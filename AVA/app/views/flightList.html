@@ -1,0 +1,556 @@
+﻿
+<style>
+    .dx-tab {
+        padding: 7px !important;
+        background-color: #898e8c;
+        color: rgba(255,255,255,0.5);
+    }
+
+        .dx-tab.dx-tab-selected {
+            color: white;
+        }
+
+        .dx-tab.dx-state-hover {
+            background-color: #ededed;
+            color: gray;
+        }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 25px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-navigator {
+        min-width: 200px !important;
+    }
+
+    .dx-scheduler-view-switcher {
+        display: none !important;
+    }
+
+    .dx-scheduler-view-switcher-label {
+        display: none !important
+    }
+</style>
+
+
+
+<div class="box flightlist" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'flights';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div dx-data-grid="dg" id="dg" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-11 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_view"></div>
+            
+
+
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+            <div dx-button="btn_filter"></div>
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <div id="popup_filght" dx-popup="popup_flight">
+        <div class="col-lg-4 padding-0">
+
+            <div dx-scroll-view="scroll_1" style="padding:0px 0px 0 0;">
+                <div style="padding:0px 5px 0 0;">
+                    <div style="border:1px solid #ccc;color:gray;padding:0; font-size:13px;">
+                        <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3 font-inherit" style="padding:10px 0 10px 0; font-size:13px;text-align:center;font-weight:normal;border-right:1px solid #eee;line-height:30px; ">
+                            {{flight.AircraftType}}
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 font-inherit" style="padding:10px 0 10px 0;font-size:13px;text-align:center;font-weight:bold;border-left:0px solid #eee;line-height:30px">
+                            {{flight.Register}}
+                        </div>
+                        <div class="col-lg-4 col-md-3 col-sm-3 col-xs-3 font-inherit" style="padding:10px 0 10px 0;font-size:12px;text-align:center;font-weight:normal;border-left:1px solid #eee;line-height:30px">
+                            {{flight.Manufacturer}}
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <div style="border:1px solid #ccc;color:gray;padding:0px;font-size:13px;margin-top:8px;">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 font-inherit" style="padding:5px 0 5px 0;color:white;font-size:13px;text-align:center;font-weight:normal;border-right:0px solid #eee;line-height:50px;background:#647687">
+                            {{flight.FlightNumber}}
+
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 font-inherit" style="padding:5px 0 5px 0;">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 font-inherit padding-0 center" style="line-height:23px">
+                                {{flight.FromAirportIATA}}
+                                <div style="border-top:1px solid #ddd;font-size:12px;padding-top:2px"> {{flight.FromCity}}</div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 center" style="line-height:45px"><i class="fas fa-plane"></i></div>
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 padding-0 center font-inherit" style="line-height:23px">
+                                {{flight.ToAirportIATA}}
+                                <div style="border-top:1px solid #ddd;font-size:12px;padding-top:2px"> {{flight.ToCity}}</div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div ng-class="getStatusClass(flight)" style="padding:5px 0 5px 0;font-size:13px;text-align:center;font-weight:normal;border-left:0px solid #eee;line-height:50px">
+                            {{flight.FlightStatus}}
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="border:1px solid #ccc;color:gray;padding:10px 5px 10px 5px;font-size:13px;margin-top:8px;text-align:center">
+                        {{flight.FlightType}}
+                    </div>
+                    <div style="border:0px solid #ccc;color:gray;padding:0px;font-size:13px;margin-top:8px;">
+                        <div class="col-lg-12 col-md-12 col-sm-6 col-xs-6 font-inherit center padding-0" style="padding-right:2px">
+                            <div style="border:1px solid #ccc;padding-bottom:8px">
+                                <div style="font-size:12px;padding:6px;background:rgb(238, 238, 238);color:#000;border-bottom:1px solid #ccc">
+                                    Times
+
+                                </div>
+                                <div class="col-lg-6   padding-7 dx-border">
+                                    <label>
+                                        Scheduled Departure
+                                    </label>
+
+                                    <div class="center" dx-date-box="time_std"></div>
+                                </div>
+                                <div class="col-lg-6   padding-7 dx-border">
+                                    <label>Scheduled Arrival </label>
+                                    <div class="center" dx-date-box="time_sta"></div>
+                                </div>
+                                <div class="col-lg-6   padding-7 dx-border">
+
+
+                                    <label style="text-align:left">Off Block </label>
+
+
+                                    <div class="center" dx-date-box="time_offblock"></div>
+
+                                </div>
+                                <div class="col-lg-6   padding-7 dx-border">
+                                    <label style="text-align:left">Take Off </label>
+                                    <div class="center" dx-date-box="time_takeoff2"></div>
+                                </div>
+
+
+                                <div class="col-lg-6   padding-7 dx-border">
+                                    <label style="text-align:left">Landing</label>
+                                    <div class="center" dx-date-box="time_landing"></div>
+                                </div>
+                                <div class="col-lg-6   padding-7 dx-border">
+                                    <label style="text-align:left">On Block</label>
+                                    <div class="center" dx-date-box="time_onblock"></div>
+                                </div>
+
+                                <div style="clear:both"></div>
+                            </div>
+                            <div style="border:1px solid #ccc;padding-bottom:7px;margin-top:10px">
+                                <div class="col-lg-6   padding-7 dx-border">
+                                    <label style="text-align:left">Delay</label>
+                                    <div class="center" dx-text-box="txt_delay"></div>
+                                </div>
+                                <div class="col-lg-6   padding-7 dx-border">
+                                    <label style="text-align:left">Delay (Landing)</label>
+                                    <div class="center" dx-text-box="txt_delayLanding"></div>
+                                </div>
+
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+
+                        <div style="clear:both"></div>
+                    </div>
+
+
+
+
+
+
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="col-lg-8 padding-0">
+            <div dx-tabs="tabs_options">
+
+            </div>
+            <div class="tab departure dx-border">
+                <div dx-scroll-view="scroll_dep" style="padding:3px 10px 5px 5px; border:1px solid #ccc">
+                    <!--<div style="margin-top:5px;color:gray;font-size:14px;font-weight:bold">{{moment(flight.STD)}}</div>-->
+                    <div style="padding:0px">
+
+
+                        <div class="col-lg-12   padding-7 dx-border" style="padding:3px;">
+                            <div class="groupbox" style="border-radius:0">
+                                <div class="caption" style="border-radius:0">PAX</div>
+                                
+
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Adult</label>
+                                    <div class="center" dx-number-box="pax_adult" dx-validator="{validationGroup:'fbacflight',  validationRules: [{ type: 'required'}]}"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Child</label>
+                                    <div class="center" dx-number-box="pax_child" dx-validator="{validationGroup:'fbacflight',  validationRules: [{ type: 'required'}]}"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Infant</label>
+                                    <div class="center" dx-number-box="pax_infant" dx-validator="{validationGroup:'fbacflight',  validationRules: [{ type: 'required'}]}"></div>
+                                </div>
+
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Total Seats</label>
+                                    <div class="center" dx-number-box="total_seats"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Total Pax</label>
+                                    <div class="center" dx-number-box="total_pax"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Over Pax</label>
+                                    <div class="center" dx-number-box="pax_over"></div>
+                                </div>
+
+                                <div style="clear:both"></div>
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="col-lg-12   padding-7 dx-border" style="padding:3px;">
+                            <div class="groupbox" style="border-radius:0">
+                                <div class="caption" style="border-radius:0">Cargo / Baggage</div>
+                                <div class="col-lg-4   padding-7 dx-border">
+                                    <label>Unit</label>
+                                    <div dx-text-box="txt_massunit"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Cargo Piece(s)</label>
+                                    <div class="center" dx-number-box="cargo_piece" dx-validator="{validationGroup:'fbacflight',  validationRules: [{ type: 'required'}]}"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Cargo Weight</label>
+                                    <div class="center" dx-number-box="cargo_weight" dx-validator="{validationGroup:'fbacflight',  validationRules: [{ type: 'required'}]}"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Bag Piece(s)</label>
+                                    <div class="center" dx-number-box="bag_piece" dx-validator="{validationGroup:'fbacflight',  validationRules: [{ type: 'required'}]}"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Bag Weight</label>
+                                    <div class="center" dx-number-box="bag_weight" dx-validator="{validationGroup:'fbacflight ',  validationRules: [{ type: 'required'}]}"></div>
+                                </div>
+
+
+
+
+                                <div style="clear:both"></div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12   padding-7 dx-border" style="padding:3px;">
+                            <div class="groupbox" style="border-radius:0">
+                                <div class="caption" style="border-radius:0">Fuel</div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Unit</label>
+                                    <div dx-text-box="txt_fuelunit"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Departure</label>
+                                    <div class="center" dx-number-box="fuel_dep"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Arrival</label>
+                                    <div class="center" dx-number-box="fuel_arr"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Actual</label>
+                                    <div class="center" dx-number-box="fuel_actual"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Planned</label>
+                                    <div class="center" dx-number-box="fuel_planned"></div>
+                                </div>
+                                <div class="col-lg-2   padding-7 dx-border">
+                                    <label>Variance</label>
+                                    <div class="center" dx-number-box="fuel_variance"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12   padding-7 dx-border" style="padding:3px;">
+                            <label>Remark (Dep.)</label>
+                            <div dx-text-box="remark_dep"></div>
+                        </div>
+                        <div class="col-lg-12   padding-7 dx-border" style="padding:3px;">
+                            <label>Remark (Arr.)</label>
+                            <div dx-text-box="remark_arr"></div>
+                        </div>
+                        <div style="clear:both"></div>
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="tab delays">
+                <div dx-data-grid="dg_delay" id="dg_delay" class="content" style="overflow-y:hidden"></div>
+            </div>
+
+            <div class="tab weather dx-border">
+                <div dx-scroll-view="scroll_weather" style="padding:3px 10px 5px 5px; border:1px solid #ccc">
+
+                    <div style="padding:0px">
+                        <div class="col-lg-6 padding-5">
+                            <div style="border:1px solid #ccc;color:gray;padding:0px;font-size:13px;margin-top:5px;min-height:140px" ng-show="true">
+                                <div style="font-size:13px;padding:6px;background:rgb(238, 238, 238);color:#000;border-bottom:1px solid #ccc">
+                                    Off Block <span style="display:inline-block;padding-left:2px;font-size:13px">({{flight.FromAirportIATA}}, {{flight.WOffBlock.latitude}}, {{flight.WOffBlock.longitude}})</span>
+                                </div>
+                                <div ng-show="flight.WOffBlockVisible" style="padding-top:5px;padding-bottom:5px">
+                                    <div class="col-lg-7 col-md-8 col-sm-8 col-xs-8 font-inherit padding-7" style="padding-bottom:0;padding-left:10px">
+                                        <div ng-class="getIcon(flight.WOffBlock)" style="float:left"></div>
+                                        <div style="position:relative;display:inline-block;left:10px;margin-left:0px; ">
+                                            <span style="font-size:16px;font-weight:bold">{{flight.WOffBlock.currently.temperature}}</span><span style="position:relative;font-size:14px;display:inline-block;margin-left:4px">&deg;</span><span style="font-size:11px">C</span>
+                                            <div style="font-size:13px;margin-top:10px;margin-bottom:10px">{{flight.WOffBlock.currently.summary}}</div>
+                                        </div>
+                                        <div style="clear:both;margin-top:5px"></div>
+                                        <div style="position:relative;display:inline-block;float:left" class="wicon">
+                                            <div class="wind-compass" style="position:absolute;top:0;left:0; width:50px;height:50px;background-size:50px; "></div>
+                                            <div class="wind-point" ng-style="{transform:flight.WOffBlock.currently.windDeg}"></div>
+                                        </div>
+                                        <div style="position:relative; left:10px;margin-left:5px;padding-top:4px; ">
+                                            <span style="font-size:16px;font-weight:bold">{{flight.WOffBlock.currently.windSpeed}}</span><span style="font-size:11px;margin-left:4px">km/h</span>
+                                            <div style="margin-top:3px;"></div>
+                                            <span style="font-size:13px;font-weight:normal;">{{flight.WOffBlock.currently.windPoint}}</span>
+                                            <!--<span style="position:relative;font-size:14px;display:inline-block;margin-left:4px">&deg;</span>-->
+                                        </div>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 font-inherit padding-7">
+                                        <div style="font-size:13px;margin-top:0px;">Humidity:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOffBlock.currently.humidity}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">%</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Pressure:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOffBlock.currently.pressure}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">mb</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Cloud Cover:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOffBlock.currently.cloudCover}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">%</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Visibility:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOffBlock.currently.visibility}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">m</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Dew Point:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOffBlock.currently.dewPoint}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">&deg;C</span></div>
+
+
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+
+                        <!--takeoff-->
+                        <div class="col-lg-6 padding-5">
+                            <div style="border:1px solid #ccc;color:gray;padding:0px;font-size:13px;margin-top:5px;min-height:140px" ng-show="true">
+                                <div style="font-size:13px;padding:6px;background:rgb(238, 238, 238);color:#000;border-bottom:1px solid #ccc">
+
+                                    Take Off <span style="display:inline-block;padding-left:2px;font-size:13px">({{flight.FromAirportIATA}}, {{flight.WTakeoff.latitude}}, {{flight.WTakeoff.longitude}})</span>
+                                </div>
+                                <div ng-show="flight.WTakeoffVisible" style="padding-top:5px;padding-bottom:5px">
+                                    <div class="col-lg-7 col-md-8 col-sm-8 col-xs-8 font-inherit padding-7" style="padding-bottom:0;padding-left:10px">
+                                        <div ng-class="getIcon(flight.WTakeoff)" style="float:left"></div>
+                                        <div style="position:relative;display:inline-block;left:10px;margin-left:0px; ">
+                                            <span style="font-size:16px;font-weight:bold">{{flight.WTakeoff.currently.temperature}}</span><span style="position:relative;font-size:14px;display:inline-block;margin-left:4px">&deg;</span><span style="font-size:11px">C</span>
+                                            <div style="font-size:13px;margin-top:10px;margin-bottom:10px">{{flight.WTakeoff.currently.summary}}</div>
+                                        </div>
+                                        <div style="clear:both;margin-top:5px"></div>
+                                        <div style="position:relative;display:inline-block;float:left" class="wicon">
+                                            <div class="wind-compass" style="position:absolute;top:0;left:0; width:50px;height:50px;background-size:50px; "></div>
+                                            <div class="wind-point" ng-style="{transform:flight.WTakeoff.currently.windDeg}"></div>
+                                        </div>
+                                        <div style="position:relative; left:10px;margin-left:5px;padding-top:4px; ">
+                                            <span style="font-size:16px;font-weight:bold">{{flight.WTakeoff.currently.windSpeed}}</span><span style="font-size:11px;margin-left:4px">km/h</span>
+                                            <div style="margin-top:3px;"></div>
+                                            <span style="font-size:13px;font-weight:normal;">{{flight.WTakeoff.currently.windPoint}}</span>
+                                            <!--<span style="position:relative;font-size:14px;display:inline-block;margin-left:4px">&deg;</span>-->
+                                        </div>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 font-inherit padding-7">
+                                        <div style="font-size:13px;margin-top:0px;">Humidity:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WTakeoff.currently.humidity}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">%</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Pressure:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WTakeoff.currently.pressure}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">mb</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Cloud Cover:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WTakeoff.currently.cloudCover}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">%</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Visibility:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WTakeoff.currently.visibility}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">m</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Dew Point:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WTakeoff.currently.dewPoint}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">&deg;C</span></div>
+
+
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                        <!---->
+                        <div style="clear:both"></div>
+                        <!--landing-->
+                        <div class="col-lg-6 padding-5">
+                            <div style="border:1px solid #ccc;color:gray;padding:0px;font-size:13px;margin-top:5px;min-height:140px" ng-show="true">
+                                <div style="font-size:13px;padding:6px;background:rgb(238, 238, 238);color:#000;border-bottom:1px solid #ccc">
+
+                                    Landing <span style="display:inline-block;padding-left:2px;font-size:13px">({{flight.ToAirportIATA}}, {{flight.WLanding.latitude}}, {{flight.WLanding.longitude}})</span>
+                                </div>
+                                <div ng-show="flight.WLandingVisible" style="padding-top:5px;padding-bottom:5px">
+                                    <div class="col-lg-7 col-md-8 col-sm-8 col-xs-8 font-inherit padding-7" style="padding-bottom:0;padding-left:10px">
+                                        <div ng-class="getIcon(flight.WLanding)" style="float:left"></div>
+                                        <div style="position:relative;display:inline-block;left:10px;margin-left:0px; ">
+                                            <span style="font-size:16px;font-weight:bold">{{flight.WLanding.currently.temperature}}</span><span style="position:relative;font-size:14px;display:inline-block;margin-left:4px">&deg;</span><span style="font-size:11px">C</span>
+                                            <div style="font-size:13px;margin-top:10px;margin-bottom:10px">{{flight.WLanding.currently.summary}}</div>
+                                        </div>
+                                        <div style="clear:both;margin-top:5px"></div>
+                                        <div style="position:relative;display:inline-block;float:left" class="wicon">
+                                            <div class="wind-compass" style="position:absolute;top:0;left:0; width:50px;height:50px;background-size:50px; "></div>
+                                            <div class="wind-point" ng-style="{transform:flight.WLanding.currently.windDeg}"></div>
+                                        </div>
+                                        <div style="position:relative; left:10px;margin-left:5px;padding-top:4px; ">
+                                            <span style="font-size:16px;font-weight:bold">{{flight.WLanding.currently.windSpeed}}</span><span style="font-size:11px;margin-left:4px">km/h</span>
+                                            <div style="margin-top:3px;"></div>
+                                            <span style="font-size:13px;font-weight:normal;">{{flight.WLanding.currently.windPoint}}</span>
+                                            <!--<span style="position:relative;font-size:14px;display:inline-block;margin-left:4px">&deg;</span>-->
+                                        </div>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 font-inherit padding-7">
+                                        <div style="font-size:13px;margin-top:0px;">Humidity:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WLanding.currently.humidity}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">%</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Pressure:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WLanding.currently.pressure}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">mb</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Cloud Cover:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WLanding.currently.cloudCover}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">%</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Visibility:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WLanding.currently.visibility}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">m</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Dew Point:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WLanding.currently.dewPoint}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">&deg;C</span></div>
+
+
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                        <!---->
+                        <!--onblock-->
+                        <div class="col-lg-6 padding-5">
+                            <div style="border:1px solid #ccc;color:gray;padding:0px;font-size:13px;margin-top:5px;min-height:140px" ng-show="true">
+                                <div style="font-size:13px;padding:6px;background:rgb(238, 238, 238);color:#000;border-bottom:1px solid #ccc">
+                                    On Block <span style="display:inline-block;padding-left:2px;font-size:13px">({{flight.ToAirportIATA}}, {{flight.WOnBlock.latitude}}, {{flight.WOnBlock.longitude}})</span>
+                                </div>
+                                <div ng-show="flight.WOnBlockVisible" style="padding-top:5px;padding-bottom:5px">
+                                    <div class="col-lg-7 col-md-8 col-sm-8 col-xs-8 font-inherit padding-7" style="padding-bottom:0;padding-left:10px">
+                                        <div ng-class="getIcon(flight.WOnBlock)" style="float:left"></div>
+                                        <div style="position:relative;display:inline-block;left:10px;margin-left:0px; ">
+                                            <span style="font-size:16px;font-weight:bold">{{flight.WOnBlock.currently.temperature}}</span><span style="position:relative;font-size:14px;display:inline-block;margin-left:4px">&deg;</span><span style="font-size:11px">C</span>
+                                            <div style="font-size:13px;margin-top:10px;margin-bottom:10px">{{flight.WOnBlock.currently.summary}}</div>
+                                        </div>
+                                        <div style="clear:both;margin-top:5px"></div>
+                                        <div style="position:relative;display:inline-block;float:left" class="wicon">
+                                            <div class="wind-compass" style="position:absolute;top:0;left:0; width:50px;height:50px;background-size:50px; "></div>
+                                            <div class="wind-point" ng-style="{transform:flight.WOnBlock.currently.windDeg}"></div>
+                                        </div>
+                                        <div style="position:relative; left:10px;margin-left:5px;padding-top:4px; ">
+                                            <span style="font-size:16px;font-weight:bold">{{flight.WOnBlock.currently.windSpeed}}</span><span style="font-size:11px;margin-left:4px">km/h</span>
+                                            <div style="margin-top:3px;"></div>
+                                            <span style="font-size:13px;font-weight:normal;">{{flight.WOnBlock.currently.windPoint}}</span>
+                                            <!--<span style="position:relative;font-size:14px;display:inline-block;margin-left:4px">&deg;</span>-->
+                                        </div>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-4 col-sm-4 col-xs-4 font-inherit padding-7">
+                                        <div style="font-size:13px;margin-top:0px;">Humidity:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOnBlock.currently.humidity}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">%</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Pressure:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOnBlock.currently.pressure}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">mb</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Cloud Cover:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOnBlock.currently.cloudCover}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">%</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Visibility:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOnBlock.currently.visibility}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">m</span></div>
+                                        <div style="font-size:13px;margin-top:10px;">Dew Point:<span style="display:inline-block;padding-left:3px;font-weight:bold">{{flight.WOnBlock.currently.dewPoint}}</span><span style="font-size:12px;display:inline-block;padding-left:2px">&deg;C</span></div>
+
+
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                        <!---->
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+</div>

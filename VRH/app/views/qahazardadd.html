@@ -1,0 +1,802 @@
+<style>
+   .rist-matrix{
+      border:1px solid #aaa;
+   }
+   .rist-matrix td {
+      text-align:center;
+	  padding:7px;
+	  border:1px solid #aaa
+   }
+   .td-matrix.selected{
+     font-weight:bold !important;
+	 font-size:16px;
+	 border:3px solid #595959;
+   }
+   .Acceptable{background:#00ffbf}
+   .Unacceptable{background:#ff6666}
+   .Mitigatable{background:#ffff4d}
+</style>
+<div ng-controller="hazardAddController">
+     <div id="popup_add" dx-popup="popup_add" class="no-padding">
+	 
+	    <div dx-tabs="tabs_options">
+
+        </div>
+		<div class="tab main ">
+		   <div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
+		       <div class="col-lg-2 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
+                        <label>Issue Type</label>
+                        <div dx-select-box="sb_hazard_issue_type"  ></div>
+              </div>
+			  <div class="col-lg-2 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
+                        <label>Occurred On</label>
+                        <div dx-date-box="dt_hazard_occurred" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+              </div>
+			 
+			  <div class="col-lg-2   col-12  margin-bottom-5 padding-7">
+				       <label>Register</label>
+                        <div dx-select-box="sb_hazard_flight" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+				  </div>
+				   <div class="col-lg-2   col-12  margin-bottom-5 padding-7">
+				   
+				        <label>Airport</label>
+                        <div dx-select-box="sb_hazard_flight" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+				  </div>
+				  <div class="col-lg-4   col-12  margin-bottom-5 padding-7">
+				   
+				        <label>Flight</label>
+                        <div dx-select-box="sb_hazard_flight" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+				  </div>
+			   <div style='clear:both'></div>
+		      <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Description</label>
+                        <div dx-text-area="txt_hazard_description" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+              </div>
+			 
+			  <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                        <label>Scope(s)</label>
+                        <div dx-select-box="sb_hazard_scope" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+              </div>
+			   
+			   <!--<div class="col-lg-3 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
+                        <label>Priority</label>
+                        <div dx-select-box="sb_hazard_priority"  ></div>
+              </div>-->
+			 
+			  <div class="col-lg-5   col-12  margin-bottom-5 padding-7">
+			      <!--<div class="col-12  margin-bottom-5 padding-7">
+                        <label>Category</label>
+                        <div dx-select-box="sb_hazard_category"  ></div>
+                  </div>-->
+				   <div class="col-12  margin-bottom-5 padding-7">
+                        <label>Category</label>
+						<div style='padding:5px;border:1px solid #ccc'>
+						   <div dx-tree-view="tree_hazard_subcategory" dx-item-alias="item">
+						    <div data-options="dxTemplate: {name: 'item'}">
+                                  <div> {{ item.title  }} </div>
+                            </div>
+						  </div>
+						</div>
+                          
+                  </div>
+			  </div>
+			  <div class="col-lg-4   col-12  margin-bottom-5 padding-7">
+			     
+				  <div style='clear:both'></div>
+				  <label style='margin-top:7px'>Location Coordinates</label>
+				  <div style='border:1px solid #ccc;height:285px;'></div>
+			      
+			  </div>
+			   <div class="col-lg-3   col-12  margin-bottom-5 padding-7">
+			     <!-- <label style='margin-top:7px'>Parts Involved</label>
+				   <div dx-data-grid="dg_parts" id="dg_parts" class="content" style="overflow-y:hidden"></div>
+				   <div dx-button="btn_part_add" style='margin-top:10px;'></div>-->
+				    <label style='margin-top:7px'>People Involved</label>
+				    <div dx-data-grid="dg_people" id="dg_people" class="content" style="overflow-y:hidden"></div>
+					<div dx-button="btn_people_add" style='margin-top:10px;'></div>
+					<!--<label style='margin-top:7px'>Components Involved</label>
+				   <div dx-data-grid="dg_parts" id="dg_parts" class="content" style="overflow-y:hidden"></div>
+				   <div dx-button="btn_part_add" style='margin-top:10px;'></div>-->
+			  </div>
+			  
+  		    <div style='clear:both'></div>
+			  <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Remark</label>
+                         <div dx-text-area="txt_hazard_remark" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+              </div>
+			 <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Tags</label>
+                         <div dx-text-area="txt_hazard_tags" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+              </div>
+			 <!-- <div class="col-lg-6 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
+                        <label>Category</label>
+                        <div dx-drop-down-box="sb_category">
+                           <div data-options="dxTemplate: { name: 'content' }">
+                               <div dx-tree-view="sb_category.treeView"></div>
+                           </div>
+                        </div>
+						
+              </div>
+			  <div class="col-lg-6 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
+                        <label>Sub Category</label>
+                        <div dx-drop-down-box="sb_category">
+                           <div data-options="dxTemplate: { name: 'content' }">
+                               <div dx-tree-view="sb_category.treeView"></div>
+                           </div>
+                        </div>
+						
+              </div>-->
+			  
+			  
+			  
+			  
+			   <div style='clear:both'></div>
+			  
+		   </div>
+		</div>
+		<div class="tab sources " style='display:none;'>
+		      <div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
+			     <div class="col-lg-4 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                        <label>Source Type</label>
+                        <div dx-select-box="sb_hazard_source" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+                 </div>
+				 
+			<div ng-show='hazard_source_type==1' class="col-lg-8 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+			       <div class="col-lg-4 col-md-6 col-sm-12  col-12    padding-0" style='margin:0'>
+				      <label>Report</label>
+                        <div>
+						   <table style='width:100%;'>
+						      <tr>
+							     <td>  <div dx-text-box="txt_hazard_reporter" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div></td>
+							     <td style='width:40px;text-align:center'>  <div dx-button="btn_form_select"  ></div></td>
+								 <td style='width:70px;text-align:left'>  <div dx-button="btn_form_show"  ></div></td>
+								
+							  </tr>
+						   </table>
+						
+						 
+						</div>
+				   </div>
+				   <div class="col-lg-4 col-md-6 col-sm-12  col-12    padding-0" style='margin:0;padding-right:7px'>
+				      <label>Reporter</label>
+                      <div dx-text-box="txt_hazard_reporter" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div> 
+				   </div>
+				    <div   class="col-lg-3 col-md-3 col-sm-6  col-12  padding-0" style='margin:0'>
+                        <label>Reported On</label>
+                        <div dx-date-box="dt_hazard_occurred" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+                     </div>
+                        
+              </div>
+			  
+			  
+			  <div ng-show='hazard_source_type==2' class="col-lg-8 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+			       <div class="col-lg-4 col-md-6 col-sm-12  col-12    padding-0" style='margin:0'>
+				      <label>Audit</label>
+                        <div>
+						   <table style='width:100%;'>
+						      <tr>
+							     <td>  <div dx-text-box="txt_hazard_reporter" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div></td>
+							     <td style='width:40px;text-align:center'>  <div dx-button="btn_form_select"  ></div></td>
+								 <td style='width:70px;text-align:left'>  <div dx-button="btn_form_show"  ></div></td>
+								
+							  </tr>
+						   </table>
+						
+						 
+						</div>
+				   </div>
+				   <div class="col-lg-4 col-md-6 col-sm-12  col-12    padding-0" style='margin:0;padding-right:7px'>
+				      <label>Reporter</label>
+                      <div dx-text-box="txt_hazard_reporter" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div> 
+				   </div>
+				    <div   class="col-lg-3 col-md-3 col-sm-6  col-12  padding-0" style='margin:0'>
+                        <label>Reported On</label>
+                        <div dx-date-box="dt_hazard_occurred" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+                     </div>
+                        
+              </div>
+			  
+			  <div ng-show='hazard_source_type==3' class="col-lg-8 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+			       <div class="col-lg-4 col-md-6 col-sm-12  col-12    padding-0" style='margin:0'>
+				      <label>Reporter</label>
+                        <div>
+						   <table style='width:100%;'>
+						      <tr>
+							     <td>  <div dx-text-box="txt_hazard_reporter" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div></td>
+							     <td style='width:60px;text-align:left;padding-left:5px'>  <div dx-button="btn_form_select"  ></div></td>
+								 
+								
+							  </tr>
+						   </table>
+						
+						 
+						</div>
+				   </div>
+				   
+				    <div   class="col-lg-3 col-md-3 col-sm-6  col-12  padding-0" style='margin:0'>
+                        <label>Reported On</label>
+                        <div dx-date-box="dt_hazard_occurred" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+                     </div>
+                        
+              </div>
+			  	 
+			   
+			  
+			   
+			  
+			  <div style='clear:both'></div>
+			   <div class="col-lg-3 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
+                       <div dx-check-box="check_is_confidential"></div>	
+              </div>
+			   <div class="col-lg-3 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
+                      <div dx-check-box="check_is_anonymous"></div>	
+              </div>
+			  <div style='clear:both'></div>
+			 <!-- <div class="col-lg-4 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                        <label>Flight</label>
+                        <div dx-select-box="sb_hazard_flight" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+              </div>-->
+			   
+			   <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Remark</label>
+                        <div dx-text-area="txt_source_remark" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+              </div>
+			   <div style='clear:both'></div>
+			   <div style='padding:10px'>
+			        <div dx-data-grid="dg_source" id="dg_source" class="content" style="overflow-y:hidden"></div>
+			   </div>
+			   
+
+			  
+				<!--end of border--> 
+			  </div>
+		</div>
+		
+		
+			<div class="tab root_causes " style='display:none;'>
+		      <div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
+			      <div class="col-lg-6 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+				        <div style='padding:10px;'>Root Causes</div>
+						<div style='padding:5px 10px 10px 10px;border:1px solid #ccc'>
+						  <div dx-tree-view="tree_route_cause" dx-item-alias="item">
+						    <div data-options="dxTemplate: {name: 'item'}">
+                                  <div> {{ item.title  }} </div>
+                            </div>
+						  </div>
+						</div>
+                         
+                  </div>
+				   <div class="col-lg-6 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+				      <div style='padding:10px;'>Other</div>
+					  <div dx-text-area="txt_hazard_root_other"  ></div>
+					  <div style='padding:10px;'>Root Cause Analysis</div>
+					  <div dx-text-area="txt_hazard_root_analysis"  ></div>
+				   </div>
+				  <div style='clear:both'></div>
+			  </div>
+			</div>
+			
+			<div class="tab consequences " style='display:none;'>
+		      <div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
+			     <div class="col-lg-4 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                        <label>Category</label>
+                        <div dx-select-box="sb_consequence_category"  ></div>
+                 </div>
+				 <div class="col-lg-2 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                        <label>Severity</label>
+                        <div dx-select-box="sb_consequence_severity"  ></div>
+                 </div>
+				 <div class="col-lg-6 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                        <label>Tags</label>
+                        <div dx-text-box="txt_consequence_tag"  ></div>
+                 </div>
+				  <div class="col-lg-11 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                        <label>Consequence</label>
+                        <div dx-text-box="txt_consequence_title"  ></div>
+                 </div>
+				  <div class="col-lg-1 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                       <label style='display:block'>&nbsp;</label>
+                        <div dx-button="btn_consequence_add"></div>
+                 </div>
+				 <div style='clear:both'></div>
+				 <div style='padding:7px;'> 
+				    <div dx-data-grid='dg_consequence'></div>
+				 </div>
+				 
+			  
+			  </div>
+			</div>
+			
+			<div class="tab assessment " style='display:none;'>
+		      <div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
+			       <div class="col-lg-6 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                        <table style='width:100%' class='rist-matrix'>
+						   <tr style='background:#eee'>
+						      <td></td>
+							  <td colspan=5 style='font-weight:bold'>Severity</td>
+						   </tr>
+						   <tr>
+						      <td style='font-weight:bold;background:#eee'>Propability</td>
+							  <td style='background:#eee'>
+							     <div >Negligible</div>
+								 <div style='padding-top:7px;font-weight:bold'>E</div>
+							  </td>
+							  <td style='background:#eee'>
+							    <div>Minor</div>
+								 <div style='padding-top:7px;font-weight:bold'>D</div>
+							  </td>
+							  <td style='background:#eee'>
+							     <div>Major</div>
+								 <div style='padding-top:7px;font-weight:bold'>C</div>
+							  </td>
+							  <td style='background:#eee'>
+							     <div>Hazardous</div>
+								 <div style='padding-top:7px;font-weight:bold'>B</div>
+							  </td>
+							  <td style='background:#eee'>
+							  
+							    <div>Catastrophic</div>
+								 <div style='padding-top:7px;font-weight:bold'>A</div>
+							  </td> 
+								   
+						   </tr>
+						   <tr>
+						      <td style='background:#eee'><div>Extremely Improbable</div><div style='padding-top:10px;font-weight:bold'>1</div></td>
+							  <td style='background:#00ffbf;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"E")' ng-class="get_cell_matrix_class('1E')">
+							     1E
+							  </td>
+							  <td style='background:#00ffbf;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"D")' ng-class="get_cell_matrix_class('1D')">
+							     1D
+							  </td>
+							  <td style='background:#00ffbf;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"C")' ng-class="get_cell_matrix_class('1C')">
+							      1C
+							  </td>
+							  <td style='background:#00ffbf;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"B")' ng-class="get_cell_matrix_class('1B')">
+							      1B
+							  </td>
+							  <td style='background:#ffff4d;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"A")' ng-class="get_cell_matrix_class('1A')">
+							     1A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   
+						   <tr>
+						      <td style='background:#eee'><div>Improbable</div><div style='padding-top:10px;font-weight:bold'>2</div></td>
+							  <td style='background:#00ffbf;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"E")' ng-class="get_cell_matrix_class('2E')">
+							     2E
+							  </td>
+							  <td style='background:#00ffbf;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"D")' ng-class="get_cell_matrix_class('2D')">
+							     2D
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"C")' ng-class="get_cell_matrix_class('2C')">
+							     2C
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"B")' ng-class="get_cell_matrix_class('2B')">
+							     2B
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"A")' ng-class="get_cell_matrix_class('2A')">
+							     2A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   
+						   <tr>
+						      <td style='background:#eee'><div>Remote</div><div style='padding-top:10px;font-weight:bold'>3</div></td>
+							  <td style='background:#00ffbf;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"E")' ng-class="get_cell_matrix_class('3E')">
+							     3E
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"D")' ng-class="get_cell_matrix_class('3D')">
+							     3D
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"C")' ng-class="get_cell_matrix_class('3C')">
+							     3C
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"B")' ng-class="get_cell_matrix_class('3B')">
+							     3B
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"A")' ng-class="get_cell_matrix_class('3A')">
+							     3A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   <tr>
+						      <td style='background:#eee'><div>Occasional</div><div style='padding-top:10px;font-weight:bold'>4</div></td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"E")' ng-class="get_cell_matrix_class('4E')">
+							     4E
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"D")' ng-class="get_cell_matrix_class('4D')">
+							     4D
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"C")' ng-class="get_cell_matrix_class('4C')">
+							     4C
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"B")' ng-class="get_cell_matrix_class('4B')">
+							     4B
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"A")' ng-class="get_cell_matrix_class('4A')">
+							     4A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   <tr>
+						      <td style='background:#eee'><div>Frequent</div><div style='padding-top:10px;font-weight:bold'>5</div></td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"E")' ng-class="get_cell_matrix_class('5E')">
+							     5E
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"D")' ng-class="get_cell_matrix_class('5D')">
+							     5D
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"C")' ng-class="get_cell_matrix_class('5C')">
+							     5C
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"B")' ng-class="get_cell_matrix_class('5B')">
+							     5B
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"A")' ng-class="get_cell_matrix_class('5A')">
+							     5A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   
+						</table>
+						 <table style='width:100%;margin-top:10px;border:1px solid #aaa'>
+						    <tr>
+							   <td style='width:25%;border:1px solid #aaa;padding:10px;background:#eee'>Probability</td>
+							    <td style=' border:1px solid #aaa;padding:10px;text-align:center;font-weight:bold'>{{risk_probability}}</td>
+							</tr>
+							<tr>
+							  <td style='border:1px solid #aaa;padding:10px;background:#eee'>Severity</td>
+							    <td style=' border:1px solid #aaa;padding:10px;text-align:center;font-weight:bold'>{{risk_severity}}</td>
+							</tr>
+							<tr>
+							  <td style='border:1px solid #aaa;padding:10px;background:#eee'>Index</td>
+							    <td style=' border:1px solid #aaa;padding:10px;text-align:center;font-weight:bold' ng-class='get_tolerability_class()'>{{risk_index}}</td>
+							</tr>
+						 
+						 </table>
+						   
+						   
+						   
+						 
+						
+						  
+                 </div>
+				 
+				 
+				  <div class="col-lg-6 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+				     <table style='width:100%' class='rist-matrix'>
+					    <tr style='background:#eee'>
+						      <td style='text-align:center;font-weight:bold ' colspan=2>Tolerability</td>
+							  
+						 </tr>
+					    
+						  <tr style='height:55px' >
+						      <td style='text-align:center;font-weight:bold;width:30%; ' ng-class='get_tolerability_class()'> {{risk_tolerability}}</td>
+							  <td style='text-align:right;direction:rtl;font-family:tahoma;'>{{risk_tolerability_action}} </td>
+						 </tr>
+						 
+					 </table>
+					  <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                            <label style='font-size:15px;'>Assessment Justification</label>
+                           <div dx-text-area="txt_assessment_remark"  ></div>
+                     </div> 
+					 <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					   <div dx-data-grid="dg_responsible" id="dg_responsible" class="content" style="overflow-y:hidden"></div>
+					   	<div dx-button="btn_people_add" style='margin-top:10px;'></div>
+					 </div>
+					 
+				  </div>
+			  
+			  </div>
+			</div>
+			
+			
+			<div class="tab actions " style='display:none;'>
+		      <div class="dx-border thin-scroll"  >
+			      
+				    <div class="col-lg-5 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7 thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
+					    <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Task Title</label>
+                        <div dx-text-box="txt_task_title"  ></div>
+					</div>
+					<div class="col-lg-11 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Assigned To</label>
+                        <div dx-text-box="txt_task_responsible"  ></div>
+					</div>
+					<div class="col-lg-1 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    
+                       <div dx-button="btn_people_add" style='margin-top:20px;'></div>
+					</div>
+					<div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Deadline</label>
+                        <div dx-text-box="txt_task_deadline"  ></div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Urgency</label>
+                        <div dx-select-box="sb_task_urgency"  ></div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Type</label>
+                        <div dx-select-box="sb_task_type"  ></div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Term</label>
+                        <div dx-select-box="sb_task_term"  ></div>
+					</div>
+					<div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Status</label>
+                        <div dx-select-box="sb_task_status"  ></div>
+					</div>
+					<div ng-show='task_status=="Rejected"'>
+					   <div class="col-lg-4 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Date</label>
+                        <div dx-date-box="txt_task_status_remark"  ></div>
+					   </div>
+					   <div class="col-lg-8 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Rejected By</label>
+                        <div dx-select-box="txt_task_status_by"  ></div>
+					   </div>
+					   <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Remark</label>
+                        <div dx-text-area="txt_task_status_remark"  ></div>
+					   </div>
+					</div>
+					<div ng-show='task_status=="Started"'>
+					  <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Remark</label>
+                        <div dx-text-area="txt_task_status_remark"  ></div>
+					   </div>
+					</div>
+					<div ng-show='task_status=="Done"'>
+					    <div class="col-lg-4 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Date</label>
+                        <div dx-date-box="txt_task_status_remark"  ></div>
+					   </div>
+					    
+					   <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Remark</label>
+                        <div dx-text-area="txt_task_status_remark"  ></div>
+					   </div>
+					</div>
+					<div ng-show='task_status=="Confirmed"'>
+					
+					    <div class="col-lg-4 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Date</label>
+                        <div dx-date-box="txt_task_status_remark"  ></div>
+					   </div>
+					   <div class="col-lg-8 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Confirmed By</label>
+                        <div dx-select-box="txt_task_status_by"  ></div>
+					   </div>
+					   <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Remark</label>
+                        <div dx-text-area="txt_task_status_remark"  ></div>
+					   </div>
+					</div>
+					
+					<div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					    <label style='font-size:15px;'>Task Remark</label>
+                        <div dx-text-area="txt_task_remark"  ></div>
+					   </div>
+					
+					
+					</div>
+					
+					
+					 <div class="col-lg-7 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+				       <div dx-data-grid="dg_action" id="dg_action" class="content" style="overflow-y:hidden"></div>
+				   </div>
+				   
+					
+			  </div>
+			</div>
+		
+		    <div class="tab assessment_review ">
+		       <div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
+			       <div class="col-lg-6 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                        <table style='width:100%' class='rist-matrix'>
+						   <tr style='background:#eee'>
+						      <td></td>
+							  <td colspan=5 style='font-weight:bold'>Severity</td>
+						   </tr>
+						   <tr>
+						      <td style='font-weight:bold;background:#eee'>Propability</td>
+							  <td style='background:#eee'>
+							     <div >Negligible</div>
+								 <div style='padding-top:7px;font-weight:bold'>E</div>
+							  </td>
+							  <td style='background:#eee'>
+							    <div>Minor</div>
+								 <div style='padding-top:7px;font-weight:bold'>D</div>
+							  </td>
+							  <td style='background:#eee'>
+							     <div>Major</div>
+								 <div style='padding-top:7px;font-weight:bold'>C</div>
+							  </td>
+							  <td style='background:#eee'>
+							     <div>Hazardous</div>
+								 <div style='padding-top:7px;font-weight:bold'>B</div>
+							  </td>
+							  <td style='background:#eee'>
+							  
+							    <div>Catastrophic</div>
+								 <div style='padding-top:7px;font-weight:bold'>A</div>
+							  </td> 
+								   
+						   </tr>
+						   <tr>
+						      <td style='background:#eee'><div>Extremely Improbable</div><div style='padding-top:10px;font-weight:bold'>1</div></td>
+							  <td style='background:#00ffbf;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"E")' ng-class="get_cell_matrix_class('1E')">
+							     1E
+							  </td>
+							  <td style='background:#00ffbf;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"D")' ng-class="get_cell_matrix_class('1D')">
+							     1D
+							  </td>
+							  <td style='background:#00ffbf;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"C")' ng-class="get_cell_matrix_class('1C')">
+							      1C
+							  </td>
+							  <td style='background:#00ffbf;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"B")' ng-class="get_cell_matrix_class('1B')">
+							      1B
+							  </td>
+							  <td style='background:#ffff4d;width:15%;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(1,"A")' ng-class="get_cell_matrix_class('1A')">
+							     1A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   
+						   <tr>
+						      <td style='background:#eee'><div>Improbable</div><div style='padding-top:10px;font-weight:bold'>2</div></td>
+							  <td style='background:#00ffbf;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"E")' ng-class="get_cell_matrix_class('2E')">
+							     2E
+							  </td>
+							  <td style='background:#00ffbf;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"D")' ng-class="get_cell_matrix_class('2D')">
+							     2D
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"C")' ng-class="get_cell_matrix_class('2C')">
+							     2C
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"B")' ng-class="get_cell_matrix_class('2B')">
+							     2B
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(2,"A")' ng-class="get_cell_matrix_class('2A')">
+							     2A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   
+						   <tr>
+						      <td style='background:#eee'><div>Remote</div><div style='padding-top:10px;font-weight:bold'>3</div></td>
+							  <td style='background:#00ffbf;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"E")' ng-class="get_cell_matrix_class('3E')">
+							     3E
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"D")' ng-class="get_cell_matrix_class('3D')">
+							     3D
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"C")' ng-class="get_cell_matrix_class('3C')">
+							     3C
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"B")' ng-class="get_cell_matrix_class('3B')">
+							     3B
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(3,"A")' ng-class="get_cell_matrix_class('3A')">
+							     3A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   <tr>
+						      <td style='background:#eee'><div>Occasional</div><div style='padding-top:10px;font-weight:bold'>4</div></td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"E")' ng-class="get_cell_matrix_class('4E')">
+							     4E
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"D")' ng-class="get_cell_matrix_class('4D')">
+							     4D
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"C")' ng-class="get_cell_matrix_class('4C')">
+							     4C
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"B")' ng-class="get_cell_matrix_class('4B')">
+							     4B
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(4,"A")' ng-class="get_cell_matrix_class('4A')">
+							     4A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   <tr>
+						      <td style='background:#eee'><div>Frequent</div><div style='padding-top:10px;font-weight:bold'>5</div></td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"E")' ng-class="get_cell_matrix_class('5E')">
+							     5E
+							  </td>
+							  <td style='background:#ffff4d;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"D")' ng-class="get_cell_matrix_class('5D')">
+							     5D
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"C")' ng-class="get_cell_matrix_class('5C')">
+							     5C
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"B")' ng-class="get_cell_matrix_class('5B')">
+							     5B
+							  </td>
+							  <td style='background:#ff6666;font-weight:normal' class='td-matrix' ng-click='click_matrix_cell(5,"A")' ng-class="get_cell_matrix_class('5A')">
+							     5A
+							     
+							  </td> 
+								   
+						   </tr>
+						   
+						   
+						</table>
+						 <table style='width:100%;margin-top:10px;border:1px solid #aaa'>
+						    <tr>
+							   <td style='width:25%;border:1px solid #aaa;padding:10px;background:#eee'>Probability</td>
+							    <td style=' border:1px solid #aaa;padding:10px;text-align:center;font-weight:bold'>{{risk_probability}}</td>
+							</tr>
+							<tr>
+							  <td style='border:1px solid #aaa;padding:10px;background:#eee'>Severity</td>
+							    <td style=' border:1px solid #aaa;padding:10px;text-align:center;font-weight:bold'>{{risk_severity}}</td>
+							</tr>
+							<tr>
+							  <td style='border:1px solid #aaa;padding:10px;background:#eee'>Index</td>
+							    <td style=' border:1px solid #aaa;padding:10px;text-align:center;font-weight:bold' ng-class='get_tolerability_class()'>{{risk_index}}</td>
+							</tr>
+						 
+						 </table>
+						   
+						   
+						   
+						 
+						
+						  
+                 </div>
+				 
+				 
+				  <div class="col-lg-6 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+				     <table style='width:100%' class='rist-matrix'>
+					    <tr style='background:#eee'>
+						      <td style='text-align:center;font-weight:bold ' colspan=2>Tolerability</td>
+							  
+						 </tr>
+					    
+						  <tr style='height:55px' >
+						      <td style='text-align:center;font-weight:bold;width:30%; ' ng-class='get_tolerability_class()'> {{risk_tolerability}}</td>
+							  <td style='text-align:right;direction:rtl;font-family:tahoma;'>{{risk_tolerability_action}} </td>
+						 </tr>
+						 
+					 </table>
+					  <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+                            <label style='font-size:15px;'>Remark</label>
+                           <div dx-text-area="txt_assessment_review_remark"  ></div>
+                     </div> 
+					 
+					 
+				  </div>
+			  
+			  </div>
+			</div>
+			
+			 <div class="tab monitoring ">
+		       <div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
+			   </div>
+			</div>
+		
+	 </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

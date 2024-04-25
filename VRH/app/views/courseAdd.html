@@ -1,0 +1,312 @@
+
+<div ng-controller="courseAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <!--<div dx-tabs="tabs_options">
+
+        </div>-->
+        <div class="tab main dx-border">
+           
+                <div style="padding-top:20px;padding-left:10px;padding-right:10px">
+                    <div class="col-lg-7 padding-0" style="border:1px solid #ccc;padding:5px;">
+                        <div id="scrollview" dx-scroll-view="scroll_main">
+                            <div class="col-lg-8 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Type</label>
+                                <div dx-select-box="sb_CourseTypeId" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Class Id</label>
+                                <div dx-text-box="txt_No" ></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="col-lg-8 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Groups</label>
+                                <div dx-text-box="txt_groups" class="center"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Certificate Type</label>
+                                <div dx-text-box="txt_certype" class="center"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="col-lg-8 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Type of Class Holding</label>
+                                <div dx-select-box="sb_holding" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Status</label>
+                                <div dx-select-box="sb_StatusId" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Title</label>
+                                <div dx-text-box="txt_Title" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Start Date</label>
+                                <div dx-date-box="date_DateStart" class="center" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>End Date</label>
+                                <div dx-date-box="date_DateEnd" class="center"></div>
+                            </div>
+
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Organization</label>
+                                <div dx-select-box="sb_OrganizationId"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Location</label>
+                                <div dx-text-box="txt_Location"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <!--<div class="col-lg-6    col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Instructor</label>
+            <div dx-text-box="txt_Instructor"></div>
+        </div>-->
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Instructor</label>
+                                <div dx-select-box="sb_Instructor"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Instructor 2</label>
+                                <div dx-select-box="sb_Instructor2"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Training Director</label>
+                                <!--<div dx-text-box="txt_TrainingDirector"></div>-->
+								 <div dx-select-box="sb_director" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+
+
+                            <div style="clear:both"></div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Duration (hrs)</label>
+                                <div dx-number-box="txt_Duration" class="center" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+                            <!--<div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>&nbsp;</label>
+            <div dx-select-box="sb_DurationUnitId" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>-->
+                            <!--<div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Start Date (Practical)</label>
+            <div dx-date-box="date_DateStartPractical" class="center"></div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>End Date (Practical)</label>
+            <div dx-date-box="date_DateEndPractical" class="center"></div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Registration Deadline</label>
+            <div dx-date-box="date_DateDeadlineRegistration" class="center"></div>
+        </div>-->
+
+
+
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Interval</label>
+                                <div dx-number-box="txt_Interval" class="center"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>&nbsp;</label>
+                                <div dx-select-box="sb_CalanderTypeId"></div>
+                            </div>
+
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" style="margin-top:30px">
+                                <label>&nbsp;</label>
+                                <div dx-check-box="chb_Recurrent"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Cost</label>
+                                <div dx-number-box="txt_Cost" class="center"></div>
+                            </div>
+                            <!--<div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" style="margin-top:30px">
+            <label>&nbsp;</label>
+            <div dx-check-box="chb_IsInside"></div>
+        </div>-->
+
+                            <div style="clear:both"></div>
+                            <!--<div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Aircraft Type</label>
+            <div dx-tag-box="tag_CourseAircraftType"></div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Category/Rating</label>
+            <div dx-tag-box="tag_CourseCatRate"></div>
+        </div>-->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Remark</label>
+                                <div dx-text-box="txt_Remark"></div>
+                            </div>
+
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>SMS</label>
+                                <div dx-text-box="txt_sms"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>SMS Status (Instructor)</label>
+                                <div dx-text-box="txt_smsst1"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>SMS Status (Instructor 2)</label>
+                                <div dx-text-box="txt_smsst2"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>SMS Date</label>
+                                <div dx-text-box="txt_smsdate"></div>
+                            </div>
+
+                            <!--<div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Tuition</label>
+            <div dx-number-box="txt_Tuition" class="center"></div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>&nbsp;</label>
+            <div dx-select-box="sb_CurrencyId"></div>
+        </div>-->
+                        </div>
+                    </div>
+                    <div class="col-lg-5 padding-0" style="padding-left:5px;">
+                        <div>
+                            <div style="background:gray;color:white;font-weight:bold;padding:7px;">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td>Sessions</td>
+                                        <td style="width:35px;padding:0 3px 0 3px">
+                                            <a ng-show="IsEditable" ng-click="addSession()" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-plus"></i></a>
+                                        </td>
+                                        <td style="width:35px;padding:0 3px 0 3px">
+                                            <a ng-show="IsEditable" ng-click="removeSession()" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div dx-data-grid="dg_session" id="dg_session"></div>
+                        </div>
+						
+						
+						<div>
+							 <div style="background:gray;color:white;font-weight:bold;padding:7px;">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td>Syllabi</td>
+                                        <td style="width:35px;padding:0 3px 0 3px">
+                                            <a ng-show="IsEditable" ng-click="addSyllabus()" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-plus"></i></a>
+                                        </td>
+                                        <td style="width:35px;padding:0 3px 0 3px">
+                                            <a ng-show="IsEditable" ng-click="removeSyllabus()" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-times"></i></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div dx-data-grid="dg_syllabi" id="dg_syllabi"></div>
+						</div>
+						
+
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+           
+        </div>
+
+
+        <div class="tab aircrafttype" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_aircrafttype" id="dg_aircrafttype"></div>
+
+        </div>
+        <div class="tab coursetype" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_coursetype" id="dg_coursetype"></div>
+
+        </div>
+        <div class="tab education" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_education" id="dg_education"></div>
+
+        </div>
+        <div class="tab course" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_course" id="dg_course"></div>
+
+        </div>
+        <div class="tab group" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_group" id="dg_group"></div>
+
+        </div>
+        <div class="tab employee" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_employee" id="dg_employee"></div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <div id="popup_education" dx-popup="popup_education" class="dx-border">
+    </div>
+    <div id="popup_aircrafttype" dx-popup="popup_aircrafttype" class="dx-border">
+    </div>
+    <div id="popup_coursetype" dx-popup="popup_coursetype" class="dx-border">
+    </div>
+    <div id="popup_course" dx-popup="popup_course" class="dx-border">
+    </div>
+    <div id="popup_group" dx-popup="popup_group" class="dx-border">
+    </div>
+    <div id="popup_employee" dx-popup="popup_employee" class="dx-border">
+    </div>
+
+    <div id="popup_session" dx-popup="popup_session">
+
+        <div class="padding-7 dx-border" style="padding:0;margin-top:3px">
+            <div class="col-lg-12  margin-bottom-5 padding-5">
+                <label>Date</label>
+                <div class="center" dx-date-box="date_session" dx-validator="{validationGroup:'crsession',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-5">
+                <label>Start</label>
+                <div class="center" dx-date-box="start_session" dx-validator="{validationGroup:'crsession',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-5">
+                <label>End</label>
+                <div class="center" dx-date-box="end_session" dx-validator="{validationGroup:'crsession',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+
+            <div style="clear:both"></div>
+
+        </div>
+
+    </div>
+	
+	 <div id="popup_syllabus" dx-popup="popup_syllabus">
+
+        <div class="padding-7 dx-border" style="padding:0;margin-top:3px">
+            <div class="col-lg-12  margin-bottom-5 padding-5">
+                <label>Title</label>
+                <div   dx-text-box="txt_syllabi" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-5">
+                <label>Hours</label>
+                <div class="center" dx-date-box="hrs_syllabi" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            
+
+
+            <div style="clear:both"></div>
+
+        </div>
+
+    </div>
+
+
+    <div ng-include="'app/views/aircraftSelect.html'"></div>
+    <div ng-include="'app/views/coursetypeSelect.html'"></div>
+    <div ng-include="'app/views/studyFieldSelect.html'"></div>
+    <div ng-include="'app/views/employeeSelect.html'"></div>
+    <div ng-include="'app/views/courseSelect.html'"></div>
+    <div ng-include="'app/views/jobgroupSelect.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+
+</div>

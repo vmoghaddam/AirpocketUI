@@ -1,0 +1,531 @@
+<style>
+    .stSelected{
+        background:green !important;
+        color:white !important;
+    }
+    .dx-fileuploader-input-wrapper {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+        .dx-fileuploader-input-wrapper .dx-button-content {
+            background: green;
+            color: white;
+        }
+    .dx-fileuploader-container{
+
+    }
+    .cell-img{height:40px;}
+</style>
+
+<div class="box courseperson" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'course';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class=" col-lg-12  col1 col-grid" style="padding-right:2px;padding-left:2px;">
+            <div dx-data-grid="dg" id="grid"></div>
+
+        </div>
+        <!--<div class=" col-lg-2 col1 col-row-sum" style="padding-right:2px;padding-left:2px;">
+
+            <div class="filter-container box dx-border">
+                <div class="header">Summary</div>
+
+                <div style="display: block; ">
+                    <div style="padding:5px;overflow-y:auto;" class="sum-wrapper">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number cn w3-2017-neutral-gray" ng-click="filterStatus($event,-1)">
+                                <div class="caption">  Pending</div>
+                                <div class="value">
+                                    {{summary.Pending}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number   w3-2017-greenery" ng-click="filterStatus($event,67)">
+                                <div class="caption">
+                                    Registered
+                                </div>
+                                <div class="value">
+                                    {{summary.Registered}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number   w3-2017-flame" ng-click="filterStatus($event,69)">
+                                <div class="caption">
+                                    Canceled
+                                </div>
+                                <div class="value">
+                                    {{summary.Canceled}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number  w3-win-phone-teal" ng-click="filterStatus($event,68)">
+                                <div class="caption">
+                                    Attended
+                                </div>
+                                <div class="value">
+                                    {{summary.Attended}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number   w3-win-phone-red" ng-click="filterStatus($event,70)">
+                                <div class="caption">
+                                    Failed
+                                </div>
+                                <div class="value">
+                                    {{summary.Failed}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number   w3-2017-marina" ng-click="filterStatus($event,71)">
+                                <div class="caption">
+                                    Passed
+                                </div>
+                                <div class="value">
+                                    {{summary.Passed}}
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>-->
+
+    </div>
+
+    <div class="rowx footer">
+        <div class=" col-lg-11 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <!--<div dx-button="btn_search"></div>
+            <div ng-show="IsEditable" dx-button="btn_new"></div>
+            <div dx-button="btn_edit"></div>
+           
+            <div dx-button="btn_people"></div>
+
+            <div dx-button="btn_notify"></div>
+            <div dx-button="btn_syncroster"></div>
+
+
+            <div ng-show="IsEditable" dx-button="btn_delete"></div>
+			-->
+			
+			 <table>
+                <tr>
+			  <td style="padding-right:3px;"> <div dx-button="btn_search"></div></td>
+                    <td style="padding-right:3px;"> <div ng-show="IsEditable" dx-button="btn_new"></div></td>
+                    <td style="padding-right:3px;"> <div dx-button="btn_edit"></div></td>
+                    <td style="padding-right:3px;"> <div dx-button="btn_people"></div></td>
+                    <td style="padding-right:3px;"> <div dx-button="btn_notify"></div></td>
+                    <td style="padding-right:3px;"> <div dx-button="btn_syncroster"></div></td>
+                    <td ng-show="dg_selected" style="padding-right:3px;"> <div id="uploader_file" dx-file-uploader="uploader_file" class="invisibleuploader"></div> </td>
+                    <td style="padding-right:3px;"><div ng-show="IsEditable" dx-button="btn_delete"></div></td>
+					      </tr>
+            </table>
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+            <div dx-button="btn_filter"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+    <div id="popup_people" dx-popup="popup_people">
+        <div class="   padding-7" style="padding:0;margin-top:3px;">
+              <div dx-tabs="tabs_folder_options">
+                   
+             </div>
+			<div class="tabfolder participants">
+			  <div dx-data-grid="dg_people" id="dg_people" dx-item-alias="row">
+
+                <div data-options="dxTemplate:{ name:'updateResultTemplate' }">
+                    <a ng-click="updateResult(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Update Result</a>
+                </div>
+                <div data-options="dxTemplate:{ name:'AttendanceTemplate' }">
+                    <a ng-click="updateAttendance(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Attendance</a>
+                </div>
+               </div>
+			</div>
+			
+			
+			<div class="tabfolder syllabi" style="display:none;">
+			 <div dx-data-grid="dg_syllabi" id="dg_syllabi" dx-item-alias="row">
+						<div data-options="dxTemplate:{ name:'updateSyllabusTemplate' }">
+                    <a ng-click="updateSyllabus(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Update</a>
+                </div>
+				    </div>
+			</div>
+			
+			
+			
+        </div>
+    </div>
+
+
+    <div id="popup_att" dx-popup="popup_att">
+        <div class="   padding-7" style="padding:0;margin-top:3px;">
+            <div style="border-bottom:1px solid gray;padding:5px;margin-bottom:5px">Sessions</div>
+            <div class="col-lg-2" ng-repeat="x in sessionTiles" ng-click="sessionTileClick(x)" style="padding:3px;">
+                <div ng-class="getSessionTileClass(x)" style="background:gray;color:white;text-align:center;padding:7px;">
+                    {{x.Caption}}
+                </div>
+            </div>
+            <div style="clear:both"></div>
+            <div style="padding:2px">
+                <div dx-data-grid="dg_att" id="dg_att" dx-item-alias="row">
+                    <div data-options="dxTemplate:{ name:'AttendanceDeleteTemplate' }">
+                        <a ng-click="deleteAttendance(row)" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Delete</a>
+                    </div>
+
+                </div>
+            </div>
+            <div style="margin-top:5px;" class="dx-border">
+                <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>From</label>
+                    <div dx-date-box="time_attfrom" class="center" dx-validator="{validationGroup:'attadd',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>To</label>
+                    <div dx-date-box="time_attto" class="center" dx-validator="{validationGroup:'attadd',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Remark</label>
+                    <div dx-text-box="txt_attremark" class="center"></div>
+                </div>
+
+                <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>&nbsp;</label>
+                    <div dx-button="btn_attadd"></div>
+                </div>
+
+                <div style="clear:both"></div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <div id="popup_employees" dx-popup="popup_employees">
+        <div class="box">
+            <div class="rowx content" style="clear:both">
+                <div class=" col-lg-3 col-md-3 col-sm-12 col-xs-12 col2">
+                    <div class="filter-container box dx-border">
+                        <div class="header">Course Information</div>
+                        <div id="scrollview" dx-scroll-view="scroll_employees">
+                            <div style="display:inline-block;padding-right:5px;">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Title</label>
+                                    <div dx-text-box="txt_Title"></div>
+                                </div>
+                                <div class="col-lg-9 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Type</label>
+                                    <div dx-text-box="txt_Type"></div>
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>No</label>
+                                    <div dx-text-box="txt_No" class="center"></div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Start Date</label>
+                                    <div dx-date-box="date_DateStart" class="center"></div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>End Date</label>
+                                    <div dx-date-box="date_DateEnd" class="center"></div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Organization</label>
+                                    <div dx-text-box="txt_Organization"></div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Location</label>
+                                    <div dx-text-box="txt_Location"></div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Instructor</label>
+                                    <div dx-text-box="txt_Instructor"></div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Training Director</label>
+                                    <div dx-text-box="txt_TrainingDirector"></div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Registration Deadline</label>
+                                    <div dx-date-box="date_DateDeadlineRegistration" class="center"></div>
+                                </div>
+                                <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Remaining</label>
+                                    <div dx-text-box="txt_Remaining" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Remark</label>
+                                    <div dx-text-box="txt_Remark"></div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:5px;">
+                    <div dx-data-grid="dg_employees" id="grid"></div>
+
+                    <div style="display: block">
+                        <div style="padding:5px;">
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,-1)">
+                                    <div class="caption">  Pending</div>
+                                    <div class="value">
+                                        {{courseEmployee.Pending}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,67)">
+                                    <div class="caption">
+                                        Registered
+                                    </div>
+                                    <div class="value">
+                                        {{courseEmployee.Registered}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,69)">
+                                    <div class="caption">
+                                        Canceled
+                                    </div>
+                                    <div class="value">
+                                        {{courseEmployee.Canceled}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,68)">
+                                    <div class="caption">
+                                        Attended
+                                    </div>
+                                    <div class="value">
+                                        {{courseEmployee.Attended}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,70)">
+                                    <div class="caption">
+                                        Failed
+                                    </div>
+                                    <div class="value">
+                                        {{courseEmployee.Failed}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,71)">
+                                    <div class="caption">
+                                        Passed
+                                    </div>
+                                    <div class="value">
+                                        {{courseEmployee.Passed}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="popup_status" dx-popup="popup_status" class="dx-border">
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Current Status</label>
+            <div dx-text-box="txt_OldStatus"></div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>New Status</label>
+            <div dx-select-box="sb_StatusId" dx-validator="{validationGroup:'statusChange',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Remark</label>
+            <div dx-text-box="txt_StatusRemark"></div>
+        </div>
+
+        <div style="clear:both"></div>
+
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+            <div dx-check-box="chb_SMS"></div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+            <div dx-check-box="chb_Email"></div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+            <div dx-check-box="chb_AppNotification"></div>
+        </div>
+
+    </div>
+
+
+    <div id="popup_passed" dx-popup="popup_passed" class="dx-border">
+        <div class="col-lg-8 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Name</label>
+            <div dx-text-box="txt_Name"></div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Current Status</label>
+            <div dx-text-box="txt_OldStatus"></div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Remark</label>
+            <div dx-text-box="txt_StatusRemark"></div>
+        </div>
+
+        <div style="clear:both"></div>
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col2">
+            <div class="filter-container box dx-border">
+                <div class="header">Certificate</div>
+                <div style="display:inline-block">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Issue Date</label>
+                        <div dx-date-box="date_DateIssue" class="center" dx-validator="{validationGroup:'passed',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>No.</label>
+                        <div dx-text-box="txt_CertificateNo" class="center" dx-validator="{validationGroup:'passed',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+            <div dx-check-box="chb_SMS"></div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+            <div dx-check-box="chb_Email"></div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+            <div dx-check-box="chb_AppNotification"></div>
+        </div>
+
+    </div>
+
+
+    <div id="popup_result" dx-popup="popup_result" class="dx-border">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Status</label>
+            <div dx-select-box="sb_result" dx-validator="{validationGroup:'cresult',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Remark</label>
+            <div dx-text-box="txt_resultremark"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Issue Date</label>
+            <div dx-date-box="date_resultissue" class="center"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Expire Date</label>
+            <div dx-date-box="date_resultexpire" class="center"></div>
+        </div>
+        <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Certificate No.</label>
+            <div dx-text-box="txt_resultno" class="center"></div>
+        </div>
+        <div style="clear:both"></div>
+
+
+
+
+    </div>
+    <div id="popup_syncerrors" dx-popup="popup_syncerrors">
+
+
+        <div dx-data-grid="dg_syncerrors" id="dg_syncerrors">
+
+        </div>
+
+    </div>
+
+
+    <div id="popup_notify" dx-popup="popup_notify">
+        <div class="   padding-7" style="padding:0;margin-top:3px;">
+            <div dx-data-grid="dg_notify" id="dg_notify" dx-item-alias="row">
+
+                 
+            </div>
+        </div>
+    </div>
+	
+	<div id="popup_syllabus" dx-popup="popup_syllabus">
+        <div class="dx-border   padding-7" style="padding:0;margin-top:3px;">
+             <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+               <label>Session</label>
+               <div dx-select-box="sb_syl_session" ></div>
+             </div>
+			 <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+               <label>Instructor</label>
+               <div dx-select-box="sb_syl_ins" ></div>
+             </div>
+			 <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+               <label>Remark</label>
+               <div dx-text-box="txt_syl_remark" ></div>
+             </div>
+			 <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                
+               <div dx-check-box="chb_syl_done" ></div>
+             </div>
+        </div>
+    </div>
+
+
+
+    <div ng-include="'app/views/courseAdd.html?v=1256887'" ng-init="type = 'active';"></div>
+    <div ng-include="'app/views/employeeSelectCourse.html?v=100'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+

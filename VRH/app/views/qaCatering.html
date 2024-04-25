@@ -1,0 +1,222 @@
+<style>
+    .td-field {
+        padding: 7px;
+        text-align: right
+    }
+
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: right;
+        color: black;
+        font-weight: bold
+    }
+</style>
+
+<div ng-controller="qaCateringController">
+    <div style="padding:0px 10px 0 10px;">
+        <div style="margin-top: 0px; float: left; overflow: hidden; width: 60%;padding:10px 15px 0 0px" ng-show="isMaximise">
+            <div style='background:#898e8c;color:white;font-weight:bold;padding:7px;text-align:center'>CATERING HAZARD REPORT</div>
+            <div style="border:1px solid #ccc;padding:10px;">
+                <div class='thin-scroll' style='overflow-y:auto;' ng-style="{height: scroll_qaCatering_height + 'px'}">
+
+                    <div class="visible-sm visible-md visible-lg">
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="6" style=" padding:7px;text-align:left;color:black;font-weight:bold">
+                                Id:<span style='display:inline-block;margin-left:5px;'>{{entity.FormNo}}</span>
+                            </td>
+                        </tr>
+                    </table>
+						<table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="2">
+                                    :گزارش دهنده
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_email" class="center"></div></td>
+                                <td class="td-field" style="font-weight:bold"> :(Email) آدرس ایمیل </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_telNumber" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :(Tel No.) شماره تلفن </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"> <div dx-text-box="txt_name" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :(Full Name) نام و نام‌خانوادگی </td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top: 10px; border: 1px solid #ccc; width: 100%; color: black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="4">
+                                    :اطلاعات اولیه
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-date-box="txt_reportDate" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold; text-align: right"> :تاریخ گزارش </td>
+                                <td class="td-field"><div dx-date-box="txt_hazardDate" class="center"></div></td>
+                                <td class="td-field" style="text-align:right; font-weight: bold"> :تاریخ رویداد/مخاطره </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-date-box="txt_hazardTime" class="center"></div></td>
+                                <td class="td-field" style="text-align:right; font-weight: bold"> :ساعت بروز رویداد/مخاطره </td>
+                                <td class="td-field"><div dx-text-box="txt_area" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="td-field" style="font-weight: bold;text-align:right"> :محل و بخش بروز رویداد/مخاطره </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_register" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="td-field" style="font-weight: bold; text-align: right"> :علامت ثبت هواپیما </td>
+                                <td class="td-field"><div dx-text-box="txt_route" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="td-field" style="text-align:right; font-weight: bold"> :مسیر پرواز </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_flightNumber" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="td-field" style="text-align:right; font-weight: bold"> :شماره پرواز </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field" style="font-weight: bold" colspan="4"> :شرح مخاطره / رویداد </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field" style="height:80px" colspan="4"><div dx-text-area="txt_description" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <div style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <div class="td-title">
+                                :عامل بروز مخاطره/رویداد
+                            </div>
+
+                            <div class="col-xs-3 col-sm-3 col-md-3" style="padding: 1%;text-align:right" ng-repeat="x in chrReason">
+                                <p style="margin-right:5px;display:inline-block">{{x.Title}}</p><input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="optReason[$index]" ng-disabled="true" ng-change="chkReason($index)" />
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="td-field center" style="height:80px" dx-text-area="txt_eventOther"></div>
+                        </div>
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="6">
+                                    :مشخصات/ نوع و شماره
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_trolley" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="td-field" style="text-align:right; font-weight: bold"> :ترولی </td>
+                                <td class="td-field"><div dx-text-box="txt_equipment" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="td-field" style="text-align:right; font-weight: bold"> :دستگاه/تجهیزات </td>
+                                <td class="td-field"><div dx-text-box="txt_transporter" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="td-field" style="text-align:right; font-weight: bold"> :خودرو حمل کننده </td>
+                            </tr>
+                        </table>
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="4">
+                                    گزارش شرایط و جزئیات ترولی/تجهیزات یا خودرو حمل کنندهمرتبط با مخاطره/رویداد
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-area="txt_trolleyEquipmentTransporterDecs" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="4">
+                                    آیا رویداد منجر به جرح/مصدومیت یا آسیب‌دیدگی پرسنل گردیدهاست؟ (توضیح داده شود)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:7px;text-align:right;"><div dx-select-box="sb_injuryOccurring" class="center"></div></td>
+                            </tr>
+                            <tr ng-show="entity.InjeryOccurring == true">
+                                <td style="padding:7px;text-align:right;"><div dx-text-area="txt_injuryDescription" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="4">
+                                    آیا فرد آسیب‌دیده حین انجام کار از وسایل و تجهیزات حفاظتی لازم استفاده کرده است؟
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:7px;text-align:right;"><div dx-select-box="sb_safty" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:right; font-weight: bold" ng-show="entity.SaftyEquipmentUseage == true"> چه نوع وسایلی؟ </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:7px;text-align:right;"><div dx-text-area="txt_saftyEquipmentType" ng-show="entity.SaftyEquipmentUseage == true" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="4">
+                                    آیا رویداد منجر به وقفه کاری شده است؟ (چه مدت؟ بر حسب دقیقه)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-sm-12 col-md-12 td-field"><div dx-number-box="txt_workBreakPeriod" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="4">
+                                    اقدامات پیشگیرانه/پیشنهادی یا اصلاحی لازم
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-area="txt_preventiveActions" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" style="background-color: #66ffcc !important; text-align: left !important">
+                                    Result
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"> <div dx-text-area="txt_result"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <div style="clear:both"></div>
+                        <div class="td-title" style="margin-top: 10px;text-align: left">
+                            ATTACHED DOCUMENTS
+                        </div>
+                        <div dx-data-grid="dg_attachments" id="dg_attachments" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                            <div data-options="dxTemplate:{ name:'download' }">
+                                <a ng-click="download(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         
+        <div style="float: right; width: 40%" ng-style="getStyle()">
+            <div ng-include="'app/views/qaRefer.html?vx=3'" onload="testLoaded()"></div>
+            <table style="width:100%">
+                <tr>
+                    <td></td>
+                    <td style="width:200px;padding-right:10px">
+                        <div style="margin-top: 10px;padding: 7px; text-align: center; width: 100%;background-color:#ccc" ng-show="isMaximise" ng-click="maximise()">Maximize</div>
+                        <div style="margin-top: 10px;padding: 7px; text-align: center; width: 100%;background-color:#ccc" ng-show="!isMaximise" ng-click="maximise()">Minimize</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style='clear:both'></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+<div style='clear:both'></div>

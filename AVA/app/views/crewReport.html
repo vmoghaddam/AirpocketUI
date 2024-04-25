@@ -1,0 +1,95 @@
+﻿<style>
+    .dx-toolbar .dx-toolbar-items-container{
+        height:36px !important;
+    }
+</style>
+<div class="box crewreport" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'person';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;">
+            <div dx-data-grid="dg" id="grid">
+
+            </div>
+
+        </div>
+    </div>
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_group" ></div></td>
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'crewreportsearch',  validationRules: [{ type: 'required'}]}"></div></td>
+
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+
+                <td></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_person"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_flight"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_flight_total"></div></td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <div id="popup_flight" dx-popup="popup_flight">
+        <div class="_print_flight">
+            <div style="margin:0px 0px 5px 0px;border-radius:0;" class="groupbox dx-border">
+                <div class="caption">Information</div>
+                <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>First Name</label>
+                    <div dx-text-box="txt_FirstName"></div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Last Name</label>
+                    <div dx-text-box="txt_LastName"></div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Personnel Id</label>
+                    <div dx-text-box="txt_PID" class="center ltr f16"></div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Group</label>
+                    <div dx-text-box="txt_group" class="center ltr f16"></div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Mobile</label>
+                    <div dx-text-box="txt_Mobile" class="center ltr f16"></div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>
+
+        </div>
+      
+
+    </div>
+
+    <div id="popup_flight_total" dx-popup="popup_flight_total">
+
+        <div dx-data-grid="dg_flight_total" id="dg_flight_total" class="content" style="overflow-y:hidden"></div>
+
+
+    </div>
+
+    <div ng-include="'app/views/personView.html'"></div>
+
+
+</div>
+
+
