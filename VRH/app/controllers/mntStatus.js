@@ -14,9 +14,29 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
 
     $scope.engEntity =
     {
-        id: null
+        id: null,
+        engEntity: null
     };
 
+    $scope.checkEntity = {
+        date_initial: null,
+
+    };
+
+    $scope.adEntity = {
+        date_initial: null,
+        date_due: null
+    };
+        
+    $scope.catEntity = {
+        date_initial: null,
+        date_due: null
+    };
+
+    $scope.engAdEntity = {
+        date_initial: null,
+        date_due: null
+    };
 
 
     $scope.selectedTabIndex = -1;
@@ -341,7 +361,7 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
 
 
 
-            $scope.entity.date_initial_landing_gear =  $scope.entity.date_initial_landing_gear == null ? null : moment($scope.entity.date_initial_landing_gear).format('YYYY-MM-DD');
+            $scope.entity.date_initial_landing_gear = $scope.entity.date_initial_landing_gear == null ? null : moment($scope.entity.date_initial_landing_gear).format('YYYY-MM-DD');
             $scope.entity.date_initial_apu = $scope.entity.date_initial_apu == null ? null : moment($scope.entity.date_initial_apu).format('YYYY-MM-DD');
             $scope.entity.date_initial_ht1 = $scope.entity.date_initial_ht1 == null ? null : moment($scope.entity.date_initial_ht1).format('YYYY-MM-DD');
             $scope.entity.date_initial_ht2 = $scope.entity.date_initial_ht2 == null ? null : moment($scope.entity.date_initial_ht2).format('YYYY-MM-DD');
@@ -1072,7 +1092,7 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
 
                         $scope.engEntity.aircraft_id = $scope.selectedTabId;
-                        $scope.engEntity.date_initial = moment($scope.engEntity.date_initial).format('YYYY-MM-DD')
+                        $scope.engEntity.date_initial = $scope.engEntity.date_initial == null ? null : moment($scope.engEntity.date_initial).format('YYYY-MM-DD')
                         if ($scope.engEntity.engine_no == 1)
                             $scope.engEntity.id = $scope.eng1Id
                         else
@@ -1129,7 +1149,8 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', icon: '', onClick: function (e) {
 
-                        $scope.checkEntity.date_initial = moment($scope.checkEntity.date_initial).format('YYYY-MM-DD');
+                       
+                        $scope.checkEntity.date_initial = $scope.checkEntity.date_initial == null ? null : moment($scope.checkEntity.date_initial).format('YYYY-MM-DD');
                         $scope.checkEntity.aircraft_id = $scope.selectedTabId;
                         $scope.loadingVisible = true;
                         mntService.saveCheck($scope.checkEntity).then(function (response) {
@@ -1181,8 +1202,10 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', icon: '', onClick: function (e) {
 
-                        $scope.adEntity.date_initial = moment($scope.adEntity.date_initial).format("YYYY-MM-DD");
-                        $scope.adEntity.date_due = moment($scope.adEntity.date_due).format("YYYY-MM-DD");
+                       
+
+                        $scope.adEntity.date_initial = $scope.adEntity.date_initial == null ? null : moment($scope.adEntity.date_initial).format("YYYY-MM-DD");
+                        $scope.adEntity.date_due = $scope.adEntity.date_due == null ? null : moment($scope.adEntity.date_due).format("YYYY-MM-DD");
                         $scope.adEntity.aircraft_id = $scope.selectedTabId;
                         $scope.loadingVisible = true;
                         mntService.saveADSB($scope.adEntity).then(function (response) {
@@ -1235,8 +1258,10 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', icon: '', onClick: function (e) {
 
-                        $scope.catEntity.date_initial = moment($scope.catEntity.date_initial).format("YYYY-MM-DD");
-                        $scope.catEntity.date_due = moment($scope.catEntity.date_due).format("YYYY-MM-DD");
+                       
+
+                        $scope.catEntity.date_initial = $scope.catEntity.date_initial == null ? null :moment($scope.catEntity.date_initial).format("YYYY-MM-DD");
+                        $scope.catEntity.date_due = $scope.catEntity.date_due == null ? null : moment($scope.catEntity.date_due).format("YYYY-MM-DD");
                         $scope.catEntity.engine_id = $scope.engEntity.id
                         $scope.loadingVisible = true;
                         mntService.saveEngLlp($scope.catEntity).then(function (response) {
@@ -1286,8 +1311,10 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', icon: '', onClick: function (e) {
 
-                        $scope.engAdEntity.date_initial = moment($scope.engAdEntity.date_initial).format("YYYY-MM-DD");
-                        $scope.engAdEntity.date_due = moment($scope.engAdEntity.date_due).format("YYYY-MM-DD");
+                       
+
+                        $scope.engAdEntity.date_initial = $scope.engAdEntity.date_initial == null ? null :  moment($scope.engAdEntity.date_initial).format("YYYY-MM-DD");
+                        $scope.engAdEntity.date_due = $scope.engAdEntity.date_due == null ? null : moment($scope.engAdEntity.date_due).format("YYYY-MM-DD");
                         $scope.engAdEntity.engine_id = $scope.engEntity.id;
                         $scope.loadingVisible = true;
                         mntService.saveEngAdsb($scope.engAdEntity).then(function (response) {
