@@ -2,7 +2,16 @@
 
 
 app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
-    $scope.entity = {};
+    $scope.entity = {
+        date_initial_landing_gear: null,
+        date_initial_apu: null,
+        date_initial_ht1: null,
+        date_initial_ht2: null,
+        date_initial_ht3: null,
+        date_initial_due: null,
+        date_initial: null
+    };
+
     $scope.engEntity =
     {
         id: null
@@ -330,13 +339,15 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
         onClick: function (e) {
 
 
-            $scope.entity.date_initial_landing_gear = moment($scope.entity.date_initial_landing_gear).format('YYYY-MM-DD');
-            $scope.entity.date_initial_apu = moment($scope.entity.date_initial_apu).format('YYYY-MM-DD');
-            $scope.entity.date_initial_ht1 = moment($scope.entity.date_initial_ht1).format('YYYY-MM-DD');
-            $scope.entity.date_initial_ht2 = moment($scope.entity.date_initial_ht2).format('YYYY-MM-DD');
-            $scope.entity.date_initial_ht3 = moment($scope.entity.date_initial_ht3).format('YYYY-MM-DD');
-            $scope.entity.date_initial_due = moment($scope.entity.date_initial_due).format('YYYY-MM-DD');
-            $scope.entity.date_initial = moment($scope.entity.date_initial).format('YYYY-MM-DD');
+
+
+            $scope.entity.date_initial_landing_gear =  $scope.entity.date_initial_landing_gear == null ? null : moment($scope.entity.date_initial_landing_gear).format('YYYY-MM-DD');
+            $scope.entity.date_initial_apu = $scope.entity.date_initial_apu == null ? null : moment($scope.entity.date_initial_apu).format('YYYY-MM-DD');
+            $scope.entity.date_initial_ht1 = $scope.entity.date_initial_ht1 == null ? null : moment($scope.entity.date_initial_ht1).format('YYYY-MM-DD');
+            $scope.entity.date_initial_ht2 = $scope.entity.date_initial_ht2 == null ? null : moment($scope.entity.date_initial_ht2).format('YYYY-MM-DD');
+            $scope.entity.date_initial_ht3 = $scope.entity.date_initial_ht3 == null ? null : moment($scope.entity.date_initial_ht3).format('YYYY-MM-DD');
+            $scope.entity.date_initial_due = $scope.entity.date_initial_due == null ? null : moment($scope.entity.date_initial_due).format('YYYY-MM-DD');
+            $scope.entity.date_initial = $scope.entity.date_initial == null ? null : moment($scope.entity.date_initial).format('YYYY-MM-DD');
             $scope.entity.ID = $scope.selectedTabId;
             console.log($scope.entity);
 
@@ -720,7 +731,7 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
 
             $scope.dg_coming_id.id = e.selectedRowsData[0].id;
 
-            
+
             if (!data) {
                 $scope.dg_coming_selected = null;
             }
@@ -883,7 +894,7 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
     $scope.dg_eng_part_selected = null;
     $scope.dg_eng_part_instance = null;
     $rootScope.dg_eng_part_ds = null;
-    $scope.dg_eng_part_id = {id: null}
+    $scope.dg_eng_part_id = { id: null }
     $scope.dg_eng_part = {
 
 
@@ -982,7 +993,7 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
     $scope.dg_eng_ad_selected = null;
     $scope.dg_eng_ad_instance = null;
     $rootScope.dg_eng_ad_ds = null;
-    $scope.dg_eng_ad_id = {id: null}
+    $scope.dg_eng_ad_id = { id: null }
     $scope.dg_eng_ad = {
 
 
