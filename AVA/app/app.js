@@ -1,8 +1,23 @@
 ﻿    
-var app = angular.module('GriffinApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'dx', 'ngSanitize', 'ngAnimate']).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
+var app = angular.module('GriffinApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'dx', 'ngSanitize', 'ngAnimate', 'angularjs-gauge', 'nvd3']).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
-}]);
+}]).config(configApp);
+configApp.$inject = ['ngGaugeProvider'];
  
+function configApp(ngGaugeProvider) {
+
+    // setting the default parameters for 
+    // gauge instances globally.
+    ngGaugeProvider.setOptions({
+        type: 'arch',
+        size: 180,
+        cap: 'round',
+        thick: 12,
+       // foregroundColor: "#ff8645",   // note the camelCase notation for parameter name
+       // backgroundColor: "#e4e4e4"
+    });
+
+}
  
 app.config(function ($routeProvider) {
     var version = 100;
@@ -1018,6 +1033,13 @@ app.run(['authService', 'activityService', '$rootScope', '$location', '$template
 	$rootScope.HasDispatch = function () {
         
         var role = Enumerable.From($rootScope.roles).Where('$=="Dispatch"').FirstOrDefault();
+        if (role)
+            return true;
+        return false;
+    };
+    $rootScope.HasACStatus = function () {
+
+        var role = Enumerable.From($rootScope.roles).Where('$=="A/C Status"').FirstOrDefault();
         if (role)
             return true;
         return false;

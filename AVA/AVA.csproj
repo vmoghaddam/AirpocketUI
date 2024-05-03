@@ -271,6 +271,7 @@
     <Content Include="app\services\libraryService.js" />
     <Content Include="app\services\locationService.js" />
     <Content Include="app\services\logService.js" />
+    <Content Include="app\services\mapService.js" />
     <Content Include="app\services\mntService.js" />
     <Content Include="app\services\msgService.js" />
     <Content Include="app\services\neerjaService.js" />
@@ -746,7 +747,6 @@
     <Content Include="gantt2.css" />
     <Content Include="gantt2.html" />
     <Content Include="gantt2.js" />
-    <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="logo.png" />
     <Content Include="pdfjs\api\draft\display_api.js.html" />

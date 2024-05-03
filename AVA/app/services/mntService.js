@@ -156,7 +156,22 @@ app.factory('mntService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
         return deferred.promise;
     };
 
-  
+    var _getDashboard = function () {
+
+        var deferred = $q.defer();
+        $http.get( $rootScope.serviceMnt + 'api/mnt/dashboard/-1').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+
+
+         
+    };
+    ordersServiceFactory.getDashboard = _getDashboard;
 
     ordersServiceFactory.getLLP = _getLLP;
     ordersServiceFactory.getADSB = _getADSB;

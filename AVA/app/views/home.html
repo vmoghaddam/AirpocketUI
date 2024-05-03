@@ -44,6 +44,37 @@
     .green {
         background: green !important;
     }
+
+
+
+
+    /***********************8*/
+
+
+    .gauge_value {
+        font-size: 0.75em ;
+    }
+    .gauge_append {
+        font-size: 0.5em !important;
+    }
+    .gauge_label {
+        font-size: 1.2em !important;
+    }
+   /* .nv-range1 {
+      
+        fill: orange !important;
+    }
+    .nv-range2 {
+        fill: red !important;
+    }
+    .nv-range0 {
+        fill: #00ffcc !important;
+    }*/
+    .bar-green{
+        fill:green !important;
+    }
+
+    /********************88*/
 </style>
 <div class="box home" style="height:100%;display:none;overflow-y:hidden">
 
@@ -308,13 +339,7 @@
                             </tr>
                         </table>
                     </div>
-                    <!--<div class="col-lg-5 col-md-6 col-sm-6" style="height:85px;">
-                        <div class="chart-wrapper">
-                            <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-
-                            <canvas id="chart-active" width="300" height="80" class="chartjs-render-monitor"></canvas>
-                        </div>
-                    </div>-->
+                     
                     <div style="clear:both"></div>
 
                 </div>
@@ -797,86 +822,17 @@
         </div>
 
         <div class=" col-lg-11 col-md-12   thin-scroll" style="padding:5px 5px 5px 10px;height:100%;overflow-y:auto">
-            <!--<div ng-repeat="x in flight.Airports" class="box-app" style="padding-top:0;display: inline-block;width:150px;background:gray;margin:5px;border-radius:0">
-            <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigateairport(x.IATA)">
 
-                <div class="title-small ng-binding" style="color:white;font-size:1em">{{x.IATA}}</div>
-            </a>
-        </div>-->
-		    <div class='hidden-lg col-md-12 col-sm-12 col-xs-12' style='padding : 0px'>
-			   <div style='background:#ffdd99;border:1px solid gray;padding:20px;font-weight:bold;font-size:14px;text-align:center;' ng-click='go_board()'>
-			       FLIGHTS BOARD
-			   </div>
-			</div>
-			<div style='clear:both'></div>
+            <div class='hidden-lg col-md-12 col-sm-12 col-xs-12' style='padding : 0px'>
+                <div style='background:#ffdd99;border:1px solid gray;padding:20px;font-weight:bold;font-size:14px;text-align:center;' ng-click='go_board()'>
+                    FLIGHTS BOARD
+                </div>
+            </div>
+            <div style='clear:both'></div>
             <div class="flight-summary">
 
-                <div class="col-lg-2 hidden-xs hidden-sm hidden-xsm  padding-0 center summarybox">
 
-                    <div class="home-box " style="padding:8px;">
-                        <table style="width:100%" class="hidden-sm">
-                            <tbody>
-                                <tr>
-                                    <td style="width:80% !important;padding:0 10px 0 0;text-align:center" class="td-icon ">
-                                        <div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'homedate',  validationRules: [{ type: 'required'}]}"></div>
-                                        <div class="center" style="margin-top:5px;" dx-date-box="date_to" dx-validator="{validationGroup:'homedate',  validationRules: [{ type: 'required'}]}"></div>
-                                    </td>
-                                    <td>
-                                        <a href="" ng-click="BindSummary()"><i class="fas fa-sync-alt" style="font-size:28px;color:forestgreen !important"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <!--<div class="hidden-lg">
-                            <div class="col-sm-3">
-                                <div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'homedate',  validationRules: [{ type: 'required'}]}"></div>
-                                
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="center"   dx-date-box="date_to" dx-validator="{validationGroup:'homedate',  validationRules: [{ type: 'required'}]}"></div>
-                            </div>
-                        </div>
-                        <div style="clear:both"></div>-->
-                    </div>
-                </div>
-
-                <div class="col-lg-2 hidden-lg hidden-sm hidden-md hidden-xsm  padding-0 center summarybox">
-
-                    <div class="home-box " style="padding:8px;">
-                        <table style="width:100%">
-                            <tbody>
-                                <tr>
-                                    <td style="width:60% !important;padding:0 10px 0 0; " class="td-icon ">
-                                        <div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'homedate',  validationRules: [{ type: 'required'}]}"></div>
-                                        <div class="center" style="margin-top:4px;" dx-date-box="date_to" dx-validator="{validationGroup:'homedate',  validationRules: [{ type: 'required'}]}"></div>
-                                    </td>
-                                    <td>
-                                        <a href="" ng-click="BindSummary()"><i class="fas fa-sync-alt" style="font-size:32px;color:forestgreen !important"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div class="hidden-lg hidden-md hidden-xs col-sm-5  col-xsm-5  padding-0" style="padding-right:5px;margin-top:3px;">
-                    <div class="home-box " style="padding:8px;height:57.5px">
-                        <table style="width:100%">
-                            <tbody>
-                                <tr>
-                                    <td style="width:50% !important;padding:0 10px 0 0; " class="td-icon ">
-                                        <div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'homedate',  validationRules: [{ type: 'required'}]}"></div>
-                                        <div class="center" style="margin-top:4px;" dx-date-box="date_to" dx-validator="{validationGroup:'homedate',  validationRules: [{ type: 'required'}]}"></div>
-                                    </td>
-                                    <td style="text-align:center">
-                                        <a href="" ng-click="BindSummary()"><i class="fas fa-sync-alt" style="font-size:32px;color:forestgreen !important"></i></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-sm-7 col-xsm-7  padding-0 center summarybox">
+                <div class="col-lg-1 col-xs-6 col-sm-3 col-xsm-4  padding-0 center summarybox">
 
                     <div class="home-box " style="padding:8px;">
                         <table style="width:100%">
@@ -894,22 +850,7 @@
                                             <div style="clear:both"></div>
                                         </div>
                                     </td>
-                                    <td style="width:25%">
-                                        <div style="margin-bottom:5px;text-align:center; " class="caption">Types</div>
-                                        <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold">{{boardSummary.Types}}</span>
 
-                                            <div style="clear:both"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div style="margin-bottom:5px;text-align:center;" class="caption">Registers</div>
-                                        <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold">{{boardSummary.Registers}}</span>
-
-                                            <div style="clear:both"></div>
-                                        </div>
-                                    </td>
 
                                 </tr>
                             </tbody>
@@ -918,53 +859,8 @@
 
 
                 </div>
-                <div class="hidden-lg" style="clear:both"></div>
-                <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
+                
 
-                    <div class="home-box " style="padding:8px;background:#ff4d4d !important">
-                        <table style="width:100%">
-                            <tbody>
-                                <tr>
-                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
-
-                                        <i class="fas fa-times-circle" style="font-size:25px;color:white !important"></i>
-                                    </td>
-                                    <td>
-                                        <div style="margin-bottom:5px;text-align:center;color:white" class="caption">Cancled</div>
-                                        <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold;color:white">{{boardSummary.Canceled}}</span>
-
-                                            <div style="clear:both"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
-
-                    <div class="home-box " style="padding:8px;background:#ff944d !important">
-                        <table style="width:100%">
-                            <tbody>
-                                <tr>
-                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
-
-                                        <i class="fas fa-random" style="font-size:25px;color:white !important"></i>
-                                    </td>
-                                    <td>
-                                        <div style="margin-bottom:5px;text-align:center;color:white" class="caption">Diverted</div>
-                                        <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold;color:white">{{boardSummary.Diverted}}</span>
-
-                                            <div style="clear:both"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
                 <div class="col-lg-1 col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
 
                     <div class="home-box " style="padding:8px;">
@@ -990,30 +886,6 @@
                 </div>
 
 
-                <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
-
-                    <div class="home-box " style="padding:8px;">
-                        <table style="width:100%">
-                            <tbody>
-                                <tr>
-                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
-
-                                        <i class="fas fa-plane-arrival" style="font-size:25px;color:#3399ff !important"></i>
-                                    </td>
-                                    <td>
-                                        <div style="margin-bottom:5px;text-align:center" class="caption">Arrived</div>
-                                        <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold">{{boardSummary.Arrived}}</span>
-
-                                            <div style="clear:both"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
 
 
 
@@ -1044,30 +916,8 @@
                     </div>
 
                 </div>
-                <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
 
-                    <div class="home-box " style="padding:8px;">
-                        <table style="width:100%">
-                            <tbody>
-                                <tr>
-                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
-
-                                        <i class="fas fa-chart-pie" style="font-size:25px;color:#cc0000 !important"></i>
-                                    </td>
-                                    <td>
-                                        <div style="margin-bottom:5px;text-align:center" class="caption">DLA Ratio</div>
-                                        <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold">{{boardSummary.DelayRatio}}%</span>
-
-                                            <div style="clear:both"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
+                <div class="col-lg-2  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
 
                     <div class="home-box " style="padding:8px;">
                         <table style="width:100%">
@@ -1091,31 +941,8 @@
                     </div>
                 </div>
 
-                <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
 
-                    <div class="home-box " style="padding:8px;">
-                        <table style="width:100%">
-                            <tbody>
-                                <tr>
-                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
-
-                                        <i class="fas fa-gas-pump" style="font-size:25px;color:#e6b800 !important"></i>
-                                    </td>
-                                    <td>
-                                        <div style="margin-bottom:5px;text-align:center" class="caption">Fuel Used</div>
-                                        <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold">{{boardSummary.FuelActual}}K</span>
-
-                                            <div style="clear:both"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-                <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 col-xsm-4 padding-0 center summarybox">
+                <div class="col-lg-2  col-xs-6 col-sm-3 col-xsm-4 col-xsm-4 padding-0 center summarybox">
 
                     <div class="home-box " style="padding:8px;">
                         <table style="width:100%">
@@ -1212,20 +1039,23 @@
                         </table>
                     </div>
                 </div>
+
+
+                <!--2024-->
                 <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
 
-                    <div class="home-box " style="padding:8px;">
+                    <div class="home-box " style="padding:8px;background:#ff4d4d !important">
                         <table style="width:100%">
                             <tbody>
                                 <tr>
                                     <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
 
-                                        <i class="fas fa-stopwatch" style="font-size:25px;color:lawngreen !important"></i>
+                                        <i class="fas fa-times-circle" style="font-size:25px;color:white !important"></i>
                                     </td>
                                     <td>
-                                        <div style="margin-bottom:5px;text-align:center" class="caption">FL. Time</div>
+                                        <div style="margin-bottom:5px;text-align:center;color:white" class="caption">Cancled</div>
                                         <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold">{{boardSummary.FlightTimeActualStr}}</span>
+                                            <span style="font-size:16px;font-weight:bold;color:white">{{boardSummary.Canceled}}</span>
 
                                             <div style="clear:both"></div>
                                         </div>
@@ -1237,18 +1067,18 @@
                 </div>
                 <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
 
-                    <div class="home-box " style="padding:8px;">
+                    <div class="home-box " style="padding:8px;background:#ff944d !important">
                         <table style="width:100%">
                             <tbody>
                                 <tr>
                                     <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
 
-                                        <i class="fas fa-stopwatch" style="font-size:25px;color:mediumpurple !important"></i>
+                                        <i class="fas fa-random" style="font-size:25px;color:white !important"></i>
                                     </td>
                                     <td>
-                                        <div style="margin-bottom:5px;text-align:center" class="caption">SITA Time</div>
+                                        <div style="margin-bottom:5px;text-align:center;color:white" class="caption">Diverted</div>
                                         <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold">{{boardSummary.SITATimeStr}}</span>
+                                            <span style="font-size:16px;font-weight:bold;color:white">{{boardSummary.Diverted}}</span>
 
                                             <div style="clear:both"></div>
                                         </div>
@@ -1258,51 +1088,183 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-lg-1  col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
-
-                    <div class="home-box " style="padding:8px;">
-                        <table style="width:100%">
-                            <tbody>
-                                <tr>
-                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
-
-                                        <i class="fas fa-stopwatch" style="font-size:25px;color:slategrey !important"></i>
-                                    </td>
-                                    <td>
-                                        <div style="margin-bottom:5px;text-align:center" class="caption">Fix Time</div>
-                                        <div class="libcount" style="text-align:center">
-                                            <span style="font-size:16px;font-weight:bold">{{boardSummary.FixTimeStr}}</span>
-
-                                            <div style="clear:both"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-
                 <div style="clear:both"></div>
             </div>
             <!--End of flight summary-->
-            <div style="margin-top:10px;">
-                <!--delay chart-->
-                <div class="col-lg-8" style="padding:0 2px 0 2px">
+            <!--AIRCRAFT-->
 
-                    <div class="card" style="margin-bottom:10px">
-                        <div class="card-header">
-                            The most delayed flights
+            <div class="col-lg-6 col-md-12 col-sm-12 hidden-xs col-xsm-12   padding-0" style="padding-right:10px;margin-top:10px" ng-repeat="ac in aircrafts" ng-show="ac_status_visible">
+                <div style="border:1px solid #ccc;background:white;">
 
-                        </div>
-                        <!--<div class="card-body" style="height:264px;">
-                        <canvas id="chart-chartmostdelay" height="80"></canvas>
-                    </div>-->
-                        <div id="chart" dx-chart="chart_most_delayed"></div>
-                    </div>
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2" style="padding:7px 0 7px 0;border-bottom:1px solid #ddd;background:#eeeeee">
+                                <div class="col-lg-3 col-sm-5 col-xs-6" style="text-align:left;font-size:24px;border-right:1px solid #ddd">{{ac.register}}</div>
+
+                                <div class="col-lg-1 col-sm-1 padding-0 hidden-xsm" style="text-align:center;font-size:16px;padding-top:0px;line-height:32px;font-weight:bold;border-right:1px solid #ddd">
+                                    {{ac.cycle}}
+                                    <span style="display:inline-block;margin-left:3px;font-size:13px; font-weight:normal ">CY</span>
+                                </div>
+
+
+                                <div class="col-lg-2 col-sm-2 padding-0 hidden-xsm" style="text-align:center;font-size:16px;padding-top:0px;line-height:32px;font-weight:bold;border-right:1px solid #ddd">
+                                    {{formatMinutes(ac.block_num)}}
+                                    <span style="display:inline-block;margin-left:3px;font-size:13px; font-weight:normal ">B/L</span>
+                                </div>
+
+
+                                <div class="col-lg-1 col-sm-1 col-xs-1 padding-0" style="text-align:center;font-size:16px;padding-top:0px;line-height:32px;">TFC</div>
+                                <div class="col-lg-2 col-sm-1 col-xs-2 padding-0" style="text-align:center;font-size:16px;line-height:32px;font-weight:bold;border-right:1px solid #ddd">{{ac.tfc}}</div>
+                                <div class="col-lg-1 col-sm-1 col-xs-1 padding-0" style="text-align:center;font-size:16px;padding-top:0px;line-height:32px;">TFH</div>
+                                <div class="col-lg-2 col-sm-1 col-xs-2 padding-0" style="text-align:center;font-size:16px;line-height:32px;font-weight:bold;padding-right:5px">{{ac.tfh}}</div>
+
+
+
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td class="col-lg-3 col-xsm-2 padding-0" style="border-right:1px solid #ccc">
+
+                                <div style="padding: 0px 15px 0px 15px;border-top:0px solid #ccc">
+                                    <ng-gauge value="ac.engine1.actual_remaining" label="{{ac.engine1.label}}" append="{{ac.engine1.append}}"
+                                              max="ac.engine1.initial_remaining"
+                                              thresholds="ac.engine1.ranges"></ng-gauge>
+                                </div>
+
+                                <div style="padding:20px 15px 0px 15px;border-top:1px solid #ccc">
+                                    <ng-gauge value="ac.engine2.actual_remaining" label="{{ac.engine2.label}}" append="{{ac.engine2.append}}"
+                                              max="ac.engine2.initial_remaining"
+                                              thresholds="ac.engine2.ranges"></ng-gauge>
+                                </div>
+
+
+                            </td>
+                            <td class="col-lg-9 col-xs-10 padding-0" style="padding: 0px">
+
+                                <div style="clear:both"></div>
+                                <div class="col-lg-8 col-sm-8 col-xsm-8 padding-0" style="border-bottom:1px solid #ddd;text-align:center; padding-bottom:7px;border-right:1px solid #eee">
+                                    <div style="padding:10px;font-size:1.1em">Landing Gear</div>
+                                    <div class="col-lg-6 col-sm-6 col-xsm-6 padding-0">
+                                        <nvd3 options="bar_gauge_options" data="ac.landing_gear.data_days"></nvd3>
+
+                                        <div style="padding:10px 5px 5px 5px;font-size:1.3em">
+                                            {{ac.landing_gear.data_days.measures[0]}}
+                                            <span style="display:inline-block;margin-left:3px;font-size:0.8em">days</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-xsm-6 padding-0">
+                                        <nvd3 options="bar_gauge_options" data="ac.landing_gear.data_ldgs"></nvd3>
+
+                                        <div style="padding:10px 5px 5px 5px;font-size:1.3em">
+                                            {{ac.landing_gear.data_ldgs.measures[0]}}
+                                            <span style="display:inline-block;margin-left:3px;font-size:0.8em">ldgs</span>
+                                        </div>
+
+                                    </div>
+                                    <div style="clear:both"></div>
+
+                                </div>
+                                <div class="col-lg-4 col-sm-4 col-xsm-4 padding-0" style="border-bottom:1px solid #ddd; padding-bottom:7px;text-align:center">
+                                    <div style="padding:10px;font-size:1.1em">APU</div>
+                                    <nvd3 options="bar_gauge_options" data="ac.apu.data_days"></nvd3>
+
+                                    <div style="padding:10px 5px 5px 5px;font-size:1.3em">{{ac.apu.data_days.measures[0]}} <span style="display:inline-block;margin-left:3px;font-size:0.8em">{{ac.apu.append}}</span></div>
+
+                                </div>
+
+
+                                <div style="text-align:center">
+
+
+                                    <div class="col-lg-4 col-sm-4 col-xsm-4 padding-0" style="border-bottom: 1px solid #ddd; padding-bottom: 0px">
+                                        <div style="padding:10px;font-size:1.1em">Deffects ({{ac.defects.count}})</div>
+                                        <nvd3 options="bar_gauge_options" data="ac.defects.data_days"></nvd3>
+
+                                        <div style="padding:10px 5px 5px 5px;font-size:1.3em">{{ac.defects.data_days.measures[0]}} <span style="display:inline-block;margin-left:3px;font-size:0.8em">{{ac.defects.append}}</span></div>
+
+                                    </div>
+                                    <div class="col-lg-4 col-sm-4 col-xsm-4 padding-0" style="border-bottom: 1px solid #ddd; padding-bottom: 0px">
+                                        <div style="padding:10px;font-size:1.1em">CHECK {{ac.checks[0].title}}</div>
+                                        <nvd3 options="bar_gauge_options" data="ac.checks[0].data_days"></nvd3>
+
+                                        <div style="padding:10px 5px 5px 5px;font-size:1.3em">{{ac.checks[0].data_days.measures[0]}} <span style="display:inline-block;margin-left:3px;font-size:0.8em">{{ac.checks[0].append}}</span></div>
+
+                                    </div>
+                                    <div class="col-lg-4 col-sm-4 col-xsm-4 padding-0" style="border-bottom: 1px solid #ddd; padding-bottom: 0px">
+                                        <div style="padding:10px;font-size:1.1em">AD/SB {{ac.adsbs[0].title}}</div>
+                                        <nvd3 options="bar_gauge_options" data="ac.adsbs[0].data_days"></nvd3>
+
+                                        <div style="padding:10px 5px 5px 5px;font-size:1.3em">{{ac.adsbs[0].data_days.measures[0]}} <span style="display:inline-block;margin-left:3px;font-size:0.8em">{{ac.adsbs[0].append}}</span></div>
+
+                                    </div>
+
+
+                                    <div style="clear:both"></div>
+                                    <div ng-repeat="ht in ac.hts" class="col-lg-4 col-sm-4 col-xsm-4 padding-0" style="border-bottom:1px solid #ddd;;padding-bottom:0px">
+                                        <div style="padding-top:5px">{{ht.title}}</div>
+                                        <ng-gauge type="arch" value="ht.actual_remaining"
+                                                  max="ht.initial_remaining"
+                                                  thresholds="ht.ranges" size="130" append="{{ht.append}}"></ng-gauge>
+
+                                    </div>
+
+
+
+
+                                    <div style="clear:both"></div>
+
+                                </div>
+                                <table style="width:100%">
+                                    <tr>
+
+                                        <td style="padding:8px;">{{ac.scheduled_cycle}} <span style="display:inline-block;margin-left:3px;font-size:0.8em">Cycle(s)</span></td>
+                                        <td style="padding:8px;">{{ac.scheduled_block}} <span style="display:inline-block;margin-left:3px;font-size:0.8em">Block Time</span></td>
+                                        <td>{{ac.route}}</td>
+
+                                        <td>{{ac.std}} <span style="display:inline-block;margin-left:3px;font-size:0.8em">STD</span></td>
+
+                                        <td>{{ac.sta}} <span style="display:inline-block;margin-left:3px;font-size:0.8em">STA</span></td>
+                                    </tr>
+
+
+
+                                </table>
+                                <!-- <div ng-click="_update()">update</div>-->
+                            </td>
+                        </tr>
+
+                    </table>
+
+
+
+
+
+
+
+                    <div style="clear:both"></div>
+
+
                 </div>
 
-                <!--end of delay chart-->
+            </div>
+
+            <div style="clear:both"></div>
+
+            <div style="margin-top:10px;">
+
+
+                <div class="col-lg-8" style="padding:0 2px 0 2px">
+                    <div class="card" style="margin-bottom:10px">
+                        <div class="card-header">
+                            Pax Load by Route
+
+                        </div>
+                        <div dx-chart="chart_paxload"></div>
+                    </div>
+
+                </div>
 
                 <div class="col-lg-4" style="padding:0 2px 0 2px; ">
                     <div class="card" style="margin-bottom:10px">
@@ -1319,7 +1281,7 @@
             </div>
 
             <!--Pax-->
-            <div class="col-lg-6" style="padding:0 2px 0 0px;margin-top:0px;border:0px solid #eee">
+            <div class="col-lg-6" style="padding:0 2px 0 0px;margin-top:0px;border:0px solid #eee" ng-show="pax_visible">
                 <div style="padding:5px;background:#ddd;text-align:center; ">Pax</div>
                 <div style="padding:0px">
                     <div class="col-lg-3 col-sm-3 col-xs-6 col-xsm-4 padding-0 center summarybox">
@@ -1423,7 +1385,7 @@
 
             </div>
             <!--End of PAx-->
-            <div class="col-lg-6" style="padding:0 2px 0 0px;margin-top:0px;border:0px solid #eee">
+            <div class="col-lg-6" style="padding:0 2px 0 0px;margin-top:0px;border:0px solid #eee" ng-show="baggage_visible">
                 <div style="padding:5px;background-color:#ddd;text-align:center; ">Cargo/Baggage</div>
                 <div class="col-lg-3 col-sm-3 col-xs-6 col-xsm-4 padding-0 center summarybox">
 
@@ -1521,37 +1483,36 @@
             </div>
 
 
+        </div>
+            <!--END OF AIRCRAFT-->
+
+
+            
+
+          
+
+
 
 
             <div style="clear:both"></div>
 
-            <div style="margin-top:10px;">
-                <!--pax chart-->
-                <div class="col-lg-8" style="padding:0 2px 0 2px">
-                    <div class="card" style="margin-bottom:10px">
-                        <div class="card-header">
-                            Pax Load by Route
+            <!--<div style="margin-top:10px;">
 
-                        </div>
-                        <div dx-chart="chart_paxload"></div>
-                    </div>
+
+
+        <div class="col-lg-4" style="padding:0 2px 0 2px; ">
+            <div class="card" style="margin-bottom:10px">
+                <div class="card-header">
+                    Total Pax by Route
 
                 </div>
-
-                <!--end of pax chart-->
-                <div class="col-lg-4" style="padding:0 2px 0 2px; ">
-                    <div class="card" style="margin-bottom:10px">
-                        <div class="card-header">
-                            Total Pax by Route
-
-                        </div>
-                        <div dx-pie-chart="chart_pax"></div>
-                    </div>
-                </div>
-
-
-                <div style="clear:both"></div>
+                <div dx-pie-chart="chart_pax"></div>
             </div>
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>-->
 
 
         </div>
@@ -1559,7 +1520,7 @@
 
 
 
-    </div>
+    
 
 
 
