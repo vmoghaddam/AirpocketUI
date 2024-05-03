@@ -1,6 +1,7 @@
 ﻿'use strict';
-app.controller('homeController', ['$scope', '$routeParams', 'authService', 'activityService', 'libraryService', 'flightService', '$rootScope', '$compile','mntService','mapService',
-    function ($scope, $routeParams, authService, activityService, libraryService, flightService, $rootScope, $compile, mntService,mapService) {
+app.controller('homeController', ['$scope', '$routeParams', 'authService', 'activityService', 'libraryService', 'flightService', '$rootScope', '$compile', 'mntService', 'mapService',
+    '$sce', '$location', '$window',
+    function ($scope, $routeParams, authService, activityService, libraryService, flightService, $rootScope, $compile, mntService,mapService,$sce,$location,$window) {
 
         if ($rootScope.IsOnlyFlightView()) {
             authService.setModule(3);
@@ -1756,6 +1757,56 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
         $scope.ac_status_visible =  $rootScope.HasACStatus();
         $scope.pax_visible = !$scope.ac_status_visible;
         $scope.baggage_visible = !$scope.ac_status_visible;
+
+
+        ///////////MAP /////////////////////////////
+        $scope.map = $rootScope.userName == 'demo';
+        $scope.ds_live = [];
+        $scope.get_map_class = function () {
+            var cls = 'col-xs-12 col-sm-12 col-md-6 ';
+            if ($scope.ds_live.length == 1) cls += 'col-lg-12';
+            if ($scope.ds_live.length == 2) cls += 'col-lg-6';
+            if ($scope.ds_live.length > 2) cls += 'col-lg-4';
+
+            return cls;
+
+        };
+        var _intv;
+        $scope.update_maps = function () {
+            _intv = setInterval(function () {
+                $.each($scope.ds_live, function (_i, _d) {
+                    // $('#i1').get(0).contentWindow.postMessage("FUCK", "*");
+                    var message = {
+                        type: 'info',
+                        reg: _d.Register,
+                        route: _d.Origin + '-' + _d.Destination,
+                        dep: moment(_d.DepLocal).format('HH:mm'),
+                        arr: moment(_d.ArrLocal).format('HH:mm'),
+                        status: _d.FlightStatus,
+                        takeoff: _d.DepLocal,
+                        departed: _d.FlightStatus == 'Departed' ? 1 : 0,
+
+                    };
+                    //console.log(message);
+                    $('#map-' + _d.Id).get(0).contentWindow.postMessage(message, "*");
+
+                });
+                clearInterval(_intv);
+            }
+                , 2000);
+        };
+
+        $scope.show_map = function (x) {
+
+            var data = x;
+            $rootScope.$broadcast('InitMap', data);
+        }
+
+
+        ////////////////////////////////////////////
+
+
+
         if (!authService.isAuthorized()) {
 
             authService.redirectToLogin();
@@ -1829,122 +1880,163 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
 
                 $scope.aircrafts = [];
 
-                var ac = {
-                    register: 'RBA',
-                    tfc: 2321,
-                    tfh: 1145,
-                    block: 382,
-                    cycle: 3,
-                    scheduled_cycle: 6,
-                    scheduled_block:'11:20',
-                    std: '06:12',
-                    sta: '22:50',
-                    route:'THR,MHD,THR,SYZ,KIH,THR',
-                    engine1: {
+                mapService.getLiveFlights().then(function (response) {
+                    $.each(response, function (_i, _d) {
+                        _d.url = $sce.trustAsResourceUrl('https://map.airpocket.app/fr.html?icao=axv&no=' + _d.FlightNo + '&date=' + moment(new Date(_d.DateFlight)).format("YYYY-MM-DD") + '&mode=online');
+                    });
+                    $scope.ds_live = response;
+                    $scope.update_maps();
+                }, function (err) { });
+                //setInterval(function () {
+                //    mapService.getLiveFlights().then(function (response) {
+                //        console.log('search flight');
+                //        var new_ids = [];
+                //        var ex_ids = Enumerable.From($scope.ds_live).Select('$.Id').ToArray();
+                //        $.each(response, function (_i, _d) {
+                //            _d.url = $sce.trustAsResourceUrl('https://map.airpocket.app/fr.html?icao=vrh&no=' + _d.FlightNo + '&date=' + moment(new Date(_d.DateFlight)).format("YYYY-MM-DD") + '&mode=online');
+                //            new_ids.push(_d.Id);
+                //            if (!ex_ids.includes(_d.Id))
+                //                $scope.ds_live.push(_d);
+                //            else {
+                //                var ex = Enumerable.From($scope.ds_live).Where('$.Id==' + _d.Id).FirstOrDefault();
+                //                if (ex) {
+                //                    ex.Register = _d.Register;
+                //                    ex.Origin = _d.Origin;
+                //                    ex.Destination = _d.Destination;
+                //                    ex.DepLocal = _d.DepLocal;
+                //                    ex.ArrLocal = _d.ArrLocal;
+                //                    ex.FlightStatus = _d.FlightStatus;
 
-                        initial_remaining: 5000,
-                        label: 'Engine 1',
-                        append: 'CY',
-                        actual_remaining: 2100,
-
-                    },
-                    engine2: {
-                        initial_remaining: 8000,
-                        label: 'Engine 2',
-                        append: 'CY',
-                        actual_remaining: 6543,
-                    },
-                    landing_gear: {
-                        initial_remaining_days: 356,
-                        initial_remaining_ldgs: 700,
-                        actual_remaining_days: 210,
-                        actual_remaining_ldgs: 260,
-                        //data_days: {},
-                        // data_ldgs: {},
-                        //data_days: {
-
-                        //   // "ranges": [300],
-                        //   // "measures": [0],
-                        //  //  color: ['#404040'],
-                        //   // bcolor:  'red' 
-                        //},
-                        //data_ldgs: {
-                        //   // "ranges": [300],
-                        //   // "measures": [0],
-                        //}
-                    }
-                    , apu: {
-                        initial_remaining: 2806,
-                        actual_remaining: 570,
-                        append: 'hrs',
-                    },
-                    deffects: {
-                        count: 2,
-                        initial_remaining: 15,
-                        actual_remaining: 14,
-                        append: 'cy',
-                    },
-                    checks: [
-                        {
-                            title: 'A3',
-                            initial_remaining: 96,
-                            actual_remaining: 43,
-                            append: 'days',
-                        }
-                    ],
-                    adsbs: [
-                        {
-                            title: '',
-                            initial_remaining: 123,
-                            actual_remaining: 63,
-                            append: 'days',
-                        }
-                    ],
-                    hts: [
-                        {
-                            title: 'H/T 1',
-                            initial_remaining: 123,
-                            actual_remaining: 33,
-                            append: 'cy',
-                        },
-                        {
-                            title: 'H/T 2',
-                            initial_remaining: 209,
-                            actual_remaining: 168,
-                            append: 'cy',
-                        },
-                        {
-                            title: 'H/T 3',
-                            initial_remaining: 480,
-                            actual_remaining: 200,
-                            append: 'cy',
-                        },
-                    ]
+                //                }
+                //            }
+                //        });
+                //        if (!response || response.length == 0) $scope.ds_live = [];
+                //        $scope.ds_live = Enumerable.From($scope.ds_live).Where(function (t) { return new_ids.includes(t.Id); }).ToArray();
 
 
 
-                };
+                //        console.log('repeat', $scope.ds_live);
+                //        $scope.update_maps();
 
-                //ac.landing_gear.data_days.ranges = [300];
-                // ac.landing_gear.data_days.measures = [145];
+                //    }, function (err) { });
 
-                // ac.landing_gear.data_ldgs.ranges = [948];
-                // ac.landing_gear.data_ldgs.measures = [500];
+                //}, 10000);
+                //var ac = {
+                //    register: 'RBA',
+                //    tfc: 2321,
+                //    tfh: 1145,
+                //    block: 382,
+                //    cycle: 3,
+                //    scheduled_cycle: 6,
+                //    scheduled_block:'11:20',
+                //    std: '06:12',
+                //    sta: '22:50',
+                //    route:'THR,MHD,THR,SYZ,KIH,THR',
+                //    engine1: {
+
+                //        initial_remaining: 5000,
+                //        label: 'Engine 1',
+                //        append: 'CY',
+                //        actual_remaining: 2100,
+
+                //    },
+                //    engine2: {
+                //        initial_remaining: 8000,
+                //        label: 'Engine 2',
+                //        append: 'CY',
+                //        actual_remaining: 6543,
+                //    },
+                //    landing_gear: {
+                //        initial_remaining_days: 356,
+                //        initial_remaining_ldgs: 700,
+                //        actual_remaining_days: 210,
+                //        actual_remaining_ldgs: 260,
+                //        //data_days: {},
+                //        // data_ldgs: {},
+                //        //data_days: {
+
+                //        //   // "ranges": [300],
+                //        //   // "measures": [0],
+                //        //  //  color: ['#404040'],
+                //        //   // bcolor:  'red' 
+                //        //},
+                //        //data_ldgs: {
+                //        //   // "ranges": [300],
+                //        //   // "measures": [0],
+                //        //}
+                //    }
+                //    , apu: {
+                //        initial_remaining: 2806,
+                //        actual_remaining: 570,
+                //        append: 'hrs',
+                //    },
+                //    deffects: {
+                //        count: 2,
+                //        initial_remaining: 15,
+                //        actual_remaining: 14,
+                //        append: 'cy',
+                //    },
+                //    checks: [
+                //        {
+                //            title: 'A3',
+                //            initial_remaining: 96,
+                //            actual_remaining: 43,
+                //            append: 'days',
+                //        }
+                //    ],
+                //    adsbs: [
+                //        {
+                //            title: '',
+                //            initial_remaining: 123,
+                //            actual_remaining: 63,
+                //            append: 'days',
+                //        }
+                //    ],
+                //    hts: [
+                //        {
+                //            title: 'H/T 1',
+                //            initial_remaining: 123,
+                //            actual_remaining: 33,
+                //            append: 'cy',
+                //        },
+                //        {
+                //            title: 'H/T 2',
+                //            initial_remaining: 209,
+                //            actual_remaining: 168,
+                //            append: 'cy',
+                //        },
+                //        {
+                //            title: 'H/T 3',
+                //            initial_remaining: 480,
+                //            actual_remaining: 200,
+                //            append: 'cy',
+                //        },
+                //    ]
+
+
+
+                //};
+
+                ////ac.landing_gear.data_days.ranges = [300];
+                //// ac.landing_gear.data_days.measures = [145];
+
+                //// ac.landing_gear.data_ldgs.ranges = [948];
+                //// ac.landing_gear.data_ldgs.measures = [500];
                
-                //$scope.aircrafts.push(
-                //    {
-                //        register: 'RBB',
-                //        tfc: 1460,
-                //        tfh: 823,
-                //    }
-                //);
-                //$scope.aircrafts.push(
-                //    {
-                //        register: 'RBC',
-                //        tfc: 1980,
-                //        tfh: 1000,
-                //    }
-                //);
+                ////$scope.aircrafts.push(
+                ////    {
+                ////        register: 'RBB',
+                ////        tfc: 1460,
+                ////        tfh: 823,
+                ////    }
+                ////);
+                ////$scope.aircrafts.push(
+                ////    {
+                ////        register: 'RBC',
+                ////        tfc: 1980,
+                ////        tfh: 1000,
+                ////    }
+                ////);
 
                 ///// End Flight Pocket
             }

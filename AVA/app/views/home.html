@@ -859,7 +859,7 @@
 
 
                 </div>
-                
+
 
                 <div class="col-lg-1 col-xs-6 col-sm-3 col-xsm-4 padding-0 center summarybox">
 
@@ -1092,6 +1092,28 @@
             </div>
             <!--End of flight summary-->
             <!--AIRCRAFT-->
+
+            <div ng-show='map'>
+                <div ng-class='get_map_class()' style='padding:0;padding-right:5px;' ng-repeat='x in ds_live'>
+                    <div style='background:gray;color:black;text-align:center;font-weight:bold'>
+                        <table style='width:100%;background:#ddd'>
+                            <tr>
+                                <td style='padding:7px;width:55%;text-align:left'>{{x.FlightNo}}</td>
+                                <td style='width:22%;font-size:12px;text-align:right'><img src="content/images/acicon2.png" style="margin-right:5px;width:20px;height:20px;vertical-align:middle" />Estimated</td>
+                                <td style='width:18%;font-size:12px;border-right:1px solid #ccc'><img src="content/images/acicon.png" style="margin-right:5px;width:20px;height:20px;vertical-align:middle" />Actual</td>
+                                <td style='width:5%' ng-click='show_map(x)'><i class='fas fa-expand-arrows-alt' style='font-size:24px;color:gray'></i></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style='width:100%;height:400px;border:1px solid gray'>
+                        <iframe ng-attr-id="map-{{x.Id}}" ng-src="{{x.url}}" style="border:none;height:100%;width:100%;"></iframe>
+                    </div>
+
+                </div>
+                <div style='clear:both'></div>
+            </div>
+
+
 
             <div class="col-lg-6 col-md-12 col-sm-12 hidden-xs col-xsm-12   padding-0" style="padding-right:10px;margin-top:10px" ng-repeat="ac in aircrafts" ng-show="ac_status_visible">
                 <div style="border:1px solid #ccc;background:white;">

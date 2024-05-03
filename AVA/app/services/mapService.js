@@ -9,7 +9,7 @@ app.factory('mapService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
 
         var deferred = $q.defer();
-        $http.get(apiMap + 'fr/live/flights/icao?icao='+'VRH'+'&no=-1').then(function (response) {
+        $http.get(apiMap + 'fr/live/flights/icao?icao='+'AXV'+'&no=-1').then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
