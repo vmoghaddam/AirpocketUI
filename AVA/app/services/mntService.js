@@ -157,7 +157,7 @@ app.factory('mntService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     };
 
     var _getDashboard = function () {
-
+        //00000
         var deferred = $q.defer();
         $http.get( $rootScope.serviceMnt + 'api/mnt/dashboard/-1').then(function (response) {
             deferred.resolve(response.data);
