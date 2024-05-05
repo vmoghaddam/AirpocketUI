@@ -208,6 +208,10 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
 
         mntService.getEngine($scope.engEntity.id, $scope.engEntity.engine_no).then(function (res) {
             $scope.engEntity = res.data;
+            var hh = Math.trunc((res.data.remaining_minutes / 60));
+            var mm = (res.data.remaining_minutes % 60);
+            $scope.engEntity.remaining_hour = hh;
+            $scope.engEntity.remaining_min = mm;
         });
         mntService.getEngADSB($scope.engEntity.id).then(function (response) {
             $scope.dg_eng_ad_ds = response.data;
@@ -419,6 +423,11 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
             value: "entity.landing_gear_remaining",
         }
     }
+    $scope.num_landingldg = {
+        bindingOptions: {
+            value: "entity.landing_gear_ldg_remaining",
+        }
+    }
 
     $scope.dt_ldg = {
         type: 'date',
@@ -525,10 +534,28 @@ app.controller('mntStatusController', ['$scope', '$location', 'mntService', 'aut
     }
     $scope.num_engTfh = {
         bindingOptions: {
-            value: "engEntity.remaining_minutes",
+            value: "engEntity.total_flight_hour",
         }
     }
     $scope.num_engTfc = {
+        bindingOptions: {
+            value: "engEntity.total_flight_cycle",
+        }
+    }
+
+    $scope.num_rHour = {
+        bindingOptions: {
+            value: "engEntity.remaining_hour",
+        }
+    }
+    $scope.num_rMin = {
+        max: 59,
+        bindingOptions: {
+            value: "engEntity.remaining_min",
+        }
+    }
+
+    $scope.num_rCycle = {
         bindingOptions: {
             value: "engEntity.remaining_cycles",
         }
