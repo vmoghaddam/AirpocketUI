@@ -723,6 +723,11 @@ app.config(function ($routeProvider) {
     templateUrl: "/app/views/mntStatus.html?v=1130"
 });
 
+    $routeProvider.when("/request/form", {
+        controller: "requestFormController",
+        templateUrl: "/app/views/requestForm.html?v=1130"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   
