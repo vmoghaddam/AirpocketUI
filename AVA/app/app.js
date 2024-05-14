@@ -723,6 +723,11 @@ app.config(function ($routeProvider) {
     templateUrl: "/app/views/mntStatus.html?v=1130"
 });
 
+    $routeProvider.when("/request/form", {
+        controller: "requestFormController",
+        templateUrl: "/app/views/requestForm.html?v=1130"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   
@@ -975,7 +980,8 @@ app.run(['authService', 'activityService', '$rootScope', '$location', '$template
     $rootScope.reportServer = "https://ava.report.airpocket.app/frmreportview.aspx";
 	$rootScope.formsReportServer = "https://ava.formsreport.airpocket.app/frmreportview.aspx";
     $rootScope.reportServerTRN = "https://ava.report.airpocket.app/frmreportview.aspx";
-	$rootScope.serviceMnt = 'https://ava.apimnt.airpocket.app/';
+	//$rootScope.serviceMnt = 'https://ava.apimnt.airpocket.app/';
+    $rootScope.serviceMnt = 'http://localhost:9063/';
     ////////////////////////////////
     $rootScope.startingBIYear = 1398;
     ////////////////////////////////
