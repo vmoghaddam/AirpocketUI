@@ -728,6 +728,36 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/requestForm.html?v=1130"
     });
 
+    $routeProvider.when("/nis/form", {
+        controller: "nisFollowUpController",
+        templateUrl: "/app/views/nisFollowUp.html?v=1130"
+    });
+
+    $routeProvider.when("/logestic/form", {
+        controller: "logesticRequestController",
+        templateUrl: "/app/views/logesticRequest.html?v=1130"
+    });
+
+     $routeProvider.when("/disagg/form", {
+         controller: "disaggregationController",
+         templateUrl: "/app/views/disaggregation.html?v=1130"
+    });
+
+     $routeProvider.when("/agg/form", {
+         controller: "aggregateController",
+         templateUrl: "/app/views/aggregate.html?v=1130"
+    });
+
+    $routeProvider.when("/receipt/form", {
+        controller: "receiptController",
+         templateUrl: "/app/views/receipt.html?v=1130"
+    });
+
+    $routeProvider.when("/delivery/form", {
+        controller: "directDeliveryController",
+        templateUrl: "/app/views/directDelivery.html?v=1130"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   

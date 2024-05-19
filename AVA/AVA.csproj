@@ -75,6 +75,7 @@
     <Content Include="app\controllers\asrAdd.js" />
     <Content Include="app\controllers\asrreport.js" />
     <Content Include="app\controllers\associateController.js" />
+    <Content Include="app\controllers\awbController.js" />
     <Content Include="app\controllers\board.js" />
     <Content Include="app\controllers\boardfly.js" />
     <Content Include="app\controllers\boardtest.js" />
@@ -105,6 +106,8 @@
     <Content Include="app\controllers\delaybiKPI.js" />
     <Content Include="app\controllers\delayCodesController.js" />
     <Content Include="app\controllers\delayReport.js" />
+    <Content Include="app\controllers\directDeliveryController.js" />
+    <Content Include="app\controllers\disaggregationController.js" />
     <Content Include="app\controllers\documentAddController.js" />
     <Content Include="app\controllers\drAdd.js" />
     <Content Include="app\controllers\dutyTimeline.js" />
@@ -154,6 +157,7 @@
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\imageviewer.js" />
     <Content Include="app\controllers\indexController.js" />
+    <Content Include="app\controllers\inventoryController.js" />
     <Content Include="app\controllers\ipaccessController.js" />
     <Content Include="app\controllers\irregularFlightController.js" />
     <Content Include="app\controllers\jobgroupAddController.js" />
@@ -182,12 +186,14 @@
     <Content Include="app\controllers\locationAddController.js" />
     <Content Include="app\controllers\locationController.js" />
     <Content Include="app\controllers\logAdd.js" />
+    <Content Include="app\controllers\logeticRequest.js" />
     <Content Include="app\controllers\loginController.js" />
     <Content Include="app\controllers\mlistAddController.js" />
     <Content Include="app\controllers\mlistController.js" />
     <Content Include="app\controllers\mntStatus.js" />
     <Content Include="app\controllers\New Text Document.txt" />
     <Content Include="app\controllers\nira.js" />
+    <Content Include="app\controllers\nisFollowUp.js" />
     <Content Include="app\controllers\notificationController.js" />
     <Content Include="app\controllers\ofpAdd.js" />
     <Content Include="app\controllers\optionAddController.js" />
@@ -195,6 +201,7 @@
     <Content Include="app\controllers\ordersController.js" />
     <Content Include="app\controllers\organizationAddController.js" />
     <Content Include="app\controllers\organizationController.js" />
+    <Content Include="app\controllers\partNumberSelection.js" />
     <Content Include="app\controllers\personAddController.js" />
     <Content Include="app\controllers\personbookController.js" />
     <Content Include="app\controllers\personcertificateController.js" />
@@ -207,6 +214,7 @@
     <Content Include="app\controllers\planningBoard.js" />
     <Content Include="app\controllers\planRegistersController.js" />
     <Content Include="app\controllers\rawcmd.js" />
+    <Content Include="app\controllers\receiptController.js" />
     <Content Include="app\controllers\refreshController.js" />
     <Content Include="app\controllers\regAvailabilityController.js" />
     <Content Include="app\controllers\regflightmonthly.js" />
@@ -290,6 +298,8 @@
     <Content Include="app\services\zpersonService.js" />
     <Content Include="app\services\zschedulingService.js" />
     <Content Include="app\services\ztrainingService.js" />
+    <Content Include="app\controllers\aggregateController.js" />
+    <Content Include="app\views\aggregate.html" />
     <Content Include="app\views\aircraftSelect.html" />
     <Content Include="app\views\aircrafttype.html" />
     <Content Include="app\views\airport.html" />
@@ -298,6 +308,7 @@
     <Content Include="app\views\asrAdd.html" />
     <Content Include="app\views\asrreport.html" />
     <Content Include="app\views\associate.html" />
+    <Content Include="app\views\awb.html" />
     <Content Include="app\views\board.html" />
     <Content Include="app\views\boardtest.html" />
     <Content Include="app\views\boarfly.html" />
@@ -329,6 +340,8 @@
     <Content Include="app\views\delaybiKPI.html" />
     <Content Include="app\views\delayCodes.html" />
     <Content Include="app\views\delayReport.html" />
+    <Content Include="app\views\directDelivery.html" />
+    <Content Include="app\views\disaggregation.html" />
     <Content Include="app\views\Document.html" />
     <Content Include="app\views\documentAdd.html" />
     <Content Include="app\views\drAdd.html" />
@@ -380,6 +393,7 @@
     <Content Include="app\views\heasernarrow.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\imageviewer.html" />
+    <Content Include="app\views\inventory.html" />
     <Content Include="app\views\ipaccess.html" />
     <Content Include="app\views\irregularFlight.html" />
     <Content Include="app\views\jobgroup.html" />
@@ -408,11 +422,13 @@
     <Content Include="app\views\location.html" />
     <Content Include="app\views\locationAdd.html" />
     <Content Include="app\views\logAdd.html" />
+    <Content Include="app\views\logesticRequest.html" />
     <Content Include="app\views\login.html" />
     <Content Include="app\views\menu.html" />
     <Content Include="app\views\mlist.html" />
     <Content Include="app\views\mlistAdd.html" />
     <Content Include="app\views\mntStatus.html" />
+    <Content Include="app\views\nisFollowUp.html" />
     <Content Include="app\views\nira.html" />
     <Content Include="app\views\notification.html" />
     <Content Include="app\views\ofpAdd.html" />
@@ -421,6 +437,7 @@
     <Content Include="app\views\orders.html" />
     <Content Include="app\views\Organization.html" />
     <Content Include="app\views\OrganizationAdd.html" />
+    <Content Include="app\views\partNumberSelection.html" />
     <Content Include="app\views\person.html" />
     <Content Include="app\views\personAdd.html" />
     <Content Include="app\views\personbook.html" />
@@ -433,6 +450,7 @@
     <Content Include="app\views\planningBoard.html" />
     <Content Include="app\views\planRegisters.html" />
     <Content Include="app\views\rawcmd.html" />
+    <Content Include="app\views\receipt.html" />
     <Content Include="app\views\refresh.html" />
     <Content Include="app\views\regavailability.html" />
     <Content Include="app\views\regflightmonthly.html" />
