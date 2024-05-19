@@ -1882,7 +1882,7 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
 
                 mapService.getLiveFlights().then(function (response) {
                     $.each(response, function (_i, _d) {
-                        _d.url = $sce.trustAsResourceUrl('https://map.airpocket.app/fr.html?icao=axv&no=' + _d.FlightNo + '&date=' + moment(new Date(_d.DateFlight)).format("YYYY-MM-DD") + '&mode=online');
+                        _d.url = $sce.trustAsResourceUrl('https://map.airpocket.app/fr.html?ver=1&icao=axv&no=' + _d.FlightNo + '&date=' + moment(new Date(_d.DateFlight)).format("YYYY-MM-DD") + '&mode=online');
                     });
                     $scope.ds_live = response;
                     $scope.update_maps();

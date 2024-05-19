@@ -250,6 +250,7 @@
     <Content Include="app\controllers\testController.js" />
     <Content Include="app\controllers\tokensManagerController.js" />
     <Content Include="app\controllers\training.js" />
+    <Content Include="app\controllers\tripinfo.js" />
     <Content Include="app\controllers\trnDashboard.js" />
     <Content Include="app\controllers\trnexpiringgroups.js" />
     <Content Include="app\controllers\trnexpiringtypes.js" />
@@ -485,6 +486,7 @@
     <Content Include="app\views\test.html" />
     <Content Include="app\views\tokens.html" />
     <Content Include="app\views\training.html" />
+    <Content Include="app\views\tripinfo.html" />
     <Content Include="app\views\trnDashboard.html" />
     <Content Include="app\views\trnexpiringgroups.html" />
     <Content Include="app\views\trnexpiringtypes.html" />
