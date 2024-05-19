@@ -38,26 +38,26 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
     //////////////////
 
 
-    $scope.txt_parNo = {
+    $scope.txt_plaque = {
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.txt_description = {
+    $scope.txt_snbn = {
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.priority =
-        [
-            { title: 'Routine', id: 0 },
-            { title: 'Urgent', id: 1 },
-            { title: 'AOG', id: 2 },
-        ];
+    $scope.ch_rfid = {
+        defaultValue: false,
+        bindingOptions: {
+            value: ''
+        }
+    } 
 
-    $scope.sb_reqPriority = {
+    $scope.sb_acType = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
@@ -79,44 +79,40 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         }
     }
 
-
-    $scope.years =
-        [
-            { title: '96', id: 0 },
-            { title: '97', id: 1 },
-            { title: '98', id: 2 },
-            { title: '90', id: 3 },
-            { title: '00', id: 4 },
-            { title: '01', id: 5 },
-            { title: '02', id: 6 },
-            { title: '03', id: 7 },
-        ];
-
-    $scope.sb_year = {
+    $scope.sb_warehouse = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-        dataSource: $scope.years,
+        dataSource: $scope.priority,
         bindingOptions: {
             value: '',
         }
     }
 
-    $scope.txt_nisNo = {
+
+   
+
+    $scope.sb_shop = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.txt_issuedBy = {
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.txt_reqNo = {
-        bindingOptions: {
-            value: ''
-        }
-    }
+   
 
-
-    $scope.dt_dateFrom = {
+    $scope.dt_date = {
         type: 'date',
         displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
@@ -124,13 +120,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         }
     }
 
-    $scope.dt_dateTo = {
-        type: 'date',
-        displayFormat: "yyyy-MMM-dd",
-        bindingOptions: {
-            value: ''
-        }
-    }
+  
 
     ///////////////////////
 

@@ -104,26 +104,20 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
 
     ////////////////////
 
-    $scope.txt_parNo = {
+    $scope.txt_partNo = {
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.txt_description = {
+    $scope.ch_alt = {
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.priority =
-        [
-            { title: 'Routine', id: 0 },
-            { title: 'Urgent', id: 1 },
-            { title: 'AOG', id: 2 },
-        ];
-
-    $scope.sb_reqPriority = {
+   
+    $scope.sb_acType = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
@@ -134,7 +128,29 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         }
     }
 
-    $scope.sb_register = {
+    $scope.sb_ata = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.sb_location = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.sb_pnCategory = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
@@ -146,58 +162,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
     }
 
 
-    $scope.years =
-        [
-            { title: '96', id: 0 },
-            { title: '97', id: 1 },
-            { title: '98', id: 2 },
-            { title: '90', id: 3 },
-            { title: '00', id: 4 },
-            { title: '01', id: 5 },
-            { title: '02', id: 6 },
-            { title: '03', id: 7 },
-        ];
-
-    $scope.sb_year = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.years,
-        bindingOptions: {
-            value: '',
-        }
-    }
-
-    $scope.txt_nisNo = {
-        bindingOptions: {
-            value: ''
-        }
-    }
-
-    $scope.txt_reqNo = {
-        bindingOptions: {
-            value: ''
-        }
-    }
-
-
-    $scope.dt_dateFrom = {
-        type: 'date',
-        displayFormat: "yyyy-MMM-dd",
-        bindingOptions: {
-            value: ''
-        }
-    }
-
-    $scope.dt_dateTo = {
-        type: 'date',
-        displayFormat: "yyyy-MMM-dd",
-        bindingOptions: {
-            value: ''
-        }
-    }
-
+   
     ///////////////////////
 
 

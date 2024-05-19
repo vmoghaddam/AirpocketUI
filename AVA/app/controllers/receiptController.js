@@ -58,21 +58,21 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     };
 
     $scope.txt_awb = {
-        value: 'test',
+        
         bindingOptions: {
-
+            value: 'test',
         },
-         buttons: [$scope.awbButton]
+       
     };
 
 
-    $scope.txt_partNo = {
+    $scope.txt_paperNo = {
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.txt_reqNo = {
+    $scope.txt_paperRemark = {
         bindingOptions: {
             value: ''
         }
@@ -84,7 +84,42 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         }
     }
 
-    $scope.sb_register = {
+   
+    $scope.txt_poNo = {
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.ch_po = {
+        defaultValue: false,
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.ch_rmvRegister = {
+        defaultValue: false,
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.ch_rmvAssy = {
+        defaultValue: false,
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.ch_charge = {
+        defaultValue: false,
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.sb_stock = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
@@ -96,7 +131,122 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     }
 
 
-    $scope.dt_reqDate = {
+    $scope.sb_poCompany = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+
+    $scope.sb_rmvRegister = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+
+    $scope.sb_rmvAssy = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.sb_itemPnNo = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.sb_itemQuantity = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.sb_itemUnit = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.sb_itemCondition = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+
+    $scope.sb_itemCurrency = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+
+    $scope.sb_itemDoc = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.sb_itemNo = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.priority,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+
+    $scope.dt_paperDate = {
         type: 'date',
         displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
@@ -104,65 +254,82 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         }
     }
 
-    $scope.num_reqNo = {
+    $scope.dt_poDate = {
+        type: 'date',
+        displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.txt_shop = {
+    $scope.dt_invoice = {
+        type: 'date',
+        displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.sb_reqReg = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.priority,
-        bindingOptions: {
-            value: '',
-        }
-    }
-
-    $scope.sb_acType = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.priority,
-        bindingOptions: {
-            value: '',
-        }
-    }
-
-    $scope.priority =
-        [
-            { title: 'Routine', id: 0 },
-            { title: 'Urgent', id: 1 },
-            { title: 'AOG', id: 2 },
-        ];
-
-    $scope.sb_reqPriority = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.priority,
-        bindingOptions: {
-            value: '',
-        }
-    }
-
-    $scope.txt_remark = {
+    $scope.dt_itemDate = {
+        type: 'date',
+        displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.txt_apBy = {
+    $scope.dt_itemExp = {
+        type: 'date',
+        displayFormat: "yyyy-MMM-dd",
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.txt_awb = {
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.txt_itemPrice = {
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.txt_itemId = {
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.txt_invoice = {
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+   
+    $scope.txt_itemDesc = {
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.txt_itemSnbn = {
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.txt_itemShelf = {
+        bindingOptions: {
+            value: ''
+        }
+    }
+
+    $scope.itemRemark = {
         bindingOptions: {
             value: ''
         }
