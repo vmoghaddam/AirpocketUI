@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('mntService', ['$http', '$q', 'ngAuthSettings', '$rootScope', function ($http, $q, ngAuthSettings, $rootScope) {
+app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', '$rootScope', function ($http, $q, localStorageService, ngAuthSettings, $rootScope) {
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
 
@@ -188,8 +188,16 @@ app.factory('mntService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
     var _authenticate = function (entity) {
         var deferred = $q.defer();
-        $http.post('http://185.79.157.33/api/Authenticate', entity).then(function (response) {
-            console.log(response);
+        $http.post('https://lmmcore.online/api/Authenticate', entity).then(function (response) {
+          
+            var responseData = response.data.data;
+
+            console.log(responseData);
+            localStorageService.set('authorizationMnt', {
+                token: responseData.token, refreshToken: responseData.refreshToken, expires: responseData.tokenTimeout, useRefreshTokens: true
+            });
+
+           
             deferred.resolve(response.data);
         }, function (err, status) {
 
