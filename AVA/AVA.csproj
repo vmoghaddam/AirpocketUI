@@ -192,6 +192,7 @@
     <Content Include="app\controllers\mlistController.js" />
     <Content Include="app\controllers\mntStatus.js" />
     <Content Include="app\controllers\New Text Document.txt" />
+    <Content Include="app\controllers\newPartNumber.js" />
     <Content Include="app\controllers\nira.js" />
     <Content Include="app\controllers\nisFollowUp.js" />
     <Content Include="app\controllers\notificationController.js" />
@@ -429,6 +430,7 @@
     <Content Include="app\views\mlist.html" />
     <Content Include="app\views\mlistAdd.html" />
     <Content Include="app\views\mntStatus.html" />
+    <Content Include="app\views\newPartNumber.html" />
     <Content Include="app\views\nisFollowUp.html" />
     <Content Include="app\views\nira.html" />
     <Content Include="app\views\notification.html" />

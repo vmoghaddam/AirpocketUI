@@ -358,7 +358,7 @@
                 <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
                     <tr>
                         <td class="td-field" style="font-weight:bold; width:100px">Part No. :</td>
-                        <td class="td-field"><div dx-text-box="sb_itemPnNo" style="width: 77%; display: inline-block"></div><div dx-button="pnButton" style="width:20%; display: inline-block;margin-top: -30px"></div></td>
+                        <td class="td-field" colspan="2"><div dx-text-box="sb_itemPnNo" style="width: 60%; display: inline-block"></div><div dx-button="pnButton" style="width:20%; display: inline-block;margin-top: -30px"></div><div dx-button="newPn" style="width:20%; display: inline-block;margin-top: -30px"></div></td>
                         
                         <td class="td-field" style="font-weight: bold; width: 100px">Description:</td>
                         <td class="td-field"><div dx-text-box="txt_itemDesc" class="center"></div></td>
@@ -436,6 +436,7 @@
 
         <div ng-include="'app/views/awb.html?vx.2'"></div>
         <div ng-include="'app/views/partNumberSelection.html?vx.2'"></div>
+        <div ng-include="'app/views/newPartNumber.html?vx.2'"></div>
         <div style="clear:both"></div>
     </div>
 </div>

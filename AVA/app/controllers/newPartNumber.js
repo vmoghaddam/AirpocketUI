@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
+app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
 
     $scope.btn_refresh = {
@@ -17,11 +17,11 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
     //////////////////
 
     $scope.popup_pn_visible = false;
-    $scope.popup_height = $(window).height() - 100;
-    $scope.popup_width = 1500;
+    $scope.popup_height = $(window).height() - 500;
+    $scope.popup_width = 1000;
     $scope.popup_pn_title = $rootScope.Title;
     $scope.popup_instance = null;
-    $scope.isFullScreen = true;
+    $scope.isFullScreen = false;
 
     $scope.popup_pn = {
 
@@ -251,7 +251,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 600,
+        height: $(window).height() - 500,
         width: $(window).width(),
         columns: $scope.dg_pn_columns,
         onContentReady: function (e) {
@@ -303,7 +303,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
     };
 
 
-  $scope.dg_inter_columns = [
+    $scope.dg_inter_columns = [
 
 
 
@@ -314,11 +314,11 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
                     .appendTo(container);
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
-      { dataField: '', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-      { dataField: '', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-      { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-      { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-      { dataField: '', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: '', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: '', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
+        { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: '', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
     ];
 
 
@@ -352,7 +352,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 600,
+        height: $(window).height() - 260,
         width: $(window).width(),
         columns: $scope.dg_inter_columns,
         onContentReady: function (e) {
@@ -404,7 +404,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
     };
 
 
-    $scope.$on('InitPNPopup', function (event, prms) {
+    $scope.$on('InitNewPNPopup', function (event, prms) {
 
         $scope.tempData = prms;
 

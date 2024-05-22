@@ -1,6 +1,14 @@
 ﻿'use strict';
 app.controller('receiptController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
+    $scope.newPn = {
+        icon: 'plus',
+        onClick: function () {
+            $rootScope.$broadcast('InitNewPNPopup', null);
+        }
+
+    };
+
 
     $scope.btn_addNew = {
         text: 'Add And New',
@@ -56,6 +64,8 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         }
 
     };
+
+  
 
     $scope.txt_awb = {
         
@@ -391,7 +401,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 350,
+        height: $(window).height() - 650,
         columns: $scope.dg_rec_columns,
         onContentReady: function (e) {
             if (!$scope.dg_rec_instance)
