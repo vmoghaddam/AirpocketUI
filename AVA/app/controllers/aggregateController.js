@@ -1,5 +1,19 @@
 ﻿'use strict';
-app.controller('aggregateController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
+app.controller('aggregateController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce',  
+    function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce ) {
+
+
+
+        mntService.authenticate({ "username":"test","password":"1234"}).then(function (response) {
+
+             
+
+
+
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+
+
 
 
     $scope.btn_refresh = {

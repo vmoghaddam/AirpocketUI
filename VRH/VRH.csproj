@@ -443,6 +443,7 @@
     <Content Include="app\views\personmisc.html" />
     <Content Include="app\views\personmiscAdd.html" />
     <Content Include="app\views\personView.html" />
+    <Content Include="app\views\pif.html" />
     <Content Include="app\views\plan.html" />
     <Content Include="app\views\planningBoard.html" />
     <Content Include="app\views\planRegisters.html" />

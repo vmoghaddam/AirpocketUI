@@ -1616,7 +1616,7 @@ app.controller('libraryAddController', ['$scope', '$location', 'libraryService',
     $scope.bookKey = null;
     $scope.$on('InitAddHazard', function (event, prms) {
 
-        alert('x');
+        
         $scope.tempData = null;
 
         if (!prms.Id) {

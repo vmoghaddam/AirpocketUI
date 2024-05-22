@@ -84,7 +84,7 @@ app.factory('libraryService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fu
     };
     var _exposeBook = function (entity) {
         var deferred = $q.defer();
-        $http.post($rootScope.serviceUrl + 'odata/library/book/expose', entity).then(function (response) {
+        $http.post(/*$rootScope.serviceUrl*/zapinet + 'odata/library/book/expose', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 

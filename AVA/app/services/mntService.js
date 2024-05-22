@@ -184,6 +184,25 @@ app.factory('mntService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
          
     };
+
+
+    var _authenticate = function (entity) {
+        var deferred = $q.defer();
+        $http.post('http://185.79.157.33/api/Authenticate', entity).then(function (response) {
+            console.log(response);
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.authenticate = _authenticate;
+
+
+
+
     ordersServiceFactory.getDashboard = _getDashboard;
 
     ordersServiceFactory.getLLP = _getLLP;
