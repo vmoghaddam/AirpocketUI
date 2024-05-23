@@ -1,6 +1,39 @@
 ﻿'use strict';
 app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
+    mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+
+
+
+
+
+    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+
+
+    $scope.entity = {
+        id: 0,
+        partTypeId: 0,
+        measurementUnitId: 0,
+        typeId: 0,
+        categoryId: 0,
+        creatorId: 0,
+        hardTime: true,
+        blockList: true,
+        ipC_Reference: 'test',
+        typeEfectivity: [
+            'test'
+        ],
+        modelEffectivity: [
+            'test'
+        ],
+        msnEffectivity: [
+            {
+                id: 0,
+                register: 'test'
+            }
+        ]
+    };
 
     $scope.btn_refresh = {
         text: 'Refresh',
@@ -12,8 +45,7 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         }
 
     };
-
-
+   
     //////////////////
 
     $scope.popup_pn_visible = false;
@@ -32,9 +64,11 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
 
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'success', text: 'Select', onClick: function (e) {
+                    type: 'success',icon:'check', text: 'Save', onClick: function (e) {
 
-
+                        mntService.addPartNumber($scope.entity).then(function (res) {
+                            console.log("Add Part Number Response: ", res);
+                        });
 
                     }
                 }, toolbar: 'bottom'
@@ -101,109 +135,73 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
 
         }
     };
+    //////////////////
 
-
-    ////////////////////
-
-    $scope.txt_parNo = {
-        bindingOptions: {
-            value: ''
-        }
-    }
-
-    $scope.txt_description = {
-        bindingOptions: {
-            value: ''
-        }
-    }
-
-    $scope.priority =
+    $scope.type =
         [
             { title: 'Routine', id: 0 },
             { title: 'Urgent', id: 1 },
             { title: 'AOG', id: 2 },
         ];
 
-    $scope.sb_reqPriority = {
+    $scope.sb_ata = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-        dataSource: $scope.priority,
+        dataSource: $scope.type,
         bindingOptions: {
-            value: '',
+            value: 'entity.ataChapter',
         }
     }
 
-    $scope.sb_register = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.priority,
+    $scope.txt_pn = {
         bindingOptions: {
-            value: '',
+            value: 'entity.partNumber'
         }
     }
 
-
-    $scope.years =
-        [
-            { title: '96', id: 0 },
-            { title: '97', id: 1 },
-            { title: '98', id: 2 },
-            { title: '90', id: 3 },
-            { title: '00', id: 4 },
-            { title: '01', id: 5 },
-            { title: '02', id: 6 },
-            { title: '03', id: 7 },
-        ];
-
-    $scope.sb_year = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.years,
+    $scope.txt_figNo = {
         bindingOptions: {
-            value: '',
+            value: 'entity.figureNo'
         }
     }
 
-    $scope.txt_nisNo = {
+    $scope.txt_itemNo = {
         bindingOptions: {
-            value: ''
+            value: 'entity.itemNo'
         }
     }
 
-    $scope.txt_reqNo = {
+    $scope.txt_itemNo = {
         bindingOptions: {
-            value: ''
+            value: 'entity.itemNo'
+        }
+    }
+    $scope.txt_desc = {
+        bindingOptions: {
+            value: 'entity.description'
+        }
+    }
+
+    $scope.txt_remark = {
+        bindingOptions: {
+            value: 'entity.remark'
         }
     }
 
 
-    $scope.dt_dateFrom = {
-        type: 'date',
-        displayFormat: "yyyy-MMM-dd",
-        bindingOptions: {
-            value: ''
-        }
-    }
 
-    $scope.dt_dateTo = {
-        type: 'date',
-        displayFormat: "yyyy-MMM-dd",
-        bindingOptions: {
-            value: ''
-        }
-    }
+    ////////////////////
 
-    ///////////////////////
+    $scope.dg_effec_ds = [
+        { Id: '0', AircraftType: 'A320' },
+        { Id: '1', AircraftType: 'B737' },
+        { Id: '2', AircraftType: 'Embraer 145' },
+        { Id: '3', AircraftType: 'MD 80' },
+    ];
 
-
-    $scope.dg_pn_columns = [
-
+    $scope.dg_effec_columns = [
 
 
         {
@@ -213,18 +211,15 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
                     .appendTo(container);
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
-        { dataField: '', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: '', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-        { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'AircraftType', caption: 'Aircraft Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 1000 },
+        
     ];
 
 
 
-    $scope.dg_pn_selected = null;
-    $scope.dg_pn_instance = null;
-    $scope.dg_pn = {
+    $scope.dg_effec_selected = null;
+    $scope.dg_effec_instance = null;
+    $scope.dg_effec = {
 
 
 
@@ -248,15 +243,15 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         scrolling: { mode: 'infinite' },
         paging: { pageSize: 100 },
         showBorders: true,
-        selection: { mode: 'single' },
+        selection: { mode: 'multiple' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 500,
+        height: $(window).height() - 700,
         width: $(window).width(),
-        columns: $scope.dg_pn_columns,
+        columns: $scope.dg_effec_columns,
         onContentReady: function (e) {
-            if (!$scope.dg_pn_instance)
-                $scope.dg_pn_instance = e.component;
+            if (!$scope.dg_effec_instance)
+                $scope.dg_effec_instance = e.component;
 
         },
 
@@ -278,131 +273,24 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
 
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
-
-            console.log(data);
-
-            $scope.dg_pn_id.Id = e.selectedRowsData[0].Id;
-
-            console.log($scope.dg_pn_id.id);
+          
             if (!data) {
-                $scope.dg_pn_selected = null;
+                $scope.dg_effec_selected = null;
             }
             else
-                $scope.dg_pn_selected = data;
+                $scope.dg_effec_selected = data;
 
 
         },
 
         bindingOptions: {
-            dataSource: 'dg_pn_ds'
+            dataSource: 'dg_effec_ds'
         },
         columnChooser: {
             enabled: false
         },
 
     };
-
-
-    $scope.dg_inter_columns = [
-
-
-
-        {
-            cellTemplate: function (container, options) {
-                $("<div style='text-align:center'/>")
-                    .html(options.rowIndex + 1)
-                    .appendTo(container);
-            }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
-        },
-        { dataField: '', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: '', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-        { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-    ];
-
-
-
-    $scope.dg_inter_selected = null;
-    $scope.dg_inter_instance = null;
-    $scope.dg_inter = {
-
-
-
-        wordWrapEnabled: true,
-        rowAlternationEnabled: false,
-        headerFilter: {
-            visible: false
-        },
-        filterRow: {
-            visible: true,
-            showOperationChooser: true,
-        },
-        showRowLines: true,
-        showColumnLines: true,
-        sorting: { mode: 'none' },
-
-        noDataText: '',
-
-        allowColumnReordering: true,
-        allowColumnResizing: true,
-        scrolling: { mode: 'infinite' },
-        paging: { pageSize: 100 },
-        showBorders: true,
-        selection: { mode: 'single' },
-
-        columnAutoWidth: false,
-        height: $(window).height() - 260,
-        width: $(window).width(),
-        columns: $scope.dg_inter_columns,
-        onContentReady: function (e) {
-            if (!$scope.dg_inter_instance)
-                $scope.dg_inter_instance = e.component;
-
-        },
-
-        onRowClick: function (e) {
-
-
-
-        },
-
-        onRowPrepared: function (e) {
-
-
-        },
-
-
-        onCellPrepared: function (e) {
-
-        },
-
-        onSelectionChanged: function (e) {
-            var data = e.selectedRowsData[0];
-
-            console.log(data);
-
-            $scope.dg_inter_id.Id = e.selectedRowsData[0].Id;
-
-            console.log($scope.dg_inter_id.id);
-            if (!data) {
-                $scope.dg_inter_selected = null;
-            }
-            else
-                $scope.dg_inter_selected = data;
-
-
-        },
-
-        bindingOptions: {
-            dataSource: 'dg_inter_ds'
-        },
-        columnChooser: {
-            enabled: false
-        },
-
-    };
-
 
     $scope.$on('InitNewPNPopup', function (event, prms) {
 

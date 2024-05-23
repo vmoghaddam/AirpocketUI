@@ -2,7 +2,7 @@
     <div id="popup_pn" dx-popup="popup_pn" class="no-padding" style='padding:0 !important;'>
         <div style="width: 100%">
             <div>
-                <div class="col-lg-8 col-md-8" style="padding: 5px; height: 100%; border: 1px solid lightgray">
+                <div class="col-lg-8 col-md-8" style="padding: 5px; height: 100%; border: 1px solid lightgray;margin-top:5px">
                     <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Part Number Information</div>
                     <table style="margin-top:10px;color:black;width:100%" class="dx-border">
                         <tr>
@@ -45,11 +45,10 @@
                     </table>
                 </div>
 
-                <div class="col-lg-4 col-md-4" style="padding: 5px;border: 1px solid lightgray ">
+                <div class="col-lg-4 col-md-4" style="padding: 5px; border: 1px solid lightgray; margin-top: 5px">
                     <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Effectivity</div>
-                    <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
-                       
-                    </table>
+                    <div dx-data-grid="dg_effec" id="dg_effec" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
+
                 </div>
 
             </div>

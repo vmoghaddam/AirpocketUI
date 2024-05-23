@@ -23,15 +23,15 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
             return results;
         });
     };
-   var _getEngADSB = function (id) {
+    var _getEngADSB = function (id) {
 
-       return $http.get($rootScope.serviceMnt + 'api/mnt/get/aircraft/adsbs/engine/' + id).then(function (results) {
+        return $http.get($rootScope.serviceMnt + 'api/mnt/get/aircraft/adsbs/engine/' + id).then(function (results) {
             return results;
         });
     };
-     var _getEngLlp = function (id) {
+    var _getEngLlp = function (id) {
 
-       return $http.get($rootScope.serviceMnt + 'api/mnt/get/aircraft/llps/engine/' + id).then(function (results) {
+        return $http.get($rootScope.serviceMnt + 'api/mnt/get/aircraft/llps/engine/' + id).then(function (results) {
             return results;
         });
     };
@@ -84,9 +84,9 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
     };
 
-     var _saveEngStatus = function (entity) {
+    var _saveEngStatus = function (entity) {
         var deferred = $q.defer();
-         $http.post($rootScope.serviceMnt + 'api/mnt/engine/status', entity).then(function (response) {
+        $http.post($rootScope.serviceMnt + 'api/mnt/engine/status', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -96,9 +96,9 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
     };
 
-   var _saveEngLlp = function (entity) {
+    var _saveEngLlp = function (entity) {
         var deferred = $q.defer();
-       $http.post($rootScope.serviceMnt + 'api/mnt/engine/llp/save', entity).then(function (response) {
+        $http.post($rootScope.serviceMnt + 'api/mnt/engine/llp/save', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -132,9 +132,9 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
     };
 
-   var _deletAcCheck = function (entity) {
+    var _deletAcCheck = function (entity) {
         var deferred = $q.defer();
-       $http.post($rootScope.serviceMnt + 'api/mnt/aircraft/check/delete', entity).then(function (response) {
+        $http.post($rootScope.serviceMnt + 'api/mnt/aircraft/check/delete', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -144,9 +144,9 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
     };
 
-  var _deletAcAdsb = function (entity) {
+    var _deletAcAdsb = function (entity) {
         var deferred = $q.defer();
-      $http.post($rootScope.serviceMnt + 'api/mnt/aircraft/adsb/delete', entity).then(function (response) {
+        $http.post($rootScope.serviceMnt + 'api/mnt/aircraft/adsb/delete', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -156,10 +156,10 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
     };
 
-  
-     var _deletEngLlp = function (entity) {
+
+    var _deletEngLlp = function (entity) {
         var deferred = $q.defer();
-         $http.post($rootScope.serviceMnt + 'api/mnt/engine/llp/delete', entity).then(function (response) {
+        $http.post($rootScope.serviceMnt + 'api/mnt/engine/llp/delete', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -172,7 +172,7 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
     var _getDashboard = function () {
         //00000
         var deferred = $q.defer();
-        $http.get( $rootScope.serviceMnt + 'api/mnt/dashboard/-1').then(function (response) {
+        $http.get($rootScope.serviceMnt + 'api/mnt/dashboard/-1').then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -182,14 +182,14 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
 
 
-         
+
     };
 
 
     var _authenticate = function (entity) {
         var deferred = $q.defer();
         $http.post('https://lmmcore.online/api/Authenticate', entity).then(function (response) {
-          
+
             var responseData = response.data.data;
 
             console.log(responseData);
@@ -197,7 +197,7 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
                 token: responseData.token, refreshToken: responseData.refreshToken, expires: responseData.tokenTimeout, useRefreshTokens: true
             });
 
-           
+
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -206,13 +206,33 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
 
         return deferred.promise;
     };
+
+    var _addPartNumber = function (entity) {
+        var deferred = $q.defer();
+        var authorizationMnt = localStorageService.get('authorizationMnt');
+        console.log('token: ',authorizationMnt.token);
+        $http.post('https://lmmcore.online/api/CMPPartNumber/Add', entity, {
+            withCredentials: true,
+            headers: { 'Authorization': 'Bearer ' + authorizationMnt.token }
+
+        }).then(function (response) {
+
+
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+
     ordersServiceFactory.authenticate = _authenticate;
 
-
-
+    ordersServiceFactory.addPartNumber = _addPartNumber;
 
     ordersServiceFactory.getDashboard = _getDashboard;
-
     ordersServiceFactory.getLLP = _getLLP;
     ordersServiceFactory.getADSB = _getADSB;
     ordersServiceFactory.getCheck = _getCheck;
