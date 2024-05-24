@@ -12,27 +12,25 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
 
 
     $scope.entity = {
-        id: 0,
-        partTypeId: 0,
-        measurementUnitId: 0,
-        typeId: 0,
-        categoryId: 0,
-        creatorId: 0,
+
+
+        typeId: 93,
+        categoryId: 98,
+        creatorId: 1,
         hardTime: true,
         blockList: true,
-        ipC_Reference: 'test',
-        typeEfectivity: [
-            'test'
-        ],
-        modelEffectivity: [
-            'test'
-        ],
-        msnEffectivity: [
-            {
-                id: 0,
-                register: 'test'
-            }
-        ]
+        typeEfectivity: [],
+        modelEffectivity: null,
+        msnEffectivity: null
+
+    };
+
+
+
+    $scope.ataEntity = {
+        "id": 0,
+        "ata": "string",
+        "title": "string"
     };
 
     $scope.btn_refresh = {
@@ -45,13 +43,13 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         }
 
     };
-   
+
     //////////////////
 
     $scope.popup_pn_visible = false;
-    $scope.popup_height = $(window).height() - 500;
-    $scope.popup_width = 1000;
-    $scope.popup_pn_title = $rootScope.Title;
+    $scope.popup_height = 420;
+    $scope.popup_width = 1250;
+    $scope.popup_pn_title = "New Part Number";
     $scope.popup_instance = null;
     $scope.isFullScreen = false;
 
@@ -64,10 +62,24 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
 
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'success',icon:'check', text: 'Save', onClick: function (e) {
+                    type: 'success', icon: 'check', text: 'Save',validationGroup: 'partnumber', onClick: function (e) {
+                        var result = e.validationGroup.validate();
 
+                        if (!result.isValid) {
+                            General.ShowNotify(Config.Text_FillRequired, 'error');
+                            return;
+                        }
+
+                        $scope.loadingVisible = true;
                         mntService.addPartNumber($scope.entity).then(function (res) {
-                            console.log("Add Part Number Response: ", res);
+                            if (res.errorCode == 101) {
+                                $scope.loadingVisible = false;
+                                General.ShowNotify("Error Occurred While Saving", 'error');
+                            }
+                            else {
+                                $scope.loadingVisible = false;
+                                General.ShowNotify("Saving Was Done Successfully", 'success');
+                            }
                         });
 
                     }
@@ -86,7 +98,7 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         ],
 
         visible: false,
-        dragEnabled: true,
+        dragEnabled: false,
         closeOnOutsideClick: false,
         onShowing: function (e) {
             $rootScope.IsRootSyncEnabled = false;
@@ -136,24 +148,97 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         }
     };
     //////////////////
+    $scope.bind = function () {
+        mntService.getAtaChart().then(function (res) {
+            $scope.ataType = res.data;
+        });
 
-    $scope.type =
-        [
-            { title: 'Routine', id: 0 },
-            { title: 'Urgent', id: 1 },
-            { title: 'AOG', id: 2 },
-        ];
+        mntService.getAFCTType().then(function (res) {
+            $scope.dg_effec_ds = res.data;
+        });
+
+        mntService.getPartType().then(function (res) {
+            $scope.partDs = res.data;
+            console.log($scope.partDs);
+        });
+    };
+
+    ////////////
+
+
 
     $scope.sb_ata = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.type,
+        valueExpr: 'ata',
+
         bindingOptions: {
             value: 'entity.ataChapter',
+            dataSource: 'ataType',
         }
     }
+
+    $scope.descPartDs = [
+        { id: 0, title: 'Description' },
+        { id: 1, title: 'Part Type' }
+    ]
+
+    $scope.sb_descPart = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.descPartDs,
+        bindingOptions: {
+            value: 'entity.descPart',
+        }
+    }
+
+    $scope.consumDs = [
+        { id: 93, title: 'Rotable' },
+        { id: 94, title: 'Consumable' }
+    ]
+
+    $scope.sb_consum = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.consumDs,
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.sb_partType = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+
+        bindingOptions: {
+            value: 'entity.partTypeId',
+            dataSource: 'partDs',
+        }
+    }
+
+    $scope.uomDs =
+        [
+            { id: 106, title: "undefined" }
+        ],
+
+        $scope.sb_uom = {
+            showClearButton: false,
+            searchEnabled: false,
+            displayExpr: "title",
+            valueExpr: 'id',
+            dataSource: $scope.uomDs,
+            bindingOptions: {
+                value: 'entity.measurementUnitId',
+
+            }
+        }
 
     $scope.txt_pn = {
         bindingOptions: {
@@ -173,11 +258,6 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         }
     }
 
-    $scope.txt_itemNo = {
-        bindingOptions: {
-            value: 'entity.itemNo'
-        }
-    }
     $scope.txt_desc = {
         bindingOptions: {
             value: 'entity.description'
@@ -190,16 +270,16 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         }
     }
 
+    $scope.txt_reference = {
+        bindingOptions: {
+            value: 'entity.ipC_Reference'
+        }
+    }
+
 
 
     ////////////////////
 
-    $scope.dg_effec_ds = [
-        { Id: '0', AircraftType: 'A320' },
-        { Id: '1', AircraftType: 'B737' },
-        { Id: '2', AircraftType: 'Embraer 145' },
-        { Id: '3', AircraftType: 'MD 80' },
-    ];
 
     $scope.dg_effec_columns = [
 
@@ -211,8 +291,8 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
                     .appendTo(container);
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
-        { dataField: 'AircraftType', caption: 'Aircraft Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 1000 },
-        
+        { dataField: 'id', caption: 'Aircraft Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+
     ];
 
 
@@ -246,8 +326,8 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         selection: { mode: 'multiple' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 700,
-        width: $(window).width(),
+        height: $scope.popup_height - 152,
+        width: '100%',
         columns: $scope.dg_effec_columns,
         onContentReady: function (e) {
             if (!$scope.dg_effec_instance)
@@ -272,15 +352,20 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         },
 
         onSelectionChanged: function (e) {
-            var data = e.selectedRowsData[0];
-          
+            var data = e.selectedRowsData;
+
             if (!data) {
                 $scope.dg_effec_selected = null;
             }
-            else
-                $scope.dg_effec_selected = data;
+            else {
+                $scope.entity.typeEfectivity = [];
+                $.each(data, function (_i, _d) {
+                    console.log("date loop", _d)
+                    $scope.entity.typeEfectivity.push(_d.id);
+                });
+            }
 
-
+            console.log($scope.entity.typeEfectivity);
         },
 
         bindingOptions: {
@@ -296,9 +381,29 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
 
         $scope.tempData = prms;
 
-
+        $scope.bind();
         $scope.popup_pn_visible = true;
     });
+
+    $scope.loadingVisible = false;
+    $scope.loadPanel = {
+        message: 'Please wait...',
+
+        showIndicator: true,
+        showPane: true,
+        shading: true,
+        closeOnOutsideClick: false,
+        shadingColor: "rgba(0,0,0,0.4)",
+        onShown: function () {
+
+        },
+        onHidden: function () {
+
+        },
+        bindingOptions: {
+            visible: 'loadingVisible'
+        }
+    };
 
 
 

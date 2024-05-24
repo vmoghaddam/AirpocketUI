@@ -210,9 +210,8 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
     var _addPartNumber = function (entity) {
         var deferred = $q.defer();
         var authorizationMnt = localStorageService.get('authorizationMnt');
-        console.log('token: ',authorizationMnt.token);
+        console.log('token: ', authorizationMnt.token);
         $http.post('https://lmmcore.online/api/CMPPartNumber/Add', entity, {
-            withCredentials: true,
             headers: { 'Authorization': 'Bearer ' + authorizationMnt.token }
 
         }).then(function (response) {
@@ -227,10 +226,145 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
     };
 
+    var _addReceipt = function (entity) {
+        var deferred = $q.defer();
+        var authorizationMnt = localStorageService.get('authorizationMnt');
+        console.log('token: ', authorizationMnt.token);
+        $http.post('https://lmmcore.online/api/LGSStockManagement/AddReceipt', entity, {
+            headers: { 'Authorization': 'Bearer ' + authorizationMnt.token }
+
+        }).then(function (response) {
+
+
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+    var _getAtaChart = function () {
+        var deferred = $q.defer();
+        var authorizationMnt = localStorageService.get('authorizationMnt');
+
+
+        var token = authorizationMnt.token;
+        console.log('Token:', token);
+
+        $http.get("https://lmmcore.online/api/GIATAChapter/GetAll", {
+            //withCredentials: true,
+            headers: {
+                'Authorization': 'bearer ' + token,
+            }
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+
+    var _getAFCTType = function () {
+        var deferred = $q.defer();
+        var authorizationMnt = localStorageService.get('authorizationMnt');
+
+
+        var token = authorizationMnt.token;
+        console.log('Token:', token);
+
+        $http.get("https://lmmcore.online/api/ACFTType/GetAll", {
+            headers: {
+                'Authorization': 'bearer ' + token,
+            }
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+     var _getPartType = function () {
+        var deferred = $q.defer();
+        var authorizationMnt = localStorageService.get('authorizationMnt');
+
+
+        var token = authorizationMnt.token;
+        console.log('Token:', token);
+
+         $http.get("https://lmmcore.online/api/CMPPartType/GetAll", {
+            //withCredentials: true,
+            headers: {
+                'Authorization': 'bearer ' + token,
+            }
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+
+     var _getReceiptPN= function (parentId) {
+        var deferred = $q.defer();
+        var authorizationMnt = localStorageService.get('authorizationMnt');
+        var token = authorizationMnt.token;
+        
+         $http.get("https://lmmcore.online/api/GeneralInfo/GetByParent?parentId=" + parentId, {
+            //withCredentials: true,
+            headers: {
+                'Authorization': 'bearer ' + token,
+            }
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+       var _getPNSelection = function (entity) {
+        var deferred = $q.defer();
+        var authorizationMnt = localStorageService.get('authorizationMnt');
+        var token = authorizationMnt.token;
+           $http.post("https://lmmcore.online/api/CMPPartNumber/GetAllPagination?page=1&size=5000", entity, {
+            //withCredentials: true,
+            headers: {
+                'Authorization': 'bearer ' + token,
+            }
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+
 
     ordersServiceFactory.authenticate = _authenticate;
 
     ordersServiceFactory.addPartNumber = _addPartNumber;
+    ordersServiceFactory.getAtaChart = _getAtaChart;
+    ordersServiceFactory.getAFCTType = _getAFCTType;
+    ordersServiceFactory.getPartType = _getPartType;
+    ordersServiceFactory.getReceiptPN = _getReceiptPN;
+    ordersServiceFactory.addReceipt = _addReceipt;
+    ordersServiceFactory.getPNSelection = _getPNSelection;
 
     ordersServiceFactory.getDashboard = _getDashboard;
     ordersServiceFactory.getLLP = _getLLP;
