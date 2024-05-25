@@ -2,13 +2,56 @@
 app.controller('directDeliveryController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
 
+    $scope.entity = {
+        id: 0,
+        requestId: 9,
+        acfT_TypeId: "B737",
+        acfT_MSNId: 1,
+        sender_LocationId: 5,
+        sender_UserId: 4,
+        receiver_LocationId: 1,
+        receiver_UserId: 1,
+        approver_LocationId: 5,
+        approver_UserId: 4,
+        remark: "Do for Request REQ-1403-01",
+        deliveryOrderItems: [
+            {
+                id: 0,
+                paperId: 0,
+                paperItemId: 3,
+                cmP_PartNumberId: 1700,
+                cmP_ComponentId: 75204,
+                conditionId: 131,
+                measurementUnitId: 106,
+                itemNo: 1,
+                quantity: 2,
+                remark: "DO Item 3"
+            }
+        ]
+    };
+
+    $scope.itemEntity = {};
+
+
     $scope.btn_add = {
         text: 'Add',
         type: 'success',
         icon: '',
         width: 120,
         onClick: function (e) {
-         
+            mntService.get_component().then(function (res) {
+                $scope.itemEntit.id = res.id
+                //$scope.itemEntit.paperId = res.
+                //     $scope.itemEntit.paperItemId = res.
+                $scope.itemEntit.cmP_PartNumberId = rescmP_PostionId
+                //  $scope.itemEntit.cmP_ComponentId = res.
+                //      $scope.itemEntit.conditionId = res.
+                //          $scope.itemEntit.measurementUnitId = res.
+                //              $scope.itemEntit.itemNo = res.
+                //                  $scope.itemEntit.quantity = res.
+                //                      $scope.itemEntit.remark = res.
+                $scope.dg_del_ds.push($scope.itemEntity);
+            });
         }
 
     };
@@ -33,10 +76,111 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
             $rootScope.$broadcast('InitInventoryPopup', null);
         }
     };
+    //////////////////
 
+    $scope.popup_pn_visible = false;
+    $scope.popup_pn_title = "Direct Delivery";
+    $scope.popup_instance = null;
+    $scope.isFullScreen = true;
+
+    $scope.popup_pn = {
+
+
+        showTitle: true,
+
+        toolbarItems: [
+
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'success', text: 'Save', onClick: function (e) {
+
+                        $scope.entity.deliveryOrderItems = $scope.dg_del_ds
+                       
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'danger', text: 'Close', onClick: function (e) {
+
+                        $scope.popup_pn_visible = false;
+
+                    }
+                }, toolbar: 'bottom'
+            },
+
+        ],
+
+        visible: false,
+        dragEnabled: true,
+        closeOnOutsideClick: false,
+        onShowing: function (e) {
+            $rootScope.IsRootSyncEnabled = false;
+            $scope.popup_instance.repaint();
+
+
+        },
+        onShown: function (e) {
+
+            if ($scope.isNew) {
+                $scope.isContentVisible = true;
+            }
+            if ($scope.tempData != null)
+                $scope.bind();
+
+            //$rootScope.referred_list_instance.repaint();
+            //$rootScope.$broadcast('InitTest', $scope.tempData);
+
+
+
+        },
+        onHiding: function () {
+
+
+            $scope.popup_pn_visible = false;
+        },
+        onContentReady: function (e) {
+            if (!$scope.popup_instance)
+                $scope.popup_instance = e.component;
+
+        },
+        // fullScreen:false,
+        bindingOptions: {
+            visible: 'popup_pn_visible',
+            fullScreen: 'isFullScreen',
+            title: 'popup_pn_title',
+            height: 'popup_height',
+            width: 'popup_width',
+            'toolbarItems[0].visible': 'isNotLocked',
+            //'toolbarItems[1].visible': 'isNotLocked',
+            'toolbarItems[2].visible': 'isNotLocked',
+
+        }
+    };
 
     //////////////////
 
+    $scope.bind = function () {
+        mntService.get_ac_type().then(function (res) {
+
+            $scope.ac_type_ds = res;
+            mntService.get_register().then(function (res) {
+                $scope.registers = res
+            });
+        });
+
+        mntService.get_shop().then(function (res) {
+            console.log(res);
+            $scope.shop_ds = res;
+        });
+
+        mntService.get_component().then(function (res) {
+            console.log(res);
+            $scope.dg_del_ds = res;
+        });
+    }
+
+    //////////////////
 
     $scope.txt_plaque = {
         bindingOptions: {
@@ -55,27 +199,35 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         bindingOptions: {
             value: ''
         }
-    } 
+    }
 
     $scope.sb_acType = {
         showClearButton: false,
         searchEnabled: false,
-        displayExpr: "title",
+        displayExpr: "id",
         valueExpr: 'id',
-        dataSource: $scope.priority,
+        onValueChanged: function (e) {
+            $scope.reg_ds = [];
+            $scope.reg_ds = Enumerable.From($scope.registers).Where(function (x) {
+                var models = x.acfT_ModelId.split("-")[0];
+                return models == e.value;
+            }).ToArray();
+            console.log($scope.reg_ds);
+        },
         bindingOptions: {
-            value: '',
+            value: 'entity.ac_type',
+            dataSource: 'ac_type_ds',
         }
     }
 
     $scope.sb_register = {
         showClearButton: false,
         searchEnabled: false,
-        displayExpr: "title",
+        displayExpr: "register",
         valueExpr: 'id',
-        dataSource: $scope.priority,
         bindingOptions: {
             value: '',
+            dataSource: 'reg_ds'
         }
     }
 
@@ -91,16 +243,16 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
     }
 
 
-   
+
 
     $scope.sb_shop = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-        dataSource: $scope.priority,
         bindingOptions: {
             value: '',
+            dataSource: 'shop_ds'
         }
     }
 
@@ -110,7 +262,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         }
     }
 
-   
+
 
     $scope.dt_date = {
         type: 'date',
@@ -120,7 +272,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         }
     }
 
-  
+
 
     ///////////////////////
 
@@ -227,6 +379,15 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         },
 
     };
+
+    $scope.$on('InitDirectDelivery', function (event, prms) {
+
+        $scope.tempData = prms;
+        $scope.popup_pn_visible = true;
+
+        $scope.bind();
+    });
+
 
 }]);
 

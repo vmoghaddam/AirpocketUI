@@ -109,7 +109,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     //////////////////////////
 
 
-    $scope.popup_pn_visible = true;
+    $scope.popup_pn_visible = false;
     $scope.popup_pn_title = "Part Number Selection";
     $scope.popup_instance = null;
     $scope.isFullScreen = true;
@@ -622,12 +622,13 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
     };
 
-    $scope.$on('InitPNSelected', function (event, prms) {
+    $scope.$on('InitReceipt', function (event, prms) {
 
         $scope.tempData = prms;
-        console.log(prms);
-        $scope.itemEntity.cmP_PartNumberId = $scope.tempData.id;
-        $scope.itemEntity.PartNumberTitle = $scope.tempData.partNumber;
+        $scope.popup_pn_visible = true;
+        //console.log(prms);
+        //$scope.itemEntity.cmP_PartNumberId = $scope.tempData.id;
+        //$scope.itemEntity.PartNumberTitle = $scope.tempData.partNumber;
 
     });
 

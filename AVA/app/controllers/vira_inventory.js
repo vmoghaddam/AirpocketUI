@@ -230,7 +230,7 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
             // validationGroup: 'crewreportsearch',
             bindingOptions: {},
             onClick: function (e) {
-
+                $rootScope.$broadcast('InitReceipt', null);
                 
 
 
@@ -246,7 +246,7 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
             bindingOptions: {},
             onClick: function (e) {
 
-
+                $rootScope.$broadcast('InitDirectDelivery', null);
 
 
             }

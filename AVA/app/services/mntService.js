@@ -390,6 +390,77 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
     ordersServiceFactory.get_user_locations = _get_user_locations;
 
 
+    var _get_register = function () {
+        var deferred = $q.defer();
+
+        $http.get(vira_api+"api/ACFTRegister/GetAll", {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_register = _get_register;
+
+
+     var _get_ac_type = function () {
+        var deferred = $q.defer();
+
+        $http.get(vira_api+"api/ACFTType/GetAll", {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_ac_type = _get_ac_type;
+
+
+    var _get_shop = function () {
+        var deferred = $q.defer();
+        var entity = {};
+        $http.post(vira_api+"api/GILocation/GetAllPagination?page=1&size1000", entity ,{
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_shop = _get_shop;
+
+     var _get_component = function (entity) {
+        var deferred = $q.defer();
+
+         $http.post(vira_api +"/api/CMPComponent/GetAllPagination?page=1&size1000" , entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_component = _get_component;
+
+
 
     ordersServiceFactory.authenticate = _authenticate;
 
