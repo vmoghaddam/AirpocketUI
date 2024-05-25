@@ -275,12 +275,12 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
 
 
         var token = authorizationMnt.token;
-        console.log('Token:', token);
+        console.log('Token:', 'bearer ' +token);
 
         $http.get("https://lmmcore.online/api/ACFTType/GetAll", {
-            headers: {
-                'Authorization': 'bearer ' + token,
-            }
+          //  headers: {
+          //      'Authorization': 'bearer ' + token,
+         //   }
         }).then(function (response) {
             deferred.resolve(response.data);
         }, function (err) {
@@ -353,6 +353,41 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
 
         return deferred.promise;
     };
+
+    var _get_inventory = function (dto) {
+        var deferred = $q.defer();
+        
+        $http.post("https://lmmcore.online/api/LGSStockManagement/GetInventoryByComponent?page=1&size=1000", dto, {
+            
+            
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_inventory = _get_inventory;
+
+
+    var _get_user_locations = function (dto) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api+"api/UMUser/GetUserLocationList", dto, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_user_locations = _get_user_locations;
 
 
 

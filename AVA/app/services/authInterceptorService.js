@@ -4,13 +4,22 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
     var authInterceptorServiceFactory = {};
 
     var _request = function (config) {
+        console.log(config);
 
         config.headers = config.headers || {};
 
         var authData = localStorageService.get('authorizationData');
+
+        var authDataVIRA = localStorageService.get('authorizationMnt');
         
   
+        if (config.url.startsWith(vira_api)) {
+            if (authDataVIRA) {
 
+                config.headers.Authorization = 'Bearer ' + authDataVIRA.token;
+            }
+        }
+        else
         if (authData) {
 
             config.headers.Authorization = 'Bearer ' + authData.token;

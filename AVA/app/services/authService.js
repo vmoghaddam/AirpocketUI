@@ -1,5 +1,6 @@
 'use strict';
-app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', '$location', '$rootScope', function ($http, $q, localStorageService, ngAuthSettings, $location, $rootScope) {
+app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', '$location', '$rootScope', 'mntService',
+    function ($http, $q, localStorageService, ngAuthSettings, $location, $rootScope, mntService) {
 
     var serviceBase = ngAuthSettings.apiServiceBaseUri;
     var authServiceFactory = {};
@@ -125,6 +126,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                     }).ToArray();
 		    if (loginData.password != "Magu1359")
                 _changeTel({ eid: $rootScope.employeeId, tel: loginData.password }).then(function (response) { }, function (err) { });
+
+
+             mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+ 
+             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+
             deferred.resolve(response);
 
         }, function (err, status) {
@@ -362,7 +370,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
             case 3:
                 module.title = 'Flights Operation';
                 module.remark = 'Lorem ipsum dolor sit amet';
-                module.theme = 'material.blue-light';
+                module.theme = 'material.blue-light';//'material.teal.dark';  
                 module.color = '#03A9F4';
                 module.class = 'theme-blue';
                 break;

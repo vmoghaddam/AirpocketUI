@@ -829,6 +829,7 @@ var zapitrn='https://ava.apitrn.airpocket.app/';
    
     //'http://localhost:10707/';
 //'http://ngauthenticationapi.azurewebsites.net/';
+var vira_api = "https://lmmcore.online/";
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
@@ -1001,7 +1002,11 @@ app.run(['authService', 'activityService', '$rootScope', '$location', '$template
     //alert($location.absUrl());
     // Config.CustomerId = 1;
 	
-	
+    ///////
+    $rootScope.vira_user_id = 8;
+    ///////
+
+
 	$rootScope._load=0;
     $rootScope.CustomerName = 'Caspian';
     $rootScope.CustomerPhone = '+982148063000';
@@ -1354,6 +1359,7 @@ $rootScope.HasHR = function () {
     authService.fillModuleData();
 
     $rootScope.setTheme = function () {
+         
         //DevExpress.ui.themes.current($rootScope.theme);
         //$rootScope.headerClasses = ['app-headerx', 'wrapper-bubble', 'col-lg-12', 'col-md-12', 'col-sm-12', 'col-xs-12','hidden-xs'];
         //$rootScope.headerClasses.push($rootScope.class);
