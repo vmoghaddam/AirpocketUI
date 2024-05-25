@@ -25,7 +25,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         itemNo: 1,
         shelfFromId: 2,
         shelfToId: 2,
-
+        
     }
 
     $scope.dg_rec_ds = [];
@@ -62,7 +62,20 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         width: '100%',
         onClick: function (e) {
 
-            console.log($scope.itemEntity);
+            
+
+            $.each($scope.itemUnit, function (_i, _d) {
+                if (_d.id == $scope.itemEntity.measurementUnitId)
+                    $scope.itemEntity.measurementUnitTitle = _d.title;
+            });
+
+            $.each($scope.conditionDs, function (_i, _d) {
+               
+                if (_d.id == $scope.itemEntity.conditionId)
+                    $scope.itemEntity.conditionTitle = _d.title;
+
+            });
+
             $scope.itemEntity.Id = $scope.itemEntity.Id + 1 
             $scope.dg_rec_ds.push($scope.itemEntity);
             $scope.itemEntity = {
@@ -384,29 +397,31 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         }
     }
 
+    $scope.sb_itemCondition = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        bindingOptions: {
+            value: 'itemEntity.conditionId',
+            dataSource: 'conditionDs',
+        }
+
+    }
+
+
     $scope.sb_itemUnit = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-
         bindingOptions: {
             value: 'itemEntity.measurementUnitId',
             dataSource: 'itemUnit',
         }
     }
 
-    $scope.sb_itemCondition = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
-
-        bindingOptions: {
-            value: 'itemEntity.conditionId',
-            dataSource: 'conditionDs',
-        }
-    }
+    
 
 
     $scope.sb_itemCurrency = {
@@ -518,9 +533,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         { dataField: 'PartNumberTitle', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: 'sN_BN', caption: 'SN /BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'measurementUnitTitle', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: '', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'conditionTitle', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: 'manufactureDate', caption: 'Man.Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
         { dataField: 'expireDate', caption: 'Exp. Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
     ];
