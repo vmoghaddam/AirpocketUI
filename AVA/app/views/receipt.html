@@ -280,30 +280,17 @@
             </table>
         </div>
 
-        <div style="display:none">
-            <div class="col-lg-3 col-md-3" style="padding:5px;height:100%">
+        <div style="height:210px">
+            <!--<div class="col-lg-3 col-md-3" style="padding:5px;height:100%">
                 <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Account Type</div>
                 <table style="width: 100%; height:82% ;color: black; border: 1px solid #ccc; " class="dx-border">
                     <tr>
-                        <td class="td-field" style="font-weight:bold; width:200px">PO:</td>
-                        <td class="td-field"><div dx-check-box="ch_po" class="center" style="width: 100%"></div></td>
-                    </tr>
-                    <tr>
-                        <td class="td-field" style="font-weight:bold; width:200px">Removed From a Register:</td>
-                        <td class="td-field"><div dx-check-box="ch_rmvRegister" class="center" style="width: 100%"></div></td>
-                    </tr>
-                    <tr>
-                        <td class="td-field" style="font-weight:bold; width:200px">Removed From an Assy:</td>
-                        <td class="td-field"><div dx-check-box="ch_rmvAssy" class="center" style="width: 100%"></div></td>
-                    </tr>
-                    <tr>
-                        <td class="td-field" style="font-weight:bold; width:200px">Direct Charge:</td>
-                        <td class="td-field"><div dx-check-box="ch_charge" class="center" style="width: 100%"></div></td>
+                        <td class="td-field"><div dx-select-box="sb_accountType" class="center" style="width: 100%"></div></td>
                     </tr>
                 </table>
-            </div>
+            </div>-->
 
-            <div class="col-lg-6 col-md-6" style="padding: 5px ">
+            <div class="col-lg-8 col-md-8" style="padding: 5px;height:100% ">
                 <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">PO Information</div>
                 <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
                     <tr>
@@ -329,7 +316,7 @@
                     </tr>
                 </table>
             </div>
-            <div class="col-lg-3 col-md-3" style="padding: 5px ">
+            <div class="col-lg-4 col-md-4" style="padding: 5px ">
                 <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Removed From a Register</div>
                 <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
                     <tr>
@@ -338,17 +325,24 @@
                     </tr>
                 </table>
 
-                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;margin-top: 15px">Removed From a Assy</div>
+                <!--<div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;margin-top: 15px">Removed From a Assy</div>
                 <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
                     <tr>
                         <td class="td-field" style="font-weight:bold; width:100px">Assy:</td>
                         <td class="td-field"><div dx-select-box="sb_rmvAssy" class="center" style="width: 100%"></div></td>
                     </tr>
+                </table>-->
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;margin-top: 15px">Receipt Type</div>
+                <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
+                    <tr>
+                        <td class="td-field" style="font-weight:bold; width:100px">Account Type:</td>
+                        <td class="td-field"><div dx-select-box="sb_accountType" class="center" style="width: 100%"></div></td>
+                    </tr>
                 </table>
             </div>
         </div>
         <div sstyle="border: 1px solid #ccc">
-            <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Items</div>
+            <!--<div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Items</div>-->
             <table style="color: black" class="dx-border">
                 <tr>
                     <td class="td-field" style="font-weight:bold; width:100px">Part No. :</td>
@@ -425,5 +419,5 @@
     <div dx-load-panel="loadPanel"></div>
 </div>
 
-    
-       
+
+

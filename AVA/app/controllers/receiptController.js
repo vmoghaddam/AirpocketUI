@@ -4,18 +4,15 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
     $scope.entity = {
         id: 0,
-        receiptType: 1,
-        acfT_MSNId: 0,
-        companyId: 12,
-        sender_LocationId: 3,
-        sender_UserId: 5,
-        receiver_LocationId: 3,
-        receiver_UserId: 5,
+        sender_LocationId: null,
+        sender_UserId: null,
+        receiver_LocationId: 19,
+        receiver_UserId: 8,
         receivedPaperNo: "PO-02-36",
         receivedPaperDate: "2024-05-20T16:39:40.744Z",
         receivedInvoiveNo: null,
         receivedInvoiveDate: null,
-        remark: "Receipt from PO-02-36",
+        remark: " ",
         receiptItems:
             []
     }
@@ -25,7 +22,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         itemNo: 1,
         shelfFromId: 2,
         shelfToId: 2,
-        
+
     }
 
     $scope.dg_rec_ds = [];
@@ -62,7 +59,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         width: '100%',
         onClick: function (e) {
 
-            
+
 
             $.each($scope.itemUnit, function (_i, _d) {
                 if (_d.id == $scope.itemEntity.measurementUnitId)
@@ -70,13 +67,13 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             });
 
             $.each($scope.conditionDs, function (_i, _d) {
-               
+
                 if (_d.id == $scope.itemEntity.conditionId)
                     $scope.itemEntity.conditionTitle = _d.title;
 
             });
 
-            $scope.itemEntity.Id = $scope.itemEntity.Id + 1 
+            $scope.itemEntity.Id = $scope.itemEntity.Id + 1
             $scope.dg_rec_ds.push($scope.itemEntity);
             $scope.itemEntity = {
                 Id: $scope.itemEntity.Id,
@@ -109,7 +106,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     //////////////////////////
 
 
-    $scope.popup_pn_visible = false;
+    $scope.popup_pn_visible = true;
     $scope.popup_pn_title = "Part Number Selection";
     $scope.popup_instance = null;
     $scope.isFullScreen = true;
@@ -213,6 +210,18 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             $scope.currencyDs = res;
         });
 
+        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
+            $scope.ds_locations = response;
+        });
+
+        mntService.get_company().then(function (response) {
+            $scope.ds_company = response;
+        });
+
+        mntService.get_register().then(function (response) {
+            $scope.ds_register = response;
+        });
+
 
     }
 
@@ -302,10 +311,10 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.priority,
+        valueExpr: 'gI_LocationId',
         bindingOptions: {
-            value: '',
+            value: 'entity.receiver_LocationId',
+            dataSource: 'ds_locations',
         }
     }
 
@@ -315,9 +324,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-        dataSource: $scope.priority,
         bindingOptions: {
-            value: '',
+            value: 'entity.companyId',
+            dataSource: 'ds_company',
         }
     }
 
@@ -327,9 +336,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-        dataSource: $scope.priority,
         bindingOptions: {
-            value: '',
+            value: 'entity.acfT_MSNId',
+            dataSource: 'ds_register',
         }
     }
 
@@ -342,6 +351,24 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         dataSource: $scope.priority,
         bindingOptions: {
             value: '',
+        }
+    }
+
+    $scope.accoutn_type_ds =
+        [
+        {Id:1 , title:"PO"},
+        {Id:2 , title:"Removed From A Register"},
+        {Id:3 , title:"Direct Charge"},
+        ];
+
+    $scope.sb_accountType = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        dataSource: $scope.accoutn_type_ds,
+        bindingOptions: {
+            value: 'entity.receiptType',
         }
     }
 
@@ -365,7 +392,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         type: 'date',
         displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
-            value: ''
+            value: 'entity.receivedInvoiveDate'
         }
     }
 
@@ -380,7 +407,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
     $scope.txt_invoice = {
         bindingOptions: {
-            value: ''
+            value: 'entity.receivedInvoiveNo'
         }
     }
 
@@ -421,7 +448,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         }
     }
 
-    
+
 
 
     $scope.sb_itemCurrency = {

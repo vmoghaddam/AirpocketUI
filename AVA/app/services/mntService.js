@@ -478,6 +478,23 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
     };
     ordersServiceFactory.add_delivery_order = _add_delivery_order;
 
+     var _get_company = function () {
+        var deferred = $q.defer();
+
+         $http.get(vira_api +"api/GICompany/GetAll" , {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_company = _get_company;
+
 
 
     ordersServiceFactory.authenticate = _authenticate;

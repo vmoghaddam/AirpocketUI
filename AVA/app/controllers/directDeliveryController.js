@@ -3,19 +3,16 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
 
     $scope.entity = {
-       
-        requestId: 9,
-        acfT_TypeId: "B737",
-        acfT_MSNId: 1,
-        sender_LocationId: 5,
-        sender_UserId: 4,
-        receiver_LocationId: 1,
-        receiver_UserId: 1,
-        approver_LocationId: 5,
-        approver_UserId: 4,
-        remark: "Do for Request REQ-1403-01",
+
+        "id": 0,
+        "requestId": null,
+        "receiver_LocationId": 3,
+        "receiver_UserId": 5,
+        "approver_LocationId": 19,
+        "approver_UserId": 8,
+        "remark": null,
         deliveryOrderItems: [
-           
+
         ]
     };
 
@@ -32,7 +29,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
             var lgsEntity =
             {
-                locationId: 19,
+                locationId: 1,
                 //"sN_BN": "SEP1000"
             }
             mntService.get_component(lgsEntity).then(function (response) {
@@ -44,22 +41,22 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
                 console.log("Enum Response", res);
 
-                $scope.itemEntity.paperId = 0
-                $scope.itemEntity.paperItemId = 3
+                $scope.itemEntity.paperId = null
+                $scope.itemEntity.paperItemId = 1
                 $scope.itemEntity.cmP_PartNumberId = res[0].cmP_PartNumberId
                 $scope.itemEntity.cmP_ComponentId = res[0].id
                 $scope.itemEntity.conditionId = res[0].conditionId
-                $scope.itemEntity.measurementUnitId = 0
-                $scope.itemEntity.itemNo = 0;
+                //$scope.itemEntity.measurementUnitId = 0
+                //$scope.itemEntity.itemNo = 0;
                 //$scope.itemEntity.quantity = res[0].availablrQty
-                $scope.itemEntity.quantity = 0
-                $scope.itemEntity.remark = res[0].description
-                $scope.itemEntity.sN_BN = res[0].sN_bn
+                $scope.itemEntity.quantity = res[0].availableQty;
+                //$scope.itemEntity.remark = res[0].description
+                //$scope.itemEntity.sN_BN = res[0].sN_bn
                 console.log($scope.itemEntity);
                 $scope.dg_del_ds.push($scope.itemEntity);
             });
 
-            console.log("DataGrid Data Source" ,$scope.dg_del_ds);
+            console.log("DataGrid Data Source", $scope.dg_del_ds);
         }
 
     };
@@ -184,7 +181,15 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
             $scope.shop_ds = res;
         });
 
-        
+        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
+            console.log("User ", res);
+            $scope.user = res[0];
+
+            $scope.entity.sender_LocationId = $scope.user.gI_LocationId;
+            $scope.entity.sender_UserId = $scope.user.personalId;
+        });
+
+
     }
 
     //////////////////
@@ -199,7 +204,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         bindingOptions: {
             value: 'entity.sn_bn'
         }
-       
+
     }
 
     $scope.ch_rfid = {
@@ -223,7 +228,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
             console.log($scope.reg_ds);
         },
         bindingOptions: {
-            value: 'entity.ac_type',
+            value: 'entity.acfT_TypeId',
             dataSource: 'ac_type_ds',
         }
     }
@@ -234,7 +239,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         displayExpr: "register",
         valueExpr: 'id',
         bindingOptions: {
-            value: '',
+            value: 'entity.acfT_MSNId',
             dataSource: 'reg_ds'
         }
     }
@@ -243,10 +248,11 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.priority,
+        valueExpr: 'gI_LocationId',
+
         bindingOptions: {
-            value: '',
+            value: 'entity.warehouse',
+            dataSource: 'ds_locations',
         }
     }
 
@@ -258,8 +264,9 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
+
         bindingOptions: {
-            value: '',
+            value: 'entity.receiver_LocationId',
             dataSource: 'shop_ds'
         }
     }
