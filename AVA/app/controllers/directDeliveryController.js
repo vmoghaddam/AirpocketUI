@@ -3,7 +3,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
 
     $scope.entity = {
-        id: 0,
+       
         requestId: 9,
         acfT_TypeId: "B737",
         acfT_MSNId: 1,
@@ -15,23 +15,13 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         approver_UserId: 4,
         remark: "Do for Request REQ-1403-01",
         deliveryOrderItems: [
-            {
-                id: 0,
-                paperId: 0,
-                paperItemId: 3,
-                cmP_PartNumberId: 1700,
-                cmP_ComponentId: 75204,
-                conditionId: 131,
-                measurementUnitId: 106,
-                itemNo: 1,
-                quantity: 2,
-                remark: "DO Item 3"
-            }
+           
         ]
     };
 
     $scope.itemEntity = {};
 
+    $scope.dg_del_ds = [];
 
     $scope.btn_add = {
         text: 'Add',
@@ -39,19 +29,37 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         icon: '',
         width: 120,
         onClick: function (e) {
-            mntService.get_component().then(function (res) {
-                $scope.itemEntit.id = res.id
-                //$scope.itemEntit.paperId = res.
-                //     $scope.itemEntit.paperItemId = res.
-                $scope.itemEntit.cmP_PartNumberId = rescmP_PostionId
-                //  $scope.itemEntit.cmP_ComponentId = res.
-                //      $scope.itemEntit.conditionId = res.
-                //          $scope.itemEntit.measurementUnitId = res.
-                //              $scope.itemEntit.itemNo = res.
-                //                  $scope.itemEntit.quantity = res.
-                //                      $scope.itemEntit.remark = res.
+
+            var lgsEntity =
+            {
+                locationId: 19,
+                //"sN_BN": "SEP1000"
+            }
+            mntService.get_component(lgsEntity).then(function (response) {
+                console.log("Response", response);
+
+                var res = Enumerable.From(response).Where(function (x) {
+                    return x.sN_BN == $scope.entity.sn_bn;
+                }).ToArray();
+
+                console.log("Enum Response", res);
+
+                $scope.itemEntity.paperId = 0
+                $scope.itemEntity.paperItemId = 3
+                $scope.itemEntity.cmP_PartNumberId = res[0].cmP_PartNumberId
+                $scope.itemEntity.cmP_ComponentId = res[0].id
+                $scope.itemEntity.conditionId = res[0].conditionId
+                $scope.itemEntity.measurementUnitId = 0
+                $scope.itemEntity.itemNo = 0;
+                //$scope.itemEntity.quantity = res[0].availablrQty
+                $scope.itemEntity.quantity = 0
+                $scope.itemEntity.remark = res[0].description
+                $scope.itemEntity.sN_BN = res[0].sN_bn
+                console.log($scope.itemEntity);
                 $scope.dg_del_ds.push($scope.itemEntity);
             });
+
+            console.log("DataGrid Data Source" ,$scope.dg_del_ds);
         }
 
     };
@@ -95,7 +103,9 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
                     type: 'success', text: 'Save', onClick: function (e) {
 
                         $scope.entity.deliveryOrderItems = $scope.dg_del_ds
-                       
+                        mntService.add_delivery_order($scope.entity).then(function (res) {
+                            console.log(res);
+                        });
                     }
                 }, toolbar: 'bottom'
             },
@@ -174,10 +184,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
             $scope.shop_ds = res;
         });
 
-        mntService.get_component().then(function (res) {
-            console.log(res);
-            $scope.dg_del_ds = res;
-        });
+        
     }
 
     //////////////////
@@ -190,8 +197,9 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
     $scope.txt_snbn = {
         bindingOptions: {
-            value: ''
+            value: 'entity.sn_bn'
         }
+       
     }
 
     $scope.ch_rfid = {
@@ -288,13 +296,13 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
         { dataField: '', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-        { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'SN / BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'remark', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
+        { dataField: 'cmP_PartNumberId', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'sN_BN', caption: 'SN / BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'conditionId', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: '', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'measurementUnitId', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
 
     ];
 
@@ -329,7 +337,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 260,
+        height: $(window).height() - 350,
         width: $(window).width(),
         columns: $scope.dg_del_columns,
         onContentReady: function (e) {

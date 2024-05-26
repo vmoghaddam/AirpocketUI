@@ -446,7 +446,7 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
      var _get_component = function (entity) {
         var deferred = $q.defer();
 
-         $http.post(vira_api +"/api/CMPComponent/GetAllPagination?page=1&size1000" , entity, {
+         $http.post(vira_api +"api/LGSStockManagement/GetInventoryByComponent?page=1&size1000" , entity, {
 
 
         }).then(function (response) {
@@ -459,6 +459,24 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
     };
     ordersServiceFactory.get_component = _get_component;
+
+
+     var _add_delivery_order = function (entity) {
+        var deferred = $q.defer();
+
+         $http.post(vira_api +"api/LGSStockManagement/AddDeliveryOrder" , entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.add_delivery_order = _add_delivery_order;
 
 
 
