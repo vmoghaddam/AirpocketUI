@@ -280,7 +280,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
     $scope.txt_poNo = {
         bindingOptions: {
-            value: 'entity.receivedPaperNo'
+            value: ''
         }
     }
 
