@@ -293,19 +293,16 @@
             <div class="col-lg-8 col-md-8" style="padding: 5px;height:100% ">
                 <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">PO Information</div>
                 <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
-                    <tr>
-                        <td class="td-field" style="font-weight:bold; width:100px">No. :</td>
-                        <td class="td-field"><div dx-text-box="txt_poNo" class="center" style="width: 100%"></div></td>
 
-                        <td class="td-field" style="font-weight: bold; width: 100px">Stock:</td>
-                        <td class="td-field"><div dx-select-box="sb_poCompany" class="center"></div></td>
-                    </tr>
                     <tr>
                         <td class="td-field" style="font-weight: bold; width: 100px">Date:</td>
                         <td class="td-field"><div dx-date-box="dt_poDate" class="center" style="width:100%"></div></td>
 
-                        <td class="td-field" style="font-weight: bold; width: 100px">AWB:</td>
-                        <td class="td-field"><div dx-text-box="txt_awb" style="display: inline-block; width:80%"></div><div dx-button="awbButton" style="width:20%; display: inline-block;margin-top: -30px"></div></td>
+                        <td class="td-field" style="font-weight:bold; width:100px">No. :</td>
+                        <td class="td-field"><div dx-text-box="txt_poNo" class="center" style="width: 100%"></div></td>
+
+                        <!--<td class="td-field" style="font-weight: bold; width: 100px">AWB:</td>
+    <td class="td-field"><div dx-text-box="txt_awb" style="display: inline-block; width:80%"></div><div dx-button="awbButton" style="width:20%; display: inline-block;margin-top: -30px"></div></td>-->
                     </tr>
                     <tr>
                         <td class="td-field" style="font-weight: bold; width: 100px">Invoice:</td>
@@ -313,6 +310,11 @@
 
                         <td class="td-field" style="font-weight: bold; width: 100px">Invoice Date:</td>
                         <td class="td-field"><div dx-date-box="dt_invoice" class="center" style="width:100%"></div></td>
+                    </tr>
+                    <tr>
+                     
+                        <td class="td-field" style="font-weight: bold; width: 100px">Company:</td>
+                        <td class="td-field" colspan="3"><div dx-select-box="sb_poCompany" class="center"></div></td>
                     </tr>
                 </table>
             </div>

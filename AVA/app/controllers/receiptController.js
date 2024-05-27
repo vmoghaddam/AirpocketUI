@@ -2,17 +2,18 @@
 app.controller('receiptController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
 
-    $scope.entity = {
+    
+     $scope.entity = {
         id: 0,
-        sender_LocationId: null,
-        sender_UserId: null,
-        receiver_LocationId: 19,
+        //sender_LocationId: null,
+        //sender_UserId: null,
+        /* receiver_LocationId: 19,*/
+        receivedPaperNo: null,
+        receivedPaperDate: null,
         receiver_UserId: 8,
-        receivedPaperNo: "PO-02-36",
-        receivedPaperDate: "2024-05-20T16:39:40.744Z",
+        companyId: null,
         receivedInvoiveNo: null,
         receivedInvoiveDate: null,
-        remark: " ",
         receiptItems:
             []
     }
@@ -106,7 +107,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     //////////////////////////
 
 
-    $scope.popup_pn_visible = true;
+    $scope.popup_pn_visible = false;
     $scope.popup_pn_title = "Part Number Selection";
     $scope.popup_instance = null;
     $scope.isFullScreen = true;
@@ -212,6 +213,10 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
         mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
             $scope.ds_locations = response;
+            $scope.user = response;
+            console.log($scope.user);
+            $scope.entity.sender_LocationId = $scope.user[0].gI_LocationId;
+            $scope.entity.sender_UserId = $rootScope.vira_user_id;
         });
 
         mntService.get_company().then(function (response) {
@@ -275,7 +280,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
     $scope.txt_poNo = {
         bindingOptions: {
-            value: ''
+            value: 'entity.receivedPaperNo'
         }
     }
 
@@ -322,7 +327,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     $scope.sb_poCompany = {
         showClearButton: false,
         searchEnabled: false,
-        displayExpr: "title",
+        displayExpr: "name",
         valueExpr: 'id',
         bindingOptions: {
             value: 'entity.companyId',
@@ -334,7 +339,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     $scope.sb_rmvRegister = {
         showClearButton: false,
         searchEnabled: false,
-        displayExpr: "title",
+        displayExpr: "register",
         valueExpr: 'id',
         bindingOptions: {
             value: 'entity.acfT_MSNId',
@@ -356,16 +361,16 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
     $scope.accoutn_type_ds =
         [
-        {Id:1 , title:"PO"},
-        {Id:2 , title:"Removed From A Register"},
-        {Id:3 , title:"Direct Charge"},
+            { Id: 1, title: "PO" },
+            { Id: 2, title: "Removed From A Register" },
+            { Id: 3, title: "Direct Charge" },
         ];
 
     $scope.sb_accountType = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
-        valueExpr: 'id',
+        valueExpr: 'Id',
         dataSource: $scope.accoutn_type_ds,
         bindingOptions: {
             value: 'entity.receiptType',
@@ -654,11 +659,16 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         $scope.tempData = prms;
         $scope.popup_pn_visible = true;
         //console.log(prms);
-        //$scope.itemEntity.cmP_PartNumberId = $scope.tempData.id;
-        //$scope.itemEntity.PartNumberTitle = $scope.tempData.partNumber;
+
 
     });
 
+
+    $scope.$on('InitPNSelected', function (event, prms) {
+        console.log(prms);
+        $scope.itemEntity.cmP_PartNumberId = prms.id;
+        $scope.itemEntity.PartNumberTitle = prms.partNumber;
+    });
 
 
     $scope.bind();
