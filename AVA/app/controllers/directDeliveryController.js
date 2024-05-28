@@ -29,7 +29,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
             var lgsEntity =
             {
-                locationId: 1,
+                locationId: 19,
                 //"sN_BN": "SEP1000"
             }
             mntService.get_component(lgsEntity).then(function (response) {
@@ -41,12 +41,16 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
                 console.log("Enum Response", res);
 
-                $scope.itemEntity.paperId = null
-                $scope.itemEntity.paperItemId = 1
+
+                $scope.itemEntity.paperId = 0
+                $scope.itemEntity.paperItemId = null
+                //$scope.itemEntity.cmP_PartNumberId = res[0].cmP_PartNumberId
                 $scope.itemEntity.cmP_PartNumberId = res[0].cmP_PartNumberId
                 $scope.itemEntity.cmP_ComponentId = res[0].id
                 $scope.itemEntity.conditionId = res[0].conditionId
-                //$scope.itemEntity.measurementUnitId = 0
+                $scope.itemEntity.shelfFrom = "48875"
+                $scope.itemEntity.shelfTo = "48875"
+                $scope.itemEntity.measurementUnitId = 106
                 //$scope.itemEntity.itemNo = 0;
                 //$scope.itemEntity.quantity = res[0].availablrQty
                 $scope.itemEntity.quantity = res[0].availableQty;
@@ -56,10 +60,16 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
                 $scope.dg_del_ds.push($scope.itemEntity);
             });
 
+                            
             console.log("DataGrid Data Source", $scope.dg_del_ds);
         }
 
     };
+
+    $scope.$on('on_inventory_selected', function (event, prms) {
+        console.log("Init PN Data", prms);
+
+    });
 
     $scope.btn_remove = {
         text: 'Remove',
@@ -186,7 +196,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
             $scope.user = res[0];
 
             $scope.entity.sender_LocationId = $scope.user.gI_LocationId;
-            $scope.entity.sender_UserId = $scope.user.personalId;
+            $scope.entity.sender_UserId = $scope.user.uM_UserId;
         });
 
 

@@ -15,13 +15,17 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
     }
 
 
+
+
     $scope.btn_refresh = {
         text: 'Refresh',
         type: 'Default',
         icon: '',
         width: 120,
         onClick: function (e) {
-            alert("Refresh")
+            mntService.getPNSelection($scope.entity).then(function (res) {
+                $scope.dg_pn_ds = res.data;
+            });
         }
 
     };
@@ -119,20 +123,37 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
         mntService.getPNSelection($scope.entity).then(function (res) {
             $scope.dg_pn_ds = res.data;
         });
+
+        mntService.get_ata_chart().then(function (res) {
+            console.log(res);
+            $scope.ds_ata = res;
+        });
     }
 
 
     ////////////////////
 
-    $scope.txt_parNo = {
+    $scope.sb_ata = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
         bindingOptions: {
-            value: ''
+            value: 'entity.ataChapter',
+            dataSource: 'ds_ata'
         }
     }
 
-    $scope.txt_description = {
+
+    $scope.txt_parNo = {
         bindingOptions: {
-            value: ''
+            value: 'entity.partNumber'
+        }
+    }
+
+    $scope.txt_desc = {
+        bindingOptions: {
+            value: 'entity.description'
         }
     }
 

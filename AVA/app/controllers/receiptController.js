@@ -10,7 +10,6 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         /* receiver_LocationId: 19,*/
         receivedPaperNo: null,
         receivedPaperDate: null,
-        receiver_UserId: 8,
         companyId: null,
         receivedInvoiveNo: null,
         receivedInvoiveDate: null,
@@ -74,6 +73,10 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
             });
 
+            $scope.itemEntity.shelfFromId = 48875,
+            $scope.itemEntity.shelfToId = 48875,
+                
+
             $scope.itemEntity.Id = $scope.itemEntity.Id + 1
             $scope.dg_rec_ds.push($scope.itemEntity);
             $scope.itemEntity = {
@@ -107,12 +110,12 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     //////////////////////////
 
 
-    $scope.popup_pn_visible = false;
-    $scope.popup_pn_title = "Part Number Selection";
+    $scope.popup_receipt_visible = false;
+    $scope.popup_receipt_title = "Part Number Selection";
     $scope.popup_instance = null;
     $scope.isFullScreen = true;
 
-    $scope.popup_pn = {
+    $scope.popup_receipt = {
 
 
         showTitle: true,
@@ -121,12 +124,12 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'success', text: 'Select', onClick: function (e) {
+                    type: 'success', text: 'Save', onClick: function (e) {
 
                         $scope.entity.receiptItems = $scope.dg_rec_ds
                         mntService.addReceipt($scope.entity).then(function (res) {
                             console.log(res);
-                            $scope.popup_pn_visible = false;
+                            $scope.popup_receipt_visible = false;
                         });
                     }
                 }, toolbar: 'bottom'
@@ -135,7 +138,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
                 widget: 'dxButton', location: 'before', options: {
                     type: 'danger', text: 'Close', onClick: function (e) {
 
-                        $scope.popup_pn_visible = false;
+                        $scope.popup_receipt_visible = false;
 
                     }
                 }, toolbar: 'bottom'
@@ -169,7 +172,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         onHiding: function () {
 
 
-            $scope.popup_pn_visible = false;
+            $scope.popup_receipt_visible = false;
         },
         onContentReady: function (e) {
             if (!$scope.popup_instance)
@@ -178,9 +181,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         },
         // fullScreen:false,
         bindingOptions: {
-            visible: 'popup_pn_visible',
+            visible: 'popup_receipt_visible',
             fullScreen: 'isFullScreen',
-            title: 'popup_pn_title',
+            title: 'popup_receipt_title',
             height: 'popup_height',
             width: 'popup_width',
             'toolbarItems[0].visible': 'isNotLocked',
@@ -217,6 +220,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             console.log($scope.user);
             $scope.entity.sender_LocationId = $scope.user[0].gI_LocationId;
             $scope.entity.sender_UserId = $rootScope.vira_user_id;
+            $scope.entity.receiver_UserId = $rootScope.vira_user_id;
         });
 
         mntService.get_company().then(function (response) {
@@ -603,7 +607,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 650,
+        height: $(window).height() - 630,
         width: '100%',
         columns: $scope.dg_rec_columns,
         onContentReady: function (e) {
@@ -657,7 +661,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     $scope.$on('InitReceipt', function (event, prms) {
 
         $scope.tempData = prms;
-        $scope.popup_pn_visible = true;
+        $scope.popup_receipt_visible = true;
         //console.log(prms);
 
 

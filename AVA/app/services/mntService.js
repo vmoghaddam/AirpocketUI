@@ -245,29 +245,7 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
     };
 
-    var _getAtaChart = function () {
-        var deferred = $q.defer();
-        var authorizationMnt = localStorageService.get('authorizationMnt');
-
-
-        var token = authorizationMnt.token;
-        console.log('Token:', token);
-
-        $http.get("https://lmmcore.online/api/GIATAChapter/GetAll", {
-            //withCredentials: true,
-            headers: {
-                'Authorization': 'bearer ' + token,
-            }
-        }).then(function (response) {
-            deferred.resolve(response.data);
-        }, function (err) {
-            console.error('HTTP request error:', err);
-            deferred.reject(Exceptions.getMessage(err));
-        });
-
-        return deferred.promise;
-    };
-
+    
 
     var _getAFCTType = function () {
         var deferred = $q.defer();
@@ -495,12 +473,63 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
     };
     ordersServiceFactory.get_company = _get_company;
 
+     var _get_part_number = function (entity) {
+        var deferred = $q.defer();
+
+         $http.post(vira_api + "api/LGSStockManagement/GetInventoryByPartNumber?page=1&size=10000", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_part_number = _get_part_number;
+
+    var _get_selected_component = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSStockManagement/GetSelectedComponent", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_selected_component = _get_selected_component;
+
+    var _get_ata_chart = function () {
+
+        var deferred = $q.defer();
+
+        $http.get(vira_api + "api/GIATAChapter/GetAll", {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_ata_chart = _get_ata_chart;
+
 
 
     ordersServiceFactory.authenticate = _authenticate;
 
     ordersServiceFactory.addPartNumber = _addPartNumber;
-    ordersServiceFactory.getAtaChart = _getAtaChart;
     ordersServiceFactory.getAFCTType = _getAFCTType;
     ordersServiceFactory.getPartType = _getPartType;
     ordersServiceFactory.getReceiptPN = _getReceiptPN;

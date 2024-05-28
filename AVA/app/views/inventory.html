@@ -29,14 +29,34 @@
                         <td class="td-field" style="font-weight:bold">PN Category:</td>
                         <td class="td-field" colspan="3"><div dx-select-box="sb_pnCategory" class="center"></div></td>
 
-                        <td style="padding: 5px"><div dx-button="btn_refresh"></div></td>
+                        <td style="padding: 5px"><div dx-button="btn_search"></div></td>
                     </tr>
                 </table>
             </div>
 
 
-
-            <div dx-data-grid="dg_inv" id="dg_inv" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
+            <div>
+                <div dx-data-grid="dg_inv" id="dg_inv" class="content col-lg-10 col-md-10" style="overflow-y:hidden;margin-top: 5px; display:inline-block" dx-item-alias="row"></div>
+                <div class="content col-lg-2 col-md-2" style="display: inline-block;margin-top:5px">
+                    <div class="td-title" style="width: 100%; background-color: #898e8c; color:white">Detail</div>
+                    <div style="border: 1px solid lightgray; padding:5px" ng-style="{height: detail_height + 'px'}">
+                        <table style="margin-top:10px;color:black;background-color:limegreen;width:100%" class="dx-border" ng-repeat="x in ds_details">
+                            <tr>
+                                <td class="td-field" style="font-weight:bold">SN/BN:</td>
+                                <td class="td-field" style="font-weight:bold">{{x.sN_BN}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-field" style="font-weight:bold">QTY:</td>
+                                <td class="td-field" style="font-weight:bold">{{x.availableQty}}</td>
+                            </tr>
+                            <tr>
+                                <td class="td-field" style="font-weight:bold">Shelf:</td>
+                                <td class="td-field" style="font-weight:bold">{{x.shelf}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div ng-include="'app/views/receipt.html'"></div>
