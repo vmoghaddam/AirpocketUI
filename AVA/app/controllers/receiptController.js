@@ -34,7 +34,15 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         }
 
     };
+    $scope.btn_pn = {
+        icon: 'search',
+        width: '50%',
+        type: 'default',
+        onClick: function () {
+            $rootScope.$broadcast('InitPNPopup', null);
+        }
 
+    };
 
 
 

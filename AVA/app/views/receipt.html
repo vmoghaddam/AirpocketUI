@@ -261,95 +261,189 @@
 
 <div ng-controller="receiptController">
     <div id="popup_receipt" dx-popup="popup_receipt" class="no-padding" style='padding:0 !important;'>
-        <div style="width: 100%; border: 1px solid #ccc">
-            <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Paper</div>
-            <table style="margin-top:10px;color:black" class="dx-border">
-                <tr>
-                    <td class="td-field" style="font-weight:bold; width:100px">Date:</td>
-                    <td class="td-field"><div dx-date-box="dt_paperDate" class="center" style="width: 100%"></div></td>
-
-                    <td class="td-field" style="font-weight: bold; width: 100px">Stock:</td>
-                    <td class="td-field"><div dx-select-box="sb_stock" class="center"></div></td>
-
-                    <td class="td-field" style="font-weight: bold; width: 100px">No. :</td>
-                    <td class="td-field"><div dx-text-box="txt_paperNo" class="center" style="width:100%"></div></td>
-
-                    <td class="td-field" style="font-weight: bold; width: 100px">Remark:</td>
-                    <td class="td-field"><div dx-text-box="txt_paperRemark" class="center" style="width:100%"></div></td>
-                </tr>
-            </table>
-        </div>
-
-        <div style="height:210px">
-            <!--<div class="col-lg-3 col-md-3" style="padding:5px;height:100%">
-                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Account Type</div>
-                <table style="width: 100%; height:82% ;color: black; border: 1px solid #ccc; " class="dx-border">
+        <div style="width: 100%; border: 1px solid #ccc;padding:10px 0 10px 0" class="dx-border">
+            <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                <table style="width:100%">
                     <tr>
-                        <td class="td-field"><div dx-select-box="sb_accountType" class="center" style="width: 100%"></div></td>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            Date:
+                        </td>
+                        <td>
+                            <div dx-date-box="dt_paperDate" class="center" style="width: 100%"></div>
+                        </td>
+
                     </tr>
                 </table>
-            </div>-->
-
-            <div class="col-lg-8 col-md-8" style="padding: 5px;height:100% ">
-                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">PO Information</div>
-                <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
-
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                <table style="width:100%">
                     <tr>
-                        <td class="td-field" style="font-weight: bold; width: 100px">Date:</td>
-                        <td class="td-field"><div dx-date-box="dt_poDate" class="center" style="width:100%"></div></td>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            No:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_paperNo" class="center" style="width:100%"></div>
+                        </td>
 
-                        <td class="td-field" style="font-weight:bold; width:100px">No. :</td>
-                        <td class="td-field"><div dx-text-box="txt_poNo" class="center" style="width: 100%"></div></td>
-
-                        <!--<td class="td-field" style="font-weight: bold; width: 100px">AWB:</td>
-    <td class="td-field"><div dx-text-box="txt_awb" style="display: inline-block; width:80%"></div><div dx-button="awbButton" style="width:20%; display: inline-block;margin-top: -30px"></div></td>-->
                     </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                <table style="width:100%">
                     <tr>
-                        <td class="td-field" style="font-weight: bold; width: 100px">Invoice:</td>
-                        <td class="td-field"><div dx-text-box="txt_invoice" class="center" style="width:100%"></div></td>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            Stock:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_stock" class="center"></div>
+                        </td>
 
-                        <td class="td-field" style="font-weight: bold; width: 100px">Invoice Date:</td>
-                        <td class="td-field"><div dx-date-box="dt_invoice" class="center" style="width:100%"></div></td>
                     </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                <table style="width:100%">
                     <tr>
+                        <td style="width:90px;font-size:12px;padding-right:5px;text-align:right">
+                            Type:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_accountType" class="center" style="width: 100%"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="padding-left:0px;" ng-show="entity.receiptType==2">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Register:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_rmvRegister" class="center" style="width: 100%"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+            <div style="clear:both"></div>
+            <div ng-show="entity.receiptType==1">
+
+                <div class="col-lg-12 padding-0" style="padding-left:0px;;margin-top: 7px;margin-bottom:7px">
+                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">PO Information</div>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                No:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_poNo" class="center" style="width: 100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                Date:
+                            </td>
+                            <td>
+                                <div dx-date-box="dt_poDate" class="center" style="width:100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                Invoice:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_invoice" class="center" style="width:100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:90px;font-size:12px;padding-right:5px;text-align:right">
+                                Invoice Date:
+                            </td>
+                            <td>
+                                <div dx-date-box="dt_invoice" class="center" style="width:100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                Company:
+                            </td>
+                            <td>
+                                <div dx-select-box="sb_poCompany" class="center"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div style="clear:both"></div>
+
+            </div>
+
+          
+
+
+
+
+        </div>
+
+             
+        <div sstyle="border: 1px solid #ccc" class="dx-border">
+            <div class="col-lg-12 padding-0" style="padding-left:0px;;margin-top:0px;margin-bottom:7px">
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Items</div>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:0px;"  >
+                <table style="width:100%">
+                    
+                    <tr>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            P/N:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_itemPnNo" style="width: 67%; display: inline-block"></div>
+                        </td>
+                        <td style="width:50px;padding-left:5px;">
+                            <div dx-button="btn_pn"></div>
+                        </td>
+                        <td style="width:50px;padding-left:5px;">
+                            <div dx-button="newPn"></div>
+                        </td>
+
+                    </tr>
+
                      
-                        <td class="td-field" style="font-weight: bold; width: 100px">Company:</td>
-                        <td class="td-field" colspan="3"><div dx-select-box="sb_poCompany" class="center"></div></td>
-                    </tr>
                 </table>
             </div>
-            <div class="col-lg-4 col-md-4" style="padding: 5px ">
-                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Removed From a Register</div>
-                <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
-                    <tr>
-                        <td class="td-field" style="font-weight:bold; width:100px">Register:</td>
-                        <td class="td-field"><div dx-select-box="sb_rmvRegister" class="center" style="width: 100%"></div></td>
-                    </tr>
-                </table>
+            <div style="clear:both"></div>
 
-                <!--<div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;margin-top: 15px">Removed From a Assy</div>
-                <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
-                    <tr>
-                        <td class="td-field" style="font-weight:bold; width:100px">Assy:</td>
-                        <td class="td-field"><div dx-select-box="sb_rmvAssy" class="center" style="width: 100%"></div></td>
-                    </tr>
-                </table>-->
-                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;margin-top: 15px">Receipt Type</div>
-                <table style="width: 100%; color: black; border: 1px solid #ccc; " class="dx-border">
-                    <tr>
-                        <td class="td-field" style="font-weight:bold; width:100px">Account Type:</td>
-                        <td class="td-field"><div dx-select-box="sb_accountType" class="center" style="width: 100%"></div></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div sstyle="border: 1px solid #ccc">
-            <!--<div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Items</div>-->
+
             <table style="color: black" class="dx-border">
                 <tr>
-                    <td class="td-field" style="font-weight:bold; width:100px">Part No. :</td>
-                    <td class="td-field" style="width:235px"><div dx-text-box="txt_itemPnNo" style="width: 67%; display: inline-block"></div><div dx-button="pnButton" style="width:10%; display: inline-block;margin-top: -30px"></div><div dx-button="newPn" style="width:10%; display: inline-block;margin-top: -30px"></div></td>
-
+                    
                     <td class="td-field" style="font-weight: bold; width: 100px">Description:</td>
                     <td class="td-field" style="width:235px"><div dx-text-box="txt_itemDesc" class="center"></div></td>
 
@@ -372,7 +466,7 @@
                     <td class="td-field" style="width:235px"><div dx-select-box="sb_itemCondition" class="center" style="width: 100%"></div></td>
 
                     <!--<td class="td-field" style="font-weight: bold; width: 100px">ID:</td>
-        <td class="td-field"><div dx-text-box="txt_itemId" class="center"></div></td>-->
+            <td class="td-field"><div dx-text-box="txt_itemId" class="center"></div></td>-->
                     <td class="td-field" style="font-weight:bold; width:100px">Man.Date:</td>
                     <td class="td-field"><div dx-date-box="dt_itemDate" class="center" style="width: 100%"></div></td>
 
@@ -405,17 +499,17 @@
                 </tr>
             </table>
         </div>
-        <div style="margin-top:5px">
-            <div dx-data-grid="dg_rec" id="dg_rec" class="content" style="overflow-y:hidden" dx-item-alias="row">
-                <div data-options="dxTemplate:{ name:'delete' }">
-                    <a ng-click="Delete(row)" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Delete</a>
+            <div style="margin-top:5px">
+                <div dx-data-grid="dg_rec" id="dg_rec" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                    <div data-options="dxTemplate:{ name:'delete' }">
+                        <a ng-click="Delete(row)" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Delete</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-    <div ng-include="'app/views/partNumberSelection.html'"></div>
-    <div ng-include="'app/views/newPartNumber.html'"></div>
+        </div>
+    <!--<div ng-include="'app/views/partNumberSelection.html'"></div>
+    <div ng-include="'app/views/newPartNumber.html'"></div>-->
     <div style="clear:both"></div>
 
     <div dx-load-panel="loadPanel"></div>
