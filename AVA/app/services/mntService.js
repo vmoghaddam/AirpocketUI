@@ -507,6 +507,44 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
     };
     ordersServiceFactory.get_selected_component = _get_selected_component;
 
+
+
+    var _get_selected_component_all = function (items) {
+        var deferred = $q.defer();
+
+        var syncedPromises = [];
+        var resps = [];
+
+        $.each(items, function (_d, _item) {
+
+            syncedPromises.push($http.post(vira_api + "api/LGSStockManagement/GetSelectedComponent", _item).then(resp => { resps.push(resp); }));
+        });
+
+        var components = [];
+        $q.all(syncedPromises).then(result => {
+            $.each(resps, function (_l, _row) {
+                $.each(_row.data.data, function (_k, _dt) {
+                    components.push(_dt);
+                });
+            });
+            deferred.resolve(components);
+        });
+
+        //$http.post(vira_api + "api/LGSStockManagement/GetSelectedComponent", entity, {
+
+
+        //}).then(function (response) {
+        //    deferred.resolve(response.data.data);
+        //}, function (err) {
+        //    console.error('HTTP request error:', err);
+        //    deferred.reject(Exceptions.getMessage(err));
+        //});
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_selected_component_all = _get_selected_component_all;
+
+
     var _get_ata_chart = function () {
 
         var deferred = $q.defer();

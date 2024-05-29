@@ -33,9 +33,9 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
 
     $scope.btn_search = {
         text: 'Search',
-        type: 'Default',
-        icon: 'search',
-        width: 120,
+        type: 'default',
+       // icon: 'search',
+      //  width: 120,
         onClick: function (e) {
             mntService.get_part_number($scope.entity).then(function (res) {
                 $.each(res, function (_i, _d) {
@@ -51,20 +51,20 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
 
     //////////////////
 
-    $scope.detail_height = $(window).height() - 292;
+    $scope.detail_height = $(window).height() - 252;
 
     //////////////////
 
     $scope.popup_inventory_visible = false;
-    $scope.popup_height = $(window).height() - 100;
-    $scope.popup_width = 1500;
+    $scope.popup_height = $(window).height() - 50;
+    $scope.popup_width = $(window).width()-100;
     $scope.popup_inventory_title = $rootScope.Title;
     $scope.popup_instance = null;
     $scope.isFullScreen = true;
 
     $scope.popup_inventory = {
 
-
+        title:'Inventory',
         showTitle: true,
 
         toolbarItems: [
@@ -149,6 +149,9 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
             if ($scope.tempData != null)
                 $scope.bind();
 
+            if ($scope.tempData && $scope.tempData.location_id)
+                $scope.entity.locationId = $scope.tempData.location_id
+
             //$rootScope.referred_list_instance.repaint();
             //$rootScope.$broadcast('InitTest', $scope.tempData);
 
@@ -168,8 +171,8 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         // fullScreen:false,
         bindingOptions: {
             visible: 'popup_inventory_visible',
-            fullScreen: 'isFullScreen',
-            title: 'popup_inventory_title',
+            //fullScreen: 'isFullScreen',
+            
             height: 'popup_height',
             width: 'popup_width',
             'toolbarItems[0].visible': 'isNotLocked',
@@ -179,40 +182,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         }
     };
 
-    $scope.bind = function () {
-
-        mntService.get_ata_chart().then(function (res) {
-            $scope.ds_ata = res;
-        });
-        mntService.get_ac_type().then(function (res) {
-
-            $scope.ac_type_ds = res;
-
-        });
-
-        mntService.getReceiptPN(97).then(function (res) {
-            $scope.pn_category_ds = res;
-        });
-
-
-        mntService.get_shop().then(function (res) {
-            console.log(res);
-            $scope.shop_ds = res;
-        });
-
-        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
-            $scope.ds_locations = res;
-        });
-
-
-
-
-
-
-
-
-
-    }
+   
 
 
     ////////////////////
@@ -224,6 +194,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
     }
 
     $scope.ch_alt = {
+        text:'Alt.',
         bindingOptions: {
             value: 'entity.showInterchanges'
         }
@@ -267,6 +238,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         bindingOptions: {
             value: 'entity.locationId',
             dataSource: 'ds_locations',
+            readOnly: 'tempData.location_id',
         }
     }
 
@@ -281,7 +253,50 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         }
     }
 
+    $scope.btn_pn = {
+        icon: 'search',
+        width: '50%',
+        type: 'default',
+        onClick: function () {
+            $rootScope.$broadcast('InitPNPopup', null);
+        }
 
+    };
+
+    $scope.bind = function () {
+
+        mntService.get_ata_chart().then(function (res) {
+            $scope.ds_ata = res;
+        });
+        mntService.get_ac_type().then(function (res) {
+
+            $scope.ac_type_ds = res;
+
+        });
+
+        mntService.getReceiptPN(97).then(function (res) {
+            $scope.pn_category_ds = res;
+        });
+
+
+        mntService.get_shop().then(function (res) {
+            console.log(res);
+            $scope.shop_ds = res;
+        });
+
+        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
+            $scope.ds_locations = res;
+        });
+
+
+
+
+
+
+
+
+
+    }
 
     ///////////////////////
 
@@ -290,29 +305,23 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
 
 
 
-        {
-            cellTemplate: function (container, options) {
-                $("<div style='text-align:center'/>")
-                    .html(options.rowIndex + 1)
-                    .appendTo(container);
-            }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
-        },
-        {
-            caption: 'Technical Information',
-            alignment: 'center',
-            columns: [
-                { dataField: '', caption: 'Effectivity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-                { dataField: '', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-                { dataField: '', caption: 'Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-                { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-                { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-            ]
-        },
+        //{
+        //    cellTemplate: function (container, options) {
+        //        $("<div style='text-align:center'/>")
+        //            .html(options.rowIndex + 1)
+        //            .appendTo(container);
+        //    }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+        //},
+        { dataField: 'partNumber', caption: 'P/N', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200, fixed: true, fixedPosition:'left' },
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 270,  fixed: true, fixedPosition: 'left' },
+        { dataField: 'ataChapter', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 80 },
+       
+        { dataField: '', caption: 'Effectivity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         {
             caption: 'Location',
             alignment: 'center',
             columns: [
-                { dataField: 'receiverLocation_Title', caption: 'Title', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+                { dataField: 'receiverLocation_Title', caption: 'Title', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
             ]
         },
         {
@@ -327,6 +336,8 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         {
             caption: 'Quantity',
             alignment: 'center',
+            fixedPosition: 'right',
+            fixed:true,
             columns: [
                 { dataField: 'availableQuantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
                 { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
@@ -372,7 +383,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 260,
+        height: $(window).height() - 220,
         //width: $(window).width(),
         columns: $scope.dg_inv_columns,
         onContentReady: function (e) {
@@ -424,9 +435,11 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
     };
 
 
+     
     $scope.$on('InitInventoryPopup', function (event, prms) {
-
+      
         $scope.tempData = prms;
+        //alert($scope.tempData.location_id);
 
         $scope.bind();
 
