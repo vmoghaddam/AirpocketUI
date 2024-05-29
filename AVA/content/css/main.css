@@ -30,7 +30,11 @@
 .inline-block {
     display: inline-block !important;
 }
-
+.theme-teal {
+    background: #009688;
+    /*background: linear-gradient(to bottom right, #009688 20%, #53e3a6 95%);*/
+    border-bottom: 2px solid #009688;
+}
 .theme-gray {
     background: #97a1a6;
     /*background: linear-gradient(to bottom right, #009688 20%, #53e3a6 95%);*/
@@ -573,7 +577,7 @@ body {
 
 @media (min-width: 768px) {
     .box-app .logo .title {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 }
 

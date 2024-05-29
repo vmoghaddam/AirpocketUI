@@ -1371,6 +1371,7 @@ $rootScope.HasHR = function () {
         try {
             //2021-12-15
             //upgrade dx
+           // alert($rootScope.theme);
             var thm = $rootScope.theme.replace("-", ".");
 
             DevExpress.ui.themes.current(thm);

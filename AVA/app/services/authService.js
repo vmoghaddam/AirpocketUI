@@ -381,6 +381,20 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 module.color = '#97a1a6';
                 module.class = 'theme-gray';
                 break;
+            case 5:
+                module.title = 'Compliance Monitoring';
+                module.remark = 'Lorem ipsum dolor sit amet';
+                module.theme = 'material.gray-light';
+                module.color = '#97a1a6';
+                module.class = 'theme-gray';
+                break;
+            case 6:
+                module.title = 'Logistics Management';
+                module.remark = 'Lorem ipsum dolor sit amet';
+                module.theme = 'material.teal.light';
+                module.color = '#009688';
+                module.class = 'theme-teal';
+                break;
             default:
                 break;
         }

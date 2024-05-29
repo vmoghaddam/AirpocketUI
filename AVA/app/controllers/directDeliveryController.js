@@ -11,6 +11,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         "approver_LocationId": 19,
         "approver_UserId": 8,
         "remark": null,
+        warehouse:19,
         deliveryOrderItems: [
 
         ]
@@ -66,10 +67,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
     };
 
-    $scope.$on('on_inventory_selected', function (event, prms) {
-        console.log("Init PN Data", prms);
-
-    });
+   
 
     $scope.btn_remove = {
         text: 'Remove',
@@ -88,7 +86,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         icon: '',
         width: 120,
         onClick: function (e) {
-            $rootScope.$broadcast('InitInventoryPopup', null);
+            $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity.warehouse });
         }
     };
     //////////////////
@@ -104,9 +102,16 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         showTitle: true,
 
         toolbarItems: [
-
             {
                 widget: 'dxButton', location: 'before', options: {
+                    type: 'default', text: 'Inventory', onClick: function (e) {
+
+                        $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity.warehouse });
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
 
                         $scope.entity.deliveryOrderItems = $scope.dg_del_ds
@@ -117,7 +122,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
                 }, toolbar: 'bottom'
             },
             {
-                widget: 'dxButton', location: 'before', options: {
+                widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', onClick: function (e) {
 
                         $scope.popup_pn_visible = false;
@@ -138,7 +143,9 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
         },
         onShown: function (e) {
-
+            if ($scope.dg_del_instance) {
+                $scope.dg_del_instance.repaint();
+            }
             if ($scope.isNew) {
                 $scope.isContentVisible = true;
             }
@@ -177,30 +184,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
     //////////////////
 
-    $scope.bind = function () {
-        mntService.get_ac_type().then(function (res) {
-
-            $scope.ac_type_ds = res;
-            mntService.get_register().then(function (res) {
-                $scope.registers = res
-            });
-        });
-
-        mntService.get_shop().then(function (res) {
-            console.log(res);
-            $scope.shop_ds = res;
-        });
-
-        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
-            console.log("User ", res);
-            $scope.user = res[0];
-
-            $scope.entity.sender_LocationId = $scope.user.gI_LocationId;
-            $scope.entity.sender_UserId = $scope.user.uM_UserId;
-        });
-
-
-    }
+   
 
     //////////////////
 
@@ -262,7 +246,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
         bindingOptions: {
             value: 'entity.warehouse',
-            dataSource: 'ds_locations',
+            dataSource: 'ds_warehouse',
         }
     }
 
@@ -283,7 +267,17 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
     $scope.txt_issuedBy = {
         bindingOptions: {
-            value: ''
+            value: 'issuedBy'
+        }
+    }
+    $scope.receiver_location = {
+        bindingOptions: {
+            value: 'entity.receiver_location'
+        }
+    }
+    $scope.receiver  = {
+        bindingOptions: {
+            value: 'entity.receiver'
         }
     }
 
@@ -291,13 +285,29 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
     $scope.dt_date = {
         type: 'date',
-        displayFormat: "yyyy-MMM-dd",
+        width: '100%',
+       // displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
             value: ''
         }
     }
 
+    $scope.pnButton = {
+        icon: 'search',
+        onClick: function () {
+            $rootScope.$broadcast('InitPNPopup', null);
+        }
 
+    };
+
+
+    $scope.btn_receiver = {
+        icon: 'search',
+        onClick: function () {
+            $rootScope.$broadcast('InitPNPopup', null);
+        }
+
+    };
 
     ///////////////////////
 
@@ -312,14 +322,14 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
                     .appendTo(container);
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
-        { dataField: '', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'remark', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-        { dataField: 'cmP_PartNumberId', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        //{ dataField: '', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 250 },
+        { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: 'sN_BN', caption: 'SN / BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'conditionId', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'measurementUnitId', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'condition', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'shelf', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+        { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
 
     ];
 
@@ -354,7 +364,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 350,
+        height: $(window).height() - 330,
         width: $(window).width(),
         columns: $scope.dg_del_columns,
         onContentReady: function (e) {
@@ -404,6 +414,65 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         },
 
     };
+    $scope.$on('on_inventory_selected', function (event, prms) {
+        console.log("Init PN Data", prms);
+        var dtos = [];
+        $.each(prms, function (_i, _d) {
+            dtos.push(
+                {
+                    "partNumberId": _d.cmP_PartNumberId,
+                    "quantity": _d.selected_qty,
+                    "stockLocationId": _d.receiver_LocationId,
+                    "stockUserId": $scope.vira_user_id,
+                    "componentId": null
+                }
+            );
+        });
+
+        
+        mntService.get_selected_component_all(dtos).then(function (response) {
+ 
+            
+            console.log('SELECTED RESULT', response);
+            $scope.dg_del_ds = response;
+
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+    });
+
+
+
+
+    $scope.bind = function () {
+        mntService.get_ac_type().then(function (res) {
+
+            $scope.ac_type_ds = res;
+            mntService.get_register().then(function (res) {
+                $scope.registers = res
+            });
+        });
+
+        mntService.get_shop().then(function (res) {
+            console.log(res);
+            $scope.shop_ds = res;
+        });
+
+        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
+             console.log("User ", res);
+            $scope.ds_warehouse = res;
+            $scope.user = res[0];
+            $scope.issuedBy = res[0].fullName;
+
+            $scope.entity.sender_LocationId = $scope.user.gI_LocationId;
+            $scope.entity.sender_UserId = $scope.user.uM_UserId;
+        });
+
+
+    }
+
+
+
+
 
     $scope.$on('InitDirectDelivery', function (event, prms) {
 

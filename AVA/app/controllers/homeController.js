@@ -1812,7 +1812,7 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
             authService.redirectToLogin();
         }
         else {
-            if ($rootScope.moduleId != 3) {
+            if ($rootScope.moduleId != 3 && $rootScope.moduleId != 5 && $rootScope.moduleId != 6 && $rootScope.moduleId != 7 && $rootScope.moduleId != 8) {
 
                 var items = Enumerable.From(Config.MenuItems)//.Where('$.moduleId==' + $rootScope.moduleId)
                     .Where(function (x) {
@@ -1869,7 +1869,7 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
 
                 //}, function (err) { });
             }
-            else {
+            else if ($rootScope.moduleId == 3) {
                 $scope.flight.Init();
                 $scope.flight.Bind();
                 $scope.get_mnt_dashboard();
@@ -2022,7 +2022,7 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
 
                 //// ac.landing_gear.data_ldgs.ranges = [948];
                 //// ac.landing_gear.data_ldgs.measures = [500];
-               
+
                 ////$scope.aircrafts.push(
                 ////    {
                 ////        register: 'RBB',
@@ -2039,6 +2039,11 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
                 ////);
 
                 ///// End Flight Pocket
+            }
+            else if ($rootScope.moduleId == 5) {
+            }
+            else if ($rootScope.moduleId == 6) {
+                $('.vira_lgs').fadeIn();
             }
         }
 

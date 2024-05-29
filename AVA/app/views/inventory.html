@@ -1,37 +1,135 @@
 ﻿<div ng-controller="inventoryController">
     <div id="popup_inventory" dx-popup="popup_inventory" class="no-padding" style='padding:0 !important;'>
         <div style="width: 100%">
-            <div style="width: 100%; border: 1px solid #ccc">
-                <div class="td-title" style="width: 100%">Filter Panel</div>
-                <table style="margin-top:10px;color:black" class="dx-border">
-                    <tr>
-                        <td class="td-field" style="font-weight:bold">Part No. :</td>
-                        <td class="td-field"><div dx-text-box="txt_partNo" class="center" style="width: 100%"></div></td>
+            <div style="width: 100%; border: 1px solid #ccc;padding:10px" class="dx-border">
+                <!--<div class="td-title" style="width: 100%">Filter Panel</div>-->
+                <div class="col-lg-1 padding-0" style="width:11%">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                Location:
+                            </td>
+                            <td>
+                                <div dx-select-box="sb_location" class="center" style="width: 100%"></div>
+                            </td>
 
-                        <td class="td-field" style="font-weight:bold">Alt:</td>
-                        <td class="td-field"><div dx-check-box="ch_alt" class="center"></div></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-3 padding-0" style="padding-left:10px;width:20%;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                Part No.:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_partNo" class="center" style="width: 100%"></div>
+                            </td>
+                            <td style="width:50px;padding-left:5px;">
+                                <div dx-button="btn_pn"></div>
+                            </td>
+                            <td style="width:50px;padding-left:5px;">
+                                <div dx-check-box="ch_alt" class="center"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
-                        <td class="td-field" style="font-weight:bold">A/C Type:</td>
-                        <td class="td-field"><div dx-select-box="sb_acType" class="center"></div></td>
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                Description:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_description" style="width: 100%"></div>
+                            </td>
 
-                        <td class="td-field" style="font-weight:bold">ATA:</td>
-                        <td class="td-field"><div dx-select-box="sb_ata" class="center"></div></td>
+                        </tr>
+                    </table>
+                </div>
 
-                    </tr>
+                <div class="col-lg-1 padding-0" style="padding-left:10px;width:10%">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                A/C Type:
+                            </td>
+                            <td>
+                                <div dx-select-box="sb_acType" class="center"></div>
+                            </td>
 
-                    <tr>
-                        <td class="td-field" style="font-weight:bold">Location:</td>
-                        <td class="td-field"><div dx-select-box="sb_location" class="center" style="width: 100%"></div></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                P/N Cat.:
+                            </td>
+                            <td>
+                                <div dx-select-box="sb_pnCategory" class="center"></div>
+                            </td>
 
-                        <td class="td-field" style="font-weight:bold">Shelf:</td>
-                        <td class="td-field"><div dx-text-box="txt_shelf" class="center"></div></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                ATA:
+                            </td>
+                            <td>
+                                <div dx-select-box="sb_ata" class="center"></div>
+                            </td>
 
-                        <td class="td-field" style="font-weight:bold">PN Category:</td>
-                        <td class="td-field" colspan="3"><div dx-select-box="sb_pnCategory" class="center"></div></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-1 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                             
+                            <td>
+                                <div dx-button="btn_search"></div>
+                            </td>
 
-                        <td style="padding: 5px"><div dx-button="btn_search"></div></td>
-                    </tr>
-                </table>
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="clear:both"></div>
+                <!--<table style="margin-top:10px;color:black" class="dx-border">
+        <tr>
+            <td class="td-field" style="font-weight:bold">Part No. :</td>
+            <td class="td-field"><div dx-text-box="txt_partNo" class="center" style="width: 100%"></div></td>
+
+            <td class="td-field" style="font-weight:bold">Alt:</td>
+            <td class="td-field"><div dx-check-box="ch_alt" class="center"></div></td>
+
+            <td class="td-field" style="font-weight:bold">A/C Type:</td>
+            <td class="td-field"><div dx-select-box="sb_acType" class="center"></div></td>
+
+            <td class="td-field" style="font-weight:bold">ATA:</td>
+            <td class="td-field"><div dx-select-box="sb_ata" class="center"></div></td>
+
+        </tr>
+
+        <tr>
+            <td class="td-field" style="font-weight:bold">Location:</td>
+            <td class="td-field"><div dx-select-box="sb_location" class="center" style="width: 100%"></div></td>
+
+            <td class="td-field" style="font-weight:bold">Shelf:</td>
+            <td class="td-field"><div dx-text-box="txt_shelf" class="center"></div></td>
+
+            <td class="td-field" style="font-weight:bold">PN Category:</td>
+            <td class="td-field" colspan="3"><div dx-select-box="sb_pnCategory" class="center"></div></td>
+
+            <td style="padding: 5px"><div dx-button="btn_search"></div></td>
+        </tr>
+    </table>-->
             </div>
 
 
@@ -40,18 +138,18 @@
                 <div class="content col-lg-2 col-md-2" style="display: inline-block;margin-top:5px">
                     <div class="td-title" style="width: 100%; background-color: #898e8c; color:white">Detail</div>
                     <div style="border: 1px solid lightgray; padding:5px" ng-style="{height: detail_height + 'px'}">
-                        <table style="margin-top:10px;color:black;background-color:limegreen;width:100%" class="dx-border" ng-repeat="x in ds_details">
+                        <table style="margin-bottom:5px;color:black;background-color:#80e5ff;width:100%" class="dx-border" ng-repeat="x in ds_details">
                             <tr>
-                                <td class="td-field" style="font-weight:bold">SN/BN:</td>
-                                <td class="td-field" style="font-weight:bold">{{x.sN_BN}}</td>
+                                <td class="td-field" style="font-weight:normal">SN/BN</td>
+                                <td class="td-field" style="font-weight:bold;text-align:center">{{x.sN_BN}}</td>
                             </tr>
                             <tr>
-                                <td class="td-field" style="font-weight:bold">QTY:</td>
-                                <td class="td-field" style="font-weight:bold">{{x.availableQty}}</td>
+                                <td class="td-field" style="font-weight:normal">QTY</td>
+                                <td class="td-field" style="font-weight:bold;text-align:center">{{x.availableQty}}</td>
                             </tr>
                             <tr>
-                                <td class="td-field" style="font-weight:bold">Shelf:</td>
-                                <td class="td-field" style="font-weight:bold">{{x.shelf}}</td>
+                                <td class="td-field" style="font-weight:normal">Shelf</td>
+                                <td class="td-field" style="font-weight:bold;text-align:center">{{x.shelf}}</td>
                             </tr>
                         </table>
                     </div>
