@@ -304,7 +304,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
     $scope.btn_receiver = {
         icon: 'search',
         onClick: function () {
-            $rootScope.$broadcast('InitPNPopup', null);
+            $rootScope.$broadcast('InitPersonnelPopup', null);
         }
 
     };
@@ -480,6 +480,13 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         $scope.popup_pn_visible = true;
 
         $scope.bind();
+    });
+
+    $scope.$on('InitPersonnelSelected', function (event, prms) {
+
+        $scope.tempData = prms;
+        $scope.popup_pn_visible = true;
+
     });
 
 
