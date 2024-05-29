@@ -2,8 +2,8 @@
 app.controller('receiptController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
 
-    
-     $scope.entity = {
+
+    $scope.entity = {
         id: 0,
         //sender_LocationId: null,
         //sender_UserId: null,
@@ -82,10 +82,10 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             });
 
             $scope.itemEntity.shelfFromId = 48875,
-            $scope.itemEntity.shelfToId = 48875,
-                
+                $scope.itemEntity.shelfToId = 48875,
 
-            $scope.itemEntity.Id = $scope.itemEntity.Id + 1
+
+                $scope.itemEntity.Id = $scope.itemEntity.Id + 1
             $scope.dg_rec_ds.push($scope.itemEntity);
             $scope.itemEntity = {
                 Id: $scope.itemEntity.Id,
@@ -251,16 +251,8 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         }
 
     };
-    
-    $scope.pnButton = {
-        icon: 'search',
-        onClick: function () {
-            $rootScope.$broadcast('InitPNPopup', null);
-        }
 
-    };
 
-    
 
 
 
