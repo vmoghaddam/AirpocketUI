@@ -46,14 +46,14 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
 
     //////////////////
 
-    $scope.popup_pn_visible = false;
+    $scope.popup_personnel_visible = false;
     $scope.popup_height = 420;
     $scope.popup_width = 1250;
-    $scope.popup_pn_title = "New Part Number";
+    $scope.popup_personnel_title = "New Part Number";
     $scope.popup_instance = null;
     $scope.isFullScreen = false;
 
-    $scope.popup_pn = {
+    $scope.popup_personnel = {
 
 
         showTitle: true,
@@ -89,7 +89,7 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
                 widget: 'dxButton', location: 'before', options: {
                     type: 'danger', text: 'Close', onClick: function (e) {
 
-                        $scope.popup_pn_visible = false;
+                        $scope.popup_personnel_visible = false;
 
                     }
                 }, toolbar: 'bottom'
@@ -127,7 +127,7 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
 
             };
             $scope.entity.Result = null;
-            $scope.popup_pn_visible = false;
+            $scope.popup_personnel_visible = false;
         },
         onContentReady: function (e) {
             if (!$scope.popup_instance)
@@ -136,9 +136,9 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         },
         // fullScreen:false,
         bindingOptions: {
-            visible: 'popup_pn_visible',
+            visible: 'popup_personnel_visible',
             fullScreen: 'isFullScreen',
-            title: 'popup_pn_title',
+            title: 'popup_personnel_title',
             height: 'popup_height',
             width: 'popup_width',
             'toolbarItems[0].visible': 'isNotLocked',
@@ -382,7 +382,7 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         $scope.tempData = prms;
 
         $scope.bind();
-        $scope.popup_pn_visible = true;
+        $scope.popup_personnel_visible = true;
     });
 
     $scope.loadingVisible = false;

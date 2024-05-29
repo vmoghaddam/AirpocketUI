@@ -33,14 +33,14 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
 
     //////////////////
 
-    $scope.popup_pn_visible = false;
+    $scope.popup_personnel_visible = false;
     $scope.popup_height = 700;
     $scope.popup_width = 800;
-    $scope.popup_pn_title = "Part Number Selection";
+    $scope.popup_personnel_title = "Part Number Selection";
     $scope.popup_instance = null;
     $scope.isFullScreen = false;
 
-    $scope.popup_pn = {
+    $scope.popup_personnel = {
 
 
         showTitle: true,
@@ -52,7 +52,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
                     type: 'success', text: 'Select', onClick: function (e) {
 
                         $rootScope.$broadcast('InitPNSelected', $scope.dg_pn_selected);
-                         $scope.popup_pn_visible = false;
+                         $scope.popup_personnel_visible = false;
 
                     }
                 }, toolbar: 'bottom'
@@ -61,7 +61,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
                 widget: 'dxButton', location: 'before', options: {
                     type: 'danger', text: 'Close', onClick: function (e) {
 
-                        $scope.popup_pn_visible = false;
+                        $scope.popup_personnel_visible = false;
 
                     }
                 }, toolbar: 'bottom'
@@ -95,7 +95,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
         onHiding: function () {
            
             
-            $scope.popup_pn_visible = false;
+            $scope.popup_personnel_visible = false;
         },
         onContentReady: function (e) {
             if (!$scope.popup_instance)
@@ -104,9 +104,9 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
         },
         // fullScreen:false,
         bindingOptions: {
-            visible: 'popup_pn_visible',
+            visible: 'popup_personnel_visible',
             fullScreen: 'isFullScreen',
-            title: 'popup_pn_title',
+            title: 'popup_personnel_title',
             height: 'popup_height',
             width: 'popup_width',
             'toolbarItems[0].visible': 'isNotLocked',
@@ -368,7 +368,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
 
         $scope.bind();
 
-        $scope.popup_pn_visible = true;
+        $scope.popup_personnel_visible = true;
     });
 
 
