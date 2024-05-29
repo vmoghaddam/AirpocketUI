@@ -763,6 +763,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_inventory.html?v=1130"
     });
 
+     $routeProvider.when("/vira/part/type", {
+        controller: "vira_part_typeController",
+        templateUrl: "/app/views/vira_part_type.html?v=1130"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   

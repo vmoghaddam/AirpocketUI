@@ -33,14 +33,14 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
 
     //////////////////
 
-    $scope.popup_pn_visible = false;
+    $scope.popup_personnel_visible = false;
     $scope.popup_height = 700;
     $scope.popup_width = 800;
-    $scope.popup_pn_title = "Part Number Selection";
+    $scope.popup_personnel_title = "Part Number Selection";
     $scope.popup_instance = null;
     $scope.isFullScreen = false;
 
-    $scope.popup_pn = {
+    $scope.popup_personnel = {
 
 
         showTitle: true,
@@ -52,7 +52,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
                     type: 'success', text: 'Select', onClick: function (e) {
 
                         $rootScope.$broadcast('InitPNSelected', $scope.dg_pn_selected);
-                         $scope.popup_pn_visible = false;
+                        $scope.popup_personnel_visible = false;
 
                     }
                 }, toolbar: 'bottom'
@@ -61,7 +61,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
                 widget: 'dxButton', location: 'before', options: {
                     type: 'danger', text: 'Close', onClick: function (e) {
 
-                        $scope.popup_pn_visible = false;
+                        $scope.popup_personnel_visible = false;
 
                     }
                 }, toolbar: 'bottom'
@@ -70,7 +70,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
         ],
 
         visible: false,
-        dragEnabled: true,
+        dragEnabled: false,
         closeOnOutsideClick: false,
         onShowing: function (e) {
             $rootScope.IsRootSyncEnabled = false;
@@ -93,9 +93,9 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
 
         },
         onHiding: function () {
-           
-            
-            $scope.popup_pn_visible = false;
+
+
+            $scope.popup_personnel_visible = false;
         },
         onContentReady: function (e) {
             if (!$scope.popup_instance)
@@ -104,9 +104,9 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
         },
         // fullScreen:false,
         bindingOptions: {
-            visible: 'popup_pn_visible',
+            visible: 'popup_personnel_visible',
             fullScreen: 'isFullScreen',
-            title: 'popup_pn_title',
+            title: 'popup_personnel_title',
             height: 'popup_height',
             width: 'popup_width',
             'toolbarItems[0].visible': 'isNotLocked',
@@ -119,7 +119,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
     ////////////////////
 
     $scope.bind = function () {
-        
+
         mntService.getPNSelection($scope.entity).then(function (res) {
             $scope.dg_pn_ds = res.data;
         });
@@ -137,7 +137,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
-        valueExpr: 'id',
+        valueExpr: 'title',
         bindingOptions: {
             value: 'entity.ataChapter',
             dataSource: 'ds_ata'
@@ -145,7 +145,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
     }
 
 
-    $scope.txt_parNo = {
+    $scope.txt_pn = {
         bindingOptions: {
             value: 'entity.partNumber'
         }
@@ -157,7 +157,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
         }
     }
 
-    
+
     ///////////////////////
 
 
@@ -183,183 +183,185 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
 
     $scope.dg_pn_selected = null;
     $scope.dg_pn_instance = null;
-    $scope.dg_pn = {
+    $scope.dg_pn_height =  500,
+        $scope.dg_pn = {
 
 
 
-        wordWrapEnabled: true,
-        rowAlternationEnabled: false,
-        headerFilter: {
-            visible: false
-        },
-        filterRow: {
-            visible: true,
-            showOperationChooser: true,
-        },
-        showRowLines: true,
-        showColumnLines: true,
-        sorting: { mode: 'none' },
+            wordWrapEnabled: true,
+            rowAlternationEnabled: false,
+            headerFilter: {
+                visible: false
+            },
+            filterRow: {
+                visible: true,
+                showOperationChooser: true,
+            },
+            showRowLines: true,
+            showColumnLines: true,
+            sorting: { mode: 'none' },
 
-        noDataText: '',
+            noDataText: '',
 
-        allowColumnReordering: true,
-        allowColumnResizing: true,
-        scrolling: { mode: 'infinite' },
-        paging: { pageSize: 100 },
-        showBorders: true,
-        selection: { mode: 'single' },
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            scrolling: { mode: 'infinite' },
+            paging: { pageSize: 100 },
+            showBorders: true,
+            selection: { mode: 'single' },
 
-        columnAutoWidth: false,
-        height: $(window).height() - 600,
-        width: $(window).width(),
-        columns: $scope.dg_pn_columns,
-        onContentReady: function (e) {
-            if (!$scope.dg_pn_instance)
-                $scope.dg_pn_instance = e.component;
+            columnAutoWidth: false,
 
-        },
+            width: $(window).width(),
+            columns: $scope.dg_pn_columns,
+            onContentReady: function (e) {
+                if (!$scope.dg_pn_instance)
+                    $scope.dg_pn_instance = e.component;
 
-        onRowClick: function (e) {
+            },
 
-
-
-        },
-
-        onRowPrepared: function (e) {
-
-
-        },
-
-
-        onCellPrepared: function (e) {
-
-        },
-
-        onSelectionChanged: function (e) {
-            var data = e.selectedRowsData[0];
-
-            console.log(data);
-
-            
-
-            if (!data) {
-                $scope.dg_pn_selected = null;
-            }
-            else
-                $scope.dg_pn_selected = data;
-
-
-        },
-
-        bindingOptions: {
-            dataSource: 'dg_pn_ds'
-        },
-        columnChooser: {
-            enabled: false
-        },
-
-    };
-
-
-  //$scope.dg_inter_columns = [
+            onRowClick: function (e) {
 
 
 
-  //      {
-  //          cellTemplate: function (container, options) {
-  //              $("<div style='text-align:center'/>")
-  //                  .html(options.rowIndex + 1)
-  //                  .appendTo(container);
-  //          }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
-  //      },
-  //    { dataField: '', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-  //    { dataField: '', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-  //    { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-  //    { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-  //    { dataField: '', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-  //  ];
+            },
+
+            onRowPrepared: function (e) {
+
+
+            },
+
+
+            onCellPrepared: function (e) {
+
+            },
+
+            onSelectionChanged: function (e) {
+                var data = e.selectedRowsData[0];
+
+                console.log(data);
 
 
 
-  //  $scope.dg_inter_selected = null;
-  //  $scope.dg_inter_instance = null;
-  //  $scope.dg_inter = {
+                if (!data) {
+                    $scope.dg_pn_selected = null;
+                }
+                else
+                    $scope.dg_pn_selected = data;
+
+
+            },
+
+            bindingOptions: {
+                dataSource: 'dg_pn_ds',
+                height: 'dg_pn_height',
+            },
+            columnChooser: {
+                enabled: false
+            },
+
+        };
+
+
+    //$scope.dg_inter_columns = [
 
 
 
-  //      wordWrapEnabled: true,
-  //      rowAlternationEnabled: false,
-  //      headerFilter: {
-  //          visible: false
-  //      },
-  //      filterRow: {
-  //          visible: true,
-  //          showOperationChooser: true,
-  //      },
-  //      showRowLines: true,
-  //      showColumnLines: true,
-  //      sorting: { mode: 'none' },
-
-  //      noDataText: '',
-
-  //      allowColumnReordering: true,
-  //      allowColumnResizing: true,
-  //      scrolling: { mode: 'infinite' },
-  //      paging: { pageSize: 100 },
-  //      showBorders: true,
-  //      selection: { mode: 'single' },
-
-  //      columnAutoWidth: false,
-  //      height: $(window).height() - 600,
-  //      width: $(window).width(),
-  //      columns: $scope.dg_inter_columns,
-  //      onContentReady: function (e) {
-  //          if (!$scope.dg_inter_instance)
-  //              $scope.dg_inter_instance = e.component;
-
-  //      },
-
-  //      onRowClick: function (e) {
+    //      {
+    //          cellTemplate: function (container, options) {
+    //              $("<div style='text-align:center'/>")
+    //                  .html(options.rowIndex + 1)
+    //                  .appendTo(container);
+    //          }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+    //      },
+    //    { dataField: '', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+    //    { dataField: '', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
+    //    { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+    //    { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+    //    { dataField: '', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+    //  ];
 
 
 
-  //      },
-
-  //      onRowPrepared: function (e) {
-
-
-  //      },
+    //  $scope.dg_inter_selected = null;
+    //  $scope.dg_inter_instance = null;
+    //  $scope.dg_inter = {
 
 
-  //      onCellPrepared: function (e) {
 
-  //      },
+    //      wordWrapEnabled: true,
+    //      rowAlternationEnabled: false,
+    //      headerFilter: {
+    //          visible: false
+    //      },
+    //      filterRow: {
+    //          visible: true,
+    //          showOperationChooser: true,
+    //      },
+    //      showRowLines: true,
+    //      showColumnLines: true,
+    //      sorting: { mode: 'none' },
 
-  //      onSelectionChanged: function (e) {
-  //          var data = e.selectedRowsData[0];
+    //      noDataText: '',
 
-  //          console.log(data);
+    //      allowColumnReordering: true,
+    //      allowColumnResizing: true,
+    //      scrolling: { mode: 'infinite' },
+    //      paging: { pageSize: 100 },
+    //      showBorders: true,
+    //      selection: { mode: 'single' },
 
-  //          $scope.dg_inter_id.Id = e.selectedRowsData[0].Id;
+    //      columnAutoWidth: false,
+    //      height: $(window).height() - 600,
+    //      width: $(window).width(),
+    //      columns: $scope.dg_inter_columns,
+    //      onContentReady: function (e) {
+    //          if (!$scope.dg_inter_instance)
+    //              $scope.dg_inter_instance = e.component;
 
-  //          console.log($scope.dg_inter_id.id);
-  //          if (!data) {
-  //              $scope.dg_inter_selected = null;
-  //          }
-  //          else
-  //              $scope.dg_inter_selected = data;
+    //      },
+
+    //      onRowClick: function (e) {
 
 
-  //      },
 
-  //      bindingOptions: {
-  //          dataSource: 'dg_inter_ds'
-  //      },
-  //      columnChooser: {
-  //          enabled: false
-  //      },
+    //      },
 
-  //  };
+    //      onRowPrepared: function (e) {
+
+
+    //      },
+
+
+    //      onCellPrepared: function (e) {
+
+    //      },
+
+    //      onSelectionChanged: function (e) {
+    //          var data = e.selectedRowsData[0];
+
+    //          console.log(data);
+
+    //          $scope.dg_inter_id.Id = e.selectedRowsData[0].Id;
+
+    //          console.log($scope.dg_inter_id.id);
+    //          if (!data) {
+    //              $scope.dg_inter_selected = null;
+    //          }
+    //          else
+    //              $scope.dg_inter_selected = data;
+
+
+    //      },
+
+    //      bindingOptions: {
+    //          dataSource: 'dg_inter_ds'
+    //      },
+    //      columnChooser: {
+    //          enabled: false
+    //      },
+
+    //  };
 
 
     $scope.$on('InitPNPopup', function (event, prms) {
@@ -368,7 +370,7 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
 
         $scope.bind();
 
-        $scope.popup_pn_visible = true;
+        $scope.popup_personnel_visible = true;
     });
 
 

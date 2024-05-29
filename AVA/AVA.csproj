@@ -262,6 +262,9 @@
     <Content Include="app\controllers\usersController.js" />
     <Content Include="app\controllers\verify.js" />
     <Content Include="app\controllers\vira_inventory.js" />
+    <Content Include="app\controllers\vira_new_part_type.js" />
+    <Content Include="app\controllers\vira_part_type.js" />
+    <Content Include="app\controllers\vira_personnel_selection.js" />
     <Content Include="app\controllers\vrAdd.js" />
     <Content Include="app\controllers\zdutyTimeline.js" />
     <Content Include="app\controllers\zpersonAddController.js" />
@@ -297,6 +300,7 @@
     <Content Include="app\services\testService.js" />
     <Content Include="app\services\tokensManagerService.js" />
     <Content Include="app\services\trainingService.js" />
+    <Content Include="app\services\vira_general_service.js" />
     <Content Include="app\services\weatherService.js" />
     <Content Include="app\services\zpersonService.js" />
     <Content Include="app\services\zschedulingService.js" />
@@ -500,6 +504,9 @@
     <Content Include="app\views\users.html" />
     <Content Include="app\views\verify.html" />
     <Content Include="app\views\vira_inventory.html" />
+    <Content Include="app\views\vira_new_part_type.html" />
+    <Content Include="app\views\vira_part_type.html" />
+    <Content Include="app\views\vira_personnel_selection.html" />
     <Content Include="app\views\vrAdd.html" />
     <Content Include="app\views\zdutyTimeline.html" />
     <Content Include="app\views\zperson.html" />
