@@ -29,7 +29,7 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
 
     //////////////////
 
-    $scope.popup_personnel_visible = true;
+    $scope.popup_personnel_visible = false;
     $scope.popup_height = 700;
     $scope.popup_width = 700;
     $scope.popup_personnel_title = "Personnel Selection";
@@ -194,6 +194,7 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
 
     $scope.dg_personnel_selected = null;
     $scope.dg_personnel_instance = null;
+    $scope.dg_personnel_height = 530
     $scope.dg_personnel = {
 
 
@@ -221,7 +222,6 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 600,
         width: '100%',
         columns: $scope.dg_personnel_columns,
         onContentReady: function (e) {
@@ -263,7 +263,8 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
         },
 
         bindingOptions: {
-            dataSource: 'dg_personnel_ds'
+            dataSource: 'dg_personnel_ds',
+            height: 'dg_personnel_height'
         },
         columnChooser: {
             enabled: false
