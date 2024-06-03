@@ -7,9 +7,12 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         id: 0,
         //sender_LocationId: null,
         //sender_UserId: null,
-        /* receiver_LocationId: 19,*/
+        receiver_LocationId: 19, 
+        
+
+         receiptType:3,
         receivedPaperNo: null,
-        receivedPaperDate: null,
+        receivedPaperDate: new Date(),
         companyId: null,
         receivedInvoiveNo: null,
         receivedInvoiveDate: null,
@@ -20,8 +23,10 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     $scope.itemEntity = {
         Id: -1,
         itemNo: 1,
-        shelfFromId: 2,
-        shelfToId: 2,
+        shelfFromId: 48875,
+        shelfToId: 48875,
+        documentTypeId: 187,
+        documentNo: '-',
 
     }
 
@@ -29,6 +34,8 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
     $scope.newPn = {
         icon: 'plus',
+       width: '50%',
+         type: 'default',
         onClick: function () {
             $rootScope.$broadcast('InitNewPNPopup', null);
         }
@@ -36,7 +43,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     };
     $scope.btn_pn = {
         icon: 'search',
-        width: '50%',
+         width: '50%',
         type: 'default',
         onClick: function () {
             $rootScope.$broadcast('InitPNPopup', null);
@@ -65,21 +72,17 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         type: 'success',
         icon: '',
         width: '100%',
+        validationGroup:  'recitemadd',
         onClick: function (e) {
 
+            var result = e.validationGroup.validate();
 
+            if (!result.isValid) {
+                General.ShowNotify(Config.Text_FillRequired, 'error');
+                return;
+            }
 
-            $.each($scope.itemUnit, function (_i, _d) {
-                if (_d.id == $scope.itemEntity.measurementUnitId)
-                    $scope.itemEntity.measurementUnitTitle = _d.title;
-            });
-
-            $.each($scope.conditionDs, function (_i, _d) {
-
-                if (_d.id == $scope.itemEntity.conditionId)
-                    $scope.itemEntity.conditionTitle = _d.title;
-
-            });
+          
 
             $scope.itemEntity.shelfFromId = 48875,
                 $scope.itemEntity.shelfToId = 48875,
@@ -90,8 +93,10 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             $scope.itemEntity = {
                 Id: $scope.itemEntity.Id,
                 itemNo: 1,
-                shelfFromId: 2,
-                shelfToId: 2,
+                shelfFromId: 48875,
+                shelfToId: 48875,
+                documentTypeId: 187,
+                documentNo: '-',
 
             }
         }
@@ -119,7 +124,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
 
     $scope.popup_receipt_visible = false;
-    $scope.popup_receipt_title = "Part Number Selection";
+    $scope.popup_receipt_title = "Receipt";
     $scope.popup_instance = null;
     $scope.isFullScreen = true;
 
@@ -131,7 +136,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         toolbarItems: [
 
             {
-                widget: 'dxButton', location: 'before', options: {
+                widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
 
                         $scope.entity.receiptItems = $scope.dg_rec_ds
@@ -143,7 +148,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
                 }, toolbar: 'bottom'
             },
             {
-                widget: 'dxButton', location: 'before', options: {
+                widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', onClick: function (e) {
 
                         $scope.popup_receipt_visible = false;
@@ -171,6 +176,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             if ($scope.tempData != null)
                 $scope.bind();
 
+
+            if ($scope.dg_rec_instance)
+                $scope.dg_rec_instance.repaint();
             //$rootScope.referred_list_instance.repaint();
             //$rootScope.$broadcast('InitTest', $scope.tempData);
 
@@ -425,7 +433,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     $scope.txt_itemPnNo = {
         readOnly: true,
         bindingOptions: {
-            value: 'itemEntity.PartNumberTitle'
+            value: 'itemEntity.partNumber'
         }
     }
 
@@ -435,11 +443,20 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         }
     }
 
+
+    
     $scope.sb_itemCondition = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
+        onSelectionChanged: function (e) {
+            if (!e.selectedItem) {
+                $scope.itemEntity.conditionTitle = null;
+                return;
+            }
+            $scope.itemEntity.conditionTitle = e.selectedItem.title;
+        },
         bindingOptions: {
             value: 'itemEntity.conditionId',
             dataSource: 'conditionDs',
@@ -453,6 +470,13 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
+        onSelectionChanged: function (e) {
+            if (!e.selectedItem) {
+                $scope.itemEntity.measurementUnitTitle = null;
+                return;
+            }
+            $scope.itemEntity.measurementUnitTitle = e.selectedItem.title;
+        },
         bindingOptions: {
             value: 'itemEntity.measurementUnitId',
             dataSource: 'itemUnit',
@@ -467,7 +491,13 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-
+        onSelectionChanged: function (e) {
+            if (!e.selectedItem) {
+                $scope.itemEntity.currencyTitle = null;
+                return;
+            }
+            $scope.itemEntity.currencyTitle = e.selectedItem.title;
+        },
         bindingOptions: {
             value: 'itemEntity.currencyId',
             dataSource: 'currencyDs',
@@ -480,6 +510,13 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
+        onSelectionChanged: function (e) {
+            if (!e.selectedItem) {
+                $scope.itemEntity.docTypeTitle = null;
+                return;
+            }
+            $scope.itemEntity.docTypeTitle = e.selectedItem.title;
+        },
         bindingOptions: {
             value: 'itemEntity.documentTypeId',
             dataSource: 'docTypeDs',
@@ -521,8 +558,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     }
 
     $scope.txt_itemDesc = {
+        readOnly:true,
         bindingOptions: {
-            value: 'itemEntity.desc'
+            value: 'itemEntity.description'
         }
     }
 
@@ -556,26 +594,36 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
                     .appendTo(container);
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
+
+        //{ dataField: 'itemNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left'  },
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: true, fixedPosition: 'left' },
+        { dataField: 'ataChapter', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+       
+
+        { dataField: 'sN_BN', caption: 'SN/BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 180 },
+
+        { dataField: 'conditionTitle', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'manufactureDate', caption: 'Man.Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, format: 'yyyy-MM-dd', width: 110 },
+        { dataField: 'expireDate', caption: 'Exp. Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, format: 'yyyy-MM-dd', width: 110 },
+        { dataField: 'price', caption: 'Price', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
+        { dataField: 'currencyTitle', caption: 'Currency', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'docTypeTitle', caption: 'Doc. Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'documentNo', caption: 'Doc. No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: '', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+
+        { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
+        { dataField: 'measurementUnitTitle', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
         {
             dataField: "Id", caption: '',
-            width: 115,
+            width: 100,
             cellTemplate: "delete",
             allowFiltering: false,
             allowSorting: false,
 
             fixed: true, fixedPosition: 'right',
         },
-        { dataField: 'itemNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: '', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-        { dataField: 'desc', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'PartNumberTitle', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'sN_BN', caption: 'SN /BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'measurementUnitTitle', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'conditionTitle', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'manufactureDate', caption: 'Man.Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
-        { dataField: 'expireDate', caption: 'Exp. Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
+
     ];
 
 
@@ -592,7 +640,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             visible: false
         },
         filterRow: {
-            visible: true,
+            visible: false,
             showOperationChooser: true,
         },
         showRowLines: true,
@@ -609,7 +657,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 630,
+       // height: $(window).height() - 630,
         width: '100%',
         columns: $scope.dg_rec_columns,
         onContentReady: function (e) {
@@ -652,14 +700,17 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         },
 
         bindingOptions: {
-            dataSource: 'dg_rec_ds'
+            dataSource: 'dg_rec_ds',
+            height:'get_dg_height()'
         },
         columnChooser: {
             enabled: false
         },
 
     };
-
+    $scope.get_dg_height = function () {
+        return $scope.entity.receiptType == 1 ? $(window).height() - 500 : $(window).height() - 400;
+    }
     $scope.$on('InitReceipt', function (event, prms) {
 
         $scope.tempData = prms;
@@ -673,7 +724,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     $scope.$on('InitPNSelected', function (event, prms) {
         console.log(prms);
         $scope.itemEntity.cmP_PartNumberId = prms.id;
-        $scope.itemEntity.PartNumberTitle = prms.partNumber;
+        $scope.itemEntity.partNumber = prms.partNumber;
+        $scope.itemEntity.description = prms.description;
+        $scope.itemEntity.ataChapter=prms.ataChapter;
     });
 
 
