@@ -768,6 +768,15 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_part_type.html?v=1130"
     });
 
+     $routeProvider.when("/vira/request", {
+         controller: "vira_request_listController",
+        templateUrl: "/app/views/vira_request_list.html?v=1130"
+    });
+  $routeProvider.when("/vira/request/cartable", {
+         controller: "vira_request_cartableController",
+        templateUrl: "/app/views/vira_request_cartable.html?v=1130"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   

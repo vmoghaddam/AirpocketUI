@@ -54,7 +54,7 @@
                         <td class="td-field"><div dx-date-box="dt_deadline" class="center" style="width: 100%"></div></td>
 
                         <td class="td-field" style="font-weight:bold">Remark:</td>
-                        <td class="td-field" colspan="3"><div dx-text-box="sb_type" class="center"></div></td>
+                        <td class="td-field" colspan="3"><div dx-text-box="txt_remark" class="center"></div></td>
 
                     </tr>
                 </table>
@@ -64,12 +64,17 @@
             <div style="width: 100%; border: 1px solid #ccc; margin-top: 5px">
                 <div class="td-title" style="width: 100%">Items</div>
                 <table style="margin-top:10px;color:black" class="dx-border">
+                   
                     <tr>
-                        <td class="td-field" style="font-weight:bold">P/N:</td>
-                        <td class="td-field"><div dx-text-box="txt_pn" class="center" style="width: 100%"></div></td>
-
+                        <td  class="td-field" style="font-weight:bold">
+                            P/N:
+                        </td>
+                        <td class="td-field">
+                            <div dx-text-box="txt_pn" style="width: 67%; display: inline-block"></div>
+                            <div dx-button="btn_pn" style="top: -15px; margin-left: 5px"></div>
+                        </td>
                         <td class="td-field" style="font-weight:bold">ATA:</td>
-                        <td class="td-field"> 
+                        <td class="td-field">
                             <div dx-drop-down-box="gridBoxOptions">
                                 <div data-options="dxTemplate: { name: 'content' }">
                                     <div dx-data-grid="gridBoxOptions.dataGrid"></div>
@@ -90,7 +95,7 @@
                         <td class="td-field"><div dx-select-box="sb_unit" class="center"></div></td>
 
                         <td class="td-field" style="font-weight:bold">Reference :</td>
-                        <td class="td-field"><div dx-number-box="num_reference" class="center"></div></td>
+                        <td class="td-field"><div dx-text-box="txt_reference" class="center"></div></td>
 
                         <td class="td-field" style="font-weight:bold">Position :</td>
                         <td class="td-field"><div dx-select-box="sb_position" class="center"></div></td>
@@ -98,11 +103,8 @@
                     </tr>
                     <tr>
                         <td class="td-field" style="font-weight:bold">Remark:</td>
-                        <td class="td-field" colspan="7"><div dx-text-box="sb_type" class="center"></div></td>
+                        <td class="td-field" colspan="7"><div dx-text-box="txt_itemRemark" class="center"></div></td>
 
-                    </tr>
-
-                    <tr>
                         <td dx-button="btn_saveItem" style="margin: 5px 5px 5px 5px"></td>
                         <td dx-button="btn_deleteItem" style="margin: 5px 5px 5px 0"></td>
 
@@ -117,13 +119,13 @@
                 <table style="margin-top:10px;color:black" class="dx-border">
                     <tr>
                         <td class="td-field" style="font-weight:bold">Sender:</td>
-                        <td class="td-field"><div dx-text-box="txt_sender" class="center" style="width: 100%"></div></td>
+                        <td class="td-field"><div dx-select-box="sb_sender" class="center" style="width: 100%"></div></td>
 
                         <td class="td-field" style="font-weight:bold">Receiver:</td>
-                        <td class="td-field"><div dx-text-box="txt_receiver" class="center" style="width: 100%"></div></td>
+                        <td class="td-field"><div dx-select-box="sb_receiver" class="center" style="width: 100%"></div></td>
 
                         <td class="td-field" style="font-weight:bold">Shop:</td>
-                        <td class="td-field"><div dx-text-box="txt_shop" class="center" style="width: 100%"></div></td>
+                        <td class="td-field"><div dx-select-box="sb_shop" class="center" style="width: 100%"></div></td>
 
                     </tr>
                     <tr>
@@ -137,4 +139,5 @@
         </div>
     </div>
     <div dx-load-panel="loadPanel"></div>
+    <div ng-include="'app/views/partNumberSelection.html'"></div>
 </div>

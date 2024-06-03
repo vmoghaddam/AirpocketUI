@@ -1,0 +1,34 @@
+﻿<div ng-controller="nisAddController">
+    <div id="popup_nis" dx-popup="popup_nis" class="no-padding" style='padding:0 !important;'>
+        <div style="width: 100%">
+            <div class="td-title" style="width: 100%">P/N Information</div>
+            <table style="margin-top:10px;color:black;width:100%" class="dx-border">
+                <tr>
+                    <td class="td-field" style="font-weight:bold">P/N:</td>
+                    <td class="td-field"><div dx-select-box="txt_pn" class="center" style="width: 100%"></div></td>
+
+                    <td class="td-field" style="font-weight:bold"> New P/N:</td>
+                    <td class="td-field"><div dx-text-box="txt_newPn" class="center"></div></td>
+                </tr>
+                <tr>
+                    <td class="td-field" style="font-weight:bold">QTY:</td>
+                    <td class="td-field"><div dx-text-box="txt_qty" class="center"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">New QTY:</td>
+                    <td class="td-field"><div dx-text-box="txt_newQty" class="center"></div></td>
+
+
+                </tr>
+                <tr>
+                    <td class="td-field" style="font-weight:bold">Remark:</td>
+                </tr>
+                <tr>
+                    <td class="td-field" colspan="4"><div dx-text-area="txt_remark" class="center"></div></td>
+
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+</div>

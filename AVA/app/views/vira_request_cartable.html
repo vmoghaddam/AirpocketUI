@@ -1,0 +1,358 @@
+﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-fileuploader-files-container {
+        display: none;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-popup-content {
+        padding: 0 !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_regroute .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_regroute .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_reg .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_reg .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    #dg_route .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_route .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .tile_selected {
+        background: #ffb3cc !important;
+    }
+
+    .dx-texteditor-input {
+        text-align: center
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box finmonthreport" style="height:100%;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+        <div class="col-lg-4 col-md-4">
+
+            <div style="width: 100%; border: 1px solid #ccc">
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Filter Panel</div>
+                <table style="margin-top:10px;color:black" class="dx-border">
+                    <tr>
+                        <td class="td-field" style="font-weight:bold; width:100px">Req NO. :</td>
+                        <td class="td-field"><div dx-number-box="num_reqNo" class="center" style="width: 100%"></div></td>
+
+                        <td class="td-field" style="font-weight: bold; width: 100px">Desc No. :</td>
+                        <td class="td-field"><div dx-number-box="num_descNo" class="center"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="td-field" style="font-weight: bold; width: 100px">Register :</td>
+                        <td class="td-field"><div dx-select-box="sb_register" class="center" style="width:100%"></div></td>
+
+                        <td class="td-field" style="font-weight: bold; width: 100px">Part NO. :</td>
+                        <td class="td-field"><div dx-number-box="num_partNo" class="center" style="width:100%"></div></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px 10px 10px 5px"><div dx-button="btn_refresh"></div></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="td-title" style="width: 100%; margin-top: 5px; border: 1px solid #ccc ">Request Order</div>
+            <div dx-data-grid="dg_req" id="dg_req" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+
+        </div>
+        <div class="col-lg-8 col-md-8" style="padding-left: 0 !important">
+
+            <div style="width: 100%; border: 1px solid #ccc">
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Request Information</div>
+                <table style="margin-top:10px;color:black" class="dx-border">
+                    <tr>
+                        <td class="td-field" style="font-weight:bold; width:80px">Req NO. :</td>
+                        <td class="td-field"><div dx-number-box="num_reqNo" class="center" style="width: 100%"></div></td>
+
+                        <td class="td-field" style="font-weight: bold; width: 80px">Date :</td>
+                        <td class="td-field"><div dx-date-box="dt_reqDate" class="center" style="width:100%"></div></td>
+
+                        <td class="td-field" style="font-weight: bold; width: 80px">A/C Type :</td>
+                        <td class="td-field"><div dx-select-box="sb_acType" class="center"></div></td>
+
+                        <td class="td-field" style="font-weight: bold; width: 80px">Register :</td>
+                        <td class="td-field"><div dx-select-box="sb_reqReg" class="center"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="td-field" style="font-weight:bold; width:80px">Remark :</td>
+                        <td class="td-field" colspan="5"><div dx-text-box="txt_remark" class="center"></div></td>
+
+                        <td class="td-field" style="font-weight: bold; width: 80px">Priority :</td>
+                        <td class="td-field"><div dx-select-box="sb_priority" class="center"></div></td>
+
+                        <td class="td-field" style="font-weight: bold; width: 80px">Approved By :</td>
+                        <td class="td-field"><div dx-text-box="txt_apBy" class="center" style="width:100%"></div></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="margin-top: 5px">
+                <div class="col-lg-6 col-md-6 " style="padding: 0 5px 0 0  !important">
+                    <div class="td-title" style="width: 100%; border: 1px solid #ccc ">Request Items</div>
+                    <div dx-data-grid="dg_reqItem" id="dg_reqItem" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+                </div>
+                <div class="col-lg-3 col-md-3 " style="padding: 0 5px 0 0 !important">
+                    <div class="td-title" style="width: 100%; border: 1px solid #ccc">Interchanges</div>
+                    <div dx-data-grid="dg_inter" id="dg_inter" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+                </div>
+                <div class="col-lg-3 col-md-3 " style="padding: 0 !important">
+                    <div class="td-title" style="width: 100%; border: 1px solid #ccc">Order Stocks</div>
+                    <div dx-data-grid="dg_other" id="dg_other" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+                </div>
+            </div>
+            <div style="display: inline-flex; width: 100%;margin-top:5px">
+                <div class="td-title" style="border: 1px solid #ccc; width: 100%">Delivery Order</div>
+            </div>
+            <div dx-data-grid="dg_delivery" id="dg_delivery" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+
+
+        </div>
+
+        <div dx-load-panel="loadPanel"></div>
+    </div>
+    <div class="rowx footer">
+        <div class=" col-lg-8 col-md-11 col-sm-11 col-xs-11" style="padding:0">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+                    <td class="dx-border" style="text-align: right;display:inline-block;padding-right: 5px" dx-select-box="sb_receiver"></td>
+                    <td class="dx-border" style="text-align: right; display: inline-block; padding-right: 5px " dx-select-box="sb_stock"></td>
+
+                    <td style="text-align: left" dx-button="btn_submit"></td>
+                    <td></td>
+                </tr>
+            </table>
+
+
+        </div>
+
+        <div ng-include="'app/views/requestNewAdd.html?vx.2'"></div>
+        <div style="clear:both"></div>
+    </div>
+</div>

@@ -42,11 +42,11 @@ app.controller('requestFormController', ['$scope', '$location', 'mntService', 'a
     $scope.sb_register = {
         showClearButton: false,
         searchEnabled: false,
-        displayExpr: "title",
+        displayExpr: "register",
         valueExpr: 'id',
         bindingOptions: {
             value: '',
-            dataSource: '',
+            dataSource: 'ds_register',
         }
     }
 
@@ -110,6 +110,46 @@ app.controller('requestFormController', ['$scope', '$location', 'mntService', 'a
     }
 
     //////////////////////////////
+
+    $scope.bind = function () {
+
+        mntService.getReceiptPN(101).then(function (res) {
+            $scope.itemUnit = res;
+        });
+
+        mntService.getReceiptPN(124).then(function (res) {
+            $scope.conditionDs = res;
+        });
+
+
+        mntService.getReceiptPN(186).then(function (res) {
+            $scope.docTypeDs = res
+        });
+
+
+        mntService.getReceiptPN(194).then(function (res) {
+            $scope.currencyDs = res;
+        });
+
+        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
+            $scope.ds_locations = response;
+            $scope.user = response;
+            $scope.entity.sender_LocationId = $scope.user[0].gI_LocationId;
+            $scope.entity.sender_UserId = $rootScope.vira_user_id;
+            $scope.entity.receiver_UserId = $rootScope.vira_user_id;
+        });
+
+        mntService.get_company().then(function (response) {
+            $scope.ds_company = response;
+        });
+
+        mntService.get_register().then(function (response) {
+            $scope.ds_register = response;
+        });
+
+    }
+
+    ///////////////////////////////
 
     $scope.dg_req_columns = [
 

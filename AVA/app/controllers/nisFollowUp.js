@@ -2,13 +2,13 @@
 app.controller('nisFollowUpController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
 
-    $scope.btn_refresh = {
-        text: 'Refresh',
+    $scope.btn_add = {
+        text: 'Add',
         type: 'default',
         icon: '',
         width: 120,
         onClick: function (e) {
-            alert("Refresh")
+            $rootScope.$broadcast("InitNISPopup", null);
 
         }
 

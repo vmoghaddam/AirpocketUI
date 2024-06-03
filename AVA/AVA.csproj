@@ -224,6 +224,7 @@
     <Content Include="app\controllers\reportFlightDaily.js" />
     <Content Include="app\controllers\reportFlightDailyStation.js" />
     <Content Include="app\controllers\reportFlights.js" />
+    <Content Include="app\controllers\vira_request_cartable.js" />
     <Content Include="app\controllers\requestForm.js" />
     <Content Include="app\controllers\requestNewAdd.js" />
     <Content Include="app\controllers\roster2.js" />
@@ -263,8 +264,10 @@
     <Content Include="app\controllers\verify.js" />
     <Content Include="app\controllers\vira_inventory.js" />
     <Content Include="app\controllers\vira_new_part_type.js" />
+    <Content Include="app\controllers\vira_nis_add.js" />
     <Content Include="app\controllers\vira_part_type.js" />
     <Content Include="app\controllers\vira_personnel_selection.js" />
+    <Content Include="app\controllers\vira_request_list.js" />
     <Content Include="app\controllers\vrAdd.js" />
     <Content Include="app\controllers\zdutyTimeline.js" />
     <Content Include="app\controllers\zpersonAddController.js" />
@@ -467,6 +470,7 @@
     <Content Include="app\views\reportFlightDaily.html" />
     <Content Include="app\views\reportFlightDailyStation.html" />
     <Content Include="app\views\reportFlights.html" />
+    <Content Include="app\views\vira_request_cartable.html" />
     <Content Include="app\views\requestForm.html" />
     <Content Include="app\views\requestNewAdd.html" />
     <Content Include="app\views\roster.html" />
@@ -505,8 +509,10 @@
     <Content Include="app\views\verify.html" />
     <Content Include="app\views\vira_inventory.html" />
     <Content Include="app\views\vira_new_part_type.html" />
+    <Content Include="app\views\vira_nis_add.html" />
     <Content Include="app\views\vira_part_type.html" />
     <Content Include="app\views\vira_personnel_selection.html" />
+    <Content Include="app\views\vira_request_list.html" />
     <Content Include="app\views\vrAdd.html" />
     <Content Include="app\views\zdutyTimeline.html" />
     <Content Include="app\views\zperson.html" />
