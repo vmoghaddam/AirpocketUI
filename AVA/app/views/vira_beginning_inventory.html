@@ -42,63 +42,100 @@
             padding: 0;
             margin: 0px;
         }
-
-    .td-field {
-        padding: 7px;
-        text-align: left
-    }
-
-    .td-title {
-        background-color: whitesmoke;
-        padding: 7px;
-        text-align: left;
-        color: black;
-        font-weight: bold
-    }
 </style>
-<div class="box vira_inventory" style="height:100%;overflow-y:hidden">
+<div class="box vira_inventory" style="height:100%;display:none;overflow-y:hidden">
 
 
     <div ng-include="'app/views/header.html'" class="rowx header"></div>
 
     <div class="rowx content" style="clear:both">
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:0px;padding-left:2px;">
 
-        <div style="width: 100%; border: 1px solid #ccc">
-            <div class="td-title" style="width: 100%">Stock:</div>
-            <table style="margin-top:10px;color:black" class="dx-border">
-                <tr>
-                    <td class="td-field" style="font-weight:bold">Stock:</td>
-                    <td class="td-field"><div dx-select-box="sb_stock" class="center" style="width: 100%"></div></td>
-</tr>
+            <div style="width: 100%; border: 1px solid #ccc;padding:10px 0 10px 0" class="dx-border">
+                <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
+                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Stock</div>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                Stock:
+                            </td>
+                            <td>
+                                <div dx-select-box="sb_stock" class="center" style="width: 100%"></div>
+                            </td>
 
-
-            </table>
-            <div class="td-title" style="width: 100%">Filter Panel</div>
-            <table style="margin-top:10px;color:black" class="dx-border">
-                <tr>
-                    <td class="td-field" style="font-weight:bold">ATA:</td>
-                    <td class="td-field"><div dx-select-box="sb_ata" class="center" style="width: 100%"></div></td>
-
-                    <td class="td-field" style="font-weight:bold">Description:</td>
-                    <td class="td-field"><div dx-text-box="txt_desc" class="center"></div></td>
-
-                    <td class="td-field" style="font-weight:bold">P/N:</td>
-                    <td class="td-field"><div dx-text-box="txt_pn" class="center"></div></td>
-
-                    <td style="padding: 5px"><div dx-button="btn_refresh"></div></td>
-                </tr>
+                        </tr>
+                    </table>
+                </div>
+            </div>
 
 
-            </table>
-            <div dx-data-grid="dg_inv" id="dg_inv"></div>
+            <div style="clear:both"></div>
+            <div style="width: 100%; border: 1px solid #ccc;padding:5px 0 10px 0" class="dx-border">
+                <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
+                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Filter Panel</div>
+                </div>
+
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                Description:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_desc" class="center" style="width: 100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                Part No:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_parNo" class="center" style="width: 100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                SN/BN:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_snbn" class="center" style="width: 100%"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div style="clear:both"></div>
+            <div style="width: 100%; border: 1px solid #ccc;padding:5px 0 0px 0" class="dx-border">
+                <div dx-data-grid="dg_inv" id="dg_inv"></div>
+            </div>
+
+            <div style="clear:both"></div>
         </div>
-       
     </div>
     <div class="rowx footer">
         <table style="width:100%;margin:0;padding:0;">
             <tr>
 
-                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_new"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_edit"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_delete"></div></td>
 
                 <td></td>
 
@@ -106,8 +143,23 @@
         </table>
     </div>
 
-   
+
+
+    <div ng-include="'app/views/partNumberSelection.html'"></div>
+    <div ng-include="'app/views/newPartNumber.html'"></div>
+    <div ng-include="'app/views/receipt.html'"></div>
+    <div ng-include="'app/views/directDelivery.html'"></div>
     <div dx-load-panel="loadPanel"></div>
+
+
+
+
+
+
+
+
+
+
 </div>
 
 

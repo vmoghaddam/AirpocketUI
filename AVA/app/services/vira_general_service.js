@@ -158,6 +158,40 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
     };
     ordersServiceFactory.get_partnumebr_interchabge = _get_partnumebr_interchabge;
 
+    var _get_stock_paper = function () {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSStockManagement/GetStockPaper?page=1&size=1000", {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_stock_paper = _get_stock_paper;
+
+    var _get_beginning_inventory = function (id) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSStockManagement/GetBeginningInventory?locationId=" + id ,  {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_beginning_inventory = _get_beginning_inventory;
+
     return ordersServiceFactory;
 
 }]);

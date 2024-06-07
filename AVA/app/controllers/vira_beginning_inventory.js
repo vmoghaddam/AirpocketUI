@@ -1,9 +1,20 @@
 ﻿'use strict';
-app.controller('vira_beginningController', ['$scope', '$location', '$routeParams', '$rootScope', 'authService', 'notificationService', '$route', 'mntService',
-    function ($scope, $location, $routeParams, $rootScope, authService, notificationService, $route, mntService) {
+app.controller('vira_beginningController', ['$scope', '$location', '$routeParams', '$rootScope', 'authService', 'notificationService', '$route', 'mntService', 'vira_general_service',
+    function ($scope, $location, $routeParams, $rootScope, authService, notificationService, $route, mntService, vira_general_service) {
 
-        $scope.prms = $routeParams.prms;
-        // mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+        $scope.entity =
+        {
+            stockLocationId: null,
+            year: null,
+            paperNo: null,
+            description: null,
+            partNumber: null,
+            sN_BN: null,
+            dateFrom: null,
+            dateTo: null,
+            locationId: null
+        };
+
 
 
         $scope.btn_refresh = {
@@ -12,14 +23,56 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
             icon: '',
             width: 120,
             onClick: function (e) {
-              
+                vira_general_service.get_stock_paper($scope.entity).then(function (response) {
+                    console.log(response);
+                    $scope.dg_inv_ds = response;
+                });
             }
 
         };
 
+        $scope.btn_new = {
+            text: 'New',
+            type: 'default',
+            icon: '',
+            width: 120,
+            onClick: function (e) {
+               
+            }
 
+        };
 
-        // }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        $scope.btn_edit = {
+            text: 'Edit',
+            type: 'default',
+            icon: '',
+            width: 120,
+            onClick: function (e) {
+               
+               
+            }
+
+        };
+
+         $scope.btn_delete = {
+            text: 'Delete',
+            type: 'danger',
+            icon: '',
+            width: 120,
+            onClick: function (e) {
+               
+            }
+
+        };
+
+        //////////////////////////////
+
+        //$scope.bind = function () {
+        //    vira_general_service.get_stock_paper($scope.entity).then(function (resposne) {
+        //        $scope.dg_inv_ds = response.data;
+        //    });
+        //};
+       
 
 
         /////////////////////////////////////
@@ -43,16 +96,12 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
                 visible: 'loadingVisible'
             }
         };
-        $scope.dg_inv_height = $(window).height() - 305;
+        $scope.dg_inv_height = $(window).height() - 315;
         $scope.dg_inv_columns = [
-            { dataField: '', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70},
-            { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 300},
-
-            //{ dataField: 'acfT_Type', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+            { dataField: 'fullNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
+            { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 300 },
             { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-
             { dataField: '', caption: 'SN/BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-
             { dataField: '', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80 },
             { dataField: '', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 50 },
             { dataField: '', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
@@ -61,10 +110,7 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
             { dataField: '', caption: 'Exp. Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
             { dataField: '', caption: 'Doc Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
             { dataField: '', caption: 'Document', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-            { dataField: '', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 400 },
-
-
-
+            { dataField: 'remark', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 400 },
         ];
 
 
@@ -89,7 +135,7 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
             sorting: { mode: 'none' },
 
             noDataText: '',
-            width:'100%',
+            width: '100%',
             allowColumnReordering: true,
             allowColumnResizing: true,
             scrolling: { mode: 'infinite' },
@@ -150,121 +196,38 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
 
         };
 
-        $scope.dto_search = {};
         $scope.ds_locations = null;
-        $scope.sb_location = {
+        $scope.sb_stock = {
             showClearButton: false,
             searchEnabled: false,
             displayExpr: "title",
             valueExpr: 'gI_LocationId',
-
             bindingOptions: {
+                value: 'entity.receiver_LocationId',
                 dataSource: 'ds_locations',
-                value: 'dto_search.locationId',
             }
         }
-        $scope.sb_actype = {
-            showClearButton: false,
-            searchEnabled: false,
-            displayExpr: "title",
-            valueExpr: 'id',
-            dataSource: $scope.type,
-            bindingOptions: {
-                value: '',
-            }
-        }
-        $scope.sb_assettype = {
-            showClearButton: false,
-            searchEnabled: false,
-            displayExpr: "title",
-            valueExpr: 'id',
-            dataSource: $scope.type,
-            bindingOptions: {
-                value: '',
-            }
-        }
+      
 
         $scope.txt_parNo = {
             bindingOptions: {
-                value: ''
+                value: 'entity.partNumber'
             }
         }
 
-        $scope.txt_description = {
+        $scope.txt_desc = {
             bindingOptions: {
-                value: ''
+                value: 'entity.description'
             }
         }
         $scope.txt_snbn = {
             bindingOptions: {
-                value: ''
+                value: 'entity.sN_BN'
             }
         }
-        $scope.txt_shelf = {
-            bindingOptions: {
-                value: ''
-            }
-        }
+    
 
 
-        $scope.btn_search = {
-            text: 'Search',
-            type: 'success',
-            icon: 'search',
-            width: '100%',
-            // validationGroup: 'crewreportsearch',
-            bindingOptions: {},
-            onClick: function (e) {
-
-                $scope.bind();
-
-
-            }
-
-        };
-        $scope.btn_receipt = {
-            text: 'Receipt',
-            type: 'default',
-            // icon: 'down',
-            width: '100%',
-            // validationGroup: 'crewreportsearch',
-            bindingOptions: {},
-            onClick: function (e) {
-                $rootScope.$broadcast('InitReceipt', null);
-
-
-
-            }
-
-        };
-        $scope.btn_do = {
-            text: 'D/O',
-            type: 'default',
-            // icon: 'up',
-            width: '100%',
-            // validationGroup: 'crewreportsearch',
-            bindingOptions: {},
-            onClick: function (e) {
-
-                $rootScope.$broadcast('InitDirectDelivery', null);
-
-
-            }
-
-        };
-
-        $scope.bind = function () {
-            $scope.dg_inv_ds = null;
-            // $scope.dto_search.locationId = 6;
-            $scope.loadingVisible = true;
-            mntService.get_inventory($scope.dto_search).then(function (response) {
-
-                $scope.loadingVisible = false;
-                $scope.dg_inv_ds = (response);
-
-            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-        };
         /////////////////////////////////////
 
         $scope.get_filters_style = function () {
@@ -279,14 +242,17 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
             authService.redirectToLogin();
         }
         else {
-            $rootScope.page_title = '> Inventory';
+            $rootScope.page_title = '> Beginning Inventory';
             $('.vira_inventory').fadeIn();
         }
         //////////////////////////////////////////
         $scope.$on('$viewContentLoaded', function () {
             mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
                 $scope.ds_locations = response;
-                $scope.dto_search.locationId = response[0].gI_LocationId;
+                $scope.entity.stockLocationId = response[0].gI_LocationId;
+                vira_general_service.get_beginning_inventory(response[0].gI_LocationId).then(function (res) {
+                    console.log("Beginning Inventory", res);
+                });
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             setTimeout(function () {
 
