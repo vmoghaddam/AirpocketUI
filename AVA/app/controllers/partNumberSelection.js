@@ -50,7 +50,9 @@ app.controller('PartNumberController', ['$scope', '$location', 'mntService', 'au
             {
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Select', onClick: function (e) {
-
+                        console.log($scope.dg_pn_selected);
+                        if ($scope.dg_pn_selected.typeId == 93 || $scope.dg_pn_selected == 94)
+                            $scope.dg_pn_selected.qty = 1;
                         $rootScope.$broadcast('InitPNSelected', $scope.dg_pn_selected);
                         $scope.popup_personnel_visible = false;
 

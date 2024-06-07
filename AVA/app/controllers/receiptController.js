@@ -437,9 +437,11 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         }
     }
 
+    $scope.is_qty_readonly = false;
     $scope.txt_itemQuantity = {
         bindingOptions: {
             value: 'itemEntity.quantity',
+            readOnly: 'is_qty_readonly'
         }
     }
 
@@ -726,7 +728,11 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         $scope.itemEntity.cmP_PartNumberId = prms.id;
         $scope.itemEntity.partNumber = prms.partNumber;
         $scope.itemEntity.description = prms.description;
-        $scope.itemEntity.ataChapter=prms.ataChapter;
+        $scope.itemEntity.ataChapter = prms.ataChapter;
+        console.log("quantity",prms.qty)
+        $scope.itemEntity.quantity = prms.qty;
+        if ($scope.itemEntity.quantity == 1)
+            $scope.is_qty_readonly = true;
     });
 
 
