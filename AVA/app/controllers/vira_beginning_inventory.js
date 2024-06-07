@@ -19,7 +19,7 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
 
         $scope.btn_refresh = {
             text: 'Refresh',
-            type: 'Default',
+            type: 'default',
             icon: '',
             width: 120,
             onClick: function (e) {
