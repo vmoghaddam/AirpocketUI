@@ -37,7 +37,7 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
             icon: '',
             width: 120,
             onClick: function (e) {
-               
+                $scope.$broadcast('InitBeginningPopup', null);
             }
 
         };
@@ -256,7 +256,7 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             setTimeout(function () {
 
-                //$scope.$broadcast('getFilterQuery', null);
+               
             }, 500);
         });
 

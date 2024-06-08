@@ -224,6 +224,7 @@
     <Content Include="app\controllers\reportFlightDaily.js" />
     <Content Include="app\controllers\reportFlightDailyStation.js" />
     <Content Include="app\controllers\reportFlights.js" />
+    <Content Include="app\controllers\vira_beginning_add.js" />
     <Content Include="app\controllers\vira_beginning_inventory.js" />
     <Content Include="app\controllers\vira_request_cartable.js" />
     <Content Include="app\controllers\requestForm.js" />
@@ -471,6 +472,7 @@
     <Content Include="app\views\reportFlightDaily.html" />
     <Content Include="app\views\reportFlightDailyStation.html" />
     <Content Include="app\views\reportFlights.html" />
+    <Content Include="app\views\vira_beginning_add.html" />
     <Content Include="app\views\vira_beginning_inventory.html" />
     <Content Include="app\views\vira_request_cartable.html" />
     <Content Include="app\views\requestForm.html" />

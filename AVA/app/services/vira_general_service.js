@@ -192,6 +192,23 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
     };
     ordersServiceFactory.get_beginning_inventory = _get_beginning_inventory;
 
+     var _add_beginning_inventory = function (entity) {
+        var deferred = $q.defer();
+
+         $http.post(vira_api + "api/LGSStockManagement/AddBeginningInventory", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.add_beginning_inventory = _add_beginning_inventory;
+
     return ordersServiceFactory;
 
 }]);

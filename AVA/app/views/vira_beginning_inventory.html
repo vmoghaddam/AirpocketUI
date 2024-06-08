@@ -42,6 +42,13 @@
             padding: 0;
             margin: 0px;
         }
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
 </style>
 <div class="box vira_inventory" style="height:100%;display:none;overflow-y:hidden">
 
@@ -159,10 +166,7 @@
 
 
 
-    <div ng-include="'app/views/partNumberSelection.html'"></div>
-    <div ng-include="'app/views/newPartNumber.html'"></div>
-    <div ng-include="'app/views/receipt.html'"></div>
-    <div ng-include="'app/views/directDelivery.html'"></div>
+    <div ng-include="'app/views/vira_beginning_add.html'"></div>
     <div dx-load-panel="loadPanel"></div>
 
 
