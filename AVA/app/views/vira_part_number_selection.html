@@ -1,0 +1,86 @@
+﻿<div ng-controller="part_number_slectionController">
+    <div id="popup_personnel" dx-popup="popup_personnel" class="no-padding" style='padding:0 !important;'>
+        <div style="border: 1px solid #ccc " class="dx-border">
+            <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Filter Panel</div>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-left:5px;text-align:left">
+                            ATA:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_ata" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding-left: 5px; text-align: left">
+                            Description:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_desc" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding-left: 5px; text-align: left">
+                            P/N:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_pn" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-3 padding-0" style="padding-left:10px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:150px; direction:rtl; padding-right: 5px">
+                            <div dx-button="btn_refresh"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="clear: both"></div>
+
+        </div>
+        <div style="padding: 5px 0 0 0">
+            <div dx-data-grid="dg_pn" id="dg_pn" class="content" style="overflow-y: hidden" dx-item-alias="row"></div>
+        </div>
+        <!--<div dx-data-grid="dg_inter" id="dg_inter" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>-->
+        <!--<div style="width: 100%; border: 1px solid #ccc">
+            <div class="td-title" style="width: 100%">Filter Panel</div>
+            <table style="margin-top:10px;color:black" class="dx-border">
+                <tr>
+                    <td class="td-field" style="font-weight:bold">ATA:</td>
+                    <td class="td-field"><div dx-select-box="sb_ata" class="center" style="width: 100%"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Description:</td>
+                    <td class="td-field"><div dx-text-box="txt_desc" class="center"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">P/N:</td>
+                    <td class="td-field"><div dx-text-box="txt_pn" class="center"></div></td>
+
+                    <td style="padding: 5px"><div dx-button="btn_refresh"></div></td>
+                </tr>
+
+
+            </table>
+        </div>-->
+
+
+
+    </div>
+</div>

@@ -62,7 +62,7 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
     //////////////////
 
     $scope.popup_add_visible = false;
-    $scope.popup_height = 600;
+    $scope.popup_height = 620;
     $scope.popup_width = 400;
     $scope.popup_add_title = "Beginning Document Add";
     $scope.popup_instance = null;
