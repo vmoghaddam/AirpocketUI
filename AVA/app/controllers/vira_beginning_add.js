@@ -14,8 +14,8 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
         documentTypeId: 0,
         documentNo: null,
         sN_BN: null,
-        shelfFromId: 0,
-        shelfToId: 0,
+        shelfFromId: 29358,
+        shelfToId: 29358,
         quantity: null,
         price: null,
         expireDate: null,
@@ -81,6 +81,28 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
 
                         vira_general_service.add_beginning_inventory($scope.entity).then(function (response) {
                             console.log(response);
+                            $scope.entity =
+                            {
+                                id: 0,
+                                stock_LocationId: 0,
+                                sender_LocationId: 0,
+                                sender_UserId: 0,
+                                cmP_PartNumberId: 0,
+                                cmP_ComponentId: 0,
+                                conditionId: 0,
+                                measurementUnitId: 0,
+                                currencyId: 0,
+                                documentTypeId: 0,
+                                documentNo: null,
+                                sN_BN: null,
+                                shelfFromId: 29358,
+                                shelfToId: 29358,
+                                quantity: null,
+                                price: null,
+                                expireDate: null,
+                                manufactureDate: null,
+                                remark: null
+                            }
                         });
                         $scope.popup_add_visible = false;
 
