@@ -1,0 +1,667 @@
+﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-fileuploader-files-container {
+        display: none;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-popup-content {
+        padding: 0 !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_regroute .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_regroute .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_reg .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_reg .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    #dg_route .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_route .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .tile_selected {
+        background: #ffb3cc !important;
+    }
+
+    .dx-texteditor-input {
+        text-align: center
+    }
+
+    .td-field {
+        padding: 7px;
+        text-align: left
+    }
+
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div ng-controller="receiptController">
+    <div id="popup_receipt" dx-popup="popup_receipt" class="no-padding" style='padding:0 !important;'>
+        <div style="width: 100%; border: 1px solid #ccc;padding:10px 0 10px 0" class="dx-border">
+            <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            Date:
+                        </td>
+                        <td>
+                            <div dx-date-box="dt_paperDate" class="center" style="width: 100%"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            Stock:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_stock" class="center"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            No:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_paperNo" class="center" style="width:100%"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:90px;font-size:12px;padding-right:5px;text-align:right">
+                            Type:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_accountType" class="left" style="width: 100%"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="padding-left:0px;" ng-show="entity.receiptType==2">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Register:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_rmvRegister" class="center" style="width: 100%"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+            <div style="clear:both"></div>
+            <div ng-show="entity.receiptType==1">
+
+                <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top: 7px;margin-bottom:7px">
+                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">PO Information</div>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                No:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_poNo" class="center" style="width: 100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                Date:
+                            </td>
+                            <td>
+                                <div dx-date-box="dt_poDate" class="center" style="width:100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                Invoice:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_invoice" class="center" style="width:100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:90px;font-size:12px;padding-right:5px;text-align:right">
+                                Invoice Date:
+                            </td>
+                            <td>
+                                <div dx-date-box="dt_invoice" class="center" style="width:100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:0px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                Company:
+                            </td>
+                            <td>
+                                <div dx-select-box="sb_poCompany" class="center"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div style="clear:both"></div>
+
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+        <div sstyle="border: 1px solid #ccc" class="dx-border">
+            <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Items</div>
+            </div>
+            <div class="col-lg-3 padding-0" style="padding-left:0px;">
+                <table style="width:100%">
+
+                    <tr>
+                        <td style="width:70px;font-size:12px;padding-right:5px;text-align:right">
+                            P/N:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_itemPnNo" dx-validator="{validationGroup:'recitemadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </td>
+                        <td style="width:30px;padding-left:3px;">
+                            <div dx-button="btn_pn"></div>
+                        </td>
+                        <td style="width:30px;padding-left:3px;">
+                            <div dx-button="newPn"></div>
+                        </td>
+
+                    </tr>
+
+
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="padding-left:10px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Description:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_itemDesc" class="center"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:10px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            SN/BN:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_itemSnbn" class="center" dx-validator="{validationGroup:'recitemadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </td>
+                        <td style="width:30px;padding-left:3px;">
+                            <div dx-button="btn_pn"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-1 padding-0" style="padding-left:10px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:65px;font-size:12px;padding-right:5px;text-align:right">
+                            Qty:
+                        </td>
+                        <td>
+                            <div dx-number-box="txt_itemQuantity" class="center" style="width: 100%" dx-validator="{validationGroup:'recitemadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-1 padding-0" style="padding-left:10px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:20px;font-size:12px;padding-right:5px;text-align:right">
+                            Unit:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_itemUnit" class="center" style="width: 100%" dx-validator="{validationGroup:'recitemadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:10px;padding-right:10px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:70px;font-size:12px;padding-right:5px;text-align:right">
+                            Condition:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_itemCondition" class="center" dx-validator="{validationGroup:'recitemadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div style="clear:both"></div>
+            <div class="col-lg-3 padding-0" style="padding-left:0px;padding-top:10px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:70px;font-size:12px;padding-right:5px;text-align:right">
+                            Doc. Type:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_itemDoc" class="center" dx-validator="{validationGroup:'recitemadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </td>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            Doc. No:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_itemNo" class="center" dx-validator="{validationGroup:'recitemadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-3 padding-0" style="padding-left:10px;padding-top:10px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Price:
+                        </td>
+                        <td>
+                            <div dx-number-box="txt_itemPrice" class="center"></div>
+                        </td>
+                        <td style="width:70px;font-size:12px;padding-right:5px;text-align:right">
+                            Currency:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_itemCurrency" class="center" style="width: 100%"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:10px;padding-top:10px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Man. Date:
+                        </td>
+                        <td>
+                            <div dx-date-box="dt_itemDate" class="center" style="width: 100%"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:10px;padding-top:10px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:65px;font-size:12px;padding-right:5px;text-align:right">
+                            Exp. Date:
+                        </td>
+                        <td>
+                            <div dx-date-box="dt_itemExp" class="center" style="width: 100%"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:10px;padding-right:10px;padding-top:10px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:70px;font-size:12px;padding-right:5px;text-align:right">
+                            Shelf:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_itemShelf" class="center"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div style="clear:both"></div>
+            <div class="col-lg-8 padding-0" style="padding-left:0px;padding-top:10px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:70px;font-size:12px;padding-right:5px;text-align:right">
+                            Remark:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_itemRemark" class="left"></div>
+                        </td>
+
+
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="padding-left:10px;padding-top:10px">
+
+            </div>
+            <div class="col-lg-2 padding-0" style="padding-left:10px;padding-right:10px;padding-top:10px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:70px;font-size:12px;padding-right:5px;text-align:right">
+                        </td>
+                        <td>
+                            <div dx-button="btn_add" class="center"></div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+
+
+
+            <div style="clear:both"></div>
+
+
+            <!--<table style="color: black" class="dx-border">
+
+            <tr>
+                <td class="td-field" style="font-weight: bold; width: 100px">Remark:</td>
+                <td class="td-field" colspan="5"><div dx-text-box="txt_itemRemark" class="center"></div></td>-->
+            <!-- <td class="td-field"><div dx-button="btn_addNew" class="center"></div></td>-->
+            <!--<td class="td-field"><div dx-button="btn_add" class="center"></div></td>-->
+            <!--<td class="td-field"><div dx-button="btn_delete" class="center"></div></td>-->
+            <!--</tr>
+            </table>-->
+        </div>
+        <div style="margin-top:5px">
+            <div dx-data-grid="dg_rec" id="dg_rec" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                <div data-options="dxTemplate:{ name:'delete' }">
+                    <a ng-click="Delete(row)" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Delete</a>
+                </div>
+            </div>
+
+            <div class="col-lg-12 dx-border" style="margin-top:5px">
+
+
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:60px">Remark </td>
+                        <td>  <div dx-text-box="txt_paperRemark" class="left" style="width: 100%;margin-top:5px"></div></td>
+                    </tr>
+                </table>
+
+
+            </div>
+        </div>
+
+    </div>
+    <!--<div ng-include="'app/views/partNumberSelection.html'"></div>
+    <div ng-include="'app/views/newPartNumber.html'"></div>-->
+    <div style="clear:both"></div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+
+
