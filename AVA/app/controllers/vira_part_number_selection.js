@@ -17,11 +17,10 @@ app.controller('part_number_slectionController', ['$scope', '$location', 'mntSer
 
 
 
-    $scope.btn_refresh = {
-        text: 'Refresh',
+    $scope.btn_search = {
+        icon: 'search',
+        width: '10%',
         type: 'default',
-        icon: '',
-        width: 120,
         onClick: function (e) {
             mntService.getPNSelection($scope.entity).then(function (res) {
                 $scope.dg_pn_ds = res.data;
