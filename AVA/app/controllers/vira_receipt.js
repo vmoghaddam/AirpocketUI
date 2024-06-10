@@ -7,18 +7,20 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         id: 0,
         //sender_LocationId: null,
         //sender_UserId: null,
-        receiver_LocationId: 19,
-
-
-        receiptType: 3,
+        
         receivedPaperNo: null,
         receivedPaperDate: new Date(),
+        receiver_LocationId: 19,
+        receiptType: 3,
         companyId: null,
         receivedInvoiveNo: null,
         receivedInvoiveDate: null,
-        receiptItems:
-            []
+        receiptItems: []
     }
+
+
+
+
 
     $scope.itemEntity = {
         Id: -1,
@@ -29,6 +31,40 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         documentNo: '-',
 
     }
+
+
+    $scope.clear_entity = function () {
+        $scope.entity.receivedPaperDate = null;
+        $scope.entity.receivedPaperNo = null;
+        $scope.entity.receiptType = 1;
+        $scope.entity.acfT_MSNId = null;
+        $scope.entity.receivedInvoiveNo = null;
+        $scope.entity.receivedInvoiveDate = null;
+        $scope.entity.companyId = null;
+        $scope.itemEntity.partNumber = null;
+        $scope.itemEntity.description = null;
+        $scope.itemEntity.sN_BN = null;
+        $scope.itemEntity.quantity = null;
+        $scope.itemEntity.measurementUnitId = null;
+        $scope.itemEntity.conditionId = null;
+        $scope.itemEntity.documentTypeId = 187;
+        $scope.itemEntity.documentNo = '-';
+        $scope.itemEntity.price = null;
+        $scope.itemEntity.currencyId = null;
+        $scope.itemEntity.manufactureDate = null;
+        $scope.itemEntity.expireDate = null;
+        $scope.itemEntity.remark = null;
+        $scope.entity.remark = null;
+
+        $scope.entity.acfT_MSNId = null;
+        $scope.entity.receivedPaperNo = null;
+        $scope.entity.receivedPaperDate = null;
+        $scope.entity.paperNo = '';
+        $scope.entity.paperDate = new Date();
+        $scope.entity.receiver_LocationId = 19;
+        $scope.entity.receiptType = 3;
+        $scope.dg_rec_ds = [];
+    };
 
     $scope.dg_rec_ds = [];
 
@@ -89,16 +125,30 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
 
                 $scope.itemEntity.Id = $scope.itemEntity.Id + 1
-            $scope.dg_rec_ds.push($scope.itemEntity);
-            $scope.itemEntity = {
-                Id: $scope.itemEntity.Id,
-                itemNo: 1,
-                shelfFromId: 48875,
-                shelfToId: 48875,
-                documentTypeId: 187,
-                documentNo: '-',
 
+            var _item = JSON.parse(JSON.stringify($scope.itemEntity));
+            $scope.dg_rec_ds.push(_item);
+            if ($scope.selected_part_number.typeId == 93 || $scope.selected_part_number == 94) {
+                $scope.is_qty_readonly = true;
+                $scope.itemEntity.quantity = 1;
             }
+            else {
+                $scope.itemEntity.quantity = null;
+            }
+            $scope.itemEntity.sN_BN = null;
+            $scope.itemEntity.price = null;
+            $scope.itemEntity.remark = null;
+            $scope.itemEntity.manufactureDate = null;
+            $scope.itemEntity.expireDate = null;
+            //$scope.itemEntity = {
+            //    Id: $scope.itemEntity.Id,
+            //    itemNo: 1,
+            //    shelfFromId: 48875,
+            //    shelfToId: 48875,
+            //    documentTypeId: 187,
+            //    documentNo: '-',
+
+            //}
         }
 
     };
@@ -121,13 +171,60 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
     //};
     //////////////////////////
+    $scope.loadingVisible = false;
+    $scope.loadPanel = {
+        message: 'Please wait...',
 
+        showIndicator: true,
+        showPane: true,
+        shading: true,
+        closeOnOutsideClick: false,
+        shadingColor: "rgba(0,0,0,0.4)",
+        // position: { of: "body" },
+        onShown: function () {
+
+        },
+        onHidden: function () {
+
+        },
+        bindingOptions: {
+            visible: 'loadingVisible'
+        }
+    };
 
     $scope.popup_receipt_visible = false;
     $scope.popup_receipt_title = "Receipt";
     $scope.popup_instance = null;
     $scope.isFullScreen = true;
 
+
+
+    $scope.save = function (callback) {
+        $scope.loadingVisible = true;
+        $scope.entity.receiptItems = $scope.dg_rec_ds;
+        mntService.addReceipt($scope.entity).then(function (res) {
+            $scope.loadingVisible = false;
+            console.log(res);
+            if (callback)
+                callback(res);
+            else {
+                if (res.errorCode) {
+                    General.ShowNotify(res.errorMessage, 'error');
+                }
+                else {
+                    $scope.entity.paperNo = res.data.paperNo;
+
+                    $scope.popup_result_visible = true;
+
+                }
+            }
+
+
+           
+
+        });
+
+    };
     $scope.popup_receipt = {
 
 
@@ -138,11 +235,24 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
+                        $scope.save(function (res) {
+                            if (res.errorCode) {
+                                if (res.errorCode == 10029) {
+                                    mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+                                        $scope.save();
 
-                        $scope.entity.receiptItems = $scope.dg_rec_ds
-                        mntService.addReceipt($scope.entity).then(function (res) {
-                            console.log(res);
-                            $scope.popup_receipt_visible = false;
+                                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                                }
+                                else
+                                    General.ShowNotify(res.errorMessage, 'error');
+                            }
+                            else {
+                                $scope.entity.paperNo = res.data.paperNo;
+                               
+                                $scope.popup_result_visible = true;
+
+                            }
+
                         });
                     }
                 }, toolbar: 'bottom'
@@ -164,12 +274,13 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         closeOnOutsideClick: false,
         onShowing: function (e) {
             $rootScope.IsRootSyncEnabled = false;
+            
             $scope.popup_instance.repaint();
 
 
         },
         onShown: function (e) {
-
+            $scope.clear_entity();
             if ($scope.isNew) {
                 $scope.isContentVisible = true;
             }
@@ -186,8 +297,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
         },
         onHiding: function () {
-
-
+            
+           
+            $rootScope.$broadcast('ReceiptClosed', {});
             $scope.popup_receipt_visible = false;
         },
         onContentReady: function (e) {
@@ -205,6 +317,91 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             'toolbarItems[0].visible': 'isNotLocked',
             //'toolbarItems[1].visible': 'isNotLocked',
             'toolbarItems[2].visible': 'isNotLocked',
+
+        }
+    };
+
+
+
+
+
+    $scope.popup_result_visible = false;
+    $scope.popup_result_title = "";
+    
+
+    $scope.popup_result = {
+
+
+        showTitle: true,
+
+        toolbarItems: [
+
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'default', text: 'New Receipt', onClick: function (e) {
+                        //$scope.loadingVisible = true;
+                        //$scope.entity.receiptItems = $scope.dg_rec_ds
+                        //mntService.addReceipt($scope.entity).then(function (res) {
+                        //    $scope.loadingVisible = false;
+                        //    console.log(res);
+                        //    if (res.errorCode) {
+                        //        General.ShowNotify(res.errorMessage, 'error');
+                        //    }
+                        //    else {
+                        //        $scope.entity.paperNo = res.data.paperNo;
+                        //        General.ShowNotify(Config.Text_SavedOk, 'success');
+                        //        $scope.popup_receipt_visible = false;
+
+                        //    }
+
+                        //});
+                        $scope.clear_entity();
+                        $scope.popup_result_visible = false;
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'danger', text: 'Close', onClick: function (e) {
+
+                        $scope.popup_result_visible = false;
+                        $scope.popup_receipt_visible = false;
+
+                    }
+                }, toolbar: 'bottom'
+            },
+
+        ],
+
+        visible: false,
+        dragEnabled: true,
+        closeOnOutsideClick: false,
+        onShowing: function (e) {
+           
+        },
+        onShown: function (e) {
+
+            
+
+
+        },
+        onHiding: function () {
+           
+
+            $scope.popup_result_visible = false;
+        },
+        onContentReady: function (e) {
+         
+
+        },
+        // fullScreen:false,
+        bindingOptions: {
+            visible: 'popup_result_visible',
+            
+            title: 'popup_result_title',
+            height: '300',
+            width: '500',
+            
 
         }
     };
@@ -274,8 +471,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
 
     $scope.txt_paperNo = {
+        readOnly:true,
         bindingOptions: {
-            value: 'entity.receivedPaperNo'
+            value: 'entity.paperNo'
         }
     }
 
@@ -294,7 +492,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
     $scope.txt_poNo = {
         bindingOptions: {
-            value: ''
+            value: 'entity.receivedPaperNo'
         }
     }
 
@@ -308,7 +506,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     $scope.ch_rmvRegister = {
         defaultValue: false,
         bindingOptions: {
-            value: ''
+            value: 'entity.acfT_MSNId'
         }
     }
 
@@ -395,7 +593,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         type: 'date',
         displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
-            value: 'entity.receivedPaperDate'
+            value: 'entity.paperDate'
         }
     }
 
@@ -403,7 +601,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         type: 'date',
         displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
-            value: ''
+            value: 'entity.receivedPaperDate'
         }
     }
 
@@ -616,6 +814,8 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
         { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
         { dataField: 'measurementUnitTitle', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
+        //itemEntity.remark
+        { dataField: 'remark', caption: 'Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 350 },
         {
             dataField: "Id", caption: '',
             width: 100,
@@ -724,15 +924,27 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
 
     $scope.$on('InitPNSelected', function (event, prms) {
-        console.log(prms);
+        $scope.selected_part_number = prms;
+        console.log('selected pn', prms);
         $scope.itemEntity.cmP_PartNumberId = prms.id;
         $scope.itemEntity.partNumber = prms.partNumber;
+
         $scope.itemEntity.description = prms.description;
         $scope.itemEntity.ataChapter = prms.ataChapter;
-        console.log("quantity", prms.qty)
-        $scope.itemEntity.quantity = prms.qty;
-        if ($scope.itemEntity.quantity == 1)
+        $scope.itemEntity.measurementUnitId = prms.measurementUnitId;
+        $scope.is_qty_readonly = false;
+       
+        if ($scope.selected_part_number.typeId == 93 || $scope.selected_part_number == 94) {
             $scope.is_qty_readonly = true;
+            $scope.itemEntity.quantity = 1;
+        }
+        else
+            $scope.itemEntity.quantity = null;
+
+        //console.log("quantity", prms.qty)
+        //$scope.itemEntity.quantity = prms.qty;
+        //if ($scope.itemEntity.quantity == 1)
+        //   $scope.is_qty_readonly = true;
     });
 
 

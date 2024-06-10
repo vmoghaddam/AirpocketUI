@@ -446,7 +446,7 @@
                             Description:
                         </td>
                         <td>
-                            <div dx-text-box="txt_itemDesc" class="center"></div>
+                            <div dx-text-box="txt_itemDesc" class="left"></div>
                         </td>
 
                     </tr>
@@ -461,9 +461,9 @@
                         <td>
                             <div dx-text-box="txt_itemSnbn" class="center" dx-validator="{validationGroup:'recitemadd',  validationRules: [{ type: 'required'}]}"></div>
                         </td>
-                        <td style="width:30px;padding-left:3px;">
+                        <!--<td style="width:30px;padding-left:3px;">
                             <div dx-button="btn_pn"></div>
-                        </td>
+                        </td>-->
                     </tr>
                 </table>
             </div>
@@ -660,6 +660,13 @@
     <div ng-include="'app/views/newPartNumber.html'"></div>-->
     <div style="clear:both"></div>
 
+    <div id="popup_result" dx-popup="popup_result" class="no-padding" style='padding:20px !important;'>
+        <div style="text-align:center">
+            <div style="font-size:17px;padding:25px;">The document saved successfully.</div>
+            <div dx-text-box="txt_paperNo" class="center" style="width:100%;margin-top:0px"></div>
+
+        </div>
+    </div>
     <div dx-load-panel="loadPanel"></div>
 </div>
 
