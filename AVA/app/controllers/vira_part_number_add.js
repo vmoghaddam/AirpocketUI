@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
+app.controller('vira_part_number_addController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
     //mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
 
@@ -51,7 +51,7 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
     $scope.popup_width = 1250;
     $scope.popup_personnel_title = "New Part Number";
     $scope.popup_instance = null;
-    $scope.isFullScreen = false;
+    $scope.isFullScreen = true;
 
     $scope.popup_personnel = {
 
@@ -62,7 +62,7 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
 
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'success', icon: 'check', text: 'Save',validationGroup: 'partnumber', onClick: function (e) {
+                    type: 'success', icon: 'check', text: 'Save', validationGroup: 'partnumber', onClick: function (e) {
                         var result = e.validationGroup.validate();
 
                         if (!result.isValid) {
@@ -176,58 +176,59 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'ata',
-
         bindingOptions: {
             value: 'entity.ataChapter',
             dataSource: 'ataType',
         }
     }
 
-    $scope.descPartDs = [
-        { id: 0, title: 'Description' },
-        { id: 1, title: 'Part Type' }
-    ]
-
-    $scope.sb_descPart = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
-        dataSource: $scope.descPartDs,
-        bindingOptions: {
-            value: 'entity.descPart',
-        }
-    }
-
-    $scope.consumDs = [
-        { id: 93, title: 'Rotable' },
-        { id: 94, title: 'Consumable' },
-        { id: 95, title: 'Fixed' },
+    $scope.ds_comp = [
+        { id: 98, title: 'Component' },
+        { id: 99, title: 'General Tools' },
+        { id: 100, title: 'Special Tools' },
         { id: 119, title: 'Unknown' }
     ]
 
-    $scope.sb_consum = {
+    $scope.sb_comp = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-        dataSource: $scope.consumDs,
+        dataSource: $scope.ds_comp,
         bindingOptions: {
             value: '',
         }
     }
 
-    $scope.sb_partType = {
+    $scope.ds_asset = [
+        { id: 93, title: 'Rotable' },
+        { id: 94, title: 'Consumable' },
+        { id: 95, title: 'Fixed Assets' },
+        { id: 119, title: 'Unknown' }
+    ]
+
+    $scope.sb_asset = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-
+        dataSource: $scope.ds_asset,
         bindingOptions: {
-            value: 'entity.partTypeId',
-            dataSource: 'partDs',
+            value: '',
         }
     }
+
+    //$scope.sb_partType = {
+    //    showClearButton: false,
+    //    searchEnabled: false,
+    //    displayExpr: "title",
+    //    valueExpr: 'id',
+
+    //    bindingOptions: {
+    //        value: 'entity.partTypeId',
+    //        dataSource: 'partDs',
+    //    }
+    //}
 
     $scope.uomDs =
         [
@@ -246,9 +247,9 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
             }
         }
 
-    $scope.txt_pn = {
+    $scope.txt_ipc = {
         bindingOptions: {
-            value: 'entity.partNumber'
+            value: ''
         }
     }
 
@@ -259,6 +260,12 @@ app.controller('newPartNumberController', ['$scope', '$location', 'mntService', 
     }
 
     $scope.txt_itemNo = {
+        bindingOptions: {
+            value: 'entity.itemNo'
+        }
+    }
+
+   $scope.txt_pn = {
         bindingOptions: {
             value: 'entity.itemNo'
         }
