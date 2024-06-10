@@ -297,6 +297,17 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
             }
 
         };
+
+        $scope.btn_pn = {
+            icon: 'search',
+            width: '10%',
+            type: 'default',
+            onClick: function () {
+                $rootScope.$broadcast('InitPNPopup', null);
+            }
+
+        };
+
         $scope.btn_receipt = {
             text: 'Receipt',
             type: 'default',
@@ -365,6 +376,13 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
         $scope.$on('ReceiptClosed', function (event, prms) {
             $scope.bind();
 
+        });
+
+        $scope.$on('InitPNSelected', function (event, prms) {
+            $scope.dto_search.cmP_PartNumberId = prms.id;
+            $scope.dto_search.partNumber = prms.partNumber;
+            $scope.dto_search.description = prms.description;
+            
         });
         $scope.$on('$viewContentLoaded', function () {
             mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
