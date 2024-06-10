@@ -787,6 +787,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_part_number.html?v=1130"
     });
 
+      $routeProvider.when("/vira/inventory/total", {
+          controller: "inventory_totalController",
+        templateUrl: "/app/views/vira_inventory_total.html?v=1130"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   

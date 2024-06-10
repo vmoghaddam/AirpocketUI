@@ -262,6 +262,57 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
 
     };
 
+    $scope.btn_select = {
+      text: 'Select',
+        type: 'success',
+        onClick: function () {
+            if ($scope.form_type == 'do') {
+                console.log('dool', $scope.dg_inv_ds);
+                var selected_rows = [];
+                selected_rows = Enumerable.From($scope.dg_inv_ds).Where(function (x) {
+                    //console.log('sel qty', x.selected_qty);
+                    console.log('sel qty', x);
+                    //<= x.availableQuantity
+                    console.log('check', x.selected_qty <= x.availableQuantity);
+                    return x.selected_qty && x.selected_qty > 0 && x.selected_qty <= x.availableQuantity;
+                }).ToArray();
+                //var query_items = [];
+
+                //var _result = [];
+                //$.each(selected_rows, function (_i, _d) {
+
+                //    var item = {
+                //        "partNumberId": _d.cmP_PartNumberId,
+                //        "quantity": _d.selected_qty,
+                //        "stockLocationId": _d.receiver_LocationId,
+                //        //"stockUserId": $scope.,
+                //        "componentId": null
+                //    };
+
+                //    //Fill Item By _d
+                //    //query_items.push(item);
+                //    mntService.get_selected_component().then(function (res) {
+                //        _result = _result.concat(res.data);
+                //    }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
+
+                //});
+
+
+
+
+
+                $rootScope.$broadcast('on_inventory_selected', selected_rows);
+
+                //boro to cos 
+                //close
+                $scope.popup_inventory_visible = false;
+
+            }
+        }
+
+    };
+
+  
     $scope.bind = function () {
 
         mntService.get_ata_chart().then(function (res) {
@@ -439,12 +490,12 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
         $scope.tempData = prms;
         //alert($scope.tempData.location_id);
 
-        $scope.bind();
+      
 
         $scope.popup_inventory_visible = true;
     });
 
-
+    $scope.bind();
 
 }]);
 
