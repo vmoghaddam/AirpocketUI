@@ -122,14 +122,14 @@ app.controller('part_number_slectionController', ['$scope', '$location', 'mntSer
 
     $scope.bind = function () {
 
-        mntService.getPNSelection($scope.entity).then(function (res) {
-            $scope.dg_pn_ds = res.data;
-        });
+        //mntService.getPNSelection($scope.entity).then(function (res) {
+        //    $scope.dg_pn_ds = res.data;
+        //});
 
-        mntService.get_ata_chart().then(function (res) {
-            console.log(res);
-            $scope.ds_ata = res;
-        });
+        //mntService.get_ata_chart().then(function (res) {
+        //    console.log(res);
+        //    $scope.ds_ata = res;
+        //});
     }
 
 
@@ -142,7 +142,7 @@ app.controller('part_number_slectionController', ['$scope', '$location', 'mntSer
         valueExpr: 'title',
         bindingOptions: {
             value: 'entity.ataChapter',
-            dataSource: 'ds_ata'
+            dataSource: 'vira_ds_ata'
         }
     }
 

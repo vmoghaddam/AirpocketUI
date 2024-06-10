@@ -42,8 +42,10 @@ app.controller('appsController', ['$scope', '$location', 'authService', 'ngAuthS
             case 3:
                 ok = $rootScope.HasAccessToFlightPocket();
             case 5:
+               
                 ok = false;
             case 6:
+                $rootScope.fill_vira_information();
                 ok = true;
                  
                  

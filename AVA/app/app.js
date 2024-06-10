@@ -1022,7 +1022,7 @@ app.directive('onFinishRender', function ($timeout) {
     }
 });
 
-app.run(['authService', 'activityService', '$rootScope', '$location', '$templateCache', function (authService, activityService, $rootScope, $location, $templateCache) {
+app.run(['authService', 'activityService', 'mntService', '$rootScope', '$location', '$templateCache', function (authService, activityService, mntService, $rootScope, $location, $templateCache) {
     //alert($location.absUrl());
     // Config.CustomerId = 1;
 	
@@ -2219,6 +2219,17 @@ $rootScope.HasHR = function () {
         return $rootScope.colorSetGray[n];
     };
     ////////////////////////////////////////////////
+    $rootScope.fill_vira_information = function(){
+        mntService.get_ata_chart().then(function (res1) {
+            
+            $rootScope.vira_ds_ata = res1;
+
+        });
+    };
+
+
+
+    /////////////////////////////////////////////
 }]);
 
 

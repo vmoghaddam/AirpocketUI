@@ -255,7 +255,7 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
             valueExpr: 'title',
             bindingOptions: {
                 value: 'dto_search.ataChapter',
-                dataSource: 'ds_ata'
+                dataSource: 'vira_ds_ata'
             }
         }
          
