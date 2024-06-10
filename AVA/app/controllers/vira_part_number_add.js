@@ -285,6 +285,17 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
         }
     }
 
+    $scope.ch_block = {
+        bindingOptions: {
+            value: '',
+        }
+    }
+
+    $scope.ch_ht = {
+        bindingOptions: {
+            value: '',
+        }
+    }
 
 
     ////////////////////
