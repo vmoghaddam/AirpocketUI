@@ -151,7 +151,7 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
                 widget: 'dxButton', location: 'before', options: {
                     type: 'default', text: 'Inventory', onClick: function (e) {
 
-                        $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity.warehouse });
+                        $rootScope.$broadcast('InitInventoryTotalPopup', { location_id: $scope.entity.warehouse });
                     }
                 }, toolbar: 'bottom'
             },
