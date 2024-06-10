@@ -78,6 +78,11 @@
                         <div dx-select-box="sb_actype" class="center" style="width: 100%"></div>
                     </div>
                     <div class="col-lg-12  margin-bottom-5 padding-7">
+                        <label>ATA</label>
+                        <div dx-select-box="sb_ata" class="center" style="width: 100%"></div>
+                    </div>
+                    
+                    <div class="col-lg-12  margin-bottom-5 padding-7">
                         <label>Asset Type</label>
                         <div dx-select-box="sb_assettype" class="center" style="width: 100%"></div>
                     </div>
@@ -93,8 +98,15 @@
         </div>
         <div class=" col-lg-10 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:0px;padding-left:5px;">
 
-            <div dx-data-grid="dg_inv" id="dg_inv">
+            <div dx-data-grid="dg_inv" id="dg_inv" dx-item-alias="inv_row">
+                <div data-options="dxTemplate:{ name:'typeTemplate' }">
+                    <i ng-show="inv_row.data.typeId==93" class='fas fa-dice-one' style="font-size: 20px; color:#00b386"></i>
+    <i ng-show="inv_row.data.typeId==94" class='fas fa-dice-five' style="font-size:20px; color:#ff3399"></i>
+    <i ng-show="inv_row.data.typeId==95" class='fas fa-cube' style="font-size:20px; color:#5c8a8a"></i>
+    <i ng-show="inv_row.data.typeId==119" class='far fa-question-circle' style="font-size:20px; color:#ffcc00"></i>
+                   <!-- <i   class='far fa-question-circle' style="font-size:20px; color:#ffcc00" ng-class="get_cell_type_class(inv_row)"></i>-->
 
+                </div>
             </div>
             <div style="margin-top:5px;border:1px solid #ccc;background:#eee;padding:5px;">
                 <table style="width:100%">
@@ -128,9 +140,9 @@
         </table>
     </div>-->
 
-    <div ng-include="'app/views/partNumberSelection.html'"></div>
+    <div ng-include="'app/views/vira_part_number_selection.html'"></div>
     <div ng-include="'app/views/newPartNumber.html'"></div>
-    <div ng-include="'app/views/receipt.html'"></div>
+    <div ng-include="'app/views/vira_receipt.html'"></div>
     <div ng-include="'app/views/directDelivery.html'"></div>
     <div dx-load-panel="loadPanel"></div>
 

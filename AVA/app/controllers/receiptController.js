@@ -729,10 +729,10 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         $scope.itemEntity.partNumber = prms.partNumber;
         $scope.itemEntity.description = prms.description;
         $scope.itemEntity.ataChapter = prms.ataChapter;
-        console.log("quantity",prms.qty)
-        $scope.itemEntity.quantity = prms.qty;
-        if ($scope.itemEntity.quantity == 1)
-            $scope.is_qty_readonly = true;
+        //console.log("quantity",prms.qty)
+        //$scope.itemEntity.quantity = prms.qty;
+        //if ($scope.itemEntity.quantity == 1)
+        //    $scope.is_qty_readonly = true;
     });
 
 

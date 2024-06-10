@@ -50,9 +50,9 @@ app.controller('part_number_slectionController', ['$scope', '$location', 'mntSer
             {
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Select', onClick: function (e) {
-                        console.log($scope.dg_pn_selected);
-                        if ($scope.dg_pn_selected.typeId == 93 || $scope.dg_pn_selected == 94)
-                            $scope.dg_pn_selected.qty = 1;
+                        //console.log($scope.dg_pn_selected);
+                       // if ($scope.dg_pn_selected.typeId == 93 || $scope.dg_pn_selected == 94)
+                       //     $scope.dg_pn_selected.qty = 1;
                         $rootScope.$broadcast('InitPNSelected', $scope.dg_pn_selected);
                         $scope.popup_personnel_visible = false;
 
@@ -167,18 +167,19 @@ app.controller('part_number_slectionController', ['$scope', '$location', 'mntSer
 
 
 
-        {
-            cellTemplate: function (container, options) {
-                $("<div style='text-align:center'/>")
-                    .html(options.rowIndex + 1)
-                    .appendTo(container);
-            }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
-        },
-        { dataField: 'acfT_Type', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        //{
+        //    cellTemplate: function (container, options) {
+        //        $("<div style='text-align:center'/>")
+        //            .html(options.rowIndex + 1)
+        //            .appendTo(container);
+        //    }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+        //},
+        { dataField: 'acfT_Type', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
         { dataField: 'ataChapter', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'remark', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350 },
+      
+        { dataField: 'remark', caption: 'Remark', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 300 },
     ];
 
 
