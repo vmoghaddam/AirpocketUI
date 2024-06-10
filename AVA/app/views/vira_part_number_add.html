@@ -1,14 +1,23 @@
-﻿<div ng-controller="vira_part_number_addController">
+﻿<style>
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+</style>
+<div ng-controller="vira_part_number_addController">
     <div id="popup_personnel" dx-popup="popup_personnel" class="no-padding" style='padding:0 !important;'>
-        <div class="col-lg-10 col-md-10 col-sm-10">
+        <div class="col-lg-10 col-md-10 col-sm-10 padding-0" style="padding:5px 5px 0 5px">
 
             <div style="width: 100%; border: 1px solid #ccc;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
                 <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
-                            <!--<td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
-                        Category:
-                    </td>-->
+                            <!--<td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                Category:
+                            </td>-->
                             <td>
                                 <div dx-select-box="sb_comp" class="center" style="width: 100%"></div>
                             </td>
@@ -20,7 +29,7 @@
                 <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
                                 Asset Type:
                             </td>
                             <td>
@@ -34,7 +43,7 @@
                 <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
                                 ATA:
                             </td>
                             <td>
@@ -50,7 +59,7 @@
                 <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
                                 IPC:
                             </td>
                             <td>
@@ -65,7 +74,7 @@
                 <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
                                 Figure No.:
                             </td>
                             <td>
@@ -80,7 +89,7 @@
                 <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
                                 Item No.:
                             </td>
                             <td>
@@ -103,7 +112,7 @@
                 <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
                                 Part Number:
                             </td>
                             <td>
@@ -118,8 +127,8 @@
                 <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
-                               Description:
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                Descriptiont:
                             </td>
                             <td>
                                 <div dx-text-box="txt_txt_desc" class="center" style="width: 100%"></div>
@@ -133,11 +142,25 @@
                 <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
-                                Item No.:
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                Part Type:
                             </td>
                             <td>
-                                <div dx-text-box="txt_itemNo" class="center" style="width: 100%"></div>
+                                <div dx-text-box="txt_pt" class="center" style="width: 100%"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                UOM:
+                            </td>
+                            <td>
+                                <div dx-select-box="sb_uom" class="center" style="width: 100%"></div>
                             </td>
 
                         </tr>
@@ -151,8 +174,10 @@
 
                 <div style="clear: both"></div>
             </div>
-
-
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 padding-0" style="padding: 5px 5px 0 0 ">
+            <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Effectivity</div>
+            <div dx-data-grid="dg_effec" id="dg_effec" class="content" style="overflow-y: hidden; margin-top: 5px; border: 1px solid lightgray" dx-item-alias="row"></div>
         </div>
     </div>
     <div dx-load-panel="loadPanel"></div>
