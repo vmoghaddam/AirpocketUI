@@ -17,7 +17,7 @@
         font-weight: bold
     }
 </style>
-<div ng-controller="directDeliveryController">
+<div ng-controller="vira_direct_deliveryController">
     <div id="popup_pn" dx-popup="popup_pn" class="no-padding" style='padding:0 !important;'>
         <div style="width: 100%">
             <div style="width: 100%; border: 1px solid #ccc;padding:10px">
@@ -63,16 +63,16 @@
                     <div class="col-lg-2 padding-0" style="padding-left:10px">
                         <span>A/C Type</span>
 
-                        <div dx-select-box="sb_acType" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
+                        <div dx-select-box="sb_acType" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px "dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
                         <span>Register</span>
-                        <div dx-select-box="sb_register" class="left"></div>
+                        <div dx-select-box="sb_register" class="left" dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
 
                     </div>
 
                     <div class="col-lg-2 padding-0" style="padding-left:10px">
                         <span>Warehouse</span>
 
-                        <div dx-select-box="sb_warehouse" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
+                        <div dx-select-box="sb_warehouse" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px" ></div>
                         <span>Issued By</span>
                         <div dx-text-box="txt_issuedBy" class="left" style="width: 100%"></div>
 
@@ -82,7 +82,7 @@
                         <table style="width:100%;margin-top:5px;margin-bottom:5px">
                             <tr>
                                 <td>
-                                    <div dx-text-box="txt_receiver" class="left" style="width: 100%"></div>
+                                    <div dx-text-box="txt_receiver" class="left" style="width: 100%" dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
                                 </td>
                                 <td style="width:10%"><div dx-button="btn_receiver"></div></td>
                             </tr>
@@ -90,7 +90,7 @@
                         </table>
 
                         <span>Location</span>
-                        <div dx-text-box="txt_receiver_location" class="left" style="width: 100%"></div>
+                        <div dx-text-box="txt_receiver_location" class="left" style="width: 100%" ></div>
 
 
 
@@ -136,6 +136,14 @@
         <div ng-include="'app/views/inventory.html?vx.2'"></div>
         <div ng-include="'app/views/vira_personnel_selection.html?vx.2'"></div>
 
+    </div>
+
+    <div id="popup_result" dx-popup="popup_result" class="no-padding" style='padding:20px !important;'>
+        <div style="text-align:center">
+            <div style="font-size:17px;padding:25px;">The document saved successfully.</div>
+            <div dx-text-box="txt_paperNo" class="center" style="width:100%;margin-top:0px"></div>
+
+        </div>
     </div>
 </div>
 

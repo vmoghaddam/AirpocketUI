@@ -218,12 +218,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
 
                 }
             }
-
-
-           
-
         });
-
     };
     $scope.popup_receipt = {
 

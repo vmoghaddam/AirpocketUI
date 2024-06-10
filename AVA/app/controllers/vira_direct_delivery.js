@@ -1,21 +1,42 @@
 ﻿'use strict';
-app.controller('directDeliveryController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
+app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
 
     $scope.entity = {
 
-        "id": 0,
-        "requestId": null,
-        "receiver_LocationId": 3,
-        "receiver_UserId": 5,
-        "approver_LocationId": 19,
-        "approver_UserId": 8,
-        "remark": null,
-        warehouse: 19,
+        id: 0,
+        requestId: null,
+        acfT_TypeId: null,
+        acfT_MSNId: 0,
+        receiver_LocationId: null,
+        receiver_UserId: null,
+        approver_LocationId: null,
+        approver_UserId: null,
+        remark: null,
+        warehouse: null,
+        date: new Date(),
         deliveryOrderItems: [
 
         ]
     };
+
+    $scope.clear_entity = function () {
+        $scope.entity.id = 0;
+        $scope.entity.requestId = null;
+        $scope.entity.receiver_LocationId = null;
+        $scope.entity.receiver_UserId = null;
+        $scope.entity.receiver = null;
+        $scope.entity.location = null;
+        $scope.entity.remark = null;
+        $scope.entity.acfT_TypeId = null;
+        $scope.entity.acfT_MSNId = 0;
+        $scope.entity.warehouse = null;
+        $scope.entity.date = new Date();
+        $scope.entity.deliveryOrderItems = [];
+        $scope.entity.remark = null;
+        $scope.dg_del_ds = [];
+    };
+
 
     $scope.itemEntity = {};
 
@@ -91,6 +112,30 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
     };
     //////////////////
 
+    $scope.save = function (callback) {
+        $scope.loadingVisible = true;
+        $scope.entity.deliveryOrderItems = $scope.dg_del_ds
+        mntService.add_delivery_order($scope.entity).then(function (res) {
+            $scope.loadingVisible = false;
+            console.log(res);
+            if (callback)
+                callback(res);
+            else {
+                if (res.errorCode) {
+                    General.ShowNotify(res.errorMessage, 'error');
+                }
+                else {
+                    $scope.entity.paperNo = res.data.paperNo;
+
+                    $scope.popup_result_visible = true;
+
+                }
+            }
+
+        });
+    };
+
+
     $scope.popup_pn_visible = false;
     $scope.popup_pn_title = "Direct Delivery";
     $scope.popup_instance = null;
@@ -112,12 +157,38 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
             },
             {
                 widget: 'dxButton', location: 'after', options: {
-                    type: 'success', text: 'Save', onClick: function (e) {
+                    type: 'success', text: 'Save', validationGroup: 'deladd', onClick: function (e) {
 
-                        $scope.entity.deliveryOrderItems = $scope.dg_del_ds
-                        mntService.add_delivery_order($scope.entity).then(function (res) {
+                        var result = e.validationGroup.validate();
+
+                        if (!result.isValid) {
+                            General.ShowNotify(Config.Text_FillRequired, 'error');
+                            return;
+                        }
+
+                        $scope.save(function (res) {
                             console.log(res);
+                            if (res.errorCode) {
+                                if (res.errorCode == 10029) {
+                                    mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+                                        $scope.save();
+
+                                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                                }
+                                else
+                                    General.ShowNotify(res.errorMessage, 'error');
+                            }
+                            else {
+                                //$scope.entity.paperNo = res.data.paperNo;
+
+                                $scope.popup_result_visible = true;
+
+                            }
+
                         });
+
+
+
                     }
                 }, toolbar: 'bottom'
             },
@@ -143,13 +214,11 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
         },
         onShown: function (e) {
+            $scope.clear_entity();
             if ($scope.dg_del_instance) {
                 $scope.dg_del_instance.repaint();
             }
-            if ($scope.isNew) {
-                $scope.isContentVisible = true;
-            }
-            if ($scope.tempData != null)
+            if ($scope.tempData == null)
                 $scope.bind();
 
             //$rootScope.referred_list_instance.repaint();
@@ -182,31 +251,105 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         }
     };
 
+    $scope.popup_result_visible = false;
+    $scope.popup_result_title = "";
+
+
+    $scope.popup_result = {
+
+
+        showTitle: true,
+
+        toolbarItems: [
+
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'default', text: 'New Delivery Order', onClick: function (e) {
+                        //$scope.loadingVisible = true;
+                        //$scope.entity.receiptItems = $scope.dg_rec_ds
+                        //mntService.addReceipt($scope.entity).then(function (res) {
+                        //    $scope.loadingVisible = false;
+                        //    console.log(res);
+                        //    if (res.errorCode) {
+                        //        General.ShowNotify(res.errorMessage, 'error');
+                        //    }
+                        //    else {
+                        //        $scope.entity.paperNo = res.data.paperNo;
+                        //        General.ShowNotify(Config.Text_SavedOk, 'success');
+                        //        $scope.popup_receipt_visible = false;
+
+                        //    }
+
+                        //});
+                        $scope.clear_entity();
+                        $scope.popup_result_visible = false;
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'danger', text: 'Close', onClick: function (e) {
+
+                        $scope.popup_result_visible = false;
+                        $scope.popup_pn_visible = false;
+
+                    }
+                }, toolbar: 'bottom'
+            },
+
+        ],
+
+        visible: false,
+        dragEnabled: true,
+        closeOnOutsideClick: false,
+        onShowing: function (e) {
+
+        },
+        onShown: function (e) {
+
+
+
+
+        },
+        onHiding: function () {
+
+
+            $scope.popup_result_visible = false;
+        },
+        onContentReady: function (e) {
+
+
+        },
+        // fullScreen:false,
+        bindingOptions: {
+            visible: 'popup_result_visible',
+
+            title: 'popup_result_title',
+            height: '300',
+            width: '500',
+
+
+        }
+    };
+
     //////////////////
 
 
+    $scope.dt_date = {
+        type: 'date',
+        width: '100%',
+        displayFormat: "yyyy-MMM-dd",
+        bindingOptions: {
+            value: 'entity.date'
+        }
+    }
 
-    //////////////////
-
-    $scope.txt_plaque = {
+    $scope.txt_no = {
         bindingOptions: {
             value: ''
         }
     }
 
-    $scope.txt_snbn = {
-        bindingOptions: {
-            value: 'entity.sn_bn'
-        }
-
-    }
-
-    $scope.ch_rfid = {
-        defaultValue: false,
-        bindingOptions: {
-            value: ''
-        }
-    }
 
     $scope.sb_acType = {
         showClearButton: false,
@@ -250,32 +393,21 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         }
     }
 
-
-
-
-    $scope.sb_shop = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
-
+    $scope.txt_receiver_location = {
+        readOnly: true,
         bindingOptions: {
-            value: 'entity.receiver_LocationId',
-            dataSource: 'shop_ds'
+            value: 'entity.location',
         }
     }
+
 
     $scope.txt_issuedBy = {
         bindingOptions: {
-            value: 'issuedBy'
+            value: 'entity.issuedBy'
         }
     }
-    $scope.receiver_location = {
-        bindingOptions: {
-            value: 'entity.receiver_location'
-        }
-    }
-    $scope.receiver = {
+
+    $scope.txt_receiver = {
         bindingOptions: {
             value: 'entity.receiver'
         }
@@ -283,14 +415,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
 
 
-    $scope.dt_date = {
-        type: 'date',
-        width: '100%',
-        // displayFormat: "yyyy-MMM-dd",
-        bindingOptions: {
-            value: ''
-        }
-    }
+
 
     $scope.pnButton = {
         icon: 'search',
@@ -432,6 +557,10 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
         mntService.get_selected_component_all(dtos).then(function (response) {
 
+            $.each(response, function (_i, _d) {
+                _d.ShelfTo = String(_d.shelfToId)
+                _d.ShelfFrom = String(_d.shelfFromId)
+            });
 
             console.log('SELECTED RESULT', response);
             $scope.dg_del_ds = response;
@@ -458,13 +587,19 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
         });
 
         mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
-            console.log("User ", res);
             $scope.ds_warehouse = res;
             $scope.user = res[0];
-            $scope.issuedBy = res[0].fullName;
+
+            $scope.entity.warehouse = $scope.user.gI_LocationId;
+            $scope.entity.issuedBy = $scope.user.fullName;
+
+
+            console.log($scope.user.gI_LocationId);
 
             $scope.entity.sender_LocationId = $scope.user.gI_LocationId;
             $scope.entity.sender_UserId = $scope.user.uM_UserId;
+            $scope.entity.approver_LocationId = $scope.user.gI_LocationId;
+            $scope.entity.approver_UserId = $scope.user.uM_UserId;
         });
 
 
@@ -476,20 +611,26 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
     $scope.$on('InitDirectDelivery', function (event, prms) {
 
+        console.log('prms', prms);
         $scope.tempData = prms;
         $scope.popup_pn_visible = true;
 
-        $scope.bind();
+
     });
 
     $scope.$on('InitPersonnelSelected', function (event, prms) {
 
         $scope.tempData = prms;
+
+        $scope.entity.receiver_LocationId = $scope.tempData.gI_LocationId;
+        $scope.entity.receiver_UserId = $scope.tempData.uM_UserId;
+        $scope.entity.receiver = $scope.tempData.fullName;
+        $scope.entity.location = $scope.tempData.title;
         $scope.popup_pn_visible = true;
 
     });
 
-
+    $scope.bind();
 }]);
 
 

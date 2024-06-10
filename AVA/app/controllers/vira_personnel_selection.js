@@ -21,6 +21,7 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
         onClick: function (e) {
             vira_general_service.get_user_location($scope.entity).then(function (res) {
                 $scope.dg_personnel_ds = res;
+                console.log($scope.dg_personnel_ds);
             });
         }
 
@@ -121,11 +122,11 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
         });
 
         vira_general_service.get_user_location($scope.entity).then(function (res) {
-            $scope.dg_personnel_ds = res.data;
+            $scope.dg_personnel_ds = res;
         });
 
+
         mntService.get_ata_chart().then(function (res) {
-            console.log(res);
             $scope.ds_ata = res;
         });
     }

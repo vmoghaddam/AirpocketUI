@@ -446,7 +446,7 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
 
 
         }).then(function (response) {
-            deferred.resolve(response.data.data);
+            deferred.resolve(response.data);
         }, function (err) {
             console.error('HTTP request error:', err);
             deferred.reject(Exceptions.getMessage(err));
