@@ -1,16 +1,6 @@
 ﻿'use strict';
 app.controller('vira_part_number_addController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
 
-    //mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
-
-
-
-
-
-    //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-
-
     $scope.entity = {
 
 
@@ -272,6 +262,12 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
     }
 
     $scope.txt_desc = {
+        bindingOptions: {
+            value: 'entity.description'
+        }
+    }
+
+    $scope.txt_pt = {
         bindingOptions: {
             value: 'entity.description'
         }
