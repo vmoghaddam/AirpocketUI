@@ -317,7 +317,7 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         var deferred = $q.defer();
         var authorizationMnt = localStorageService.get('authorizationMnt');
         var token = authorizationMnt.token;
-           $http.post("https://lmmcore.online/api/CMPPartNumber/GetAllPagination?page=1&size=5000", entity, {
+           $http.post("https://lmmcore.online/api/CMPPartNumber/GetAllPagination?page=1&size=10000", entity, {
             //withCredentials: true,
             headers: {
                 'Authorization': 'bearer ' + token,
