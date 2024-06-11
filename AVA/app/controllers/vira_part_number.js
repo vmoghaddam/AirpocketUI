@@ -36,8 +36,9 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
         }
 
         $scope.btn_new = {
-            icon: 'New',
-            width: '50%',
+            icon: 'add',
+            text:'New',
+            width: 120,
             type: 'default',
             onClick: function () {
                 $rootScope.$broadcast('InitNewPNPopup', null);

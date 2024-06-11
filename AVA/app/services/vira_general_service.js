@@ -209,6 +209,23 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
     };
     ordersServiceFactory.add_beginning_inventory = _add_beginning_inventory;
 
+    var _add_nis = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSNIS/Add", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.add_nis = _add_nis;
+
     return ordersServiceFactory;
 
 }]);
