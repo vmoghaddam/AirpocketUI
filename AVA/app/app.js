@@ -753,10 +753,10 @@ app.config(function ($routeProvider) {
          templateUrl: "/app/views/receipt.html?v=1130"
     });
 
-    $routeProvider.when("/delivery/form", {
-        controller: "directDeliveryController",
-        templateUrl: "/app/views/directDelivery.html?v=1130"
-    });
+    //$routeProvider.when("/delivery/form", {
+    //    controller: "directDeliveryController",
+    //    templateUrl: "/app/views/directDelivery.html?v=1130"
+    //});
 
     $routeProvider.when("/vira/inventory", {
         controller: "vira_inventoryController",

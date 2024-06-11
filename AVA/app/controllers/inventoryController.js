@@ -1,6 +1,6 @@
 ﻿'use strict';
 app.controller('inventoryController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
-
+   // alert('x');
     $scope.form_type = 'do';
 
     $scope.entity =
