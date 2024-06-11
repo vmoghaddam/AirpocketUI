@@ -107,6 +107,7 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
         icon: '',
         width: 120,
         onClick: function (e) {
+            
             $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity.warehouse });
         }
     };
@@ -151,7 +152,8 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
                 widget: 'dxButton', location: 'before', options: {
                     type: 'default', text: 'Inventory', onClick: function (e) {
 
-                        $rootScope.$broadcast('InitInventoryTotalPopup', { location_id: $scope.entity.warehouse });
+                       // $rootScope.$broadcast('InitInventoryTotalPopup', { location_id: $scope.entity.warehouse });
+                        $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity.warehouse });
                     }
                 }, toolbar: 'bottom'
             },
@@ -218,7 +220,8 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
             if ($scope.dg_del_instance) {
                 $scope.dg_del_instance.repaint();
             }
-            if ($scope.tempData == null)
+
+            //if ($scope.tempData == null)
                 $scope.bind();
 
             //$rootScope.referred_list_instance.repaint();
@@ -630,7 +633,7 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
 
     });
 
-    $scope.bind();
+    //$scope.bind();
 }]);
 
 

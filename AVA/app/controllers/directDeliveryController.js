@@ -474,7 +474,7 @@ app.controller('directDeliveryController', ['$scope', '$location', 'mntService',
 
 
 
-    $scope.$on('InitDirectDelivery', function (event, prms) {
+    $scope.$on('InitDirectDeliveryxxxx', function (event, prms) {
 
         $scope.tempData = prms;
         $scope.popup_pn_visible = true;
