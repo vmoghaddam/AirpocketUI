@@ -144,7 +144,7 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
      var _get_partnumebr_interchabge = function () {
         var deferred = $q.defer();
 
-         $http.post(vira_api + "api/LGSStockManagement/GetPartNumberInterchange", {
+         $http.get(vira_api + "api/LGSStockManagement/GetPartNumberInterchange", {
 
 
         }).then(function (response) {

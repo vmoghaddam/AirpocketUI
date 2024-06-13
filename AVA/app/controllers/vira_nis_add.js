@@ -26,7 +26,7 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
 
 
     $scope.txt_remark = {
-        height: 120,
+        height: '80',
         width: '100%',
         bindingOptions: {
             value: ''
@@ -34,7 +34,6 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
     }
 
     $scope.txt_pn = {
-        height: 120,
         width: '100%',
         bindingOptions: {
             value: ''
@@ -42,7 +41,6 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
     }
 
     $scope.txt_newPn = {
-        height: 120,
         width: '100%',
         bindingOptions: {
             value: ''
@@ -50,7 +48,6 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
     }
 
     $scope.txt_qty = {
-        height: 120,
         width: '100%',
         bindingOptions: {
             value: ''
@@ -58,7 +55,6 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
     }
 
     $scope.txt_newQty = {
-        height: 120,
         width: '100%',
         bindingOptions: {
             value: ''
@@ -69,7 +65,7 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
     /////////////////////////////
 
     $scope.popup_nis_visible = false;
-    $scope.popup_height = 410;
+    $scope.popup_height = 285;
     $scope.popup_width = 650;
     $scope.popup_nis_title = "NIS Info";
     $scope.popup_instance = null;
@@ -158,7 +154,7 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
         toolbarItems: [
 
             {
-                widget: 'dxButton', location: 'after', options: {
+                widget: 'dxButton', location: 'before', options: {
                     type: 'default', text: 'New Receipt', onClick: function (e) {
                         //$scope.loadingVisible = true;
                         //$scope.entity.receiptItems = $scope.dg_rec_ds
@@ -182,7 +178,7 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
                 }, toolbar: 'bottom'
             },
             {
-                widget: 'dxButton', location: 'after', options: {
+                widget: 'dxButton', location: 'before', options: {
                     type: 'danger', text: 'Close', onClick: function (e) {
 
                         $scope.popup_result_visible = false;

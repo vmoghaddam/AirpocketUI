@@ -12,6 +12,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         receiver_LocationId: null,
         deadline: null,
         remark: null,
+        date: new Date(),
         requestItems: []
     }
 
@@ -118,6 +119,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                     $scope.item = { Id: -1 };
                     $scope.entity.requestItems = [];
                     $scope.entity.requestItems = $scope.dg_item_ds;
+                    $scope.entity.acfT_MSNIds = $scope.valEntity.acfT_MSNIds;
                 };
             });
         }
@@ -220,7 +222,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         type: 'date',
         displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
-            value: ''
+            value: 'entity.date'
         }
     }
 
@@ -228,7 +230,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         type: 'date',
         displayFormat: "yyyy-MMM-dd",
         bindingOptions: {
-            value: '$scope.entity.deadline'
+            value: 'entity.deadline'
         }
     }
 
@@ -413,46 +415,57 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         { dataField: 'title', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false },
     ];
 
-    $scope.gridBoxOptions = {
-        bindingOptions: {
-            value: "item.ataTitle",
-            opened: "isTreeBoxOpened",
-        },
+    //$scope.gridBoxOptions = {
+    //    bindingOptions: {
+    //        value: "item.ataTitle",
+    //        opened: "isTreeBoxOpened",
+    //    },
 
-        valueExpr: "item.ataTitle",
-        deferRendering: false,
+    //    valueExpr: "item.ataTitle",
+    //    deferRendering: false,
 
-        displayExpr: $scope.item.ataTitle,
+    //    displayExpr: $scope.item.ataTitle,
 
-        //onValueChanged: function (e) {
-        //    $scope.gridSelectedRowKeys = e.value || [];
-        //},
+    //    //onValueChanged: function (e) {
+    //    //    $scope.gridSelectedRowKeys = e.value || [];
+    //    //},
+    //    showClearButton: false,
+
+    //    dataGrid: {
+    //        dataSource: $scope.gridDataSource,
+    //        //columns: ["ATA", "Description"],
+    //        columns: $scope.dg_ata_columns,
+    //        hoverStateEnabled: true,
+    //        paging: { enabled: true, pageSize: 10 },
+    //        filterRow: { visible: true },
+    //        scrolling: { mode: "virtual" },
+    //        selection: { mode: "single" },
+    //        height: "100%",
+    //        bindingOptions: {
+    //            "selectedRowKeys": "gridSelectedRowKeys",
+    //            dataSource: 'ds_ata',
+    //        },
+    //        onSelectionChanged: function (selectedItems) {
+    //            var keys = selectedItems.selectedRowKeys;
+    //            $scope.gridBoxValue = keys.length && keys[0] || null;
+    //            $scope.item.ataChapter = keys[0].ata;
+    //            $scope.item.ataTitle = keys[0].title;
+    //            $scope.isTreeBoxOpened = false;
+    //        },
+
+    //    }
+    //};
+
+    $scope.sb_ata = {
         showClearButton: false,
-
-        dataGrid: {
-            dataSource: $scope.gridDataSource,
-            //columns: ["ATA", "Description"],
-            columns: $scope.dg_ata_columns,
-            hoverStateEnabled: true,
-            paging: { enabled: true, pageSize: 10 },
-            filterRow: { visible: true },
-            scrolling: { mode: "virtual" },
-            selection: { mode: "single" },
-            height: "100%",
-            bindingOptions: {
-                "selectedRowKeys": "gridSelectedRowKeys",
-                dataSource: 'ds_ata',
-            },
-            onSelectionChanged: function (selectedItems) {
-                var keys = selectedItems.selectedRowKeys;
-                $scope.gridBoxValue = keys.length && keys[0] || null;
-                $scope.item.ataChapter = keys[0].ata;
-                $scope.item.ataTitle = keys[0].title;
-                $scope.isTreeBoxOpened = false;
-            },
-
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'title',
+        bindingOptions: {
+            value: 'item.ataChapter',
+            dataSource: 'ds_ata'
         }
-    };
+    }
 
     ///////////////////////////////
 
