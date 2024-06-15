@@ -37,6 +37,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
        // icon: 'search',
       //  width: 120,
         onClick: function (e) {
+           // $scope.fn_test();
             mntService.get_part_number($scope.entity).then(function (res) {
                 $.each(res, function (_i, _d) {
                     _d.selected_qty = null;
@@ -160,7 +161,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         },
         onHiding: function () {
 
-
+            $scope.dg_inv_ds = [];
             $scope.popup_inventory_visible = false;
         },
         onContentReady: function (e) {
@@ -348,7 +349,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
     ];
 
 
-
+    $scope.dg_inv_ds = null;
     $scope.dg_inv_selected = null;
     $scope.dg_inv_instance = null;
     $scope.dg_inv = {

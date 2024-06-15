@@ -350,6 +350,25 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
     ordersServiceFactory.get_inventory = _get_inventory;
 
 
+    var _get_locations = function (dto) {
+        if (!dto)
+            dto = {};
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/GILocation/GetAllPagination?page=1&size=1000", dto, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_locations = _get_locations;
+
     var _get_user_locations = function (dto) {
         var deferred = $q.defer();
 

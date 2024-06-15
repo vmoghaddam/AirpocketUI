@@ -126,6 +126,7 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
                     General.ShowNotify(res.errorMessage, 'error');
                 }
                 else {
+                    console.log('dddd ooooo 2', res);
                     $scope.entity.paperNo = res.data.paperNo;
 
                     $scope.popup_result_visible = true;
@@ -135,7 +136,12 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
 
         });
     };
-
+    $scope.txt_paperNo = {
+        readOnly: true,
+        bindingOptions: {
+            value: 'entity.paperNo'
+        }
+    }
 
     $scope.popup_pn_visible = false;
     $scope.popup_pn_title = "Direct Delivery";
@@ -181,8 +187,8 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
                                     General.ShowNotify(res.errorMessage, 'error');
                             }
                             else {
-                                //$scope.entity.paperNo = res.data.paperNo;
-
+                                $scope.entity.paperNo = res.data.paperNo;
+                                console.log('dddd ooooo 1', res);
                                 $scope.popup_result_visible = true;
 
                             }
@@ -336,7 +342,11 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
     };
 
     //////////////////
-
+    $scope.txt_paperRemark = {
+        bindingOptions: {
+            value: 'entity.remark'
+        }
+    }
 
     $scope.dt_date = {
         type: 'date',
@@ -432,7 +442,7 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
     $scope.btn_receiver = {
         icon: 'search',
         onClick: function () {
-            $rootScope.$broadcast('InitPersonnelPopup', null);
+            $rootScope.$broadcast('InitPersonnelPopup', {});
         }
 
     };
