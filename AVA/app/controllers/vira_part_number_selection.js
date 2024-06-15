@@ -11,7 +11,7 @@ app.controller('part_number_slectionController', ['$scope', '$location', 'mntSer
         categoryId: null,
         statusId: null,
         hardTime: null,
-        blockList: null
+        blockList: null,
     }
 
 

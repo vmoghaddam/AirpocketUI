@@ -426,7 +426,7 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
     var _get_shop = function () {
         var deferred = $q.defer();
         var entity = {};
-        $http.post(vira_api+"api/GILocation/GetAllPagination?page=1&size1000", entity ,{
+        $http.post(vira_api+"api/GILocation/GetAllPagination?page=1&size=1000", entity ,{
 
 
         }).then(function (response) {

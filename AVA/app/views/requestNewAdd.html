@@ -74,14 +74,14 @@
                             <div dx-button="btn_pn" style="top: -15px; margin-left: 5px"></div>
                         </td>
                         <td class="td-field" style="font-weight:bold">ATA:</td>
-                        <td class="td-field">
+                        <!--<td class="td-field">
                             <div dx-drop-down-box="gridBoxOptions">
                                 <div data-options="dxTemplate: { name: 'content' }">
                                     <div dx-data-grid="gridBoxOptions.dataGrid"></div>
                                 </div>
-                            </div>
-                        </td>
-                        <!--<td class="td-field"><div dx-select-box="sb_ata" class="center"></div></td>-->
+                            </div>-->
+                        <!--</td>-->
+                        <td class="td-field"><div dx-select-box="sb_ata" class="center"></div></td>
 
                         <td class="td-field" style="font-weight:bold">Availability:</td>
                         <td class="td-field"><div dx-text-box="txt_availability" class="center"></div></td>
@@ -139,5 +139,5 @@
         </div>
     </div>
     <div dx-load-panel="loadPanel"></div>
-    <div ng-include="'app/views/partNumberSelection.html'"></div>
+    <div ng-include="'app/views/vira_part_number_selection.html'"></div>
 </div>

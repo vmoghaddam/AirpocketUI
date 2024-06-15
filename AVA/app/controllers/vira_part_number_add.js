@@ -1,5 +1,82 @@
 ﻿'use strict';
 app.controller('vira_part_number_addController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
+    $scope.selectedTabIndex = -1;
+    $scope.selectedTabId = null;
+    $scope.popupselectedTabIndex = -1;
+    $scope.popupselectedTabId = null;
+    $scope.tabs = [
+        { text: "A/C Type", id: 'type' },
+        { text: "A/C Model", id: 'model' },
+        { text: "A/C MSN", id: 'msn' },
+ ];
+
+
+    $scope.$watch("selectedTabIndex", function (newValue) {
+        //ati
+        try {
+            $('.tabc').hide();
+            var id = $scope.tabs[newValue].id;
+            $scope.selectedTabId = id;
+            $('#' + id).fadeIn();
+
+            switch (id) {
+                case 'type':
+
+                    break;
+
+                case 'model':
+
+                    break;
+
+                case 'msn':
+
+                    break;
+
+                default:
+                    break;
+            }
+            if ($scope.dg_type_instance)
+                $scope.dg_type_instance.refresh();
+            if ($scope.dg_model_instance)
+                $scope.dg_model_instance.refresh();
+            if ($scope.dg_msn_instance)
+                $scope.dg_msn_instance.refresh();
+
+        }
+        catch (e) {
+
+        }
+
+
+    });
+
+    
+    $scope.tabs_options = {
+        scrollByContent: true,
+        showNavButtons: true,
+
+
+        onItemClick: function (arg) {
+            //$scope.selectedTab = arg.itemData;
+
+        },
+        onItemRendered: function (e) {
+            $scope.selectedTabIndex = -1;
+            $scope.selectedTabIndex = 0;
+        },
+        bindingOptions: {
+            //visible: 'tabsdatevisible',
+            dataSource: { dataPath: "tabs", deep: true },
+            selectedIndex: 'selectedTabIndex'
+        }
+
+    };
+
+    
+
+
+
+
 
     $scope.entity = {
 
@@ -37,11 +114,11 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
     //////////////////
 
     $scope.popup_personnel_visible = false;
-    $scope.popup_height = 420;
-    $scope.popup_width = 1250;
+    $scope.popup_height = 400;
+    $scope.popup_width = 1200;
     $scope.popup_personnel_title = "New Part Number";
     $scope.popup_instance = null;
-    $scope.isFullScreen = true;
+    $scope.isFullScreen = false;
 
     $scope.popup_personnel = {
 
@@ -315,6 +392,8 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
 
     ];
 
+   
+
 
 
     $scope.dg_effec_selected = null;
@@ -346,7 +425,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
         selection: { mode: 'multiple' },
 
         columnAutoWidth: false,
-        height: $scope.popup_height - 152,
+        height: $scope.popup_height - 178,
         width: '100%',
         columns: $scope.dg_effec_columns,
         onContentReady: function (e) {
@@ -396,6 +475,201 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
         },
 
     };
+
+    $scope.dg_msn_columns = [
+
+
+        {
+            cellTemplate: function (container, options) {
+                $("<div style='text-align:center'/>")
+                    .html(options.rowIndex + 1)
+                    .appendTo(container);
+            }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+        },
+        { dataField: 'id', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+
+    ];
+
+
+    $scope.dg_msn_selected = null;
+    $scope.dg_msn_instance = null;
+    $scope.dg_msn = {
+
+
+
+        wordWrapEnabled: true,
+        rowAlternationEnabled: false,
+        headerFilter: {
+            visible: false
+        },
+        filterRow: {
+            visible: true,
+            showOperationChooser: true,
+        },
+        showRowLines: true,
+        showColumnLines: true,
+        sorting: { mode: 'none' },
+
+        noDataText: '',
+
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'infinite' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'multiple' },
+
+        columnAutoWidth: false,
+        height: $scope.popup_height - 178,
+        width: '100%',
+        columns: $scope.dg_msn_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_msn_instance)
+                $scope.dg_msn_instance = e.component;
+
+        },
+
+        onRowClick: function (e) {
+
+
+
+        },
+
+        onRowPrepared: function (e) {
+
+
+        },
+
+
+        onCellPrepared: function (e) {
+
+        },
+
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData;
+
+            if (!data) {
+                $scope.dg_msn_selected = null;
+            }
+            else {
+                $scope.entity.typeEfectivity = [];
+                $.each(data, function (_i, _d) {
+                    console.log("date loop", _d)
+                    $scope.entity.typeEfectivity.push(_d.id);
+                });
+            }
+
+            console.log($scope.entity.typeEfectivity);
+        },
+
+        bindingOptions: {
+            dataSource: 'dg_msn_ds'
+        },
+        columnChooser: {
+            enabled: false
+        },
+
+    };
+
+    $scope.dg_model_columns = [
+
+
+        {
+            cellTemplate: function (container, options) {
+                $("<div style='text-align:center'/>")
+                    .html(options.rowIndex + 1)
+                    .appendTo(container);
+            }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+        },
+        { dataField: 'id', caption: 'Aircraft Model', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+
+    ];
+
+
+
+    $scope.dg_model_selected = null;
+    $scope.dg_model_instance = null;
+    $scope.dg_model = {
+
+
+
+        wordWrapEnabled: true,
+        rowAlternationEnabled: false,
+        headerFilter: {
+            visible: false
+        },
+        filterRow: {
+            visible: true,
+            showOperationChooser: true,
+        },
+        showRowLines: true,
+        showColumnLines: true,
+        sorting: { mode: 'none' },
+
+        noDataText: '',
+
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'infinite' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'multiple' },
+
+        columnAutoWidth: false,
+        height: $scope.popup_height - 178,
+        width: '100%',
+        columns: $scope.dg_model_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_model_instance)
+                $scope.dg_model_instance = e.component;
+
+        },
+
+        onRowClick: function (e) {
+
+
+
+        },
+
+        onRowPrepared: function (e) {
+
+
+        },
+
+
+        onCellPrepared: function (e) {
+
+        },
+
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData;
+
+            if (!data) {
+                $scope.dg_model_selected = null;
+            }
+            else {
+                $scope.entity.typeEfectivity = [];
+                $.each(data, function (_i, _d) {
+                    console.log("date loop", _d)
+                    $scope.entity.typeEfectivity.push(_d.id);
+                });
+            }
+
+            console.log($scope.entity.typeEfectivity);
+        },
+
+        bindingOptions: {
+            dataSource: 'dg_model_ds'
+        },
+        columnChooser: {
+            enabled: false
+        },
+
+    };
+
+
+
+
 
     $scope.$on('InitNewPNPopup', function (event, prms) {
 

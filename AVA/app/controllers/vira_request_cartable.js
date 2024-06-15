@@ -27,6 +27,20 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
     };
 
+     $scope.btn_search = {
+        text: 'Search',
+        type: 'default',
+        icon: 'search',
+        width: 120,
+        onClick: function (e) {
+            vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
+                $scope.dg_req_ds = res;
+                console.log("Request Cartable Response")
+            });
+        }
+
+    };
+
     $scope.btn_snbn = {
         text: 'Refresh',
         type: 'default',
@@ -661,6 +675,9 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         },
 
     };
+
+    $scope.bind();
+
 
 }]);
 

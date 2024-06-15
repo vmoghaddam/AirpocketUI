@@ -9,195 +9,209 @@
 </style>
 <div ng-controller="vira_part_number_addController">
     <div id="popup_personnel" dx-popup="popup_personnel" class="no-padding" style='padding:0 !important;'>
-        <div class="col-lg-10 col-md-10 col-sm-10 padding-0" style="padding:5px 5px 0 5px">
+        <div class="col-lg-9 col-md-9 col-sm-9 padding-0" style="padding: 10px 5px 0 5px">
+            <div style=" border: 1px solid #ccc;">
+                <div style="width: 100%;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Category:
+                                </td>
+                                <td>
+                                    <div dx-select-box="sb_comp" class="center" style="width: 100%"></div>
+                                </td>
 
-            <div style="width: 100%; border: 1px solid #ccc;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <!--<td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                Category:
-                            </td>-->
-                            <td>
-                                <div dx-select-box="sb_comp" class="center" style="width: 100%"></div>
-                            </td>
+                            </tr>
+                        </table>
+                    </div>
 
-                        </tr>
-                    </table>
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Asset Type:
+                                </td>
+                                <td>
+                                    <div dx-select-box="sb_asset" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    ATA:
+                                </td>
+                                <td>
+                                    <div dx-select-box="sb_ata" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div style="width: 100%;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    IPC:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_ipc" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Figure No.:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_figNo" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Item No.:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_itemNo" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+
+
+
+
+
+                    <div style="clear: both"></div>
                 </div>
 
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                Asset Type:
-                            </td>
-                            <td>
-                                <div dx-select-box="sb_asset" class="center" style="width: 100%"></div>
-                            </td>
+                <div style="width: 100%;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Part Number:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_pn" class="center" style="width: 100%"></div>
+                                </td>
 
-                        </tr>
-                    </table>
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Descriptiont:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_txt_desc" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="clear: both"></div>
                 </div>
+                <div style="width: 100%;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
 
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                ATA:
-                            </td>
-                            <td>
-                                <div dx-select-box="sb_ata" class="center" style="width: 100%"></div>
-                            </td>
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Part Type:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_pt" class="center" style="width: 100%"></div>
+                                </td>
 
-                        </tr>
-                    </table>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 padding-0" style="padding-left:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    UOM:
+                                </td>
+                                <td>
+                                    <div dx-select-box="sb_uom" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding-left:0px;margin-top:10px">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:100px;font-size:12px;padding-right:5px;text-align:right">
+                                    Hard Time:
+                                </td>
+                                <td dx-check-box="ch_ht" class="center"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding-left:0px;margin-top:10px">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:100px;font-size:12px;padding-right:5px;text-align:right">
+                                    Block PN(s):
+                                </td>
+                                <td dx-check-box="ch_block" class="center"></td>
+                            </tr>
+                        </table>
+                    </div>
+
+
+
+                    <div style="clear: both"></div>
                 </div>
-                <div style="clear:both"></div>
-            </div>
-            <div style="width: 100%; border: 1px solid #ccc;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                IPC:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_ipc" class="center" style="width: 100%"></div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-
-
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                Figure No.:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_figNo" class="center" style="width: 100%"></div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-
-
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                Item No.:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_itemNo" class="center" style="width: 100%"></div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-
-
-
-
-
-
-                <div style="clear: both"></div>
-            </div>
-
-            <div style="width: 100%; border: 1px solid #ccc;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                Part Number:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_pn" class="center" style="width: 100%"></div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-
-
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                Descriptiont:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_txt_desc" class="center" style="width: 100%"></div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-
-
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                Part Type:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_pt" class="center" style="width: 100%"></div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="col-lg-2 padding-0" style="padding-left:10px;">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
-                                UOM:
-                            </td>
-                            <td>
-                                <div dx-select-box="sb_uom" class="center" style="width: 100%"></div>
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-
-
-                <div class="col-lg-1 padding-0" style="padding-left:0px;margin-top:10px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:100px;font-size:12px;padding-right:5px;text-align:right">
-                                Hard Time:
-                            </td>
-                            <td dx-check-box="ch_ht" class="center"></td>
-                        </tr>
-                    </table>
-                </div>
-
-                  <div class="col-lg-1 padding-0" style="padding-left:0px;margin-top:10px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:100px;font-size:12px;padding-right:5px;text-align:right">
-                                Block PN(s):
-                            </td>
-                            <td dx-check-box="ch_block" class="center"></td>
-                        </tr>
-                    </table>
-                </div>
-
-
-
-                <div style="clear: both"></div>
             </div>
         </div>
-        <div class="col-lg-2 col-md-2 col-sm-2 padding-0" style="padding: 5px 5px 0 0 ">
+        <div class="col-lg-3 col-md-3 col-sm-3 padding-0" style="padding: 10px 5px 0 0 ">
             <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc">Effectivity</div>
-            <div dx-data-grid="dg_effec" id="dg_effec" class="content" style="overflow-y: hidden; margin-top: 5px; border: 1px solid lightgray" dx-item-alias="row"></div>
+
+
+            <div id="type" class="tabc">
+                <div dx-data-grid="dg_effec" id="dg_effec" class="content" style="overflow-y: hidden; border: 1px solid lightgray" dx-item-alias="row"></div>
+            </div>
+            <div id="model" class="tabc">
+                <div dx-data-grid="dg_model" id="dg_model" class="content" style="overflow-y: hidden; border: 1px solid lightgray" dx-item-alias="row"></div>
+            </div>
+            <div id="msn" class="tabc">
+                <div dx-data-grid="dg_msn" id="dg_msn" class="content" style="overflow-y: hidden;border: 1px solid lightgray" dx-item-alias="row"></div>
+            </div>
+            <div dx-tabs="tabs_options"></div>
         </div>
     </div>
     <div dx-load-panel="loadPanel"></div>
