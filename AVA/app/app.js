@@ -1032,7 +1032,7 @@ app.directive('onFinishRender', function ($timeout) {
     }
 });
 
-app.run(['authService', 'activityService', 'mntService', '$rootScope', '$location', '$templateCache', function (authService, activityService, mntService, $rootScope, $location, $templateCache) {
+app.run(['authService', 'activityService', 'mntService', 'vira_general_service', '$rootScope', '$location', '$templateCache', function (authService, activityService, mntService, vira_general_service, $rootScope, $location, $templateCache) {
     //alert($location.absUrl());
     // Config.CustomerId = 1;
 	
@@ -2236,6 +2236,35 @@ $rootScope.HasHR = function () {
 
         });
     };
+
+
+    $rootScope.vira_locations = null;
+    $rootScope.vira_user_locations_all = null;
+    $rootScope.fill_vira_locations = function (callback) {
+        mntService.get_locations().then(function (res1) {
+
+            var _filtered = Enumerable.From(res1).Where('$.title.startsWith("AVA")').ToArray();
+            $.each(_filtered, function (_i, _d) {
+                _d.gI_LocationId = _d.id;
+                _d.uM_UserId = $rootScope.vira_user_id;
+            });
+            $rootScope.vira_locations = _filtered;
+
+            vira_general_service.get_user_location({}).then(function (res2) {
+                var _filtered2 = Enumerable.From(res2).Where('$.title.startsWith("AVA")').ToArray();
+                $rootScope.vira_user_locations_all = _filtered2;
+            });
+
+
+
+
+            if (callback)
+                callback();
+
+        });
+    };
+
+
 
 
 

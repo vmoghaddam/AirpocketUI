@@ -1,7 +1,9 @@
 ﻿'use strict';
 app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams', '$rootScope', 'authService', 'notificationService', '$route', 'mntService',
     function ($scope, $location, $routeParams, $rootScope, authService, notificationService, $route, mntService) {
-
+        $scope.fn_test = function () {
+            alert('vv');
+        };
         $scope.prms = $routeParams.prms;
         // mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
 
@@ -347,7 +349,7 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
                 $scope.dto_search.partNumberTypeId = [$scope.dto_search._typeId];
             //console.log($scope.dto_search);
             
-            mntService.get_inventory($scope.dto_search).then(function (response) {
+            mntService.get_inventory( $scope.dto_search ).then(function (response) {
 
                 $scope.loadingVisible = false;
                 $scope.dg_inv_ds = (response);
@@ -385,10 +387,24 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
             
         });
         $scope.$on('$viewContentLoaded', function () {
-            mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
-                $scope.ds_locations = response;
-                $scope.dto_search.locationId = response[0].gI_LocationId;
-            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+            //mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
+            //    $scope.ds_locations = response;
+            //    $scope.dto_search.locationId = response[0].gI_LocationId;
+            //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+            if ($rootScope.vira_locations) {
+                $scope.ds_locations = $rootScope.vira_locations;
+                $scope.dto_search.locationId = $rootScope.vira_locations[0].gI_LocationId;
+            }
+            else {
+
+                $rootScope.fill_vira_locations(function () {
+                    $scope.ds_locations = $rootScope.vira_locations;
+                    $scope.dto_search.locationId = $rootScope.vira_locations[0].gI_LocationId;
+                });
+            }
+
+
             setTimeout(function () {
 
                 //$scope.$broadcast('getFilterQuery', null);

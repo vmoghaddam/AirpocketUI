@@ -21,7 +21,7 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
         onClick: function (e) {
             vira_general_service.get_user_location($scope.entity).then(function (res) {
                 $scope.dg_personnel_ds = res;
-                console.log($scope.dg_personnel_ds);
+               
             });
         }
 
@@ -29,6 +29,36 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
 
 
     //////////////////
+
+    $scope.bind = function () {
+
+        //mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
+        //    $scope.ds_locations = res;
+        //});
+        if ($rootScope.vira_locations) {
+            $scope.ds_locations = $rootScope.vira_locations;
+            $scope.dg_personnel_ds = $rootScope.vira_user_locations_all;
+            console.log('dg_personnel_ds',$scope.dg_personnel_ds);
+            
+        }
+        else {
+
+            $rootScope.fill_vira_locations(function () {
+                $scope.ds_locations = $rootScope.vira_locations;
+                $scope.dg_personnel_ds = $rootScope.vira_user_locations_all;
+                console.log('dg_personnel_ds',$scope.dg_personnel_ds);
+            });
+        }
+
+        //vira_general_service.get_user_location($scope.entity).then(function (res) {
+        //    $scope.dg_personnel_ds = res;
+        //});
+
+
+        mntService.get_ata_chart().then(function (res) {
+            $scope.ds_ata = res;
+        });
+    }
 
     $scope.popup_personnel_visible = false;
     $scope.popup_height = 700;
@@ -76,7 +106,8 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
 
         },
         onShown: function (e) {
-
+            if (!$scope.dg_personnel_instance)
+                $scope.dg_personnel_instance.repaint();
             if ($scope.isNew) {
                 $scope.isContentVisible = true;
             }
@@ -115,21 +146,7 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
 
     ////////////////////
 
-    $scope.bind = function () {
-
-        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
-            $scope.ds_locations = res;
-        });
-
-        vira_general_service.get_user_location($scope.entity).then(function (res) {
-            $scope.dg_personnel_ds = res;
-        });
-
-
-        mntService.get_ata_chart().then(function (res) {
-            $scope.ds_ata = res;
-        });
-    }
+   
 
 
     ////////////////////
@@ -186,16 +203,16 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
         { dataField: 'personalId', caption: 'Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
-        { dataField: 'fullName', caption: 'Full Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'title', caption: 'Location', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'fullCode', caption: 'Stamp No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+        { dataField: 'fullName', caption: 'Full Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250 },
+        { dataField: 'title', caption: 'Location', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false,  },
+       // { dataField: 'fullCode', caption: 'Stamp No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
     ];
 
 
 
     $scope.dg_personnel_selected = null;
     $scope.dg_personnel_instance = null;
-    $scope.dg_personnel_height = 530
+    $scope.dg_personnel_height = 570
     $scope.dg_personnel = {
 
 
@@ -278,7 +295,7 @@ app.controller('personnelselectionController', ['$scope', '$location', 'mntServi
 
         $scope.tempData = prms;
 
-        $scope.bind();
+        
 
         $scope.popup_personnel_visible = true;
     });
