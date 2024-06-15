@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('vira_request_cartableController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', 'vira_general_service', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce, vira_general_service) {
+app.controller('vira_request_cartable_lineController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', 'vira_general_service', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce, vira_general_service) {
 
     $scope.reciver_location = 0;
 
@@ -27,33 +27,33 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         remark: null
     };
 
-   
-    
-     $scope.entity_info =
-     {
-         id: 0,
-         requestId: null,
-         acfT_TypeId: null,
-         acfT_MSNId: 0,
-         receiver_LocationId: null,
-         receiver_UserId: null,
-         approver_LocationId: null,
-         approver_UserId: null,
-         remark: null,
-         warehouse: null,
-         date: null,
-         deliveryOrderItems: [
 
-         ]
-     }
 
-     $scope.btn_search = {
+    $scope.entity_info =
+    {
+        id: 0,
+        requestId: null,
+        acfT_TypeId: null,
+        acfT_MSNId: 0,
+        receiver_LocationId: null,
+        receiver_UserId: null,
+        approver_LocationId: null,
+        approver_UserId: null,
+        remark: null,
+        warehouse: null,
+        date: null,
+        deliveryOrderItems: [
+
+        ]
+    }
+
+    $scope.btn_search = {
         text: 'Search',
         type: 'default',
         icon: 'search',
         width: 120,
-         onClick: function (e) {
-             $scope.ds_req_order.receiverLocationId = $scope.reciver_location
+        onClick: function (e) {
+            $scope.ds_req_order.receiverLocationId = $scope.reciver_location
             vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
                 $scope.dg_req_ds = res;
             });
@@ -61,26 +61,26 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
     };
 
-    
+
     $scope.do = function (e) {
         $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity_nis.sender_LocationId });
     }
 
     $scope.nis = function (e) {
 
-        
 
-       $scope.$broadcast('InitNISPopup', $scope.entity_nis);
+
+        $scope.$broadcast('InitNISPopup', $scope.entity_nis);
     }
 
-  
+
     $scope.btn_submit = {
         text: 'Save D/O',
         type: 'default',
         icon: null,
         width: 110,
         onClick: function (e) {
-            
+
             $scope.save(function (res) {
                 if (res.errorCode) {
                     if (res.errorCode == 10029) {
@@ -156,7 +156,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
     //////////////////////////
 
-   
+
     $scope.txt_partNo = {
         bindingOptions: {
             value: 'ds_req_order.partNumber'
@@ -180,7 +180,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         searchEnabled: false,
         displayExpr: "register",
         valueExpr: 'register',
-       
+
         bindingOptions: {
             value: 'ds_req_order.register',
             dataSource: 'registers',
@@ -360,7 +360,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
 
-           
+
             $scope.dg_req_id = e.selectedRowsData[0].id;
             vira_general_service.get_request_cartable_item($scope.dg_req_id).then(function (response) {
                 $scope.dg_reqItem_ds = response;
@@ -464,7 +464,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
 
-            
+
             $scope.dg_other_id.Id = e.selectedRowsData[0].Id;
 
             if (!data) {
@@ -576,7 +576,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
     $scope.dg_reqItem_columns = [
 
         { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false},
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false },
         { dataField: 'quantity', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
         { dataField: 'doReaminingQuantity', caption: 'Rem.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
         { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
@@ -759,7 +759,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
 
-            
+
             $scope.dg_delivery_id.Id = e.selectedRowsData[0].Id;
 
 
@@ -791,12 +791,12 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         setTimeout(function () {
 
             //$scope.$broadcast('getFilterQuery', null);
-          
+
         }, 500);
     });
 
 
-  
+
     $scope.$on('on_inventory_selected', function (event, prms) {
         console.log("Init PN Data", prms);
         var dtos = [];
@@ -828,7 +828,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
     });
 
 
-  
+
 
 
 }]);

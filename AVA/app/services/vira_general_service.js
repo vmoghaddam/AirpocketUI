@@ -110,7 +110,7 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
    var _get_request_cartable = function (entity) {
         var deferred = $q.defer();
 
-       $http.post(vira_api + "api/LGSStockManagement/GetRequestCartable?page=1&size:1000", entity, {
+       $http.post(vira_api + "api/LGSStockManagement/GetRequestCartable?page=1&size=10", entity, {
 
 
         }).then(function (response) {
@@ -124,10 +124,10 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
     };
     ordersServiceFactory.get_request_cartable = _get_request_cartable;
 
-   var _get_request_cartable_item = function () {
+   var _get_request_cartable_item = function (id) {
         var deferred = $q.defer();
 
-       $http.post(vira_api + "api/LGSStockManagement/GetRequestItemCartable", {
+       $http.get(vira_api + "api/LGSStockManagement/GetRequestItemCartable?id=" + id,{
 
 
         }).then(function (response) {
@@ -141,10 +141,10 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
     };
     ordersServiceFactory.get_request_cartable_item = _get_request_cartable_item;
 
-     var _get_partnumebr_interchabge = function () {
+     var _get_partnumebr_interchabge = function (id) {
         var deferred = $q.defer();
 
-         $http.get(vira_api + "api/LGSStockManagement/GetPartNumberInterchange", {
+         $http.get(vira_api + "api/LGSStockManagement/GetPartNumberInterchange?id=" + id, {
 
 
         }).then(function (response) {

@@ -275,6 +275,7 @@
     <Content Include="app\controllers\vira_nis_add.js" />
     <Content Include="app\controllers\vira_part_type.js" />
     <Content Include="app\controllers\vira_personnel_selection.js" />
+    <Content Include="app\controllers\vira_request_cartable_line.js" />
     <Content Include="app\controllers\vira_request_list.js" />
     <Content Include="app\controllers\vrAdd.js" />
     <Content Include="app\controllers\zdutyTimeline.js" />
@@ -528,6 +529,7 @@
     <Content Include="app\views\vira_nis_add.html" />
     <Content Include="app\views\vira_part_type.html" />
     <Content Include="app\views\vira_personnel_selection.html" />
+    <Content Include="app\views\vira_request_cartable_line.html" />
     <Content Include="app\views\vira_request_list.html" />
     <Content Include="app\views\vrAdd.html" />
     <Content Include="app\views\zdutyTimeline.html" />

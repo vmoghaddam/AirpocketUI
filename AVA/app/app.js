@@ -782,6 +782,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_request_cartable.html?v=1130"
     });
 
+    $routeProvider.when("/vira/request/cartable/line", {
+         controller: "vira_request_cartable_lineController",
+        templateUrl: "/app/views/vira_request_cartable_line.html?v=1130"
+    });
+
     $routeProvider.when("/vira/partnumber", {
         controller: "vira_part_numberController",
         templateUrl: "/app/views/vira_part_number.html?v=1130"
