@@ -262,15 +262,15 @@
     <div class="rowx content" style="clear:both">
 
 
-        <div class="col-lg-3 col-md-3">
+        <div class="col-lg-5 col-md-5">
             <div style="border: 1px solid #ccc " class="dx-border">
                 <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
                     <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Filter Panel</div>
                 </div>
-                <div class="col-lg-6 padding-0" style="margin-bottom: 5px">
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:70px;font-size:12px;padding-left:5px;text-align:left">
+                            <td style="width:80px;font-size:12px;padding-left:5px;text-align:left">
                                 Req NO. :
                             </td>
                             <td>
@@ -280,23 +280,23 @@
                     </table>
                 </div>
 
-                <div class="col-lg-6 padding-0" style="margin-bottom: 5px">
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">
                         <tr>
-                            <td style="width: 70px; font-size: 12px; padding-left: 5px; text-align: left ">
-                                Register:
+                            <td style="width: 80px; font-size: 12px; padding-left: 5px; text-align: left ">
+                                Priority:
                             </td>
                             <td>
-                                <div dx-select-box="sb_register" class="center" style="width: 100%"></div>
+                                <div dx-select-box="sb_priority" class="center" style="width: 100%"></div>
                             </td>
                         </tr>
                     </table>
                 </div>
 
-                <div class="col-lg-6 padding-0" style="margin-bottom: 5px">
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">
                         <tr>
-                            <td style="width: 70px; font-size: 12px; padding-left: 5px; text-align: left ">
+                            <td style="width: 80px; font-size: 12px; padding-left: 5px; text-align: left ">
                                 Description:
                             </td>
                             <td>
@@ -306,10 +306,10 @@
                     </table>
                 </div>
 
-                <div class="col-lg-6 padding-0" style="margin-bottom: 5px">
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">
                         <tr>
-                            <td style="width: 70px; font-size: 12px; padding-left:5px; text-align: left ">
+                            <td style="width: 80px; font-size: 12px; padding-left: 5px; text-align: left ">
                                 Part NO. :
                             </td>
                             <td>
@@ -320,7 +320,23 @@
                     </table>
                 </div>
 
-                <div class="col-lg-12 padding-0" style="margin-bottom: 5px">
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width: 80px; font-size: 12px; padding-left: 5px; text-align: left ">
+                                Status:
+                            </td>
+                            <td>
+                                <div dx-select-box="sb_status" class="center" style="width: 100%"></div>
+
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                
+
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">
                         <tr>
                             <td style="padding: 5px; text-align:right">
@@ -340,10 +356,10 @@
             <div dx-data-grid="dg_req" id="dg_req" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
 
         </div>
-        <div class="col-lg-9 col-md-9" style="padding-left: 0 !important">
+        <div class="col-lg-7 col-md-7" style="padding-left: 0 !important">
             <div style="border: 1px solid #ccc " class="dx-border">
                 <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
-                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Request Information</div>
+                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Request</div>
                 </div>
                 <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">
@@ -352,7 +368,7 @@
                                 Req NO. :
                             </td>
                             <td>
-                                <div dx-text-box="txt_req_info_no" class="center" style="width: 100%"></div>
+                                <div dx-text-box="txt_req_no" class="center" style="width: 100%"></div>
                             </td>
                         </tr>
                     </table>
@@ -365,51 +381,11 @@
                                 Date:
                             </td>
                             <td>
-                                <div dx-date-box="dt_req_info_date" class="center" style="width: 100%"></div>
+                                <div dx-date-box="dt_req_date" class="center" style="width: 100%"></div>
                             </td>
                         </tr>
                     </table>
                 </div>
-
-                <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:100px;font-size:12px;padding-left:5px;text-align:left">
-                                A/C Type:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_acType" class="center" style="width: 100%"></div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:100px;font-size:12px;padding-left:5px;text-align:left">
-                                Register:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_reqReg" class="center" style="width: 100%"></div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:100px;font-size:12px;padding-left:5px;text-align:left">
-                                Remark:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_remark" class="center" style="width: 100%"></div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
 
                 <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">
@@ -418,7 +394,7 @@
                                 Priority:
                             </td>
                             <td>
-                                <div dx-text-box="txt_reqPriority" class="center" style="width: 100%"></div>
+                                <div dx-text-box="txt_req_priority" class="center" style="width: 100%"></div>
                             </td>
                         </tr>
                     </table>
@@ -428,10 +404,38 @@
                     <table style="width:100%">
                         <tr>
                             <td style="width:100px;font-size:12px;padding-left:5px;text-align:left">
-                                Approved By:
+                                DeadLine
                             </td>
                             <td>
-                                <div dx-text-box="txt_apBy" class="center" style="width: 100%"></div>
+                                <div dx-date-box="dt_req_deadline" class="center" style="width: 100%"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:100px;font-size:12px;padding-left:5px;text-align:left">
+                                Status:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_req_status" class="center" style="width: 100%"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div class="col-lg-9 padding-0" style="margin-bottom: 5px">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:100px;font-size:12px;padding-left:5px;text-align:left">
+                                Remark:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_req_remark" class="center" style="width: 100%"></div>
                             </td>
                         </tr>
                     </table>
@@ -440,17 +444,11 @@
             </div>
 
             <div style="margin-top: 5px">
+
                 <div class="col-lg-12 col-md-12" style="padding: 0 !important">
-                    <div class="td-title" style="width: 100%; border: 1px solid #ccc">Order Stocks</div>
-                    <div dx-data-grid="dg_other" id="dg_other" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+                    <div dx-data-grid="dg_req_other" id="dg_req_other" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
                 </div>
             </div>
-            <div style="display: inline-flex; width: 100%;margin-top:5px">
-                <div class="td-title" style="border: 1px solid #ccc; width: 100%">Delivery Order</div>
-            </div>
-            <div dx-data-grid="dg_delivery" id="dg_delivery" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
-
-
         </div>
 
         <div dx-load-panel="loadPanel"></div>
@@ -459,10 +457,11 @@
         <div class=" col-lg-8 col-md-11 col-sm-11 col-xs-11" style="padding:0">
             <table style="width:100%;margin:0;padding:0;">
                 <tr>
-                    <td class="dx-border" style="text-align: right;display:inline-block;padding-right: 5px" dx-select-box="sb_receiver"></td>
-                    <td class="dx-border" style="text-align: right; display: inline-block; padding-right: 5px " dx-select-box="sb_stock"></td>
 
-                    <td style="text-align: left" dx-button="btn_submit"></td>
+                    <td style="text-align: center; margin:5px" dx-button="btn_add"></td>
+                    <td style="text-align: center; margin: 5px " dx-button="btn_edit"></td>
+                    <td style="text-align: center; margin: 5px " dx-button="btn_approve"></td>
+                    <td style="text-align: center; margin: 5px " dx-button="btn_cancel"></td>
                     <td></td>
                 </tr>
             </table>
@@ -470,8 +469,9 @@
 
         </div>
 
-        <div ng-include="'app/views/vira_nis_add.html?vx.2'"></div>
-        <div ng-include="'app/views/inventory.html?vx.2'"></div>
+        <div ng-include="'app/views/requestNewAdd.html?vx.2'"></div>
+        <div ng-include="'app/views/vira_request_edit.html?vx.2'"></div>
+        <div ng-include="'app/views/vira_part_number_selection.html'"></div>
         <div style="clear:both"></div>
     </div>
 </div>
