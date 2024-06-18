@@ -41,7 +41,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
          approver_UserId: null,
          remark: null,
          warehouse: null,
-         date: null,
+         date: new Date(),
          deliveryOrderItems: [
 
          ]

@@ -3,30 +3,32 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
 
     $scope.reciver_location = 0;
 
-    $scope.ds_req_order =
+    $scope.entity_req =
     {
-        receiverLocationId: 0,
-        statusId: null,
-        priorityId: null,
+        userId: 0,
         requestNo: null,
-        register: null,
         description: null,
         partNumber: null,
-        dateFrom: null,
-        dateTo: null
+        priorityId: null,
+        status: null
     }
 
-    $scope.entity_nis =
+    $scope.entity_approve =
     {
-        paperItemId: 0,
-        cmP_PartNumberId: 0,
-        priorityId: 0,
-        sender_LocationId: 0,
-        sender_UserId: 0,
-        quantity: 0,
-        remark: null
+        requestId: 0,
+        userId: 0,
+        locationId: 0
     };
 
+    $scope.entity_cancel =
+    {
+        paperId: 0,
+        userId: 0,
+        locationId: 0,
+        remark: "test test test test"
+    };
+
+    $scope.entity_edit = {};
 
 
     $scope.entity_info =
@@ -36,7 +38,7 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         acfT_TypeId: null,
         acfT_MSNId: 0,
         receiver_LocationId: null,
-        receiver_UserId: null,
+        //receiver_UserId: null,
         approver_LocationId: null,
         approver_UserId: null,
         remark: null,
@@ -53,10 +55,10 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         icon: 'search',
         width: 120,
         onClick: function (e) {
-            $scope.ds_req_order.receiverLocationId = $scope.reciver_location
-            vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
+            //$scope.entity_req.receiverLocationId = $scope.reciver_location
+            vira_general_service.get_request_cartable_line($scope.entity_req).then(function (res) {
                 $scope.dg_req_ds = res;
-            });
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         }
 
     };
@@ -74,32 +76,54 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
     }
 
 
-    $scope.btn_submit = {
-        text: 'Save D/O',
+    $scope.btn_add = {
+        text: 'Add',
         type: 'default',
         icon: null,
         width: 110,
         onClick: function (e) {
+            $rootScope.$broadcast('InitNewReq', null);
 
-            $scope.save(function (res) {
-                if (res.errorCode) {
-                    if (res.errorCode == 10029) {
-                        mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
-                            $scope.save();
+        }
 
-                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-                    }
-                    else
-                        General.ShowNotify(res.errorMessage, 'error');
-                }
-                else {
-                    //$scope.entity.paperNo = res.data.paperNo;
+    };
 
-                    $scope.popup_result_visible = true;
+    $scope.btn_approve = {
+        text: 'Approve',
+        type: 'success',
+        icon: null,
+        width: 110,
+        onClick: function (e) {
 
-                }
+            vira_general_service.approve_request($scope.entity_approve).then(function (resposne) {
 
-            });
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        }
+
+    };
+
+    $scope.btn_edit = {
+        text: 'Edit',
+        type: 'default',
+        icon: null,
+        width: 110,
+        onClick: function (e) {
+            $scope.$broadcast('InitEditReq', $scope.entity_edit);
+        }
+
+    };
+
+    $scope.btn_cancel = {
+        text: 'Cancel',
+        type: 'danger',
+        icon: null,
+        width: 110,
+        onClick: function (e) {
+            vira_general_service.cancel_request($scope.entity_cancel).then(function (resposne) {
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+
         }
 
     };
@@ -131,19 +155,24 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
 
 
     $scope.bind = function () {
-        vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
+        vira_general_service.get_request_cartable($scope.entity_req).then(function (res) {
             $scope.dg_req_ds = res;
-        });
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         vira_general_service.get_request_cartable_item().then(function (res) {
             $scope.dg_req_ds = res;
-        });
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         vira_general_service.get_partnumebr_interchabge().then(function (res) {
             $scope.dg_req_ds = res;
-        });
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+        mntService.getReceiptPN(76).then(function (res) {
+            $scope.ds_priority = res;
+            console.log(res);
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
         mntService.get_register().then(function (res) {
             $scope.registers = res
-        });
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         //mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
         //    $scope.ds_locations = response;
         //    $scope.user = response;
@@ -159,89 +188,98 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
 
     $scope.txt_partNo = {
         bindingOptions: {
-            value: 'ds_req_order.partNumber'
+            value: 'entity_req.partNumber'
         }
     }
 
     $scope.txt_reqNo = {
         bindingOptions: {
-            value: 'ds_req_order.requestNo'
+            value: 'entity_req.requestNo'
         }
     }
 
     $scope.txt_desc = {
         bindingOptions: {
-            value: 'ds_req_order.description'
+            value: 'entity_req.description'
         }
     }
 
-    $scope.sb_register = {
+    $scope.sb_priority = {
         showClearButton: false,
         searchEnabled: false,
-        displayExpr: "register",
-        valueExpr: 'register',
-
+        displayExpr: "title",
+        valueExpr: 'id',
+        placeholder: 'Priority',
         bindingOptions: {
-            value: 'ds_req_order.register',
-            dataSource: 'registers',
+            value: 'entity_req.priorityId',
+            dataSource: 'ds_priority'
+        }
+    }
+
+    $scope.ds_status =
+        [
+            { id: null, title: "All" },
+            { id: 161, title: "Approved" },
+            { id: 154, title: "Canceled" },
+            { id: 150, title: "Waiting" }
+        ]
+
+    $scope.sb_status = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        placeholder: 'Priority',
+        dataSource: $scope.ds_status,
+        bindingOptions: {
+            value: 'entity_req.status',
+
         }
     }
 
 
-    $scope.dt_req_info_date = {
+
+    $scope.dt_req_date = {
         type: 'date',
         displayFormat: "yyyy-MMM-dd",
+        readOnly: true,
         bindingOptions: {
             value: 'entity_info.date'
         }
     }
 
-    $scope.txt_req_info_no = {
+    $scope.dt_req_deadline = {
+        type: 'date',
+        displayFormat: "yyyy-MMM-dd",
+        readOnly: true,
+        bindingOptions: {
+            value: 'entity_info.deadline'
+        }
+    }
+
+    $scope.txt_req_no = {
         bindingOptions: {
             value: 'entity_info.no'
         }
     }
 
-    $scope.txt_shop = {
+    $scope.txt_req_priority = {
         bindingOptions: {
-            value: ''
+            value: 'entity_info.priority'
         }
     }
 
-    $scope.txt_reqReg = {
+
+
+    $scope.txt_req_status = {
         bindingOptions: {
-            value: 'entity_info.register',
+            value: 'entity_info.status',
         }
     }
 
-    $scope.txt_acType = {
-        bindingOptions: {
-            value: 'entity_info.acfT_TypeId',
-        }
-    }
-
-    $scope.priority =
-        [
-            { title: 'Routine', id: 0 },
-            { title: 'Urgent', id: 1 },
-            { title: 'AOG', id: 2 },
-        ];
-
-    $scope.txt_reqPriority = {
-        bindingOptions: {
-            value: 'entity_info.priority',
-        }
-    }
-
-    $scope.txt_remark = {
+    $scope.txt_req_remark = {
         bindingOptions: {
             value: 'entity_info.remark'
-        }
-    }
-
-    $scope.txt_apBy = {
-        bindingOptions: {
-            value: 'entity_info.approvedBy'
         }
     }
 
@@ -270,7 +308,7 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
             console.log(e.selectedItem);
             $scope.entity_nis.sender_LocationId = e.selectedItem.gI_LocationId;
             $scope.entity_nis.sender_UserId = e.selectedItem.uM_UserId;
-            $scope.entity_info.receiver_UserId = e.selectedItem.uM_UserId;
+            //$scope.entity_info.receiver_UserId = e.selectedItem.uM_UserId;
             $scope.entity_info.receiver_LocationId = e.selectedItem.gI_LocationId;
             $scope.entity_info.approver_UserId = e.selectedItem.uM_UserId;
             $scope.entity_info.approver_LocationId = e.selectedItem.gI_LocationId;
@@ -295,10 +333,28 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
                     .appendTo(container);
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
-        { dataField: 'fullNo', caption: 'Request No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        {
+            dataField: "isApproved", caption: '',
+            width: 55,
+            allowFiltering: false,
+            allowSorting: false,
+            cellTemplate: function (container, options) {
+                var fn = options.value == 1 ? 'registered-24' : 'red';
+
+                $("<div>")
+                    .append("<img src='content/images/" + fn + ".png' />")
+                    .appendTo(container);
+            },
+            fixed: true, fixedPosition: 'left',//  sortIndex: 0, sortOrder: "desc"
+        },
+
+        { dataField: 'fullNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
         { dataField: 'paperDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-        { dataField: 'register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'senderUser_FullName', caption: 'Requested By', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'senderUser_FullName', caption: 'Sender', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'senderLocation_Title', caption: 'Location', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'acfT_TypeId', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'register', caption: 'MSN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: '', caption: 'Reg./SN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
     ];
 
 
@@ -333,7 +389,7 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 365,
+        height: $(window).height() - 338,
         columns: $scope.dg_req_columns,
         onContentReady: function (e) {
             if (!$scope.dg_req_instance)
@@ -362,24 +418,25 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
 
 
             $scope.dg_req_id = e.selectedRowsData[0].id;
-            vira_general_service.get_request_cartable_item($scope.dg_req_id).then(function (response) {
-                $scope.dg_reqItem_ds = response;
-            });
+            vira_general_service.get_request_cartable_item_line($scope.dg_req_id).then(function (response) {
+                $scope.dg_req_other_ds = response;
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-            $scope.entity_nis.cmP_PartNumberId = data.id;
-            $scope.entity_nis.pn_title = data.fullNo;
-            $scope.entity_nis.priorityId = data.priorityId;
 
+            $scope.entity_info.priority = data.priority;
+            $scope.entity_info.deadline = data.deadline;
             $scope.entity_info.date = data.paperDate;
             $scope.entity_info.no = data.fullNo;
             $scope.entity_info.remark = data.remark;
-            $scope.entity_info.approvedBy = data.approverUser_FullName;
-            $scope.entity_info.register = data.register;
-            $scope.entity_info.acfT_TypeId = data.acfT_TypeId;
-            $scope.entity_info.acfT_MSNId = data.acfT_MSNId;
-            $scope.entity_info.priority = data.priority;
+            $scope.entity_info.status = data.lastStatusId;
 
+            $scope.entity_approve.requestId = data.id;
+            $scope.entity_approve.locationId = data.sender_LocationId;
 
+            $scope.entity_cancel.paperId = data.id;
+            $scope.entity_cancel.locationId = data.sender_LocationId;
+
+            $scope.entity_edit = data;
 
             if (!data) {
                 $scope.dg_req_selected = null;
@@ -399,215 +456,34 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
 
     };
 
+    $scope.dg_req_other_columns = [
 
-    $scope.dg_other_columns = [
-
-        { dataField: '', caption: 'Stock', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 165 },
-        { dataField: '', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-    ];
-
-
-    $scope.dg_other_selected = null;
-    $scope.dg_other_instance = null;
-    $scope.dg_other = {
-
-
-
-        wordWrapEnabled: true,
-        rowAlternationEnabled: false,
-        headerFilter: {
-            visible: false
-        },
-        filterRow: {
-            visible: true,
-            showOperationChooser: true,
-        },
-        showRowLines: true,
-        showColumnLines: true,
-        sorting: { mode: 'none' },
-
-        noDataText: '',
-
-        allowColumnReordering: true,
-        allowColumnResizing: true,
-        scrolling: { mode: 'infinite' },
-        paging: { pageSize: 100 },
-        showBorders: true,
-        selection: { mode: 'single' },
-
-        columnAutoWidth: false,
-        height: $(window).height() - 650,
-        width: '100%',
-        columns: $scope.dg_other_columns,
-        onContentReady: function (e) {
-            if (!$scope.dg_other_instance)
-                $scope.dg_other_instance = e.component;
-
-        },
-
-        onRowClick: function (e) {
-
-
-
-        },
-
-        onRowPrepared: function (e) {
-
-
-        },
-
-
-        onCellPrepared: function (e) {
-
-        },
-
-        onSelectionChanged: function (e) {
-            var data = e.selectedRowsData[0];
-
-
-            $scope.dg_other_id.Id = e.selectedRowsData[0].Id;
-
-            if (!data) {
-                $scope.dg_other_selected = null;
-            }
-            else
-                $scope.dg_other_selected = data;
-
-
-        },
-
-        bindingOptions: {
-            dataSource: 'dg_other_ds'
-        },
-        columnChooser: {
-            enabled: false
-        },
-
-    };
-
-
-    $scope.dg_inter_columns = [
-
-        { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 165 },
-        { dataField: '', caption: 'Stock', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-    ];
-
-
-    $scope.dg_inter_selected = null;
-    $scope.dg_inter_instance = null;
-    $scope.dg_inter = {
-
-
-
-        wordWrapEnabled: true,
-        rowAlternationEnabled: false,
-        headerFilter: {
-            visible: false
-        },
-        filterRow: {
-            visible: true,
-            showOperationChooser: true,
-        },
-        showRowLines: true,
-        showColumnLines: true,
-        sorting: { mode: 'none' },
-
-        noDataText: '',
-
-        allowColumnReordering: true,
-        allowColumnResizing: true,
-        scrolling: { mode: 'infinite' },
-        paging: { pageSize: 100 },
-        showBorders: true,
-        selection: { mode: 'single' },
-
-        columnAutoWidth: false,
-        height: $(window).height() - 650,
-        width: '100%',
-        columns: $scope.dg_inter_columns,
-        onContentReady: function (e) {
-            if (!$scope.dg_inter_instance)
-                $scope.dg_inter_instance = e.component;
-
-        },
-
-        onRowClick: function (e) {
-
-
-
-        },
-
-        onRowPrepared: function (e) {
-
-
-        },
-
-
-        onCellPrepared: function (e) {
-
-        },
-
-        onSelectionChanged: function (e) {
-            var data = e.selectedRowsData[0];
-
-
-            $scope.dg_inter_id.Id = e.selectedRowsData[0].Id;
-
-            if (!data) {
-                $scope.dg_inter_selected = null;
-            }
-            else
-                $scope.dg_inter_selected = data;
-
-
-        },
-
-        bindingOptions: {
-            dataSource: 'dg_inter_ds'
-        },
-        columnChooser: {
-            enabled: false
-        },
-
-    };
-
-
-
-    $scope.dg_reqItem_columns = [
-
-        { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false },
-        { dataField: 'quantity', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
-        { dataField: 'doReaminingQuantity', caption: 'Rem.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
-        { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
 
         {
-            dataField: "Id", caption: '',
-            alignment: 'center',
-            allowFiltering: false,
-            allowSorting: false,
-            cellTemplate: 'nis',
-            width: 100,
-
+            cellTemplate: function (container, options) {
+                $("<div style='text-align:center'/>")
+                    .html(options.rowIndex + 1)
+                    .appendTo(container);
+            }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
-
-        {
-            dataField: "Id", caption: '',
-            alignment: 'center',
-            allowFiltering: false,
-            allowSorting: false,
-            cellTemplate: 'do',
-            width: 100,
-
-        },
-
+        { dataField: 'itemNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 50 },
+        { dataField: '', caption: 'NIS No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'ataChapter', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250 },
+        { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'partNumberStatus_Int', caption: '', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 50 },
+        { dataField: '', caption: 'Position', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
+        { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
+        { dataField: 'reference', caption: 'Reference', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
     ];
 
 
 
-    $scope.dg_reqItem_selected = null;
-    $scope.dg_reqItem_instance = null;
-    $scope.dg_reqItem = {
+    $scope.dg_req_other_selected = null;
+    $scope.dg_req_other_instance = null;
+    $scope.dg_req_other_id = null;
+    $scope.dg_req_other = {
 
 
 
@@ -634,11 +510,11 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 650,
-        columns: $scope.dg_reqItem_columns,
+        height: $(window).height() - 251,
+        columns: $scope.dg_req_other_columns,
         onContentReady: function (e) {
-            if (!$scope.dg_reqItem_instance)
-                $scope.dg_reqItem_instance = e.component;
+            if (!$scope.dg_req_other_instance)
+                $scope.dg_req_other_instance = e.component;
 
         },
 
@@ -661,26 +537,17 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
 
-            $scope.dg_reqItem_id = e.selectedRowsData[0].cmP_PartNumberId;
-
-            $scope.entity_nis.paperItemId = data.id;
-            $scope.entity_nis.rem_quantity = data.doReaminingQuantity;
-            $scope.entity_nis.quantity = data.quantity;
-            vira_general_service.get_partnumebr_interchabge($scope.dg_reqItem_id).then(function (response) {
-                $scope.dg_inter_ds = response;
-            });
-
             if (!data) {
-                $scope.dg_reqItem_selected = null;
+                $scope.dg_req_other_selected = null;
             }
             else
-                $scope.dg_reqItem_selected = data;
+                $scope.dg_req_other_selected = data;
 
 
         },
 
         bindingOptions: {
-            dataSource: 'dg_reqItem_ds'
+            dataSource: 'dg_req_other_ds'
         },
         columnChooser: {
             enabled: false
@@ -688,103 +555,15 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
 
     };
 
-    $scope.dg_delivery_columns = [
 
-        { dataField: 'partNumber', caption: 'No. ', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-        { dataField: '', caption: 'SN/BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'selected_qty', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'shelf', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: '', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-    ];
-
-
-
-    $scope.dg_delivery_selected = null;
-    $scope.dg_delivery_instance = null;
-    $scope.dg_delivery = {
-
-
-
-        wordWrapEnabled: true,
-        rowAlternationEnabled: false,
-        headerFilter: {
-            visible: false
-        },
-        filterRow: {
-            visible: true,
-            showOperationChooser: true,
-        },
-        showRowLines: true,
-        showColumnLines: true,
-        sorting: { mode: 'none' },
-
-        noDataText: '',
-
-        allowColumnReordering: true,
-        allowColumnResizing: true,
-        scrolling: { mode: 'infinite' },
-        paging: { pageSize: 100 },
-        showBorders: true,
-        selection: { mode: 'single' },
-
-        columnAutoWidth: false,
-        height: $(window).height() - 615,
-        width: '100%',
-        columns: $scope.dg_delivery_columns,
-        onContentReady: function (e) {
-            if (!$scope.dg_delivery_instance)
-                $scope.dg_delivery_instance = e.component;
-
-        },
-
-        onRowClick: function (e) {
-
-
-
-        },
-
-        onRowPrepared: function (e) {
-
-
-        },
-
-
-        onCellPrepared: function (e) {
-
-        },
-
-        onSelectionChanged: function (e) {
-            var data = e.selectedRowsData[0];
-
-
-            $scope.dg_delivery_id.Id = e.selectedRowsData[0].Id;
-
-
-            if (!data) {
-                $scope.dg_delivery_selected = null;
-            }
-            else
-                $scope.dg_delivery_selected = data;
-
-
-        },
-
-        bindingOptions: {
-            dataSource: 'dg_delivery_ds'
-        },
-        columnChooser: {
-            enabled: false
-        },
-
-    };
 
 
     $scope.$on('$viewContentLoaded', function () {
         mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
             $scope.ds_locations = response;
+            $scope.entity_req.userId = response[0].uM_UserId;
+            $scope.entity_approve.userId = response[0].uM_UserId;
+            $scope.entity_cancel.userId = response[0].uM_UserId;
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
         $scope.bind();
@@ -794,6 +573,8 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
 
         }, 500);
     });
+
+
 
 
 

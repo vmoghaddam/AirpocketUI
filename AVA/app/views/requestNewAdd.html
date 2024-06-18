@@ -18,7 +18,335 @@
     }
 </style>
 <div ng-controller="RequestNewAddController">
-    <div id="popup_req" dx-popup="popup_req">
+   <div id="popup_req" dx-popup="popup_req">
+    <div class="col-lg-10 col-md-10 " style="margin-top: 10px">
+        <div class="dx-border" style="border: 1px solid #ccc ">
+            <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Request</div>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Date:
+                        </td>
+                        <td>
+                            <div dx-date-box="dt_date" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Type:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_type" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            A/C Type:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_acType" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Req. No. :
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_reqNo" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Priority:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_priority" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+               <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Serial No. :
+                        </td>
+                        <td>
+                            <div dx-number-box="num_serialNo" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            DeadLine:
+                        </td>
+                        <td>
+                            <div dx-date-box="dt_deadline" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                            Remark:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_remark" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <!--<div style="width: 100%; border: 1px solid #ccc">
+            <div class="td-title" style="width: 100%">Request</div>
+            <table style="margin-top:10px;color:black" class="dx-border">
+                <tr>
+                    <td class="td-field" style="font-weight:bold">Date:</td>
+                    <td class="td-field"><div dx-date-box="dt_date" class="center" style="width: 100%"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Type:</td>
+                    <td class="td-field"><div dx-select-box="sb_type" class="center"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">A/C Type:</td>
+                    <td class="td-field"><div dx-select-box="sb_acType" class="center"></div></td>
+                </tr>
+                <tr>
+                    <td class="td-field" style="font-weight:bold">Req. No. :</td>
+                    <td class="td-field"><div dx-text-box="txt_reqNo" class="center" style="width: 100%"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Priority:</td>
+                    <td class="td-field"><div dx-select-box="sb_priority" class="center"></div></td>
+                </tr>
+                <tr>
+                    <td class="td-field" style="font-weight:bold">DeadLine:</td>
+                    <td class="td-field"><div dx-date-box="dt_deadline" class="center" style="width: 100%"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Remark:</td>
+                    <td class="td-field" colspan="5"><div dx-text-box="txt_remark" class="center"></div></td>
+
+                </tr>
+            </table>
+        </div>-->
+
+        <div class="dx-border" style="border: 1px solid #ccc;margin-top:5px">
+            <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Items</div>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
+                            P/N:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_pn" class="center" style="width: 100%"></div>
+
+                        </td>
+                        <td style="padding-left: 15px">
+                            <div dx-button="btn_pn"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
+                            ATA:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_ata" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
+                            Availability:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_availability" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
+                            Quantity:
+                        </td>
+                        <td>
+                            <div dx-number-box="num_quantity" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
+                            Unit:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_unit" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
+                            Reference:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_reference" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
+                            Position:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_position" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-6 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
+                            Remark:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_itemRemark" class="center" style="width: 100%"></div>
+                        </td>
+                      
+                    </tr>
+                </table>
+            </div> 
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td dx-button="btn_saveItem" style="margin: 5px 5px 5px 5px"></td>
+                        <td dx-button="btn_deleteItem" style="margin: 5px 5px 5px 0"></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div dx-data-grid="dg_item" id="dg_item" class="content" style="overflow-y: hidden; margin-top:5px" dx-item-alias="row"></div>
+
+        <!--<div style="width: 100%; border: 1px solid #ccc; margin-top: 5px">
+            <div class="td-title" style="width: 100%">Items</div>
+            <table style="margin-top:10px;color:black" class="dx-border">
+
+                <tr>
+                    <td class="td-field" style="font-weight:bold">
+                        P/N:
+                    </td>
+                    <td class="td-field">
+                        <div dx-text-box="txt_pn" style="width: 67%; display: inline-block"></div>
+                        <div dx-button="btn_pn" style="top: -15px; margin-left: 5px"></div>
+                    </td>
+                    <td class="td-field" style="font-weight:bold">ATA:</td>-->
+        <!--<td class="td-field">
+        <div dx-drop-down-box="gridBoxOptions">
+            <div data-options="dxTemplate: { name: 'content' }">
+                <div dx-data-grid="gridBoxOptions.dataGrid"></div>
+            </div>
+        </div>-->
+        <!--</td>-->
+        <!--<td class="td-field"><div dx-select-box="sb_ata" class="center"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Availability:</td>
+                    <td class="td-field"><div dx-text-box="txt_availability" class="center"></div></td>
+
+                </tr>
+                <tr>
+                    <td class="td-field" style="font-weight:bold">Quantity :</td>
+                    <td class="td-field"><div dx-number-box="num_quantity" class="center" style="width: 100%"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Unit:</td>
+                    <td class="td-field"><div dx-select-box="sb_unit" class="center"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Reference :</td>
+                    <td class="td-field"><div dx-text-box="txt_reference" class="center"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Position :</td>
+                    <td class="td-field"><div dx-select-box="sb_position" class="center"></div></td>
+
+                </tr>
+                <tr>
+                    <td class="td-field" style="font-weight:bold">Remark:</td>
+                    <td class="td-field" colspan="7"><div dx-text-box="txt_itemRemark" class="center"></div></td>
+
+                    <td dx-button="btn_saveItem" style="margin: 5px 5px 5px 5px"></td>
+                    <td dx-button="btn_deleteItem" style="margin: 5px 5px 5px 0"></td>
+
+                </tr>
+            </table>
+
+            <div dx-data-grid="dg_item" id="dg_item" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+
+        </div>-->
+
+        <div style="width: 100%; border: 1px solid #ccc; margin-top: 5px">
+            <table style="margin-top:10px;color:black" class="dx-border">
+                <tr>
+
+                    <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">Sender:</td>
+                    <td class="td-field"><div dx-select-box="sb_sender" class="center" style="width: 100%"></div></td>
+
+                    <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">Receiver:</td>
+                    <td class="td-field"><div dx-select-box="sb_receiver" class="center" style="width: 100%"></div></td>
+
+                </tr>
+                <tr>
+            </table>
+
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2" style="padding: 10px 5px 0 0 !important">
+        <div dx-data-grid="dg_reg" id="dg_reg" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+    </div>
+</div>
+    <!--<div id="popup_req" dx-popup="popup_req">
         <div class="col-lg-10 col-md-10" style="margin-top: 10px">
             <div style="width: 100%; border: 1px solid #ccc">
                 <div class="td-title" style="width: 100%">Request</div>
@@ -73,7 +401,7 @@
                             <div dx-text-box="txt_pn" style="width: 67%; display: inline-block"></div>
                             <div dx-button="btn_pn" style="top: -15px; margin-left: 5px"></div>
                         </td>
-                        <td class="td-field" style="font-weight:bold">ATA:</td>
+                        <td class="td-field" style="font-weight:bold">ATA:</td>-->
                         <!--<td class="td-field">
                             <div dx-drop-down-box="gridBoxOptions">
                                 <div data-options="dxTemplate: { name: 'content' }">
@@ -81,7 +409,7 @@
                                 </div>
                             </div>-->
                         <!--</td>-->
-                        <td class="td-field"><div dx-select-box="sb_ata" class="center"></div></td>
+                        <!--<td class="td-field"><div dx-select-box="sb_ata" class="center"></div></td>
 
                         <td class="td-field" style="font-weight:bold">Availability:</td>
                         <td class="td-field"><div dx-text-box="txt_availability" class="center"></div></td>
@@ -137,7 +465,7 @@
         <div class="col-lg-2 col-md-2" style="padding: 10px 5px 0 0 !important">
             <div dx-data-grid="dg_reg" id="dg_reg" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
         </div>
-    </div>
+    </div>-->
     <div dx-load-panel="loadPanel"></div>
-    <div ng-include="'app/views/vira_part_number_selection.html'"></div>
+    <!--<div ng-include="'app/views/vira_part_number_selection.html'"></div>-->
 </div>

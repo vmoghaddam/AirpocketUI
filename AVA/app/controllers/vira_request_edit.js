@@ -1,11 +1,11 @@
 ﻿'use strict';
-app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', 'vira_general_service', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce, vira_general_service) {
+app.controller('vira_request_editController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', 'vira_general_service', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce, vira_general_service) {
 
     $scope.entity = {
         id: 0,
         acfT_TypeId: null,
         acfT_MSNIds: [],
-        priorityId: null, 
+        priorityId: null,
         requestType: null,
         sender_LocationId: null,
         sender_UserId: null,
@@ -26,7 +26,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     }
 
     $scope.item = {
-        id: 0,
+        id: -1,
         paperId: 0,
         cmP_PartNumberId: 0,
         partNumber_TypeId: 0,
@@ -37,7 +37,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         ataTitle: "",
         quantity: 0,
         reference: null,
-        remark:  null
+        remark: null
     };
 
     $scope.dg_item_ds = [];
@@ -46,7 +46,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         Id: null
     };
 
-   
+
 
     $scope.popup_req_visible = false;
     $scope.popup_req = {
@@ -73,8 +73,8 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
 
-                        
-                        vira_general_service.add_request($scope.entity).then(function (response) {
+                        $scope.entity.requestItems = $scope.dg_item_ds;
+                        vira_general_service.edit_request($scope.entity).then(function (response) {
 
                         });
 
@@ -87,7 +87,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
         ],
         visible: false,
-        title: 'New Request',
+        title: 'Edit Request',
         closeOnOutsideClick: false,
 
         bindingOptions: {
@@ -114,9 +114,9 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                 console.log(res);
                 if (res == 0) {
                     var row = $scope.dg_item_ds[$scope.dg_item_ds.length - 1];
-                    $scope.item.Id = row != null ? row.Id + 1: 1;
+                    $scope.item.lId = row != null ? row.lId + 1 : 1;
                     $scope.dg_item_ds.push($scope.item);
-                    $scope.item = { Id: -1 };
+                    $scope.item = { lId: -1 };
                     $scope.entity.requestItems = [];
                     $scope.entity.requestItems = $scope.dg_item_ds;
                     $scope.entity.acfT_MSNIds = $scope.valEntity.acfT_MSNIds;
@@ -214,6 +214,11 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
             $scope.ds_pos = res;
         });
 
+        vira_general_service.get_request($scope.request_id).then(function (res) {
+            console.log("request items", res.requestItems);
+            $scope.dg_item_ds = res.requestItems;
+        });
+
     }
 
     ////////////////////////////////
@@ -258,25 +263,13 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         }
     }
 
-    $scope.sb_shop = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: 'title',
-        valueExpr: 'id',
-        bindingOptions: {
-            value: '',
-            dataSource: 'ds_location'
-        }
-    }
-
-
     $scope.sb_receiver = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: 'title',
         valueExpr: 'id',
         onSelectionChanged: function (e) {
-            console.log("eeee",e);
+            console.log("eeee", e);
         },
         bindingOptions: {
             value: 'entity.receiver_LocationId',
@@ -310,12 +303,12 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         displayExpr: 'id',
         valueExpr: 'id',
         onValueChanged: function (e) {
-           
+
             $scope.dg_reg_ds = Enumerable.From($scope.registers).Where(function (x) {
                 var models = x.acfT_ModelId.split("-")[0];
                 return models == e.value;
             }).ToArray();
-           
+
         },
         bindingOptions: {
             value: 'entity.acfT_TypeId',
@@ -366,9 +359,9 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         }
     }
 
-    $scope.num_reqNo = {
+    $scope.txt_reqNo = {
         bindingOptions: {
-            value: ''
+            value: 'entity.fullNo'
         }
     }
 
@@ -378,7 +371,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         }
     }
 
-      $scope.txt_itemRemark = {
+    $scope.txt_itemRemark = {
         bindingOptions: {
             value: 'item.remark'
         }
@@ -460,7 +453,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
-        valueExpr: 'ata',
+        valueExpr: 'title',
         bindingOptions: {
             value: 'item.ataChapter',
             dataSource: 'ds_ata'
@@ -480,10 +473,10 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
 
-        { dataField: 'ata', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'ata', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'ata', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, minWidth: 200 },
-        { dataField: 'pn', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'itemNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'ataChapter', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, minWidth: 200 },
+        { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
         { dataField: 'reference', caption: 'Reference', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
         { dataField: 'position', caption: 'Position', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
         { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
@@ -688,10 +681,27 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         }
     };
 
-    $scope.$on('InitNewReq', function (event, prms) {
-        $scope.tempData = null;
-
+    $scope.tempData = null;
+    $scope.$on('InitEditReq', function (event, prms) {
+        
         $scope.tempData = prms;
+        $scope.entity.id = $scope.tempData.id;
+        $scope.entity.date = $scope.tempData.paperDate;
+        $scope.entity.priorityId = $scope.tempData.priorityId;
+        $scope.entity.receiver_LocationId = $scope.tempData.receiver_LocationId;
+        $scope.entity.deadline = $scope.tempData.deadline;
+        $scope.entity.remark = $scope.tempData.remark;
+        $scope.entity.acfT_TypeId = $scope.tempData.acfT_TypeId;
+        $scope.entity.fullNo = $scope.tempData.fullNo;
+        $scope.entity.requestType = $scope.tempData.requestType;
+
+        $scope.dg_reg_ds = Enumerable.From($scope.registers).Where(function (x) {
+            var models = x.acfT_ModelId.split("-")[0];
+            return models == $scope.tempData.acfT_TypeId;
+        }).ToArray();
+
+        $scope.request_id = $scope.tempData.id;
+        console.log("Temp Data",$scope.tempData);
 
         $scope.bind();
 

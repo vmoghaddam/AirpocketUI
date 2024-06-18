@@ -107,10 +107,27 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
     };
     ordersServiceFactory.add_request = _add_request;
 
+  var _edit_request = function (entity) {
+        var deferred = $q.defer();
+
+      $http.post(vira_api + "api/LGSRequest/Edit", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.edit_request = _edit_request;
+
    var _get_request_cartable = function (entity) {
         var deferred = $q.defer();
 
-       $http.post(vira_api + "api/LGSStockManagement/GetRequestCartable?page=1&size=10", entity, {
+       $http.post(vira_api + "api/LGSStockManagement/GetRequestCartable?page=1&size=1000", entity, {
 
 
         }).then(function (response) {
@@ -123,6 +140,42 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.get_request_cartable = _get_request_cartable;
+
+    var _get_request_cartable_line = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSRequest/GetRequestCartable?page=1&size=1000", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_request_cartable_line = _get_request_cartable_line;
+
+
+   var _get_request = function (id) {
+        var deferred = $q.defer();
+
+       $http.get(vira_api + "api/LGSRequest/GetRequest/" + id, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_request = _get_request;
+
 
    var _get_request_cartable_item = function (id) {
         var deferred = $q.defer();
@@ -140,6 +193,57 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.get_request_cartable_item = _get_request_cartable_item;
+
+    var _get_request_cartable_item_line = function (id) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSRequest/GetRequestItemCartable?id=" + id, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_request_cartable_item_line = _get_request_cartable_item_line;
+
+     var _approve_request = function (entity) {
+        var deferred = $q.defer();
+
+         $http.post(vira_api + "api/LGSRequest/Approve" , entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.approve_request = _approve_request;
+
+    var _cancel_request = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSRequest/Cancel" , entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.cancel_request = _cancel_request;
 
      var _get_partnumebr_interchabge = function (id) {
         var deferred = $q.defer();
