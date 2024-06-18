@@ -58,6 +58,19 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
             {
                 widget: 'dxButton', location: 'after', options: {
+                    type: 'success', text: 'Save', onClick: function (e) {
+
+
+                        vira_general_service.add_request($scope.entity).then(function (response) {
+
+                        });
+
+                        $scope.popup_req_visible = false;
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
 
                         $scope.engEntity =
@@ -69,19 +82,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                     }
                 }, toolbar: 'bottom'
             },
-            {
-                widget: 'dxButton', location: 'after', options: {
-                    type: 'success', text: 'Save', onClick: function (e) {
-
-                        
-                        vira_general_service.add_request($scope.entity).then(function (response) {
-
-                        });
-
-                        $scope.popup_req_visible = false;
-                    }
-                }, toolbar: 'bottom'
-            },
+           
 
 
 
@@ -89,7 +90,15 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         visible: false,
         title: 'New Request',
         closeOnOutsideClick: false,
+        onShown: function (e) {
+          
 
+            if ($scope.dg_item_instance)
+                $scope.dg_item_instance.repaint();
+            
+
+
+        },
         bindingOptions: {
             visible: 'popup_req_visible',
             'toolbarItems[0].visible': 'btn_duties_visible',
@@ -101,10 +110,10 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     ///////////////////////////////
 
     $scope.btn_saveItem = {
-        text: '',
+        text: 'Save',
         type: 'default',
         icon: 'plus',
-        width: 35,
+        width: 120,
         onClick: function (e) {
 
             $scope.valEntity.requestItems = $scope.dg_item_ds;
@@ -127,10 +136,10 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     };
 
     $scope.btn_deleteItem = {
-        text: '',
+        text: 'Delete',
         type: 'danger',
         icon: 'remove',
-        width: 35,
+        width: 120,
         onClick: function (e) {
             $scope.dg_item_ds = Enumerable.From($scope.dg_item_ds).Where(function (x) {
                 return x.Id != $scope.dg_item_id.Id;
@@ -523,7 +532,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 630,
+        height: $(window).height() - 430,
         width: '100%',
         columns: $scope.dg_item_columns,
         onContentReady: function (e) {
