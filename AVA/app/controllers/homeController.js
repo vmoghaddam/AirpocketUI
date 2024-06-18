@@ -1874,19 +1874,19 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
                 $scope.flight.Bind();
                 $scope.get_mnt_dashboard();
                 //Flight Pocket
-                $scope.timer_flight_opertation = setInterval(function () {
-                    console.log('timer_flight_opertation');
-                }, 5000);
+                //$scope.timer_flight_opertation = setInterval(function () {
+                //    console.log('timer_flight_opertation');
+                //}, 5000);
 
-                $scope.aircrafts = [];
+                //$scope.aircrafts = [];
 
-                mapService.getLiveFlights().then(function (response) {
-                    $.each(response, function (_i, _d) {
-                        _d.url = $sce.trustAsResourceUrl('https://map.airpocket.app/fr.html?ver=1&icao=axv&no=' + _d.FlightNo + '&date=' + moment(new Date(_d.DateFlight)).format("YYYY-MM-DD") + '&mode=online');
-                    });
-                    $scope.ds_live = response;
-                    $scope.update_maps();
-                }, function (err) { });
+                //mapService.getLiveFlights().then(function (response) {
+                //    $.each(response, function (_i, _d) {
+                //        _d.url = $sce.trustAsResourceUrl('https://map.airpocket.app/fr.html?ver=1&icao=axv&no=' + _d.FlightNo + '&date=' + moment(new Date(_d.DateFlight)).format("YYYY-MM-DD") + '&mode=online');
+                //    });
+                //    $scope.ds_live = response;
+                //    $scope.update_maps();
+                //}, function (err) { });
                 //setInterval(function () {
                 //    mapService.getLiveFlights().then(function (response) {
                 //        console.log('search flight');

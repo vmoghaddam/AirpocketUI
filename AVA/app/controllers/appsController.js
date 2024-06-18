@@ -45,8 +45,11 @@ app.controller('appsController', ['$scope', '$location', 'authService', 'ngAuthS
                
                 ok = false;
             case 6:
-                $rootScope.fill_vira_information();
-                ok = true;
+                ok = $rootScope.HasAccessToLGS();
+                
+                if (ok)
+                    $rootScope.fill_vira_information();
+                
                  
                  
                 break;

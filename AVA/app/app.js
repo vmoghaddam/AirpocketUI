@@ -2239,7 +2239,11 @@ $rootScope.HasHR = function () {
     ////////////////////////////////////////////////
     $rootScope.vira_user_id = 8;
     $rootScope.vira_user_delafult_stock_id = 19;
+    $rootScope.HasAccessToLGS = function () {
 
+        var exist = Enumerable.From($rootScope.roleClaims).Where('$.indexOf("LGS")!=-1').FirstOrDefault();
+        return exist ? true : false;
+    };
 
 
 
