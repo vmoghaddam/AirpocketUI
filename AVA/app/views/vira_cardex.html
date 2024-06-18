@@ -261,65 +261,67 @@
     <div ng-include="'app/views/menu.html'"></div>
     <div class="rowx content" style="clear:both">
 
-        <div class="col-lg-12" style="border: 1px solid #ccc;padding:10px">
-            <div class="dx-border">
+        <div style="width: 100%">
+            <div class="col-lg-12" style="border: 1px solid #ccc;padding:10px;">
+                <div class="dx-border">
 
 
-                <div class="col-lg-2 padding-0">
-                    <span>Date</span>
-                    <div dx-date-box="dt_date" class="center" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
+                    <div class="col-lg-2 padding-0">
+                        <span>Date</span>
+                        <div dx-date-box="dt_date" class="center" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
 
-                    <span>No</span>
-                    <div dx-text-box="txt_no" class="center" style="width: 100%"></div>
+                        <span>No</span>
+                        <div dx-text-box="txt_no" class="center" style="width: 100%"></div>
 
+                    </div>
+                    <div class="col-lg-2 padding-0" style="padding-left:10px">
+                        <span>A/C Type</span>
+
+                        <div dx-select-box="sb_acType" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px " dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
+                        <span>Register</span>
+                        <div dx-select-box="sb_register" class="left" dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
+
+                    </div>
+
+                    <div class="col-lg-2 padding-0" style="padding-left:10px">
+                        <span>Warehouse</span>
+
+                        <div dx-select-box="sb_warehouse" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
+                        <span>Issued By</span>
+                        <div dx-text-box="txt_issuedBy" class="left" style="width: 100%"></div>
+
+                    </div>
+                    <div class="col-lg-2 padding-0" style="padding-left:10px">
+                        <span>Receiver</span>
+                        <table style="width:100%;margin-top:5px;margin-bottom:5px">
+                            <tr>
+                                <td>
+                                    <div dx-text-box="txt_receiver" class="left" style="width: 100%" dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
+                                </td>
+                                <td style="width:10%"><div dx-button="btn_receiver"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <span>Location</span>
+                        <div dx-text-box="txt_receiver_location" class="left" style="width: 100%"></div>
+
+
+
+
+                    </div>
+
+
+                    <div style="clear:both"></div>
                 </div>
-                <div class="col-lg-2 padding-0" style="padding-left:10px">
-                    <span>A/C Type</span>
-
-                    <div dx-select-box="sb_acType" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px " dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
-                    <span>Register</span>
-                    <div dx-select-box="sb_register" class="left" dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
-
-                </div>
-
-                <div class="col-lg-2 padding-0" style="padding-left:10px">
-                    <span>Warehouse</span>
-
-                    <div dx-select-box="sb_warehouse" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
-                    <span>Issued By</span>
-                    <div dx-text-box="txt_issuedBy" class="left" style="width: 100%"></div>
-
-                </div>
-                <div class="col-lg-2 padding-0" style="padding-left:10px">
-                    <span>Receiver</span>
-                    <table style="width:100%;margin-top:5px;margin-bottom:5px">
-                        <tr>
-                            <td>
-                                <div dx-text-box="txt_receiver" class="left" style="width: 100%" dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
-                            </td>
-                            <td style="width:10%"><div dx-button="btn_receiver"></div></td>
-                        </tr>
-
-                    </table>
-
-                    <span>Location</span>
-                    <div dx-text-box="txt_receiver_location" class="left" style="width: 100%"></div>
 
 
 
-
-                </div>
-
-
-                <div style="clear:both"></div>
             </div>
 
-
-
-        </div>
-
-        <div class="col-lg-12">
-            <div dx-data-grid="dg_del" id="dg_del" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
+            <div class="col-lg-12">
+                <div dx-data-grid="dg_del" id="dg_del" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
+            </div>
         </div>
         <div dx-load-panel="loadPanel"></div>
     </div>
