@@ -24,7 +24,7 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
     }
 
 
-
+    $scope.isNew = null;
 
     $scope.btn_refresh = {
         text: 'Refresh',
@@ -79,31 +79,59 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
 
-                        vira_general_service.add_beginning_inventory($scope.entity).then(function (response) {
-                            console.log(response);
-                            $scope.entity =
-                            {
-                                id: 0,
-                                stock_LocationId: 0,
-                                sender_LocationId: 0,
-                                sender_UserId: 0,
-                                cmP_PartNumberId: 0,
-                                cmP_ComponentId: 0,
-                                conditionId: 0,
-                                measurementUnitId: 0,
-                                currencyId: 0,
-                                documentTypeId: 0,
-                                documentNo: null,
-                                sN_BN: null,
-                                shelfFromId: 29358,
-                                shelfToId: 29358,
-                                quantity: null,
-                                price: null,
-                                expireDate: null,
-                                manufactureDate: null,
-                                remark: null
-                            }
-                        });
+                        if ($scope.isNew) {
+                            vira_general_service.add_beginning_inventory($scope.entity).then(function (response) {
+                                console.log(response);
+                                $scope.entity =
+                                {
+                                    id: 0,
+                                    stock_LocationId: 0,
+                                    sender_LocationId: 0,
+                                    sender_UserId: 0,
+                                    cmP_PartNumberId: 0,
+                                    cmP_ComponentId: 0,
+                                    conditionId: 0,
+                                    measurementUnitId: 0,
+                                    currencyId: 0,
+                                    documentTypeId: 0,
+                                    documentNo: null,
+                                    sN_BN: null,
+                                    shelfFromId: 29358,
+                                    shelfToId: 29358,
+                                    quantity: null,
+                                    price: null,
+                                    expireDate: null,
+                                    manufactureDate: null,
+                                    remark: null
+                                }
+                            });
+                        } else {
+                            vira_general_service.edit_beginning_inventory($scope.entity).then(function (response) {
+                                console.log(response);
+                                $scope.entity =
+                                {
+                                    id: 0,
+                                    stock_LocationId: 0,
+                                    sender_LocationId: 0,
+                                    sender_UserId: 0,
+                                    cmP_PartNumberId: 0,
+                                    cmP_ComponentId: 0,
+                                    conditionId: 0,
+                                    measurementUnitId: 0,
+                                    currencyId: 0,
+                                    documentTypeId: 0,
+                                    documentNo: null,
+                                    sN_BN: null,
+                                    shelfFromId: 29358,
+                                    shelfToId: 29358,
+                                    quantity: null,
+                                    price: null,
+                                    expireDate: null,
+                                    manufactureDate: null,
+                                    remark: null
+                                }
+                            });
+                        }
                         $scope.popup_add_visible = false;
 
                     }
@@ -161,7 +189,7 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
             title: 'popup_add_title',
             height: 'popup_height',
             width: 'popup_width',
-          
+
 
         }
     };
@@ -199,7 +227,7 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
 
     ////////////////////
 
-   
+
 
     $scope.txt_pn = {
         bindingOptions: {
@@ -239,7 +267,7 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
     }
 
 
-  
+
 
 
     $scope.txt_shelf = {
@@ -340,7 +368,7 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
     }
 
 
-  
+
 
     $scope.txt_docNo = {
         bindingOptions: {
@@ -463,6 +491,36 @@ app.controller('vira_beginning_addController', ['$scope', '$location', 'mntServi
     $scope.$on('InitBeginningPopup', function (event, prms) {
 
         $scope.tempData = prms;
+        if ($scope.tempData == null)
+            $scope.isNew = true
+        else {
+            $scope.isNew = false
+            console.log("It's in editing mode")
+            $scope.entity.id = $scope.tempData.paperId;
+            //$scope.entity.stock_LocationId= $scope.tempData.;
+            $scope.entity.sender_LocationId = $scope.tempData.sender_LocationId;
+            //$scope.entity.sender_UserId= $scope.tempData.;
+            $scope.entity.cmP_PartNumberId = $scope.tempData.cmP_PartNumberId;
+            $scope.entity.cmP_ComponentId = $scope.tempData.cmP_ComponentId;
+            //$scope.entity.conditionId= $scope.tempData.;
+            $scope.entity.measurementUnitId = $scope.tempData.measurementUnitId;
+            //$scope.entity.currencyId= $scope.tempData.;
+            $scope.entity.documentTypeId = 187;
+            $scope.entity.documentNo= "-";
+            $scope.entity.sN_BN = $scope.tempData.sN_BN;
+            $scope.entity.shelfFromId = 29358;
+            $scope.entity.shelfToId = 29358;
+            $scope.entity.quantity = $scope.tempData.quantity;
+            $scope.entity.price= null;
+            //$scope.entity.expireDate= $scope.tempData.;
+            //$scope.entity.manufactureDate= $scope.tempData.;
+            $scope.entity.remark = $scope.tempData.remark
+
+        }
+
+
+        console.log($scope.tempData);
+
 
         $scope.bind();
 
