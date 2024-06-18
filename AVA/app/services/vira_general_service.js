@@ -381,6 +381,40 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
     };
     ordersServiceFactory.add_nis = _add_nis;
 
+     var _get_year = function (id) {
+        var deferred = $q.defer();
+
+         $http.get(vira_api + "api/FINFinancialYear/GetFinancialYear/" + id, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_year = _get_year;
+
+    var _get_cardex = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSStockManagement/GetInventoryCardex", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_cardex = _get_cardex;
+
     return ordersServiceFactory;
 
 }]);
