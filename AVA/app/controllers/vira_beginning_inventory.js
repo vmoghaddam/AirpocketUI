@@ -15,18 +15,20 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
             locationId: null
         };
 
-
+        $scope.item = {};
 
         $scope.btn_refresh = {
-            text: 'Refresh',
+            text: 'Search',
             type: 'default',
             icon: '',
             width: 120,
             onClick: function (e) {
-                vira_general_service.get_stock_paper($scope.entity).then(function (response) {
-                    console.log(response);
+                $scope.loadingVisible = true;
+                vira_general_service.get_stock_paper_item($scope.entity).then(function (response) {
+
                     $scope.dg_inv_ds = response;
-                });
+                    $scope.loadingVisible = false;
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             }
 
         };
@@ -48,19 +50,25 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
             icon: '',
             width: 120,
             onClick: function (e) {
-               
-               
+
+                $scope.$broadcast('InitBeginningPopup', $scope.item);
             }
 
         };
 
-         $scope.btn_delete = {
+        $scope.btn_delete = {
             text: 'Delete',
             type: 'danger',
             icon: '',
             width: 120,
             onClick: function (e) {
-               
+                $scope.loadingVisible = true;
+                vira_general_service.delete_beginning_inventory($scope.item.id).then(function () {
+                    $scope.dg_inv_ds = Enumerable.From($scope.dg_inv_ds).Where(function (x) {
+                        return x.id != $scope.item.id;
+                    }).ToArray();
+                    $scope.loadingVisible = false;
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             }
 
         };
@@ -72,40 +80,19 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
         //        $scope.dg_inv_ds = response.data;
         //    });
         //};
-       
-
 
         /////////////////////////////////////
-        $scope.loadingVisible = false;
-        $scope.loadPanel = {
-            message: 'Please wait...',
-
-            showIndicator: true,
-            showPane: true,
-            shading: true,
-            closeOnOutsideClick: false,
-            shadingColor: "rgba(0,0,0,0.4)",
-            // position: { of: "body" },
-            onShown: function () {
-
-            },
-            onHidden: function () {
-
-            },
-            bindingOptions: {
-                visible: 'loadingVisible'
-            }
-        };
+       
         $scope.dg_inv_height = $(window).height() - 315;
         $scope.dg_inv_columns = [
-            { dataField: 'fullNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
-            { dataField: '', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 300 },
-            { dataField: '', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-            { dataField: '', caption: 'SN/BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-            { dataField: '', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80 },
-            { dataField: '', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 50 },
+            { dataField: 'itemNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
+            { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 300 },
+            { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
+            { dataField: 'sN_BN', caption: 'SN/BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+            { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80 },
+            { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 50 },
             { dataField: '', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-            { dataField: '', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+            { dataField: 'condition', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
             { dataField: '', caption: 'Man. Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
             { dataField: '', caption: 'Exp. Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
             { dataField: '', caption: 'Doc Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
@@ -174,9 +161,7 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
 
                 console.log(data);
 
-                $scope.dg_inv_id.Id = e.selectedRowsData[0].Id;
-
-                console.log($scope.dg_inv_id.id);
+                $scope.item = data;
                 if (!data) {
                     $scope.dg_inv_selected = null;
                 }
@@ -203,11 +188,11 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
             displayExpr: "title",
             valueExpr: 'gI_LocationId',
             bindingOptions: {
-                value: 'entity.receiver_LocationId',
+                value: 'entity.stockLocationId',
                 dataSource: 'ds_locations',
             }
         }
-      
+
 
         $scope.txt_parNo = {
             bindingOptions: {
@@ -225,7 +210,7 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
                 value: 'entity.sN_BN'
             }
         }
-    
+
 
 
         /////////////////////////////////////
@@ -251,15 +236,35 @@ app.controller('vira_beginningController', ['$scope', '$location', '$routeParams
                 $scope.ds_locations = response;
                 $scope.entity.stockLocationId = response[0].gI_LocationId;
                 vira_general_service.get_beginning_inventory(response[0].gI_LocationId).then(function (res) {
-                    console.log("Beginning Inventory", res);
-                });
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             setTimeout(function () {
 
-               
+
             }, 500);
         });
 
+
+        $scope.loadingVisible = false;
+        $scope.loadPanel = {
+            message: 'Please wait...',
+
+            showIndicator: true,
+            showPane: true,
+            shading: true,
+            closeOnOutsideClick: false,
+            shadingColor: "rgba(0,0,0,0.4)",
+            // position: { of: "body" },
+            onShown: function () {
+
+            },
+            onHidden: function () {
+
+            },
+            bindingOptions: {
+                visible: 'loadingVisible'
+            }
+        };
         ///////////////////////////////////////
 
     }]);

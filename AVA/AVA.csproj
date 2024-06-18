@@ -226,6 +226,7 @@
     <Content Include="app\controllers\reportFlights.js" />
     <Content Include="app\controllers\vira_beginning_add.js" />
     <Content Include="app\controllers\vira_beginning_inventory.js" />
+    <Content Include="app\controllers\vira_cardex.js" />
     <Content Include="app\controllers\vira_direct_delivery.js" />
     <Content Include="app\controllers\vira_inventory_total.js" />
     <Content Include="app\controllers\vira_part_number.js" />
@@ -482,6 +483,7 @@
     <Content Include="app\views\reportFlights.html" />
     <Content Include="app\views\vira_beginning_add.html" />
     <Content Include="app\views\vira_beginning_inventory.html" />
+    <Content Include="app\views\vira_cardex.html" />
     <Content Include="app\views\vira_direct_delivery.html" />
     <Content Include="app\views\vira_inventory_total.html" />
     <Content Include="app\views\vira_part_number.html" />

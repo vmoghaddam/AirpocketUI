@@ -262,10 +262,10 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
     };
     ordersServiceFactory.get_partnumebr_interchabge = _get_partnumebr_interchabge;
 
-    var _get_stock_paper = function () {
+    var _get_stock_paper = function (entity) {
         var deferred = $q.defer();
 
-        $http.post(vira_api + "api/LGSStockManagement/GetStockPaper?page=1&size=1000", {
+        $http.post(vira_api + "api/LGSStockManagement/GetStockPaper?page=1&size=1000", entity , {
 
 
         }).then(function (response) {
@@ -278,6 +278,23 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.get_stock_paper = _get_stock_paper;
+
+  var _get_stock_paper_item = function (entity) {
+        var deferred = $q.defer();
+
+      $http.post(vira_api + "api/LGSStockManagement/GetStockPaperItem?page=1&size=1000", entity , {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_stock_paper_item = _get_stock_paper_item;
 
     var _get_beginning_inventory = function (id) {
         var deferred = $q.defer();
@@ -312,6 +329,40 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.add_beginning_inventory = _add_beginning_inventory;
+
+    var _edit_beginning_inventory = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSStockManagement/UpdateBeginningInventory", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.edit_beginning_inventory = _edit_beginning_inventory;
+
+     var _delete_beginning_inventory = function (id) {
+        var deferred = $q.defer();
+
+         $http.post(vira_api + "api/LGSStockManagement/DeleteBeginningInventory?id=" + id , {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.delete_beginning_inventory = _delete_beginning_inventory;
 
     var _add_nis = function (entity) {
         var deferred = $q.defer();

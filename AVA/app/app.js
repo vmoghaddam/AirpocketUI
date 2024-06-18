@@ -797,6 +797,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_inventory_total.html?v=1130"
     });
 
+    $routeProvider.when("/vira/cardex", {
+          controller: "vira_cardexController",
+        templateUrl: "/app/views/vira_cardex.html?v=1130"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   
