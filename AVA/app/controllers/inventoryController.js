@@ -71,7 +71,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         toolbarItems: [
 
             {
-                widget: 'dxButton', location: 'before', options: {
+                widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Select', onClick: function (e) {
                         if ($scope.form_type == 'do') {
                             console.log('dool',$scope.dg_inv_ds);
@@ -83,7 +83,13 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
                                  //<= x.availableQuantity
                                  console.log('check', x.selected_qty <= x.availableQuantity);
                                  return x.selected_qty && x.selected_qty > 0 && x.selected_qty <= x.availableQuantity;
-                            }).ToArray();
+                             }).ToArray();
+                            if (!selected_rows || selected_rows.length == 0) {
+                                General.ShowNotify("No Items Selected", 'error');
+                                return;
+                            }
+
+                             
                             //var query_items = [];
                             
                             //var _result = [];
@@ -122,7 +128,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
                 }, toolbar: 'bottom'
             },
             {
-                widget: 'dxButton', location: 'before', options: {
+                widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', onClick: function (e) {
 
                         $scope.popup_inventory_visible = false;
@@ -143,7 +149,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
 
         },
         onShown: function (e) {
-
+            
             if ($scope.isNew) {
                 $scope.isContentVisible = true;
             }
@@ -162,6 +168,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         onHiding: function () {
 
             $scope.dg_inv_ds = [];
+            $scope.ds_details = [];
             $scope.popup_inventory_visible = false;
         },
         onContentReady: function (e) {

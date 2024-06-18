@@ -1547,6 +1547,78 @@
 
         <div class=" col-lg-12 col-md-12   thin-scroll" style="padding:5px 5px 5px 10px;height:100%;overflow-y:auto">
             <div style="padding:5px;">
+                <div style="padding:10px;border-bottom:1px solid #ccc;color:gray;font-size:18px;">Stock</div>
+                <div class="menu_row" style="padding:10px">
+                    <div class="col-lg-1 padding-0" style="padding-right:10px">
+                        <div class="box-app" style="padding-top:0;width:100%;">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/vira/inventory'  , 'vira_inventory')">
+                                <img src="content/images/vira_inventory2.png">
+                                <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Inventory </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 padding-0" style="padding-right:10px">
+                        <div class="box-app" style="padding-top:0;width:100%;">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/vira/inventory/total' , 'vira_inventory_total')">
+                                <img src="content/images/vira_inventory_grouped2.png">
+                                <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Inventory (Grouped) </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 padding-0" style="padding-right:10px">
+                        <div class="box-app" style="padding-top:0;width:100%;">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="menu_broadcast('InitReceipt',{})">
+                                <img src="content/images/vira_receipt.png">
+                                <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Receipt </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 padding-0" style="padding-right:10px">
+                        <div class="box-app" style="padding-top:0;width:100%;">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="menu_broadcast('InitDirectDelivery',{})">
+                                <img src="content/images/vira_do.png">
+                                <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">D/O </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 padding-0" style="padding-right:10px">
+                        <div class="box-app" style="padding-top:0;width:100%;">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="">
+                                <img src="content/images/vira_ro.png">
+                                <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Return to Store </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-1 padding-0" style="padding-right:10px">
+                        <div class="box-app" style="padding-top:0;width:100%;">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="">
+                                <img src="content/images/vira_binventory.png">
+                                <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Begining Inventory </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-1 padding-0" style="padding-right:10px">
+                        <div class="box-app" style="padding-top:0;width:100%;">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="">
+                                <img src="content/images/vira_requests.png">
+                                <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Requests (2) </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                </div>
+
+
+            </div>
+
+
+            <div style="padding:5px;">
                 <div style="padding:10px;border-bottom:1px solid #ccc;color:gray;font-size:18px;">General Information</div>
                 <div class="menu_row" style="padding:10px">
                     <div class="col-lg-1 padding-0" style="padding-right:10px">
@@ -1588,7 +1660,16 @@
 
 
             </div>
+
+
+
+
         </div>
+
+
+
+
+
     </div>
 
 
@@ -1599,7 +1680,12 @@
 
     <div dx-load-panel="loadPanel"></div>
     <div ng-include="'app/views/map.html?v=106011'"></div>
-   
+    <div ng-include="'app/views/vira_part_number_selection.html'"></div>
+    <div ng-include="'app/views/newPartNumber.html'"></div>
+    <div ng-include="'app/views/vira_receipt.html'"></div>
+    <div ng-include="'app/views/vira_direct_delivery.html'"></div>
+    <div ng-include="'app/views/vira_personnel_selection.html?vx.2'"></div>
+
 </div>
 
 

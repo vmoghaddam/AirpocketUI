@@ -318,7 +318,7 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
             // validationGroup: 'crewreportsearch',
             bindingOptions: {},
             onClick: function (e) {
-                $rootScope.$broadcast('InitReceipt', null);
+                $rootScope.$broadcast('InitReceipt', { location_id: $scope.dto_search.locationId });
 
 
 
@@ -334,7 +334,7 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
             bindingOptions: {},
             onClick: function (e) {
 
-                $rootScope.$broadcast('InitDirectDelivery', null);
+                $rootScope.$broadcast('InitDirectDelivery', { location_id: $scope.dto_search.locationId});
 
 
             }
@@ -376,6 +376,10 @@ app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams
         }
         //////////////////////////////////////////
         $scope.$on('ReceiptClosed', function (event, prms) {
+            $scope.bind();
+
+        });
+        $scope.$on('DirectDoClosed', function (event, prms) {
             $scope.bind();
 
         });

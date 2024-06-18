@@ -19,23 +19,23 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
 
     $scope.cmpEntity = {
         locationId: null,
-        partNumberTypeId: [],
-        description: null,
+       // partNumberTypeId: [],
+       // description: null,
         partNumber: null,
-        showInterchanges: false,
-        sN_BN: null,
-        ataChapter: null,
-        acfT_Type: [],
-        shelf: null,
-        remainToExpire: null,
-        hasShelfTime: false
+       // showInterchanges: false,
+     //   sN_BN: null,
+     //   ataChapter: null,
+     //   acfT_Type: [],
+    //    shelf: null,
+     //   remainToExpire: null,
+      //  hasShelfTime: false
     }
 
     $scope.btn_search = {
         text: 'Search',
-        type: 'default',
-        // icon: 'search',
-        //  width: 120,
+        type: 'success',
+        icon: 'search',
+        width: '100%',
         onClick: function (e) {
             mntService.get_part_number($scope.entity).then(function (res) {
                 $.each(res, function (_i, _d) {
@@ -217,7 +217,6 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
             dataSource: 'ac_type_ds',
         }
     }
-
     $scope.sb_ata = {
         showClearButton: false,
         searchEnabled: false,
@@ -225,9 +224,10 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
         valueExpr: 'id',
         bindingOptions: {
             value: 'entity.ataChapter',
-            dataSource: 'ds_ata'
+            dataSource: 'vira_ds_ata'
         }
     }
+    
 
     $scope.sb_location = {
         showClearButton: false,
@@ -258,6 +258,36 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
         type: 'default',
         onClick: function () {
             $rootScope.$broadcast('InitPNPopup', null);
+        }
+
+    };
+    $scope.btn_receipt = {
+        text: 'Receipt',
+        type: 'default',
+        // icon: 'down',
+        width: '100%',
+        // validationGroup: 'crewreportsearch',
+        bindingOptions: {},
+        onClick: function (e) {
+            $rootScope.$broadcast('InitReceipt', { location_id: $scope.entity.locationId});
+
+
+
+        }
+
+    };
+    $scope.btn_do = {
+        text: 'D/O',
+        type: 'default',
+        // icon: 'up',
+        width: '100%',
+        // validationGroup: 'crewreportsearch',
+        bindingOptions: {},
+        onClick: function (e) {
+
+            $rootScope.$broadcast('InitDirectDelivery', { location_id: $scope.entity.locationId });
+
+
         }
 
     };
@@ -349,7 +379,29 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
     }
 
     ///////////////////////
+    $scope.get_filters_style = function () {
+        var _height = $(window).height() - 160;
+        return {
+            height: _height + 'px'
+        }
+    }
+    $scope.get_detail_style = function (x) {
+        var clr = '#85e0e0';
+        if (x.expireDate) {
+            if (x.remainingToExpire <= 0)
+                clr = '#ffcccc';
+            else if (x.remainingToExpire > 0 && x.remainingToExpire <= 30)
+                //#ffaa80
+                clr = '#ffccb3';
+            else if (x.remainingToExpire > 30 && x.remainingToExpire <= 60)
+                clr = '#ffff99';
+        }
+        
 
+        return {
+            background: clr
+        }
+    }
 
     $scope.dg_inv_columns = [
 
@@ -366,7 +418,6 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
         { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 270, fixed: true, fixedPosition: 'left' },
         { dataField: 'ataChapter', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 80 },
 
-        { dataField: '', caption: 'Effectivity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         {
             caption: 'Location',
             alignment: 'center',
@@ -374,14 +425,31 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
                 { dataField: 'receiverLocation_Title', caption: 'Title', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
             ]
         },
+        //{
+        //    caption: 'Control',
+        //    alignment: 'center',
+        //    columns: [
+        //        { dataField: 'minPoint', caption: 'Min', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        //        { dataField: 'reorderPoint', caption: 'Reorder', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
+        //        { dataField: 'maxPoint', caption: 'Max', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
+        //    ]
+        //},
         {
-            caption: 'Control',
-            alignment: 'center',
-            columns: [
-                { dataField: 'minPoint', caption: 'Min', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-                { dataField: 'reorderPoint', caption: 'Reorder', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-                { dataField: 'maxPoint', caption: 'Max', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-            ]
+            dataField: 'typeId', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150,
+
+            lookup: {
+                valueExpr: 'id',
+                displayExpr: 'title',
+                dataSource: [
+                    { id: 93, title: 'Capital' },
+                    { id: 94, title: 'Conumable' },
+                    { id: 95, title: 'Fixed' },
+                    { id: 119, title: 'Unknown' },
+
+                ],
+
+            },
+
         },
         {
             caption: 'Quantity',
@@ -397,7 +465,7 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
     ];
 
 
-    $scope.dg_height = $(window).height() - 105;
+    $scope.dg_height = $(window).height() - 115;
     $scope.dg_inv_selected = null;
     $scope.dg_inv_instance = null;
     $scope.dg_inv = {
@@ -485,17 +553,49 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
 
 
 
-    $scope.$on('InitInventoryTotalPopup', function (event, prms) {
+    if (!authService.isAuthorized()) {
 
-        $scope.tempData = prms;
-        //alert($scope.tempData.location_id);
+        authService.redirectToLogin();
+    }
+    else {
+        $rootScope.page_title = '> Inventory (Grouped)';
+        $('.vira_inventory_total').fadeIn();
+    }
+    $scope.$on('ReceiptClosed', function (event, prms) {
+        $scope.bind();
 
-      
+    });
+    $scope.$on('DirectDoClosed', function (event, prms) {
+        $scope.bind();
 
-        $scope.popup_inventory_visible = true;
+    });
+    
+    $scope.$on('$viewContentLoaded', function () {
+        //mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
+        //    $scope.ds_locations = response;
+        //    $scope.dto_search.locationId = response[0].gI_LocationId;
+        //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+        if ($rootScope.vira_locations) {
+            $scope.ds_locations = $rootScope.vira_locations;
+            $scope.entity.locationId = $rootScope.vira_locations[0].gI_LocationId;
+        }
+        else {
+
+            $rootScope.fill_vira_locations(function () {
+                $scope.ds_locations = $rootScope.vira_locations;
+                $scope.entity.locationId = $rootScope.vira_locations[0].gI_LocationId;
+            });
+        }
+
+
+        setTimeout(function () {
+
+            //$scope.$broadcast('getFilterQuery', null);
+        }, 500);
     });
 
-    $scope.bind();
+        ///////////////////////////////////////
 
 }]);
 

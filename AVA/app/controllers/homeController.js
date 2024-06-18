@@ -2043,7 +2043,14 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
             else if ($rootScope.moduleId == 5) {
             }
             else if ($rootScope.moduleId == 6) {
+                if (!$rootScope.vira_locations) {
+                    $rootScope.fill_vira_locations(function () {
+                        $('.vira_lgs').fadeIn();
+                    });
+                }
+                else
                 $('.vira_lgs').fadeIn();
+                
             }
         }
 

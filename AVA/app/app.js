@@ -1037,7 +1037,7 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
     // Config.CustomerId = 1;
 	
     ///////
-    $rootScope.vira_user_id = 8;
+    
     ///////
 
 
@@ -1197,9 +1197,12 @@ $rootScope.HasHR = function () {
         document.getElementById("mySidenav").style.width = "0";
     };
     $rootScope.navigate = function (target, key) {
-        
-        var rec = Enumerable.From(Config.MenuItems).Where('$.moduleId==' + $rootScope.moduleId + ' && $.key=="' +  key + '"').FirstOrDefault();
-        activityService.hitMenu(key, target, 'Visiting ' + $rootScope.module+' > '+rec.title);
+        try {
+
+            var rec = Enumerable.From(Config.MenuItems).Where('$.moduleId==' + $rootScope.moduleId + ' && $.key=="' + key + '"').FirstOrDefault();
+            activityService.hitMenu(key, target, 'Visiting ' + $rootScope.module + ' > ' + rec.title);
+        }
+        catch (e) { }
          
         $location.path(target); 
        
@@ -2229,6 +2232,12 @@ $rootScope.HasHR = function () {
         return $rootScope.colorSetGray[n];
     };
     ////////////////////////////////////////////////
+    $rootScope.vira_user_id = 8;
+    $rootScope.vira_user_delafult_stock_id = 19;
+
+
+
+
     $rootScope.fill_vira_information = function(){
         mntService.get_ata_chart().then(function (res1) {
             
@@ -2263,6 +2272,11 @@ $rootScope.HasHR = function () {
 
         });
     };
+
+
+    $rootScope.menu_broadcast = function (key, prms) {
+        $rootScope.$broadcast(key, prms);
+    }
 
 
 

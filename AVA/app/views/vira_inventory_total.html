@@ -50,75 +50,105 @@
         font-weight: bold
     }
 </style>
-<div class="box vira_inventory" style="height:100%;overflow-y:hidden">
+<div class="box vira_inventory_total" style="height:100%;overflow-y:hidden">
 
 
     <div ng-include="'app/views/header.html'" class="rowx header"></div>
 
     <div class="rowx content" style="clear:both">
+        <div class=" col-lg-2 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:0px;padding-left:2px;">
+            <div style="border:1px solid #ccc">
+                <div style="background:#898e8c;padding:10px;color:white">Filters</div>
+                <div ng-style="get_filters_style()" class="dx-border">
 
-        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 col1 dx-border" style="padding-right: 0px; padding-left: 2px; padding: 10px 5px 0 5px" ng-style="{height: dg_height - 42 + 'px'}">
-            <div style="border: 1px solid #ccc;">
-                <div class="col-lg-12 padding-0" style="padding:10px">
-                    <label>Location</label>
-                    <div dx-select-box="sb_location" class="center" style="width: 100%"></div>
-                </div>
-                <div class="col-lg-12 padding-0" style="padding:10px">
-                    <label>Part No.:</label>
-                    <div>
-                        <div dx-text-box="txt_partNo" class="center" style="width: 80%;display:inline-block"></div>
-                        <div dx-button="btn_pn" style="bottom:15px"></div>
+                    <div class="col-lg-12 padding-0" style="padding:10px">
+                        <label>Location</label>
+                        <div dx-select-box="sb_location" class="center" style="width: 100%"></div>
                     </div>
-                </div>
-                <div class="col-lg-12 padding-0" style="padding:10px">
-                    <label>Description:</label>
-                    <div dx-text-box="txt_description" style="width: 100%"></div>
-                </div>
-                <div class="col-lg-12 padding-0" style="padding:10px">
-                    <label>A/C Type:</label>
-                    <div dx-select-box="sb_acType" class="center"></div>
-                </div>
-                <div class="col-lg-12 padding-0" style="padding:10px">
-                    <label>P/N Cat.:</label>
-                    <div dx-select-box="sb_pnCategory" class="center"></div>
+                    <div class="col-lg-12 padding-0" style="padding:10px">
+                        <label>Part No.:</label>
+                        <div>
+                            <div dx-text-box="txt_partNo" class="center" style="width: 80%;display:inline-block"></div>
+                            <div dx-button="btn_pn" style="bottom:15px"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 padding-0" style="padding:10px">
+                        <label>Description:</label>
+                        <div dx-text-box="txt_description" style="width: 100%"></div>
+                    </div>
+                    <div class="col-lg-12 padding-0" style="padding:10px">
+                        <label>A/C Type:</label>
+                        <div dx-select-box="sb_acType" class="center"></div>
+                    </div>
+                    <div class="col-lg-12 padding-0" style="padding:10px">
+                        <label>P/N Cat.:</label>
+                        <div dx-select-box="sb_pnCategory" class="center"></div>
+                    </div>
+
+                    <div class="col-lg-12 padding-0" style="padding:10px">
+                        <label>ATA:</label>
+                        <div dx-select-box="sb_ata" class="center"></div>
+                    </div>
+
+
+                    <div style="clear:both"></div>
                 </div>
 
-                <div class="col-lg-12 padding-0" style="padding:10px">
-                    <label>ATA:</label>
-                    <div dx-select-box="sb_ata" class="center"></div>
-                </div>
-                <div class="col-lg-12 padding-0" style="padding:10px">
+                <div class="col-lg-12  margin-bottom-5 padding-7">
                     <div dx-button="btn_search"></div>
                 </div>
-
                 <div style="clear:both"></div>
             </div>
+
         </div>
 
-        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col1" style="padding: 0 5px 0 5px">
-            <div dx-data-grid="dg_inv" id="dg_inv" class="content col-lg-10 col-md-10" style="overflow-y:hidden; padding-top:10px;display:inline-block" dx-item-alias="row"></div>
-            <div class="content col-lg-2 col-md-2" style="display: inline-block;padding:10px 5px 0 5px" ng-style="{height: dg_height - 44 + 'px'}">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col1" style="padding: 0 0px 0 5px">
+            <div dx-data-grid="dg_inv" id="dg_inv" class="content col-lg-9 col-md-10" style="overflow-y:hidden; padding-top:0px;display:inline-block" dx-item-alias="row"></div>
+            <div class="content col-lg-3 col-md-2" style="display: inline-block;padding:0px 0px 0 5px" ng-style="{height: dg_height - 44 + 'px'}">
                 <div class="td-title" style="width: 100%; background-color: #898e8c; color:white">Detail</div>
                 <div style="border: 1px solid lightgray; padding:5px" ng-style="{height: dg_height - 44 + 'px'}">
-                    <table style="margin-bottom:5px;color:black;background-color:#80e5ff;width:100%" class="dx-border" ng-repeat="x in ds_details">
+                    <table style="margin-bottom:5px;color:black;background-color:#85e0e0;width:100%" class="dx-border" ng-repeat="x in ds_details" ng-style="get_detail_style(x)">
                         <tr>
-                            <td class="td-field" style="font-weight:normal">SN/BN</td>
-                            <td class="td-field" style="font-weight:bold;text-align:center">{{x.sN_BN}}</td>
+                            <td class="td-fieldx" style="font-weight:normal;padding-top:5px;padding-left:8px;">SN/BN</td>
+                            <td class="td-fieldx" style="font-weight:bold;text-align:center;padding-top:7px;">{{x.sN_BN}}</td>
                         </tr>
                         <tr>
-                            <td class="td-field" style="font-weight:normal">QTY</td>
-                            <td class="td-field" style="font-weight:bold;text-align:center">{{x.availableQty}}</td>
+                            <td class="td-fieldx" style="font-weight:normal;padding-top:5px;padding-left:8px;">QTY</td>
+                            <td class="td-fieldx" style="font-weight:bold;text-align:center;padding-top:7px;">{{x.availableQty}}</td>
                         </tr>
-                        <tr>
+                        <!--<tr>
                             <td class="td-field" style="font-weight:normal">Shelf</td>
                             <td class="td-field" style="font-weight:bold;text-align:center">{{x.shelf}}</td>
+                        </tr>-->
+                        <tr>
+                            <td class="td-fieldx" style="font-weight:normal;padding-top:7px;padding-left:8px;">Cond.</td>
+                            <td class="td-fieldx" style="font-weight:bold;text-align:center;padding-top:7px;">{{x.condition}}</td>
+                        </tr>
+                        <tr ng-show="x.expireDate">
+                            <td class="td-field" style="font-weight:normal;padding-left:8px;padding-top:7px;">Exp. Rem.</td>
+                            <td class="td-field" style="font-weight:bold;text-align:center">{{x.remainingToExpire}}</td>
                         </tr>
                     </table>
                 </div>
             </div>
+            <div style="clear:both"></div>
+            <div style="margin-top:5px;border:1px solid #ccc;background:#eee;padding:5px;">
+                <table style="width:100%">
+                    <tr>
+                        <td></td>
+                        <td style="width:150px">
+                            <div dx-button="btn_receipt"></div>
+                        </td>
+                        <td style="width:150px;padding-left:5px">
+                            <div dx-button="btn_do"></div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
         </div>
     </div>
-    <div class="rowx footer">
+    <!--<div class="rowx footer">
         <table style="width:100%;margin:0;padding:0;">
             <tr>
 
@@ -128,10 +158,11 @@
 
             </tr>
         </table>
-    </div>
+    </div>-->
     <div ng-include="'app/views/vira_part_number_selection.html'"></div>
     <div ng-include="'app/views/newPartNumber.html'"></div>
     <div ng-include="'app/views/vira_receipt.html'"></div>
+    <div ng-include="'app/views/vira_direct_delivery.html'"></div>
     <!--<div ng-include="'app/views/vira_direct_delivery.html'"></div>-->
     <div dx-load-panel="loadPanel"></div>
 

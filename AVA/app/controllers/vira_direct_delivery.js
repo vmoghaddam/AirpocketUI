@@ -107,7 +107,7 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
         icon: '',
         width: 120,
         onClick: function (e) {
-            
+
             $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity.warehouse });
         }
     };
@@ -142,7 +142,7 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
             value: 'entity.paperNo'
         }
     }
-
+    
     $scope.popup_pn_visible = false;
     $scope.popup_pn_title = "Direct Delivery";
     $scope.popup_instance = null;
@@ -158,7 +158,7 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
                 widget: 'dxButton', location: 'before', options: {
                     type: 'default', text: 'Inventory', onClick: function (e) {
 
-                       // $rootScope.$broadcast('InitInventoryTotalPopup', { location_id: $scope.entity.warehouse });
+                        // $rootScope.$broadcast('InitInventoryTotalPopup', { location_id: $scope.entity.warehouse });
                         $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity.warehouse });
                     }
                 }, toolbar: 'bottom'
@@ -228,7 +228,14 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
             }
 
             //if ($scope.tempData == null)
-                $scope.bind();
+            $scope.bind();
+            if ($scope.tempData) {
+                if ($scope.tempData.location_id) {
+                    $scope.entity.warehouse = $scope.tempData.location_id;
+                }
+                else
+                    $scope.entity.warehouse = $rootScope.vira_user_delafult_stock_id;
+            }
 
             //$rootScope.referred_list_instance.repaint();
             //$rootScope.$broadcast('InitTest', $scope.tempData);
@@ -237,7 +244,7 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
 
         },
         onHiding: function () {
-
+            $rootScope.$broadcast('DirectDoClosed', {});
 
             $scope.popup_pn_visible = false;
         },
@@ -552,6 +559,45 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
         },
 
     };
+    
+
+
+
+
+    $scope.bind = function () {
+        mntService.get_ac_type().then(function (res) {
+
+            $scope.ac_type_ds = res;
+            mntService.get_register().then(function (res) {
+                $scope.registers = res
+            });
+        });
+
+        mntService.get_shop().then(function (res) {
+            console.log(res);
+            $scope.shop_ds = res;
+        });
+
+        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
+            $scope.ds_warehouse = res;
+            $scope.user = res[0];
+
+           // $scope.entity.warehouse = $scope.user.gI_LocationId;
+           $scope.entity.issuedBy = $scope.user.fullName;
+
+
+            console.log($scope.user.gI_LocationId);
+
+            $scope.entity.sender_LocationId = $scope.user.gI_LocationId;
+            $scope.entity.sender_UserId = $scope.user.uM_UserId;
+            $scope.entity.approver_LocationId = $scope.user.gI_LocationId;
+            $scope.entity.approver_UserId = $scope.user.uM_UserId;
+        });
+
+
+    }
+
+
     $scope.$on('on_inventory_selected', function (event, prms) {
         console.log("Init PN Data", prms);
         var dtos = [];
@@ -576,50 +622,16 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
             });
 
             console.log('SELECTED RESULT', response);
-            $scope.dg_del_ds = response;
+            if (!$scope.dg_del_ds)
+                $scope.dg_del_ds = [];
+            $.each(response, function (_i, _d) {
+                $scope.dg_del_ds.push(_d);
+            });
+            
 
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
     });
-
-
-
-
-    $scope.bind = function () {
-        mntService.get_ac_type().then(function (res) {
-
-            $scope.ac_type_ds = res;
-            mntService.get_register().then(function (res) {
-                $scope.registers = res
-            });
-        });
-
-        mntService.get_shop().then(function (res) {
-            console.log(res);
-            $scope.shop_ds = res;
-        });
-
-        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (res) {
-            $scope.ds_warehouse = res;
-            $scope.user = res[0];
-
-            $scope.entity.warehouse = $scope.user.gI_LocationId;
-            $scope.entity.issuedBy = $scope.user.fullName;
-
-
-            console.log($scope.user.gI_LocationId);
-
-            $scope.entity.sender_LocationId = $scope.user.gI_LocationId;
-            $scope.entity.sender_UserId = $scope.user.uM_UserId;
-            $scope.entity.approver_LocationId = $scope.user.gI_LocationId;
-            $scope.entity.approver_UserId = $scope.user.uM_UserId;
-        });
-
-
-    }
-
-
-
 
 
     $scope.$on('InitDirectDelivery', function (event, prms) {

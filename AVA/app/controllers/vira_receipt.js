@@ -202,6 +202,9 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
     $scope.save = function (callback) {
         $scope.loadingVisible = true;
         $scope.entity.receiptItems = $scope.dg_rec_ds;
+        $scope.entity.sender_LocationId = $scope.entity.receiver_LocationId;
+        $scope.entity.sender_UserId = $scope.entity.receiver_UserId;
+
         mntService.addReceipt($scope.entity).then(function (res) {
             $scope.loadingVisible = false;
             console.log(res);
@@ -279,8 +282,14 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
             if ($scope.isNew) {
                 $scope.isContentVisible = true;
             }
-            if ($scope.tempData != null)
-                $scope.bind();
+            $scope.is_stock_readonly = false;
+            if ($scope.tempData != null) {
+                //$scope.bind();
+                //goh
+                if ($scope.tempData.location_id) {
+                    $scope.entity.receiver_LocationId = $scope.tempData.location_id;
+                }
+            }
 
 
             if ($scope.dg_rec_instance)
@@ -527,6 +536,7 @@ app.controller('receiptController', ['$scope', '$location', 'mntService', 'authS
         bindingOptions: {
             value: 'entity.receiver_LocationId',
             dataSource: 'ds_locations',
+            readOnly:'is_stock_readonly'
         }
     }
 
