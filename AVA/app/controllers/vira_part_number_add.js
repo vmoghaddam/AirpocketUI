@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('vira_part_number_addController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce) {
+app.controller('vira_part_number_addController', ['$scope', '$location', '$q', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location,$q, mntService, authService, $routeParams, $rootScope, $window, $sce) {
     $scope.selectedTabIndex = -1;
     $scope.selectedTabId = null;
     $scope.popupselectedTabIndex = -1;
@@ -8,7 +8,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
         { text: "A/C Type", id: 'type' },
         { text: "A/C Model", id: 'model' },
         { text: "A/C MSN", id: 'msn' },
- ];
+    ];
 
 
     $scope.$watch("selectedTabIndex", function (newValue) {
@@ -50,7 +50,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
 
     });
 
-    
+
     $scope.tabs_options = {
         scrollByContent: true,
         showNavButtons: true,
@@ -72,7 +72,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
 
     };
 
-    
+
 
 
 
@@ -81,14 +81,24 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
     $scope.entity = {
 
 
-        typeId: 93,
-        categoryId: 98,
-        creatorId: 1,
+        id: 0,
+        partTypeId: 0,
+        measurementUnitId: 0,
+        typeId: 0,
+        categoryId: 0,
+        creatorId: 8,
+        ataChapter: null,
+        partNumber: null,
+        description: null,
         hardTime: true,
         blockList: true,
+        ipC_Reference: null,
+        figureNo: null,
+        itemNo: null,
+        remark: null,
         typeEfectivity: [],
-        modelEffectivity: null,
-        msnEffectivity: null
+        modelEffectivity: [],
+        msnEffectivity: []
 
     };
 
@@ -127,15 +137,25 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
 
         toolbarItems: [
 
+
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'success', icon: 'check', text: 'Save', validationGroup: 'partnumber', onClick: function (e) {
-                        var result = e.validationGroup.validate();
+                    type: 'danger', text: 'Close', onClick: function (e) {
 
-                        if (!result.isValid) {
-                            General.ShowNotify(Config.Text_FillRequired, 'error');
-                            return;
-                        }
+                        $scope.popup_personnel_visible = false;
+
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'success', text: 'Save', validationGroup: 'partnumber', onClick: function (e) {
+                        //var result = e.validationGroup.validate();
+
+                        //if (!result.isValid) {
+                        //    General.ShowNotify(Config.Text_FillRequired, 'error');
+                        //    return;
+                        //}
 
                         $scope.loadingVisible = true;
                         mntService.addPartNumber($scope.entity).then(function (res) {
@@ -148,15 +168,6 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
                                 General.ShowNotify("Saving Was Done Successfully", 'success');
                             }
                         });
-
-                    }
-                }, toolbar: 'bottom'
-            },
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'danger', text: 'Close', onClick: function (e) {
-
-                        $scope.popup_personnel_visible = false;
 
                     }
                 }, toolbar: 'bottom'
@@ -224,9 +235,24 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
             $scope.dg_effec_ds = res.data;
         });
 
+        mntService.getAFCTModel().then(function (res) {
+            $scope.models = res.data;
+            console.log("Models", $scope.models)
+        });
+
+        mntService.getAFCTRegister().then(function (res) {
+
+            $scope.registers = res.data;
+            console.log('registers', $scope.registers)
+        });
+
+        mntService.getReceiptPN(101).then(function (res) {
+            $scope.ds_unit = res;
+        });
+
         mntService.get_ata_chart().then(function (res) {
             console.log(res);
-            $scope.ataType = res.data;
+            $scope.ds_ata = res;
         });
         mntService.getPartType().then(function (res) {
             $scope.partDs = res.data;
@@ -238,6 +264,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
 
 
 
+
     $scope.sb_ata = {
         showClearButton: false,
         searchEnabled: false,
@@ -245,10 +272,9 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
         valueExpr: 'ata',
         bindingOptions: {
             value: 'entity.ataChapter',
-            dataSource: 'ataType',
+            dataSource: 'ds_ata'
         }
     }
-
     $scope.ds_comp = [
         { id: 98, title: 'Component' },
         { id: 99, title: 'General Tools' },
@@ -297,26 +323,21 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
     //    }
     //}
 
-    $scope.uomDs =
-        [
-            { id: 106, title: "undefined" }
-        ],
 
-        $scope.sb_uom = {
-            showClearButton: false,
-            searchEnabled: false,
-            displayExpr: "title",
-            valueExpr: 'id',
-            dataSource: $scope.uomDs,
-            bindingOptions: {
-                value: 'entity.measurementUnitId',
-
-            }
+    $scope.sb_unit = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        bindingOptions: {
+            value: 'entity.measurementUnitId',
+            dataSource: 'ds_unit',
         }
+    }
 
     $scope.txt_ipc = {
         bindingOptions: {
-            value: ''
+            value: 'entity.ipC_Reference'
         }
     }
 
@@ -332,19 +353,13 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
         }
     }
 
-   $scope.txt_pn = {
+    $scope.txt_pn = {
         bindingOptions: {
-            value: 'entity.itemNo'
+            value: 'entity.partNumber'
         }
     }
 
     $scope.txt_desc = {
-        bindingOptions: {
-            value: 'entity.description'
-        }
-    }
-
-    $scope.txt_pt = {
         bindingOptions: {
             value: 'entity.description'
         }
@@ -356,26 +371,45 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
         }
     }
 
-    $scope.txt_reference = {
+    $scope.txt_pt = {
         bindingOptions: {
-            value: 'entity.ipC_Reference'
+            value: 'entity.partTypeId'
         }
     }
 
+    $scope.txt_remark = {
+        bindingOptions: {
+            value: 'entity.remark'
+        }
+    }
+
+
+
     $scope.ch_block = {
         bindingOptions: {
-            value: '',
+            value: 'entity.blockList',
         }
     }
 
     $scope.ch_ht = {
         bindingOptions: {
-            value: '',
+            value: 'entity.hardTime',
         }
     }
 
 
     ////////////////////
+
+    var get_ac_type = function (data) {
+        var deferred = $q.defer();
+        $.each(data, function (_i, _d) {
+            $scope.entity.typeEfectivity.push(_d.id);
+        })
+        deferred.resolve($scope.entity.typeEfectivity);
+        console.log('deferred', deferred);
+
+        return deferred.promise;
+    };
 
 
     $scope.dg_effec_columns = [
@@ -392,7 +426,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
 
     ];
 
-   
+
 
 
 
@@ -452,19 +486,43 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
 
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData;
-
+            console.log(data)
             if (!data) {
                 $scope.dg_effec_selected = null;
             }
             else {
                 $scope.entity.typeEfectivity = [];
-                $.each(data, function (_i, _d) {
-                    console.log("date loop", _d)
-                    $scope.entity.typeEfectivity.push(_d.id);
+                $scope.dg_model_ds = [];
+                $scope.dg_msn_ds = [];
+
+               
+                get_ac_type(data).then(function (e) {
+
+                    console.log($scope.entity.typeEfectivity)
+                    $.each($scope.entity.typeEfectivity, function (_i, _d) {
+
+                        $scope.dg_model_ds = Enumerable.From($scope.models).Where(function (x) {
+                            var models = x.id.split("-")[0];
+                            return models == _d;
+                            return
+                        }).ToArray();
+
+                        $scope.dg_msn_ds = Enumerable.From($scope.registers).Where(function (x) {
+                            console.log(x);
+                            var models = x.acfT_ModelId.split("-")[0];
+                            return models == _d;
+                        }).ToArray();
+
+
+                        console.log("dddddd", _d);
+                    });
                 });
+
+
+
             }
 
-            console.log($scope.entity.typeEfectivity);
+
         },
 
         bindingOptions: {
@@ -486,7 +544,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
                     .appendTo(container);
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
-        { dataField: 'id', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
 
     ];
 
@@ -552,10 +610,10 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
                 $scope.dg_msn_selected = null;
             }
             else {
-                $scope.entity.typeEfectivity = [];
+                $scope.entity.msnEffectivity = [];
                 $.each(data, function (_i, _d) {
                     console.log("date loop", _d)
-                    $scope.entity.typeEfectivity.push(_d.id);
+                    $scope.entity.msnEffectivity.push(_d.id);
                 });
             }
 
@@ -648,10 +706,10 @@ app.controller('vira_part_number_addController', ['$scope', '$location', 'mntSer
                 $scope.dg_model_selected = null;
             }
             else {
-                $scope.entity.typeEfectivity = [];
+                $scope.entity.modelEffectivity = [];
                 $.each(data, function (_i, _d) {
                     console.log("date loop", _d)
-                    $scope.entity.typeEfectivity.push(_d.id);
+                    $scope.entity.modelEffectivity.push(_d.id);
                 });
             }
 

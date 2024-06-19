@@ -16,14 +16,6 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             blockList: null
         };
 
-        // mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
-
-
-
-
-
-        // }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
         ///////////////////////////////
 
         $scope.btn_search = {
@@ -31,7 +23,9 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             width: '50%',
             type: 'default',
             onClick: function () {
-
+                mntService.getPNSelection($scope.entity).then(function (res) {
+                    $scope.dg_pn_ds = res.data;
+                });
             }
         }
 
@@ -46,6 +40,43 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
         }
 
         /////////////////////////////////////
+        $scope.txt_desc = {
+            bindingOptions: {
+                value: 'entity.description',
+            }
+        }
+
+        $scope.txt_pn = {
+            bindingOptions: {
+                value: 'entity.partNumber',
+            }
+        }
+
+        $scope.txt_ipc = {
+            bindingOptions: {
+                value: 'entity.ipcReference',
+            }
+        }
+
+        $scope.txt_code = {
+            bindingOptions: {
+                value: '',
+            }
+        }
+
+        $scope.txt_issuedBy = {
+            bindingOptions: {
+                 value: '',
+            }
+        }
+
+        $scope.ch_block = {
+            bindingOptions: {
+                value: 'entity.blockList',
+            }
+        }
+
+
 
         $scope.sb_ata = {
             showClearButton: false,
@@ -73,7 +104,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             valueExpr: 'id',
             dataSource: $scope.ds_cat,
             bindingOptions: {
-                value: '',
+                value: 'entity.categoryId',
             }
         }
 
@@ -110,17 +141,12 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             valueExpr: 'id',
             dataSource: $scope.ds_status,
             bindingOptions: {
-                value: '',
+                value: 'entity.statusId',
             }
         }
 
 
-        $scope.ch_block = {
-            bindingOptions: {
-                value: '',
-            }
-        }
-
+      
 
         /////////////////////////
         $scope.dg_pn_columns = [
@@ -138,7 +164,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             { dataField: '', caption: 'Effectivity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
             { dataField: 'ataChapter', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
             { dataField: '', caption: 'Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
-            { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
+            { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250, fixed: true, fixedPosition: 'left' },
             { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
             { dataField: '', caption: 'Shelf Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
             { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
@@ -158,7 +184,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
 
         $scope.dg_pn_selected = null;
         $scope.dg_pn_instance = null;
-        $scope.dg_pn_height = $(window).height() - 230,
+        $scope.dg_pn_height = $(window).height() - 240,
             $scope.dg_pn = {
 
 
@@ -251,7 +277,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
 
         $scope.dg_int_selected = null;
         $scope.dg_int_instance = null;
-        $scope.dg_int_height = $(window).height() - 230,
+        $scope.dg_int_height = $(window).height() - 240,
             $scope.dg_int = {
 
 
