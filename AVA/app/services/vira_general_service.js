@@ -80,7 +80,7 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
 
 
        }).then(function (response) {
-           deferred.resolve(response.data.errorCode);
+           deferred.resolve(response.data );
         }, function (err) {
             console.error('HTTP request error:', err);
             deferred.reject(Exceptions.getMessage(err));
@@ -97,7 +97,7 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
 
 
         }).then(function (response) {
-            deferred.resolve(response.data.data);
+            deferred.resolve(response.data);
         }, function (err) {
             console.error('HTTP request error:', err);
             deferred.reject(Exceptions.getMessage(err));

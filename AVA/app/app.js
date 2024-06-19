@@ -2255,9 +2255,11 @@ $rootScope.HasHR = function () {
         });
     };
 
-
+    //locationTypeId
     $rootScope.vira_locations = null;
+    $rootScope.vira_stocks = null;
     $rootScope.vira_user_locations_all = null;
+    $rootScope.vira_user_locations = null;
     $rootScope.fill_vira_locations = function (callback) {
         mntService.get_locations().then(function (res1) {
 
@@ -2267,17 +2269,26 @@ $rootScope.HasHR = function () {
                 _d.uM_UserId = $rootScope.vira_user_id;
             });
             $rootScope.vira_locations = _filtered;
+            $rootScope.vira_stocks = Enumerable.From(res1).Where('$.title.startsWith("AVA") && $.locationTypeId==90').ToArray();
 
             vira_general_service.get_user_location({}).then(function (res2) {
+               
+                console.log('q');
+                console.log(res2);
                 var _filtered2 = Enumerable.From(res2).Where('$.title.startsWith("AVA")').ToArray();
+                console.log(_filtered2);
                 $rootScope.vira_user_locations_all = _filtered2;
+
+                $rootScope.vira_user_locations = Enumerable.From(_filtered2).Where('$.uM_UserId==' + $rootScope.vira_user_id).ToArray();;
+
+                if (callback)
+                    callback();
             });
 
 
 
 
-            if (callback)
-                callback();
+            
 
         });
     };
