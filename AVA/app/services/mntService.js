@@ -269,6 +269,50 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
         return deferred.promise;
     };
 
+   var _getAFCTModel = function () {
+        var deferred = $q.defer();
+        var authorizationMnt = localStorageService.get('authorizationMnt');
+
+
+        var token = authorizationMnt.token;
+        console.log('Token:', 'bearer ' +token);
+
+       $http.get("https://lmmcore.online/api/ACFTModel/GetAll", {
+          //  headers: {
+          //      'Authorization': 'bearer ' + token,
+         //   }
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+    var _getAFCTRegister = function () {
+        var deferred = $q.defer();
+        var authorizationMnt = localStorageService.get('authorizationMnt');
+
+
+        var token = authorizationMnt.token;
+        console.log('Token:', 'bearer ' +token);
+
+        $http.get("https://lmmcore.online/api/ACFTRegister/GetAll", {
+          //  headers: {
+          //      'Authorization': 'bearer ' + token,
+         //   }
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
      var _getPartType = function () {
         var deferred = $q.defer();
         var authorizationMnt = localStorageService.get('authorizationMnt');
@@ -588,6 +632,8 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
 
     ordersServiceFactory.addPartNumber = _addPartNumber;
     ordersServiceFactory.getAFCTType = _getAFCTType;
+    ordersServiceFactory.getAFCTModel = _getAFCTModel;
+    ordersServiceFactory.getAFCTRegister = _getAFCTRegister;
     ordersServiceFactory.getPartType = _getPartType;
     ordersServiceFactory.getReceiptPN = _getReceiptPN;
     ordersServiceFactory.addReceipt = _addReceipt;
