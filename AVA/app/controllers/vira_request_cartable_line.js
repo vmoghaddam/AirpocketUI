@@ -97,7 +97,16 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         onClick: function (e) {
 
             vira_general_service.approve_request($scope.entity_approve).then(function (resposne) {
-
+                if (response.errorCode === 0) {
+                    var myDialog = DevExpress.ui.dialog.custom({
+                        rtlEnabled: true,
+                        title: "The request approved.",
+                        message: expired,
+                        buttons: [{ text: "OK", onClick: function () { } }]
+                    });
+                    myDialog.show();
+                }
+                
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         }
 
@@ -121,7 +130,15 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         width: 110,
         onClick: function (e) {
             vira_general_service.cancel_request($scope.entity_cancel).then(function (resposne) {
-
+                if (response.errorCode === 0) {
+                    var myDialog = DevExpress.ui.dialog.custom({
+                        rtlEnabled: true,
+                        title: "The request canceled.",
+                        message: expired,
+                        buttons: [{ text: "OK", onClick: function () { } }]
+                    });
+                    myDialog.show();
+                }
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
 
