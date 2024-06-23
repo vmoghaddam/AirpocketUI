@@ -57,6 +57,7 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         onClick: function (e) {
             //$scope.entity_req.receiverLocationId = $scope.reciver_location
             vira_general_service.get_request_cartable_line($scope.entity_req).then(function (res) {
+                console.log(res);
                 $scope.dg_req_ds = res;
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         }
@@ -96,7 +97,16 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         onClick: function (e) {
 
             vira_general_service.approve_request($scope.entity_approve).then(function (resposne) {
-
+                if (response.errorCode === 0) {
+                    var myDialog = DevExpress.ui.dialog.custom({
+                        rtlEnabled: true,
+                        title: "The request approved.",
+                        message: expired,
+                        buttons: [{ text: "OK", onClick: function () { } }]
+                    });
+                    myDialog.show();
+                }
+                
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         }
 
@@ -120,7 +130,15 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         width: 110,
         onClick: function (e) {
             vira_general_service.cancel_request($scope.entity_cancel).then(function (resposne) {
-
+                if (response.errorCode === 0) {
+                    var myDialog = DevExpress.ui.dialog.custom({
+                        rtlEnabled: true,
+                        title: "The request canceled.",
+                        message: expired,
+                        buttons: [{ text: "OK", onClick: function () { } }]
+                    });
+                    myDialog.show();
+                }
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
 
@@ -333,22 +351,22 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
                     .appendTo(container);
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
-        {
-            dataField: "isApproved", caption: '',
-            width: 55,
-            allowFiltering: false,
-            allowSorting: false,
-            cellTemplate: function (container, options) {
-                var fn = options.value == 1 ? 'registered-24' : 'red';
+        //{
+        //    dataField: "isApproved", caption: '',
+        //    width: 55,
+        //    allowFiltering: false,
+        //    allowSorting: false,
+        //    cellTemplate: function (container, options) {
+        //        var fn = options.value == 1 ? 'registered-24' : 'red';
 
-                $("<div>")
-                    .append("<img src='content/images/" + fn + ".png' />")
-                    .appendTo(container);
-            },
-            fixed: true, fixedPosition: 'left',//  sortIndex: 0, sortOrder: "desc"
-        },
+        //        $("<div>")
+        //            .append("<img src='content/images/" + fn + ".png' />")
+        //            .appendTo(container);
+        //    },
+        //    fixed: true, fixedPosition: 'left',//  sortIndex: 0, sortOrder: "desc"
+        //},
 
-        { dataField: 'fullNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 170,fixed: true, fixedPosition: 'left'},
+        { dataField: 'fullNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 170,fixed: true, fixedPosition: 'left',sortIndex:0,sortOrder:'desc'},
         { dataField: 'paperDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left' },
         { dataField: 'senderUser_FullName', caption: 'Sender', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: 'senderLocation_Title', caption: 'Location', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
@@ -389,7 +407,7 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 338,
+        height: $(window).height() - 310,
         columns: $scope.dg_req_columns,
         onContentReady: function (e) {
             if (!$scope.dg_req_instance)
@@ -404,13 +422,17 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
         },
 
         onRowPrepared: function (e) {
-
+            
 
         },
 
 
         onCellPrepared: function (e) {
+            if (e.rowType === "data" && e.column.dataField == "fullNo" && e.data.isApproved == 1) {
+               
+                e.cellElement.css('background', '#71dada');
 
+            }
         },
 
         onSelectionChanged: function (e) {

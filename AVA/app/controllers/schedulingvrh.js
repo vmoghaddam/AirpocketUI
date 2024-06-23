@@ -139,6 +139,29 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         }
     };
 
+    //2024-06-23
+    $scope.get_ac_type = function (message, rank) {
+        var type_part = null;
+        var result = [];
+        if (message) {
+            type_part = message.split('*')[0];
+        }
+        if (!type_part) {
+            if (['ISCCM', 'SCCM', 'CCM', 'CCI', 'CCE', 'SCC', 'CC'].indexOf(rank) != -1)
+                return 'ALL';
+            else
+                return 'UNKNOWN';
+        }
+        if (type_part.includes('73'))
+            result.push('737');
+        if (type_part.includes('MD') || type_part.includes('M82') || type_part.includes('M83') || type_part.includes('M88'))
+            result.push('MD');
+        if (type_part.includes('310') || type_part.includes('320') || type_part.includes('330') || type_part.includes('340'))
+            result.push('AIRBUS');
+
+        return result.join(',');
+
+    };
 
     $scope.fillCrew = function () {
 
@@ -151,8 +174,15 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         schedulingService.getCrewForRosterByDateNew(1, _dt).then(function (response) {
 
             $scope.loadingVisible = false;
+            //2024-06-23
+            $.each(response, function (_i, _d) {
+
+                _d.ac_type = $scope.get_ac_type(_d.ValidationMessage, _d.JobGroup);
+                 
+            });
 
             $scope.ds_crew = response;
+            console.log('ds_crew', $scope.ds_crew);
             if ($scope.IsCabin && $scope.IsCockpit) {
                 $scope.ds_crew_roster = Enumerable.From($scope.ds_crew).ToArray();
             }
@@ -3051,6 +3081,9 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             // $scope.bind_calcrew();
 
             // $scope.cal_change();
+            //2024-06-23
+            if ($scope.dg_calcrew_instance)
+                $scope.dg_calcrew_instance.repaint();
 
         },
         onHiding: function () {
@@ -3163,12 +3196,13 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
 
     $scope.dg_calcrew_columns = [
         // { dataField: 'Selected', caption: '', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width:45},
+        { dataField: 'ac_type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width:90/*sortIndex: 1, sortOrder: 'asc'*/ },
         { dataField: 'ScheduleName', caption: 'Schedule Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, sortIndex: 1, sortOrder: 'asc' },
-        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
         { dataField: 'GroupOrder', caption: 'O', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, visible: false, sortIndex: 0, sortOrder: 'asc' },
         {
             dataField: "Id", caption: '',
-            width: 55,
+            width: 45,
             allowFiltering: false,
             allowSorting: false,
             cellTemplate: 'smsTemplate',
@@ -3176,9 +3210,10 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             //visible:false,
 
         },
+        //2024-06-23
         {
             dataField: "Id", caption: '',
-            width: 55,
+            width: 45,
             allowFiltering: false,
             allowSorting: false,
             cellTemplate: 'profileTemplate',
@@ -3241,6 +3276,28 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         onRowPrepared: function (e) {
             //if (e.data && e.data.AvailabilityId != 1)
             //    e.rowElement.css('background', '#ffcccc');
+
+        },
+        //2024-06-23
+        onCellPrepared: function (e) {
+
+            if (e.rowType === "data" && e.column.dataField == "ac_type") {
+                if (e.data.ac_type == '737') {
+                    e.cellElement.css("backgroundColor", "#d9ffcc");
+                }
+                if (e.data.ac_type == 'MD') {
+                    e.cellElement.css("backgroundColor", "#ffccff");
+                }
+                if (e.data.ac_type == 'AIRBUS') {
+                    e.cellElement.css("backgroundColor", "#ccffff");
+                }
+                if (e.data.ac_type == 'ALL') {
+                    e.cellElement.css("backgroundColor", "#f2f2f2");
+                }
+                if (e.data.ac_type == 'UNKNOWN') {
+                    e.cellElement.css("backgroundColor", "#ffcccc");
+                }
+            }
 
         },
 

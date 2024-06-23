@@ -796,13 +796,13 @@
                     <div dx-text-box="text_search" class="dx-border" style="background:white"></div>
                 </div>
 
-                <div class="thin-scroll col-res" style="background:#d9d9d9;overflow-y:hidden;overflow-x:hidden " ng-style="getLeftColumnStyle()">
-                    <div class="reg-row" ng-repeat="res in resources_filtered" style="text-align:left;padding:0px 0 0 10px;font-size:12px;  border-bottom:1px solid gray" ng-style="getResStyle(res)">
-                        <div style="font-size:11px;font-weight:bold;margin-top:0px" >{{res.text }}</div>
+                <div class="thin-scroll col-res" style="background:#f2f2f2;overflow-y:hidden;overflow-x:hidden " ng-style="getLeftColumnStyle()">
+                    <div class="reg-row" ng-repeat="res in resources_filtered" style="text-align:left;padding:0px 0 0 0px;font-size:12px;  border-bottom:1px solid gray" ng-style="getResStyle(res)">
+                        <div style="font-size:11px;font-weight:bold;margin-top:0px" ng-style="get_crew_style(res)"><span style="padding:3px 0 3px 5px;font-size:11px;display:inline-block">{{res.text }}</span></div>
                         <table style="width:130px;margin-top:3px;">
                             
                             <tr>
-                                <td style="font-size:11px;font-weight:bold;text-align:center;width:10px">X</td>
+                                <td style="font-size:11px;font-weight:bold;text-align:center;width:10px;padding-left:5px">X</td>
                                 <td style="font-size:12px;text-align:center ">{{formatMinutes(res.FX)}}</td>
                                 <td style="font-size:11px;font-weight:bold;text-align:center;width:10px">B</td>
                                 <td style="font-size:12px;text-align:center">{{formatMinutes(res.BL)}}</td>
@@ -811,7 +811,7 @@
                             </tr>
                         </table>
                     </div>
-                    <idv style="clear:both"></idv>
+                    <div style="clear:both"></div>
                 </div>
 
             </div>
@@ -919,17 +919,19 @@
                     <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
                     <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
                     <!-- <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_persiandate"></div></td>-->
+                    <!--2024-06-22-->
+                    
+                    <td style="width:130px;text-align:left;padding-right:5px" class="dx-border"><div dx-select-box="sb_type"></div></td>
                     <td style="width:130px;text-align:left;padding-right:5px" class="dx-border"><div dx-select-box="sb_rank"></div></td>
                     <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
-					 <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_export"></div></td>
-					
-					<!-- <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_on"></div></td>
-					  <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_off"></div></td>-->
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_export"></div></td>
 
+                    <!-- <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_on"></div></td>
+    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_off"></div></td>-->
                     <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_add"></div></td>
 
-                                        <td style="width:90px;text-align:right;padding-right:5px" class="dx-border"><div dx-check-box="chb_rest"></div></td>
-                    -->
+                        <td style="width:90px;text-align:right;padding-right:5px" class="dx-border"><div dx-check-box="chb_rest"></div></td>
+    -->
                     <td></td>
 
 

@@ -1406,12 +1406,39 @@ app.controller('zdutyTimelineController', ['$scope', '$location', '$routeParams'
             width: _width + 'px'
         }
     };
-    //2023
+    //2024-06-22
+    $scope.get_crew_style = function (res) {
+        var bcolor = '#d9d9d9';
+        switch (res.ac_type) {
+            case 'ALL':
+                bcolor = '#f2f2f2';
+                break;
+            case '737':
+                bcolor = '#d9ffcc';
+                break;
+            case 'MD':
+                bcolor = '#ffccff';
+                break;
+            case 'AIRBUS':
+                bcolor = '#ccffff';
+                break;
+            case 'UNKNOWN':
+                bcolor = '#ffcccc';
+                break;
+            default:
+                break;
+        }
+        return {
+            background: bcolor
+        }
+    }
     $scope.getResStyle = function (res) {
+        
         var _width = $scope.ganttData && $scope.ganttData.dates ? $scope.ganttData.dates.length * date_cell_width : 1000;
         return {
             width: _width + 'px',
-            height: (res.maxTop + duty_height + 5 ) + 'px'
+            height: (res.maxTop + duty_height + 5) + 'px',
+           // background:bcolor
         };
     };
     $scope.getResCaptionStyle = function (res) {
@@ -1651,6 +1678,17 @@ app.controller('zdutyTimelineController', ['$scope', '$location', '$routeParams'
         schedulingService.getCrewForGanttByDateNew(_code, '', _dt).then(function (response) {
 
             $scope.loadingVisible = false;
+            //2024-06-21
+            $.each(response, function (_i, _d) {
+
+                _d.ac_type = $scope.get_ac_type(_d.item.ValidationMessage, _d.JobGroup);
+                if (_d.ac_type != 'ALL')
+                    _d.text +=' (' + _d.ac_type + ')';
+            });
+            if ($scope.ac_type != 'ALL') {
+                response = Enumerable.From(response).Where('$.ac_type=="' + $scope.ac_type + '"').ToArray();
+            }
+           
 
             //$scope.ds_crew = response;
 
@@ -3086,7 +3124,29 @@ $scope.destroy_menu();
         return result;
     };
 
+    //2024-06-21
+    $scope.get_ac_type = function (message, rank) {
+        var type_part = null;
+        var result = [];
+        if (message) {
+            type_part = message.split('*')[0];
+        }
+        if (!type_part) {
+            if (['ISCCM', 'SCCM', 'CCM', 'CCI', 'CCE', 'SCC', 'CC'].indexOf(rank) != -1)
+                return 'ALL';
+            else
+                return 'UNKNOWN';
+        }
+        if (type_part.includes('73'))
+            result.push('737');
+        if (type_part.includes('MD') || type_part.includes('M82') || type_part.includes('M83') || type_part.includes('M88'))
+            result.push('MD');
+        if (type_part.includes('310') || type_part.includes('320') || type_part.includes('330') || type_part.includes('340'))
+            result.push('AIRBUS');
 
+        return result.join(',');
+
+    };
     $scope.timeline_data = null;
     $scope.resources_filtered = [];
     $scope.bindDutyTimeLine = function (callback) {
@@ -3129,6 +3189,7 @@ $scope.destroy_menu();
         $scope.getCrew(function (crews) {
             //nool
             $scope.getDuties(_df, _dt, function (dts) {
+                
                 $scope.duties = dts;
                 crews.duties = [];
 
@@ -3188,6 +3249,9 @@ $scope.destroy_menu();
                         _d.maxTop = 0;
 
                     $scope.totalHeight += _d.maxTop;
+                    //2024-06-21
+                   
+                  
 
 
                 });
@@ -3425,6 +3489,7 @@ $scope.destroy_menu();
         $scope.loadingVisible = true;
         var ed = (new Date($scope.dateEnd)).toUTCDateTimeDigits(); //(new Date($scope.dateto)).toUTCDateTimeDigits();
         //flightService.getFlightsGantt(Config.CustomerId, (new Date($scope.datefrom)).toUTCDateTimeDigits(), ed, offset, /*($scope.IsAdmin ? null : $scope.airportEntity.Id)*/-1, 0, filter).then(function (response) {
+        
         flightService.getFlightsGantt(Config.CustomerId, (new Date($scope.datefrom)).toUTCDateTimeDigits(), ed, offset, null, filter).then(function (response) {
             try {
                 $scope.loadingVisible = false;
@@ -3440,7 +3505,9 @@ $scope.destroy_menu();
                 }
                 $scope.tabsdatevisible = true;
 
-
+               
+                
+               
                 $.each(response.resources, function (_i, _d) {
                     _d.text = _d.resourceName;
                     var flights = Enumerable.From(response.flights).Where('$.RegisterID==' + _d.resourceId)
@@ -3755,6 +3822,24 @@ $scope.destroy_menu();
     ///////////////////// 
     $scope.dt_from = new Date();//new Date(2021,11,1).addDays(0);
     $scope.dt_to = new Date($scope.dt_from).addDays(14);
+
+    $scope.ac_type = 'ALL';
+    $scope.sb_type = {
+        placeholder: 'A/C Type',
+        showClearButton: false,
+        searchEnabled: false,
+        dataSource: ['ALL', '737', 'MD', 'AIRBUS', 'UNKNOWN'],
+
+        onSelectionChanged: function (arg) {
+
+        },
+
+        bindingOptions: {
+            value: 'ac_type',
+
+
+        }
+    };
 
     $scope.rank = 'COCKPIT';
     $scope.sb_rank = {
@@ -5421,12 +5506,14 @@ $scope.destroy_menu();
             width: _width + 'px'
         }
     };
-    //2023
+    
     $scope.getResStyle_flt = function (res) {
+       
         var _width = $scope.ganttFlightData && $scope.ganttFlightData.dates ? $scope.ganttFlightData.dates.length * date_cell_width_flt : 1000;
         return {
             width: _width + 'px',
-            height: (res.maxTop + duty_height_flt + 15) + 'px'
+            height: (res.maxTop + duty_height_flt + 15) + 'px',
+            
         };
     };
     $scope.getResCaptionStyle_flt = function (res) {

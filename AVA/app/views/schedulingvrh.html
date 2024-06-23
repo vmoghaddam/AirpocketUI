@@ -1619,14 +1619,15 @@
 
     <div id="popup_cal" dx-popup="popup_cal">
         <div style="padding:0px 0 0 0">
+            <!--2024-06-23-->
             <div class=" col-lg-2 col-md-1 col-sm-1 col-xs-1 " style="padding:0 5px 0 0; width:25%;  ">
                 <div dx-data-grid="dg_calcrew" id="dg_calcrew" class="content" style="overflow-y:hidden" dx-item-alias="crew">
                     <div data-options="dxTemplate:{ name:'smsTemplate' }">
-                        <a ng-click="smsCrew(crew)" href="" class='w3-button w3-block w3-deep-orange' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fas fa-bell" aria-hidden="true"></i></a>
+                        <a ng-click="smsCrew(crew)" href="" class='w3-button w3-block w3-deep-orange' style='background:#fff !important; margin:0 auto 0px auto;text-decoration:none;padding:3px 0px !important;border-radius:50%;text-align:center'><i class="fas fa-bell" style="color:red;font-size:17px" aria-hidden="true"></i></a>
                     </div>
 
                     <div data-options="dxTemplate:{ name:'profileTemplate' }">
-                        <a ng-click="showProfile(crew.data)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fas fa-info" aria-hidden="true"></i></a>
+                        <a ng-click="showProfile(crew.data)" href="" class='w3-button w3-block w3-blue' style='background: #fff !important; margin: 0 auto 0px auto; text-decoration: none; padding: 3px 0px !important; border-radius: 50%; text-align: center'><i style="color:#2196F3;font-size:17px" class="fas fa-info" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
