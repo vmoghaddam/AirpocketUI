@@ -802,6 +802,12 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_cardex.html?v=1130"
     });
 
+   
+    $routeProvider.when("/cabin/reports", {
+          controller: "cabin_reportsController",
+        templateUrl: "/app/views/cabin_reports.html?v=1130"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   

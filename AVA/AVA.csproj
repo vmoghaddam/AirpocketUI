@@ -80,6 +80,7 @@
     <Content Include="app\controllers\boardfly.js" />
     <Content Include="app\controllers\boardtest.js" />
     <Content Include="app\controllers\cabinReports.js" />
+    <Content Include="app\controllers\cabin_reports.js" />
     <Content Include="app\controllers\ceoFlightBoardController.js" />
     <Content Include="app\controllers\certificateAddController.js" />
     <Content Include="app\controllers\changeFlightRegisterController.js" />
@@ -334,6 +335,7 @@
     <Content Include="app\views\boardtest.html" />
     <Content Include="app\views\boarfly.html" />
     <Content Include="app\views\cabinReports.html" />
+    <Content Include="app\views\cabin_reports.html" />
     <Content Include="app\views\ceoFlightBoard.html" />
     <Content Include="app\views\certificateAdd.html" />
     <Content Include="app\views\changeflightregister.html" />

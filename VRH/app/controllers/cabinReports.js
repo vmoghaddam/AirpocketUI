@@ -743,6 +743,14 @@ app.controller('cabinReports', ['$scope', '$location', '$routeParams', '$rootSco
         scrollByThumb: true,
         bindingOptions: { height: 'scroll_jl_height', }
     };
+
+    $scope.scroll_equeoment_height = 760;
+    $scope.scroll_equeoment = {
+        scrollByContent: true,
+        scrollByThumb: true,
+        bindingOptions: { height: 'scroll_equeoment_height', }
+    };
+
     $scope.popup_jl_visible = false;
     $scope.popup_jl_title = 'Journey Log';
     $scope.popup_jl = {
@@ -1530,6 +1538,7 @@ app.controller('cabinReports', ['$scope', '$location', '$routeParams', '$rootSco
         { text: "LOG", id: 'log' },
         { text: "SCC", id: 'scc' },
         { text: "Eval Form", id: 'evalForm' },
+        { text: "Equepment", id: 'equepment' },
         //{ text: "OFP", id: 'ofp' },
         //{ text: "METAR", id: 'metar' },
         //{ text: "TAF", id: 'taf' },
@@ -1546,8 +1555,7 @@ app.controller('cabinReports', ['$scope', '$location', '$routeParams', '$rootSco
             $('#' + id).fadeIn();
 
             switch (id) {
-                case 'calendar':
-                    $scope.bindCrew();
+                case 'equepment':
                     break;
                 case 'route':
 
@@ -3185,6 +3193,66 @@ app.controller('cabinReports', ['$scope', '$location', '$routeParams', '$rootSco
         },
 
     };
+
+    $scope.bind_equip = function () {
+        $scope.loadingVisible = true;
+
+        alert("asd asd asd asd asd");
+        //flightService.epGetFlightLocal($scope.entity.Id).then(function (response) {
+        //    $scope.loadingVisible = false;
+        //    if (response.IsSuccess) {
+        //        $scope.isContentVisible = true;
+        //        $scope.flight = response.Data;
+
+
+        neerjaService.get_pfc_items_grouped_ap($scope.entity.Id , $scope.entity.crew).then(function (response2) {
+                    console.log(response2);
+                    $scope.loadingVisible = false;
+                    $scope.pfc_grouped = response2;
+
+
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+
+        //    }
+
+
+        //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+    }
+
+
+    //$scope.item_click = function (item_id, cat_id) {
+    //    var cat = Enumerable.From($scope.pfc_grouped).Where('$.category_id==' + cat_id).FirstOrDefault();
+    //    var item = Enumerable.From(cat.items).Where('$.item_id==' + item_id).FirstOrDefault();
+    //    if (item.is_servicable === 0 || item.is_servicable === false)
+    //        item.is_servicable = 1;
+    //    else if (item.is_servicable === 1 || item.is_servicable === true)
+    //        item.is_servicable = 0;
+    //    else item.is_servicable = 1;
+    //    //  alert();
+    //}
+    //$scope.get_item_result = function (item_id, cat_id) {
+    //    var cat = Enumerable.From($scope.pfc_grouped).Where('$.category_id==' + cat_id).FirstOrDefault();
+    //    var item = Enumerable.From(cat.items).Where('$.item_id==' + item_id).FirstOrDefault();
+    //    if (item.is_servicable === 0 || item.is_servicable === false)
+    //        return 'U/S';
+    //    else if (item.is_servicable === 1 || item.is_servicable === true)
+    //        return 'S';
+    //    else return '?';
+    //}
+
+    //$scope.get_item_class = function (item_id, cat_id) {
+    //    var cat = Enumerable.From($scope.pfc_grouped).Where('$.category_id==' + cat_id).FirstOrDefault();
+    //    var item = Enumerable.From(cat.items).Where('$.item_id==' + item_id).FirstOrDefault();
+    //    if (item.is_servicable === 0 || item.is_servicable === false)
+    //        return 'cls_item_us';
+    //    else if (item.is_servicable === 1 || item.is_servicable === true)
+    //        return 'cls_item_s';
+    //    else return 'cls_item_x';
+    //}
+
+
+
     $scope.bindEvalCrews = function (flightId) {
 
         flightService.epGetFlightCrews(flightId).then(function (response) {
@@ -3239,6 +3307,20 @@ app.controller('cabinReports', ['$scope', '$location', '$routeParams', '$rootSco
         onClick: function (e) {
 
             $scope.bindEval()
+
+
+        },
+
+    };
+
+     $scope.btn_equpm_fill = {
+        text: 'Fill',
+        type: 'success',
+        width: '100%',
+
+        onClick: function (e) {
+
+            $scope.bind_equip();
 
 
         },

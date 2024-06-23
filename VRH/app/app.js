@@ -729,6 +729,12 @@ app.config(function ($routeProvider) {
     });
 
 
+       $routeProvider.when("/cabin/reports", {
+           controller: "cabin_reportsController",
+        templateUrl: "/app/views/cabin_reports.html"
+    });
+
+
 
 
 
