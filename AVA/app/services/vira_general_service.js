@@ -12,7 +12,7 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
 
 
         }).then(function (response) {
-            deferred.resolve(response.data.data);
+            deferred.resolve(response.data);
         }, function (err) {
             console.error('HTTP request error:', err);
             deferred.reject(Exceptions.getMessage(err));
@@ -21,6 +21,23 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.get_part_type = _get_part_type;
+
+     var _delete_part_type = function (id) {
+        var deferred = $q.defer();
+
+         $http.post(vira_api + "api/CMPPartType/Delete?id=" + id, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.delete_part_type = _delete_part_type;
 
      var _get_position = function () {
         var deferred = $q.defer();
@@ -55,6 +72,23 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.add_part_type = _add_part_type;
+
+   var _edit_part_type = function (entity) {
+        var deferred = $q.defer();
+
+       $http.post(vira_api + "api/CMPPartType/Edit", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.edit_part_type = _edit_part_type;
 
     var _get_user_location = function (entity) {
         var deferred = $q.defer();
@@ -175,7 +209,6 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.get_request = _get_request;
-
 
    var _get_request_cartable_item = function (id) {
         var deferred = $q.defer();
@@ -414,6 +447,39 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.get_cardex = _get_cardex;
+     var _edit_part_number = function (entity) {
+        var deferred = $q.defer();
+
+         $http.post(vira_api + "api/CMPPartNumber/Edit", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.edit_part_number = _edit_part_number;
+
+  var _delete_part_number = function (id) {
+        var deferred = $q.defer();
+
+      $http.post(vira_api + "api/CMPPartNumber/Delete?id=" + id, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.delete_part_number = _delete_part_number;
 
     return ordersServiceFactory;
 
