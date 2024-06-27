@@ -228,6 +228,8 @@
     <Content Include="app\controllers\vira_beginning_add.js" />
     <Content Include="app\controllers\vira_beginning_inventory.js" />
     <Content Include="app\controllers\vira_cardex.js" />
+    <Content Include="app\controllers\vira_company.js" />
+    <Content Include="app\controllers\vira_company_add.js" />
     <Content Include="app\controllers\vira_direct_delivery.js" />
     <Content Include="app\controllers\vira_inventory_total.js" />
     <Content Include="app\controllers\vira_part_number.js" />
@@ -280,6 +282,8 @@
     <Content Include="app\controllers\vira_request_cartable_line.js" />
     <Content Include="app\controllers\vira_request_edit.js" />
     <Content Include="app\controllers\vira_request_list.js" />
+    <Content Include="app\controllers\vira_shipment.js" />
+    <Content Include="app\controllers\vira_shipment_add.js" />
     <Content Include="app\controllers\vrAdd.js" />
     <Content Include="app\controllers\zdutyTimeline.js" />
     <Content Include="app\controllers\zpersonAddController.js" />
@@ -486,6 +490,8 @@
     <Content Include="app\views\vira_beginning_add.html" />
     <Content Include="app\views\vira_beginning_inventory.html" />
     <Content Include="app\views\vira_cardex.html" />
+    <Content Include="app\views\vira_company.html" />
+    <Content Include="app\views\vira_company_add.html" />
     <Content Include="app\views\vira_direct_delivery.html" />
     <Content Include="app\views\vira_inventory_total.html" />
     <Content Include="app\views\vira_part_number.html" />
@@ -537,6 +543,8 @@
     <Content Include="app\views\vira_request_cartable_line.html" />
     <Content Include="app\views\vira_request_edit.html" />
     <Content Include="app\views\vira_request_list.html" />
+    <Content Include="app\views\vira_shipment.html" />
+    <Content Include="app\views\vira_shipment_add.html" />
     <Content Include="app\views\vrAdd.html" />
     <Content Include="app\views\zdutyTimeline.html" />
     <Content Include="app\views\zperson.html" />

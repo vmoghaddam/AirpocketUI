@@ -431,6 +431,142 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
     };
     ordersServiceFactory.get_year = _get_year;
 
+    var _get_company = function () {
+        var deferred = $q.defer();
+
+        $http.get(vira_api + "api/GICompany/GetAll", {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_company = _get_company;
+
+   var _add_company = function (entity) {
+        var deferred = $q.defer();
+
+       $http.post(vira_api + "api/GICompany/Add",entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.add_company = _add_company;
+
+   var _edit_company = function (entity) {
+        var deferred = $q.defer();
+
+       $http.post(vira_api + "api/GICompany/Edit",entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.edit_company = _edit_company;
+
+    var _delete_company = function (id) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/GICompany/Delete?id=" + id, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.delete_company = _delete_company;
+
+    var _get_shipment = function () {
+        var deferred = $q.defer();
+
+        $http.get(vira_api + "api/GICompany/GetAllShipment", {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_shipment = _get_shipment;
+
+    var _add_shipment = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/GICompany/AddShipment",entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.add_shipment = _add_shipment;
+
+    var _edit_shipment = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/GICompany/EditShipment",entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.edit_shipment = _edit_shipment;
+
+    var _delete_shipment = function (id) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/GICompany/DeleteShipment?id=" + id, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.delete_shipment = _delete_shipment;
+
     var _get_cardex = function (entity) {
         var deferred = $q.defer();
 
