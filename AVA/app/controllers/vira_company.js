@@ -34,13 +34,13 @@ app.controller('vira_companyController', ['$scope', '$location', '$routeParams',
         };
         $scope.dg_company_height = $(window).height() - 115;
         $scope.dg_company_columns = [
-            { dataField: 'name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250},
-            { dataField: 'address', caption: 'Address', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false  },
+            { dataField: 'name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
+            { dataField: 'address', caption: 'Address', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false },
             { dataField: 'telephone', caption: 'Telephone', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
-            { dataField: 'fax', caption: 'Fax', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150,},
+            { dataField: 'fax', caption: 'Fax', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
             { dataField: 'email', caption: 'Email', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250, },
             { dataField: 'contactPerson', caption: 'Contact Person', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-            { dataField: 'companyType', caption: 'Company Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150,  },
+            { dataField: 'companyType', caption: 'Company Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
 
         ];
 
@@ -196,28 +196,35 @@ app.controller('vira_companyController', ['$scope', '$location', '$routeParams',
             width: '100%',
             bindingOptions: {},
             onClick: function (e) {
-                $scope.loadingVisible = true;
-                $scope.delete(function (res) {
-                    if (res.errorCode) {
-                        if (res.errorCode == 10029) {
-                            mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
-                                $scope.delete();
+                General.Confirm(Config.Text_DeleteConfirm, function (res) {
 
-                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-                        }
-                        else
-                            General.ShowNotify(res.errorMessage, 'error');
-                    }
-                    else {
-                        General.ShowNotify('Deleting Was Done Successfully', 'success');
-                        $scope.loadingVisible = false;
+                    if (res) {
+                        $scope.loadingVisible = true;
+                        $scope.delete(function (res) {
+                            if (res.errorCode) {
+                                if (res.errorCode == 10029) {
+                                    mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+                                        $scope.delete();
+
+                                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                                }
+                                else
+                                    General.ShowNotify(res.errorMessage, 'error');
+                            }
+                            else {
+                                General.ShowNotify('Deleting Was Done Successfully', 'success');
+                                $scope.bind();
+                                $scope.loadingVisible = false;
+                            }
+                        });
+
                     }
                 });
-
             }
         };
 
         $scope.delete = function (callback) {
+
             $scope.loadingVisible = true;
             vira_general_service.delete_company($scope.entity.id).then(function (res) {
                 $scope.loadingVisible = false;
@@ -234,6 +241,7 @@ app.controller('vira_companyController', ['$scope', '$location', '$routeParams',
                     }
                 }
             });
+
         };
 
         $scope.bind = function () {
@@ -246,7 +254,7 @@ app.controller('vira_companyController', ['$scope', '$location', '$routeParams',
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-        };
+           };
         /////////////////////////////////////
 
         $scope.get_filters_style = function () {
@@ -276,6 +284,12 @@ app.controller('vira_companyController', ['$scope', '$location', '$routeParams',
 
                 //$scope.$broadcast('getFilterQuery', null);
             }, 500);
+        });
+
+        $scope.$on('company_closed', function () {
+
+            $scope.bind();
+          
         });
 
         ///////////////////////////////////////

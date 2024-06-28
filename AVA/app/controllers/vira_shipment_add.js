@@ -28,7 +28,14 @@ app.controller('vira_shipment_addController', ['$scope', '$location', 'mntServic
 
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'success', text: 'Save', onClick: function (e) {
+                    type: 'success', text: 'Save', validationGroup:'val_shipment', onClick: function (e) {
+
+                        var result = e.validationGroup.validate();
+
+                        if (!result.isValid) {
+                            General.ShowNotify(Config.Text_FillRequired, 'error');
+                            return;
+                        }
 
                         $scope.loadingVisible = true;
                         if ($scope.isNew) {
@@ -121,6 +128,7 @@ app.controller('vira_shipment_addController', ['$scope', '$location', 'mntServic
 
             }
             $scope.popup_personnel_visible = false;
+            $rootScope.$broadcast('shipment_closed', null);
         },
         onContentReady: function (e) {
             if (!$scope.popup_instance)

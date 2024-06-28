@@ -34,7 +34,7 @@ app.controller('vira_shipmentController', ['$scope', '$location', '$routeParams'
         };
         $scope.dg_company_height = $(window).height() - 115;
         $scope.dg_company_columns = [
-            { dataField: 'title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
+            { dataField: 'title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 350 },
             { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false },
         ];
 
@@ -190,24 +190,30 @@ app.controller('vira_shipmentController', ['$scope', '$location', '$routeParams'
             width: '100%',
             bindingOptions: {},
             onClick: function (e) {
-                $scope.loadingVisible = true;
-                $scope.delete(function (res) {
-                    if (res.errorCode) {
-                        if (res.errorCode == 10029) {
-                            mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
-                                $scope.delete();
+                General.Confirm(Config.Text_DeleteConfirm, function (res) {
 
-                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-                        }
-                        else
-                            General.ShowNotify(res.errorMessage, 'error');
-                    }
-                    else {
-                        General.ShowNotify('Deleting Was Done Successfully', 'success');
-                        $scope.loadingVisible = false;
+                    if (res) {
+                        $scope.loadingVisible = true;
+                        $scope.delete(function (res) {
+                            if (res.errorCode) {
+                                if (res.errorCode == 10029) {
+                                    mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+                                        $scope.delete();
+
+                                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                                }
+                                else
+                                    General.ShowNotify(res.errorMessage, 'error');
+                            }
+                            else {
+                                General.ShowNotify('Deleting Was Done Successfully', 'success');
+                                $scope.bind();
+                                $scope.loadingVisible = false;
+
+                            }
+                        });
                     }
                 });
-
             }
         };
 
@@ -270,6 +276,12 @@ app.controller('vira_shipmentController', ['$scope', '$location', '$routeParams'
 
                 //$scope.$broadcast('getFilterQuery', null);
             }, 500);
+        });
+
+          $scope.$on('shipment_closed', function () {
+
+            $scope.bind();
+           
         });
 
         ///////////////////////////////////////

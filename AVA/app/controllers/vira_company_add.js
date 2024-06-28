@@ -5,8 +5,8 @@ app.controller('vira_company_addController', ['$scope', '$location', 'mntService
     $scope.entity = {
 
         id: 0,
-        countryId: "AE",
-        shipmentId: 1,
+        countryId: null,
+        shipmentId: null,
         currencyId: 0,
         name: null,
         address: null,
@@ -14,7 +14,7 @@ app.controller('vira_company_addController', ['$scope', '$location', 'mntService
         fax: null,
         email: null,
         contactPerson: null,
-        companyType: 0,
+        companyType: null,
         selected: true,
         active: true
     }
@@ -37,7 +37,15 @@ app.controller('vira_company_addController', ['$scope', '$location', 'mntService
 
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'success', text: 'Save', onClick: function (e) {
+                    type: 'success', text: 'Save', validationGroup: 'val_company', onClick: function (e) {
+
+
+                        var result = e.validationGroup.validate();
+
+                        if (!result.isValid) {
+                            General.ShowNotify(Config.Text_FillRequired, 'error');
+                            return;
+                        }
 
                         $scope.loadingVisible = true;
                         if ($scope.isNew) {
@@ -130,6 +138,7 @@ app.controller('vira_company_addController', ['$scope', '$location', 'mntService
 
             }
             $scope.popup_personnel_visible = false;
+            $rootScope.$broadcast('company_closed', null);
         },
         onContentReady: function (e) {
             if (!$scope.popup_instance)
@@ -196,6 +205,12 @@ app.controller('vira_company_addController', ['$scope', '$location', 'mntService
         mntService.getReceiptPN(194).then(function (res) {
             $scope.ds_currency = res;
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+        vira_general_service.get_shipment().then(function (response) {
+
+            $scope.ds_shipment = response.data;
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
     }
 
 
@@ -220,12 +235,31 @@ app.controller('vira_company_addController', ['$scope', '$location', 'mntService
         }
     }
 
+    $scope.ds_country =
+        [
+            { id: 'IRN', title: 'IRN' },
+            { id: 'GB', title: 'GB' },
+            { id: 'TUR', title: 'TUR' },
+            { id: 'ARE', title: 'ARE' },
+            { id: 'FRA', title: 'FRA' },
+            { id: 'DEU', title: 'DEU' },
+            { id: 'CHN', title: 'CHN' },
+            { id: 'AE', title: 'AE' },
+            { id: 'AUT', title: 'AUT' },
+            { id: 'ESP', title: 'ESP' },
+            { id: 'UKR', title: 'UKR' },
+            { id: 'HR', title: 'HR' },
+            { id: 'BGR', title: 'BGR' },
+            { id: 'IDN', title: 'IDN' },
+            { id: 'MYS', title: 'MYS' },
+        ]
+
     $scope.sb_country = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-        
+        dataSource: $scope.ds_country,
         bindingOptions: {
             value: 'entity.countryId',
 
@@ -238,10 +272,9 @@ app.controller('vira_company_addController', ['$scope', '$location', 'mntService
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-       
         bindingOptions: {
             value: 'entity.shipmentId',
-
+            dataSource: 'ds_shipment'
         }
     }
 
