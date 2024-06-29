@@ -3441,10 +3441,14 @@ $scope.destroy_menu();
         }
     }
 
+    //2024-06-23
     $scope.getDutyClass = function (duty) {
         var str = '';
         if (duty.DutyType == 1165 && duty.OutOfHomeBase)
             str += "-oh";
+        if (duty.DutyType == 1165 && duty.InitRoute.includes('(o)'))
+            str = "-obs";
+
         return 'obj-duty duty-' + duty.DutyType+str;
     }
 
