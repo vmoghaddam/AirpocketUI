@@ -813,6 +813,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_shipment.html?v=1130"
     });
 
+     $routeProvider.when("/vira/nis", {
+          controller: "vira_nisController",
+        templateUrl: "/app/views/vira_nis.html?v=1130"
+    });
+
    
     $routeProvider.when("/cabin/reports", {
           controller: "cabin_reportsController",

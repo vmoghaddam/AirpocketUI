@@ -232,6 +232,7 @@
     <Content Include="app\controllers\vira_company_add.js" />
     <Content Include="app\controllers\vira_direct_delivery.js" />
     <Content Include="app\controllers\vira_inventory_total.js" />
+    <Content Include="app\controllers\vira_nis.js" />
     <Content Include="app\controllers\vira_part_number.js" />
     <Content Include="app\controllers\vira_part_number_add.js" />
     <Content Include="app\controllers\vira_part_number_selection.js" />
@@ -494,6 +495,7 @@
     <Content Include="app\views\vira_company_add.html" />
     <Content Include="app\views\vira_direct_delivery.html" />
     <Content Include="app\views\vira_inventory_total.html" />
+    <Content Include="app\views\vira_nis.html" />
     <Content Include="app\views\vira_part_number.html" />
     <Content Include="app\views\vira_part_number_add.html" />
     <Content Include="app\views\vira_part_number_selection.html" />
