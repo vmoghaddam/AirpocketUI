@@ -1,5 +1,39 @@
 ﻿'use strict';
-app.controller('vira_part_number_addController', ['$scope', '$location', '$q', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location,$q, mntService, authService, $routeParams, $rootScope, $window, $sce) {
+app.controller('vira_part_number_addController', ['$scope', '$location', '$q', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', 'vira_general_service', function ($scope, $location, $q, mntService, authService, $routeParams, $rootScope, $window, $sce, vira_general_service) {
+
+    $scope.isNew = null;
+
+    $scope.entity = {
+        id: 0,
+        partTypeId: 0,
+        measurementUnitId: 0,
+        typeId: 0,
+        categoryId: 0,
+        creatorId: 8,
+        ataChapter: null,
+        partNumber: null,
+        description: null,
+        hardTime: true,
+        blockList: true,
+        ipC_Reference: null,
+        figureNo: null,
+        itemNo: null,
+        remark: null,
+        typeEfectivity: [],
+        modelEffectivity: [],
+        msnEffectivity: []
+    };
+
+
+
+    $scope.ataEntity = {
+        "id": 0,
+        "ata": "string",
+        "title": "string"
+    };
+
+
+
     $scope.selectedTabIndex = -1;
     $scope.selectedTabId = null;
     $scope.popupselectedTabIndex = -1;
@@ -73,42 +107,29 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
     };
 
 
+    $scope.clear_entity = function () {
+        $scope.entity.id = 0;
+        $scope.entity.partTypeId = 0;
+        $scope.entity.measurementUnitId = 0;
+        $scope.entity.typeId = 0;
+        $scope.entity.categoryId = 0;
+        $scope.entity.creatorId = 8;
+        $scope.entity.ataChapter = null;
+        $scope.entity.partNumber = null;
+        $scope.entity.description = null;
+        $scope.entity.hardTime = true;
+        $scope.entity.blockList = true;
+        $scope.entity.ipC_Reference = null;
+        $scope.entity.figureNo = null;
+        $scope.entity.itemNo = null;
+        $scope.entity.remark = null;
+        $scope.entity.typeEfectivity = [];
+        $scope.entity.modelEffectivity = [];
+        $scope.entity.msnEffectivity = []
+    }
 
 
 
-
-
-    $scope.entity = {
-
-
-        id: 0,
-        partTypeId: 0,
-        measurementUnitId: 0,
-        typeId: 0,
-        categoryId: 0,
-        creatorId: 8,
-        ataChapter: null,
-        partNumber: null,
-        description: null,
-        hardTime: true,
-        blockList: true,
-        ipC_Reference: null,
-        figureNo: null,
-        itemNo: null,
-        remark: null,
-        typeEfectivity: [],
-        modelEffectivity: [],
-        msnEffectivity: []
-
-    };
-
-
-
-    $scope.ataEntity = {
-        "id": 0,
-        "ata": "string",
-        "title": "string"
-    };
 
     $scope.btn_refresh = {
         text: 'Refresh',
@@ -121,6 +142,41 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
 
     };
 
+
+    $scope.save = function (callback) {
+        $scope.loadingVisible = true;
+        mntService.addPartNumber($scope.entity).then(function (res) {
+            $scope.loadingVisible = false;
+            if (callback)
+                callback(res);
+            else {
+                if (res.errorCode) {
+                    General.ShowNotify(res.errorMessage, 'error');
+                }
+                else {
+                    $scope.loadingVisible = false;
+
+                }
+            }
+        });
+    };
+    $scope.edit = function (callback) {
+        $scope.loadingVisible = true;
+        vira_general_service.edit_part_number($scope.entity).then(function (res) {
+            $scope.loadingVisible = false;
+            if (callback)
+                callback(res);
+            else {
+                if (res.errorCode) {
+                    General.ShowNotify(res.errorMessage, 'error');
+                }
+                else {
+                    $scope.loadingVisible = false;
+
+                }
+            }
+        });
+    };
     //////////////////
 
     $scope.popup_personnel_visible = false;
@@ -150,24 +206,65 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
             {
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Save', validationGroup: 'partnumber', onClick: function (e) {
-                        //var result = e.validationGroup.validate();
+                        ////var result = e.validationGroup.validate();
 
-                        //if (!result.isValid) {
-                        //    General.ShowNotify(Config.Text_FillRequired, 'error');
-                        //    return;
-                        //}
+                        ////if (!result.isValid) {
+                        ////    General.ShowNotify(Config.Text_FillRequired, 'error');
+                        ////    return;
+                        ////}
+
+                        //$scope.loadingVisible = true;
+                        //mntService.addPartNumber($scope.entity).then(function (res) {
+                        //    if (res.errorCode == 101) {
+                        //        $scope.loadingVisible = false;
+                        //        General.ShowNotify("Error Occurred While Saving", 'error');
+                        //    }
+                        //    else {
+                        //        $scope.loadingVisible = false;
+                        //        General.ShowNotify("Saving Was Done Successfully", 'success');
+                        //    }
+                        //});
 
                         $scope.loadingVisible = true;
-                        mntService.addPartNumber($scope.entity).then(function (res) {
-                            if (res.errorCode == 101) {
-                                $scope.loadingVisible = false;
-                                General.ShowNotify("Error Occurred While Saving", 'error');
-                            }
-                            else {
-                                $scope.loadingVisible = false;
-                                General.ShowNotify("Saving Was Done Successfully", 'success');
-                            }
-                        });
+                        if ($scope.isNew) {
+                            $scope.save(function (res) {
+                                if (res.errorCode) {
+                                    if (res.errorCode == 10029) {
+                                        mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+                                            $scope.save();
+
+                                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                                    }
+                                    else
+                                        General.ShowNotify(res.errorMessage, 'error');
+                                }
+                                else {
+                                    General.ShowNotify('Saving Was Done Successfully', 'success');
+                                    $scope.popup_personnel_visible = false;
+                                    $scope.loadingVisible = false;
+                                }
+                            });
+                        }
+                        else {
+                            $scope.edit(function (res) {
+                                if (res.errorCode) {
+                                    if (res.errorCode == 10029) {
+                                        mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+                                            $scope.edit();
+
+                                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                                    }
+                                    else
+                                        General.ShowNotify(res.errorMessage, 'error');
+                                }
+                                else {
+                                    General.ShowNotify('Saving Was Done Successfully', 'success');
+                                    $scope.popup_personnel_visible = false;
+                                    $scope.loadingVisible = false;
+                                }
+                            });
+
+                        }
 
                     }
                 }, toolbar: 'bottom'
@@ -186,11 +283,12 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
         },
         onShown: function (e) {
 
-            if ($scope.isNew) {
-                $scope.isContentVisible = true;
-            }
-            if ($scope.tempData != null)
-                $scope.bind();
+            //if ($scope.isNew) {
+            //    $scope.isContentVisible = true;
+            //}
+            //if ($scope.tempData != null)
+
+            $scope.bind();
 
             //$rootScope.referred_list_instance.repaint();
             //$rootScope.$broadcast('InitTest', $scope.tempData);
@@ -206,6 +304,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
             };
             $scope.entity.Result = null;
             $scope.popup_personnel_visible = false;
+            $scope.clear_entity();
         },
         onContentReady: function (e) {
             if (!$scope.popup_instance)
@@ -231,6 +330,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
         //    $scope.ataType = res.data;
         //});
 
+
         mntService.getAFCTType().then(function (res) {
             $scope.dg_effec_ds = res.data;
         });
@@ -255,7 +355,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
             $scope.ds_ata = res;
         });
         mntService.getPartType().then(function (res) {
-            $scope.partDs = res.data;
+            $scope.ds_part_type = res.data;
             console.log($scope.partDs);
         });
     };
@@ -289,7 +389,18 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
         valueExpr: 'id',
         dataSource: $scope.ds_comp,
         bindingOptions: {
-            value: '',
+            value: 'entity.categoryId',
+        }
+    }
+
+    $scope.sb_part_type = {
+        showClearButton: false,
+        searchEnabled: false,
+        displayExpr: "title",
+        valueExpr: 'id',
+        bindingOptions: {
+            value: 'entity.partTypeId',
+            dataSource: 'ds_part_type',
         }
     }
 
@@ -307,21 +418,9 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
         valueExpr: 'id',
         dataSource: $scope.ds_asset,
         bindingOptions: {
-            value: '',
+            value: 'entity.typeId',
         }
     }
-
-    //$scope.sb_partType = {
-    //    showClearButton: false,
-    //    searchEnabled: false,
-    //    displayExpr: "title",
-    //    valueExpr: 'id',
-
-    //    bindingOptions: {
-    //        value: 'entity.partTypeId',
-    //        dataSource: 'partDs',
-    //    }
-    //}
 
 
     $scope.sb_unit = {
@@ -495,7 +594,7 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
                 $scope.dg_model_ds = [];
                 $scope.dg_msn_ds = [];
 
-               
+
                 get_ac_type(data).then(function (e) {
 
                     console.log($scope.entity.typeEfectivity)
@@ -733,7 +832,18 @@ app.controller('vira_part_number_addController', ['$scope', '$location', '$q', '
 
         $scope.tempData = prms;
 
-        $scope.bind();
+        if ($scope.tempData == null)
+            $scope.isNew = true;
+        else {
+            $scope.isNew = false
+            $scope.entity = $scope.tempData
+        }
+
+        $scope.entity.creatorId = 8;
+        console.log('entity: ', $scope.entity);
+        console.log('Is New: ', $scope.isNew);
+
+
         $scope.popup_personnel_visible = true;
     });
 

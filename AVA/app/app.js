@@ -802,6 +802,23 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_cardex.html?v=1130"
     });
 
+    $routeProvider.when("/vira/company", {
+          controller: "vira_companyController",
+        templateUrl: "/app/views/vira_company.html?v=1130"
+    });
+
+   
+      $routeProvider.when("/vira/shipment", {
+          controller: "vira_shipmentController",
+        templateUrl: "/app/views/vira_shipment.html?v=1130"
+    });
+
+   
+    $routeProvider.when("/cabin/reports", {
+          controller: "cabin_reportsController",
+        templateUrl: "/app/views/cabin_reports.html?v=1130"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   

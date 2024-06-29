@@ -1,20 +1,21 @@
 ﻿'use strict';
-app.controller('vira_new_part_typeController', ['$scope', '$location', 'mntService', 'vira_general_service', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, vira_general_service, authService, $routeParams, $rootScope, $window, $sce) {
+app.controller('vira_shipment_addController', ['$scope', '$location', 'mntService', 'vira_general_service', 'authService', '$routeParams', '$rootScope', '$window', '$sce', function ($scope, $location, mntService, vira_general_service, authService, $routeParams, $rootScope, $window, $sce) {
 
     $scope.isNew = null;
     $scope.entity = {
-        id: 0,
-        ataId: null,
-        title: null
 
+        id: 0,
+        title: null,
+        description: null,
+       
     }
 
     //////////////////
 
     $scope.popup_personnel_visible = false;
     $scope.popup_height = 230;
-    $scope.popup_width = 400;
-    $scope.popup_personnel_title = "New Part Type";
+    $scope.popup_width = 500;
+    $scope.popup_personnel_title = "New Shipment";
     $scope.popup_instance = null;
     $scope.isFullScreen = false;
 
@@ -27,7 +28,14 @@ app.controller('vira_new_part_typeController', ['$scope', '$location', 'mntServi
 
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'success', text: 'Save', onClick: function (e) {
+                    type: 'success', text: 'Save', validationGroup:'val_shipment', onClick: function (e) {
+
+                        var result = e.validationGroup.validate();
+
+                        if (!result.isValid) {
+                            General.ShowNotify(Config.Text_FillRequired, 'error');
+                            return;
+                        }
 
                         $scope.loadingVisible = true;
                         if ($scope.isNew) {
@@ -69,7 +77,7 @@ app.controller('vira_new_part_typeController', ['$scope', '$location', 'mntServi
                             });
 
                         }
-                      
+
 
                     }
                 }, toolbar: 'bottom'
@@ -102,7 +110,7 @@ app.controller('vira_new_part_typeController', ['$scope', '$location', 'mntServi
             //}
             //if ($scope.tempData != null)
 
-                $scope.bind();
+            $scope.bind();
 
             //$rootScope.referred_list_instance.repaint();
             //$rootScope.$broadcast('InitTest', $scope.tempData);
@@ -120,6 +128,7 @@ app.controller('vira_new_part_typeController', ['$scope', '$location', 'mntServi
 
             }
             $scope.popup_personnel_visible = false;
+            $rootScope.$broadcast('shipment_closed', null);
         },
         onContentReady: function (e) {
             if (!$scope.popup_instance)
@@ -145,7 +154,7 @@ app.controller('vira_new_part_typeController', ['$scope', '$location', 'mntServi
 
     $scope.save = function (callback) {
         $scope.loadingVisible = true;
-        vira_general_service.add_part_type($scope.entity).then(function (res) {
+        vira_general_service.add_shipment($scope.entity).then(function (res) {
             $scope.loadingVisible = false;
             if (callback)
                 callback(res);
@@ -162,7 +171,7 @@ app.controller('vira_new_part_typeController', ['$scope', '$location', 'mntServi
     };
     $scope.edit = function (callback) {
         $scope.loadingVisible = true;
-        vira_general_service.edit_part_type($scope.entity).then(function (res) {
+        vira_general_service.edit_shipment($scope.entity).then(function (res) {
             $scope.loadingVisible = false;
             if (callback)
                 callback(res);
@@ -179,29 +188,24 @@ app.controller('vira_new_part_typeController', ['$scope', '$location', 'mntServi
     };
     $scope.bind = function () {
 
-        mntService.get_ata_chart().then(function (res) {
-            $scope.ds_ata = res;
+        vira_general_service.get_company().then(function (res) {
+            $scope.ds_company = res;
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     }
 
 
     ////////////////////
 
-    $scope.sb_ata = {
-        showClearButton: false,
-        searchEnabled: false,
-        displayExpr: "title",
-        valueExpr: 'id',
+   
+    $scope.txt_title = {
         bindingOptions: {
-            value: 'entity.ataId',
-            dataSource: 'ds_ata'
+            value: 'entity.title'
         }
     }
 
-
-    $scope.txt_part_type = {
+    $scope.txt_description = {
         bindingOptions: {
-            value: 'entity.title'
+            value: 'entity.description'
         }
     }
 
@@ -222,8 +226,8 @@ app.controller('vira_new_part_typeController', ['$scope', '$location', 'mntServi
             $scope.entity = $scope.tempData
         }
 
-        console.log('entity: ',$scope.entity);
-        console.log('Is New: ',$scope.isNew);
+        console.log('entity: ', $scope.entity);
+        console.log('Is New: ', $scope.isNew);
 
         $scope.popup_personnel_visible = true;
     });

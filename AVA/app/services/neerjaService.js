@@ -1,9 +1,9 @@
 ﻿'use strict';
 app.factory('neerjaService', ['$http', '$q', 'ngAuthSettings', '$rootScope', function ($http, $q, ngAuthSettings, $rootScope) {
     var serviceFactory = {};
-    var apicore='https://faap.api.airpocket.app/';
+    var apicore = 'https://faap.api.airpocket.app/';
     var _get_pfc_items = function (flt_id) {
-      
+
         var deferred = $q.defer();
         $http.get(apicore + 'neerja/pfc/items/' + flt_id + '/' + $rootScope.employeeId).then(function (response) {
             deferred.resolve(response.data);
@@ -32,6 +32,21 @@ app.factory('neerjaService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     };
 
     serviceFactory.get_pfc_items_grouped = _get_pfc_items_grouped;
+
+    var _get_pfc_items_grouped_ap = function (flt_id, crew_id) {
+
+        var deferred = $q.defer();
+        $http.get(apicore + 'neerja/pfc/items/grouped/' + flt_id + '/' + crew_id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+    serviceFactory.get_pfc_items_grouped_ap = _get_pfc_items_grouped_ap;
 
     var _get_scc = function (flt_id, crew_id) {
 
