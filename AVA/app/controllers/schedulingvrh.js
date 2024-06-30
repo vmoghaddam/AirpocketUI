@@ -3986,9 +3986,14 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         return false;
     };
 
+    //2024-06-23
     $scope.xgetDutyClass = function (duty) {
         switch (duty.DutyType) {
             case 1165:
+                 
+                if (duty.InitRoute.includes('(o)'))
+                    return 'duty-1165 duty-1165-obs duty-base';
+                else
                 return 'duty-1165 duty-base';
             default:
                 return 'duty-' + duty.DutyType+' duty-base';

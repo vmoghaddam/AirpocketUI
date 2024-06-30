@@ -512,7 +512,7 @@
     }
 
 
-    .duty-100020, .duty-100021, .duty-100022, .duty-100023 {
+   /* .duty-100020, .duty-100021, .duty-100022, .duty-100023 {
         background: #ff471a;
         text-align: center;
         padding: 3px !important;
@@ -531,7 +531,7 @@
         text-align: center;
         padding: 3px !important;
         color: white;
-    }
+    }*/
 
     .mainselection div.selected {
         background: #ccffcc !important;
@@ -546,8 +546,8 @@
     }
 
     .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
-         /*height: initial !important;*/
-		 height: 31px !important;
+        /*height: initial !important;*/
+        height: 31px !important;
     }
 
     .ftl-tbl {
@@ -564,21 +564,26 @@
         border: 2px solid red;
         /*background: #33adff !important;*/
     }
-	.duty-base {padding:1px !important;}
-	
-	.duty-300050 {
+
+    .duty-base {
+        padding: 1px !important;
+    }
+
+   /* .duty-300050 {
         background: #80ff80;
         text-align: center;
-         
         color: black;
     }
-	.duty-300051 {
+
+    .duty-300051 {
         background: #e6e6e6;
         text-align: center;
-         
         color: black;
+    }*/
+
+    .dx-popup-content {
+        min-height: 130px;
     }
-	.dx-popup-content {min-height:130px;}
 </style>
 
 
@@ -1526,7 +1531,7 @@
                             <td style="width: 20%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee">D28</td>
 
                             <td style="width: 17%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee"> F12M</td>
-                           
+
 
 
                         </tr>
@@ -1619,15 +1624,14 @@
 
     <div id="popup_cal" dx-popup="popup_cal">
         <div style="padding:0px 0 0 0">
-            <!--2024-06-23-->
             <div class=" col-lg-2 col-md-1 col-sm-1 col-xs-1 " style="padding:0 5px 0 0; width:25%;  ">
                 <div dx-data-grid="dg_calcrew" id="dg_calcrew" class="content" style="overflow-y:hidden" dx-item-alias="crew">
                     <div data-options="dxTemplate:{ name:'smsTemplate' }">
-                        <a ng-click="smsCrew(crew)" href="" class='w3-button w3-block w3-deep-orange' style='background:#fff !important; margin:0 auto 0px auto;text-decoration:none;padding:3px 0px !important;border-radius:50%;text-align:center'><i class="fas fa-bell" style="color:red;font-size:17px" aria-hidden="true"></i></a>
+                        <a ng-click="smsCrew(crew)" href="" class='w3-button w3-block w3-deep-orange' style='background:transparent !important; margin:0 auto 0px auto;text-decoration:none;padding:3px 0px !important;border-radius:50%;text-align:center'><i class="fas fa-bell" style="color:red;font-size:17px" aria-hidden="true"></i></a>
                     </div>
 
                     <div data-options="dxTemplate:{ name:'profileTemplate' }">
-                        <a ng-click="showProfile(crew.data)" href="" class='w3-button w3-block w3-blue' style='background: #fff !important; margin: 0 auto 0px auto; text-decoration: none; padding: 3px 0px !important; border-radius: 50%; text-align: center'><i style="color:#2196F3;font-size:17px" class="fas fa-info" aria-hidden="true"></i></a>
+                        <a ng-click="showProfile(crew.data)" href="" class='w3-button w3-block w3-blue' style='background: transparent !important; margin: 0 auto 0px auto; text-decoration: none; padding: 3px 0px !important; border-radius: 50%; text-align: center'><i style="color:#2196F3;font-size:17px" class="fas fa-info" aria-hidden="true"></i></a>
                     </div>
                 </div>
 
@@ -1669,7 +1673,7 @@
                                     </td>
                                     <td style="text-align:left;padding-left:5px">
 
-                                     
+
                                         <!--<span style='font-size:10px'>({{duty.FltNo}})</span>-->
                                         <div style="font-size:11px;font-weight:normal">{{duty.Route}}</div>
                                         <div style="font-size:11px; "><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
@@ -1683,10 +1687,10 @@
 
 
                         <div ng-show="duty.DutyType!=1165">
-						    <table ng-show="duty.DutyType==300050" style="width:100%;  ">
-							<tr>
+                            <table ng-show="duty.DutyType==300050" style="width:100%;  ">
+                                <tr>
                                     <td style="width:30px;text-align:center;background:white;">
-                                         <a href="" style="display:block" ng-click="removeDutyCal(duty);$event.stopPropagation();"><i class="fas fa-minus-circle" style="color:red;font-size:20px; "></i></a>
+                                        <a href="" style="display:block" ng-click="removeDutyCal(duty);$event.stopPropagation();"><i class="fas fa-minus-circle" style="color:red;font-size:20px; "></i></a>
                                         <!--<a href="" style="display:block" ng-click="notifyDutyCal(duty)"><i class="fas fa-bell" style="color:#2196F3;font-size:20px; "></i></a>-->
                                     </td>
                                     <td style="text-align:left;padding-left:5px;">
@@ -1694,8 +1698,8 @@
                                         <!--<div ng-show="duty.DutyType!=10000">-->
                                         <!--2023-->
                                         <div>
-                                            <div style="font-size:10px; "  ><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
-                                            
+                                            <div style="font-size:10px; "><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
+
                                         </div>
 
                                     </td>
@@ -1703,11 +1707,11 @@
 
 
                                 </tr>
-							</table >
-							<table ng-show="duty.DutyType==300051" style="width:100%;  ">
-							<tr>
+                            </table>
+                            <table ng-show="duty.DutyType==300051" style="width:100%;  ">
+                                <tr>
                                     <td style="width:20%;text-align:center;background:white;height:28px;">
-                                         <a href="" style="display:block" ng-click="removeDutyCal(duty);$event.stopPropagation();"><i class="fas fa-minus-circle" style="color:red;font-size:20px; "></i></a>
+                                        <a href="" style="display:block" ng-click="removeDutyCal(duty);$event.stopPropagation();"><i class="fas fa-minus-circle" style="color:red;font-size:20px; "></i></a>
                                         <!--<a href="" style="display:block" ng-click="notifyDutyCal(duty)"><i class="fas fa-bell" style="color:#2196F3;font-size:20px; "></i></a>-->
                                     </td>
                                     <td style="text-align:right;padding-left:5px;width:80%;">
@@ -1724,7 +1728,7 @@
 
 
                                 </tr>
-							</table >
+                            </table>
                             <table ng-show="[300050,300051].indexOf(duty.DutyType)==-1" style="width:100%;  ">
                                 <tr>
                                     <td style="width:30px;text-align:center;background:white;">
@@ -1736,12 +1740,12 @@
                                         <!--<div ng-show="duty.DutyType!=10000">-->
                                         <!--2023-->
                                         <div>
-                                           <!-- <div style="font-size:10px; " ng-show="!duty.Remark2"><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
-                                            <div style="font-size:12px; " ng-show="duty.CanceledNo">{{duty.CanceledNo}}</div>
-                                            <div style="font-size:12px; " ng-show="duty.DutyType==300007 || duty.DutyType==300010">{{duty.Remark2}}</div>
-                                            <div style="font-size:12px; " ng-show="duty.Remark">{{duty.Remark}}</div>-->
-											<div style="font-size:10px; "  ><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
-											
+                                            <!-- <div style="font-size:10px; " ng-show="!duty.Remark2"><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
+                                             <div style="font-size:12px; " ng-show="duty.CanceledNo">{{duty.CanceledNo}}</div>
+                                             <div style="font-size:12px; " ng-show="duty.DutyType==300007 || duty.DutyType==300010">{{duty.Remark2}}</div>
+                                             <div style="font-size:12px; " ng-show="duty.Remark">{{duty.Remark}}</div>-->
+                                            <div style="font-size:10px; "><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
+
                                         </div>
 
                                     </td>
@@ -1773,57 +1777,57 @@
                                 <tr>
                                     <td style="text-align:center;">
                                         <div style="font-size:12px;font-weight:bold">{{duty.DutyTypeTitle}}</div>
-                                        
+
                                     </td>
-                                    
+
                                 </tr>
 
                             </table>
 
                         </div>
                         <div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="duty.DutyType==1165">
-                             <div style='font-size:12px;font-weight:bold;text-align:center;padding:5px;'>{{duty.Route}}</div>
-							 <div style='font-size:12px;font-weight:bold;text-align:center;padding:5px;'>{{duty.FltNo}}</div>
-							  <div style="font-size:12px;font-weight:bold;text-align:center;padding:5px; ">
-							      Start:<span style="font-size:12px; ">{{formatTime(duty.Start)}}</span>
-								  <span style="font-size:12px;display:inline-block;margin-left:10px">End:{{formatTime(duty.End)}}</span>
-								  <span style="font-size:12px;display:inline-block;margin-left:10px">Rest:{{formatTime(duty.RestUntilLocal)}}</span>
-							  </div>
+                            <div style='font-size:12px;font-weight:bold;text-align:center;padding:5px;'>{{duty.Route}}</div>
+                            <div style='font-size:12px;font-weight:bold;text-align:center;padding:5px;'>{{duty.FltNo}}</div>
+                            <div style="font-size:12px;font-weight:bold;text-align:center;padding:5px; ">
+                                Start:<span style="font-size:12px; ">{{formatTime(duty.Start)}}</span>
+                                <span style="font-size:12px;display:inline-block;margin-left:10px">End:{{formatTime(duty.End)}}</span>
+                                <span style="font-size:12px;display:inline-block;margin-left:10px">Rest:{{formatTime(duty.RestUntilLocal)}}</span>
+                            </div>
 
                         </div>
-						<div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="duty.DutyType==300050">
-                            
-							 <div style='font-size:12px;font-weight:bold;text-align:center;padding:5px;'>{{duty.PosFrom}}-{{duty.PosTo}}({{duty.PosAirline}})</div>
-							  <div style="font-size:12px;font-weight:bold;text-align:center;padding:5px; ">
-							      Dep:<span style="font-size:12px; ">{{formatTime(duty.PosDep)}}</span>
-								  <span style="font-size:12px;display:inline-block;margin-left:10px">Arr:{{formatTime(duty.PosArr)}}</span>
-								   
-							  </div>
-							  <div style='font-size:12px;font-weight:bold;text-align:center;padding:5px;'>Ticket No:{{duty.PosRemark}} </div>
-							  <p style='font-size:12px;text-align:center;direction:rtl;height:50px;font-family:"tahoma";text-wrap:wrap;overflow-y:auto'>
-							   {{duty.Remark}}
-							  </p>
+                        <div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="duty.DutyType==300050">
+
+                            <div style='font-size:12px;font-weight:bold;text-align:center;padding:5px;'>{{duty.PosFrom}}-{{duty.PosTo}}({{duty.PosAirline}})</div>
+                            <div style="font-size:12px;font-weight:bold;text-align:center;padding:5px; ">
+                                Dep:<span style="font-size:12px; ">{{formatTime(duty.PosDep)}}</span>
+                                <span style="font-size:12px;display:inline-block;margin-left:10px">Arr:{{formatTime(duty.PosArr)}}</span>
+
+                            </div>
+                            <div style='font-size:12px;font-weight:bold;text-align:center;padding:5px;'>Ticket No:{{duty.PosRemark}} </div>
+                            <p style='font-size:12px;text-align:center;direction:rtl;height:50px;font-family:"tahoma";text-wrap:wrap;overflow-y:auto'>
+                                {{duty.Remark}}
+                            </p>
 
                         </div>
-						<div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="duty.DutyType==300051">
+                        <div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="duty.DutyType==300051">
                             <p style='font-size:12px;text-align:right;direction:rtl;height:100px;font-family:"tahoma";text-wrap:wrap;overflow-y:auto'>
-							   {{duty.Remark}}
-							</p>
+                                {{duty.Remark}}
+                            </p>
 
                         </div>
-						<div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="[1165,300050,300051].indexOf(duty.DutyType)==-1">
-                             
-							  <div style="font-size:12px;font-weight:bold;text-align:center;padding:5px; ">
-							      Start:<span style="font-size:12px; ">{{formatTime(duty.Start)}}</span>
-								  <span style="font-size:12px;display:inline-block;margin-left:10px">End:{{formatTime(duty.End)}}</span>
-								  <span style="font-size:12px;display:inline-block;margin-left:10px">Rest:{{formatTime(duty.RestUntilLocal)}}</span>
-							  </div>
-							 <p style='font-size:12px;text-align:center;direction:rtl;height:50px;font-family:"tahoma";text-wrap:wrap;overflow-y:auto'>
-							   {{duty.Remark}}
-							</p>
+                        <div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="[1165,300050,300051].indexOf(duty.DutyType)==-1">
+
+                            <div style="font-size:12px;font-weight:bold;text-align:center;padding:5px; ">
+                                Start:<span style="font-size:12px; ">{{formatTime(duty.Start)}}</span>
+                                <span style="font-size:12px;display:inline-block;margin-left:10px">End:{{formatTime(duty.End)}}</span>
+                                <span style="font-size:12px;display:inline-block;margin-left:10px">Rest:{{formatTime(duty.RestUntilLocal)}}</span>
+                            </div>
+                            <p style='font-size:12px;text-align:center;direction:rtl;height:50px;font-family:"tahoma";text-wrap:wrap;overflow-y:auto'>
+                                {{duty.Remark}}
+                            </p>
 
                         </div>
-                       
+
 
                     </div>
 
@@ -1855,54 +1859,54 @@
         <div style="padding:0px 0 0 0">
             <div class="dx-border">
                 <div ng-show="event_status!=10000 && [  100007,100008,100002,300051].indexOf(event_status)==-1">
-				    <div ng-show='event_status!=300050'>
-					  <div class="col-lg-6 margin-bottom-5 padding-7">
-                        <label>From</label>
-                        <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-                      <div class="col-lg-6 margin-bottom-5 padding-7">
-                        <label>&nbsp;</label>
-                        <div class="center" dx-date-box="date_from_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-                      <div style="clear:both"></div>
-                      <div class="col-lg-6 margin-bottom-5 padding-7">
-                        <label>To</label>
-                        <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-                      <div class="col-lg-6 margin-bottom-5 padding-7">
-                        <label>&nbsp;</label>
-                        <div class="center" dx-date-box="date_to_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-					  <div style="clear:both"></div> 
-					</div>
-					
-					 <div ng-show='event_status==300050'>
-					  <div class="col-lg-6 margin-bottom-5 padding-7">
-                        <label>Dep</label>
-                        <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-                      <div class="col-lg-6 margin-bottom-5 padding-7">
-                        <label>&nbsp;</label>
-                        <div class="center" dx-date-box="date_from_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-                      <div style="clear:both"></div>
-                      <div class="col-lg-6 margin-bottom-5 padding-7">
-                        <label>Arr</label>
-                        <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-                      <div class="col-lg-6 margin-bottom-5 padding-7">
-                        <label>&nbsp;</label>
-                        <div class="center" dx-date-box="date_to_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-					  <div style="clear:both"></div> 
-					</div>
-                    
+                    <div ng-show='event_status!=300050'>
+                        <div class="col-lg-6 margin-bottom-5 padding-7">
+                            <label>From</label>
+                            <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div class="col-lg-6 margin-bottom-5 padding-7">
+                            <label>&nbsp;</label>
+                            <div class="center" dx-date-box="date_from_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="col-lg-6 margin-bottom-5 padding-7">
+                            <label>To</label>
+                            <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div class="col-lg-6 margin-bottom-5 padding-7">
+                            <label>&nbsp;</label>
+                            <div class="center" dx-date-box="date_to_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <div ng-show='event_status==300050'>
+                        <div class="col-lg-6 margin-bottom-5 padding-7">
+                            <label>Dep</label>
+                            <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div class="col-lg-6 margin-bottom-5 padding-7">
+                            <label>&nbsp;</label>
+                            <div class="center" dx-date-box="date_from_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="col-lg-6 margin-bottom-5 padding-7">
+                            <label>Arr</label>
+                            <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div class="col-lg-6 margin-bottom-5 padding-7">
+                            <label>&nbsp;</label>
+                            <div class="center" dx-date-box="date_to_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
                 </div>
                 <div ng-show="event_status==10000">
-				    <div style="padding:20px;">
+                    <div style="padding:20px;">
                         <div dx-check-box="check_ex48"></div>
                     </div>
-                   
+
                     <div style="clear:both"></div>
                     <div class="col-lg-6 margin-bottom-5 padding-7">
                         <label>From</label>
@@ -1913,37 +1917,37 @@
                         <div class="center" dx-date-box="date_from_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
                     </div>
                     <div style="clear:both"></div>
-					 <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
                         <label>To</label>
                         <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-                      <div class="col-lg-6 margin-bottom-5 padding-7">
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
                         <label>&nbsp;</label>
                         <div class="center" dx-date-box="date_to_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
-                      </div>
-					  <div style="clear:both"></div>
-                    
+                    </div>
+                    <div style="clear:both"></div>
+
                 </div>
                 <div style="clear:both"></div>
-				<div ng-show="event_status==300050">
-				  <div class="col-lg-6 margin-bottom-5 padding-7">
+                <div ng-show="event_status==300050">
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
                         <label>From</label>
-                        <div class="center" dx-select-box="sb_from_event"  ></div>
-                  </div>
-				  <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <div class="center" dx-select-box="sb_from_event"></div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
                         <label>To</label>
-                        <div class="center" dx-select-box="sb_to_event"  ></div>
-                  </div>
-				  <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <div class="center" dx-select-box="sb_to_event"></div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
                         <label>Airline</label>
-                        <div class="center" dx-text-box="txt_airline_event"  ></div>
-                  </div>
-				   <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <div class="center" dx-text-box="txt_airline_event"></div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
                         <label>Flight No</label>
-                        <div class="center" dx-text-box="txt_ticket_no"  ></div>
-                  </div>
-				   <div style="clear:both"></div>
-				</div>
+                        <div class="center" dx-text-box="txt_ticket_no"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
                 <div ng-show="event_status==100025">
                     <div class="col-lg-6 margin-bottom-5 padding-7">
                         <label>BlockTime (hh)</label>
@@ -1963,8 +1967,8 @@
                         <div class="center" dx-number-box="num_ev_fx_mm"></div>
                     </div>
                 </div>
-				
-				 
+
+
 
                 <div style="clear:both"></div>
                 <div class="col-lg-12 margin-bottom-5 padding-7">
@@ -2788,15 +2792,15 @@
         <div style="padding:0px 0 0 0" class='dx-border'>
             <div class="center" dx-date-box="date_daily" dx-validator="{validationGroup:'daily',  validationRules: [{ type: 'required'}]}"></div>
              <div style='margin-top:20px'>REVISION</div>
-            <div class="center" dx-number-box="num_rev" dx-validator="{validationGroup:'daily',  validationRules: [{ type: 'required'}]}"></div> 
+            <div class="center" dx-number-box="num_rev" dx-validator="{validationGroup:'daily',  validationRules: [{ type: 'required'}]}"></div>
         </div>
 
 
     </div>-->
-	 <div id="popup_report2" dx-popup="popup_report2">
+    <div id="popup_report2" dx-popup="popup_report2">
         <div style="padding:0px 0 0 0" class='dx-border'>
             <div class="center" dx-date-box="date_daily" dx-validator="{validationGroup:'daily',  validationRules: [{ type: 'required'}]}"></div>
-			<div style='margin-top:20px'>REVISION</div>
+            <div style='margin-top:20px'>REVISION</div>
             <div class="center" dx-number-box="num_rev" dx-validator="{validationGroup:'daily',  validationRules: [{ type: 'required'}]}"></div>
         </div>
 

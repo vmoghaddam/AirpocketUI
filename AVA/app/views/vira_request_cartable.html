@@ -262,16 +262,16 @@
     <div class="rowx content" style="clear:both">
 
 
-        <div class="col-lg-3 col-md-3">
+        <div class="col-lg-4 col-md-3 padding-0" style="padding-right:5px;">
             <div style="border: 1px solid #ccc " class="dx-border">
                 <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
-                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Filter Panel</div>
+                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc;padding:5px 5px 5px 7px">Filter</div>
                 </div>
-                <div class="col-lg-6 padding-0" style="margin-bottom: 5px">
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:70px;font-size:12px;padding-left:5px;text-align:left">
-                                Req NO. :
+                            <td style="width:45px;font-size:12px;padding-left:5px;text-align:right;padding-right:2px;">
+                                No.:
                             </td>
                             <td>
                                 <div dx-text-box="txt_reqNo" class="center" style="width: 100%"></div>
@@ -280,11 +280,11 @@
                     </table>
                 </div>
 
-                <div class="col-lg-6 padding-0" style="margin-bottom: 5px">
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px;padding-right:0px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width: 70px; font-size: 12px; padding-left: 5px; text-align: left ">
-                                Register:
+                            <td style="width: 45px; font-size: 12px; padding-left: 5px; text-align: right;padding-right:2px; ">
+                                Reg.:
                             </td>
                             <td>
                                 <div dx-select-box="sb_register" class="center" style="width: 100%"></div>
@@ -292,25 +292,11 @@
                         </tr>
                     </table>
                 </div>
-
-                <div class="col-lg-6 padding-0" style="margin-bottom: 5px">
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px;padding-right:10px;">
                     <table style="width:100%">
                         <tr>
-                            <td style="width: 70px; font-size: 12px; padding-left: 5px; text-align: left ">
-                                Description:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_desc" class="center" style="width: 100%"></div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="col-lg-6 padding-0" style="margin-bottom: 5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width: 70px; font-size: 12px; padding-left:5px; text-align: left ">
-                                Part NO. :
+                            <td style="width: 45px; font-size: 12px; padding-left:5px; text-align: right;padding-right:2px; ">
+                                P/N:
                             </td>
                             <td>
                                 <div dx-text-box="txt_partNo" class="center" style="width: 100%"></div>
@@ -320,10 +306,25 @@
                     </table>
                 </div>
 
-                <div class="col-lg-12 padding-0" style="margin-bottom: 5px">
+                <div class="col-lg-8 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">
                         <tr>
-                            <td style="padding: 5px; text-align:right">
+                            <td style="width: 45px; font-size: 12px; padding-left: 5px; text-align: right;padding-right:2px; ">
+                                Desc.:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_desc" class="center" style="width: 100%"></div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+
+                <div class="col-lg-4 padding-0" style="margin-bottom: 5px">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="padding: 5px; text-align:right;padding-right:10px">
                                 <div dx-button="btn_search"></div>
                             </td>
                         </tr>
@@ -336,14 +337,16 @@
             </div>
 
             
-            <div class="td-title" style="width: 100%; margin-top: 5px; border: 1px solid #ccc ">Request Order</div>
+            <!--<div class="td-title" style="width: 100%; margin-top: 5px; border: 1px solid #ccc ">Request Order</div>-->
             <div dx-data-grid="dg_req" id="dg_req" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
 
         </div>
-        <div class="col-lg-9 col-md-9" style="padding-left: 0 !important">
+        <div class="col-lg-8 col-md-9" style="padding-left: 0 !important">
             <div style="border: 1px solid #ccc " class="dx-border">
                 <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
-                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Request Information</div>
+                    <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">
+                    Request Information
+                    </div>
                 </div>
                 <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
                     <table style="width:100%">

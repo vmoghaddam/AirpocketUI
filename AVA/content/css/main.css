@@ -1662,6 +1662,243 @@ h1 {
     background: #ccc;
 }
 
+.duty-100020, .duty-100021, .duty-100022, .duty-100023 {
+    background: #ff471a;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+.duty-text-1165 {
+    color: white;
+}
+
+.duty-text-5001 {
+    color: white;
+}
+
+.duty-text-5000 {
+    color: white;
+}
+
+.duty-text-1168 {
+    color: black;
+}
+
+.duty-text-1167 {
+    color: black;
+}
+
+.duty-text-10000, .duty-text-10001 {
+    color: white;
+}
+
+.duty-text-100000, .duty-text-100004, .duty-text-100005, .duty-text-100006 {
+    color: black;
+}
+
+.duty-text-100002 {
+    color: black;
+}
+
+.duty-text-100003 {
+    color: black;
+}
+
+.duty-text-100001 {
+    color: white;
+}
+
+.duty-text-1169 {
+    color: black;
+}
+
+.duty-text-1170 {
+    color: black;
+}
+
+.duty-text-100007 {
+    color: black;
+}
+
+.duty-text-100008 {
+    color: black;
+}
+
+.duty-text-100009 {
+    color: white;
+}
+
+.duty-1165 {
+    background: #80e5ff;
+    text-align: center;
+    padding: 0px !important;
+    color: black;
+}
+
+.duty-1165-oh {
+    background: #bfff80;
+    text-align: center;
+    padding: 0px !important;
+    color: black;
+}
+
+.duty-5001 {
+    background: #e699ff;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-300014 {
+    background: #db70b8;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-5000 {
+    background: #ff1a8c;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-1168 {
+    background: #ffff00;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-1167 {
+    background: #ffb31a;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-300013 {
+    background: #ffe066;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-10000, .duty-10001 {
+    background: #e699ff;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-100000, .duty-100004, .duty-100005, .duty-100006 {
+    background: #ff0000;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-100002 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100003 {
+    background: #47d1d1;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100001 {
+    background: #e699ff;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-1169 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-1166 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-1170 {
+    background: #ffff99;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100007 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100008 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100009 {
+    background: #ff471a;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-300008 {
+    background: gray;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-300009 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100025 {
+    background: #03A9F4;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+.duty-300050 {
+    background: #b8b894;
+    text-align: center;
+    color: black;
+}
+
+.duty-300051 {
+    background: #e6e6e6;
+    text-align: center;
+    color: black;
+}
+.duty-1165-obs {
+    background: #ffd9b3;
+    text-align: center;
+    padding: 0px !important;
+    color: black;
+}
+/*   OLD 
 .duty-1165 {
     background: #9966ff;
     text-align: center;
@@ -1710,6 +1947,7 @@ h1 {
     padding: 3px !important;
     color: black;
 }
+
 
 .duty-100002 {
     background: #b3b3b3;
@@ -1761,7 +1999,7 @@ h1 {
     padding: 3px !important;
     color: white;
 }
-
+*/
 /***************************/
 /******Weather*/
 .wicon {

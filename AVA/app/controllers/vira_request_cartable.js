@@ -1,20 +1,9 @@
 ﻿'use strict';
 app.controller('vira_request_cartableController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', 'vira_general_service', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce, vira_general_service) {
-
+    
     $scope.reciver_location = 0;
 
-    $scope.ds_req_order =
-    {
-        receiverLocationId: 0,
-        statusId: null,
-        priorityId: null,
-        requestNo: null,
-        register: null,
-        description: null,
-        partNumber: null,
-        dateFrom: null,
-        dateTo: null
-    }
+   
 
     $scope.entity_nis =
     {
@@ -47,11 +36,25 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
          ]
      }
 
+
+
+    $scope.ds_req_order =
+    {
+        receiverLocationId: 0,
+        statusId: null,
+        priorityId: null,
+        requestNo: null,
+        register: null,
+        description: null,
+        partNumber: null,
+        dateFrom: null,
+        dateTo: null
+    }
      $scope.btn_search = {
-        text: 'Search',
+       // text: 'Search',
         type: 'default',
         icon: 'search',
-        width: 120,
+         width: '45',
          onClick: function (e) {
              $scope.ds_req_order.receiverLocationId = $scope.reciver_location
             vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
@@ -288,17 +291,11 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
     $scope.dg_req_columns = [
 
 
-        {
-            cellTemplate: function (container, options) {
-                $("<div style='text-align:center'/>")
-                    .html(options.rowIndex + 1)
-                    .appendTo(container);
-            }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
-        },
-        { dataField: 'fullNo', caption: 'Request No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'paperDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-        { dataField: 'register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'senderUser_FullName', caption: 'Requested By', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        
+        { dataField: 'fullNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'paperDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
+        { dataField: 'register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+        { dataField: 'senderUser_FullName', caption: 'Requested By', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
     ];
 
 
