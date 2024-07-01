@@ -47,22 +47,22 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
         };
         $scope.dg_nis_height = $(window).height() - 250;
         $scope.dg_nis_columns = [
-            { dataField: 'nisNo', caption: 'Nis No.', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
-            { dataField: 'createDate', caption: 'Date', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false },
+            { dataField: 'nisNo', caption: 'Nis No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+            { dataField: 'createDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false },
             { dataField: 'senderUser_FullName', caption: 'Sender', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
-            { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+            { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 350, },
             { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250, },
             { dataField: 'ipC_Reference', caption: 'IPC Reference', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-            { dataField: 'quantity', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+            { dataField: 'quantity', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, },
             { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
             { dataField: 'request_Priority', caption: 'Priority', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
             { dataField: 'stock_Title', caption: 'Stock', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
-            { dataField: 'request_SenderUser_FullName', caption: 'Sender', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
-            { dataField: 'request_ApproverUser_FullName', caption: 'Approver', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
-            { dataField: 'approverLocation_Title', caption: 'Location', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+            { dataField: 'request_SenderUser_FullName', caption: 'Sender', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250, },
+            { dataField: 'request_ApproverUser_FullName', caption: 'Approver', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250, },
+            { dataField: 'approverLocation_Title', caption: 'Location', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250, },
             { dataField: 'request_ACFTType', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
             { dataField: 'request_Register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
-            { dataField: 'request_PartDescription', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+            { dataField: 'request_PartDescription', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 350, },
             { dataField: 'request_PartNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
 
         ];
@@ -289,12 +289,29 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             width: '100%',
             bindingOptions: {},
             onClick: function (e) {
-                vira_general_service.cancel_nis($scope.entity).then(function (response) {
+                $scope.loadingVisible = true;
+                $scope.cancel(function (res) {
+                    if (res.errorCode) {
+                        if (res.errorCode == 10029) {
+                            mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+                                $scope.save();
 
-                    $scope.loadingVisible = false;
-                    $scope.dg_nis_ds = (response.data);
+                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                        }
+                        else
+                            General.ShowNotify(res.errorMessage, 'error');
+                    }
+                    else {
+                        General.ShowNotify('Saving Was Done Successfully', 'success');
+                        $scope.loadingVisible = false;
+                    }
+                });
+                //vira_general_service.cancel_nis($scope.entity).then(function (response) {
 
-                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                //    $scope.loadingVisible = false;
+                //    $scope.dg_nis_ds = (response.data);
+
+                //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
 
 
@@ -308,14 +325,69 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             width: '100%',
             bindingOptions: {},
             onClick: function (e) {
-                vira_general_service.approve_nis($scope.entity).then(function (response) {
 
-                    $scope.loadingVisible = false;
-                    $scope.dg_nis_ds = (response.data);
+                $scope.loadingVisible = true;
+                $scope.approve(function (res) {
+                    if (res.errorCode) {
+                        if (res.errorCode == 10029) {
+                            mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+                                $scope.save();
 
-                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                        }
+                        else
+                            General.ShowNotify(res.errorMessage, 'error');
+                    }
+                    else {
+                        General.ShowNotify('Saving Was Done Successfully', 'success');
+                        $scope.loadingVisible = false;
+                    }
+                });
+
+                //vira_general_service.approve_nis($scope.entity).then(function (response) {
+
+                //    $scope.loadingVisible = false;
+                //    $scope.dg_nis_ds = (response.data);
+
+                //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
             }
+        };
+
+
+        $scope.approve = function (callback) {
+            $scope.loadingVisible = true;
+            vira_general_service.approve_nis($scope.entity).then(function (res) {
+                $scope.loadingVisible = false;
+                if (callback)
+                    callback(res);
+                else {
+                    if (res.errorCode) {
+                        General.ShowNotify(res.errorMessage, 'error');
+                    }
+                    else {
+                        $scope.loadingVisible = false;
+
+                    }
+                }
+            });
+        };
+        $scope.cancel = function (callback) {
+            $scope.loadingVisible = true;
+            vira_general_service.cancel_nis($scope.entity).then(function (res) {
+                $scope.loadingVisible = false;
+                if (callback)
+                    callback(res);
+                else {
+                    if (res.errorCode) {
+                        General.ShowNotify(res.errorMessage, 'error');
+                    }
+                    else {
+                        $scope.loadingVisible = false;
+
+                    }
+                }
+            });
         };
 
 
@@ -361,8 +433,8 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             $scope.bind();
             mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
                 $scope.ds_locations = response;
-                /*$scope.dto_search.userId = $rootScope.vira_user_id;*/
-                $scope.dto_search.userId = 18;
+                $scope.dto_search.userId = $rootScope.vira_user_id;
+                //$scope.dto_search.userId = 18;
                 $scope.entity.userId = $rootScope.vira_user_id;
                 console.log('User Response', response);
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
