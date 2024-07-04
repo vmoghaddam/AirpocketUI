@@ -2149,3 +2149,13 @@ h1 {
         padding: 0;
         margin: 0px;
     }
+
+
+.vira .dx-datagrid .dx-row > td{
+    padding-top:8px;
+    padding-bottom:8px;
+    line-height:18px;
+}
+.vira .dx-datagrid .dx-row.dx-header-row > td {
+    padding: 8px 10px 8px 10px !important;
+}

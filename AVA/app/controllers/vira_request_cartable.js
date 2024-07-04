@@ -30,13 +30,13 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
          approver_UserId: null,
          remark: null,
          warehouse: null,
-         date: new Date(),
+         date: null,
          deliveryOrderItems: [
 
          ]
      }
 
-
+    $scope.selected_stock_id = $rootScope.vira_user_delafult_stock_id;
 
     $scope.ds_req_order =
     {
@@ -56,7 +56,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         icon: 'search',
          width: '45',
          onClick: function (e) {
-             $scope.ds_req_order.receiverLocationId = $scope.reciver_location
+             $scope.ds_req_order.receiverLocationId = $scope.selected_stock_id;
             vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
                 $scope.dg_req_ds = res;
             });
@@ -81,7 +81,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         text: 'Save D/O',
         type: 'default',
         icon: null,
-        width: 110,
+        width: 140,
         onClick: function (e) {
             
             $scope.save(function (res) {
@@ -132,7 +132,11 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         });
     };
 
-
+    $scope.format_date = function (dt) {
+        if (!dt)
+            return "";
+        return moment(dt).format('YYYY-MM-DD')
+    }
     $scope.bind = function () {
         vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
             $scope.dg_req_ds = res;
@@ -254,7 +258,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         searchEnabled: false,
         displayExpr: 'fullName',
         valueExpr: 'gI_LocationId',
-        width: 200,
+        width: 300,
         placeholder: 'Reciver',
         bindingOptions: {
             value: 'reciver_location',
@@ -293,9 +297,9 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
         
         { dataField: 'fullNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'paperDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
-        { dataField: 'register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
-        { dataField: 'senderUser_FullName', caption: 'Requested By', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
+        { dataField: 'paperDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 115,sortIndex:0,sortOrder:'desc' },
+        { dataField: 'register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+        { dataField: 'senderUser_FullName', caption: 'Requested By', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 150 },
     ];
 
 
@@ -330,7 +334,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 365,
+        height: $(window).height() - 250,
         columns: $scope.dg_req_columns,
         onContentReady: function (e) {
             if (!$scope.dg_req_instance)
@@ -519,7 +523,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 650,
+        height:200, //$(window).height() - 650,
         width: '100%',
         columns: $scope.dg_inter_columns,
         onContentReady: function (e) {
@@ -572,21 +576,13 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
     $scope.dg_reqItem_columns = [
 
-        { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false},
+        { dataField: 'partNumber', caption: 'P/N', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 180 },
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false},
         { dataField: 'quantity', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
         { dataField: 'doReaminingQuantity', caption: 'Rem.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
         { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
 
-        {
-            dataField: "Id", caption: '',
-            alignment: 'center',
-            allowFiltering: false,
-            allowSorting: false,
-            cellTemplate: 'nis',
-            width: 100,
-
-        },
+       
 
         {
             dataField: "Id", caption: '',
@@ -594,7 +590,16 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
             allowFiltering: false,
             allowSorting: false,
             cellTemplate: 'do',
-            width: 100,
+            width: 80,
+
+        },
+        {
+            dataField: "Id", caption: '',
+            alignment: 'center',
+            allowFiltering: false,
+            allowSorting: false,
+            cellTemplate: 'nis',
+            width: 80,
 
         },
 
@@ -614,7 +619,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
             visible: false
         },
         filterRow: {
-            visible: true,
+            visible: false,
             showOperationChooser: true,
         },
         showRowLines: true,
@@ -631,7 +636,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 650,
+        height: 200, //$(window).height() - 650,
         columns: $scope.dg_reqItem_columns,
         onContentReady: function (e) {
             if (!$scope.dg_reqItem_instance)
@@ -711,7 +716,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
             visible: false
         },
         filterRow: {
-            visible: true,
+            visible: false,
             showOperationChooser: true,
         },
         showRowLines: true,
@@ -728,7 +733,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 615,
+        height: $(window).height() - 200-280,
         width: '100%',
         columns: $scope.dg_delivery_columns,
         onContentReady: function (e) {
