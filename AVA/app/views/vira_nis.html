@@ -1,0 +1,243 @@
+﻿<style>
+    #grid .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #grid .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #grid .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #grid .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .datepicker-plot-area {
+        box-sizing: border-box;
+        overflow: hidden;
+        min-height: 70px;
+        display: block;
+        width: 300px !important;
+        min-width: 200px;
+        padding: 10px !important;
+        position: absolute;
+        font: 12px tahoma;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
+
+        .datepicker-plot-area .datepicker-day-view .table-days td span {
+            display: block;
+            width: 100%;
+            height: 30px !important;
+            line-height: 30px !important;
+            padding: 0;
+            margin: 0px;
+        }
+
+    .td-field {
+        padding: 7px;
+        text-align: left
+    }
+
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+</style>
+<div class="box vira_inventory" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div style="width: 100%">
+            <div style=" border: 1px solid #ccc; padding: 10px">
+                <div style="width: 100%;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    A/C Type:
+                                </td>
+                                <td>
+                                    <div dx-select-box="sb_ac_type" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Register:
+                                </td>
+                                <td>
+                                    <div dx-select-box="sb_reg" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Nis No:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_nis_no" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Register No:
+                                </td>
+                                <td>
+                                    <div dx-text-box="nis_reg_no" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Stock:
+                                </td>
+                                <td>
+                                    <div dx-select-box="sb_stock" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Priority:
+                                </td>
+                                <td>
+                                    <div dx-select-box="sb_priority" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Description:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_desc" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Part No:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_pn" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Date From:
+                                </td>
+                                <td>
+                                    <div dx-date-box="dt_from" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Date To:
+                                </td>
+                                <td>
+                                    <div dx-date-box="dt_to" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-1 col-md-1 padding-0" style="padding: 10px 10px 0 10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td>
+                                    <div dx_button="btn_search" class="center" style="width: 100%"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div dx-data-grid="dg_nis" id="dg_nis" class="content" style="overflow-y:hidden;padding: 5px 0 0 0;width: 100%" dx-item-alias="row"></div>
+        </div>
+
+    </div>
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_approve"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_cancel"></div></td>
+                
+                <td></td>
+
+            </tr>
+        </table>
+    </div>
+
+    <div ng-include="'app/views/vira_company_add.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+

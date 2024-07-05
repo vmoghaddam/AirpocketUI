@@ -616,6 +616,56 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.delete_part_number = _delete_part_number;
+    var _get_nis_approving = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSNIS/GetNISApprovingCartable?page=1&size=1000",entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_nis_approving = _get_nis_approving;
+
+   var _approve_nis = function (entity) {
+        var deferred = $q.defer();
+
+       $http.post(vira_api + "api/LGSNIS/Approve",entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.approve_nis = _approve_nis;
+
+    var _cancel_nis = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSNIS/Cancel",entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.cancel_nis = _cancel_nis;
 
     return ordersServiceFactory;
 
