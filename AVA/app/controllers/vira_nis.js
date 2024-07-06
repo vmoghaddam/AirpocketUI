@@ -7,7 +7,7 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             nisId: 0,
             userId: 0,
             cmP_PartNumberId: 0,
-            priorityId: 0,
+            priorityId: null,
             conditionIds: ["NE"],
             remark: null
         }
@@ -16,10 +16,10 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             userId: 18,
             requestNo: null,
             nisNo: null,
-            priorityId: 0,
+            priorityId: null,
             acfT_TypeId: null,
             register: null,
-            stockLocation: "AVA IKA",
+            stockLocation: null,
             description: null,
             partNumber: null
         };
@@ -433,8 +433,8 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             $scope.bind();
             mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
                 $scope.ds_locations = response;
-                $scope.dto_search.userId = $rootScope.vira_user_id;
-                //$scope.dto_search.userId = 18;
+                //$scope.dto_search.userId = $rootScope.vira_user_id;
+                $scope.dto_search.userId = 18;
                 $scope.entity.userId = $rootScope.vira_user_id;
                 console.log('User Response', response);
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
