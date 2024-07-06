@@ -2259,8 +2259,9 @@ $rootScope.HasHR = function () {
         return $rootScope.colorSetGray[n];
     };
     ////////////////////////////////////////////////
-    $rootScope.vira_user_id = 16;
-    $rootScope.vira_user_delafult_stock_id = 20;
+    $rootScope.vira_user_id = 8;
+    $rootScope.vira_user_delafult_stock_id = 19;
+    //$rootScope.vira_
     $rootScope.HasAccessToLGS = function () {
 
         var exist = Enumerable.From($rootScope.roleClaims).Where('$.indexOf("LGS")!=-1').FirstOrDefault();
