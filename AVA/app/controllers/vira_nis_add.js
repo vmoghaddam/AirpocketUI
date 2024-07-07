@@ -103,8 +103,21 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
                     type: 'success', text: 'Save', onClick: function (e) {
 
                         $scope.popup_nis_visible = false;
+                        if (!$scope.new_part_number) {
 
-                        vira_general_service.add_nis($scope.entity).then(function () {
+                        }
+                        else {
+                        }
+                        var dto = {
+                            "paperItemId": $scope.entity.paperItemId,
+                            "cmP_PartNumberId": $scope.entity.cmP_PartNumberId,
+                            "priorityId": $scope.entity.priorityId,
+                            "sender_LocationId": $scope.entity.sender_LocationId,
+                            "sender_UserId": $scope.entity.sender_UserId,
+                            "quantity": $scope.entity.rem_quantity,
+                            "remark": $scope.entity.remark
+                        };
+                        vira_general_service.add_nis(dto).then(function () {
                             $scope.clear_entity();
                         });
                     }
@@ -252,14 +265,15 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
     $scope.$on('InitNISPopup', function (event, prms) {
 
         $scope.tempData = prms;
-        $scope.entity.cmP_PartNumberId = $scope.tempData.cmP_PartNumberId;
-        $scope.entity.pn_title = $scope.tempData.pn_title;
-        $scope.entity.quantity = $scope.tempData.quantity;
-        $scope.entity.rem_quantity = $scope.tempData.rem_quantity;
-        $scope.entity.paperItemId = $scope.tempData.paperItemId;
-        $scope.entity.priorityId = $scope.tempData.priorityId;
-        $scope.entity.sender_LocationId = $scope.tempData.sender_LocationId;
-        $scope.entity.sender_UserId = $scope.tempData.sender_UserId;
+        $scope.entity = prms;
+        //$scope.entity.cmP_PartNumberId = $scope.tempData.cmP_PartNumberId;
+        //$scope.entity.pn_title = $scope.tempData.pn_title;
+        //$scope.entity.quantity = $scope.tempData.quantity;
+        //$scope.entity.rem_quantity = $scope.tempData.rem_quantity;
+        //$scope.entity.paperItemId = $scope.tempData.paperItemId;
+        //$scope.entity.priorityId = $scope.tempData.priorityId;
+        //$scope.entity.sender_LocationId = $scope.tempData.sender_LocationId;
+        //$scope.entity.sender_UserId = $scope.tempData.sender_UserId;
 
 
         $scope.popup_nis_visible = true;

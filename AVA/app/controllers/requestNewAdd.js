@@ -291,6 +291,8 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         if ($rootScope.vira_locations) {
             $scope.ds_user_locations = $rootScope.vira_user_locations;
             
+            console.log('dddddddd',$rootScope.vira_user_locations);
+            
             $scope.ds_locations = $rootScope.vira_stocks;
             
         }
@@ -298,6 +300,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
             $rootScope.fill_vira_locations(function () {
                 $scope.ds_user_locations = $rootScope.vira_user_locations;
+                console.log('dddddddd', $rootScope.vira_user_locations);
                 console.log('b', $scope.ds_user_locations);
                 $scope.ds_locations = $rootScope.vira_stocks;
                 
@@ -904,6 +907,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
     $scope.$on('InitPNSelected', function (event, prms) {
         $scope.selected_pn = prms;
+        console.log($scope.selected_pn);
 
         $scope.item.cmP_PartNumberId = prms.id;
         $scope.item.partNumber_TypeId = prms.partTypeId;

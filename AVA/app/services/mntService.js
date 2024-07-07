@@ -196,6 +196,26 @@ app.factory('mntService', ['$http', '$q', 'localStorageService', 'ngAuthSettings
             localStorageService.set('authorizationMnt', {
                 token: responseData.token, refreshToken: responseData.refreshToken, expires: responseData.tokenTimeout, useRefreshTokens: true
             });
+           // $rootScope.vira_user_id = 8;
+           // $rootScope.vira_user_delafult_stock_id = 19;
+           // $rootScope.vira_user_delafult_location_id = 19;
+            if (entity.ap_username == 'e.shakeri2') {
+
+                $rootScope.vira_user_id = 19;
+                $rootScope.vira_user_delafult_stock_id = 19;
+                $rootScope.vira_user_delafult_location_id = 35;
+                localStorageService.set('vira_user_id', 19);
+                localStorageService.set('vira_user_delafult_stock_id', 19);
+                localStorageService.set('vira_user_delafult_location_id', 35);
+            }
+            else {
+                $rootScope.vira_user_id = 8;
+                $rootScope.vira_user_delafult_stock_id = 19;
+                $rootScope.vira_user_delafult_location_id = 19;
+                localStorageService.set('vira_user_id', 8);
+                localStorageService.set('vira_user_delafult_stock_id', 19);
+                localStorageService.set('vira_user_delafult_location_id', 19);
+            }
 
 
             deferred.resolve(response.data);

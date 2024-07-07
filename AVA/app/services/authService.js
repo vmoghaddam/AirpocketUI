@@ -128,7 +128,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 _changeTel({ eid: $rootScope.employeeId, tel: loginData.password }).then(function (response) { }, function (err) { });
 
 
-             mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
+            mntService.authenticate({ "username": "test", "password": "1234", ap_username: loginData.userName.toLowerCase() }).then(function (response) {
+               
  
              }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
@@ -218,6 +219,11 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                     }).ToArray();
                  
             }
+
+            $rootScope.vira_user_id = localStorageService.get('vira_user_id');
+            $rootScope.vira_user_delafult_stock_id = localStorageService.get('vira_user_delafult_stock_id');
+            $rootScope.vira_user_delafult_location_id = localStorageService.get('vira_user_delafult_location_id');
+
         }
 
     };

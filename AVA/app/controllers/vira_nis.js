@@ -6,14 +6,14 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
         {
             nisId: 0,
             userId: 0,
-            cmP_PartNumberId: 0,
+            cmP_PartNumberId: 6,
             priorityId: null,
             conditionIds: ["NE"],
             remark: null
         }
-
+        //alert($rootScope.vira_user_id);
         $scope.dto_search = {
-            userId: 18,
+            userId: $rootScope.vira_user_id,
             requestNo: null,
             nisNo: null,
             priorityId: null,
@@ -132,6 +132,7 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
                                    
              
                 $scope.entity.cmP_PartNumberId = data.cmP_PartNumberId;
+                $scope.entity.cmP_PartNumberId = 6;
                 $scope.entity.priorityId = data.priorityId;
                 $scope.entity.nisId = data.id;
                 $scope.entity.remark = data.remark;
@@ -331,7 +332,7 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
                     if (res.errorCode) {
                         if (res.errorCode == 10029) {
                             mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
-                                $scope.save();
+                                $scope.approve();
 
                             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
                         }
@@ -433,8 +434,9 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             $scope.bind();
             mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
                 $scope.ds_locations = response;
-                //$scope.dto_search.userId = $rootScope.vira_user_id;
-                $scope.dto_search.userId = 18;
+                $scope.dto_search.userId = $rootScope.vira_user_id;
+               // $scope.dto_search.userId = 18;
+
                 $scope.entity.userId = $rootScope.vira_user_id;
                 console.log('User Response', response);
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });

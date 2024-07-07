@@ -79,10 +79,20 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
     }
 
     $scope.nis = function (e) {
+        $scope.dg_reqItem_instance.selectRows([e], false);
+        var nis_dto = {
+            "paperItemId": $scope.dg_reqItem_selected.id,
+            "cmP_PartNumberId": $scope.dg_reqItem_selected.cmP_PartNumberId,
+            "priorityId": $scope.dg_req_selected.priorityId,
+            "sender_LocationId": $scope.selected_stock_id,
+            "sender_UserId":  $rootScope.vira_user_id,
+            "quantity": $scope.dg_reqItem_selected.quantity,
+            "remark": null,
+            "pn_title": $scope.dg_reqItem_selected.partNumber,
+            "rem_quantity": $scope.dg_reqItem_selected.doReaminingQuantity
+        };
 
-
-
-        $scope.$broadcast('InitNISPopup', $scope.entity_nis);
+        $scope.$broadcast('InitNISPopup', nis_dto);
     }
 
 
