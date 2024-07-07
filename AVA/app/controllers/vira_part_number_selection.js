@@ -369,7 +369,7 @@ app.controller('part_number_slectionController', ['$scope', '$location', 'mntSer
 
 
     $scope.$on('InitPNPopup', function (event, prms) {
-
+       
         $scope.tempData = prms;
 
         $scope.bind();

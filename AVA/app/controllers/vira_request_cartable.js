@@ -1,9 +1,9 @@
 ﻿'use strict';
 app.controller('vira_request_cartableController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', 'vira_general_service', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce, vira_general_service) {
-    
+
     $scope.reciver_location = 0;
 
-   
+
 
     $scope.entity_nis =
     {
@@ -16,25 +16,25 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         remark: null
     };
 
-   
-    
-     $scope.entity_info =
-     {
-         id: 0,
-         requestId: null,
-         acfT_TypeId: null,
-         acfT_MSNId: 0,
-         receiver_LocationId: null,
-         receiver_UserId: null,
-         approver_LocationId: null,
-         approver_UserId: null,
-         remark: null,
-         warehouse: null,
-         date: null,
-         deliveryOrderItems: [
 
-         ]
-     }
+
+    $scope.entity_info =
+    {
+        id: 0,
+        requestId: null,
+        acfT_TypeId: null,
+        acfT_MSNId: 0,
+        receiver_LocationId: null,
+        receiver_UserId: null,
+        approver_LocationId: null,
+        approver_UserId: null,
+        remark: null,
+        warehouse: null,
+        date: null,
+        deliveryOrderItems: [
+
+        ]
+    }
 
     $scope.selected_stock_id = $rootScope.vira_user_delafult_stock_id;
 
@@ -50,40 +50,49 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         dateFrom: null,
         dateTo: null
     }
-     $scope.btn_search = {
-       // text: 'Search',
+    $scope.bind_requests = function () {
+        $scope.ds_req_order.receiverLocationId = $scope.selected_stock_id;
+        vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
+            $scope.dg_req_ds = res;
+        });
+    };
+    $scope.btn_search = {
+        // text: 'Search',
         type: 'default',
         icon: 'search',
-         width: '45',
-         onClick: function (e) {
-             $scope.ds_req_order.receiverLocationId = $scope.selected_stock_id;
-            vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
-                $scope.dg_req_ds = res;
-            });
+        width: '45',
+        onClick: function (e) {
+            $scope.bind_requests();
         }
 
     };
 
-    
+
     $scope.do = function (e) {
-        $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity_nis.sender_LocationId });
+        $scope.dg_reqItem_instance.selectRows([e], false);
+        $rootScope.$broadcast('InitInventoryPopup', {
+            location_id: $scope.selected_stock_id,
+            pn_id: $scope.dg_reqItem_selected.cmP_PartNumberId,
+            description: $scope.dg_reqItem_selected.description,
+            partNumber: $scope.dg_reqItem_selected.partNumber
+        });
     }
 
     $scope.nis = function (e) {
 
-        
 
-       $scope.$broadcast('InitNISPopup', $scope.entity_nis);
+
+        $scope.$broadcast('InitNISPopup', $scope.entity_nis);
     }
 
-  
+
     $scope.btn_submit = {
         text: 'Save D/O',
         type: 'default',
         icon: null,
         width: 140,
         onClick: function (e) {
-            
+
             $scope.save(function (res) {
                 if (res.errorCode) {
                     if (res.errorCode == 10029) {
@@ -96,8 +105,9 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
                         General.ShowNotify(res.errorMessage, 'error');
                 }
                 else {
-                    //$scope.entity.paperNo = res.data.paperNo;
-
+                    $scope.bind_items();
+                    $scope._DONo = res.data.paperNo;
+                    $scope.dg_delivery_ds = null;
                     $scope.popup_result_visible = true;
 
                 }
@@ -106,13 +116,160 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         }
 
     };
+    $scope.loadingVisible = false;
+    $scope.loadPanel = {
+        message: 'Please wait...',
 
+        showIndicator: true,
+        showPane: true,
+        shading: true,
+        closeOnOutsideClick: false,
+        shadingColor: "rgba(0,0,0,0.4)",
+        onShown: function () {
+
+        },
+        onHidden: function () {
+
+        },
+        bindingOptions: {
+            visible: 'loadingVisible'
+        }
+    };
     /////////////////////////
+    $scope._DONo = null;
+    $scope.txt_DONo = {
+        readOnly: true,
+        bindingOptions: {
+            value: '_DONo'
+        }
+    }
+    $scope.popup_result_visible = false;
+    $scope.popup_result_title = "";
+
+
+    $scope.popup_result = {
+
+
+        showTitle: true,
+
+        toolbarItems: [
+
+             
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'danger', text: 'Close', onClick: function (e) {
+
+                        $scope.popup_result_visible = false;
+                      
+
+                    }
+                }, toolbar: 'bottom'
+            },
+
+        ],
+
+        visible: false,
+        dragEnabled: true,
+        closeOnOutsideClick: false,
+        onShowing: function (e) {
+
+        },
+        onShown: function (e) {
+
+
+
+
+        },
+        onHiding: function () {
+
+
+            $scope.popup_result_visible = false;
+        },
+        onContentReady: function (e) {
+
+
+        },
+        // fullScreen:false,
+        bindingOptions: {
+            visible: 'popup_result_visible',
+
+            title: 'popup_result_title',
+            height: '300',
+            width: '500',
+
+
+        }
+    };
 
     $scope.save = function (callback) {
         $scope.loadingVisible = true;
-        $scope.entity_info.deliveryOrderItems = $scope.dg_delivery_ds
-        mntService.add_delivery_order($scope.entity_info).then(function (res) {
+        // $scope.entity_info.deliveryOrderItems = $scope.dg_delivery_ds
+
+        var dto = {
+            "id": 0,
+            "requestId": $scope.dg_req_selected.id,
+            "acfT_TypeId": $scope.dg_req_selected.acfT_TypeId,
+            "acfT_MSNId": $scope.dg_req_selected.acfT_MSNId,
+            "sender_LocationId": $scope.selected_stock_id,
+            "sender_UserId": $rootScope.vira_user_id,
+            "receiver_LocationId": $scope.do_receiver.gI_LocationId,
+            "receiver_UserId": $scope.do_receiver.uM_UserId,
+            "remark": 'Request No.:' + $scope.dg_req_selected.fullNo,
+            "deliveryOrderItems": [],
+        };
+       
+        $.each($scope.dg_delivery_ds, function (_i, _d) {
+            var _ci = 1;
+            dto.deliveryOrderItems.push({
+                "id": 0,
+                "paperItemId": $scope.dg_reqItem_selected.id,
+                "cmP_PartNumberId": _d.cmP_PartNumberId,
+                "cmP_ComponentId": _d.cmP_ComponentId,
+                "conditionId": _d.conditionId,
+                "measurementUnitId": _d.conditionId,
+                "itemNo": _ci,
+                "quantity": _d.quantity,
+                "shelfFrom": _d.shelf,
+                "shelfTo": _d.shelf,
+                "remark": "-",
+            });
+            _ci++;
+        });
+        //{
+        //   // "id": 0,
+        //       // "requestId": 0,
+        //            //"acfT_TypeId": "string",
+        //               // "acfT_MSNId": 0,
+        //                   // "sender_LocationId": 0,
+        //                       // "sender_UserId": 0,
+        //                          //  "receiver_LocationId": 0,
+        //                             //   "receiver_UserId": 0,
+        //                                 //   "remark": "string",
+
+
+        //                                        "deliveryOrderItems": [
+        //                                            {
+        //                                                "id": 0,
+        //                                                "paperId": 0,
+        //                                                "paperItemId": 0,
+        //                                                "cmP_PartNumberId": 0,
+        //                                                "cmP_ComponentId": 0,
+        //                                                "conditionId": 0,
+        //                                                "measurementUnitId": 0,
+        //                                                "itemNo": 0,
+        //                                                "quantity": 0,
+        //                                                "shelfFrom": "string",
+        //                                                "shelfTo": "string",
+        //                                                "remark": "string"
+        //                                            }
+        //                                        ]
+        //}
+
+
+
+
+        $scope.loadingVisible = true;
+        mntService.add_delivery_order(dto).then(function (res) {
             $scope.loadingVisible = false;
             console.log(res);
             if (callback)
@@ -122,8 +279,9 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
                     General.ShowNotify(res.errorMessage, 'error');
                 }
                 else {
-                    $scope.entity.paperNo = res.data.paperNo;
-
+                    $scope.bind_items();
+                    $scope._DONo = res.data.paperNo;
+                    $scope.dg_delivery_ds = null;
                     $scope.popup_result_visible = true;
 
                 }
@@ -141,16 +299,37 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         vira_general_service.get_request_cartable($scope.ds_req_order).then(function (res) {
             $scope.dg_req_ds = res;
         });
-        vira_general_service.get_request_cartable_item().then(function (res) {
-            $scope.dg_req_ds = res;
-        });
-        vira_general_service.get_partnumebr_interchabge().then(function (res) {
-            $scope.dg_req_ds = res;
-        });
+        //vira_general_service.get_request_cartable_item().then(function (res) {
+        //    $scope.dg_req_ds = res;
+        //});
+        //vira_general_service.get_partnumebr_interchabge().then(function (res) {
+        //   $scope.dg_req_ds = res;
+        // });
+
 
         mntService.get_register().then(function (res) {
             $scope.registers = res
         });
+
+        if ($rootScope.vira_locations) {
+            //$scope.ds_user_locations = $rootScope.vira_user_locations;
+
+            $scope.ds_locations = $rootScope.vira_user_locations_all;
+
+
+        }
+        else {
+
+            $rootScope.fill_vira_locations(function () {
+                // $scope.ds_user_locations = $rootScope.vira_user_locations;
+                // console.log('b', $scope.ds_user_locations);
+                $scope.ds_locations = $rootScope.vira_user_locations_all;
+
+            });
+        }
+
+
+
         //mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
         //    $scope.ds_locations = response;
         //    $scope.user = response;
@@ -163,7 +342,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
     //////////////////////////
 
-   
+
     $scope.txt_partNo = {
         bindingOptions: {
             value: 'ds_req_order.partNumber'
@@ -187,7 +366,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         searchEnabled: false,
         displayExpr: "register",
         valueExpr: 'register',
-       
+
         bindingOptions: {
             value: 'ds_req_order.register',
             dataSource: 'registers',
@@ -253,15 +432,47 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
     }
 
     $scope.ds_locations = null;
+    //$scope.sb_receiver = {
+    //    showClearButton: false,
+    //    searchEnabled: false,
+    //    displayExpr: 'fullName',
+    //    valueExpr: 'gI_LocationId',
+    //    width: 300,
+    //    placeholder: 'Reciver',
+    //    bindingOptions: {
+    //        value: 'reciver_location',
+    //        dataSource: 'ds_locations'
+    //    }
+    //}
+
+    $scope.do_receiver = null;
     $scope.sb_receiver = {
         showClearButton: false,
         searchEnabled: false,
-        displayExpr: 'fullName',
-        valueExpr: 'gI_LocationId',
-        width: 300,
-        placeholder: 'Reciver',
+        //displayExpr: 'title',
+        // valueExpr: 'gI_LocationId',
+        itemTemplate: function (data) {
+            //return $rootScope.getSbTemplateAirport(data);
+            var tmpl =
+                "<div>"
+                + "<div class='tmpl-col-left' style='width:50%'>" + data.title + "</div>"
+                + "<div class='tmpl-col-right' style='width:50%'>" + data.fullName + "</div>"
+
+
+
+                + "</div>";
+            return tmpl;
+        },
+        fieldTemplate: 'field',
+        onSelectionChanged: function (e) {
+            if (!e.selectedItem) {
+                $scope.do_receiver = null;
+                return;
+            }
+            // $scope.entity.sender_UserId = e.selectedItem.uM_UserId;
+        },
         bindingOptions: {
-            value: 'reciver_location',
+            value: 'do_receiver',
             dataSource: 'ds_locations'
         }
     }
@@ -295,9 +506,9 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
     $scope.dg_req_columns = [
 
 
-        
+
         { dataField: 'fullNo', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'paperDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 115,sortIndex:0,sortOrder:'desc' },
+        { dataField: 'paperDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 115, sortIndex: 0, sortOrder: 'desc' },
         { dataField: 'register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
         { dataField: 'senderUser_FullName', caption: 'Requested By', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 150 },
     ];
@@ -360,12 +571,11 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
+            $scope.dg_delivery_ds = null;
 
-           
+
             $scope.dg_req_id = e.selectedRowsData[0].id;
-            vira_general_service.get_request_cartable_item($scope.dg_req_id).then(function (response) {
-                $scope.dg_reqItem_ds = response;
-            });
+            $scope.bind_items();
 
             $scope.entity_nis.cmP_PartNumberId = data.id;
             $scope.entity_nis.pn_title = data.fullNo;
@@ -385,8 +595,17 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
             if (!data) {
                 $scope.dg_req_selected = null;
             }
-            else
+            else {
                 $scope.dg_req_selected = data;
+
+
+                $scope.do_receiver = Enumerable.From($scope.ds_locations).Where(function (x) {
+
+
+                    return x.uM_UserId == data.sender_UserId && x.gI_LocationId == data.sender_LocationId;
+
+                }).FirstOrDefault();
+            }
 
 
         },
@@ -399,7 +618,16 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         },
 
     };
+    $scope.bind_items = function () {
+        $scope.dg_reqItem_ds = null;
+        vira_general_service.get_request_cartable_item($scope.dg_req_id).then(function (response) {
+            $scope.dg_reqItem_ds = response;
+            if (!response || response.length == 0)
+                $scope.bind_requests();
+                 
+        });
 
+    };
 
     $scope.dg_other_columns = [
 
@@ -465,7 +693,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
 
-            
+
             $scope.dg_other_id.Id = e.selectedRowsData[0].Id;
 
             if (!data) {
@@ -523,7 +751,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height:200, //$(window).height() - 650,
+        height: 200, //$(window).height() - 650,
         width: '100%',
         columns: $scope.dg_inter_columns,
         onContentReady: function (e) {
@@ -577,12 +805,12 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
     $scope.dg_reqItem_columns = [
 
         { dataField: 'partNumber', caption: 'P/N', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 180 },
-        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false},
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false },
         { dataField: 'quantity', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
         { dataField: 'doReaminingQuantity', caption: 'Rem.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
         { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 60 },
 
-       
+
 
         {
             dataField: "Id", caption: '',
@@ -692,14 +920,15 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
     $scope.dg_delivery_columns = [
 
-        { dataField: 'partNumber', caption: 'No. ', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 100 },
-        { dataField: '', caption: 'SN/BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'selected_qty', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'partNumber', caption: 'P/N', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200, fixed: true, fixedPosition: 'left' },
+        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'date', allowEditing: false, minWidth: 250, fixed: true, fixedPosition: 'left' },
+        { dataField: 'sN_BN', caption: 'SN/BN', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
+        { dataField: 'quantity', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110, fixed: true, fixedPosition: 'left' },
+        { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110 },
+
+        { dataField: 'condition', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         { dataField: 'shelf', caption: 'Shelf', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: 'Condition', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: '', caption: '', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        //{ dataField: '', caption: '', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
     ];
 
 
@@ -733,7 +962,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 200-280,
+        height: $(window).height() - 200 - 280,
         width: '100%',
         columns: $scope.dg_delivery_columns,
         onContentReady: function (e) {
@@ -761,7 +990,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
 
-            
+
             $scope.dg_delivery_id.Id = e.selectedRowsData[0].Id;
 
 
@@ -785,20 +1014,18 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
 
     $scope.$on('$viewContentLoaded', function () {
-        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
-            $scope.ds_locations = response;
-        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
 
         $scope.bind();
         setTimeout(function () {
 
             //$scope.$broadcast('getFilterQuery', null);
-          
+
         }, 500);
     });
 
 
-  
+
     $scope.$on('on_inventory_selected', function (event, prms) {
         console.log("Init PN Data", prms);
         var dtos = [];
@@ -830,7 +1057,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
     });
 
 
-  
+
 
 
 }]);

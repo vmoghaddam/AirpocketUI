@@ -19,36 +19,19 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
 
     $scope.cmpEntity = {
         locationId: null,
-        partNumberTypeId: [],
-        description: null,
+        // partNumberTypeId: [],
+        // description: null,
         partNumber: null,
-        showInterchanges: false,
-        sN_BN: null,
-        ataChapter: null,
-        acfT_Type: [],
-        shelf: null,
-        remainToExpire: null,
-        hasShelfTime: false
+        // showInterchanges: false,
+        //   sN_BN: null,
+        //   ataChapter: null,
+        //   acfT_Type: [],
+        //    shelf: null,
+        //   remainToExpire: null,
+        //  hasShelfTime: false
     }
 
-    $scope.btn_search = {
-        text: 'Search',
-        type: 'default',
-       // icon: 'search',
-      //  width: 120,
-        onClick: function (e) {
-           // $scope.fn_test();
-            mntService.get_part_number($scope.entity).then(function (res) {
-                $.each(res, function (_i, _d) {
-                    _d.selected_qty = null;
-                });
-
-                $scope.dg_inv_ds = res;
-               
-            });
-        }
-
-    };
+   
 
     //////////////////
 
@@ -155,9 +138,22 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
             }
             if ($scope.tempData != null)
                 $scope.bind();
-
+            
             if ($scope.tempData && $scope.tempData.location_id)
-                $scope.entity.locationId = $scope.tempData.location_id
+                $scope.entity.locationId = $scope.tempData.location_id;
+
+            if ($scope.tempData && $scope.tempData.pn_id) {
+                $scope.entity.cmP_PartNumberId = $scope.tempData.pn_id;
+                if ($scope.tempData && $scope.tempData.partNumber)
+                    $scope.entity.partNumber = $scope.tempData.partNumber;
+                if ($scope.tempData && $scope.tempData.description)
+                    $scope.entity.description = $scope.tempData.description;
+
+                $scope.do_search();
+            }
+
+
+          
 
             //$rootScope.referred_list_instance.repaint();
             //$rootScope.$broadcast('InitTest', $scope.tempData);
@@ -191,7 +187,23 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
     };
 
    
+    $scope.get_detail_style = function (x) {
+        var clr = '#85e0e0';
+        if (x.expireDate) {
+            if (x.remainingToExpire <= 0)
+                clr = '#ffcccc';
+            else if (x.remainingToExpire > 0 && x.remainingToExpire <= 30)
+                //#ffaa80
+                clr = '#ffccb3';
+            else if (x.remainingToExpire > 30 && x.remainingToExpire <= 60)
+                clr = '#ffff99';
+        }
 
+
+        return {
+            background: clr
+        }
+    }
 
     ////////////////////
 
@@ -267,6 +279,36 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         type: 'default',
         onClick: function () {
             $rootScope.$broadcast('InitPNPopup', null);
+        }
+
+    };
+    $scope.selected_pn = null;
+    $scope.$on('InitPNSelected', function (event, prms) {
+        
+        $scope.selected_pn = prms;
+         $scope.entity.cmP_PartNumberId = prms.id;
+         $scope.entity.partNumber = prms.partNumber;
+         $scope.entity.description = prms.description;
+
+    });
+    $scope.do_search = function () {
+        mntService.get_part_number($scope.entity).then(function (res) {
+            $.each(res, function (_i, _d) {
+                _d.selected_qty = null;
+            });
+
+            $scope.dg_inv_ds = res;
+
+        });
+    };
+    $scope.btn_search = {
+        text: 'Search',
+        type: 'default',
+        // icon: 'search',
+        //  width: 120,
+        onClick: function (e) {
+            // $scope.fn_test();
+            $scope.do_search();
         }
 
     };
@@ -355,7 +397,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
 
     ];
 
-
+    $scope.dg_height = $(window).height() - 220;
     $scope.dg_inv_ds = null;
     $scope.dg_inv_selected = null;
     $scope.dg_inv_instance = null;
@@ -391,7 +433,7 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 220,
+       // height: $(window).height() - 220,
         //width: $(window).width(),
         columns: $scope.dg_inv_columns,
         onContentReady: function (e) {
@@ -434,7 +476,8 @@ app.controller('inventoryController', ['$scope', '$location', 'mntService', 'aut
         },
 
         bindingOptions: {
-            dataSource: 'dg_inv_ds'
+            dataSource: 'dg_inv_ds',
+            height: 'dg_height'
         },
         columnChooser: {
             enabled: false

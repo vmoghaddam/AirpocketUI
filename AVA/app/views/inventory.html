@@ -28,9 +28,9 @@
                             <td style="width:50px;padding-left:5px;">
                                 <div dx-button="btn_pn"></div>
                             </td>
-                            <td style="width:50px;padding-left:5px;">
+                            <!--<td style="width:50px;padding-left:5px;">
                                 <div dx-check-box="ch_alt" class="center"></div>
-                            </td>
+                            </td>-->
                         </tr>
                     </table>
                 </div>
@@ -136,20 +136,44 @@
             <div>
                 <div dx-data-grid="dg_inv" id="dg_inv" class="content col-lg-10 col-md-10" style="overflow-y:hidden;margin-top: 5px; display:inline-block" dx-item-alias="row"></div>
                 <div class="content col-lg-2 col-md-2" style="display: inline-block;margin-top:5px">
-                    <div class="td-title" style="width: 100%; background-color: #898e8c; color:white">Detail</div>
-                    <div style="border: 1px solid lightgray; padding:5px;overflow-y:auto" ng-style="{height: detail_height + 'px'}">
-                        <table style="margin-bottom:5px;color:black;background-color:#80e5ff;width:100%" class="dx-border" ng-repeat="x in ds_details">
+                    <div class="td-title" style="width: 100%; background-color: #898e8c; color:white">Details</div>
+                    <!--<div style="border: 1px solid lightgray; padding:5px;overflow-y:auto" ng-style="{height: detail_height + 'px'}">
+        <table style="margin-bottom:5px;color:black;background-color:#80e5ff;width:100%" class="dx-border" ng-repeat="x in ds_details">
+            <tr>
+                <td class="td-field" style="font-weight:normal">SN/BN</td>
+                <td class="td-field" style="font-weight:bold;text-align:center">{{x.sN_BN}}</td>
+            </tr>
+            <tr>
+                <td class="td-field" style="font-weight:normal">QTY</td>
+                <td class="td-field" style="font-weight:bold;text-align:center">{{x.availableQty}}</td>
+            </tr>
+            <tr>
+                <td class="td-field" style="font-weight:normal">Shelf</td>
+                <td class="td-field" style="font-weight:bold;text-align:center">{{x.shelf}}</td>
+            </tr>
+        </table>
+    </div>-->
+                    <div style="border: 1px solid lightgray; padding:5px" ng-style="{height: dg_height - 44 + 'px'}">
+                        <table style="margin-bottom:5px;color:black;background-color:#85e0e0;width:100%" class="dx-border" ng-repeat="x in ds_details" ng-style="get_detail_style(x)">
                             <tr>
-                                <td class="td-field" style="font-weight:normal">SN/BN</td>
-                                <td class="td-field" style="font-weight:bold;text-align:center">{{x.sN_BN}}</td>
+                                <td class="td-fieldx" style="font-weight:normal;padding-top:5px;padding-left:8px;">SN/BN</td>
+                                <td class="td-fieldx" style="font-weight:bold;text-align:center;padding-top:7px;">{{x.sN_BN}}</td>
                             </tr>
                             <tr>
-                                <td class="td-field" style="font-weight:normal">QTY</td>
-                                <td class="td-field" style="font-weight:bold;text-align:center">{{x.availableQty}}</td>
+                                <td class="td-fieldx" style="font-weight:normal;padding-top:5px;padding-left:8px;">QTY</td>
+                                <td class="td-fieldx" style="font-weight:bold;text-align:center;padding-top:7px;">{{x.availableQty}}</td>
                             </tr>
+                            <!--<tr>
+                <td class="td-field" style="font-weight:normal">Shelf</td>
+                <td class="td-field" style="font-weight:bold;text-align:center">{{x.shelf}}</td>
+            </tr>-->
                             <tr>
-                                <td class="td-field" style="font-weight:normal">Shelf</td>
-                                <td class="td-field" style="font-weight:bold;text-align:center">{{x.shelf}}</td>
+                                <td class="td-fieldx" style="font-weight:normal;padding-top:7px;padding-left:8px;">Cond.</td>
+                                <td class="td-fieldx" style="font-weight:bold;text-align:center;padding-top:7px;">{{x.condition}}</td>
+                            </tr>
+                            <tr ng-show="x.expireDate">
+                                <td class="td-field" style="font-weight:normal;padding-left:8px;padding-top:7px;">Exp. Rem.</td>
+                                <td class="td-field" style="font-weight:bold;text-align:center">{{x.remainingToExpire}}</td>
                             </tr>
                         </table>
                     </div>

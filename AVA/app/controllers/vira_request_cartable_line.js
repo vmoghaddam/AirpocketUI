@@ -302,15 +302,44 @@ app.controller('vira_request_cartable_lineController', ['$scope', '$location', '
     }
 
     $scope.ds_locations = null;
+    //$scope.sb_receiver = {
+    //    showClearButton: false,
+    //    searchEnabled: false,
+    //    displayExpr: 'fullName',
+    //    valueExpr: 'gI_LocationId',
+    //    width: 200,
+    //    placeholder: 'Reciver',
+    //    bindingOptions: {
+    //        value: 'reciver_location',
+    //        dataSource: 'ds_locations'
+    //    }
+    //}
     $scope.sb_receiver = {
         showClearButton: false,
         searchEnabled: false,
-        displayExpr: 'fullName',
+        displayExpr: 'title',
         valueExpr: 'gI_LocationId',
-        width: 200,
-        placeholder: 'Reciver',
+        itemTemplate: function (data) {
+            //return $rootScope.getSbTemplateAirport(data);
+            var tmpl =
+                "<div>"
+                + "<div class='tmpl-col-left' style='width:50%'>" + data.title + "</div>"
+                + "<div class='tmpl-col-right' style='width:50%'>" + data.fullName + "</div>"
+
+
+
+                + "</div>";
+            return tmpl;
+        },
+        onSelectionChanged: function (e) {
+            if (!e.selectedItem) {
+                $scope.entity.sender_UserId = null;
+                return;
+            }
+            $scope.entity.sender_UserId = e.selectedItem.uM_UserId;
+        },
         bindingOptions: {
-            value: 'reciver_location',
+            value: 'entity.sender_LocationId',
             dataSource: 'ds_locations'
         }
     }
