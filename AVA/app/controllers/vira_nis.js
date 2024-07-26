@@ -11,6 +11,8 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             conditionIds: ["NE"],
             remark: null
         }
+
+        $scope.priorityId = null;
         //alert($rootScope.vira_user_id);
         $scope.dto_search = {
             userId: $rootScope.vira_user_id,
@@ -23,6 +25,97 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             description: null,
             partNumber: null
         };
+        /////////////////////////////////////
+
+        $scope.popup_nis_approve_visible = false;
+        $scope.popup_height = 400;
+        $scope.popup_width = 800;
+        $scope.popup_nis_approve_title = "NIS Approve";
+        $scope.popup_instance = null;
+        $scope.isFullScreen = false;
+
+        $scope.popup_nis_approve = {
+
+
+            showTitle: true,
+
+            toolbarItems: [
+
+
+                {
+                    widget: 'dxButton', location: 'before', options: {
+                        type: 'danger', text: 'Close', onClick: function (e) {
+
+                            $scope.popup_nis_approve_visible = false;
+
+                        }
+                    }, toolbar: 'bottom'
+                },
+                {
+                    widget: 'dxButton', location: 'before', options: {
+                        type: 'success', text: 'Save', validationGroup: 'partnumber', onClick: function (e) {
+                            if ($scope.entity.priorityId == null)
+                                $scope.entity.priorityId = $scope.priorityId;
+                        }
+                    }, toolbar: 'bottom'
+                },
+
+            ],
+
+            visible: false,
+            dragEnabled: false,
+            closeOnOutsideClick: false,
+            onShowing: function (e) {
+                $rootScope.IsRootSyncEnabled = false;
+                $scope.popup_instance.repaint();
+
+
+            },
+            onShown: function (e) {
+
+                //if ($scope.isNew) {
+                //    $scope.isContentVisible = true;
+                //}
+                //if ($scope.tempData != null)
+
+                $scope.bind();
+
+                //$rootScope.referred_list_instance.repaint();
+                //$rootScope.$broadcast('InitTest', $scope.tempData);
+
+
+
+            },
+            onHiding: function () {
+                $scope.entity = {
+                    Id: -1,
+                    EventTitleIds: [],
+
+                };
+                $scope.entity.Result = null;
+                $scope.popup_nis_approve_visible = false;
+             /*   $scope.clear_entity();*/
+            },
+            onContentReady: function (e) {
+                if (!$scope.popup_instance)
+                    $scope.popup_instance = e.component;
+
+            },
+            // fullScreen:false,
+            bindingOptions: {
+                visible: 'popup_nis_approve_visible',
+                fullScreen: 'isFullScreen',
+                title: 'popup_nis_approve_title',
+                height: 'popup_height',
+                width: 'popup_width',
+                'toolbarItems[0].visible': 'isNotLocked',
+                //'toolbarItems[1].visible': 'isNotLocked',
+                'toolbarItems[2].visible': 'isNotLocked',
+
+            }
+        };
+
+
         /////////////////////////////////////
 
         $scope.loadingVisible = false;
@@ -128,12 +221,13 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
 
                 console.log(e.selectedRowsData);
                 //$scope.entity.Id = e.selectedRowsData[0].id;
-               
-                                   
-             
+
+                
+
                 $scope.entity.cmP_PartNumberId = data.cmP_PartNumberId;
-                $scope.entity.cmP_PartNumberId = 6;
-                $scope.entity.priorityId = data.priorityId;
+                $scope.entity.approve_pn_title = data.description;
+                $scope.entity.approve_priority_title = data.priority;
+                $scope.priorityId = data.priorityId;
                 $scope.entity.nisId = data.id;
                 $scope.entity.remark = data.remark;
 
@@ -175,6 +269,17 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
                 dataSource: 'ac_type_ds',
             }
         }
+
+        $scope.btn_pn = {
+            icon: 'search',
+            width: '15%',
+            type: 'default',
+            onClick: function () {
+                $rootScope.$broadcast('InitPNPopup', null);
+            }
+
+        };
+
 
         $scope.sb_reg = {
             showClearButton: false,
@@ -224,6 +329,30 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             }
         }
 
+        $scope.txt_pn = {
+            bindingOptions: {
+                value: 'entity.new_pn_title'
+            }
+        }
+
+        $scope.txt_new_pn = {
+            bindingOptions: {
+                value: 'entity.new_pn_title'
+            }
+        }
+
+        $scope.txt_approve_pn = {
+            bindingOptions: {
+                value: 'entity.approve_pn_title'
+            }
+        }
+
+         $scope.txt_approve_priority = {
+            bindingOptions: {
+                 value: 'entity.approve_priority_title'
+            }
+        }
+
         $scope.dt_from = {
             type: 'date',
             displayFormat: "yyyy-MMM-dd",
@@ -240,25 +369,69 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             }
         }
 
-        $scope.priority =
-            [
-                { title: 'Routine', id: 0 },
-                { title: 'Urgent', id: 1 },
-                { title: 'AOG', id: 2 },
-            ];
+        //$scope.priority =
+        //    [
+        //        { title: 'Routine', id: 0 },
+        //        { title: 'Urgent', id: 1 },
+        //        { title: 'AOG', id: 2 },
+        //    ];
 
         $scope.sb_priority = {
             showClearButton: false,
             searchEnabled: false,
             displayExpr: "title",
             valueExpr: 'id',
-            dataSource: $scope.priority,
             bindingOptions: {
                 value: 'dto_search.priorityId',
+                dataSource: 'ds_priority'
             }
         }
 
+        $scope.sb_approve_priority = {
+            showClearButton: false,
+            searchEnabled: false,
+            displayExpr: "title",
+            valueExpr: 'id',
+            bindingOptions: {
+                value: 'entity.priorityId',
+                dataSource: 'ds_priority'
+            }
+        }
 
+        $scope.reg = null;
+        $scope.tag_reg = {
+
+            showSelectionControls: true,
+            applyValueMode: "instantly",
+
+            showClearButton: true,
+            searchEnabled: true,
+            searchExpr: ["title"],
+            displayExpr: "title",
+            valueExpr: 'id',
+            bindingOptions: {
+                value: '',
+                dataSource: 'ds_condition'
+            }
+        };
+        $scope.dg_reg_columns = [
+
+
+            { dataField: 'title', caption: 'Title', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+
+
+        ];
+
+        $scope.sb_priority = {
+            showClearButton: false,
+            searchEnabled: false,
+            displayExpr: "title",
+            valueExpr: 'id',
+            bindingOptions: {
+                value: 'entity.priorityId',
+                dataSource: 'priority',
+            }
+        }
 
 
         ////////////////////
@@ -320,7 +493,19 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
         };
 
 
-        $scope.btn_approve = {
+        $scope.btn_approve2 = {
+            text: 'Approve2',
+            type: 'success',
+            width: '100%',
+            bindingOptions: {},
+            onClick: function (e) {
+
+                $scope.popup_nis_approve_visible = true;
+            }
+        };
+
+
+       $scope.btn_approve = {
             text: 'Approve',
             type: 'success',
             width: '100%',
@@ -403,6 +588,14 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
                     $scope.registers = res
                 });
             });
+
+            mntService.getReceiptPN(76).then(function (res) {
+                $scope.ds_priority = res;
+            });
+
+            mntService.getReceiptPN(124).then(function (res) {
+                $scope.ds_condition = res;
+            });
             vira_general_service.get_nis_approving($scope.dto_search).then(function (response) {
 
                 $scope.loadingVisible = false;
@@ -435,7 +628,7 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
             mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
                 $scope.ds_locations = response;
                 $scope.dto_search.userId = $rootScope.vira_user_id;
-               // $scope.dto_search.userId = 18;
+                // $scope.dto_search.userId = 18;
 
                 $scope.entity.userId = $rootScope.vira_user_id;
                 console.log('User Response', response);
@@ -473,5 +666,13 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
         };
 
         //////////////////////////////
+
+        $scope.$on('InitPNSelected', function (event, prms) {
+            $scope.selected_pn = prms;
+            console.log($scope.selected_pn);
+
+            $scope.entity.cmP_PartNumberId = prms.id;
+            $scope.entity.new_pn_title = prms.partNumber;
+        });
 
     }]);

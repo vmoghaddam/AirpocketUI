@@ -228,16 +228,114 @@
             <tr>
 
                 <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_approve"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_approve2"></div></td>
                 <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_cancel"></div></td>
-                
+
                 <td></td>
 
             </tr>
         </table>
+
+        <div ng-include="'app/views/vira_part_number_selection.html'"></div>
     </div>
 
-    <div ng-include="'app/views/vira_company_add.html'"></div>
-    <div dx-load-panel="loadPanel"></div>
+
+    <div id="popup_nis_approve" dx-popup="popup_nis_approve" class="no-padding" style='padding:0 !important;'>
+        <div class="col-lg-12 col-md-12 col-sm-12 padding-0" style="padding: 10px 5px 0 5px">
+            <div style=" border: 1px solid #ccc;">
+                <div style="width: 100%;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
+                    <div class="col-lg-6 col-md-6 padding-0" style="padding:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    P/N:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_approve_pn" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 padding-0" style="padding:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width: 60px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
+                                    P/N:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_new_pn" class="center" style="width: 100%" dx-validator="{validationGroup:'reqitemadd',  validationRules: [{ type: 'required'}]}"></div>
+
+                                </td>
+                                <td style="padding-left:2px">
+                                    <div dx-button="btn_pn"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 padding-0" style="padding:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Priority:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_approve_priority" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 padding-0" style="padding:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Priority:
+                                </td>
+                                <td>
+                                    <div dx-select-box="sb_approve_priority" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-lg-12 col-md-12 padding-0" style="padding:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Conditions:
+                                </td>
+                                <td>
+                                    <div dx-tag-box="tag_reg" dx-validator="{validationGroup:'reqitemadd',  validationRules: [{ type: 'required'}]}"></div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-lg-12 col-md-12 padding-0" style="padding:10px;">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80px;font-size:12px;padding-right:5px;text-align:right">
+                                    Remark:
+                                </td>
+                                <td>
+                                    <div dx-text-box="txt_priority" class="center" style="width: 100%"></div>
+                                </td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
 </div>
 
 
