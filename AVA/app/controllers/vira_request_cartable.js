@@ -126,6 +126,17 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         }
 
     };
+
+    $scope.$on('OnNISAdd', function (event, prms) {
+        //alert('ddddddfdsdfd');
+        console.log('nis out', prms);
+        $scope.bind_items();
+        $scope._DONo = prms.paperNo;
+        $scope.popup_result_visible = true;
+    });
+
+
+
     $scope.loadingVisible = false;
     $scope.loadPanel = {
         message: 'Please wait...',

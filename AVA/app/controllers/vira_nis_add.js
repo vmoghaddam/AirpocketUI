@@ -102,7 +102,7 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
 
-                        $scope.popup_nis_visible = false;
+                       
                         if (!$scope.new_part_number) {
 
                         }
@@ -117,8 +117,15 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
                             "quantity": $scope.entity.rem_quantity,
                             "remark": $scope.entity.remark
                         };
-                        vira_general_service.add_nis(dto).then(function () {
-                            $scope.clear_entity();
+                        $scope.nis_add_result = null;
+                        vira_general_service.add_nis(dto).then(function (res) {
+                            console.log('sdfsdfsdfsfsdf  ', res);
+                            $scope.nis_add_result = res;
+                            $rootScope.$broadcast('OnNISAdd', $scope.nis_add_result);
+                           // $scope.clear_entity();
+                           
+                            
+                            $scope.popup_nis_visible = false;
                         });
                     }
                 }, toolbar: 'bottom'
@@ -155,7 +162,7 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
         },
         onHiding: function () {
 
-
+           
             $scope.popup_nis_visible = false;
         },
         onContentReady: function (e) {
