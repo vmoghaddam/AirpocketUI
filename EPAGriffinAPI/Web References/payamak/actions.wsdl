@@ -1,0 +1,1891 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s2="http://tempuri.org/AbstractTypes" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="GetBranchs">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="owner" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBranchsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBranchsResult" type="tns:ArrayOfBranchs" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBranchs">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Branchs" nillable="true" type="tns:Branchs" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Branchs">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="NumberCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="BranchOwner" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="BranchName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddBranch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="branchName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="owner" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddBranchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddBranchResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="branchId" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="mobileNumbers" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddNumberResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveBranch">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="branchId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveBranchResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RemoveBranchResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBulkCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="branch" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeFrom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeTo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBulkCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetBulkCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddBulk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="branch" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bulkType" type="s:unsignedByte" />
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeFrom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeTo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DateToSend" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="requestCount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="rowFrom" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddBulkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddBulkResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddBulk2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="branch" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bulkType" type="s:unsignedByte" />
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeFrom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeTo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="DateToSend" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="requestCount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="rowFrom" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddBulk2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddBulk2Result" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNewBulk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="branch" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="bulkType" type="s:unsignedByte" />
+            <s:element minOccurs="0" maxOccurs="1" name="title" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeFrom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeTo" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="DateToSend" type="s:dateTime" />
+            <s:element minOccurs="1" maxOccurs="1" name="requestCount" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="rowFrom" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddNewBulkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="AddNewBulkResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBulkReceptions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bulkId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromRows" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBulkReceptionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBulkReceptionsResult" type="tns:ArrayOfBulkReceptions" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBulkReceptions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BulkReceptions" nillable="true" type="tns:BulkReceptions" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BulkReceptions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RecNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OpID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BulkID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateBulkDelivery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bulkId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateBulkDeliveryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateBulkDeliveryResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesReceptions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="msgId" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="fromRows" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMessagesReceptionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetMessagesReceptionsResult" type="tns:ArrayOfMsgReceptions" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfMsgReceptions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="MsgReceptions" nillable="true" type="tns:MsgReceptions" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="MsgReceptions">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RecNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SendDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DeliveryStatus" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RecID" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="RemoveBulk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bulkId" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RemoveBulkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="RemoveBulkResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBulkStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="bulkId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="sent" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="failed" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="status" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBulkStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetBulkStatusResult" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="sent" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="failed" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="status" type="s:unsignedByte" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTotalSent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTotalSentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetTotalSentResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTodaySent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTodaySentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetTodaySentResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMultipleSMS">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="to" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="isflash" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="udh" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="recId" type="tns:ArrayOfLong" />
+            <s:element minOccurs="0" maxOccurs="1" name="status" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfLong">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="long" type="s:long" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendMultipleSMSResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendMultipleSMSResult" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="recId" type="tns:ArrayOfLong" />
+            <s:element minOccurs="0" maxOccurs="1" name="status" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SendMultipleSMS2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="to" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="from" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="tns:ArrayOfString" />
+            <s:element minOccurs="1" maxOccurs="1" name="isflash" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="udh" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="recId" type="tns:ArrayOfLong" />
+            <s:element minOccurs="0" maxOccurs="1" name="status" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMultipleSMS2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendMultipleSMS2Result" type="tns:ArrayOfInt" />
+            <s:element minOccurs="0" maxOccurs="1" name="recId" type="tns:ArrayOfLong" />
+            <s:element minOccurs="0" maxOccurs="1" name="status" type="s:base64Binary" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBulk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBulkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBulkResult" type="tns:ArrayOfBulkGridList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBulkGridList">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BulkGridList" nillable="true" type="tns:BulkGridList" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BulkGridList">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BulksBL">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="BranchName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BulksBL">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:BaseBL">
+            <s:sequence>
+              <s:element minOccurs="1" maxOccurs="1" name="BulkID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Tariff" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="BranchID" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="BatchID" nillable="true" type="s1:guid" />
+              <s:element minOccurs="1" maxOccurs="1" name="BulkType" type="s:unsignedByte" />
+              <s:element minOccurs="1" maxOccurs="1" name="SendType" type="s:unsignedByte" />
+              <s:element minOccurs="0" maxOccurs="1" name="Title" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Body" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="BodyParts" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Sender" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="RangeFrom" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RangeTo" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="RowFrom" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="NumberRule" type="s:unsignedByte" />
+              <s:element minOccurs="0" maxOccurs="1" name="NumberText" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="ScheduleDate" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="SentDate" nillable="true" type="s:dateTime" />
+              <s:element minOccurs="1" maxOccurs="1" name="RequestCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="SentCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="FailedCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="Period" type="s:unsignedByte" />
+              <s:element minOccurs="1" maxOccurs="1" name="SendStatus" type="s:unsignedByte" />
+              <s:element minOccurs="0" maxOccurs="1" name="Descriptions" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ErrorLog" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="BulkStatus" type="s:unsignedByte" />
+              <s:element minOccurs="1" maxOccurs="1" name="Credit" type="s:double" />
+              <s:element minOccurs="1" maxOccurs="1" name="IsMoneyBack" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="MoneyBackCount" type="s:int" />
+              <s:element minOccurs="1" maxOccurs="1" name="MoneyBackLevel" type="s:int" />
+              <s:element minOccurs="0" maxOccurs="1" name="GID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="CGID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FromGID" type="s:string" />
+              <s:element minOccurs="1" maxOccurs="1" name="NotBlackList" type="s:boolean" />
+              <s:element minOccurs="1" maxOccurs="1" name="NotifySMS" type="s:boolean" />
+              <s:element minOccurs="0" maxOccurs="1" name="MobileNumberNotify" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="BaseBL" />
+      <s:element name="GetSendBulk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSendBulkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSendBulkResult" type="tns:ArrayOfBulkGridList" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMobileCount">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="branch" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeFrom" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="rangeTo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetMobileCountResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetMobileCountResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ArrayOfBranchs" nillable="true" type="tns:ArrayOfBranchs" />
+      <s:element name="int" type="s:int" />
+      <s:element name="ArrayOfBulkReceptions" nillable="true" type="tns:ArrayOfBulkReceptions" />
+      <s:element name="ArrayOfMsgReceptions" nillable="true" type="tns:ArrayOfMsgReceptions" />
+      <s:element name="ArrayOfBulkGridList" nillable="true" type="tns:ArrayOfBulkGridList" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+    <s:schema targetNamespace="http://tempuri.org/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetBranchsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBranchs" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBranchsResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddBranchSoapIn">
+    <wsdl:part name="parameters" element="tns:AddBranch" />
+  </wsdl:message>
+  <wsdl:message name="AddBranchSoapOut">
+    <wsdl:part name="parameters" element="tns:AddBranchResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:AddNumber" />
+  </wsdl:message>
+  <wsdl:message name="AddNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:AddNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBranchSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveBranch" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBranchSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveBranchResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBulkCount" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBulkCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddBulkSoapIn">
+    <wsdl:part name="parameters" element="tns:AddBulk" />
+  </wsdl:message>
+  <wsdl:message name="AddBulkSoapOut">
+    <wsdl:part name="parameters" element="tns:AddBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="AddBulk2SoapIn">
+    <wsdl:part name="parameters" element="tns:AddBulk2" />
+  </wsdl:message>
+  <wsdl:message name="AddBulk2SoapOut">
+    <wsdl:part name="parameters" element="tns:AddBulk2Response" />
+  </wsdl:message>
+  <wsdl:message name="AddNewBulkSoapIn">
+    <wsdl:part name="parameters" element="tns:AddNewBulk" />
+  </wsdl:message>
+  <wsdl:message name="AddNewBulkSoapOut">
+    <wsdl:part name="parameters" element="tns:AddNewBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkReceptionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBulkReceptions" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkReceptionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBulkReceptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBulkDeliverySoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateBulkDelivery" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBulkDeliverySoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateBulkDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesReceptionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMessagesReceptions" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesReceptionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMessagesReceptionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBulkSoapIn">
+    <wsdl:part name="parameters" element="tns:RemoveBulk" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBulkSoapOut">
+    <wsdl:part name="parameters" element="tns:RemoveBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBulkStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBulkStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalSentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTotalSent" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalSentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTotalSentResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTodaySentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTodaySent" />
+  </wsdl:message>
+  <wsdl:message name="GetTodaySentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTodaySentResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMultipleSMSSoapIn">
+    <wsdl:part name="parameters" element="tns:SendMultipleSMS" />
+  </wsdl:message>
+  <wsdl:message name="SendMultipleSMSSoapOut">
+    <wsdl:part name="parameters" element="tns:SendMultipleSMSResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMultipleSMS2SoapIn">
+    <wsdl:part name="parameters" element="tns:SendMultipleSMS2" />
+  </wsdl:message>
+  <wsdl:message name="SendMultipleSMS2SoapOut">
+    <wsdl:part name="parameters" element="tns:SendMultipleSMS2Response" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBulk" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSendBulkSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSendBulk" />
+  </wsdl:message>
+  <wsdl:message name="GetSendBulkSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSendBulkResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetMobileCountSoapIn">
+    <wsdl:part name="parameters" element="tns:GetMobileCount" />
+  </wsdl:message>
+  <wsdl:message name="GetMobileCountSoapOut">
+    <wsdl:part name="parameters" element="tns:GetMobileCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchsHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="owner" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBranchs" />
+  </wsdl:message>
+  <wsdl:message name="AddBranchHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branchName" type="s:string" />
+    <wsdl:part name="owner" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddBranchHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddNumberHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branchId" type="s:string" />
+    <wsdl:part name="mobileNumbers" type="s2:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="AddNumberHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBranchHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBranchHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkCountHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkCountHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddBulkHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="from" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="bulkType" type="s:string" />
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+    <wsdl:part name="DateToSend" type="s:string" />
+    <wsdl:part name="requestCount" type="s:string" />
+    <wsdl:part name="rowFrom" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddBulkHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddBulk2HttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="from" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="bulkType" type="s:string" />
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+    <wsdl:part name="DateToSend" type="s:string" />
+    <wsdl:part name="requestCount" type="s:string" />
+    <wsdl:part name="rowFrom" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddBulk2HttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddNewBulkHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="from" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="bulkType" type="s:string" />
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+    <wsdl:part name="DateToSend" type="s:string" />
+    <wsdl:part name="requestCount" type="s:string" />
+    <wsdl:part name="rowFrom" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddNewBulkHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkReceptionsHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="bulkId" type="s:string" />
+    <wsdl:part name="fromRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkReceptionsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBulkReceptions" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBulkDeliveryHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="bulkId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBulkDeliveryHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesReceptionsHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="msgId" type="s:string" />
+    <wsdl:part name="fromRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesReceptionsHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMsgReceptions" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBulkHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="bulkId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBulkHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalSentHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalSentHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetTodaySentHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTodaySentHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBulkGridList" />
+  </wsdl:message>
+  <wsdl:message name="GetSendBulkHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSendBulkHttpGetOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBulkGridList" />
+  </wsdl:message>
+  <wsdl:message name="GetMobileCountHttpGetIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMobileCountHttpGetOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchsHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="owner" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBranchs" />
+  </wsdl:message>
+  <wsdl:message name="AddBranchHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branchName" type="s:string" />
+    <wsdl:part name="owner" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddBranchHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddNumberHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branchId" type="s:string" />
+    <wsdl:part name="mobileNumbers" type="s2:StringArray" />
+  </wsdl:message>
+  <wsdl:message name="AddNumberHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBranchHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branchId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBranchHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkCountHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkCountHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddBulkHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="from" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="bulkType" type="s:string" />
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+    <wsdl:part name="DateToSend" type="s:string" />
+    <wsdl:part name="requestCount" type="s:string" />
+    <wsdl:part name="rowFrom" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddBulkHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddBulk2HttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="from" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="bulkType" type="s:string" />
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+    <wsdl:part name="DateToSend" type="s:string" />
+    <wsdl:part name="requestCount" type="s:string" />
+    <wsdl:part name="rowFrom" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddBulk2HttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="AddNewBulkHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="from" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="bulkType" type="s:string" />
+    <wsdl:part name="title" type="s:string" />
+    <wsdl:part name="message" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+    <wsdl:part name="DateToSend" type="s:string" />
+    <wsdl:part name="requestCount" type="s:string" />
+    <wsdl:part name="rowFrom" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="AddNewBulkHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkReceptionsHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="bulkId" type="s:string" />
+    <wsdl:part name="fromRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkReceptionsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBulkReceptions" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBulkDeliveryHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="bulkId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateBulkDeliveryHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesReceptionsHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="msgId" type="s:string" />
+    <wsdl:part name="fromRows" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMessagesReceptionsHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfMsgReceptions" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBulkHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="bulkId" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="RemoveBulkHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalSentHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTotalSentHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetTodaySentHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTodaySentHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBulkHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBulkGridList" />
+  </wsdl:message>
+  <wsdl:message name="GetSendBulkHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSendBulkHttpPostOut">
+    <wsdl:part name="Body" element="tns:ArrayOfBulkGridList" />
+  </wsdl:message>
+  <wsdl:message name="GetMobileCountHttpPostIn">
+    <wsdl:part name="username" type="s:string" />
+    <wsdl:part name="password" type="s:string" />
+    <wsdl:part name="branch" type="s:string" />
+    <wsdl:part name="rangeFrom" type="s:string" />
+    <wsdl:part name="rangeTo" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMobileCountHttpPostOut">
+    <wsdl:part name="Body" element="tns:int" />
+  </wsdl:message>
+  <wsdl:portType name="ActionsSoap">
+    <wsdl:operation name="GetBranchs">
+      <wsdl:input message="tns:GetBranchsSoapIn" />
+      <wsdl:output message="tns:GetBranchsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBranch">
+      <wsdl:input message="tns:AddBranchSoapIn" />
+      <wsdl:output message="tns:AddBranchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNumber">
+      <wsdl:input message="tns:AddNumberSoapIn" />
+      <wsdl:output message="tns:AddNumberSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBranch">
+      <wsdl:input message="tns:RemoveBranchSoapIn" />
+      <wsdl:output message="tns:RemoveBranchSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkCount">
+      <wsdl:input message="tns:GetBulkCountSoapIn" />
+      <wsdl:output message="tns:GetBulkCountSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk">
+      <wsdl:input message="tns:AddBulkSoapIn" />
+      <wsdl:output message="tns:AddBulkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk2">
+      <wsdl:input message="tns:AddBulk2SoapIn" />
+      <wsdl:output message="tns:AddBulk2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBulk">
+      <wsdl:input message="tns:AddNewBulkSoapIn" />
+      <wsdl:output message="tns:AddNewBulkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkReceptions">
+      <wsdl:input message="tns:GetBulkReceptionsSoapIn" />
+      <wsdl:output message="tns:GetBulkReceptionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBulkDelivery">
+      <wsdl:input message="tns:UpdateBulkDeliverySoapIn" />
+      <wsdl:output message="tns:UpdateBulkDeliverySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <wsdl:input message="tns:GetMessagesReceptionsSoapIn" />
+      <wsdl:output message="tns:GetMessagesReceptionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBulk">
+      <wsdl:input message="tns:RemoveBulkSoapIn" />
+      <wsdl:output message="tns:RemoveBulkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkStatus">
+      <wsdl:input message="tns:GetBulkStatusSoapIn" />
+      <wsdl:output message="tns:GetBulkStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalSent">
+      <wsdl:input message="tns:GetTotalSentSoapIn" />
+      <wsdl:output message="tns:GetTotalSentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTodaySent">
+      <wsdl:input message="tns:GetTodaySentSoapIn" />
+      <wsdl:output message="tns:GetTodaySentSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMultipleSMS">
+      <wsdl:input message="tns:SendMultipleSMSSoapIn" />
+      <wsdl:output message="tns:SendMultipleSMSSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMultipleSMS2">
+      <wsdl:input message="tns:SendMultipleSMS2SoapIn" />
+      <wsdl:output message="tns:SendMultipleSMS2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulk">
+      <wsdl:input message="tns:GetBulkSoapIn" />
+      <wsdl:output message="tns:GetBulkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSendBulk">
+      <wsdl:input message="tns:GetSendBulkSoapIn" />
+      <wsdl:output message="tns:GetSendBulkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMobileCount">
+      <wsdl:input message="tns:GetMobileCountSoapIn" />
+      <wsdl:output message="tns:GetMobileCountSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ActionsHttpGet">
+    <wsdl:operation name="GetBranchs">
+      <wsdl:input message="tns:GetBranchsHttpGetIn" />
+      <wsdl:output message="tns:GetBranchsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBranch">
+      <wsdl:input message="tns:AddBranchHttpGetIn" />
+      <wsdl:output message="tns:AddBranchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNumber">
+      <wsdl:input message="tns:AddNumberHttpGetIn" />
+      <wsdl:output message="tns:AddNumberHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBranch">
+      <wsdl:input message="tns:RemoveBranchHttpGetIn" />
+      <wsdl:output message="tns:RemoveBranchHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkCount">
+      <wsdl:input message="tns:GetBulkCountHttpGetIn" />
+      <wsdl:output message="tns:GetBulkCountHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk">
+      <wsdl:input message="tns:AddBulkHttpGetIn" />
+      <wsdl:output message="tns:AddBulkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk2">
+      <wsdl:input message="tns:AddBulk2HttpGetIn" />
+      <wsdl:output message="tns:AddBulk2HttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBulk">
+      <wsdl:input message="tns:AddNewBulkHttpGetIn" />
+      <wsdl:output message="tns:AddNewBulkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkReceptions">
+      <wsdl:input message="tns:GetBulkReceptionsHttpGetIn" />
+      <wsdl:output message="tns:GetBulkReceptionsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBulkDelivery">
+      <wsdl:input message="tns:UpdateBulkDeliveryHttpGetIn" />
+      <wsdl:output message="tns:UpdateBulkDeliveryHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <wsdl:input message="tns:GetMessagesReceptionsHttpGetIn" />
+      <wsdl:output message="tns:GetMessagesReceptionsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBulk">
+      <wsdl:input message="tns:RemoveBulkHttpGetIn" />
+      <wsdl:output message="tns:RemoveBulkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalSent">
+      <wsdl:input message="tns:GetTotalSentHttpGetIn" />
+      <wsdl:output message="tns:GetTotalSentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTodaySent">
+      <wsdl:input message="tns:GetTodaySentHttpGetIn" />
+      <wsdl:output message="tns:GetTodaySentHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulk">
+      <wsdl:input message="tns:GetBulkHttpGetIn" />
+      <wsdl:output message="tns:GetBulkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSendBulk">
+      <wsdl:input message="tns:GetSendBulkHttpGetIn" />
+      <wsdl:output message="tns:GetSendBulkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMobileCount">
+      <wsdl:input message="tns:GetMobileCountHttpGetIn" />
+      <wsdl:output message="tns:GetMobileCountHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ActionsHttpPost">
+    <wsdl:operation name="GetBranchs">
+      <wsdl:input message="tns:GetBranchsHttpPostIn" />
+      <wsdl:output message="tns:GetBranchsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBranch">
+      <wsdl:input message="tns:AddBranchHttpPostIn" />
+      <wsdl:output message="tns:AddBranchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNumber">
+      <wsdl:input message="tns:AddNumberHttpPostIn" />
+      <wsdl:output message="tns:AddNumberHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBranch">
+      <wsdl:input message="tns:RemoveBranchHttpPostIn" />
+      <wsdl:output message="tns:RemoveBranchHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkCount">
+      <wsdl:input message="tns:GetBulkCountHttpPostIn" />
+      <wsdl:output message="tns:GetBulkCountHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk">
+      <wsdl:input message="tns:AddBulkHttpPostIn" />
+      <wsdl:output message="tns:AddBulkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk2">
+      <wsdl:input message="tns:AddBulk2HttpPostIn" />
+      <wsdl:output message="tns:AddBulk2HttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBulk">
+      <wsdl:input message="tns:AddNewBulkHttpPostIn" />
+      <wsdl:output message="tns:AddNewBulkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkReceptions">
+      <wsdl:input message="tns:GetBulkReceptionsHttpPostIn" />
+      <wsdl:output message="tns:GetBulkReceptionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBulkDelivery">
+      <wsdl:input message="tns:UpdateBulkDeliveryHttpPostIn" />
+      <wsdl:output message="tns:UpdateBulkDeliveryHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <wsdl:input message="tns:GetMessagesReceptionsHttpPostIn" />
+      <wsdl:output message="tns:GetMessagesReceptionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBulk">
+      <wsdl:input message="tns:RemoveBulkHttpPostIn" />
+      <wsdl:output message="tns:RemoveBulkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalSent">
+      <wsdl:input message="tns:GetTotalSentHttpPostIn" />
+      <wsdl:output message="tns:GetTotalSentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTodaySent">
+      <wsdl:input message="tns:GetTodaySentHttpPostIn" />
+      <wsdl:output message="tns:GetTodaySentHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBulk">
+      <wsdl:input message="tns:GetBulkHttpPostIn" />
+      <wsdl:output message="tns:GetBulkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSendBulk">
+      <wsdl:input message="tns:GetSendBulkHttpPostIn" />
+      <wsdl:output message="tns:GetSendBulkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMobileCount">
+      <wsdl:input message="tns:GetMobileCountHttpPostIn" />
+      <wsdl:output message="tns:GetMobileCountHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ActionsSoap" type="tns:ActionsSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBranchs">
+      <soap:operation soapAction="http://tempuri.org/GetBranchs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBranch">
+      <soap:operation soapAction="http://tempuri.org/AddBranch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNumber">
+      <soap:operation soapAction="http://tempuri.org/AddNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBranch">
+      <soap:operation soapAction="http://tempuri.org/RemoveBranch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkCount">
+      <soap:operation soapAction="http://tempuri.org/GetBulkCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk">
+      <soap:operation soapAction="http://tempuri.org/AddBulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk2">
+      <soap:operation soapAction="http://tempuri.org/AddBulk2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBulk">
+      <soap:operation soapAction="http://tempuri.org/AddNewBulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkReceptions">
+      <soap:operation soapAction="http://tempuri.org/GetBulkReceptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBulkDelivery">
+      <soap:operation soapAction="http://tempuri.org/UpdateBulkDelivery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <soap:operation soapAction="http://tempuri.org/GetMessagesReceptions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBulk">
+      <soap:operation soapAction="http://tempuri.org/RemoveBulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkStatus">
+      <soap:operation soapAction="http://tempuri.org/GetBulkStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalSent">
+      <soap:operation soapAction="http://tempuri.org/GetTotalSent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTodaySent">
+      <soap:operation soapAction="http://tempuri.org/GetTodaySent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMultipleSMS">
+      <soap:operation soapAction="http://tempuri.org/SendMultipleSMS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMultipleSMS2">
+      <soap:operation soapAction="http://tempuri.org/SendMultipleSMS2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulk">
+      <soap:operation soapAction="http://tempuri.org/GetBulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSendBulk">
+      <soap:operation soapAction="http://tempuri.org/GetSendBulk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMobileCount">
+      <soap:operation soapAction="http://tempuri.org/GetMobileCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ActionsSoap12" type="tns:ActionsSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBranchs">
+      <soap12:operation soapAction="http://tempuri.org/GetBranchs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBranch">
+      <soap12:operation soapAction="http://tempuri.org/AddBranch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNumber">
+      <soap12:operation soapAction="http://tempuri.org/AddNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBranch">
+      <soap12:operation soapAction="http://tempuri.org/RemoveBranch" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkCount">
+      <soap12:operation soapAction="http://tempuri.org/GetBulkCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk">
+      <soap12:operation soapAction="http://tempuri.org/AddBulk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk2">
+      <soap12:operation soapAction="http://tempuri.org/AddBulk2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBulk">
+      <soap12:operation soapAction="http://tempuri.org/AddNewBulk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkReceptions">
+      <soap12:operation soapAction="http://tempuri.org/GetBulkReceptions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBulkDelivery">
+      <soap12:operation soapAction="http://tempuri.org/UpdateBulkDelivery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <soap12:operation soapAction="http://tempuri.org/GetMessagesReceptions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBulk">
+      <soap12:operation soapAction="http://tempuri.org/RemoveBulk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkStatus">
+      <soap12:operation soapAction="http://tempuri.org/GetBulkStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalSent">
+      <soap12:operation soapAction="http://tempuri.org/GetTotalSent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTodaySent">
+      <soap12:operation soapAction="http://tempuri.org/GetTodaySent" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMultipleSMS">
+      <soap12:operation soapAction="http://tempuri.org/SendMultipleSMS" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMultipleSMS2">
+      <soap12:operation soapAction="http://tempuri.org/SendMultipleSMS2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulk">
+      <soap12:operation soapAction="http://tempuri.org/GetBulk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSendBulk">
+      <soap12:operation soapAction="http://tempuri.org/GetSendBulk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMobileCount">
+      <soap12:operation soapAction="http://tempuri.org/GetMobileCount" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ActionsHttpGet" type="tns:ActionsHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetBranchs">
+      <http:operation location="/GetBranchs" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBranch">
+      <http:operation location="/AddBranch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNumber">
+      <http:operation location="/AddNumber" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBranch">
+      <http:operation location="/RemoveBranch" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkCount">
+      <http:operation location="/GetBulkCount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk">
+      <http:operation location="/AddBulk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk2">
+      <http:operation location="/AddBulk2" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBulk">
+      <http:operation location="/AddNewBulk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkReceptions">
+      <http:operation location="/GetBulkReceptions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBulkDelivery">
+      <http:operation location="/UpdateBulkDelivery" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <http:operation location="/GetMessagesReceptions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBulk">
+      <http:operation location="/RemoveBulk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalSent">
+      <http:operation location="/GetTotalSent" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTodaySent">
+      <http:operation location="/GetTodaySent" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulk">
+      <http:operation location="/GetBulk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSendBulk">
+      <http:operation location="/GetSendBulk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMobileCount">
+      <http:operation location="/GetMobileCount" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ActionsHttpPost" type="tns:ActionsHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetBranchs">
+      <http:operation location="/GetBranchs" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBranch">
+      <http:operation location="/AddBranch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNumber">
+      <http:operation location="/AddNumber" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBranch">
+      <http:operation location="/RemoveBranch" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkCount">
+      <http:operation location="/GetBulkCount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk">
+      <http:operation location="/AddBulk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBulk2">
+      <http:operation location="/AddBulk2" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddNewBulk">
+      <http:operation location="/AddNewBulk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulkReceptions">
+      <http:operation location="/GetBulkReceptions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBulkDelivery">
+      <http:operation location="/UpdateBulkDelivery" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMessagesReceptions">
+      <http:operation location="/GetMessagesReceptions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveBulk">
+      <http:operation location="/RemoveBulk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTotalSent">
+      <http:operation location="/GetTotalSent" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTodaySent">
+      <http:operation location="/GetTodaySent" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBulk">
+      <http:operation location="/GetBulk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSendBulk">
+      <http:operation location="/GetSendBulk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMobileCount">
+      <http:operation location="/GetMobileCount" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Actions">
+    <wsdl:port name="ActionsSoap" binding="tns:ActionsSoap">
+      <soap:address location="http://api.payamak-panel.com/post/actions.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ActionsSoap12" binding="tns:ActionsSoap12">
+      <soap12:address location="http://api.payamak-panel.com/post/actions.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ActionsHttpGet" binding="tns:ActionsHttpGet">
+      <http:address location="http://api.payamak-panel.com/post/actions.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ActionsHttpPost" binding="tns:ActionsHttpPost">
+      <http:address location="http://api.payamak-panel.com/post/actions.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

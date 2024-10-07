@@ -1,0 +1,191 @@
+﻿<div style="height:100%;">
+    <div class="box libraryitem maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:white; ">
+
+
+
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                <div class="item83" style="padding:10px 20px 10px 20px;display:none">
+
+                    <div ng-show="ImageUrl" class="col-lg-2 col-md-2 col-sm-2 hidden-xs" style="padding:10px 0 0 0">
+                        <img ng-src="{{ImageUrl}}" style="width:98%;max-height:250px;border:1px solid #ccc " />
+                    </div>
+                    <div ng-show="ImageUrl"  class=" hidden-lg  hidden-md  hidden-sm" style="padding:10px 10px 0 10px;">
+                        <img ng-src="{{ImageUrl}}" style="width:50%; border:1px solid #ccc;margin:0 auto 0 auto " />
+                    </div>
+                    <div class="col-lg-7 col-md-10 col-sm-10 " style="padding:20px 10px 0 10px">
+                        <div style=" font-weight:bold;color:silver">{{Category}}</div>
+                        <div style=" font-weight:bold;font-size:16px;margin-top:5px;color:midnightblue ">{{Title}}</div>
+                        <!-- <div style="margin-top:10px">by</div>-->
+                        <div style="margin-top:10px" ng-show="Authors">
+                            <span>by:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{Authors}}</span>
+                        </div>
+                        <div style="margin-top:10px" ng-show="Publisher">
+                            <span>Publisher:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{Publisher}}</span>
+                        </div>
+                        <div style="margin-top:10px" ng-show="ISBN">
+                            <span>ISBN:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{ISBN}}</span>
+                        </div>
+                        <div style="margin-top:10px" ng-show="ISSNPrint || ISSNElectronic">
+                            <span ng-show="ISSNPrint">ISSN Print:</span><span ng-show="ISSNPrint" style="display:inline-block;padding-left:5px;font-weight:bold">{{ISSNPrint}}</span>
+                            <span ng-show="ISSNElectronic" style="display:inline-block;padding-left:15px;">ISSN Electronic:</span><span ng-show="ISSNElectronic" style="display:inline-block;padding-left:5px;font-weight:bold">{{ISSNElectronic}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Publication Date:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{DateRelease}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Date added to Library:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{DateExposure}}</span>
+                        </div>
+                    </div>
+                    <div style="border-top:1px solid #ccc;  margin:10px 0 5px 0" class="hidden-lg  hidden-md  hidden-sm"></div>
+                    <div class="col-lg-3 col-md-10 col-sm-10 " style="padding:10px 10px 0 20px">
+                        <div>
+                            <span>Visit Date:</span><span style="display:inline-block;margin-left:5px;font-weight:bold">{{DateVisit}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Download Date:</span><span style="display:inline-block;margin-left:5px;font-weight:bold">{{DateDownload}}</span>
+                        </div>
+                        <a  data-ng-click="download()" class="w3-button w3-block w3-blue" style="width:100%;margin:10px auto 5px auto;text-decoration:none">Download</a>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="border-top:1px solid #ccc;  margin:10px 0 5px 0" class="hidden-lg  hidden-md  hidden-sm"></div>
+                    <div class="col-lg-9 col-md-10 col-sm-10 " style="padding:20px 10px 0  5px">
+                        <div style="font-weight:bold;">Keywords</div>
+                        <div style="  margin-top:5px; ">{{Keywords}}</div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-10 col-sm-10 " style="padding:15px 10px 0  5px">
+                        <div style="font-weight:bold;">Abstract</div>
+                        <div style="  margin-top:5px;text-align:justify;line-height:25px ">{{Abstract}}</div>
+                    </div>
+                    <!--<video width="400" controls preload="metadata" crossorigin="anonymous" tabindex="-1"  >
+                         <source src="https://udemy-assets-on-demand.udemy.com/2018-11-07_23-14-23-d12135e8e3898a0cf792a190bdaf06c2/WebHD_720p.mp4?nva=20190114170818&amp;token=01eb6ab20274cc45e1daf" type="video/mp4">
+
+
+                    </video>-->
+                </div>
+
+                <div class="item84" style="padding:10px 20px 10px 20px;display:none">
+
+                    <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs" style="padding:10px 0 0 0">
+                        <img ng-src="{{ImageUrl}}" style="width:98%;max-height:250px;border:0px solid #ccc " />
+                    </div>
+                    <div class=" hidden-lg  hidden-md  hidden-sm" style="padding:10px 10px 0 10px;">
+                        <img ng-src="{{ImageUrl}}" style="width:50%; border:1px solid #ccc;margin:0 auto 0 auto " />
+                    </div>
+                    <div class="col-lg-7 col-md-10 col-sm-10 " style="padding:20px 10px 0 10px">
+                        <div style=" font-weight:bold;">{{Category}}</div>
+                        <div style=" font-weight:bold;font-size:15px;margin-top:5px; ">{{Title}}</div>
+                        <!-- <div style="margin-top:10px">by</div>-->
+                        <div style="margin-top:10px">
+                            <span>by:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{Authors}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Published In:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{Journal}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>NSPEC Accession Number:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{INSPECAccessionNumber}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>ISSN Print:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{ISSNPrint}}</span>
+                            <span style="display:inline-block;padding-left:15px;">ISSN Electronic:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{ISSNElectronic}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Publication Date:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{DateRelease}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Date added to Library:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{DateExposure}}</span>
+                        </div>
+                    </div>
+                    <div style="border-top:1px solid #ccc;  margin:10px 0 5px 0" class="hidden-lg  hidden-md  hidden-sm"></div>
+                    <div class="col-lg-3 col-md-10 col-sm-10 " style="padding:10px 10px 0 20px">
+                        <div>
+                            <span>Visit Date:</span><span style="display:block;font-weight:bold">{{DateVisit}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Download Date:</span><span style="display:block;font-weight:bold">{{DateDownload}}</span>
+                        </div>
+                        <a data-ng-click="download()" class="w3-button w3-block w3-blue" style="width:100%;margin:10px auto 5px auto;text-decoration:none">Download</a>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="border-top:1px solid #ccc;  margin:10px 0 5px 0" class="hidden-lg  hidden-md  hidden-sm"></div>
+                    <div class="col-lg-9 col-md-10 col-sm-10 " style="padding:20px 10px 0  5px">
+                        <div style="font-weight:bold;">Keywords</div>
+                        <div style="  margin-top:5px; ">{{Keywords}}</div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-10 col-sm-10 " style="padding:15px 10px 0  5px">
+                        <div style="font-weight:bold;">Abstract</div>
+                        <div style="  margin-top:5px;text-align:justify;line-height:25px ">{{Abstract}}</div>
+                    </div>
+                    <!--<video width="400" controls preload="metadata" crossorigin="anonymous" tabindex="-1"  >
+                         <source src="https://udemy-assets-on-demand.udemy.com/2018-11-07_23-14-23-d12135e8e3898a0cf792a190bdaf06c2/WebHD_720p.mp4?nva=20190114170818&amp;token=01eb6ab20274cc45e1daf" type="video/mp4">
+
+
+                    </video>-->
+                </div>
+                <div class="item85" style=" display:none">
+                    <div class="col-lg-4  " style="padding:10px 10px 10px 10px">
+                        <div style="width:100%" class="videocontainer"><video style="width:100%" id="video" controls preload="metadata" crossorigin="anonymous" tabindex="-1" ng-src="{{ExternalUrl}}"></video></div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-9 col-sm-9 " style="padding:20px 10px 0 10px">
+                        <div style=" font-weight:bold;">{{Category}}</div>
+                        <div style=" font-weight:bold;font-size:15px;margin-top:5px; ">{{Title}}</div>
+                        <!-- <div style="margin-top:10px">by</div>-->
+                        <div style="margin-top:10px">
+                            <span>by:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{Authors}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Publisher:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{Publisher}}</span>
+                        </div>
+
+                        <div style="margin-top:10px">
+                            <span>Duration:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{Duration}}</span>
+                            <span style="display:inline-block;padding-left:15px;">Lessons:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{NumberOfLessens}}</span>
+                            <span style="display:inline-block;padding-left:15px;">Language:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{Language}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Publication Date:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{DateRelease}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Date added to Library:</span><span style="display:inline-block;padding-left:5px;font-weight:bold">{{DateExposure}}</span>
+                        </div>
+                    </div>
+                    <div style="border-top:1px solid #ccc;  margin:10px 0 5px 0" class="hidden-lg  hidden-md  hidden-sm"></div>
+                    <div class="col-lg-2 col-md-3 col-sm-3 " style="padding:10px 10px 0 20px">
+                        <div>
+                            <span>Visit Date:</span><span style="display:block;font-weight:bold">{{DateVisit}}</span>
+                        </div>
+                        <div style="margin-top:10px">
+                            <span>Download Date:</span><span style="display:block;font-weight:bold">{{DateDownload}}</span>
+                        </div>
+                        <a data-ng-click="download()" class="w3-button w3-block w3-blue" style="width:100%;margin:10px auto 5px auto;text-decoration:none">Download</a>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="border-top:1px solid #ccc;  margin:10px 0 5px 0" class="hidden-lg  hidden-md  hidden-sm"></div>
+                    <div class="col-lg-9 col-md-10 col-sm-10 " style="padding:20px 10px 0  5px">
+                        <div style="font-weight:bold;">Keywords</div>
+                        <div style="  margin-top:5px; ">{{Keywords}}</div>
+                    </div>
+
+                    <div class="col-lg-9 col-md-10 col-sm-10 " style="padding:15px 10px 0  5px">
+                        <div style="font-weight:bold;">Abstract</div>
+                        <div style="  margin-top:5px;text-align:justify;line-height:25px ">{{Abstract}}</div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'applibraryitem';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

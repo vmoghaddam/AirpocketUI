@@ -1,0 +1,827 @@
+﻿<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.Compilers.3.7.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.3.7.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{56AE6B1F-B40D-4C77-8761-3E1977815DF3}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApp</RootNamespace>
+    <AssemblyName>WebApp</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ionic.Zip.Reduced, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\controllers\aircraftSelectController.js" />
+    <Content Include="app\controllers\aircraftTypeController.js" />
+    <Content Include="app\controllers\airportAddController.js" />
+    <Content Include="app\controllers\airportController.js" />
+    <Content Include="app\controllers\appsController.js" />
+    <Content Include="app\controllers\asrAdd.js" />
+    <Content Include="app\controllers\asrreport.js" />
+    <Content Include="app\controllers\atcAdd.js" />
+    <Content Include="app\controllers\board.js" />
+    <Content Include="app\controllers\boardam.js" />
+    <Content Include="app\controllers\boardfly.js" />
+    <Content Include="app\controllers\boardtest.js" />
+    <Content Include="app\controllers\boardvrh.js" />
+    <Content Include="app\controllers\ceoFlightBoardController.js" />
+    <Content Include="app\controllers\certificateAddController.js" />
+    <Content Include="app\controllers\changeFlightRegisterController.js" />
+    <Content Include="app\controllers\chrReport.js" />
+    <Content Include="app\controllers\chrs.js" />
+    <Content Include="app\controllers\citypair.js" />
+    <Content Include="app\controllers\citypairyearly.js" />
+    <Content Include="app\controllers\courseAddController.js" />
+    <Content Include="app\controllers\courseController.js" />
+    <Content Include="app\controllers\coursepersonController.js" />
+    <Content Include="app\controllers\courseSelectController.js" />
+    <Content Include="app\controllers\courseTypeAddController.js" />
+    <Content Include="app\controllers\courseTypeController.js" />
+    <Content Include="app\controllers\coursetypeSelectController.js" />
+    <Content Include="app\controllers\courseView.js" />
+    <Content Include="app\controllers\crewassign.js" />
+    <Content Include="app\controllers\crewassign2.js" />
+    <Content Include="app\controllers\crewassignreg.js" />
+    <Content Include="app\controllers\crewReportController.js" />
+    <Content Include="app\controllers\crewtest.js" />
+    <Content Include="app\controllers\crewtimereport.js" />
+    <Content Include="app\controllers\dailyRoster2Controller.js" />
+    <Content Include="app\controllers\delayAirportReport.js" />
+    <Content Include="app\controllers\delaybidaily.js" />
+    <Content Include="app\controllers\delaybiKPI.js" />
+    <Content Include="app\controllers\delayCodesController.js" />
+    <Content Include="app\controllers\delayReport.js" />
+    <Content Include="app\controllers\documentAddController.js" />
+    <Content Include="app\controllers\drAdd.js" />
+    <Content Include="app\controllers\drAddFly.js" />
+    <Content Include="app\controllers\dutyTimeline.js" />
+    <Content Include="app\controllers\employeeSelectController.js" />
+    <Content Include="app\controllers\employeeSelectCourse.js" />
+    <Content Include="app\controllers\expiringCourseType.js" />
+    <Content Include="app\controllers\expiringGroup.js" />
+    <Content Include="app\controllers\fdplog.js" />
+    <Content Include="app\controllers\fdps.js" />
+    <Content Include="app\controllers\fdpsfly.js" />
+    <Content Include="app\controllers\filterController.js" />
+    <Content Include="app\controllers\finMonthlyReport.js" />
+    <Content Include="app\controllers\finMonthReport.js" />
+    <Content Include="app\controllers\finReport.js" />
+    <Content Include="app\controllers\fixtime.js" />
+    <Content Include="app\controllers\fixtimereport.js" />
+    <Content Include="app\controllers\fixtimereportdaily.js" />
+    <Content Include="app\controllers\flightBoardAllController.js" />
+    <Content Include="app\controllers\flightBoardController.js" />
+    <Content Include="app\controllers\flightController.js" />
+    <Content Include="app\controllers\flightDelaysController.js" />
+    <Content Include="app\controllers\flightDesignController.js" />
+    <Content Include="app\controllers\flightDesignGridController.js" />
+    <Content Include="app\controllers\flightListController.js" />
+    <Content Include="app\controllers\flightPlanApply2Controller.js" />
+    <Content Include="app\controllers\flightPlanApplyController.js" />
+    <Content Include="app\controllers\flightPlanCrew.js" />
+    <Content Include="app\controllers\flightPlanListController.js" />
+    <Content Include="app\controllers\flightPlanningController.js" />
+    <Content Include="app\controllers\flightPlanningGanttViewController.js" />
+    <Content Include="app\controllers\flightPlanPermitController.js" />
+    <Content Include="app\controllers\flightPlanRegisterController.js" />
+    <Content Include="app\controllers\flightPlansCalendarMaintenanceController.js" />
+    <Content Include="app\controllers\flightPlansMaintenanceController.js" />
+    <Content Include="app\controllers\flightPlanViewController.js" />
+    <Content Include="app\controllers\flightReportSecurityController.js" />
+    <Content Include="app\controllers\flightrvsm.js" />
+    <Content Include="app\controllers\flightsMonthly.js" />
+    <Content Include="app\controllers\forma.js" />
+    <Content Include="app\controllers\formayearly.js" />
+    <Content Include="app\controllers\formB.js" />
+    <Content Include="app\controllers\formC.js" />
+    <Content Include="app\controllers\formmovaled.js" />
+    <Content Include="app\controllers\formmovaledyearly.js" />
+    <Content Include="app\controllers\fuelbi.js" />
+    <Content Include="app\controllers\fuelbiKPI.js" />
+    <Content Include="app\controllers\fuelbiRoute.js" />
+    <Content Include="app\controllers\fuelReport.js" />
+    <Content Include="app\controllers\fuelReportOFP.js" />
+    <Content Include="app\controllers\gnt.js" />
+    <Content Include="app\controllers\imageviewer.js" />
+    <Content Include="app\controllers\ipaccessController.js" />
+    <Content Include="app\controllers\irregularFlightController.js" />
+    <Content Include="app\controllers\jobgroupAddController.js" />
+    <Content Include="app\controllers\jobgroupController.js" />
+    <Content Include="app\controllers\jobgroupSelectController.js" />
+    <Content Include="app\controllers\jobGroupSelectSimple.js" />
+    <Content Include="app\controllers\journalAddController.js" />
+    <Content Include="app\controllers\journalController.js" />
+    <Content Include="app\controllers\kpiDelay.js" />
+    <Content Include="app\controllers\kpiDelayAirport.js" />
+    <Content Include="app\controllers\kpiDelayCat.js" />
+    <Content Include="app\controllers\kpiDelayTech.js" />
+    <Content Include="app\controllers\kpiFBL.js" />
+    <Content Include="app\controllers\kpiFC.js" />
+    <Content Include="app\controllers\kpiFP.js" />
+    <Content Include="app\controllers\kpiFRP.js" />
+    <Content Include="app\controllers\kpiFTK.js" />
+    <Content Include="app\controllers\kpiFU.js" />
+    <Content Include="app\controllers\kpiRPB.js" />
+    <Content Include="app\controllers\kpiRPK.js" />
+    <Content Include="app\controllers\kpiRPKAC.js" />
+    <Content Include="app\controllers\kpiRPKReg.js" />
+    <Content Include="app\controllers\kpiRPKRoute.js" />
+    <Content Include="app\controllers\ldgAdd.js" />
+    <Content Include="app\controllers\libraryAddController.js" />
+    <Content Include="app\controllers\libraryController.js" />
+    <Content Include="app\controllers\locationAddController.js" />
+    <Content Include="app\controllers\locationController.js" />
+    <Content Include="app\controllers\logAdd.js" />
+    <Content Include="app\controllers\logininfo.js" />
+    <Content Include="app\controllers\mlistAddController.js" />
+    <Content Include="app\controllers\mlistController.js" />
+    <Content Include="app\controllers\nira.js" />
+    <Content Include="app\controllers\notificationController.js" />
+    <Content Include="app\controllers\ofpAdd.js" />
+    <Content Include="app\controllers\optionAddController.js" />
+    <Content Include="app\controllers\optionController.js" />
+    <Content Include="app\controllers\organizationAddController.js" />
+    <Content Include="app\controllers\organizationController.js" />
+    <Content Include="app\controllers\personAddController.js" />
+    <Content Include="app\controllers\personbookController.js" />
+    <Content Include="app\controllers\personcertificateController.js" />
+    <Content Include="app\controllers\personController.js" />
+    <Content Include="app\controllers\personcourseController.js" />
+    <Content Include="app\controllers\personmiscAddController.js" />
+    <Content Include="app\controllers\personmiscController.js" />
+    <Content Include="app\controllers\personViewController.js" />
+    <Content Include="app\controllers\planController.js" />
+    <Content Include="app\controllers\planningBoard.js" />
+    <Content Include="app\controllers\planRegistersController.js" />
+    <Content Include="app\controllers\qaCabin.js" />
+    <Content Include="app\controllers\qaCatering.js" />
+    <Content Include="app\controllers\qaDashboard.js" />
+    <Content Include="app\controllers\qaDispatch.js" />
+    <Content Include="app\controllers\qaEmployee.js" />
+    <Content Include="app\controllers\qaForm.js" />
+    <Content Include="app\controllers\qaGround.js" />
+    <Content Include="app\controllers\qaMaintenance.js" />
+    <Content Include="app\controllers\qaRefer.js" />
+    <Content Include="app\controllers\qaReports.js" />
+    <Content Include="app\controllers\qaReportStatus.js" />
+    <Content Include="app\controllers\qaSecurity.js" />
+    <Content Include="app\controllers\qaVoluntary.js" />
+    <Content Include="app\controllers\rawcmd.js" />
+    <Content Include="app\controllers\regAvailabilityController.js" />
+    <Content Include="app\controllers\regflightmonthly.js" />
+    <Content Include="app\controllers\reportEFB.js" />
+    <Content Include="app\controllers\reportEFBFly.js" />
+    <Content Include="app\controllers\reportEFBVaresh.js" />
+    <Content Include="app\controllers\reportFDR.js" />
+    <Content Include="app\controllers\reportFlightDaily.js" />
+    <Content Include="app\controllers\reportFlightDailyStation.js" />
+    <Content Include="app\controllers\reportFlights.js" />
+    <Content Include="app\controllers\reportlogprofile.js" />
+    <Content Include="app\controllers\roster2.js" />
+    <Content Include="app\controllers\rosterController.js" />
+    <Content Include="app\controllers\rosterDailyController.js" />
+    <Content Include="app\controllers\rosterReport.js" />
+    <Content Include="app\controllers\rosterTimeline.js" />
+    <Content Include="app\controllers\routeAddController.js" />
+    <Content Include="app\controllers\routeController.js" />
+    <Content Include="app\controllers\rptflightspopup.js" />
+    <Content Include="app\controllers\scheduling.js" />
+    <Content Include="app\controllers\schedulinggrid.js" />
+    <Content Include="app\controllers\schedulingvrh.js" />
+    <Content Include="app\controllers\skyofp.js" />
+    <Content Include="app\controllers\statDelayController.js" />
+    <Content Include="app\controllers\studyFieldSelectController.js" />
+    <Content Include="app\controllers\tblDelay.js" />
+    <Content Include="app\controllers\tblDelayAirport.js" />
+    <Content Include="app\controllers\tblDelayCat.js" />
+    <Content Include="app\controllers\tblDelayedFlights.js" />
+    <Content Include="app\controllers\tblDelayItems.js" />
+    <Content Include="app\controllers\tblDelayTech.js" />
+    <Content Include="app\controllers\teachersController.js" />
+    <Content Include="app\controllers\toAdd.js" />
+    <Content Include="app\controllers\training.js" />
+    <Content Include="app\controllers\trnDashboard.js" />
+    <Content Include="app\controllers\trnexpiringgroups.js" />
+    <Content Include="app\controllers\trnexpiringtypes.js" />
+    <Content Include="app\controllers\trnschedule.js" />
+    <Content Include="app\controllers\trnScheduleCourse.js" />
+    <Content Include="app\controllers\trnScheduleCourseType.js" />
+    <Content Include="app\controllers\trnStat.js" />
+    <Content Include="app\controllers\usersController.js" />
+    <Content Include="app\controllers\verify.js" />
+    <Content Include="app\controllers\vrAdd.js" />
+    <Content Include="app\controllers\zdutyTimeline.js" />
+    <Content Include="app\services\activityService.js" />
+    <Content Include="app\services\aircraftService.js" />
+    <Content Include="app\services\airportService.js" />
+    <Content Include="app\services\biService.js" />
+    <Content Include="app\services\courseService.js" />
+    <Content Include="app\services\fbService.js" />
+    <Content Include="app\services\flightBagService.js" />
+    <Content Include="app\services\flightService.js" />
+    <Content Include="app\services\generalService.js" />
+    <Content Include="app\services\jobgroupService.js" />
+    <Content Include="app\services\libraryService.js" />
+    <Content Include="app\services\locationService.js" />
+    <Content Include="app\services\logService.js" />
+    <Content Include="app\services\msgService.js" />
+    <Content Include="app\services\notificationService.js" />
+    <Content Include="app\services\organizationService.js" />
+    <Content Include="app\services\personService.js" />
+    <Content Include="app\services\qaService.js" />
+    <Content Include="app\services\schedulingService.js" />
+    <Content Include="app\services\statService.js" />
+    <Content Include="app\services\trainingService.js" />
+    <Content Include="app\services\weatherService.js" />
+    <Content Include="app\services\zschedulingService.js" />
+    <Content Include="app\views\aircraftSelect.html" />
+    <Content Include="app\views\aircrafttype.html" />
+    <Content Include="app\views\airport.html" />
+    <Content Include="app\views\airportAdd.html" />
+    <Content Include="app\views\apps.html" />
+    <Content Include="app\views\asrAdd.html" />
+    <Content Include="app\views\asrreport.html" />
+    <Content Include="app\views\atcAdd.html" />
+    <Content Include="app\views\board.html" />
+    <Content Include="app\views\boardam.html" />
+    <Content Include="app\views\boardtest.html" />
+    <Content Include="app\views\boardvrh.html" />
+    <Content Include="app\views\boarfly.html" />
+    <Content Include="app\views\ceoFlightBoard.html" />
+    <Content Include="app\views\certificateAdd.html" />
+    <Content Include="app\views\changeflightregister.html" />
+    <Content Include="app\views\chrReport.html" />
+    <Content Include="app\views\chrs.html" />
+    <Content Include="app\views\citypair.html" />
+    <Content Include="app\views\citypairyearly.html" />
+    <Content Include="app\views\course.html" />
+    <Content Include="app\views\courseAdd.html" />
+    <Content Include="app\views\courseperson.html" />
+    <Content Include="app\views\courseSelect.html" />
+    <Content Include="app\views\CourseType.html" />
+    <Content Include="app\views\courseTypeAdd.html" />
+    <Content Include="app\views\coursetypeSelect.html" />
+    <Content Include="app\views\courseView.html" />
+    <Content Include="app\views\crewassign.html" />
+    <Content Include="app\views\crewassign2.html" />
+    <Content Include="app\views\crewassignreg.html" />
+    <Content Include="app\views\crewReport.html" />
+    <Content Include="app\views\crewtest.html" />
+    <Content Include="app\views\crewtimereport.html" />
+    <Content Include="app\views\dailyRoster2.html" />
+    <Content Include="app\views\dashboard.html" />
+    <Content Include="app\views\DatePicker.html" />
+    <Content Include="app\views\delayAirportReport.html" />
+    <Content Include="app\views\delaybidaily.html" />
+    <Content Include="app\views\delaybiKPI.html" />
+    <Content Include="app\views\drAdd.html" />
+    <Content Include="app\views\drAddFly.html" />
+    <Content Include="app\views\dutyTimeline.html" />
+    <Content Include="app\views\employeeSelectCourse.html" />
+    <Content Include="app\views\expiringCourseType.html" />
+    <Content Include="app\views\expiringGroup.html" />
+    <Content Include="app\views\fdplog.html" />
+    <Content Include="app\views\fdpsfly.html" />
+    <Content Include="app\views\fixtime.html" />
+    <Content Include="app\views\fixtimereportdaily.html" />
+    <Content Include="app\views\flightrvsm.html" />
+    <Content Include="app\views\formayearly.html" />
+    <Content Include="app\views\formB.html" />
+    <Content Include="app\views\formC.html" />
+    <Content Include="app\views\formmovaledyearly.html" />
+    <Content Include="app\views\fuelReportOFP.html" />
+    <Content Include="app\views\HtmlPage1.html" />
+    <Content Include="app\views\imageviewer.html" />
+    <Content Include="app\views\jobgroupSelectSimple.html" />
+    <Content Include="app\views\kpiDelayCat.html" />
+    <Content Include="app\views\delayCodes.html" />
+    <Content Include="app\views\delayReport.html" />
+    <Content Include="app\views\Document.html" />
+    <Content Include="app\views\documentAdd.html" />
+    <Content Include="app\views\employeeSelect.html" />
+    <Content Include="app\views\fdps.html" />
+    <Content Include="app\views\filter.html" />
+    <Content Include="app\views\finMonthlyReport.html" />
+    <Content Include="app\views\finMonthReport.html" />
+    <Content Include="app\views\finReport.html" />
+    <Content Include="app\views\firstLogin.html" />
+    <Content Include="app\views\fixtimereport.html" />
+    <Content Include="app\views\flight.html" />
+    <Content Include="app\views\flightboard.html" />
+    <Content Include="app\views\flightboardall.html" />
+    <Content Include="app\views\flightDelays.html" />
+    <Content Include="app\views\flightDesign.html" />
+    <Content Include="app\views\flightDesignGrid.html" />
+    <Content Include="app\views\flightList.html" />
+    <Content Include="app\views\flightPlanApply.html" />
+    <Content Include="app\views\flightplanapply2.html" />
+    <Content Include="app\views\flightPlanCrew.html" />
+    <Content Include="app\views\flightplanlist.html" />
+    <Content Include="app\views\flightPlanning.html" />
+    <Content Include="app\views\flightPlanningGanttView.html" />
+    <Content Include="app\views\flightPlanPermit.html" />
+    <Content Include="app\views\flightPlanRegister.html" />
+    <Content Include="app\views\flightPlansCalendarMaintenance.html" />
+    <Content Include="app\views\flightPlansMaintenance.html" />
+    <Content Include="app\views\flightplanview.html" />
+    <Content Include="app\views\flightReportSecurity.html" />
+    <Content Include="app\views\flightsMonthly.html" />
+    <Content Include="app\views\forma.html" />
+    <Content Include="app\views\formmovaled.html" />
+    <Content Include="app\views\fuelbi.html" />
+    <Content Include="app\views\fuelbiKPI.html" />
+    <Content Include="app\views\fuelbiRoute.html" />
+    <Content Include="app\views\fuelReport.html" />
+    <Content Include="app\views\gnt.html" />
+    <Content Include="app\views\heasernarrow.html" />
+    <Content Include="app\views\ipaccess.html" />
+    <Content Include="app\views\irregularFlight.html" />
+    <Content Include="app\views\jobgroupAdd.html" />
+    <Content Include="app\views\header.html" />
+    <Content Include="app\views\jobgroup.html" />
+    <Content Include="app\views\jobgroupSelect.html" />
+    <Content Include="app\views\journal.html" />
+    <Content Include="app\views\journalAdd.html" />
+    <Content Include="app\views\kpiDelay.html" />
+    <Content Include="app\views\kpiDelayAirport.html" />
+    <Content Include="app\views\kpiDelayTech.html" />
+    <Content Include="app\views\kpiFBL.html" />
+    <Content Include="app\views\kpiFC.html" />
+    <Content Include="app\views\kpiFP.html" />
+    <Content Include="app\views\kpiFRP.html" />
+    <Content Include="app\views\kpiFTK.html" />
+    <Content Include="app\views\kpiFU.html" />
+    <Content Include="app\views\kpiRPB.html" />
+    <Content Include="app\views\kpiRPK.html" />
+    <Content Include="app\views\kpiRPKAC.html" />
+    <Content Include="app\views\kpiRPKReg.html" />
+    <Content Include="app\views\kpiRPKRoute.html" />
+    <Content Include="app\views\ldgAdd.html" />
+    <Content Include="app\views\library.html" />
+    <Content Include="app\views\libraryAdd.html" />
+    <Content Include="app\views\location.html" />
+    <Content Include="app\views\locationAdd.html" />
+    <Content Include="app\views\logAdd.html" />
+    <Content Include="app\views\logininfo.html" />
+    <Content Include="app\views\menu.html" />
+    <Content Include="app\views\mlist.html" />
+    <Content Include="app\views\mlistAdd.html" />
+    <Content Include="app\views\nira.html" />
+    <Content Include="app\views\notification.html" />
+    <Content Include="app\views\ofpAdd.html" />
+    <Content Include="app\views\option.html" />
+    <Content Include="app\views\optionadd.html" />
+    <Content Include="app\views\Organization.html" />
+    <Content Include="app\views\OrganizationAdd.html" />
+    <Content Include="app\views\person.html" />
+    <Content Include="app\views\personAdd.html" />
+    <Content Include="app\views\personbook.html" />
+    <Content Include="app\views\personcertificate.html" />
+    <Content Include="app\views\personcourse.html" />
+    <Content Include="app\views\personmisc.html" />
+    <Content Include="app\views\personmiscAdd.html" />
+    <Content Include="app\views\personView.html" />
+    <Content Include="app\views\plan.html" />
+    <Content Include="app\views\planningBoard.html" />
+    <Content Include="app\views\planRegisters.html" />
+    <Content Include="app\views\qaCabin.html" />
+    <Content Include="app\views\qaCatering.html" />
+    <Content Include="app\views\qaDashboard.html" />
+    <Content Include="app\views\qaDispatch.html" />
+    <Content Include="app\views\qaEmployee.html" />
+    <Content Include="app\views\qaForm.html" />
+    <Content Include="app\views\qaGround.html" />
+    <Content Include="app\views\qaMaintenance.html" />
+    <Content Include="app\views\qaRefer.html" />
+    <Content Include="app\views\qaReport.html" />
+    <Content Include="app\views\qaReportStatus.html" />
+    <Content Include="app\views\qaSecurity.html" />
+    <Content Include="app\views\qaVoluntary.html" />
+    <Content Include="app\views\rawcmd.html" />
+    <Content Include="app\views\regavailability.html" />
+    <Content Include="app\views\regflightmonthly.html" />
+    <Content Include="app\views\reportEFB.html" />
+    <Content Include="app\views\reportEFBFly.html" />
+    <Content Include="app\views\reportFDR.html" />
+    <Content Include="app\views\reportFlightDaily.html" />
+    <Content Include="app\views\reportFlightDailyStation.html" />
+    <Content Include="app\views\reportFlights.html" />
+    <Content Include="app\views\reportlogprofile.html" />
+    <Content Include="app\views\roster.html" />
+    <Content Include="app\views\rosterdaily.html" />
+    <Content Include="app\views\rosterReport.html" />
+    <Content Include="app\views\rosterTimeline.html" />
+    <Content Include="app\views\route.html" />
+    <Content Include="app\views\routeAdd.html" />
+    <Content Include="app\views\rptflightspopup.html" />
+    <Content Include="app\views\scheduling.html" />
+    <Content Include="app\views\schedulinggrid.html" />
+    <Content Include="app\views\schedulingvrh.html" />
+    <Content Include="app\views\skyofp.html" />
+    <Content Include="app\views\statDelay.html" />
+    <Content Include="app\views\studyFieldSelect.html" />
+    <Content Include="app\views\tblDelay.html" />
+    <Content Include="app\views\tblDelayAirport.html" />
+    <Content Include="app\views\tblDelayCat.html" />
+    <Content Include="app\views\tblDelayedFlight.html" />
+    <Content Include="app\views\tblDelayItems.html" />
+    <Content Include="app\views\tblDelayTech.html" />
+    <Content Include="app\views\teachers.html" />
+    <Content Include="app\views\templates.html" />
+    <Content Include="app\views\toAdd.html" />
+    <Content Include="app\views\training.html" />
+    <Content Include="app\views\trnDashboard.html" />
+    <Content Include="app\views\trnexpiringgroups.html" />
+    <Content Include="app\views\trnexpiringtypes.html" />
+    <Content Include="app\views\trnschedule.html" />
+    <Content Include="app\views\trnScheduleCourse.html" />
+    <Content Include="app\views\trnScheduleCourseType.html" />
+    <Content Include="app\views\trnStat.html" />
+    <Content Include="app\views\users.html" />
+    <Content Include="app\views\verify.html" />
+    <Content Include="app\views\vrAdd.html" />
+    <Content Include="app\views\zdutyTimeline.html" />
+    <Content Include="content\css\bootstrap-4.min.css" />
+    <Content Include="content\css\bootstrap.min.css" />
+    <Content Include="content\css\core-ui.css" />
+    <Content Include="content\css\dx-epa.css" />
+    <Content Include="content\css\dx.android5.light.css" />
+    <Content Include="content\css\dx.carmine.compact.css" />
+    <Content Include="content\css\dx.carmine.css" />
+    <Content Include="content\css\dx.common.css" />
+    <Content Include="content\css\dx.contrast.compact.css" />
+    <Content Include="content\css\dx.contrast.css" />
+    <Content Include="content\css\dx.dark.compact.css" />
+    <Content Include="content\css\dx.dark.css" />
+    <Content Include="content\css\dx.darkmoon.compact.css" />
+    <Content Include="content\css\dx.darkmoon.css" />
+    <Content Include="content\css\dx.darkviolet.compact.css" />
+    <Content Include="content\css\dx.darkviolet.css" />
+    <Content Include="content\css\dx.greenmist.compact.css" />
+    <Content Include="content\css\dx.greenmist.css" />
+    <Content Include="content\css\dx.ios7.default.css" />
+    <Content Include="content\css\dx.light.compact.css" />
+    <Content Include="content\css\dx.light.css" />
+    <Content Include="content\css\dx.material.blue.light.css" />
+    <Content Include="content\css\dx.softblue.compact.css" />
+    <Content Include="content\css\dx.softblue.css" />
+    <Content Include="content\css\dx.spa.css" />
+    <Content Include="content\css\dx.win10.black.css" />
+    <Content Include="content\css\dx.win10.white.css" />
+    <Content Include="content\css\dx.win8.black.css" />
+    <Content Include="content\css\dx.win8.white.css" />
+    <Content Include="content\css\fontiran.css" />
+    <Content Include="content\css\icons\ionicons.css" />
+    <Content Include="content\css\icons\test.txt" />
+    <Content Include="content\css\main.css" />
+    <Content Include="content\css\material.blue-light.custom.css" />
+    <Content Include="content\css\material.gray-light.custom.css" />
+    <Content Include="content\css\material.purple-light.custom.css" />
+    <Content Include="content\css\material.steel-light.custom.css" />
+    <Content Include="content\css\material.teal-light.custom.css" />
+    <Content Include="content\css\persian-datepicker.min.css" />
+    <Content Include="content\css\print.css" />
+    <Content Include="content\css\w3.css" />
+    <Content Include="content\fonts\fontawesome-webfont.eot" />
+    <Content Include="content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="content\fonts\fontawesome-webfont.woff" />
+    <Content Include="content\fonts\FontAwesome.otf" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="content\css\icons\dxicons.ttf" />
+    <Content Include="content\css\icons\dxicons.woff" />
+    <Content Include="content\css\icons\dxicons.woff2" />
+    <Content Include="content\css\icons\dxiconsios.ttf" />
+    <Content Include="content\css\icons\dxiconsios.woff" />
+    <Content Include="content\css\icons\dxiconsios.woff2" />
+    <Content Include="content\css\icons\dxiconsmaterial.ttf" />
+    <Content Include="content\css\icons\dxiconsmaterial.woff" />
+    <Content Include="content\css\icons\dxiconsmaterial.woff2" />
+    <Content Include="content\fonts\eot\IRANSansWeb%28FaNum%29.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb%28FaNum%29_Black.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb%28FaNum%29_Bold.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb%28FaNum%29_Light.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb%28FaNum%29_Medium.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb%28FaNum%29_UltraLight.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb_Bold.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb_Light.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb_Medium.eot" />
+    <Content Include="content\fonts\eot\IRANSansWeb_UltraLight.eot" />
+    <Content Include="content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="content\fonts\IranianSerifWeb-Regular.woff" />
+    <Content Include="content\fonts\ttf\IRANSansWeb%28FaNum%29.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb%28FaNum%29_Black.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb%28FaNum%29_Bold.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb%28FaNum%29_Light.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb%28FaNum%29_Medium.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb%28FaNum%29_UltraLight.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb_Bold.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb_Light.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb_Medium.ttf" />
+    <Content Include="content\fonts\ttf\IRANSansWeb_UltraLight.ttf" />
+    <Content Include="content\fonts\woff2\IRANSansWeb%28FaNum%29.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb%28FaNum%29_Black.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb%28FaNum%29_Bold.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb%28FaNum%29_Light.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb%28FaNum%29_Medium.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb%28FaNum%29_UltraLight.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb_Bold.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb_Light.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb_Medium.woff2" />
+    <Content Include="content\fonts\woff2\IRANSansWeb_UltraLight.woff2" />
+    <Content Include="content\fonts\woff\IRANSansWeb%28FaNum%29.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb%28FaNum%29_Black.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb%28FaNum%29_Bold.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb%28FaNum%29_Light.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb%28FaNum%29_Medium.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb%28FaNum%29_UltraLight.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb_Bold.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb_Light.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb_Medium.woff" />
+    <Content Include="content\fonts\woff\IRANSansWeb_UltraLight.woff" />
+    <Content Include="content\fonts\SourceSansPro-ExtraLight.ttf" />
+    <Content Include="content\fonts\SourceSansPro-Light.ttf" />
+    <Content Include="download.aspx" />
+    <Content Include="filehandler.ashx" />
+    <Content Include="downloadhandler.ashx" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="gantt2.css" />
+    <Content Include="gantt2.html" />
+    <Content Include="gantt2.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Progress.html" />
+    <Content Include="scripts\combinedJqueryAngular.js" />
+    <Content Include="scripts\ej.widget.angular.min.js" />
+    <Content Include="scripts\ej.widget.ko.js" />
+    <Content Include="scripts\ej.widget.ko.min.js" />
+    <Content Include="scripts\gantt.js" />
+    <Content Include="scripts\html2canvas.js" />
+    <Content Include="scripts\jsonganttdata.js" />
+    <Content Include="scripts\jsrender.min.js" />
+    <Content Include="scripts\mobile-detect.min.js" />
+    <Content Include="scripts\momenttz.js" />
+    <Content Include="scripts\persian-date.min.js" />
+    <Content Include="scripts\persian-datepicker.min.js" />
+    <Content Include="scripts\properties.js" />
+    <Content Include="selection.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\app.js" />
+    <Content Include="app\controllers\associateController.js" />
+    <Content Include="app\controllers\homeController.js" />
+    <Content Include="app\controllers\indexController.js" />
+    <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\controllers\ordersController.js" />
+    <Content Include="app\controllers\refreshController.js" />
+    <Content Include="app\controllers\signupController.js" />
+    <Content Include="app\controllers\testController.js" />
+    <Content Include="app\controllers\tokensManagerController.js" />
+    <Content Include="app\services\authInterceptorService.js" />
+    <Content Include="app\services\authService.js" />
+    <Content Include="app\services\ordersService.js" />
+    <Content Include="app\services\testService.js" />
+    <Content Include="app\services\tokensManagerService.js" />
+    <Content Include="app\views\associate.html" />
+    <Content Include="app\views\home.html" />
+    <Content Include="app\views\login.html" />
+    <Content Include="app\views\orders.html" />
+    <Content Include="app\views\refresh.html" />
+    <Content Include="app\views\signup.html" />
+    <Content Include="app\views\test.html" />
+    <Content Include="app\views\tokens.html" />
+    <Content Include="content\css\bootstrap.css" />
+    <Content Include="content\css\bootstrap.rtl.full.css" />
+    <Content Include="content\css\font-awesome.min.css" />
+    <Content Include="content\css\loading-bar.css" />
+    <Content Include="content\css\loading-bar.min.css" />
+    <Content Include="content\css\site.css" />
+    <Content Include="content\css\social-buttons.css" />
+    <Content Include="content\fonts\fontawesome-webfont.svg" />
+    <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="content\images\flight.png" />
+    <Content Include="content\images\library.png" />
+    <Content Include="content\images\logo.png" />
+    <Content Include="content\images\logout.png" />
+    <Content Include="content\images\profile.png" />
+    <Content Include="content\images\share.png" />
+    <Content Include="content\images\shutdown.png" />
+    <Content Include="content\images\user.png" />
+    <Content Include="gant.html" />
+    <Content Include="index.html" />
+    <Content Include="scripts\angular-1.7.2.js" />
+    <Content Include="scripts\angular-local-storage.min.js" />
+    <Content Include="scripts\angular-route-1.7.2.js" />
+    <Content Include="scripts\angularjs-sanitize.js" />
+    <Content Include="scripts\chart-bundle.js" />
+    <Content Include="scripts\chart.js" />
+    <Content Include="scripts\cldr.js" />
+    <Content Include="scripts\cldr.min.js" />
+    <Content Include="scripts\cldr\event.js" />
+    <Content Include="scripts\cldr\event.min.js" />
+    <Content Include="scripts\cldr\supplemental.js" />
+    <Content Include="scripts\cldr\supplemental.min.js" />
+    <Content Include="scripts\cldr\unresolved.js" />
+    <Content Include="scripts\cldr\unresolved.min.js" />
+    <Content Include="scripts\config.js" />
+    <Content Include="scripts\core.js" />
+    <Content Include="scripts\custom-tooltip.js" />
+    <Content Include="scripts\dx.all.debug.js" />
+    <Content Include="scripts\dx.all.js" />
+    <Content Include="scripts\dx.mobile.debug.js" />
+    <Content Include="scripts\dx.mobile.js" />
+    <Content Include="scripts\dx.viz-web.debug.js" />
+    <Content Include="scripts\dx.viz-web.js" />
+    <Content Include="scripts\dx.viz.debug.js" />
+    <Content Include="scripts\dx.viz.js" />
+    <Content Include="scripts\dx.web.debug.js" />
+    <Content Include="scripts\dx.web.js" />
+    <Content Include="scripts\globalize.js" />
+    <Content Include="scripts\globalize.min.js" />
+    <Content Include="scripts\globalize\currency.js" />
+    <Content Include="scripts\globalize\currency.min.js" />
+    <Content Include="scripts\globalize\date.js" />
+    <Content Include="scripts\globalize\date.min.js" />
+    <Content Include="scripts\globalize\message.js" />
+    <Content Include="scripts\globalize\message.min.js" />
+    <Content Include="scripts\globalize\number.js" />
+    <Content Include="scripts\globalize\number.min.js" />
+    <Content Include="scripts\ionicons.js" />
+    <Content Include="scripts\jquery-3.1.0.js" />
+    <Content Include="scripts\jszip.js" />
+    <Content Include="scripts\jszip.min.js" />
+    <Content Include="scripts\knockout-latest.debug.js" />
+    <Content Include="scripts\knockout-latest.js" />
+    <Content Include="scripts\linq.min.js" />
+    <Content Include="scripts\loading-bar.min.js" />
+    <Content Include="scripts\localization\dx.messages.cs.js" />
+    <Content Include="scripts\localization\dx.messages.de.js" />
+    <Content Include="scripts\localization\dx.messages.en.js" />
+    <Content Include="scripts\localization\dx.messages.es.js" />
+    <Content Include="scripts\localization\dx.messages.fi.js" />
+    <Content Include="scripts\localization\dx.messages.fr.js" />
+    <Content Include="scripts\localization\dx.messages.it.js" />
+    <Content Include="scripts\localization\dx.messages.ja.js" />
+    <Content Include="scripts\localization\dx.messages.pt.js" />
+    <Content Include="scripts\localization\dx.messages.ru.js" />
+    <Content Include="scripts\localization\dx.messages.sv.js" />
+    <Content Include="scripts\localization\dx.messages.zh.js" />
+    <Content Include="scripts\moment.js" />
+    <Content Include="scripts\template.js" />
+    <Content Include="scripts\templateAdd.js" />
+    <Content Include="scripts\vectormap-data\africa.js" />
+    <Content Include="scripts\vectormap-data\canada.js" />
+    <Content Include="scripts\vectormap-data\eurasia.js" />
+    <Content Include="scripts\vectormap-data\europe.js" />
+    <Content Include="scripts\vectormap-data\usa.js" />
+    <Content Include="scripts\vectormap-data\world.js" />
+    <Content Include="scripts\vectormap-utils\dx.vectormaputils.debug.js" />
+    <Content Include="scripts\vectormap-utils\dx.vectormaputils.js" />
+    <Content Include="scripts\vectormap-utils\dx.vectormaputils.node.js" />
+    <Content Include="settings.js" />
+    <Content Include="test.css" />
+    <Content Include="test.html" />
+    <Content Include="test.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="download.aspx.cs">
+      <DependentUpon>download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="download.aspx.designer.cs">
+      <DependentUpon>download.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="downloadhandler.ashx.cs">
+      <DependentUpon>downloadhandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="filehandler.ashx.cs">
+      <DependentUpon>filehandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="FileManager.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\views\templates\" />
+    <Folder Include="archived\" />
+    <Folder Include="temp\" />
+    <Folder Include="upload\images\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>30273</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:30000/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:30000/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.3.7.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.3.7.0\build\Microsoft.Net.Compilers.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,39 @@
+﻿﻿
+<style>
+
+    .ctd {
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    .ctd-empty {
+        border: 0px solid #ccc;
+        text-align: center;
+    }
+
+    .ctr {
+        /*height:30px;*/
+    }
+
+    .ctd-center {
+        background-color: lightseagreen;
+    }
+
+    .ctd-selected {
+        background-color: red;
+    }
+</style>
+<div ng-controller="qaReferController">
+    <div id="scroll_referre" dx-scroll-view="scroll_referre">
+        <div dx-tree-list="referred_list"></div>
+    </div>
+    <div dx-text-area="txt_referComment" style="border: 1px solid lightgray;height: 20%"></div>
+    <div dx-data-grid="dg_comment" id="dg_comment" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+    <div>
+        <div dx-text-area="txt_comment"  class="col-lg-11"style="display:inline-block;border: 1px solid lightgray; height:50px"></div>
+        <div class="col-lg-1" style="display: inline-block;padding:10px;float:right">
+            <div dx-button="btn_send"></div>
+        </div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

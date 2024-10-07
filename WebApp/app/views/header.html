@@ -1,0 +1,107 @@
+﻿<style>
+    .app-headerx-mobile {
+        padding: 7px;
+        
+        color: white;
+        font-size: 15px;
+       
+    }
+
+        .app-headerx-mobile .title {
+            font-size: 18px;
+        }
+    .app-headerx{
+        min-height:55px;
+    }
+</style>
+
+<div ng-class="headerClasses" id="_header">
+    <div>
+        <table style="width:100%;z-index:2;position:relative">
+            <tr>
+                <td style="text-align:center;width:45px;z-index:10">
+                    <a style="text-decoration:none;" href="#">
+                        <img src="content/images/home.png" style="width:35px;" />
+                    </a>
+                </td>
+            
+
+                <td style="position:relative;top:1px;padding-left:5px">
+                    <!--<div class="app-remark" style="position:relative; top: 0px; font-size:15px">{{app_title}}</div>-->
+                    <span class="app-title" style="position:relative; top:0px;font-size:20px;font-weight:bold">  {{module}}</span>
+                    <span class="page-title" style="position:relative; top:0px;font-size:20px">  {{page_title}}</span>
+
+                </td>
+                <td style="text-align:right; font-size:25px;cursor: pointer; ">
+
+                   <!-- <span style=" font-size:20px;color:white;cursor: pointer;" ng-click="goProfile()">{{userName}}</span>-->
+
+                </td>
+
+                <td style="text-align:right;width:60px;z-index:10">
+                    <a style="text-decoration:none;" href="">
+                        <img src="content/images/user.png" style="width:35px;" />
+                    </a>
+                </td>
+                <td style="text-align:center;width:50px;z-index:10">
+                    <a style="text-decoration:none;" href="" data-ng-click="apps()">
+                        <img src="content/images/apps.png" style="width:35px;" />
+                    </a>
+                </td>
+                <td style="text-align:center;width:55px;z-index:10">
+                    <a style="text-decoration:none;" href="" data-ng-click="logOut()">
+                        <img src="content/images/logout.png" style="width:35px;" />
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+  
+
+    <ul class="bg-bubbles hidden-xs">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+
+<div ng-class="headerClassesMobile" id="_header">
+    <div  >
+        <table style="width:100%;z-index:2;position:relative">
+            <tr>
+             
+                <td style="text-align:center;width:40px;z-index:10">
+                    <a style="text-decoration:none;" href="" data-ng-click="menu()">
+                        <img src="../../content/images/menu.png" style="width:35px;" />
+                    </a>
+                </td>
+
+                <td style="position:relative;top:2px;padding-left:5px">
+                    <div class="app-remark" style="position:relative; top: 0px; font-size:17px">{{app_title}}</div>
+
+
+                </td>
+                <td style="text-align:right; font-size:25px;cursor: pointer; ">
+
+                    <span style=" font-size:20px;color:white;cursor: pointer;" ng-click="goProfile()">{{userName}}</span>
+
+                </td>
+
+                
+    <td style="text-align:center;width:65px;z-index:10">
+        <a style="text-decoration:none;" href="" data-ng-click="logOut()">
+            <img src="content/images/logout.png" style="width:40px;" />
+        </a>
+    </td> 
+            </tr>
+        </table>
+    </div>
+</div>

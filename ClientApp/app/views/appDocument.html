@@ -1,0 +1,43 @@
+﻿<div style="height:100%;">
+    <div class="box document maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+
+            
+            <div id="scrollview" dx-scroll-view="scroll_main">
+
+                <div style="padding-top:2px;padding-right:2px;padding-left:2px;" ng-repeat="x in ds">
+                    <div class="col-lg-12 col-md-12 col-sm-12  applibraryitem" style="padding:1px 2px 5px 2px;display:block" ng-click="itemClick(x.BookId,x.EmployeeId)">
+                        <div ng-class="x.class" style="margin:0; padding:10px 5px 10px 10px;display:block">
+                            
+                            <div class="col-lg-11 col-md-9 col-sm-9 col-xs-9">
+                                <p style="padding:0;margin:0;font-weight:bold" ng-class="x.titleClass">{{x.Title}}</p>
+                                <p style="padding:0;margin:5px 0 0 0;font-style:italic"> {{x.No}}</p>
+                                <p style="padding:0;margin:5px 0 0 0;font-style:italic"> {{x.Sender}}</p>
+                                <p style="padding:0;margin:5px 0 0 0;font-style:italic;font-size:13px"> {{x.DateExposure}}</p>
+                            </div>
+                            <div class="col-lg-1  col-md-1 col-sm-1" style="text-align:right">
+                                <i ng-class="x.VisitedClass" style="font-size:25px;margin-top:10px;display:block"></i>
+                                <i ng-class="x.DownloadedClass" style="font-size:25px;margin-top:10px;display:block"></i>
+                            </div>
+                            <div style="clear:both"></div>
+
+                        </div>
+                    </div>
+
+ 
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'appdocument';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

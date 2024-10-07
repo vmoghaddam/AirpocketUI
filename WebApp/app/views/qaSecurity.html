@@ -1,0 +1,166 @@
+﻿<style>
+    .ctd {
+        border: 1px solid #eee;
+        text-align: center;
+    }
+
+    .ctd-empty {
+        border: 0px solid #eee;
+        text-align: center;
+    }
+
+    .ctr {
+        /*height:30px;*/
+    }
+
+    .ctd-center {
+        background-color: lightseagreen;
+    }
+
+    .ctd-selected {
+        background-color: red;
+    }
+</style>
+<div ng-controller="qaSecurityController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+
+            <div id="scroll_qaSecurity" dx-scroll-view="scroll_qaSecurity" style="margin-top: 5px; float: left; overflow: hidden;width:60%">
+
+
+
+                <div class="visible-sm visible-md visible-lg">
+                    <table style="margin-top: 10px; border: 1px solid #eee; width: 100%; color: black" class="dx-border">
+                        <tr>
+                            <td style="background-color: lightgray; padding: 7px; text-align: right; color: black; font-weight: bold" colspan="4">
+                                اطلاعات اولیه
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:7px;text-align:right;"><div dx-date-box="txt_reportDate" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> :تاریخ گزارش </td>
+                            <td style="padding:7px;text-align:right;"><div dx-date-box="txt_hazardDate" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> :تاریخ و ساعت بروز رویداد/مخاطره </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:7px;text-align:right;"><div dx-text-box="txt_area" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> :محل و بخض رویداد/مخاطره </td>
+                            <td style="padding:7px;text-align:right;"><div dx-text-box="txt_register" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> :علامت ثبت هواپیما </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:7px;text-align:right;"><div dx-text-box="txt_route" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> :مسیر پرواز </td>
+                            <td style="padding:7px;text-align:right;"><div dx-text-box="txt_flightNumber" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> :شماره پرواز </td>
+                        </tr>
+                    </table>
+
+                    <div style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <div style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                            :عامل بروز مخاطره/رویداد
+                        </div>
+
+                        <div class="col-xs-3 col-sm-3 col-md-3" style="padding: 1%;text-align:right" ng-repeat="x in shrReason">
+                            <p style="margin-right:5px;display:inline-block">{{x.Title}}</p><input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="optReason[$index]" ng-change="chkReason($index)" />
+                        </div>
+                        <div style="clear:both"></div>
+                        <div ng-show="showOther" style="margin:1%;border:1px solid #eee;width:98%;color:black" dx-text-area="txt_eventOther"></div>
+                    </div>
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color: lightgray; padding: 7px; text-align: right; color: black; font-weight: bold" colspan="6">
+                                جزئیات پتانسیل خطر
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td style="padding:7px;text-align:right;"><div dx-text-box="txt_camera" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> دوربین: </td>
+                            <td style="padding:7px;text-align:right;"><div dx-text-box="txt_carryingBox" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> جعبه حمل اشیاء ممنوعه: </td>
+                            <td style="padding:7px;text-align:right;"><div dx-text-box="txt_handRocket" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> راکت‌دستی بازرسی کترینگ: </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:7px;text-align:right;"><div dx-text-box="txt_comail" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> Co mail: </td>
+                            <td style="padding:7px;text-align:right;"><div dx-text-box="txt_other" class="center"></div></td>
+                            <td style="padding: 7px;text-align:right; font-weight: bold"> سایر: </td>
+                        </tr>
+                    </table>
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color: lightgray; padding: 7px; text-align: right; color: black; font-weight: bold" colspan="4">
+                                گزارش شرایط و جزئیات تجهیزات مرتبط با مخاطره/رویداد
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:7px"><div dx-text-area="txt_equipmentDescription" class="center"></div></td>
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color: lightgray; padding: 7px; text-align: right; color: black; font-weight: bold" colspan="4">
+                                (آیا رویداد منجر به جرح/مصدومیت یا آسیب‌دیدگی پرسنل گردیدهاست؟ (توضیح داده شود
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:7px;text-align:right;"><div dx-text-area="txt_injuryDescription" class="center"></div></td>
+                        </tr>
+                    </table>
+
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color: lightgray; padding: 7px; text-align: right; color: black; font-weight: bold" colspan="4">
+                                آیا رویداد منجر به وقفه کاری شده است؟
+                            </td>
+                        </tr>
+                        <tr style="float:right; padding: 0px !important">
+                            <td class="col-sm-6 col-md-6" style="padding:7px;text-align:right;"><div dx-number-box="txt_workBreakPeriod" class="center"></div></td>
+                            <!-- <td class="col-sm-3 col-md-3" style="padding: 7px;text-align:left; font-weight: bold"> :چه مدت؟ </td>-->
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color: lightgray; padding: 7px; text-align: right; color: black; font-weight: bold" colspan="4">
+                                اقدامات پیشگیرانه/پیشنهادی یا اصلاحی لازم
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:7px;text-align:right;"><div dx-text-area="txt_preventiveActions" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                Result
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_result" dx-validator="{validationGroup:'result',  validationRules: [{ type: 'required',}]}"></div></td>
+                        </tr>
+
+                    </table>
+                    <div style="clear:both"></div>
+                </div>
+
+
+
+
+            </div>
+            <div style="float: right;width:40%">
+                <div ng-include="'app/views/qaRefer.html?vx=2'" onload="testLoaded()"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

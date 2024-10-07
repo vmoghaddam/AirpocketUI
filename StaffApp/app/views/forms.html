@@ -1,0 +1,175 @@
+﻿<style>
+    .file-visited2 {
+        color: #66ffcc !important;
+    }
+    .form-selected {
+        background: #ccf5ff !important;
+    }
+    .st-accepted {
+        background: #00e6ac !important;
+    }
+    .st-rejected {
+        background: #ffbb33 !important;
+    }
+    .dx-item.dx-toolbar-item.dx-toolbar-label {
+        max-width: 200px !important
+    }
+	.dx-placeholder{text-align:center; width:100%;}
+	
+	._form_type.selected{
+	   background:coral !important;
+	}
+	._form_type {
+	border:1px solid #ccc;margin-bottom:10px;background:#eee;padding:20px;text-align:center;font-weight:bold;text-transform: uppercase
+	}
+	
+	
+	.closed{
+	    background:#00e6ac ;
+	}
+	.inprogress{
+	    background:#66d9ff ;
+	}
+	.notsigned{
+	    background:#ffcc66 ;
+	}
+</style>
+<div style="height:100%;">
+	<div class="box document maincontainer" style="height:100%;overflow-y:hidden;max-width:1024px;margin:0 auto 0 auto">
+		<div class="rowx header" ng-include="'app/views/header.html'"></div>
+		<div style="position:relative;">
+			<div ng-include="'app/views/menu.html'"></div>
+		</div>
+
+		<div class="rowx content" style="clear:both;  ">
+			<div dx-tabs="tabs_options" class="gray">
+
+			</div>
+			<div style='clear:both'></div>
+			<div id="scrollview" dx-scroll-view="scroll_main">
+				<div style=" margin:5px 5px 0 5px; border:1px solid #ccc" ng-class="getFormClass(x)" ng-repeat="x in ds_active" ng-click="showForm(x)">
+					<div>
+						<div style='font-weight:bold;text-align:center;padding:5px;' ng-class="getHeaderClass(x)">
+							<table style='width:100%;'>
+								<tr>
+									<td style='text-align:left'>{{x.TypeTitle}}</td>
+									<td style='width:30%;text-align:right;font-weight:normal'>FRM-{{x.type}}-{{x.EntityId}}</td>
+								</tr>
+							</table>
+						</div>
+						<div ng-show='x.type!=2' style='padding:7px;border-bottom:1px solid #ddd;text-align:center'>
+							<div style=' font-weight:bold;font-size:14px;'> {{x.Route}} </div>
+							<div style=' font-weight:bold;font-size:14px;margin-top:5px;'> {{formatDateTime(x.STDLocal)}} </div>
+
+						</div>
+						<div style='padding:7px; border-bottom:1px solid #ddd'>Result/Remark</div>
+						<div style='height:50px;font-weight:bold;border-bottom:1px solid #eee'>{{x.Result}}</div>
+						<div style=' text-align:right;padding:5px;background:#ddd' ng-class="getHeaderClass(x)"> {{formatDateTime(x.DateCreation)}}</div>
+					</div>
+
+				</div>
+
+			</div>
+
+
+		</div>
+
+		<div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'forms';" style="padding:0;flex:0 0 45px"></div>
+	</div>
+
+
+	<div id="popup_newform" dx-popup="popup_newform" class="no-padding">
+		<div style="padding:5px;">
+
+			<div class="dx-border" style="padding:10px;">
+				<div style="margin-bottom:5px;">FROM</div>
+				<div class="center" dx-date-box="date_from"></div>
+				<div style="margin-bottom:5px;margin-top:10px">TO</div>
+				<div class="center" dx-date-box="date_to"></div>
+				<div style="margin-bottom:5px;margin-top:10px">REASON</div>
+				<div class="center" dx-select-box="sb_reason"></div>
+				<div style="margin-bottom:5px;margin-top:10px">REMARK</div>
+				<div dx-text-area="txt_remark"></div>
+				<div style="clear:both"></div>
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div id="popup_select" dx-popup="popup_select" class="no-padding">
+		<div style="padding:5px;">
+
+			<div class="dx-border" style="padding:10px;">
+				<div id="scroll_ft" dx-scroll-view="scroll_ft">
+					<div class='_form_type' ng-click='type_click($event,"InitQACabin")'>
+						Cabin Hazard/Event Safety Report
+					</div>
+
+					<div class='_form_type' ng-click='type_click($event,"InitQAGround")'>
+						Ground Operation Hazard/Event Report Form
+					</div>
+
+					<div class='_form_type' ng-click='type_click($event,"InitQAMaintenance")'>
+						Maintenance Occurence Report
+					</div>
+
+
+					<div class='_form_type' ng-click='type_click($event,"InitQADispatch")'>
+						Dispatch Hazard/Event Safety Report Form
+					</div>
+
+					<div class='_form_type' ng-click='type_click($event,"InitQASecurity")'>
+						Security Hazard/Event Safety Report Form
+					</div>
+
+					<div class='_form_type' ng-click='type_click($event,"InitQACatering")'>
+						Catering Hazard Report
+					</div>
+					<div class='_form_type' ng-click='type_click($event,"InitQAVoluntary")'>
+						Voluntary Hazard Reporting
+					</div>
+
+					<div class='_form_type' ng-click='type_click($event,"InitQACyberSecurity")'>
+						Cyber Security Hazard/Event Safety Report Form
+					</div>
+
+
+				</div>
+
+
+
+				<div style='padding-top:10px;'>
+					<div style='border-top:1px solid gray;padding:10px 10px 10px 10px'>
+						<div dx-date-box="date_from" class="center"></div>
+
+						<div dx-select-box="sb_flts" class="center" style='margin-top:5px;'></div>
+						<div dx-text-box="txt_route" class="center" style='margin-top:5px;'></div>
+					</div>
+
+				</div>
+
+				<div style="clear:both"></div>
+
+
+			</div>
+
+
+		</div>
+	</div>
+
+
+	<div dx-load-panel="loadPanel"></div>
+
+
+
+	<div ng-include="'app/views/qacabin.html'"></div>
+	<div ng-include="'app/views/qasecurity.html'"></div>
+	<div ng-include="'app/views/qadispatch.html'"></div>
+	<div ng-include="'app/views/qacatering.html'"></div>
+	<div ng-include="'app/views/qaground.html'"></div>
+	<div ng-include="'app/views/qamaintenance.html'"></div>
+	<div ng-include="'app/views/qaVoluntary.html'"></div>
+	<div ng-include="'app/views/qaCyberSecurity.html'"></div>
+</div>

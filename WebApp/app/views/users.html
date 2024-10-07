@@ -1,0 +1,307 @@
+﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_flight .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box users" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+        <div class=" col-lg-4 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <!-- <div style="background:gray;color:white;padding:7px 5px 8px 5px">Total<i class="fa fa-file-excel-o" ng-click="exportTotal"  style="color:lightgreen;font-size:24px;float:right;cursor: pointer;"></i></div>-->
+                <div dx-data-grid="dg_flight_total" id="dg_flight_total" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+        </div>
+        <div class=" col-lg-3 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <!-- <div style="background:gray;color:white;padding:7px 5px 8px 5px">Details<i class="fa fa-file-excel-o" ng-click="exportDetails" style="color:lightgreen;font-size:24px;float:right;cursor: pointer;"></i></div>-->
+                    <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class=" col-lg-5 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <!-- <div style="background:gray;color:white;padding:7px 5px 8px 5px">Details<i class="fa fa-file-excel-o" ng-click="exportDetails" style="color:lightgreen;font-size:24px;float:right;cursor: pointer;"></i></div>-->
+                    <div dx-data-grid="dg_claims" id="dg_claims" class="content" style="overflow-y:hidden"></div>
+                    <!-- <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>-->
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-8 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px">  <div dx-button="btn_new"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px">  <div dx-button="btn_edit"></div></td>
+                    <td style="width:160px;text-align:left;padding-right:5px">  <div dx-button="btn_password"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px">  <div dx-button="btn_role"></div></td>
+                    <td style="width:160px;text-align:left;padding-right:5px">  <div dx-button="btn_disable"></div></td>
+                    <td style="width:160px;text-align:left;padding-right:5px">  <div dx-button="btn_enable"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px">    <div dx-button="btn_delete"></div></td>
+
+
+
+                    <td></td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div class="dx-border" style="padding:10px;">
+            <div class="padding-7 margin-bottom-5">
+                <label>Select From Employees</label>
+                <div dx-select-box="sb_employees"></div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>First Name</label>
+                <div dx-text-box="txt_FirstName" dx-validator="{validationGroup:'useradd',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Last Name</label>
+                <div dx-text-box="txt_LastName" dx-validator="{validationGroup:'useradd',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>User Name</label>
+                <div dx-text-box="txt_UserName" dx-validator="{validationGroup:'useradd',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" ng-show="!IsEdit">
+                <label>Password</label>
+                <div dx-text-box="txt_Password" dx-validator="{validationGroup:'useradd',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div style="clear:both"></div>
+
+
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Station</label>
+                <div dx-select-box="sb_airport"></div>
+            </div>
+            <div style="clear:both"></div>
+            <div class="margin-bottom-5 padding-7">
+                <label>Roles</label>
+                <div dx-tag-box="tag_roles"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="popup_password" dx-popup="popup_password" class="no-padding">
+        <div class="dx-border" style="padding:10px;">
+
+            <div class="margin-bottom-5 padding-7">
+                <label>New Password</label>
+                <div dx-text-box="txt_newPassword" dx-validator="{validationGroup:'password',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div id="popup_role" dx-popup="popup_role" class="no-padding">
+        <div class="col-lg-5 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+            <div dx-data-grid="dg_role" class="content" style="overflow-y:hidden"></div>
+        </div>
+        <div class="col-lg-7 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <div dx-data-grid="dg_rc" id="dg_rc" class="content" style="overflow-y:hidden"></div>
+        </div>
+
+    </div>
+
+    <div id="popup_rep" dx-popup="popup_rep" class="no-padding">
+        <div style="padding:10px;">
+
+            <div dx-data-grid="dg" id="dg">
+
+            </div>
+
+
+        </div>
+    </div>
+</div>

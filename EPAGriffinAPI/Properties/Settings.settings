@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EPAGriffinAPI.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="EPAGriffinAPI_payamak_Actions" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://api.payamak-panel.com/post/actions.asmx</Value>
+    </Setting>
+    <Setting Name="EPAGriffinAPI_com_magfa_sms_SoapSmsQueuableImplementationService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://sms.magfa.com/api/soap/sms/v1/server</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

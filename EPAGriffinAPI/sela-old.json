@@ -1,0 +1,2786 @@
+{
+  "application": {
+    "name": "amanat",
+    "version": "1.1.0"
+  },
+  "processes": {
+    "insert_erp_paper": {
+      "name": "insert_erp_paper",
+      "info": "This process responsible for erp_paper creation.",
+      "data_tags": [
+        {
+          "info": "فعال یا غیر فعال",
+          "RType": "L",
+          "name": "ACTIVE"
+        },
+        {
+          "info": "وضعیت تایید",
+          "RType": "L",
+          "name": "APPROVED"
+        },
+        {
+          "info": "واحد هدف اموال خریداری شده",
+          "RType": "L",
+          "name": "BUYFOR"
+        },
+        {
+          "info": "سایر هزینه های افزایشی",
+          "RType": "L",
+          "name": "COST_ADDITIVE"
+        },
+        {
+          "info": "سایر هزینه های کاهشی",
+          "RType": "L",
+          "name": "COST_SUBTRACTIVE"
+        },
+        {
+          "info": "تاریخ ایجاد",
+          "RType": "L",
+          "name": "CREATEDATE"
+        },
+        {
+          "info": "ایجاد کننده",
+          "RType": "L",
+          "name": "CREATOR"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "DESCRIPTION"
+        },
+        {
+          "info": "شماره کامل سند",
+          "RType": "L",
+          "name": "FULLNO"
+        },
+        {
+          "info": "واحد حقوقی",
+          "RType": "L",
+          "name": "HOGHUGHI_LOCATION"
+        },
+        {
+          "info": "مسئول حقوقی",
+          "RType": "L",
+          "name": "HOGHUGHI_USER"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "واحد پول فاکتور",
+          "RType": "L",
+          "name": "INVOICE_CURRENCY"
+        },
+        {
+          "info": "تاریخ فاکتور",
+          "RType": "L",
+          "name": "INVOICE_DATE"
+        },
+        {
+          "info": "تخفیف",
+          "RType": "L",
+          "name": "INVOICE_DISCOUNT"
+        },
+        {
+          "info": "قیمت نهایی فاکتور",
+          "RType": "L",
+          "name": "INVOICE_FINALPRICE"
+        },
+        {
+          "info": "شماره فاکتور",
+          "RType": "L",
+          "name": "INVOICE_NO"
+        },
+        {
+          "info": "قیمت اولیه فاکتور",
+          "RType": "L",
+          "name": "INVOICE_PRICE"
+        },
+        {
+          "info": "مالیات",
+          "RType": "L",
+          "name": "INVOICE_TAX"
+        },
+        {
+          "info": "شرکت",
+          "RType": "L",
+          "name": "KASR_COMPANY"
+        },
+        {
+          "info": "تاریخ کسر",
+          "RType": "L",
+          "name": "KASR_DATE"
+        },
+        {
+          "info": "تاریخ اعتبار کسر",
+          "RType": "L",
+          "name": "KASR_DEADLINE"
+        },
+        {
+          "info": "پلاک تحویلی",
+          "RType": "L",
+          "name": "KASR_PLAK_TAHVILI"
+        },
+        {
+          "info": "رابط",
+          "RType": "L",
+          "name": "KASR_RABET"
+        },
+        {
+          "info": "دلیل کسر",
+          "RType": "L",
+          "name": "KASR_REASON"
+        },
+        {
+          "info": "تاریخ برگشت از کسر",
+          "RType": "L",
+          "name": "KASR_RETURN_DATE"
+        },
+        {
+          "info": "فروش-واحد پول",
+          "RType": "L",
+          "name": "KASR_SELL_CURRENCY"
+        },
+        {
+          "info": "فروش-مزاینده",
+          "RType": "L",
+          "name": "KASR_SELL_MOZAIEDE"
+        },
+        {
+          "info": "فروش-قیمت",
+          "RType": "L",
+          "name": "KASR_SELL_VALUE"
+        },
+        {
+          "info": "سرقت-قیمت کارشناسی",
+          "RType": "L",
+          "name": "KASR_SERGHAT_KARSHENASI"
+        },
+        {
+          "info": "سرقت-تحویل گیرنده",
+          "RType": "L",
+          "name": "KASR_SERGHAT_USERID"
+        },
+        {
+          "info": "واحد نگهداری",
+          "RType": "L",
+          "name": "KEEPING_LOCATION"
+        },
+        {
+          "info": "شماره ناامه",
+          "RType": "L",
+          "name": "LICENCE_NO"
+        },
+        {
+          "info": "دلیل مرجوعی",
+          "RType": "L",
+          "name": "MARJU_REASON"
+        },
+        {
+          "info": "شماره سند",
+          "RType": "L",
+          "name": "NO"
+        },
+        {
+          "info": "تاریخ سند",
+          "RType": "L",
+          "name": "PAPERDATE"
+        },
+        {
+          "info": "تاریخ اعتبار",
+          "RType": "L",
+          "name": "PAPEREXPDATE"
+        },
+        {
+          "info": "نوع سند",
+          "RType": "L",
+          "name": "PAPERTYPE"
+        },
+        {
+          "info": "سال سند",
+          "RType": "L",
+          "name": "PAPERYEAR"
+        },
+        {
+          "info": "واحد امین اموال تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_AMINAMVAL_LOCATION"
+        },
+        {
+          "info": "امین اموال تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_AMINAMVAL_USER"
+        },
+        {
+          "info": "انبار تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_ANBARDAR_LOCATION"
+        },
+        {
+          "info": "انباردار تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_ANBARDAR_USER"
+        },
+        {
+          "info": "واحد امین اموال کل تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_HEADAMINAMVAL_LOCATION"
+        },
+        {
+          "info": "امین اموال کل تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_HEADAMINAMVAL_USER"
+        },
+        {
+          "info": "واحد مقام مسئول تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_RESPONSIBLE_LOCATION"
+        },
+        {
+          "info": "مقام مسئول تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_RESPONSIBLE_USER"
+        },
+        {
+          "info": "واحد تحویل گیرنده",
+          "RType": "L",
+          "name": "RECEIVER_LOCATION"
+        },
+        {
+          "info": "تحویل گیرنده",
+          "RType": "L",
+          "name": "RECEIVER_USER"
+        },
+        {
+          "info": "سند مرتبط",
+          "RType": "L",
+          "name": "RELATEDPAPER"
+        },
+        {
+          "info": "شناسه ریشه تحویل دهنده",
+          "RType": "L",
+          "name": "ROOTLOCATION"
+        },
+        {
+          "info": "شناسه ریشه تحویل گیرنده",
+          "RType": "L",
+          "name": "ROOTLOCATION2"
+        },
+        {
+          "info": "واحد مقام مسئول تحویل دهنده",
+          "RType": "L",
+          "name": "SENDE_RRESPONSIBLE_LOCATION"
+        },
+        {
+          "info": "واحد امین اموال تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_AMINAMVAL_LOCATION"
+        },
+        {
+          "info": "امین اموال تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_AMINAMVAL_USER"
+        },
+        {
+          "info": "واحد امین اموال کل تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_HEADAMINAMVAL_LOCATION"
+        },
+        {
+          "info": "امین اموال کل تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_HEADAMINAMVAL_USER"
+        },
+        {
+          "info": "واحد تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_LOCATION"
+        },
+        {
+          "info": "مقام مسئول تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_RESPONSIBLE_USER"
+        },
+        {
+          "info": "تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_USER"
+        },
+        {
+          "info": "واحد هدف",
+          "RType": "L",
+          "name": "TARGETLOCATION"
+        },
+        {
+          "info": "کاربر هدف",
+          "RType": "L",
+          "name": "TARGETUSER"
+        },
+        {
+          "info": "هزینه جابجایی",
+          "RType": "L",
+          "name": "TRANSPORTCOST"
+        }
+      ]
+    },
+    "insert_erp_role": {
+      "name": "insert_erp_role",
+      "info": "This process responsible for erp_role creation.",
+      "data_tags": [
+        {
+          "info": "مدیر",
+          "RType": "L",
+          "name": "ADMIN"
+        },
+        {
+          "info": "امین اموال",
+          "RType": "L",
+          "name": "AMINAMVAL"
+        },
+        {
+          "info": "امین اموال کل",
+          "RType": "L",
+          "name": "AMINAMVALKOL"
+        },
+        {
+          "info": "انباردار",
+          "RType": "L",
+          "name": "ANBARDAR"
+        },
+        {
+          "info": "انباردار کل",
+          "RType": "L",
+          "name": "ANBARDARKOL"
+        },
+        {
+          "info": "ماژول",
+          "RType": "L",
+          "name": "APPLICATION"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "DESCRIPTION"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "دریافت",
+          "RType": "L",
+          "name": "RECEIVING"
+        },
+        {
+          "info": "تعمیرات و نگهداری",
+          "RType": "L",
+          "name": "REPAIR"
+        },
+        {
+          "info": "درخواست",
+          "RType": "L",
+          "name": "REQUEST"
+        },
+        {
+          "info": "خرید",
+          "RType": "L",
+          "name": "SHOP"
+        },
+        {
+          "info": "عنوان",
+          "RType": "L",
+          "name": "TITLE"
+        }
+      ]
+    },
+    "insert_erp_asset": {
+      "name": "insert_erp_asset",
+      "info": "This process responsible for erp_asset creation.",
+      "data_tags": [
+        {
+          "info": "کد پستی",
+          "RType": "L",
+          "name": "AMLAK_POSTALCODE"
+        },
+        {
+          "info": "پلاک ثبتی اصلی",
+          "RType": "L",
+          "name": "AMLAK_SABTI_ASLI"
+        },
+        {
+          "info": "پلاک ثتبی فرعی",
+          "RType": "L",
+          "name": "AMLAK_SABTI_FAREI"
+        },
+        {
+          "info": "ورقه مالکیت",
+          "RType": "L",
+          "name": "AMLAK_VARAGHE_MALEKIAT"
+        },
+        {
+          "info": "آمپر",
+          "RType": "L",
+          "name": "AMPER"
+        },
+        {
+          "info": "واحد آمپر",
+          "RType": "L",
+          "name": "AMPERUNIT"
+        },
+        {
+          "info": "مساحت",
+          "RType": "L",
+          "name": "AREA"
+        },
+        {
+          "info": "واحد مساحت",
+          "RType": "L",
+          "name": "AREAUNIT"
+        },
+        {
+          "info": "مبلغ ارزی",
+          "RType": "L",
+          "name": "ARZI"
+        },
+        {
+          "info": "ماهیت کالا",
+          "RType": "L",
+          "name": "ASSETTYPE"
+        },
+        {
+          "info": "سازنده",
+          "RType": "L",
+          "name": "BRAND"
+        },
+        {
+          "info": "خریداری شده برای",
+          "RType": "L",
+          "name": "BUYFOR"
+        },
+        {
+          "info": "سند خرید",
+          "RType": "L",
+          "name": "BUYFORPAPER"
+        },
+        {
+          "info": "ردیف سند خرید",
+          "RType": "L",
+          "name": "BUYFORPAPERITEM"
+        },
+        {
+          "info": "حجم",
+          "RType": "L",
+          "name": "CAPACITY"
+        },
+        {
+          "info": "واحد حجم",
+          "RType": "L",
+          "name": "CAPACITYUNIT"
+        },
+        {
+          "info": "کد کالا",
+          "RType": "L",
+          "name": "CODEID"
+        },
+        {
+          "info": "رنگ",
+          "RType": "L",
+          "name": "COLOR"
+        },
+        {
+          "info": "شرایط",
+          "RType": "L",
+          "name": "CONDITION"
+        },
+        {
+          "info": "کشور سازنده",
+          "RType": "L",
+          "name": "COUNTRY"
+        },
+        {
+          "info": "کورس",
+          "RType": "L",
+          "name": "COURSE"
+        },
+        {
+          "info": "واحد کورس",
+          "RType": "L",
+          "name": "COURSEUNIT"
+        },
+        {
+          "info": "تاریخ ایجاد رکورد",
+          "RType": "L",
+          "name": "CREATEDATE"
+        },
+        {
+          "info": "ایجاد کننده",
+          "RType": "L",
+          "name": "CREATOR"
+        },
+        {
+          "info": "واحد پول",
+          "RType": "L",
+          "name": "CURRENCY"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "DESCRIPTION"
+        },
+        {
+          "info": "قطر",
+          "RType": "L",
+          "name": "DIAMETER"
+        },
+        {
+          "info": "واحد قطر",
+          "RType": "L",
+          "name": "DIAMETERUNIT"
+        },
+        {
+          "info": "نوع استحصال",
+          "RType": "L",
+          "name": "EARNINGTYPE"
+        },
+        {
+          "info": "نرخ تبدیل",
+          "RType": "L",
+          "name": "EXCHANGERATE"
+        },
+        {
+          "info": "ردیف سند کسر",
+          "RType": "L",
+          "name": "EXIT_PAPERITEM"
+        },
+        {
+          "info": "تاریخ کسر",
+          "RType": "L",
+          "name": "EXITDATE"
+        },
+        {
+          "info": "دلیل کسر",
+          "RType": "L",
+          "name": "EXITREASON"
+        },
+        {
+          "info": "تاریخ انقضا",
+          "RType": "L",
+          "name": "EXPDATE"
+        },
+        {
+          "info": "تاریخ انقضا میلادی",
+          "RType": "L",
+          "name": "EXPDATEG"
+        },
+        {
+          "info": "PARENT ID-CONSUMABLES",
+          "RType": "L",
+          "name": "EXTRACTFROMID"
+        },
+        {
+          "info": "نیرو",
+          "RType": "L",
+          "name": "FORCE"
+        },
+        {
+          "info": "واحد نیرو",
+          "RType": "L",
+          "name": "FORCEUNIT"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "محل نگهداری",
+          "RType": "L",
+          "name": "KEEPINGLOCATIONID"
+        },
+        {
+          "info": "شماره انتظامی",
+          "RType": "L",
+          "name": "KHODRO_ENTEZAMI"
+        },
+        {
+          "info": "شماره موتور",
+          "RType": "L",
+          "name": "KHODRO_MOTOR"
+        },
+        {
+          "info": "نوع شماره انتظامی",
+          "RType": "L",
+          "name": "KHODRO_NOTYPE"
+        },
+        {
+          "info": "شماره شاسی",
+          "RType": "L",
+          "name": "KHODRO_SHASI"
+        },
+        {
+          "info": "پلاک",
+          "RType": "L",
+          "name": "LABEL"
+        },
+        {
+          "info": "نوع پلاک",
+          "RType": "L",
+          "name": "LABELTYPE"
+        },
+        {
+          "info": "LAST PAPER ITEM ",
+          "RType": "L",
+          "name": "LASTPAPERITEMID"
+        },
+        {
+          "info": "نام تجاری",
+          "RType": "L",
+          "name": "LATINNAME"
+        },
+        {
+          "info": "طول",
+          "RType": "L",
+          "name": "LENGTHX"
+        },
+        {
+          "info": "واحد طول",
+          "RType": "L",
+          "name": "LENGTHXUNIT"
+        },
+        {
+          "info": "تاریخ نامه",
+          "RType": "L",
+          "name": "LETTERDATE"
+        },
+        {
+          "info": "شماره  نامه",
+          "RType": "L",
+          "name": "LETTERNO"
+        },
+        {
+          "info": "موضوع نامه",
+          "RType": "L",
+          "name": "LETTERSUBJECT"
+        },
+        {
+          "info": "مالک اصلی",
+          "RType": "L",
+          "name": "MAINOWNER"
+        },
+        {
+          "info": "جنس",
+          "RType": "L",
+          "name": "MATERIAL"
+        },
+        {
+          "info": "مدل",
+          "RType": "L",
+          "name": "MODEL"
+        },
+        {
+          "info": "شناسه مدل",
+          "RType": "L",
+          "name": "MODELID"
+        },
+        {
+          "info": "عنوان",
+          "RType": "L",
+          "name": "NAME"
+        },
+        {
+          "info": "پلاک اموال عددی",
+          "RType": "L",
+          "name": "NLABEL"
+        },
+        {
+          "info": "شناسه سیستم قدیم",
+          "RType": "L",
+          "name": "OLDID"
+        },
+        {
+          "info": "پلاک قدیم",
+          "RType": "L",
+          "name": "OLDLABEL"
+        },
+        {
+          "info": "مالک قدیمی",
+          "RType": "L",
+          "name": "OLDOWNER"
+        },
+        {
+          "info": "تاریخ استفاده",
+          "RType": "L",
+          "name": "OPERATIONDATE"
+        },
+        {
+          "info": "PARENT ID",
+          "RType": "L",
+          "name": "PARENTID"
+        },
+        {
+          "info": "شماره تلفن",
+          "RType": "L",
+          "name": "PHONE_NO"
+        },
+        {
+          "info": "شماره فنی",
+          "RType": "L",
+          "name": "PN"
+        },
+        {
+          "info": "توان",
+          "RType": "L",
+          "name": "POWER"
+        },
+        {
+          "info": "واحد توان",
+          "RType": "L",
+          "name": "POWERUNIT"
+        },
+        {
+          "info": "فشار",
+          "RType": "L",
+          "name": "PRESSURE"
+        },
+        {
+          "info": "واحد فشار",
+          "RType": "L",
+          "name": "PRESSUREUNIT"
+        },
+        {
+          "info": "تاریخ تولید",
+          "RType": "L",
+          "name": "PRODATE"
+        },
+        {
+          "info": "تاریخ تولید میلادی",
+          "RType": "L",
+          "name": "PRODATEG"
+        },
+        {
+          "info": "تاریخ خرید",
+          "RType": "L",
+          "name": "PURCHASEDATE"
+        },
+        {
+          "info": "کیفیت",
+          "RType": "L",
+          "name": "QUALITY"
+        },
+        {
+          "info": "تعداد",
+          "RType": "L",
+          "name": "QUANTITY"
+        },
+        {
+          "info": "واحد تعداد",
+          "RType": "L",
+          "name": "QUANTITYUNIT"
+        },
+        {
+          "info": "دریافت کننده",
+          "RType": "L",
+          "name": "RECEIVERID"
+        },
+        {
+          "info": "واحد تحویل گیرنده",
+          "RType": "L",
+          "name": "RECLOCATIONID"
+        },
+        {
+          "info": "مانده",
+          "RType": "L",
+          "name": "REMAIN"
+        },
+        {
+          "info": "مقاومت",
+          "RType": "L",
+          "name": "RESISTANCE"
+        },
+        {
+          "info": "واحد مقاومت",
+          "RType": "L",
+          "name": "RESISTANCEUNIT"
+        },
+        {
+          "info": "واحد ریشه",
+          "RType": "L",
+          "name": "ROOTLOCATION"
+        },
+        {
+          "info": "آدرس فروشنده",
+          "RType": "L",
+          "name": "SELLERADDRESS"
+        },
+        {
+          "info": "فروشنده",
+          "RType": "L",
+          "name": "SELLERNAME"
+        },
+        {
+          "info": "تلفن فروشنده",
+          "RType": "L",
+          "name": "SELLERPHONE"
+        },
+        {
+          "info": "سریال",
+          "RType": "L",
+          "name": "SNBN"
+        },
+        {
+          "info": "شماره پیگیری",
+          "RType": "L",
+          "name": "TRACKINGNO"
+        },
+        {
+          "info": "نوع استفاده",
+          "RType": "L",
+          "name": "USAGE"
+        },
+        {
+          "info": "ارزش",
+          "RType": "L",
+          "name": "VALUE"
+        },
+        {
+          "info": "نوع ارزشگذاری",
+          "RType": "L",
+          "name": "VALUETYPE"
+        },
+        {
+          "info": "ولتاژ",
+          "RType": "L",
+          "name": "VOLTAGE"
+        },
+        {
+          "info": "واحد ولتاژ",
+          "RType": "L",
+          "name": "VOLTAGEUNIT"
+        },
+        {
+          "info": "وارانتی",
+          "RType": "L",
+          "name": "WARANTY"
+        },
+        {
+          "info": "شروع وارانتی",
+          "RType": "L",
+          "name": "WARANTYBEGINDATE"
+        },
+        {
+          "info": "خاتمه وارانتی",
+          "RType": "L",
+          "name": "WARANTYENDDATE"
+        },
+        {
+          "info": "وزن",
+          "RType": "L",
+          "name": "WEIGHT"
+        },
+        {
+          "info": "واحد وزن",
+          "RType": "L",
+          "name": "WEIGHTUNIT"
+        }
+      ]
+    },
+    "insert_erp_coding": {
+      "name": "insert_erp_coding",
+      "info": "This process responsible for erp_coding creation.",
+      "data_tags": [
+        {
+          "info": "الزام تعریف ماهیت",
+          "RType": "L",
+          "name": "ASSET_TYPE"
+        },
+        {
+          "info": "ماهیت کالا",
+          "RType": "L",
+          "name": "ASSETTYPE"
+        },
+        {
+          "info": "کد",
+          "RType": "L",
+          "name": "CODE"
+        },
+        {
+          "info": "نوع کد",
+          "RType": "L",
+          "name": "CODETYPE"
+        },
+        {
+          "info": "الزام تعریف رنگ",
+          "RType": "L",
+          "name": "COLOR"
+        },
+        {
+          "info": "نرخ استهلاک",
+          "RType": "L",
+          "name": "DEPRATE"
+        },
+        {
+          "info": "نوع استهلاک",
+          "RType": "L",
+          "name": "DEPTYPE"
+        },
+        {
+          "info": "الزام تعریف سازنده",
+          "RType": "L",
+          "name": "FACTORY"
+        },
+        {
+          "info": "کد کامل",
+          "RType": "L",
+          "name": "FULLCODE"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "الزام تعریف نام تجاری",
+          "RType": "L",
+          "name": "LATINNAME"
+        },
+        {
+          "info": "دوره زمانی مصرف کالا",
+          "RType": "L",
+          "name": "MASRAFPERIOD"
+        },
+        {
+          "info": "الزام تعریف جنس",
+          "RType": "L",
+          "name": "MATERIAL"
+        },
+        {
+          "info": "الزام تعریف مدل",
+          "RType": "L",
+          "name": "MODEL"
+        },
+        {
+          "info": "PARENT CODE",
+          "RType": "L",
+          "name": "PARENTID"
+        },
+        {
+          "info": "الزام تعریف شماره فنی",
+          "RType": "L",
+          "name": "PN"
+        },
+        {
+          "info": "الزام تعریف سریال",
+          "RType": "L",
+          "name": "SN"
+        },
+        {
+          "info": "عنوان",
+          "RType": "L",
+          "name": "TITLE"
+        }
+      ]
+    },
+    "insert_erp_ins": {
+      "name": "insert_erp_ins",
+      "info": "This process responsible for erp_ins creation.",
+      "data_tags": [
+        {
+          "info": "شناسه کالا",
+          "RType": "L",
+          "name": "ASSETID"
+        },
+        {
+          "info": "تاریخ شروع",
+          "RType": "L",
+          "name": "BEGINDATE"
+        },
+        {
+          "info": "بیمه گزار",
+          "RType": "L",
+          "name": "BIMEGOZAR"
+        },
+        {
+          "info": "شرکت",
+          "RType": "L",
+          "name": "COMPANY"
+        },
+        {
+          "info": "تاریخ پایان",
+          "RType": "L",
+          "name": "ENDDATE"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "شماره بیمه نامه",
+          "RType": "L",
+          "name": "NO"
+        },
+        {
+          "info": "مبلغ",
+          "RType": "L",
+          "name": "PRICE"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "REMARK"
+        },
+        {
+          "info": "موضوع",
+          "RType": "L",
+          "name": "SUBJECT"
+        },
+        {
+          "info": "نوع",
+          "RType": "L",
+          "name": "TYPE"
+        }
+      ]
+    },
+    "insert_erp_paperitem": {
+      "name": "insert_erp_paperitem",
+      "info": "This process responsible for erp_paperitem creation.",
+      "data_tags": [
+        {
+          "info": "شناسه کالا",
+          "RType": "L",
+          "name": "ASSETID"
+        },
+        {
+          "info": "پلاک اموال",
+          "RType": "L",
+          "name": "ASSETLABEL"
+        },
+        {
+          "info": "عنوان کالا",
+          "RType": "L",
+          "name": "ASSETTITLE"
+        },
+        {
+          "info": "برند",
+          "RType": "L",
+          "name": "BRAND"
+        },
+        {
+          "info": "کد کالا",
+          "RType": "L",
+          "name": "CODEID"
+        },
+        {
+          "info": "وضعیت کالا",
+          "RType": "L",
+          "name": "CONDITION"
+        },
+        {
+          "info": "حذف شده",
+          "RType": "L",
+          "name": "DELETED"
+        },
+        {
+          "info": "دلیل حذف",
+          "RType": "L",
+          "name": "DELETEREASON"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "DESCRIPTION"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "تعداد اولیه کالای مصرفی",
+          "RType": "L",
+          "name": "INIT_QTY"
+        },
+        {
+          "info": "تاریخ برگشت از کسر",
+          "RType": "L",
+          "name": "KASR_RETURN_DATE"
+        },
+        {
+          "info": "مدل",
+          "RType": "L",
+          "name": "MODEL"
+        },
+        {
+          "info": "قیمت اولیه",
+          "RType": "L",
+          "name": "ORIGINAL_PRICE"
+        },
+        {
+          "info": "شناسه سند",
+          "RType": "L",
+          "name": "PAPERID"
+        },
+        {
+          "info": "شماره فنی",
+          "RType": "L",
+          "name": "PN"
+        },
+        {
+          "info": "قیمت",
+          "RType": "L",
+          "name": "PRICE"
+        },
+        {
+          "info": "تعداد",
+          "RType": "L",
+          "name": "QUANTITY"
+        },
+        {
+          "info": "واحد شمارش",
+          "RType": "L",
+          "name": "QUANTITYUNIT"
+        },
+        {
+          "info": "دلیل",
+          "RType": "L",
+          "name": "REASON"
+        },
+        {
+          "info": "تحویل گیرنده",
+          "RType": "L",
+          "name": "RECID"
+        },
+        {
+          "info": "واحد تحویل گیرنده",
+          "RType": "L",
+          "name": "RECLOCATIONID"
+        },
+        {
+          "info": "ردیف سند مرتبط",
+          "RType": "L",
+          "name": "RELATEDPAPERITEM"
+        },
+        {
+          "info": "تحویل دهنده",
+          "RType": "L",
+          "name": "SENDERID"
+        },
+        {
+          "info": "واحد تحویل دهنده",
+          "RType": "L",
+          "name": "SENDERLOCATIONID"
+        },
+        {
+          "info": "واحد ریشه تحویل دهنده",
+          "RType": "L",
+          "name": "SENDERROOTLOCATIONID"
+        },
+        {
+          "info": "شماره سریال",
+          "RType": "L",
+          "name": "SNBN"
+        },
+        {
+          "info": "وضعیت سیستمی",
+          "RType": "L",
+          "name": "STATUS"
+        },
+        {
+          "info": "تغییر دهنده وضعیت سیستمی",
+          "RType": "L",
+          "name": "STATUS_BY"
+        },
+        {
+          "info": "تاریخ تغییر وضعیت سیستمی",
+          "RType": "L",
+          "name": "STATUS_DATE"
+        }
+      ]
+    },
+    "insert_erp_location": {
+      "name": "insert_erp_location",
+      "info": "This process responsible for erp_location creation.",
+      "data_tags": [
+        {
+          "info": "کد",
+          "RType": "L",
+          "name": "CODE"
+        },
+        {
+          "info": "حذف شده",
+          "RType": "L",
+          "name": "DELETED"
+        },
+        {
+          "info": "کد کامل",
+          "RType": "L",
+          "name": "FULLCODE"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "مجازی",
+          "RType": "L",
+          "name": "ISVIRTUAL"
+        },
+        {
+          "info": "نوع تقسیمات سازمانی",
+          "RType": "L",
+          "name": "LOCATIONTYPE"
+        },
+        {
+          "info": "PARENT LOCATION",
+          "RType": "L",
+          "name": "PARENTID"
+        },
+        {
+          "info": "تلفن",
+          "RType": "L",
+          "name": "PHONE"
+        },
+        {
+          "info": "واحد ریشه",
+          "RType": "L",
+          "name": "ROOTLOCATIONID"
+        },
+        {
+          "info": "عنوان",
+          "RType": "L",
+          "name": "TITLE"
+        }
+      ]
+    },
+    "insert_erp_userrole": {
+      "name": "insert_erp_userrole",
+      "info": "This process responsible for erp_userrole creation.",
+      "data_tags": [
+        {
+          "info": "تاریخ شروع",
+          "RType": "L",
+          "name": "DATE_BEGIN"
+        },
+        {
+          "info": "تاریخ پایان",
+          "RType": "L",
+          "name": "DATE_END"
+        },
+        {
+          "info": "شناسه گروه",
+          "RType": "L",
+          "name": "GROUPID"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "فعال غیر فعال",
+          "RType": "L",
+          "name": "ISACTIVE"
+        },
+        {
+          "info": "شناسه نقش",
+          "RType": "L",
+          "name": "ROLEID"
+        },
+        {
+          "info": "شناسه کاربر",
+          "RType": "L",
+          "name": "USERID"
+        }
+      ]
+    },
+    "insert_erp_roleaccess": {
+      "name": "insert_erp_roleaccess",
+      "info": "This process responsible for erp_roleaccess creation.",
+      "data_tags": [
+        {
+          "info": "FORMCAPTION",
+          "RType": "L",
+          "name": "FORMCAPTION"
+        },
+        {
+          "info": "FORMKEY",
+          "RType": "L",
+          "name": "FORMKEY"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "OBJECTCAPTION",
+          "RType": "L",
+          "name": "OBJECTCAPTION"
+        },
+        {
+          "info": "OBJECTKEY",
+          "RType": "L",
+          "name": "OBJECTKEY"
+        },
+        {
+          "info": "PUBLICKEY",
+          "RType": "L",
+          "name": "PUBLICKEY"
+        },
+        {
+          "info": "شناسه نقش",
+          "RType": "L",
+          "name": "ROLEID"
+        }
+      ]
+    },
+    "edit_erp_paper": {
+      "name": "edit_erp_paper",
+      "info": "This process responsible for erp_paper editing.",
+      "data_tags": [
+        {
+          "info": "فعال یا غیر فعال",
+          "RType": "L",
+          "name": "ACTIVE"
+        },
+        {
+          "info": "وضعیت تایید",
+          "RType": "L",
+          "name": "APPROVED"
+        },
+        {
+          "info": "واحد هدف اموال خریداری شده",
+          "RType": "L",
+          "name": "BUYFOR"
+        },
+        {
+          "info": "سایر هزینه های افزایشی",
+          "RType": "L",
+          "name": "COST_ADDITIVE"
+        },
+        {
+          "info": "سایر هزینه های کاهشی",
+          "RType": "L",
+          "name": "COST_SUBTRACTIVE"
+        },
+        {
+          "info": "تاریخ ایجاد",
+          "RType": "L",
+          "name": "CREATEDATE"
+        },
+        {
+          "info": "ایجاد کننده",
+          "RType": "L",
+          "name": "CREATOR"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "DESCRIPTION"
+        },
+        {
+          "info": "شماره کامل سند",
+          "RType": "L",
+          "name": "FULLNO"
+        },
+        {
+          "info": "واحد حقوقی",
+          "RType": "L",
+          "name": "HOGHUGHI_LOCATION"
+        },
+        {
+          "info": "مسئول حقوقی",
+          "RType": "L",
+          "name": "HOGHUGHI_USER"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "واحد پول فاکتور",
+          "RType": "L",
+          "name": "INVOICE_CURRENCY"
+        },
+        {
+          "info": "تاریخ فاکتور",
+          "RType": "L",
+          "name": "INVOICE_DATE"
+        },
+        {
+          "info": "تخفیف",
+          "RType": "L",
+          "name": "INVOICE_DISCOUNT"
+        },
+        {
+          "info": "قیمت نهایی فاکتور",
+          "RType": "L",
+          "name": "INVOICE_FINALPRICE"
+        },
+        {
+          "info": "شماره فاکتور",
+          "RType": "L",
+          "name": "INVOICE_NO"
+        },
+        {
+          "info": "قیمت اولیه فاکتور",
+          "RType": "L",
+          "name": "INVOICE_PRICE"
+        },
+        {
+          "info": "مالیات",
+          "RType": "L",
+          "name": "INVOICE_TAX"
+        },
+        {
+          "info": "شرکت",
+          "RType": "L",
+          "name": "KASR_COMPANY"
+        },
+        {
+          "info": "تاریخ کسر",
+          "RType": "L",
+          "name": "KASR_DATE"
+        },
+        {
+          "info": "تاریخ اعتبار کسر",
+          "RType": "L",
+          "name": "KASR_DEADLINE"
+        },
+        {
+          "info": "پلاک تحویلی",
+          "RType": "L",
+          "name": "KASR_PLAK_TAHVILI"
+        },
+        {
+          "info": "رابط",
+          "RType": "L",
+          "name": "KASR_RABET"
+        },
+        {
+          "info": "دلیل کسر",
+          "RType": "L",
+          "name": "KASR_REASON"
+        },
+        {
+          "info": "تاریخ برگشت از کسر",
+          "RType": "L",
+          "name": "KASR_RETURN_DATE"
+        },
+        {
+          "info": "فروش-واحد پول",
+          "RType": "L",
+          "name": "KASR_SELL_CURRENCY"
+        },
+        {
+          "info": "فروش-مزاینده",
+          "RType": "L",
+          "name": "KASR_SELL_MOZAIEDE"
+        },
+        {
+          "info": "فروش-قیمت",
+          "RType": "L",
+          "name": "KASR_SELL_VALUE"
+        },
+        {
+          "info": "سرقت-قیمت کارشناسی",
+          "RType": "L",
+          "name": "KASR_SERGHAT_KARSHENASI"
+        },
+        {
+          "info": "سرقت-تحویل گیرنده",
+          "RType": "L",
+          "name": "KASR_SERGHAT_USERID"
+        },
+        {
+          "info": "واحد نگهداری",
+          "RType": "L",
+          "name": "KEEPING_LOCATION"
+        },
+        {
+          "info": "شماره ناامه",
+          "RType": "L",
+          "name": "LICENCE_NO"
+        },
+        {
+          "info": "دلیل مرجوعی",
+          "RType": "L",
+          "name": "MARJU_REASON"
+        },
+        {
+          "info": "شماره سند",
+          "RType": "L",
+          "name": "NO"
+        },
+        {
+          "info": "تاریخ سند",
+          "RType": "L",
+          "name": "PAPERDATE"
+        },
+        {
+          "info": "تاریخ اعتبار",
+          "RType": "L",
+          "name": "PAPEREXPDATE"
+        },
+        {
+          "info": "نوع سند",
+          "RType": "L",
+          "name": "PAPERTYPE"
+        },
+        {
+          "info": "سال سند",
+          "RType": "L",
+          "name": "PAPERYEAR"
+        },
+        {
+          "info": "واحد امین اموال تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_AMINAMVAL_LOCATION"
+        },
+        {
+          "info": "امین اموال تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_AMINAMVAL_USER"
+        },
+        {
+          "info": "انبار تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_ANBARDAR_LOCATION"
+        },
+        {
+          "info": "انباردار تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_ANBARDAR_USER"
+        },
+        {
+          "info": "واحد امین اموال کل تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_HEADAMINAMVAL_LOCATION"
+        },
+        {
+          "info": "امین اموال کل تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_HEADAMINAMVAL_USER"
+        },
+        {
+          "info": "واحد مقام مسئول تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_RESPONSIBLE_LOCATION"
+        },
+        {
+          "info": "مقام مسئول تحویل گیرنده",
+          "RType": "L",
+          "name": "REC_RESPONSIBLE_USER"
+        },
+        {
+          "info": "واحد تحویل گیرنده",
+          "RType": "L",
+          "name": "RECEIVER_LOCATION"
+        },
+        {
+          "info": "تحویل گیرنده",
+          "RType": "L",
+          "name": "RECEIVER_USER"
+        },
+        {
+          "info": "سند مرتبط",
+          "RType": "L",
+          "name": "RELATEDPAPER"
+        },
+        {
+          "info": "شناسه ریشه تحویل دهنده",
+          "RType": "L",
+          "name": "ROOTLOCATION"
+        },
+        {
+          "info": "شناسه ریشه تحویل گیرنده",
+          "RType": "L",
+          "name": "ROOTLOCATION2"
+        },
+        {
+          "info": "واحد مقام مسئول تحویل دهنده",
+          "RType": "L",
+          "name": "SENDE_RRESPONSIBLE_LOCATION"
+        },
+        {
+          "info": "واحد امین اموال تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_AMINAMVAL_LOCATION"
+        },
+        {
+          "info": "امین اموال تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_AMINAMVAL_USER"
+        },
+        {
+          "info": "واحد امین اموال کل تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_HEADAMINAMVAL_LOCATION"
+        },
+        {
+          "info": "امین اموال کل تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_HEADAMINAMVAL_USER"
+        },
+        {
+          "info": "واحد تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_LOCATION"
+        },
+        {
+          "info": "مقام مسئول تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_RESPONSIBLE_USER"
+        },
+        {
+          "info": "تحویل دهنده",
+          "RType": "L",
+          "name": "SENDER_USER"
+        },
+        {
+          "info": "واحد هدف",
+          "RType": "L",
+          "name": "TARGETLOCATION"
+        },
+        {
+          "info": "کاربر هدف",
+          "RType": "L",
+          "name": "TARGETUSER"
+        },
+        {
+          "info": "هزینه جابجایی",
+          "RType": "L",
+          "name": "TRANSPORTCOST"
+        }
+      ]
+    },
+    "edit_erp_role": {
+      "name": "edit_erp_role",
+      "info": "This process responsible for erp_role editing.",
+      "data_tags": [
+        {
+          "info": "مدیر",
+          "RType": "L",
+          "name": "ADMIN"
+        },
+        {
+          "info": "امین اموال",
+          "RType": "L",
+          "name": "AMINAMVAL"
+        },
+        {
+          "info": "امین اموال کل",
+          "RType": "L",
+          "name": "AMINAMVALKOL"
+        },
+        {
+          "info": "انباردار",
+          "RType": "L",
+          "name": "ANBARDAR"
+        },
+        {
+          "info": "انباردار کل",
+          "RType": "L",
+          "name": "ANBARDARKOL"
+        },
+        {
+          "info": "ماژول",
+          "RType": "L",
+          "name": "APPLICATION"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "DESCRIPTION"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "دریافت",
+          "RType": "L",
+          "name": "RECEIVING"
+        },
+        {
+          "info": "تعمیرات و نگهداری",
+          "RType": "L",
+          "name": "REPAIR"
+        },
+        {
+          "info": "درخواست",
+          "RType": "L",
+          "name": "REQUEST"
+        },
+        {
+          "info": "خرید",
+          "RType": "L",
+          "name": "SHOP"
+        },
+        {
+          "info": "عنوان",
+          "RType": "L",
+          "name": "TITLE"
+        }
+      ]
+    },
+    "edit_erp_asset": {
+      "name": "edit_erp_asset",
+      "info": "This process responsible for erp_asset editing.",
+      "data_tags": [
+        {
+          "info": "کد پستی",
+          "RType": "L",
+          "name": "AMLAK_POSTALCODE"
+        },
+        {
+          "info": "پلاک ثبتی اصلی",
+          "RType": "L",
+          "name": "AMLAK_SABTI_ASLI"
+        },
+        {
+          "info": "پلاک ثتبی فرعی",
+          "RType": "L",
+          "name": "AMLAK_SABTI_FAREI"
+        },
+        {
+          "info": "ورقه مالکیت",
+          "RType": "L",
+          "name": "AMLAK_VARAGHE_MALEKIAT"
+        },
+        {
+          "info": "آمپر",
+          "RType": "L",
+          "name": "AMPER"
+        },
+        {
+          "info": "واحد آمپر",
+          "RType": "L",
+          "name": "AMPERUNIT"
+        },
+        {
+          "info": "مساحت",
+          "RType": "L",
+          "name": "AREA"
+        },
+        {
+          "info": "واحد مساحت",
+          "RType": "L",
+          "name": "AREAUNIT"
+        },
+        {
+          "info": "مبلغ ارزی",
+          "RType": "L",
+          "name": "ARZI"
+        },
+        {
+          "info": "ماهیت کالا",
+          "RType": "L",
+          "name": "ASSETTYPE"
+        },
+        {
+          "info": "سازنده",
+          "RType": "L",
+          "name": "BRAND"
+        },
+        {
+          "info": "خریداری شده برای",
+          "RType": "L",
+          "name": "BUYFOR"
+        },
+        {
+          "info": "سند خرید",
+          "RType": "L",
+          "name": "BUYFORPAPER"
+        },
+        {
+          "info": "ردیف سند خرید",
+          "RType": "L",
+          "name": "BUYFORPAPERITEM"
+        },
+        {
+          "info": "حجم",
+          "RType": "L",
+          "name": "CAPACITY"
+        },
+        {
+          "info": "واحد حجم",
+          "RType": "L",
+          "name": "CAPACITYUNIT"
+        },
+        {
+          "info": "کد کالا",
+          "RType": "L",
+          "name": "CODEID"
+        },
+        {
+          "info": "رنگ",
+          "RType": "L",
+          "name": "COLOR"
+        },
+        {
+          "info": "شرایط",
+          "RType": "L",
+          "name": "CONDITION"
+        },
+        {
+          "info": "کشور سازنده",
+          "RType": "L",
+          "name": "COUNTRY"
+        },
+        {
+          "info": "کورس",
+          "RType": "L",
+          "name": "COURSE"
+        },
+        {
+          "info": "واحد کورس",
+          "RType": "L",
+          "name": "COURSEUNIT"
+        },
+        {
+          "info": "تاریخ ایجاد رکورد",
+          "RType": "L",
+          "name": "CREATEDATE"
+        },
+        {
+          "info": "ایجاد کننده",
+          "RType": "L",
+          "name": "CREATOR"
+        },
+        {
+          "info": "واحد پول",
+          "RType": "L",
+          "name": "CURRENCY"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "DESCRIPTION"
+        },
+        {
+          "info": "قطر",
+          "RType": "L",
+          "name": "DIAMETER"
+        },
+        {
+          "info": "واحد قطر",
+          "RType": "L",
+          "name": "DIAMETERUNIT"
+        },
+        {
+          "info": "نوع استحصال",
+          "RType": "L",
+          "name": "EARNINGTYPE"
+        },
+        {
+          "info": "نرخ تبدیل",
+          "RType": "L",
+          "name": "EXCHANGERATE"
+        },
+        {
+          "info": "ردیف سند کسر",
+          "RType": "L",
+          "name": "EXIT_PAPERITEM"
+        },
+        {
+          "info": "تاریخ کسر",
+          "RType": "L",
+          "name": "EXITDATE"
+        },
+        {
+          "info": "دلیل کسر",
+          "RType": "L",
+          "name": "EXITREASON"
+        },
+        {
+          "info": "تاریخ انقضا",
+          "RType": "L",
+          "name": "EXPDATE"
+        },
+        {
+          "info": "تاریخ انقضا میلادی",
+          "RType": "L",
+          "name": "EXPDATEG"
+        },
+        {
+          "info": "PARENT ID-CONSUMABLES",
+          "RType": "L",
+          "name": "EXTRACTFROMID"
+        },
+        {
+          "info": "نیرو",
+          "RType": "L",
+          "name": "FORCE"
+        },
+        {
+          "info": "واحد نیرو",
+          "RType": "L",
+          "name": "FORCEUNIT"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "محل نگهداری",
+          "RType": "L",
+          "name": "KEEPINGLOCATIONID"
+        },
+        {
+          "info": "شماره انتظامی",
+          "RType": "L",
+          "name": "KHODRO_ENTEZAMI"
+        },
+        {
+          "info": "شماره موتور",
+          "RType": "L",
+          "name": "KHODRO_MOTOR"
+        },
+        {
+          "info": "نوع شماره انتظامی",
+          "RType": "L",
+          "name": "KHODRO_NOTYPE"
+        },
+        {
+          "info": "شماره شاسی",
+          "RType": "L",
+          "name": "KHODRO_SHASI"
+        },
+        {
+          "info": "پلاک",
+          "RType": "L",
+          "name": "LABEL"
+        },
+        {
+          "info": "نوع پلاک",
+          "RType": "L",
+          "name": "LABELTYPE"
+        },
+        {
+          "info": "LAST PAPER ITEM ",
+          "RType": "L",
+          "name": "LASTPAPERITEMID"
+        },
+        {
+          "info": "نام تجاری",
+          "RType": "L",
+          "name": "LATINNAME"
+        },
+        {
+          "info": "طول",
+          "RType": "L",
+          "name": "LENGTHX"
+        },
+        {
+          "info": "واحد طول",
+          "RType": "L",
+          "name": "LENGTHXUNIT"
+        },
+        {
+          "info": "تاریخ نامه",
+          "RType": "L",
+          "name": "LETTERDATE"
+        },
+        {
+          "info": "شماره  نامه",
+          "RType": "L",
+          "name": "LETTERNO"
+        },
+        {
+          "info": "موضوع نامه",
+          "RType": "L",
+          "name": "LETTERSUBJECT"
+        },
+        {
+          "info": "مالک اصلی",
+          "RType": "L",
+          "name": "MAINOWNER"
+        },
+        {
+          "info": "جنس",
+          "RType": "L",
+          "name": "MATERIAL"
+        },
+        {
+          "info": "مدل",
+          "RType": "L",
+          "name": "MODEL"
+        },
+        {
+          "info": "شناسه مدل",
+          "RType": "L",
+          "name": "MODELID"
+        },
+        {
+          "info": "عنوان",
+          "RType": "L",
+          "name": "NAME"
+        },
+        {
+          "info": "پلاک اموال عددی",
+          "RType": "L",
+          "name": "NLABEL"
+        },
+        {
+          "info": "شناسه سیستم قدیم",
+          "RType": "L",
+          "name": "OLDID"
+        },
+        {
+          "info": "پلاک قدیم",
+          "RType": "L",
+          "name": "OLDLABEL"
+        },
+        {
+          "info": "مالک قدیمی",
+          "RType": "L",
+          "name": "OLDOWNER"
+        },
+        {
+          "info": "تاریخ استفاده",
+          "RType": "L",
+          "name": "OPERATIONDATE"
+        },
+        {
+          "info": "PARENT ID",
+          "RType": "L",
+          "name": "PARENTID"
+        },
+        {
+          "info": "شماره تلفن",
+          "RType": "L",
+          "name": "PHONE_NO"
+        },
+        {
+          "info": "شماره فنی",
+          "RType": "L",
+          "name": "PN"
+        },
+        {
+          "info": "توان",
+          "RType": "L",
+          "name": "POWER"
+        },
+        {
+          "info": "واحد توان",
+          "RType": "L",
+          "name": "POWERUNIT"
+        },
+        {
+          "info": "فشار",
+          "RType": "L",
+          "name": "PRESSURE"
+        },
+        {
+          "info": "واحد فشار",
+          "RType": "L",
+          "name": "PRESSUREUNIT"
+        },
+        {
+          "info": "تاریخ تولید",
+          "RType": "L",
+          "name": "PRODATE"
+        },
+        {
+          "info": "تاریخ تولید میلادی",
+          "RType": "L",
+          "name": "PRODATEG"
+        },
+        {
+          "info": "تاریخ خرید",
+          "RType": "L",
+          "name": "PURCHASEDATE"
+        },
+        {
+          "info": "کیفیت",
+          "RType": "L",
+          "name": "QUALITY"
+        },
+        {
+          "info": "تعداد",
+          "RType": "L",
+          "name": "QUANTITY"
+        },
+        {
+          "info": "واحد تعداد",
+          "RType": "L",
+          "name": "QUANTITYUNIT"
+        },
+        {
+          "info": "دریافت کننده",
+          "RType": "L",
+          "name": "RECEIVERID"
+        },
+        {
+          "info": "واحد تحویل گیرنده",
+          "RType": "L",
+          "name": "RECLOCATIONID"
+        },
+        {
+          "info": "مانده",
+          "RType": "L",
+          "name": "REMAIN"
+        },
+        {
+          "info": "مقاومت",
+          "RType": "L",
+          "name": "RESISTANCE"
+        },
+        {
+          "info": "واحد مقاومت",
+          "RType": "L",
+          "name": "RESISTANCEUNIT"
+        },
+        {
+          "info": "واحد ریشه",
+          "RType": "L",
+          "name": "ROOTLOCATION"
+        },
+        {
+          "info": "آدرس فروشنده",
+          "RType": "L",
+          "name": "SELLERADDRESS"
+        },
+        {
+          "info": "فروشنده",
+          "RType": "L",
+          "name": "SELLERNAME"
+        },
+        {
+          "info": "تلفن فروشنده",
+          "RType": "L",
+          "name": "SELLERPHONE"
+        },
+        {
+          "info": "سریال",
+          "RType": "L",
+          "name": "SNBN"
+        },
+        {
+          "info": "شماره پیگیری",
+          "RType": "L",
+          "name": "TRACKINGNO"
+        },
+        {
+          "info": "نوع استفاده",
+          "RType": "L",
+          "name": "USAGE"
+        },
+        {
+          "info": "ارزش",
+          "RType": "L",
+          "name": "VALUE"
+        },
+        {
+          "info": "نوع ارزشگذاری",
+          "RType": "L",
+          "name": "VALUETYPE"
+        },
+        {
+          "info": "ولتاژ",
+          "RType": "L",
+          "name": "VOLTAGE"
+        },
+        {
+          "info": "واحد ولتاژ",
+          "RType": "L",
+          "name": "VOLTAGEUNIT"
+        },
+        {
+          "info": "وارانتی",
+          "RType": "L",
+          "name": "WARANTY"
+        },
+        {
+          "info": "شروع وارانتی",
+          "RType": "L",
+          "name": "WARANTYBEGINDATE"
+        },
+        {
+          "info": "خاتمه وارانتی",
+          "RType": "L",
+          "name": "WARANTYENDDATE"
+        },
+        {
+          "info": "وزن",
+          "RType": "L",
+          "name": "WEIGHT"
+        },
+        {
+          "info": "واحد وزن",
+          "RType": "L",
+          "name": "WEIGHTUNIT"
+        }
+      ]
+    },
+    "edit_erp_coding": {
+      "name": "edit_erp_coding",
+      "info": "This process responsible for erp_coding editing.",
+      "data_tags": [
+        {
+          "info": "الزام تعریف ماهیت",
+          "RType": "L",
+          "name": "ASSET_TYPE"
+        },
+        {
+          "info": "ماهیت کالا",
+          "RType": "L",
+          "name": "ASSETTYPE"
+        },
+        {
+          "info": "کد",
+          "RType": "L",
+          "name": "CODE"
+        },
+        {
+          "info": "نوع کد",
+          "RType": "L",
+          "name": "CODETYPE"
+        },
+        {
+          "info": "الزام تعریف رنگ",
+          "RType": "L",
+          "name": "COLOR"
+        },
+        {
+          "info": "نرخ استهلاک",
+          "RType": "L",
+          "name": "DEPRATE"
+        },
+        {
+          "info": "نوع استهلاک",
+          "RType": "L",
+          "name": "DEPTYPE"
+        },
+        {
+          "info": "الزام تعریف سازنده",
+          "RType": "L",
+          "name": "FACTORY"
+        },
+        {
+          "info": "کد کامل",
+          "RType": "L",
+          "name": "FULLCODE"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "الزام تعریف نام تجاری",
+          "RType": "L",
+          "name": "LATINNAME"
+        },
+        {
+          "info": "دوره زمانی مصرف کالا",
+          "RType": "L",
+          "name": "MASRAFPERIOD"
+        },
+        {
+          "info": "الزام تعریف جنس",
+          "RType": "L",
+          "name": "MATERIAL"
+        },
+        {
+          "info": "الزام تعریف مدل",
+          "RType": "L",
+          "name": "MODEL"
+        },
+        {
+          "info": "PARENT CODE",
+          "RType": "L",
+          "name": "PARENTID"
+        },
+        {
+          "info": "الزام تعریف شماره فنی",
+          "RType": "L",
+          "name": "PN"
+        },
+        {
+          "info": "الزام تعریف سریال",
+          "RType": "L",
+          "name": "SN"
+        },
+        {
+          "info": "عنوان",
+          "RType": "L",
+          "name": "TITLE"
+        }
+      ]
+    },
+    "edit_erp_ins": {
+      "name": "edit_erp_ins",
+      "info": "This process responsible for erp_ins editing.",
+      "data_tags": [
+        {
+          "info": "شناسه کالا",
+          "RType": "L",
+          "name": "ASSETID"
+        },
+        {
+          "info": "تاریخ شروع",
+          "RType": "L",
+          "name": "BEGINDATE"
+        },
+        {
+          "info": "بیمه گزار",
+          "RType": "L",
+          "name": "BIMEGOZAR"
+        },
+        {
+          "info": "شرکت",
+          "RType": "L",
+          "name": "COMPANY"
+        },
+        {
+          "info": "تاریخ پایان",
+          "RType": "L",
+          "name": "ENDDATE"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "شماره بیمه نامه",
+          "RType": "L",
+          "name": "NO"
+        },
+        {
+          "info": "مبلغ",
+          "RType": "L",
+          "name": "PRICE"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "REMARK"
+        },
+        {
+          "info": "موضوع",
+          "RType": "L",
+          "name": "SUBJECT"
+        },
+        {
+          "info": "نوع",
+          "RType": "L",
+          "name": "TYPE"
+        }
+      ]
+    },
+    "edit_erp_paperitem": {
+      "name": "edit_erp_paperitem",
+      "info": "This process responsible for erp_paperitem editing.",
+      "data_tags": [
+        {
+          "info": "شناسه کالا",
+          "RType": "L",
+          "name": "ASSETID"
+        },
+        {
+          "info": "پلاک اموال",
+          "RType": "L",
+          "name": "ASSETLABEL"
+        },
+        {
+          "info": "عنوان کالا",
+          "RType": "L",
+          "name": "ASSETTITLE"
+        },
+        {
+          "info": "برند",
+          "RType": "L",
+          "name": "BRAND"
+        },
+        {
+          "info": "کد کالا",
+          "RType": "L",
+          "name": "CODEID"
+        },
+        {
+          "info": "وضعیت کالا",
+          "RType": "L",
+          "name": "CONDITION"
+        },
+        {
+          "info": "حذف شده",
+          "RType": "L",
+          "name": "DELETED"
+        },
+        {
+          "info": "دلیل حذف",
+          "RType": "L",
+          "name": "DELETEREASON"
+        },
+        {
+          "info": "توضیحات",
+          "RType": "L",
+          "name": "DESCRIPTION"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "تعداد اولیه کالای مصرفی",
+          "RType": "L",
+          "name": "INIT_QTY"
+        },
+        {
+          "info": "تاریخ برگشت از کسر",
+          "RType": "L",
+          "name": "KASR_RETURN_DATE"
+        },
+        {
+          "info": "مدل",
+          "RType": "L",
+          "name": "MODEL"
+        },
+        {
+          "info": "قیمت اولیه",
+          "RType": "L",
+          "name": "ORIGINAL_PRICE"
+        },
+        {
+          "info": "شناسه سند",
+          "RType": "L",
+          "name": "PAPERID"
+        },
+        {
+          "info": "شماره فنی",
+          "RType": "L",
+          "name": "PN"
+        },
+        {
+          "info": "قیمت",
+          "RType": "L",
+          "name": "PRICE"
+        },
+        {
+          "info": "تعداد",
+          "RType": "L",
+          "name": "QUANTITY"
+        },
+        {
+          "info": "واحد شمارش",
+          "RType": "L",
+          "name": "QUANTITYUNIT"
+        },
+        {
+          "info": "دلیل",
+          "RType": "L",
+          "name": "REASON"
+        },
+        {
+          "info": "تحویل گیرنده",
+          "RType": "L",
+          "name": "RECID"
+        },
+        {
+          "info": "واحد تحویل گیرنده",
+          "RType": "L",
+          "name": "RECLOCATIONID"
+        },
+        {
+          "info": "ردیف سند مرتبط",
+          "RType": "L",
+          "name": "RELATEDPAPERITEM"
+        },
+        {
+          "info": "تحویل دهنده",
+          "RType": "L",
+          "name": "SENDERID"
+        },
+        {
+          "info": "واحد تحویل دهنده",
+          "RType": "L",
+          "name": "SENDERLOCATIONID"
+        },
+        {
+          "info": "واحد ریشه تحویل دهنده",
+          "RType": "L",
+          "name": "SENDERROOTLOCATIONID"
+        },
+        {
+          "info": "شماره سریال",
+          "RType": "L",
+          "name": "SNBN"
+        },
+        {
+          "info": "وضعیت سیستمی",
+          "RType": "L",
+          "name": "STATUS"
+        },
+        {
+          "info": "تغییر دهنده وضعیت سیستمی",
+          "RType": "L",
+          "name": "STATUS_BY"
+        },
+        {
+          "info": "تاریخ تغییر وضعیت سیستمی",
+          "RType": "L",
+          "name": "STATUS_DATE"
+        }
+      ]
+    },
+    "edit_erp_location": {
+      "name": "edit_erp_location",
+      "info": "This process responsible for erp_location editing.",
+      "data_tags": [
+        {
+          "info": "کد",
+          "RType": "L",
+          "name": "CODE"
+        },
+        {
+          "info": "حذف شده",
+          "RType": "L",
+          "name": "DELETED"
+        },
+        {
+          "info": "کد کامل",
+          "RType": "L",
+          "name": "FULLCODE"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "مجازی",
+          "RType": "L",
+          "name": "ISVIRTUAL"
+        },
+        {
+          "info": "نوع تقسیمات سازمانی",
+          "RType": "L",
+          "name": "LOCATIONTYPE"
+        },
+        {
+          "info": "PARENT LOCATION",
+          "RType": "L",
+          "name": "PARENTID"
+        },
+        {
+          "info": "تلفن",
+          "RType": "L",
+          "name": "PHONE"
+        },
+        {
+          "info": "واحد ریشه",
+          "RType": "L",
+          "name": "ROOTLOCATIONID"
+        },
+        {
+          "info": "عنوان",
+          "RType": "L",
+          "name": "TITLE"
+        }
+      ]
+    },
+    "edit_erp_userrole": {
+      "name": "edit_erp_userrole",
+      "info": "This process responsible for erp_userrole editing.",
+      "data_tags": [
+        {
+          "info": "تاریخ شروع",
+          "RType": "L",
+          "name": "DATE_BEGIN"
+        },
+        {
+          "info": "تاریخ پایان",
+          "RType": "L",
+          "name": "DATE_END"
+        },
+        {
+          "info": "شناسه گروه",
+          "RType": "L",
+          "name": "GROUPID"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "فعال غیر فعال",
+          "RType": "L",
+          "name": "ISACTIVE"
+        },
+        {
+          "info": "شناسه نقش",
+          "RType": "L",
+          "name": "ROLEID"
+        },
+        {
+          "info": "شناسه کاربر",
+          "RType": "L",
+          "name": "USERID"
+        }
+      ]
+    },
+    "edit_erp_roleaccess": {
+      "name": "edit_erp_roleaccess",
+      "info": "This process responsible for erp_roleaccess editing.",
+      "data_tags": [
+        {
+          "info": "FORMCAPTION",
+          "RType": "L",
+          "name": "FORMCAPTION"
+        },
+        {
+          "info": "FORMKEY",
+          "RType": "L",
+          "name": "FORMKEY"
+        },
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        },
+        {
+          "info": "OBJECTCAPTION",
+          "RType": "L",
+          "name": "OBJECTCAPTION"
+        },
+        {
+          "info": "OBJECTKEY",
+          "RType": "L",
+          "name": "OBJECTKEY"
+        },
+        {
+          "info": "PUBLICKEY",
+          "RType": "L",
+          "name": "PUBLICKEY"
+        },
+        {
+          "info": "شناسه نقش",
+          "RType": "L",
+          "name": "ROLEID"
+        }
+      ]
+    },
+    "delete_erp_asset": {
+      "name": "delete_erp_asset",
+      "info": "This process responsible for erp_asset deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        }
+      ]
+    },
+    "delete_erp_coding": {
+      "name": "delete_erp_coding",
+      "info": "This process responsible for erp_coding deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        }
+      ]
+    },
+    "delete_erp_ins": {
+      "name": "delete_erp_ins",
+      "info": "This process responsible for erp_ins deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        }
+      ]
+    },
+    "delete_erp_location": {
+      "name": "delete_erp_location",
+      "info": "This process responsible for erp_location deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        }
+      ]
+    },
+    "delete_erp_paper": {
+      "name": "delete_erp_paper",
+      "info": "This process responsible for erp_paper deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        }
+      ]
+    },
+    "delete_erp_paperitem": {
+      "name": "delete_erp_paperitem",
+      "info": "This process responsible for erp_paperitem deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        }
+      ]
+    },
+	"delete_erp_paperitem_by_asset_id": {
+      "name": "delete_erp_paperitem_by_asset_id",
+      "info": "This process responsible for erp_paperitem deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه کالا",
+          "RType": "L",
+          "name": "ASSETID"
+        }
+      ]
+    },
+    "delete_erp_role": {
+      "name": "delete_erp_role",
+      "info": "This process responsible for erp_role deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        }
+      ]
+    },
+    "delete_erp_roleaccess": {
+      "name": "delete_erp_roleaccess",
+      "info": "This process responsible for erp_roleaccess deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        }
+      ]
+    },
+    "delete_erp_userrole": {
+      "name": "delete_erp_userrole",
+      "info": "This process responsible for erp_userrole deleting.",
+      "data_tags": [
+        {
+          "info": "شناسه",
+          "RType": "L",
+          "name": "ID"
+        }
+      ]
+    }
+  }
+}

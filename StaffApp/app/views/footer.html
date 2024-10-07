@@ -1,0 +1,48 @@
+﻿<style>
+    .footeritem.xactive {
+        color: white;
+        background: #FF5722;
+    }
+</style>
+<div ng-controller="footerController" id="_footer" style="width:100%;position:relative">
+    <div class="icon-bar" style="overflow:hidden">
+        <a href="#" class="apphome footeritem footerhome"><i class="fa fa-home"></i><span class="hidden-xs">Home</span></a>
+
+        <a href="" class="footeritem footerflight" data-ng-click="navigate('/appflight','appflight',2)"><i class="fas fa-plane"></i><span class="hidden-xs">Flights</span></a>
+  <a href="" class="footeritem footernotification" data-ng-click="navigate('/appmessage','appmessage',-1)"><i class="fas fa-comments"></i><span class="hidden-xs">Messages</span></a>
+        <a href="" class="footeritem footerflightcalendar" data-ng-click="navigate('/appflight','appflight',2)"><i class="far fa-calendar-alt"></i><span class="hidden-xs">Calendar</span></a>
+        <a href="" class="footeritem footerflightstatistics" data-ng-click="navigate('/appflightstatistics','appflightstatistics',2)"><i class="fas fa-chart-pie"></i><span class="hidden-xs">Statistics</span></a>
+        <a href="" class="footeritem footerflightlogbook" data-ng-click="navigate('/appflightlogbook','appflightlogbook',2)"><i class="fas fa-clipboard"></i><span class="hidden-xs">Log Book</span></a>
+
+        <a href="" class="applibrary footeritem footerlibrary" data-ng-click="navigate('/applibrary/1/1','applibrary',2)"><i class="fas fa-book-open"></i><span class="hidden-xs">Library</span></a>
+
+       <!-- <a href="" class="footeritem footerdocument" data-ng-click="navigate('/appdocument','appdocument',2)"><i class="fas fa-file"></i><span class="hidden-xs">Documents</span></a>-->
+        <a href="" class="footeritem footerdocument" data-ng-click="navigate('/appdocument','appdocument',2)"><i class="fas fa-sticky-note"></i><span class="hidden-xs">Memos</span></a>
+        <a href="" class="footeritem footerdocumentpif" data-ng-click="navigate('/appdocument','appdocument',2)"><i class="fas fa-pen-alt"></i><span class="hidden-xs">PIF/CIF</span></a>
+        <a href="" class="footeritem footerdocumentother" data-ng-click="navigate('/appdocumentother','appdocumentother',2)"><i class="fas fa-file-alt"></i><span class="hidden-xs">Others</span></a>
+
+        <a href="" class="footeritem footercertification" data-ng-click="navigate('/appcertificate/last','appcertificate-last',1)"><i class="fas fa-award"></i><span class="hidden-xs">Certificates</span></a>
+        <a href="" class="footeritem footerlast " data-ng-click="navigate('/appcertificate/last','appcertificate-last',1)"><i class="fas fa-star"></i><span class="hidden-xs">Last</span></a>
+        <a href="" class="footeritem footerall " data-ng-click="navigate('/appcertificate/all','appcertificate-all',1)"><i class="fas fa-folder"></i><span class="hidden-xs">All</span></a>
+
+        <a href="" class="footeritem footercourse" data-ng-click="navigate('/appcourse/active','appcourse-active',1)"><i class="fas fa-graduation-cap"></i><span class="hidden-xs">Courses</span></a>
+      
+
+        <a href="" class="footeritem footerbook " data-ng-click="navigate('/applibrary/books','applibrary-book',2)"><i class="icon ion-md-bookmarks"></i><span class="hidden-xs">Books</span></a>
+        <a href="" class="footeritem footervideo " data-ng-click="navigate('/applibrary/videos','applibrary-video',2)"><i class="fab fa-youtube"></i><span class="hidden-xs">Videos</span></a>
+        <a href="" class="footeritem footerpaper " data-ng-click="navigate('/applibrary/papers','applibrary-paper',2)"><i class="icon ion-md-journal"></i><span class="hidden-xs">Papers</span></a>
+
+ <a href="" class="footeritem footerforms" data-ng-click="navigate('/forms','forms',-1)"><i class="fas fa-sticky-note"></i><span class="hidden-xs">Forms</span></a>
+       
+
+   	     <a href="" class="footeritem footerformnew" data-ng-click="linkClicked('new_form')" style="background:#fff"><i class="fas fa-plus" style="color:green"></i><span class="hidden-xs" style="color:white">New</span></a>
+        <a href="" class="footeritem footerformdelete" data-ng-click="linkClicked('delete_form')" style="background:#fff"><i class="fas fa-trash" style="color:#b30000;"></i><span class="hidden-xs" style="color:white">Delete</span></a>
+
+
+        <!-- <a href="" class="footeritem footercoursepending " data-ng-click="navigate('/appcourse/pending','appcourse-pending',1)"><i class="fas fa-question-circle"></i><span class="hidden-xs">New</span></a>-->
+        <!--   <a href="" class="footeritem footercourseactive " data-ng-click="navigate('/appcourse/active','appcourse-active',1)"><i class="fas fa-lightbulb"></i><span class="hidden-xs">Active</span></a>-->
+        <!--   <a href="" class="footeritem footercoursearchive " data-ng-click="navigate('/appcourse/archive','appcourse-archive',1)"><i class="fas fa-folder"></i><span class="hidden-xs">Archive</span></a>-->
+
+    </div>
+   
+</div>

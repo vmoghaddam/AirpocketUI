@@ -1,0 +1,163 @@
+﻿<div ng-controller="filterController" style="width:100%" class="no-padding">
+    <!--<div id="scrollview" dx-scroll-view="{
+            scrollByContent: true,
+            scrollByThumb: true,
+
+        }">-->
+
+    <div class="dx-border filterpanel" style="margin-top:15px;padding-right: 8px;padding-left:10px;">
+        <div id="CityId" class="item airport">
+            <div class="col-lg-3  caption">City</div>
+            <div class="col-lg-3 operator" dx-select-box="{readOnly:true,value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+            <div class="col-lg-6 sbcity sb" style="padding:0 2px 0 7px" dx-select-box="sb_city"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div id="NID" class="item  person">
+            <div class="col-lg-3 caption">National Code </div>
+
+            <div class="col-lg-3 operator" dx-select-box="{value:1, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:stringOperatorDs}"></div>
+            <div class="col-lg-6 text" style="padding:0 2px 0 7px" dx-text-box="{}"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div id="PID" class="item  person">
+            <div class="col-lg-3 caption">Personnel Id </div>
+
+            <div class="col-lg-3 operator" dx-select-box="{value:1, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:stringOperatorDs}"></div>
+            <div class="col-lg-6 text" style="padding:0 2px 0 7px" dx-text-box="{}"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div id="Name" class="item airport person">
+            <div class="col-lg-3 caption">Name </div>
+
+            <div class="col-lg-3 operator" dx-select-box="{value:1, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:stringOperatorDs}"></div>
+            <div class="col-lg-6 text" style="padding:0 2px 0 7px" dx-text-box="{}"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div id="DateJoinCompany" class="item  person">
+            <div class="col-lg-3 caption">Join Company </div>
+
+            <div class="col-lg-3 operator" dx-select-box="{value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+            <div class="col-lg-6 date" style="padding:0 2px 0 7px" dx-date-box="{}"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div id="EmployeeLocationId" class="item person">
+            <div class="col-lg-3  caption">Department</div>
+            <div class="col-lg-3 operator" dx-select-box="{readOnly:true,value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+            <div class="col-lg-6 sblocation sb" style="padding:0 2px 0 7px" dx-select-box="sb_location"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+
+        <div id="OrgRoleId" class="item person">
+            <div class="col-lg-3  caption">Post</div>
+            <div class="col-lg-3 operator" dx-select-box="{readOnly:true,value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+            <div class="col-lg-6 sboption sb" pid="36" style="padding:0 2px 0 7px" dx-select-box="{ valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: true,searchEnabled: true,  }"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div class="groupbox2 person grp">
+            <div class="caption2">Passport</div>
+            <div id="PassportNumber" class="item  person">
+                <div class="col-lg-3 caption">No </div>
+
+                <div class="col-lg-3 operator" dx-select-box="{value:1, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:stringOperatorDs}"></div>
+                <div class="col-lg-6 text" style="padding:0 2px 0 7px" dx-text-box="{}"></div>
+            </div>
+            <div style="clear:both;margin-bottom:2px;"></div>
+            <div id="DatePassportIssue" class="item  person">
+                <div class="col-lg-3 caption">Issue </div>
+
+                <div class="col-lg-3 operator" dx-select-box="{value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+                <div class="col-lg-6 date" style="padding:0 2px 0 7px" dx-date-box="{}"></div>
+            </div>
+            <div style="clear:both;margin-bottom:2px;"></div>
+            <div id="DatePassportExpire" class="item  person">
+                <div class="col-lg-3 caption">Expire </div>
+
+                <div class="col-lg-3 operator" dx-select-box="{value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+                <div class="col-lg-6 date" style="padding:0 2px 0 7px" dx-date-box="{}"></div>
+            </div>
+            <div style="clear:both;margin-bottom:4px;"></div>
+        </div>
+
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div class="groupbox2 person grp">
+            <div class="caption2">CAO</div>
+            <div id="CaoCardNumber" class="item  person">
+                <div class="col-lg-3 caption">No </div>
+
+                <div class="col-lg-3 operator" dx-select-box="{value:1, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:stringOperatorDs}"></div>
+                <div class="col-lg-6 text" style="padding:0 2px 0 7px" dx-text-box="{}"></div>
+            </div>
+            <div style="clear:both;margin-bottom:2px;"></div>
+            <div id="DateCaoCardIssue" class="item  person">
+                <div class="col-lg-3 caption">Issue </div>
+
+                <div class="col-lg-3 operator" dx-select-box="{value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+                <div class="col-lg-6 date" style="padding:0 2px 0 7px" dx-date-box="{}"></div>
+            </div>
+            <div style="clear:both;margin-bottom:2px;"></div>
+            <div id="DateCaoCardExpire" class="item  person">
+                <div class="col-lg-3 caption">Expire </div>
+
+                <div class="col-lg-3 operator" dx-select-box="{value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+                <div class="col-lg-6 date" style="padding:0 2px 0 7px" dx-date-box="{}"></div>
+            </div>
+            <div style="clear:both;margin-bottom:4px;"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div class="groupbox2 person grp">
+            <div class="caption2">NDT</div>
+            <div id="NDTNumber" class="item  person">
+                <div class="col-lg-3 caption">No </div>
+
+                <div class="col-lg-3 operator" dx-select-box="{value:1, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:stringOperatorDs}"></div>
+                <div class="col-lg-6 text" style="padding:0 2px 0 7px" dx-text-box="{}"></div>
+            </div>
+            <div style="clear:both;margin-bottom:2px;"></div>
+            <div id="DateIssueNDT" class="item  person">
+                <div class="col-lg-3 caption">Issue </div>
+
+                <div class="col-lg-3 operator" dx-select-box="{value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+                <div class="col-lg-6 date" style="padding:0 2px 0 7px" dx-date-box="{}"></div>
+            </div>
+            <div style="clear:both;margin-bottom:2px;"></div>
+            <div id="DateExpireNDT" class="item  person">
+                <div class="col-lg-3 caption">Expire </div>
+
+                <div class="col-lg-3 operator" dx-select-box="{value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+                <div class="col-lg-6 date" style="padding:0 2px 0 7px" dx-date-box="{}"></div>
+            </div>
+            <div style="clear:both;margin-bottom:4px;"></div>
+        </div>
+
+
+
+
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div id="ICAO" class="item airport">
+            <div class="col-lg-3 caption">ICAO Code </div>
+
+            <div class="col-lg-3 operator" dx-select-box="{value:1, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:stringOperatorDs}"></div>
+            <div class="col-lg-6 text" style="padding:0 2px 0 7px" dx-text-box="{}"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+        <div id="IATA" class="item airport">
+            <div class="col-lg-3 caption">IATA Code </div>
+
+            <div class="col-lg-3 operator" dx-select-box="{value:1, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:stringOperatorDs}"></div>
+            <div class="col-lg-6 text" style="padding:0 2px 0 7px" dx-text-box="{}"></div>
+        </div>
+        <div style="clear:both;margin-bottom:4px;"></div>
+
+        <div id="TypeId" class="item library">
+            <div class="col-lg-3  caption">Type</div>
+            <div class="col-lg-3 operator" dx-select-box="{readOnly:true,value:4, valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: false,dataSource:numberOperatorDs}"></div>
+            <div class="col-lg-6 sboption sb" pid="82" style="padding:0 2px 0 7px" dx-select-box="{ valueExpr:'Id',displayExpr:'Title', placeholder: '',showClearButton: true,searchEnabled: true,bindingOptions:{value:'values.TypeId'}  }"></div>
+        </div>
+
+
+
+    </div>
+
+        
+        <!--</div>-->
+    </div>

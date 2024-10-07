@@ -1,0 +1,297 @@
+﻿<div ng-controller="libraryAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+
+ 
+
+
+        <div dx-tabs="tabs_options">
+
+        </div>
+        <div class="tab main ">
+            <div class="dx-border">
+                <div style="padding-top:20px;padding-left:10px;padding-right:10px">
+                    <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Folder</label>
+                        <div dx-select-box="sb_folder" dx-validator="{validationGroup:'libraryadd',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <!--<div class="col-lg-9 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Type</label>
+                <div dx-select-box="sb_Type" dx-validator="{validationGroup:'libraryadd',  validationRules: [{ type: 'required'}]}"></div>
+            </div>-->
+                    <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Category</label>
+                        <div dx-select-box="sb_Category" dx-validator="{validationGroup:'libraryadd',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Title</label>
+                        <div dx-text-box="txt_Title" dx-validator="{validationGroup:'libraryadd',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Edition/Revision</label>
+                        <div dx-text-box="txt_Edition"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Issue</label>
+                        <div dx-number-box="txt_Issue"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6    margin-bottom-5 padding-7">
+                        <label>Effective Date</label>
+                        <div dx-text-box="txt_DateEffective"></div>
+                    </div>
+                    <!--<div class="col-lg-11 col-md-11 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Authors</label>
+                <div dx-tag-box="tag_Authors"></div>
+            </div>
+            <div class="col-lg-1  col-md-1 " style="padding:8px 0 0 0;">
+                <label style="display:block"> &nbsp;</label>
+                <div dx-button="btn_newAuthor"></div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Key words</label>
+                <div dx-tag-box="tag_KeyWords"></div>
+            </div>-->
+                    <!--<div class="tbook" ng-show="entity.TypeId==83">
+                           <div class="col-lg-6 col-md-7 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Publisher</label>
+                <div dx-select-box="sb_Publisher"></div>
+            </div>
+            <div class="col-lg-1  col-md-1 " style="padding:8px 0 0 0;">
+                <label style="display:block"> &nbsp;</label>
+                <div dx-button="btn_newPublisher"></div>
+            </div>
+
+            <div class="col-lg-3 col-md-4 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Publication Date</label>
+                <div dx-date-box="date_DatePublication"></div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                <label>Pages</label>
+                <div dx-text-box="txt_Pages" class="center"></div>
+            </div>
+
+
+
+            <div class="col-lg-3 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                <label>Print ISSN</label>
+                <div dx-text-box="txt_ISSNPrint" class="center"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                <label>Electronic ISSN</label>
+                <div dx-text-box="txt_ISSNElectronic" class="center"></div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6    margin-bottom-5 padding-7">
+                <label>ISBN</label>
+                <div dx-text-box="txt_ISBN" class="center"></div>
+            </div>
+
+
+                        </div>-->
+
+
+
+
+                    <div class="tpaper" ng-show="entity.TypeId==84">
+                        <div class="col-lg-8 col-md-11 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Published In (Journal / Conference)</label>
+                            <div dx-select-box="sb_journal"></div>
+                        </div>
+                        <div class="col-lg-1  col-md-1 " style="padding:8px 0 0 0;">
+                            <label style="display:block"> &nbsp;</label>
+                            <div dx-button="btn_newJournal"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                            <label>Date of Conference</label>
+                            <div dx-text-box="txt_DateConference" class="center"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Publication Date</label>
+                            <div dx-date-box="date_DatePublication"></div>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                            <label>Pages</label>
+                            <div dx-text-box="txt_Pages" class="center"></div>
+                        </div>
+                        <div class="col-lg-4 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                            <label>Remark</label>
+                            <div dx-text-box="txt_Remark"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6    margin-bottom-5 padding-7">
+                            <label>Effective Date</label>
+                            <div dx-text-box="txt_DateEffective"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                            <label>Print ISSN</label>
+                            <div dx-text-box="txt_ISSNPrint" class="center"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                            <label>Electronic ISSN</label>
+                            <div dx-text-box="txt_ISSNElectronic" class="center"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6    margin-bottom-5 padding-7">
+                            <label>INSPEC Accession Number</label>
+                            <div dx-text-box="txt_INSPECAccessionNumber" class="center"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-6    margin-bottom-5 padding-7">
+                            <label>DOI</label>
+                            <div dx-text-box="txt_DOI" class="center"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="tcourse" ng-show="entity.TypeId==85">
+                        <div class="col-lg-6 col-md-7 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Publisher</label>
+                            <div dx-select-box="sb_Publisher"></div>
+                        </div>
+                        <div class="col-lg-1  col-md-1 " style="padding:8px 0 0 0;">
+                            <label style="display:block"> &nbsp;</label>
+                            <div dx-button="btn_newPublisher"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Publication Date</label>
+                            <div dx-date-box="date_DatePublication"></div>
+                        </div>
+                        <div class="col-lg-2 col-md-4 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Duration</label>
+                            <div dx-text-box="txt_Duration"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-7 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Language</label>
+                            <div dx-select-box="sb_Language"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-2 col-sm-6    margin-bottom-5 padding-7">
+                            <label>Lessons</label>
+                            <div dx-number-box="number_Lessons" class="center"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                            <label>Remark</label>
+                            <div dx-text-box="txt_Remark"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-sm-6    margin-bottom-5 padding-7">
+                            <label>Effective Date</label>
+                            <div dx-text-box="txt_DateEffective"></div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <!--<div class="col-lg-9 col-md-9 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Abstract</label>
+                <div dx-text-area="txt_Abstract"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding:0px 5px 5px 15px">
+                <div style="border:1px solid #aaa; border-radius:5px;">
+
+                    <div style="text-align:center;padding-top:2px ;height:155px;line-height: 155px;">
+                        <img ng-src="{{img_url}}" style="max-height:150px" />
+                    </div>
+                    <div id="uploader_image" dx-file-uploader="uploader_image" class="invisibleuploader"></div>
+                </div>
+
+            </div>-->
+
+                </div>
+                <div style="clear:both"></div>
+
+            </div>
+            <div style="padding:10px;">
+                <div style="background:gray;color:white;font-weight:bold;padding:7px;">
+                    <table style="width:100%;">
+                        <tr>
+                            <td>GROUPS</td>
+                            <td style="width:35px;padding:0 3px 0 3px"  >
+                                <a ng-click="addGroup()" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-plus"></i></a>
+                            </td>
+                            <td style="width:35px;padding:0 3px 0 3px"  >
+                                <a ng-click="removeGroup()" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-times"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div dx-data-grid="dg_group" id="dg_group"></div>
+
+            </div>
+        </div>
+
+        <div class="tab files" style="display:none;padding-top:0;">
+
+            <div class="col-lg-3 col-md-12 col-sm-12 col-12  margin-bottom-5" style="padding:5px">
+
+            </div>
+            <div style="clear:both"></div>
+
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5" style="padding:5px">
+                <div class="header" style="padding:5px 10px 5px 10px;background:#bbb;border:1px solid #ccc">
+
+                    <table style="width:100%;min-height:36px;">
+                        <tr>
+                            <td>Chapters</td>
+
+                            <td style="width:40px" ng-show="IsEditable"><div dx-button="btn_new_folder"></div></td>
+                            <td style="width:40px" ng-show="IsEditable"><div dx-button="btn_edit_folder"></div></td>
+                            <td style="width:40px" ng-show="IsEditable"><div dx-button="btn_delete_folder"></div></td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div dx-tree-list="chaptertree" id="chaptertree"></div>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5" style="padding:5px">
+                <div class="header" style="padding:5px 10px 5px 10px;background:#bbb;border:1px solid #ccc">
+                    Files
+                </div>
+                <div class="dx-border">
+                    <div dx-select-box="sb_chapters"></div>
+                </div>
+
+                <div dx-data-grid="dg_file" id="dg_file" dx-item-alias="bookFile">
+                    <div data-options="dxTemplate:{ name:'deleteFileTemplate' }">
+                        <a ng-click="deleteBookFile(bookFile)" href="" class='w3-button w3-block w3-2017-flame' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center'>DEL</a>
+
+                    </div>
+                </div>
+                <div id="uploader_document" dx-file-uploader="uploader_document" class="invisibleuploader"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="tab actypes" style="display:none;padding-top:0;">
+
+            <div dx-data-grid="dg_aircrafttype" id="dg_aircrafttype"></div>
+
+        </div>
+        <div class="tab groups" style="display:none;padding-top:0;">
+            <!--<div dx-data-grid="dg_group" id="dg_group"></div>-->
+        </div>
+        <div class="tab educations" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_education" id="dg_education"></div>
+        </div>
+        <div class="tab employees" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_employee" id="dg_employee"></div>
+        </div>
+
+    </div>
+    <div id="popup_chapter" dx-popup="popup_chapter">
+        <div style="padding:10px 0 0 0" class="dx-border">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Parent</label>
+                <div dx-select-box="sb_chapter_add"></div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding-7 margin-bottom-15">
+                <label> Title</label>
+                <div dx-text-box="txt_chapter_title" dx-validator="{validationGroup:'chapteradd',  validationRules: [{ type: 'required' }]}"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+
+    </div>
+
+
+    <div ng-include="'app/views/aircraftSelect.html'"></div>
+    <div ng-include="'app/views/studyFieldSelect.html'"></div>
+    <div ng-include="'app/views/employeeSelect.html'"></div>
+    <div ng-include="'app/views/jobgroupSelect.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

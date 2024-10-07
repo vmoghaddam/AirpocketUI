@@ -1,0 +1,61 @@
+﻿<style>
+
+
+    /*.dx-fileuploader-content{
+        display: inline-flex;
+    }
+
+    .dx-fileuploader-file-status-message, .dx-fileuploader-file-size{
+        display:none
+    }
+
+    .dx-fileuploader-input-wrapper{
+        padding: 0px !important
+    }*/
+
+
+
+    .dx-fileuploader-input-container, .dx-fileuploader-files-container {
+        display: none !important;
+    }
+
+    .dx-fileuploader-input-wrapper {
+        padding: 0px !important;
+    }
+
+    .dx-fileuploader-button {
+        width: 100% !important;
+    }
+</style>
+
+<div ng-controller="qaAttachmentPopup">
+    <div id="popup_attachment" dx-popup="popup_attachment" class="no-padding">
+
+        <div id="scroll_qaAttachment" dx-scroll-view="scroll_qaAttachment" style="margin-top:5px">
+
+            <div style="padding: 5%; display:inline-block; width: 100%" ng-repeat="f in files">
+                <div ng-bind="f.FileName" style="text-align: center; width: 100%; border:1px solid Lightgray; border-bottom: 0!important;padding:10px"></div>
+                <div dx-text-area="txt_fileRemark" ng-bind="f.Description" style="border: 1px solid lightgray"></div>
+                <div class="col-md-6 col-sm-6 col-xs-6" style="display: inline-block; float: left; margin-top: 7px; padding: 0 3px 0 0">
+                    <div dx-button="btn_download" ng-click="download(f)"></div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-6" style="display: inline-block; float: right; margin-top: 7px;padding: 0 0 0 3px">
+                    <div dx-button="btn_delete" ng-click="deleteFile(f)" ng-show="isEditable"></div>
+                </div>
+            </div>
+        </div>
+
+        <div style="width:100%; height:130px; padding:5% ">
+            <div dx-text-area="txt_remark" style="border: 1px solid lightgray"></div>
+            <div>
+                <div class="col-md-6 col-sm-6 col-xs-6" ng-bind="entity.FileName" style="margin-right:1%; margin-top:7px; height:35px; padding-top: 6px"></div>
+                <div class="col-md-4 col-sm-4 col-xs-4" id="uploader_document" dx-file-uploader="uploader_document" style="margin-right:4%; margin-top:7px" ng-show="isEditable"></div>
+                <div class="col-md-1 col-sm-1 col-xs-1" dx-button="btn_add" style="margin-top: 10px" ng-show="isEditable"></div>
+
+                <!--<div class="col-md-3 col-sm-3 col-xs-3" dx-button="btn_select" style="margin-right: 3%; margin-top: 7px"></div>-->
+            </div>
+        </div>
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

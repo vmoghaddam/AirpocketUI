@@ -1,0 +1,2 @@
+An error occurred while executing the command definition. See the inner exception for details.   Invalid column name 'Pos'.
+An error occurred while executing the command definition. See the inner exception for details.   Invalid column name 'Pos'.

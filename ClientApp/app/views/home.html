@@ -1,0 +1,351 @@
+﻿<style>
+    .speed-value {
+        position: absolute;
+        border: 2px solid #f05b41;
+        border-radius: 50%;
+        width: 110px;
+        height: 110px;
+        left: 28%;
+        top: 36%;
+        line-height: 100px;
+    }
+
+        .speed-value > span {
+            font-size: 50px;
+            font-weight: lighter;
+            color: #f05b41;
+        }
+
+    .text-cancel {
+        color: #595959 !important;
+    }
+
+    .text-delay {
+        color: #ff3300 !important;
+    }
+
+    .text-pickup {
+        color: #0099ff !important;
+    }
+
+    .text-general {
+        color: #00cc99 !important;
+    }
+
+    .applibraryitem .card:hover {
+        background-color: #eee !important;
+    }
+
+
+
+    .duty-1165 {
+        background: #0099ff;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-5001 {
+        background: #cc3399;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-5000 {
+        background: #336699;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-1168 {
+        background: #ffff00;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-1167 {
+        background: #ffcc66;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-10000, .duty-10001 {
+        background: #009999;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-100000, .duty-100004, .duty-100005, .duty-100006 {
+        background: #ff9933;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100002 {
+        background: #b3b3b3;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100003 {
+        background: #47d1d1;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100001 {
+        background: #00b386;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-1169 {
+        background: #ffb3ff;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-1170 {
+        background: #ffff99;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100007 {
+        background: #b3b3b3;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100008 {
+        background: #cccc00;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100009 {
+        background: #ff471a;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+</style>
+<div style="height:100%;">
+    <div class="box home maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+
+
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                <div style="padding-top:2px;padding-right:5px;padding-left:5px">
+
+
+                    <!--<div class="applibraryitem" style="padding:2px 0px 5px 0px;height:300px" ng-show="IsNotificationVisible" ng-click="alertAction(1000)">
+                        <div class="card text-black-50  bg-white" style="margin:0; padding:10px;display:block;">
+                            <div class="center-section">
+                                <div id="speed-gauge" dx-circular-gauge="options.speed"></div>
+                                 <div class="speed-value">
+                                    <span>{{speedValue}}</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>-->
+                    <!--7-17-->
+                    <div class="applibraryitem" style="padding:2px 0px 5px 0px;" ng-repeat="x in sms">
+                        <div ng-show="[10010,10011,10012,10013,10017].indexOf( x.Type)==-1" class="card text-black-50  bg-white" style="margin:0; padding:5px 7px 5px 0px;display:block; ">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left:5px;padding-right:0">
+                                <div style="font-weight:bold;padding:5px;border-bottom:1px solid #ccc">{{x.DutyType}}</div>
+                                <div style="margin-top:5px;font-weight:normal;padding:5px;border-bottom:0px solid #ccc;color:black">
+                                    <span>{{moment3(x.DateLocal)}}</span>
+                                    <span style="display:inline-block;margin-right:3px;margin-left:10px;color:gray;font-size:13px">Start</span><span style="color:black">{{moment4(x.Start)}}</span>
+                                    <span style="display:inline-block;margin-right:3px;margin-left:10px;color:gray;font-size:13px">End</span><span style="color:black">{{moment4(x.End)}}</span>
+                                </div>
+                                <div ng-show="x.Routes" style="font-weight:normal;padding:5px;border-bottom:0px solid #ccc">
+                                    <div style="  color:black">{{x.Routes}}</div>
+                                    <div style="  color:black;margin-top:5px;">{{x.Flts}}</div>
+                                </div>
+                                <div ng-show="x.Remark" style="font-weight:normal;padding:5px;border-bottom:0px solid #ccc;font-size:13px">{{x.Remark}}</div>
+
+                                <div style="clear:both"></div>
+
+                            </div>
+                            <!--<div class="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="text-align:center">
+                                <i style="font-size:30px;line-height:70px" class="fas fa-comment {{getNotificationClass(x.Type)}}"></i>
+
+
+                            </div>-->
+                            <!--<div ng-show="x.FlightNumber" style="font-weight:bold;padding-left:10px;margin-bottom:5px;padding-top:0px">
+                                <span style="font-size:13px">{{x.FromAirportIATA}}</span>-<span style="font-size:13px">{{x.ToAirportIATA}}</span>
+                                <span style="display:inline-block;margin-left:3px;font-size:13px">{{x.FlightNumber}}</span>
+                                <span style="display:inline-block;margin-left:3px;font-size:13px">DEP:</span>
+                                <span style="display:inline-block;margin-left:0px;font-size:13px">{{getTimeFormated(x.DepartureLocal)}}</span>
+
+                                <span ng-show="x.Type==10010 || x.Type==10011" style="display:inline-block;margin-left:3px;font-size:13px">PICKUP:</span>
+                                <span ng-show="x.Type==10010 || x.Type==10011" style="display:inline-block;margin-left:0px;font-size:13px">{{getTimeFormated(x.PickupLocal)}}</span>
+
+                            </div>-->
+                            <div style="clear:both"></div>
+                         
+                            <div style="text-align:center;padding:0px 0 5px 0;margin-top:10px;">
+
+                                <div style="background:#bbb;color:white;padding:5px;width:97%;margin:0 auto 0 auto;display:inline-block" ng-click="notClick(x.Id,$event)">OK</div>
+                            </div>
+                        </div>
+                        <div ng-show="x.Type==10010 || x.Type==10011 || x.Type==10012 || x.Type==10013 || x.Type==10017" class="card text-black-50  bg-white" style="margin:0; padding:5px 7px 5px 0px;display:block; ">
+                            <div class="col-lg-11 col-md-10 col-sm-10 col-xs-10" style="padding-left:5px;padding-right:0">
+                                <div style="font-weight:bold;padding:5px;border-bottom:0px solid #ccc">{{x.TypeStr}}</div>
+                                <p style="color:black;text-align:justify;padding:0 5px 5px 10px;border-bottom:1px dotted #ccc">{{x.Message}}</p>
+
+
+
+                                <div style="clear:both"></div>
+
+                            </div>
+                            <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="text-align:center">
+                                <i style="font-size:30px;line-height:70px" class="fas fa-comment {{getNotificationClass(x.Type)}}"></i>
+
+
+                            </div>
+
+                            <div style="clear:both"></div>
+                            <div ng-show="x.FlightNumber" style="font-weight:bold;padding-left:10px;margin-bottom:5px;padding-top:0px">
+                                <span style="font-size:13px">{{x.FromAirportIATA}}</span>-<span style="font-size:13px">{{x.ToAirportIATA}}</span>
+                                <span style="display:inline-block;margin-left:3px;font-size:13px">{{x.FlightNumber}}</span>
+                                <span style="display:inline-block;margin-left:3px;font-size:13px">DEP:</span>
+                                <span style="display:inline-block;margin-left:0px;font-size:13px">{{getTimeFormated(x.DepartureLocal)}}</span>
+
+                                <span ng-show="x.Type==10010 || x.Type==10011" style="display:inline-block;margin-left:3px;font-size:13px">PICKUP:</span>
+                                <span ng-show="x.Type==10010 || x.Type==10011" style="display:inline-block;margin-left:0px;font-size:13px">{{getTimeFormated(x.PickupLocal)}}</span>
+
+                            </div>
+                            <div style="text-align:center;padding:5px 0 5px 0">
+                                <div style="background:#bbb;color:white;padding:5px;width:96%;margin:0 auto 0 auto;display:inline-block" ng-click="notClick(x.Id,$event)">OK</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--<div class="applibraryitem" style="padding:2px 0px 5px 0px;" ng-show="IsNotificationVisible" ng-click="alertAction(1000)">
+                        <div class="card text-black-50  bg-white" style="margin:0; padding:10px 7px 10px 0px;display:block;height:110px">
+                            <div class="col-lg-11 col-md-10 col-sm-10 col-xs-10">
+                                <div style="font-size:16px" ng-bind-html="notTitle"> </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 hidden-xs" style="margin-top:5px" ng-bind-html="notSenderDate"></div>
+                                <div class="hidden-lg hidden-md hidden-sm" style="margin-top:5px" ng-bind-html="notSender"></div>
+                                <div class="hidden-lg hidden-md hidden-sm" style="margin-top:5px" ng-bind-html="notDate"></div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 hidden-xs" style="margin-top:5px" ng-bind-html="notAbs"></div>
+                            </div>
+                            <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="text-align:center">
+                                <i style="font-size:40px;line-height:70px" class="fas fa-comment text-red"></i>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                        </div>
+                    </div>-->
+                    <!--ENd of 7-17-->
+                    <div style="clear:both"></div>
+                    <div style="padding:7px;border-bottom:1px solid #ccc;border-top:1px solid #ccc;color:gray;background:white;margin-bottom:2px;" ng-show="IsPersonalDocumentVisible">
+                        Certificates / Documents
+                    </div>
+                    <div id="persoanllic">
+
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div style="padding:7px;border-bottom:1px solid #ccc;border-top:1px solid #ccc;color:gray;background:white;margin-bottom:2px;" ng-show="IsLibraryVisible">
+                        Library
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-6  applibraryitem" style="padding:2px 3px 5px 3px;" ng-repeat="x in library" ng-click="alertAction(x.Type)">
+                        <div class="card text-black-50  bg-white" style="margin:0; padding:10px 7px 10px 0px;display:block;height:80px">
+                            <div class="col-lg-9 col-md-10 col-sm-10 col-xs-10" style="padding-right:0">
+                                <div style="font-weight:bold;font-size:16px">{{x.Total}}</div>
+                                <div style="margin-top:5px"><span style="display:inline-block;font-weight:bold">{{x.Caption}}</span><span style="display:inline-block;padding-left:5px;font-size:13px">{{x.Remark}}</span></div>
+                            </div>
+                            <div class="col-lg-3 col-md-2 col-sm-2 col-xs-2" style="text-align:center;padding-left:0">
+                                <i style="font-size:40px;" ng-class="x.icon"></i>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                        </div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="padding:7px;border-bottom:1px solid #ccc;border-top:1px solid #ccc;color:gray;background:white;margin-bottom:2px;" ng-show="IsCertificatesVisible">
+                        Certificates
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12  applibraryitem" style="padding:2px 3px 5px 3px;" ng-repeat="x in certificates" ng-click="alertAction(1001)">
+                        <div ng-class="x.class" style="margin:0; padding:10px 7px 10px 0px;display:block;min-height:80px">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <div ng-bind-html="x.ExpireRemark"></div>
+                                <div style="margin-top:5px"><span style="display:inline-block;font-weight:bold">{{x.CourseTypeTitle}}</span></div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="text-align:center;padding-top:10px">
+                                <i style="font-size:35px;" ng-class="x.icon"></i>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <span style="display:inline-block;">Issue Date: </span>
+                                <span style="display:inline-block;font-weight:bold">{{x.DateIssue}}</span>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                        </div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div style="padding:7px;border-bottom:1px solid #ccc;border-top:1px solid #ccc;color:gray;background:white;margin-bottom:2px;" ng-show="IsCoursesVisible">
+                        New Courses
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12  applibraryitem" style="padding:2px 3px 5px 3px;" ng-repeat="x in courses" ng-click="alertAction(1002)">
+                        <div ng-class="x.class" style="margin:0; padding:10px 7px 10px 0px;display:block;min-height:80px">
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                <div style="margin-top:5px"><span style="display:inline-block;"><i>{{x.Organization}}</i></span></div>
+                                <div style="margin-top:2px"><span style="display:inline-block;font-weight:bold">{{x.CT_Title}}</span></div>
+
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" style="text-align:center;padding-top:10px">
+                                <i style="font-size:30px;" ng-class="x.icon"></i>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="margin-top:7px">
+
+                                <span style="display:inline-block;font-weight:normal">{{x.start}}</span>
+                            </div>
+
+                            <div style="clear:both;margin-top:5px"></div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div style="clear:both"></div>
+
+            </div>
+        </div>
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'apphome';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+
+
+
