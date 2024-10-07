@@ -247,7 +247,7 @@ namespace APWeather
         }
     }
 
-    private class MyWebClient : WebClient
+    public class MyWebClient : WebClient
     {
         protected override WebRequest GetWebRequest(Uri uri)
         {
