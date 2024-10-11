@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f81523febe14ad0ace704e25063c581" Name="Diagram1" ZoomLevel="12">
+        <EntityTypeShape EntityType="EPAGRIFFINModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AircraftModel" Width="1.5" PointX="11.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AircraftType" Width="1.5" PointX="9" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AspNetRole" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AspNetUser" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CaoBasic" Width="1.5" PointX="6" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CaoBasicLicenseType" Width="1.5" PointX="3.75" PointY="37.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CaoBasicType" Width="1.5" PointX="6" PointY="49" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CaoCategory" Width="1.5" PointX="6" PointY="52.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CaoType" Width="1.5" PointX="11.25" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.City" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Client" Width="1.5" PointX="2.75" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Country" Width="1.5" PointX="3.75" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseCategory" Width="1.5" PointX="9" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseType" Width="1.5" PointX="11.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Customer" Width="1.5" PointX="6" PointY="20.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.EmployeeLocation" Width="1.5" PointX="10.5" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FileType" Width="1.5" PointX="0.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.LicenseResultBasic" Width="1.5" PointX="9" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Location" Width="1.5" PointX="8.25" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Organization" Width="1.5" PointX="6.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonAircraftType" Width="1.5" PointX="5.25" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonCaoLicenceHistory" Width="1.5" PointX="10.5" PointY="30.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonCaoLicense" Width="1.5" PointX="8.25" PointY="27.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonEducationDocument" Width="1.5" PointX="7.5" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonExperiense" Width="1.5" PointX="5.25" PointY="45.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonRatingDocument" Width="1.5" PointX="10.5" PointY="35" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Rating" Width="1.5" PointX="6" PointY="56.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RefreshToken" Width="1.5" PointX="2.75" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RoleOrganizational" Width="1.5" PointX="4.75" PointY="13.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.State" Width="1.5" PointX="12.75" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.HelperPerson" Width="1.5" PointX="17.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewManufacturer" Width="1.5" PointX="14.75" PointY="18.875" IsExpanded="true" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_MODEL_TYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_ACTYPE_ORGAN" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CAOTYPE_AIRCRAFTTYPE" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_UM_Type_Access_Ac_Type" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoBasic_CaoBasicLicenseType" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoBasicType_CaoBasic" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_TRN_CaoUserLicence_TRN_CaoBasic" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoBasicType_CaoType" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoUserLicence_CaoBasicType" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoUserLicenceHistory_CaoBasicType" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoUserLicence_CaoCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoUserLicenceHistory_CaoCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CSUTOMER_COUNTRY" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CourseCategory_CourseCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_UserCourseType_CourseCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CourseType_LicenseResultBasic" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_LOCATION_CUSTOMER" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_EMPLOCATION_LOCATION" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_LOCATION_LOCATION" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_LOCATION_ROOT" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_RATING_ORG" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoUserLicenceHistory_CaoUserLicence" ManuallyRouted="false" />
+        <AssociationConnector Association="EPAGRIFFINModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCaoType" Width="1.5" PointX="23.625" PointY="4.875" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Currency" Width="1.5" PointX="22.375" PointY="12.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseAircraftType" Width="1.5" PointX="21.75" PointY="1.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseCatRate" Width="1.5" PointX="15.75" PointY="35.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseRelatedAircraftType" Width="1.5" PointX="18.75" PointY="1.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseRelatedCourse" Width="1.5" PointX="15.75" PointY="29.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseRelatedCourseType" Width="1.5" PointX="15.75" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseRelatedEmployee" Width="1.5" PointX="22.75" PointY="22" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseRelatedGroup" Width="1.5" PointX="22.75" PointY="18.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseRelatedStudyField" Width="1.5" PointX="15.75" PointY="32.5" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSEACTYPE_ACTYPE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CRSACTYPE_ACTYPE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSETYPE_TYPE" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPersonAircraftType" Width="1.5" PointX="24.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPersonCaoLicense" Width="1.5" PointX="24.375" PointY="7.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPersonExperiense" Width="1.5" PointX="25.375" PointY="19.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPersonDocument" Width="1.5" PointX="8.375" PointY="23.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Document" Width="1.5" PointX="26.375" PointY="1.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonDocument" Width="1.5" PointX="28.625" PointY="17.375" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_DOC_DOC" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PERSONEDUDOC_DOC" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PRD_DOC" />
+        <AssociationConnector Association="EPAGRIFFINModel.PersonDocumentFile" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPersonDocumentFile" Width="1.5" PointX="24.375" PointY="11.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonRating" Width="1.5" PointX="13.25" PointY="31.25" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PersonRating_AcType" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PersonRating_Rating" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PRD_PERSONRATING" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPersonRating" Width="1.5" PointX="22.375" PointY="25.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonCustomer" Width="1.5" PointX="11.25" PointY="22.875" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PERSONCUSTOMER_CUSTOMER" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Course" Width="1.5" PointX="13.5" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCourse" Width="1.5" PointX="28.375" PointY="1.25" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_Course_ACMODEL" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_Course_ACTYPE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_Course_CaoType" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSE_COURSE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSE_COURSERELATED" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_Course_Type" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSEACTYPE_COURSE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSEEMPLOYEE_COURSE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSEGROUP_COURSE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSESTUDYFIELD" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSETYPE_COURSE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CRSACTYPE_CRS" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CRSCATRATE_CRS" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonCourse" Width="1.5" PointX="17.75" PointY="15" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCourseNotificationEnabled" Width="1.5" PointX="24.375" PointY="28.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewEmployeeSimple" Width="1.5" PointX="29.375" PointY="20.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PersonCourse_Course" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewApplicableCourse" Width="1.5" PointX="18.375" PointY="28.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewApplicableCoursePerson" Width="1.5" PointX="20.375" PointY="29.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCertificate" Width="1.5" PointX="31.375" PointY="13.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCourseType" Width="1.5" PointX="20.375" PointY="5.875" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookAutor" Width="1.5" PointX="20.625" PointY="41.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookKeyword" Width="1.5" PointX="11.25" PointY="59.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookRelatedAircraftType" Width="1.5" PointX="13.25" PointY="36.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookRelatedStudyField" Width="1.5" PointX="11.25" PointY="56.375" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookAircraftType_AircraftType_Id" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBookAuthor" Width="1.5" PointX="7.375" PointY="32.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Journal" Width="1.5" PointX="33.375" PointY="11.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonMisc" Width="1.5" PointX="16.375" PointY="24.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewOrganization" Width="1.5" PointX="32.375" PointY="5" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookAutor_PersonMisc_Id" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPersonMisc" Width="1.5" PointX="28.375" PointY="35.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewJournal" Width="1.5" PointX="30.375" PointY="35.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Notification" Width="1.5" PointX="26.375" PointY="28.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.UserActivityMenuHit" Width="1.5" PointX="37.375" PointY="8.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.UserActivity" Width="1.5" PointX="36.375" PointY="20.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewUserActivity" Width="1.5" PointX="37.375" PointY="12.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumCarelessEmployee" Width="1.5" PointX="5.375" PointY="16.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumCarelessEmployeeTotal" Width="1.5" PointX="15.375" PointY="12.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumLibraryDownloadByMonth" Width="1.5" PointX="36.375" PointY="24.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumLibraryAddedByMonth" Width="1.5" PointX="37.375" PointY="17.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.JobGroup" Width="1.5" PointX="37.375" PointY="28" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSEGROUP_GROUP" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_JOBGROUP_PARENT" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PERSONCUSTOMER_GROUP" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPost" Width="1.5" PointX="7.375" PointY="14" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewStudyField" Width="1.5" PointX="37.375" PointY="38" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewLocation" Width="1.5" PointX="19.375" PointY="20.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeAge" Width="1.5" PointX="25.375" PointY="24" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeDegree" Width="1.5" PointX="37.375" PointY="33" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeJobGroup" Width="1.5" PointX="8.375" PointY="39" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeLocation" Width="1.5" PointX="38.375" PointY="21" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeSex" Width="1.5" PointX="38.375" PointY="24" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeStudyField" Width="1.5" PointX="32.375" PointY="39" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewEmployeeAge" Width="1.5" PointX="34.375" PointY="39" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewEmployeeLocation" Width="1.5" PointX="39.375" PointY="1" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewJobGroup" Width="1.5" PointX="39.375" PointY="7" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeExp" Width="1.5" PointX="39.375" PointY="11.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewEmployeeExp" Width="1.5" PointX="39.375" PointY="15.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeMaritalStatu" Width="1.5" PointX="39.375" PointY="26.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumActiveCourse" Width="1.5" PointX="39.375" PointY="29.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumCertificateStatu" Width="1.5" PointX="39.375" PointY="33.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeDateAlert" Width="1.5" PointX="0.75" PointY="36.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumCertificateType" Width="1.5" PointX="0.75" PointY="40.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.EmployeeBookStatu" Width="1.5" PointX="41.25" PointY="21.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumEmployeeLibraryAlert" Width="1.5" PointX="33.375" PointY="20.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPersonActiveCourse" Width="1.5" PointX="26.375" PointY="40.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewNotification" Width="1.5" PointX="28.375" PointY="40.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightGroup" Width="1.5" PointX="18.5" PointY="60.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.G_DelayCode" Width="1.5" PointX="20.75" PointY="54.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.G_OpOneDelayType" Width="1.5" PointX="30.375" PointY="20.5" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_G_DelayCode_G_DelayCode" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightStatu" Width="1.5" PointX="28.5" PointY="54.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewMSN" Width="1.5" PointX="41.375" PointY="1.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AvgFlight" Width="1.5" PointX="30.375" PointY="10.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanGroup" Width="1.5" PointX="39" PointY="57.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanDay" Width="1.5" PointX="10.5" PointY="64.875" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanMonth" Width="1.5" PointX="10.5" PointY="62.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlighPlanCalendar" Width="1.5" PointX="10.5" PointY="67.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanStatu" Width="1.5" PointX="20.75" PointY="45" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCity" Width="1.5" PointX="14.375" PointY="41.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DelayCode" Width="1.5" PointX="42" PointY="61.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightDelay" Width="1.5" PointX="46.25" PointY="45.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightDelayCode" Width="1.5" PointX="33.375" PointY="43.25" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_FlightDelay_G_DelayCode" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightsAcType" Width="1.5" PointX="22.375" PointY="15.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightsFrom" Width="1.5" PointX="43.375" PointY="19.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightsRegister" Width="1.5" PointX="7.375" PointY="44.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightsTo" Width="1.5" PointX="9.375" PointY="44.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightStatusWeather" Width="1.5" PointX="46.25" PointY="28.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightRoute" Width="1.5" PointX="42.375" PointY="37.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRouteFromAirport" Width="1.5" PointX="43.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlanRegisterAssigned" Width="1.5" PointX="43.375" PointY="5.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRouteToAirport" Width="1.5" PointX="43.375" PointY="8.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlighPlanAssignedRegister" Width="1.5" PointX="42.375" PointY="44.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Option" Width="1.5" PointX="0.75" PointY="26.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewOption" Width="1.5" PointX="43.375" PointY="13.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CUSTOMER_OPTION" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightLink" Width="1.5" PointX="45" PointY="34.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightRegisterChangeLog" Width="1.5" PointX="41.375" PointY="25.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlan" Width="1.5" PointX="8.625" PointY="47.25" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flightplan_customrt" />
+        <AssociationConnector Association="EPAGRIFFINModel.fp_fpca_fp" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpa_fp" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpd_fp" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpm_fp" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPermit" Width="1.5" PointX="15.75" PointY="53.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlan" Width="1.5" PointX="36.375" PointY="41.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlanCalendarRegisterAll" Width="1.5" PointX="41.375" PointY="33.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlanCalander" Width="1.5" PointX="30.375" PointY="42.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlanRegister" Width="1.5" PointX="11.375" PointY="42.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlanCalendarRegister" Width="1.5" PointX="43.375" PointY="28.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanItemPermit" Width="1.5" PointX="18" PointY="50.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlanItemPermit" Width="1.5" PointX="45.375" PointY="0.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_pip_permit" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanRegister" Width="1.5" PointX="34.75" PointY="51.25" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpr_fp" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightCrew" Width="1.5" PointX="49" PointY="31.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightCrewChangeHistory" Width="1.5" PointX="47.375" PointY="5.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CrewAvailability" Width="1.5" PointX="39.375" PointY="36.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CrewAvailabilityStatu" Width="1.5" PointX="43.375" PointY="31.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanCalanderCrew" Width="1.5" PointX="39.25" PointY="41.375" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_crew_cal" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flightcrew_fpc" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlanItemCalander" Width="1.5" PointX="44.375" PointY="49.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Box" Width="1.5" PointX="47.375" PointY="1" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_crew_box" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CrewTypeRequirement" Width="1.5" PointX="13.375" PointY="23.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBoxCrewRequirement" Width="1.5" PointX="45.375" PointY="13.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCrew" Width="1.5" PointX="13.375" PointY="45.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBoxCrewFlight" Width="1.5" PointX="45.375" PointY="17.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PersonEducation" Width="1.5" PointX="5.25" PointY="59.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPersonEducation" Width="1.5" PointX="23.375" PointY="44.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PERSONEDUDOC_PERSONEDU" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BoxCrew" Width="1.5" PointX="49.625" PointY="14.625" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_bc_box" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BoxFlightPlanItem" Width="1.5" PointX="49.625" PointY="1.625" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_bfp_box" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewCalendar" Width="1.5" PointX="38.75" PointY="46.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewCalendarSplited" Width="1.5" PointX="20.75" PointY="48.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.EmployeeCalendar" Width="1.5" PointX="51.875" PointY="25.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.EmployeeCalendarSplited" Width="1.5" PointX="58.125" PointY="20" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_ec_bc" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_ecs_bc" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_cd_cm" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.LibraryFolder" Width="1.5" PointX="17.375" PointY="11.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBox" Width="1.5" PointX="49.375" PointY="4.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewTime" Width="1.5" PointX="8.375" PointY="52.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewAssignFDP" Width="1.5" PointX="0.75" PointY="21.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightMatchingList" Width="1.5" PointX="25.375" PointY="15.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.HelperMatchingList" Width="1.5" PointX="0.75" PointY="30.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewMatchingList" Width="1.5" PointX="3.375" PointY="31.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.MatchingList" Width="1.5" PointX="0.75" PointY="33.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightFDP" Width="1.5" PointX="50.375" PointY="18.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPAB" Width="1.5" PointX="56.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AspNetRoleClaim" Width="1.5" PointX="13.375" PointY="26.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RegisterGround" Width="1.5" PointX="43.375" PointY="24.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewLibraryFolder" Width="1.5" PointX="52.375" PointY="12.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRegisterGround" Width="1.5" PointX="58.375" PointY="8" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayCode" Width="1.5" PointX="3.375" PointY="7.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDutyFDPDetail" Width="1.5" PointX="52.375" PointY="50.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRotserDailyCrew" Width="1.5" PointX="31.375" PointY="31.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDailyRosterFlight" Width="1.5" PointX="15.375" PointY="45.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.HelperFDPBox" Width="1.5" PointX="41.375" PointY="54.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightStatusLog" Width="1.5" PointX="57.875" PointY="29" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightSecurity" Width="1.5" PointX="58.375" PointY="32.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightSecurityDH" Width="1.5" PointX="58.375" PointY="43.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookFileVisit" Width="1.5" PointX="34.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBookApplicableEmployeeAb" Width="1.5" PointX="34.375" PointY="27.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FDPMaxDaily" Width="1.5" PointX="34.375" PointY="8.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.PlanItem" Width="1.5" PointX="7.375" PointY="61.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPlanItem" Width="1.5" PointX="54.375" PointY="61.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewLayOver" Width="1.5" PointX="62.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPositioning" Width="1.5" PointX="45.375" PointY="24.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightFuel" Width="1.5" PointX="62.375" PointY="17.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBoardSummary" Width="1.5" PointX="47.375" PointY="18.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DelayCodeCategory" Width="1.5" PointX="39.75" PointY="62" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_dc_cdc" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDayDutyFlight" Width="1.5" PointX="48.375" PointY="25.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBook" Width="1.5" PointX="64.375" PointY="9.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookRelatedEmployee" Width="1.5" PointX="32.75" PointY="48.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookSigned" Width="1.5" PointX="15.375" PointY="39.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBookApplicableEmployee" Width="1.5" PointX="64.375" PointY="33.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DelayAvgByAirport" Width="1.5" PointX="51.375" PointY="7.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DelayAvgByAirportCategory" Width="1.5" PointX="51.375" PointY="10.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DelayAvgByCategory" Width="1.5" PointX="36.375" PointY="36.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DelayAvgByRegister" Width="1.5" PointX="28.375" PointY="52.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DelayAvgByRegisterCategory" Width="1.5" PointX="10.375" PointY="53.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.UserExt" Width="1.5" PointX="12.375" PointY="52.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRole" Width="1.5" PointX="52.375" PointY="22.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_ext_users" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewUserRole" Width="1.5" PointX="53.375" PointY="6.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewUser" Width="1.5" PointX="52.375" PointY="17.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewClaim" Width="1.5" PointX="53.375" PointY="9.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRoleClaim" Width="1.5" PointX="37.375" PointY="53.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewUserRoleClaim" Width="1.5" PointX="17.375" PointY="56.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewWeek" Width="1.5" PointX="64.375" PointY="61.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayMonthly" Width="1.5" PointX="58.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayMonthlyAirport" Width="1.5" PointX="64.375" PointY="55.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayMonthlyAirportCategory" Width="1.5" PointX="58.375" PointY="64.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayMonthlyCategory" Width="1.5" PointX="66.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayWeekly" Width="1.5" PointX="37.375" PointY="64.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayWeeklyAirport" Width="1.5" PointX="39.375" PointY="65.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayWeeklyAirportCategory" Width="1.5" PointX="41.375" PointY="65.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayWeeklyCategory" Width="1.5" PointX="5.375" PointY="66.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayDaily" Width="1.5" PointX="66.375" PointY="6.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayDailyCategory" Width="1.5" PointX="7.375" PointY="66.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayDailyAirport" Width="1.5" PointX="66.375" PointY="11.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayAirportCategoryGrouped" Width="1.5" PointX="66.375" PointY="17.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDelayDailyAirportCategory" Width="1.5" PointX="66.375" PointY="32.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCertification" Width="1.5" PointX="54.375" PointY="38.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Certification" Width="1.5" PointX="54.375" PointY="45.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPFlightDetail" Width="1.5" PointX="66.375" PointY="55.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SunTime" Width="1.5" PointX="58.375" PointY="54.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.UpdatedPlanFlight" Width="1.5" PointX="54.375" PointY="51.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCrewXOff" Width="1.5" PointX="68.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.C_SC" Width="1.5" PointX="25.375" PointY="55.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Airport" Width="1.5" PointX="3" PointY="23.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewAirport" Width="1.5" PointX="68.375" PointY="15.375" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_AIRPORT_CITY" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewEmployeeACType" Width="1.5" PointX="16.375" PointY="9" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFolderApplicable" Width="1.5" PointX="33.375" PointY="14.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDP2" Width="1.5" PointX="68.375" PointY="31.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightAB" Width="1.5" PointX="68.375" PointY="47.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewLegCrew" Width="1.5" PointX="43.375" PointY="69.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewIdeaLast" Width="1.5" PointX="51.375" PointY="30.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewIdeaRank" Width="1.5" PointX="70.375" PointY="40.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewImportPlan" Width="1.5" PointX="70.375" PointY="45.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Idea" Width="1.5" PointX="70.375" PointY="34.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ThirdPartySyncHistory" Width="1.5" PointX="3.375" PointY="41.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookChapter" Width="1.5" PointX="11.25" PointY="8.25" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_bf_bf" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookFile" Width="1.5" PointX="30.625" PointY="1.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBookFile" Width="1.5" PointX="35.375" PointY="57.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookFile_Document_Id" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBookFileVisited" Width="1.5" PointX="35.375" PointY="70.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBookChapter" Width="1.5" PointX="33.375" PointY="23.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Ac_MSN" Width="1.5" PointX="31.5" PointY="0.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_Ac_MSN_Ac_Model" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_Ac_MSN_G_AirlineOperators" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_acmsn_customer" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpr_msn" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpr_pmsn" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCrewArchived" Width="1.5" PointX="50.375" PointY="35.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCrewArchive" Width="1.5" PointX="50.375" PointY="39.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDayOffRanked" Width="1.5" PointX="0.75" PointY="43.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.NiraHistory" Width="1.5" PointX="31.375" PointY="51.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightInformation" Width="1.5" PointX="23.375" PointY="66.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FDPItem" Width="1.5" PointX="66.875" PointY="25.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPItem" Width="1.5" PointX="15.375" PointY="61" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPCrew" Width="1.5" PointX="57.375" PointY="24.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPCrewDetail" Width="1.5" PointX="17.375" PointY="69.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPCrewDetailSM" Width="1.5" PointX="9.375" PointY="70.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRosterSheet" Width="1.5" PointX="70.375" PointY="51.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCrewNewX" Width="1.5" PointX="44.375" PointY="38.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanItem" Width="1.5" PointX="72.625" PointY="20" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlanItem" Width="1.5" PointX="72.375" PointY="0.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpi_msn" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpi_actype" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpi_airportfrom" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpi_airportto" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpi_box" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpi_flightplan" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_crew_item" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flightplangroup_flightplan" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpi_organ" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_pip_plani" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPItem2" Width="1.5" PointX="0.75" PointY="72.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewFlightApp" Width="1.5" PointX="72.375" PointY="27.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SMSHistory" Width="1.5" PointX="58.375" PointY="70.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightChangeHistory" Width="1.5" PointX="51.375" PointY="58.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightChangeHistory" Width="1.5" PointX="39.375" PointY="73.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewCode" Width="1.5" PointX="72.375" PointY="43.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRoute" Width="1.5" PointX="55.375" PointY="32.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFinMonthlyPersian" Width="1.5" PointX="54.375" PointY="26" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFinMonthly" Width="1.5" PointX="50.375" PointY="44.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFinMonthlyReg" Width="1.5" PointX="3.375" PointY="73.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFinMonthlyRouteReg" Width="1.5" PointX="5.375" PointY="73.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFin" Width="1.5" PointX="19.375" PointY="63.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDayFlight28" Width="1.5" PointX="53.375" PointY="58.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewAircraftType" Width="1.5" PointX="52.375" PointY="35.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.IPAccess" Width="1.5" PointX="54.375" PointY="19.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewIPAccess" Width="1.5" PointX="54.375" PointY="22.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewValid" Width="1.5" PointX="60.375" PointY="59.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCrewNew" Width="1.5" PointX="23.375" PointY="49.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.UserLogin" Width="1.5" PointX="52.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.OffItem" Width="1.5" PointX="77.125" PointY="26.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CrewPickupSM" Width="1.5" PointX="23.375" PointY="58.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewPickupSM" Width="1.5" PointX="51.375" PointY="65.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Employee" Width="1.5" PointX="18.5" PointY="0.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_emp_airport" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_emp_baseairport" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookRelatedEmployee_Employee_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_bc_emp" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_COURSEEMPLOYEE_EMPLOYEE" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_crew_employee" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_EMPLOCATION_EMPLOYEE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_EMPLOYEE_PERSONCUSTOMER" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_EmployeeBookStatus_Employee_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flightcrew_employee" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flightgroup_employee" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fpa_approver" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewEmployeeLight" Width="1.5" PointX="46.375" PointY="49.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.NotificationGroup" Width="1.5" PointX="5.25" PointY="79.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.idx_notgrp_user" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewNotificationGroup" Width="1.5" PointX="59.375" PointY="24.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Extension" Width="1.5" PointX="60.375" PointY="31.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.HelperFDP" Width="1.5" PointX="13.375" PointY="81.875" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ExtensionHistory" Width="1.5" PointX="51.875" PointY="119" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewOffItem" Width="1.5" PointX="13.375" PointY="56.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRosterReport" Width="1.5" PointX="25.375" PointY="58.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFDP" Width="1.5" PointX="13.375" PointY="69.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFDPItem" Width="1.5" PointX="53.375" PointY="70.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFDPMonthly" Width="1.5" PointX="68.375" PointY="19.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRegHistory" Width="1.5" PointX="58.375" PointY="75.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRegHistoryMonthly" Width="1.5" PointX="15.375" PointY="74.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRegHistoryYearly" Width="1.5" PointX="74.375" PointY="7.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Coord" Width="1.5" PointX="52.375" PointY="3.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewCertificatesSummary" Width="1.5" PointX="7.375" PointY="76.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDayDuty" Width="1.5" PointX="62.375" PointY="5.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCockpit" Width="1.5" PointX="27.375" PointY="78.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewLegTime" Width="1.5" PointX="78.375" PointY="30.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewValidFTL" Width="1.5" PointX="78.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FixTimeRoute" Width="1.5" PointX="58.375" PointY="15.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FixTimeRouteHistory" Width="1.5" PointX="60.375" PointY="12.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDispatchSMSEmployee" Width="1.5" PointX="79.375" PointY="13.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayLegMap" Width="1.5" PointX="76.375" PointY="13.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SumFlightDelay" Width="1.5" PointX="64.375" PointY="22.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDP" Width="1.5" PointX="80.375" PointY="75.125" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCrewX" Width="1.5" PointX="62.375" PointY="66.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewDuty" Width="1.5" PointX="80.375" PointY="21.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPRest" Width="1.5" PointX="62.375" PointY="80.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FDPLog" Width="1.5" PointX="77" PointY="53.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewDutyNoReg" Width="1.5" PointX="0.75" PointY="81.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.MVT" Width="1.5" PointX="77.125" PointY="19.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FDPVisibleDate" Width="1.5" PointX="70.375" PointY="16.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.TableDutyFDP" Width="1.5" PointX="25.375" PointY="73.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDayDuty7" Width="1.5" PointX="54.375" PointY="16.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.GrpFlight" Width="1.5" PointX="74.375" PointY="4.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.GrpFlightCal" Width="1.5" PointX="82.375" PointY="20.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DelayNotified" Width="1.5" PointX="25.375" PointY="67.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.SMSGroup" Width="1.5" PointX="72.375" PointY="16.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightPlanCalanderCrew" Width="1.5" PointX="84.375" PointY="71.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DlyGrpFlight" Width="1.5" PointX="47.375" PointY="35.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewBoxCrew" Width="1.5" PointX="53.375" PointY="79.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCrew2" Width="1.5" PointX="64.375" PointY="83.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewDutyFlightLocal" Width="1.5" PointX="27.375" PointY="57.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewTimeDetail" Width="1.5" PointX="32.375" PointY="56.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.DlyGrpFlightCat" Width="1.5" PointX="27.375" PointY="67.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.GrpDelayCategory" Width="1.5" PointX="0.75" PointY="20.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.GrpAirport" Width="1.5" PointX="29.375" PointY="57.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPLog" Width="1.5" PointX="74.375" PointY="67.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.C_ViewLegTime" Width="1.5" PointX="74.375" PointY="75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelDailyRegisterCal" Width="1.5" PointX="45.375" PointY="70" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelDailyTypeCal" Width="1.5" PointX="76.375" PointY="80" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelMonthlyRegisterCal" Width="1.5" PointX="80.375" PointY="36" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelMonthlyRouteX" Width="1.5" PointX="80.375" PointY="56" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelMonthlyRouteXCal" Width="1.5" PointX="39.375" PointY="82" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelMonthlyTypeCal" Width="1.5" PointX="3.375" PointY="83" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCourseSession" Width="1.5" PointX="34.375" PointY="63" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFinYearlyRoute" Width="1.5" PointX="74.375" PointY="45" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFormAMonthlyDom" Width="1.5" PointX="64.375" PointY="76" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFormAMonthlyInt" Width="1.5" PointX="66.375" PointY="76" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFormAYearly" Width="1.5" PointX="84.375" PointY="1" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFormAYearlyDom" Width="1.5" PointX="74.375" PointY="61" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFormAYearlyInt" Width="1.5" PointX="81.375" PointY="13" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewJobGroupType" Width="1.5" PointX="74.375" PointY="1" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewRosterReportFP" Width="1.5" PointX="82.375" PointY="40" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelMonthlyCal" Width="1.5" PointX="48.375" PointY="52.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelMonthlyRegister" Width="1.5" PointX="47.375" PointY="75.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrew" Width="1.5" PointX="33.375" PointY="79.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCrewList" Width="1.5" PointX="49.375" PointY="77.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFinMonthlyRoute" Width="1.5" PointX="76.375" PointY="75.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFormA" Width="1.5" PointX="84.375" PointY="26.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFormAMonthly" Width="1.5" PointX="84.375" PointY="88.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookRelatedGroup" Width="1.5" PointX="39.625" PointY="0.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookRelatedGroup_JobGroup_Id" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelLeg" Width="1.5" PointX="35.375" PointY="76.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelMonthlyType" Width="1.5" PointX="86.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightDelay" Width="1.5" PointX="29.375" PointY="73.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDRReport" Width="1.5" PointX="88.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AppFTL" Width="1.5" PointX="86.375" PointY="40.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CourseSession" Width="1.5" PointX="15.75" PointY="80.625" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_session_course" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelDailyCal" Width="1.5" PointX="5.375" PointY="88.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFDPKey" Width="1.5" PointX="29.375" PointY="60.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFixtimeRoute" Width="1.5" PointX="10.375" PointY="38.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelDailyRouteXCal" Width="1.5" PointX="9.375" PointY="76.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelYearlyRegister" Width="1.5" PointX="18.375" PointY="75.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelYearlyRoute" Width="1.5" PointX="20.375" PointY="75.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelYearlyType" Width="1.5" PointX="80.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayAirportDailyCal" Width="1.5" PointX="60.375" PointY="35.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayAirportMonthlyCal" Width="1.5" PointX="82.375" PointY="47.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayCatAirportMonthlyCal" Width="1.5" PointX="15.375" PointY="85.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayCatDailyCal" Width="1.5" PointX="84.375" PointY="48.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayCatMonthlyCal" Width="1.5" PointX="49.375" PointY="85.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayCatRegisterMonthlyCal" Width="1.5" PointX="20.375" PointY="87.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayDailyCal" Width="1.5" PointX="41.375" PointY="87.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayLeg" Width="1.5" PointX="43.375" PointY="87.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayLegBI" Width="1.5" PointX="17.375" PointY="88.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayLegPivot" Width="1.5" PointX="55.375" PointY="88.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayMonthlyCal" Width="1.5" PointX="88.375" PointY="13.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayCatAirportDailyCal" Width="1.5" PointX="66.375" PointY="83.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDelayCatRegisterDailyCal" Width="1.5" PointX="57.375" PointY="88.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightRoute" Width="1.5" PointX="34.375" PointY="3.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightCrewNewXTime" Width="1.5" PointX="36.375" PointY="0.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFuelMonthlyRoute" Width="1.5" PointX="59.375" PointY="89.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FDPExtra" Width="1.5" PointX="51.875" PointY="103.875" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.HelperMaxFDP" Width="1.5" PointX="19.375" PointY="11.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.TableBlockTime" Width="1.5" PointX="51.875" PointY="107.625" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FLTGroup" Width="1.5" PointX="82.875" PointY="101.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FLTGroupItem" Width="1.5" PointX="85.125" PointY="24.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightGroupItem" Width="1.5" PointX="31.375" PointY="74.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFLTGroup" Width="1.5" PointX="83.375" PointY="13.375" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fltgrpitem_fltgrp" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CateringItem" Width="1.5" PointX="85.125" PointY="21" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.CateringItemCode" Width="1.5" PointX="82.875" PointY="105.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewCateringItem" Width="1.5" PointX="90.375" PointY="1.25" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_ctr_apt" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_ctr_code" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptRedirect" Width="1.5" PointX="90.375" PointY="14.375" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FDP" Width="1.5" PointX="49.625" PointY="0.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fdp_box" />
+        <AssociationConnector Association="EPAGRIFFINModel.cps_fdp" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fdp_employee" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_ec_fdpid" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_exh_fdp" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fdp_fdp" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fdpextra_fdp" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fdpitem_fdp" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_tableblocktime_fdp" />
+        <AssociationConnector Association="EPAGRIFFINModel.off_fdp" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptNoFDP" Width="1.5" PointX="69.375" PointY="25.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptNoFDPMonthlyPersian" Width="1.5" PointX="76.375" PointY="60.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptFDPMonthlyPersian" Width="1.5" PointX="90.375" PointY="21.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptDeadHead" Width="1.5" PointX="76.375" PointY="66.875" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.RptReposition" Width="1.5" PointX="90.375" PointY="7.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AppFuel" Width="1.5" PointX="25.375" PointY="90.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightsGantt" Width="1.5" PointX="68.375" PointY="77.25" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.FlightInformation" Width="1.5" PointX="90.875" PointY="31.625" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_FlightInformation_Ac_MSN" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_FlightInformation_Ac_Type" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flightinformation_fromairport" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flightinformation_toairport" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flighti_box" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_ctr_flight" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flightinformation_customer" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fdpitem_flight" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_FlightCrew_FlightInformation" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_FlightDelay_FlightInformation" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_FlightInformation_FlightGroup" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_FlightInformation_FlightStatus" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_flightinformation_fpi" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_FlightInformation_G_AirlineOperators" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_FlightStatusLog_FlightInformation" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fll_flight1" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fll_flight2" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fltgrpitem_flt" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_fsw_flight" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_mvt_flight" />
+        <AssociationConnector Association="EPAGRIFFINModel.off_flight" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewPlanFlight" Width="1.5" PointX="86.375" PointY="48.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Person" Width="1.5" PointX="3" PointY="102.5" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewEmployee" Width="1.5" PointX="70.375" PointY="76.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PERSON_OPTION_ICAO" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PERSON_OPTION_INDT" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PERSON_OPTION_MARRIAGE" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoUserLicence_Person" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_CaoUserLicenceHistory_Person" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PD_PERS" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PERSONCUSTOMER_PERSON" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PERSONEDUCATION_PERSON" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PersonExperience_Person" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_PersonRating_Person" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_UM_Type_Access_UM_Users" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_UserCourse_Person" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.Book" Width="1.5" PointX="9" PointY="0.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_bc_b" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_Book_Customer_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BOOK_ORG" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookAircraftType_Book_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookAutor_Book_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookFile_Book_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookKeyword_Book_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookRelatedEmployee_Book_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookRelatedGroup_Book_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_BookRelatedStudyField_Book_Id" />
+        <AssociationConnector Association="EPAGRIFFINModel.FK_EmployeeBookStatus_Book_Id" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.BookCourse" Width="1.5" PointX="11.25" PointY="1.125" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_bc_book" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

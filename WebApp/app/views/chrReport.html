@@ -1,0 +1,97 @@
+﻿
+
+<style>
+
+
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+</style>
+
+
+
+
+<div class="box chrreport" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+
+
+
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <div dx-tabs="tabs_options"></div>
+                    <div id="details" class="tab details">
+                        <div dx-data-grid="dg_course" id="dg_course" class="content" style="overflow-y:hidden"></div>
+                    </div>
+                    <div id="route" class="tab">
+
+                    </div>
+                    <div id="register" class="tab">
+
+                    </div>
+                    <div id="route_register" class="tab">
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+
+                    <td style="width:160px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                    <td style="width:160px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                    <td style="width:300px;text-align:right;padding-right:5px" class="dx-border"><div dx-select-box="sb_chr"></div></td>
+                    <!--<td style="width:170px;text-align:right;padding-right:5px" class="dx-border"><div dx-select-box="sb_status"></div></td>
+                    <td style="width:170px;text-align:right;padding-right:5px" class="dx-border"><div dx-select-box="sb_result"></div></td>
+
+                    <td style="width:300px;text-align:right;padding-right:5px" class="dx-border"><div dx-select-box="sb_inst1"></div></td>
+                    <td style="width:300px;text-align:right;padding-right:5px" class="dx-border"><div dx-select-box="sb_inst2"></div></td>
+
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div dx-select-box="sb_rank"></div></td>-->
+
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_export"></div></td>
+                    <td></td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <div ng-include="'app/views/imageviewer.html'"></div>
+
+</div>

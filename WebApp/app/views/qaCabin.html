@@ -1,0 +1,189 @@
+﻿﻿
+<style>
+
+    .ctd {
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    .ctd-empty {
+        border: 0px solid #ccc;
+        text-align: center;
+    }
+
+    .ctr {
+        /*height:30px;*/
+    }
+
+    .ctd-center {
+        background-color: lightseagreen;
+    }
+
+    .ctd-selected {
+        background-color: red;
+    }
+</style>
+<div ng-controller="qaCabinController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+            <div id="scroll_qaCabin" dx-scroll-view="scroll_qaCabin" style="margin-top: 5px; float: left; overflow: hidden; width: 60%">
+
+                <div class="visible-sm visible-md visible-lg">
+
+                    <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Name (If you want): </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_Name"></div></td>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> BOX: </td>
+                            <td style="padding:7px;text-align:left;"><div dx-text-box="txt_BOX" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Ref: </td>
+                            <td style="padding:7px;text-align:left;"><div dx-number-box="num_refNumber" class="center"></div></td>
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+
+                        <tr>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Report field by: </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_repFieldBy"></div></td>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Date of Occurrence: </td>
+                            <td style="padding:7px;text-align:left;"><div dx-date-box="txt_OccurrenceDate" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <!--<td style="padding: 7px;text-align:left; font-weight: bold"> Approximate local time of event: </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-date-box="txt_apxTime"></div></td>-->
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Flight number: </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-number-box="num_fltNum"></div></td>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Flight segment(from-to): </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_fltSeg"></div></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Location of event: </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_eventLoc"></div></td>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> A/C type & registration: </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_acType"></div></td>
+
+                        </tr>
+                        <tr>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Number of passenger: </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-number-box="num_PAXNum"></div></td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Weather condition: </td>
+                            <td style="padding: 7px;text-align:left;" colspan="3"> <div dx-text-area="txt_wxCondition"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <div style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                        <div style="background-color: whitesmoke; padding: 7px; text-align: left; color: black; font-weight: bold ">
+                            Flight Phase:
+                        </div>
+
+                        <div class="col-xs-3 col-sm-3 col-md-3" ng-repeat="x in flightPhase">
+
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="fpoptions[x.Id]" ng-change="chkFlightPhase($index)" /> {{x.Title}}
+
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <div style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                        <div style="background-color: whitesmoke; padding: 7px; text-align: left; color: black; font-weight: bold ">
+                            Event Title(check all that apply):
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6" ng-repeat="x in eventTitle">
+
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="etoptions[x.Id]" ng-change="chkEventTitle($index)" /> {{x.Title}}
+
+                        </div>
+                        <div style="clear:both"></div>
+                        <div ng-show="showOther" style="margin:1%;border:1px solid #ccc;width:98%;color:black" dx-text-area="txt_eventOther"></div>
+
+
+                    </div>
+
+                    <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color: whitesmoke; padding: 7px; text-align: left; color: black; font-weight: bold ">
+                                Describe occurernece/ situation with all relevant information (Please be brief & to the point)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_desOccurrence"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color: whitesmoke; padding: 7px; text-align: left; color: black; font-weight: bold ">
+                                Recommendation(s)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_Rec"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                Result
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_result" dx-validator="{validationGroup:'result',  validationRules: [{ type: 'required',}]}"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <div style="clear:both"></div>
+
+
+
+                    <table ng-show="url_sign" style="width:100%;height:60px;margin-top:10px;border:1px solid #ccc;">
+                        <tr>
+                            <td style="background-color:black;padding:7px;text-align:left;color:black;font-weight:bold" colspan="3">
+                                Signature & Date
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding:10px;border-bottom:1px solid #ccce;text-align:center" colspan="3">
+                                <div ng-show="url_sign" style="text-align:center;font-size:14px;padding:0px;">The document signed and approved by</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:25%;"></td>
+                            <td style="width:50%; text-align:center;padding:10px">
+
+                                <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">{{PIC}}</div>
+                                <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">{{signDate}}</div>
+                                <img style="height:auto;display: block; width: 50%;margin:0 auto 0 auto" ng-show="url_sign" ng-src="{{url_sign}}" />
+                            </td>
+                            <td style="width:25%;"></td>
+                        </tr>
+                    </table>
+                    <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Recived: </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_recived"></div></td>
+                            <td style="padding: 7px;text-align:left; font-weight: bold"> Follow-Up: </td>
+                            <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_followup"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+            <div style="float: right; width: 40%">
+                <div ng-include="'app/views/qaRefer.html?vx=2'" onload="testLoaded()"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

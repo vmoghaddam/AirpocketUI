@@ -1,0 +1,252 @@
+﻿<style>
+    .ctd {
+        border: 1px solid #eee;
+        text-align: center;
+    }
+
+    .ctd-empty {
+        border: 0px solid #eee;
+        text-align: center;
+    }
+
+    .ctr {
+        /*height:30px;*/
+    }
+
+    .ctd-center {
+        background-color: lightseagreen;
+    }
+
+    .ctd-selected {
+        background-color: red;
+    }
+</style>
+<div ng-controller="qaMaintenanceController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+
+            <div id="scroll_qaMaintenance" dx-scroll-view="scroll_qaMaintenance" style="margin-top: 5px; float: left; overflow: hidden;width:60%">
+
+                <div class="container">
+                    <div class="visible-xs">
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Date of Occurrence: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_OccurrenceDate" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> A/C Register: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_acReg"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Aircraft Type: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_acType"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Flight number: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_fltNum"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Route: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_route"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> ATL No. : </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_atlNum"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Task No. : </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_taskNum"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Station: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_station"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Reference: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_reference"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold" colspan="6">
+                                    Component Specification:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Component: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-select-box="sb_compn"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Serial Number: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-number-box="nb_serialNumber"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Part Number: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-number-box="nb_partNumber"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                    Event
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_event"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                    Corrective Action Taken Until Now:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_actionTaken"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Name: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_name"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> CAA License No.: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_CAALicense"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Authorization No.: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_authNum"></div></td>
+                            </tr>
+                        </table>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="visible-sm visible-md visible-lg">
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Date of Occurrence: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_OccurrenceDate" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Station: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_station"></div></td>
+                                <!--<td style="padding: 7px;text-align:left; font-weight: bold"> UTC Time / Local Time: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_time"></div></td>-->
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> A/C Register: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_acReg"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Aircraft Type: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_acType"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Flight number: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_fltNum"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Route: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_route"></div></td>
+
+
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> ATL No. : </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_atlNum"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Task No. : </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_taskNum"></div></td>
+
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Reference: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_reference"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold" colspan="6">
+                                    Component Specification:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Component: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-select-box="sb_compn"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Serial Number: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-number-box="nb_serialNumber"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Part Number: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-number-box="nb_partNumber"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                    Event
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_event"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                    Corrective Action Taken Until Now:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_actionTaken"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                    Result
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_result" dx-validator="{validationGroup:'result',  validationRules: [{ type: 'required',}]}"></div></td>
+                            </tr>
+
+                        </table>
+
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Name: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_name"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> CAA License No.: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_CAALicense"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Authorization No.: </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_authNum"></div></td>
+                            </tr>
+                        </table>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div style="float: right;width:40%">
+                <div ng-include="'app/views/qaRefer.html?vx=2'" onload="testLoaded()"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

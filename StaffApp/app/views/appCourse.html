@@ -1,0 +1,62 @@
+﻿<div style="height:100%;">
+    <div class="box course maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+
+
+            <div id="scrollview" dx-scroll-view="scroll_main">
+
+                <div style="padding-top:2px;padding-right:2px;padding-left:2px" ng-repeat="x in ds">
+                    <div class="col-lg-12 col-md-12 col-sm-12  applibraryitem" style="padding:1px 2px 2px 2px;display:block"  >
+                        <div ng-class="x.class" style="margin:0; padding:5px 5px 5px 10px;display:block">
+                            <div class="col-lg-11 col-sm-10 col-xs-10 col-md-10">
+                                <div style="margin-top:5px"><span style="display:inline-block;"><i>{{x.Organization}}</i></span></div>
+                                <div style="margin-top:2px"><span style="display:inline-block;font-weight:bold">{{x.CT_Title}}</span></div>
+                                <div style="margin-top:5px"><span style="display:inline-block;"> {{x.Status}} </span></div>
+                                <div style="padding:5px 0 5px 0">
+                                    <div class="col-lg-3   " style="padding-left:0;padding-right:0;"><span style="display:inline-block;padding-left:0px;font-weight:bold">{{x.start}}</span></div>
+                                    <div class="col-lg-3 col-sm-3 col-md-3" style="padding-left:0;padding-right:0;"><span>No:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.No}}</span></div>
+                                    <div class="col-lg-3 col-sm-5 col-md-5" style="padding-left:0;padding-right:0;"><span>Start Date:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.DateStart}}</span></div>
+                                    <div class="col-lg-3 col-sm-4 col-md-4" style="padding-left:0;padding-right:0;"><span style="width:64px;  display:inline-block">End Date:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.DateEnd}}</span></div>
+
+                                    <div style="clear:both;margin-bottom:5px"></div>
+                                    <div class="col-lg-3    " style="padding-left:0;padding-right:0;"></div>
+                                    <div class="col-lg-3 col-sm-3 col-md-3" style="padding-left:0;padding-right:0;"><span style="width:60px;  display:inline-block">Duration:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.Duration2}}</span></div>
+                                    <div class="col-lg-3 col-sm-5 col-md-5" style="padding-left:0;padding-right:0;"><span>Instructor:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.Instructor}}</span></div>
+                                    <div class="col-lg-3 col-sm-4 col-md-4" style="padding-left:0;padding-right:0;"><span>Location:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.Location}}</span></div>
+                                    <div style="clear:both"></div>
+                                    <div style="clear:both;margin-bottom:5px"></div>
+                                    <div class="col-lg-3    " style="padding-left:0;padding-right:0;"></div>
+                                    <div class="col-lg-3 col-sm-3 col-md-3" style="padding-left:0;padding-right:0;"><span style="width:66px;  display:inline-block">Interval:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.Interval}}</span></div>
+                                    <div class="col-lg-3 col-sm-5 col-md-5" style="padding-left:0;padding-right:0;" ng-show="x.CerNumber"><span>Issue Date:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.DateIssue}}</span></div>
+                                    <div class="col-lg-3 col-sm-4 col-md-4" style="padding-left:0;padding-right:0;" ng-show="x.CerNumber"><span>Certificate No:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.CerNumber}}</span></div>
+                                    
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="text-align:center;padding-top:10px">
+                                <i style="line-height:50px" ng-class="x.icon"></i>
+                            </div>
+
+
+                            <div style="clear:both"></div>
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'appcourse';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

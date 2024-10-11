@@ -1,0 +1,381 @@
+﻿<style>
+    .tab-field-R {
+        padding: 7px;
+        text-align: right !important
+    }
+
+    .tab-field-R-title {
+        padding: 7px;
+        text-align: right !important;
+        font-weight: bold
+    }
+
+    .tab-title-R {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: right !important;
+        color: black;
+        font-weight: bold
+    }
+
+    .tab-style {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        width: 100%;
+        color: black
+    }
+
+    .dx-toolbar-center {
+        width: 100%;
+    }
+</style>
+
+<div ng-controller="qaSecurityController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+
+            <div id="scroll_qaSecurity" dx-scroll-view="scroll_qaSecurity" style="margin-top:5px">
+
+                <div class="container">
+                    <div class="visible-xs">
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="2">
+                                    :گزارش دهنده
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title" style="text-align:left !important"> Anonymous Submit: </td>
+                                <td class="tab-field-R" style="text-align: right !important"> <div dx-check-box="ch_anonymous" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Email (آدرس ایمیل): </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"><div dx-text-box="txt_email" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Tel No. (شماره تلفن): </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"><div dx-text-box="txt_telNumber" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Full Name (نام و نام‌خانوادگی): </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"> <div dx-text-box="txt_name" class="center"></div></td>
+                            </tr>
+                        </table>
+
+
+                        <div style="clear:both"></div>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    :اطلاعات اولیه
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-date-box="txt_reportDate" class="center" dx-validator="{validationGroup:'seurity',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="tab-field-R-title"> :تاریخ گزارش </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-date-box="txt_hazardDate" class="center" dx-validator="{validationGroup:'seurity',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="tab-field-R-title"> :تاریخ بروز رویداد/ مخاطره </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-date-box="txt_hazardTime" class="center" dx-validator="{validationGroup:'seurity',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="tab-field-R-title"> :ساعت بروز رویداد/ مخاطره </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_area" class="center"></div></td>
+                                <td class="tab-field-R-title"> :محل و بخش بروز رویداد/ مخاطره </td>
+                            </tr>
+                            <tr ng-show="fltInfo">
+                                <td class="tab-field-R"><div dx-text-box="txt_register" class="center"></div></td>
+                                <td class="tab-field-R-title"> :علامت ثبت هواپیما </td>
+                            </tr>
+                            <tr ng-show="fltInfo">
+                                <td class="tab-field-R"><div dx-text-box="txt_route" class="center"></div></td>
+                                <td class="tab-field-R-title"> :مسیر پرواز </td>
+                            </tr>
+                            <tr ng-show="fltInfo">
+                                <td class="tab-field-R"><div dx-text-box="txt_flightNumber" class="center"></div></td>
+                                <td class="tab-field-R-title"> :شماره پرواز </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title">  :دلیل تاخیر </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"> <div dx-text-area="txt_delayReason" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"> <div dx-number-box="num_delay" class="center"></div></td>
+                                <td class="tab-field-R-title"> :تاخیر(دقیقه) </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title" colspan="2"> :شرح مخاطره / رویداد </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"><div dx-text-area="txt_description" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <div class="dx-border tab-style">
+                            <div class="tab-title-R">
+                                :عامل بروز مخاطره/رویداد
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6 tab-field-R" ng-repeat="x in shrReason">
+                                <p style="margin-right:5px;display:inline-block">{{x.Title}}</p><input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkReason(x)" ng-disabled="!isEditable" />
+                            </div>
+                            <div style="clear:both"></div>
+                            <div style="padding: 7px" dx-text-area="txt_eventOther" class="center"></div>
+                        </div>
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="6">
+                                    :مشخصات/نوع و شماره تجهیزات/ابزار
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_camera" class="center"></div></td>
+                                <td class="tab-field-R-title"> :دوربین </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_carryingBox" class="center"></div></td>
+                                <td class="tab-field-R-title"> :جعبه حمل اشیاء ممنوعه </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_handRocket" class="center"></div></td>
+                                <td class="tab-field-R-title"> :راکت‌دستی بازرسی کترینگ </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_comail" class="center"></div></td>
+                                <td class="tab-field-R-title"> :Co mail </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_other" class="center"></div></td>
+                                <td class="tab-field-R-title"> :سایر </td>
+                            </tr>
+                        </table>
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    :گزارش شرایط و جزئیات تجهیزات مرتبط با مخاطره/رویداد
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-area="txt_equipmentDescription" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    آیا رویداد منجر به جرح/مصدومیت یا آسیب‌دیدگی پرسنل گردیدهاست؟ (توضیح داده شود)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-select-box="sb_injuryOccuring" class="center"></div></td>
+                            </tr>
+                            <tr ng-show="entity.InjuryOccuring == true">
+                                <td class="tab-field-R"><div dx-text-area="txt_injuryDescription" class="center"></div></td>
+                            </tr>
+                        </table>
+
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    آیا رویداد منجر به وقفه کاری شده است؟ (چه مدت؟ بر حسب دقیقه)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-select-box="sb_workBreak" class="center"></div></td>
+                            </tr>
+                            <tr style="padding: 0px !important;text-align:center;width:100%" ng-show="entity.WorkBreak == true">
+                                <td class="col-sm-12 col-xs-12 col-md-12 tab-field-R"><div dx-number-box="txt_workBreakPeriod" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    :اقدامات پیشگیرانه/پیشنهادی یا اصلاحی لازم
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-area="txt_preventiveActions" class="center"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <div style="clear:both"></div>
+
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="visible-sm visible-md">
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="2">
+                                    :گزارش دهنده
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Email (آدرس ایمیل): </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_email" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Tel No. (شماره تلفن): </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_telNumber" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Full Name (نام و نام‌خانوادگی): </td>
+                                <td class="tab-field-R"> <div dx-text-box="txt_name" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    :اطلاعات اولیه
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-date-box="txt_hazardDate" class="center" dx-validator="{validationGroup:'seurity',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="tab-field-R-title"> :تاریخ بروز رویداد/ مخاطره </td>
+                                <td class="tab-field-R"><div dx-date-box="txt_hazardTime" class="center" dx-validator="{validationGroup:'seurity',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="tab-field-R-title"> :ساعت بروز رویداد/مخاطره </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-date-box="txt_reportDate" class="center" dx-validator="{validationGroup:'seurity',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="tab-field-R-title"> :تاریخ گزارش </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_area" class="center"></div></td>
+                                <td class="tab-field-R-title"> :محل و بخش بروز رویداد/ مخاطره </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_register" class="center"></div></td>
+                                <td class="tab-field-R-title"> :علامت ثبت هواپیما </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_route" class="center"></div></td>
+                                <td class="tab-field-R-title"> :مسیر پرواز </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_flightNumber" class="center"></div></td>
+                                <td class="tab-field-R-title"> :شماره پرواز </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> :شرح مخاطره / رویداد </td>
+                                <td class="tab-field-R" colspan="2"><div dx-text-area="txt_description" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <div class="dx-border tab-style">
+                            <div class="tab-title-R">
+                                :عامل بروز مخاطره/رویداد
+                            </div>
+
+                            <div class="col-xs-3 col-sm-3 col-md-3 tab-field-R" ng-repeat="x in shrReason">
+                                <p style="margin-right:5px;display:inline-block">{{x.Title}}</p><input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkReason(x)" ng-disabled="!isEditable" />
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="tab-field-R center" dx-text-area="txt_eventOther"></div>
+                        </div>
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="6">
+                                    :مشخصات/نوع و شماره تجهیزات/ابزار
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_camera" class="center"></div></td>
+                                <td class="tab-field-R-title"> دوربین: </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_carryingBox" class="center"></div></td>
+                                <td class="tab-field-R-title"> جعبه حمل اشیاء ممنوعه: </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_handRocket" class="center"></div></td>
+                                <td class="tab-field-R-title"> راکت‌دستی بازرسی کترینگ: </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_comail" class="center"></div></td>
+                                <td class="tab-field-R-title"> Co mail: </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_other" class="center"></div></td>
+                                <td class="tab-field-R-title"> سایر: </td>
+                            </tr>
+                        </table>
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    :گزارش شرایط و جزئیات تجهیزات مرتبط با مخاطره/رویداد
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-area="txt_equipmentDescription" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    آیا رویداد منجر به جرح/مصدومیت یا آسیب‌دیدگی پرسنل گردیدهاست؟ (توضیح داده شود)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-select-box="sb_injuryOccuring" class="center"></div></td>
+                            </tr>
+                            <tr ng-if="entity.InjuryOccuring == true">
+                                <td class="tab-field-R"><div dx-text-area="txt_injuryDescription" class="center"></div></td>
+                            </tr>
+                        </table>
+
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    آیا رویداد منجر به وقفه کاری شده است؟ (چه مدت؟ بر حسب دقیقه)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-select-box="sb_workBreak" class="center"></div></td>
+                            </tr>
+                            <tr style="padding: 7px;" ng-show="WorkBreak == true">
+                                <td class="col-sm-6 col-md-6 tab-field-R"><div dx-number-box="txt_workBreakPeriod" class="center"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    :اقدامات پیشگیرانه/پیشنهادی یا اصلاحی لازم
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-area="txt_preventiveActions" class="center"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

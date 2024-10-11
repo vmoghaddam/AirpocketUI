@@ -1,0 +1,1477 @@
+﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_flight .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .dx-tab {
+        background-color: gray !important;
+    }
+
+    .section-header {
+        background-color: lightgrey;
+        font-weight: bold;
+    }
+
+    .section-table {
+        width: 100%;
+    }
+
+        .section-table tr {
+            border-bottom: 1px solid #bbb;
+        }
+
+            .section-table tr td {
+                padding: 7px;
+                width: 25%;
+            }
+
+                .section-table tr td:nth-child(odd) {
+                    text-align: left;
+                    color: black
+                }
+
+                .section-table tr td:nth-child(even) {
+                    text-align: right;
+                    color: black;
+                }
+
+                    .section-table tr td:nth-child(even) span {
+                        color: black;
+                    }
+
+                .section-table tr td:nth-child(odd) span {
+                    color: black;
+                }
+
+    .z5000 {
+    }
+
+    .h70 {
+        height: 70px;
+    }
+
+    .left80 {
+        margin-left: 160px;
+    }
+
+    .sig {
+        display: inline-block;
+        position: relative;
+    }
+
+    .sig_img {
+        position: absolute;
+        top: 25px;
+        left: 0;
+        width: auto;
+        height: 110px;
+    }
+
+    pre {
+        font-size: 15px;
+        border: none !important;
+        background: white !important;
+    }
+
+        pre .prop {
+            color: red;
+            font-weight: bold;
+            display: inline-block;
+            min-width: 70px;
+            text-align: center;
+            border-color: #ccc;
+            border-width: 1px;
+            border-style: solid;
+            width: 90px;
+        }
+
+            pre .prop.selected {
+                border-color: red;
+            }
+
+    .noborder {
+        border: 1px solid #ccc !important;
+    }
+
+    .alignleft {
+        text-align: left !important;
+    }
+
+    .station {
+        background-color: dimgray;
+    }
+
+        .station.selected {
+            background-color: lightseagreen !important;
+        }
+
+    .selected-obj {
+        background: #306b65 !important;
+    }
+    .windc td {
+        border: 1px solid #ddd;
+        text-align: center;
+        padding: 10px;
+    }
+    .hasInfo {
+        background-color: darkslategray !important;
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box reportEFB" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+
+        <div class=" col-lg-7 col-md-8 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <!-- <div style="background:gray;color:white;padding:7px 5px 8px 5px">Details<i class="fa fa-file-excel-o" ng-click="exportDetails" style="color:lightgreen;font-size:24px;float:right;cursor: pointer;"></i></div>-->
+                    <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class=" col-lg-5 col-md-4 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div dx-tabs="tabs_options"></div>
+            <div id="log" class="tabc" style="border:1px solid #ccc">
+
+                <div id="rightColumn" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+
+
+
+
+                    <div>
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Flight</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+
+                            <table class="section-table">
+
+                                <tr>
+                                    <td colspan="2">
+                                        Date
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block">{{formatDateLong(selectedFlight.STDDay)}}</span>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Flight#
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block">{{selectedFlight.FlightNumber}}-{{selectedFlight.FlightId}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        From
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{selectedFlight.FromAirportIATA}}</span>
+                                    </td>
+                                    <td>
+                                        To
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.ToAirportIATA}}</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        STD
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{getSTD(selectedFlight)}}</span>
+
+                                    </td>
+
+
+
+                                    <td>
+
+
+
+                                        STA
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{getSTA(selectedFlight)}}</span>
+
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="2">
+                                        BlockOff
+                                    </td>
+                                    <td colspan="2">
+                                        <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block">{{getBlockOff(selectedFlight,1)}}</span>
+                                        <!--<span ng-show="showMVTTime(selectedFlight)" style="display:inline-block;margin-left:3px;">({{getBlockOffLocal(selectedFlight,1)}})</span>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        T/O
+                                    </td>
+                                    <td colspan="2">
+                                        <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block">{{getTakeOff(selectedFlight,1)}}</span>
+                                        <!--<span ng-show="showMVTTime(selectedFlight)" style="display:inline-block;margin-left:3px;">({{getTakeOffLocal(selectedFlight,1)}})</span>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        LND
+                                    </td>
+                                    <td colspan="2">
+                                        <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block">{{getLanding(selectedFlight,1)}}</span>
+                                        <!-- <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block;margin-left:3px;">({{getLandingLocal(selectedFlight,1)}})</span>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        BlockOn
+                                    </td>
+                                    <td colspan="2">
+                                        <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block">{{getBlockOn(selectedFlight,1)}}</span>
+                                        <!-- <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block;margin-left:3px;">({{getBlockOnLocal(selectedFlight,1)}})</span>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        PF I/C/F
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block">{{selectedFlight.PF}}</span>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Time</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td>
+                                        Block Time
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{getDuration(selectedFlight.BlockTime)}}</span>
+                                    </td>
+                                    <td>
+                                        Flight Time
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{getDuration(selectedFlight.FlightTime)}}</span>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        Night
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"></span>
+                                    </td>
+                                    <td>
+                                        Scheduled
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{getDuration(selectedFlight.ScheduledFlightTime)}}</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2">
+                                        Total Delay
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block;color:red">{{getDuration(selectedFlight.DelayBlockOff)}}</span>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Fuel</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td>
+                                        Remaining
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"> {{selectedFlight.FuelRemaining}}</span>
+                                    </td>
+                                    <td>
+                                        Uplift
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.FuelUplift}}</span>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        Total
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{selectedFlight.FuelTotal}}</span>
+                                    </td>
+                                    <td>
+                                        Used
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.FuelUsed}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Density
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{selectedFlight.FuelDensity}}</span>
+                                    </td>
+                                    <td>
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Passenger</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td>
+                                        Adult
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"> {{selectedFlight.PaxAdult}}</span>
+                                    </td>
+                                    <td>
+                                        Child
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.PaxChild}}</span>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        Infant
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{selectedFlight.PaxInfant}}</span>
+                                    </td>
+                                    <td>
+                                        Total
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.PaxTotal}}</span>
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Cargo/Bags</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td>
+                                        Cargo
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"> {{selectedFlight.CargoWeight}}</span>
+                                    </td>
+                                    <td>
+                                        Bags
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.BaggageWeight}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Total
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block"> {{selectedFlight.Freight}}</span>
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Serial No./LTR</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"> {{selectedFlight.SerialNo}}</span>
+                                    </td>
+
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.LTR}}</span>
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">RVSM Check</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td style="border-right: 1px dotted #bbb;color:gray">
+                                        PHASE
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:gray;text-align:center">
+                                        CPT
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:gray;text-align:center">
+                                        STBY
+                                    </td>
+                                    <td style="color:gray;text-align:center">
+                                        F/O
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px dotted #bbb;color:gray">
+                                        GND
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:black;text-align:center">
+                                        {{selectedFlight.RVSM_GND_CPT}}
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:black;text-align:center">
+                                        {{selectedFlight.RVSM_GND_STBY}}
+                                    </td>
+                                    <td style="color:black;text-align:center">
+                                        {{selectedFlight.RVSM_GND_FO}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px dotted #bbb;color:gray">
+                                        FLT
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:black;text-align:center">
+                                        {{selectedFlight.RVSM_FLT_CPT}}
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:black;text-align:center">
+                                        {{selectedFlight.RVSM_FLT_STBY}}
+                                    </td>
+                                    <td style="color:black;text-align:center">
+                                        {{selectedFlight.RVSM_FLT_FO}}
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+
+
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Notes</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td colspan="3">
+                                        <p>{{selectedFlight.CommanderNote}}</p>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width:33.33%;text-align:left">
+                                    </td>
+                                    <td style="width:33.33%;text-align:left">
+                                    </td>
+                                    <td style="width:33.33%;text-align:right">
+
+                                        <span style="display:inline-block;color:gray">Repositioning</span>
+                                        <span ng-show="!selectedFlight.AttRepositioning1" style="display:inline-block; margin-left:3px;"><i class="far fa-square"></i></span>
+                                        <span ng-show="selectedFlight.AttRepositioning1" style="display:inline-block; "><i class="far fa-check-square"></i></span>
+                                        <span ng-show="!selectedFlight.AttRepositioning2" style="display:inline-block; "><i class="far fa-square"></i></span>
+                                        <span ng-show="selectedFlight.AttRepositioning2" style="display:inline-block; "><i class="far fa-check-square"></i></span>
+                                    </td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Crew</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr ng-repeat="c in selectedFlightCrews">
+                                    <td>
+                                        <span ng-show="!c.IsPositioning" style="display:inline-block">{{c.Position}}</span>
+                                        <span ng-show="c.IsPositioning" style="display:inline-block">Positioning({{c.JobGroup}})</span>
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{c.Name}}</span>
+                                    </td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">COMMANDER'S SIGNATURE</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr style="border-bottom:0px dotted #eee;text-align:left">
+                                    <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px;padding:10px;text-align:center;">
+                                        <div ng-show="selectedFlight.JLSignedBy" style="text-align:center;font-size:16px;padding:5px;">The document signed and approved by</div>
+                                        <div ng-show="selectedFlight.JLSignedBy" style="text-align:center;font-size:18px;padding:5px;">{{selectedFlight.PIC2}}</div>
+                                        <div ng-show="selectedFlight.JLSignedBy" style="text-align:center;font-size:16px;padding:5px;">{{selectedFlight.signDate}}</div>
+                                        <img style="height:200px;display: block;  margin:0 auto 0 auto" ng-show="selectedFlight.JLSignedBy" ng-src="{{selectedFlight.url_sign}}" />
+                                    </td>
+
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+
+
+                        <div style="padding:10px 7px 10px 7px;border-bottom:1px solid #eee;" class="section-header" ng-show="selectedFlight.JLUser">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:85px;font-style;padding-right:5px;color:#ccc; ">Filled by</td>
+                                    <td style="font-weight:bold;text-align:right;">{{selectedFlight.JLUser}}</td>
+                                    <td style="width:85px;text-align:right;font-weight:bold">{{formatDateShort(selectedFlight.JLDate)}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="padding:10px 7px 10px 7px;border-bottom:1px solid #eee;" class="section-header" ng-show="selectedFlight.JLApprover">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:85px;font-style;padding-right:5px;color:#ccc; ">Approved by</td>
+                                    <td style="font-weight:bold;text-align:right;">{{selectedFlight.JLApprover}}</td>
+                                    <td style="width:85px;text-align:right;font-weight:bold">{{formatDateShort(selectedFlight.JLDateApproved)}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+            <div id="ofp" class="tabc" style="border:1px solid #ccc">
+                <div id="rightColumn2" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+                    <div class="ofp-container" id="ofp-doc" ng-bind-html="OFPHtml">
+
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+            </div>
+
+            <div id="metar" class="tabc" style="border:1px solid #ccc">
+                <div id="rightColumn2" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+                    <div style="padding:5px">
+
+                        <table style="width:100%;">
+                            <tr>
+                                <td ng-repeat="x in stations" style="padding:5px;" ng-style="{'width':(100.0/stations.length)+'%'}">
+                                    <div style="padding:5px;border:1px solid #eee;text-align:center;font-size:15px;color:white;font-weight:bold" ng-click="stationClick(x)" ng-class="getStationClass(x)">
+                                        {{x}}
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <div style="padding: 5px 5px 5px 5px;">
+
+                            <div class="padding-0">
+                                <div id="scroll_metar" dx-scroll-view="scroll_metar" style="margin-top:5px;border-right:1px solid #eee">
+                                    <div style="padding:0px 5px 5px 5px;">
+                                        <div ng-repeat="metar in filteredMETAR" style="border:1px solid #bbb; margin-top:5px;">
+                                            <!-- <div style="font-size:15px;font-weight:bold;border-bottom:1px dotted rgb(204, 204, 204);padding:10px">{{metar.StationId}}</div>-->
+                                            <div style="font-size:14px;padding:10px;text-align:justify;line-height:20px;">{{metar.RawText}}</div>
+                                        </div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+            </div>
+            <div id="taf" class="tabc" style="border:1px solid #ccc">
+                <div id="rightColumn2" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+                    <div style="padding:5px">
+
+                        <table style="width:100%;">
+                            <tr>
+                                <td ng-repeat="x in stations" style="padding:5px;" ng-style="{'width':(100.0/stations.length)+'%'}">
+                                    <div style="padding:5px;border:1px solid #eee;text-align:center;font-size:15px;color:white;font-weight:bold" ng-click="stationClick(x)" ng-class="getStationClass(x)">
+                                        {{x}}
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <div style="padding: 5px 5px 5px 5px;">
+
+                            <div class="padding-0">
+                                <div id="scroll_taf" dx-scroll-view="scroll_taf" style="margin-top:5px;border-right:1px solid #eee">
+                                    <div style="padding:0px 5px 5px 5px;">
+                                        <div ng-repeat="metar in filteredTAF" style="border:1px solid #bbb; margin-top:5px;">
+                                            <!-- <div style="font-size:15px;font-weight:bold;border-bottom:1px dotted rgb(204, 204, 204);padding:10px">{{metar.StationId}}</div>-->
+                                            <div style="font-size:14px;padding:10px;text-align:justify;line-height:20px;">{{metar.RawText}}</div>
+                                        </div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+            </div>
+            <div id="notam" class="tabc" style="border:1px solid #ccc">
+                <div id="rightColumn2" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+                    <div style="padding:5px">
+
+                        <table style="width:100%;">
+                            <tr>
+                                <td ng-repeat="x in stations" style="padding:5px;" ng-style="{'width':(100.0/stations.length)+'%'}">
+                                    <div style="padding:5px;border:1px solid #eee;text-align:center;font-size:15px;color:white;font-weight:bold" ng-click="stationClick(x)" ng-class="getStationClass(x)">
+                                        {{x}}
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <div style="padding: 5px 5px 5px 5px;">
+
+                            <div class="padding-0">
+                                <div id="scroll_notam" dx-scroll-view="scroll_notam" style="margin-top:5px;border-right:1px solid #eee">
+                                    <div style="padding:0px 5px 5px 5px;">
+                                        <div ng-repeat="taf in filteredNOTAM" style="border:1px solid rgb(204, 204, 204); margin-top:5px;margin-bottom:5px">
+                                            <div style="font-size:15px;font-weight:bold;border-bottom:1px dotted rgb(204, 204, 204);padding:5px">{{taf.StationId}}</div>
+                                            <div style="padding:10px 10px 10px 20px;">
+                                                <div style="border-bottom:1px dotted #eee;padding-top:5px;padding-bottom:5px;text-align:justify;line-height:20px" ng-repeat="y in taf.NOTAMItems">
+                                                    <p ng-bind-html="y.Text"></p>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+            </div>
+
+
+
+            <div id="charts" class="tabc" style="border:1px solid #ccc">
+                <div id="rightColumn2" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+                    <div style="padding:10px;background-color:#00cc99;color:black;font-weight:bold;text-align:center">
+                        AVIATION WEATHER CENTER
+                    </div>
+                    <div style="border :0px solid #eee;padding:5px;font-weight:bold;margin-top:5px;" class="folder-item">
+                        Significant Weather (SIGWX)
+                    </div>
+                    <div ng-repeat="item in folderSIGWX" style="padding:5px;">
+                        <!--<div style="padding:5px;border-bottom:1px solid #ddd;">{{item.date}}</div>-->
+                        <div style="padding:7px 0 7px 0;border-bottom:1px solid #ddd">
+
+
+
+
+
+                            <table>
+                                <tr>
+
+                                    <td ng-repeat="x in item.items" style="padding-right:10px;">
+                                        <div style="width:150px;padding:7px;background-color:#ccc;border:1px solid #ddd;text-align:center;color:black" ng-click="showImage(x)">{{x.title}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div style="border :0px solid #eee;padding:5px;font-weight:bold;margin-top:5px;" class="folder-item">
+                        Wind and Temperature
+                    </div>
+                    <div style="padding:0px;">
+                        <table style="width:100%;border:1px solid #ddd" class="windc">
+                            <tr style="background-color:darkgray;color:black">
+                                <td style="width:10%;font-weight:bold;padding:5px 7px 5px 7px !important">Level</td>
+                                <td colspan="6" style="font-weight:bold;padding:5px 7px 5px 7px !important">Valid</td>
+                            </tr>
+                            <tr>
+                                <td>FL 340</td>
+                                <td style="width:15%" ng-click="showWind('340','06')">+06 hr</td>
+                                <td style="width:15%" ng-click="showWind('340','12')">+12 hr</td>
+                                <td style="width:15%" ng-click="showWind('340','18')">+18 hr</td>
+                                <td style="width:15%" ng-click="showWind('340','24')">+24 hr</td>
+                                <td style="width:15%" ng-click="showWind('340','30')">+30 hr</td>
+                                <td style="width:15%" ng-click="showWind('340','36')">+36 hr</td>
+                            </tr>
+                            <tr style="background: #eee;">
+                                <td>FL 300</td>
+                                <td style="width:15%" ng-click="showWind('300','06')">+06 hr</td>
+                                <td style="width:15%" ng-click="showWind('300','12')">+12 hr</td>
+                                <td style="width:15%" ng-click="showWind('300','18')">+18 hr</td>
+                                <td style="width:15%" ng-click="showWind('300','24')">+24 hr</td>
+                                <td style="width:15%" ng-click="showWind('300','30')">+30 hr</td>
+                                <td style="width:15%" ng-click="showWind('300','36')">+36 hr</td>
+                            </tr>
+                            <tr>
+                                <td>FL 240</td>
+                                <td style="width:15%" ng-click="showWind('240','06')">+06 hr</td>
+                                <td style="width:15%" ng-click="showWind('240','12')">+12 hr</td>
+                                <td style="width:15%" ng-click="showWind('240','18')">+18 hr</td>
+                                <td style="width:15%" ng-click="showWind('240','24')">+24 hr</td>
+                                <td style="width:15%" ng-click="showWind('240','30')">+30 hr</td>
+                                <td style="width:15%" ng-click="showWind('240','36')">+36 hr</td>
+                            </tr>
+                            <tr style="background: #eee;">
+                                <td>FL 180</td>
+                                <td style="width:15%" ng-click="showWind('180','06')">+06 hr</td>
+                                <td style="width:15%" ng-click="showWind('180','12')">+12 hr</td>
+                                <td style="width:15%" ng-click="showWind('180','18')">+18 hr</td>
+                                <td style="width:15%" ng-click="showWind('180','24')">+24 hr</td>
+                                <td style="width:15%" ng-click="showWind('180','30')">+30 hr</td>
+                                <td style="width:15%" ng-click="showWind('180','36')">+36 hr</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="padding:10px;background-color:#00cc99;color:black;font-weight:bold;text-align:center;margin-top:10px">
+                        AVMET WEATHER
+                    </div>
+                    <div style="border :0px solid #eee;padding:5px;font-weight:bold;margin-top:5px;" class="folder-item">
+                        Significant Weather (SIGWX)
+                    </div>
+                    <div style="padding:0px;">
+                        <table style="width:100%;border:1px solid #ddd" class="windc">
+                            <tr style="background-color:darkgray;color:black">
+
+                                <td colspan="4" style="font-weight:bold;padding:5px 7px 5px 7px !important">Valid(Z)</td>
+                            </tr>
+                            <tr>
+
+                                <td style="width:25%" ng-click="showAVMETSIGWX('00','00')">00</td>
+                                <td style="width:25%" ng-click="showAVMETSIGWX('06','06')">06</td>
+                                <td style="width:25%" ng-click="showAVMETSIGWX('12','12')">12</td>
+                                <td style="width:25%" ng-click="showAVMETSIGWX('18','18')">18</td>
+
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+            </div>
+
+
+            <div style="margin-top:2px;border:1px solid #bbb;padding:5px;">
+                <table style="width:100%;">
+                    <tr>
+                        <td style="width:160px;text-align:left;padding-right:5px"><div dx-button="btn_jl"></div></td>
+                        <!--   <td ng-show="IsFBVisible" style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_dr"></div></td>-->
+
+                        <td ng-show="IsFBVisible" style="width:160px;text-align:left;padding-right:5px"><div dx-button="btn_vr"></div></td>
+
+
+                        <td ng-show="IsFBVisible" style="width:160px;text-align:left;padding-right:5px"><div dx-button="btn_asr"></div></td>
+                        <td style="width:160px;text-align:left;padding-right:5px"><div dx-button="btn_to"></div></td>
+                        <td style="width:160px;text-align:left;padding-right:5px"><div dx-button="btn_lnd"></div></td>
+                        <td></td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                    <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_persiandate"></div></td>
+                    <td ng-show="!isOPSStaff" style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_Status"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_IP"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_CPT"></div></td>
+                    <td ng-show="!isOPSStaff" style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_asrvr"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                    <!--<td ng-show="IsFBVisible" style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_dr"></div></td>
+                    <td ng-show="IsFBVisible" style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_ofp"></div></td>
+                    <td ng-show="IsFBVisible" style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_vr"></div></td>
+
+
+                    <td ng-show="IsFBVisible" style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_asr"></div></td>-->
+                    <!--  <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_log"></div></td>-->
+
+                    <td></td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_date" dx-popup="popup_date">
+        <div class="margin-bottom-5 padding-7 dx-border" style="padding:25px 0 10px 0">
+            <div>
+                <label style="width:45px;text-align:right;margin-right:5px;">From</label>
+
+                <input type="text" class="date1 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+            <div style="margin-top:15px;">
+                <label style="width:45px;text-align:right; margin-right:5px;">To</label>
+
+                <input type="text" class="date2 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+    <div id="popup_jl" dx-popup="popup_jl">
+        <div id="scrollview" dx-scroll-view="scroll_jl">
+
+            <div id="jl" class="page-a4 dx-border1" style="font-size:13px;">
+
+                <div class="subpage">
+                    <!--<div style="display:inline-block;float:left">Left</div>
+                    <div style="display:inline-block;float:right">Right</div>
+                    <div style="position:absolute;bottom:0;">Bottom</div>-->
+                    <div class="jl-title" style="width:100%; text-align:center;font-weight:bold;padding:0px 0 0px 0">JOURNEY LOG</div>
+                    <div class="div3" style="position:relative;/*height:224px;*/padding-left:10px;padding-right:22px;display:flex">
+                        <div style="padding:0;margin:0;width:21%;display:inline-block;position:relative;/*top:-200px;*/">
+                            <img src="../../airpocket/content/images/airline.png" style="margin-left:5px;position:relative;top:-10px;width:240px" />
+                            <table style="width:100%;margin-left:5px;margin-top: 0px;" class="jl-table">
+                                <tr>
+                                    <td style="width:90px;padding: 6px 0 6px 0;">A/C Type</td>
+                                    <td style="width:97px;padding: 6px 0 6px 0;font-weight:bold">{{jl.AcType}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 6px 0 6px 0;">A/C Reg</td>
+                                    <td style="padding: 6px 0 6px 0;font-weight:bold">{{jl.Reg}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 6px 0 6px 0;">Date</td>
+                                    <td style="padding: 6px 0 6px 0; font-weight:bold">{{formatDate(jl.Date)}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 6px 0 6px 0;">DEP.</td>
+                                    <td style="padding: 6px 0 6px 0;font-weight:bold">{{formatTime(jl.STD)}}</td>
+                                </tr>
+
+                            </table>
+                            <table style="width:100%;margin-left:5px;margin-top: 5px; border:1px solid black" class="jl-table">
+                                <tr>
+                                    <td style=" padding: 0px 10px 0px 10px;border:none;text-align:left;border-bottom:1px solid #aaa">Form No: {{jl.FDPId}}</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0px 10px 0px 10px;border:none;text-align:left;border-bottom:1px solid #aaa">Tel: {{jl.tel}}</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="padding: 0px 10px 0px 10px;border:none;text-align:left">Email: {{jl.email}}</td>
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+                        <div class="jl-table-1" style="padding:0 0 0 20px;margin:0;width:78%;display:inline-block">
+                            <table style="width:100%;margin-left:5px;margin-top:0px;" class="jl-table">
+                                <tr>
+                                    <td style="width:12%">DUTY ASSIGNM.</td>
+                                    <td style="width:38%">NAME OF CREW MEMBERS</td>
+                                    <td style="width:12%;">DUTY ASSIGNM.</td>
+                                    <td style="width:38%">NAME OF CREW MEMBERS</td>
+                                </tr>
+                                <tr ng-repeat="x in jl.crews" style="height:20px;">
+                                    <td>{{x.cockpit.Position}}</td>
+
+                                    <td style='font-size:12px;font-weight:bold'>{{x.cockpit.Name}}<span style='font-size:12px;font-weight:normal;display:inline-block;margin-left:3px' ng-show="x.cockpit.LegsStr.length>0">{{x.cockpit.LegsStr}}</span></td>
+                                    <td>{{x.cabin.Position}}</td>
+                                    <td style='font-size:12px;font-weight:bold'>{{x.cabin.Name}}<span style='font-size:12px;font-weight:normal;display:inline-block;margin-left:3px' ng-show="x.cabin.LegsStr.length>0">{{x.cabin.LegsStr}}</span></td>
+
+
+
+                                </tr>
+                                <!--<tr>
+                                    <td>Capt.</td>
+
+                                    <td>{{jl.cpt.Name}}</td>
+                                    <td>SCCM</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>F/O</td>
+
+                                    <td>{{jl.fo.Name}}</td>
+                                    <td>CCM</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td>CCM</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td>CCM</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp; </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>-->
+
+                            </table>
+
+                            <table style="width:100%;margin-left:5px;margin-top:2px;" class="jl-table">
+                                <tr>
+                                    <td colspan="8" style="padding:0px;font-size:11px;"> CREW DUTY TIME</td>
+                                </tr>
+                                <tr style="height:27px;">
+                                    <td style="width:12.5%;padding:0px;font-size:11px">MAX DUTY</td>
+                                    <td style="width:12.5%;padding:0px;font-size:11px">{{formatMinutes(jl.MaxFDP)}}</td>
+                                    <td style="width:12.5%;padding:0px;font-size:11px">
+                                        <div style="font-size:12px">START</div>
+                                        <div style="font-size:10px;">ETD -1:00</div>
+                                    </td>
+                                    <td style="width:12.5%;padding:0px;font-size:11px">{{formatTime(jl.ReportingTime)}}</td>
+                                    <td style="width:12.5%;padding:0px;font-size:11px">
+                                        <div style="font-size:12px">END</div>
+                                        <div style="font-size:10px;">ONBLOCK +00:30</div>
+                                    </td>
+                                    <td style="width:12.5%;padding:0px;font-size:11px">{{formatTime(jl.DutyEnd)}}</td>
+                                    <td style="width:12.5%;padding:0px;font-size:11px">TOTAL DUTY</td>
+                                    <td style="width:12.5%;padding:0px;font-size:11px">{{formatMinutes(jl.Duty)}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="clear:both"></div>
+
+                    </div>
+                    <div class="div2" style="position:relative;padding-left:16px;margin-top:5px;padding-right:10px;">
+                        <table style="width:100%;margin-left:0px;margin-top:0px;" class="jl-table">
+                            <tr>
+                                <td style="width:12%; border-right:none;padding:2px !important;font-size:12px">OPERATION NOTES:</td>
+                                <td style="  border-left:none;;padding:2px !important;"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="div2 bdiv" style="position:relative;padding-left:16px;margin-top:2px;padding-right:10px;text-align:center">
+                        <div class="dh" style="border:1px solid black;">
+                            <div style="width:1%;height:56px;float:left;writing-mode:tb; text-orientation:mixed;text-align:left;font-size:9px !important;padding:14px 0px 0 0px " class="fjl">SECTOR</div>
+                            <div style="width:16%; float:left; ">
+                                <div class="bob fjl dp" style=" border-bottom: 1px solid black;border-right: 1px solid black;">TRIP DATA REPORT</div>
+                                <div>
+                                    <div style="width:25%;float:left; height:40px" class="bob fjl">
+                                        <div s class="nbo fjl">DATE</div>
+                                        <div class="nbo ">
+                                            <div style="width:50%;float:left; " class="nbo fjl">M</div>
+                                            <div style="width:50%;float:left; " class="nbo fjl">D</div>
+                                        </div>
+                                    </div>
+                                    <div style="width:25%;float:left; height:40px;padding:11px 0;" class="bo fjl">FROM</div>
+                                    <div style="width:25%;float:left; height:40px;padding:11px 0;" class="bo fjl">TO</div>
+                                    <div style="width:25%;float:left; height:40px;padding:3px 0;border-right: 1px solid black;font-size:11px !important" class="bo fjl">FLIGHT NO.</div>
+                                </div>
+                            </div>
+                            <div style="width:2%; height:56px;text-align:left; float:left; writing-mode:tb; text-orientation:mixed;padding:14px 4px 0 0" class="fjl">PF L/R</div>
+                            <div style="width:18%; float:left; ">
+
+                                <div class="bob fjl dp" style=" border-bottom: 1px solid black;">FUEL</div>
+                                <div>
+                                    <div style="width:22%;float:left; height:40px;padding:3px 0;" class="bob fjl">
+                                        REM. FUEL
+
+                                    </div>
+                                    <div style="width:22.7%;float:left; height:40px;padding:11px 0;" class="bo fjl">UP LIFT</div>
+                                    <div style="width:15.7%;float:left; height:40px;padding:0 6px;writing-mode:vertical-lr; text-orientation:mixed" class="bo fjl">DEN</div>
+                                    <div style="width:19.8%;float:left; height:40px;padding:11px 0;" class="bo fjl">TOTAL</div>
+                                    <div style="width:19.8%;float:left; height:40px;padding:11px 0;" class="bo fjl">USED</div>
+                                </div>
+                            </div>
+                            <div style="width:13%; float:left; ">
+
+                                <div class="bob fjl dp" style=" border-bottom: 1px solid black;border-right: 1px solid black;">PASSENGER</div>
+                                <div>
+                                    <div style="width:28%;float:left; height:40px;padding:11px 0;" class="bob fjl">ADL </div>
+                                    <div style="width:22%;float:left; height:40px;padding:11px 0;" class="bo fjl">CHD</div>
+                                    <div style="width:22%;float:left; height:40px;padding:11px 0;" class="bo fjl">INF</div>
+                                    <div style="width:28%;float:left; height:40px;padding:11px 0;border-right: 1px solid black;" class="bo fjl">TOTAL</div>
+                                </div>
+                            </div>
+                            <div style="width:4%; height:56px;text-align:left; float:left; writing-mode:tb; text-orientation:mixed;padding:14px 15px 0 0" class="fjl">CARGO</div>
+                            <div style="width:31%; float:left; ">
+
+                                <div class="bob fjl dp" style=" border-bottom: 1px solid black;">TIME (UTC)</div>
+                                <div>
+                                    <div style="width:16.67%;float:left; height:40px;padding:3px 0;" class="bob fjl">BLOCK OFF </div>
+                                    <div style="width:16.67%;float:left; height:40px;padding:3px 5px;" class="bo fjl">T/O TIME</div>
+                                    <div style="width:16.67%;float:left; height:40px;padding:5px;" class="bo fjl">LND TIME</div>
+                                    <div style="width:16.67%;float:left; height:40px;padding:3px 0;" class="bo fjl">BLOCK ON</div>
+                                    <div style="width:16.67%;float:left; height:40px;padding:3px 0;" class="bo fjl">FLIGHT TIME</div>
+                                    <div style="width:16.65%;float:left; height:40px;padding:3px 0;" class="bo fjl">BLOCK TIME</div>
+                                </div>
+                            </div>
+                            <div style="width:15%; float:left; ">
+
+                                <div class="bob fjl dp" style=" border-bottom: 1px solid black;">DUTY CALC.</div>
+                                <div>
+                                    <div style="width:38.5%;float:left; height:40px;padding:3px 0;font-size:10px !important" class="bob fjl">GRD SERV TIME </div>
+                                    <div style="width:38.5%;float:left; height:40px;padding:3px 3px;font-size:10px !important" class="bo fjl">REM DUTY</div>
+                                    <div style="width:23%;float:left; height:40px;font-size:10px !important;padding:5px 0;" class="bo fjl">DELAY CODE</div>
+
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="dr" ng-repeat="x in jl.sectors">
+                            <div style="width:1.1%; float:left;border-left:1px solid black;font-weight:bold" class="fjl bo2 dcell">{{x.sector}}</div>
+
+                            <div style="width:2%; float:left;border-left:1px solid black;font-weight:bold" class="fjl bo2 dcell">{{x.mm}}</div>
+                            <div style="width:2%; float:left;font-weight:bold" class="fjl bo2 dcell">{{x.dd}}</div>
+                            <div style="width:3.95%; float:left;font-weight:bold" class="fjl bo2 dcell">{{x.from}}</div>
+                            <div style="width:4%; float:left;font-weight:bold" class="fjl bo2 dcell">{{x.to}}</div>
+                            <div style="width:4%; float:left;font-weight:bold" class="fjl bo2 dcell">{{x.no}}</div>
+
+                            <div style="width:2%; float:left;border-left:1px solid black;" class="fjl bo2 dcell">{{x.leg.PF}}</div>
+                            <!--Fuel-->
+                            <div style="width:4%; float:left;border-left:1px solid black;" class="fjl bo2 dcell">{{x.leg.FuelRemaining}}</div>
+                            <div style="width:4%; float:left;" class="fjl bo2 dcell">{{x.leg.FuelUplift}}</div>
+                            <div style="width:2.88%; float:left;" class="fjl bo2 dcell">{{x.leg.FuelDensity}}</div>
+                            <div style="width:3.55%; float:left;" class="fjl bo2 dcell">{{x.leg.FuelTotal}}</div>
+                            <div style="width:3.54%; float:left;" class="fjl bo2 dcell">{{x.leg.FuelUsed}}</div>
+                            <!--Passenger-->
+                            <div style="width:3.6%; float:left;border-left:1px solid black;" class="fjl bo2 dcell">{{x.leg.PaxAdult}}</div>
+                            <div style="width:2.9%; float:left;" class="fjl bo2 dcell">{{x.leg.PaxChild}}</div>
+                            <div style="width:2.85%; float:left;" class="fjl bo2 dcell">{{x.leg.PaxInfant}}</div>
+                            <div style="width:3.55%; float:left;" class="fjl bo2 dcell">{{x.leg.PaxTotal}}</div>
+
+                            <!--cargo-->
+                            <div style="width:4.1%; float:left;border-left:1px solid black;" class="fjl bo2 dcell">{{x.leg.Freight}}</div>
+                            <!--Time-->
+                            <div style="width:5.1617%; float:left;border-left:1px solid black;" class="fjl bo2 dcell">{{formatTime(x.leg.BlockOff)}}</div>
+                            <div style="width:5.1617%; float:left;" class="fjl bo2 dcell">{{formatTime(x.leg.TakeOff)}}</div>
+                            <div style="width:5.1617%; float:left;" class="fjl bo2 dcell">{{formatTime(x.leg.Landing)}}</div>
+                            <div style="width:5.1%; float:left;" class="fjl bo2 dcell">{{formatTime(x.leg.BlockOn)}}</div>
+                            <div style="width:5.2%; float:left;" class="fjl bo2 dcell">{{formatMinutes(x.leg.FlightTime)}}</div>
+                            <div style="width:5.1615%; float:left;" class="fjl bo2 dcell">{{formatMinutes(x.leg.BlockTime)}}</div>
+                            <!--Duty-->
+                            <div style="width:5.775%; float:left;border-left:1px solid black;" class="fjl bo2 dcell">:</div>
+                            <div style="width:5.775%; float:left;" class="fjl bo2 dcell">:</div>
+                            <div style="width:3.49%; float:left;border-right:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <div style='clear:both'></div>
+                        </div>
+
+                        <!--NEW-->
+                        <div style='clear:both'></div>
+                        <div class="dr ERT">
+                            <div style="width:1.1%; float:left;font-weight:bold;border:none;border-bottom:1px solid black;border-left:1px solid black;" class="fjl bo2 dcell"> &nbsp;</div>
+
+                            <div style="width:2%; float:left;border-left:1px solid black;font-weight:bold;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell"> &nbsp;</div>
+                            <div style="width:2%; float:left;font-weight:bold;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp; </div>
+                            <div style="width:3.95%; float:left;font-weight:bold;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp; </div>
+                            <div style="width:4%; float:left;font-weight:bold;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp; </div>
+                            <div style="width:4%; float:left;font-weight:bold;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell"> &nbsp;</div>
+
+                            <div style="width:2%; float:left;border-left:1px solid black; border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <!--Fuel-->
+                            <div style="width:4%; float:left;border-left:1px solid black;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <div style="width:4.0%; float:left;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <div style="width:2.88%; float:left;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <div style="width:2.26%; float:left;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <div style="width:2.84%; float:left;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <!--Passenger-->
+                            <div style="width:3.6%; float:left;border-left:1px solid black;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <div style="width:2.9%; float:left;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <div style="width:2.85%; float:left;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <div style="width:3.55%; float:left;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+
+                            <!--cargo-->
+                            <div style="width:4.1%; float:left;border-left:1px solid black;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+                            <!--Time-->
+                            <div style="width:5.1617%; float:left;border-left:1px solid black;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell"> </div>
+                            <div style="width:5.1617%; float:left;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp; </div>
+                            <div style="width:7.15%; float:left;border:none;border-bottom:1px solid black;" class="fjl bo2 dcell">&nbsp; </div>
+                            <div style="width:5.1%; float:left;border:none;border-bottom:1px solid black;;border-left: 1px solid #000;" class="fjl bo2 dcell"> Total</div>
+                            <div style="width:5.2%; float:left;border:none;border-bottom:1px solid black;border-left: 1px solid #aaa;" class="fjl bo2 dcell">{{formatMinutes(jl.flight)}}</div>
+                            <div style="width:5.1615%; float:left;border:none;border-bottom:1px solid black;border-left:1px solid #aaa " class="fjl bo2 dcell"> {{formatMinutes(jl.block)}}</div>
+                            <!--Duty-->
+                            <div style="width:5.775%; float:left;border-left:1px solid black;border:none;border-bottom:1px solid black;border-left:1px solid black " class="fjl bo2 dcell">&nbsp;</div>
+                            <div style="width:5.775%; float:left;border:none; border-bottom:1px solid black;" class="fjl bo2 dcell"> </div>
+                            <div style="width:3.47%; float:left;border-right:1px solid black;border:none; border-bottom:1px solid black;border-right:1px solid black;" class="fjl bo2 dcell">&nbsp;</div>
+
+                        </div>
+                        <!--NEW-->
+
+
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="div2" style="position:relative;padding-left:16px;margin-top:2px;padding-right:10px;text-align:center">
+                        <div style=" float:left;width:17%;padding-right:5px;">
+                            <div class="dh" style="border:1px solid black;">
+                                <div style="width:6%;height:27px;float:left;writing-mode:tb; text-orientation:mixed;text-align:left;font-size:9px !important;padding:5px 0px 0 0px " class="fjl">LEG</div>
+                                <div style="width:94%; float:left;text-align:center;height:40px;padding:7px 0 !important " class="bob fjl dp">
+
+                                    SERIAL NO./LTR
+
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="dr" ng-repeat="x in jl.sectors">
+                                <div style="width:6.5%; float:left;border-left:1px solid black;height:28px;padding:6px 0" class="fjl bo2 dcell">{{x.sector}}</div>
+                                <div style="width:93.5%; float:left;border-right:1px solid black;height:28px;padding:6px 0" class="fjl bo2 dcell">{{x.leg.SerialNo}}&nbsp;/&nbsp;{{x.leg.LTR}}</div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style=" float:left;width:48%;padding-right:5px;">
+                            <div style="border:1px solid black;font-size:12px">RVSM CHECK</div>
+                            <div>
+                                <div class="dr" style=" width:50%;float:left">
+                                    <div>
+                                        <div style="width:10%; float:left;border:1px solid black;border-right:none;border-top:none;  padding:5px 0;font-size:11px" class="fjl bo2 dcell">LEG</div>
+                                        <div style="width:19%; float:left;border:1px solid black;border-right:none;border-top:none; padding:5px 0;font-size:12px" class="fjl bo2 dcell">PHASE</div>
+                                        <div style="width:24.5%; float:left;border:1px solid black;border-right:none;border-top:none; padding:5px 0;font-size:12px" class="fjl bo2 dcell">CPT</div>
+                                        <div style="width:24%; float:left;border:1px solid black;border-right:none;border-top:none; padding:5px 0;font-size:12px" class="fjl bo2 dcell">STBY</div>
+                                        <div style="width:22.5%; float:left;border:1px solid black; border-top:none; padding:5px 0;font-size:12px" class="fjl bo2 dcell">F/O</div>
+                                    </div>
+                                    <div ng-repeat="x in jl.rvsm1">
+                                        <div style="width:10%; float:left;border-left:1px solid black;height:56px;padding:20px 0" class="fjl bo2 dcell">{{x.leg}}</div>
+                                        <div style="width:90%; float:left;border-right:1px solid black;height:56px;padding:0px 0" class="fjl bo2 dcell">
+                                            <div>
+                                                <div style="width:21%; float:left;border-right:1px solid #bbb;border-bottom:1px solid #bbb;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">GND</div>
+                                                <div style="width:27.6%; float:left;border-right:1px solid #bbb;border-bottom:1px solid #bbb;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_GND_CPT}}</div>
+                                                <div style="width:27%; float:left;border-right:1px solid #bbb;border-bottom:1px solid #bbb;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_GND_STBY}}</div>
+                                                <div style="width:24.4%; float:left;border-right:none;border-bottom:1px solid #bbb;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_GND_FO}}</div>
+
+                                                <div style="clear:both"></div>
+                                            </div>
+                                            <div>
+                                                <div style="width:21%; float:left;border-right:1px solid #bbb;border-top:none;border-left:none;border-bottom:none; padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">FLT</div>
+                                                <div style="width:27.6%; float:left;border-right:1px solid #bbb;border-bottom:none;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_FLT_CPT}}</div>
+                                                <div style="width:27%; float:left;border-right:1px solid #bbb;border-bottom:none;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_FLT_STBY}}</div>
+                                                <div style="width:24.4%; float:left;border-right:none;border-bottom:none;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_FLT_FO}}</div>
+                                                <div style="clear:both"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dr" style=" width:50%;float:left">
+                                    <div>
+                                        <div style="width:10%; float:left;border:1px solid black;border-right:none;border-top:none;   padding:5px 0;font-size:11px" class="fjl bo2 dcell">LEG</div>
+                                        <div style="width:19%; float:left;border:1px solid black;border-right:none;border-top:none; padding:5px 0;font-size:12px" class="fjl bo2 dcell">PHASE</div>
+                                        <div style="width:24.5%; float:left;border:1px solid black;border-right:none;border-top:none; padding:5px 0;font-size:12px" class="fjl bo2 dcell">CPT</div>
+                                        <div style="width:24%; float:left;border:1px solid black;border-right:none;border-top:none; padding:5px 0;font-size:12px" class="fjl bo2 dcell">STBY</div>
+                                        <div style="width:22.5%; float:left;border:1px solid black; border-top:none; padding:5px 0;font-size:12px" class="fjl bo2 dcell">F/O</div>
+                                    </div>
+                                    <div ng-repeat="x in jl.rvsm2">
+                                        <div style="width:10%; float:left;border-left:1px solid black;height:56px;padding:20px 0" class="fjl bo2 dcell">{{x.leg}}</div>
+                                        <div style="width:90%; float:left;border-right:1px solid black; height:56px;padding:0px 0" class="fjl bo2 dcell">
+                                            <div>
+                                                <div style="width:21%; float:left;border-right:1px solid #bbb;border-bottom:1px solid #bbb;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">GND</div>
+                                                <div style="width:27.6%; float:left;border-right:1px solid #bbb;border-bottom:1px solid #bbb;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_GND_CPT}}</div>
+                                                <div style="width:27%; float:left;border-right:1px solid #bbb;border-bottom:1px solid #bbb;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_GND_STBY}}</div>
+                                                <div style="width:24.4%; float:left;border-right:none;border-bottom:1px solid #bbb;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_GND_FO}}</div>
+
+                                                <div style="clear:both"></div>
+                                            </div>
+                                            <div>
+                                                <div style="width:21%; float:left;border-right:1px solid #bbb;border-top:none;border-left:none;border-bottom:none; padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">FLT</div>
+                                                <div style="width:27.6%; float:left;border-right:1px solid #bbb;border-bottom:none;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_FLT_CPT}}</div>
+                                                <div style="width:27%; float:left;border-right:1px solid #bbb;border-bottom:none;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_FLT_STBY}}</div>
+                                                <div style="width:24.4%; float:left;border-right:none;border-bottom:none;border-top:none;border-left:none;  padding:6px 0;font-size:12px;height:28px" class="fjl bo2 dcell">{{x.RVSM_FLT_FO}}</div>
+                                                <div style="clear:both"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style=" float:left;width:35%;border:1px solid black;">
+                            <div style="text-align:left;font-size:12px;padding:3px;padding-bottom:36px">COMMANDER'S NOTES:</div>
+                            <div>
+                                <div style="float:right;width:195px;height:110px;border:1px solid #aaa;font-size:11px;background-size: cover;background-repeat:no-repeat;position:relative" id="jlsign">
+                                    <span style="z-index:10000">Commander's Signature</span>
+                                    <img id="_jlsign" style="width:194px;height:109px;position:absolute;top:0;left:0;" />
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+                            <div style="text-align:center;font-size:8px;border-top:1px solid #aaa;height:43px">
+                                THE FOLLOWING FORM COMPELETED AND ATTACHED
+                                <span style="display:inline-block;margin-left:5px;font-size:8px;">ASR</span><input type="checkbox" id="asr" style="display:inline-block;border:1px solid #aaa;margin-left:5px;position:relative;top:3px;" />
+                                <span style="display:inline-block;margin-left:10px;font-size:8px;">VOYAGE REPORT</span><input type="checkbox" id="vr" style="display:inline-block;border:1px solid #aaa;margin-left:5px;position:relative;top:3px;" />
+                                <span style="display:inline-block;margin-left:10px;font-size:8px;">REPOSITIONING</span>
+                                <input type="checkbox" id="pos1" style="display:inline-block;border:1px solid #aaa;margin-left:5px;position:relative;top:3px;" />
+                                <!--<span><i class="fa fa-check-square"></i></span>-->
+                                <input type="checkbox" id="pos2" style="display:inline-block;border:1px solid #aaa;margin-left:5px;position:relative;top:3px;" />
+                            </div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <!--<div class="div2" style="position:relative;padding-left:16px;margin-top:0px;padding-right:10px;text-align:center">
+                        <table style="width:95%">
+                            <tr>
+                                <td style="font-size: 11px;text-align:right;padding-right:5px;width:10%">Form No:</td>
+                                <td style="font-size: 11px;width:23%;text-align:left">{{jl.formNo}}</td>
+                                <td style="font-size: 11px;text-align:right;padding-right:5px;width:10%">Tel:</td>
+                                <td style="font-size: 11px;width:23%;text-align:left">{{jl.tel}}</td>
+                                <td style="font-size: 11px;text-align:right;padding-right:5px;width:10%">Email:</td>
+                                <td style="font-size: 11px;width:16%;text-align:left">{{jl.email}}</td>
+                            </tr>
+                        </table>
+                    </div>-->
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <!-- <div ng-include="'app/views/logAdd.html?vx=2'"></div>-->
+    <div ng-include="'app/views/drAdd.html?vx=2'"></div>
+    <div ng-include="'app/views/asrAdd.html?vx=2'"></div>
+    <div ng-include="'app/views/vrAdd.html?vx=2'"></div>
+    <div ng-include="'app/views/ofpAdd.html?vx=2'"></div>
+
+    <div ng-include="'app/views/toAdd.html?vx=2'"></div>
+    <div ng-include="'app/views/ldgAdd.html?vx=2'"></div>
+
+    <div ng-include="'app/views/imageviewer.html'"></div>
+
+</div>

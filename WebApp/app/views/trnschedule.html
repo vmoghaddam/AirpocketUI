@@ -1,0 +1,262 @@
+﻿<style>
+    .row_odd .cal_day {
+        background: #ffe6cc;
+    }
+
+    .row_even .cal_day {
+        background: #ccf2ff;
+    }
+
+
+    ._cal .days-row {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days-row td {
+            text-align: center;
+            border: 1px solid gray;
+            padding: 5px;
+            width: 14.28571%;
+            background:#ddd;
+        }
+
+    ._cal .days {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days td {
+            border: 1px solid #ccc;
+            width: 14.28571%;
+            padding: 3px;
+        }
+
+            ._cal .days td .day-wrapper {
+                padding: 2px;
+                /*min-height: 65px;*/
+            }
+
+
+            ._cal .days td .day-caption {
+                color: black;
+                text-align: right;
+                padding: 1px;
+            }
+
+            ._cal .days td .today .day-caption {
+                color: green;
+                font-weight: bold;
+            }
+
+            ._cal .days td .day-caption._inactive {
+                color: #ccc !important;
+            }
+
+            ._cal .days td .today .day-caption._inactive {
+                color: green !important;
+                font-weight: bold;
+            }
+            ._cal .days td:has(> .today) {
+                background: #ccffe6;
+            }
+
+    ._cal .event {
+        padding: 3px;
+        margin: 2px 0 0 0;
+        text-align: center;
+    }
+
+        ._cal .event.d1165 {
+            background-color: #00cc99;
+        }
+
+        ._cal .event.d10000 {
+            background-color: #66ff66;
+        }
+
+        ._cal .event span {
+            display: inline-block;
+            margin-left: 5px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        ._cal .event i {
+            font-size: 15px;
+        }
+
+    .thin-scroll0::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .thin-scroll0::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+</style>
+<div class="box trnschedule" style="height:100%;display:none;overflow-y:hidden">
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+
+    <div class="rowx content" style="clear:both">
+
+        <div class=" col-lg-3 col-md-3 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px; width:30% ">
+            <div class="filter-container box  thin-scroll2" style="border:none;border-right:1px solid #ccc;padding:3px; overflow-y:auto" ng-style="getMainStyle()">
+
+
+
+                <div style="padding:0px;">
+
+                    <div>
+                        <table style="width:100%">
+                            <tr>
+                                <td style="padding:5px" ng-click="nextMonth(-1)"><i class="fas fa-chevron-circle-left main-color" style="font-size:24px;"></i></td>
+                                <td style="text-align:center;font-size:18px;padding:5px">{{caption}}</td>
+                                <td style="padding:5px;text-align:right;" ng-click="nextMonth(1)"><i class="fas fa-chevron-circle-right main-color" style="font-size:24px;"></i></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                    <div class="_cal">
+
+                        <table style="width:100%" class="days-row">
+                            <tr>
+                                <td>SUN</td>
+                                <td>MON</td>
+                                <td>TUE</td>
+                                <td>WED</td>
+                                <td>THU</td>
+                                <td>FRI</td>
+                                <td>SAT</td>
+                            </tr>
+                        </table>
+                        <div id="scrollview" class="thin-scroll0" style="overflow-y:auto;margin-top:0px;" ng-style="getScrollStyle()">
+                            <table style="width:100%" class="days" id="_days">
+                                <tr id="w1">
+                                    <td id="d0">
+                                        <div class="day-wrapper"></div>
+                                    </td>
+                                    <td id="d1">
+                                    </td>
+                                    <td id="d2">
+                                    </td>
+                                    <td id="d3">
+                                    </td>
+                                    <td id="d4">
+                                    </td>
+                                    <td id="d5">
+                                    </td>
+                                    <td id="d6">
+                                    </td>
+                                </tr>
+
+                                <tr id="w2">
+                                    <td id="d7">
+                                    </td>
+                                    <td id="d8">
+                                    </td>
+                                    <td id="d9">
+                                    </td>
+                                    <td id="d10">
+                                    </td>
+                                    <td id="d11">
+                                    </td>
+                                    <td id="d12">
+                                    </td>
+                                    <td id="d13">
+                                    </td>
+                                </tr>
+
+                                <tr id="w3">
+                                    <td id="d14">
+                                    </td>
+                                    <td id="d15">
+                                    </td>
+                                    <td id="d16">
+                                    </td>
+                                    <td id="d17">
+                                    </td>
+                                    <td id="d18">
+                                    </td>
+                                    <td id="d19">
+                                    </td>
+                                    <td id="d20">
+                                    </td>
+                                </tr>
+                                <tr id="w4">
+                                    <td id="d21">
+                                    </td>
+                                    <td id="d22">
+                                    </td>
+                                    <td id="d23">
+                                    </td>
+                                    <td id="d24">
+                                    </td>
+                                    <td id="d25">
+                                    </td>
+                                    <td id="d26">
+                                    </td>
+                                    <td id="d27">
+                                    </td>
+                                </tr>
+                                <tr id="w5">
+                                    <td id="d28">
+                                    </td>
+                                    <td id="d29">
+                                    </td>
+                                    <td id="d30">
+                                    </td>
+                                    <td id="d31">
+                                    </td>
+                                    <td id="d32">
+                                    </td>
+                                    <td id="d33">
+                                    </td>
+                                    <td id="d34">
+                                    </td>
+                                </tr>
+                                <tr id="w6">
+                                    <td id="d35">
+                                    </td>
+                                    <td id="d36">
+                                    </td>
+                                    <td id="d37">
+                                    </td>
+                                    <td id="d38">
+                                    </td>
+                                    <td id="d39">
+                                    </td>
+                                    <td id="d40">
+                                    </td>
+                                    <td id="d41">
+                                    </td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_employees"></div>
+            <!--<div dx-button="btn_delete"></div>-->
+
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+</div>

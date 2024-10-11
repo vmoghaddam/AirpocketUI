@@ -1,0 +1,78 @@
+﻿.ep-gantt-header, .ep-gantt-content {
+    /*border-bottom: 1px solid black;*/
+}
+
+    .ep-gantt-header .cell-caption, .ep-gantt-content .cell-caption {
+        background: yellow;
+        display: inline-block;
+        float: left;
+        width: 300px;
+    }
+    .ep-gantt-content .row {
+        border-bottom:1px solid black;
+    }
+    .ep-gantt-content .cell-caption {
+        /*border-bottom:1px solid black;*/
+       
+    }
+
+    .ep-gantt-header .cell-content {
+        background: red;
+        display: inline-block;
+        /*width:700px;*/
+    }
+    .ep-gantt-content .task-line {
+        background-color: cornsilk;
+        display: inline-block;
+         position:relative;
+        border-left:1px solid black;
+        padding:5px 0;
+        /*width:700px;*/
+    }
+
+        .ep-gantt-header .cell-content .date {
+            text-align: center;
+            border-bottom: 1px solid black;
+        }
+
+        .ep-gantt-header .cell-content .time-utc {
+            /*text-align:center;*/
+            background: lime;
+            
+            display:flex;
+        }
+
+        .ep-gantt-header .cell-content .time {
+            /*text-align: center;*/
+            background: pink;
+            display:flex;
+        }
+        .ep-gantt-header .cell-content .time-cell {
+            text-align: left;
+            display: table-cell;
+            padding: 5px 0 5px 0;
+            border-left: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+        .ep-gantt-header .cell-content .time-cell .time-cell-value{
+            display:inline-block;
+            margin-left:5px;
+        }
+
+.ep-task{
+    text-align:center;
+    display:inline-block;
+    position:absolute;
+    font-size:12px;
+
+}
+    .ep-task .ep-task-header {
+        font-size: 10px;
+    }
+    .ep-task .ep-task-main {
+        border:1px solid red;
+        height:20px;
+    }
+    .ep-task .ep-task-footer {
+        font-size: 10px;
+    }

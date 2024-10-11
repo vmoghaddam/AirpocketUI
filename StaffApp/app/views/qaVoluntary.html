@@ -1,0 +1,243 @@
+﻿<style>
+    .tab-field-R {
+        padding: 7px;
+        text-align: left
+    }
+
+    .tab-field-R-title {
+        padding: 7px;
+        text-align: right !important;
+        font-weight: bold
+    }
+
+    .tab-title-R {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: right !important;
+        color: black;
+        font-weight: bold
+    }
+
+    .tab-style {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        width: 100%;
+        color: black
+    }
+
+    .dx-toolbar-center {
+        width: 100%;
+    }
+</style>
+<div ng-controller="qaVoluntaryController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+
+            <div id="scroll_qaVoluntary" dx-scroll-view="scroll_qaVoluntary" style="margin-top:5px">
+
+                <div class="container">
+                    <div class="visible-xs">
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="2">
+                                    Contact Information (Optionally) (اطلاعات تماس (اختیاری
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title" style="text-align:left !important"> Anonymous Submit: </td>
+                                <td class="tab-field-R" style="text-align: right !important"> <div dx-check-box="ch_anonymous" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title">  :(Email) آدرس ایمیل </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"><div dx-text-box="txt_email" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> :(Tel No.) شماره تلفن </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"><div dx-text-box="txt_telNumber" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> :(Full Name) نام و نام‌خانوادگی </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"> <div dx-text-box="txt_name" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> :(Related Department) واحد مربوطه</td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"> <div dx-text-box="txt_relatedDepartment" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title">  :دلیل تاریخ </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"> <div dx-text-area="txt_delayReason" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> :تاخیر(دقیقه) </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R" colspan="2"> <div dx-number-box="num_delay" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="2">
+                                    :(Hazard Details) جزئیات پتانسیل خطر
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title">  تاریخ شناسایی پتانسیل خطر <br />:(Date of Hazard identified)</td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-date-box="txt_hazardDate" class="center" dx-validator="{validationGroup:'voluntary',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title">  مناطق تحت تاثیر پتانسیل خطر<br />:(Affected area of Incident/Hazard) </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"><div dx-text-box="txt_affectedArea" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> تاریخ گزارش<br />:(Report Date) </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"> <div dx-date-box="txt_repDate" class="center" dx-validator="{validationGroup:'voluntary',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            </tr>
+
+                        </table>
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R">
+                                    شرح پتانسیل خطر یا حادثه <br />:(Description of Incident/Hazard)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"> <div dx-text-area="txt_hazardDes" class="center"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R">
+                                    اقدام توصیه شده جهت رفع پتانسیل خطر<br />:(Recommended action to mitigate hazard)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"> <div dx-text-area="txt_recAction" class="center"></div></td>
+                            </tr>
+
+                        </table>
+
+
+                        <div style="clear:both"></div>
+
+
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="visible-sm visible-md">
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    Contact Information (Optionally) (اطلاعات تماس (اختیاری
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Email (آدرس ایمیل): </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_email" class="center"></div></td>
+                                <td class="tab-field-R-title"> Tel No. (شماره تلفن): </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_telNumber" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Full Name (نام و نام‌خانوادگی): </td>
+                                <td class="tab-field-R"> <div dx-text-box="txt_Name"></div></td>
+                            </tr>
+                        </table>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R" colspan="4">
+                                    Hazard Details جزئیات پتانسیل خطر :
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Date of Hazard identified: </td>
+                                <td class="tab-field-R"><div dx-date-box="txt_hazardDate" class="center" dx-validator="{validationGroup:'voluntary',  validationRules: [{ type: 'required',   }]}"></div></td>
+                                <td class="tab-field-R-title"> Affected area of Incident/Hazard: </td>
+                                <td class="tab-field-R"><div dx-text-box="txt_affectedArea" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R-title"> Report Date: </td>
+                                <td class="tab-field-R"> <div dx-date-box="txt_repDate" dx-validator="{validationGroup:'voluntary',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            </tr>
+                        </table>
+
+
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R">
+                                    Description of Incident/Hazard
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"> <div dx-text-area="txt_hazardDes"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table class="dx-border tab-style">
+                            <tr>
+                                <td class="tab-title-R">
+                                    Recommended action to mitigate hazard
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tab-field-R"> <div dx-text-area="txt_recAction"></div></td>
+                            </tr>
+
+                        </table>
+
+
+                        <div style="clear:both"></div>
+
+
+                    </div>
+                </div>
+
+
+
+                <table ng-show="url_sign" style="width:100%;margin-top:10px;border:1px solid #eee;">
+                    <tr>
+                        <td style="padding:10px;border-bottom:1px solid #eeee;text-align:center" colspan="3">
+                            <div ng-show="url_sign" style="text-align:center;font-size:14px;padding:0px;">The document signed and approved by</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:25%;"></td>
+                        <td style="width:50%; text-align:center;padding:10px">
+
+                            <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">{{PIC}}</div>
+                            <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">{{signDate}}</div>
+                            <img style="height:auto;display: block; width: 50%;margin:0 auto 0 auto" ng-show="url_sign" ng-src="{{url_sign}}" />
+                        </td>
+                        <td style="width:25%;"></td>
+                    </tr>
+                </table>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

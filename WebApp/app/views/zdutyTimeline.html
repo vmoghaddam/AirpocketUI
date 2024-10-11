@@ -1,0 +1,1468 @@
+﻿<style>
+
+    .task-route {
+        background: rgba(250,250,250,1);
+    }
+    /*[class$="gridrowIndexlevel0"], [class*='gridrowIndexlevel0 '] {
+        display: none !important;
+    }*/
+    .summarybox {
+        /*min-width: 140px !important;*/
+        padding-right: 3px;
+    }
+
+        .summarybox .caption {
+            font-size: 11px !important;
+            margin-bottom: 0 !important;
+        }
+
+        .summarybox .td-icon {
+            width: 30% !important;
+            padding: 0 5px 0 5px !important;
+        }
+
+    .home-box {
+        padding: 4px !important;
+        min-height: 60px !important;
+    }
+
+    .dx-datagrid .dx-row.dx-header-row > td {
+        padding: 8px !important;
+    }
+
+    .dx-datagrid .dx-row > td {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    .dx-datagrid .dx-row.dx-header-row > td .dx-datagrid-text-content {
+        font-size: 12px !important;
+    }
+
+    .dx-border .dx-texteditor-input {
+        padding: 5px !important;
+    }
+
+    .dx-toast-custom {
+        background: #ffd480;
+        color: black;
+    }
+
+    .e-headercelldiv span {
+        display: none;
+    }
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .dx-checkbox-text {
+        font-size: 12px !important;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .dx-popup-title.dx-toolbar {
+        /*background:red !important;*/
+    }
+
+    .red {
+        background: red !important;
+    }
+
+
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: #f44336;
+        opacity: 1 !important;
+    }
+
+
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .e-gantt-parenttaskbar-innerdiv.e-chartexpand.e-parentTask {
+        display: none;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-childtaskbar {
+        border: 2px solid #ff3399;
+    }
+    /*************/
+    #ganttviewerheaderContainerejGanttChartresourceGanttba {
+    }
+
+    .e-ganttviewerheaderContainer {
+        height: 53px !important;
+    }
+
+    .e-treegrid .e-headercell {
+        height: 53px !important;
+    }
+
+    .e-ganttchart .e-schedule-day-headercell {
+        height: 30px !important;
+    }
+
+    .tabsdate.dx-tabs {
+        /*text-align: left;*/
+        background: #e6e6e6;
+    }
+
+    .tabsdate .dx-tab {
+        background: #e6e6e6;
+        max-width: 200px;
+        min-width: 150px;
+        display: inline-block;
+        text-align: center;
+    }
+
+        .tabsdate .dx-tab.dx-tab-selected {
+            color: black;
+            background: #ffdab3 !important;
+        }
+
+    .tabsdetoptions.dx-tabs {
+        /*text-align: left;*/
+        background: #e6e6e6;
+    }
+
+    .tabsdetoptions .dx-tab {
+        background: lightgray;
+        /*display: inline-block;*/
+        text-align: center;
+    }
+
+        .tabsdetoptions .dx-tab.dx-tab-selected {
+            background-color: gray;
+            color: white;
+        }
+
+
+
+    .tabsdate2.dx-tabs {
+        /*text-align: left;*/
+        background: #e6e6e6;
+    }
+
+    .tabsdate2 .dx-tab {
+        background: #e6e6e6;
+        max-width: 200px;
+        min-width: 150px;
+        display: inline-block;
+        text-align: center;
+    }
+
+        .tabsdate2 .dx-tab.dx-tab-selected {
+            color: black;
+            background: #ffdab3 !important;
+        }
+
+    .e-ganttviewerbodyContianer.e-scroller.e-js.e-widget {
+        background: rgb(250, 250, 250);
+    }
+
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        background: #fce9e9;
+        background: #ffe6cc;
+    }
+
+    .e-treegrid .e-alt-row {
+        background: #fce9e9;
+        background: #ffe6cc;
+    }
+
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        border-bottom: none;
+    }
+
+    .e-ganttchart .e-ganttviewerheaderContainer {
+        background: #fce9e9;
+        background: #ffe6cc;
+    }
+
+    .e-container-spreadsheet {
+        height: 100%;
+        width: 100%;
+    }
+
+    .e-rg-rangdiv {
+        opacity: 0 !important
+    }
+
+    .e-gantt-template-progressbar {
+        top: 12px !important;
+        height: 15px !important;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-template-progressbar {
+        top: 13px !important;
+        height: 15px !important;
+    }
+
+    .e-gantt-template-taskbar.linked-flight, .linked-flight {
+        display: none;
+    }
+
+    .datepicker-plot-area {
+        box-sizing: border-box;
+        overflow: hidden;
+        min-height: 70px;
+        display: block;
+        width: 300px !important;
+        min-width: 200px;
+        padding: 10px !important;
+        position: absolute;
+        font: 12px tahoma;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
+
+        .datepicker-plot-area .datepicker-day-view .table-days td span {
+            display: block;
+            width: 100%;
+            height: 30px !important;
+            line-height: 30px !important;
+            padding: 0;
+            margin: 0px;
+        }
+
+    #resourceGanttba .e-cell {
+        font-size: 14px;
+    }
+
+    @media screen and (max-width: 640px) {
+        #resourceGanttba .e-cell {
+            font-size: 11px;
+        }
+
+        #resourceGanttba .treegridrows .e-dragintend {
+        }
+    }
+
+    .large-tile {
+        display: none;
+        height: 65px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        width: 100%;
+    }
+
+    .small-tile {
+        /*display: none;*/
+        display: inline-flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 60px;
+    }
+
+        /*@media screen and (min-height: 640px) {
+        .small-tile{display:inline-flex;width:100%;}
+
+    }
+    @media screen and (min-height: 768px) {
+        .small-tile {
+            display: none;
+        }
+        .large-tile {
+            display: inline-flex;
+        }
+    }*/
+        .small-tile .summarybox {
+            min-width: 115px;
+            display: inline-block
+        }
+
+    .large-tile .summarybox {
+        min-width: 115px;
+        display: inline-block
+    }
+
+    .small-tile .home-box {
+        min-height: 50px !important
+    }
+
+    .small-tile .libcount span {
+        font-size: 15px !important
+    }
+
+    .log-mobile .dx-icon {
+        font-size: 16px;
+    }
+
+    /***********************/
+    .gantt-main-container {
+        /*display: flex;*/
+        /*height: calc(100% - 300px);*/
+        height: 50px;
+    }
+
+    .col-fleet {
+        width: 150px;
+        display: inline-block;
+        float: left;
+        height: 100%;
+    }
+
+    .col-flights {
+        display: inline-block;
+        width: calc(100% - 150px);
+        float: left;
+        height: 100%;
+        /*flex-grow: 1;*/
+    }
+
+    .header-date {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .header-time {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .regs {
+        /* background-color: #fce9e9;
+        background-color: #ffe6cc;*/
+    }
+
+    .flights {
+        background-color: #f5f5f5;
+    }
+
+    .cell-hour {
+        border-right: 1px solid #bbb;
+        position: relative;
+        text-align: center;
+        line-height: 25px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .cell-day {
+        border-right: 1px solid #bbb;
+        position: relative;
+        text-align: center;
+        line-height: 23px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .second-time {
+        font-size: 9px;
+        position: absolute;
+        top: -7px;
+        left: 2px;
+        font-weight: normal;
+    }
+
+    .mid-line {
+        position: absolute;
+        border-left: 1px solid gray;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+    .now-line {
+        position: absolute;
+        border-left: 2px solid orange;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+    .hour-line {
+        position: absolute;
+        border-left: 1px dotted #ccc;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+
+
+    #dg3 .dx-row > td {
+        padding-top: 4px !important;
+        padding-bottom: 3px !important;
+        font-size: 12px;
+    }
+
+    .dx-tab-content, .dx-tab-text {
+        font-size: 12px;
+        line-height: 10px;
+    }
+
+    .crewpos {
+        display: table-cell;
+        min-width: 200px;
+        padding-right: 5px;
+    }
+
+        .crewpos .header {
+            background: #eee;
+            border: 1px solid #ccc;
+            padding: 3px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .crewpos.selected .header {
+            background: #80ff80 !important;
+            border: 1px solid #ccc;
+            padding: 3px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .crewpos .content {
+            font-size: 12px;
+            text-align: center;
+            border: 1px solid #ccc;
+            height: 40px;
+            background: white;
+            padding: 5px;
+        }
+
+        .crewpos.selected .content {
+            font-size: 12px;
+            text-align: center;
+            border: 1px solid #ccc;
+            height: 40px;
+            background: #e6ffe6 !important;
+            padding: 5px;
+        }
+
+
+
+    .dx-tooltip-wrapper .dx-overlay-content {
+        background-color: white !important;
+    }
+
+        .dx-tooltip-wrapper .dx-overlay-content .dx-popup-content {
+            padding: 0px !important
+        }
+
+    .dx-toast-custom {
+        background: #ffd480;
+        color: black;
+    }
+
+    #dg_flightrr .dx-toolbar .dx-toolbar-items-container {
+        height: 40px !important;
+    }
+
+    @media print {
+        .rrheader {
+            background: #ccc;
+        }
+    }
+
+    .init-flt {
+        background: #f9d286;
+        background: #ffcc99;
+        color: black;
+    }
+
+    .cnl {
+        background-color: #999999 !important;
+        color: black !important;
+    }
+
+    .has-crew {
+        background: #66ccff;
+        background: #4ddbff;
+        color: black;
+    }
+
+    .has-crew-all {
+        background: #00e6b8;
+        color: black;
+    }
+
+    .has-crew-extra {
+        color: red !important;
+    }
+
+    .dh {
+        background: #bfbfbf !important;
+    }
+
+
+    .duty-100020, .duty-100021, .duty-100022, .duty-100023 {
+        background: #ff471a;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .mainselection div.selected {
+        background: #ccffcc !important;
+    }
+
+    .isover {
+        background: #ffaa80 !important;
+    }
+
+    .aboveavg {
+        background: #ffd480 !important;
+    }
+
+    .txt-left {
+        text-align: left !important;
+    }
+
+
+    .duty-text-1165 {
+        color: white;
+    }
+
+    .duty-text-5001 {
+        color: white;
+    }
+
+    .duty-text-5000 {
+        color: white;
+    }
+
+    .duty-text-1168 {
+        color: black;
+    }
+
+    .duty-text-1167 {
+        color: black;
+    }
+
+    .duty-text-10000, .duty-text-10001 {
+        color: white;
+    }
+
+    .duty-text-100000, .duty-text-100004, .duty-text-100005, .duty-text-100006 {
+        color: black;
+    }
+
+    .duty-text-100002 {
+        color: black;
+    }
+
+    .duty-text-100003 {
+        color: black;
+    }
+
+    .duty-text-100001 {
+        color: white;
+    }
+
+    .duty-text-1169 {
+        color: black;
+    }
+
+    .duty-text-1170 {
+        color: black;
+    }
+
+    .duty-text-100007 {
+        color: black;
+    }
+
+    .duty-text-100008 {
+        color: black;
+    }
+
+    .duty-text-100009 {
+        color: white;
+    }
+
+    .thin-scroll::-webkit-scrollbar {
+        height: 12px;
+    }
+
+
+    .duty-1165 {
+        background: #80e5ff;
+        text-align: center;
+        padding: 0px !important;
+        color: black;
+    }
+
+    .duty-1165-oh {
+        background: #bfff80;
+        text-align: center;
+        padding: 0px !important;
+        color: black;
+    }
+
+    .duty-5001 {
+        background: #e699ff;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-300014 {
+        background: #db70b8;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-5000 {
+        background: #ff1a8c;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-1168 {
+        background: #ffff00;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-1167 {
+        background: #ffb31a;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-300013 {
+        background: #ffe066;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-10000, .duty-10001 {
+        background: #e699ff;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-100000, .duty-100004, .duty-100005, .duty-100006 {
+        background: #ff0000;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-100002 {
+        background: #99ffdd;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100003 {
+        background: #47d1d1;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100001 {
+        background: #e699ff;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-1169 {
+        background: #99ffdd;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-1166 {
+        background: #99ffdd;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-1170 {
+        background: #ffff99;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100007 {
+        background: #99ffdd;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100008 {
+        background: #99ffdd;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100009 {
+        background: #ff471a;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-300008 {
+        background: gray;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+
+    .duty-300009 {
+        background: #99ffdd;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .duty-100025 {
+        background: #03A9F4;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+    }
+
+    .tbl-dty-content tr td {
+        font-size: 11px;
+    }
+
+    .isover {
+        background: #ffaa80 !important;
+    }
+
+    .aboveavg {
+        background: #ffd480 !important;
+    }
+
+    .ftl-tbl {
+    }
+
+        .ftl-tbl tr td {
+            text-align: center;
+            border: 1px solid #aaa;
+            padding: 5px;
+            font-size: 15px
+        }
+
+    .context-menu-list {
+        z-index: 5000 !important;
+    }
+
+    .duty-rest {
+        background: linear-gradient(45deg, #aaa 1%, transparent 1%, transparent 49%, #aaa 49%, #aaa 51%, transparent 51%, transparent 99%, #aaa 99%);
+        background-size: 5px 5px;
+        background-position: 0 0;
+    }
+</style>
+
+<div class="box dutytimeline" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both; ">
+        <div class="gantt2-main-container" id="content" style="width:100%; background:#fff;border :1px solid #ccc;border-top:1px solid #ccc">
+            <div style=" float:left;width:200px">
+                <div style="border-bottom:1px solid #ccc;height:35px">
+                    <div dx-text-box="text_search" class="dx-border" style="background:white"></div>
+                </div>
+
+                <div class="thin-scroll col-res" style="background:#d9d9d9;overflow-y:hidden;overflow-x:hidden " ng-style="getLeftColumnStyle()">
+                    <div class="reg-row" ng-repeat="res in resources_filtered" style="text-align:left;padding:0px 0 0 10px;font-size:12px;  border-bottom:1px solid gray" ng-style="getResStyle(res)">
+                        <div style="font-size:11px;font-weight:bold;margin-top:0px" >{{res.text }}</div>
+                        <table style="width:130px;margin-top:3px;">
+                            
+                            <tr>
+                                <td style="font-size:11px;font-weight:bold;text-align:center;width:10px">X</td>
+                                <td style="font-size:12px;text-align:center ">{{formatMinutes(res.FX)}}</td>
+                                <td style="font-size:11px;font-weight:bold;text-align:center;width:10px">B</td>
+                                <td style="font-size:12px;text-align:center">{{formatMinutes(res.BL)}}</td>
+                                <td style="font-size:11px;font-weight:bold;text-align:center;width:10px">F</td>
+                                <td style="font-size:12px;text-align:center">{{formatMinutes(res.FL)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <idv style="clear:both"></idv>
+                </div>
+
+            </div>
+            <div style=" float:right;width: calc(100% - 200px)">
+                <div class="thin-scroll row-date" style="overflow-x: hidden; border-bottom: 1px solid #ccc; height: 35px; background: #d9d9d9">
+                    <div calss="row-data-bar" ng-style="getDateBarStyle()">
+                        <div style="display:inline-block;border-right:1px solid #b3b3b3;line-height:30px;text-align:center" ng-repeat="dt in ganttData.dates" ng-style="getDateCellStyle()">
+                            <span style="font-size:13px">{{dt.day}}</span>
+                            <span style="font-size:13px;font-weight:bold">{{dt.caption}}</span>
+                            <span style="font-size:13px">({{dt.pdate}})</span>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                </div>
+
+                <div class="thin-scroll col-duty" style="overflow-y:auto; " ng-style="getRightColumnStyle()">
+                    <div class="reg-row" ng-repeat="res in resources_filtered" style="position:relative;text-align:left;font-size:12px;  border-bottom:1px solid gray" ng-style="getResStyle(res)">
+                        <div style="display:inline-block;border-right:1px solid #b3b3b3;height:100%;position:relative" ng-repeat="dt in ganttData.dates" ng-style="getDateCellStyle(getCellId(res,dt))" class="context-menu-one" id="{{getCellId(res,dt)}}" ng-mousedown="_cell_click(getCellId(res,dt),dt,res.duties,$event)">
+                            <div style="font-size:11px;display:inline-block;position:absolute;top:2px;right:2px;z-index:1000"><i ng-click="showProfile(res.item,dt.date)" ng-show="getCrewCerStatus(res,dt).IsExpired" class='fas fa-exclamation-circle' style='font-size:16px;color:red'></i>  </div>
+                        </div>
+                        <div style="display:inline-block;position:absolute; border:1px solid black;font-size:12px;" ng-repeat="duty in res.duties" ng-style="getDutyStyle(duty)" ng-class="getDutyClass(duty)" id="{{getCellDutyId(duty)}}">
+                            <div style="position:absolute;height:100%;top:0; " class="duty-rest" ng-style="getRestStyle(duty)">
+
+                            </div>
+
+                            <div style="text-align:center" ng-show="[100020].indexOf(duty.DutyType)!=-1">
+                                <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center">{{getDutyTitle(duty)}}</div>
+                                <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center">{{getRoute(duty.CanceledRoute)}} </div>
+
+                            </div>
+                            <div style="text-align:center" ng-show="[1166,1169,100000,100002,100004,100005,100006,100007,100008,100009,100020,100021,100022,100023,100024,300008,300009].indexOf(duty.DutyType)!=-1">
+                                <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center">{{getDutyTitle(duty)}}</div>
+                                <div style="font-size:11px;font-weight:normal;padding:1px 0 1px 0;text-align:center"><span style="font-size:11px">{{getTime(duty.InitStart)}}</span>-<span style="font-size:11px">{{getTime(duty.InitEnd)}}</span></div>
+
+                            </div>
+
+                            <div style="text-align:center" ng-show="[10000].indexOf(duty.DutyType)!=-1">
+                                <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center">{{getDutyTitle(duty)}}</div>
+                                <div style="font-size:11px;font-weight:normal;padding:1px 0 1px 0;text-align:center"><span style="font-size:11px">{{getTime(duty.InitStart)}}</span>-<span style="font-size:11px">{{getTime(duty.InitEnd)}}</span></div>
+
+                            </div>
+
+                            <div style="text-align:center" ng-show="[1165].indexOf(duty.DutyType)!=-1" ng-click="show_info(duty)">
+
+                                <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center" ng-style="getHomeBase(duty)">{{getRoute(duty.InitRoute,duty.InitFlts)}} </div>
+
+                                <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center"><span style="font-size:11px">{{getTime(duty.InitStart)}}</span>-<span style="font-size:11px">{{getTime(duty.InitEnd)}}</span></div>
+                            </div>
+
+
+                            <div style="text-align:center" ng-show="[1167,1168,1170,300013].indexOf(duty.DutyType)!=-1">
+
+                                <div style="font-size:11px;font-weight:bold;padding:8px 0 1px 0;text-align:center">{{getDutyTitle(duty)}}</div>
+                                <!--<div style="font-size:11px;font-weight:normal;padding:1px 0 1px 0;text-align:center"><span style="font-size:11px">{{getTime(duty.InitStart)}}</span>-<span style="font-size:11px">{{getTime(duty.InitEnd)}}</span></div>-->
+                            </div>
+
+
+
+                            <div style="text-align:center" ng-show="[5000,5001,100001,300014].indexOf(duty.DutyType)!=-1">
+
+                                <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center">{{getDutyTitle(duty)}}</div>
+                                <!--<div style="font-size:11px;font-weight:normal;padding:1px 0 1px 0;text-align:center"><span style="font-size:11px">{{getTime(duty.InitStart)}}</span>-<span style="font-size:11px">{{getTime(duty.InitEnd)}}</span></div>-->
+                            </div>
+
+
+
+                            <div style="text-align:center" ng-show="[100025,100003].indexOf(duty.DutyType)!=-1">
+
+
+
+                                <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center">{{getDutyTitle(duty)}}</div>
+                                <!--<div style="font-size:11px;font-weight:normal;padding:1px 0 1px 0;text-align:center"><span style="font-size:11px">{{getTime(duty.InitStart)}}</span>-<span style="font-size:11px">{{getTime(duty.InitEnd)}}</span></div>-->
+                            </div>
+
+
+                        </div>
+                        <div style="clear:both"></div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div style="clear:both"></div>
+
+
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+
+
+
+
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                    <!-- <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_persiandate"></div></td>-->
+                    <td style="width:130px;text-align:left;padding-right:5px" class="dx-border"><div dx-select-box="sb_rank"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+					
+					<!-- <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_on"></div></td>
+					  <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_off"></div></td>-->
+
+                    <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_add"></div></td>
+
+                                        <td style="width:90px;text-align:right;padding-right:5px" class="dx-border"><div dx-check-box="chb_rest"></div></td>
+                    -->
+                    <td></td>
+
+
+                </tr>
+            </table>
+
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_event" dx-popup="popup_event">
+        <div style="padding:0px 0 0 0">
+            <div class="dx-border">
+                <div ng-show="event_status!=10000 && [ 1169, 100007,100008,100002].indexOf(event_status)==-1">
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>From</label>
+                        <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>&nbsp;</label>
+                        <div class="center" dx-date-box="date_from_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>To</label>
+                        <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>&nbsp;</label>
+                        <div class="center" dx-date-box="date_to_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                </div>
+                <div ng-show="event_status==10000">
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>From</label>
+                        <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>&nbsp;</label>
+                        <div class="center" dx-date-box="date_from_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="padding:20px;">
+                        <div dx-check-box="check_ex48"></div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div ng-show="event_status==100025">
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>BlockTime (hh)</label>
+                        <div class="center" dx-number-box="num_bl_hh"></div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>(mm)</label>
+                        <div class="center" dx-number-box="num_bl_mm"></div>
+                    </div>
+
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>FixedTime (hh)</label>
+                        <div class="center" dx-number-box="num_ev_fx_hh"></div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>(mm)</label>
+                        <div class="center" dx-number-box="num_ev_fx_mm"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>Remark</label>
+                    <div dx-text-area="remark_event"></div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="popup_flt" dx-popup="popup_flt">
+        <div>
+
+            <div class="col-lg-9" style="padding:0">
+                <div style="padding-bottom:5px;">
+                    <div class="dx-border" dx-select-box="sb_crews"></div>
+                </div>
+
+
+
+
+                <!--BEGIN GANTT-->
+                <div class="gantt3-main-container" id="content" style="width:100%; background:#fff;border :1px solid #ccc;border-top:1px solid #ccc">
+                    <div style=" float:left;width:70px">
+                        <div style="border-bottom:1px solid #ccc;height:60px"> </div>
+                        <div class="thin-scroll col-res-flt" style="background:#d9d9d9;overflow-y:hidden;overflow-x:hidden " ng-style="getLeftColumnStyle_flt()">
+                            <div class="reg-row" ng-repeat="res in ganttFlightData" style="text-align:left;padding:0px 0 0 10px;font-size:12px;  border-bottom:1px solid gray" ng-style="getResStyle_flt(res)">
+                                <div style="font-size:11px;font-weight:bold" ng-style="getResCaptionStyle_flt(res)">{{res.Register }}</div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                    </div>
+                    <div style=" float:right;width: calc(100% - 70px)">
+                        <div class="thin-scroll row-date-flt" style="overflow-x: hidden; border-bottom: 1px solid #ccc; height: 60px; background: #d9d9d9">
+                            <div calss="row-data-bar" style="border-bottom:1px solid #b3b3b3" ng-style="getDateBarStyle_flt()">
+                                <div style="display:inline-block;border-right:1px solid #b3b3b3;line-height:30px;text-align:center;font-size:12px" ng-repeat="dt in ganttFlightData.dates" ng-style="getDateCellStyle_flt()">
+                                    <span style="font-size:12px">{{dt.caption}}</span>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+                            <div calss="row-data-bar" ng-style="getDateBarStyle_flt()">
+                                <div style="display:inline-block;border-right:1px solid #b3b3b3;line-height:30px;r" ng-repeat="dt in ganttFlightData.dates" ng-style="getDateCellStyle_flt()">
+                                    <div style="display:inline-block;border-right:1px solid #b3b3b3;line-height:30px;text-align:center" ng-repeat="hr in dt.hours" ng-style="getHourCellStyle_flt()">
+                                        <span style="font-size:12px">{{hr}}</span>
+                                    </div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                        <div class="thin-scroll col-duty-flt" style="overflow-y:auto;" ng-style="getRightColumnStyle_flt()">
+                            <div class="reg-row" ng-repeat="res in ganttFlightData" style="position:relative;text-align:left;font-size:12px;  border-bottom:1px solid gray" ng-style="getResStyle_flt(res)">
+                                <div style="display:inline-block;border-right:1px solid #b3b3b3;height:100%" ng-repeat="dt in ganttFlightData.dates" ng-style="getDateCellStyle_flt()" class="context-menu-one" context_menu_main>
+
+                                </div>
+                                <div style="display:inline-block;position:absolute; border:0px solid black;font-size:12px; text-align:center" ng-repeat="flight in res.Flights" ng-style="getDutyStyle_flt(flight)" ng-class="getDutyClass_flt(flight)" id="{{flight.ID}}" ng-click="flightClick(flight)">
+                                    <div style="font-size:10px;">{{getFlightRoute(flight)}}</div>
+                                    <div style="font-size:11px;border:1px solid #00e64d;padding:1px 0 1px 0;line-height:17px;" ng-style="getFlightStyle(flight)">{{getFlightCaption(flight)}}</div>
+                                    <div style="font-size:10px;min-width:60px">{{getFlightMVT(flight)}}</div>
+
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div style="margin-top:2px">
+                    <table style="width:100%; border:1px solid #ccc">
+                        <tr>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold" ng-style="getOverlappedStyle()">OVERLAPPED</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;width:45px"><div dx-check-box="check_overlapping"></div></td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold" ng-style="getContiuityStyle()">CONTINUITY</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;width:45px"><div dx-check-box="check_continuity"></div></td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold">WOCL</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;min-width:50px">{{FDPStat.WOCLStr}}</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold;background:#66ff99">MAX FDP</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;min-width:60px;">{{FDPStat.MaxFDPStr}}</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold">BY SPLIT</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;min-width:60px">{{FDPStat.ExtendedStr}}</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold">MAX EXT. FDP</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;min-width:60px">{{FDPStat.MaxFDPExtendedStr}}</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold" ng-style="getFDPCellStyle()">FDP</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;min-width:60px">{{FDPStat.DurationStr}}</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold">DUTY</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;min-width:60px">{{FDPStat.DutyStr}}</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold">FLIGHT</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;min-width:60px">{{FDPStat.FlightStr}}</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;font-size:11px;font-weight:bold">USE SPLIT</td>
+                            <td style="border-right:1px solid #ccc;padding:5px;text-align:center;width:45px"><div dx-check-box="check_split"></div></td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="padding-bottom:2px;padding-top:2px">
+                    <table style="margin:0 auto 0 auto">
+                        <tr>
+                            <td ng-repeat="x in crew_duties_history" style="padding:2px;max-width:300px;">
+                                <div style="border:0px solid #ccc;padding:3px 10px 3px 10px;background:#ddd" ng-style="getHistoryCellStyle(x)">
+                                    <div style="text-align:center;font-size:12px;">{{formatDate(x.DateLocal)}}</div>
+                                    <div style="text-align:center" ng-show="[1165].indexOf(x.DutyType)!=-1">
+                                        <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center">{{getRoute(x.InitRoute)}} </div>
+                                    </div>
+                                    <div style="text-align:center" ng-show="[1165].indexOf(x.DutyType)==-1">
+                                        <div style="font-size:11px;font-weight:bold;padding:1px 0 1px 0;text-align:center">{{getDutyTitle(x)}}</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <!--END GANTT-->
+            </div>
+            <div class="col-lg-3" style="padding:0;padding-left:5px;">
+                <table style="width:100%">
+                    <tr>
+                        <td style="font-size: 12px; font-weight: bold; padding: 5px;width: 50px;   border: 1px solid gray; text-align: center " ng-class="getFLClass(selected_crew.FTL.Ratio)">F/L</td>
+                        <td style="font-size:12px;font-weight:bold;padding:7px;width:50px;border:1px solid gray;text-align:center" ng-class="getFLT28Class(selected_crew.FTL.Flight28)">F28</td>
+
+                        <td style="font-size: 12px; font-weight: bold; padding: 5px; width: 50px; border: 1px solid gray; text-align: center ">D7</td>
+                        <td style="font-size: 12px; font-weight: bold; padding: 5px; width: 50px; border: 1px solid gray; text-align: center ">D14</td>
+                        <td style="font-size: 12px; font-weight: bold; padding: 5px; width: 50px; border: 1px solid gray; text-align: center ">D28</td>
+                        <td style="font-size: 12px; font-weight: bold; padding: 5px; width: 50px; border: 1px solid gray; text-align: center ">F12M</td>
+                        <td rowspan="2" style="text-align:center ;padding:0 12px" ng-click="showProfile2()" ng-style="getCertificationStyle(selected_crew)">
+                            <i style="color:#f7f7f7;font-size:18px;" class="fas fa-graduation-cap"></i>
+                        </td>
+                        <!--<td rowspan="2" style="text-align:center;  padding: 0 12px;background: #66c2ff;width:50px">
+                            <i style="color:white;font-size:20px" class="fas fa-info"></i>
+                        </td>-->
+
+                    </tr>
+                    <tr>
+                        <td style="font-size: 12px; text-align: center; border : 1px solid gray; font-weight: bold; background: #b3ffe6; padding: 5px; text-align: center "> {{selected_crew.FTL.Ratio}}</td>
+                        <td style="font-size: 12px; text-align: center; border : 1px solid gray; font-weight: bold; background: #f9f9f9; padding: 5px; text-align: center " ng-class="getCFTLStyle(selected_crew.FTL.Flight28Remain,1)"> {{selected_crew.FTL._Flight28Remain}}</td>
+
+                        <td style="font-size: 12px; text-align: center; border: 1px solid gray; font-weight: bold; background: #f9f9f9; padding: 5px; text-align: center " ng-class="getCFTLStyle(selected_crew.FTL.Duty7Remain,0)">{{selected_crew.FTL._Duty7Remain}}</td>
+                        <td style="font-size: 12px; text-align: center; border: 1px solid gray; font-weight: bold; background: #f9f9f9; padding: 5px; text-align: center " ng-class="getCFTLStyle(selected_crew.FTL.Duty14Remain,0)">{{selected_crew.FTL._Duty14Remain}}</td>
+                        <td style="font-size: 12px; text-align: center; border : 1px solid gray; font-weight: bold; background: #f9f9f9; padding: 5px; text-align: center " ng-class="getCFTLStyle(selected_crew.FTL.Duty28Remain,0)">{{selected_crew.FTL._Duty28Remain}}</td>
+
+                        <td style="font-size: 12px; text-align: center; border : 1px solid gray; font-weight: bold; background: #f9f9f9; padding: 5px; text-align: center " ng-class="getCFTLStyle(selected_crew.FTL.FlightYearRemain,1)"> {{selected_crew.FTL._FlightYearRemain}}</td>
+
+                    </tr>
+                </table>
+                <table style="width:100%;margin-top:10px">
+                    <tr>
+                        <td style="padding:5px 5px 10px 5px;font-size:12px;">Def. Pos.</td>
+                        <td><div dx-select-box="sb_position" class="dx-border"></div></td>
+                        <td style="padding:5px 10px 5px 10px;font-size:12px">Apply to all</td>
+                        <td><div dx-check-box="check_apply_all" class="dx-border"></div></td>
+                    </tr>
+                </table>
+                <div dx-data-grid="dg_flt" id="dg_flt" style="margin-top:5px;"></div>
+                <!-- <div dx-data-grid="dg_crew_abs" id="dg_crew_abs" class="content" style="overflow-y:hidden;margin-top:5px;"></div>-->
+                <div style="border:1px solid #ccc;overflow-y:auto" class="thin-scroll2" ng-style="get_flt_fdps_style()">
+                    <div ng-repeat="x in flt_fdps" style="border:0px solid #ccc">
+                        <div style="padding:7px;background-color:skyblue;color:black;border-bottom:1px solid #ccc">{{x.flts}}</div>
+                        <table style="width:100%">
+                            <tr ng-repeat="c in x.item">
+
+                                <td style="border-bottom:1px solid #ccc;padding:7px;width:95px;text-align:center;border-right:1px solid #ccc">{{c.InitRank}}</td>
+                                <td style="border-bottom:1px solid #ccc;padding:7px;border-right:1px solid #ccc">{{c.InitScheduleName}}</td>
+                                <td style="border-bottom:1px solid #ccc;text-align:center;padding:7px;width:70px; ">
+                                    <a href="" ng-click="removeFDP(c,x)"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+
+        </div>
+    </div>
+
+
+    <div id="popup_profile" dx-popup="popup_profile">
+        <div class="col-lg-3" style="padding-right:5px;height:100%;border-right:1px solid gray">
+            <div class="dx-border">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>First Name</label>
+                    <div dx-text-box="txt_FirstName"></div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Last Name</label>
+                    <div dx-text-box="txt_LastName"></div>
+                </div>
+                <div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Schedule Name</label>
+                    <div dx-text-box="txt_ScheduleName"></div>
+                </div>
+                <div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Group</label>
+                    <div dx-text-box="txt_Group"></div>
+                </div>
+
+                <div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Mobile</label>
+                    <div dx-text-box="txt_Mobile" class="center ltr f16"></div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-9" style="padding-left:5px;">
+            <table style="width:100%;margin-bottom:10px;padding:5px;">
+                <tr>
+                    <td style="width:50px;" ng-click="dtFtlGo(-1)"><i class="far fa-arrow-alt-circle-left" style="color:green;font-size:29px;"></i></td>
+                    <td>
+                        <div dx-date-box="date_ftl" class="center dx-border"></div>
+                    </td>
+                    <td style="width:50px;text-align:right" ng-click="dtFtlGo(1)"><i class="far fa-arrow-alt-circle-right" style="color:green;font-size:29px;"></i></td>
+                </tr>
+            </table>
+            <div dx-tabs="tabs_profile" style="border-top: 1px solid gray ">
+
+            </div>
+            <div id="scroll_profile" dx-scroll-view="scroll_profile">
+                <div class="tabprofile profilemain">
+
+                    <div dx-data-grid="dg_cer" id="dg_cer"></div>
+                </div>
+
+                <div class="tabprofile profileftl" style="padding:5px 10px 5px 5px;">
+
+                    <div style="margin-top:10px;padding:0 5px 0 5px">
+                        <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                            <div dx-bar-gauge="duty7Gauge"></div>
+                            <div style="text-align:center;font-size:15px;font-weight:bold">{{getDutyText(7)}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                            <div dx-bar-gauge="duty14Gauge"></div>
+                            <div style="text-align:center;font-size:15px;font-weight:bold">{{getDutyText(14)}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                            <div dx-bar-gauge="duty28Gauge"></div>
+                            <div style="text-align:center;font-size:15px;font-weight:bold">{{getDutyText(28)}}</div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="margin-top:10px;padding:10px 20px 10px 20px;">
+                            <table class="ftl-tbl" style="margin-top:10px;border:1px solid #ccc;width:100%;">
+                                <tr>
+                                    <td></td>
+                                    <td style="background:#ccc">7 Days</td>
+                                    <td style="background:#ccc">14 Days</td>
+                                    <td style="background:#ccc">28 Days</td>
+                                </tr>
+                                <tr>
+                                    <td style="background:#ccc">USED</td>
+                                    <td ng-style="getDutyCellStyle(7)">{{getDutyText2(7)}}</td>
+                                    <td ng-style="getDutyCellStyle(14)">{{getDutyText2(14)}}</td>
+                                    <td ng-style="getDutyCellStyle(28)">{{getDutyText2(28)}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="background:#ccc">REMAINING</td>
+                                    <td>{{getDutyRemainingText(7)}}</td>
+                                    <td>{{getDutyRemainingText(14)}}</td>
+                                    <td>{{getDutyRemainingText(28)}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="padding:15px;font-size:15px;font-weight:bold;text-align:center;border-bottom:1px solid #ccc">DUTY</div>
+
+
+                    </div>
+                    <div style="margin-top:10px;padding:0 5px 0 5px">
+                        <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                            <div dx-bar-gauge="flight28Gauge"></div>
+                            <div style="text-align:center;font-size:15px;font-weight:bold">{{getFlightText(28)}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                            <div dx-bar-gauge="flightYearGauge"></div>
+                            <div style="text-align:center;font-size:15px;font-weight:bold">{{getFlightText(12)}}</div>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                            <div dx-bar-gauge="flightCYearGauge"></div>
+                            <div style="text-align:center;font-size:15px;font-weight:bold">{{getFlightText(1)}}</div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="margin-top:10px;padding:10px 20px 10px 20px;">
+                            <table class="ftl-tbl" style="margin-top:10px;border:1px solid #ccc;width:100%;">
+                                <tr>
+                                    <td></td>
+                                    <td style="background:#ccc">28 Days</td>
+                                    <td style="background:#ccc">12 Months</td>
+                                    <td style="background:#ccc">Year</td>
+                                </tr>
+                                <tr>
+                                    <td style="background:#ccc">USED</td>
+                                    <td ng-style="getFlightCellStyle(28)">{{getFlightText2(28)}}</td>
+                                    <td ng-style="getFlightCellStyle(12)">{{getFlightText2(12)}}</td>
+                                    <td ng-style="getFlightCellStyle(1)">{{getFlightText2(1)}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="background:#ccc">REMAINING</td>
+                                    <td>{{getFlightRemainingText(28)}}</td>
+                                    <td>{{getFlightRemainingText(12)}}</td>
+                                    <td>{{getFlightRemainingText(1)}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="padding:15px;font-size:15px;font-weight:bold;text-align:center;border-bottom:1px solid #ccc">FLIGHT</div>
+
+
+                    </div>
+                    <div ng-show="ds_exceed.length>0 && 1==2">
+                        <div style="padding:15px;font-size:15px;font-weight:bold;text-align:left;border-bottom:1px solid #ccc">Exceeded</div>
+                        <div style="margin-top:10px;padding:10px 20px 10px 20px;">
+                            <table class="ftl-tbl" style="margin-top:10px;border:1px solid #ccc;width:100%;">
+                                <thead>
+                                    <tr>
+                                        <td style="background:#ccc">Date</td>
+                                        <td style="background:#ccc">DTY 7</td>
+                                        <td style="background:#ccc">DTY 14</td>
+                                        <td style="background:#ccc">DTY 28</td>
+                                        <td style="background:#ccc">FLT 28</td>
+                                        <td style="background:#ccc">FLT 12 M</td>
+                                        <td style="background:#ccc">FLT Year</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="rec in ds_exceed">
+                                        <td style="background:#ccc">{{formatDate(rec.CDate)}}</td>
+                                        <td ng-style="getDutyCellStyle3(rec,7)">{{getDutyText3(rec,'Duty7')}}</td>
+                                        <td ng-style="getDutyCellStyle3(rec,14)">{{getDutyText3(rec,'Duty14')}}</td>
+                                        <td ng-style="getDutyCellStyle3(rec,28)">{{getDutyText3(rec,'Duty28')}}</td>
+                                        <td ng-style="getFlightCellStyle3(rec,28)">{{getDutyText3(rec,'Flight28')}}</td>
+                                        <td ng-style="getFlightCellStyle3(rec,12)">{{getDutyText3(rec,'FlightYear')}}</td>
+                                        <td ng-style="getFlightCellStyle3(rec,1)">{{getDutyText3(rec,'FlightCYear')}}</td>
+                                    </tr>
+                                </tbody>
+
+
+                            </table>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+                <div class="tabprofile profileflights" style="padding:5px 10px 5px 5px;">
+                    <table style="width:100%; ">
+                        <tr>
+                            <td>
+                                <div dx-select-box="sb_year" class="center dx-border"></div>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <div style="margin-top:10px;padding:15px 25px 15px 25px;">
+                        <div dx-chart="chart_bl"></div>
+
+                    </div>
+                    <div style="margin-top:20px;padding:15px 25px 15px 25px;">
+                        <div dx-chart="chart_cnt"></div>
+
+                    </div>
+                    <div style="margin-top:20px;padding:15px 25px 15px 25px;">
+                        <div dx-chart="chart_fltratio"></div>
+
+                    </div>
+                    <div style="margin-top:10px;padding:10px 20px 10px 20px;">
+                        <table class="ftl-tbl" style="margin-top:10px;border:1px solid #ccc;width:100%;">
+
+                            <tr>
+                                <td style="background:#ccc">Year</td>
+                                <td style="background:#ccc">Month</td>
+                                <td style="background:#ccc">Flight Time</td>
+                                <td style="background:#ccc">Block Time</td>
+                                <td style="background:#ccc">Flights</td>
+                                <td style="background:#ccc">Flight/Leg</td>
+                                <td></td>
+                            </tr>
+                            <tr ng-repeat="x in data_bl">
+                                <td style="background:#ccc">{{x.Year}}</td>
+                                <td style="background:#ccc">{{x.MonthName}}</td>
+                                <td>{{formatMinutes(x.FlightTime)}}</td>
+                                <td>{{formatMinutes(x.BlockTime)}}</td>
+                                <td>{{ (x.Flights)}}</td>
+                                <td>{{formatMinutes(x.FLTRatio)}}</td>
+                                <td><div ng-click="goFlights(x.Year,x.Month)" style="background:#009973;padding:3px;color:white">Details</div></td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="tabprofile profileduties" style="padding:5px 10px 5px 5px;">
+                    <table style="width:100%; ">
+                        <tr>
+
+                            <td style="width:250px">
+                                <div dx-date-box="date_dty_from" class="center dx-border"></div>
+                            </td>
+                            <td style="padding-left:5px;width:250px;">
+                                <div dx-date-box="date_dty_to" class="center dx-border"></div>
+                            </td>
+                            <td style="width:60px;padding-left:10px"><div dx-button="btn_search_duties"></div></td>
+                            <td></td>
+
+                        </tr>
+                    </table>
+                    <div dx-data-grid="dg_pdty" id="dg_pdty" class="content" style="overflow-y:hidden;margin-top:10px"></div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div style="clear:both"></div>
+
+    </div>
+    <div id="popup_info" dx-popup="popup_info">
+        <div ng-show="duty_info.duty.DutyType==1165">
+            <div style="border:1px solid #ccc">
+                <div style="font-weight:bold;font-size:12px;text-align:center;padding:5px">{{duty_info.duty.InitRoute}}</div>
+                <div style="font-weight:bold;font-size:12px;text-align:center;padding:5px">{{duty_info.duty.InitFlts}}</div>
+
+            </div>
+             
+            <table style="width:100%;border:1px solid #ccc;margin-top:5px;font-size:12px">
+                <tr>
+                    <td style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;background:#eee;padding:5px;text-align:center;font-size:12px">Start</td>
+                    <td style="border-right:1px solid #ccc;border-bottom:1px solid #ccc;background:#eee;padding:5px;text-align:center;font-size:12px">End</td>
+                    <td style=" border-bottom:1px solid #ccc;background:#eee;padding:5px;text-align:center;font-size:12px">Rest</td>
+                </tr>
+                <tr>
+                    <td style="border-right:1px solid #ccc;text-align:center;font-size:12px  ">{{formatTime(duty_info.duty.InitStart)}}</td>
+                    <td style="border-right:1px solid #ccc;text-align:center;font-size:12px  ">{{formatTime(duty_info.duty.InitEnd)}}</td>
+                    <td style="   padding:5px;text-align:center;font-size:12px">{{formatTime(duty_info.duty.InitRestTo)}}</td>
+                </tr>
+
+            </table>
+            
+            <div style="background:#ccc;text-align:center;padding:5px;font-size:12px;margin-top:5px">FDPs</div>
+            <div style="border:1px solid #ccc;overflow-y:auto;height:350px" class="thin-scroll2">
+
+                <div ng-repeat="x in duty_info.fdps" style="border:0px solid #ccc">
+                    <div style="padding:5px;background-color:#eee;color:black;border-bottom:1px solid #ccc;text-align:center;font-size:12px">{{x.flts}}({{x.route}})</div>
+                    <table style="width:100%">
+                        <tr ng-repeat="c in x.item">
+
+                            <td style="border-bottom:1px solid #ccc;padding:4px;width:95px;text-align:center;border-right:1px solid #ccc;font-size:12px">{{c.InitRank}}</td>
+                            <td style="border-bottom:1px solid #ccc;padding:4px;border-right:1px solid #ccc;font-size:12px">{{c.InitScheduleName}}</td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+
+</div>

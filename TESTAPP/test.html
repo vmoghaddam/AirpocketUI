@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="scripts/jquery-3.1.0.js"></script>
+    <script>
+        alert('test');
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:58908/odata/options/all/1',
+
+            jsonpCallback: 'callback',
+            dataType: 'json',
+            success: function (data, textStatus, XmlHttpRequest) {
+
+
+                console.log(data);
+
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            async: true
+
+        });
+
+        alert('post');
+        var entity = {
+
+            Id: -1,
+            Title: 'Griffin',
+            ParentId: null,
+            IsSystem: true,
+            OrderIndex: 1,
+        };
+        $.ajax({
+            type: "POST",
+            //  contentType: "application/json; charset=utf-8",
+            datatype: "json",
+            url: "http://localhost:58908/odata/options/",
+            data: entity,
+            beforeSend: function (XMLHttpRequest) {
+
+            },
+            success: function (data, textStatus, XmlHttpRequest) {
+
+
+                // account = data.d;
+                console.log('success');
+                //console.log(textStatus);
+                //console.log(XmlHttpRequest);
+                //console.log(data);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                //errorCallback(XMLHttpRequest, textStatus, errorThrown);
+                // errorHandler(XMLHttpRequest, textStatus, errorThrown);
+                console.log('error');
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrown);
+            }
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

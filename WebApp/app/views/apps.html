@@ -1,0 +1,281 @@
+﻿<style>
+
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-weight: 300;
+    }
+
+    /*body {
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        font-weight: 300;
+    }*/
+
+    body ::-webkit-input-placeholder {
+        /* WebKit browsers */
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        font-weight: 300;
+    }
+
+    body :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        opacity: 1;
+        font-weight: 300;
+    }
+
+    body ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        opacity: 1;
+        font-weight: 300;
+    }
+
+    body :-ms-input-placeholder {
+        /* Internet Explorer 10+ */
+        font-family: 'Source Sans Pro', sans-serif;
+        color: white;
+        font-weight: 300;
+    }
+
+    .wrapper {
+        background: #0b9de0;
+        background: linear-gradient(to bottom right,#0b9de0 0%, #49bdf2 90%);
+        background: linear-gradient(to bottom right,gray 0%, #aaa 90%);
+        position: absolute;
+        left: 0;
+        width: 100%;
+        overflow: hidden;
+        top: 0;
+        margin-top: 0;
+        height: 100%;
+    }
+    @media (min-width: 1200px) {
+        .wrapper {
+            top: 50%;
+            margin-top: -250px;
+            height: 500px;
+        }
+    }
+    .yaxis {
+        -webkit-transform: translateY(105px);
+        transform: translateY(105px);
+    }
+
+    .wrapper.form-success .container h1 {
+        -webkit-transform: translateY(85px);
+        transform: translateY(85px);
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 10px 0;
+        height: 400px;
+        text-align: center;
+    }
+
+        .container h1 {
+            font-size: 40px;
+            transition-duration: 1s;
+            transition-timing-function: ease-in-put;
+            font-weight: 200;
+        }
+
+    form {
+        padding: 20px 0;
+        position: relative;
+        z-index: 2;
+    }
+
+        form input {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            outline: 0;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 250px;
+            border-radius: 3px;
+            padding: 10px 15px;
+            margin: 0 auto 10px auto;
+            display: block;
+            text-align: center;
+            font-size: 18px;
+            color: white;
+            transition-duration: 0.25s;
+            font-weight: 300;
+        }
+
+            form input:hover {
+                background-color: rgba(255, 255, 255, 0.4);
+            }
+
+            form input:focus {
+                background-color: white;
+                width: 300px;
+                color: gray;
+            }
+
+        form button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            outline: 0;
+            background-color: white;
+            border: 0;
+            padding: 10px 15px;
+            /*color: #009688;*/
+            color: #0b9de0;
+            border-radius: 3px;
+            width: 250px;
+            cursor: pointer;
+            font-size: 18px;
+            transition-duration: 0.25s;
+        }
+
+            form button:hover {
+                background-color: #f5f7f9;
+            }
+
+   
+
+    @-webkit-keyframes square {
+        0% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+
+        100% {
+            -webkit-transform: translateY(-700px) rotate(600deg);
+            transform: translateY(-700px) rotate(600deg);
+        }
+    }
+
+    @keyframes square {
+        0% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+
+        100% {
+            -webkit-transform: translateY(-700px) rotate(600deg);
+            transform: translateY(-700px) rotate(600deg);
+        }
+    }
+</style>
+<div class="wrapper apps" style="display:none;">
+    <div class="container">
+        <div class="row" style="z-index:100;position:relative">
+            
+            <table class="hidden-xs hidden-md hidden-sm hidden-xsm" style="width:100%;border-bottom:1px solid white;height:70px;text-align:left;z-index:2;position:relative">
+                <tr>
+                    <td style="width:55px;text-align:center">
+                        <img src="content/images/logoap2.png" style="width:50px;" />
+                    </td>
+                    <td style="text-align:left">
+                        <span style=" font-size:25px;color:white;margin-left:5px"> {{app_title}}</span>
+
+                    </td>
+                    <td style="text-align:right;cursor:pointer"><span style=" font-size:20px;color:white;cursor:pointer" ng-click="goProfile()">{{userName}}</span></td>
+                    <td style="text-align:right;width:70px;z-index:10">
+                        <a style="text-decoration:none;" href="">
+                            <img src="content/images/user.png" style="width:40px;" />
+                        </a>
+                    </td>
+                    <td style="text-align:center;width:65px;z-index:10">
+                        <a style="text-decoration:none;" href="" data-ng-click="logOut()">
+                            <img src="content/images/logout.png" style="width:40px;" />
+                        </a>
+                    </td>
+                </tr>
+
+            </table>
+
+            <table class="hidden-lg" style="width:100%;border-bottom:1px solid white;height:70px;text-align:left;z-index:2;position:relative">
+                <tr>
+                    <td style="width:55px;text-align:center">
+                        <img src="content/images/logoap2.png" style="width:40px;" />
+                    </td>
+                    <td style="text-align:left">
+
+                        <span style=" font-size:0.8em;color:white;display:block">{{app_title}}</span>
+                        <span style=" font-size:1.1em;color:white;display:block" ng-click="goProfile()">{{userName}}</span>
+
+                    </td>
+                     
+                    <td style="text-align:right;width:60px;z-index:10">
+                        <a style="text-decoration:none;" href="">
+                            <img src="content/images/user.png" style="width:35px;" />
+                        </a>
+                    </td>
+                    <td style="text-align:center;width:55px;z-index:10">
+                        <a style="text-decoration:none;" href="" data-ng-click="logOut()">
+                            <img src="content/images/logout.png" style="width:35px;" />
+                        </a>
+                    </td>
+                </tr>
+
+            </table>
+
+
+
+            <div style="margin-top:10px"></div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 " style="text-align:left;padding:0px 0px 0 0;">
+                <div class="box-app">
+                    <a class="logo" style="text-decoration:none;" href="" data-ng-click="go(1)">
+                        <img src="content/images/profile.png" />
+                        <div class="title">Base Pocket</div>
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6  col-xs-6" style="text-align:center;padding:0px 0px 0 0;">
+                <div class="box-app">
+                    <a class="logo" style="text-decoration:none;" href="" data-ng-click="go(2)">
+                        <img src="content/images/library.png" />
+                        <div class="title">Learning Pocket</div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6  col-xs-6" style="text-align:right;padding:0px 0px 0 0;">
+                <div class="box-app">
+                    <a class="logo" style="text-decoration:none;" href="" data-ng-click="go(3)">
+                        <img src="content/images/flight.png" />
+                        <div class="title">Flight Pocket</div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6" style="text-align:right;padding:0px 0px 0 0;">
+                <div class="box-app">
+                    <a class="logo" style="text-decoration:none;" href="" data-ng-click="go(4)">
+                        <img src="content/images/share.png" />
+                        <div class="title">Basic Information</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+       
+
+    </div>
+
+    <!--<ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>-->
+</div>

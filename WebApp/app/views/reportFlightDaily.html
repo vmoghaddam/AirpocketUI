@@ -1,0 +1,367 @@
+﻿﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_flight .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+    #dg_fdp .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_fdp .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_fdp .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_fdp .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+    #dg_ctr .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_ctr .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_ctr .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_ctr .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .dx-selectbox {
+        border: 1px solid #ccc;
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box reportflightdaily" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'flightplanview';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class=" col-lg-3 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;width:20%;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  dx-border" style="background:#fff; ">
+                    <div style="background:gray;color:white;padding:8px;">Filter</div>
+                    <div dx-scroll-view="scroll_1">
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Date</div>
+                        <div class="col-lg-5" style="padding:5px;"> <div class="center" dx-date-box="date_from"></div></div>
+                        <div class="col-lg-5" style="padding:5px;"><div class="center" dx-date-box="date_to"></div></div>
+                        <div class="col-lg-1" style="padding:5px;"><div dx-button="btn_persiandate"></div></div>
+                        <div style="clear:both"></div>
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Units</div>
+                        <div style='padding:5px'>
+                            <table style='width:100%;'>
+                                <tr><td style='width:100px'>Fuel:</td><td><div dx-select-box="sb_volumeunit"></div></td></tr>
+                                <tr style='height:50px'><td>Bag./Cargo:</td><td><div dx-select-box="sb_massunit"></div></td></tr>
+                                <tr style='height:50px'><td>Time</td><td><div dx-select-box="sb_timeunit"></div></td></tr>
+                            </table>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Dep. Stn</div>
+                        <div style="padding:5px;"> <div dx-tag-box="tag_origin"></div></div>
+
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Arr. Stn</div>
+                        <div style="padding:5px;"> <div dx-tag-box="tag_destination"></div></div>
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Reoute</div>
+                        <div style="padding:5px;"> <div dx-text-area="txt_routes"></div></div>
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Register</div>
+                        <div style="padding:5px;"> <div dx-tag-box="tag_reg"></div></div>
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Flight NO</div>
+                        <div style="padding:5px;"> <div dx-text-area="txt_fltnos"></div></div>
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Status</div>
+                        <div style="padding:5px;"> <div dx-tag-box="tag_status"></div></div>
+
+
+
+
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Flight Type</div>
+                        <div style="padding:5px;"> <div dx-tag-box="tag_ft"></div></div>
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Index</div>
+                        <div style="padding:5px;"> <div dx-tag-box="tag_idx"></div></div>
+                        <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Charterers</div>
+                        <div style="padding:5px;"> <div dx-tag-box="tag_chr"></div></div>
+
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class=" col-lg-9 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;width:80%  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <!-- <div style="background:gray;color:white;padding:7px 5px 8px 5px">Details<i class="fa fa-file-excel-o" ng-click="exportDetails" style="color:lightgreen;font-size:24px;float:right;cursor: pointer;"></i></div>-->
+                    <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+
+
+
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_export"></div></td>
+                    <td></td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_date" dx-popup="popup_date">
+        <div class="margin-bottom-5 padding-7 dx-border" style="padding:25px 0 10px 0">
+            <div>
+                <label style="width:45px;text-align:right;margin-right:5px;">From</label>
+
+                <input type="text" class="date1 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+            <div style="margin-top:15px;">
+                <label style="width:45px;text-align:right; margin-right:5px;">To</label>
+
+                <input type="text" class="date2 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <div id="popup_fdp" dx-popup="popup_cduties">
+
+        <div dx-data-grid="dg_fdp" dx-item-alias="error" id="dg_fdp">
+
+
+        </div>
+
+
+    </div>
+
+    <div id="popup_ctr" dx-popup="popup_ctr">
+
+        <div dx-data-grid="dg_ctr" dx-item-alias="error" id="dg_ctr">
+
+
+        </div>
+
+
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <!-- <div ng-include="'app/views/logAdd.html?vx=2'"></div>-->
+
+
+</div>
