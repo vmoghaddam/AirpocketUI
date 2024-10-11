@@ -4,8 +4,9 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     $scope.entity = {
         id: 0,
         acfT_TypeId: null,
+        acfT_TypeIds: [],
         acfT_MSNIds: [],
-        priorityId: null, 
+        priorityId: null,
         requestType: null,
         sender_LocationId: null,
         sender_UserId: null,
@@ -13,7 +14,8 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         deadline: null,
         remark: null,
         date: new Date(),
-        requestItems: []
+        requestItems: [],
+        items: []
     }
 
 
@@ -37,7 +39,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         ataTitle: "",
         quantity: null,
         reference: null,
-        remark:  null
+        remark: null
     };
 
     $scope.dg_item_ds = [];
@@ -46,7 +48,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         Id: null
     };
 
-   
+
 
     $scope.popup_req_visible = false;
     $scope.popup_req = {
@@ -61,18 +63,18 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                     type: 'success', text: 'Save', onClick: function (e) {
                         $scope.entity.acfT_MSNIds = $scope.dg_reg_selected_ids;
                         $scope.entity.requestItems = $scope.dg_item_ds;
-                        console.log($scope.entity);
-                        
-                        vira_general_service.add_request($scope.entity).then(function (response) {
-                            console.log(response);
-                            if (response.errorCode===0) {
 
-                                General.ShowNotify(Config.Text_SavedOk, 'success');
-                                $scope.popup_req_visible = false;
+                        vira_general_service.add_request($scope.entity).then(function (response) {
+
+                            if (response.errorCode === 0) {
+                                vira_general_service.document_sync_request().then(function (response2) {
+                                    General.ShowNotify(Config.Text_SavedOk, 'success');
+                                    $scope.popup_req_visible = false;
+                                });
                             }
                         });
 
-                       
+
                     }
                 }, toolbar: 'bottom'
             },
@@ -89,7 +91,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                     }
                 }, toolbar: 'bottom'
             },
-           
+
 
 
 
@@ -116,7 +118,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
             if ($scope.dg_item_instance)
                 $scope.dg_item_instance.repaint();
-            
+
 
 
         },
@@ -131,7 +133,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     ///////////////////////////////
 
     $scope.btn_addItem = {
-       // text: 'Save',
+        // text: 'Save',
         type: 'default',
         icon: 'plus',
         width: 40,
@@ -143,83 +145,17 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                 General.ShowNotify(Config.Text_FillRequired, 'error');
                 return;
             }
-            //$scope.selected_pn
-        //    {
-        //    "id": 1,
-        //    "partTypeId": 2738,
-        //    "measurementUnitId": 106,
-        //    "typeId": 93,
-        //    "categoryId": 98,
-        //    "ataChapter": "57",
-        //    "partNumber": "F4100-230-709",
-        //    "hardTime": false,
-        //    "blockList": false,
-        //    "temporary": null,
-        //    "ipC_Reference": "-",
-        //    "figureNo": null,
-        //    "itemNo": null,
-        //    "createDate": "2024-01-19T16:36:57.317",
-        //    "remark": null,
-        //    "acfT_Type": null,
-        //    "user_Creator_FullName": "Admin Admin",
-        //    "description": "LEADING EDGE STABI",
-        //    "uom": "EA",
-        //    "type": "Capital",
-        //    "category": "Component"
-        //}
-
-            //{
-            //    "requestItems": [
-            //        {
-            //            "id": 0,
-            //            "paperId": 0,
-            //            "cmP_PartNumberId": 0,
-            //            "partNumber_TypeId": 0,
-            //            "measurementUnitId": 0,
-            //            "cmP_PositionId": 0,
-            //            "itemNo": 0,
-            //            "ataChapter": "string",
-            //            "quantity": 0,
-            //            "reference": "string",
-            //            "remark": "string"
-            //        }
-            //    ],
-            //        "acfT_MSNIds": [
-            //            0
-            //        ],
-            //            "acfT_TypeId": "string",
-            //                "partNumberId": 0,
-            //                    "ignoreControls": true
-            //}
-
 
             var vitem = {
                 requestItems: $scope.dg_item_ds,
                 acfT_TypeId: $scope.entity.acfT_TypeId,
                 acfT_MSNIds: $scope.dg_reg_selected_ids,
                 partNumberId: $scope.selected_pn.id,
-               
-                ignoreControls: $scope.dg_item_ds.length==0,
+
+                ignoreControls: $scope.dg_item_ds.length == 0,
 
             };
-           // $scope.valEntity.requestItems = $scope.dg_item_ds;
-           // $scope.valEntity.acfT_TypeId = $scope.entity.acfT_TypeId;
 
-            //"requestItems": [
-            //    {
-            //        "id": 0,
-            //        "paperId": 0,
-            //        
-            //       
-            //        
-            //        
-            //       
-            //        
-            //        "quantity": 0,
-            //        "reference": "string",
-            //        "remark": "string"
-            //    }
-            //],
             //dool
             vira_general_service.validate_request(vitem).then(function (res) {
                 console.log(res);
@@ -238,7 +174,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                         partNumber: $scope.selected_pn.partNumber,
                         description: $scope.selected_pn.description,
                         uom: $scope.selected_pn.uom,
-                        position:$scope.position,
+                        position: $scope.position,
 
 
                     };
@@ -253,7 +189,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                     var message = res.data[0].errorMessage;
                     General.ShowNotify(message, 'error');
                 }
-                 
+
             });
         }
 
@@ -290,11 +226,11 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
         if ($rootScope.vira_locations) {
             $scope.ds_user_locations = $rootScope.vira_user_locations;
-            
-            console.log('dddddddd',$rootScope.vira_user_locations);
-            
+
+            console.log('dddddddd', $rootScope.vira_user_locations);
+
             $scope.ds_locations = $rootScope.vira_stocks;
-            
+
         }
         else {
 
@@ -303,7 +239,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                 console.log('dddddddd', $rootScope.vira_user_locations);
                 console.log('b', $scope.ds_user_locations);
                 $scope.ds_locations = $rootScope.vira_stocks;
-                
+
             });
         }
 
@@ -411,7 +347,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                 "<div>"
                 + "<div class='tmpl-col-left' style='width:50%'>" + data.title + "</div>"
                 + "<div class='tmpl-col-right' style='width:50%'>" + data.fullName + "</div>"
-                 
+
 
 
                 + "</div>";
@@ -448,7 +384,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         displayExpr: 'title',
         valueExpr: 'id',
         onSelectionChanged: function (e) {
-            console.log("eeee",e);
+            console.log("eeee", e);
         },
         bindingOptions: {
             value: 'entity.receiver_LocationId',
@@ -482,12 +418,12 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         displayExpr: 'id',
         valueExpr: 'id',
         onValueChanged: function (e) {
-           
+
             $scope.dg_reg_ds = Enumerable.From($scope.registers).Where(function (x) {
                 var models = x.acfT_ModelId.split("-")[0];
                 return models == e.value;
             }).ToArray();
-           
+
         },
         bindingOptions: {
             value: 'entity.acfT_TypeId',
@@ -531,7 +467,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                 $scope.position = null;
                 return;
             }
-            $scope.position  = e.selectedItem.title;
+            $scope.position = e.selectedItem.title;
         },
         bindingOptions: {
             value: 'item.cmP_PositionId',
@@ -558,14 +494,14 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         }
     }
 
-      $scope.txt_itemRemark = {
+    $scope.txt_itemRemark = {
         bindingOptions: {
             value: 'item.remark'
         }
     }
 
     $scope.txt_pn = {
-        readOnly:true,
+        readOnly: true,
         bindingOptions: {
             value: 'item.pnTitle'
         }
@@ -577,7 +513,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         }
     }
     $scope.txt_description = {
-        readOnly:true,
+        readOnly: true,
         bindingOptions: {
             value: 'item.description'
         }
@@ -770,7 +706,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
         showClearButton: true,
         searchEnabled: true,
-         searchExpr: ["regsiter"],
+        searchExpr: ["regsiter"],
         displayExpr: "register",
         valueExpr: 'id',
         bindingOptions: {
@@ -845,7 +781,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         },
 
         onSelectionChanged: function (e) {
-           // $scope.valEntity.acfT_MSNIds = Enumerable.From(e.selectedRowsData).Select(function (x) { return x.id }).ToArray();
+            // $scope.valEntity.acfT_MSNIds = Enumerable.From(e.selectedRowsData).Select(function (x) { return x.id }).ToArray();
             $scope.dg_reg_selected_ids = Enumerable.From(e.selectedRowsData).Select(function (x) { return x.id }).ToArray();
             var data = e.selectedRowsData[0];
 
@@ -897,7 +833,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
         $scope.tempData = prms;
 
-       
+
 
         $scope.popup_req_visible = true;
 
@@ -916,7 +852,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         $scope.item.description = prms.partNumber;
         $scope.item.ataChapter = prms.ataChapter;
         $scope.item.measurementUnitId = prms.measurementUnitId;
-        $scope.item.reference=prms.ipC_Reference;
+        $scope.item.reference = prms.ipC_Reference;
     });
 
 

@@ -1,9 +1,9 @@
-﻿    
+﻿
 var app = angular.module('GriffinApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'dx', 'ngSanitize', 'ngAnimate', 'angularjs-gauge', 'nvd3']).config(['cfpLoadingBarProvider', function (cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
 }]).config(configApp);
 configApp.$inject = ['ngGaugeProvider'];
- 
+
 function configApp(ngGaugeProvider) {
 
     // setting the default parameters for 
@@ -13,12 +13,12 @@ function configApp(ngGaugeProvider) {
         size: 180,
         cap: 'round',
         thick: 12,
-       // foregroundColor: "#ff8645",   // note the camelCase notation for parameter name
-       // backgroundColor: "#e4e4e4"
+        // foregroundColor: "#ff8645",   // note the camelCase notation for parameter name
+        // backgroundColor: "#e4e4e4"
     });
 
 }
- 
+
 app.config(function ($routeProvider) {
     var version = 100;
     //ati new 2
@@ -27,15 +27,15 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/firstlogin.html"
     });
 
-    
-     
+
+
     $routeProvider.when("/apps", {
         controller: "appsController",
         templateUrl: "/app/views/apps.html?v=" + version
     });
     $routeProvider.when("/home", {
         controller: "homeController",
-        templateUrl: "/app/views/home.html?v="+'5673'
+        templateUrl: "/app/views/home.html?v=" + '5673'
     });
     $routeProvider.when("/home/:year/:month/:day", {
         controller: "homeController",
@@ -47,7 +47,7 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/login.html"
     });
 
-    
+
 
     $routeProvider.when("/signup", {
         controller: "signupController",
@@ -107,16 +107,16 @@ app.config(function ($routeProvider) {
         controller: "zpersonController",
         templateUrl: "/app/views/zperson.html?v=90038"
     });
-     $routeProvider.when("/person/crew", {
+    $routeProvider.when("/person/crew", {
         controller: "zpersonController",
         templateUrl: "/app/views/zperson.html?v=6100028",
-        isCrew:true,
-    }); 
+        isCrew: true,
+    });
     $routeProvider.when("/person/course", {
         controller: "personcourseController",
         templateUrl: "/app/views/personcourse.html"
     });
-     
+
     $routeProvider.when("/person/book", {
         controller: "personbookController",
         templateUrl: "/app/views/personbook.html"
@@ -187,7 +187,7 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/library", {
         controller: "libraryController",
         templateUrl: "/app/views/library.html",
-        isDocument:false,
+        isDocument: false,
     });
     $routeProvider.when("/library/people", {
         controller: "libraryController",
@@ -202,7 +202,7 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/option/:parent", {
         controller: "optionController",
         templateUrl: "/app/views/option.html",
-         
+
     });
 
     $routeProvider.when("/document", {
@@ -221,7 +221,7 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/personmisc.html",
         TypeId: 75,
     });
-   
+
     $routeProvider.when("/journal", {
         controller: "journalController",
         templateUrl: "/app/views/journal.html",
@@ -235,23 +235,23 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/notification", {
         controller: "notificationController",
         templateUrl: "/app/views/notification.html",
-        
+
     });
     $routeProvider.when("/flight", {
         controller: "flightController",
         templateUrl: "/app/views/flight.html",
 
     });
-   
 
 
-    
+
+
 
 
     $routeProvider.when("/flight/archive", {
         controller: "flightListController",
         templateUrl: "/app/views/flightlist.html",
-        type:-1,
+        type: -1,
 
     });
     $routeProvider.when("/flight/archive/:airport", {
@@ -261,14 +261,14 @@ app.config(function ($routeProvider) {
 
     });
 
-    
+
     $routeProvider.when("/maintenance/flights/irregular", {
         controller: "irregularFlightController",
         templateUrl: "/app/views/irregularflight.html",
         type: 2,
 
     });
-    
+
     $routeProvider.when("/flight/plans/closed", {
         controller: "flightPlanViewController",
         templateUrl: "/app/views/flightplanview.html",
@@ -291,13 +291,13 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/commercial/plans/permits", {
         //controller: "flightPlanViewController",
         //templateUrl: "/app/views/flightplanview.html",
-         controller: "flightPlanPermitController",
+        controller: "flightPlanPermitController",
         templateUrl: "/app/views/flightplanpermit.html",
         //type: 50,
 
     });
     $routeProvider.when("/commercial/plans/crew", {
-         
+
         controller: "flightPlanCrewController",
         templateUrl: "/app/views/flightPlanCrew.html",
         //type: 50,
@@ -349,7 +349,7 @@ app.config(function ($routeProvider) {
         controller: "crewReportController",
         templateUrl: "/app/views/crewReport.html"
     });
-    
+
     $routeProvider.when("/fuel/report", {
         controller: "fuelReportController",
         templateUrl: "/app/views/fuelReport.html?v=200"
@@ -469,7 +469,7 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/delayreport.html"
     });
 
-    $routeProvider.when("/citypair", { 
+    $routeProvider.when("/citypair", {
         controller: "citypairController",
         templateUrl: "/app/views/citypair.html"
     });
@@ -524,7 +524,7 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/reg/flights/monthly", {
         controller: "regFlightsMonthlyController",
         templateUrl: "/app/views/regflightmonthly.html",
-        
+
     });
 
     $routeProvider.when("/reg/flights/monthly/:yy/:mm", {
@@ -653,25 +653,25 @@ app.config(function ($routeProvider) {
         controller: "rawcmdController",
         templateUrl: "/app/views/rawcmd.html"
     });
-	$routeProvider.when("/scheduling/grid", {
+    $routeProvider.when("/scheduling/grid", {
         controller: "schedulinggridController",
         templateUrl: "/app/views/schedulinggrid.html"
     });
- $routeProvider.when("/report/flight/daily", {
+    $routeProvider.when("/report/flight/daily", {
         controller: "reportFlightDailyController",
         templateUrl: "/app/views/reportflightdaily.html?v=101104802"
     });
-	   $routeProvider.when("/report/flight/daily/station", {
+    $routeProvider.when("/report/flight/daily/station", {
         controller: "reportFlightDailyStationController",
         templateUrl: "/app/views/reportflightdailystation.html"
     });
-	
-  $routeProvider.when("/trn/stat", {
+
+    $routeProvider.when("/trn/stat", {
         controller: "trnStatController",
         templateUrl: "/app/views/trnstat.html?v=1100"
     });
-	
-	$routeProvider.when("/trn/expiring/groups", {
+
+    $routeProvider.when("/trn/expiring/groups", {
         controller: "trnexpiringGroupController",
         templateUrl: "/app/views/trnexpiringgroups.html"
     });
@@ -695,33 +695,33 @@ app.config(function ($routeProvider) {
         controller: "trnDashboardController",
         templateUrl: "/app/views/trndashboard.html"
     });
-	
-	 $routeProvider.when("/duty/timeline/z", {
+
+    $routeProvider.when("/duty/timeline/z", {
         controller: "zdutyTimelineController",
         templateUrl: "/app/views/zdutyTimeline.html?v=301"
     });
-	 
-	
-	$routeProvider.when("/scheduling/z", {
+
+
+    $routeProvider.when("/scheduling/z", {
         controller: "zschedulingController",
         templateUrl: "app/views/zscheduling.html",
         isAdmin: false,
     });
-	
-	
-	  $routeProvider.when("/cabin/report", {
-      controller: "cabinReports",
-      templateUrl: "/app/views/cabinReports.html"
-  });
-	  $routeProvider.when("/sim", {
+
+
+    $routeProvider.when("/cabin/report", {
+        controller: "cabinReports",
+        templateUrl: "/app/views/cabinReports.html"
+    });
+    $routeProvider.when("/sim", {
         controller: "simController",
         templateUrl: "app/views/sim.html?v=1129"
     });
 
-   $routeProvider.when("/mnt/status", {
-       controller: "mntStatusController",
-    templateUrl: "/app/views/mntStatus.html?v=1130"
-});
+    $routeProvider.when("/mnt/status", {
+        controller: "mntStatusController",
+        templateUrl: "/app/views/mntStatus.html?v=1130"
+    });
 
     $routeProvider.when("/request/form", {
         controller: "requestFormController",
@@ -738,19 +738,19 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/logesticRequest.html?v=1130"
     });
 
-     $routeProvider.when("/disagg/form", {
-         controller: "disaggregationController",
-         templateUrl: "/app/views/disaggregation.html?v=1130"
+    $routeProvider.when("/disagg/form", {
+        controller: "disaggregationController",
+        templateUrl: "/app/views/disaggregation.html?v=1130"
     });
 
-     $routeProvider.when("/agg/form", {
-         controller: "aggregateController",
-         templateUrl: "/app/views/aggregate.html?v=1130"
+    $routeProvider.when("/agg/form", {
+        controller: "aggregateController",
+        templateUrl: "/app/views/aggregate.html?v=1130"
     });
 
     $routeProvider.when("/receipt/form", {
         controller: "receiptController",
-         templateUrl: "/app/views/receipt.html?v=1130"
+        templateUrl: "/app/views/receipt.html?v=1130"
     });
 
     //$routeProvider.when("/delivery/form", {
@@ -763,27 +763,27 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_inventory.html?v=1130"
     });
 
-     $routeProvider.when("/vira/beginning", {
-         controller: "vira_beginningController",
+    $routeProvider.when("/vira/beginning", {
+        controller: "vira_beginningController",
         templateUrl: "/app/views/vira_beginning_inventory.html?v=1130"
     });
 
-     $routeProvider.when("/vira/part/type", {
+    $routeProvider.when("/vira/part/type", {
         controller: "vira_part_typeController",
         templateUrl: "/app/views/vira_part_type.html?v=1130"
     });
 
-     $routeProvider.when("/vira/request", {
-         controller: "vira_request_listController",
+    $routeProvider.when("/vira/request", {
+        controller: "vira_request_listController",
         templateUrl: "/app/views/vira_request_list.html?v=1130"
     });
-  $routeProvider.when("/vira/request/cartable", {
-         controller: "vira_request_cartableController",
+    $routeProvider.when("/vira/request/cartable", {
+        controller: "vira_request_cartableController",
         templateUrl: "/app/views/vira_request_cartable.html?v=1130"
     });
 
     $routeProvider.when("/vira/request/cartable/line", {
-         controller: "vira_request_cartable_lineController",
+        controller: "vira_request_cartable_lineController",
         templateUrl: "/app/views/vira_request_cartable_line.html?v=1130"
     });
 
@@ -792,41 +792,121 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/vira_part_number.html?v=1130"
     });
 
-      $routeProvider.when("/vira/inventory/total", {
-          controller: "inventory_totalController",
+    $routeProvider.when("/vira/inventory/total", {
+        controller: "inventory_totalController",
         templateUrl: "/app/views/vira_inventory_total.html?v=1130"
     });
 
     $routeProvider.when("/vira/cardex", {
-          controller: "vira_cardexController",
+        controller: "vira_cardexController",
         templateUrl: "/app/views/vira_cardex.html?v=1130"
     });
 
     $routeProvider.when("/vira/company", {
-          controller: "vira_companyController",
+        controller: "vira_companyController",
         templateUrl: "/app/views/vira_company.html?v=1130"
     });
 
-   
-      $routeProvider.when("/vira/shipment", {
-          controller: "vira_shipmentController",
+
+    $routeProvider.when("/vira/shipment", {
+        controller: "vira_shipmentController",
         templateUrl: "/app/views/vira_shipment.html?v=1130"
     });
 
-     $routeProvider.when("/vira/nis", {
-          controller: "vira_nisController",
+    $routeProvider.when("/vira/nis", {
+        controller: "vira_nisController",
         templateUrl: "/app/views/vira_nis.html?v=1130"
     });
 
-   
+    $routeProvider.when("/vira/nis/list", {
+        controller: "vira_nis_listController",
+        templateUrl: "/app/views/vira_nis_list.html?v=1103"
+    });
+
+    $routeProvider.when("/vira/mrf/list", {
+        controller: "vira_mrf_listController",
+        templateUrl: "/app/views/vira_mrf_list.html?v=1103"
+    });
+
+    $routeProvider.when("/vira/qrf/list", {
+        controller: "vira_qrf_listController",
+        templateUrl: "/app/views/vira_qrf_list.html?v=1103"
+    });
+
+    $routeProvider.when("/vira/rfq/result", {
+        controller: "vira_rfq_resultController",
+        templateUrl: "/app/views/vira_rfq_result.html?v=1103"
+    });
+
+    $routeProvider.when("/vira/po/list", {
+        controller: "vira_po_listController",
+        templateUrl: "/app/views/vira_po_list.html?v=1103"
+    });
+
     $routeProvider.when("/cabin/reports", {
-          controller: "cabin_reportsController",
+        controller: "cabin_reportsController",
         templateUrl: "/app/views/cabin_reports.html?v=1130"
+    });
+
+    $routeProvider.when("/gpt/test", {
+        controller: "gpt_testController",
+        templateUrl: "/app/views/gpt_test.html"
+    });
+
+
+    $routeProvider.when("/trn/efb/assessment", {
+        controller: "trn_efb_assessmentControll",
+        templateUrl: "/app/views/trn_efb_assessment.html?v=1103"
+    });
+
+    $routeProvider.when("/trn/fstd/crm", {
+        controller: "trn_fstd_crmController",
+        templateUrl: "/app/views/trn_fstd_crm.html"
+    });
+
+    $routeProvider.when("/trn/fstd/monitoring", {
+        controller: "trn_fstd_monitoringController",
+        templateUrl: "/app/views/trn_fstd_monitoring.html?v=1103"
+    });
+
+    $routeProvider.when("/trn/grt", {
+        controller: "trn_grtController",
+        templateUrl: "/app/views/trn_grt.html?v=1103"
+    });
+
+    $routeProvider.when("/trn/instructor", {
+        controller: "trn_instructor",
+        templateUrl: "/app/views/trn_instructor.html?v=1103"
+    });
+
+    $routeProvider.when("/trn/lifus", {
+        controller: "trn_lifus",
+        templateUrl: "/app/views/trn_lifus.html?v=1103"
+    });
+
+    $routeProvider.when("/trn/line/check", {
+        controller: "trn_line_check",
+        templateUrl: "/app/views/trn_line_check.html?v=1103"
+    });
+
+    $routeProvider.when("/trn/line/crm", {
+        controller: "trn_line_crm",
+        templateUrl: "/app/views/trn_line_crm.html?v=1103"
+    });
+
+    $routeProvider.when("/trn/zftt", {
+        controller: "trn_zftt",
+        templateUrl: "/app/views/trn_zftt.html?v=1103"
+    });
+
+      $routeProvider.when("/student/attendance", {
+          controller: "student_attendance",
+        templateUrl: "/app/views/student_attendance.html?v=1103"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });
 
-});   
+});
 
 ////var serviceBase = 'http://grfn.api.epatrin.ir/';
 ////var webBase = 'http://grfn.epatrin.ir/';
@@ -842,63 +922,63 @@ app.config(function ($routeProvider) {
 //} 
 //var serviceBase = 'http://fleet.caspianairlines.com/api/';
 
-var serviceBaseAPI ='https://ava.api.airpocket.app/';  //*
+var serviceBaseAPI = 'https://ava.api.airpocket.app/';  //*
 var serviceBaseTRN = 'https://ava.apitrn.airpocket.app/';
- 
- 
+
+
 var webBase = 'https://ava.airpocket.app/';  //*
-var serviceBase ='https://ava.apinet.airpocket.app/'; //*
+var serviceBase = 'https://ava.apinet.airpocket.app/'; //*
 var liburl = serviceBase;
-var serviceBase2 =  'https://localhost:5001/'; 
- 
+var serviceBase2 = 'https://localhost:5001/';
+
 var signFiles = 'https://_fbpocket.ir/upload/signs/';
-var apimain='https://ava.api.airpocket.app/';
-var comAPI='https://_api.apvaresh.com/'; 
-var msgUrl="https://ava.apinet.airpocket.app/"; 
-var apiLog='https://ava.apilog.airpocket.app/'; //*
-var schUrl='https://_sch.apvaresh.com/'; 
-var apigd='https://ava.api.airpocket.app/';//'http://ava.api.airpocket.app/'; 
-var netProfile='https://_netprofile.apvaresh.com/'; 
-var apireportflight='https://ava.apireportflight.airpocket.app/'; //* 
-var zreportflight=apireportflight ;
-var apixls='https://ava.apixls.airpocket.app/'; //*
-var apiScheduling='https://ava.apischeduling.airpocket.app/';
- var zapiScheduling="https://ava.apischeduling.airpocket.app/";
+var apimain = 'https://ava.api.airpocket.app/';
+var comAPI = 'https://_api.apvaresh.com/';
+var msgUrl = "https://ava.apinet.airpocket.app/";
+var apiLog = 'https://ava.apilog.airpocket.app/'; //*
+var schUrl = 'https://_sch.apvaresh.com/';
+var apigd = 'https://ava.api.airpocket.app/';//'http://ava.api.airpocket.app/'; 
+var netProfile = 'https://_netprofile.apvaresh.com/';
+var apireportflight = 'https://ava.apireportflight.airpocket.app/'; //* 
+var zreportflight = apireportflight;
+var apixls = 'https://ava.apixls.airpocket.app/'; //*
+var apiScheduling = 'https://ava.apischeduling.airpocket.app/';
+var zapiScheduling = "https://ava.apischeduling.airpocket.app/";
 
 var apiExternal = 'https://_xpi.airpocket.app/';
 var airlineCode = 'vrh';
 
 var serviceSKYBAG = 'https://_api.sbvaresh.ir/';
-var weatherUrl='https://wxava.skybag.app/';
+var weatherUrl = 'https://wxava.skybag.app/';
 var staticFilesSKYBAG = 'https://fbpocket.ir/Upload/';
 
-var apimsg='https://_apimsg.apvaresh.com/';
-var apiplanning='https://ava.apiplanning.airpocket.app/'; //*
-var apilogdefault='https://ava.apilogdefault.airpocket.app/'; //*
-var apiapsb='https://ava.apiapsb.airpocket.app/';
-var apiprofile='https://ava.apiprofile.airpocket.app/';
-var apiauth='https://ava.apinet.airpocket.app//'; //*
-var atcfiles='https://files.airpocket.app/air1/atc/';
+var apimsg = 'https://_apimsg.apvaresh.com/';
+var apiplanning = 'https://ava.apiplanning.airpocket.app/'; //*
+var apilogdefault = 'https://ava.apilogdefault.airpocket.app/'; //*
+var apiapsb = 'https://ava.apiapsb.airpocket.app/';
+var apiprofile = 'https://ava.apiprofile.airpocket.app/';
+var apiauth = 'https://ava.apinet.airpocket.app//'; //*
+var atcfiles = 'https://files.airpocket.app/air1/atc/';
 
-var apiCAO='https://_apicao.apvaresh.com/';
+var apiCAO = 'https://_apicao.apvaresh.com/';
 
-var zapinet='https://ava.apinet.airpocket.app/';
-var zfuel='https://ava.apifuel.airpocket.app/';
-var zapitrn='https://ava.apitrn.airpocket.app/';
-    //'http://localhost:58908/';
-    //'http://localhost:40654/';
-   
-    //'http://localhost:10707/';
+var zapinet = 'https://ava.apinet.airpocket.app/';
+var zfuel = 'https://ava.apifuel.airpocket.app/';
+var zapitrn = 'https://ava.apitrn.airpocket.app/';
+//'http://localhost:58908/';
+//'http://localhost:40654/';
+
+//'http://localhost:10707/';
 //'http://ngauthenticationapi.azurewebsites.net/';
 var vira_api = "https://lmmcore.online/";
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
 });
- 
+
 //app.config(function ($httpProvider) {
 app.config(['$httpProvider', function ($httpProvider) {
-   
+
     $httpProvider.interceptors.push('authInterceptorService');
 }]);
 
@@ -1062,13 +1142,13 @@ app.directive('onFinishRender', function ($timeout) {
 app.run(['authService', 'activityService', 'mntService', 'vira_general_service', '$rootScope', '$location', '$templateCache', function (authService, activityService, mntService, vira_general_service, $rootScope, $location, $templateCache) {
     //alert($location.absUrl());
     // Config.CustomerId = 1;
-	
+
     ///////
-    
+
     ///////
 
 
-	$rootScope._load=0;
+    $rootScope._load = 0;
     $rootScope.CustomerName = 'Caspian';
     $rootScope.CustomerPhone = '+982148063000';
     $rootScope.CustomerEmail = 'OpsEng@Caspian.aero';
@@ -1079,27 +1159,27 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
     }
     ////////////////////////////////
     $rootScope.reportServer = "https://ava.report.airpocket.app/frmreportview.aspx";
-	$rootScope.formsReportServer = "https://ava.formsreport.airpocket.app/frmreportview.aspx";
+    $rootScope.formsReportServer = "https://ava.formsreport.airpocket.app/frmreportview.aspx";
     $rootScope.reportServerTRN = "https://ava.report.airpocket.app/frmreportview.aspx";
-	//$rootScope.serviceMnt = 'https://ava.apimnt.airpocket.app/';
+    //$rootScope.serviceMnt = 'https://ava.apimnt.airpocket.app/';
     $rootScope.serviceMnt = 'http://localhost:9063/';
     ////////////////////////////////
     $rootScope.startingBIYear = 1398;
     ////////////////////////////////
     persianDate.toLocale('en');
-   
+
     $rootScope.$on('$viewContentLoaded', function () {
         //ati12
         if (authService.IsAuthurized() && $rootScope.EmailConfirmed != "True") {
             $rootScope.navigatefirstlogin();
             return;
         }
-           
+
         $templateCache.removeAll();
     });
     $rootScope.serviceUrl = serviceBase;
     $rootScope.fileHandlerUrl = webBase + 'filehandler.ashx';
-	// $rootScope.fileHandlerUrl ='https://trn.apvaresh.com/'+'filehandler.ashx';
+    // $rootScope.fileHandlerUrl ='https://trn.apvaresh.com/'+'filehandler.ashx';
     $rootScope.clientsFilesUrl = 'https://files.airpocket.app/varesh/certificates/';//webBase + 'upload/clientsfiles/';
     $rootScope.app_title = 'AirPocket';
     $rootScope.page_title = '';
@@ -1116,29 +1196,29 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
     $rootScope.employeeId = null;
     //vahid
     $rootScope.roles = null;
-    $rootScope.navigateSimple = function (target ) {
+    $rootScope.navigateSimple = function (target) {
 
-        
+
         $location.path(target);
 
 
     };
-	$rootScope.InvisibleCrew = function () {
-        
+    $rootScope.InvisibleCrew = function () {
+
         var role = Enumerable.From($rootScope.roles).Where('$=="View Invisible Crew"').FirstOrDefault();
         if (role)
             return true;
         return false;
     };
     $rootScope.HasDepartmentManager = function () {
-        
+
         var role = Enumerable.From($rootScope.roles).Where('$=="Department Manager"').FirstOrDefault();
         if (role)
             return true;
         return false;
     };
-	$rootScope.HasDispatch = function () {
-        
+    $rootScope.HasDispatch = function () {
+
         var role = Enumerable.From($rootScope.roles).Where('$=="Dispatch"').FirstOrDefault();
         if (role)
             return true;
@@ -1151,28 +1231,28 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
             return true;
         return false;
     };
-	$rootScope.HasCabinView = function () {
-        
+    $rootScope.HasCabinView = function () {
+
         var role = Enumerable.From($rootScope.roles).Where('$=="Base Pocket - View (Cabin)"').FirstOrDefault();
         if (role)
             return true;
         return false;
     };
-	$rootScope.HasCockpitView = function () {
-        
+    $rootScope.HasCockpitView = function () {
+
         var role = Enumerable.From($rootScope.roles).Where('$=="Base Pocket - View (Cockpit)"').FirstOrDefault();
         if (role)
             return true;
         return false;
     };
-	 
-	$rootScope.HasAllEmployeeView = function () {
+
+    $rootScope.HasAllEmployeeView = function () {
         //Base Pocket - View (All)
-		 var role = Enumerable.From($rootScope.roles).Where('$=="Base Pocket - View (All)"').FirstOrDefault();
+        var role = Enumerable.From($rootScope.roles).Where('$=="Base Pocket - View (All)"').FirstOrDefault();
         if (role)
             return true;
-       if (!$rootScope.HasCabinView() && !$rootScope.HasCockpitView())
-		   return true;
+        if (!$rootScope.HasCabinView() && !$rootScope.HasCockpitView())
+            return true;
         return false;
     };
     $rootScope.HasTrainingAccess = function () {
@@ -1183,7 +1263,7 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
         return false;
     };
 
-$rootScope.HasHR = function () {
+    $rootScope.HasHR = function () {
 
         var role = Enumerable.From($rootScope.roles).Where('$=="HR"').FirstOrDefault();
         if (role)
@@ -1192,16 +1272,16 @@ $rootScope.HasHR = function () {
     };
 
     $rootScope.HasAccessToCrewList = function () {
-		//if ($rootScope.userName.toLowerCase()=='line')
-		//	return false
-		//else
+        //if ($rootScope.userName.toLowerCase()=='line')
+        //	return false
+        //else
         //    return true;
-		//if ($rootScope.userName.toLowerCase().startsWith('stn.'))
-		//	return false;
-		//else
-		if ($rootScope.userName.toLowerCase()=='kusha' || $rootScope.userName.toLowerCase()=='mehregan')
-			return false;
-		else return true;
+        //if ($rootScope.userName.toLowerCase().startsWith('stn.'))
+        //	return false;
+        //else
+        if ($rootScope.userName.toLowerCase() == 'kusha' || $rootScope.userName.toLowerCase() == 'mehregan')
+            return false;
+        else return true;
         var role = Enumerable.From($rootScope.roles).Where('$=="Flight Crew List"').FirstOrDefault();
         if (role)
             return true;
@@ -1230,31 +1310,31 @@ $rootScope.HasHR = function () {
             activityService.hitMenu(key, target, 'Visiting ' + $rootScope.module + ' > ' + rec.title);
         }
         catch (e) { }
-         
-        $location.path(target); 
-       
-       
+
+        $location.path(target);
+
+
     };
     $rootScope.navigateairport = function (iata) {
 
-        
 
-        $location.path("/dispatch/flights/"+iata+"/0");
+
+        $location.path("/dispatch/flights/" + iata + "/0");
 
 
     };
-    $rootScope.navigatehomedate = function (y,m,d) {
+    $rootScope.navigatehomedate = function (y, m, d) {
 
 
 
-        $location.path("/home/" + y + "/"+m+"/"+d);
+        $location.path("/home/" + y + "/" + m + "/" + d);
 
 
     };
 
     //ati new
-    $rootScope.navigatehome  = function ( ) {
-          $location.path("/home"  );
+    $rootScope.navigatehome = function () {
+        $location.path("/home");
     };
 
     //ati new 2
@@ -1264,20 +1344,20 @@ $rootScope.HasHR = function () {
 
 
     $rootScope.HasMenuAccess = function (key, module) {
-		//console.log($rootScope.roles);
+        //console.log($rootScope.roles);
         if ($rootScope.userName == 'demo')
             return true;
-		if (key=='flight_calendar_cockpit' )
-			return $rootScope.userName.toLowerCase().startsWith('cs.') ||  $rootScope.userName.toLowerCase().startsWith('ops.kha')
-		||  $rootScope.userName.toLowerCase().startsWith('ops.paz')
-		||  $rootScope.userName.toLowerCase().startsWith('ops.dara')
-		||  $rootScope.userName.toLowerCase().startsWith('ops.jama')
-		||  $rootScope.userName.toLowerCase().startsWith('ops.abdi')
-		||  $rootScope.userName.toLowerCase().startsWith('ops.aska')
-		//||  $rootScope.userName.toLowerCase()==('qa')
-		//||  $rootScope.userName.toLowerCase()==('cms')
-		||  $rootScope.userName.toLowerCase()==('s.kashani')
-		||  $rootScope.userName.toLowerCase()==('marefat');
+        if (key == 'flight_calendar_cockpit')
+            return $rootScope.userName.toLowerCase().startsWith('cs.') || $rootScope.userName.toLowerCase().startsWith('ops.kha')
+                || $rootScope.userName.toLowerCase().startsWith('ops.paz')
+                || $rootScope.userName.toLowerCase().startsWith('ops.dara')
+                || $rootScope.userName.toLowerCase().startsWith('ops.jama')
+                || $rootScope.userName.toLowerCase().startsWith('ops.abdi')
+                || $rootScope.userName.toLowerCase().startsWith('ops.aska')
+                //||  $rootScope.userName.toLowerCase()==('qa')
+                //||  $rootScope.userName.toLowerCase()==('cms')
+                || $rootScope.userName.toLowerCase() == ('s.kashani')
+                || $rootScope.userName.toLowerCase() == ('marefat');
         //profile_users
         if (key == 'profile_users' && $rootScope.userName != 'razbani') {
 
@@ -1285,8 +1365,8 @@ $rootScope.HasHR = function () {
 
 
         }
-       
-       
+
+
         if (key == 'flight_board_ceo') {
             if (authService.getCEO())
                 return true;
@@ -1296,37 +1376,37 @@ $rootScope.HasHR = function () {
         if (key == 'flight_board') {
             if (authService.getCEO())
                 return false;
-           
+
 
         }
-		 if (key == 'flight_board') {
+        if (key == 'flight_board') {
             if (authService.getCEO())
                 return false;
-           
+
 
         }
         var exist = Enumerable.From($rootScope.claims).Where('$.page=="' + key + '"').FirstOrDefault();
-        
+
         if (!exist) {
             switch (module) {
                 case 3:
                     exist = Enumerable.From($rootScope.claims).Where('$.page=="flight_admin"').FirstOrDefault();
-                    
+
                     break;
                 case 2:
                     exist = Enumerable.From($rootScope.claims).Where('$.page=="learning_admin"').FirstOrDefault();
-                    
+
                     break;
                 case 1:
-					if (key!='profile_person')
-                    exist = Enumerable.From($rootScope.claims).Where('$.page=="base_admin"').FirstOrDefault();
-					else
-						exist=$rootScope.roles.indexOf('Profiles-Ground-Edit')!=-1 ||
-							$rootScope.roles.indexOf('Profiles-Ground-View')!=-1 ||
-							$rootScope.roles.indexOf('Profiles-Crew-Edit')!=-1 ||
-							$rootScope.roles.indexOf('Profiles-Crew-View')!=-1 ;
-						//exist=Enumerable.From($rootScope.claims).Where('$.page=="Profiles-Ground-Edit" || $.page=="Profiles-Ground-View" || $.page=="Profiles-Crew-Edit" || $.page=="Profiles-Crew-View"').FirstOrDefault();
-                     
+                    if (key != 'profile_person')
+                        exist = Enumerable.From($rootScope.claims).Where('$.page=="base_admin"').FirstOrDefault();
+                    else
+                        exist = $rootScope.roles.indexOf('Profiles-Ground-Edit') != -1 ||
+                            $rootScope.roles.indexOf('Profiles-Ground-View') != -1 ||
+                            $rootScope.roles.indexOf('Profiles-Crew-Edit') != -1 ||
+                            $rootScope.roles.indexOf('Profiles-Crew-View') != -1;
+                    //exist=Enumerable.From($rootScope.claims).Where('$.page=="Profiles-Ground-Edit" || $.page=="Profiles-Ground-View" || $.page=="Profiles-Crew-Edit" || $.page=="Profiles-Crew-View"').FirstOrDefault();
+
                     break;
                 default:
                     break;
@@ -1335,13 +1415,13 @@ $rootScope.HasHR = function () {
         }
         //alert(exist ? true : false);
         var result = exist ? true : false;
-      //  if (result)
+        //  if (result)
         //    console.log(module+'  '+key);
         return result;
     };
-	//2023-09-10
+    //2023-09-10
     $rootScope.IsFlightBoardEditable = function () {
-		var comm = Enumerable.From($rootScope.roles).Where('$=="Commercial" || $=="Dispatch"').FirstOrDefault();
+        var comm = Enumerable.From($rootScope.roles).Where('$=="Commercial" || $=="Dispatch"').FirstOrDefault();
         var exist = Enumerable.From($rootScope.claims).Where('($.page=="flight_board" && $.action=="edit") || $.page=="flight_admin"').FirstOrDefault();
         return (exist || comm) ? true : false;
     };
@@ -1361,24 +1441,24 @@ $rootScope.HasHR = function () {
 
         if ($rootScope.roles && $rootScope.roles.length == 1 && ($rootScope.roles[0] == 'Transport' || $rootScope.roles[0] == 'Station'))
             return true;
-         
-         var arr = Enumerable.From($rootScope.claims).Select('$.page').Distinct().ToArray();
 
-        return arr.length==1 && arr[0]!='flight_admin' ? true : false;
-        
+        var arr = Enumerable.From($rootScope.claims).Select('$.page').Distinct().ToArray();
+
+        return arr.length == 1 && arr[0] != 'flight_admin' ? true : false;
+
 
     };
-	$rootScope.IsOnlyFDR = function () {
+    $rootScope.IsOnlyFDR = function () {
 
-        if ($rootScope.roles && $rootScope.roles.length == 1 && ($rootScope.roles[0] == 'FDR Report' ))
+        if ($rootScope.roles && $rootScope.roles.length == 1 && ($rootScope.roles[0] == 'FDR Report'))
             return true;
-         
+
         else return false;
-        
+
 
     };
     $rootScope.HasAccessToFlightPocket = function () {
-         
+
         var exist = Enumerable.From($rootScope.roleClaims).Where('$.indexOf("FlightPocket")!=-1').FirstOrDefault();
         return exist ? true : false;
     };
@@ -1392,14 +1472,14 @@ $rootScope.HasHR = function () {
         var exist = Enumerable.From($rootScope.roleClaims).Where('$.indexOf("LearningPocket")!=-1').FirstOrDefault();
         return exist ? true : false;
     };
-	 $rootScope.HasDepartmentManager = function () {
-        
+    $rootScope.HasDepartmentManager = function () {
+
         var role = Enumerable.From($rootScope.roles).Where('$=="Department Manager"').FirstOrDefault();
         if (role)
             return true;
         return false;
     };
-	$rootScope.HasTrainingAdmin = function () {
+    $rootScope.HasTrainingAdmin = function () {
 
         var role = Enumerable.From($rootScope.roles).Where('$=="BasePocket Admin"').FirstOrDefault();
         if (role)
@@ -1415,15 +1495,15 @@ $rootScope.HasHR = function () {
     $rootScope.detector = new MobileDetect(window.navigator.userAgent);
     if ($rootScope.detector.mobile())
         $rootScope.headerHeight = 55;
-    
+
     /////////////////////////////////////
 
-    
+
     authService.fillAuthData();
     authService.fillModuleData();
 
     $rootScope.setTheme = function () {
-         
+
         //DevExpress.ui.themes.current($rootScope.theme);
         //$rootScope.headerClasses = ['app-headerx', 'wrapper-bubble', 'col-lg-12', 'col-md-12', 'col-sm-12', 'col-xs-12','hidden-xs'];
         //$rootScope.headerClasses.push($rootScope.class);
@@ -1435,28 +1515,28 @@ $rootScope.HasHR = function () {
         try {
             //2021-12-15
             //upgrade dx
-           // alert($rootScope.theme);
+            // alert($rootScope.theme);
             var thm = $rootScope.theme.replace("-", ".");
 
             DevExpress.ui.themes.current(thm);
-            $rootScope.headerClasses = ['app-headerx', 'wrapper-bubble', 'col-lg-12', 'col-md-12', 'col-sm-12', 'col-xs-12', 'hidden-xs', 'hidden-md', 'hidden-sm','hidden-xsm'];
+            $rootScope.headerClasses = ['app-headerx', 'wrapper-bubble', 'col-lg-12', 'col-md-12', 'col-sm-12', 'col-xs-12', 'hidden-xs', 'hidden-md', 'hidden-sm', 'hidden-xsm'];
             $rootScope.headerClasses.push($rootScope.class);
             //ati 1-14
-            $rootScope.headerClassesMobile = ['app-headerx-mobile', 'wrapper-bubble', 'col-lg-12', 'col-md-12', 'col-sm-12', 'col-xs-12','col-xsm-12', 'hidden-lg', ];
+            $rootScope.headerClassesMobile = ['app-headerx-mobile', 'wrapper-bubble', 'col-lg-12', 'col-md-12', 'col-sm-12', 'col-xs-12', 'col-xsm-12', 'hidden-lg',];
             $rootScope.headerClassesMobile.push($rootScope.class);
         }
         catch (e) {
             //alert(e);
         }
-       
+
     };
     /////////////////////////////
-    $rootScope.getWindowSize  = function ( ) {
+    $rootScope.getWindowSize = function () {
         var w = -1;
         var h = -1;
-        var w = $(window).width()  ;
-        var h = $(window).height()  ;
-        
+        var w = $(window).width();
+        var h = $(window).height();
+
 
         return { width: w, height: h };
     };
@@ -1465,42 +1545,42 @@ $rootScope.HasHR = function () {
     $rootScope.setTheme();
     $rootScope.history = [];
     //nasiri
-  $rootScope.getCertificateTypeList = function () {
-        return ['SEPTP', 'SEPT', 'LPC', 'OPC', 'LPR', 'DG', 'CRM', 'CCRM', 'SMS', 'AVSEC', 'COLDWX', 'HOTWX', 'FIRSTAID', 'GRT', 'ANNUALRECURRENT', 'FMT','TRG02'
-		 ,'Flight Crew Licence'
-		 ,'IP'
-		 , 'Medical Certificate'
-		 ,'Crew Member Certificate'
-		 ,'Passport'
-		 ,'Line Check'
-		];
+    $rootScope.getCertificateTypeList = function () {
+        return ['SEPTP', 'SEPT', 'LPC', 'OPC', 'LPR', 'DG', 'CRM', 'CCRM', 'SMS', 'AVSEC', 'COLDWX', 'HOTWX', 'FIRSTAID', 'GRT', 'ANNUALRECURRENT', 'FMT', 'TRG02'
+            , 'Flight Crew Licence'
+            , 'IP'
+            , 'Medical Certificate'
+            , 'Crew Member Certificate'
+            , 'Passport'
+            , 'Line Check'
+        ];
     };
     $rootScope.getCertificateTypeListDetails = function () {
         return [
-            { title: 'SEPTP', type: 1, issue: 'SEPTPIssueDate', expire: 'SEPTPExpireDate', caption: 'SEPT-P', RemField:'RemainSEPTP', },
+            { title: 'SEPTP', type: 1, issue: 'SEPTPIssueDate', expire: 'SEPTPExpireDate', caption: 'SEPT-P', RemField: 'RemainSEPTP', },
             { title: 'SEPT', type: 2, issue: 'SEPTIssueDate', expire: 'SEPTIssueDate', caption: 'SEPT-T', RemField: 'RemainSEPT', },
-            { title: 'LPC', type: 100, issue: 'ProficiencyCheckDate', expire: 'ProficiencyValidUntil', RemField: 'RemainProficiency',},
+            { title: 'LPC', type: 100, issue: 'ProficiencyCheckDate', expire: 'ProficiencyValidUntil', RemField: 'RemainProficiency', },
             { title: 'OPC', type: 101, issue: 'ProficiencyCheckDateOPC', expire: 'ProficiencyValidUntilOPC', RemField: 'RemainProficiencyOPC', },
             { title: 'LPR', type: 102, issue: '', expire: 'ICAOLPRValidUntil', RemField: 'RemainLPR', },
             { title: 'DG', type: 3, issue: 'DangerousGoodsIssueDate', expire: 'DangerousGoodsExpireDate', RemField: 'RemainDG', },
-            { title: 'CRM', type: 4, issue: 'UpsetRecoveryTrainingIssueDate', expire: 'UpsetRecoveryTrainingExpireDate', RemField: 'RemainCRM',},
+            { title: 'CRM', type: 4, issue: 'UpsetRecoveryTrainingIssueDate', expire: 'UpsetRecoveryTrainingExpireDate', RemField: 'RemainCRM', },
             { title: 'CCRM', type: 5, issue: 'CCRMIssueDate', expire: 'CCRMExpireDate', RemField: 'RemainCCRM', },
             { title: 'SMS', type: 6, issue: 'SMSIssueDate', expire: 'SMSIssueDate', RemField: 'RemainSMS', },
             { title: 'AVSEC', type: 7, issue: 'AviationSecurityIssueDate', expire: 'AviationSecurityExpireDate', RemField: 'RemainAvSec', },
-            { title: 'COLDWX', type: 8, issue: 'ColdWeatherOperationIssueDate', expire: 'ColdWeatherOperationExpireDate', RemField: '',},
-            { title: 'HOTWX', type: 9, issue: 'HotWeatherOperationIssueDate', expire: 'HotWeatherOperationExpireDate', RemField: '',},
-            { title: 'FIRSTAID', type: 10, issue: 'FirstAidIssueDate', expire: 'FirstAidExpireDate', RemField: 'RemainFirstAid',},
+            { title: 'COLDWX', type: 8, issue: 'ColdWeatherOperationIssueDate', expire: 'ColdWeatherOperationExpireDate', RemField: '', },
+            { title: 'HOTWX', type: 9, issue: 'HotWeatherOperationIssueDate', expire: 'HotWeatherOperationExpireDate', RemField: '', },
+            { title: 'FIRSTAID', type: 10, issue: 'FirstAidIssueDate', expire: 'FirstAidExpireDate', RemField: 'RemainFirstAid', },
             { title: 'GRT', type: 103, issue: 'DateCaoCardIssue', expire: 'DateCaoCardIssue', RemField: 'RemainCAO', },
             { title: 'ANNUALRECURRENT', type: 11, issue: 'RecurrentIssueDate', expire: 'RecurrentExpireDate', RemField: 'RemainRecurrent', },
             { title: 'FMT', type: 104, issue: 'EGPWSIssueDate', expire: 'EGPWSExpireDate', RemField: 'RemainEGPWS', },
-			{ title: 'TRG02', type: 105, issue: 'LineIssueDate', expire: 'LineExpireDate', RemField: 'RemainNDT', },
-			  { title: 'Flight Crew Licence', type: 10000, issue: 'Issue10000', expire: 'Expire10000', RemField: 'RemainLicence', },
-				  {title:'IP',type:10001},
-				  
-				    { title: 'Medical Certificate', type: 10002, issue: 'Issue10002', expire: 'Expire10000', RemField: 'RemainMedical', },
-					  {title:'Passport',type:10003,RemField: 'RemainPassport',},
-					    {title:'Line Check',type:10004,RemField: 'RemainLine',},
-							{title:'Crew Member Certificate',type:10005,RemField: 'RemainCMC',},
+            { title: 'TRG02', type: 105, issue: 'LineIssueDate', expire: 'LineExpireDate', RemField: 'RemainNDT', },
+            { title: 'Flight Crew Licence', type: 10000, issue: 'Issue10000', expire: 'Expire10000', RemField: 'RemainLicence', },
+            { title: 'IP', type: 10001 },
+
+            { title: 'Medical Certificate', type: 10002, issue: 'Issue10002', expire: 'Expire10000', RemField: 'RemainMedical', },
+            { title: 'Passport', type: 10003, RemField: 'RemainPassport', },
+            { title: 'Line Check', type: 10004, RemField: 'RemainLine', },
+            { title: 'Crew Member Certificate', type: 10005, RemField: 'RemainCMC', },
         ];
     };
     $rootScope.getCertificateTypeLisRemainingFields = function () {
@@ -1521,16 +1601,16 @@ $rootScope.HasHR = function () {
             return null;
         var rows = instance.getSelectedRowsData();
         if (rows && rows.length > 0)
-            return rows ;
+            return rows;
         return null;
     };
     $rootScope.getNextDate = function (interval, ctype, date) {
-         
+
         if (!interval || !ctype || !date)
             return null;
         ctype = Number(ctype);
         var nextDate = new Date(date);
-         
+
         //year
         if (ctype == 12) {
             nextDate = nextDate.setFullYear(nextDate.getFullYear() + interval);
@@ -1550,7 +1630,7 @@ $rootScope.HasHR = function () {
     };
     $rootScope.$on('$routeChangeSuccess', function () {
         $rootScope.history.push($location.$$path);
-       
+
     });
     //////////////////////////////////////////////
     $rootScope.DateBoxFormat = "dd-MMM-yyyy";
@@ -1562,12 +1642,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/options/'+pid,
-              //  key: "Id",
-               // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/options/' + pid,
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['OrderIndex', 'Title'],
         });
@@ -1582,7 +1662,7 @@ $rootScope.HasHR = function () {
                     // keyType: "Int32",
                     // version: 4
                 }),
-             filter: ['Id', '<>', 86],
+            filter: ['Id', '<>', 86],
             sort: ['OrderIndex', 'Title'],
         });
     };
@@ -1590,12 +1670,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/options/personcoursestatus'  ,
-                //  key: "Id",
-                // keyType: "Int32",
-                // version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/options/personcoursestatus',
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    // version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['OrderIndex', 'Title'],
         });
@@ -1604,12 +1684,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/cities/country/' + cid,
-                //  key: "Id",
-                // keyType: "Int32",
-                  version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/cities/country/' + cid,
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['City'],
         });
@@ -1619,7 +1699,7 @@ $rootScope.HasHR = function () {
             store:
 
                 new DevExpress.data.ODataStore({
-                    url: $rootScope.serviceUrl + 'odata/airports/all'  ,
+                    url: $rootScope.serviceUrl + 'odata/airports/all',
                     //  key: "Id",
                     // keyType: "Int32",
                     version: 4
@@ -1647,12 +1727,12 @@ $rootScope.HasHR = function () {
             store:
 
                 new DevExpress.data.ODataStore({
-                    url: $rootScope.serviceUrl + 'odata/flights/routes/airline/'+id,
+                    url: $rootScope.serviceUrl + 'odata/flights/routes/airline/' + id,
                     //  key: "Id",
                     // keyType: "Int32",
                     version: 4
                 }),
-             
+
             sort: ['FromAirportIATA'],
         });
     };
@@ -1674,12 +1754,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/locations/' + Config.CustomerId,
-                //  key: "Id",
-                // keyType: "Int32",
-                // version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/locations/' + Config.CustomerId,
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    // version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['FullCode'],
         });
@@ -1688,17 +1768,17 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/aircrafttypes/all'  ,
-                //  key: "Id",
-                // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/aircrafttypes/all',
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
-            sort: ['Manufacturer','Type'],
+            sort: ['Manufacturer', 'Type'],
         });
     };
-    $rootScope.getDatasourceAuthors= function () {
+    $rootScope.getDatasourceAuthors = function () {
         return new DevExpress.data.DataSource({
             store:
 
@@ -1709,19 +1789,19 @@ $rootScope.HasHR = function () {
                     version: 4
                 }),
             //filter: ['ParentId', '=', pid],
-            sort: ['Name' ],
+            sort: ['Name'],
         });
     };
     $rootScope.getDatasourceCourseType = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/courses/types',
-                //  key: "Id",
-                // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/courses/types',
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['Title'],
         });
@@ -1730,12 +1810,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/base/caotypes',
-                //  key: "Id",
-                // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/base/caotypes',
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['Title'],
         });
@@ -1744,12 +1824,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/base/airlines',
-                //  key: "Id",
-                // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/base/airlines',
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['Title'],
         });
@@ -1758,12 +1838,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/base/ratingorganization',
-                //  key: "Id",
-                // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/base/ratingorganization',
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['Title'],
         });
@@ -1782,7 +1862,7 @@ $rootScope.HasHR = function () {
             sort: ['Title'],
         });
     };
-    
+
     $rootScope.getDatasourceJournals = function () {
         return new DevExpress.data.DataSource({
             store:
@@ -1801,12 +1881,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/base/currencies',
-                //  key: "Id",
-                // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/base/currencies',
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['Title'],
         });
@@ -1815,12 +1895,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                    url: $rootScope.serviceUrl + 'odata/base/jobgroups/'+ Config.CustomerId,
-                //  key: "Id",
-                // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/base/jobgroups/' + Config.CustomerId,
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['FullCode'],
         });
@@ -1849,7 +1929,7 @@ $rootScope.HasHR = function () {
                     url: $rootScope.serviceUrl + 'odata/flights/actypes/' + cid,
                     version: 4
                 }),
-            
+
             sort: ['Title'],
         });
     };
@@ -1899,7 +1979,7 @@ $rootScope.HasHR = function () {
                     // keyType: "Int32",
                     version: 4
                 }),
-          
+
             sort: ['Title'],
         });
     };
@@ -1922,14 +2002,14 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/crew/ip'  ,
-                //  key: "Id",
-                // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/crew/ip',
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
-            sort: ['ScheduleName' ],
+            sort: ['ScheduleName'],
         });
     };
     //vahid new
@@ -1937,12 +2017,12 @@ $rootScope.HasHR = function () {
         return new DevExpress.data.DataSource({
             store:
 
-            new DevExpress.data.ODataStore({
-                url: $rootScope.serviceUrl + 'odata/crew/captain',
-                //  key: "Id",
-                // keyType: "Int32",
-                version: 4
-            }),
+                new DevExpress.data.ODataStore({
+                    url: $rootScope.serviceUrl + 'odata/crew/captain',
+                    //  key: "Id",
+                    // keyType: "Int32",
+                    version: 4
+                }),
             //filter: ['ParentId', '=', pid],
             sort: ['ScheduleName'],
         });
@@ -1968,10 +2048,10 @@ $rootScope.HasHR = function () {
             store:
 
                 new DevExpress.data.ODataStore({
-                    url: serviceBaseTRN + 'api/course/types/query', 
+                    url: serviceBaseTRN + 'api/course/types/query',
                     //  key: "Id",
                     // keyType: "Int32" ,
-                    
+
                 }),
             //filter: ['ParentId', '=', pid],
             sort: ['Title'],
@@ -1988,7 +2068,7 @@ $rootScope.HasHR = function () {
 
             + "</div>";
         return tmpl;
-       
+
     };
     $rootScope.getSbTemplateRouteTo = function (data) {
         var tmpl =
@@ -2026,7 +2106,7 @@ $rootScope.HasHR = function () {
     $rootScope.getSbTemplateLocation2 = function (data) {
         var tmpl =
             "<div>" + data.TitleFormated
-             
+
 
 
             + "</div>";
@@ -2065,23 +2145,23 @@ $rootScope.HasHR = function () {
         '#86af49',
         '#ffff4d',
         '#3399ff',
-        
+
         '#feb236',
         '#b5e7a0',
         '#d64161',
         '#00ff00',
-       
 
-       
+
+
 
         '#bdcebe',
-       
+
         '#c1946a',
         '#034f84',
         '#c94c4c',
         '#92a8d1',
         '#50394c',
-        
+
         '#4040a1',
         '#622569',
         '#eeac99',
@@ -2101,8 +2181,8 @@ $rootScope.HasHR = function () {
 
     $rootScope.colorSet2 = [
         '#0099cc',
-       // '#66b3ff',
-       
+        // '#66b3ff',
+
         '#00cc99',
         '#cc0052',
         '#cc7a00',
@@ -2149,7 +2229,7 @@ $rootScope.HasHR = function () {
 
         '#ff99ff',
         '#66ffe0',
-         
+
     ];
     $rootScope.colorSetChart2 = [
         '#4dffd2',
@@ -2198,33 +2278,33 @@ $rootScope.HasHR = function () {
 
     $rootScope.colorSetRed = [
         '#ff3300',
-        
+
 
         '#e68a00',
-        
+
 
 
         '#ff33cc',
-       
+
 
         '#802000',
-        
+
 
         '#e6e600',
         '#800060',
 
     ];
     $rootScope.colorSetGreen = [
-        '#00cc00', 
+        '#00cc00',
         '#339966',
-         
-        
+
+
         '#00cca3',
 
-        
+
         '#006666',
 
-       
+
         '#00ccff',
 
 
@@ -2237,14 +2317,14 @@ $rootScope.HasHR = function () {
         '#b3b3cc',
         '#b3cccc',
         '#666666',
-        
+
 
     ];
-    $rootScope.getColorFromSetRed  = function (n) {
+    $rootScope.getColorFromSetRed = function (n) {
         //0 based
-        if (n > $rootScope.colorSetRed .length - 1)
-            n = n % ($rootScope.colorSetRed .length - 1);
-        return $rootScope.colorSetRed [n];
+        if (n > $rootScope.colorSetRed.length - 1)
+            n = n % ($rootScope.colorSetRed.length - 1);
+        return $rootScope.colorSetRed[n];
     };
     $rootScope.getColorFromSetGreen = function (n) {
         //0 based
@@ -2270,9 +2350,9 @@ $rootScope.HasHR = function () {
 
 
 
-    $rootScope.fill_vira_information = function(){
+    $rootScope.fill_vira_information = function () {
         mntService.get_ata_chart().then(function (res1) {
-            
+
             $rootScope.vira_ds_ata = res1;
 
         });
@@ -2295,7 +2375,7 @@ $rootScope.HasHR = function () {
             $rootScope.vira_stocks = Enumerable.From(res1).Where('$.title.startsWith("AVA") && $.locationTypeId==90').ToArray();
 
             vira_general_service.get_user_location({}).then(function (res2) {
-               
+
                 console.log('q');
                 console.log(res2);
                 var _filtered2 = Enumerable.From(res2).Where('$.title.startsWith("AVA")').ToArray();
@@ -2311,7 +2391,7 @@ $rootScope.HasHR = function () {
 
 
 
-            
+
 
         });
     };
@@ -2461,12 +2541,11 @@ $rootScope.HasHR = function () {
             }, i[r].l = 1 * new Date(); a = s.createElement(o),
                 m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-28909194-3', 'auto');
+        ga('create', 'UA-38909194-3', 'auto');
         ga('send', 'pageview');
     }
     /* eslint-enable */
 
 }(this));
- 
- 
- 
+
+

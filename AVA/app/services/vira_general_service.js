@@ -632,6 +632,73 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.get_nis_approving = _get_nis_approving;
+    var _get_nis_list = function (entity) {
+        var deferred = $q.defer();
+
+        $http.get("http://localhost:9063/api/vira/get/nis/list",entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_nis_list = _get_nis_list;
+
+    var _delivery_order_wr = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSStockManagement/GetDeliveryOrderForWR", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.delivery_order_wr = _delivery_order_wr;
+
+    var _delete_component_cache = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post(vira_api + "api/LGSComponentCache/Delete", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.delete_component_cache = _delete_component_cache;
+
+   var _get_tag_location = function (id) {
+        var deferred = $q.defer();
+
+       $http.get(vira_api + "api/GeneralInfo/GetTagByLocation?warehousetype=" + id, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.get_tag_location = _get_tag_location;
 
    var _approve_nis = function (entity) {
         var deferred = $q.defer();
@@ -666,6 +733,107 @@ app.factory('vira_general_service', ['$http', '$q', 'localStorageService', 'ngAu
         return deferred.promise;
     };
     ordersServiceFactory.cancel_nis = _cancel_nis;
+
+    var _document_save = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post("http://localhost:9063/api/mnt/document/save", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.document_save = _document_save;
+     var _document_save_result = function (entity) {
+        var deferred = $q.defer();
+
+         $http.post("http://localhost:9063/api/mnt/document/result", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.document_save_result = _document_save_result;
+
+    var _document_save_request = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post("http://localhost:9063/api/vira/document/save/request", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.document_save_request = _document_save_request;
+
+    var _document_save_do = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post("http://localhost:9063/api/vira/document/save/do", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.document_save_do = _document_save_do;
+
+    var _document_save_nis = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post("http://localhost:9063/vira/document/save/nis", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.document_save_nis = _document_save_nis;
+
+ var _document_sync_request = function (entity) {
+        var deferred = $q.defer();
+
+     $http.get("http://localhost:9063/api/document/request/sync", entity, {
+
+
+        }).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
+            console.error('HTTP request error:', err);
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    ordersServiceFactory.document_sync_request = _document_sync_request;
 
     return ordersServiceFactory;
 

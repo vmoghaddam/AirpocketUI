@@ -16,7 +16,9 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
         remark: null
     };
 
+    $scope.document = {
 
+    }
 
     $scope.entity_info =
     {
@@ -85,7 +87,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
             "cmP_PartNumberId": $scope.dg_reqItem_selected.cmP_PartNumberId,
             "priorityId": $scope.dg_req_selected.priorityId,
             "sender_LocationId": $scope.selected_stock_id,
-            "sender_UserId":  $rootScope.vira_user_id,
+            "sender_UserId": $rootScope.vira_user_id,
             "quantity": $scope.dg_reqItem_selected.quantity,
             "remark": null,
             "pn_title": $scope.dg_reqItem_selected.partNumber,
@@ -117,6 +119,18 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
                 else {
                     $scope.bind_items();
                     $scope._DONo = res.data.paperNo;
+
+                    $scope.document.vira_no = res.data.paperNo;
+                    $scope.document.vira_id = $scope.dg_req_selected.id;
+                    $scope.document.paper_id = res.data.id;
+
+                    vira_general_service.document_save_do($scope.document).then(function (response) {
+                        vira_general_service.document_save_result($scope.document).then(function (response2) {
+
+                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+
                     $scope.dg_delivery_ds = null;
                     $scope.popup_result_visible = true;
 
@@ -175,13 +189,13 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
 
         toolbarItems: [
 
-             
+
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', onClick: function (e) {
 
                         $scope.popup_result_visible = false;
-                      
+
 
                     }
                 }, toolbar: 'bottom'
@@ -238,7 +252,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
             "remark": 'Request No.:' + $scope.dg_req_selected.fullNo,
             "deliveryOrderItems": [],
         };
-       
+
         $.each($scope.dg_delivery_ds, function (_i, _d) {
             var _ci = 1;
             dto.deliveryOrderItems.push({
@@ -645,7 +659,7 @@ app.controller('vira_request_cartableController', ['$scope', '$location', 'mntSe
             $scope.dg_reqItem_ds = response;
             if (!response || response.length == 0)
                 $scope.bind_requests();
-                 
+
         });
 
     };

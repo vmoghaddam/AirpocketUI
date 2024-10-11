@@ -1,5 +1,5 @@
 ﻿﻿'use strict';
-app.controller('boardController', ['$scope', '$location', '$routeParams', '$rootScope', '$timeout', 'flightService', 'weatherService', 'aircraftService', 'authService', 'notificationService', '$route', '$window', 'fbService', '$http','$q','logService', function ($scope, $location, $routeParams, $rootScope, $timeout, flightService, weatherService, aircraftService, authService, notificationService, $route, $window, fbService, $http,$q,logService) {
+app.controller('boardController', ['$scope', '$location', '$routeParams', '$rootScope', '$timeout', 'flightService', 'grhService', 'weatherService', 'aircraftService', 'authService', 'notificationService', '$route', '$window', 'fbService', '$http', '$q', 'logService', function ($scope, $location, $routeParams, $rootScope, $timeout, flightService, grhService, weatherService, aircraftService, authService, notificationService, $route, $window, fbService, $http,$q,logService) {
     $scope.prms = $routeParams.prms;
 
     var hourWidth = 85;
@@ -16451,6 +16451,39 @@ dto.ChrCapacity = $scope.mchr.Capacity;
         }
 
     }
+
+    //$scope.getProgressStyle = function (flight) {
+
+    //    console.log('-----flight------',flight)
+       
+    //    //grhService.get_cehck_list(flight.ID).then(function (response) {
+
+    //    //    $scope.formData = response.Data;
+
+    //    //    console.log('------Flight Progress-------',$scope.formData);
+
+    //    //});
+
+
+    //    //if (now < std) {
+    //    //    $scope.percent = '0%';
+    //    //    return { width: '0%' };  // Flight hasn't started yet
+    //    //} else if (now > sta) {
+    //    //    $scope.percent = '1000%';
+    //    //    return { width: '100%' };  // Flight has completed
+    //    //} else {
+    //    //    var totalDuration = sta - std;
+    //    //    var elapsed = now - std;
+    //    //    var progressPercentage = (elapsed / totalDuration) * 100;
+    //    //    $scope.percent = progressPercentage + '%';
+    //    //return { width: progressPercentage + '%' };
+    //    //}
+    //    return { width: flight.progress + '%' };
+        
+    //};
+
+  
+
     $scope.addToGantt = function (flt, res) {
         var gres = Enumerable.From($scope.ganttData.resources).Where('$.resourceId==' + res.resourceId).FirstOrDefault();
         if (!gres) {

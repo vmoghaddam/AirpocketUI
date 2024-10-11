@@ -227,7 +227,7 @@ app.controller('vira_nisController', ['$scope', '$location', '$routeParams', '$r
                 $scope.entity.cmP_PartNumberId = data.cmP_PartNumberId;
                 $scope.entity.approve_pn_title = data.description;
                 $scope.entity.approve_priority_title = data.priority;
-                $scope.priorityId = data.priorityId;
+                $scope.entity.priorityId = data.priorityId;
                 $scope.entity.nisId = data.id;
                 $scope.entity.remark = data.remark;
 

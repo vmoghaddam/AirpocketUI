@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', 'vira_general_service', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce, vira_general_service) {
 
-    
+
     $scope.entity =
     {
         paperItemId: 0,
@@ -13,6 +13,9 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
         remark: null
     }
 
+    $scope.t = {
+
+    }
     $scope.clear_entity = function () {
         $scope.entity.paperItemId = 0;
         $scope.entity.cmP_PartNumberId = 0;
@@ -102,7 +105,7 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
 
-                       
+
                         if (!$scope.new_part_number) {
 
                         }
@@ -121,10 +124,14 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
                         vira_general_service.add_nis(dto).then(function (res) {
                             console.log('sdfsdfsdfsfsdf  ', res);
                             $scope.nis_add_result = res;
+                            $scope.t.vira_no = res.paperNo;
+                            vira_general_service.document_save_nis($scope.t).then(function (response) {
+                                console.log("rrrrrrrrrrrrrrrr",response);
+                            });
                             $rootScope.$broadcast('OnNISAdd', $scope.nis_add_result);
-                           // $scope.clear_entity();
-                           
-                            
+                            // $scope.clear_entity();
+
+
                             $scope.popup_nis_visible = false;
                         });
                     }
@@ -162,7 +169,7 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
         },
         onHiding: function () {
 
-           
+
             $scope.popup_nis_visible = false;
         },
         onContentReady: function (e) {
