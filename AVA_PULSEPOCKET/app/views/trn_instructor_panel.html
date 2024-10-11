@@ -1,0 +1,60 @@
+﻿<style>
+    .dx-treelist .dx-row > td {
+        padding: 12px 3px 12px 3px !important
+    }
+
+    .lib-folder {
+        border: 1px solid #ccc;
+        margin: 4px 6px 0 6px;
+        /*padding:20px !important;*/
+        display: block;
+        background-color: cornsilk;
+    }
+
+    .folder-notvisited {
+        font-weight: bold;
+        font-size: 14px !important;
+    }
+
+    .folder-notvisited-hint {
+        color: red;
+    }
+
+    .file-visited {
+        color: #00ff99 !important;
+    }
+
+    .file-visited-title {
+        font-weight: bold;
+    }
+
+    .lib-book {
+        border: 1px solid #ccc;
+        margin: 4px 6px 0 6px;
+        /*padding:20px !important;*/
+        display: block;
+        background-color: white;
+    }
+</style>
+<div style="height:100%;">
+    <div class="box library maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+
+            <div data-ng-click="navigate('/trn/instructor/course','trn-instructor-course',2)" style="width: 100%; background-color: whitesmoke; text-align: center; justify-content:center; height: 70px; padding: 5px">
+                <p style="height: 100%; align-content: center; border: 1px solid lightgray;">COURSE</p>
+            </div>
+          
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html?v=2036'" ng-init="type = 'trn-instructor-panel';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+
+   
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

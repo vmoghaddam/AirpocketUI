@@ -186,6 +186,20 @@ app.config(function ($routeProvider) {
     });
 
  
+    $routeProvider.when("/trn/instructor/panel", {
+        controller: "trn_instructor_panelController",
+        templateUrl: "app/views/trn_instructor_panel.html?v="+version,
+
+    });
+
+ 
+   $routeProvider.when("/trn/instructor/course", {
+        controller: "trn_instructor_courseController",
+        templateUrl: "app/views/trn_instructor_course.html?v="+version,
+
+    });
+
+ 
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   

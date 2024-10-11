@@ -1,0 +1,310 @@
+﻿<style>
+    .dx-treelist .dx-row > td {
+        padding: 12px 3px 12px 3px !important
+    }
+
+    .lib-folder {
+        border: 1px solid #ccc;
+        margin: 4px 6px 0 6px;
+        /*padding:20px !important;*/
+        display: block;
+        background-color: cornsilk;
+    }
+
+    .folder-notvisited {
+        font-weight: bold;
+        font-size: 14px !important;
+    }
+
+    .folder-notvisited-hint {
+        color: red;
+    }
+
+    .file-visited {
+        color: #00ff99 !important;
+    }
+
+    .file-visited-title {
+        font-weight: bold;
+    }
+
+    .lib-book {
+        border: 1px solid #ccc;
+        margin: 4px 6px 0 6px;
+        /*padding:20px !important;*/
+        display: block;
+        background-color: white;
+    }
+
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+    }
+
+    .section {
+        margin-bottom: 20px;
+        margin-top: 10px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        border: 1px solid lightgray;
+    }
+
+    h2 {
+        color: black;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    .trn_card h3 {
+        margin-bottom: 10px;
+        color: black;
+        font-size: 18px;
+        border: none !important
+    }
+
+    .attendance-section {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        border: 1px solid lightgray;
+    }
+
+    /* trn_card layout for mobile devices */
+    .attendance-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .attendance-trn_card {
+        background: linear-gradient(135deg, #f6f9fc, #fff);
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        overflow: hidden;
+    }
+
+        .attendance-trn_card h3 {
+            font-size: 20px;
+            color: #333;
+            margin: 0;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .attendance-trn_card h3:hover {
+                background-color: #0056b3;
+            }
+
+        .attendance-trn_card .trn_card-details {
+            /*display: none;*/
+            padding: 20px;
+            background-color: #fff;
+        }
+
+        .attendance-trn_card.active .trn_card-details {
+            display: block;
+        }
+
+    .remark-input, .score-input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 12px;
+        border: 1px solid #ddd;
+        background-color: #f0f0f0;
+        font-size: 15px;
+        transition: all 0.3s ease;
+    }
+
+        .remark-input:focus, .score-input:focus {
+            background-color: #fff;
+            border-color: #007bff;
+            outline: none;
+            
+        }
+
+    /* Final result buttons */
+    .final-result-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    .final-result-button {
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        color: white;
+        background-color: #007bff;
+        width: 100px;
+        transition: background-color 0.3s ease;
+    }
+
+        /* Default button styles */
+        .final-result-button.pass,
+        .final-result-button.failed,
+        .final-result-button.reexam {
+            background-color: #007bff;
+        }
+
+        /* Active button styles */
+        .final-result-button.active {
+            background-color: #28a745;
+           
+            transform: scale(1.05);
+        }
+
+    /* Table layout for larger screens */
+    @media (min-width: 768px) {
+        .attendance-container {
+            display: none;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .attendance-table th, .attendance-table td {
+                border: 1px solid #ddd;
+                padding: 12px;
+                text-align: center;
+            }
+
+            .attendance-table th {
+                background-color: #f2f2f2;
+                font-weight: bold;
+            }
+
+            .attendance-table .final-result-buttons {
+                display: inline-block;
+            }
+
+            .attendance-table .final-result-button {
+                width: auto;
+                padding: 5px 10px;
+            }
+    }
+
+    @media (max-width: 767px) {
+        .attendance-table {
+            display: none;
+        }
+
+        .trn_card {
+            width: 100%
+        }
+    }
+</style>
+<div style="height:100%;">
+    <div class="box library maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+
+            <div ng-click="exam()" style="width: 100%; background-color: whitesmoke; text-align: center; justify-content:center; height: 70px; padding: 5px">
+                <p style="height: 100%; align-content: center; border: 1px solid lightgray;">COURSE</p>
+            </div>
+
+
+            <div id="popup_exam" dx-popup="popup_exam" class="no-padding">
+                <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
+                    <div class="section">
+                        <h5><i class="fas fa-info-circle" style="font-size: 23px"></i> Exam Details</h5>
+                        <div class="container">
+                            <div class="trn_card">
+                                <h3><i class="fas fa-book"></i> Course Title</h3>
+                                <p>HF</p>
+                            </div>
+                            <div class="trn_card">
+                                <h3><i class="fas fa-id-badge"></i> Class ID</h3>
+                                <p>CLS-33884</p>
+                            </div>
+                            <div class="trn_card">
+                                <h3><i class="fas fa-calendar-alt"></i> Exam Date</h3>
+                                <p>19.10.2023</p>
+                            </div>
+                            <div class="trn_card">
+                                <h3><i class="fas fa-clock"></i> Course Duration</h3>
+                                <p>8 hrs</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Attendance Section -->
+                    <div class="attendance-section">
+                        <h5><i class="fas fa-users" style="font-size: 23px"></i> Exam Results</h5>
+
+                        <!-- trn_card layout for mobile devices -->
+                        <div class="attendance-container" ng-if="!isLargeScreen()">
+                            <div class="attendance-trn_card" ng-repeat="trainee in trainees">
+                                <h3 ng-click="toggletrn_cardDetails(trainee.id)">{{trainee.name}}</h3>
+                                <div class="trn_card-details" ng-show="trainee.showDetails">
+                                    <p><strong>Presence:</strong> {{trainee.presence}}%</p>
+                                    <p><strong>Score:</strong> {{trainee.score}}</p>
+                                    <p><strong>Final Result:</strong></p>
+                                    <div class="final-result-buttons">
+                                        <button class="final-result-button pass" ng-class="{'active': trainee.finalResult === 'Pass'}" ng-click="updateFinalResult(trainee.id, 'Pass')">Pass</button>
+                                        <button class="final-result-button failed" ng-class="{'active': trainee.finalResult === 'Failed'}" ng-click="updateFinalResult(trainee.id, 'Failed')">Failed</button>
+                                        <button class="final-result-button reexam" ng-class="{'active': trainee.finalResult === 'Re-exam'}" ng-click="updateFinalResult(trainee.id, 'Re-exam')">Re-exam</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Table layout for larger screens -->
+                        <table class="attendance-table" ng-if="isLargeScreen()">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Presence</th>
+                                    <th>Score</th>
+                                    <th>Final Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="trainee in trainees">
+                                    <td>{{trainee.name}}</td>
+                                    <td>{{trainee.presence}}%</td>
+                                    <td>{{trainee.score}}</td>
+                                    <td>
+                                        <div class="final-result-buttons">
+                                            <button class="final-result-button pass" ng-class="{'active': trainee.finalResult === 'Pass'}" ng-click="updateFinalResult(trainee.id, 'Pass')">Pass</button>
+                                            <button class="final-result-button failed" ng-class="{'active': trainee.finalResult === 'Failed'}" ng-click="updateFinalResult(trainee.id, 'Failed')">Failed</button>
+                                            <button class="final-result-button reexam" ng-class="{'active': trainee.finalResult === 'Re-exam'}" ng-click="updateFinalResult(trainee.id, 'Re-exam')">Re-exam</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html?v=2036'" ng-init="type = 'trn-instructor-course';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

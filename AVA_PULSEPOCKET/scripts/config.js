@@ -58,6 +58,9 @@ Config.MenuItems = [
     { key: 'appmessage', title: 'Messages', url: '/appmessage', icon: '../../content/images/booksg.png' },
     { key: 'appdocument', title: 'Documents', url: '/appdocument', icon: '../../content/images/booksg.png' },
     { key: 'appdocumentother', title: 'Documents', url: '/appdocumentother', icon: '../../content/images/booksg.png' },
+
+    { key: 'trn-instructor-panel', title: 'Training', url: '/trn/instructor/panel', icon: '../../content/images/booksg.png' },
+    { key: 'trn-instructor-course', title: 'Training Course', url: '/trn/instructor/course', icon: '../../content/images/booksg.png' },
   
 ];
 
