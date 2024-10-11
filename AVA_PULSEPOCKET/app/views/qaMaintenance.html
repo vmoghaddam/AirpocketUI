@@ -1,0 +1,287 @@
+﻿<style>
+    .tab-field {
+        padding: 7px;
+        text-align: left
+    }
+
+    .tab-field-title {
+        padding: 7px;
+        text-align: left;
+        font-weight: bold
+    }
+
+    .tab-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+
+    .tab-style {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        width: 100%;
+        color: black
+    }
+
+    .dx-toolbar-center, .dx-toolbar-before {
+        width: 100%;
+		  margin: 0 !important
+    }
+
+    .dx-overlay-content {
+        width: 100%
+    }
+</style>
+<div ng-controller="qaMaintenanceController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+
+            <div id="scroll_qaMaintenance" dx-scroll-view="scroll_qaMaintenance" style="margin-top:5px">
+
+                <div class="visible-xs">
+					<table class="dx-border tab-style">
+    <tr>
+        <td style="text-align: left !important; width: 0 !important; padding: 7px 0 0 7px"> <div dx-check-box="ch_anonymous" class="center"></div></td>
+        <td style="padding: 9px 0 0 5px"> Anonymous Submit </td>
+    </tr>
+    <tr>
+        <td style="font-size:11px; text-align: right; font-weight: bold;padding:7px" colspan="3">
+            (در صورت عدم تمایل به شناسایی فرد گزارش دهنده نسبت به تایید این بند اقدام گردد)
+        </td>
+    </tr>
+</table>
+                    <table class="dx-border tab-style">
+                      
+                        <tr>
+                            <td class="tab-field-title"> Date Of Occurrence: </td>
+                            <td class="tab-field"><div dx-date-box="txt_OccurrenceDate" class="center" dx-validator="{validationGroup:'maintenance',  validationRules: [{ type: 'required',   }]}"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Time Of Occurrence: </td>
+                            <td class="tab-field"><div dx-date-box="txt_OccurrenceTime" class="center" dx-validator="{validationGroup:'maintenance',  validationRules: [{ type: 'required',   }]}"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> A/C Register: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_acReg" class="center"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> Aircraft Type: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_acType" class="center"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> Flight number: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_fltNum" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">  Delay Reason: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"> <div dx-text-area="txt_delayReason" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Delay(M): </td>
+                            <td class="tab-field"> <div dx-number-box="num_delay" class="center"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> Route: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_route" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> ATL No. : </td>
+                            <td class="tab-field"> <div dx-text-box="txt_atlNum" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Task No. : </td>
+                            <td class="tab-field"> <div dx-text-box="txt_taskNum" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Station: </td>
+                            <td class="tab-field"> <div dx-select-box="sb_station" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Reference: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_reference" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="6">
+                                Component Specification:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Component: </td>
+                            <td class="tab-field"> <div dx-select-box="sb_compn" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Serial Number: </td>
+                            <td class="tab-field"> <div dx-number-box="nb_serialNumber" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Part Number: </td>
+                            <td class="tab-field"> <div dx-number-box="nb_partNumber" class="center"></div></td>
+                        </tr>
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title">
+                                Event
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-area="txt_event" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title">
+                                Corrective Action Taken Until Now:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-area="txt_actionTaken" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-field-title"> Name: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-box="txt_name" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> CAA License No.: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-box="txt_CAALicense" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Authorization No.: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-box="txt_authNum" class="center"></div></td>
+                        </tr>
+                    </table>
+
+
+                    <div style="clear:both"></div>
+                </div>
+                <div class="visible-sm visible-md visible-lg">
+					<table class="dx-border tab-style">
+    <tr>
+        <td style="text-align: left !important; width: 0 !important; padding: 7px 0 0 7px"> <div dx-check-box="ch_anonymous" class="center"></div></td>
+        <td style="padding: 9px 0 0 5px"> Anonymous Submit </td>
+    </tr>
+    <tr>
+        <td style="font-size:11px; text-align: right; font-weight: bold;padding:7px" colspan="3">
+            (در صورت عدم تمایل به شناسایی فرد گزارش دهنده نسبت به تایید این بند اقدام گردد)
+        </td>
+    </tr>
+</table>
+                    <table class="dx-border tab-style">
+ 
+                        <tr>
+                            <td class="tab-field-title"> Date of Occurrence: </td>
+                            <td class="tab-field"><div dx-date-box="txt_OccurrenceDate" class="center" dx-validator="{validationGroup:'maintenance',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            <td class="tab-field-title"> Time of occurrence: </td>
+                            <td class="tab-field"><div dx-date-box="txt_OccurrenceTime" class="center" dx-validator="{validationGroup:'maintenance',  validationRules: [{ type: 'required',   }]}"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> Route: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_route" class="center"></div></td>
+                            <td class="tab-field-title"> A/C Register: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_acReg" class="center"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+
+                            <td class="tab-field-title"> Aircraft Type: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_acType" class="center"></div></td>
+                            <td class="tab-field-title"> Flight number: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_fltNum" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Station: </td>
+                            <td class="tab-field"> <div dx-select-box="sb_station" class="center"></div></td>
+                            <td class="tab-field-title"> ATL No. : </td>
+                            <td class="tab-field"> <div dx-text-box="txt_atlNum" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Task No. : </td>
+                            <td class="tab-field"> <div dx-text-box="txt_taskNum" class="center"></div></td>
+                            <td class="tab-field-title"> Reference: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_reference" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="6">
+                                Component Specification:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Component: </td>
+                            <td class="tab-field"> <div dx-select-box="sb_compn" class="center"></div></td>
+                            <td class="tab-field-title"> Serial Number: </td>
+                            <td class="tab-field"> <div dx-number-box="nb_serialNumber" class="center"></div></td>
+                            <td class="tab-field-title"> Part Number: </td>
+                            <td class="tab-field"> <div dx-number-box="nb_partNumber" class="center"></div></td>
+                        </tr>
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title">
+                                Event
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-area="txt_event" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title">
+                                Corrective Action Taken Until Now:
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-area="txt_actionTaken" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-field-title"> Name: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_name" class="center"></div></td>
+                            <td class="tab-field-title"> CAA License No.: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_CAALicense" class="center"></div></td>
+                            <td class="tab-field-title"> Authorization No.: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_authNum" class="center"></div></td>
+                        </tr>
+                    </table>
+
+
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>
