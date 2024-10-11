@@ -1,0 +1,135 @@
+﻿<style>
+
+
+
+
+    /*.ripple {
+        background-position: center;
+        transition: background 0.5s;
+    }
+
+        .ripple:hover {
+            background: #eee radial-gradient(circle, transparent 1%, #eee 1%) center/15000%;
+        }
+
+        .ripple:active {
+            background-color: #fff;
+            background-size: 100%;
+            transition: background 0s;
+        }
+    .ripple.tile-selected {
+        background-position: center;
+        transition: background 0.5s;
+        border:3px solid black !important;
+    }
+        .ripple.tile-selected:hover {
+            background: #fff radial-gradient(circle, transparent 1%, #eee 1%) center/15000%;
+        }
+
+        .ripple.tile-selected:active {
+            background-color: #eee;
+            background-size: 100%;
+            transition: background 0s;
+        }*/
+    .lib-cer {
+        /*background-position: center;
+        transition: background 0.4s;
+        background: #fff radial-gradient(circle, transparent 1%, #eee 1%) center/15000%  ;*/
+        background: transparent;
+        transition: background 0.4s;
+    }
+
+    .cer-expiring {
+        background: #e69900;
+    }
+
+    .cer-expired {
+        background: #cc2900;
+        color: white;
+    }
+
+    .cer-unknown {
+        background: #8c8c8c;
+        color: white;
+    }
+
+    .cer-valid {
+        background: #00e6ac;
+        color: black;
+    }
+</style>
+<div style="height:100%;">
+    <div class="box certificate maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+
+           
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                <div ng-repeat="x in certificates" ng-click="itemClick($event,x)" id="cer-{{x.TypeId}}" style="padding-bottom:5px;padding-top:5px;padding-right:2px;padding-left:2px;margin:5px 5px 0 5px; border:1px solid #bbb" class="lib-cer">
+
+                    <div>
+
+                        <div style="float:left;width:20%;padding:7px 0 7px 0;margin-left:2px;" ng-class="getRemainClass(x)">
+                            <div style="text-align:center;font-size:14px;">Remaining</div>
+
+                            <div style="text-align:center;font-size:20px;padding:2px 0">{{x.Remain}}</div>
+                            <div style="text-align:center;font-size:14px;">Day(s)</div>
+
+                        </div>
+                        <div style="padding-left: 5px;float:left;border-left:1px dashed #ccc;padding:4px 15px;">
+                            <div style="font-size:14px;margin-top:3px;margin-bottom:5px;font-weight:bold;text-transform:uppercase;font-size:16px">{{x.Title}}</div>
+                            <div style="font-size:15px;font-weight:bold"><span style="display:inline-block;width:50px;font-weight:normal">Issued:</span> {{formatDateCer(x.IssueDate)}}</div>
+                            <div style="font-size:15px;font-weight:bold;margin-top:3px;"><span style="display:inline-block;width:50px;font-weight:normal">Expires:</span> {{formatDateCer(x.ExpireDate)}}</div>
+
+
+                        </div>
+
+
+                        <div style="clear:both"></div>
+                        <div style="text-align:center;font-size:13px;border-top:1px dashed #ccc;margin:5px;padding-top:5px;" ng-show="x.Description">
+                            <p style="text-align:left;padding-left:5px;padding-right:5px;padding-top:2px;text-align:justify">{{x.Description}}</p>
+                            <div style="clear:both"></div>
+
+
+                        </div>
+                    </div>
+               
+                    <div style="clear:both"></div>
+
+                </div>
+
+
+                <!--<div style="padding-top:2px;padding-right:2px;padding-left:2px" ng-repeat="x in ds">
+        <div class="col-lg-12 col-md-12 col-sm-12  applibraryitem" style="padding:1px 2px 2px 2px;display:block"  >
+            <div ng-class="x.class" style="margin:0; padding:5px 5px 5px 10px;display:block">
+                <p style="padding:5px 0 8px 0;margin:0;font-weight:bold;">{{x.CourseTypeTitle}}<span style="display:inline-block;padding-left:5px;font-weight:normal"> {{x.CourseOrganization}} </span></p>
+                <div style="padding:0 0 5px 0">
+                    <div class="col-lg-3 col-sm-4 col-md-4" style="padding-left:0;padding-right:0;"><span>No:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.CerNumber}}</span></div>
+                    <div class="col-lg-3 col-sm-4 col-md-4" style="padding-left:0;padding-right:0;"><span>Issue Date:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.DateIssue}}</span></div>
+                    <div class="col-lg-3 col-sm-4 col-md-4" style="padding-left:0;padding-right:0;"><span>Expiration Date:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.ExpireDate}}</span></div>
+                    <div class="col-lg-3 col-sm-4 col-md-4" style="padding-left:0;padding-right:0;"><span>Remains:</span><span style="display:inline-block;padding-left:3px;font-weight:bold">{{x.Remain}}</span><span style="display:inline-block;padding-left:3px;">Day(s)</span></div>
+                    <div style="clear:both"></div>
+                </div>
+
+
+                <div style="clear:both"></div>
+
+            </div>
+        </div>
+
+
+
+
+    </div>-->
+
+            </div>
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'appcertificate';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

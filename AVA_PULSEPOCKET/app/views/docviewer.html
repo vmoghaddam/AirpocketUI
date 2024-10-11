@@ -1,0 +1,39 @@
+﻿<div style="height:100%;">
+    <div class="box docviewer maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:white; ">
+            <iframe id="frame" ng-src="{{_url}}"
+                    style="border: none;" />
+            <div style="text-align:center;padding :4px 4px 0 4px;">
+                <table style="width:100%" ng-show="NotSigned">
+                    <tr>
+                        <td class="dx-border" style="padding:0px 10px 0px 0">
+                            <div class="center" dx-text-box="txt_code"></div>
+                        </td>
+                        <td style="width:200px">
+                            <div dx-button="btn_sign"></div>
+                        </td>
+                    </tr>
+                </table>
+                <table style="width:100%" ng-show="!NotSigned">
+                    <tr>
+                        <td class="dx-border" style="padding:5px 10px 0px 0">
+                            <span style="display:inline-block;font-size:18px">Signed on:</span>
+                            <span style="display:inline-block;font-size:18px;margin-left:10px" ng-bind="getDateSigned()"> </span>
+                        </td>
+                         
+                    </tr>
+                </table>
+
+            </div>
+           
+        </div>
+
+        <!--<div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'applibraryitem';" style="padding:0;flex:0 0 45px"></div>-->
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

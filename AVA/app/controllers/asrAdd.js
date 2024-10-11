@@ -8,7 +8,7 @@ app.controller('asrAddController', ['$scope', '$location', 'flightBagService', '
     var detector = new MobileDetect(window.navigator.userAgent);
 
 
-    $scope.isOPSManager = true;
+    $scope.isOPSManager = true; 
     $scope.isOPSStaff = false;
     $scope.isSave = $scope.isOPSManager || $scope.isOPSStaff;
 

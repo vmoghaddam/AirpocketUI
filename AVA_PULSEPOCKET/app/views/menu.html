@@ -1,0 +1,41 @@
+﻿<style>
+    ._menu{
+        padding:10px;
+        margin:0 10px;
+        border-bottom:1px solid white;
+    }
+</style>
+<div id="mySidenav" class="sidenav">
+    <a href="" class="closebtn" data-ng-click="closeMenu()">&times;</a>
+    <!--<a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>-->
+    <div style="align-items:center; color:white " class="_menu">
+        
+        <a href="" data-ng-click="clickMenuItem('profile')" style="padding:0 !important;font-size:initial;"> <i class="fas fa-user-circle" style="font-size:20px;"></i><span class="font-size-16 bold" style="display:inline-block;margin-left:7px;position:relative;top:-1px">{{userTitle}}</span></a>
+
+
+
+    </div>
+	
+	 <div style="align-items:center; color:white " class="_menu">
+        
+         <i class="fas fa-user-circle" style="font-size:20px;"></i><span class="font-size-16 bold" ng-click="goPrivacy();">Privacy Settings</span>
+
+    </div>
+
+    <div style="align-items:center; color:white " class="_menu">
+        <a href="" data-ng-click="clickMenuItem('sign-out')" style="padding:0 !important;font-size:initial;"> <i class="fas fa-power-off" style="font-size:20px;"></i><span class="font-size-16 bold" style="display:inline-block;margin-left:7px;position:relative;top:-1px">Sign Out</span></a>
+
+
+
+    </div>
+
+
+
+
+
+
+
+</div>
