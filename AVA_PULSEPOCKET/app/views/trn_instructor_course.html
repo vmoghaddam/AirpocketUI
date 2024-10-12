@@ -149,7 +149,7 @@
         border: none;
         cursor: pointer;
         color: white;
-        background-color: #007bff;
+        background-color: lightgray;
         width: 100px;
         transition: background-color 0.3s ease;
     }
@@ -158,7 +158,7 @@
         .final-result-button.pass,
         .final-result-button.failed,
         .final-result-button.reexam {
-            background-color: #007bff;
+            background-color: lightgray;
         }
 
         /* Active button styles */
@@ -290,17 +290,6 @@
         </div>
 
         <div class="rowx content" style="clear:both;background:#f0f3f5; ">
-
-            <div ng-click="exam()" style="width: 100%; background-color: whitesmoke; text-align: center; justify-content:center; height: 70px; padding: 5px">
-                <p style="height: 100%; align-content: center; border: 1px solid lightgray;">EXAM</p>
-            </div>
-
-
-            <div ng-click="attendance()" style="width: 100%; background-color: whitesmoke; text-align: center; justify-content:center; height: 70px; padding: 5px">
-                <p style="height: 100%; align-content: center; border: 1px solid lightgray;">ATTENDANCE</p>
-            </div>
-
-
             <div id="popup_exam" dx-popup="popup_exam" class="no-padding">
                 <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
                     <div class="section">

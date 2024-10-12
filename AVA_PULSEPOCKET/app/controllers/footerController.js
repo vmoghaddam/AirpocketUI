@@ -48,11 +48,15 @@
         if ($scope.is_crew) {
 
 
-            $('.footerhome').width('100%').show();
+            $('.footerhome').width('33.333%').show();
+            $('.footertrnexam').width('33.333%').show();
+            $('.footertrnattendance').width('33.333%').show();
 
         }
         else {
-            $('.footerhome').width('100%').show();
+            $('.footerhome').width('33.333%').show();
+            $('.footertrnexam').width('33.333%').show();
+            $('.footertrnattendance').width('33.333%').show();
         }
 
 

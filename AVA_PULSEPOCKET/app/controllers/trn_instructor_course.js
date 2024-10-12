@@ -2,11 +2,11 @@
 app.controller('trn_instructor_courseController', ['$scope', '$location', 'authService', '$routeParams', '$rootScope', '$window', function ($scope, $location, authService, $routeParams, $rootScope, $window) {
 
 
-    $scope.exam = function () {
+    $rootScope.show_exam = function () {
         $scope.popup_exam_visible = true;
     }
 
-    $scope.attendance = function () {
+    $rootScope.show_attendance = function () {
         $scope.popup_attendance_visible = true;
     }
 

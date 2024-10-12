@@ -237,6 +237,7 @@
     <Content Include="content\images\certificates2.png" />
     <Content Include="content\images\certification-document.png" />
     <Content Include="content\images\certificationdocument.png" />
+    <Content Include="content\images\chalkboard-user.png" />
     <Content Include="content\images\circle.png" />
     <Content Include="content\images\circle2.png" />
     <Content Include="content\images\cloud-download.png" />
