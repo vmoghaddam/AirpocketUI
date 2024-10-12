@@ -9,20 +9,18 @@
         $('.footeritem').hide();
         if ($scope.is_crew) {
 
-            $('.footerflight').width('16.6%').show();
+            $('.footerflight').width('20%').show();
             // $('.footernotification').width('20%').show();
-            $('.footercertification').width('16.6%').show();
-            $('.footerlibrary').width('16.6%').show();
-            $('.footerforms').width('16.6%').show();
-            $('.footerhome').width('16.6%').show();
-            $('.footertrnpanel').width('16.6%').show();
-        }
-        else {
+            $('.footercertification').width('20%').show();
             $('.footerlibrary').width('20%').show();
             $('.footerforms').width('20%').show();
-            $('.footerhelp').width('20%').show();
             $('.footerhome').width('20%').show();
-            $('.footertrnpanel').width('20%').show();
+        }
+        else {
+            $('.footerlibrary').width('25%').show();
+            $('.footerforms').width('25%').show();
+            $('.footerhelp').width('25%').show();
+            $('.footerhome').width('25%').show();
         }
 
 
@@ -202,17 +200,19 @@
     if ($scope.type == 'appflight') {
         $('.footeritem').hide();
         if ($scope.is_crew) {
-            $('.footerflight').width('20%').show();
+            $('.footerflight').width('16.6%').show();
             //$('.footernotification').width('20%').show();
-            $('.footercertification').width('20%').show();
-            $('.footerlibrary').width('20%').show();
-            $('.footerforms').width('20%').show();
-            $('.footerhome').width('20%').show();
+            $('.footercertification').width('16.6%').show();
+            $('.footerlibrary').width('16.6%').show();
+            $('.footerforms').width('16.6%').show();
+            $('.footerhome').width('16.6%').show();
+            $('.footertrnpanel').width('16.6%').show();
         }
         else {
-            $('.footerlibrary').width('33.333%').show();
-            $('.footerforms').width('33.333%').show();
-            $('.footerhelp').width('33.333%').show();
+            $('.footerlibrary').width('25%').show();
+            $('.footerforms').width('25%').show();
+            $('.footerhelp').width('253%').show();
+            $('.footertrnpanel').width('25%').show();
         }
 
 

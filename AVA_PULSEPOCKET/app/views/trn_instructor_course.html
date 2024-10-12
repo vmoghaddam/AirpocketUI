@@ -87,35 +87,35 @@
         gap: 10px;
     }
 
-    .attendance-trn_card {
+    .attendance_trn_card {
         background: linear-gradient(135deg, #f6f9fc, #fff);
         border-radius: 12px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         overflow: hidden;
     }
 
-        .attendance-trn_card h3 {
+        .attendance_trn_card h3 {
             font-size: 20px;
             color: #333;
             margin: 0;
             padding: 15px;
-            background-color: #007bff;
+            background-color: #FF5722;
             color: white;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
-            .attendance-trn_card h3:hover {
-                background-color: #0056b3;
+            .attendance_trn_card h3:hover {
+                background-color: #E64A19;
             }
 
-        .attendance-trn_card .trn_card-details {
+        .attendance_trn_card .trn_card-details {
             /*display: none;*/
             padding: 20px;
             background-color: #fff;
         }
 
-        .attendance-trn_card.active .trn_card-details {
+        .attendance_trn_card.active .trn_card-details {
             display: block;
         }
 
@@ -134,7 +134,6 @@
             background-color: #fff;
             border-color: #007bff;
             outline: none;
-            
         }
 
     /* Final result buttons */
@@ -165,9 +164,42 @@
         /* Active button styles */
         .final-result-button.active {
             background-color: #28a745;
-           
             transform: scale(1.05);
         }
+
+    .attend_section {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #007bff;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    /* Table Styling */
+    .attend_attendance_table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+        .attend_attendance_table th, .attend_attendance_table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .attend_attendance_table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+
 
     /* Table layout for larger screens */
     @media (min-width: 768px) {
@@ -200,6 +232,10 @@
                 width: auto;
                 padding: 5px 10px;
             }
+
+        .attend_participant_list {
+            display: none;
+        }
     }
 
     @media (max-width: 767px) {
@@ -210,6 +246,40 @@
         .trn_card {
             width: 100%
         }
+
+        .attend_attendance_table {
+            display: none;
+        }
+
+        .attend_participant_list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .attend_participant_item {
+            background-color: white;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .attend_participant_details {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .attend_participant_item.attend_active .attend_participant_details {
+            display: block;
+        }
+
+        .attend_participant_details label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
     }
 </style>
 <div style="height:100%;">
@@ -222,7 +292,12 @@
         <div class="rowx content" style="clear:both;background:#f0f3f5; ">
 
             <div ng-click="exam()" style="width: 100%; background-color: whitesmoke; text-align: center; justify-content:center; height: 70px; padding: 5px">
-                <p style="height: 100%; align-content: center; border: 1px solid lightgray;">COURSE</p>
+                <p style="height: 100%; align-content: center; border: 1px solid lightgray;">EXAM</p>
+            </div>
+
+
+            <div ng-click="attendance()" style="width: 100%; background-color: whitesmoke; text-align: center; justify-content:center; height: 70px; padding: 5px">
+                <p style="height: 100%; align-content: center; border: 1px solid lightgray;">ATTENDANCE</p>
             </div>
 
 
@@ -256,7 +331,7 @@
 
                         <!-- trn_card layout for mobile devices -->
                         <div class="attendance-container" ng-if="!isLargeScreen()">
-                            <div class="attendance-trn_card" ng-repeat="trainee in trainees">
+                            <div class="attendance_trn_card" ng-repeat="trainee in trainees">
                                 <h3 ng-click="toggletrn_cardDetails(trainee.id)">{{trainee.name}}</h3>
                                 <div class="trn_card-details" ng-show="trainee.showDetails">
                                     <p><strong>Presence:</strong> {{trainee.presence}}%</p>
@@ -296,6 +371,63 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="popup_attendance" dx-popup="popup_attendance" class="no-padding">
+                <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
+                    <!-- Attendance Sections -->
+                    <div class="attend_section" ng-repeat="section in sections">
+                        <h5><i class="fas fa-users" style="font-size: 23px"></i> Attendance for {{section.date}}, {{section.time}}</h5>
+
+                        <!-- Desktop Table -->
+                        <table class="attend_attendance_table">
+                            <thead>
+                                <tr>
+                                    <th>National Code</th>
+                                    <th>Name</th>
+                                    <th>Department</th>
+                                    <th>Presence</th>
+                                    <th>Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="trainee in section.trainees">
+                                    <td>{{trainee.nationalCode}}</td>
+                                    <td>{{trainee.name}}</td>
+                                    <td>{{trainee.department}}</td>
+                                    <td><input type="checkbox" ng-model="trainee.presence"></td>
+                                    <td>{{trainee.remark}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Mobile List -->
+                        <div class="attendance-container" ng-if="!isLargeScreen()">
+                            <div class="attendance_trn_card" ng-repeat="trainee in section.trainees">
+                                <h3 ng-click="toggle_attendance_details(trainee.id)">{{trainee.name}}</h3>
+                                <div class="trn_card-details" ng-show="trainee.showDetails">
+                                    <p><strong>National Code:</strong> {{trainee.nationalCode}}</p>
+                                    <p><strong>Department:</strong> {{trainee.department}}</p>
+                                    <p><strong>Presence:</strong> <input type="checkbox" ng-model="trainee.presence"></p>
+                                    <p><strong>Remark:</strong> {{trainee.remark}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--<ul class="attend_participant_list">
+        <li class="attend_participant_item" ng-repeat="participant in section.participants" ng-click="participant.active = !participant.active" ng-class="{'attend_active': participant.active}">
+            <span>{{participant.name}}</span>
+            <div class="attend_participant_details">
+                <label>National Code: {{participant.nationalCode}}</label>
+                <label>Department: {{participant.department}}</label>
+                <label>Presence: <input type="checkbox" ng-model="participant.presence"></label>
+                <label>Remark: {{participant.remark}}</label>
+            </div>
+        </li>
+    </ul>-->
                     </div>
                 </div>
             </div>
