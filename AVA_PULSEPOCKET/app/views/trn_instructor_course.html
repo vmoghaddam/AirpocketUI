@@ -45,7 +45,7 @@
     .section {
         margin-bottom: 20px;
         margin-top: 10px;
-        padding: 20px;
+        padding: 10px;
         background-color: #fff;
         border-radius: 10px;
         border: 1px solid lightgray;
@@ -74,7 +74,7 @@
 
     .attendance-section {
         margin-bottom: 20px;
-        padding: 20px;
+        padding: 10px;
         background-color: #fff;
         border-radius: 10px;
         border: 1px solid lightgray;
@@ -111,8 +111,8 @@
 
         .attendance_trn_card .trn_card-details {
             /*display: none;*/
-            padding: 20px;
-            background-color: #fff;
+            padding: 10px 0;
+            background-color: #fff
         }
 
         .attendance_trn_card.active .trn_card-details {
@@ -141,6 +141,8 @@
         display: flex;
         gap: 10px;
         margin-top: 10px;
+        margin-left: 5px;
+        justify-content: center
     }
 
     .final-result-button {
@@ -168,11 +170,10 @@
         }
 
     .attend_section {
-        margin-bottom: 20px;
-        padding: 20px;
+        margin: 10px 5px 0px 5px;
         background-color: white;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border: 1px solid #ffcc00
     }
 
     h2 {
@@ -402,22 +403,22 @@
             <div id="popup_exam" dx-popup="popup_exam" class="no-padding">
                 <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
                     <div class="section">
-                        <h5><i class="fas fa-info-circle" style="font-size: 23px"></i> Exam Details</h5>
+                        <div style="font-size: 13px; font-weight: bold"><i class="fas fa-info-circle" style="font-size: 13px"></i> Exam Details</div>
                         <div class="container">
                             <div class="trn_card">
-                                <h3><i class="fas fa-book"></i> Course Title</h3>
+                                <div style="font-size: 13px; font-weight: bold"><i class="fas fa-book"></i> Course Title</div>
                                 <p>HF</p>
                             </div>
                             <div class="trn_card">
-                                <h3><i class="fas fa-id-badge"></i> Class ID</h3>
+                                <div style="font-size: 13px; font-weight: bold"><i class="fas fa-id-badge"></i> Class ID</div>
                                 <p>CLS-33884</p>
                             </div>
                             <div class="trn_card">
-                                <h3><i class="fas fa-calendar-alt"></i> Exam Date</h3>
+                                <div style="font-size: 13px; font-weight: bold"><i class="fas fa-calendar-alt"></i> Exam Date</div>
                                 <p>19.10.2023</p>
                             </div>
                             <div class="trn_card">
-                                <h3><i class="fas fa-clock"></i> Course Duration</h3>
+                                <div style="font-size: 13px; font-weight: bold"><i class="fas fa-clock"></i> Course Duration</div>
                                 <p>8 hrs</p>
                             </div>
                         </div>
@@ -425,20 +426,17 @@
 
                     <!-- Attendance Section -->
                     <div class="attendance-section">
-                        <h5><i class="fas fa-users" style="font-size: 23px"></i> Exam Results</h5>
-
+                        
                         <!-- trn_card layout for mobile devices -->
                         <div class="attendance-container" ng-if="!isLargeScreen()">
-                            <div class="attendance_trn_card" ng-repeat="trainee in trainees">
-                                <h3 ng-click="toggletrn_cardDetails(trainee.id)">{{trainee.name}}</h3>
-                                <div class="trn_card-details" ng-show="trainee.showDetails">
-                                    <p><strong>Presence:</strong> {{trainee.presence}}%</p>
-                                    <p><strong>Score:</strong> {{trainee.score}}</p>
-                                    <p><strong>Final Result:</strong></p>
+                            <div class="attendance_trn_card" style=" border: 1px solid #ffcc00;" ng-repeat="trainee in exam_attendance">
+                                <div style="align-content: center; font-size: 13px; font-weight: bold; padding-left: 8px; height: 38px; border-radius: 8px 8px 0 0; background-color: #FF5722; color: #fff">{{trainee.Name}}</div>
+                                <div class="trn_card-details">
+                                    <input type="text" placeholder="Score" ng-model="trainee.Score" ng-change="updateScore(trainee.CourseId, trainee.Id, trainee.Score, trainee.Result)" style="width: 97%; border: 1px solid lightgray;margin: 5px; border-radius: 8px; height: 35px">
                                     <div class="final-result-buttons">
-                                        <button class="final-result-button pass" ng-class="{'active': trainee.finalResult === 'Pass'}" ng-click="updateFinalResult(trainee.id, 'Pass')">Pass</button>
-                                        <button class="final-result-button failed" ng-class="{'active': trainee.finalResult === 'Failed'}" ng-click="updateFinalResult(trainee.id, 'Failed')">Failed</button>
-                                        <button class="final-result-button reexam" ng-class="{'active': trainee.finalResult === 'Re-exam'}" ng-click="updateFinalResult(trainee.id, 'Re-exam')">Re-exam</button>
+                                        <button class="final-result-button pass" ng-class="{'active': trainee.Result === 'Pass'}" ng-click="updateFinalResult(trainee.Id, 'Pass')">Pass</button>
+                                        <button class="final-result-button failed" ng-class="{'active': trainee.Result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
+                                        <button class="final-result-button reexam" ng-class="{'active': trainee.Result === 'Re-exam'}" ng-click="updateFinalResult(trainee.Id, 'Re-exam')">Re-exam</button>
                                     </div>
                                 </div>
                             </div>
@@ -455,15 +453,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="trainee in trainees">
-                                    <td>{{trainee.name}}</td>
+                                <tr ng-repeat="trainee in exam_attendance">
+                                    <td>{{trainee.Name}}</td>
                                     <td>{{trainee.presence}}%</td>
-                                    <td>{{trainee.score}}</td>
+                                    <td>{{trainee.Score}}</td>
                                     <td>
                                         <div class="final-result-buttons">
-                                            <button class="final-result-button pass" ng-class="{'active': trainee.finalResult === 'Pass'}" ng-click="updateFinalResult(trainee.id, 'Pass')">Pass</button>
-                                            <button class="final-result-button failed" ng-class="{'active': trainee.finalResult === 'Failed'}" ng-click="updateFinalResult(trainee.id, 'Failed')">Failed</button>
-                                            <button class="final-result-button reexam" ng-class="{'active': trainee.finalResult === 'Re-exam'}" ng-click="updateFinalResult(trainee.id, 'Re-exam')">Re-exam</button>
+                                            <button class="final-result-button pass" ng-class="{'active': trainee.Result === 'Pass'}" ng-click="updateFinalResult(trainee.Id, 'Pass')">Pass</button>
+                                            <button class="final-result-button failed" ng-class="{'active': trainee.Result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
+                                            <button class="final-result-button reexam" ng-class="{'active': trainee.Result === 'Re-exam'}" ng-click="updateFinalResult(trainee.Id, 'Re-exam')">Re-exam</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -477,7 +475,7 @@
                 <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
                     <!-- Attendance Sections -->
                     <div class="attend_section" ng-repeat="session in sessions_attend">
-                        <h5><i class="fas fa-users" style="font-size: 23px"></i> Attendance for {{session.DateStart | date: 'yyyy-MM-dd'}}, {{session.DateStart | date: 'HH:mm'}}</h5>
+                        <div ng-click="toggle_attendance_details(session.Id)" style="align-content: center;font-size: 13px; font-weight: bold; padding-left: 8px; height: 38px; border-radius: 8px 8px 0 0" ng-style="{'background-color': session.showDetails ? '#FF5722' : '#fff', 'color': session.showDetails ? '#fff' : '#000'}" ng-if="!isLargeScreen()">{{session.DateStart | date: 'yyyy-MM-dd'}}  {{session.DateStart | date: 'HH:mm'}}</div>
 
                         <!-- Desktop Table -->
                         <table class="attend_attendance_table">
@@ -502,32 +500,14 @@
                         </table>
 
                         <!-- Mobile List -->
-                        <div class="attendance-container" ng-if="!isLargeScreen()">
+                        <div class="attendance-container" ng-show="session.showDetails" ng-if="!isLargeScreen()">
                             <div class="attendance_trn_card" ng-repeat="person in session.people">
-                                <!--<h3 ng-click="toggle_attendance_details(person.Id, session.Id)">{{person.Name}}</h3>
-                                <div class="trn_card-details" ng-show="person.showDetails">-->
-                                <h3 ng-click="detailsVisible = !detailsVisible">{{person.Name}}</h3>
-                                <div class="trn_card-details" ng-style="{'display': detailsVisible ? 'block' : 'none'}">
-                                    <p><strong>National Code:</strong> {{person.NID}}</p>
-                                    <p><strong>Department:</strong> {{person.Department}}</p>
-                                    <p><strong>Presence:</strong> <input type="checkbox" ng-model="person.presence"></p>
-                                    <p><strong>Remark:</strong> {{person.remark}}</p>
+                                <div class="trn_card-details" style="border-bottom: 1px solid lightgray;align-content:center">
+                                    <div class="col-sm-9 col-xs-9" style="display:inline-block; text-align: left; font-size: 13px">{{person.Name}}</div>
+                                    <div class="col-sm-3 col-xs-3" style="display:inline-block; text-align: right"><input ng-click='on_status_changed(session.Id, session.Key, session.CourseId, person.Id)' style="margin: 0px !important" type="checkbox"></div>
                                 </div>
                             </div>
                         </div>
-
-
-                        <!--<ul class="attend_participant_list">
-                            <li class="attend_participant_item" ng-repeat="participant in section.participants" ng-click="participant.active = !participant.active" ng-class="{'attend_active': participant.active}">
-                                <span>{{participant.name}}</span>
-                                <div class="attend_participant_details">
-                                    <label>National Code: {{participant.nationalCode}}</label>
-                                    <label>Department: {{participant.department}}</label>
-                                    <label>Presence: <input type="checkbox" ng-model="participant.presence"></label>
-                                    <label>Remark: {{participant.remark}}</label>
-                                </div>
-                            </li>
-                        </ul>-->
                     </div>
                 </div>
             </div>

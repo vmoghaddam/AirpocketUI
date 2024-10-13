@@ -2,8 +2,8 @@
 app.controller('trn_instructor_courseController', ['$scope', '$location', 'authService', '$routeParams', '$rootScope', '$window', 'instructorService', function ($scope, $location, authService, $routeParams, $rootScope, $window, instructorService) {
 
     $scope.course_id = $routeParams.id;
-
-
+    $scope.exam_attendance = [];
+ 
     $rootScope.show_exam = function () {
         $scope.popup_exam_visible = true;
     }
@@ -29,16 +29,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                     type: 'success', text: 'Sign', validationGroup: 'cabin', icon: 'fas fa-signature', onClick: function (e) {
 
 
-
-
-                    }
-                }, toolbar: 'bottom'
-            },
-
-            {
-                widget: 'dxButton', location: 'after', options: {
-                    type: 'success', text: 'Save', icon: 'check', validationGroup: 'cabin', onClick: function (e) {
-
+                        console.log('----Exam Result----\n', $scope.exam_attendance);
 
                     }
                 }, toolbar: 'bottom'
@@ -48,6 +39,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                 widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
                         $scope.popup_exam_visible = false;
+                       
                     }
                 }, toolbar: 'bottom'
             }
@@ -120,15 +112,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                 }, toolbar: 'bottom'
             },
 
-            {
-                widget: 'dxButton', location: 'after', options: {
-                    type: 'success', text: 'Save', icon: 'check', validationGroup: 'cabin', onClick: function (e) {
-
-
-                    }
-                }, toolbar: 'bottom'
-            },
-
+           
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
@@ -214,11 +198,20 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
         instructorService.get_people_sessions(6584).then(function (response) {
 
             $scope.sessions_attend = response.Data.sessions
+            //$scope.exam_attendance = response.Data.people
 
-            var idd = 0
+            $.each(response.Data.people, function (_i, _p) {
+                $scope.exam_attendance.push({ Id: _p.Id, course_id: _p.CourseId, person_id: _p.PID, Score: null, Result: null, Name: _p.Name });
+            });
 
+
+
+            console.log("----People----\n", $scope.exam_attendance);
+
+            
             $.each($scope.sessions_attend, function (_i, _s) {
                 _s.people = response.Data.people;
+                _s.showDetails = false;
                 $.each(_s.people, function (_j, _p) {
                     var press = Enumerable.From(response.Data.press).Where(function (x) { return x.SessionId == _s.Id && x.PersonId == _p.PersonId; }).FirstOrDefault();
                     _p.press = !press ? 0 : press.IsPresent;
@@ -238,6 +231,13 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
         trainee.showDetails = !trainee.showDetails;
     };
 
+    $scope.updateScore = function (course_id, pid, score, result) {
+        
+        var trainee = $scope.exam_attendance.find(t => t.PIDb === pid);
+        if (trainee) {
+            trainee.Score = score;
+        }
+    };
     //$scope.toggle_attendance_details = function (eid, sid) {
     //    var session = Enumerable.From($scope.sessions_attend).Where(function (x) { return x.Id == sid }).FirstOrDefault();
     //    var person = Enumerable.From(session.people).Where(function (x) { return x.Id == eid }).FirstOrDefault();
@@ -265,29 +265,45 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
 
     //};
 
-    $scope.updateFinalResult = function (id, result) {
-        var trainee = $scope.trainees.find(function (t) { return t.id === id; });
-        trainee.finalResult = result;
+    $scope.toggle_attendance_details = function (id) {
+        var session = $scope.sessions_attend.find(function (t) { return t.Id === id; });
+        session.showDetails = !session.showDetails;
+    };
+
+    $scope.on_status_changed = function (session_id, session_key, course_id, person_id) {
+        console.log("---Status Changed---\n", session_id, session_key, course_id, person_id);
+    };
+     $scope.updateFinalResult = function (id, result) {
+         var trainee = $scope.exam_attendance.find(function (t) { return t.Id === id; });
+         trainee.Result = result;
+    };
+
+    $scope.updateScore = function (course_id, pid, score, result) {
+
+        var trainee = $scope.exam_attendance.find(t => t.PID === pid);
+        if (trainee) {
+            trainee.Score = score;
+        }
     };
 
     $scope.isLargeScreen = function () {
         return $window.innerWidth >= 768;
     };
 
-    $scope.trainees = [
-        { id: 1, name: 'AMIRHOSSEIN AKHLAGHI', presence: 90, score: 82, finalResult: 'Re-exam', showDetails: false },
-        { id: 2, name: 'SEYED BAHRAM MADANI', presence: 100, score: '-', finalResult: 'Re-exam', showDetails: false },
-        { id: 3, name: 'MAHDI RABIEI', presence: 85, score: 92, finalResult: 'Pass', showDetails: false },
-        { id: 4, name: 'MOHSEN RAHIMI', presence: 100, score: 91, finalResult: 'Pass', showDetails: false },
-        { id: 5, name: 'ALI RAJABI', presence: 100, score: 94, finalResult: 'Pass', showDetails: false },
-        { id: 6, name: 'MOHAMMAD ALI GHADERI SAVIRI', presence: 100, score: 95, finalResult: 'Pass', showDetails: false },
-        { id: 7, name: 'EHSAN SALIMI', presence: 90, score: 95, finalResult: 'Pass', showDetails: false },
-        { id: 8, name: 'MOSTAFA BAHOUSH HASANJANI', presence: 70, score: 89, finalResult: 'Re-exam', showDetails: false },
-        { id: 9, name: 'HAMIDREZA JABBARI', presence: 100, score: 90, finalResult: 'Pass', showDetails: false },
-        { id: 10, name: 'POUYAN ABBASI', presence: 100, score: 95, finalResult: 'Pass', showDetails: false },
-        { id: 11, name: 'SABA JOKAR', presence: 75, score: 100, finalResult: 'Pass', showDetails: false },
-        { id: 12, name: 'VAHID NOROUZI KOKEH', presence: 0, score: '-', finalResult: 'Re-exam', showDetails: false }
-    ];
+    //$scope.trainees = [
+    //    { id: 1, name: 'AMIRHOSSEIN AKHLAGHI', presence: 90, score: 82, finalResult: 'Re-exam', showDetails: false },
+    //    { id: 2, name: 'SEYED BAHRAM MADANI', presence: 100, score: '-', finalResult: 'Re-exam', showDetails: false },
+    //    { id: 3, name: 'MAHDI RABIEI', presence: 85, score: 92, finalResult: 'Pass', showDetails: false },
+    //    { id: 4, name: 'MOHSEN RAHIMI', presence: 100, score: 91, finalResult: 'Pass', showDetails: false },
+    //    { id: 5, name: 'ALI RAJABI', presence: 100, score: 94, finalResult: 'Pass', showDetails: false },
+    //    { id: 6, name: 'MOHAMMAD ALI GHADERI SAVIRI', presence: 100, score: 95, finalResult: 'Pass', showDetails: false },
+    //    { id: 7, name: 'EHSAN SALIMI', presence: 90, score: 95, finalResult: 'Pass', showDetails: false },
+    //    { id: 8, name: 'MOSTAFA BAHOUSH HASANJANI', presence: 70, score: 89, finalResult: 'Re-exam', showDetails: false },
+    //    { id: 9, name: 'HAMIDREZA JABBARI', presence: 100, score: 90, finalResult: 'Pass', showDetails: false },
+    //    { id: 10, name: 'POUYAN ABBASI', presence: 100, score: 95, finalResult: 'Pass', showDetails: false },
+    //    { id: 11, name: 'SABA JOKAR', presence: 75, score: 100, finalResult: 'Pass', showDetails: false },
+    //    { id: 12, name: 'VAHID NOROUZI KOKEH', presence: 0, score: '-', finalResult: 'Re-exam', showDetails: false }
+    //];
 
     //$scope.sections = [
     //    {
