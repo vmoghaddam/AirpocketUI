@@ -1,5 +1,7 @@
 ﻿'use strict';
-app.controller('trn_instructor_courseController', ['$scope', '$location', 'authService', '$routeParams', '$rootScope', '$window', function ($scope, $location, authService, $routeParams, $rootScope, $window) {
+app.controller('trn_instructor_courseController', ['$scope', '$location', 'authService', '$routeParams', '$rootScope', '$window', 'instructorService', function ($scope, $location, authService, $routeParams, $rootScope, $window, instructorService) {
+
+    $scope.course_id = $routeParams.id;
 
 
     $rootScope.show_exam = function () {
@@ -18,7 +20,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
 
     $scope.popup_exam = {
 
-      
+
         showTitle: true,
 
         toolbarItems: [
@@ -26,7 +28,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Sign', validationGroup: 'cabin', icon: 'fas fa-signature', onClick: function (e) {
 
-                      
+
 
 
                     }
@@ -36,7 +38,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', icon: 'check', validationGroup: 'cabin', onClick: function (e) {
-                       
+
 
                     }
                 }, toolbar: 'bottom'
@@ -103,7 +105,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
 
     $scope.popup_attendance = {
 
-      
+
         showTitle: true,
 
         toolbarItems: [
@@ -111,7 +113,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Sign', validationGroup: 'cabin', icon: 'fas fa-signature', onClick: function (e) {
 
-                      
+
 
 
                     }
@@ -121,7 +123,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', icon: 'check', validationGroup: 'cabin', onClick: function (e) {
-                       
+
 
                     }
                 }, toolbar: 'bottom'
@@ -204,6 +206,74 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
 
     };
 
+    $scope.bind = function () {
+        instructorService.get_course_object($scope.course_id).then(function (response) {
+            $scope.course = response.Data.course;
+            $scope.sessions = response.Data.sessions;
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        instructorService.get_people_sessions(6584).then(function (response) {
+
+            $scope.sessions_attend = response.Data.sessions
+
+            var idd = 0
+
+            $.each($scope.sessions_attend, function (_i, _s) {
+                _s.people = response.Data.people;
+                $.each(_s.people, function (_j, _p) {
+                    var press = Enumerable.From(response.Data.press).Where(function (x) { return x.SessionId == _s.Id && x.PersonId == _p.PersonId; }).FirstOrDefault();
+                    _p.press = !press ? 0 : press.IsPresent;
+                    _p.showDetails = false;
+                    
+                });
+            });
+
+
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+    }
+
+
+
+    $scope.toggletrn_cardDetails = function (id) {
+        var trainee = $scope.trainees.find(function (t) { return t.id === id; });
+        trainee.showDetails = !trainee.showDetails;
+    };
+
+    //$scope.toggle_attendance_details = function (eid, sid) {
+    //    var session = Enumerable.From($scope.sessions_attend).Where(function (x) { return x.Id == sid }).FirstOrDefault();
+    //    var person = Enumerable.From(session.people).Where(function (x) { return x.Id == eid }).FirstOrDefault();
+
+
+    //    person.showDetails = !person.showDetails;
+
+    //};
+
+    //$scope.toggle_attendance_details = function (eid, sid) {
+    //    //var session = Enumerable.From($scope.sessions_attend).Where(function (x) { return x.Id == sid }).FirstOrDefault();
+    //    //var person = Enumerable.From(session.people).Where(function (x) { return x.Id == eid }).FirstOrDefault();
+
+
+    //    $.each($scope.sessions_attend, function (_i, _s) {
+    //        $.each(_s.people, function (_j, _p) {
+    //            if (_p.Id == eid && _s.Id == sid)
+    //                _p.showDetails = true;
+    //        });
+    //    });
+
+    //    console.log('-----sessions attend------\n', $scope.sessions_attend);
+
+    //    //person.showDetails = !person.showDetails;
+
+    //};
+
+    $scope.updateFinalResult = function (id, result) {
+        var trainee = $scope.trainees.find(function (t) { return t.id === id; });
+        trainee.finalResult = result;
+    };
+
+    $scope.isLargeScreen = function () {
+        return $window.innerWidth >= 768;
+    };
+
     $scope.trainees = [
         { id: 1, name: 'AMIRHOSSEIN AKHLAGHI', presence: 90, score: 82, finalResult: 'Re-exam', showDetails: false },
         { id: 2, name: 'SEYED BAHRAM MADANI', presence: 100, score: '-', finalResult: 'Re-exam', showDetails: false },
@@ -219,245 +289,211 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
         { id: 12, name: 'VAHID NOROUZI KOKEH', presence: 0, score: '-', finalResult: 'Re-exam', showDetails: false }
     ];
 
-    $scope.toggletrn_cardDetails = function (id) {
-        console.log("------Id------\n", id);
-        var trainee = $scope.trainees.find(function (t) { return t.id === id; });
-        trainee.showDetails = !trainee.showDetails;
-        console.log("------ng-show------\n", trainee.showDetails);
-        console.log("------trainee------\n", trainee);
-    };
+    //$scope.sections = [
+    //    {
+    //        date: '2024-09-10',
+    //        time: '08:00-10:00',
+    //        trainees: [
+    //            {
+    //                id: 1,
+    //                nationalCode: '0061686379',
+    //                name: 'ALIREZA ABDOLALI',
+    //                department: 'Flight Operation',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 2,
+    //                nationalCode: '2281527123',
+    //                name: 'AHAD BAGHERI',
+    //                department: 'Flight Operation',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 3,
+    //                nationalCode: '2281016986',
+    //                name: 'ARMAN JAFARPOUR',
+    //                department: 'QA',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 4,
+    //                nationalCode: '4420357614',
+    //                name: 'MOHAMMADHOSSEIN MIRAKHOR',
+    //                department: 'Commercial',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 5,
+    //                nationalCode: '2281019748',
+    //                name: 'MOHAMADREZA RAFIZADEH',
+    //                department: 'Commercial',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 6,
+    //                nationalCode: '2301231623',
+    //                name: 'ALI RAHMANI',
+    //                department: 'Maintenance',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            }
+    //        ]
+    //    },
+    //    {
+    //        date: '2024-09-10',
+    //        time: '10:00-12:00',
+    //        trainees: [
+    //            {
+    //                id: 7,
+    //                nationalCode: '0061686379',
+    //                name: 'ALIREZA ABDOLALI',
+    //                department: 'Flight Operation',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 8,
+    //                nationalCode: '2281527123',
+    //                name: 'AHAD BAGHERI',
+    //                department: 'Flight Operation',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 9,
+    //                nationalCode: '2281016986',
+    //                name: 'ARMAN JAFARPOUR',
+    //                department: 'QA',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 10,
+    //                nationalCode: '4420357614',
+    //                name: 'MOHAMMADHOSSEIN MIRAKHOR',
+    //                department: 'Commercial',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 11,
+    //                nationalCode: '2281019748',
+    //                name: 'MOHAMADREZA RAFIZADEH',
+    //                department: 'Commercial',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 12,
+    //                nationalCode: '2301231623',
+    //                name: 'ALI RAHMANI',
+    //                department: 'Maintenance',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            }
+    //        ]
+    //    },
+    //    {
+    //        date: '2024-09-10',
+    //        time: '14:00-16:00',
+    //        trainees: [
+    //            {
+    //                id: 13,
+    //                nationalCode: '0061686379',
+    //                name: 'ALIREZA ABDOLALI',
+    //                department: 'Flight Operation',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 14,
+    //                nationalCode: '2281527123',
+    //                name: 'AHAD BAGHERI',
+    //                department: 'Flight Operation',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 15,
+    //                nationalCode: '2281016986',
+    //                name: 'ARMAN JAFARPOUR',
+    //                department: 'QA',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 16,
+    //                nationalCode: '4420357614',
+    //                name: 'MOHAMMADHOSSEIN MIRAKHOR',
+    //                department: 'Commercial',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 17,
+    //                nationalCode: '2281019748',
+    //                name: 'MOHAMADREZA RAFIZADEH',
+    //                department: 'Commercial',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            },
+    //            {
+    //                id: 18,
+    //                nationalCode: '2301231623',
+    //                name: 'ALI RAHMANI',
+    //                department: 'Maintenance',
+    //                presence: false,
+    //                remark: '-',
+    //                finalResult: '',
+    //                showDetails: false
+    //            }
+    //        ]
+    //    }
+    //];
 
-    $scope.toggle_attendance_details = function (id) {
-        console.log("------Id------\n", id);
-        var trainee;
+    $scope.$on('PageLoaded', function (event, prms) {
+        $scope.bind();
+    });
 
-        // Loop through each section to find the trainee
-        $scope.sections.some(function (section) {
-            trainee = section.trainees.find(function (t) { return t.id === id; });
-            return trainee !== undefined; // Stop looping if trainee is found
-        });
-
-        if (trainee) {
-            trainee.showDetails = !trainee.showDetails;
-            console.log("------ng-show------\n", trainee.showDetails);
-            console.log("------trainee------\n", trainee);
-        } else {
-            console.log("Trainee not found with id:", id);
-        }
-    };
-
-    $scope.updateFinalResult = function (id, result) {
-        var trainee = $scope.trainees.find(function (t) { return t.id === id; });
-        trainee.finalResult = result;
-    };
-
-    // Function to detect large screen
-    $scope.isLargeScreen = function () {
-        return $window.innerWidth >= 768;
-    };
-
-    $scope.sections = [
-        {
-            date: '2024-09-10',
-            time: '08:00-10:00',
-            trainees: [
-                {
-                    id: 1,
-                    nationalCode: '0061686379',
-                    name: 'ALIREZA ABDOLALI',
-                    department: 'Flight Operation',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 2,
-                    nationalCode: '2281527123',
-                    name: 'AHAD BAGHERI',
-                    department: 'Flight Operation',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 3,
-                    nationalCode: '2281016986',
-                    name: 'ARMAN JAFARPOUR',
-                    department: 'QA',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 4,
-                    nationalCode: '4420357614',
-                    name: 'MOHAMMADHOSSEIN MIRAKHOR',
-                    department: 'Commercial',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 5,
-                    nationalCode: '2281019748',
-                    name: 'MOHAMADREZA RAFIZADEH',
-                    department: 'Commercial',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 6,
-                    nationalCode: '2301231623',
-                    name: 'ALI RAHMANI',
-                    department: 'Maintenance',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                }
-            ]
-        },
-        {
-            date: '2024-09-10',
-            time: '10:00-12:00',
-            trainees: [
-                {
-                    id: 7,
-                    nationalCode: '0061686379',
-                    name: 'ALIREZA ABDOLALI',
-                    department: 'Flight Operation',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 8,
-                    nationalCode: '2281527123',
-                    name: 'AHAD BAGHERI',
-                    department: 'Flight Operation',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 9,
-                    nationalCode: '2281016986',
-                    name: 'ARMAN JAFARPOUR',
-                    department: 'QA',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 10,
-                    nationalCode: '4420357614',
-                    name: 'MOHAMMADHOSSEIN MIRAKHOR',
-                    department: 'Commercial',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 11,
-                    nationalCode: '2281019748',
-                    name: 'MOHAMADREZA RAFIZADEH',
-                    department: 'Commercial',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 12,
-                    nationalCode: '2301231623',
-                    name: 'ALI RAHMANI',
-                    department: 'Maintenance',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                }
-            ]
-        },
-        {
-            date: '2024-09-10',
-            time: '14:00-16:00',
-            trainees: [
-                {
-                    id: 13,
-                    nationalCode: '0061686379',
-                    name: 'ALIREZA ABDOLALI',
-                    department: 'Flight Operation',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 14,
-                    nationalCode: '2281527123',
-                    name: 'AHAD BAGHERI',
-                    department: 'Flight Operation',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 15,
-                    nationalCode: '2281016986',
-                    name: 'ARMAN JAFARPOUR',
-                    department: 'QA',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 16,
-                    nationalCode: '4420357614',
-                    name: 'MOHAMMADHOSSEIN MIRAKHOR',
-                    department: 'Commercial',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 17,
-                    nationalCode: '2281019748',
-                    name: 'MOHAMADREZA RAFIZADEH',
-                    department: 'Commercial',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                },
-                {
-                    id: 18,
-                    nationalCode: '2301231623',
-                    name: 'ALI RAHMANI',
-                    department: 'Maintenance',
-                    presence: false,
-                    remark: '-',
-                    finalResult: '',
-                    showDetails: false
-                }
-            ]
-        }
-    ];
-
-       
 }]);
 
 

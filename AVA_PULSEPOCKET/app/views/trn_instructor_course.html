@@ -201,6 +201,49 @@
 
 
 
+    .info-container {
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+        .info-container h2 {
+            margin: 0;
+            padding-bottom: 15px;
+            font-size: 24px;
+            border-bottom: 1px solid #666;
+            text-align: right;
+        }
+
+    .tbl_course {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .table_data {
+        padding: 10px;
+        border: 1px dotted #666;
+    }
+
+    .table_head {
+        padding: 12px;
+        text-align: left;
+        border: 1px dotted #666;
+    }
+
+    .section-title {
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #ffcc00;
+        padding-top: 20px;
+    }
+
+    .highlight {
+        color: #ffcc00;
+        font-weight: bold;
+    }
+
+
     /* Table layout for larger screens */
     @media (min-width: 768px) {
         .attendance-container {
@@ -279,7 +322,6 @@
             display: block;
             margin-bottom: 5px;
         }
-
     }
 </style>
 <div style="height:100%;">
@@ -290,6 +332,73 @@
         </div>
 
         <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+            <div class="info-container">
+                <table class="tbl_course">
+                    <tr>
+                        <th class="table_head" colspan="4">Title</th>
+                    </tr>
+                    <tr>
+                        <td class="table_data" colspan="4">{{course.Title}}</td>
+                    </tr>
+                    <tr>
+                        <th class="table_head">Type</th>
+                        <td class="table_data" colspan="3">{{course.CertificateType}}</td>
+                    </tr>
+                    <tr>
+                        <th class="table_head">Class ID</th>
+                        <td class="table_data">{{course.No}}</td>
+                        <th class="table_head">Status</th>
+                        <td class="table_data">{{course.Status}}</td>
+                    </tr>
+                    <tr>
+                        <th class="table_head" colspan="2">Type of Class Holding</th>
+                        <td class="table_data" colspan="2">{{course.HoldingType}}</td>
+                    </tr>
+
+                    <tr>
+                        <th class="table_head">Start Date</th>
+                        <td class="table_data">{{course.DateStart | date: 'yyyy-MM-dd'}}</td>
+                        <th class="table_head">End Date</th>
+                        <td class="table_data">{{course.DateStart | date: 'yyyy-MM-dd'}}</td>
+                    </tr>
+                    <tr>
+                        <th class="table_head">Location</th>
+                        <td class="table_data">{{course.Location}}</td>
+                        <th class="table_head">Duration</th>
+                        <td class="table_data">{{course.Duration}} {{course.DurationUnit}}</td>
+                    </tr>
+                    <tr>
+                        <th class="table_head">Organization</th>
+                        <td class="table_data" colspan="3">{{course.Organization}}</td>
+                    </tr>
+                    <tr>
+                        <th class="table_head" colspan="2">Training Director</th>
+                        <td class="table_data" colspan="2">{{course.TrainingDirector}}</td>
+                    </tr>
+                    <!--<tr>
+                        <th class="table_head">Sessions</th>
+                        <td colspan="3">{{course.Sessions}}</td>
+                    </tr>-->
+
+                </table>
+
+                <table class="tbl_course">
+                    <tr>
+                        <th class="table_head col-sm-6 col-xs-6">Date</th>
+                        <th class="table_head col-sm-3 col-xs-3" style="text-align:center">Start</th>
+                        <th class="table_head col-sm-3 col-xs-3" style="text-align:center">End</th>
+                    </tr>
+                    <tr ng-repeat="session in sessions">
+                        <td class="table_data">{{session.DateStart | date: 'yyyy-MM-dd'}}</td>
+                        <td class="table_data" style="text-align:center">{{session.DateStart | date: 'HH:mm'}}</td>
+                        <td class="table_data" style="text-align:center">{{session.DateEnd | date: 'HH:mm'}}</td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
             <div id="popup_exam" dx-popup="popup_exam" class="no-padding">
                 <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
                     <div class="section">
@@ -367,8 +476,8 @@
             <div id="popup_attendance" dx-popup="popup_attendance" class="no-padding">
                 <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
                     <!-- Attendance Sections -->
-                    <div class="attend_section" ng-repeat="section in sections">
-                        <h5><i class="fas fa-users" style="font-size: 23px"></i> Attendance for {{section.date}}, {{section.time}}</h5>
+                    <div class="attend_section" ng-repeat="session in sessions_attend">
+                        <h5><i class="fas fa-users" style="font-size: 23px"></i> Attendance for {{session.DateStart | date: 'yyyy-MM-dd'}}, {{session.DateStart | date: 'HH:mm'}}</h5>
 
                         <!-- Desktop Table -->
                         <table class="attend_attendance_table">
@@ -382,41 +491,43 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="trainee in section.trainees">
-                                    <td>{{trainee.nationalCode}}</td>
-                                    <td>{{trainee.name}}</td>
-                                    <td>{{trainee.department}}</td>
-                                    <td><input type="checkbox" ng-model="trainee.presence"></td>
-                                    <td>{{trainee.remark}}</td>
+                                <tr ng-repeat="person in session.people">
+                                    <td>{{person.NID}}</td>
+                                    <td>{{person.Name}}</td>
+                                    <td>{{person.Departman}}</td>
+                                    <td><input type="checkbox" ng-model="person.presence"></td>
+                                    <td>{{person.remark}}</td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <!-- Mobile List -->
                         <div class="attendance-container" ng-if="!isLargeScreen()">
-                            <div class="attendance_trn_card" ng-repeat="trainee in section.trainees">
-                                <h3 ng-click="toggle_attendance_details(trainee.id)">{{trainee.name}}</h3>
-                                <div class="trn_card-details" ng-show="trainee.showDetails">
-                                    <p><strong>National Code:</strong> {{trainee.nationalCode}}</p>
-                                    <p><strong>Department:</strong> {{trainee.department}}</p>
-                                    <p><strong>Presence:</strong> <input type="checkbox" ng-model="trainee.presence"></p>
-                                    <p><strong>Remark:</strong> {{trainee.remark}}</p>
+                            <div class="attendance_trn_card" ng-repeat="person in session.people">
+                                <!--<h3 ng-click="toggle_attendance_details(person.Id, session.Id)">{{person.Name}}</h3>
+                                <div class="trn_card-details" ng-show="person.showDetails">-->
+                                <h3 ng-click="detailsVisible = !detailsVisible">{{person.Name}}</h3>
+                                <div class="trn_card-details" ng-style="{'display': detailsVisible ? 'block' : 'none'}">
+                                    <p><strong>National Code:</strong> {{person.NID}}</p>
+                                    <p><strong>Department:</strong> {{person.Department}}</p>
+                                    <p><strong>Presence:</strong> <input type="checkbox" ng-model="person.presence"></p>
+                                    <p><strong>Remark:</strong> {{person.remark}}</p>
                                 </div>
                             </div>
                         </div>
 
 
                         <!--<ul class="attend_participant_list">
-        <li class="attend_participant_item" ng-repeat="participant in section.participants" ng-click="participant.active = !participant.active" ng-class="{'attend_active': participant.active}">
-            <span>{{participant.name}}</span>
-            <div class="attend_participant_details">
-                <label>National Code: {{participant.nationalCode}}</label>
-                <label>Department: {{participant.department}}</label>
-                <label>Presence: <input type="checkbox" ng-model="participant.presence"></label>
-                <label>Remark: {{participant.remark}}</label>
-            </div>
-        </li>
-    </ul>-->
+                            <li class="attend_participant_item" ng-repeat="participant in section.participants" ng-click="participant.active = !participant.active" ng-class="{'attend_active': participant.active}">
+                                <span>{{participant.name}}</span>
+                                <div class="attend_participant_details">
+                                    <label>National Code: {{participant.nationalCode}}</label>
+                                    <label>Department: {{participant.department}}</label>
+                                    <label>Presence: <input type="checkbox" ng-model="participant.presence"></label>
+                                    <label>Remark: {{participant.remark}}</label>
+                                </div>
+                            </li>
+                        </ul>-->
                     </div>
                 </div>
             </div>

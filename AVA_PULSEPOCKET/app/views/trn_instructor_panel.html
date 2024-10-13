@@ -35,6 +35,58 @@
         display: block;
         background-color: white;
     }
+
+    .card-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 15px auto; /* Center the cards */
+        padding: 20px;
+        transition: transform 0.2s;
+    }
+
+        .card-container:hover {
+            transform: scale(1.05);
+        }
+
+    .title {
+        font-size: 17px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+        .info-row span {
+            color: #555;
+            font-size: 14px;
+        }
+
+    .date-range {
+        background-color: #FF5722;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 14px;
+        margin-right: 10px;
+        display: inline-block;
+    }
+
+    .duration {
+        color: #FF5722;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    
 </style>
 <div style="height:100%;">
     <div class="box library maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
@@ -44,17 +96,41 @@
         </div>
 
         <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+            <div dx-tabs="tabs_options" class="gray">
 
-            <div data-ng-click="navigate('/trn/instructor/course','trn-instructor-course',2)" style="width: 100%; background-color: whitesmoke; text-align: center; justify-content:center; height: 70px; padding: 5px">
-                <p style="height: 100%; align-content: center; border: 1px solid lightgray;">COURSE</p>
             </div>
-          
+            <div id="active" style="display:none;height:100%" class="tabc">
+                <!--<div data-ng-click="navigate('/trn/instructor/course','trn-instructor-course',2)" style="width: 100%; background-color: whitesmoke; text-align: center; justify-content:center; height: 70px; padding: 5px">
+                    <p style="height: 100%; align-content: center; border: 1px solid lightgray;">COURSE</p>
+                </div>-->
+                <div id="scrlcurs" dx-scroll-view="scroll_course">
+                    <div style="padding: 0 10px 0 10px">
+                        <div ng-repeat="course in courses" class="card-container"  data-ng-click="navigate('/trn/instructor/course/' + course.CourseId,'trn-instructor-course',2)">
+
+                            <div class="title">{{course.Title}}</div>
+                            <div class="info-row">
+                                <div class="date-range">
+                                    {{course.DateStart | date: 'yyyy-MM-dd'}} - {{course.DateEnd | date: 'yyyy-MM-dd'}}
+                                </div>
+                            </div>
+                            <div class="duration">
+                                Duration: {{course.Duration}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="archived" style="display:none;height:100%" class="tabc">
+                <div id="scrlarch" dx-scroll-view="scroll_archived">
+                </div>
+            </div>
+
         </div>
 
         <div class="rowx footer app-footer" ng-include="'app/views/footer.html?v=2036'" ng-init="type = 'trn-instructor-panel';" style="padding:0;flex:0 0 45px"></div>
     </div>
 
-   
+
 
     <div dx-load-panel="loadPanel"></div>
 </div>

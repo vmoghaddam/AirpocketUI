@@ -193,7 +193,7 @@ app.config(function ($routeProvider) {
     });
 
  
-   $routeProvider.when("/trn/instructor/course", {
+   $routeProvider.when("/trn/instructor/course/:id", {
         controller: "trn_instructor_courseController",
         templateUrl: "app/views/trn_instructor_course.html?v="+version,
 

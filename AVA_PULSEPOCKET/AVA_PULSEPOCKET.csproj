@@ -114,6 +114,7 @@
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\flightService.js" />
     <Content Include="app\services\generalService.js" />
+    <Content Include="app\services\instructorService.js" />
     <Content Include="app\services\libraryService.js" />
     <Content Include="app\services\notificationService.js" />
     <Content Include="app\services\ordersService.js" />
