@@ -2,8 +2,10 @@
 app.controller('trn_instructor_courseController', ['$scope', '$location', 'authService', '$routeParams', '$rootScope', '$window', 'instructorService', function ($scope, $location, authService, $routeParams, $rootScope, $window, instructorService) {
 
     $scope.course_id = $routeParams.id;
-    $scope.exam_attendance = [];
+
  
+    $scope.instructor = { course_id: $scope.course_id, person_id: $rootScope.employeeId }
+
     $rootScope.show_exam = function () {
         $scope.popup_exam_visible = true;
     }
@@ -26,11 +28,16 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
         toolbarItems: [
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'success', text: 'Sign', validationGroup: 'cabin', icon: 'fas fa-signature', onClick: function (e) {
+                    type: 'success', text: 'Sign', icon: 'fas fa-signature', onClick: function (e) {
 
+                        //instructorService.save_exam_result($scope.exam).then(function (response) {
+                        //    console.log('----Exam Result Save Resposne\n', response);
+                        //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-                        console.log('----Exam Result----\n', $scope.exam_attendance);
+                        
+                        instructorService.sign_exam_coures($scope.instructor).then(function (response) {
 
+                        });
                     }
                 }, toolbar: 'bottom'
             },
@@ -39,7 +46,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                 widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
                         $scope.popup_exam_visible = false;
-                       
+
                     }
                 }, toolbar: 'bottom'
             }
@@ -105,14 +112,16 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Sign', validationGroup: 'cabin', icon: 'fas fa-signature', onClick: function (e) {
 
-
+                        instructorService.sign_attendance_coures($scope.instructor).then(function (response) {
+                            
+                        });
 
 
                     }
                 }, toolbar: 'bottom'
             },
 
-           
+
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
@@ -195,33 +204,42 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
             $scope.course = response.Data.course;
             $scope.sessions = response.Data.sessions;
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-        instructorService.get_people_sessions(6584).then(function (response) {
+
+        instructorService.get_people_sessions($scope.course_id).then(function (response) {
+
+            console.log("----Resposne-----\n", response.Data)
+            console.log("----Resposne Press-----\n", response.Data.press)
 
             $scope.sessions_attend = response.Data.sessions
             //$scope.exam_attendance = response.Data.people
 
+            $scope.exam = { course_id: $scope.course_id, exam_date: '2024-10-14', scores : []}
+
             $.each(response.Data.people, function (_i, _p) {
-                $scope.exam_attendance.push({ Id: _p.Id, course_id: _p.CourseId, person_id: _p.PID, Score: null, Result: null, Name: _p.Name });
+                $scope.exam.scores.push({ Id: _p.Id, person_id: _p.PersonId, score: _p.ExamResult ,result: _p.ExamStatus,  Name: _p.Name });
             });
 
 
 
-            console.log("----People----\n", $scope.exam_attendance);
+            console.log("----People----\n", response.Data.people);
 
-            
+
             $.each($scope.sessions_attend, function (_i, _s) {
-                _s.people = response.Data.people;
+                console.log('---sessions_attend---\n', $scope.sessions_attend);
+                _s.people = angular.copy(response.Data.people);
                 _s.showDetails = false;
+               
                 $.each(_s.people, function (_j, _p) {
                     var press = Enumerable.From(response.Data.press).Where(function (x) { return x.SessionId == _s.Id && x.PersonId == _p.PersonId; }).FirstOrDefault();
+                   
                     _p.press = !press ? 0 : press.IsPresent;
-                    _p.showDetails = false;
                     
                 });
             });
 
-
+            console.log("----Sessions Attend----\n", $scope.sessions_attend);
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
     }
 
 
@@ -231,13 +249,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
         trainee.showDetails = !trainee.showDetails;
     };
 
-    $scope.updateScore = function (course_id, pid, score, result) {
-        
-        var trainee = $scope.exam_attendance.find(t => t.PIDb === pid);
-        if (trainee) {
-            trainee.Score = score;
-        }
-    };
+
     //$scope.toggle_attendance_details = function (eid, sid) {
     //    var session = Enumerable.From($scope.sessions_attend).Where(function (x) { return x.Id == sid }).FirstOrDefault();
     //    var person = Enumerable.From(session.people).Where(function (x) { return x.Id == eid }).FirstOrDefault();
@@ -271,16 +283,28 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
     };
 
     $scope.on_status_changed = function (session_id, session_key, course_id, person_id) {
-        console.log("---Status Changed---\n", session_id, session_key, course_id, person_id);
+
+        $scope.attendance_entity = { pid: person_id, cid: course_id, sid: "Session" + session_key }
+        instructorService.save_person_press($scope.attendance_entity).then(function (response) {
+            console.log('-----Save Perss Respoonse-----\n', response);
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     };
-     $scope.updateFinalResult = function (id, result) {
-         var trainee = $scope.exam_attendance.find(function (t) { return t.Id === id; });
-         trainee.Result = result;
+    $scope.updateFinalResult = function (id, result) {
+        var trainee = $scope.exam.scores.find(function (t) { return t.Id === id; });
+        trainee.result = result;
     };
 
-    $scope.updateScore = function (course_id, pid, score, result) {
+    //$scope.updateScore = function (pid, score, result) {
 
-        var trainee = $scope.exam_attendance.find(t => t.PID === pid);
+    //    var trainee = $scope.exam.attendance.find(t => t.person_id === pid);
+    //    if (trainee) {
+    //        trainee.Score = score;
+    //    }
+    //};
+
+    $scope.updateScore = function (person_id, score, result) {
+
+        var trainee = $scope.exam.scores.find(t => t.person_id === person_id);
         if (trainee) {
             trainee.Score = score;
         }

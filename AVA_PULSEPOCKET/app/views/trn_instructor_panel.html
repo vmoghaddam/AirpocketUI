@@ -41,11 +41,9 @@
         flex-direction: column;
         width: 100%;
         background-color: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         margin: 15px auto; /* Center the cards */
-        padding: 20px;
         transition: transform 0.2s;
+        border: 1px solid white
     }
 
         .card-container:hover {
@@ -53,10 +51,15 @@
         }
 
     .title {
-        font-size: 17px;
+        font-size: 13px;
         font-weight: bold;
         color: #333;
         margin-bottom: 10px;
+        background-color: #FF5722;
+        height: 30px;
+        color: white;
+        align-content: center;
+        padding-left: 5px;
     }
 
     .info-row {
@@ -71,13 +74,11 @@
         }
 
     .date-range {
-        background-color: #FF5722;
-        color: white;
         padding: 5px 10px;
-        border-radius: 5px;
         font-size: 14px;
         margin-right: 10px;
-        display: inline-block;
+        display: block;
+        width: 100%
     }
 
     .duration {
@@ -86,7 +87,56 @@
         font-size: 14px;
     }
 
-    
+    .container {
+        display: inline-block;
+        position: relative;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Hide the browser's default checkbox */
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 15px;
+        width: 15px;
+        border:1px solid Orange;
+    }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .container input:checked ~ .checkmark {
+        background-color: orange;
+    }
+
+    @media (min-width: 767px) {
+        .container {
+            position: unset;
+        }
+    }
 </style>
 <div style="height:100%;">
     <div class="box library maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
@@ -99,29 +149,78 @@
             <div dx-tabs="tabs_options" class="gray">
 
             </div>
-            <div id="active" style="display:none;height:100%" class="tabc">
+            <div id="instructor" style="display:none;height:100%" class="tabc">
                 <!--<div data-ng-click="navigate('/trn/instructor/course','trn-instructor-course',2)" style="width: 100%; background-color: whitesmoke; text-align: center; justify-content:center; height: 70px; padding: 5px">
                     <p style="height: 100%; align-content: center; border: 1px solid lightgray;">COURSE</p>
                 </div>-->
                 <div id="scrlcurs" dx-scroll-view="scroll_course">
                     <div style="padding: 0 10px 0 10px">
-                        <div ng-repeat="course in courses" class="card-container"  data-ng-click="navigate('/trn/instructor/course/' + course.CourseId,'trn-instructor-course',2)">
+                        <div ng-repeat="course in instructor_courses" class="card-container" data-ng-click="navigate('/trn/instructor/course/' + course.CourseId,'trn-instructor-course',2)">
 
                             <div class="title">{{course.Title}}</div>
-                            <div class="info-row">
-                                <div class="date-range">
-                                    {{course.DateStart | date: 'yyyy-MM-dd'}} - {{course.DateEnd | date: 'yyyy-MM-dd'}}
+
+                            <div class="date-range">
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">From</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateStart | date: 'yyyy-MM-dd'}}</p>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">To</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateEnd | date: 'yyyy-MM-dd'}}</p>
                                 </div>
                             </div>
-                            <div class="duration">
-                                Duration: {{course.Duration}}
+                            <div class="date-range">
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">Duration</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.Duration}}</p>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">In</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.Sessions}}Sessions</p>
+                                </div>
                             </div>
+                            <div class="date-range">
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">Attendance List</p> <div class="container"><input type="checkbox" ng-checked="course.Date_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">Exam Result</p> <div class="container"><input type="checkbox" ng-checked="course.Date_Exam_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="archived" style="display:none;height:100%" class="tabc">
-                <div id="scrlarch" dx-scroll-view="scroll_archived">
+            <div id="director" style="display:none;height:100%" class="tabc">
+                <div id="scrlcurs" dx-scroll-view="scroll_course">
+                    <div style="padding: 0 10px 0 10px">
+                        <div ng-repeat="course in director_courses" class="card-container" data-ng-click="navigate('/trn/instructor/course/' + course.CourseId,'trn-instructor-course',2)">
+
+                            <div class="title" style="background-color: lightgray; color: black">{{course.Title}}</div>
+
+                            <div class="date-range">
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">From</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateStart | date: 'yyyy-MM-dd'}}</p>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">To</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateEnd | date: 'yyyy-MM-dd'}}</p>
+                                </div>
+                            </div>
+                            <div class="date-range">
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">Duration</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.Duration}}</p>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">In</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.Sessions}}Sessions</p>
+                                </div>
+                            </div>
+                            <div class="date-range">
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">Attendance List</p> <div class="container"><input type="checkbox" ng-checked="course.Date_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div>
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <p style="display: inline-block">Exam Result</p> <div class="container"><input type="checkbox" ng-checked="course.Date_Exam_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

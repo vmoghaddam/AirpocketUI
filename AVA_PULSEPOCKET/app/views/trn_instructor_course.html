@@ -223,13 +223,13 @@
 
     .table_data {
         padding: 10px;
-        border: 1px dotted #666;
+        border: 1px solid #666;
     }
 
     .table_head {
         padding: 12px;
         text-align: left;
-        border: 1px dotted #666;
+        border: 1px solid #666;
     }
 
     .section-title {
@@ -429,14 +429,14 @@
                         
                         <!-- trn_card layout for mobile devices -->
                         <div class="attendance-container" ng-if="!isLargeScreen()">
-                            <div class="attendance_trn_card" style=" border: 1px solid #ffcc00;" ng-repeat="trainee in exam_attendance">
+                            <div class="attendance_trn_card" style=" border: 1px solid #ffcc00;" ng-repeat="trainee in exam.scores">
                                 <div style="align-content: center; font-size: 13px; font-weight: bold; padding-left: 8px; height: 38px; border-radius: 8px 8px 0 0; background-color: #FF5722; color: #fff">{{trainee.Name}}</div>
                                 <div class="trn_card-details">
-                                    <input type="text" placeholder="Score" ng-model="trainee.Score" ng-change="updateScore(trainee.CourseId, trainee.Id, trainee.Score, trainee.Result)" style="width: 97%; border: 1px solid lightgray;margin: 5px; border-radius: 8px; height: 35px">
+                                    <input type="text" placeholder="Score" ng-model="trainee.score" ng-change="updateScore(trainee.persin_id, trainee.Score, trainee.Result)" style="width: 97%; border: 1px solid lightgray;margin: 5px; border-radius: 8px; height: 35px">
                                     <div class="final-result-buttons">
-                                        <button class="final-result-button pass" ng-class="{'active': trainee.Result === 'Pass'}" ng-click="updateFinalResult(trainee.Id, 'Pass')">Pass</button>
-                                        <button class="final-result-button failed" ng-class="{'active': trainee.Result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
-                                        <button class="final-result-button reexam" ng-class="{'active': trainee.Result === 'Re-exam'}" ng-click="updateFinalResult(trainee.Id, 'Re-exam')">Re-exam</button>
+                                        <button class="final-result-button pass" ng-class="{'active': trainee.result === 'Pass'}" ng-click="updateFinalResult(trainee.Id, 'Pass')">Pass</button>
+                                        <button class="final-result-button failed" ng-class="{'active': trainee.result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
+                                        <button class="final-result-button reexam" ng-class="{'active': trainee.result === 'Re-exam'}" ng-click="updateFinalResult(trainee.Id, 'Re-exam')">Re-exam</button>
                                     </div>
                                 </div>
                             </div>
@@ -446,22 +446,20 @@
                         <table class="attendance-table" ng-if="isLargeScreen()">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Presence</th>
-                                    <th>Score</th>
-                                    <th>Final Result</th>
+                                    <th class="col-lg-7 col-md-7" style="text-align:left">Name</th>
+                                    <th class="col-lg-1 col-md-1">Score</th>
+                                    <th class="col-lg-4 col-md-4">Final Result</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="trainee in exam_attendance">
-                                    <td>{{trainee.Name}}</td>
-                                    <td>{{trainee.presence}}%</td>
-                                    <td>{{trainee.Score}}</td>
+                                <tr ng-repeat="trainee in exam.scores">
+                                    <td style="text-align:left">{{trainee.Name}}</td>
+                                    <td> <input type="text" placeholder="Score" ng-model="trainee.score" ng-change="updateScore(trainee.persin_id, trainee.Score, trainee.Result)" style="width: 97%; border: 1px solid lightgray;margin: 5px; border-radius: 8px; height: 35px;text-align:center"></td>
                                     <td>
                                         <div class="final-result-buttons">
-                                            <button class="final-result-button pass" ng-class="{'active': trainee.Result === 'Pass'}" ng-click="updateFinalResult(trainee.Id, 'Pass')">Pass</button>
-                                            <button class="final-result-button failed" ng-class="{'active': trainee.Result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
-                                            <button class="final-result-button reexam" ng-class="{'active': trainee.Result === 'Re-exam'}" ng-click="updateFinalResult(trainee.Id, 'Re-exam')">Re-exam</button>
+                                            <button class="final-result-button pass" ng-class="{'active': trainee.result === 'Pass'}" ng-click="updateFinalResult(trainee.Id, 'Pass')">Pass</button>
+                                            <button class="final-result-button failed" ng-class="{'active': trainee.result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
+                                            <button class="final-result-button reexam" ng-class="{'active': trainee.result === 'Re-exam'}" ng-click="updateFinalResult(trainee.Id, 'Re-exam')">Re-exam</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -493,7 +491,7 @@
                                     <td>{{person.NID}}</td>
                                     <td>{{person.Name}}</td>
                                     <td>{{person.Departman}}</td>
-                                    <td><input type="checkbox" ng-model="person.presence"></td>
+                                    <td><input ng-click='on_status_changed(session.Id, session.Key, session.CourseId, person.PersonId)' ng-model="person.press" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></td>
                                     <td>{{person.remark}}</td>
                                 </tr>
                             </tbody>
@@ -504,7 +502,7 @@
                             <div class="attendance_trn_card" ng-repeat="person in session.people">
                                 <div class="trn_card-details" style="border-bottom: 1px solid lightgray;align-content:center">
                                     <div class="col-sm-9 col-xs-9" style="display:inline-block; text-align: left; font-size: 13px">{{person.Name}}</div>
-                                    <div class="col-sm-3 col-xs-3" style="display:inline-block; text-align: right"><input ng-click='on_status_changed(session.Id, session.Key, session.CourseId, person.Id)' style="margin: 0px !important" type="checkbox"></div>
+                                    <div class="col-sm-3 col-xs-3" style="display:inline-block; text-align: right"><input ng-click='on_status_changed(session.Id, session.Key, session.CourseId, person.PersonId)' ng-model="person.press" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></div>
                                 </div>
                             </div>
                         </div>

@@ -307,7 +307,8 @@ app.run(['authService', 'activityService', '$rootScope', '$location','$window', 
     $rootScope.userId = null;
     $rootScope.employeeId = null;
     $rootScope.jobGroup = null;
-	$rootScope.JobGroup2=null;
+    $rootScope.JobGroup2 = null;
+    $rootScope.instructorId = 238
     $rootScope.logOut = function () { authService.logOut(); };
 	$rootScope.printcrs=function(){
 		$window.open('https://fleet.flypersia.aero/trncard/frmreportview.aspx?type=11&pid='+($rootScope.userId*2+1237), '_blank') ;

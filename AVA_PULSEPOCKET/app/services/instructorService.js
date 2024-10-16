@@ -1,11 +1,24 @@
 ﻿'use strict';
 app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope', function ($http, $q, ngAuthSettings, $rootScope) {
     var serviceFactory = {};
-   
-    var _get_teacher_course = function (id) {
+
+    var _get_instructor_course = function (id) {
 
         var deferred = $q.defer();
-        $http.get('https://fleet.flypersia.aero/apitrn/api/teacher/courses/' + id).then(function (response) {
+        $http.get('https://fleet.flypersia.aero/ztrn2/api/instructor/courses/active/' + id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(/*Exceptions.getMessage(err)*/ JSON.stringify(err));
+        });
+
+        return deferred.promise;
+    };
+
+    var _get_director_course = function (id) {
+
+        var deferred = $q.defer();
+        $http.get('https://fleet.flypersia.aero/ztrn2/api/director/courses/active/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -28,10 +41,10 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
         return deferred.promise;
     };
 
-   var _get_people_sessions = function (id) {
+    var _get_people_sessions = function (id) {
 
         var deferred = $q.defer();
-       $http.get('https://fleet.flypersia.aero/apitrn/api/course/peoplesessions/' + id).then(function (response) {
+        $http.get('https://fleet.flypersia.aero/ztrn2/api/course/peoplesessions/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -41,11 +54,70 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
         return deferred.promise;
     };
 
-    serviceFactory.get_teacher_course = _get_teacher_course;
+    var _save_person_press = function (entity) {
+
+        var deferred = $q.defer();
+        $http.post('https://fleet.flypersia.aero/apitrn/api/course/session/pres/save', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(/*Exceptions.getMessage(err)*/ JSON.stringify(err));
+        });
+
+        return deferred.promise;
+    };
+
+    var _save_exam_result = function (entity) {
+
+        var deferred = $q.defer();
+        $http.post('https://fleet.flypersia.aero/ztrn2/api/course/exam/result/save', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(/*Exceptions.getMessage(err)*/ JSON.stringify(err));
+        });
+
+        return deferred.promise;
+    };
+
+    var _sign_attendance_coures = function (entity) {
+
+        var deferred = $q.defer();
+        $http.post('https://fleet.flypersia.aero/ztrn2/api/course/sign', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(/*Exceptions.getMessage(err)*/ JSON.stringify(err));
+        });
+
+        return deferred.promise;
+    };
+
+    var _sign_exam_coures = function (entity) {
+
+        var deferred = $q.defer();
+        $http.post('https://fleet.flypersia.aero/ztrn2/api/course/exam/sign', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(/*Exceptions.getMessage(err)*/ JSON.stringify(err));
+        });
+
+        return deferred.promise;
+    };
+
+    serviceFactory.get_instructor_course = _get_instructor_course;
+    serviceFactory.get_director_course = _get_director_course;
     serviceFactory.get_course_object = _get_course_object;
     serviceFactory.get_people_sessions = _get_people_sessions;
 
-   
+    serviceFactory.save_person_press = _save_person_press;
+    serviceFactory.save_exam_result = _save_exam_result;
+
+    serviceFactory.sign_attendance_coures = _sign_attendance_coures;
+    serviceFactory.sign_exam_coures = _sign_exam_coures;
+
+
 
     return serviceFactory;
 

@@ -3,8 +3,8 @@ app.controller('trn_instructor_panelController', ['$scope', '$location', 'authSe
 
     var tabs = [
 
-        { text: "Active", id: 'active' },
-        { text: "Archived", id: 'archived' },
+        { text: "Instructor", id: 'instructor' },
+        { text: "Director", id: 'director' },
     ];
     $scope.tabs = tabs;
 
@@ -16,10 +16,10 @@ app.controller('trn_instructor_panelController', ['$scope', '$location', 'authSe
 
         });
         switch (id) {
-            case 'active':
+            case 'instructor':
                 $scope.bind_active();
                 break;
-            case 'archived':
+            case 'director':
                 break;
            
 
@@ -96,9 +96,15 @@ app.controller('trn_instructor_panelController', ['$scope', '$location', 'authSe
     };
 
     $scope.bind_active = function () {
-        instructorService.get_teacher_course(238).then(function (response) {
+        instructorService.get_instructor_course(238).then(function (response) {
 
-            $scope.courses = response;
+            $scope.instructor_courses = response;
+            console.log("--------Course Response--------\n", response);
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+        instructorService.get_director_course(238).then(function (response) {
+
+            $scope.director_courses = response;
             console.log("--------Course Response--------\n", response);
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     }
