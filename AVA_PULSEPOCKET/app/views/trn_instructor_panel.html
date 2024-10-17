@@ -41,7 +41,8 @@
         flex-direction: column;
         width: 100%;
         background-color: white;
-        margin: 15px auto; /* Center the cards */
+         margin-bottom:3px;
+         margin-top:3px;
         transition: transform 0.2s;
         border: 1px solid white
     }
@@ -55,9 +56,9 @@
         font-weight: bold;
         color: #333;
         margin-bottom: 10px;
-        background-color: #FF5722;
+        background-color: #cccccc;
         height: 30px;
-        color: white;
+        color: black;
         align-content: center;
         padding-left: 5px;
     }
@@ -154,7 +155,7 @@
                     <p style="height: 100%; align-content: center; border: 1px solid lightgray;">COURSE</p>
                 </div>-->
                 <div id="scrlcurs" dx-scroll-view="scroll_course">
-                    <div style="padding: 0 10px 0 10px">
+                    <div style="padding: 0 3px 0 3px">
                         <div ng-repeat="course in instructor_courses" class="card-container" data-ng-click="navigate('/trn/instructor/course/' + course.CourseId,'trn-instructor-course',2)">
 
                             <div class="title">{{course.Title}}</div>
@@ -172,7 +173,8 @@
                                     <p style="display: inline-block">Duration</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.Duration}}</p>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
-                                    <p style="display: inline-block">In</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.Sessions}}Sessions</p>
+                                    <p style="display: inline-block">In</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.Sessions}}</p>
+                                    Sessions
                                 </div>
                             </div>
                             <div class="date-range">
@@ -190,7 +192,7 @@
             </div>
             <div id="director" style="display:none;height:100%" class="tabc">
                 <div id="scrlcurs" dx-scroll-view="scroll_course">
-                    <div style="padding: 0 10px 0 10px">
+                    <div style="padding: 0 3px 0 3px">
                         <div ng-repeat="course in director_courses" class="card-container" data-ng-click="navigate('/trn/instructor/course/' + course.CourseId,'trn-instructor-course',2)">
 
                             <div class="title" style="background-color: lightgray; color: black">{{course.Title}}</div>

@@ -74,10 +74,10 @@
 
     .attendance-section {
         margin-bottom: 20px;
-        padding: 10px;
+        padding: 5px 0 5px 0;
         background-color: #fff;
-        border-radius: 10px;
-        border: 1px solid lightgray;
+        border-radius: 0px;
+        border: 0px solid lightgray;
     }
 
     /* trn_card layout for mobile devices */
@@ -89,7 +89,7 @@
 
     .attendance_trn_card {
         background: linear-gradient(135deg, #f6f9fc, #fff);
-        border-radius: 12px;
+        border-radius: 5px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         overflow: hidden;
     }
@@ -147,11 +147,11 @@
 
     .final-result-button {
         padding: 10px 20px;
-        border-radius: 8px;
-        border: none;
+        border-radius: 4px;
+        border: 1px solid #ddd;
         cursor: pointer;
-        color: white;
-        background-color: lightgray;
+        color: gray;
+        background-color: #fff;
         width: 100px;
         transition: background-color 0.3s ease;
     }
@@ -160,21 +160,33 @@
         .final-result-button.pass,
         .final-result-button.failed,
         .final-result-button.reexam {
-            background-color: lightgray;
+            background-color: white;
         }
 
         /* Active button styles */
         .final-result-button.active {
-            background-color: #28a745;
+            /*background-color: #28a745;*/
             transform: scale(1.05);
+            color:black;
+            font-weight:bold;
+
+        }
+        .final-result-button.failed.active {
+            background-color: #ff5c33;
+        }
+        .final-result-button.active.reexam {
+            background-color: #ffcc66;
+        }
+        .final-result-button.active.pass {
+            background-color: #00e6ac;
         }
 
-    .attend_section {
-        margin: 10px 5px 0px 5px;
-        background-color: white;
-        border-radius: 8px;
-        border: 1px solid #ffcc00
-    }
+        .attend_section {
+            margin: 10px 5px 0px 5px;
+            background-color: white;
+            border-radius: 8px;
+            border: 1px solid #ffcc00
+        }
 
     h2 {
         color: #007bff;
@@ -204,7 +216,7 @@
 
     .info-container {
         border-radius: 10px;
-        padding: 10px;
+        padding: 5px;
     }
 
         .info-container h2 {
@@ -218,18 +230,21 @@
     .tbl_course {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 15px;
+        margin-bottom: 15px;
     }
 
     .table_data {
-        padding: 10px;
+        padding: 8px;
         border: 1px solid #666;
+        font-size: 13px;
+        text-align:center;
     }
 
     .table_head {
-        padding: 12px;
+        padding: 8px;
         text-align: left;
         border: 1px solid #666;
+        font-size:13px;
     }
 
     .section-title {
@@ -323,6 +338,9 @@
             display: block;
             margin-bottom: 5px;
         }
+       /* .dx-item-content.dx-toolbar-item-content{
+            min-width:200px;
+        }*/
     }
 </style>
 <div style="height:100%;">
@@ -333,23 +351,22 @@
         </div>
 
         <div class="rowx content" style="clear:both;background:#f0f3f5; ">
-            <div class="info-container">
+            <div class="info-container" style="overflow-y:auto">
                 <table class="tbl_course">
                     <tr>
-                        <th class="table_head" colspan="4">Title</th>
+                        <th class="table_head" colspan="4" style="background: #d9d9d9;text-align:center">
+                            <div>{{course.Title}}</div>
+                            <div style="padding-top:3px;font-size:13px;font-weight:normal">({{course.CertificateType}})</div>
+
+                        </th>
                     </tr>
-                    <tr>
-                        <td class="table_data" colspan="4">{{course.Title}}</td>
-                    </tr>
-                    <tr>
-                        <th class="table_head">Type</th>
-                        <td class="table_data" colspan="3">{{course.CertificateType}}</td>
-                    </tr>
+
+
                     <tr>
                         <th class="table_head">Class ID</th>
-                        <td class="table_data">{{course.No}}</td>
+                        <td class="table_data" style="min-width:95px;">{{course.No}}</td>
                         <th class="table_head">Status</th>
-                        <td class="table_data">{{course.Status}}</td>
+                        <td class="table_data" style="min-width:95px;">{{course.Status}}</td>
                     </tr>
                     <tr>
                         <th class="table_head" colspan="2">Type of Class Holding</th>
@@ -357,35 +374,38 @@
                     </tr>
 
                     <tr>
-                        <th class="table_head">Start Date</th>
+                        <th class="table_head">Start</th>
                         <td class="table_data">{{course.DateStart | date: 'yyyy-MM-dd'}}</td>
-                        <th class="table_head">End Date</th>
+                        <th class="table_head">End</th>
                         <td class="table_data">{{course.DateStart | date: 'yyyy-MM-dd'}}</td>
+                    </tr>
+                    <tr>
+                        <th class="table_head">Duration</th>
+                        <td class="table_data">{{course.Duration}} {{course.DurationUnit}}</td>
+                        <th class="table_head">Organization</th>
+                        <td class="table_data">{{course.Organization}}</td>
+
                     </tr>
                     <tr>
                         <th class="table_head">Location</th>
-                        <td class="table_data">{{course.Location}}</td>
-                        <th class="table_head">Duration</th>
-                        <td class="table_data">{{course.Duration}} {{course.DurationUnit}}</td>
+                        <td class="table_data" colspan="3">{{course.Location}}</td>
+                       
                     </tr>
+
                     <tr>
-                        <th class="table_head">Organization</th>
-                        <td class="table_data" colspan="3">{{course.Organization}}</td>
-                    </tr>
-                    <tr>
-                        <th class="table_head" colspan="2">Training Director</th>
-                        <td class="table_data" colspan="2">{{course.TrainingDirector}}</td>
+                        <th class="table_head" colspan="1">Director</th>
+                        <td class="table_data" colspan="3">{{course.TrainingDirector}}</td>
                     </tr>
                     <!--<tr>
-                        <th class="table_head">Sessions</th>
-                        <td colspan="3">{{course.Sessions}}</td>
-                    </tr>-->
+        <th class="table_head">Sessions</th>
+        <td colspan="3">{{course.Sessions}}</td>
+    </tr>-->
 
                 </table>
 
                 <table class="tbl_course">
                     <tr>
-                        <th class="table_head col-sm-6 col-xs-6">Date</th>
+                        <th class="table_head col-sm-6 col-xs-6" style="text-align:center">Date</th>
                         <th class="table_head col-sm-3 col-xs-3" style="text-align:center">Start</th>
                         <th class="table_head col-sm-3 col-xs-3" style="text-align:center">End</th>
                     </tr>
@@ -402,7 +422,7 @@
 
             <div id="popup_exam" dx-popup="popup_exam" class="no-padding">
                 <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
-                    <div class="section">
+                    <!--<div class="section">
                         <div style="font-size: 13px; font-weight: bold"><i class="fas fa-info-circle" style="font-size: 13px"></i> Exam Details</div>
                         <div class="container">
                             <div class="trn_card">
@@ -422,21 +442,22 @@
                                 <p>8 hrs</p>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
                     <!-- Attendance Section -->
                     <div class="attendance-section">
                         
                         <!-- trn_card layout for mobile devices -->
                         <div class="attendance-container" ng-if="!isLargeScreen()">
-                            <div class="attendance_trn_card" style=" border: 1px solid #ffcc00;" ng-repeat="trainee in exam.scores">
-                                <div style="align-content: center; font-size: 13px; font-weight: bold; padding-left: 8px; height: 38px; border-radius: 8px 8px 0 0; background-color: #FF5722; color: #fff">{{trainee.Name}}</div>
+                            <div class="attendance_trn_card" style=" border: 1px solid #cccccc;" ng-repeat="trainee in exam.scores">
+                                <div style="align-content: center; font-size: 13px; font-weight: bold; padding-left: 8px; height: 38px; border-radius: 0; background-color: #cccccc; color: #000">{{trainee.Name}}</div>
                                 <div class="trn_card-details">
                                     <input type="text" placeholder="Score" ng-model="trainee.score" ng-change="updateScore(trainee.persin_id, trainee.Score, trainee.Result)" style="width: 97%; border: 1px solid lightgray;margin: 5px; border-radius: 8px; height: 35px">
                                     <div class="final-result-buttons">
                                         <button class="final-result-button pass" ng-class="{'active': trainee.result === 'Pass'}" ng-click="updateFinalResult(trainee.Id, 'Pass')">Pass</button>
-                                        <button class="final-result-button failed" ng-class="{'active': trainee.result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
+
                                         <button class="final-result-button reexam" ng-class="{'active': trainee.result === 'Re-exam'}" ng-click="updateFinalResult(trainee.Id, 'Re-exam')">Re-exam</button>
+                                        <button class="final-result-button failed" ng-class="{'active': trainee.result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
                                     </div>
                                 </div>
                             </div>
@@ -458,8 +479,10 @@
                                     <td>
                                         <div class="final-result-buttons">
                                             <button class="final-result-button pass" ng-class="{'active': trainee.result === 'Pass'}" ng-click="updateFinalResult(trainee.Id, 'Pass')">Pass</button>
-                                            <button class="final-result-button failed" ng-class="{'active': trainee.result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
+
                                             <button class="final-result-button reexam" ng-class="{'active': trainee.result === 'Re-exam'}" ng-click="updateFinalResult(trainee.Id, 'Re-exam')">Re-exam</button>
+
+                                            <button class="final-result-button failed" ng-class="{'active': trainee.result === 'Failed'}" ng-click="updateFinalResult(trainee.Id, 'Failed')">Failed</button>
                                         </div>
                                     </td>
                                 </tr>
