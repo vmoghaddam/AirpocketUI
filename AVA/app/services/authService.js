@@ -401,6 +401,15 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
                 module.color = '#009688';
                 module.class = 'theme-teal';
                 break;
+
+
+            case 10:
+                module.title = 'Training';
+                module.remark = 'Lorem ipsum dolor sit amet';
+                module.theme = 'material.teal.light';
+                module.color = '#009688';
+                module.class = 'theme-teal';
+                break;
             default:
                 break;
         }
@@ -412,14 +421,18 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         var data = localStorageService.get('module');
        
         if (data) {
-            $rootScope.module = data.title;
+            $rootScope.module = data.title? data.title:"Training";
             $rootScope.moduleId = data.id;
             $rootScope.moduleRemark = data.remark;
             $rootScope.theme = data.theme;
             $rootScope.color = data.color;
             $rootScope.class = data.class;
-            
-          //  $rootScope.headerClasses.push(data.class);
+
+            //  $rootScope.headerClasses.push(data.class);
+        }
+        else {
+            $rootScope.module = "Training";
+            $rootScope.moduleId = 10;
         }
 
     };
