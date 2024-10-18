@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APFlightRadar", "APFlightRa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVA_PULSEPOCKET", "AVA_PULSEPOCKET\AVA_PULSEPOCKET.csproj", "{3098ABD6-321B-463D-819D-B13D8CC6FB93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATOClient", "ATOClient\ATOClient.csproj", "{971FC521-FCAA-4E16-A447-A2AB4B12D063}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{3098ABD6-321B-463D-819D-B13D8CC6FB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3098ABD6-321B-463D-819D-B13D8CC6FB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3098ABD6-321B-463D-819D-B13D8CC6FB93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{971FC521-FCAA-4E16-A447-A2AB4B12D063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971FC521-FCAA-4E16-A447-A2AB4B12D063}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971FC521-FCAA-4E16-A447-A2AB4B12D063}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971FC521-FCAA-4E16-A447-A2AB4B12D063}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

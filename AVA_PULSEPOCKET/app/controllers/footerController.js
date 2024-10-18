@@ -13,12 +13,12 @@
             // $('.footernotification').width('20%').show();
             $('.footercertification').width('20%').show();
             $('.footerlibrary').width('20%').show();
-            $('.footerforms').width('20%').show();
+            $('.footertrnpanel').width('20%').show();
             $('.footerhome').width('20%').show();
         }
         else {
             $('.footerlibrary').width('25%').show();
-            $('.footerforms').width('25%').show();
+            $('.footertrnpanel').width('25%').show();
             $('.footerhelp').width('25%').show();
             $('.footerhome').width('25%').show();
         }

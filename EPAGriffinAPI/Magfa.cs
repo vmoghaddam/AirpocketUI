@@ -116,7 +116,7 @@ namespace EPAGriffinAPI
         //////////////////////////////////
         string username = ConfigurationManager.AppSettings["magfa_user"];/* "taban";*/ //ConfigurationManager.AppSettings["magfa_user"]; //"caspianline"; //"flypersia_48000";
         string password = ConfigurationManager.AppSettings["magfa_pass"];/*"ZIECXHgRSJT1QLMy";*/ //ConfigurationManager.AppSettings["magfa_pass"]; // "ZQMihTmdLqCbnbrW"; //"YYDWMU5BAJQQHCuG";
-        string domain = "varesh"; //"magfa";// "varesh";// "tabanair"; /*"tabanair";*/
+        string domain = "magfa"; //"varesh"; //"magfa";// "varesh";// "tabanair"; /*"tabanair";*/
         string senderNumber = ConfigurationManager.AppSettings["magfa_no"];
 
 
@@ -400,7 +400,7 @@ namespace EPAGriffinAPI
             try
             {
                 //magfa
-                if (1 == 2)
+                if (1 == 1)
                 {
                     System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
                     com.magfa.sms.SoapSmsQueuableImplementationService sq = new com.magfa.sms.SoapSmsQueuableImplementationService();
@@ -533,7 +533,7 @@ namespace EPAGriffinAPI
                     }
                 }
                 //ava
-                else if (1 ==1){
+                else if (1 ==4){
                     //MelliRef.SendSoapClient soapClient = new MelliRef.SendSoapClient();
                     // var _melli_res=soapClient.SendSimpleSMS2("9354957316", "Rhbsms99@", "09124449584", "90009105", "test sms", false);
                     RestClient client = new RestClient("9354957316", "Rhbsms99@");

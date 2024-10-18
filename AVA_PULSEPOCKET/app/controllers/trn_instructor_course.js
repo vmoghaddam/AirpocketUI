@@ -17,7 +17,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
     $scope.popup_exam_visible = false;
     $scope.popup_height = '100%';
     $scope.popup_width = '100%';
-    $scope.popup_exam_title = 'Exam Form';
+    $scope.popup_exam_title = 'Exam Result';
     $scope.popup_instance = null;
 
     $scope.popup_exam = {
@@ -99,7 +99,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
     $scope.popup_attendance_visible = false;
     $scope.popup_height = '100%';
     $scope.popup_width = '100%';
-    $scope.popup_attendance_title = 'Attendance Form';
+    $scope.popup_attendance_title = 'Attendance List';
     $scope.popup_instance = null;
 
     $scope.popup_attendance = {
@@ -109,7 +109,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
 
         toolbarItems: [
             {
-                widget: 'dxButton', location: 'before', options: {
+                widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Sign', validationGroup: 'cabin', icon: 'fas fa-signature', onClick: function (e) {
 
                         instructorService.sign_attendance_coures($scope.instructor).then(function (response) {
@@ -531,6 +531,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
     //];
 
     $scope.$on('PageLoaded', function (event, prms) {
+        $('.info-container').height($(window).height() - 100);
         $scope.bind();
     });
 

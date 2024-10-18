@@ -5,7 +5,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _get_instructor_course = function (id) {
 
         var deferred = $q.defer();
-        $http.get('https://fleet.flypersia.aero/ztrn2/api/instructor/courses/active/' + id).then(function (response) {
+        $http.get('https://ava.apitrn.airpocket.app/api/instructor/courses/active/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -18,7 +18,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _get_director_course = function (id) {
 
         var deferred = $q.defer();
-        $http.get('https://fleet.flypersia.aero/ztrn2/api/director/courses/active/' + id).then(function (response) {
+        $http.get('https://ava.apitrn.airpocket.app/api/director/courses/active/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -31,7 +31,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _get_course_object = function (id) {
 
         var deferred = $q.defer();
-        $http.get('https://fleet.flypersia.aero/ztrn/api/course/view/object/' + id).then(function (response) {
+        $http.get('https://ava.apitrn.airpocket.app/api/course/view/object/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -44,7 +44,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _get_people_sessions = function (id) {
 
         var deferred = $q.defer();
-        $http.get('https://fleet.flypersia.aero/ztrn2/api/course/peoplesessions/' + id).then(function (response) {
+        $http.get('https://ava.apitrn.airpocket.app/api/course/peoplesessions/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -57,7 +57,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _save_person_press = function (entity) {
 
         var deferred = $q.defer();
-        $http.post('https://fleet.flypersia.aero/apitrn/api/course/session/pres/save', entity).then(function (response) {
+        $http.post('https://ava.apitrn.airpocket.app/api/course/session/pres/save', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -70,7 +70,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _save_exam_result = function (entity) {
 
         var deferred = $q.defer();
-        $http.post('https://fleet.flypersia.aero/ztrn2/api/course/exam/result/save', entity).then(function (response) {
+        $http.post('https://ava.apitrn.airpocket.app/api/course/exam/result/save', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -83,7 +83,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _sign_attendance_coures = function (entity) {
 
         var deferred = $q.defer();
-        $http.post('https://fleet.flypersia.aero/ztrn2/api/course/sign', entity).then(function (response) {
+        $http.post('https://ava.apitrn.airpocket.app/api/course/sign', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -96,7 +96,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _sign_exam_coures = function (entity) {
 
         var deferred = $q.defer();
-        $http.post('https://fleet.flypersia.aero/ztrn2/api/course/exam/sign', entity).then(function (response) {
+        $http.post('https://ava.apitrn.airpocket.app/api/course/exam/sign', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 

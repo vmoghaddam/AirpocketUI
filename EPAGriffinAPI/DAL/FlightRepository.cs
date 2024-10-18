@@ -21871,6 +21871,15 @@ namespace EPAGriffinAPI.DAL
             public Nullable<int> Leg8 { get; set; }
             public int RankOrder { get; set; }
             public Nullable<int> StandBy { get; set; }
+            public Nullable<int> StandByFixTime
+            {
+                get
+                {
+                    if (this.StandBy == null)
+                        return 0;
+                    return this.StandBy * 120;
+                }
+            }
             public Nullable<int> Misson { get; set; }
             public Nullable<int> FixTimeTotal { get; set; }
             public int? Pos1 { get; set; }
@@ -22119,7 +22128,12 @@ namespace EPAGriffinAPI.DAL
                         if (exist.FixTimeTotal == null)
                             exist.FixTimeTotal = 0;
                         if (x.DutyTypeTitle == "StandBy")
+                        {
+                            if (exist.StandBy == null)
+                                exist.StandBy = 0;
                             exist.StandBy += x.Count;
+                            exist.FixTimeTotal = (int)exist.FixTimeTotal + x.Count*120;
+                        }
                         // if (x.DutyTypeTitle == "OTHER AIRLINE STBY")
                         //    exist.StandBy += x.Count;
                         if (x.DutyTypeTitle == "Mission" /*|| x.DutyTypeTitle.StartsWith("عم")*/)
