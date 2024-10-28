@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', 'flightBagService', '$sce', 'neerjaService', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route, flightBagService, $sce, neerjaService) {
+app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', 'flightBagService', '$sce', 'neerjaService', '$window', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route, flightBagService, $sce, neerjaService, $window) {
 
 
     $scope.selectedTabIndex = -1;
@@ -69,7 +69,7 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
     };
 
 
-   
+
 
     $scope.btn_search = {
         text: 'Search',
@@ -131,6 +131,32 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
 
     };
 
+    //$scope.scc_report = {
+    //    text: 'Print',
+    //    type: 'success',
+    //    width: '15%',
+    //    onClick: function (e) {
+
+
+    //        $window.open(apixls + 'api/scc/report/' + $scope.entity.crew + '/' + $scope.selectedFlight.FlightId);
+    //    }
+
+    //}
+
+    $scope.btn_print = {
+        text: 'Print',
+        type: 'default',
+
+        width: 120,
+        // validationGroup: 'ctrsearch',bind 
+        bindingOptions: {},
+        onClick: function (e) {
+            if ($scope.selectedTabId == 'scc')
+                $window.open(apixls + 'api/scc/report/' + $scope.entity.crew + '/' + $scope.selectedFlight.FlightId);
+           
+        }
+
+    };
     ///////////////////////////////
 
     $scope.sb_reporter2 = {
@@ -414,11 +440,11 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
     $scope.bind_equip = function () {
         $scope.loadingVisible = true;
         neerjaService.get_pfc_items_grouped_ap($scope.selectedFlight.FlightId, $scope.entity.crew).then(function (response2) {
-            
+
             $scope.loadingVisible = false;
             $scope.pfc_grouped = response2;
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-   }
+    }
 
     $scope.bindEval = function () {
         $scope.loadingVisible = true;
@@ -431,7 +457,7 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
     $scope.bind_equip = function () {
         $scope.loadingVisible = true;
 
-       
+
         neerjaService.get_pfc_items_grouped_ap($scope.selectedFlight.FlightId, $scope.entity.crew).then(function (response2) {
             console.log(response2);
             $scope.loadingVisible = false;
@@ -446,7 +472,7 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
     $scope.bindScc = function () {
         $scope.loadingVisible = true;
         neerjaService.get_scc($scope.selectedFlight.FlightId, $scope.entity.crew).then(function (response2) {
-          
+
             $scope.report = response2;
             if (!$scope.report)
                 $scope.report = {};
@@ -560,7 +586,7 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 425,
+        height: $(window).height() - 248,
 
         columns: $scope.dg_eval_columns,
         onContentReady: function (e) {
@@ -628,14 +654,11 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
     $scope.dg_flight_columns = [];
     $scope.dg_flight_columns = [
 
-     { dataField: 'STDDay', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 110, format: 'yy-MMM-dd', sortIndex: 0, sortOrder: 'asc', fixed: true, fixedPosition: 'left' },
-        { dataField: 'AttASR', caption: 'ASR', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 50, fixed: true, fixedPosition: 'left', visible: $scope.ASRVR },
-        { dataField: 'AttVoyageReport', caption: 'VR', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 50, fixed: true, fixedPosition: 'left', visible: $scope.ASRVR },
+        { dataField: 'STDDay', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 110, format: 'yy-MMM-dd', sortIndex: 0, sortOrder: 'asc', fixed: true, fixedPosition: 'left' },
         { dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90, fixed: true, fixedPosition: 'left' },
-        { dataField: 'FlightStatus', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left'},
         { dataField: 'Register', caption: 'Reg', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, sortIndex: 2, sortOrder: 'asc' },
-        { dataField: 'FromAirportIATA', caption: 'From', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
-        { dataField: 'ToAirportIATA', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+        { dataField: 'FromAirportIATA', caption: 'From', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixedPosition: 'left' },
+        { dataField: 'ToAirportIATA', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixedPosition: 'left' },
         { dataField: 'P1Name', caption: 'Captain', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
         { dataField: 'IPName', caption: 'IP', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
         { dataField: 'BlockTime2', caption: 'Block Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
@@ -697,7 +720,7 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
 
 
         },
-       
+
         "export": {
             enabled: true,
             fileName: "Flights_Report",
@@ -738,7 +761,7 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
         },
 
         onCellPrepared: function (e) {
-            if (!$scope.isOPSStaff && e.rowType === "data" && e.column.dataField == "FlightStatus")
+            if (!$scope.isOPSStaff && e.rowType === "data" && e.column.dataField == "FlightNumber")
                 e.cellElement.addClass(e.data.FlightStatus.toLowerCase());
             if (e.rowType === "data" && e.column.dataField == "AttVoyageReport" && e.data.AttVoyageReport == 1) {
                 if (!e.data.VR_OPSStaffStatusId)
@@ -785,7 +808,7 @@ app.controller('cabin_reportsController', ['$scope', '$location', '$routeParams'
 
         $('.tabc').height($(window).height() - 150);
         $('#rightColumn').height($(window).height() - 220);
-        $('#rightColumn2').height($(window).height() - 220);
+        $('#rightColumn2').height($(window).height() - 175);
     });
 
     $rootScope.$broadcast('FlightsReportLoaded', null);

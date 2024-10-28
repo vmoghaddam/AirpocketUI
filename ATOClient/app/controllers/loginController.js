@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', '$rootScope','$http', function ($scope, $location, authService, ngAuthSettings, $rootScope,$http) {
+app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', '$rootScope', '$http', 'atoService', function ($scope, $location, authService, ngAuthSettings, $rootScope, $http, atoService) {
     var detector = new MobileDetect(window.navigator.userAgent);
     console.log("Mobile: " + detector.mobile());
     console.log("Phone: " + detector.phone());
@@ -14,7 +14,7 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
     };
 
     var ceo = authService.getCEO();
-    
+
     if (ceo) {
         $scope.loginData.userName = ceo.userName;
         $scope.loginData.password = ceo.password;
@@ -47,6 +47,7 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
 
             //$rootScope.app_selected
 
+
             $rootScope.userName = authService.authentication.userName;
 
             //let apiKey = '1e169b8624484597afff2bb8f0084a40';
@@ -67,33 +68,38 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
             //    });
             //});
 
-           
 
-
-           // alert($rootScope.EmailConfirmed);
-             if ( $rootScope.EmailConfirmed != "True")
+            console.log(response);
+            
+            // alert($rootScope.EmailConfirmed);
+            if ($rootScope.EmailConfirmed != "True")
                 $rootScope.navigatefirstlogin();
-             else {
-                 if (!ceo && $rootScope.userName != 'ceo')
-                     $location.path('/apps');
-                 else
-                 {
-                     authService.setModule(3);
-                     $location.path('/board');
-                 }
-             }
-               
+            else {
+                if (!ceo && $rootScope.userName != 'ceo') {
+
+                    var dto = {user_id: null, person_id: Number(response.data.UserId) }
+                    atoService.get_person_info(dto).then(function (response) {
+                        localStorage.setItem('profile', JSON.stringify(response.Data))
+                        $location.path('/profile');
+                    });
+                }
+                else {
+                    authService.setModule(3);
+                    $location.path('/profile');
+                }
+            }
+
 
 
         },
-       function (err) {
-          
-           $scope.message = err.data.error_description;
-           $('.wait').hide();
-           $('.wrapper').removeClass('form-success');
-           $('form').fadeIn(700);
-           
-       });
+            function (err) {
+
+                $scope.message = err.data.error_description;
+                $('.wait').hide();
+                $('.wrapper').removeClass('form-success');
+                $('form').fadeIn(700);
+
+            });
     };
 
     $scope.authExternalProvider = function (provider) {
@@ -101,8 +107,8 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
         var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
 
         var externalProviderUrl = ngAuthSettings.apiServiceBaseUri + "api/Account/ExternalLogin?provider=" + provider
-                                                                    + "&response_type=token&client_id=" + ngAuthSettings.clientId
-                                                                    + "&redirect_uri=" + redirectUri;
+            + "&response_type=token&client_id=" + ngAuthSettings.clientId
+            + "&redirect_uri=" + redirectUri;
         window.$windowScope = $scope;
 
         var oauthWindow = window.open(externalProviderUrl, "Authenticate Account", "location=0,status=0,width=600,height=750");
@@ -133,9 +139,9 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
                     $location.path('/orders');
 
                 },
-             function (err) {
-                 $scope.message = err.error_description;
-             });
+                    function (err) {
+                        $scope.message = err.error_description;
+                    });
             }
 
         });
@@ -155,15 +161,15 @@ app.controller('firstLoginController', ['$scope', '$location', 'authService', 'n
     $scope.message = "";
 
     $scope.change = function () {
-        
-        
+
+
         if (!$scope.cp.OldPassword || !$scope.cp.NewPassword || !$scope.cp.ConfirmPassword)
             return;
         $('form').fadeOut(700);
         $('.wait').addClass('yaxis').fadeIn(1500);
 
         $('.wrapper').addClass('form-success');
-         
+
         authService.changePassword($scope.cp).then(function (response) {
             authService.changeTel({ eid: $rootScope.employeeId, tel: $scope.cp.NewPassword }).then(function (response) { }, function (err) { });
 
@@ -186,13 +192,13 @@ app.controller('firstLoginController', ['$scope', '$location', 'authService', 'n
 
 
         },
-       function (err) {
-           $scope.message = err.message;
-           General.ShowNotify(err.message, 'error');
-           $('.wait').hide();
-           $('.wrapper').removeClass('form-success');
-           $('form').fadeIn(700);
-       });
+            function (err) {
+                $scope.message = err.message;
+                General.ShowNotify(err.message, 'error');
+                $('.wait').hide();
+                $('.wrapper').removeClass('form-success');
+                $('form').fadeIn(700);
+            });
     };
 
     $scope.authExternalProvider = function (provider) {
@@ -200,8 +206,8 @@ app.controller('firstLoginController', ['$scope', '$location', 'authService', 'n
         var redirectUri = location.protocol + '//' + location.host + '/authcomplete.html';
 
         var externalProviderUrl = ngAuthSettings.apiServiceBaseUri + "api/Account/ExternalLogin?provider=" + provider
-                                                                    + "&response_type=token&client_id=" + ngAuthSettings.clientId
-                                                                    + "&redirect_uri=" + redirectUri;
+            + "&response_type=token&client_id=" + ngAuthSettings.clientId
+            + "&redirect_uri=" + redirectUri;
         window.$windowScope = $scope;
 
         var oauthWindow = window.open(externalProviderUrl, "Authenticate Account", "location=0,status=0,width=600,height=750");
@@ -232,9 +238,9 @@ app.controller('firstLoginController', ['$scope', '$location', 'authService', 'n
                     $location.path('/orders');
 
                 },
-             function (err) {
-                 $scope.message = err.error_description;
-             });
+                    function (err) {
+                        $scope.message = err.error_description;
+                    });
             }
 
         });

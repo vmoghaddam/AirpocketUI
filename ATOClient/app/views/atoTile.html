@@ -1,0 +1,171 @@
+﻿<style>
+    .tiles {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        border: 1px solid gray;
+        padding: 7px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .name {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .exam-question-count {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .ruler-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    .ruler-unit {
+        flex-grow: 1;
+        position: relative;
+        height: 20px;
+    }
+
+    .ruler-number {
+        position: absolute;
+        top: -20px;
+        font-size: 12px;
+        right: 2px
+    }
+
+    .ruler-tick {
+        width: 1px;
+        height: 10px;
+        background-color: #333;
+        position: absolute;
+        bottom: 0;
+    }
+
+    .long-tick {
+        height: 15px;
+    }
+
+    .progress-bar-container {
+        position: relative;
+        height: 5px;
+        background-color: #ddd;
+        margin: 10px 0;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background-color: #3498db;
+    }
+
+    .answers-count {
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: bold;
+    }
+
+    .results {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .answers {
+        display: flex;
+        gap: 10px; /* Adjust this gap value to control spacing between true-answers and false-answers */
+    }
+
+    .true-answers, .false-answers {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .result {
+        font-size: 24px;
+        font-weight: bold;
+        color: #3498db;
+    }
+
+    .text-success {
+        color: green;
+    }
+
+    .text-warning {
+        color: orange;
+    }
+
+    .text-danger {
+        color: red;
+    }
+
+
+    .box .rowx.footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        z-index: 2;
+    }
+
+</style>
+<div class="box profile" style="height:100%;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+
+
+        <div class="row">
+            <div class="col-lg-3 col-md-3" ng-repeat="data in exam_result" style="padding: 0 5px 0 5px !important">
+                <div class="tiles">
+                    <div class="header">
+                        <span class="name">{{ data.name }}</span>
+                    </div>
+                    <div class="ruler-bar">
+                        <div class="ruler-unit" ng-repeat="n in [].constructor(46) track by $index">
+                            <div class="ruler-number" ng-if="$index % 5 === 0">{{ $index }}</div>
+                            <div class="ruler-tick" ng-class="{'long-tick': $index % 5 === 0}"></div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" ng-style="{ 'width': getProgressBarWidth(data.answers_count, data.exam_question_count) + '%' }"></div>
+                    </div>
+                    <div class="results">
+                        <div class="answers">
+                            <span class="true-answers" ng-style="{ 'color': 'green' }">{{ data.true_answers }}</span>
+                            <span class="false-answers" ng-style="{ 'color': 'red' }">{{ data.false_answers }}</span>
+                        </div>
+                        <span class="result" ng-class="{
+                            'text-success': data.result === 'PASSED',
+                            'text-warning': data.result === 'RE-EXAM',
+                            'text-danger': data.result === 'FAILED'
+                        }">{{ data.result }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="rowx footer">
+        FOOTER
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+</div>
+
+

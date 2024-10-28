@@ -1,5 +1,150 @@
 ﻿<style>
-   
+
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f3f4f6;
+        margin: 0;
+        padding: 20px;
+    }
+
+    .profile-container {
+        margin: auto;
+        padding: 7px
+    }
+
+    .profile-card {
+        background-color: white;
+        padding: 20px;
+        border: 1px solid lightgray;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .section-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .personal-input-group {
+        padding: 7px;
+        width: 100%;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+        width: 45%;
+    }
+
+        .input-group.full-width {
+            width: 100%;
+        }
+
+    label {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+    button[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        background-color: #009688;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .upload-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .upload-box {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+    }
+
+        .upload-box input[type="file"] {
+            display: none;
+        }
+
+        .upload-box img {
+            max-width: 100%;
+            height: auto;
+            display: none;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+    .file-name {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #666;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .nav-tabs-profile .nav-link {
+        border: none;
+        color: #555;
+        background-color: white;
+        padding: 12px 20px;
+        display: inline-block !important;
+        width: 100% !important
+    }
+
+        .nav-tabs-profile .nav-link.active {
+            background-color: #009688;
+            color: #fff;
+            border-radius: 0.25rem 0.25rem 0 0;
+        }
+
+    .tab-content .tab-pane {
+        padding: 20px;
+       
+        border-top: none;
+    }
+
+    .nav-item-profile {
+        width:33.3333%
+    }
+
+    @media (max-width: 768px) {
+        .input-group {
+            width: 100%;
+        }
+    }
+
 
     .box .rowx.footer {
         position: absolute;
@@ -14,21 +159,194 @@
     <div ng-include="'app/views/header.html'" class="rowx header"></div>
 
     <div class="rowx content" style="clear:both">
-        
-        <div class=" col-lg-12 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;">
-           
+
+        <div class=" col-lg-6 col-md-6 col-sm-9 col-xs-9 col1 thin-scroll" style="overflow-y:auto" ng-style="{ 'height': (windowHeight - 110) + 'px' }">
+            <div class="profile-container">
+
+                <!-- Personal Information Section -->
+                <div class="profile-card" style="width: 100%; display: inline-block">
+                    <div class="section-title">Personal Information</div>
+
+                    <div class="col-lg-3 col-md-3">
+                        <label for="profile-image-upload" class="upload-box" style="height: 170px">
+                            <p>Profile Image</p>
+                            <input type="file" id="profile-image-upload" name="profile-image" accept="image/*">
+                            <img id="profile-preview" alt="Profile Image" class="img-fluid" style="max-width: 100%; border-radius: 5px;">
+                        </label>
+                    </div>
+                    <div class="col-lg-9 col-md-9">
+                        <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                            <div class="personal-input-group">
+                                <label for="firstname">First Name</label>
+                                <input type="text" id="firstname" name="firstname">
+                            </div>
+                            <div class="personal-input-group">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" id="lastname" name="lastname">
+                            </div>
+                            <div class="personal-input-group">
+                                <label for="fathername">Father's Name</label>
+                                <input type="text" id="fathername" name="fathername">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                            <div class="personal-input-group">
+                                <label for="birthdate">Date of Birth</label>
+                                <input type="date" id="birthdate" name="birthdate">
+                            </div>
+                            <div class="personal-input-group">
+                                <label for="nid">National Code</label>
+                                <input type="number" id="nid" name="nid">
+                            </div>
+                            <div class="personal-input-group">
+                                <label for="mobile">Mobile Number</label>
+                                <input type="number" id="mobile" name="mobile">
+                            </div>
+                        </div>
+                        <div class="personal-input-group">
+                            <label for="email">E-Mail</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                        <div class="personal-input-group full-width">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address">
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Course Information Section -->
+                <div class="profile-card">
+                    <div class="section-title">Course Information</div>
+                    <div class="section-content">
+                        <div class="personal-input-group">
+                            <label for="cpl-start">CPL Course Start Date</label>
+                            <input type="date" id="cpl-start" name="cpl-start">
+                        </div>
+                        <div class="personal-input-group">
+                            <label for="class-expiry">Class Rating Expiry Date</label>
+                            <input type="date" id="class-expiry" name="class-expiry">
+                        </div>
+                        <div class="personal-input-group">
+                            <label for="ir-category">Instrument Rating Category</label>
+                            <input type="text" id="ir-category" name="ir-category">
+                        </div>
+                        <div class="personal-input-group">
+                            <label for="ir-expiry">IR Expiry Date</label>
+                            <input type="date" id="ir-expiry" name="ir-expiry">
+                        </div>
+                    </div>
+                </div>
+
+              
+                <div class="profile-card">
+                    <div class="section-title">National Card</div>
+                    <div class="upload-container">
+                        <!-- National Card -->
+                        <label for="meli_front" class="upload-box">
+                            <p>Front</p>
+                            <input type="file" id="meli_front" name="meli_front" accept="image/*">
+                            <div class="file-name" id="file-name1">No file chosen</div>
+                            <img id="preview1" alt="Preview">
+                        </label>
+                        <!-- Passport -->
+                        <label for="meli_back" class="upload-box">
+                            <p>Back</p>
+                            <input type="file" id="meli_back" name="meli_back" accept="image/*">
+                            <div class="file-name" id="file-name2">No file chosen</div>
+                            <img id="preview2" alt="Preview">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Upload Documents Section -->
+                <div class="profile-card">
+                    <div class="section-title">Identity Certificate</div>
+                    <div class="upload-container">
+                        <!-- National Card -->
+                        <label for="shenasname_front" class="upload-box">
+                            <p>Front</p>
+                            <input type="file" id="shenasname_front" name="shenasname_front" accept="image/*">
+                            <div class="file-name" id="file-name3">No file chosen</div>
+                            <img id="preview3" alt="Preview">
+                        </label>
+
+                        <!-- Passport -->
+                        <label for="shenasname_back" class="upload-box">
+                            <p>Back</p>
+                            <input type="file" id="shenasname_back" name="shenasname_back" accept="image/*">
+                            <div class="file-name" id="file-name4">No file chosen</div>
+                            <img id="preview4" alt="Preview">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Upload Documents Section -->
+                <div class="profile-card">
+                    <div class="section-title">Mandatory service completion card</div>
+                    <div class="upload-container">
+                        <!-- National Card -->
+                        <label for="mandatory_front" class="upload-box">
+                            <p>Front</p>
+                            <input type="file" id="mandatory_front" name="mandatory_front" accept="image/*">
+                            <div class="file-name" id="file-name5">No file chosen</div>
+                            <img id="preview5" alt="Preview">
+                        </label>
+
+                        <!-- Passport -->
+                        <label for="mandatory_back" class="upload-box">
+                            <p>Back</p>
+                            <input type="file" id="mandatory_back" name="mandatory_back" accept="image/*">
+                            <div class="file-name" id="file-name6">No file chosen</div>
+                            <img id="preview6" alt="Preview">
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class=" col-lg-6 col-md-6 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;">
+
+            <div class="profile-container" ng-style="{ 'height': (windowHeight - 110) + 'px' }">
+                <ul class="nav nav-tabs-profile" id="myCustomTab" role="tablist">
+                    <li class="nav-item-profile" role="presentation" style="border-top: 1px solid lightgray; border-left: 1px solid lightgray;">
+                        <a href="" class="nav-link col-4" ng-class="{active: isActiveTab(1)}" ng-click="selectTab(1)">Course</a>
+                    </li>
+                    <li class="nav-item-profile" role="presentation" style="border-top: 1px solid lightgray; border-left: 1px solid lightgray; border-right: 1px solid lightgray">
+                        <a href="" class="nav-link col-4" ng-class="{active: isActiveTab(2)}" ng-click="selectTab(2)">#</a>
+                    </li>
+                    <li class="nav-item-profile" role="presentation" style="border-top: 1px solid lightgray; border-right: 1px solid lightgray;">
+                        <a href="" class="nav-link col-4" ng-class="{active: isActiveTab(3)}" ng-click="selectTab(3)">#</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" style="margin-top: 0px !important">
+                    <div class="tab-pane"  ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(1)}" role="tabpanel">
+                        <h3>Course Tab</h3>
+                        <p>Welcome to the course tab! Here you can find introductory content.</p>
+                    </div>
+                    <div class="tab-pane"  ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(2)}" role="tabpanel">
+                        <h3>Profile Tab</h3>
+                        <p>This is your profile information and settings section.</p>
+                    </div>
+                    <div class="tab-pane" ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(3)}" role="tabpanel">
+                        <h3>Contact Tab</h3>
+                        <p>Get in touch with us through the contact tab content.</p>
+                    </div>
+                </div>
+            </div>
 
         </div>
+
     </div>
     <div class="rowx footer">
-        FOOTER
-    
+        footer
+
         <div style="clear:both"></div>
     </div>
 
-  
 
-   
+
+
 </div>
 
 
