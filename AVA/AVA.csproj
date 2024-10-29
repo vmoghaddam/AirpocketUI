@@ -216,6 +216,7 @@
     <Content Include="app\controllers\planController.js" />
     <Content Include="app\controllers\planningBoard.js" />
     <Content Include="app\controllers\planRegistersController.js" />
+    <Content Include="app\controllers\quizController.js" />
     <Content Include="app\controllers\rawcmd.js" />
     <Content Include="app\controllers\receiptController.js" />
     <Content Include="app\controllers\refreshController.js" />
@@ -316,6 +317,7 @@
     <Content Include="app\services\activityService.js" />
     <Content Include="app\services\aircraftService.js" />
     <Content Include="app\services\airportService.js" />
+    <Content Include="app\services\atoServices.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\biService.js" />
@@ -502,6 +504,7 @@
     <Content Include="app\views\plan.html" />
     <Content Include="app\views\planningBoard.html" />
     <Content Include="app\views\planRegisters.html" />
+    <Content Include="app\views\quiz.html" />
     <Content Include="app\views\rawcmd.html" />
     <Content Include="app\views\receipt.html" />
     <Content Include="app\views\refresh.html" />

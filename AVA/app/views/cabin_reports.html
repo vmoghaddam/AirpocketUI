@@ -767,63 +767,14 @@
             </div>
             <div id="scc" class="tabc" style="border:1px solid #ccc">
                 <div id="rightColumn2" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
-                    <div style="border: 1px solid #9c9c9c; height:50px; width: 100%">
+                    <div style="border: 1px solid #9c9c9c; height:50px; width: 100%; position: sticky; top: 0;background-color: white; z-index: 10">
                         <div class="col-lg-2 col-md-2 col-sm-2" style="height:50px"><p style="text-align: center; vertical-align: middle; line-height: 50px; ">Reporter:</p></div>
                         <div class="col-lg-8 col-md-8 col-sm-8" style=" height:50px; padding: 5px"><div style="width: 100%; height: 100%; border: 1px solid lightgray; border-radius: 20px" dx-select-box="sb_reporter"> </div></div>
                         <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center;padding:5px"><div dx-button="btn_sccFill"></div>     </div>
                         <!--<div class="col-lg-2 col-md-2 col-sm-2" ng-click="sccFill()" style="background-color: greenyellow; padding: 7px">Fill</div>-->
                     </div>
 
-                    <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Flight</div>
-                    <div style="padding:0px;" class="main-bkcolor2-light-imp">
 
-                        <table class="section-table">
-
-                            <tr>
-                                <td colspan="2">
-                                    Date
-                                </td>
-                                <td colspan="2">
-                                    <span style="display:inline-block">{{formatDateLong(selectedFlight.STDDay)}}</span>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    Flight#
-                                </td>
-                                <td colspan="2">
-                                    <span style="display:inline-block">{{selectedFlight.FlightNumber}}-{{selectedFlight.FlightId}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    Register
-                                </td>
-                                <td colspan="2">
-                                    <span style="display:inline-block">{{selectedFlight.FlightNumber}}-{{selectedFlight.FlightId}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    From
-                                </td>
-                                <td style="border-right: 1px dotted #bbb">
-                                    <span style="display:inline-block">{{selectedFlight.FromAirportIATA}}</span>
-                                </td>
-                                <td>
-                                    To
-                                </td>
-                                <td>
-                                    <span style="display:inline-block">{{selectedFlight.ToAirportIATA}}</span>
-                                </td>
-                            </tr>
-
-
-                        </table>
-                    </div>
-
-                    <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Crew</div>
                     <div style="padding:0px;" class="main-bkcolor2-light-imp">
                         <table class="section-table">
                             <tr ng-repeat="c in selectedFlightCrews">
@@ -851,6 +802,7 @@
                         <div dx-text-area="txt_safety"></div>
                         <div style="margin-bottom: 10px; margin-top: 15px; font-weight: bold">General Issue</div>
                         <div dx-text-area="txt_general"></div>
+                        <!--<div dx-button="scc_report" style="margin-top: 7px; float: right"></div>-->
                     </div>
 
                 </div>
@@ -858,66 +810,15 @@
 
             <div id="evalForm" class="tabc" style="border:1px solid #ccc">
                 <div id="rightColumn3" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
-                    <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Flight</div>
                     <div style="padding:0px;" class="main-bkcolor2-light-imp">
 
-                        <div style="border: 1px solid #9c9c9c; height:50px; width: 100%">
+                        <div style="border: 1px solid #9c9c9c; height: 50px; width: 100%; position: sticky; top: 0; background-color: white; z-index: 10">
                             <div class="col-lg-2 col-md-2 col-sm-2" style="height:50px"><p style="text-align: center; vertical-align: middle; line-height: 50px; ">Reporter:</p></div>
                             <div class="col-lg-8 col-md-8 col-sm-8" style=" height:50px; padding: 5px"><div style="width: 100%; height: 100%; border: 1px solid lightgray; border-radius: 20px" dx-select-box="sb_reporter"> </div></div>
                             <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center;padding:5px"><div dx-button="btn_evalFill"></div>     </div>
                             <!--<div class="col-lg-2 col-md-2 col-sm-2" ng-click="sccFill()" style="background-color: greenyellow; padding: 7px">Fill</div>-->
                         </div>
 
-                        <table class="section-table">
-
-                            <tr>
-                                <td colspan="2">
-                                    Date
-                                </td>
-                                <td colspan="2">
-                                    <span style="display:inline-block">{{formatDateLong(selectedFlight.STDDay)}}</span>
-
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    Flight#
-                                </td>
-                                <td colspan="2">
-                                    <span style="display:inline-block">{{selectedFlight.FlightNumber}}-{{selectedFlight.FlightId}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    Register
-                                </td>
-                                <td colspan="2">
-                                    <span style="display:inline-block">{{selectedFlight.FlightNumber}}-{{selectedFlight.FlightId}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    From
-                                </td>
-                                <td style="border-right: 1px dotted #bbb">
-                                    <span style="display:inline-block">{{selectedFlight.FromAirportIATA}}</span>
-                                </td>
-                                <td>
-                                    To
-                                </td>
-                                <td>
-                                    <span style="display:inline-block">{{selectedFlight.ToAirportIATA}}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">
-                                    <span style="display:inline-block">{{SCCM.JobGroup}}</span>
-                                </td>
-
-                                <td colspan="2">
-                                    <span style="display:inline-block">{{SCCM.Name}}</span>
-                                </td>
-                        </table>
                         <div dx-data-grid="dg_eval" id="dg_eval" class="content" style="overflow-y:hidden;margin-top:5px" dx-item-alias="row"></div>
 
 
@@ -930,7 +831,7 @@
                 <div style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
                     <div style="padding:0px;" class="main-bkcolor2-light-imp">
 
-                        <div style="border: 1px solid #9c9c9c; height:50px; width: 100%">
+                        <div style="border: 1px solid #9c9c9c; height: 50px; width: 100%; position: sticky; top: 0; background-color: white; z-index: 10">
                             <div class="col-lg-2 col-md-2 col-sm-2" style="height:50px"><p style="text-align: center; vertical-align: middle; line-height: 50px; ">Reporter:</p></div>
                             <div class="col-lg-8 col-md-8 col-sm-8" style=" height:50px; padding: 5px"><div style="width: 100%; height: 100%; border: 1px solid lightgray; border-radius: 20px" dx-select-box="sb_reporter"> </div></div>
                             <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center;padding:5px"><div dx-button="btn_equpm_fill"></div>     </div>
@@ -972,7 +873,7 @@
                             </div>
                         </div>
 
-                      
+
                     </div>
                 </div>
             </div>
@@ -1002,7 +903,7 @@
 
                     <td></td>
                     <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_print"></div></td>-->
-
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_print"></div></td>
                 </tr>
             </table>
 
@@ -1035,7 +936,7 @@
     </div>-->
 
 
-   
+
 
 
 

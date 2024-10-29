@@ -69,16 +69,20 @@
   <ItemGroup>
     <Content Include="app\app.js" />
     <Content Include="app\controllers\appsController.js" />
+    <Content Include="app\controllers\atoTileController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\imageviewer.js" />
     <Content Include="app\controllers\indexController.js" />
     <Content Include="app\controllers\loginController.js" />
     <Content Include="app\controllers\profileController.js" />
+    <Content Include="app\controllers\question_list_controller.js" />
+    <Content Include="app\controllers\question_paging_controller.js" />
     <Content Include="app\controllers\usersController.js" />
     <Content Include="app\controllers\verify.js" />
     <Content Include="app\services\activityService.js" />
     <Content Include="app\services\aircraftService.js" />
     <Content Include="app\services\airportService.js" />
+    <Content Include="app\services\atoService.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\biService.js" />
@@ -111,11 +115,14 @@
     <Content Include="app\services\zpersonService.js" />
     <Content Include="app\services\zschedulingService.js" />
     <Content Include="app\services\ztrainingService.js" />
+    <Content Include="app\views\atoTile.html" />
     <Content Include="app\views\header.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\imageviewer.html" />
     <Content Include="app\views\login.html" />
     <Content Include="app\views\profile.html" />
+    <Content Include="app\views\question_list.html" />
+    <Content Include="app\views\question_paging.html" />
     <Content Include="app\views\users.html" />
     <Content Include="app\views\verify.html" />
     <Content Include="content\css\bootstrap-4.min.css" />

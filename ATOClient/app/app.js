@@ -55,6 +55,21 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/profile.html?v=" + '5673'
     });
 
+    $routeProvider.when("/quiz/list", {
+        controller: "question_list_controller",
+        templateUrl: "/app/views/question_list.html?v=" + '5673'
+    });
+
+    $routeProvider.when("/quiz/paging", {
+        controller: "question_paging_controller",
+        templateUrl: "/app/views/question_paging.html?v=" + '5673'
+    });
+   
+
+      $routeProvider.when("/tile", {
+          controller: "atoTileController",
+        templateUrl: "/app/views/atoTile.html?v=" + '5673'
+    });
    
 
     $routeProvider.otherwise({ redirectTo: "/home" });

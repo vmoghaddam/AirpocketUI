@@ -904,6 +904,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/student_attendance.html?v=1103"
     });
 
+      $routeProvider.when("/quiz", {
+          controller: "quizController",
+        templateUrl: "/app/views/quiz.html?v=1103"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
