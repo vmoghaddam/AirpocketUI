@@ -1943,8 +1943,20 @@ namespace EPAGriffinAPI.DAL
             public int nira { get; set; }
             public int sign { get; set; }
         }
+
         public async Task<CustomActionResult> ShiftFlights(ShiftFlightsDto dto)
         {
+
+            var nullable_ids = dto.ids.Select(q => (Nullable<int>)q).ToList();
+            var fdpitems = await (from fi in this.context.FDPItems
+                              join f in this.context.FDPs on fi.FDPId equals f.Id
+                              where nullable_ids.Contains(fi.FlightId) && f.IsTemplate == false
+                              select fi.FlightId).ToListAsync();
+            if (fdpitems!=null && fdpitems.Count>0)
+            {
+                return new CustomActionResult(HttpStatusCode.BadRequest, "flight crew error");
+            }
+
             var flights = await this.context.FlightInformations.Where(q => dto.ids.Contains(q.ID)).ToListAsync();
             var legs = await this.context.ViewLegTimes.Where(q => dto.ids.Contains(q.ID)).ToListAsync();
             foreach (var flight in flights)
@@ -12572,8 +12584,11 @@ namespace EPAGriffinAPI.DAL
             }
             //old
             //var flights = await this.context.ViewLegTimes.Where(q => ids.Contains(q.ID)).OrderBy(q => q.STDDay).ThenBy(q => q.STD).ThenBy(q => q.Register).ToListAsync();
+            var rep = 60;
+            if (flights.First().ToAirportIATA == "NJF")
+                rep = 75;
             MaxFDPStats stat = new MaxFDPStats();
-            stat.ReportingTime = ((DateTime)flights.First().DepartureLocal).AddMinutes(-75);
+            stat.ReportingTime = ((DateTime)flights.First().DepartureLocal).AddMinutes(-rep);
             stat.Sectors = ids.Count - (dh == null ? 0 : (int)dh);
             stat.RestFrom = ((DateTime)flights.Last().ArrivalLocal).AddMinutes(30);
             var endDate = ((DateTime)flights.Last().ArrivalLocal);
@@ -12592,7 +12607,7 @@ namespace EPAGriffinAPI.DAL
 
 
             stat.RestTo = stat.RestFrom.AddHours(12);
-            stat.MaxFDP = getMaxFDP(((DateTime)flights.First().DepartureLocal).AddMinutes(-75), stat.Sectors, MaxFDPTable);
+            stat.MaxFDP = getMaxFDP(((DateTime)flights.First().DepartureLocal).AddMinutes(-rep), stat.Sectors, MaxFDPTable);
             stat.WOCL = wocl * 60;
             stat.Extended = 0;
             stat.AllowedExtension = 0;
@@ -12642,9 +12657,9 @@ namespace EPAGriffinAPI.DAL
             if (stat.Duration > stat.MaxFDP && stat.Extended == 0)
             {
                 var extTable = getExtensionTable();
-                var extend = getExtension(((DateTime)flights.First().DepartureLocal).AddMinutes(-60), stat.Sectors, extTable);
+                var extend = getExtension(((DateTime)flights.First().DepartureLocal).AddMinutes(-rep), stat.Sectors, extTable);
                 if (extend >= stat.Duration)
-                    stat.AllowedExtension = getExtension(((DateTime)flights.First().DepartureLocal).AddMinutes(-60), stat.Sectors, extTable);
+                    stat.AllowedExtension = getExtension(((DateTime)flights.First().DepartureLocal).AddMinutes(-rep), stat.Sectors, extTable);
 
 
             }
@@ -13592,6 +13607,8 @@ namespace EPAGriffinAPI.DAL
             //internal async Task<object> DeleteFDP(int fdpId)
             try
             {
+                var rep_time = 0;
+
                 dto.IsAdmin = dto.IsAdmin == null ? 0 : (int)dto.IsAdmin;
                 Stopwatch timer = new Stopwatch();
                 timer.Start();
@@ -13745,6 +13762,13 @@ namespace EPAGriffinAPI.DAL
                 var rst = dto.to == dto.homeBase ? 12 : 10;
                 if (dto.extension != null && dto.extension > 0)
                     rst += 4;
+
+
+                if (dto.items.First().to == "NJF")
+                    rep_time = 75;
+                else
+                    rep_time = 60;
+
                 var fdp = new FDP()
                 {
                     IsTemplate = false,
@@ -13759,9 +13783,9 @@ namespace EPAGriffinAPI.DAL
                     InitRoute = dto.route,
                     InitFromIATA = dto.from.ToString(),
                     InitToIATA = dto.to.ToString(),
-                    InitStart = !alldh ? dto.items.First().std.AddMinutes(-60) : dto.items.First().std,
+                    InitStart = !alldh ? dto.items.First().std.AddMinutes(-rep_time) : dto.items.First().std,
                     InitEnd = !alldh ? dto.items.Last().sta.AddMinutes(30) : dto.items.Last().sta,
-                    DateStart = !alldh ? dto.items.First().std.AddMinutes(-60) : dto.items.First().std,
+                    DateStart = !alldh ? dto.items.First().std.AddMinutes(-rep_time) : dto.items.First().std,
                     DateEnd = !alldh ? dto.items.Last().sta.AddMinutes(30) : dto.items.Last().sta,
                     InitRestTo = !alldh ? dto.items.Last().sta.AddMinutes(30).AddHours(rst) : dto.items.Last().sta,
                     InitFlights = string.Join("*", dto.flights),
@@ -13893,7 +13917,7 @@ namespace EPAGriffinAPI.DAL
                                     {
                                         try
                                         {
-                                            var intStart = ((DateTime)_interupted.InitStart).AddMinutes(60);
+                                            var intStart = ((DateTime)_interupted.InitStart).AddMinutes(rep_time);
                                             var intEnd = ((DateTime)_interupted.InitEnd).AddMinutes(-30);
                                             if (fdp.InitStart > intStart && fdp.InitStart < intEnd)
                                                 sendError = true;
@@ -13968,7 +13992,7 @@ namespace EPAGriffinAPI.DAL
                                 });
                             else
                             {
-                                var _strt = ((DateTime)fdp.InitStart).AddMinutes(60);
+                                var _strt = ((DateTime)fdp.InitStart).AddMinutes(rep_time);
                                 var rdif = Math.Abs((DateTime.UtcNow - _strt).TotalMinutes);
                                 if (rdif < 10 * 60)
                                     return new CustomActionResult(HttpStatusCode.NotModified, _interupted);
@@ -14046,7 +14070,7 @@ namespace EPAGriffinAPI.DAL
                         InitRoute = dto.route,
                         InitFromIATA = dto.from.ToString(),
                         InitToIATA = dto.to.ToString(),
-                        InitStart = dto.items.First().std.AddMinutes(-60),
+                        InitStart = dto.items.First().std.AddMinutes(-rep_time),
                         InitEnd = dto.items.Last().std.AddMinutes(30),
                         Split = 0,
                         UserName = dto.UserName,

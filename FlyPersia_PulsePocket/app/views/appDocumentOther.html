@@ -1,0 +1,64 @@
+﻿<div style="height:100%;">
+    <div class="box documentother maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5;  ">
+
+            <div id="scrollview" dx-scroll-view="scroll_main">
+
+                <div style="padding-top:5px;padding-right:2px;padding-left:2px;background:white !important;margin:5px 5px 0 5px; border:1px solid #bbb" class="lib-flight" ng-repeat="x in ds" ng-click="ItemClick(x)">
+
+                    <div style="float:left;width:20%;">
+                        <div style="text-align:center;font-size:11px;">{{x.No}}</div>
+                        <div style="text-align:center;font-size:26px;">{{getDay(x.DateRelease)}}</div>
+                        <div style="text-align:center;font-size:14px;">{{getTileMonth(x.DateRelease)}}</div>
+
+                    </div>
+                    <div style="padding-left: 7px;float:left;border-left:1px dashed #ccc">
+
+
+                        <div style="font-size:12px;">{{x.Category}}</div>
+                        <div style="font-size:15px;margin-top:3px;">{{x.Title}}</div>
+                        <div style="font-size:13px;">{{x.Sender}}</div>
+                        <div style="font-size:14px;margin-top:12px; " ng-show="x.DeadLine" ng-bind="getDeadLine (x)" ng-class="getDeadLineClass(x)"> </div>
+
+
+
+
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div style="text-align:center;font-size:13px;border-top:1px dashed #ccc;margin:5px;padding-top:5px;" ng-class="getDeadLineBackClass(x)">
+                        <div style="float:left;width:50%;text-align:left;padding-left:5px">
+                           
+                            <span ng-bind-html="getDeadLineRemaining(x)" style="display:inline-block;position:relative;top:2px;" ></span>
+                        </div>
+                        <div style="float:left;width:50%;text-align:right;padding-right:5px;padding-top:2px;padding-bottom:3px;">
+                            <i ng-class="getVisitedClass(x)" style="font-size:18px;margin-top:10px;display:inline;color:#b3b3b3"></i>
+                            <i ng-class="getSignedClass(x)" style="font-size:18px;margin-top:10px;display:inline;color:#b3b3b3"></i>
+
+                            <span style="display:inline-block;position:relative;top:-2px;font-weight:bold">FlyPersia</span>
+
+                        </div>
+                        <div style="clear:both"></div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+     
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'appdocumentother';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+
+   
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

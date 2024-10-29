@@ -1,0 +1,141 @@
+﻿﻿
+<style>
+    .ctd {
+        border: 1px solid #eee;
+        text-align: center;
+    }
+
+    .ctd-empty {
+        border: 0px solid #eee;
+        text-align: center;
+    }
+
+    .ctr {
+        /*height:30px;*/
+    }
+
+    .ctd-center {
+        background-color: lightseagreen;
+    }
+
+    .ctd-selected {
+        background-color: red;
+    }
+
+    ._tbl1 td {
+        font-size: 13px;
+        padding: 3px !important;
+    }
+
+    ._tbl1 tr {
+        height: 55px;
+    }
+</style>
+<div ng-controller="toAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px; ">
+
+            <div id="scroll_toadd" dx-scroll-view="scroll_toadd" style="margin-top:5px;padding:0 5px 0 5px">
+
+                <table style="margin-top:10px;border:0px solid #eee;width:100%;color:black" class="dx-border _tbl1">
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:center; font-weight: bold">Reg</td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_reg" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Airport </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_airport" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Date </td>
+                        <td style="padding:7px;text-align:left;"><div dx-date-box="txt_date" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Flt No </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_fltNo" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:center; font-weight: bold">A/C</td>
+                        <td style="padding:7px;text-align:left;"><div dx-select-box="sb_ac" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> A/I </td>
+                        <td style="padding:7px;text-align:left;"><div dx-select-box="sb_ai" class="center"></div></td>
+                        <td colspan="4"></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:center; font-weight: bold">Normal EPR</td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_nepr" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold">Max EPR </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_mepr" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold">Assume Temp</td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_atemp" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold">Flex EPR </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_fepr" class="center"></div></td>
+                    </tr>
+
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> V1 </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_v1" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> VR </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_vr" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> V2 </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_v2" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> V flaps </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_vflaps" class="center"></div></td>
+                    </tr>
+
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Per. Wt </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_zfw" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Act. TOW </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_toWeight" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> TO Flaps </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_flap" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold">TO CG </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_cg" class="center"></div></td>
+                    </tr>
+
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Stab trim </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_stab" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> RWY in use </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_rwinuse" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold" colspan="4">  </td>
+                    </tr>
+
+                    <tr style="height:35px !important">
+                        <td style="padding: 7px;text-align:center; font-weight: bold;background:gray" colspan="8">ATIS </td>
+
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:center; font-weight: bold">Info</td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_info" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Time </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_ctime" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> RWY </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_rw" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold">T.L. </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_tl" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Wind </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_wind" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Vis </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_visibility" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Temp </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_temp" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> QNH </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_qhn" class="center"></div></td>
+                    </tr>
+                    <tr style="height:35px !important">
+                        <td style="padding: 7px;text-align:left; font-weight: bold" colspan="8"> Other info. </td>
+
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding:7px;text-align:left;" colspan="8"><div dx-text-box="txt_wx" class="center"></div></td>
+                    </tr>
+
+                </table>
+
+
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

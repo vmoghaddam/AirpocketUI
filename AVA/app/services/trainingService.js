@@ -765,6 +765,21 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
         return deferred.promise;
     };
     serviceFactory.saveCourseFP = _saveCourseFP;
+
+
+
+    var _generateQuestions = function (entity) {
+        var deferred = $q.defer();
+        $http.post(serviceBaseTRN + 'api/trn/exam/questions/generate', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.generateQuestions = _generateQuestions;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;

@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVA_PULSEPOCKET", "AVA_PULS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATOClient", "ATOClient\ATOClient.csproj", "{971FC521-FCAA-4E16-A447-A2AB4B12D063}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyPersia", "FlyPersia\FlyPersia.csproj", "{8EC4861F-0EE7-486E-9F87-C982F073FD34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyPersia_PulsePocket", "FlyPersia_PulsePocket\FlyPersia_PulsePocket.csproj", "{F9CD13FD-169B-4753-B054-583082AD5569}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +85,14 @@ Global
 		{971FC521-FCAA-4E16-A447-A2AB4B12D063}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{971FC521-FCAA-4E16-A447-A2AB4B12D063}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{971FC521-FCAA-4E16-A447-A2AB4B12D063}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EC4861F-0EE7-486E-9F87-C982F073FD34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EC4861F-0EE7-486E-9F87-C982F073FD34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EC4861F-0EE7-486E-9F87-C982F073FD34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EC4861F-0EE7-486E-9F87-C982F073FD34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9CD13FD-169B-4753-B054-583082AD5569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9CD13FD-169B-4753-B054-583082AD5569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9CD13FD-169B-4753-B054-583082AD5569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9CD13FD-169B-4753-B054-583082AD5569}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

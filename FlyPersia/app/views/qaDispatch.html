@@ -1,0 +1,188 @@
+﻿<div ng-controller="qaDispatchController">
+    <div style="padding:0px 10px 0 10px;">
+        <div style="margin-top: 0px; float: left; overflow: hidden; width: 60%;padding:10px 15px 0 0px">
+            <div style='background:#898e8c;color:white;font-weight:bold;padding:7px;text-align:center'>DISPATCH HAZARD REPORT</div>
+            <div style="border:1px solid #ccc;padding:10px;">
+                <!--<div id="scroll_qaCabin" dx-scroll-view="scroll_qaCabin" class='thin-scroll'>-->
+                <div class='thin-scroll' style='overflow-y:auto;' ng-style="{height: scroll_qaDispatch_height + 'px'}">
+
+                    <div class="visible-sm visible-md visible-lg">
+                       <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="6" style=" padding:7px;text-align:left;color:black;font-weight:bold">
+                                Id:<span style='display:inline-block;margin-left:5px;'>{{entity.FormNo}}</span>
+                            </td>
+                        </tr>
+                    </table>
+						<table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold" colspan="2">
+                                    Contact Information (Optionally) (اطلاعات تماس (اختیاری
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Email (آدرس ایمیل): </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_email" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Tel No. (شماره تلفن): </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_telNumber" class="center" dx-validator="{validationGroup:'asradd',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Full Name (نام و نام‌خانوادگی): </td>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-box="txt_name" class="center"></div></td>
+                            </tr>
+                        </table>
+                        <table style="margin-top: 10px; border: 1px solid #eee; width: 100%; color: black" class="dx-border">
+
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Type Of Occurance: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-select-box="sb_occuranceType" class="center"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Date Of Report </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_dateReport" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Reporter Name: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_reporterName" class="center"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Reporter Position: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_reporterPosision" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table ng-show="entity.Type == 0" style="margin-top: 10px; border: 1px solid #eee; width: 100%; color: black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold" colspan="4">
+                                    In Flight Operation Occurance
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Date And Time Of Event: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_opEventDate" class="center"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Time Of Received Event Report(UTC): </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_opReportTime" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Event Reported By: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_opReporterName" class="center"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Location Of Event: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_eventLocation" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> PIC: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_PIC" class="center"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Flight No: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_fltNo" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> route: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_route" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Flight Cancelled: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-select-box="sb_fltCancelled" class="center"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Time: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_fltCancelledTime" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> A/C Changed: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-select-box="sb_acChanged" class="center"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Time: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_acChangeTime" class="center"></div></td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Crew Changed: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-select-box="sb_crewChanged" class="center"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Time: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_crewChangeTime" class="center"></div></td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Flight Performed: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-select-box="sb_fltPerformed" class="center"></div></td>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Time: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_fltPerformedTime" class="center"></div></td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Event Summery: </td>
+                                <td style="padding:7px;text-align:left;" colspan="3"><div dx-text-area="txt_opEventSummery" class="center"></div></td>
+                            </tr>
+                        </table>
+                        <div ng-show="entity.Type == 0" style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <div style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                Event Catagory:
+                            </div>
+                            <div style="padding: 1%;text-align:left" ng-repeat="x in opCatagory">
+                                <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="optOPCatagory[$index]" ng-change="chkOPCatagory($index)" ng-disabled="true" /> <p style="margin-right:5px;display:inline-block">{{x.Title}}</p>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+
+                        <table ng-show="entity.Type == 1" style="margin-top: 10px; border: 1px solid #eee; width: 100%; color: black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold" colspan="4">
+                                    In Flight Operation Occurance
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Date And Time Of Event: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-date-box="txt_opEventDate" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Location Of Event: </td>
+                                <td style="padding:7px;text-align:left;"><div dx-text-box="txt_eventLocation" class="center"></div></td>
+                            </tr>
+
+                            <tr>
+                                <td style="padding: 7px;text-align:left; font-weight: bold"> Action Taken, Result And Any Subsequent Event(s): </td>
+                                <td style="padding:7px;text-align:left;" colspan="3"><div dx-text-area="txt_ActionTaken" class="center"></div></td>
+                            </tr>
+                        </table>
+                        <div ng-show="entity.Type == 1" style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <div style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                Event Catagory:
+                            </div>
+
+                            <div style="padding: 1%;text-align:left" ng-repeat="x in disCatagory">
+                                <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="optDISCatagory[$index]" ng-change="chkDISCatagory($index)" ng-disabled="true" /> <p style="margin-right:5px;display:inline-block">{{x.Title}}</p>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold">
+                                    Result
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:left;"> <div dx-text-area="txt_result"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <div style="clear:both"></div>
+                        <div style="background-color: lightgray; padding: 7px; text-align: left; color: black; font-weight: bold; margin-top: 10px">
+                            ATTACHED DOCUMENTS
+                        </div>
+                        <div dx-data-grid="dg_attachments" id="dg_attachments" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                            <div data-options="dxTemplate:{ name:'download' }">
+                                <a ng-click="download(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="float: right;width:40%">
+            <div ng-include="'app/views/qaRefer.html?vx=3'" onload="testLoaded()"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>
+<div style="clear:both"></div>

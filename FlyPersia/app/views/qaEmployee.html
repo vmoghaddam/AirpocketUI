@@ -1,0 +1,25 @@
+<div ng-controller="qaEmployee">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div dx-data-grid="dg" id="dg"></div>
+        <div style='padding:5px;background:#ccc'>Remark</div>
+        <div dx-text-area="referComment" style=" border: 1px solid lightgray; height: 80px"></div>
+
+         <table style="width:100%">
+     <tr>
+         <td style="padding-left:5px"><p style="margin: 5px 0 0 !important">DeadLine</p></td>
+         <td style="padding-left:5px"><p style="margin: 5px 0 0 !important">Priority</p></td>
+     </tr>
+     <tr>
+         <td class="col-lg-6 col-md-6 col-sm-6 col-xs-6 dx-border" style="padding:5px"><div style="width:100%" dx-date-box="deadline"></div></td>
+         <td class="col-lg-6 col-md-6 col-sm-6 col-xs-6 dx-border" style="padding:5px"><div dx-select-box="sb_priority"></div></td>
+     </tr>
+ </table>
+
+        <!--<div style="height: 40px">
+            <div dx-date-box="deadline" style="display: inline-block; width: 340px; border: 1px solid lightgray; text-align: center; margin-left: 4px" class="center"></div>
+            <div dx-select-box="sb_priority" style="display: inline-block; width: 349px; border: 1px solid lightgray; text-align: center " class="center"></div>
+        </div>-->
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

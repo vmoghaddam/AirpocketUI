@@ -1,0 +1,328 @@
+﻿<style>
+    .tab-field {
+        padding: 7px;
+        text-align: left
+    }
+
+    .tab-field-title {
+        padding: 7px;
+        text-align: left;
+        font-weight: bold
+    }
+
+    .tab-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+
+    .tab-style {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        width: 100%;
+        color: black;
+    }
+
+    .dx-toolbar-center, .dx-toolbar-before {
+        width: 100%;
+		  margin: 0 !important
+    }
+
+    .dx-overlay-content {
+        width: 100%
+    }
+
+</style>
+<div ng-controller="qaCabinController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+
+            <div id="scroll_qaCabin" dx-scroll-view="scroll_qaCabin" style="margin-top:5px">
+
+                <div class="visible-xs">
+
+					<table class="dx-border tab-style">
+    <tr>
+        <td style="text-align: left !important; width: 0 !important; padding: 7px 0 0 7px"> <div dx-check-box="ch_anonymous" class="center"></div></td>
+        <td style="padding: 9px 0 0 5px"> Anonymous Submit </td>
+    </tr>
+    <tr>
+        <td style="font-size:11px; text-align: right; font-weight: bold;padding:7px" colspan="3">
+            (در صورت عدم تمایل به شناسایی فرد گزارش دهنده نسبت به تایید این بند اقدام گردد)
+        </td>
+    </tr>
+</table>
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-field-title"> Name: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_Name" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> BOX: </td>
+                            <td class="tab-field"><div dx-text-box="txt_BOX" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Ref: </td>
+                            <td class="tab-field"><div dx-text-box="txt_refNumber" class="center"></div></td>
+                        </tr>
+                    </table>
+                    <table class="dx-border tab-style">
+
+                        <tr>
+                            <td class="tab-field-title"> Reporter: </td>
+                            <td class="tab-field"> <div dx-select-box="sb_reporter" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Report field by: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_repFieldBy" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Date of Occurrence: </td>
+                            <td class="tab-field"><div dx-date-box="txt_OccurrenceDate" class="center" dx-validator="{validationGroup:'cabin',  validationRules: [{ type: 'required',   }]}"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Approximate local time of event: </td>
+                            <td class="tab-field"><div dx-date-box="txt_OccurrenceTime" class="center" dx-validator="{validationGroup:'cabin',  validationRules: [{ type: 'required',   }]}"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> Flight number: </td>
+                            <td class="tab-field"> <div dx-number-box="num_fltNum" class="center"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> Flight segment(from-to): </td>
+                            <td class="tab-field"> <div dx-text-box="txt_fltSeg" class="center"></div></td>
+                        </tr>
+
+                        <tr>
+                            <td class="tab-field-title"> Location of event: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_eventLoc" class="center"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> A/C type & registration: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_acType" class="center"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> Number of passenger: </td>
+                            <td class="tab-field"> <div dx-number-box="num_PAXNum" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Delay(M): </td>
+                            <td class="tab-field"> <div dx-number-box="num_delay" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">  Delay Reason: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"> <div dx-text-area="txt_delayReason" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Weather condition: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"> <div dx-text-area="txt_wxCondition" class="center"></div></td>
+                        </tr>
+
+                    </table>
+                    <div class="dx-border tab-style">
+                        <div class="tab-title ">
+                            Flight Phase:
+                        </div>
+
+                        <div class="col-xs-4 col-sm-3 col-md-3 tab-field" ng-repeat="x in flightPhase">
+
+                            <input type="checkbox" class="tab-field-title" ng-model="x.checked" ng-change="chkFlightPhase(x)" ng-disabled="!isEditable" /> {{x.Title}}
+
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <div class="dx-border tab-style">
+                        <div class="tab-title ">
+                            Event Title(check all that apply):
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 tab-field" ng-repeat="x in eventTitle">
+                            <input type="checkbox" class="tab-field-title" ng-checked="x.checked" ng-model="x.checked" ng-change="chkEventTitle(x)" ng-disabled="!isEditable" /> {{x.Title}}
+                        </div>
+                        <div style="clear:both"></div>
+                        <div dx-text-area="txt_eventOther" class="center tab-field"></div>
+                    </div>
+
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title ">
+                                Describe occurernece/ situation with all relevant information (Please be brief & to the point):
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-area="txt_desOccurrence" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title ">
+                                Recommendation(s):
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-area="txt_Rec" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+
+
+                    <div style="clear:both"></div>
+                </div>
+
+                <div class="visible-sm visible-md visible-lg">
+<table class="dx-border tab-style">
+    <tr>
+        <td style="text-align: left !important; width: 0 !important; padding: 7px 0 0 7px"> <div dx-check-box="ch_anonymous" class="center"></div></td>
+        <td style="padding: 9px 0 0 5px"> Anonymous Submit </td>
+    </tr>
+    <tr>
+        <td style="font-size:11px; text-align: right; font-weight: bold;padding:7px" colspan="3">
+            (در صورت عدم تمایل به شناسایی فرد گزارش دهنده نسبت به تایید این بند اقدام گردد)
+        </td>
+    </tr>
+</table>
+                    <table class="dx-border tab-style">
+						 
+                        <tr>
+                            <td class="tab-field-title"> Name: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_Name" class="center"></div></td>
+                            <td class="tab-field-title"> BOX: </td>
+                            <td class="tab-field"><div dx-text-box="txt_BOX" class="center"></div></td>
+                            <td class="tab-field-title"> Ref: </td>
+                            <td class="tab-field"><div dx-number-box="num_refNumber" class="center"></div></td>
+                        </tr>
+                    </table>
+
+                    <table class="dx-border tab-style">
+
+                        <tr>
+                            <td class="tab-field-title"> Reporter: </td>
+                            <td class="tab-field"> <div dx-select-box="sb_reporter" class="center"></div></td>
+                            <td class="tab-field-title"> Report filled by: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_repFieldBy" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Date of Occurrence: </td>
+                            <td class="tab-field"><div dx-date-box="txt_OccurrenceDate" class="center" dx-validator="{validationGroup:'cabin',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            <td class="tab-field-title"> approximate local time of event: </td>
+                            <td class="tab-field"><div dx-date-box="txt_OccurrenceTime" class="center" dx-validator="{validationGroup:'seurity',  validationRules: [{ type: 'required',   }]}"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> Number of passenger: </td>
+                            <td class="tab-field"> <div dx-number-box="num_PAXNum" class="center"></div></td>
+                            <td class="tab-field-title"> Flight number: </td>
+                            <td class="tab-field"> <div dx-number-box="num_fltNum" class="center"></div></td>
+                        </tr>
+                        <tr ng-show="fltInfo">
+                            <td class="tab-field-title"> Flight segment(from-to): </td>
+                            <td class="tab-field"> <div dx-text-box="txt_fltSeg" class="center"></div></td>
+                            <td class="tab-field-title"> A/C type & registration: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_acType" class="center"></div></td>
+                        </tr>
+
+                        <tr>
+                            <td class="tab-field-title"> Delay(M): </td>
+                            <td class="tab-field"> <div dx-number-box="num_delay" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">  Delay Reason: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="4"> <div dx-text-area="txt_delayReason" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Location of event: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="4"> <div dx-text-box="txt_eventLoc" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Weather condition: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="4"> <div dx-text-area="txt_wxCondition" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <div class="dx-border tab-style">
+                        <div class="tab-title ">
+                            Flight Phase:
+                        </div>
+
+                        <div class="col-xs-3 col-sm-3 col-md-3 tab-field" ng-repeat="x in flightPhase">
+
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkFlightPhase(x)" ng-disabled="!isEditable" /> {{x.Title}}
+
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <div class="dx-border tab-style">
+                        <div class="tab-title ">
+                            Event Title(check all that apply):
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6" ng-repeat="x in eventTitle">
+
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="etoptions[x.Id]" ng-change="chkEventTitle($index)" ng-disabled="!isEditable" /> {{x.Title}}
+
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="margin:1%;border:1px solid #eee;width:98%;color:black" dx-text-area="txt_eventOther" class="center"></div>
+
+
+                    </div>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title ">
+                                Describe occurernece/ situation with all relevant information (Please be brief & to the point):
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-area="txt_desOccurrence" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title ">
+                                Recommendation(s):
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"> <div dx-text-area="txt_Rec" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-field-title"> Recived: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_recived" class="center"></div></td>
+                            <td class="tab-field-title"> Follow-Up: </td>
+                            <td class="tab-field"> <div dx-text-box="txt_followup" class="center"></div></td>
+                        </tr>
+                    </table>
+
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <div ng-include="'app/views/qaAttachment.html?vx.2'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

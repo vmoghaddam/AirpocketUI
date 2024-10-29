@@ -1,0 +1,210 @@
+﻿<style>
+    .ctd {
+        border: 1px solid #eee;
+        text-align: center;
+    }
+
+    .ctd-empty {
+        border: 0px solid #eee;
+        text-align: center;
+    }
+
+    .ctr {
+        /*height:30px;*/
+    }
+
+    .ctd-center {
+        background-color: lightseagreen;
+    }
+
+    .ctd-selected {
+        background-color: red;
+    }
+
+    .tdStyle {
+        padding: 7px;
+        text-align: left
+    }
+
+    .titleStyle {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+</style>
+<div ng-controller="qaCyberSecurity">
+    <div style="padding:0px 10px 0 10px;">
+        <div style="margin-top: 0px; float: left; overflow: hidden; width: 60%;padding:10px 15px 0 0px">
+            <div style='background:#898e8c;color:white;font-weight:bold;padding:7px;text-align:center'>CYBER SECURITY REPORT</div>
+            <div style="border:1px solid #ccc;padding:10px;">
+                <!--<div id="scroll_qaCabin" dx-scroll-view="scroll_qaCabin" class='thin-scroll'>-->
+                <div class='thin-scroll' style='overflow-y:auto;' ng-style="{height: scroll_qaCyber_height + 'px'}">
+
+                    <div class="visible-sm visible-md visible-lg">
+                       <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="6" style=" padding:7px;text-align:left;color:black;font-weight:bold">
+                                Id:<span style='display:inline-block;margin-left:5px;'>{{entity.FormNo}}</span>
+                            </td>
+                        </tr>
+                    </table>
+						<table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle" colspan="4">
+                                    CONTACT PERSON
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Full Name : </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_name" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Job Title: </td>
+                                <td class="tdStyle"><div dx-text-box="txt_jobTitle" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Date of Event: </td>
+                                <td class="tdStyle"><div dx-date-box="txt_dateEvent" style="width:100%" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Time Of Occurrence: </td>
+                                <td class="tdStyle"><div dx-date-box="txt_OccurrenceTime" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Email: </td>
+                                <td class="tdStyle"><div dx-text-box="txt_email" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Phone: </td>
+                                <td class="tdStyle"><div dx-text-box="txt_mobile" class="center"></div></td>
+                            </tr>
+
+
+                        </table>
+
+                        <div style="margin-top: 10px; border: 1px solid #eee; width: 100%; color: black" class="dx-border">
+                            <div class="titleStyle">
+                                THE INCIDENT
+                            </div>
+                            <div style="padding: 7px;text-align:right; font-weight: bold">
+                                <div style="display:inline-block; margin-top:12px; text-align:left; padding-left: 0 !important" class="col-xs-6 col-md-6 col-sm-6">Date of Incident:</div>
+                                <div dx-date-box="txt_dateIncident" class="center" style="height:40px" dx-validator="{validationGroup:'cyber',  validationRules: [{ type: 'required',   }]}"></div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6" style="padding: 1%" ng-repeat="x in incident">
+                                <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkIncidentBy(x)" ng-disabled="true" /> {{x.Title}}
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="tdStyle" style="height:80px" dx-text-area="txt_eventOther"></div>
+
+                        </div>
+
+
+                        <div style="margin-top: 10px; border: 1px solid #eee; width: 100%; color: black" class="dx-border">
+                            <div class="titleStyle">
+                                METHOD OF INTRUSION:
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6" style="padding: 1%" ng-repeat="x in method">
+                                <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkMethodBy(x)" ng-disabled="true" /> {{x.Title}}
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="tdStyle" style="height:80px" dx-text-area="txt_eventOther"></div>
+
+                        </div>
+
+                        <div style="margin-top: 10px; border: 1px solid #eee; width: 100%; color: black" class="dx-border">
+                            <div class="titleStyle">
+                                UNAUTHORIZED ACCESS
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6" style="padding: 1%" ng-repeat="x in access">
+                                <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkAccessBy(x)" ng-disabled="true" /> {{x.Title}}
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="tdStyle" style="height:80px" dx-text-area="txt_eventOther"></div>
+
+                            <div>
+                                <div style="margin-bottom:5px"> Were any containment measures made?:</div>
+                                <div dx-text-area="txt_containment" class="center" style="height:75px; padding:5px"></div>
+                            </div>
+
+                        </div>
+
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle" colspan="2">
+                                    IMPACTED SERVICES
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Was anything permanently impacted by the incident?: </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"><div dx-text-area="txt_impacted" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Was there any data, records, or information breached?: </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"><div dx-text-area="txt_breached" class="center"></div></td>
+                            </tr>
+                        </table>
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle" colspan="2">
+                                    ATTACK VECTOR
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Do you know how the attack was made?: </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"><div dx-text-area="txt_attack" class="center"></div></td>
+                            </tr>
+                        </table>
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle">
+                                    OTHER
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold">Is there any other information you would like to include in this report?: </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"><div dx-text-area="txt_other" class="center"></div></td>
+                            </tr>
+
+                        </table>
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black;  " class="dx-border">
+                            <tr>
+                                <td class="titleStyle" style="background-color: #66ffcc !important">
+                                    Result
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"> <div dx-text-area="txt_result"></div></td>
+                            </tr>
+
+                        </table>
+                        <div class="titleStyle " style="margin-top: 10px">
+                            ATTACHED DOCUMENTS
+                        </div>
+                        <div dx-data-grid="dg_attachments" id="dg_attachments" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                            <div data-options="dxTemplate:{ name:'download' }">
+                                <a ng-click="download(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div style="float: right; width:40%">
+            <div ng-include="'app/views/qaRefer.html?vx=3'" onload="testLoaded()"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+<div style="clear:both"></div>
+
+

@@ -1,0 +1,72 @@
+﻿<style>
+    .speed-value {
+        position: absolute;
+        border: 2px solid #f05b41;
+        border-radius: 50%;
+        width: 110px;
+        height: 110px;
+        left: 28%;
+        top: 36%;
+        line-height: 100px;
+    }
+
+        .speed-value > span {
+            font-size: 50px;
+            font-weight: lighter;
+            color: #f05b41;
+        }
+		    .text-cancel {
+        color: #595959 !important;
+    }
+    .text-delay {
+        color: #ff3300 !important;
+    }
+    .text-pickup {
+        color: #0099ff !important;
+    }
+    .text-general {
+        color: #00cc99 !important;
+    }
+    .applibraryitem .card:hover {
+        background-color: #eee !important;
+    }
+</style>
+<div style="height:100%;">
+ 
+    <div class="box home maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+
+
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html?v=10'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                <div style="padding-top:15px;padding-right:15px;padding-left:15px">
+
+
+					<div style='border:1px solid orange;text-align:center;padding:30px;background:white;font-weight:bold' data-ng-click="navigate('/forms','forms',-1)">Safety Report Forms</div>
+					
+					<div style='border:1px solid orange;text-align:center;padding:30px;margin-top:15px;background:white;font-weight:bold' data-ng-click="navigate('/applibrary/1/1','applibrary',2)">Library</div>
+					
+					<div style='border:1px solid orange;text-align:center;padding:30px;margin-top:15px;background:white;font-weight:bold'  data-ng-click="navigate('/help','help',-1)">Help</div>
+     
+
+
+                </div>
+                <div style="clear:both"></div>
+
+            </div>
+        </div>
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html?v=334'" ng-init="type = 'apphome';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+	 
+</div>
+
+
+
+

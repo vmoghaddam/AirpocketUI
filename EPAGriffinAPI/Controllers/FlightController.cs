@@ -5222,6 +5222,8 @@ namespace EPAGriffinAPI.Controllers
 
 
             var result = await unitOfWork.FlightRepository.ShiftFlights(obj);
+            if (result.Code != HttpStatusCode.OK)
+                return result;
             var saveResult = await unitOfWork.SaveAsync();
             if (saveResult.Code != HttpStatusCode.OK)
                 return saveResult;

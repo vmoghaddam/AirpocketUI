@@ -1,0 +1,400 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+ <script>
+
+            if (location.protocol !== 'https:') {
+                          alert('http');                         
+						 location.replace(`https:${location.href.substring(location.protocol.length)}`);
+         }
+        
+    </script>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>AirPocket</title>
+	 <link rel="icon" href="logo.png">
+    <link href="content/css/bootstrap.css" rel="stylesheet" />
+    <link href="content/css/w3.css" rel="stylesheet" />
+    <link href="content/css/ionicons.css" rel="stylesheet" />
+    <link href="content/css/fontawsome2.css" rel="stylesheet" />
+   <link href="content/css/dx.common.css" rel="stylesheet" /> 
+    <!--<link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/19.2.7/css/dx.common.css">-->
+    <link rel="dx-theme" data-theme="material.teal-light" href="content/css/material.teal-light.custom.css" data-active="false" />
+    <link rel="dx-theme" data-theme="material.purple-light" href="content/css/material.purple-light.custom.css" data-active="false" />
+    <link rel="dx-theme" data-theme="material.blue-light" href="content/css/material.blue-light.custom.css" data-active="false" />
+    <link rel="dx-theme" data-theme="material.gray-light" href="content/css/material.gray-light.custom.css" data-active="false" />
+    <link rel="dx-theme" data-theme="material.steel-light" href="content/css/material.steel-light.custom.css" data-active="false" />
+
+    <link rel="dx-theme" data-theme="generic.light" href="content/css/dx.light.css" data-active="false" />
+    <link rel="dx-theme" data-theme="generic.dark" href="content/css/dx.dark.css" data-active="false" />
+
+
+    <link href="content/css/fontiran.css" rel="stylesheet" />
+    <!-- <link href="content/css/material.teal-light.custom.css" rel="stylesheet" />-->
+    <link href="content/css/loading-bar.css" rel="stylesheet" />
+    <link href="content/css/social-buttons.css" rel="stylesheet" />
+    <link href="content/css/main.css" rel="stylesheet" />
+    <link href="content/css/core-ui.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+</head>
+<body>
+    <div ng-app="GriffinApp" style=" height:100%">
+        <!-- <ng-view></ng-view>-->
+        <div class="anfade" ng-view></div>
+    </div>
+
+    <script src="scripts/jquery-3.1.0.js"></script>
+
+    <script src="scripts/jszip.min.js"></script>
+    <script src="scripts/angular-1.7.2.js"></script>
+
+    <script src="scripts/angularjs-sanitize.js"></script>
+
+    <script src="scripts/angular-route-1.7.2.js"></script>
+	
+	
+
+    <script src="scripts/angular-animate.js"></script>
+    <script src="scripts/angular-local-storage.min.js"></script>
+    <script src="scripts/loading-bar.min.js"></script>
+    <script type="text/javascript" src="scripts/linq.min.js"></script>
+    <script src="scripts/moment.js"></script>
+    <script src="scripts/momenttz.js"></script>
+
+    <script src="scripts/knockout.js"></script>
+    <script src="scripts/jsrender.min.js"></script>
+ <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!--<script src="scripts/jquery.validate.min.js"></script>
+    <script src="scripts/jquery.validate.unobtrusive.min.js"></script>-->
+    <!-- <script src="scripts/ejtotal.js" type="text/javascript"></script>-->
+    <!--<script src="scripts/properties.js" type="text/javascript"></script>
+    <script src="scripts/ej.widget.angular.min.js"></script>
+    <script src="scripts/ej.widget.ko.js"></script>-->
+    <!--<script src="scripts/jsonganttdata.js"></script>
+    <script type="text/javascript" src="scripts/knockout-3.4.0.js"></script>
+    <script src="scripts/ej.widget.ko.js"></script>-->
+
+    <script src="scripts/mobile-detect.min.js"></script>
+    <!-- <script type="text/javascript" src="scripts/persian-date.min.js"></script>-->
+    <script type="text/javascript" src="scripts/dx.all.js"></script>
+	    <script src="scripts/dx.aspnet.data.js"></script>
+    <!--<script type="text/javascript" src="https://cdn3.devexpress.com/jslib/19.2.7/js/dx.all.js"></script>-->
+    <!--<script type="text/javascript" src="scripts/ionicons.js"></script>-->
+
+   <!-- <script type="text/javascript" src="scripts/chart-bundle.js"></script>
+    <script type="text/javascript" src="scripts/chart.js"></script>-->
+	 <script type="text/javascript" src="scripts/chart.min.js"></script>
+	  <script type="text/javascript" src="scripts/chart.bundle.min.js"></script>
+    <script type="text/javascript" src="scripts/html2canvas.js"></script>
+    <!--Remove-->
+    <script type="text/javascript" src="scripts/jsonganttdata.js"></script>
+    <!-- <script type="text/javascript" src="scripts/gantt.js"></script>-->
+    <!--End-->
+
+
+    <link rel="stylesheet" href="content/css/persian-datepicker.min.css" />
+
+    <script src="scripts/persian-date.min.js"></script>
+    <script src="scripts/persian-datepicker.min.js"></script>
+    <script src="scripts/jspdf.umd.min.js"></script>
+
+    <script src="scripts/custom-tooltip.js"></script>
+    <script src="scripts/config.js?v=9058"></script>
+    <script src="scripts/core.js"></script>
+
+
+    <link href="scripts/styles.css" rel="stylesheet" />
+    <script src="scripts/selection.min.js"></script>
+    <!--  <script src="scripts/code.js"></script>-->
+
+
+    <script src="app/app.js?v=68"></script>
+
+    <!-- Load services -->
+    <script src="app/services/authInterceptorService.js?v=1014"></script>
+    <script src="app/services/authService.js?v=1014"></script>
+    <script src="app/services/weatherService.js?v=1014"></script>
+    <script src="app/services/activityService.js?v=1014"></script>
+    <script src="app/services/ordersService.js?v=1014"></script>
+    <script src="app/services/testService.js?v=1014"></script>
+    <script src="app/services/tokensManagerService.js?v=1014"></script>
+    <script src="app/services/generalService.js?v=1014"></script>
+    <script src="app/services/notificationService.js?v=1014"></script>
+    <script src="app/services/locationService.js?v=1014"></script>
+    <script src="app/services/airportService.js?v=1014"></script>
+    <script src="app/services/aircraftService.js?v=1014"></script>
+    <script src="app/services/courseService.js?v=1014"></script>
+    <script src="app/services/personService.js?v=1014"></script>
+	 <script src="app/services/zpersonService.js?v=1014"></script>
+    <script src="app/services/libraryService.js?v=1014"></script>
+    <script src="app/services/organizationService.js?v=1014"></script>
+    <script src="app/services/jobgroupService.js?v=1014"></script>
+    <script src="app/services/flightService.js?v=61457"></script>
+    <script src="app/services/statService.js?v=1014"></script>
+	<script src="app/services/biService.js?v=1014"></script>
+<script src="app/services/trainingService.js?v=1014"></script>
+<script src="app/services/ztrainingService.js?v=1014"></script>
+
+<script src="app/services/qaService.js?v=1014"></script>
+<script src="app/services/qahService.js?v=1014"></script>
+<script src="app/services/qalogService.js?v=1014"></script>
+<script src="app/services/fuelService.js?v=1014"></script>
+    <!--<script src="app/_service1.js?v=100"></script>-->
+    <!-- Load controllers -->
+    <script src="app/controllers/indexController.js?v=1014"></script>
+    <script src="app/controllers/appsController.js?v=1014"></script>
+    <script src="app/controllers/homeController.js?v=1014"></script>
+    <script src="app/controllers/loginController.js?v=1014"></script>
+    <script src="app/controllers/signupController.js?v=1014"></script>
+
+    <script src="app/controllers/filterController.js?v=1014"></script>
+
+
+    <script src="app/controllers/ordersController.js?v=1014"></script>
+    <script src="app/controllers/testController.js?v=1014"></script>
+    <script src="app/controllers/refreshController.js?v=1014"></script>
+    <script src="app/controllers/tokensManagerController.js?v=1014"></script>
+    <script src="app/controllers/associateController.js?v=1014"></script>
+
+    <script src="app/controllers/aircraftSelectController.js?v=1014"></script>
+    <script src="app/controllers/coursetypeSelectController.js?v=1014"></script>
+    <script src="app/controllers/studyFieldSelectController.js?v=1014"></script>
+    <script src="app/controllers/employeeSelectController.js?v=1014"></script>
+    <script src="app/controllers/courseSelectController.js?v=1014"></script>
+    <script src="app/controllers/jobgroupSelectController.js?v=1014"></script>
+
+    <script src="app/controllers/locationAddController.js?v=1014"></script>
+    <script src="app/controllers/locationController.js?v=1014"></script>
+
+    <script src="app/controllers/organizationAddController.js?v=1014"></script>
+    <script src="app/controllers/organizationController.js?v=1014"></script>
+
+    <script src="app/controllers/personmiscAddController.js?v=1014"></script>
+    <script src="app/controllers/personmiscController.js?v=1014"></script>
+
+    <script src="app/controllers/journalAddController.js?v=1014"></script>
+    <script src="app/controllers/journalController.js?v=1014"></script>
+
+    <script src="app/controllers/airportAddController.js?v=1014"></script>
+    <script src="app/controllers/airportController.js?v=1014"></script>
+
+    <script src="app/controllers/aircraftTypeController.js?v=1014"></script>
+
+    <script src="app/controllers/notificationController.js?v=1014"></script>
+
+    <script src="app/controllers/courseTypeAddController.js?v=1014"></script>
+    <script src="app/controllers/courseTypeController.js?v=1014"></script>
+
+
+    <script src="app/controllers/courseAddController.js?v=1014"></script>
+    <script src="app/controllers/courseController.js?v=1014"></script>
+    <script src="app/controllers/coursepersonController.js?v=1014"></script>
+    <script src="app/controllers/personcourseController.js?v=1014"></script>
+    <script src="app/controllers/personbookController.js?v=1014"></script>
+    <script src="app/controllers/certificateAddController.js?v=1014"></script>
+    <script src="app/controllers/personcertificateController.js?v=1014"></script>
+
+    <script src="app/controllers/personAddController.js?v=1014"></script>
+	<script src="app/controllers/zpersonAddController.js?v=50147"></script>
+    <script src="app/controllers/personController.js?v=1014"></script>
+	 <script src="app/controllers/zpersonController.js?v=1015"></script>
+    <script src="app/controllers/personViewController.js?v=1014"></script>
+    <script src="app/controllers/jobgroupAddController.js?v=1014"></script>
+    <script src="app/controllers/jobgroupController.js?v=1014"></script>
+
+    <script src="app/controllers/optionAddController.js?v=1014"></script>
+    <script src="app/controllers/optionController.js?v=1014"></script>
+
+    <script src="app/controllers/libraryAddController.js?v=1014"></script>
+    <script src="app/controllers/documentAddController.js?v=1014"></script>
+    <script src="app/controllers/libraryController.js?v=1014"></script>
+	 <script src="app/controllers/jobGroupSelectSimple.js?v=1014"></script>
+    <script src="app/controllers/employeeSelectCourse.js?v=1014"></script>
+
+    <script src="app/controllers/flightDesignController.js?v=1014"></script>
+    <script src="app/controllers/flightDesignGridController.js?v=1014"></script>
+    <script src="app/controllers/flightController.js?v=1014"></script>
+    <script src="app/controllers/flightPlanningController.js?v=1014"></script>
+    <script src="app/controllers/flightPlanningGanttViewController.js?v=1014"></script>
+
+    <script src="app/controllers/flightPlanViewController.js?v=1014"></script>
+
+    <script src="app/controllers/flightBoardAllController.js?v=1014"></script>
+    <script src="app/controllers/flightBoardController.js?v=1014"></script>
+    <script src="app/controllers/flightPlanRegisterController.js?v=1014"></script>
+
+    <script src="app/controllers/flightPlansMaintenanceController.js?v=1014"></script>
+    <script src="app/controllers/flightPlansCalendarMaintenanceController.js?v=1014"></script>
+    <script src="app/controllers/planRegistersController.js?v=1014"></script>
+    <script src="app/controllers/flightPlanApplyController.js?v=1014"></script>
+    <script src="app/controllers/flightPlanApply2Controller.js?v=1014"></script>
+    <script src="app/controllers/flightPlanPermitController.js?v=1014"></script>
+    <script src="app/controllers/flightPlanCrew.js?v=1014"></script>
+
+    <script src="app/controllers/crewtest.js?v=1014"></script>
+    <script src="app/controllers/crewassign.js?v=1014"></script>
+    <script src="app/controllers/crewassign2.js?v=1014"></script>
+    <script src="app/controllers/crewReportController.js?v=1014"></script>
+    <script src="app/controllers/fuelReport.js?v=2016"></script>
+    <script src="app/controllers/flightDelaysController.js?v=1014"></script>
+    <script src="app/controllers/flightPlanListController.js?v=1014"></script>
+    <script src="app/controllers/flightListController.js?v=1014"></script>
+    <script src="app/controllers/irregularFlightController.js?v=1014"></script>
+    <script src="app/controllers/changeFlightRegisterController.js?v=1014"></script>
+
+
+    <script src="app/controllers/mlistController.js?v=1014"></script>
+    <script src="app/controllers/mlistAddController.js?v=1014"></script>
+
+    <script src="app/controllers/planController.js?v=1014"></script>
+    <script src="app/controllers/flightReportSecurityController.js?v=1014"></script>
+    <script src="app/controllers/regAvailabilityController.js?v=1014"></script>
+    <script src="app/controllers/routeAddController.js?v=1014"></script>
+    <script src="app/controllers/routeController.js?v=1014"></script>
+    <script src="app/controllers/delayCodesController.js?v=1014"></script>
+
+    <script src="app/controllers/crewassignreg.js?v=1014"></script>
+
+    <script src="app/controllers/rosterDailyController.js?v=1014"></script>
+    <script src="app/controllers/ceoFlightBoardController.js?v=1014"></script>
+    <script src="app/controllers/dailyRoster2Controller.js?v=1014"></script>
+    <script src="app/controllers/crewtimereport.js?v=1014"></script>
+    <script src="app/controllers/reportFlights.js?v=1014"></script>
+    <script src="app/controllers/planningBoard.js?v=1014"></script>
+    <script src="app/controllers/rosterController.js?v=1014"></script>
+    <!--<script src="app/controllers/roster2.js"></script>-->
+    <script src="app/controllers/statDelayController.js?v=1014"></script>
+    <script src="app/controllers/usersController.js?v=2015"></script>
+
+    <script src="app/controllers/rosterReport.js?v=1014"></script>
+    <script src="app/controllers/gnt.js?v=1014"></script>
+
+    <script src="app/controllers/reportfdr.js?v=1014"></script>
+    <script src="app/controllers/finreport.js?v=1014"></script>
+    <script src="app/controllers/finMonthReport.js?v=1014"></script>
+
+    <script src="app/controllers/delayReport.js?v=1014"></script>
+
+    <script src="app/controllers/citypair.js?v=1014"></script>
+
+    <script src="app/controllers/fdps.js?v=1014"></script>
+
+    <script src="app/controllers/ipaccessController.js?v=1014"></script>
+    <script src="app/controllers/verify.js?v=1014"></script>
+    <script src="app/controllers/forma.js?v=1014"></script>
+    <script src="app/controllers/board.js?v=1016"></script>
+    <script src="app/controllers/boardtest.js?v=1014"></script>
+	
+	 <script src="app/controllers/flightsMonthly.js?v=1015"></script>
+	  <script src="app/controllers/regflightmonthly.js?v=1015"></script>
+	  
+	  
+	  
+	    <script src="app/controllers/kpirpk.js?v=1014"></script>
+    <script src="app/controllers/kpirpb.js?v=1014"></script>
+    <script src="app/controllers/kpiftk.js?v=1014"></script>
+    <script src="app/controllers/kpifbl.js?v=1014"></script>
+    <script src="app/controllers/kpifrp.js?v=1014"></script>
+    <script src="app/controllers/kpifc.js?v=1014"></script>
+    <script src="app/controllers/kpifu.js?v=1014"></script>
+    <script src="app/controllers/kpifp.js?v=1014"></script>
+    <script src="app/controllers/kpirpkac.js?v=1014"></script>
+    <script src="app/controllers/kpirpkreg.js?v=1014"></script>
+    <script src="app/controllers/kpirpkroute.js?v=1014"></script>
+
+    <script src="app/controllers/delaybikpi.js?v=1014"></script>
+    <script src="app/controllers/kpiDelay.js?v=1014"></script>
+    <script src="app/controllers/kpiDelayCat.js?v=1014"></script>
+    <script src="app/controllers/kpiDelayTech.js?v=1014"></script>
+    <script src="app/controllers/kpiDelayTech.js?v=1014"></script>
+    <script src="app/controllers/kpiDelayAirport.js?v=1014"></script>
+    <script src="app/controllers/tblDelayAirport.js?v=1014"></script>
+    <script src="app/controllers/tblDelayedFlights.js?v=1014"></script>
+    <script src="app/controllers/tblDelay.js?v=1014"></script>
+    <script src="app/controllers/tblDelayTech.js?v=1014"></script>
+    <script src="app/controllers/tblDelayCat.js?v=1014"></script>
+	
+	<script src="app/controllers/delaybidaily.js?v=1014"></script>
+    <script src="app/controllers/tbldelayitems.js?v=1014"></script>
+ <script src="app/controllers/expiringcoursetype.js?v=1014"></script>
+ 
+ 
+  <script src="app/controllers/courseview.js?v=1014"></script>
+    <script src="app/controllers/expiringgroup.js?v=1014"></script>
+<script src="app/controllers/teacherscontroller.js?v=1014"></script>
+ <script src="app/controllers/rawcmd.js?v=1014"></script>
+   <script src="app/controllers/imageviewer.js?v=1014"></script>
+   
+    <script src="app/controllers/trnstat.js?v=1014"></script>
+	
+	<script src="app/controllers/sim.js?v=1014"></script>
+	
+	  <script src="app/services/flightBagService.js?v=1014"></script>
+	
+	
+	  <script src="app/controllers/ofpadd.js?v=1014"></script>
+    <script src="app/controllers/toadd.js?v=1014"></script>
+    <script src="app/controllers/ldgadd.js?v=1014"></script>
+    <script src="app/controllers/vrAdd.js?v=1014"></script>
+    <script src="app/controllers/logAdd.js?v=1014"></script>
+ <script src="app/controllers/asradd.js?v=1014"></script>
+    <script src="app/controllers/drAdd.js?v=1014"></script>
+	  <!-- <script src="app/controllers/drAddfly.js?v=1014"></script>-->
+   <script src="app/controllers/reportefb.js?v=1014"></script>
+      <script src="app/controllers/reportefbfly.js?v=1014"></script>
+    <script src="app/services/schedulingService.js?v=1014"></script>
+	 <script src="app/services/zschedulingService.js?v=1014"></script>
+	  <script src="app/services/schedulingServiceNew.js?v=1014"></script>
+	<script src="app/controllers/scheduling.js?v=1014"></script>
+	<script src="app/controllers/zscheduling.js?v=38"></script>
+	<script src="app/controllers/fdplog.js?v=1014"></script>
+	
+	
+	<link rel="stylesheet" href="contextmenu/jquery.contextMenu.min.css">
+    <script src="contextmenu/jquery.contextMenu.min.js"></script>
+    <script src="contextmenu/jquery.ui.position.js"></script>
+	
+	  <script src="app/controllers/dutyTimeline.js?v=1014"></script>
+	   <script src="app/controllers/zdutyTimeline.js?v=230217"></script>
+	   
+	    <script src="app/controllers/trnexpiringgroups.js?v=1014"></script>
+    <script src="app/controllers/trnexpiringtypes.js?v=1014"></script>
+
+    <script src="app/controllers/trnschedule.js?v=1014"></script>
+    <script src="app/controllers/trnschedulecoursetype.js?v=1014"></script>
+    <script src="app/controllers/trnschedulecourse.js?v=1014"></script>
+    <script src="app/controllers/trndashboard.js?v=1014"></script>
+	<script src="app/services/recencyService.js?v=1014"></script>
+	 <script src="app/controllers/recency.js?v=1014"></script>
+	
+	 <script src="app/controllers/qaDashboard.js?v=1014"></script>
+    <script src="app/controllers/qaReportStatus.js?v=1014"></script>
+    <script src="app/controllers/qaCabin.js?v=1014"></script>
+    <script src="app/controllers/qaCatering.js?v=1014"></script>
+    <script src="app/controllers/qaDispatch.js?v=1014"></script>
+    <script src="app/controllers/qaGround.js?v=1014"></script>
+    <script src="app/controllers/qaVoluntary.js?v=1014"></script>
+    <script src="app/controllers/qaSecurity.js?v=1014"></script>
+    <script src="app/controllers/qaMaintenance.js?v=1014"></script>
+    <script src="app/controllers/qaReports.js?v=1014"></script>
+    <script src="app/controllers/qaEmployee.js?v=1014"></script>
+    <script src="app/controllers/qaForm.js?v=1014"></script>
+    <script src="app/controllers/qaRefer.js?v=1014"></script>
+ <script src="app/controllers/qaOperationPopup.js?v=1014"></script>
+ <script src="app/controllers/qaCyberSecurity.js?v=1014"></script>
+	 <script src="app/controllers/qaVoyageController.js?v=1014"></script>
+	 
+	 
+	  <script src="app/controllers/summary_pax.js?v=1018"></script>
+	   
+	   
+	   
+    <!--<script src="app/_part1.js?v=100"></script>
+    <script src="app/_part2.js?v=100"></script>
+    <script src="app/_part3.js?v=100"></script>-->
+    <!-- <script src="app/rosterController.js?v=100"></script>-->
+
+</body>
+</html>

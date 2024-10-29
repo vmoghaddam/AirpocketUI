@@ -1,40 +1,110 @@
-﻿
+﻿<style>
+    .xtab-container {
+        display: flex;
+        align-items: center;
+        overflow-x: hidden;
+        padding: 0px;
+        width: 100%;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #bfbfbf;
+    }
+
+    .xtab {
+        padding: 6px;
+        border: 1px solid #8c8c8c;
+        color: #8c8c8c;
+        margin-right: 5px;
+        cursor: pointer;
+        user-select: none;
+        /*min-width: 200px;*/
+        flex-grow: 1;
+        text-align: center;
+    }
+
+        .xtab.selected {
+            background-color: #999999;
+            color: #fff;
+        }
+
+    .xbtn-container {
+        display: flex;
+        margin-left: 5px;
+    }
+
+    .xbtn {
+        width: 32px;
+        height: 32px;
+        text-align: center;
+        line-height: 30px;
+        color: gray;
+        cursor: pointer;
+        margin-left: 2px;
+        user-select: none;
+        border-radius: 50%;
+        border-width: 2px;
+        border-style: solid;
+        user-select: none;
+        transition: background 0.5s ease, color 0.5s ease;
+    }
+
+        .xbtn.add {
+            border-color: #8c8c8c;
+            color: #8c8c8c;
+        }
+
+        .xbtn.remove {
+            border-color: #8c8c8c;
+            color: #8c8c8c;
+        }
+
+        .xbtn.add:hover {
+            background: #009973;
+            color: white;
+        }
+
+        .xbtn.remove:hover {
+            background: #ff3300;
+            color: white;
+        }
+</style>
 <div ng-controller="courseAddController">
     <div id="popup_add" dx-popup="popup_add" class="no-padding">
-        <!--<div dx-tabs="tabs_options">
+        <div dx-tabs="tabs_options">
 
-        </div>-->
+        </div>
         <div class="tab main dx-border">
 
-            <div style="padding-top:20px;padding-left:10px;padding-right:10px">
+            <div style="padding-top:10px;padding-left:10px;padding-right:10px;padding-bottom:10px">
                 <div class="col-lg-7 padding-0" style="border:1px solid #ccc;padding:5px;">
                     <div id="scrollview" dx-scroll-view="scroll_main">
-                        <div class="col-lg-8 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Type</label>
                             <div dx-select-box="sb_CourseTypeId" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
                         </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Class Id</label>
                             <div dx-text-box="txt_No"></div>
                         </div>
-                        <div style="clear:both"></div>
-                        <div class="col-lg-8 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
-                            <label>Groups</label>
-                            <div dx-text-box="txt_groups" class="center"></div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
-                            <label>Certificate Type</label>
-                            <div dx-text-box="txt_certype" class="center"></div>
-                        </div>
-                        <div style="clear:both"></div>
-                        <div class="col-lg-8 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
-                            <label>Type of Class Holding</label>
-                            <div dx-select-box="sb_holding" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Status</label>
                             <div dx-select-box="sb_StatusId" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
                         </div>
+                        <div style="clear:both"></div>
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Groups</label>
+                            <div dx-text-box="txt_groups" class="center"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Certificate Type</label>
+                            <div dx-text-box="txt_certype" class="center"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Type of Class Holding</label>
+                            <div dx-select-box="sb_holding" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div style="clear:both"></div>
+
+
                         <div style="clear:both"></div>
                         <div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Title</label>
@@ -74,7 +144,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Training Director</label>
-                            <div dx-text-box="txt_TrainingDirector"  ></div> 
+                            <div dx-text-box="txt_TrainingDirector"></div>
                             <!--<div dx-select-box="sb_director" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>-->
                         </div>
 
@@ -140,7 +210,7 @@
                             <div dx-text-box="txt_Remark"></div>
                         </div>
 
-
+                        <!--
                         <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>SMS</label>
                             <div dx-text-box="txt_sms"></div>
@@ -157,7 +227,7 @@
                             <label>SMS Date</label>
                             <div dx-text-box="txt_smsdate"></div>
                         </div>
-
+                        -->
                         <!--<div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Tuition</label>
                             <div dx-number-box="txt_Tuition" class="center"></div>
@@ -187,7 +257,7 @@
                     </div>
 
 
-                    <div>
+                    <!--<div>
                         <div style="background:gray;color:white;font-weight:bold;padding:7px;">
                             <table style="width:100%;">
                                 <tr>
@@ -202,7 +272,7 @@
                             </table>
                         </div>
                         <div dx-data-grid="dg_syllabi" id="dg_syllabi"></div>
-                    </div>
+                    </div>-->
 
 
                 </div>
@@ -212,6 +282,114 @@
 
         </div>
 
+        <div class="tab exam" style="display:none;padding-top:0;">
+            <div style="padding:5px;">
+                <div class="xtab-container">
+                    <div class="xtab" ng-repeat="tab in xtabs" ng-click="select_xtab($index)" ng-class="{'selected': selected_xtab_index === $index}">
+                        {{tab.title}}
+                    </div>
+                    <div class="xbtn-container">
+                        <div class="xbtn add" ng-click="add_xtab()"><i class="fas fa-plus"></i></div>
+                        <div class="xbtn remove" ng-click="remove_xtab()"><i class="fas fa-minus"></i></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="col-lg-6 padding-0" style="padding:0 10px 0 10px">
+                    <div style="border:1px solid #ccc" class="dx-border">
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Exam Date</label>
+                            <div dx-date-box="exam_date_scheduled" class="center"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>-</label>
+                            <div dx-date-box="exam_time_scheduled" class="center"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Duration(mm)</label>
+                            <div dx-number-box="exam_duration" class="center"></div>
+                        </div>
+                        <div class="col-lg-8 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Location</label>
+                            <div dx-text-box="exam_date_scheduled" class="center"></div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Phone</label>
+                            <div dx-text-box="exam_duration" class="center"></div>
+                        </div>
+                        <div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Address</label>
+                            <div dx-text-box="exam_date_scheduled" class="center"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <div class="col-lg-5 padding-0" style="padding-top:5px;">
+                        <div style="background:gray;color:white;font-weight:bold;padding:3px;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>GROUPS</td>
+                                    <td style="width:35px;padding:0 3px 0 3px">
+                                        <a ng-click="addGroup()" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-plus"></i></a>
+                                    </td>
+                                    <td style="width:35px;padding:0 3px 0 3px">
+                                        <a ng-click="removeGroup()" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div dx-data-grid="dg_exam_group" id="dg_exam_group"></div>
+                    </div>
+                    <div class="col-lg-7 padding-0" style="padding-top:5px;padding-left:5px">
+                        <div style="background:gray;color:white;font-weight:bold;padding:3px;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>People</td>
+                                    <td style="width:35px;padding:0 3px 0 3px">
+                                        <a ng-click="addPeople()" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-plus"></i></a>
+                                    </td>
+                                    <td style="width:35px;padding:0 3px 0 3px">
+                                        <a ng-click="removePeople()" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-times"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div dx-data-grid="dg_exam_people" id="dg_exam_people"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+
+                <div class="col-lg-6 padding-0" style="padding:0 10px 0 10px">
+                    <div>
+                        <div style="background:gray;color:white;font-weight:bold;padding:7px;">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td>Questions Template</td>
+                                     
+                                </tr>
+                            </table>
+                        </div>
+                        <div dx-data-grid="dg_exam_template" id="dg_exam_template"></div>
+                        <div style="margin-top:5px;border:1px solid #ccc">
+                            <table style="width:100%">
+                                <tr>
+                                    
+                                    <td style="width:100%" >
+                                        <div dx-button="btn_generate"></div>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
 
         <div class="tab aircrafttype" style="display:none;padding-top:0;">
             <div dx-data-grid="dg_aircrafttype" id="dg_aircrafttype"></div>
@@ -307,6 +485,7 @@
     <div ng-include="'app/views/employeeSelect.html'"></div>
     <div ng-include="'app/views/courseSelect.html'"></div>
     <div ng-include="'app/views/jobgroupSelect.html'"></div>
+    <div ng-include="'app/views/jobgroupSelectSimple.html'"></div>
     <div dx-load-panel="loadPanel"></div>
 
 </div>

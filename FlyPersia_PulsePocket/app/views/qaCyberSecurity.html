@@ -1,0 +1,373 @@
+﻿<style>
+    .tab-field {
+        padding: 7px;
+        text-align: left
+    }
+
+    .tab-field-title {
+        padding: 7px;
+        text-align: left;
+        font-weight: bold
+    }
+
+    .tab-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+
+    .tab-style {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        width: 100%;
+        color: black;
+        direction: ltr
+    }
+
+    .dx-toolbar-center, .dx-toolbar-before {
+        width: 100%;
+		  margin: 0 !important
+    }
+
+    .dx-overlay-content {
+        width: 100%
+    }
+</style>
+<div ng-controller="qaCyberSecurity">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+
+            <div id="scroll_qaCyber" dx-scroll-view="scroll_qaCyber" style="margin-top:5px">
+
+                <div class="visible-xs">
+
+<table class="dx-border tab-style">
+    <tr>
+        <td style="text-align: left !important; width: 0 !important; padding: 7px 0 0 7px"> <div dx-check-box="ch_anonymous" class="center"></div></td>
+        <td style="padding: 9px 0 0 5px"> Anonymous Submit </td>
+    </tr>
+    <tr>
+        <td style="font-size:11px; text-align: right; font-weight: bold;padding:7px" colspan="3">
+            (در صورت عدم تمایل به شناسایی فرد گزارش دهنده نسبت به تایید این بند اقدام گردد)
+        </td>
+    </tr>
+</table>
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="2">
+                                CONTACT PERSON
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td class="tab-field-title"> Full Name : </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"> <div dx-text-box="txt_name" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Job Title: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"><div dx-text-box="txt_jobTitle" class="center"></div></td>
+                        </tr>
+                        <tr>
+                        <tr>
+                            <td class="tab-field-title"> Date Of Event: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"><div dx-date-box="txt_dateEvent" class="center" dx-validator="{validationGroup:'cyber',  validationRules: [{ type: 'required',   }]}"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Time Of Occurrence: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"><div dx-date-box="txt_OccurrenceTime" class="center" dx-validator="{validationGroup:'cyber',  validationRules: [{ type: 'required',   }]}"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Email: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"><div dx-text-box="txt_email" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Phone: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"><div dx-text-box="txt_mobile" class="center"></div></td>
+                        </tr>
+
+                        <tr>
+                            <td class="tab-field-title">  Delay Reason: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"> <div dx-text-area="txt_delayReason" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Delay(M): </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="2"> <div dx-number-box="num_delay" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <div class="dx-border tab-style">
+                        <div class="tab-title">
+                            The Incident:
+                        </div>
+
+                        <div class="tab-field-title">Date of Incident:</div>
+                        <div class="tab-field center" dx-date-box="txt_dateIncident" dx-validator="{validationGroup:'cyber',  validationRules: [{ type: 'required',   }]}"></div>
+
+                        <div class="tab-field-title"> Type of Incident: </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 tab-field-title" ng-repeat="x in incident">
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkIncidentBy(x)" ng-disabled="!isEditable" /> {{x.Title}}
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tab-field-title">ِHow was the incident detected/ discovered? Describe:</div>
+                        <div class="tab-field center" dx-text-area="txt_incidentOther"></div>
+
+                    </div>
+
+
+                    <div class="dx-border tab-style">
+                        <div class="tab-title">
+                            METHOD OF INTRUSION:
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-6 tab-field-title" ng-repeat="x in method">
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkMethodBy(x)" ng-disabled="!isEditable" /> {{x.Title}}
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tab-field-title">ِDescribe:</div>
+                        <div class="tab-field center" dx-text-area="txt_methodOther"></div>
+
+                    </div>
+
+                    <div class="dx-border tab-style">
+                        <div class="tab-title">
+                            UNAUTHORIZED ACCESS
+                        </div>
+                        <div class="tab-field-title">Level of Unauthorized Access Attained:</div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 tab-field" ng-repeat="x in access">
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkAccessBy(x)" ng-disabled="!isEditable" /> {{x.Title}}
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tab-field-title">ِDescribe:</div>
+                        <div class="tab-field center" dx-text-area="txt_accessOther"></div>
+                        <div style="clear:both"></div>
+                        <div class="tab-field-title"> Were any containment measures made? Describe(If the answer is NO please, do not fill the BOX):</div>
+                        <div class="tab-field center" dx-text-area="txt_containment"></div>
+
+                    </div>
+
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="2">
+                                IMPACTED SERVICES
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">Was anything permanently impacted by the incident? If yes, describe? ( if the answer is NO please, do not fill the Box) </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"><div dx-text-area="txt_impacted" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">Was there any data, records or information breached? If yes, describe? ( if the answer is NO please, do not fill the Box) </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"><div dx-text-area="txt_breached" class="center"></div></td>
+                        </tr>
+                    </table>
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="2">
+                                ATTACK VECTOR
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Do you know how the attack was made? If yes, describe: ( if the answer is NO please, do not fill the Box) </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"><div dx-text-area="txt_attack" class="center"></div></td>
+                        </tr>
+                    </table>
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="2">
+                                OTHER
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">Is there any other information you would like to include in this report?: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"><div dx-text-area="txt_other" class="center"></div></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <div class="visible-sm visible-md visible-lg">
+					<table class="dx-border tab-style">
+    <tr>
+        <td style="text-align: left !important; width: 0 !important; padding: 7px 0 0 7px"> <div dx-check-box="ch_anonymous" class="center"></div></td>
+        <td style="padding: 9px 0 0 5px"> Anonymous Submit </td>
+    </tr>
+    <tr>
+        <td style="font-size:11px; text-align: right; font-weight: bold;padding:7px" colspan="3">
+            (در صورت عدم تمایل به شناسایی فرد گزارش دهنده نسبت به تایید این بند اقدام گردد)
+        </td>
+    </tr>
+</table>
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="4">
+                                CONTACT PERSON
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td class="tab-field-title"> Full Name : </td>
+                            <td class="tab-field"> <div dx-text-box="txt_name" class="center"></div></td>
+                            <td class="tab-field-title"> Job Title: </td>
+                            <td class="tab-field"><div dx-text-box="txt_jobTitle" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Date Of Event: </td>
+                            <td class="tab-field"><div dx-date-box="txt_dateEvent" class="center" dx-validator="{validationGroup:'cyber',  validationRules: [{ type: 'required',   }]}"></div></td>
+                            <td class="tab-field-title"> Time Of Occurrence: </td>
+                            <td class="tab-field"><div dx-date-box="txt_OccurrenceTime" class="center" dx-validator="{validationGroup:'cyber',  validationRules: [{ type: 'required',   }]}"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Email: </td>
+                            <td class="tab-field"><div dx-text-box="txt_email" class="center"></div></td>
+                            <td class="tab-field-title"> Phone: </td>
+                            <td class="tab-field"><div dx-text-box="txt_mobile" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Delay(M): </td>
+                            <td class="tab-field" colspan="3"> <div dx-number-box="num_delay" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">  Delay Reason: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field" colspan="4"> <div dx-text-area="txt_delayReason" class="center"></div></td>
+                        </tr>
+
+                    </table>
+
+                    <div class="dx-border tab-style">
+                        <div class="tab-title">
+                            The Incident:
+                        </div>
+
+                        <div class="tab-field-title">Date of Incident:</div>
+                        <div class="tab-field center" dx-date-box="txt_dateIncident" dx-validator="{validationGroup:'cyber',  validationRules: [{ type: 'required',   }]}"></div>
+
+                        <div class="tab-field-title"> Type of Incident: </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 tab-field-title" ng-repeat="x in incident">
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkIncidentBy(x)" ng-disabled="!isEditable" /> {{x.Title}}
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tab-field-title">ِHow was the incident detected/ discovered? Describe:</div>
+                        <div class="tab-field center" dx-text-area="txt_incidentOther"></div>
+
+                    </div>
+
+
+                    <div class="dx-border tab-style">
+                        <div class="tab-title">
+                            METHOD OF INTRUSION:
+                        </div>
+
+                        <div class="col-xs-6 col-sm-6 col-md-6 tab-field-title" ng-repeat="x in method">
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkMethodBy(x)" ng-disabled="!isEditable" /> {{x.Title}}
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tab-field-title">ِDescribe:</div>
+                        <div class="tab-field center" dx-text-area="txt_methodOther"></div>
+
+                    </div>
+
+                    <div class="dx-border tab-style">
+                        <div class="tab-title">
+                            UNAUTHORIZED ACCESS
+                        </div>
+                        <div class="tab-field-title">Level of Unauthorized Access Attained:</div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 tab-field" ng-repeat="x in access">
+                            <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="x.checked" ng-change="chkAccessBy(x)" ng-disabled="!isEditable" /> {{x.Title}}
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tab-field-title">ِDescribe:</div>
+                        <div class="tab-field center" dx-text-area="txt_accessOther"></div>
+                        <div style="clear:both"></div>
+                        <div class="tab-field-title"> Were any containment measures made? Describe(If the answer is NO please, do not fill the BOX):</div>
+                        <div class="tab-field center" dx-text-area="txt_containment"></div>
+
+                    </div>
+
+
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="2">
+                                IMPACTED SERVICES
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">Was anything permanently impacted by the incident? If yes, describe? ( if the answer is NO please, do not fill the Box) </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"><div dx-text-area="txt_impacted" class="center"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">Was there any data, records or information breached? If yes, describe? ( if the answer is NO please, do not fill the Box) </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"><div dx-text-area="txt_breached" class="center"></div></td>
+                        </tr>
+                    </table>
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="2">
+                                ATTACK VECTOR
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title"> Do you know how the attack was made? If yes, describe: ( if the answer is NO please, do not fill the Box) </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"><div dx-text-area="txt_attack" class="center"></div></td>
+                        </tr>
+                    </table>
+                    <table class="dx-border tab-style">
+                        <tr>
+                            <td class="tab-title" colspan="2">
+                                OTHER
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field-title">Is there any other information you would like to include in this report?: </td>
+                        </tr>
+                        <tr>
+                            <td class="tab-field"><div dx-text-area="txt_other" class="center"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+
+
+                <div style="clear:both"></div>
+            </div>
+        </div>
+
+
+        <div dx-load-panel="loadPanel"></div>
+    </div>
+</div>

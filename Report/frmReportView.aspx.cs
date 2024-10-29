@@ -22,6 +22,8 @@ namespace Report
 
             try
             {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback =
+    ((senderx, certificate, chain, sslPolicyErrors) => true);
                 string customer = WebConfigurationManager.AppSettings["customer"];
                 string apiUrl = WebConfigurationManager.AppSettings["api_url"];
                 string apiUrlNet = WebConfigurationManager.AppSettings["api_url_net"];

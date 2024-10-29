@@ -1,0 +1,154 @@
+﻿<style>
+    .tdStyle {
+        padding: 7px;
+        text-align: left
+    }
+
+    .titleStyle {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+</style>
+<div ng-controller="qaMaintenanceController">
+    <div style="padding:0px 10px 0 10px;">
+        <div style="margin-top: 0px; float: left; overflow: hidden; width: 60%;padding:10px 15px 0 0px">
+            <div style='background:#898e8c;color:white;font-weight:bold;padding:7px;text-align:center'>MAINTENANCE OCCURENCE REPOERT</div>
+            <div style="border:1px solid #ccc;padding:10px;">
+                <div class='thin-scroll' style='overflow-y:auto;' ng-style="{height: scroll_qaMaintenance_height + 'px'}">
+
+
+                    <div class="visible-sm visible-md visible-lg">
+                      <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="6" style=" padding:7px;text-align:left;color:black;font-weight:bold">
+                                Id:<span style='display:inline-block;margin-left:5px;'>{{entity.FormNo}}</span>
+                            </td>
+                        </tr>
+                    </table>
+						<table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Date of Occurrence: </td>
+                                <td class="tdStyle"><div dx-date-box="txt_OccurrenceDate" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Time Of Occurrence: </td>
+                                <td class="tdStyle"><div dx-date-box="txt_OccurrenceTime" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Station: </td>
+                                <td class="tdStyle"> <div dx-select-box="sb_station" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> A/C Register: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_acReg" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Aircraft Type: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_acType" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Flight number: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_fltNum" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Route: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_route" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> ATL No. : </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_atlNum" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Task No. : </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_taskNum" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Reference: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_reference" class="center"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle" colspan="6">
+                                    Component Specification:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Component: </td>
+                                <td class="tdStyle"> <div dx-select-box="sb_compn" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Serial Number: </td>
+                                <td class="tdStyle"> <div dx-number-box="nb_serialNumber" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Part Number: </td>
+                                <td class="tdStyle"> <div dx-number-box="nb_partNumber" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle">
+                                    Event
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"> <div dx-text-area="txt_event"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle">
+                                    Corrective Action Taken Until Now:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"> <div dx-text-area="txt_actionTaken"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Name: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_name" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> CAA License No.: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_CAALicense" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Authorization No.: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_authNum" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle" style="background-color: #66ffcc !important">
+                                    Result
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"> <div dx-text-area="txt_result"></div></td>
+                            </tr>
+
+                        </table>
+
+
+
+                        <div style="clear:both"></div>
+                        <div class="titleStyle" style="margin-top:10px">
+                            ATTACHED DOCUMENTS
+                        </div>
+                        <div dx-data-grid="dg_attachments" id="dg_attachments" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                            <div data-options="dxTemplate:{ name:'download' }">
+                                <a ng-click="download(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Download</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div style="float: right;width:40%">
+            <div ng-include="'app/views/qaRefer.html?vx=3'" onload="testLoaded()"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+<div style='clear:both'></div>

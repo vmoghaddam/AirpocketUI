@@ -1009,7 +1009,18 @@ var _saveSyllabus = function (entity) {
     };
     serviceFactory.getManagerGroups = _getManagerGroups;
 	
-	
+    var _generateQuestions = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/trn/exam/questions/generate', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.generateQuestions = _generateQuestions;
 	
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;

@@ -1,0 +1,93 @@
+﻿<style>
+    .text-cancel {
+        color: #595959 !important;
+    }
+
+    .text-delay {
+        color: #ff3300 !important;
+    }
+
+    .text-pickup {
+        color: #0099ff !important;
+    }
+
+    .text-general {
+        color: #00cc99 !important;
+    }
+
+    .applibraryitem .card:hover {
+        background-color: #eee !important;
+    }
+</style>
+<div style="height:100%;">
+    <div class="box message maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html?v=100'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+
+
+            <div id="scrollview" dx-scroll-view="scroll_main">
+
+               
+                <!--<div ng-repeat="x in ds" class="applibraryitem  card w3-text-gray bg-white" style="padding:1px 2px 5px 2px;display:block;margin-bottom:4px;margin-right:3px;margin-left:3px" ng-click="itemClick(x.Id)">
+                    <div class="col-lg-11 col-md-10 col-sm-10 col-xs-10" style="margin:0; padding:5px 5px 5px 10px;display:block">
+                        <p style="padding:5px 0 0px 0;margin:0; " ng-class="x.bold">{{x.Subject}}</p>
+                        <p style="padding:5px 0px 0px 20px;margin:0; " ng-bind-html="x.Sender"> </p>
+                        <p style="padding:5px 0 0px 20px;margin:0; " ng-bind-html="x.Abstract"> </p>
+
+
+
+                    </div>
+                    <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="text-align:center;padding-top:20px">
+                        <i   ng-class="x.icon"></i>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>-->
+                <div class="applibraryitem" style="padding:2px 0px 5px 0px;" ng-repeat="x in ds">
+                    <div class="card text-black-50  bg-white" style="margin:0; padding:5px 7px 5px 0px;display:block; ">
+                        <div class="col-lg-11 col-md-10 col-sm-10 col-xs-10" style="padding-left:5px;padding-right:0">
+                            <div ng-show="x.IsVisited!=1" style="font-weight:bold;padding:5px;border-bottom:0px solid #ccc">{{x.TypeStr}}</div>
+                            <div ng-show="x.IsVisited==1" style="color:#00b386;font-weight:bold;padding:5px;border-bottom:0px solid #ccc">{{x.TypeStr}}</div>
+                            <p style="color:black;text-align:justify;padding:0 5px 5px 10px;border-bottom:1px dotted #ccc">{{x.Message}}</p>
+
+
+
+                            <div style="clear:both"></div>
+
+                        </div>
+                        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="text-align:center">
+                            <i style="font-size:30px;line-height:70px" class="fas fa-comment {{getNotificationClass(x.Type)}}"></i>
+
+
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div ng-show="x.FlightNumber" style="font-weight:bold;padding-left:10px;margin-bottom:5px;padding-top:0px">
+                            <span style="font-size:13px">{{x.FromAirportIATA}}</span>-<span style="font-size:13px">{{x.ToAirportIATA}}</span>
+                            <span style="display:inline-block;margin-left:3px;font-size:13px">{{x.FlightNumber}}</span>
+                            <span style="display:inline-block;margin-left:3px;font-size:13px">DEP:</span>
+                            <span style="display:inline-block;margin-left:0px;font-size:13px">{{getTimeFormated(x.DepartureLocal)}}</span>
+
+                            <span ng-show="x.Type==10010 || x.Type==10011" style="display:inline-block;margin-left:3px;font-size:13px">PICKUP:</span>
+                            <span ng-show="x.Type==10010 || x.Type==10011" style="display:inline-block;margin-left:0px;font-size:13px">{{getTimeFormated(x.PickupLocal)}}</span>
+
+                        </div>
+                       
+
+                    </div>
+                </div>
+
+                    <div style="clear:both"></div>
+
+               
+
+            </div>
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'appmessage';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

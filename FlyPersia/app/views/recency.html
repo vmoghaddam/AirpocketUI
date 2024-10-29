@@ -1,0 +1,303 @@
+<style>
+    .stSelected {
+        background: green !important;
+        color: white !important;
+    }
+
+    .dx-fileuploader-input-wrapper {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+        .dx-fileuploader-input-wrapper .dx-button-content {
+            background: green;
+            color: white;
+        }
+
+    .dx-fileuploader-container {
+    }
+
+    .cell-img {
+        height: 40px;
+    }
+
+
+
+
+
+    .row_odd .cal_day {
+        background: #ffe6cc;
+    }
+
+    .row_even .cal_day {
+        background: #ccf2ff;
+    }
+
+
+    ._cal .days-row {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days-row td {
+            text-align: center;
+            border: 1px solid gray;
+            padding: 5px;
+            width: 14.28571%;
+            background: #ddd;
+        }
+
+    ._cal .days {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days td {
+            border: 1px solid #ccc;
+            width: 14.28571%;
+            padding: 3px;
+            vertical-align: baseline;
+        }
+
+            ._cal .days td .day-wrapper {
+                padding: 2px;
+                /*min-height: 65px;*/
+            }
+
+
+            ._cal .days td .day-caption {
+                color: black;
+                text-align: right;
+                padding: 1px;
+            }
+
+            ._cal .days td .today .day-caption {
+                color: green;
+                font-weight: bold;
+            }
+
+            ._cal .days td .day-caption._inactive {
+                color: #ccc !important;
+            }
+
+            ._cal .days td .today .day-caption._inactive {
+                color: green !important;
+                font-weight: bold;
+            }
+
+            ._cal .days td:has(> .today) {
+                background: #ccffe6;
+            }
+
+    ._cal .event {
+        padding: 3px;
+        margin: 2px 0 0 0;
+        text-align: center;
+    }
+
+        ._cal .event.d1165 {
+            background-color: #00cc99;
+        }
+
+        ._cal .event.d10000 {
+            background-color: #66ff66;
+        }
+
+        ._cal .event span {
+            display: inline-block;
+            margin-left: 5px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        ._cal .event i {
+            font-size: 15px;
+        }
+
+    .thin-scroll0::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .thin-scroll0::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    ._xheader.selected {
+        background: #b3ffd9;
+        border-bottom: 2px solid #00cc66 !important;
+    }
+
+    ._header_child {
+        display: none;
+    }
+
+
+    ._event {
+        margin: 3px;
+    }
+
+    ._session {
+        padding: 5px;
+        background: #adebeb;
+        color: black;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    ._expired {
+        padding: 5px;
+        background: #b32400;
+        color: white;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    ._status_1 {
+        background: #99ebff;
+    }
+
+    ._status_2 {
+        background: #ffccff;
+    }
+
+    ._status_3 {
+        background: #1affa3;
+    }
+
+    ._status_4 {
+        background: #ffcc66;
+    }
+
+    ._session ._title {
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+    ._expired ._title {
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    ._session.selected {
+        background: #99ff33;
+    }
+
+    ._schedule .cell-container td {
+        border: 1px solid gray;
+        width: 25%;
+        vertical-align: baseline;
+    }
+
+    ._schedule .cell-container .month .header {
+        color: #bbb;
+        font-weight: bold;
+        font-size: 12px;
+        /*padding: 5px 10px;*/
+        margin-bottom: 5px;
+    }
+
+    ._schedule .cell-container .month {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .collapsed {
+        display: none;
+    }
+    .grp-tile{
+        /*float:left;*/
+    }
+        .grp-tile.selected {
+            background: #66ffb3 !important;
+        }
+</style>
+<div class="box recency" style="height:100%;display:none;overflow-y:hidden">
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-12  col1 col-grid" style="padding-right:2px;padding-left:2px;">
+            <div>
+                <table style="width:100%;">
+                    <tr>
+                        
+                        <td style="padding:6px;width:25%;font-weight:normal;text-align:center;border-bottom:1px solid #ccc" class="_crew_header _xheader selected" ng-click="_header_click('_crew_header','_crew')">CREW</td>
+                        <td style="padding: 6px; width: 25%; font-weight: normal; text-align: center; border-bottom: 1px solid #ccc" class="_route_header _xheader" ng-click="_header_click('_route_header','_route')">ROUTE</td>
+						<td style="padding:6px;width:25%;font-weight:normal;text-align:center;border-bottom:1px solid #ccc" class="_all_header _xheader " ng-click="_header_click('_all_header','_all')">ALL</td>
+           
+                    </tr>
+                </table>
+            </div>
+
+
+            
+             
+            <div class="_all _schedule  _header_child thin-scroll2" style="border:none;border-right:1px solid #ccc;padding:3px; overflow-y:auto; " ng-style="getMainStyle()">
+                 
+               <div class="col-lg-12" style='padding:0'>
+                    <div dx-data-grid="dg_all" id="dg_all"></div>
+
+                </div>
+               
+
+               
+                <div style="clear:both"></div>
+            </div>
+			
+			<div class="_crew _schedule  _header_child thin-scroll2" style="border:none;border-right:1px solid #ccc;padding:3px; overflow-y:auto; " ng-style="getMainStyle()">
+                <div class="col-lg-4" style="padding:0">
+                    <div dx-data-grid="dg_employees" id="dg_employees"></div>
+                   
+                </div>
+                <div class="col-lg-8">
+                    <div dx-data-grid="dg_rec_crew" id="dg_rec_crew"></div>
+
+                </div>
+                
+
+                <div style="clear:both"></div>
+            </div>
+			
+			<div class="_route _schedule  _header_child thin-scroll2" style="border:none;border-right:1px solid #ccc;padding:3px; overflow-y:auto; " ng-style="getMainStyle()">
+                <div class="col-lg-4" style="padding:0">
+                      <div dx-data-grid="dg_route" id="dg_route"></div>
+                </div>
+                <div class="col-lg-8">
+                    <div dx-data-grid="dg_rec_route" id="dg_rec_route"></div>
+
+                </div>
+               
+
+                <div style="clear:both"></div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <div class="rowx footer">
+        <div style="padding:0;">
+
+
+            <!--<table>
+                <tr>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:150px;padding-right:3px;"> <div dx-button="btn_refresh"></div></td>
+                    <td ng-show="isdrillvisble" style="width: 120px; padding-right: 3px;"> <div dx-button="btn_up"></div></td>
+                    <td ng-show="isdrillvisble" style="width: 120px; padding-right: 3px;"> <div dx-button="btn_down"></div></td>
+
+
+                </tr>
+            </table>-->
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

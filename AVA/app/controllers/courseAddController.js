@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('courseAddController', ['$scope', '$location', 'courseService', 'authService', '$routeParams', '$rootScope', 'trnService','ztrnService', function ($scope, $location, courseService, authService, $routeParams, $rootScope, trnService,ztrnService) {
+app.controller('courseAddController', ['$scope', '$location', 'courseService', 'authService', '$routeParams', '$rootScope', 'trnService', 'ztrnService', function ($scope, $location, courseService, authService, $routeParams, $rootScope, trnService, ztrnService) {
 
     $scope.IsEditable = true; $rootScope.HasTrainingAdmin();
 
@@ -167,8 +167,8 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
     };
 
-    $scope.bind = function (data, sessions, syllabi) {
-		 //2023-07-29
+    $scope.bind = function (data, sessions, syllabi,exams) {
+        //2023-07-29
         if ($scope.tempData.ReadOnly == 100)
             $scope.IsEditable = false;
         ////////////////////////////
@@ -235,6 +235,62 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         $scope.entity.SMSIns1Status = data.SMSIns1Status;
         $scope.entity.SMSIns2Status = data.SMSIns2Status;
         $scope.entity.SMSInsDate = data.SMSInsDate;
+
+        if (!exams || exams == null)
+            $scope.selected_exam = {
+                "id": null,
+                "course_id": null,
+                "exam_date": null,
+                "exam_date_persian": null,
+                "location_title": null,
+                "location_address": null,
+                "location_phone": null,
+                "remark": null,
+                "status_id": null,
+                "created_by": null,
+                "confirmed_by": null,
+                "created_date": null,
+                "confirmed_date": null,
+                "exam_type_id": null,
+                "signed_by_ins1_date": null,
+                "signed_by_ins2_date": null,
+                "signed_by_director_date": null,
+                "signed_by_staff_date": null,
+                "duration": null,
+                "date_start": null,
+                "date_end_scheduled": null,
+                "date_end_actual": null,
+                "date_start_scheduled": null,
+                "groups": [],
+                "people": [],
+                "template": [
+                    { category_id: 1, category: 'Air condition', total: null },
+                    { category_id: 2, category: 'APU', total: null },
+                    { category_id: 3, category: 'Automatic Flight', total: null },
+                    { category_id: 4, category: 'Communication', total: null },
+                    { category_id: 5, category: 'Electrical', total: null },
+                    { category_id: 6, category: 'Emergency', total: null },
+                    { category_id: 7, category: 'Engine', total: null },
+                    { category_id: 8, category: 'Fire Protection', total: null },
+                    { category_id: 9, category: 'Flight Control', total: null },
+                    { category_id: 10, category: 'Flight instrument', total: null },
+                    { category_id: 11, category: 'Fuel', total: null },
+                    { category_id: 12, category: 'General', total: null },
+                    { category_id: 13, category: 'Hydraulic', total: null },
+                    { category_id: 14, category: 'Ice&rain Protection', total: null },
+                    { category_id: 15, category: 'Landing Gear', total: null },
+                    { category_id: 16, category: 'Limitation', total: null },
+                    { category_id: 17, category: 'Navigation', total: null },
+                    { category_id: 18, category: 'Pneumatic', total: null },
+                    { category_id: 19, category: 'Warning System', total: null },
+                ],
+            };
+        else {
+            $scope.selected_exam = exams[0];
+        }
+
+
+
     };
 
 
@@ -283,6 +339,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     ////////////////////////////
     var tabs = [
         { text: "Main", id: 'main', visible_btn: false },
+        { text: "Exam", id: 'exam', visible_btn: false },
         //{ text: "Aircraft Type", id: 'aircrafttype', visible_btn: false, visible: $scope.type == 'active' },
 
         //{ text: "Course Type", id: 'coursetype', visible_btn: true, visible: $scope.type == 'active' },
@@ -335,12 +392,12 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                 clearInterval(myVar);
             }, 10);
 
-            $scope.btn_visible_aircrafttype = newValue == 1;
-            $scope.btn_visible_coursetype = newValue == 2;
-            $scope.btn_visible_education = newValue == 3;
-            $scope.btn_visible_course = newValue == 4;
-            $scope.btn_visible_group = newValue == 5;
-            $scope.btn_visible_employee = newValue == 6;
+           // $scope.btn_visible_aircrafttype = newValue == 1;
+           // $scope.btn_visible_coursetype = newValue == 2;
+          //  $scope.btn_visible_education = newValue == 3;
+           // $scope.btn_visible_course = newValue == 4;
+          //  $scope.btn_visible_group = newValue == 5;
+          //  $scope.btn_visible_employee = newValue == 6;
 
 
 
@@ -441,7 +498,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
 
         },
-        height: 270,
+        height: $(window).height() - 247,
         bindingOptions: {
 
             dataSource: 'entity.Sessions',
@@ -766,7 +823,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         scrollByThumb: true,
         bindingOptions: { height: 'scroll_height', }
     };
-    $scope.pop_width = 600;
+    $scope.pop_width = 500;
     $scope.pop_height = 350;
     $scope.popup_add_visible = false;
     $scope.popup_add_title = 'New';
@@ -928,9 +985,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             if ($scope.pop_width > 1300)
                 $scope.pop_width = 1300;
 
-            $scope.pop_height = 800; //$(window).height() - 70; //630; //size.height;
+            $scope.pop_height = 730; //$(window).height() - 70; //630; //size.height;
             $scope.dg_height = $scope.pop_height - 133;
-            $scope.scroll_height = $scope.pop_height - 130;
+            $scope.scroll_height = $scope.pop_height - 160;
 
         },
         onShown: function (e) {
@@ -947,7 +1004,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                 ztrnService.getCourseViewObject($scope.tempData.Id).then(function (response) {
                     $scope.loadingVisible = false;
 
-                    $scope.bind(response.Data.course, response.Data.sessions, response.Data.syllabi);
+                    $scope.bind(response.Data.course, response.Data.sessions, response.Data.syllabi,response.Data.exams);
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             }
@@ -1773,12 +1830,12 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             value: 'entity.Instructor',
         }
     };
-     $scope.txt_TrainingDirector = {
-         hoverStateEnabled: false,
-         bindingOptions: {
-             value: 'entity.TrainingDirector',
-         }
-     }; 
+    $scope.txt_TrainingDirector = {
+        hoverStateEnabled: false,
+        bindingOptions: {
+            value: 'entity.TrainingDirector',
+        }
+    };
     $scope.txt_Location = {
         hoverStateEnabled: false,
         bindingOptions: {
@@ -2098,6 +2155,316 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
         }
     };
+    /////////////////////////
+    /////EXAM//////////////////
+    $scope.xtabs = [
+        { id: 0, title: "Exam 1" },
+
+    ];
+    $scope.selected_xtab_index = 0;
+
+    $scope.select_xtab = function (index) {
+        $scope.selected_xtab_index = index;
+        console.log("Selected tab index:", $scope.selected_xtab_index);
+    };
+
+    $scope.add_xtab = function () {
+        const newIndex = $scope.xtabs.length;
+        $scope.xtabs.push({ id: newIndex, title: `Exam ${newIndex + 1}` });
+    };
+
+    $scope.remove_xtab = function () {
+        if ($scope.xtabs.length > 0) {
+            $scope.xtabs.splice($scope.selected_xtab_index, 1);
+            $scope.selected_xtab_index = Math.max(0, $scope.selected_xtab_index - 1);
+        }
+    };
+
+    
+    $scope._exam_date = null;
+    $scope._exam_time = null;
+    $scope.exam_date_scheduled = {
+        type: "date",
+        width: '100%',
+        //pickerType: 'rollers',
+        interval: 15,
+        onValueChanged: function (arg) {
+
+        },
+        bindingOptions: {
+            value: '_exam_date',
+
+        }
+    };
+
+    $scope.exam_time_scheduled = {
+        type: "time",
+        width: '100%',
+        //divargar-ok
+        displayFormat: "HH:mm",
+        interval: 15,
+        onValueChanged: function (arg) {
+
+        },
+        bindingOptions: {
+            value: '_exam_date',
+
+        }
+    };
+    $scope.exam_duration = {
+        min: 1,
+        bindingOptions: {
+            value: 'selected_exam.duration',
+        }
+    };
+    $scope.exam_location = {
+        hoverStateEnabled: false,
+        bindingOptions: {
+            value: 'location_title',
+        }
+    };
+    $scope.exam_location_address = {
+        hoverStateEnabled: false,
+        bindingOptions: {
+            value: 'location_address',
+        }
+    };
+    $scope.removeGroup = function () {
+        var dg_selected = $rootScope.getSelectedRow($scope.dg_group_instance);
+        if (!dg_selected) {
+            General.ShowNotify(Config.Text_NoRowSelected, 'error');
+            return;
+        }
+        $scope.entity.JobGroups = Enumerable.From($scope.entity.JobGroups).Where('$.Id!=' + dg_selected.Id).ToArray();
+
+
+    };
+    $scope.addGroup = function () {
+        $rootScope.$broadcast('InitJobGroupSelectSimple', null);
+    };
+
+    $scope.dg_exam_group_columns = [
+
+        { dataField: "Title", caption: "Title", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, },
+        // { dataField: 'FullCode', caption: 'Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, encodeHtml: false, width: 200, sortIndex: 0, sortOrder: "asc" },
+
+    ];
+    $scope.dg_exam_group_selected = null;
+    $scope.dg_exam_group_instance = null;
+    $scope.dg_exam_group = {
+        showRowLines: true,
+        showColumnLines: true,
+        sorting: { mode: 'multiple' },
+        filterRow: {
+            visible: false,
+            showOperationChooser: true,
+        },
+        noDataText: '',
+        showColumnHeaders: true,
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'infinite' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'single' },
+
+
+        columnAutoWidth: false,
+        columns: $scope.dg_exam_group_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_exam_group_instance)
+                $scope.dg_exam_group_instance = e.component;
+
+        },
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData[0];
+
+            if (!data) {
+                $scope.dg_exam_group_selected = null;
+            }
+            else
+                $scope.dg_exam_group_selected = data;
+
+
+        },
+        height: 250,
+        bindingOptions: {
+
+            dataSource: 'selected_exam.groups',
+            // height: 'dg_height',
+        },
+        // dataSource:ds
+
+    };
+    $scope.$on('onJobGroupSelectSimpleHide', function (event, prms) {
+
+
+        if (!prms || prms.length == 0)
+            return;
+        $.each(prms, function (_i, _d) {
+            var exist = Enumerable.From($scope.selected_exam.groups).Where("$.Id==" + _d.Id).FirstOrDefault();
+            if (!exist) {
+                var jg = { Id: _d.Id, Title: _d.Title, FullCode: _d.FullCode };
+
+                $scope.selected_exam.groups.push(jg);
+            }
+        });
+        $scope.dg_exam_group_instance.refresh();
+    });
+    $scope.dg_exam_people_columns = [
+        { dataField: "Title", caption: "NID", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: "Title", caption: "Name", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, },
+
+        // { dataField: 'FullCode', caption: 'Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, encodeHtml: false, width: 200, sortIndex: 0, sortOrder: "asc" },
+
+    ];
+    $scope.dg_exam_people_selected = null;
+    $scope.dg_exam_people_instance = null;
+    $scope.dg_exam_people = {
+        showRowLines: true,
+        showColumnLines: true,
+        sorting: { mode: 'multiple' },
+        filterRow: {
+            visible: false,
+            showOperationChooser: true,
+        },
+        noDataText: '',
+        showColumnHeaders: true,
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'infinite' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'single' },
+
+
+        columnAutoWidth: false,
+        columns: $scope.dg_exam_people_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_exam_people_instance)
+                $scope.dg_exam_people_instance = e.component;
+
+        },
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData[0];
+
+            if (!data) {
+                $scope.dg_exam_people_selected = null;
+            }
+            else
+                $scope.dg_exam_people_selected = data;
+
+
+        },
+        height: 250,
+        bindingOptions: {
+
+            dataSource: 'selected_exam.people',
+            // height: 'dg_height',
+        },
+        // dataSource:ds
+
+    };
+
+
+    $scope.dg_exam_template_columns = [
+        { dataField: "category", caption: "Category", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, },
+        { dataField: "total", caption: "Count", allowResizing: true, alignment: "center", dataType: 'number', allowEditing: true, width: 150 },
+
+        // { dataField: 'FullCode', caption: 'Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, encodeHtml: false, width: 200, sortIndex: 0, sortOrder: "asc" },
+
+    ];
+    $scope.dg_exam_template_selected = null;
+    $scope.dg_exam_template_instance = null;
+    $scope.dg_exam_template = {
+        editing: {
+            allowUpdating: true,
+            mode: 'cell',
+        },
+        showRowLines: true,
+        showColumnLines: true,
+        sorting: { mode: 'multiple' },
+        filterRow: {
+            visible: true,
+            showOperationChooser: true,
+        },
+        noDataText: '',
+        showColumnHeaders: true,
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'infinite' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'single' },
+
+        summary: {
+            totalItems: [
+                {
+                  column: "count",
+                    summaryType: "sum",
+                    customizeText: function (data) {
+                        return data.value;
+                    }
+                }
+            ]
+        },
+        columnAutoWidth: false,
+        columns: $scope.dg_exam_template_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_exam_template_instance)
+                $scope.dg_exam_template_instance = e.component;
+
+        },
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData[0];
+
+            if (!data) {
+                $scope.dg_exam_template_selected = null;
+            }
+            else
+                $scope.dg_exam_template_selected = data;
+
+
+        },
+        height: $(window).height() - 320,
+        bindingOptions: {
+
+            dataSource: 'selected_exam.template',
+            // height: 'dg_height',
+        },
+        // dataSource:ds
+
+    };
+    $scope.btn_generate = {
+        text: 'Generate Questions',
+        type: 'success',
+        icon: 'add',
+        width:'100%',
+       
+        // validationGroup: 'ctrsearch',
+        bindingOptions: {},
+        onClick: function (e) {
+            $scope.loadingVisible = true;
+            ztrnService.generateQuestions({ exam_id: $scope.selected_exam.id}).then(function (response) {
+
+                $scope.clearEntity();
+
+
+                General.ShowNotify(Config.Text_SavedOk, 'success');
+
+               
+
+
+                $scope.loadingVisible = false;
+                 
+
+
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+        }
+
+    };
     ///////////////////////////
     $scope.tempData = null;
     $scope.$on('InitAddCourse', function (event, prms) {
@@ -2221,4 +2588,4 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     });
     //////////////////////////////
 
-}]);  
+}]);
