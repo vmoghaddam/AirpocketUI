@@ -121,6 +121,9 @@ var apiCAO = 'https://_apicao.apvaresh.com/';
 var zapinet = 'https://ava.apinet.airpocket.app/';
 var zfuel = 'https://ava.apifuel.airpocket.app/';
 var zapitrn = 'https://ava.apitrn.airpocket.app/';
+
+var api_ato_client = 'https://ava.ato.apiclient.airpocket.app/';
+var api_ato = 'https://ava.apitrn.airpocket.app/';
  
 var vira_api = "https://lmmcore.online/";
 app.constant('ngAuthSettings', {
@@ -309,6 +312,7 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
     $rootScope.reportServerTRN = "https://ava.report.airpocket.app/frmreportview.aspx";
     //$rootScope.serviceMnt = 'https://ava.apimnt.airpocket.app/';
     $rootScope.serviceMnt = 'http://localhost:9063/';
+
     ////////////////////////////////
     $rootScope.startingBIYear = 1398;
     ////////////////////////////////
@@ -458,6 +462,14 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
         catch (e) { }
 
         $location.path(target);
+
+
+    };
+    $rootScope.navigate_profile = function () {
+
+
+
+        $location.path("/profile");
 
 
     };

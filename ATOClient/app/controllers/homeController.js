@@ -2,17 +2,9 @@
 app.controller('homeController', ['$scope', '$routeParams', 'authService', 'activityService', 'libraryService', 'flightService', '$rootScope', '$compile', 'mntService', 'mapService',
     '$sce', '$location', '$window',
     function ($scope, $routeParams, authService, activityService, libraryService, flightService, $rootScope, $compile, mntService,mapService,$sce,$location,$window) {
+        $rootScope.navigate_profile();
 
-        if ($rootScope.IsOnlyFlightView()) {
-            authService.setModule(3);
-            $rootScope.setTheme();
-            if ($rootScope.roles.indexOf('Station') != -1)
-                $rootScope.navigate('/board', 'flight_board');
-            else
-                $rootScope.navigate('/board', 'flight_board');
-
-            return;
-        }
+         
         $scope.prms = $routeParams.prms;
         $scope.year = $routeParams.year;
         $scope.month = $routeParams.month;

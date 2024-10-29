@@ -2,7 +2,10 @@
 app.controller('profileController', ['$scope', '$location', '$routeParams', '$rootScope', '$route', '$window', '$timeout', 'authService', 'atoService',
     function ($scope, $location, $routeParams, $rootScope, $route, $window, $timeout, authService, atoService) {
         $scope.prms = $routeParams.prms;
+        if (!authService.isAuthorized()) {
 
+            authService.redirectToLogin();
+        }
 
         $scope.windowHeight = $(window).height()
 

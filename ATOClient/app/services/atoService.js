@@ -5,7 +5,7 @@ app.factory('atoService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     var _save_question_answer = function (entity) {
         var deferred = $q.defer();
         console.log('----service----', entity)
-        $http.post("https://ava.apitrn.airpocket.app/api/exam/student/answer", entity).then(function (response) {
+        $http.post(api_ato+"api/exam/student/answer", entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -21,7 +21,7 @@ app.factory('atoService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     var _get_person_info = function (dto) {
         var deferred = $q.defer();
 
-        $http.post("http://localhost:9066/" + "api/ato/client/profile", dto).then(function (response) {
+        $http.post(api_ato_client + "api/ato/client/profile", dto).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -38,7 +38,7 @@ app.factory('atoService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
     var _get_ato_exam = function (exam_id, client_id) {
         var deferred = $q.defer();
-        $http.get('http://localhost:9066/' + 'api/ato/client/exam/' + exam_id + '/' + client_id).then(function (response) {
+        $http.get(api_ato_client + 'api/ato/client/exam/' + exam_id + '/' + client_id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -52,7 +52,7 @@ app.factory('atoService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
     var _save_ato_exam_answer = function (exam_id, client_id, answer_id) {
         var deferred = $q.defer();
-        $http.post('http://localhost:9066/' + 'api/ato/client/exam/anwser/save/' + exam_id + '/' + client_id + '/' + answer_id).then(function (response) {
+        $http.post(api_ato_client + 'api/ato/client/exam/anwser/save/' + exam_id + '/' + client_id + '/' + answer_id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -68,7 +68,7 @@ app.factory('atoService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     var _get_instructor_course = function (id) {
 
         var deferred = $q.defer();
-        $http.get('https://ava.apitrn.airpocket.app/api/person/courses/' + id).then(function (response) {
+        $http.get(api_ato+'api/person/courses/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -97,7 +97,7 @@ app.factory('atoService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     var _get_person_exam = function (id) {
 
         var deferred = $q.defer();
-        $http.get('http://localhost:9066/' + 'api/ato/client/exams/scheduled/' + id).then(function (response) {
+        $http.get(api_ato_client + 'api/ato/client/exams/scheduled/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
