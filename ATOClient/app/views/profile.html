@@ -130,13 +130,33 @@
         }
 
     .tab-content .tab-pane {
-        padding: 20px;
-       
+        padding: 7px;
         border-top: none;
     }
 
     .nav-item-profile {
-        width:33.3333%
+        width: 33.3333%
+    }
+
+    .card-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: white;
+        transition: transform 0.2s;
+        border: 1px solid white
+    }
+
+
+
+    .title {
+        font-size: 13px;
+        font-weight: bold;
+        color: white;
+        margin-bottom: 10px;
+        background-color: #009688;
+        height: 30px;
+        align-content: center;
     }
 
     @media (max-width: 768px) {
@@ -145,6 +165,48 @@
         }
     }
 
+    .text-success {
+        color: green;
+    }
+
+    .text-warning {
+        color: yellow;
+    }
+
+    .text-danger {
+        color: red;
+    }
+
+    .text-unknown {
+        color: orange;
+    }
+
+    .lib-cer {
+        /*background-position: center;
+    transition: background 0.4s;
+    background: #fff radial-gradient(circle, transparent 1%, #eee 1%) center/15000%  ;*/
+        background: transparent;
+        transition: background 0.4s;
+    }
+
+    .cer-expiring {
+        background: #e69900;
+    }
+
+    .cer-expired {
+        background: #cc2900;
+        color: white;
+    }
+
+    .cer-unknown {
+        background: #8c8c8c;
+        color: white;
+    }
+
+    .cer-valid {
+        background: #00e6ac;
+        color: black;
+    }
 
     .box .rowx.footer {
         position: absolute;
@@ -168,175 +230,232 @@
                     <div class="section-title">Personal Information</div>
 
                     <div class="col-lg-3 col-md-3">
-                        <label for="profile-image-upload" class="upload-box" style="height: 170px">
+                        <div for="profile-image-upload" class="upload-box" style="height: 170px">
                             <p>Profile Image</p>
-                            <input type="file" id="profile-image-upload" name="profile-image" accept="image/*">
-                            <img id="profile-preview" alt="Profile Image" class="img-fluid" style="max-width: 100%; border-radius: 5px;">
-                        </label>
+                            <input type="file" id="profile-image-upload" name="profile-image" accept="image/*" ng-model="profile.ImageUrl">
+                            <img id="profile-preview" ng-src="{{profile.ImageUrl}}" alt="Profile Image" class="img-fluid" style="max-width: 100%; border-radius: 5px;">
+                        </div>
                     </div>
                     <div class="col-lg-9 col-md-9">
                         <div class="col-lg-6 col-md-6" style="padding: 0 !important">
                             <div class="personal-input-group">
                                 <label for="firstname">First Name</label>
-                                <input type="text" id="firstname" name="firstname">
+                                <input type="text" id="firstname" ng-model="profile.FirstName">
                             </div>
                             <div class="personal-input-group">
                                 <label for="lastname">Last Name</label>
-                                <input type="text" id="lastname" name="lastname">
+                                <input type="text" id="lastname" ng-model="profile.LastName">
                             </div>
                             <div class="personal-input-group">
                                 <label for="fathername">Father's Name</label>
-                                <input type="text" id="fathername" name="fathername">
+                                <input type="text" id="fathername" ng-model="profile.FatherName">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6" style="padding: 0 !important">
                             <div class="personal-input-group">
                                 <label for="birthdate">Date of Birth</label>
-                                <input type="date" id="birthdate" name="birthdate">
+                                <input type="date" id="birthdate" ng-model="profile.DateBirth">
                             </div>
                             <div class="personal-input-group">
                                 <label for="nid">National Code</label>
-                                <input type="number" id="nid" name="nid">
+                                <input type="text" id="nid" ng-model="profile.NID">
                             </div>
                             <div class="personal-input-group">
                                 <label for="mobile">Mobile Number</label>
-                                <input type="number" id="mobile" name="mobile">
+                                <input type="text" id="mobile" ng-model="profile.Mobile">
                             </div>
                         </div>
                         <div class="personal-input-group">
                             <label for="email">E-Mail</label>
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="email" ng-model="profile.Email">
                         </div>
                         <div class="personal-input-group full-width">
                             <label for="address">Address</label>
-                            <input type="text" id="address" name="address">
+                            <input type="text" id="address" ng-model="profile.Address">
                         </div>
                     </div>
 
                 </div>
-                <!-- Course Information Section -->
-                <div class="profile-card">
-                    <div class="section-title">Course Information</div>
-                    <div class="section-content">
-                        <div class="personal-input-group">
-                            <label for="cpl-start">CPL Course Start Date</label>
-                            <input type="date" id="cpl-start" name="cpl-start">
-                        </div>
-                        <div class="personal-input-group">
-                            <label for="class-expiry">Class Rating Expiry Date</label>
-                            <input type="date" id="class-expiry" name="class-expiry">
-                        </div>
-                        <div class="personal-input-group">
-                            <label for="ir-category">Instrument Rating Category</label>
-                            <input type="text" id="ir-category" name="ir-category">
-                        </div>
-                        <div class="personal-input-group">
-                            <label for="ir-expiry">IR Expiry Date</label>
-                            <input type="date" id="ir-expiry" name="ir-expiry">
-                        </div>
+
+            </div>
+
+
+            <div class="profile-card">
+                <div class="section-title">National Card</div>
+                <div class="upload-container">
+                    <!-- National Card -->
+                    <div for="meli_front" class="upload-box">
+                        <p>Front</p>
+                        <input type="file" id="meli_front" name="meli_front" accept="image/*">
+                        <div class="file-name" id="file-name1">No file chosen</div>
+                        <img id="preview1" alt="Preview">
+                    </div>
+                    <!-- Passport -->
+                    <div for="meli_back" class="upload-box">
+                        <p>Back</p>
+                        <input type="file" id="meli_back" name="meli_back" accept="image/*">
+                        <div class="file-name" id="file-name2">No file chosen</div>
+                        <img id="preview2" alt="Preview">
                     </div>
                 </div>
+            </div>
 
-              
-                <div class="profile-card">
-                    <div class="section-title">National Card</div>
-                    <div class="upload-container">
-                        <!-- National Card -->
-                        <label for="meli_front" class="upload-box">
-                            <p>Front</p>
-                            <input type="file" id="meli_front" name="meli_front" accept="image/*">
-                            <div class="file-name" id="file-name1">No file chosen</div>
-                            <img id="preview1" alt="Preview">
-                        </label>
-                        <!-- Passport -->
-                        <label for="meli_back" class="upload-box">
-                            <p>Back</p>
-                            <input type="file" id="meli_back" name="meli_back" accept="image/*">
-                            <div class="file-name" id="file-name2">No file chosen</div>
-                            <img id="preview2" alt="Preview">
-                        </label>
+            <!-- Upload Documents Section -->
+            <div class="profile-card">
+                <div class="section-title">Identity Certificate</div>
+                <div class="upload-container">
+                    <!-- National Card -->
+                    <div for="shenasname_front" class="upload-box">
+                        <p>Front</p>
+                        <input type="file" id="shenasname_front" name="shenasname_front" accept="image/*">
+                        <div class="file-name" id="file-name3">No file chosen</div>
+                        <img id="preview3" alt="Preview">
+                    </div>
+
+                    <!-- Passport -->
+                    <div for="shenasname_back" class="upload-box">
+                        <p>Back</p>
+                        <input type="file" id="shenasname_back" name="shenasname_back" accept="image/*">
+                        <div class="file-name" id="file-name4">No file chosen</div>
+                        <img id="preview4" alt="Preview">
                     </div>
                 </div>
+            </div>
 
-                <!-- Upload Documents Section -->
-                <div class="profile-card">
-                    <div class="section-title">Identity Certificate</div>
-                    <div class="upload-container">
-                        <!-- National Card -->
-                        <label for="shenasname_front" class="upload-box">
-                            <p>Front</p>
-                            <input type="file" id="shenasname_front" name="shenasname_front" accept="image/*">
-                            <div class="file-name" id="file-name3">No file chosen</div>
-                            <img id="preview3" alt="Preview">
-                        </label>
-
-                        <!-- Passport -->
-                        <label for="shenasname_back" class="upload-box">
-                            <p>Back</p>
-                            <input type="file" id="shenasname_back" name="shenasname_back" accept="image/*">
-                            <div class="file-name" id="file-name4">No file chosen</div>
-                            <img id="preview4" alt="Preview">
-                        </label>
+            <!-- Upload Documents Section -->
+            <div class="profile-card">
+                <div class="section-title">Mandatory service completion card</div>
+                <div class="upload-container">
+                    <!-- National Card -->
+                    <div for="mandatory_front" class="upload-box">
+                        <p>Front</p>
+                        <input type="file" id="mandatory_front" name="mandatory_front" accept="image/*">
+                        <div class="file-name" id="file-name5">No file chosen</div>
+                        <img id="preview5" alt="Preview">
                     </div>
-                </div>
 
-                <!-- Upload Documents Section -->
-                <div class="profile-card">
-                    <div class="section-title">Mandatory service completion card</div>
-                    <div class="upload-container">
-                        <!-- National Card -->
-                        <label for="mandatory_front" class="upload-box">
-                            <p>Front</p>
-                            <input type="file" id="mandatory_front" name="mandatory_front" accept="image/*">
-                            <div class="file-name" id="file-name5">No file chosen</div>
-                            <img id="preview5" alt="Preview">
-                        </label>
-
-                        <!-- Passport -->
-                        <label for="mandatory_back" class="upload-box">
-                            <p>Back</p>
-                            <input type="file" id="mandatory_back" name="mandatory_back" accept="image/*">
-                            <div class="file-name" id="file-name6">No file chosen</div>
-                            <img id="preview6" alt="Preview">
-                        </label>
+                    <!-- Passport -->
+                    <div for="mandatory_back" class="upload-box">
+                        <p>Back</p>
+                        <input type="file" id="mandatory_back" name="mandatory_back" accept="image/*">
+                        <div class="file-name" id="file-name6">No file chosen</div>
+                        <img id="preview6" alt="Preview">
                     </div>
                 </div>
             </div>
         </div>
+
 
         <div class=" col-lg-6 col-md-6 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;">
 
             <div class="profile-container" ng-style="{ 'height': (windowHeight - 110) + 'px' }">
                 <ul class="nav nav-tabs-profile" id="myCustomTab" role="tablist">
                     <li class="nav-item-profile" role="presentation" style="border-top: 1px solid lightgray; border-left: 1px solid lightgray;">
-                        <a href="" class="nav-link col-4" ng-class="{active: isActiveTab(1)}" ng-click="selectTab(1)">Course</a>
+                        <a href="" class="nav-link col-4" ng-class="{active: isActiveTab(1)}" ng-click="selectTab(1)">Events</a>
                     </li>
                     <li class="nav-item-profile" role="presentation" style="border-top: 1px solid lightgray; border-left: 1px solid lightgray; border-right: 1px solid lightgray">
-                        <a href="" class="nav-link col-4" ng-class="{active: isActiveTab(2)}" ng-click="selectTab(2)">#</a>
+                        <a href="" class="nav-link col-4" ng-class="{active: isActiveTab(2)}" ng-click="selectTab(2)">Course</a>
                     </li>
-                    <li class="nav-item-profile" role="presentation" style="border-top: 1px solid lightgray; border-right: 1px solid lightgray;">
-                        <a href="" class="nav-link col-4" ng-class="{active: isActiveTab(3)}" ng-click="selectTab(3)">#</a>
+                    <li class="nav-item-profile" role="presentation" style="border-top: 1px solid lightgray; border-right: 1px solid lightgray">
+                        <a href="" class="nav-link col-4" ng-class="{active: isActiveTab(3)}" ng-click="selectTab(3)">Certificates</a>
                     </li>
+
                 </ul>
 
                 <div class="tab-content" style="margin-top: 0px !important">
-                    <div class="tab-pane"  ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(1)}" role="tabpanel">
-                        <h3>Course Tab</h3>
-                        <p>Welcome to the course tab! Here you can find introductory content.</p>
+                    <div class="tab-pane thin-scroll" ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(2)}" role="tabpanel" style="overflow-y: auto">
+                        <div style="padding: 0px !important; border: 1px solid lightgray" class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div ng-repeat="course in instructor_courses" class="card-container">
+
+                                <!--style="width: 50%; text-align: right; display: inline-block"-->
+
+                                <div class="title">
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: left; padding: 7px">
+                                        {{course.Title}}
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: right; padding: 7px">
+                                        {{course.No}}No
+                                    </div>
+                                </div>
+
+                                <div class="date-range">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <p style="display: inline-block">Start</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateStart | date: 'yyyy-MM-dd'}}</p>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <p style="display: inline-block">End</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateEnd | date: 'yyyy-MM-dd'}}</p>
+                                    </div>
+                                </div>
+                                <div class="date-range">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <p style="display: inline-block">Issue</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateIssue | date: 'yyyy-MM-dd'}}</p>
+                                    </div>
+                                    <div class="col-sm-6 col-xs-6">
+                                        <p style="display: inline-block">Expire</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateExpire | date: 'yyyy-MM-dd'}}</p>
+                                    </div>
+                                </div>
+
+                                <!--<div class="date-range">
+                                    <div class="col-sm-6 col-xs-6">
+                                        <p style="display: inline-block">Class Id</p> &nbsp; <p style="font-weight: bold; display: inline-block"></p>
+                                    </div>
+                                </div>-->
+
+                                <div style="border-bottom: 1px dashed lightgray"></div>
+                                <div class="date-range" style="margin: 7px 0 7px 0">
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;justify-content: center" ng-class="{
+                            'text-success': course.CoursePeopleStatus === 'PASSED',
+                            'text-warning': course.CoursePeopleStatus === 'RE-EXAM',
+                            'text-danger': course.CoursePeopleStatus === 'FAILED',
+                                         'text-unknown': course.CoursePeopleStatus === 'UNKNOWN'}">
+                                        <div style="font-weight: bold; display: inline-block">{{course.CoursePeopleStatus}}</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-                    <div class="tab-pane"  ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(2)}" role="tabpanel">
-                        <h3>Profile Tab</h3>
-                        <p>This is your profile information and settings section.</p>
+                    <div class="tab-pane thin-scroll" ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(3)}" role="tabpanel" style="overflow-y: auto">
+                        <div ng-repeat="x in certificates" ng-click="itemClick($event,x)" id="cer-{{x.TypeId}}" style="padding-bottom:5px;padding-top:5px;padding-right:2px;padding-left:2px;margin:5px 5px 0 5px; border:1px solid #bbb" class="lib-cer">
+
+                            <div>
+
+                                <div style="float:left;width:20%;padding:7px 0 7px 0;margin-left:2px;" ng-class="getRemainClass(x)">
+                                    <div style="text-align:center;font-size:14px;">Remaining</div>
+
+                                    <div style="text-align:center;font-size:20px;padding:2px 0">{{x.Remain}}</div>
+                                    <div style="text-align:center;font-size:14px;">Day(s)</div>
+
+                                </div>
+                                <div style="padding-left: 5px;float:left;border-left:1px dashed #ccc;padding:4px 15px;">
+                                    <div style="font-size:14px;margin-top:3px;margin-bottom:5px;font-weight:bold;text-transform:uppercase;font-size:16px">{{x.Title}}</div>
+                                    <div style="font-size:15px;font-weight:bold"><span style="display:inline-block;width:50px;font-weight:normal">Issued:</span> {{formatDateCer(x.IssueDate)}}</div>
+                                    <div style="font-size:15px;font-weight:bold;margin-top:3px;"><span style="display:inline-block;width:50px;font-weight:normal">Expires:</span> {{formatDateCer(x.ExpireDate)}}</div>
+                                </div>
+
+
+                                <div style="clear:both"></div>
+                                <div style="text-align:center;font-size:13px;border-top:1px dashed #ccc;margin:5px;padding-top:5px;" ng-show="x.Description">
+                                    <p style="text-align:left;padding-left:5px;padding-right:5px;padding-top:2px;text-align:justify">{{x.Description}}</p>
+                                    <div style="clear:both"></div>
+
+
+                                </div>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                        </div>
                     </div>
-                    <div class="tab-pane" ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(3)}" role="tabpanel">
-                        <h3>Contact Tab</h3>
-                        <p>Get in touch with us through the contact tab content.</p>
+                    <div class="tab-pane" ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(1)}" role="tabpanel">
+
                     </div>
+
                 </div>
+
             </div>
 
         </div>
-
     </div>
     <div class="rowx footer">
         footer
