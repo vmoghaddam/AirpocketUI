@@ -379,7 +379,7 @@
                             </table>
                         </p>
                         <label class="qlabel" ng-repeat="(optionIndex, option) in question.answers">
-                            <input type="radio" ng-model="option.id" ng-change="save_answer(option.quesion_id,option.answer_id )"
+                            <input type="radio" ng-model="option.id" ng-change="save_answer(option.exam_quesion_id,option.answer_id )"
                                    ng-checked="option.is_selected"
                                    name="question_{{questionIndex}}" ng-disabled="status_id!=1" />
 

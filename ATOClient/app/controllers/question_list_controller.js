@@ -75,10 +75,13 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
         $scope.bind = function () {
             atoService.get_ato_exam($scope.exam_id, $scope.person_id).then(function (response) {
                 console.log('---Get Exam----', response);
-
+                $.each(response.Data.questions, function (_i, _d) {
+                    _d.id2 = _d.id;
+                });
                 $scope.exam = response.Data.exam;
                 $scope.status_id = $scope.exam.status_id;
                 $scope.questions = response.Data.questions;
+               
                 $scope.profile = response.Data.profile;
                 $scope.total_questions = response.Data.toal_questions;
                 $scope.total_answered = response.Data.total_answerd;

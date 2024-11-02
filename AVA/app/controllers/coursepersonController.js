@@ -1,5 +1,6 @@
 ﻿'use strict';
-app.controller('coursepersonController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService','ztrnService', '$window', '$compile', function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService,ztrnService, $window, $compile) {
+app.controller('coursepersonController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService', 'ztrnService', '$window', '$compile','$interval'
+    , function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService, ztrnService, $window, $compile,$interval) {
     $scope.prms = $routeParams.prms;
     $scope.IsEditable = $rootScope.HasTrainingAdmin();
     $scope.windowHeight = $(window).height();
@@ -2164,6 +2165,28 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 break;
         }
     }
+    var timer;
+
+    $scope.startTimer = function () {
+        if (angular.isDefined(timer)) return;
+
+        timer = $interval(function () {
+            $scope.refresh_summary();
+        }, 5000); // 10 seconds interval
+    };
+
+    // Method to stop the timer
+    $scope.stopTimer = function () {
+        if (angular.isDefined(timer)) {
+            $interval.cancel(timer);
+            timer = undefined;
+
+        }
+    };
+    $scope.$on('$destroy', function () {
+        $scope.stopTimer();
+    });
+
     $scope.exam_btn_caption = "";
     $scope.exam_status_btn_class = function () {
         switch ($scope.follow_exam.status_id) {
@@ -2223,6 +2246,16 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
     // Calculate the width of the progress bar based on the count of answers
     $scope.getProgressBarWidth = function (answersCount, questionCount) {
         return (parseInt(answersCount) / parseInt(questionCount)) * 100;
+    };
+    $scope.refresh_summary = function () {
+        //get_exam_results
+        ztrnService.get_exam_summary($scope.follow_exam.id).then(function (response) {
+
+            $scope.follow_exam.summary = response.Data;
+            
+
+
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     };
     $scope.preparePeopleGrid = function () {
         $scope.loadingVisible = true;
@@ -2382,6 +2415,11 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
             $scope.dg_people_instance.refresh();
             $scope.loadingVisible = false;
+
+
+
+
+            $scope.startTimer();
 
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
