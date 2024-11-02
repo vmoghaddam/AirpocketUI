@@ -2115,13 +2115,114 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
     $scope.ddd = 'dool';
     $scope.formatDate = function (dt) {
         if (!dt)
-            return "unknown";
+            return "";
         return moment(new Date(dt)).format('YYYY-MMM-DD').toUpperCase();
     };
     $scope.formatTime = function (dt) {
         if (!dt)
-            return "unknown";
+            return "";
         return moment(new Date(dt)).format('HH:mm').toUpperCase();
+    };
+    $scope.formatDateTime = function (dt) {
+        if (!dt)
+            return "";
+        return moment(new Date(dt)).format('YYYY-MMM-DD HH:mm').toUpperCase();
+    };
+    $scope.exam_status_click = function () {
+        switch ($scope.follow_exam.status_id) {
+            case 0:
+                $scope.follow_exam.status_id = 1;
+                $scope.follow_exam.date_end_actual = null;
+                $scope.follow_exam.date_start = new Date();
+                //addMinutes
+                $scope.exam_btn_caption = "STARTED";
+                ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id}).then(function (response) {
+                   
+                    
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                break;
+            case 1:
+                $scope.follow_exam.status_id = 2;
+                $scope.follow_exam.date_end_actual = new Date();
+                $scope.exam_btn_caption = "FINISHED";
+                ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
+
+
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                break;
+            case 2:
+                $scope.follow_exam.status_id = 0;
+                $scope.follow_exam.date_end_actual = null;
+                $scope.follow_exam.date_start = null;
+                $scope.exam_btn_caption = "SCHEDULED";
+                ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
+
+
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                break;
+            default:
+                break;
+        }
+    }
+    $scope.exam_btn_caption = "";
+    $scope.exam_status_btn_class = function () {
+        switch ($scope.follow_exam.status_id) {
+            case 0:
+                return "exam_scheduled";
+            case 1:
+                return "exam_started";
+            case 2:
+                return "exam_done";
+            default:
+                return "";
+        }
+    };
+    $scope.exam_result = [
+        {
+            exam_id: 1,
+            person_id: 345,
+            name: 'ALI DEHGHAN',
+            true_answers: '58%',
+            false_answers: '42%',
+            result: 'PASSED',
+            exam_question_count: '45',
+            answers_count: '27',
+        },
+        {
+            exam_id: 1,
+            person_id: 347,
+            name: 'VAHID MOGHADDAM',
+            true_answers: '50%',
+            false_answers: '50%',
+            result: 'RE-EXAM',
+            exam_question_count: '45',
+            answers_count: '45',
+        },
+        {
+            exam_id: 1,
+            person_id: 143,
+            name: 'AGHA TRUMP',
+            true_answers: '25%',
+            false_answers: '75%',
+            result: 'FAILED',
+            exam_question_count: '45',
+            answers_count: '43',
+        },
+        {
+            exam_id: 1,
+            person_id: 3345,
+            name: 'SAHAR BOLANDI',
+            true_answers: '78%',
+            false_answers: '22%',
+            result: 'PASSED',
+            exam_question_count: '45',
+            answers_count: '36',
+        }
+    ];
+
+    // Calculate the width of the progress bar based on the count of answers
+    $scope.getProgressBarWidth = function (answersCount, questionCount) {
+        return (parseInt(answersCount) / parseInt(questionCount)) * 100;
     };
     $scope.preparePeopleGrid = function () {
         $scope.loadingVisible = true;
@@ -2130,7 +2231,22 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             $scope.loadingVisible = false;
 
             $scope.follow_course = response.Data.course;
-            $scope.follow_exams = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : null;
+            $scope.follow_exam = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : null;
+            if ($scope.follow_exam) {
+                switch ($scope.follow_exam.status_id) {
+                    case 0:
+                        $scope.exam_btn_caption = "SCHEDULED";
+                        break;
+                    case 1:
+                        $scope.exam_btn_caption = "STARTED";
+                        break;
+                    case 2:
+                        $scope.exam_btn_caption = "FINISHED";
+                        break;
+                    default:
+                        break;
+                }
+            }
             $scope.dg_syllabi_ds = response.Data.syllabi;
 
 

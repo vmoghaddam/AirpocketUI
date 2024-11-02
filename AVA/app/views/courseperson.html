@@ -176,6 +176,7 @@
         margin-bottom: 15px;
         width: 45%;
     }
+
     .section-title {
         font-size: 18px;
         font-weight: bold;
@@ -187,9 +188,10 @@
         flex-wrap: wrap;
         justify-content: space-between;
     }
-        .input-group.full-width {
-            width: 100%;
-        }
+
+    .input-group.full-width {
+        width: 100%;
+    }
 
     .profile-container {
         margin: auto;
@@ -223,9 +225,137 @@
             outline: none;
             border-color: #007bff;
         }
-    .dx-tab{
+
+    .dx-tab {
+        background: #ccc;
+    }
+    .exam_scheduled{
         background:#ccc;
     }
+    .exam_started {
+        background: #47807f;
+        color:white;
+    }
+    .exam_done {
+        background: #007bd9;
+        color: white;
+    }
+
+
+
+    /*******8*/
+    .tiles {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    .name {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .exam-question-count {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .ruler-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    .ruler-unit {
+        flex-grow: 1;
+        position: relative;
+        height: 20px;
+    }
+
+    .ruler-number {
+        position: absolute;
+        top: -20px;
+        font-size: 12px;
+        right: 2px
+    }
+
+    .ruler-tick {
+        width: 1px;
+        height: 10px;
+        background-color: #333;
+        position: absolute;
+        bottom: 0;
+    }
+
+    .long-tick {
+        height: 15px;
+    }
+
+    .progress-bar-container {
+        position: relative;
+        height: 5px;
+        background-color: #ddd;
+        margin: 10px 0;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background-color: #3498db;
+    }
+
+    .answers-count {
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: bold;
+    }
+
+    .results {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .answers {
+        display: flex;
+        gap: 10px; /* Adjust this gap value to control spacing between true-answers and false-answers */
+    }
+
+    .true-answers, .false-answers {
+        font-size: 16px;
+        font-weight: normal;
+    }
+
+    .result {
+        font-size: 24px;
+        font-weight: bold;
+        color: #3498db;
+    }
+
+    .txt-success {
+        color: #005657;
+    }
+
+    .txt-warning {
+        color: #ce9884;
+    }
+
+    .txt-danger {
+        color: #ae4450;
+    }
+
 </style>
 
 <div class="box courseperson" style="height:100%;display:none;overflow-y:hidden">
@@ -574,8 +704,8 @@
                     </div>
                 </div>
             </div>
-           
 
+           
 
         </div>
         <div class="col-lg-9   padding-0" style="padding:0;margin-top:0px;">
@@ -584,7 +714,85 @@
             </div>
             <div class="tabfolder exam" style="border:1px solid #ccc" ng-style="{ 'height': (windowHeight - 150) + 'px' }">
 
-                 
+                <div class="col-lg-2   padding-0" style="padding:0;margin-top:0px;">
+                    <div class="profile-container">
+
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:5px;margin-bottom:5px;">
+                            <div class="section-title" style="font-size:15px">Scheduled</div>
+
+                            <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                                <div class="personal-input-group">
+                                    <label for="start">Starting at</label>
+                                    <input type="text" id="start" ng-model="formatDateTime(follow_exam.exam_date)" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                                <div class="personal-input-group">
+                                    <label for="end">Finishing at</label>
+                                    <input type="text" id="firstname" ng-model="formatDateTime(follow_exam.date_end_scheduled)" readonly>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block; padding: 5px; margin-bottom: 5px;">
+                            <div class="section-title" style="font-size:15px">Actual</div>
+
+                            <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                                <div class="personal-input-group">
+                                    <label for="start">Started at</label>
+                                    <input type="text" id="start" ng-model="formatDateTime(follow_exam.date_start)" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                                <div class="personal-input-group">
+                                    <label for="end">Finished at</label>
+                                    <input type="text" id="firstname" ng-model="formatDateTime(follow_exam.date_end_actual)" readonly>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                            <div class="section-title" style="text-align:center;margin-bottom:0;padding:10px 5px 10px 5px" ng-class="exam_status_btn_class()" ng-click="exam_status_click()">{{exam_btn_caption}}</div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="col-lg-10   padding-0" style="padding:10px;margin-top:0px;">
+                    <div class="col-lg-3 col-md-3" ng-repeat="data in exam_result" style="padding: 0 5px 0 5px !important">
+                        <div class="tiles">
+                            <div class="header">
+                                <span class="name" style="width:100%;font-size:13px;color:black;text-align:left">{{ data.name }}</span>
+                            </div>
+                            <div class="ruler-bar" style="margin:25px 0 0px 0">
+                                <div class="ruler-unit" ng-repeat="n in [].constructor(46) track by $index">
+                                    <div class="ruler-number" ng-if="$index % 5 === 0">{{ $index }}</div>
+                                    <div class="ruler-tick" ng-class="{'long-tick': $index % 5 === 0}"></div>
+                                </div>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" ng-style="{ 'width': getProgressBarWidth(data.answers_count, data.exam_question_count) + '%' }"></div>
+                            </div>
+                            <div class="results">
+                                <div class="answers" style="font-size:20px;font-weight:normal">
+                                    <span class="true-answers" ng-style="{ 'color': '#005657' }">{{ data.true_answers }}</span>
+                                    <span class="false-answers" ng-style="{ 'color': '#ae4450' }">{{ data.false_answers }}</span>
+                                </div>
+                                <span class="result" style="font-size:16px;font-weight:normal" ng-class="{
+                            'txt-success': data.result === 'PASSED',
+                            'txt-warning': data.result === 'RE-EXAM',
+                            'txt-danger': data.result === 'FAILED'
+                        }">{{ data.result }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="clear:both"></div>
+
 
             </div>
             <div class="tabfolder participants">

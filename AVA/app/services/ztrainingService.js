@@ -1067,6 +1067,21 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.get_exam_person_results = _get_exam_person_results;
+
+
+
+    var _set_exam_status = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/trn/exam/status', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.set_exam_status = _set_exam_status;
 	
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;

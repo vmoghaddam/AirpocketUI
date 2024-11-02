@@ -2192,7 +2192,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
         },
         bindingOptions: {
-            value: '_exam_date',
+            value: 'selected_exam.exam_date',
 
         }
     };
@@ -2207,7 +2207,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
         },
         bindingOptions: {
-            value: '_exam_date',
+            value: 'selected_exam.exam_date',
 
         }
     };
@@ -2220,13 +2220,13 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     $scope.exam_location = {
         hoverStateEnabled: false,
         bindingOptions: {
-            value: 'location_title',
+            value: 'selected_exam.location_title',
         }
     };
     $scope.exam_location_address = {
         hoverStateEnabled: false,
         bindingOptions: {
-            value: 'location_address',
+            value: 'selected_exam.location_address',
         }
     };
     $scope.removeGroup = function () {

@@ -109,6 +109,8 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
 
                 if ($scope.status_id != 0 && (!$scope.questions || $scope.questions.length == 0) && $scope.total_questions > 0)
                     $window.location.reload();
+                if ($scope.status_id == 0)
+                    $scope.questions = [];
 
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
@@ -120,7 +122,7 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
 
             timer = $interval(function () {
                 $scope.refresh_summary();
-            }, 10000); // 10 seconds interval
+            }, 5000); // 10 seconds interval
         };
 
         // Method to stop the timer
