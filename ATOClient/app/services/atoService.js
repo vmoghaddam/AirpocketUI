@@ -107,6 +107,21 @@ app.factory('atoService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
         return deferred.promise;
     };
     serviceFactory.get_person_exam = _get_person_exam;
+    //api/ato/client/exam/summary/
+    var _get_exam_summary = function (exam_id,person_id) {
+
+        var deferred = $q.defer();
+        $http.get(api_ato_client + 'api/ato/client/exam/summary/' + exam_id + '/' + person_id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(/*Exceptions.getMessage(err)*/ JSON.stringify(err));
+        });
+
+        return deferred.promise;
+    };
+
+    serviceFactory.get_exam_summary = _get_exam_summary;
 
 
     return serviceFactory;

@@ -55,7 +55,7 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/profile.html?v=" + '5673'
     });
 
-    $routeProvider.when("/quiz/list", {
+    $routeProvider.when("/exam/:id", {
         controller: "question_list_controller",
         templateUrl: "/app/views/question_list.html?v=" + '5673'
     });
@@ -122,8 +122,13 @@ var zapinet = 'https://ava.apinet.airpocket.app/';
 var zfuel = 'https://ava.apifuel.airpocket.app/';
 var zapitrn = 'https://ava.apitrn.airpocket.app/';
 
-var api_ato_client = 'https://ava.ato.apiclient.airpocket.app/';
-var api_ato = 'https://ava.apitrn.airpocket.app/';
+//var api_ato_client = 'https://ava.ato.apiclient.airpocket.app/';
+//var api_ato = 'https://ava.apitrn.airpocket.app/';
+
+var api_ato_client = 'http://localhost:4006/';
+var api_ato = 'http://localhost:4005/';
+
+
  
 var vira_api = "https://lmmcore.online/";
 app.constant('ngAuthSettings', {
@@ -470,6 +475,14 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
 
 
         $location.path("/profile");
+
+
+    };
+    $rootScope.navigate_exam = function (id) {
+
+
+
+        $location.path("/exam/"+id);
 
 
     };

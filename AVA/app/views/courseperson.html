@@ -166,6 +166,66 @@
     ._session.selected {
         background: #99ff33;
     }
+
+    .personal-input-group {
+        padding: 7px;
+        width: 100%;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+        width: 45%;
+    }
+    .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .section-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+        .input-group.full-width {
+            width: 100%;
+        }
+
+    .profile-container {
+        margin: auto;
+        padding: 7px
+    }
+
+    .profile-card {
+        background-color: white;
+        padding: 20px;
+        border: 1px solid lightgray;
+        margin-bottom: 20px;
+    }
+
+    .profile-container label {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .profile-container input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+        .profile-container input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+    .dx-tab{
+        background:#ccc;
+    }
 </style>
 
 <div class="box courseperson" style="height:100%;display:none;overflow-y:hidden">
@@ -454,8 +514,77 @@
     </div>
 
     <div id="popup_people" dx-popup="popup_people">
-        <div class="   padding-7" style="padding:0;margin-top:3px;">
+        <div class="col-lg-3   padding-0" style="padding:0;margin-top:0px;">
+            <div class="profile-container">
+                <div class="profile-card" style="width: 100%; display: inline-block">
+                    <div class="section-title">Course Information</div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="course_title">Title</label>
+                            <input type="text" id="course_title" ng-model="follow_course.Title" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="start">From</label>
+                            <input type="text" id="start" ng-model="formatDate(follow_course.DateStart)" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="end">To</label>
+                            <input type="text" id="firstname" ng-model="formatDate(follow_course.DateEnd)" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="instructors">Duration</label>
+                            <input type="text" id="firstname" ng-model="follow_course.Duration" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="instructors">Class Id</label>
+                            <input type="text" id="firstname" ng-model="follow_course.No" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="instructors">Organization</label>
+                            <input type="text" id="firstname" ng-model="follow_course.Organization" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="instructors">Location</label>
+                            <input type="text" id="firstname" ng-model="follow_course.Location" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="instructors">Instructor(s)</label>
+                            <input type="text" id="firstname" ng-model="follow_course.Instructor" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="instructors">Training Director</label>
+                            <input type="text" id="firstname" ng-model="follow_course.TrainingDirector" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+
+
+        </div>
+        <div class="col-lg-9   padding-0" style="padding:0;margin-top:0px;">
             <div dx-tabs="tabs_folder_options">
+
+            </div>
+            <div class="tabfolder exam" style="border:1px solid #ccc" ng-style="{ 'height': (windowHeight - 150) + 'px' }">
+
+                 
 
             </div>
             <div class="tabfolder participants">
@@ -482,6 +611,7 @@
 
 
         </div>
+        <div style="clear:both"></div>
     </div>
 
 

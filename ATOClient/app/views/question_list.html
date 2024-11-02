@@ -1,18 +1,14 @@
 ﻿<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f7f6;
-        padding: 20px;
-    }
 
-    .container {
-        max-width: 800px;
-        margin: auto;
+
+    .qustions-container {
+        /*max-width: 800px;*/
+        /*margin: auto;*/
         background: #fff;
         padding: 7px;
         border-radius: 8px;
-        margin-top: 10px;
-        overflow-y: auto;
+        margin-top: 0px;
+        overflow-y: hidden;
     }
 
     h5 {
@@ -28,11 +24,13 @@
         background-color: #f9f9f9;
     }
 
-    label {
+    .qlabel {
         display: flex;
         align-items: center;
         margin: 5px 0;
         cursor: pointer;
+        font-size: 14px;
+        margin-bottom: 8px;
     }
 
     .navigation {
@@ -79,7 +77,7 @@
     }
 
     input[type="radio"] {
-        position: absolute;
+        /*position: absolute;*/
         opacity: 0;
         cursor: pointer;
     }
@@ -93,7 +91,7 @@
         position: relative;
     }
 
-    label:hover input ~ .checkmark {
+    .qlabel:hover input ~ .checkmark {
         background-color: #ccc;
     }
 
@@ -123,6 +121,7 @@
     .right_class {
         margin-bottom: 20px;
         padding: 10px;
+        padding-top: 5px;
         border: 1px solid #e0e0e0;
         border-radius: 5px;
         background-color: #f9f9f9;
@@ -132,6 +131,7 @@
     .left_class {
         margin-bottom: 20px;
         padding: 10px;
+        padding-top: 2px;
         border: 1px solid #e0e0e0;
         border-radius: 5px;
         background-color: #f9f9f9;
@@ -144,30 +144,309 @@
         width: 100%;
         z-index: 2;
     }
+
+
+
+
+
+
+    .profile-container {
+        margin: auto;
+        padding: 7px
+    }
+
+    .profile-card {
+        background-color: white;
+        padding: 20px;
+        border: 1px solid lightgray;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .section-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .personal-input-group {
+        padding: 7px;
+        width: 100%;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+        width: 45%;
+    }
+
+        .input-group.full-width {
+            width: 100%;
+        }
+
+
+
+    .upload-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .upload-box {
+        border: 2px dashed #ccc;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        width: 100%;
+        position: relative;
+        cursor: pointer;
+    }
+
+        .upload-box input[type="file"] {
+            display: none;
+        }
+
+        .upload-box img {
+            max-width: 100%;
+            height: auto;
+            display: none;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+    .file-name {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #666;
+    }
+
+
+
+    .profile-container label {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .profile-container input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+        .profile-container input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+    .profile-container button[type="submit"] {
+        width: 100%;
+        padding: 15px;
+        background-color: #009688;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
 </style>
 
-<div class="box profile" style="height:100%;overflow-y:hidden">
+<div class="box exam" style="height:100%;overflow-y:hidden;display:initial">
     <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6" style="text-align: left; padding: 7px">
+        <div class="profile-container">
 
-    <div class="container thin-scroll" style="clear:both" ng-style="{ 'height': (windowHeight - 110) + 'px' }">
-        <div class="qheader">{{exam.course_title}}</div>
-        <form id="examForm" ng-submit="submitExam()">
-            <div ng-repeat="(questionIndex, question) in questions" ng-class="get_answer_class(question.dir)">
-                <p>{{questionIndex + 1}}. {{ question.english_title }}</p>
-                <label ng-repeat="(optionIndex, option) in question.answers">
-                    <input type="radio" ng-model="option.id" ng-change="save_answer(option.quesion_id,option.id)" value="{{option.id}}"
-                           name="question_{{questionIndex}}">
-                    <span class="checkmark"></span>
-                    {{option.english_title}}
-                </label>
+            <!-- Personal Information Section -->
+            <div class="profile-card" style="width: 100%; display: inline-block">
+                <div class="section-title">Personal Information</div>
+
+                <div class="col-lg-5 col-md-3">
+                    <div for="profile-image-upload" class="upload-box" style="height: 200px;margin-top:32px">
+                        <p>Profile Image</p>
+                        <input type="file" id="profile-image-upload" name="profile-image" accept="image/*" ng-model="profile.ImageUrl">
+                        <img id="profile-preview" ng-src="{{profile.ImageUrl}}" alt="Profile Image" class="img-fluid" style="max-width: 100%; border-radius: 5px;">
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-9" style="padding:0">
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="firstname">First Name</label>
+                            <input type="text" id="firstname" ng-model="profile.FirstName" readonly>
+                        </div>
+                        <div class="personal-input-group">
+                            <label for="lastname">Last Name</label>
+                            <input type="text" id="lastname" ng-model="profile.LastName" readonly>
+                        </div>
+                        <div class="personal-input-group">
+                            <label for="nid">National Code</label>
+                            <input type="text" id="nid" ng-model="profile.NID" readonly>
+                        </div>
+                        <!--<div class="personal-input-group">
+                            <label for="mobile">Mobile Number</label>
+                            <input type="text" id="mobile" ng-model="profile.Mobile">
+                        </div>-->
+                    </div>
+
+                </div>
+
             </div>
 
-            <button class="btn_submit" type="submit">Submit Exam</button>
-        </form>
+            <div class="profile-card" style="width: 100%; display: inline-block">
+                <div class="section-title">Course Information</div>
+                <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                    <div class="personal-input-group">
+                        <label for="course_title">Title</label>
+                        <input type="text" id="course_title" ng-model="exam.course_title" readonly>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                    <div class="personal-input-group">
+                        <label for="start">From</label>
+                        <input type="text" id="start" ng-model="formatDate(exam.course_start)" readonly>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                    <div class="personal-input-group">
+                        <label for="end">To</label>
+                        <input type="text" id="firstname" ng-model="formatDate(exam.course_end)" readonly>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                    <div class="personal-input-group">
+                        <label for="instructors">Instructor(s)</label>
+                        <input type="text" id="firstname" ng-model="exam.instructor" readonly>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <!--<div style="border:1px solid #ccc">
+            <div style="background: #564147;color:white; padding: 7px; text-align: center">
+                <table style="width:100%">
+                    <tr>
+                        <td style="text-align:left;padding:0 0 0 10px;font-size:18px;">
+                            Course
+                        </td>
+                        <td style="text-align:right;padding:0 10px 0 0">
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
+
+
+
+
+
+
+
+        </div>-->
     </div>
+    <div class="col-lg-8 col-md-6 col-sm-6 col-xs-6" style="text-align: left; padding: 7px">
+        <div style="border:1px solid #ccc">
+            <div style="background: #564147;color:white; padding: 7px; text-align: center">
+                <table style="width:100%">
+                    <tr>
+                        <td style="text-align:left;padding:0 0 0 10px;font-size:18px;">
+                            Questions
+                        </td>
+                        <td style="text-align:right;padding:0 10px 0 0">
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div ng-style="{ 'height': (windowHeight - height_dy) + 'px' }">
+                <div class="qustions-container   thin-scroll" ng-style="{ 'height': (windowHeight - height_dy-5) + 'px' }" style="overflow-y:auto">
+
+                    <div ng-repeat="(questionIndex, question) in questions" ng-class="get_answer_class(question.dir)">
+                        <div style="font-size:14px;color:gray;border-bottom:1px solid #ccc;padding:5px;">{{question.category}}</div>
+                        <p>
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="text-align:left">{{questionIndex + 1}}. {{ question.english_title }}</td>
+                                    <td style="text-align:right;padding-right:5px;color:gray;font-size:13px;">({{question.id}})</td>
+                                </tr>
+                            </table>
+                        </p>
+                        <label class="qlabel" ng-repeat="(optionIndex, option) in question.answers">
+                            <input type="radio" ng-model="option.id" ng-change="save_answer(option.quesion_id,option.answer_id )"
+                                   ng-checked="option.is_selected"
+                                   name="question_{{questionIndex}}" ng-disabled="status_id!=1" />
+
+                            <span class="checkmark"></span>
+                            {{option.english_title}}
+
+                        </label>
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <div style="clear:both"></div>
     <div class="rowx footer">
-        footer
+        <div style="direction:ltr;text-align:left;padding:0">
+            <table style="width:100%">
+                <tr>
+                    <td style="font-size: 14px; text-align: right; padding-right: 5px; border-left: 0px solid #ccc; padding-left: 5px; width: 80px">
+                        Result:
+                    </td>
+                    <td style="text-align: center; padding: 0 10px 0 10px; width: 80px">{{result}}</td>
+                    <td style="font-size: 14px; text-align: right; padding-right: 5px; border-left: 1px solid #ccc; padding-left: 5px; width: 80px">
+                        Score:
+                    </td>
+                    <td style="text-align: center; padding: 0 5px 0 5px; width: 50px">{{score}}</td>
+
+                    <td style="font-size: 14px; text-align: right; padding-right: 5px; border-left: 0px solid #ccc; padding-left: 5px;   ">
+                        
+                        <span ng-show="status_id==0">Starting at:</span>
+                        <span ng-show="status_id!=0">Started at:</span>
+                    </td>
+                    <td style="text-align: center; padding: 0 5px 0 5px; width: 60px">{{formatTime(date_start)}}</td>
+                    
+                    <td ng-show="status_id==1" style="font-size: 14px; text-align: right; padding-right: 5px; border-left: 0px solid #ccc; padding-left: 5px; width: 80px">
+                        Remained:
+                    </td>
+                    <td ng-show="status_id==1" style="text-align: center; padding: 0 10px 0 10px; width: 110px"><span style="font-size:20px;">{{remained_minutes}}</span><span style="display:inline-block;margin-left:5px;font-style:italic;font-size:12px">minutes</span></td>
+
+                    <td style="font-size: 14px; text-align: right; padding-right: 5px; border-left: 1px solid #ccc; padding-left: 5px; width: 100px ">
+                        <span ng-show="status_id!=2">Finishing at:</span>
+                        <span ng-show="status_id==2">Finishied at:</span>
+                    </td>
+                    <td style="text-align: center; padding: 0 5px 0 5px; width: 60px">{{formatTime(date_end)}}</td>
+
+
+
+
+                    <td style="font-size: 13px; text-align: right; padding-right: 5px; border-left: 1px solid #ccc; padding-left: 5px;  ">
+                        Qustions:
+                    </td>
+                    <td style="text-align: center; padding: 0 5px 0 5px; width: 50px">{{total_questions}}</td>
+                    <td style="font-size: 13px; text-align: right; padding-right: 5px; border-left: 1px solid #ccc; padding-left: 5px; width: 80px ">Answered:</td>
+                    <td style="text-align: center; padding: 0 5px 0 5px; width: 50px">{{total_answered}}</td>
+                    <td style="font-size: 13px; text-align: right; padding-right: 5px; border-left: 1px solid #ccc; padding-left: 5px; width: 80px ">Remains:</td>
+                    <td style="text-align: center; padding: 0 5px 0 5px; width: 50px">{{total_remained}}</td>
+
+
+                </tr>
+
+            </table>
+        </div>
+
         <div style="clear:both"></div>
     </div>
 </div>

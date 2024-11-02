@@ -10,7 +10,7 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
         userName: "",
         password: "",
         useRefreshTokens: false,
-        scope: [Config.CustomerId + '*ap'],
+        scope: [Config.CustomerId ],
     };
 
     var ceo = authService.getCEO();

@@ -2,6 +2,7 @@
 app.controller('coursepersonController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService','ztrnService', '$window', '$compile', function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService,ztrnService, $window, $compile) {
     $scope.prms = $routeParams.prms;
     $scope.IsEditable = $rootScope.HasTrainingAdmin();
+    $scope.windowHeight = $(window).height();
     //////////////////////////////////
     $scope.active_header = '_schedule_header';
     $scope._header_click = function (h, tab) {
@@ -1483,7 +1484,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         paging: { pageSize: 100 },
         showBorders: true,
 
-        height: 640,
+        height: ($scope.windowHeight - 150),
         columnAutoWidth: false,
 
         columns: $scope.dg_people_columns,
@@ -1735,7 +1736,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         paging: { pageSize: 100 },
         showBorders: true,
 
-        height: 640,
+        height: ($scope.windowHeight - 150),
         columnAutoWidth: false,
 
         columns: $scope.dg_syllabi_columns,
@@ -1825,6 +1826,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
     //////////////////////////////
 
     var tabs_folder = [
+        { text: "EXAM", id: 'exam', visible_btn: false },
         { text: "PARTICIPANTS", id: 'participants', visible_btn: false },
         { text: "SYLLABI", id: 'syllabi', visible_btn: false },
 
@@ -1873,7 +1875,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
     $scope.popup_people = {
         height: 800,
         width: $(window).width() - 200,
-        fullScreen: false,
+        fullScreen: true,
         showTitle: true,
         title: 'Follow Up',
         toolbarItems: [
@@ -2111,13 +2113,26 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         }
     };
     $scope.ddd = 'dool';
+    $scope.formatDate = function (dt) {
+        if (!dt)
+            return "unknown";
+        return moment(new Date(dt)).format('YYYY-MMM-DD').toUpperCase();
+    };
+    $scope.formatTime = function (dt) {
+        if (!dt)
+            return "unknown";
+        return moment(new Date(dt)).format('HH:mm').toUpperCase();
+    };
     $scope.preparePeopleGrid = function () {
         $scope.loadingVisible = true;
 
         trnService.getCoursePeopleSessions($scope.selectedCourse.Id).then(function (response) {
             $scope.loadingVisible = false;
 
+            $scope.follow_course = response.Data.course;
+            $scope.follow_exams = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : null;
             $scope.dg_syllabi_ds = response.Data.syllabi;
+
 
 
             $scope.dg_people_instance.addColumn({

@@ -93,7 +93,9 @@ app.controller('profileController', ['$scope', '$location', '$routeParams', '$ro
             return moment(new Date(dt)).format('MMM-DD-YYYY').toUpperCase();
         };
 
-
+        $scope.go_exam = function (id) {
+            $rootScope.navigate_exam(id);
+        };
         ///////////////////////
         if (!authService.isAuthorized()) {
 

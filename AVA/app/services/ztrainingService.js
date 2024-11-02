@@ -1021,6 +1021,52 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.generateQuestions = _generateQuestions;
+
+
+
+    var _get_exam_summary = function (exam_id) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/exam/summary/' + exam_id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_exam_summary = _get_exam_summary;
+
+
+    var _get_exam_results = function (exam_id) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/exam/results/' + exam_id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_exam_results = _get_exam_results;
+
+
+    var _get_exam_person_results = function (exam_id,person_id) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/exam/person/results/' + exam_id + '/' + person_id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_exam_person_results = _get_exam_person_results;
 	
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
