@@ -1,0 +1,151 @@
+﻿<style>
+    .dx-treelist .dx-row > td {
+        padding: 12px 3px 12px 3px !important
+    }
+
+    .lib-folder {
+        border: 1px solid #ccc;
+        margin: 4px 6px 0 6px;
+        /*padding:20px !important;*/
+        display: block;
+        background-color: cornsilk;
+    }
+    .folder-notvisited{
+        font-weight:bold;
+        
+        font-size:14px !important;
+    }
+    .folder-notvisited-hint {
+        color:red;
+    }
+    .file-visited {
+        color: #00ff99 !important;
+    }
+    .file-visited-title {
+       font-weight:bold;
+    }
+
+    .lib-book {
+        border: 1px solid #ccc;
+        margin: 4px 6px 0 6px;
+        /*padding:20px !important;*/
+        display: block;
+        background-color: white;
+    }
+</style>
+<div style="height:100%;">
+    <div class="box library maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+
+            <!--<div class="icon-bar-freewidth" style=" background-color: whitesmoke;border:1px solid #e0e0e0;overflow:hidden;flex:0 0 45px ">
+                <a href="" class="book col-lg-4 col-md-4 col-sm-4 col-xs-4" data-ng-click="navigate('/applibrary/books','applibrary-book')"><i class="icon ion-md-bookmarks"></i><span class="hidden-xs">Books</span></a>
+                <a href="" class="video col-lg-4  col-md-4 col-sm-4 col-xs-4" data-ng-click="navigate('/applibrary/videos','applibrary-video')"><i class="fab fa-youtube"></i><span class="hidden-xs">Videos</span></a>
+                <a href="" class="paper col-lg-4 col-md-4 col-sm-4 col-xs-4" data-ng-click="navigate('/applibrary/papers','applibrary-paper')"><i class="icon ion-md-journal"></i><span class="hidden-xs">Papers</span></a>
+
+            </div>
+            <div style="clear:both"></div>-->
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                <div id="lib_folders">
+                    <div style="padding-top:2px;padding-right:2px;padding-left:2px" class="lib-folder" ng-repeat="x in folders" ng-click="goFolder(x.Id,x.ParentId,x.FullCode)">
+
+                        <div style="float:left;width:80%;padding:10px 10px 10px 20px;height:60px;position:relative;">
+                            <div ng-class="x.NotVisitedClass" style="position:relative;top: 50%;transform: translateY(-50%);font-size:15px;">{{x.Title}}</div>
+
+                        </div>
+                        <div style="float:right;text-align:center;padding:10px;width:20%;">
+                            <div style="font-size:12px;">Files</div>
+                            <div ng-class="x.NotVisitedHintClass" style="font-size:16px;font-weight:bold">{{x.Files}}</div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+                <div id="lib_books">
+                    <div style="padding-top:2px;padding-right:2px;padding-left:2px;padding-bottom:5px" class="lib-book" ng-repeat="x in books" ng-click="goBook()">
+
+                        <div style="float:left;width:80%;padding:10px 10px 10px 20px;height:60px;position:relative;">
+                            <!--<div style="position:relative;top: 50%;transform: translateY(-50%);font-size:15px;">{{x.Title}}</div>-->
+                            <div style="font-size:12px;color:lightslategrey">{{x.Category}}</div>
+                            <div style="font-size:15px;" ng-class="x.VisitedClassTitle">{{x.Title}} </div>
+                        </div>
+                        <div style="float:right;text-align:center;padding:10px;width:20%;">
+                            <div style="font-size:12px;">Files</div>
+                            <div style="font-size:16px;font-weight:bold">{{x.FileCount}}</div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div ng-repeat="f in x.files" style="margin:0 20px;border-top:1px solid #ccc" ng-click="goFile(f.FileUrl,f.SysUrl,f.Id)">
+                            <div style="float:left;width:80%;padding:10px 10px 10px 10px; position:relative; font-size:13px;" ng-class="f.VisitedClassTitle">
+                                {{removeExt(f.SysUrl)}}
+                            </div>
+                            <div style="float:right;text-align:center;padding:10px;width:20%;">
+                                <i style="font-size:19px;margin-top:0px;display:block;color:#ccc" ng-class="f.VisitedClass"></i>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                        <div ng-repeat="f in x.chapters" style="margin:0 20px;border-top:1px solid #ccc">
+                            <div style=" padding:10px 10px 10px 10px; position:relative; font-size:13px;font-weight:bold;background:#eee" ng-bind-html="f.TitleFormated">
+
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                            <div ng-repeat="b in f.files" style="margin:0 0px;border-top:1px solid #ccc" ng-click="goFile(b.FileUrl,b.SysUrl,b.Id)">
+                                <div style="float:left;width:80%;padding:10px 10px 10px 20px; position:relative; font-size:13px;" ng-class="b.VisitedClassTitle" ng-bind-html="b._title">
+                                    
+                                </div>
+                                <div style="float:right;text-align:center;padding:10px;width:20%;">
+                                    <i style="font-size:19px;margin-top:0px;display:block;color:#ccc" ng-class="b.VisitedClass"></i>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                        </div>
+
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+                <!-- <div dx-tree-list="tree" id="tree"></div>-->
+                <!--<div style="padding-top:2px;padding-right:2px;padding-left:2px" ng-repeat="x in ds">
+                    <div class="col-lg-12 col-md-12 col-sm-12  applibraryitem" style="padding:1px 2px 5px 2px;display:block" ng-click="itemClick(x.BookId,x.EmployeeId)">
+                        <div ng-class="x.class" style="margin:0; padding:5px 5px 5px 10px;display:block">
+                            <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs" style="width:70px;padding:0">
+                                <img src="{{x.ImageUrl}}" style="width:98%; " />
+                            </div>
+                            <div class="col-lg-10 col-md-9 col-sm-9 col-xs-9">
+                                <p style="padding:0;margin:0;font-weight:bold" ng-class="x.titleClass">{{x.Title}}</p>
+                                <p style="padding:0;margin:5px 0 0 0;font-style:italic"> {{x.Authors}}</p>
+                                <p style="padding:0;margin:5px 0 0 0;font-style:italic"> {{x.Publisher}}</p>
+                                <p style="padding:0;margin:5px 0 0 0;font-style:italic;font-size:13px"> {{x.DateExposure}}</p>
+                            </div>
+                            <div class="col-lg-1  col-md-1 col-sm-1" style="text-align:right">
+                                <i ng-class="x.VisitedClass" style="font-size:25px;margin-top:10px;display:block"></i>
+                                <i ng-class="x.DownloadedClass" style="font-size:25px;margin-top:10px;display:block"></i>
+                            </div>
+                            <div style="clear:both"></div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>-->
+
+            </div>
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'applibrary';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

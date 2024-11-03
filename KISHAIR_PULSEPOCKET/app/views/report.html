@@ -1,0 +1,385 @@
+<style>
+
+
+
+
+    /*.ripple {
+        background-position: center;
+        transition: background 0.5s;
+    }
+
+        .ripple:hover {
+            background: #eee radial-gradient(circle, transparent 1%, #eee 1%) center/15000%;
+        }
+
+        .ripple:active {
+            background-color: #fff;
+            background-size: 100%;
+            transition: background 0s;
+        }
+    .ripple.tile-selected {
+        background-position: center;
+        transition: background 0.5s;
+        border:3px solid black !important;
+    }
+        .ripple.tile-selected:hover {
+            background: #fff radial-gradient(circle, transparent 1%, #eee 1%) center/15000%;
+        }
+
+        .ripple.tile-selected:active {
+            background-color: #eee;
+            background-size: 100%;
+            transition: background 0s;
+        }*/
+    .lib-cer {
+        /*background-position: center;
+        transition: background 0.4s;
+        background: #fff radial-gradient(circle, transparent 1%, #eee 1%) center/15000%  ;*/
+        background: transparent;
+        transition: background 0.4s;
+    }
+
+    .cer-expiring {
+        background: #e69900;
+    }
+
+    .cer-expired {
+        background: #cc2900;
+        color: white;
+    }
+
+    .cer-unknown {
+        background: #8c8c8c;
+        color: white;
+    }
+
+    .cer-valid {
+        background: #00e6ac;
+        color: black;
+    }
+	.rpt-box{}
+	.rpt-box .caption {background:#ff80aa ;padding:7px 8px 7px 8px}
+	.rpt-box .caption.c2 {background:#66ffcc}
+	 .rpt-box .caption.c3 {background:#99ddff}
+	.rpt-box .content {background:#fff !important;padding:10px;font-weight:bold;}
+	.rpt-tbl{}
+	.rpt-tbl td {border-right:1px solid #ccc;border-left:1px solid #ccc;padding:7px;text-align:center}
+	.rpt-tbl tr {border-top:1px solid #ccc}
+</style>
+<div style="height:100%;">
+    <div class="box report maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:#f0f3f5; ">
+          
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                
+				<div style='padding:0 5px 0 5px'>
+				        <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption c2'>FIX</div>
+							<div class='content'>{{formatTime(obj.FixTimeTotal)}}</div>
+						  </div>
+						
+                               
+                        </div>
+						
+						 <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption c2'>BLOCK</div>
+							<div class='content'>{{formatTime(obj.BlockTime)}}</div>
+						  </div>
+						
+                               
+                        </div>
+						
+						 <div  class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption c2'>FLIGHT</div>
+							<div class='content'>{{formatTime(obj.FlightTime)}}</div>
+						  </div>
+						
+                               
+                        </div>
+						<div style='clear:both'></div>
+						
+						<div  class="col-lg-3 col-md-3 col-sm-3 col-xs-4" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption'>Standby</div>
+							<div class='content'>{{obj.Standby}}</div>
+						  </div>
+						
+                               
+                        </div>
+						<div  class="col-lg-3 col-md-3 col-sm-3 col-xs-4" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption'>Positioning</div>
+							<div class='content'>{{obj.Positioning}}</div>
+						  </div>
+						
+                               
+                        </div>
+						<div  class="col-lg-3 col-md-3 col-sm-3 col-xs-4" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption'>Canceled</div>
+							<div class='content'>{{obj.Canceled}}</div>
+						  </div>
+						
+                               
+                        </div>
+						<div  class="col-lg-3 col-md-3 col-sm-3 col-xs-4" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption'>Early Dep.</div>
+							<div class='content'>{{obj.EarlyDeparture}}</div>
+						  </div>
+						
+                               
+                        </div>
+						
+						<div  class="col-lg-3 col-md-3 col-sm-3 col-xs-4" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption'>Late Arr.</div>
+							<div class='content'>{{obj.LateArrival}}</div>
+						  </div>
+						
+                               
+                        </div>
+						
+						<div  class="col-lg-3 col-md-3 col-sm-3 col-xs-4" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption'>Holiday</div>
+							<div class='content'>{{obj.HolidayDeparture}}</div>
+						  </div>
+						
+                               
+                        </div>
+						
+						
+						<div style='clear:both'></div>
+						 <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption c3' style='text-align:left !important'>Legs</div>
+							<div class='content' style='padding:0'>
+							   <table style='width:100%' class='rpt-tbl'>
+							     <tr>
+								    <td style='font-weight:normal'>1 Leg</td>
+									<td style='font-weight:normal'>2 Leg</td>
+									<td style='font-weight:normal'>3 Leg</td>
+									<td style='font-weight:normal'>4 Leg</td>
+									<td style='font-weight:normal'>5 Leg</td>
+									<td style='font-weight:normal'>6 Leg</td>
+									<td style='font-weight:normal;background:#ffd9b3;font-weight:bold'>Total</td>
+								 </tr>
+								 <tr>
+								    <td>{{obj.Leg1}}</td>
+									 <td>{{obj.Leg2}}</td>
+									  <td>{{obj.Leg3}}</td>
+									   <td>{{obj.Leg4}}</td>
+									    <td>{{obj.Leg5}}</td>
+										 <td>{{obj.Leg6}}</td>
+										  <td style='background:#ffd9b3'>{{obj.Legs}}</td>
+								 </tr>
+							   </table>
+							</div>
+						  </div>
+						
+                               
+                        </div>
+						
+						<div style='clear:both'></div>
+						 <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption' style='text-align:left !important;background:#ff9933 !important'>FDPs</div>
+							<div class='content' style='padding:0'>
+							  
+							  
+							   
+								  <div id="scrollviewfdps" dx-scroll-view="scroll_fdps"> 
+								   <div class='hidden-lg hidden-sm hidden-md' style='padding:0 5px 0 5px'>
+								       <div ng-repeat="x in obj.FDPs" style='border:1px solid #ccc;margin-top: 5px;'>
+									       <div   style="float:left;width:15%;padding:3px 0 3px 0;">
+                                               <div style="text-align:center;font-size:14px;margin-top:10px">{{getCDay(x.STDDay)}}</div>
+                                               <div style="text-align:center;font-size:12px;">{{getCMonth(x.STDDay)}}</div>
+
+                                           </div>
+                                           <div style="float:left;width:85%; padding-top:1px;border-left:1px solid #ccc">
+										      <table style='width:100%;text-align:left'>
+											     <tr style='border-bottom:1px solid #ddd'>
+												    <td style='font-size:12px;font-weight:bold;text-align:center;padding:3px 0 3px 0' colspan=3>{{x.Route}} 
+													  <span style='display:inline-block;margin-left:3px;font-size:12px'>({{formatTime2(x.STDLocal)}}-{{formatTime2(x.STALocal)}})</span>
+													</td>
+													 
+												 </tr>
+												 <tr style='border-bottom:1px solid #ddd'>
+												   <td style='font-size:12px;text-align:center;border-right:1px solid #ddd;padding:2px 0 2px 0'>
+												     Flight
+												   </td>
+												    <td style='font-size:12px;text-align:center;border-right:1px solid #ddd'>
+												     Block
+												   </td>
+												    <td style='font-size:12px;text-align:center'>
+												     Fix
+												   </td>
+												 </tr>
+												  <tr>
+												   <td style='font-size:12px;text-align:center;border-right:1px solid #ddd;padding:2px 0 2px 0'>
+												     {{formatTime(x.FlightTime)}}
+												   </td>
+												    <td style='font-size:12px;text-align:center;border-right:1px solid #ddd'>
+												     {{formatTime(x.BlockTime)}}
+												   </td>
+												    <td style='font-size:12px;text-align:center'>
+												     {{formatTime(x.FixedFlightTime)}}
+												   </td>
+												 </tr>
+											  </table>
+                                           </div>
+										   
+										   <div style='clear:both'></div>
+									        
+                                       </div>									   
+							       </div>
+								   
+								   <table style='width:100%' class='rpt-tbl hidden-xs'  >
+								    <tr>
+								    <td style='font-size:12px;font-weight:bold;background:#eee'>Date</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Route</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Flights</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Legs</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Start</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>End</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Flight Time</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Block Time</td>
+									<td style='font-size:12px;font-weight:bold;background:#ffd9b3;font-weight:bold'>Fix Time</td>
+								 </tr>
+								    <tr ng-repeat="x in obj.FDPs">
+								       <td style='font-size:12px; '>{{formatDate(x.STDDay)}}</td>
+									   <td style='font-size:12px'>{{x.Route}}</td>
+									  <td style='font-size:12px'>{{x.Flights}}</td>
+									   <td style='font-size:12px'>{{x.Legs}}</td>
+									    <td style='font-size:12px'>{{formatTime2(x.STDLocal)}}</td>
+										 <td style='font-size:12px'>{{formatTime2(x.STALocal)}}</td>
+									    <td style='font-size:12px'>{{formatTime(x.FlightTime)}}</td>
+										 <td style='font-size:12px'>{{formatTime(x.BlockTime)}}</td>
+										  <td style='background:#ffd9b3;font-size:12px'>{{formatTime(x.FixedFlightTime)}}</td>
+								    </tr>
+							       </table>
+								  </div> 
+								 
+							   
+							  
+							</div>
+						  </div>
+						
+                               
+                        </div>
+						
+						
+						<div style='clear:both'></div>
+						 <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption' style='text-align:left !important;background:#ff9933 !important'>Duties</div>
+							<div class='content' style='padding:0'>
+							  <div >
+							   
+								 <!--<div id="scrollviewfdps" dx-scroll-view="scroll_stby">-->
+								   <table style='width:100%' class='rpt-tbl'>
+								    <tr>
+								    <td style='font-size:12px;font-weight:bold;background:#eee'>Date</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Type</td>
+									 
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Start</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>End</td>
+									 
+								 </tr>
+								    <tr ng-repeat="x in stby">
+								       <td style='font-size:12px; '>{{formatDate(x.Date)}}</td>
+									   <td style='font-size:12px'>{{x.DutyTypeTitle}}</td>
+									  
+									   
+									    <td style='font-size:12px'>{{formatTime2(x.DateStart)}}</td>
+										 <td style='font-size:12px'>{{formatTime2(x.DateEnd)}}</td>
+									    
+								    </tr>
+							       </table>
+								 <!--</div>-->
+								 
+							  </div>
+							  
+							</div>
+						  </div>
+						
+                               
+                        </div>
+						
+						
+						<div style='clear:both'></div>
+						 <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style='padding:5px'>
+						  <div style='text-align:center;border:1px solid #ccc' class='rpt-box'>
+						    <div class='caption' style='text-align:left !important;background:#ff9933 !important'>Positioning</div>
+							<div class='content' style='padding:0'>
+							  <div >
+							   
+								 <!--<div id="scrollviewfdps" dx-scroll-view="scroll_stby">-->
+								   <table style='width:100%' class='rpt-tbl'>
+								    <tr>
+								    <td style='font-size:12px;font-weight:bold;background:#eee'>Date</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Flight</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>Route</td>
+									 
+									<td style='font-size:12px;font-weight:bold;background:#eee'>OffBlock</td>
+									<td style='font-size:12px;font-weight:bold;background:#eee'>OnBlock</td>
+									 
+								 </tr>
+								    <tr ng-repeat="x in dh">
+								       <td style='font-size:12px; '>{{formatDate(x.STDDayLocal)}}</td>
+									   <td style='font-size:12px'>{{x.FlightNumber}}</td>
+									    <td style='font-size:12px'>{{x.FromAirportIATA}}-{{x.ToAirportIATA}}</td>
+									  
+									   
+									    <td style='font-size:12px'>{{formatTime2(x.ChocksOut)}}</td>
+										 <td style='font-size:12px'>{{formatTime2(x.ChocksIn)}}</td>
+									    
+								    </tr>
+							       </table>
+								 <!--</div>-->
+								 
+							  </div>
+							  
+							</div>
+						  </div>
+						
+                               
+                        </div>
+						
+						
+						<div style='clear:both'></div>
+				</div>
+
+ 
+
+            </div>
+			 <div style='border-top:1px solid #ccc;padding-bottom:5px;padding-top:5px;background:#fff'>
+                    <table style='width:100%;padding:5px 0 5px 0;' class='dx-border'>
+                        <tr>
+						
+                            <td style='padding:0 5px 0 15px'> </td>
+                            <td style="width:130px;padding:0 7px 0 0px"> <div dx-date-box="date_from" class="center"></div></td>
+							  
+                            <td style="width:130px;padding:0 7px 0 0px"> <div dx-date-box="date_to" class="center"></div></td>
+                             <td style='padding:0 5px 0 15px'> </td>
+
+
+
+                        </tr>
+                    </table>
+			</div>
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'appcertificate';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyPersia", "FlyPersia\FlyP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyPersia_PulsePocket", "FlyPersia_PulsePocket\FlyPersia_PulsePocket.csproj", "{F9CD13FD-169B-4753-B054-583082AD5569}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KISHAIR_PULSEPOCKET", "KISHAIR_PULSEPOCKET\KISHAIR_PULSEPOCKET.csproj", "{ED7CF01F-5EFD-47A3-AA86-AE1F6BB0CCE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KISHAIR", "KISHAIR\KISHAIR.csproj", "{62CF000C-7F93-4829-A80D-CD3E3C454ED0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +97,14 @@ Global
 		{F9CD13FD-169B-4753-B054-583082AD5569}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9CD13FD-169B-4753-B054-583082AD5569}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9CD13FD-169B-4753-B054-583082AD5569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED7CF01F-5EFD-47A3-AA86-AE1F6BB0CCE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED7CF01F-5EFD-47A3-AA86-AE1F6BB0CCE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED7CF01F-5EFD-47A3-AA86-AE1F6BB0CCE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED7CF01F-5EFD-47A3-AA86-AE1F6BB0CCE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62CF000C-7F93-4829-A80D-CD3E3C454ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62CF000C-7F93-4829-A80D-CD3E3C454ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62CF000C-7F93-4829-A80D-CD3E3C454ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62CF000C-7F93-4829-A80D-CD3E3C454ED0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

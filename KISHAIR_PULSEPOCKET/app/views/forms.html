@@ -1,0 +1,109 @@
+﻿<style>
+    .file-visited2 {
+        color: #66ffcc !important;
+    }
+    .form-selected {
+        background: #ccf5ff !important;
+    }
+    .st-accepted {
+        background: #00e6ac !important;
+    }
+    .st-rejected {
+        background: #ffbb33 !important;
+    }
+    .dx-item.dx-toolbar-item.dx-toolbar-label {
+        max-width: 200px !important
+    }
+</style>
+<div style="height:100%;">
+    <div class="box document maincontainer" style="height:100%;overflow-y:hidden;max-width:1024px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;  ">
+
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                <div style="padding:10px;margin:5px 5px 0 5px; border:1px solid #ccc" ng-class="getFormClass(x)" ng-repeat="x in ds" ng-click="FormClick(x)">
+                    <div style="font-weight:bold;font-size:16px;border-bottom:1px solid gray;padding:10px;background-color:#ccc" ng-class="getStatusClass(x)">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:left;width:50%">
+                                    Request
+                                    <span style="display:inline-block;margin-left:5px">(<span style="display:inline-block;margin:0 3px 0 3px">{{x.ReasonStr}}</span>)</span>
+                                </td>
+                                
+                                <td style="padding-right:0;width:50%;text-align:right;font-size:13px">
+                                    {{x.Status}}
+                                    <span style="display:inline-block;margin-left:5px;margin-right:20px;font-size:13px;">{{formatDate(x.DateStatus)}}</span>
+                                </td>
+                            </tr>
+                        </table>
+                       
+                       
+                    </div>
+
+                    <div style=" font-size:16px;padding: 5px 10px 0 10px;font-weight:bold;margin-top:10px">
+                        From
+
+                        <span style="display:inline-block;margin-left:5px;margin-right:20px;font-size:16px;">{{formatDate(x.DateFrom)}}</span>
+                        To
+                        <span style="display:inline-block;margin-left:5px;font-size:16px"> {{formatDate(x.DateTo)}}</span>
+                    </div>
+                    <!--   <div style="font-weight:bold;font-size:15px;padding:5px 10px 0 10px;border-bottom:0px solid #ccc">{{formatDate(x.DateFrom)}}</div>-->
+                    
+                    <div style=" font-size:16px;padding: 5px 10px 0 10px;font-weight:bold">
+                        Remark
+
+                    </div>
+                    <p ng-bind-html="x.Remark" style="padding:10px;border-bottom:1px solid gray">
+
+                    </p>
+                     
+                    
+                    <div style=" font-size:16px;padding: 5px 10px 0 10px;font-weight:bold">
+                        Operation Remark
+
+                    </div>
+                    <p style="padding:10px; " ng-bind-html="x.OperationRemak">
+
+                    </p>
+                    <div style="border-top:1px solid #ccc; margin-top:10px;padding:10px;text-align:right">
+                        <span style="display:inline-block;margin-left:5px;margin-right:20px;font-size:15px;font-weight:bold">{{formatDate(x.DateCreate)}}</span>
+
+                    </div>
+                    <!--<div style="font-weight:bold;font-size:15px;padding:5px 10px 0 10px;border-bottom:1px solid #ccc">{{formatDate(x.DateTo)}}</div>-->
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'forms';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+
+
+    <div id="popup_newform" dx-popup="popup_newform" class="no-padding">
+        <div style="padding:5px;">
+
+            <div class="dx-border" style="padding:10px;">
+                <div style="margin-bottom:5px;">FROM</div>
+                <div class="center" dx-date-box="date_from"></div>
+                <div style="margin-bottom:5px;margin-top:10px">TO</div>
+                <div class="center" dx-date-box="date_to"></div>
+                <div style="margin-bottom:5px;margin-top:10px">REASON</div>
+                <div class="center" dx-select-box="sb_reason"></div>
+                <div style="margin-bottom:5px;margin-top:10px">REMARK</div>
+                <div dx-text-area="txt_remark"></div>
+                <div style="clear:both"></div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

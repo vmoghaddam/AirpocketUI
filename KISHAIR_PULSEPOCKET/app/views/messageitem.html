@@ -1,0 +1,31 @@
+﻿<div style="height:100%;">
+    <div class="box messageitem maincontainer" style="height:100%;overflow-y:hidden;max-width:1200px;margin:0 auto 0 auto">
+        <div class="rowx header" ng-include="'app/views/header.html'"></div>
+        <div style="position:relative;">
+            <div ng-include="'app/views/menu.html'"></div>
+        </div>
+
+        <div class="rowx content" style="clear:both;background:white; ">
+
+
+
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                <div class="messageitemdetail" style="padding:15px 20px 10px 20px; display:none">
+                    <div class="text-black-70 font-size-16 bold">{{data.Subject}}</div>
+                    <div class="text-black-70 " style="margin-top:5px;padding-left:20px">{{data.Sender}}</div>
+                    <div class="text-black-70 " style="margin-top:2px;padding-left:20px">{{data.DateSent}}</div>
+                    <p ng-bind-html="data.Abstract" style="margin-top:10px; padding:5px 10px 5px 5px;text-align:justify;line-height:25px">
+
+                    </p>
+
+                </div>
+
+               
+
+            </div>
+        </div>
+
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html'" ng-init="type = 'appmessageitem';" style="padding:0;flex:0 0 45px"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
