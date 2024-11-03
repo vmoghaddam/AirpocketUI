@@ -235,7 +235,7 @@
         <div class="dx-border" style="padding:10px;">
             <div class="padding-7 margin-bottom-5">
                 <label>Select From Employees</label>
-                <div dx-select-box="sb_employees"  ></div>
+                <div dx-select-box="sb_employees"></div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                 <label>First Name</label>
@@ -286,14 +286,15 @@
 
     <div id="popup_role" dx-popup="popup_role" class="no-padding">
         <div class="col-lg-5 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
-            
+
             <div dx-data-grid="dg_role" class="content" style="overflow-y:hidden"></div>
         </div>
         <div class="col-lg-7 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
             <div dx-data-grid="dg_rc" id="dg_rc" class="content" style="overflow-y:hidden"></div>
         </div>
-        
+
     </div>
 
 
+    <div ng-include="'app/views/trn_questions.html?vx=2'"></div>
 </div>

@@ -106,10 +106,26 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
         return deferred.promise;
     };
 
+    var _get_questions_list = function (exam_id) {
+
+        var deferred = $q.defer();
+        $http.get("http://localhost:4005/" + 'api/exam/questions/' + exam_id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(/*Exceptions.getMessage(err)*/ JSON.stringify(err));
+        });
+
+        return deferred.promise;
+    };
+
+
     serviceFactory.get_instructor_course = _get_instructor_course;
     serviceFactory.get_director_course = _get_director_course;
     serviceFactory.get_course_object = _get_course_object;
     serviceFactory.get_people_sessions = _get_people_sessions;
+    serviceFactory.get_questions_list = _get_questions_list;
+
 
     serviceFactory.save_person_press = _save_person_press;
     serviceFactory.save_exam_result = _save_exam_result;
@@ -117,6 +133,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     serviceFactory.sign_attendance_coures = _sign_attendance_coures;
     serviceFactory.sign_exam_coures = _sign_exam_coures;
 
+    
 
 
     return serviceFactory;

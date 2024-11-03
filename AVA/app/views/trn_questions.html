@@ -1,0 +1,180 @@
+﻿<style>
+
+    .qustions-container {
+        /*max-width: 800px;*/
+        /*margin: auto;*/
+        background: #fff;
+        padding: 7px;
+        border-radius: 8px;
+        margin-top: 0px;
+        overflow-y: hidden;
+    }
+
+    h5 {
+        text-align: center;
+        color: black;
+    }
+
+    .question-block {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .qlabel {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+        cursor: pointer;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    button {
+        width: 48%;
+        padding: 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .btn_submit {
+        width: 100%;
+        padding: 15px;
+        background-color: #009688;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    button:disabled {
+        background-color: #d3d3d3;
+    }
+
+    button:hover:not(:disabled) {
+        background-color: #008380;
+    }
+
+    .qheader {
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        padding: 7px;
+    }
+
+    input[type="radio"] {
+        /*position: absolute;*/
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkmark {
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+        margin: 0 5px 0 5px;
+        position: relative;
+    }
+
+    .qlabel:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    input:checked ~ .checkmark {
+        background-color: #009688;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .checkmark:after {
+        top: 6px;
+        left: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .right_class {
+        margin-bottom: 20px;
+        padding: 10px;
+        padding-top: 5px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        direction: rtl
+    }
+
+    .left_class {
+        margin-bottom: 20px;
+        padding: 10px;
+        padding-top: 2px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        direction: ltr
+    }
+</style>
+
+
+
+
+<div ng-controller="trn_questionsController">
+    <div id="popup_questions" dx-popup="popup_questions">
+
+        <div style="border:1px solid #ccc">
+            <div ng-style="{ 'height': (windowHeight - height_dy) + 'px' }">
+                <div class="qustions-container   thin-scroll" ng-style="{ 'height': (windowHeight - height_dy-5) + 'px' }" style="overflow-y:auto">
+
+                    <div ng-repeat="(questionIndex, question) in questions" ng-class="get_answer_class(question.is_rtl)">
+                        <div style="font-size:14px;color:gray;border-bottom:1px solid #ccc;padding:5px;">{{question.category}}</div>
+                        <p>
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="text-align:left">{{questionIndex + 1}}. {{ question.english_title }}</td>
+                                </tr>
+                            </table>
+                        </p>
+                        <label class="qlabel" ng-repeat="(optionIndex, option) in question.answers">
+                            <!--<input type="radio" ng-model="option.id" ng-change="save_answer(option.exam_quesion_id,option.answer_id )"
+                                   ng-checked="option.is_selected"
+                                   name="question_{{questionIndex}}" ng-disabled="status_id!=1" />
+
+                            <span class="checkmark"></span>-->
+                            {{optionIndex}}) {{option.english_title}}
+
+                        </label>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

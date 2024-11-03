@@ -3,7 +3,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
 
     $scope.course_id = $routeParams.id;
 
- 
+
     $scope.instructor = { course_id: $scope.course_id, person_id: $rootScope.employeeId }
 
     $rootScope.show_exam = function () {
@@ -12,6 +12,15 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
 
     $rootScope.show_attendance = function () {
         $scope.popup_attendance_visible = true;
+    }
+
+    $rootScope.show_ins_survay = function () {
+
+        $scope.popup_survay_visible = true;
+    }
+    $rootScope.show_questions = function () {
+
+        $rootScope.$broadcast('InitQuestions', null);
     }
 
     $scope.popup_exam_visible = false;
@@ -34,7 +43,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                         //    console.log('----Exam Result Save Resposne\n', response);
                         //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-                        
+
                         instructorService.sign_exam_coures($scope.instructor).then(function (response) {
 
                         });
@@ -113,7 +122,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                     type: 'success', text: 'Sign', validationGroup: 'cabin', icon: 'fas fa-signature', onClick: function (e) {
 
                         instructorService.sign_attendance_coures($scope.instructor).then(function (response) {
-                            
+
                         });
 
 
@@ -175,6 +184,97 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
         }
     };
 
+
+
+    $scope.popup_survay_visible = false;
+    $scope.popup_height = '100%';
+    $scope.popup_width = '100%';
+    $scope.popup_survay_title = 'Survay';
+    $scope.popup_instance = null;
+
+    $scope.popup_survay = {
+
+
+        showTitle: true,
+
+        toolbarItems: [
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'success', text: 'Sign', validationGroup: 'cabin', icon: 'fas fa-signature', onClick: function (e) {
+
+                        instructorService.sign_attendance_coures($scope.instructor).then(function (response) {
+
+                        });
+
+
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'success', text: 'Save', icon: 'check', validationGroup: 'logadd', onClick: function (e) {
+
+
+
+
+
+                    }
+                }, toolbar: 'bottom'
+            },
+
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
+                        $scope.popup_survay_visible = false;
+                    }
+                }, toolbar: 'bottom'
+            }
+
+        ],
+
+        visible: false,
+        dragEnabled: true,
+        closeOnOutsideClick: false,
+        onShowing: function (e) {
+            $rootScope.IsRootSyncEnabled = false;
+            $scope.popup_instance.repaint();
+
+
+        },
+        onShown: function (e) {
+            if ($scope.tempData != null)
+                $scope.bind();
+        },
+        onHiding: function () {
+            $rootScope.IsRootSyncEnabled = true;
+            $scope.fltInfo = false;
+            $scope.entity = {
+                Id: -1,
+                EventTitleIds: [],
+                Anonymous: false
+
+            };
+            $scope.popup_survay_visible = false;
+            $rootScope.$broadcast('onQACabinHide', null);
+        },
+        onContentReady: function (e) {
+            if (!$scope.popup_instance)
+                $scope.popup_instance = e.component;
+
+        },
+        // fullScreen:false,
+        bindingOptions: {
+            visible: 'popup_survay_visible',
+            fullScreen: 'isFullScreen',
+            title: 'popup_survay_title',
+            height: 'popup_height',
+            width: 'popup_width',
+            'toolbarItems[0].visible': 'isEditable',
+            'toolbarItems[2].visible': 'isEditable',
+
+        }
+    };
+
     $scope.scroll_checklist_height = $(window).height() - 100;
     $scope.scroll_checklist = {
         width: '100%',
@@ -199,12 +299,24 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
 
     };
 
+    $scope.get_answer_class = function (d) {
+
+        if (d == false)
+            return "right_class";
+        else
+            return "left_class";
+    }
+
+    $scope.windowHeight = $(window).height();
+    $scope.height_dy = 150;
     $scope.bind = function () {
         instructorService.get_course_object($scope.course_id).then(function (response) {
             $scope.course = response.Data.course;
             $scope.sessions = response.Data.sessions;
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
+        $scope.exam_id = 1
+       
         instructorService.get_people_sessions($scope.course_id).then(function (response) {
 
             console.log("----Resposne-----\n", response.Data)
@@ -213,10 +325,10 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
             $scope.sessions_attend = response.Data.sessions
             //$scope.exam_attendance = response.Data.people
 
-            $scope.exam = { course_id: $scope.course_id, exam_date: '2024-10-14', scores : []}
+            $scope.exam = { course_id: $scope.course_id, exam_date: '2024-10-14', scores: [] }
 
             $.each(response.Data.people, function (_i, _p) {
-                $scope.exam.scores.push({ Id: _p.Id, person_id: _p.PersonId, score: _p.ExamResult ,result: _p.ExamStatus,  Name: _p.Name });
+                $scope.exam.scores.push({ Id: _p.Id, person_id: _p.PersonId, score: _p.ExamResult, result: _p.ExamStatus, Name: _p.Name });
             });
 
 
@@ -228,12 +340,12 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
                 console.log('---sessions_attend---\n', $scope.sessions_attend);
                 _s.people = angular.copy(response.Data.people);
                 _s.showDetails = false;
-               
+
                 $.each(_s.people, function (_j, _p) {
                     var press = Enumerable.From(response.Data.press).Where(function (x) { return x.SessionId == _s.Id && x.PersonId == _p.PersonId; }).FirstOrDefault();
-                   
+
                     _p.press = !press ? 0 : press.IsPresent;
-                    
+
                 });
             });
 

@@ -18,6 +18,19 @@ app.controller('profileController', ['$scope', '$location', '$routeParams', '$ro
         $scope.isActiveTab = function (tabIndex) {
             return $scope.selectedTab === tabIndex;
         };
+
+
+        $scope.isPopupVisible = false;
+
+        // Function to open the popup
+        $scope.openPopup = function () {
+            $scope.isPopupVisible = true;
+        };
+
+        // Function to close the popup
+        $scope.closePopup = function () {
+            $scope.isPopupVisible = false;
+        };
         ///////////////////////////////////
         var storedUserData = localStorage.getItem('profile')
 

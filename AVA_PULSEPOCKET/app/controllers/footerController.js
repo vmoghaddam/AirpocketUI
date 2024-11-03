@@ -48,15 +48,19 @@
         if ($scope.is_crew) {
 
 
-            $('.footerhome').width('33.333%').show();
-            $('.footertrnexam').width('33.333%').show();
-            $('.footertrnattendance').width('33.333%').show();
+            $('.footerhome').width('20%').show();
+            $('.footertrnexam').width('20%').show();
+            $('.footertrnattendance').width('20%').show();
+            $('.footertrsurvay').width('20%').show();
+            $('.footertrnquestions').width('20%').show();
 
         }
         else {
-            $('.footerhome').width('33.333%').show();
-            $('.footertrnexam').width('33.333%').show();
-            $('.footertrnattendance').width('33.333%').show();
+            $('.footerhome').width('20%').show();
+            $('.footertrnexam').width('20%').show();
+            $('.footertrnattendance').width('20%').show();
+            $('.footertrsurvay').width('20%').show();
+            $('.footertrnquestions').width('20%').show();
         }
 
 
