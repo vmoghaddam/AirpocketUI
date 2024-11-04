@@ -136,6 +136,9 @@
         background-color: #f9f9f9;
         direction: ltr
     }
+    .correct-answer {
+        background-color: lightgreen;
+    }
 </style>
 
 
@@ -157,15 +160,15 @@
                                 </tr>
                             </table>
                         </p>
-                        <label class="qlabel" ng-repeat="(optionIndex, option) in question.answers">
+                        <div class="qlabel" ng-repeat="(optionIndex, option) in question.answers">
                             <!--<input type="radio" ng-model="option.id" ng-change="save_answer(option.exam_quesion_id,option.answer_id )"
-                                   ng-checked="option.is_selected"
-                                   name="question_{{questionIndex}}" ng-disabled="status_id!=1" />
+           ng-checked="option.is_selected"
+           name="question_{{questionIndex}}" ng-disabled="status_id!=1" />
 
-                            <span class="checkmark"></span>-->
-                            {{optionIndex}}) {{option.english_title}}
+    <span class="checkmark"></span>-->
+                            <div ng-class="{'correct-answer': option.is_answer === 1}">{{optionIndex}}) {{option.english_title}}</div>
 
-                        </label>
+                        </div>
                     </div>
 
 
