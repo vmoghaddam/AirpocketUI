@@ -167,26 +167,28 @@
         .final-result-button.active {
             /*background-color: #28a745;*/
             transform: scale(1.05);
-            color:black;
-            font-weight:bold;
-
+            color: black;
+            font-weight: bold;
         }
+
         .final-result-button.failed.active {
             background-color: #ff5c33;
         }
+
         .final-result-button.active.reexam {
             background-color: #ffcc66;
         }
+
         .final-result-button.active.pass {
             background-color: #00e6ac;
         }
 
-        .attend_section {
-            margin: 10px 5px 0px 5px;
-            background-color: white;
-            border-radius: 8px;
-            border: 1px solid #ffcc00
-        }
+    .attend_section {
+        margin: 10px 5px 0px 5px;
+        background-color: white;
+        border-radius: 8px;
+        border: 1px solid #ffcc00
+    }
 
     h2 {
         color: #007bff;
@@ -237,14 +239,14 @@
         padding: 8px;
         border: 1px solid #666;
         font-size: 13px;
-        text-align:center;
+        text-align: center;
     }
 
     .table_head {
         padding: 8px;
         text-align: left;
         border: 1px solid #666;
-        font-size:13px;
+        font-size: 13px;
     }
 
     .section-title {
@@ -338,9 +340,124 @@
             display: block;
             margin-bottom: 5px;
         }
-       /* .dx-item-content.dx-toolbar-item-content{
+        /* .dx-item-content.dx-toolbar-item-content{
             min-width:200px;
         }*/
+        /* Main container styling */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f0f3f5;
+            overflow-y: auto;
+        }
+
+        /* Card container styling for each survey category */
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            background-color: white;
+            border: 1px solid #ccc;
+            margin: 10px 0;
+            transition: transform 0.2s;
+            border-radius: 5px;
+        }
+
+            .card-container:hover {
+                transform: scale(1.02);
+            }
+
+        /* Section title styling */
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            padding: 10px;
+            background-color: #cccccc;
+            text-align: left;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+
+        /* Question styling */
+        .question {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        /* Rating row container */
+        .rating-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 7px;
+            margin: 5px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* Custom checkbox styling */
+        .container {
+            display: inline-block;
+            position: relative;
+            padding-left: 25px;
+            margin-right: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            user-select: none;
+        }
+
+            /* Hide the default checkbox */
+            .container input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+            }
+
+        /* Custom checkmark styling */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 18px;
+            width: 18px;
+            border: 1px solid orange;
+            background-color: white;
+        }
+
+        /* When the checkbox is checked */
+        .container input:checked ~ .checkmark {
+            background-color: orange;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .container .checkmark:after {
+            left: 6px;
+            top: 2px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Responsive styling */
+        @media (max-width: 767px) {
+            .rating-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
     }
 </style>
 <div style="height:100%;">
@@ -389,7 +506,7 @@
                     <tr>
                         <th class="table_head">Location</th>
                         <td class="table_data" colspan="3">{{course.Location}}</td>
-                       
+
                     </tr>
 
                     <tr>
@@ -397,9 +514,9 @@
                         <td class="table_data" colspan="3">{{course.TrainingDirector}}</td>
                     </tr>
                     <!--<tr>
-        <th class="table_head">Sessions</th>
-        <td colspan="3">{{course.Sessions}}</td>
-    </tr>-->
+                        <th class="table_head">Sessions</th>
+                        <td colspan="3">{{course.Sessions}}</td>
+                    </tr>-->
 
                 </table>
 
@@ -443,10 +560,9 @@
                             </div>
                         </div>
                     </div>-->
-
                     <!-- Attendance Section -->
                     <div class="attendance-section">
-                        
+
                         <!-- trn_card layout for mobile devices -->
                         <div class="attendance-container" ng-if="!isLargeScreen()">
                             <div class="attendance_trn_card" style=" border: 1px solid #cccccc;" ng-repeat="trainee in exam.scores">
@@ -534,10 +650,438 @@
             </div>
         </div>
 
+
+
+        <div id="popup_survay" dx-popup="popup_survay" class="no-padding">
+            <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
+                <div class="main-container">
+
+                    <!-- Survey Section: Course Contents -->
+                    <div class="card-container">
+                        <div class="title">Course Contents</div>
+
+                        <div class="rating-row">
+                            <div class="question">1. Appropriateness of the content of the training program with the planned duration</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">2. Proportion of the content of the educational program with the level of education and knowledge of the learners</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Survey Section: Instructor -->
+                    <div class="card-container">
+                        <div class="title">Instructor</div>
+
+                        <div class="rating-row">
+                            <div class="question">1. The level of knowledge of the learners about the goals and topics of the training course</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">2. Students' participation in the topics of knowledge and scientific activities</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">3. The ability of learners to answer your questions</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">4. How to deal with learners and create mutual respect</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">5. Timely attendance of learners in the training course</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Survey Section: Facilities -->
+                    <div class="card-container">
+                        <div class="title">Facilities</div>
+
+                        <div class="rating-row">
+                            <div class="question">1. The degree of satisfaction with the environmental conditions of the educational space (light, heat, sound, etc.)</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">2. The level of satisfaction with educational and audio-visual facilities</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">3. The level of satisfaction with the quality of educational resources (books, pamphlets, etc.)</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">4. How to deal with the course organizers (education affairs)</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">5. The level of satisfaction with the way of reception and management of affairs</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="rating-row">
+                            <div class="question">6. Satisfaction with timely payment of tuition fees</div>
+                            <div class="rating-options">
+                                <label class="container">
+                                    1
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    2
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    3
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    4
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <label class="container">
+                                    5
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="rowx footer app-footer" ng-include="'app/views/footer.html?v=2036'" ng-init="type = 'trn-instructor-course';" style="padding:0;flex:0 0 45px"></div>
+
     </div>
-
-
-
+    <div ng-include="'app/views/trn_questions.html?vx=2'"></div>
     <div dx-load-panel="loadPanel"></div>
+
 </div>

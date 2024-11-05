@@ -236,6 +236,7 @@
     <Content Include="app\controllers\trn_lifus.js" />
     <Content Include="app\controllers\trn_line_check.js" />
     <Content Include="app\controllers\trn_line_crm.js" />
+    <Content Include="app\controllers\trn_questions.js" />
     <Content Include="app\controllers\trn_zftt.js" />
     <Content Include="app\controllers\vira_mrf_closing.js" />
     <Content Include="app\controllers\vira_mrf_list.js" />
@@ -525,6 +526,7 @@
     <Content Include="app\views\trn_lifus.html" />
     <Content Include="app\views\trn_line_check.html" />
     <Content Include="app\views\trn_line_crm.html" />
+    <Content Include="app\views\trn_questions.html" />
     <Content Include="app\views\trn_zftt.html" />
     <Content Include="app\views\vira_beginning_add.html" />
     <Content Include="app\views\vira_beginning_inventory.html" />

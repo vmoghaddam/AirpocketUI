@@ -123,6 +123,8 @@ app.factory('atoService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
     serviceFactory.get_exam_summary = _get_exam_summary;
 
+      
+
 
     return serviceFactory;
 }]);

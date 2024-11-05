@@ -177,7 +177,7 @@
         color: red;
     }
 
-     .text-schedul {
+    .text-schedul {
         color: gray;
     }
 
@@ -226,6 +226,109 @@
         width: 100%;
         z-index: 2;
     }
+    /* Style for overlay background */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    /* Popup content with full height and scrollable */
+    .popup-content {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        background-color: white;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Style for close button */
+    .close-btn {
+        background: red;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 40px;
+        cursor: pointer;
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 1001;
+        width:40px;
+        height: 40px;
+        
+    }
+
+    /* Main container for the form */
+    .main-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 20px;
+    }
+
+    /* Card container styling for each survey section */
+    
+
+    /* Section title */
+    /*.title {
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        padding: 10px 0;
+        border-bottom: 1px solid #ccc;
+    }*/
+
+    /* Question styling */
+    .question {
+        color: #555;
+        font-size: 14px;
+        padding: 8px 0;
+    }
+
+    /* Rating row container */
+    .rating-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 7px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    /* Custom checkbox styling */
+    .rating-options label {
+        display: inline-block;
+        padding: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .rating-options input[type="radio"] {
+        display: none;
+    }
+
+        .rating-options input[type="radio"] + span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid lightgray;
+            border-radius: 50%;
+            color: lightgray;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .rating-options input[type="radio"]:checked + span {
+            background-color: gray;
+            color: white;
+        }
 </style>
 <div class="box profile" style="height:100%;display:none;overflow-y:hidden">
 
@@ -461,44 +564,51 @@
                     </div>
                     <!--EVENTS-->
                     <div class="tab-pane" ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(1)}" role="tabpanel">
-                        <div style="padding: 0px !important; border: 1px solid lightgray" class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                            <div ng-repeat="event in events" class="card-container" ng-click="go_exam(event.exam_id)">
-
-                                <!--style="width: 50%; text-align: right; display: inline-block"-->
-
-                                <div class="title">
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: left; padding: 7px">
-                                        {{event.course_title}}
+                        <div style="padding: 0px !important" class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                            <div style="padding: 0px !important; border: 1px solid lightgray; margin-bottom: 7px" class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
+                                <div ng-repeat="course in instructor_courses" class="card-container">
+                                    <div class="title">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: left; padding: 7px">
+                                            {{course.Title}}
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: right; padding: 7px">
+                                            {{course.No}}No
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: right; padding: 7px">
-                                        {{event.course_no}}No
+
+                                    <div class="date-range">
+                                        <div class="col-sm-6 col-xs-6">
+                                            <p style="display: inline-block">Start</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateStart | date: 'yyyy-MM-dd'}}</p>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-6">
+                                            <p style="display: inline-block">End</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateEnd | date: 'yyyy-MM-dd'}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="date-range">
+                                        <div class="col-sm-6 col-xs-6">
+                                            <p style="display: inline-block">Issue</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateIssue | date: 'yyyy-MM-dd'}}</p>
+                                        </div>
+                                        <div class="col-sm-6 col-xs-6">
+                                            <p style="display: inline-block">Expire</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateExpire | date: 'yyyy-MM-dd'}}</p>
+                                        </div>
+                                    </div>
+
+                                    <div style="border-bottom: 1px dashed lightgray"></div>
+                                    <div class="date-range" style="margin: 7px 0 7px 0">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center; justify-content: center" ng-class="{
+                'text-success': course.CoursePeopleStatus === 'PASSED',
+                'text-warning': course.CoursePeopleStatus === 'RE-EXAM',
+                'text-danger': course.CoursePeopleStatus === 'FAILED',
+                'text-unknown': course.CoursePeopleStatus === 'UNKNOWN'}">
+                                            <div style="font-weight: bold; display: inline-block">{{course.CoursePeopleStatus}}</div>
+                                        </div>
                                     </div>
                                 </div>
+                            </div>
 
-                                <div class="date-range">
-                                    <div class="col-sm-6 col-xs-6">
-                                        <p style="display: inline-block">Date</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{event.exam_date_actual | date: 'yyyy-MM-dd'}}</p>
-                                    </div>
-                                    <div class="col-sm-6 col-xs-6">
-                                        <p style="display: inline-block">Duration</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{event.exam_duration }}</p>
-                                    </div>
-                                </div>
-
-                                <div class="date-range">
-                                    <div class="col-sm-12 col-xs-12">
-                                        <p style="display: inline-block">Remark</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{event.exam_remark}}</p>
-                                    </div>
-                                </div>
-
-                                <div style="border-bottom: 1px dashed lightgray"></div>
-                                <div class="date-range" style="margin: 7px 0 7px 0">
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align: center;justify-content: center" ng-class="{
-'text-schedul': event.exam_status === 'Scheduled', 
-'text-started': event.exam_status === 'Started', 
-'text-done': event.exam_status === 'Done', }">
-                                        <div style="font-weight: bold; display: inline-block">{{event.exam_status}}</div>
-                                    </div>
-                                </div>
+                            <!-- New div at the bottom with light gray background -->
+                            <div style="background-color: lightgray; width: 100%; text-align: center; margin-top: 7px; display: flex; height: 50px" ng-click="openPopup()">
+                                <div style="width: 100%; align-content:center">Survay</div>
                             </div>
                         </div>
                     </div>
@@ -514,10 +624,229 @@
 
         <div style="clear:both"></div>
     </div>
+    <div class="overlay" ng-show="isPopupVisible">
+        <div class="popup-content  thin-scroll">
+            <button class="close-btn" ng-click="closePopup()">X</button>
 
+            <div class="main-container">
+                <!-- Survey Section: Facilities -->
+                <div class="card-container">
+                    <div class="title" style="padding-left: 7px">Facilities</div>
+                    <div class="rating-row">
+                        <div class="question">1. Environment facilities (light, heat, etc.)</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="facilities1" value="1"><span>1</span></label>
+                            <label><input type="radio" name="facilities1" value="2"><span>2</span></label>
+                            <label><input type="radio" name="facilities1" value="3"><span>3</span></label>
+                            <label><input type="radio" name="facilities1" value="4"><span>4</span></label>
+                            <label><input type="radio" name="facilities1" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">2. Punctuality in conducting the course</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="facilities2" value="1"><span>1</span></label>
+                            <label><input type="radio" name="facilities2" value="2"><span>2</span></label>
+                            <label><input type="radio" name="facilities2" value="3"><span>3</span></label>
+                            <label><input type="radio" name="facilities2" value="4"><span>4</span></label>
+                            <label><input type="radio" name="facilities2" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">3. Course management</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="facilities3" value="1"><span>1</span></label>
+                            <label><input type="radio" name="facilities3" value="2"><span>2</span></label>
+                            <label><input type="radio" name="facilities3" value="3"><span>3</span></label>
+                            <label><input type="radio" name="facilities3" value="4"><span>4</span></label>
+                            <label><input type="radio" name="facilities3" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">4. Audio and visual training facilities</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="facilities4" value="1"><span>1</span></label>
+                            <label><input type="radio" name="facilities4" value="2"><span>2</span></label>
+                            <label><input type="radio" name="facilities4" value="3"><span>3</span></label>
+                            <label><input type="radio" name="facilities4" value="4"><span>4</span></label>
+                            <label><input type="radio" name="facilities4" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">5. Administrators’ attitude & behavior</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="facilities5" value="1"><span>1</span></label>
+                            <label><input type="radio" name="facilities5" value="2"><span>2</span></label>
+                            <label><input type="radio" name="facilities5" value="3"><span>3</span></label>
+                            <label><input type="radio" name="facilities5" value="4"><span>4</span></label>
+                            <label><input type="radio" name="facilities5" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">6. General satisfaction</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="facilities6" value="1"><span>1</span></label>
+                            <label><input type="radio" name="facilities6" value="2"><span>2</span></label>
+                            <label><input type="radio" name="facilities6" value="3"><span>3</span></label>
+                            <label><input type="radio" name="facilities6" value="4"><span>4</span></label>
+                            <label><input type="radio" name="facilities6" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- Survey Section: Course Contents -->
+                <div class="card-container">
+                    <div class="title" style="padding-left: 7px">Course Contents</div>
+                    <div class="rating-row">
+                        <div class="question">1. The level of applicability and usefulness of the content provided</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="course1" value="1"><span>1</span></label>
+                            <label><input type="radio" name="course1" value="2"><span>2</span></label>
+                            <label><input type="radio" name="course1" value="3"><span>3</span></label>
+                            <label><input type="radio" name="course1" value="4"><span>4</span></label>
+                            <label><input type="radio" name="course1" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">2. Contents quality</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="course2" value="1"><span>1</span></label>
+                            <label><input type="radio" name="course2" value="2"><span>2</span></label>
+                            <label><input type="radio" name="course2" value="3"><span>3</span></label>
+                            <label><input type="radio" name="course2" value="4"><span>4</span></label>
+                            <label><input type="radio" name="course2" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">3. Use of up-to-date contents</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="course3" value="1"><span>1</span></label>
+                            <label><input type="radio" name="course3" value="2"><span>2</span></label>
+                            <label><input type="radio" name="course3" value="3"><span>3</span></label>
+                            <label><input type="radio" name="course3" value="4"><span>4</span></label>
+                            <label><input type="radio" name="course3" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">4. Increasing level of knowledge by the contents</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="course4" value="1"><span>1</span></label>
+                            <label><input type="radio" name="course4" value="2"><span>2</span></label>
+                            <label><input type="radio" name="course4" value="3"><span>3</span></label>
+                            <label><input type="radio" name="course4" value="4"><span>4</span></label>
+                            <label><input type="radio" name="course4" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">5. Time proportion with lesson objectives</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="course5" value="1"><span>1</span></label>
+                            <label><input type="radio" name="course5" value="2"><span>2</span></label>
+                            <label><input type="radio" name="course5" value="3"><span>3</span></label>
+                            <label><input type="radio" name="course5" value="4"><span>4</span></label>
+                            <label><input type="radio" name="course5" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">6. Relating training to your job responsibilities and needs</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="course6" value="1"><span>1</span></label>
+                            <label><input type="radio" name="course6" value="2"><span>2</span></label>
+                            <label><input type="radio" name="course6" value="3"><span>3</span></label>
+                            <label><input type="radio" name="course6" value="4"><span>4</span></label>
+                            <label><input type="radio" name="course6" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                </div>
 
-
+                <!-- Survey Section: Instructor -->
+                <div class="card-container" style="padding-left: 7px">
+                    <div class="title">Instructor</div>
+                    <div class="rating-row">
+                        <div class="question">1. Expression, comprehension & management ability</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="instructor1" value="1"><span>1</span></label>
+                            <label><input type="radio" name="instructor1" value="2"><span>2</span></label>
+                            <label><input type="radio" name="instructor1" value="3"><span>3</span></label>
+                            <label><input type="radio" name="instructor1" value="4"><span>4</span></label>
+                            <label><input type="radio" name="instructor1" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">2. Proficiency in presenting subject</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="instructor2" value="1"><span>1</span></label>
+                            <label><input type="radio" name="instructor2" value="2"><span>2</span></label>
+                            <label><input type="radio" name="instructor2" value="3"><span>3</span></label>
+                            <label><input type="radio" name="instructor2" value="4"><span>4</span></label>
+                            <label><input type="radio" name="instructor2" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">3. Presenting appropriate teaching methods</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="instructor3" value="1"><span>1</span></label>
+                            <label><input type="radio" name="instructor3" value="2"><span>2</span></label>
+                            <label><input type="radio" name="instructor3" value="3"><span>3</span></label>
+                            <label><input type="radio" name="instructor3" value="4"><span>4</span></label>
+                            <label><input type="radio" name="instructor3" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">4. Correct time management</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="instructor4" value="1"><span>1</span></label>
+                            <label><input type="radio" name="instructor4" value="2"><span>2</span></label>
+                            <label><input type="radio" name="instructor4" value="3"><span>3</span></label>
+                            <label><input type="radio" name="instructor4" value="4"><span>4</span></label>
+                            <label><input type="radio" name="instructor4" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">5. Engaging trainees in teaching & learning process</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="instructor5" value="1"><span>1</span></label>
+                            <label><input type="radio" name="instructor5" value="2"><span>2</span></label>
+                            <label><input type="radio" name="instructor5" value="3"><span>3</span></label>
+                            <label><input type="radio" name="instructor5" value="4"><span>4</span></label>
+                            <label><input type="radio" name="instructor5" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">6. Providing a summary at the end of session</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="instructor6" value="1"><span>1</span></label>
+                            <label><input type="radio" name="instructor6" value="2"><span>2</span></label>
+                            <label><input type="radio" name="instructor6" value="3"><span>3</span></label>
+                            <label><input type="radio" name="instructor6" value="4"><span>4</span></label>
+                            <label><input type="radio" name="instructor6" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">7. General evaluation</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="instructor7" value="1"><span>1</span></label>
+                            <label><input type="radio" name="instructor7" value="2"><span>2</span></label>
+                            <label><input type="radio" name="instructor7" value="3"><span>3</span></label>
+                            <label><input type="radio" name="instructor7" value="4"><span>4</span></label>
+                            <label><input type="radio" name="instructor7" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                    <div class="rating-row">
+                        <div class="question">8. The moral and social behavior of the lecturer with the students and creating mutual respect</div>
+                        <div class="rating-options">
+                            <label><input type="radio" name="instructor8" value="1"><span>1</span></label>
+                            <label><input type="radio" name="instructor8" value="2"><span>2</span></label>
+                            <label><input type="radio" name="instructor8" value="3"><span>3</span></label>
+                            <label><input type="radio" name="instructor8" value="4"><span>4</span></label>
+                            <label><input type="radio" name="instructor8" value="5"><span>5</span></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
 </div>
 
 
