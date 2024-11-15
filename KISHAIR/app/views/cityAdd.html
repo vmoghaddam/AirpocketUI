@@ -1,0 +1,28 @@
+﻿<div ng-controller="cityAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div id="scrollview" dx-scroll-view="{
+            scrollByContent: true,
+            scrollByThumb: true,
+
+        }">
+            <div class="dx-border" style="margin-top:15px;padding-right:15px;">
+
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding-left-20 margin-bottom-15">
+                    <label> Name</label>
+                    <div dx-text-box="txt_Name" dx-validator="{validationGroup:'cityadd',  validationRules: [{ type: 'required' }]}"></div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  padding-left-20 margin-bottom-15">
+                    <label> State</label>
+                    <div dx-select-box="sb_StateId" dx-validator="{validationGroup:'cityadd',  validationRules: [{ type: 'required' }]}"></div>
+                </div>
+                <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12  padding-left-20 margin-bottom-15">
+                    <label> AccuWeather Code</label>
+                    <div dx-text-box="txt_AccuWeather"></div>
+                </div>-->
+
+            </div>
+        </div>
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

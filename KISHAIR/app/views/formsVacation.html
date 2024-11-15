@@ -1,0 +1,144 @@
+﻿<style>
+ .dx-tab {
+        background-color: lightgray !important;
+    }
+</style>
+<div class="box vacations" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both;display:block">
+        <div dx-tabs="tabs_options"></div>
+		  <div id="new" class="tabc">
+                  <div dx-data-grid="dg" id="grid"></div>
+         </div>
+		  <div id="accpeted" class="tabc">
+		   
+                  <div dx-data-grid="dg_acc" id="dg_acc"></div>
+         </div>
+		  <div id="rejected" class="tabc">
+                  <div dx-data-grid="dg_rej" id="dg_rej"></div>
+         </div> 
+
+         
+
+
+    </div>
+    <div class="rowx footer">
+        <div class=" col-lg-11 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_new"></div>
+            <!--   <div dx-button="btn_edit"></div>
+
+               <div dx-button="btn_delete"></div>-->
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+            <!-- <div dx-button="btn_filter"></div>-->
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+    <div id="popup_newform" dx-popup="popup_newform" class="no-padding">
+        <div style="padding:5px;">
+
+            <div class="dx-border" style="padding:10px;">
+
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:50%;">
+                            <div style="background:#ccc;padding:10px;">USER</div>
+                            <div style="border:1px solid #ccc;padding:10px;">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td style="padding-right:5px;width:70%;">
+                                            <div dx-text-box="txt_name"></div>
+                                        </td>
+                                        <td>
+                                            <div dx-text-box="txt_group"></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <table style="width:100%;margin-top:5px">
+                                    <tr>
+                                        <td style="padding-right:5px;width:70%;">
+                                            <div dx-text-box="txt_mobile"></div>
+                                          
+                                        </td>
+                                        <td>
+                                            <div dx-text-box="txt_pid"></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                                <div style="margin-bottom:5px;margin-top:15px">REASON</div>
+                                <div class="center" dx-select-box="sb_reason"></div>
+                                <table style="width:100%;margin-top:5px;">
+                                    <tr>
+                                        <td style="padding-right:5px;width:50%;">
+                                            <div style="margin-bottom:5px;">FROM</div>
+                                            <div class="center" dx-date-box="date_from"></div>
+                                        </td>
+                                        <td>
+                                            <div style="margin-bottom:5px; ">TO</div>
+                                            <div class="center" dx-date-box="date_to"></div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+
+
+
+
+
+
+                                <div style="margin-bottom:5px;margin-top:5px">REMARK</div>
+                                <div dx-text-area="txt_remark"></div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </td>
+
+
+
+                        <td style="width:50%;padding-left:5px">
+                            <div style="background:#ccc;padding:10px;">OPS</div>
+                            <div style="border:1px solid #ccc;padding:10px;">
+                                
+                                <div style="margin-bottom:5px;margin-top:5px">STATUS</div>
+                                <div class="center" dx-select-box="sb_status"  dx-validator="{validationGroup:'formvacupd',  validationRules: [{ type: 'required' }]}"></div>
+                                
+
+
+
+
+
+
+                                <div style="margin-bottom:5px;margin-top:15px">REMARK</div>
+                                <div dx-text-area="txt_remarkops"  dx-validator="{validationGroup:'formvacupd',  validationRules: [{ type: 'required' }]}"></div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </td>
+
+
+
+
+
+                    </tr>
+
+                </table>
+
+
+              
+            </div>
+
+
+        </div>
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+

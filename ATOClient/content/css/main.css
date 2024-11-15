@@ -42,7 +42,7 @@
 .page-headerx {
     border: 1px solid gray;
     padding: 12px;
-    background-color: #03A9F4;
+    background-color: #6d1b16;
     color: white;
     font-size: 15px;
     font-weight: bold;
@@ -82,7 +82,7 @@
 
 .app-headerx {
     padding: 10px 20px 10px 10px;
-    background-color: #851d30 !important;
+    background-color: #6d1b16 !important;
     color: white;
     font-size: 15px;
     /*font-weight: bold;*/

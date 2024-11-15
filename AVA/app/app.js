@@ -969,7 +969,8 @@ var apiCAO = 'https://_apicao.apvaresh.com/';
 
 var zapinet = 'https://ava.apinet.airpocket.app/';
 var zfuel = 'https://ava.apifuel.airpocket.app/';
-var zapitrn = 'https://ava.apitrn.airpocket.app/';
+/*var zapitrn = 'https://ava.apitrn.airpocket.app/';*/
+var zapitrn = 'http://localhost:4005/';
 //'http://localhost:58908/';
 //'http://localhost:40654/';
 

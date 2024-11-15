@@ -1,0 +1,67 @@
+﻿<div class="box expiringcts" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+
+
+        <div class=" col-lg-5 col-md-6 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px; width:40%  ">
+            <div class="filter-container box  ">
+                <div class="header" style="padding:7px;">Course Types</div>
+
+
+                <div dx-data-grid="dg_main" id="dg_main" class="content" style="overflow-y:hidden"></div>
+
+            </div>
+
+        </div>
+        <div ng-show="!isDepManager" class=" col-lg-4 col-md-6 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;width:30%   ">
+            <div class="filter-container box  ">
+                <div class="header" style="padding:7px;">Main Groups</div>
+
+
+                <div dx-data-grid="dg_maingroup" id="dg_maingroup" class="content" style="overflow-y:hidden"></div>
+
+            </div>
+
+        </div>
+        <div class=" col-lg-3 col-md-3 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px; width:30% ">
+            <div class="filter-container box  ">
+
+                <div class="header" style="padding:7px;">Groups</div>
+                <div dx-data-grid="dg_group" id="dg_group" class="content" style="overflow-y:hidden"></div>
+
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_employees"></div>
+            <!--<div dx-button="btn_delete"></div>-->
+
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_emp" dx-popup="popup_emp">
+        <div>
+            <div class="dx-border"></div>
+            <div dx-data-grid="dg_course" dx-item-alias="error" id="dg_course" style="margin-top:10px;"></div>
+        </div>
+
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+    <div ng-include="'app/views/courseview.html'" ng-init="type = 'archived';"></div>
+</div>

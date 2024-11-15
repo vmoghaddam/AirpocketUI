@@ -1,0 +1,788 @@
+﻿<style>
+    #uploader_atc .dx-fileuploader-button {
+        width: 320px !important;
+    }
+
+    #uploader_atl .dx-fileuploader-button {
+        width: 320px !important;
+    }
+
+    .task-route {
+        background: #eee;
+    }
+    /*[class$="gridrowIndexlevel0"], [class*='gridrowIndexlevel0 '] {
+        display: none !important;
+    }*/
+    .rfgray {
+        background: gray !important
+    }
+
+    .dx-datagrid .dx-row.dx-header-row > td {
+        padding: 8px !important;
+    }
+
+    .dx-datagrid .dx-row > td {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    #dg_roster .dx-row > td {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .dx-datagrid .dx-row.dx-header-row > td .dx-datagrid-text-content {
+        font-size: 12px !important;
+    }
+
+    .dx-border .dx-texteditor-input {
+        padding: 5px !important;
+    }
+
+    .dx-toast-custom {
+        background: #ffd480;
+        color: black;
+    }
+
+    .e-headercelldiv span {
+        display: none;
+    }
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .dx-checkbox-text {
+        font-size: 12px !important;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .dx-popup-title.dx-toolbar {
+        /*background:red !important;*/
+    }
+
+    .red {
+        background: red !important;
+    }
+
+    /*.yellow {
+        background: yellow !important;
+    }*/
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: #f44336;
+        opacity: 1 !important;
+    }
+
+
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .e-gantt-parenttaskbar-innerdiv.e-chartexpand.e-parentTask {
+        display: none;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-childtaskbar {
+        border: 2px solid #ff3399;
+    }
+    /*************/
+    #ganttviewerheaderContainerejGanttChartresourceGanttba {
+    }
+
+    .e-ganttviewerheaderContainer {
+        height: 53px !important;
+    }
+
+    .e-treegrid .e-headercell {
+        height: 53px !important;
+    }
+
+    .e-ganttchart .e-schedule-day-headercell {
+        height: 30px !important;
+    }
+
+
+
+    .e-ganttviewerbodyContianer.e-scroller.e-js.e-widget {
+        background: rgb(250, 250, 250);
+        background: #eee;
+    }
+
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        background: #fce9e9;
+    }
+
+    .e-treegrid .e-alt-row {
+        background: #fce9e9;
+    }
+
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        border-bottom: none;
+    }
+
+    .e-ganttchart .e-ganttviewerheaderContainer {
+        background: #fce9e9;
+    }
+
+    .e-container-spreadsheet {
+        height: 100%;
+        width: 100%;
+    }
+
+    .e-rg-rangdiv {
+        opacity: 0 !important
+    }
+
+    .e-gantt-template-progressbar {
+        top: 12px !important;
+        height: 15px !important;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-template-progressbar {
+        top: 13px !important;
+        height: 15px !important;
+    }
+
+    .e-gantt-template-taskbar.linked-flight, .linked-flight {
+        /*display: none;*/
+    }
+
+    .hatch-delay {
+        background-size: 4px 4px, 4px 4px, 100% 100% !important;
+    }
+
+    #resourceGanttba .flight-item-selected {
+        margin-top: 0 !important;
+    }
+
+        #resourceGanttba .flight-item-selected .task-body {
+            background: #ff8533 !important;
+            color: #000 !important;
+        }
+
+    .thick-border {
+        border: 1px solid #000 !important;
+    }
+
+
+    .summarybox {
+        /*min-width: 140px !important;*/
+        padding-right: 3px;
+    }
+
+        .summarybox .caption {
+            font-size: 12px !important;
+            margin-bottom: 0 !important;
+        }
+
+        .summarybox .td-icon {
+            width: 30% !important;
+            padding: 0 5px 0 5px !important;
+        }
+
+    .home-box {
+        padding: 2px !important;
+        min-height: 60px !important;
+    }
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .large-tile {
+        display: none;
+        height: 65px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        width: 100%;
+    }
+
+    .small-tile {
+        /*display: none;*/
+        display: inline-flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 50px;
+    }
+
+        .small-tile .summarybox {
+            min-width: 115px;
+            display: inline-block
+        }
+
+    .large-tile .summarybox {
+        min-width: 115px;
+        display: inline-block
+    }
+
+    .small-tile .home-box {
+        min-height: 36px !important
+    }
+
+    .small-tile .libcount span {
+        font-size: 15px !important
+    }
+
+    .log-mobile .dx-icon {
+        font-size: 16px;
+    }
+
+    .home-box .caption {
+        padding-bottom: 0;
+    }
+
+    .tdgcont {
+        width: calc(100% - 130px) !important;
+    }
+
+    .xstdgcont {
+        width: calc(100% - 0px) !important;
+    }
+
+    .right-col, .right-col-bottom {
+        text-align: center;
+        width: 100%;
+        /*height: calc(100vh - 410px);*/
+    }
+
+    .gantt-main-container {
+        /*display: flex;*/
+        /*height: calc(100% - 300px);*/
+        height: 50px;
+        height: calc(100vh - 150px);
+    }
+
+    .tdgcont .now-line {
+        height: calc(100vh - 230px) !important;
+    }
+
+    .tdgcont .mid-line {
+        height: calc(100vh - 230px) !important;
+    }
+
+    .tdgcont .hour-line {
+        height: calc(100vh - 230px) !important;
+    }
+
+    .col-fleet {
+        width: 60px;
+        display: inline-block;
+        float: left;
+        height: 100%;
+    }
+
+    .col-flights {
+        display: inline-block;
+        width: calc(100% - 60px);
+        float: left;
+        height: 100%;
+        background: blanchedalmond;
+        /*flex-grow: 1;*/
+    }
+
+    .header-date {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .header-time {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .regs {
+        background-color: #fce9e9;
+        background: blanchedalmond !important;
+        color: black;
+    }
+
+    .flights {
+        background-color: #eee;
+    }
+
+    .cell-hour {
+        border-right: 1px solid #ccc;
+        position: relative;
+        text-align: center;
+        line-height: 25px;
+        font-size: 14px;
+        font-weight: bold;
+        width: 86px !important;
+    }
+
+    .xstdgcont .cell-hour {
+        width: 70px !important;
+        font-size: 12px;
+    }
+
+    .xstdgcont .qdate {
+        font-size: 12px !important;
+    }
+
+    .cell-day {
+        border-right: 1px solid #ccc;
+        position: relative;
+        text-align: center;
+        line-height: 23px;
+        font-size: 12px;
+        font-weight: bold;
+        width: 2064px !important;
+    }
+
+    .xstdgcont .cell-day {
+        width: 1680px !important;
+    }
+
+    .second-time {
+        font-size: 12px;
+        position: absolute;
+        top: -6px;
+        left: 1px;
+        font-weight: normal;
+    }
+
+    .xstdgcont .second-time {
+        font-size: 11px !important;
+    }
+
+    .mid-line {
+        position: absolute;
+        border-left: 1px solid gray;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+    .now-line {
+        position: absolute;
+        border-left: 2px solid orange;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+    .hour-line {
+        position: absolute;
+        border-left: 1px dotted #b3b3b3;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+    .halfhour-line {
+        position: absolute;
+        border-left: 1px dashed #e2e2e2;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+    .row-top {
+        background: blanchedalmond !important;
+        color: black;
+    }
+
+    .footer .dx-button-has-icon .dx-icon {
+        font-size: 20px !important;
+    }
+
+    .tabsdate.dx-tabs {
+        /*text-align: left;*/
+        background: #e6e6e6;
+    }
+
+    .tabsdate .dx-tab {
+        background: #e6e6e6;
+        max-width: 200px;
+        min-width: 150px;
+        display: inline-block;
+        text-align: center;
+    }
+
+        .tabsdate .dx-tab.dx-tab-selected {
+            color: black;
+            background: #ffdab3 !important;
+        }
+
+
+    .tabsheader.dx-tabs {
+        /*text-align: left;*/
+        /*background: silver;*/
+    }
+
+    .tabsheader .dx-tab {
+        /*background: #e6e6e6;*/
+        text-align: center;
+        /*background: silver;
+        color: black;*/
+    }
+
+        .tabsheader .dx-tab.dx-tab-selected {
+            /*color: black;
+            background: #ffdab3 !important;*/
+            /*color: white;
+            background: gray;*/
+        }
+
+    .tabsheader .dx-tab-text {
+        line-height: 20px;
+        font-size: 13px;
+    }
+
+    .tabsheader .dx-tab-content {
+        line-height: 20px;
+        font-size: 13px;
+    }
+
+    .thin-scroll3::-webkit-scrollbar {
+        width: 2em;
+        height: 2em;
+    }
+
+    .thin-scroll3::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    /*divargar*/
+    .padding-5 {
+        padding: 5px;
+    }
+
+    /*utc*/
+    .second-time-right {
+        font-size: 12px;
+        position: absolute;
+        top: -6px;
+        right: 3px;
+        font-weight: normal;
+    }
+
+    .canceled-t2 {
+        background-color: #595959 !important;
+        color: #ffff66;
+    }
+
+    .dx-fileuploader-input-wrapper {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+        .dx-fileuploader-input-wrapper .dx-button-content {
+            background: green;
+            color: white;
+        }
+
+    .fdp-selected {
+        border: 2px solid red;
+        /*background: #33adff !important;*/
+    }
+
+    #dg3 .dx-row > td {
+        padding-top: 4px !important;
+        padding-bottom: 3px !important;
+        font-size: 12px;
+    }
+    /* PreFlight Checklist*/
+    .checklist_fa {
+        direction: rtl;
+        float: right;
+    }
+
+        .checklist_fa label, .checklist_fa h3, .equipment_fa label, .equipment_fa h3, .equipment_fa .dx-checkbox-text, .equipment_fa .dx-placeholder, .equipment_fa .dx-texteditor-input {
+            font-family: IRANSans;
+        }
+
+    .checklist_fa {
+        text-align: right;
+    }
+
+        .checklist_fa .dx-texteditor-buttons-container, .equipment_fa .dx-texteditor-buttons-container {
+            right: unset;
+            left: 0;
+        }
+
+    .equipment_fa .equipments_item {
+        float: right;
+    }
+
+    .equipment_fa {
+        direction: rtl;
+    }
+
+        .equipment_fa .dx-checkbox-text {
+            margin-left: unset;
+            margin-right: 15px;
+            font-size: 14px !important;
+            padding-left: unset;
+        }
+
+        .equipment_fa .dx-textarea .dx-placeholder:before {
+            padding: 5px 10px;
+        }
+
+    .field_input .now_button {
+        margin-right: 10px;
+    }
+
+    .equipment_fa .dx-placeholder {
+        text-align: right;
+        right: 0;
+    }
+
+    .dx-list-item-content {
+        font-family: 'IRANSans';
+    }
+
+    .select-box-fa .dx-dropdowneditor-button {
+        float: left;
+    }
+
+    .select-box-fa .dx-icon-clear {
+        left: 2px;
+    }
+
+    .checklist_fa .dx-rtl.dx-texteditor .dx-clear-button-area {
+        display: flex;
+        text-align: right;
+    }
+
+    .checklist_fa .checklist_fields .dx-border .dx-texteditor-input {
+        text-align: center;
+    }
+</style>
+
+<div class="box opones" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div ng-include="'app/views/templates.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+        <div class="  col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  _print2" style="border:none;">
+
+                <div dx-data-grid="dg_board" id="dg_board" class="content" style="overflow-y:hidden"></div>
+
+                <div style="clear:both"></div>
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+    <div class="rowx footer">
+        <div class="col-lg-12   col-md-11 col-sm-11 col-xs-11" style="padding:0;text-align:right">
+            <table style="width:100%" class="hidden-xs  hidden-xsm">
+                <tr>
+
+
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'oponesrch',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <!--<td style="width:70px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-number-box="num_days" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div></td>-->
+
+                    <td style="width:45px;text-align:left;padding-right:2px"><div dx-button="btn_search"></div></td>
+                    <td style="width:45px;padding-left:5px" ng-show="IsJLOG"><div dx-button="btn_jlog"></div></td>
+
+
+                    <td> </td>
+                    <!-- <td style="width:45px;padding-left:5px" ng-show="IsNoCrewVisible && !isMobile"><div dx-button="btn_folder"></div></td>-->
+
+
+
+                </tr>
+            </table>
+            <table class="hidden visible-xs  visible-xsm">
+                <tr>
+
+
+                    <td style="width:110px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_fromxs" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:80px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-number-box="num_days" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:45px;text-align:left;padding-right:2px"><div dx-button="btn_search"></div></td>
+                    <td style="width:43px;padding-left:0px"><div dx-button="btn_log"></div> </td>
+
+
+
+
+                </tr>
+            </table>
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+    <div id="popup_jlog" dx-popup="popup_jlog">
+        <div style="padding:0px 0 0 0">
+            <div class="col-lg-6" style="padding:0 0 0 5px !important;">
+                <!--<div dx-data-grid="dg_fuelflt"></div>-->
+            </div>
+            <div class="col-lg-3" style="padding:0 0 0 5px !important;">
+                <div style="border:1px solid gray;padding:10px;text-align:center;background:#eee;">Log</div>
+                <div style="padding:10px;border:1px solid gray;border-top:none">
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 3px 0 3px; ">
+                        <label>BLOCK OFF</label>
+                        <div class="center" dx-date-box="jl_offblock"></div>
+
+                    </div>
+                    <div class="col-lg-6 col-md-3 col-sm-12 col-12   padding-7 dx-border" style="padding-bottom:0;padding:3px 3px 3px 3px;padding-left:2px;">
+                        <label>&nbsp; </label>
+                        <div class="center" dx-date-box="jl_offblock_hh"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 3px 0 3px; ">
+                        <label>T/O TIME</label>
+                        <div class="center" dx-date-box="jl_takeoff"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-3 col-sm-12 col-12   padding-7 dx-border" style="padding-bottom:0;padding:3px 3px 3px 3px;padding-left:2px;">
+                        <label>&nbsp; </label>
+                        <div class="center" dx-date-box="jl_takeoff_hh"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 3px 0 3px; ">
+                        <label>LND TIME</label>
+                        <div class="center" dx-date-box="jl_landing"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-3 col-sm-12 col-12   padding-7 dx-border" style="padding-bottom:0;padding:3px 3px 3px 3px;padding-left:2px;">
+                        <label>&nbsp; </label>
+                        <div class="center" dx-date-box="jl_landing_hh"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 3px 0 3px; ">
+                        <label>BLOCK ON</label>
+                        <div class="center" dx-date-box="jl_onblock"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-3 col-sm-12 col-12   padding-7 dx-border" style="padding-bottom:0;padding:3px 3px 3px 3px;padding-left:2px; ">
+                        <label>&nbsp; </label>
+                        <div class="center" dx-date-box="jl_onblock_hh"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>PF LR</label>
+                        <div dx-select-box="sb_jlpflr"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 3px 0 3px; ">
+                        <label>FLIGHT TIME</label>
+                        <div class="center" style="background:white !important" dx-text-box="jl_flighttime"></div>
+                    </div>
+
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 3px 0 3px; ">
+                        <label>BLOCK TIME</label>
+                        <div class="center" style="background:white !important" dx-text-box="jl_blocktime"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3" style="padding:0 0 0 5px !important;">
+                <div style="border:1px solid gray;padding:10px;text-align:center;background:#eee;">Fuel</div>
+                <div style="padding:10px;border:1px solid gray;border-top:none;height:360px">
+                    <div class="col-lg-12   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>Fuel Unit</label>
+                        <div dx-select-box="jl_volumeunit" dx-validator="{validationGroup:'jlog',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <!--<div class="col-lg-4   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                                <label>OFP Trip</label>
+                    <div class="center" dx-number-box="fuel_fp" dx-validator="{validationGroup:'fbacflight',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+                            <div class="col-lg-4   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                                <label>Taxi</label>
+                    <div class="center" dx-number-box="fuel_defuel" dx-validator="{validationGroup:'fbacflight',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>-->
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>OFP Fuel</label>
+                        <div class="center" dx-number-box="jl_fuel_fp"></div>
+                    </div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>Pilot Req. Fuel</label>
+                        <div class="center" dx-number-box="jl_fuel_pilot"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>Uplift </label>
+                        <div class="center" dx-number-box="jl_fuel_dep" dx-validator="{validationGroup:'jlog',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>Dep. Fuel</label>
+                        <div class="center" dx-number-box="jl_fuel_dep2" dx-validator="{validationGroup:'jlog',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>Arr. Fuel</label>
+                        <div class="center" dx-number-box="jl_fuel_arr" dx-validator="{validationGroup:'jlog',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>Used</label>
+                        <div class="center" dx-number-box="jl_fuel_used"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>T/O Weight</label>
+                        <div class="center" dx-number-box="jl_tow"></div>
+                    </div>
+                    <div class="col-lg-6   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>LND Weight</label>
+                        <div class="center" dx-number-box="jl_lndw"></div>
+                    </div>
+                    <!--<div style="clear:both"></div>
+                    <div class="col-lg-12   padding-7 dx-border" style="padding:3px 7px 3px 7px">
+                        <label>Total</label>
+                        <div class="center" dx-number-box="jl_fuel_total"></div>
+                    </div>
+
+
+                        <div style="clear:both"></div>-->
+
+
+                    <div style="clear:both"></div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

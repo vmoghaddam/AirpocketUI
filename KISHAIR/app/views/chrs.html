@@ -1,0 +1,86 @@
+﻿<style>
+
+
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+</style>
+<div class="box chrs" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <div dx-tabs="tabs_options"></div>
+                    <div class=" col-lg-12 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:5px;">
+                        <div dx-data-grid="dg" id="grid"></div>
+
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        
+
+
+
+
+    </div>
+    <div class="rowx footer">
+        <div class=" col-lg-11 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_new"></div>
+            <div dx-button="btn_edit"></div>
+
+            <div dx-button="btn_delete"></div>
+            <div dx-button="btn_flights"></div>
+        </div>
+        
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+
+        <div class="dx-border" style="margin-top:15px;padding-right:15px;">
+
+
+
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12  padding-left-20 margin-bottom-15">
+                <label> Code</label>
+                <div dx-text-box="txt_code" dx-validator="{validationGroup:'dcadd',  validationRules: [{ type: 'required' }]}"></div>
+            </div>
+            <div class="col-lg-9 col-md-6 col-sm-12 col-xs-12  padding-left-20 margin-bottom-15">
+                <label> Title</label>
+                <div dx-text-box="txt_title" dx-validator="{validationGroup:'dcadd',  validationRules: [{ type: 'required' }]}"></div>
+            </div>
+            <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12  padding-left-20 margin-bottom-15">
+                <label> Remark</label>
+                <div dx-text-box="txt_remark"></div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12  padding-left-20 margin-bottom-15">
+                <label> Nira Code</label>
+                <div dx-text-box="txt_niracode"  ></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+
+    </div>
+
+    <div ng-include="'app/views/routeAdd.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+

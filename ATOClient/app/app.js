@@ -122,11 +122,11 @@ var zapinet = 'https://ava.apinet.airpocket.app/';
 var zfuel = 'https://ava.apifuel.airpocket.app/';
 var zapitrn = 'https://ava.apitrn.airpocket.app/';
 
-var api_ato_client = 'https://ava.ato.apiclient.airpocket.app/';
-var api_ato = 'https://ava.apitrn.airpocket.app/';
+//var api_ato_client = 'https://ava.ato.apiclient.airpocket.app/';
+//var api_ato = 'https://ava.apitrn.airpocket.app/';
 
-//var api_ato_client = 'http://localhost:4006/';
-//var api_ato = 'http://localhost:4005/';
+var api_ato_client = 'http://localhost:4006/';
+var api_ato = 'http://localhost:4005/';
 
 
  

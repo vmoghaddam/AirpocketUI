@@ -1,0 +1,384 @@
+﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_regroute .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_regroute .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_reg .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_reg .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    #dg_route .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_route .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .thin-scroll4::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .thin-scroll4::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        outline: 1px solid slategrey;
+    }
+
+    .CalContent {
+        overflow-y: scroll; /* has to be scroll, not auto */
+        -webkit-overflow-scrolling: touch;
+        height: calc(100vh - 190px);
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box fixtime" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+
+
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+
+                    <div id="conflicts" class="tabc">
+                        <div dx-data-grid="dg_errors" id="dg_errors" class="content" style="overflow-y:hidden"></div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-8 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+                    <td style="width:120px;text-align:right;padding-right:5px" class="dx-border"><div class="center" style="background:white;" dx-select-box="sb_yf" dx-validator="{validationGroup:'fixtimerep',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" style="background:white;font-family:tahoma" dx-select-box="sb_month" dx-validator="{validationGroup:'fixtimerep',  validationRules: [{ type: 'required'}]}"></div></td>
+
+                    <td style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div dx-button="btn_search"></div></td>
+                    <td style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div dx-button="btn_add"></div></td>
+                    <td style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div dx-button="btn_delete"></div></td>
+
+                    <td></td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_date" dx-popup="popup_date">
+        <div class="margin-bottom-5 padding-7 dx-border" style="padding:25px 0 10px 0">
+            <div>
+                <label style="width:45px;text-align:right;margin-right:5px;">From</label>
+
+                <input type="text" class="date1 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+            <div style="margin-top:15px;">
+                <label style="width:45px;text-align:right; margin-right:5px;">To</label>
+
+                <input type="text" class="date2 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <div id="popup_fx" dx-popup="popup_fx">
+        <div style="padding:0px 0 0 0">
+            <div class="col-lg-6" style="padding:0px 0 0 0">
+                <div dx-data-grid="dg_smscrew" id="dg_smscrew"></div>
+            </div>
+            <div class="col-lg-6 dx-border" style="padding:0px 0px 0 10px">
+                 
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <div class="center" style="background:white;" dx-select-box="sb_fx_year" dx-validator="{validationGroup:'fxsave',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <div class="center" style="background:white;" dx-select-box="sb_fx_period" dx-validator="{validationGroup:'fxsave',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <div class="center" style="background:white;" dx-select-box="sb_fx_type" dx-validator="{validationGroup:'fxsave',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>Hour(s)</label>
+                    <div class="center" dx-number-box="num_fx_hh"></div>
+                </div>
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>Minute(s)</label>
+                    <div class="center" dx-number-box="num_fx_mm"></div>
+                </div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>Remark</label>
+                    <div dx-text-area="remark_fx" class="dx-border" style="margin-top:0px;"></div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class="padding-7">
+                    <div style="background:#ddd;padding:5px;border:1px solid #ccc">Selected People</div>
+                    <div class="thin-scroll2" style="overflow-y:auto;border:1px solid #ccc;padding:10px;height:120px">
+                        <div ng-repeat="x in dg_smscrew_selected" style="padding:5px;text-align:center;background:#eee;display:inline-block;font-size:12px;margin:5px;">
+                        <span>{{x.ScheduleName}}</span>
+                            <span style="display:inline-block;margin-left:5px; color:red" ng-click="removeCrew(x)"><i class="fas fa-minus-circle"></i></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+
+</div>

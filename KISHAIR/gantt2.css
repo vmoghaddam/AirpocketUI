@@ -1,0 +1,83 @@
+﻿.thin-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.thin-scroll::-webkit-scrollbar-thumb {
+    background-color: #ddd;
+    outline: 1px solid slategrey;
+}
+
+
+.gantt-main-container {
+    /*display: flex;*/
+     
+}
+.col-fleet{
+    
+    width:110px;
+    display:inline-block;
+    float:left;
+    height:100%;
+}
+
+.col-flights {
+    background: red;
+    display: inline-block;
+    width: calc(100% - 110px);
+    float: left;
+    height: 100%;
+    /*flex-grow: 1;*/
+}
+.header-date{
+     
+    border-bottom:1px solid #ccc;
+}
+.header-time {
+     
+    border-bottom: 1px solid #ccc;
+}
+
+.regs {
+    background-color: #fce9e9;
+}
+.flights{
+    background-color:#eee;
+}
+.cell-hour{
+    border-right:1px solid #ccc;
+    position:relative;
+    text-align:center;
+    line-height:25px;
+    font-size:12px;
+    font-weight:bold;
+}
+.cell-day {
+    border-right: 1px solid #ccc;
+    position: relative;
+    text-align: center;
+    line-height: 23px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.second-time{
+    font-size:11px;
+    position:absolute;
+    top:-5px;
+    left:2px;
+    font-weight:normal;
+}
+.mid-line{
+    position:absolute;
+    border-left:1px solid gray;
+    height:100px;
+    display:inline-block;
+    width:1px;
+}
+
+.hour-line {
+    position: absolute;
+    border-left: 1px dotted #ccc;
+    height: 100px;
+    display: inline-block;
+    width: 1px;
+}

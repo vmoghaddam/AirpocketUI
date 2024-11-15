@@ -1,0 +1,240 @@
+﻿<link href="sfstyles/ejthemes/default-theme/ej.web.all.min.css" rel="stylesheet" />
+<link href="sfstyles/default.css" rel="stylesheet" />
+<link href="sfstyles/default-responsive.css" rel="stylesheet" />
+<link href="sfstyles/ejthemes/responsive-css/ej.responsive.css" rel="stylesheet" />
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+</style>
+
+
+
+
+
+<div class="box flightplanscalendarmaintenance" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'flightplansmaintenance';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div dx-data-grid="dg" id="dg" class="content" style="overflow-y:hidden" dx-item-alias="plan">
+                    <div data-options="dxTemplate: {name: 'detail'}">
+                        <!--  <div class="master-detail-caption">{{employee.data.FirstName + " " + employee.data.LastName + "'s Tasks:"}}</div>-->
+                        <div dx-data-grid="getDetailGridSettings(plan.data.Id)"></div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <!--<div class=" col-lg-3 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <div class="header">Permits</div>
+
+                    <div class="content " ng-show="true">
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>-->
+        <!--<div class=" col-lg-2 col-md-3 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="header">Details</div>
+
+                <div class="content ">
+
+
+                </div>
+
+
+            </div>
+        </div>-->
+
+
+
+
+    </div>
+
+
+    <div class="rowx footer" style="padding-top:2px;">
+        <div class=" col-lg-9 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+                    <!--<td style="width:45px;text-align:right;padding-right:5px">From</td>-->
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'fpcsearch',  validationRules: [{ type: 'required'}]}"></div></td>
+
+                    <!--  <td style="width:30px;text-align:right;padding-right:5px">To</td>-->
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to" dx-validator="{validationGroup:'fpcsearch',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                    <td style="width:200px;text-align:left;padding-right:5px"><div dx-button="btn_register"></div></td>
+                    <td style="width:200px;text-align:left;padding-right:5px"><div dx-button="btn_delete"></div></td>
+                    <td ng-show="lockvisible" style="width:150px;text-align:left;padding-right:5px"><div dx-button="btn_lock"></div></td>
+                    <td ng-show="unlockvisible" style="width:150px;text-align:left;padding-right:5px"><div dx-button="btn_unlock"></div></td>
+                    <td></td>
+                </tr>
+            </table>
+            
+
+
+           <!-- <div dx-button="btn_register"></div>-->
+            <!--<div dx-button="btn_delete"></div>-->
+           <!-- <div dx-button="btn_approve"></div>-->
+
+
+
+
+
+
+        </div>
+        <!--<div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>-->
+        <div class=" col-lg-3 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+
+    <div ng-include="'app/views/flightplanregister.html'"></div>
+
+    <div dx-load-panel="loadPanel"></div>
+
+    <div id="popup_registers" dx-popup="popup_registers">
+        <div style="padding:0px 0 0 0" class="dx-border">
+            <div class="col-lg-4   padding-7">
+                <label>Date</label>
+                <div class="center" dx-date-box="date_flight"></div>
+            </div>
+            <div class="col-lg-8   padding-7">
+                <label>Register</label>
+                <div dx-select-box="sb_msn" dx-validator="{validationGroup:'fpcregisteradd',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
