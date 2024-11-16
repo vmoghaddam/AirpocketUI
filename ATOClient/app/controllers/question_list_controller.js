@@ -6,6 +6,7 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
         $scope.height_dy = 150;
         $scope.prms = $routeParams.prms;
         $scope.exam_id = $routeParams.id;
+        $scope.cid = $routeParams.cid;
         $scope.status_id = 0;
         var storedUserData = localStorage.getItem('profile')
 
@@ -15,7 +16,8 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
             console.log($scope.person_id);
             // You can use userData here...
         } else {
-            console.log('User data not found in local storage')
+            console.log('User data not found in local storage');
+            $scope.person_id = $scope.cid;
         }
 
 
@@ -93,7 +95,11 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
                 $scope.total_answered = response.Data.total_answerd;
                 $scope.total_remained = response.Data.total_remained;
                 $scope.refresh_summary();
-                $scope.startTimer();
+                if ($scope.cid) {
+                    $scope.status_id =2;
+                }
+                else
+                    $scope.startTimer();
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         }
@@ -123,6 +129,10 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
                     $window.location.reload();
                 if ($scope.status_id == 0)
                     $scope.questions = [];
+
+                if ($scope.cid) {
+                    $scope.status_id = 2;
+                }
 
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });

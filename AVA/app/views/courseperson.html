@@ -802,17 +802,17 @@
 
                 <div class="col-lg-10   padding-0" style="padding:10px;margin-top:0px;">
                     <div class="col-lg-4 col-md-4" ng-repeat="data in follow_exam.summary" style="padding: 0 5px 0 5px !important">
-                        <div class="tiles" style="margin-bottom:15px;" ng-style="get_person_result_style(data)">
+                        <div class="tiles" style="margin-bottom:15px;" ng-style="get_person_result_style(data)" ng-click="show_person_exam(data)">
                             <div class="header">
                                 
                                 <table style="width:100%">
                                     <tr>
                                         <td><span class="name" style="width:100%;font-size:13px;color:black;text-align:left">{{ data.name }}</span><span style="font-size:11px;display:inline-block;margin-left:3px;">({{data.exam_id}})</span></td>
                                         <td style="width:30px;text-align:right;padding-right:0px;">
-                                            <span ng-show="is_exam_person_selected(data.person_id)" ng-click="exam_person_click(data.person_id)">
+                                            <span ng-show="is_exam_person_selected(data.person_id)" ng-click="exam_person_click(data.person_id,$event)">
                                                 <i class='fas fa-check-circle' style='font-size:24px;color:gray'></i>
                                             </span>
-                                            <span ng-show="!is_exam_person_selected(data.person_id)" ng-click="exam_person_click(data.person_id)">
+                                            <span ng-show="!is_exam_person_selected(data.person_id)" ng-click="exam_person_click(data.person_id,$event)">
                                                 <i class='far fa-circle' style='font-size: 24px; color: gray'></i>
                                             </span>
 

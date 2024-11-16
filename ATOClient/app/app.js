@@ -59,6 +59,10 @@ app.config(function ($routeProvider) {
         controller: "question_list_controller",
         templateUrl: "/app/views/question_list.html?v=" + '5673'
     });
+    $routeProvider.when("/exam/:id/:cid", {
+        controller: "question_list_controller",
+        templateUrl: "/app/views/question_list.html?v=" + '5673'
+    });
 
     $routeProvider.when("/quiz/paging", {
         controller: "question_paging_controller",

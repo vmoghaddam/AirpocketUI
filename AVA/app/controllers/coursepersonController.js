@@ -2259,7 +2259,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         ];
 
         $scope.selected_exam_people = [];
-        $scope.exam_person_click = function (person_id) {
+        $scope.exam_person_click = function (person_id, $event) {
+            $event.stopPropagation();
             var idx = $scope.selected_exam_people.indexOf(person_id);
             if (idx == -1)
                 $scope.selected_exam_people.push(person_id);
@@ -2269,6 +2270,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         }
 
         $scope.is_exam_person_selected = function (person_id) {
+
             return $scope.selected_exam_people.indexOf(person_id) != -1;
         }
 
@@ -2314,7 +2316,15 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             });
 
         }
+        $scope.show_person_exam = function (data) {
+            window.open('https://localhost:44366/#!/exam/' + data.exam_id + '/' + data.client_id);
+            ztrnService.get_ato_exam(data.exam_id,data.client_id).then(function (response) {
+                $scope.person_exam_detail = response.Data;
+                console.log($scope.person_exam_detail);
+                
 
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        }
 
         // Calculate the width of the progress bar based on the count of answers
         $scope.getProgressBarWidth = function (answersCount, questionCount) {
