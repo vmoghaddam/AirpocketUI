@@ -355,7 +355,12 @@
     .txt-danger {
         color: #ae4450;
     }
-
+    .btn_exam{
+        opacity:0.7;
+    }
+    .btn_exam:hover {
+        opacity: 1;
+    }
 </style>
 
 <div class="box courseperson" style="height:100%;display:none;overflow-y:hidden">
@@ -726,12 +731,12 @@
                                     <input type="text" id="start" ng-model="formatDateTime(follow_exam.exam_date)" readonly>
                                 </div>
                             </div>
-                            <div class="col-lg-12 col-md-6" style="padding: 0 !important">
-                                <div class="personal-input-group">
-                                    <label for="end">Finishing at</label>
-                                    <input type="text" id="firstname" ng-model="formatDateTime(follow_exam.date_end_scheduled)" readonly>
-                                </div>
-                            </div>
+                            <!--<div class="col-lg-12 col-md-6" style="padding: 0 !important">
+            <div class="personal-input-group">
+                <label for="end">Finishing at</label>
+                <input type="text" id="firstname" ng-model="formatDateTime(follow_exam.date_end_scheduled)" readonly>
+            </div>
+        </div>-->
 
                         </div>
                         <div class="profile-card" style="width: 100%; display: inline-block; padding: 5px; margin-bottom: 5px;">
@@ -751,8 +756,42 @@
                             </div>
 
                         </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block; padding: 5px; margin-bottom: 5px;">
+
+
+                            <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                                <table style="width:100%;">
+                                    <tr style="border-bottom:1px solid #eee">
+                                        <td style="text-align:left;padding:8px;">Toal Questions</td>
+                                        <td style="text-align:center;padding:8px;">{{follow_exam.total_questions}}</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid #eee">
+                                        <td style="text-align:left;padding:8px;">Participants</td>
+                                        <td style="text-align:center;padding:8px;">{{follow_exam.participants}}</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid #eee">
+                                        <td style="text-align:left;padding:8px;">Passed</td>
+                                        <td style="text-align:center;padding:8px;">{{follow_exam.passed}}</td>
+                                    </tr>
+                                    <tr style="border-bottom:0px solid #eee">
+                                        <td style="text-align:left;padding:8px;">Failed</td>
+                                        <td style="text-align:center;padding:8px;">{{follow_exam.failed}}</td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+
+                        </div>
                         <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
-                            <div class="section-title" style="text-align:center;margin-bottom:0;padding:10px 5px 10px 5px" ng-class="exam_status_btn_class()" ng-click="exam_status_click()">{{exam_btn_caption}}</div>
+                            <div class="section-title " style="text-align:center;margin-bottom:0;padding:10px 5px 10px 5px" ng-class="exam_status_btn_class()" ng-click="exam_status_click()">{{exam_btn_caption}}</div>
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 10px 5px 10px 5px; background: #bf5074; font-weight: normal; font-size: 14px; "  ng-click="regenerate_all()">Regenerate All</div>
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 10px 5px 10px 5px; background: #fe8b93;font-weight:normal;font-size:14px;"  ng-click="regenerate_selected()">Regenerate Selected</div>
                         </div>
                     </div>
 
@@ -762,10 +801,24 @@
 
 
                 <div class="col-lg-10   padding-0" style="padding:10px;margin-top:0px;">
-                    <div class="col-lg-3 col-md-3" ng-repeat="data in follow_exam.summary" style="padding: 0 5px 0 5px !important">
-                        <div class="tiles" style="margin-bottom:15px;">
+                    <div class="col-lg-4 col-md-4" ng-repeat="data in follow_exam.summary" style="padding: 0 5px 0 5px !important">
+                        <div class="tiles" style="margin-bottom:15px;" ng-style="get_person_result_style(data)">
                             <div class="header">
-                                <span class="name" style="width:100%;font-size:13px;color:black;text-align:left">{{ data.name }}</span>
+                                
+                                <table style="width:100%">
+                                    <tr>
+                                        <td><span class="name" style="width:100%;font-size:13px;color:black;text-align:left">{{ data.name }}</span><span style="font-size:11px;display:inline-block;margin-left:3px;">({{data.exam_id}})</span></td>
+                                        <td style="width:30px;text-align:right;padding-right:0px;">
+                                            <span ng-show="is_exam_person_selected(data.person_id)" ng-click="exam_person_click(data.person_id)">
+                                                <i class='fas fa-check-circle' style='font-size:24px;color:gray'></i>
+                                            </span>
+                                            <span ng-show="!is_exam_person_selected(data.person_id)" ng-click="exam_person_click(data.person_id)">
+                                                <i class='far fa-circle' style='font-size: 24px; color: gray'></i>
+                                            </span>
+
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
                             <div class="ruler-bar" style="margin:25px 0 0px 0">
                                 <div class="ruler-unit" ng-repeat="n in [].constructor(data.total_questions) track by $index">
@@ -776,17 +829,59 @@
                             <div class="progress-bar-container">
                                 <div class="progress-bar" ng-style="{ 'width': getProgressBarWidth(data.total_answered, data.total_questions) + '%' }"></div>
                             </div>
-                            <div class="results">
+                            <!--<div class="results">
                                 <div class="answers" style="font-size:20px;font-weight:normal">
                                     <span class="true-answers" ng-style="{ 'color': '#005657' }">{{ data.score }}</span>
-                                    <!--<span class="false-answers" ng-style="{ 'color': '#ae4450' }">{{ data.total_remained }}</span>--> 
+                                    
                                 </div>
                                 <span class="result" style="font-size:16px;font-weight:normal" ng-class="{
                             'txt-success': data.result === 'PASSED',
                             'txt-warning': data.result === 'RE-EXAM',
                             'txt-danger': data.result === 'FAILED'
                         }">{{ data.result }}</span>
-                            </div>
+                            </div>-->
+                            <table style="width:100%">
+                                <tr>
+                                    <td>
+                                        <i class='fas fa-square' style='font-size: 18px; color: #47807f'></i><span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.correct_answer}}</span>
+                                    </td>
+                                    
+                                    <td>
+                                        <i class='fas fa-square' style='font-size: 18px; color: #851d30'></i>
+                                        <span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.wrong_answer}}</span>
+                                       
+                                    </td>
+                                    
+                                    <td>
+                                        <i class='far fa-square' style='font-size:18px;color:gray'></i>
+                                        <span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.ignored}}</span>
+                                    </td>
+                                     
+                                    <td>
+                                        <i class='fas fa-star' style='font-size: 18px; color: #d481cc'></i>
+                                        <span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.score}}</span>
+                                        
+                                    </td>
+                                    <td></td>
+                                    <td style="text-align:right">
+
+                                        <span ng-show="data.status_id==2" style="font-weight:bold;">
+                                            {{data.result}}
+                                        </span>
+                                        <span ng-show="data.status_id==1" style="font-size:11px;">
+                                            Proceeding
+                                        </span>
+                                        <span ng-show="data.status_id==0" style="font-size:11px;">
+                                            Waiting
+                                        </span>
+
+                                    </td>
+                                     
+
+                                  
+                                </tr>
+
+                            </table>
                         </div>
                     </div>
 

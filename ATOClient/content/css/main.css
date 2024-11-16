@@ -30,10 +30,45 @@
     
     font-size: 16px;
 }
+.x_button_default {
+    background-color: #708f7f; /* Initial background color */
 
-.block {
-    display: block;
+    transition: background-color 0.3s ease; /* Smooth transition */
+    border: 1px solid #536a5e;
 }
+
+    .x_button_default:hover {
+        background-color: #536a5e; /* Background color when hovered */
+    }
+
+.x_button_yes {
+    width: 120px;
+    background: #536a5e;
+    color:white;
+   
+}
+.x_button_no {
+    width: 120px;
+    background: #6d1b16;
+    color:white;
+    
+}
+.x_button {
+    opacity: 0.5;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+.x_button:hover{
+    opacity:1;
+}
+
+
+    .block {
+        display: block;
+    }
 
 .lowercase {
     text-transform: lowercase;

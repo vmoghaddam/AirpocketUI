@@ -123,6 +123,20 @@ app.factory('atoService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
     serviceFactory.get_exam_summary = _get_exam_summary;
 
+
+    var _close_exam = function (dto) {
+        var deferred = $q.defer();
+        $http.post(api_ato + 'api/trn/exam/sign/client/', dto ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.close_exam = _close_exam;
+
       
 
 

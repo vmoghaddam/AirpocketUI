@@ -72,6 +72,12 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
             return moment(new Date(dt)).format('HH:mm').toUpperCase();
         };
 
+        $scope.formatDateTime = function (dt) {
+            if (!dt)
+                return "unknown";
+            return moment(new Date(dt)).format('YYYY-MMM-DD (ddd) HH:mm').toUpperCase();
+        };
+
         $scope.bind = function () {
             atoService.get_ato_exam($scope.exam_id, $scope.person_id).then(function (response) {
                 console.log('---Get Exam----', response);
@@ -107,6 +113,9 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
                 $scope.passed_minutes = response.Data.passed_minutes;
                 $scope.remained_minutes = response.Data.remained_minutes;
                 $scope.score = response.Data.score;
+                $scope.correct_answer = response.Data.correct_answer;
+                $scope.wrong_answer = response.Data.wrong_answer;
+                $scope.negative_point = response.Data.negative_point;
                 $scope.result = response.Data.result;
                 $scope.result_id = response.Data.result_id;
 
@@ -146,5 +155,40 @@ app.controller('question_list_controller', ['$scope', '$location', 'authService'
         });
 
         $scope.bind();
+
+
+
+        $scope.isModalVisible = false;
+
+        $scope.openModal = function () {
+            
+            $scope.isModalVisible = true;
+        };
+
+        $scope.closeModal = function () {
+            $scope.isModalVisible = false;
+        };
+
+        $scope.confirmAction = function () {
+            $scope.isModalVisible = false;
+            atoService.close_exam({ person_id: $scope.person_id,exam_id: $scope.exam_id }).then(function (response) {
+
+                $window.location.reload();
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+           
+        };
+
+        $scope.get_answer_title_class = function (ans) {
+            if (ans.is_answer == 1)
+                return 'correct_answer';
+            return '';
+        }
+
+        $scope.get_result_class = function () {
+            return $scope.result;
+        }
+
+
+
 
     }]);
