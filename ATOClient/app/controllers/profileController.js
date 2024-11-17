@@ -46,10 +46,18 @@ app.controller('profileController', ['$scope', '$location', '$routeParams', '$ro
         $scope.exam = function () {
             $window.location.href = '/#!/quiz/list';
         };
+        $scope.go_exam = function (exam) {
+            alert(exam.exam_id);
+            $window.open('exam/' + exam.exam_id);
+        };
 
         $scope.Cockpit = [36, 37, 38, 30, 31, 32, 33, 1, 2, 3, 4, 5, 6, 7, 8, 9];
         $scope.bind = function () {
-            
+            atoService.get_person_exams($scope.person_id).then(function (response) {
+
+                $scope.exams = response.Data;
+                
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             atoService.get_instructor_course($scope.person_id).then(function (response) {
 
                 $scope.instructor_courses = response.Data;
@@ -106,8 +114,8 @@ app.controller('profileController', ['$scope', '$location', '$routeParams', '$ro
             return moment(new Date(dt)).format('MMM-DD-YYYY').toUpperCase();
         };
 
-        $scope.go_exam = function (id) {
-            $rootScope.navigate_exam(id);
+        $scope.go_exam = function (exam) {
+            $rootScope.navigate_exam(exam.exam_id);
         };
         ///////////////////////
         if (!authService.isAuthorized()) {

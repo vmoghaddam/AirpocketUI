@@ -155,7 +155,7 @@
         color: white;
         margin-bottom: 10px;
         background-color: #536a5e;
-        height: 30px;
+        height: 36px;
         align-content: center;
     }
 
@@ -566,32 +566,25 @@
                     <div class="tab-pane" ng-style="{ 'height': (windowHeight - 160) + 'px' }" ng-class="{active: isActiveTab(1)}" role="tabpanel">
                         <div style="padding: 0px !important" class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
                             <div style="padding: 0px !important; border: 1px solid lightgray; margin-bottom: 7px" class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-                                <div ng-repeat="course in instructor_courses" class="card-container">
+                                <div ng-repeat="course in exams" class="card-container" ng-click="go_exam(course)">
                                     <div class="title">
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: left; padding: 7px">
-                                            {{course.Title}}
+                                            {{course.course_title}}
                                         </div>
                                         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align: right; padding: 7px">
-                                            {{course.No}}No
+                                            Id:{{course.exam_id}}
                                         </div>
                                     </div>
 
                                     <div class="date-range">
                                         <div class="col-sm-6 col-xs-6">
-                                            <p style="display: inline-block">Start</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateStart | date: 'yyyy-MM-dd'}}</p>
+                                            <p style="display: inline-block">Start</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.exam_date_actual | date: 'yyyy-MM-dd HH:mm'}}</p>
                                         </div>
                                         <div class="col-sm-6 col-xs-6">
-                                            <p style="display: inline-block">End</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateEnd | date: 'yyyy-MM-dd'}}</p>
+                                            <p style="display: inline-block">Duration</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.exam_duration}}</p>
                                         </div>
                                     </div>
-                                    <div class="date-range">
-                                        <div class="col-sm-6 col-xs-6">
-                                            <p style="display: inline-block">Issue</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateIssue | date: 'yyyy-MM-dd'}}</p>
-                                        </div>
-                                        <div class="col-sm-6 col-xs-6">
-                                            <p style="display: inline-block">Expire</p> &nbsp; <p style="font-weight: bold; display: inline-block">{{course.DateExpire | date: 'yyyy-MM-dd'}}</p>
-                                        </div>
-                                    </div>
+                                   
 
                                     <div style="border-bottom: 1px dashed lightgray"></div>
                                     <div class="date-range" style="margin: 7px 0 7px 0">
@@ -600,7 +593,7 @@
                 'text-warning': course.CoursePeopleStatus === 'RE-EXAM',
                 'text-danger': course.CoursePeopleStatus === 'FAILED',
                 'text-unknown': course.CoursePeopleStatus === 'UNKNOWN'}">
-                                            <div style="font-weight: bold; display: inline-block">{{course.CoursePeopleStatus}}</div>
+                                            <div style="font-weight: bold; display: inline-block">{{course.exam_status}}</div>
                                         </div>
                                     </div>
                                 </div>

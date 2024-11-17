@@ -1110,6 +1110,20 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.get_ato_exam = _get_ato_exam;
+
+
+    var _get_templates = function () {
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/question/templates/' ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_templates = _get_templates;
 	
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;

@@ -535,7 +535,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
 
         },
-        height: $(window).height() - 247,
+        height: 730-200,
         bindingOptions: {
 
             dataSource: 'entity.Sessions',
@@ -1016,6 +1016,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         dragEnabled: false,
         closeOnOutsideClick: false,
         onShowing: function (e) {
+             
             var size = $rootScope.getWindowSize();
 
             $scope.pop_width = size.width;
@@ -1030,13 +1031,69 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         onShown: function (e) {
             $scope.bindTeachers();
             if ($scope.isNew) {
+                //$scope.selected_exam = { id: -1, template:[]};
+                //ztrnService.get_templates().then(function (response) {
+                //    $scope.loadingVisible = false;
+                //    //11-17
+                //    $scope.selected_exam.template = response.Data;
+                //    console.log($scope.selected_exam.tempData);
 
+                //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                $scope.selected_exam = {
+                    "id": null,
+                    "course_id": null,
+                    "exam_date": null,
+                    "exam_date_persian": null,
+                    "location_title": null,
+                    "location_address": null,
+                    "location_phone": null,
+                    "remark": null,
+                    "status_id": null,
+                    "created_by": null,
+                    "confirmed_by": null,
+                    "created_date": null,
+                    "confirmed_date": null,
+                    "exam_type_id": null,
+                    "signed_by_ins1_date": null,
+                    "signed_by_ins2_date": null,
+                    "signed_by_director_date": null,
+                    "signed_by_staff_date": null,
+                    "duration": null,
+                    "date_start": null,
+                    "date_end_scheduled": null,
+                    "date_end_actual": null,
+                    "date_start_scheduled": null,
+                    "groups": [],
+                    "people": [],
+                    "template": [
+                        { category_id: 1, category: 'Air condition', total: null },
+                        { category_id: 2, category: 'APU', total: null },
+                        { category_id: 3, category: 'Automatic Flight', total: null },
+                        { category_id: 4, category: 'Communication', total: null },
+                        { category_id: 5, category: 'Electrical', total: null },
+                        { category_id: 6, category: 'Emergency', total: null },
+                        { category_id: 7, category: 'Engine', total: null },
+                        { category_id: 8, category: 'Fire Protection', total: null },
+                        { category_id: 9, category: 'Flight Control', total: null },
+                        { category_id: 10, category: 'Flight instrument', total: null },
+                        { category_id: 11, category: 'Fuel', total: null },
+                        { category_id: 12, category: 'General', total: null },
+                        { category_id: 13, category: 'Hydraulic', total: null },
+                        { category_id: 14, category: 'Ice&rain Protection', total: null },
+                        { category_id: 15, category: 'Landing Gear', total: null },
+                        { category_id: 16, category: 'Limitation', total: null },
+                        { category_id: 17, category: 'Navigation', total: null },
+                        { category_id: 18, category: 'Pneumatic', total: null },
+                        { category_id: 19, category: 'Warning System', total: null },
+                    ],
+                };
             }
 
             //var dsclient = $rootScope.getClientsDatasource($scope.LocationId);
             //$scope.clientInstance.option('dataSource', dsclient);
 
             if ($scope.tempData != null) {
+                
                 $scope.loadingVisible = true;
                 ztrnService.getCourseViewObject($scope.tempData.Id).then(function (response) {
                     $scope.loadingVisible = false;
@@ -1098,7 +1155,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
     //save button
     $scope.popup_add.toolbarItems[12].options.onClick = function (e) {
-
+       
         var result = e.validationGroup.validate();
 
         if (!result.isValid) {
