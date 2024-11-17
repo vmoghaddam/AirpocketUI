@@ -208,19 +208,21 @@
     if ($scope.type == 'appflight') {
         $('.footeritem').hide();
         if ($scope.is_crew) {
-            $('.footerflight').width('16.6%').show();
+            $('.footerflight').width('14.28%').show();
             //$('.footernotification').width('20%').show();
-            $('.footercertification').width('16.6%').show();
-            $('.footerlibrary').width('16.6%').show();
-            $('.footerforms').width('16.6%').show();
-            $('.footerhome').width('16.6%').show();
-            $('.footertrnpanel').width('16.6%').show();
+            $('.footercertification').width('14.28%').show();
+            $('.footerlibrary').width('14.28%').show();
+            $('.footerforms').width('14.28%').show();
+            $('.footerhome').width('14.28%').show();
+            $('.footerforms').width('14.28%').show();
+            $('.footertrnpanel').width('14.28%').show();
         }
         else {
-            $('.footerlibrary').width('25%').show();
-            $('.footerforms').width('25%').show();
-            $('.footerhelp').width('253%').show();
-            $('.footertrnpanel').width('25%').show();
+            $('.footerlibrary').width('20%').show();
+            $('.footerforms').width('20%').show();
+            $('.footerhelp').width('20%').show();
+            $('.footerforms').width('20%').show();
+            $('.footertrnpanel').width('20%').show();
         }
 
 
@@ -285,15 +287,13 @@
 
     if ($scope.type == 'forms') {
         $('.footeritem').hide();
-        // $('.footerflight').width('16.66667%').show();
-        // $('.footernotification').width('16.66667%').show();
-        // $('.footercertification').width('16.66667%').show();
-        $('.footerforms').width('25%').show();
-        $('.footerformnew').width('25%').show();
+        $('.footerflight').width('16.66667%').show();
+        $('.footernotification').width('16.66667%').show();
+        $('.footercertification').width('16.66667%').show();
+        $('.footerforms').width('16.66667%').show();
+        $('.footerformnew').width('16.66667%').show();
 
-        $('.footerformdelete').width('25%').show();
-        $('.footerhome').width('25%').show();
-
+        $('.footerformdelete').width('16.66667%').show();
 
 
     }

@@ -252,7 +252,9 @@ var apiQA = 'https://https://ava.apiqa.airpocket.app/';  //*****
 
 var zscheduling='https://ava.apischedulingtemp.airpocket.app/';
 var extapi='https://ava.api.airpocket.app/';
-var zauth ='https://ava.apinet.airpocket.app/';
+var zauth = 'https://ava.apinet.airpocket.app/';
+
+var serviceForms = 'http://localhost:9066/';
   
 /////////////////////////////////////////////////////////////////////
 

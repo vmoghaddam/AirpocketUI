@@ -909,6 +909,10 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/quiz.html?v=1103"
     });
 
+    $routeProvider.when("/forms/vacation", {
+        controller: "formsVacationController",
+        templateUrl: "/app/views/formsvacation.html?v=1229"
+    });
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
@@ -973,7 +977,7 @@ var zfuel = 'https://ava.apifuel.airpocket.app/';
 var zapitrn = 'http://localhost:4005/';
 //'http://localhost:58908/';
 //'http://localhost:40654/';
-
+var serviceRequest = 'http://localhost:9066/';
 //'http://localhost:10707/';
 //'http://ngauthenticationapi.azurewebsites.net/';
 var vira_api = "https://lmmcore.online/";

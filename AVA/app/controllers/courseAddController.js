@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('courseAddController', ['$scope', '$location', 'courseService', 'authService', '$routeParams', '$rootScope', 'trnService', 'ztrnService', function ($scope, $location, courseService, authService, $routeParams, $rootScope, trnService, ztrnService) {
+app.controller('courseAddController', ['$scope', '$location', 'courseService', 'authService', '$routeParams', '$rootScope', 'trnService', 'ztrnService', '$http', function ($scope, $location, courseService, authService, $routeParams, $rootScope, trnService, ztrnService, $http) {
 
     $scope.IsEditable = true; $rootScope.HasTrainingAdmin();
 
@@ -165,9 +165,19 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         $scope.entity.Sessions = [];
         $scope.entity.Syllabi = [];
 
+        $scope.selected_exam.id = null;
+        $scope.selected_exam.course_id = null;
+        $scope.selected_exam.exam_date = null;
+        $scope.selected_exam.location_title = null;
+        $scope.selected_exam.location_address = null;
+        $scope.selected_exam.location_phone = null;
+        $scope.selected_exam.duration = null;
+        $scope.selected_exam.template = [];
+        $scope.selected_exam.groups = [];
+        $scope.selected_exam.people = [];
     };
 
-    $scope.bind = function (data, sessions, syllabi,exams) {
+    $scope.bind = function (data, sessions, syllabi, exams) {
         //2023-07-29
         if ($scope.tempData.ReadOnly == 100)
             $scope.IsEditable = false;
@@ -287,6 +297,33 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             };
         else {
             $scope.selected_exam = exams[0];
+
+            $http.get($rootScope.serviceUrl + 'odata/base/jobgroups/' + Config.CustomerId).then(function (response) {
+                $scope._JobGroup = response.data;
+
+                $scope.g = [];
+                $.each($scope.selected_exam.groups, function (_i, _d) {
+
+                    var exist = Enumerable.From($scope._JobGroup).Where("$.Id==" + _d).FirstOrDefault();
+                   
+                    if (exist != null) {
+                        var jg = { Id: exist.Id, Title: exist.Title, FullCode: exist.FullCode };
+
+                        console.log(jg)
+                        $scope.g.push(jg);
+                      
+                    }
+
+
+
+                });
+                $scope.selected_exam.groups = $scope.g
+            });
+
+            
+
+            console.log('-----selected-----', $scope.selected_exam)
+
         }
 
 
@@ -392,12 +429,12 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                 clearInterval(myVar);
             }, 10);
 
-           // $scope.btn_visible_aircrafttype = newValue == 1;
-           // $scope.btn_visible_coursetype = newValue == 2;
-          //  $scope.btn_visible_education = newValue == 3;
-           // $scope.btn_visible_course = newValue == 4;
-          //  $scope.btn_visible_group = newValue == 5;
-          //  $scope.btn_visible_employee = newValue == 6;
+            // $scope.btn_visible_aircrafttype = newValue == 1;
+            // $scope.btn_visible_coursetype = newValue == 2;
+            //  $scope.btn_visible_education = newValue == 3;
+            // $scope.btn_visible_course = newValue == 4;
+            //  $scope.btn_visible_group = newValue == 5;
+            //  $scope.btn_visible_employee = newValue == 6;
 
 
 
@@ -1004,7 +1041,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                 ztrnService.getCourseViewObject($scope.tempData.Id).then(function (response) {
                     $scope.loadingVisible = false;
 
-                    $scope.bind(response.Data.course, response.Data.sessions, response.Data.syllabi,response.Data.exams);
+                    $scope.bind(response.Data.course, response.Data.sessions, response.Data.syllabi, response.Data.exams);
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             }
@@ -1068,7 +1105,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             General.ShowNotify(Config.Text_FillRequired, 'error');
             return;
         }
-        var dto = {};
+        var dto = {
+            exams: []
+        };
         if ($scope.isNew) {
             $scope.entity.Id = -1;
             $scope.entity.CustomerId = Config.CustomerId;
@@ -1107,6 +1146,13 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         dto.Instructor2Id = $scope.entity.Instructor2Id;
 
         dto.Cost = $scope.entity.Cost;
+
+        var _groups = []
+        $.each($scope.selected_exam.groups, function (_i, _d) {
+            _groups.push(_d.Id);
+        });
+
+        dto.exams.push({ id: $scope.selected_exam.id, course_id: $scope.selected_exam.course_id, exam_date: $scope.selected_exam.exam_date, exam_date_persian: null, location_title: $scope.selected_exam.location_title, location_address: $scope.selected_exam.location_address, location_phone: $scope.selected_exam.location_phone, duration: $scope.selected_exam.duration, template: $scope.selected_exam.template, groups: _groups, people: $scope.selected_exam.people });
         console.log(dto);
 
         $scope.loadingVisible = true;
@@ -2180,7 +2226,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         }
     };
 
-    
+
     $scope._exam_date = null;
     $scope._exam_time = null;
     $scope.exam_date_scheduled = {
@@ -2227,6 +2273,12 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         hoverStateEnabled: false,
         bindingOptions: {
             value: 'selected_exam.location_address',
+        }
+    };
+    $scope.exam_location_phone = {
+        hoverStateEnabled: false,
+        bindingOptions: {
+            value: 'selected_exam.location_phone',
         }
     };
     $scope.removeGroup = function () {
@@ -2400,7 +2452,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         summary: {
             totalItems: [
                 {
-                  column: "count",
+                    column: "count",
                     summaryType: "sum",
                     customizeText: function (data) {
                         return data.value;
@@ -2439,24 +2491,24 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         text: 'Generate Questions',
         type: 'success',
         icon: 'add',
-        width:'100%',
-       
+        width: '100%',
+
         // validationGroup: 'ctrsearch',
         bindingOptions: {},
         onClick: function (e) {
             $scope.loadingVisible = true;
-            ztrnService.generateQuestions({ exam_id: $scope.selected_exam.id}).then(function (response) {
+            ztrnService.generateQuestions({ exam_id: $scope.selected_exam.id }).then(function (response) {
 
                 $scope.clearEntity();
 
 
                 General.ShowNotify(Config.Text_SavedOk, 'success');
 
-               
+
 
 
                 $scope.loadingVisible = false;
-                 
+
 
 
 

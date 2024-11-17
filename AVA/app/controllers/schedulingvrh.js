@@ -15,6 +15,20 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
     }
 
 
+    $scope.btn_req = {
+        text: 'Requests',
+        type: 'default',
+
+        width: 160,
+
+        onClick: function (e) {
+            $window.open('https://localhost:44385/#!/forms/vacation', '_blank');
+
+
+        }
+
+    };
+
 
     $scope.OnlyRoster = false;
     if ($rootScope.userName.toLowerCase() == 'train.moradi' || $rootScope.userName.toLowerCase() == 'mohammadifard')
