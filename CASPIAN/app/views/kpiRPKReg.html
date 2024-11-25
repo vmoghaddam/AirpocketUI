@@ -1,0 +1,220 @@
+﻿  <style>
+    .fuContent {
+        overflow-y: scroll; /* has to be scroll, not auto */
+        -webkit-overflow-scrolling: touch;
+        height: calc(100vh - 130px);
+    }
+
+    @media (max-width: 600px) {
+        .fuHeader {
+            display: none;
+        }
+
+        .fuContent {
+            height: calc(100vh - 130px);
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .fuContent {
+            height: calc(100vh - 100px);
+        }
+    }
+
+    .thin-scroll3::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .thin-scroll3::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    .tile-inf {
+        border: 1px solid #ccc;
+        margin: 5px 5px 5px 0;
+        text-align: center;
+        border-radius: 2px;
+        padding: 3px;
+        background: white;
+    }
+
+        .tile-inf .caption {
+            font-size: 14px;
+            padding: 4px 1px 3px 1px;
+            color: #666666 !important;
+            font-weight: normal
+        }
+
+        .tile-inf .value {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 1px 1px 2px 1px;
+        }
+
+        .tile-inf td {
+            background: white;
+        }
+
+    .thin-scroll4::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .thin-scroll4::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        outline: 1px solid slategrey;
+    }
+
+    .padding-5 .dx-popup-content {
+        padding: 0px !important;
+    }
+
+    .dx-overlay-wrapper {
+        padding: 0 !important
+    }
+
+    .dx-popup-content {
+        padding: 0 !important;
+    }
+
+
+    #dg_monthly .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_monthly .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_monthly .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_monthly .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    .pos {
+        color: green;
+    }
+
+    .neg {
+        color: red;
+    }
+
+    .nut {
+        color: gray;
+    }
+
+    .fsymbol {
+        font-size: 20px;
+        margin-left: 5px;
+    }
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .tbl-types td {
+        padding: 5px;
+    }
+
+        .tbl-types td:first-child {
+            padding-left: 0;
+        }
+
+        .tbl-types td:last-child {
+            padding-right: 0;
+        }
+
+    .off-type {
+        background: #eee;
+        color: black;
+    }
+
+    .on-type {
+        background: #a6a6a6;
+        color: white;
+    }
+
+    #dg_monthly2 .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_monthly2 .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_monthly2 .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_monthly2 .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+</style>
+
+
+<div ng-controller="kpiRPKRegController" class="bifuelroute">
+    <div id="popup" dx-popup="popup">
+        <div class="wrapper fuContent thin-scroll3" style="padding:10px;background-color:whitesmoke">
+            <div class="padding-0" style="padding:15px; border:1px solid #ccc;background:white;margin-top:0px">
+                <div dx-tag-box="tagYears" style="padding:4px;margin-bottom:5px;"></div>
+
+                <table style="width:100%;margin:10px 0 10px 0" class="tbl-types">
+                    <tr>
+                        <td style="text-align:center;" ng-repeat="t in grouped">
+                            <div style="text-align:center;border:1px solid #ccc;padding:10px;font-weight:bold;font-size:16px;" ng-class="getTypeSelectedClass(t.RegisterID)" ng-click="selectType(t.RegisterID,t.Register)">
+                                {{t.Register}}({{t.Type}})
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="col-lg-7 padding-0" style="padding-right:20px;">
+                    <div dx-chart="chart_monthly_rpk" style="margin-top:20px"></div>
+                </div>
+                <div class="col-lg-5 padding-0" style="padding-left:20px;">
+                    <div dx-chart="chart_monthly_rpktotalpanes" style="margin-top:20px"></div>
+                </div>
+                <div style="clear:both"></div>
+
+                <!--<div dx-data-grid="dg_monthly" id="dg_monthly" class="content" style="overflow-y:hidden;margin-top:25px;"></div>-->
+                <div dx-data-grid="dg_monthly2" id="dg_monthly" class="content" style="overflow-y:hidden;margin-top:25px;"></div>
+                <div style="clear:both"></div>
+
+
+            </div>
+            <div id="daily" class="padding-0" style="padding:15px; border:1px solid #ccc;background:white;margin-top:10px">
+                <div dx-tag-box="tagMonths" style="padding:4px;margin-bottom:5px;"></div>
+                <div class="col-lg-7 padding-0" style="padding-right:20px;">
+                    <div dx-chart="chart_daily_rpk" style="margin-top:20px"></div>
+                </div>
+                <div class="col-lg-5 padding-0" style="padding-left:20px;">
+                    <div dx-chart="chart_daily_rpktotalpanes" style="margin-top:20px"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div dx-data-grid="dg_daily2" id="dg_daily2" class="content" style="overflow-y:hidden;margin-top:25px;"></div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+    <div dx-load-panel="loadPanelDaily"></div>
+</div>

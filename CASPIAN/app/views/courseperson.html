@@ -1,0 +1,342 @@
+﻿<div class="box courseperson" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'course';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class=" col-lg-10  col1 col-grid" style="padding-right:2px;padding-left:2px;">
+            <div dx-data-grid="dg" id="grid"></div>
+
+        </div>
+        <div class=" col-lg-2 col1 col-row-sum" style="padding-right:2px;padding-left:2px;">
+            
+            <div class="filter-container box dx-border">
+                <div class="header">Summary</div>
+
+                <div style="display: block; " >
+                    <div style="padding:5px;overflow-y:auto;" class="sum-wrapper">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number cn w3-2017-neutral-gray" ng-click="filterStatus($event,-1)">
+                                <div class="caption">  Pending</div>
+                                <div class="value">
+                                    {{summary.Pending}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number   w3-2017-greenery" ng-click="filterStatus($event,67)">
+                                <div class="caption">
+                                    Registered
+                                </div>
+                                <div class="value">
+                                    {{summary.Registered}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number   w3-2017-flame" ng-click="filterStatus($event,69)">
+                                <div class="caption">
+                                    Canceled
+                                </div>
+                                <div class="value">
+                                    {{summary.Canceled}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number  w3-win-phone-teal" ng-click="filterStatus($event,68)">
+                                <div class="caption">
+                                    Attended
+                                </div>
+                                <div class="value">
+                                    {{summary.Attended}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number   w3-win-phone-red" ng-click="filterStatus($event,70)">
+                                <div class="caption">
+                                    Failed
+                                </div>
+                                <div class="value">
+                                    {{summary.Failed}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:5px;text-align:center">
+                            <div class="card-number   w3-2017-marina" ng-click="filterStatus($event,71)">
+                                <div class="caption">
+                                    Passed
+                                </div>
+                                <div class="value">
+                                    {{summary.Passed}}
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+ 
+<div class="rowx footer">
+    <div class=" col-lg-11 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+        <div dx-button="btn_search"></div>
+        <div dx-button="btn_new"></div>
+        <div dx-button="btn_employees"></div>
+        <div dx-button="btn_edit"></div>
+
+        <div dx-button="btn_delete"></div>
+    </div>
+    <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+        <div dx-button="btn_filter"></div>
+    </div>
+    <div style="clear:both"></div>
+</div>
+
+<div id="popup_employees" dx-popup="popup_employees">
+    <div class="box">
+        <div class="rowx content" style="clear:both">
+            <div class=" col-lg-3 col-md-3 col-sm-12 col-xs-12 col2">
+                <div class="filter-container box dx-border">
+                    <div class="header">Course Information</div>
+                    <div id="scrollview" dx-scroll-view="scroll_employees">
+                        <div style="display:inline-block;padding-right:5px;">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Title</label>
+                                <div dx-text-box="txt_Title"></div>
+                            </div>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Type</label>
+                                <div dx-text-box="txt_Type"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>No</label>
+                                <div dx-text-box="txt_No" class="center"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Start Date</label>
+                                <div dx-date-box="date_DateStart" class="center"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>End Date</label>
+                                <div dx-date-box="date_DateEnd" class="center"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Organization</label>
+                                <div dx-text-box="txt_Organization"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Location</label>
+                                <div dx-text-box="txt_Location"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Instructor</label>
+                                <div dx-text-box="txt_Instructor"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Training Director</label>
+                                <div dx-text-box="txt_TrainingDirector"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Registration Deadline</label>
+                                <div dx-date-box="date_DateDeadlineRegistration" class="center"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Remaining</label>
+                                <div dx-text-box="txt_Remaining" class="center"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Remark</label>
+                                <div dx-text-box="txt_Remark"></div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class=" col-lg-9 col-md-9 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:5px;">
+                <div dx-data-grid="dg_employees" id="grid"></div>
+
+                <div style="display: block">
+                    <div style="padding:5px;">
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                            <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,-1)">
+                                <div class="caption">  Pending</div>
+                                <div class="value">
+                                    {{courseEmployee.Pending}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                            <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,67)">
+                                <div class="caption">
+                                    Registered
+                                </div>
+                                <div class="value">
+                                    {{courseEmployee.Registered}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                            <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,69)">
+                                <div class="caption">
+                                    Canceled
+                                </div>
+                                <div class="value">
+                                    {{courseEmployee.Canceled}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                            <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,68)">
+                                <div class="caption">
+                                    Attended
+                                </div>
+                                <div class="value">
+                                    {{courseEmployee.Attended}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                            <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,70)">
+                                <div class="caption">
+                                    Failed
+                                </div>
+                                <div class="value">
+                                    {{courseEmployee.Failed}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
+                            <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,71)">
+                                <div class="caption">
+                                    Passed
+                                </div>
+                                <div class="value">
+                                    {{courseEmployee.Passed}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div id="popup_status" dx-popup="popup_status" class="dx-border">
+    <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+        <label>Current Status</label>
+        <div dx-text-box="txt_OldStatus"></div>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+        <label>New Status</label>
+        <div dx-select-box="sb_StatusId" dx-validator="{validationGroup:'statusChange',  validationRules: [{ type: 'required'}]}"></div>
+    </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+        <label>Remark</label>
+        <div dx-text-box="txt_StatusRemark"></div>
+    </div>
+
+    <div style="clear:both"></div>
+
+    <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+        <div dx-check-box="chb_SMS"></div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+        <div dx-check-box="chb_Email"></div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+        <div dx-check-box="chb_AppNotification"></div>
+    </div>
+
+</div>
+
+
+<div id="popup_passed" dx-popup="popup_passed" class="dx-border">
+    <div class="col-lg-8 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+        <label>Name</label>
+        <div dx-text-box="txt_Name"></div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+        <label>Current Status</label>
+        <div dx-text-box="txt_OldStatus"></div>
+    </div>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+        <label>Remark</label>
+        <div dx-text-box="txt_StatusRemark"></div>
+    </div>
+
+    <div style="clear:both"></div>
+    <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col2">
+        <div class="filter-container box dx-border">
+            <div class="header">Certificate</div>
+            <div style="display:inline-block">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Issue Date</label>
+                    <div dx-date-box="date_DateIssue" class="center" dx-validator="{validationGroup:'passed',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>No.</label>
+                    <div dx-text-box="txt_CertificateNo" class="center" dx-validator="{validationGroup:'passed',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div style="clear:both"></div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+        <div dx-check-box="chb_SMS"></div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+        <div dx-check-box="chb_Email"></div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+        <div dx-check-box="chb_AppNotification"></div>
+    </div>
+
+</div>
+
+<div ng-include="'app/views/courseAdd.html'" ng-init="type = 'active';"></div>
+<div dx-load-panel="loadPanel"></div>
+</div>
+
+

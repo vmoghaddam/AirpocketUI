@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
+
+    <link href="content/css/bootstrap.css" rel="stylesheet" />
+    <link href="content/css/w3.css" rel="stylesheet" />
+    <link href="content/css/ionicons.css" rel="stylesheet" />
+    <link href="content/css/fontawsome2.css" rel="stylesheet" />
+   <link href="content/css/dx.common.css" rel="stylesheet" /> 
+    <!--<link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/19.2.7/css/dx.common.css">-->
+    <link rel="dx-theme" data-theme="material.teal-light" href="content/css/material.teal-light.custom.css" data-active="false" />
+    <link rel="dx-theme" data-theme="material.purple-light" href="content/css/material.purple-light.custom.css" data-active="false" />
+    <link rel="dx-theme" data-theme="material.blue-light" href="content/css/material.blue-light.custom.css" data-active="false" />
+    <link rel="dx-theme" data-theme="material.gray-light" href="content/css/material.gray-light.custom.css" data-active="false" />
+    <link rel="dx-theme" data-theme="material.steel-light" href="content/css/material.steel-light.custom.css" data-active="false" />
+
+   <!-- <link rel="dx-theme" data-theme="generic.light" href="content/css/dx.light.css" data-active="false" />
+    <link rel="dx-theme" data-theme="generic.dark" href="content/css/dx.dark.css" data-active="false" />-->
+
+
+    <link href="content/css/fontiran.css" rel="stylesheet" />
+    <!-- <link href="content/css/material.teal-light.custom.css" rel="stylesheet" />-->
+    <link href="content/css/loading-bar.css" rel="stylesheet" />
+    <link href="content/css/social-buttons.css" rel="stylesheet" />
+    <link href="content/css/main.css?v=500" rel="stylesheet" />
+    <link href="content/css/core-ui.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+	<link rel="icon" href="logo.png">
+	 <title>AirPocket</title>
+</head>
+<body>
+    <div ng-app="GriffinApp" style=" height:100%; ">
+        <!-- <ng-view></ng-view>-->
+        <div class="anfade" ng-view></div>
+    </div>
+    <!--<div ng-app="GriffinApp" style="direction:rtl;height:100%">
+
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation" data-ng-controller="indexController">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </button>
+                    <a class="navbar-brand" href="#/">Home</a>
+                </div>
+                <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li data-ng-hide="!authentication.isAuth"><a href="#">Welcome {{authentication.userName}}</a></li>
+                        <li data-ng-hide="!authentication.isAuth"><a href="#/orders">My Orders</a></li>
+                        <li data-ng-hide="!authentication.isAuth"><a href="#/refresh">Refresh Token</a></li>
+                        <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
+                        <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
+                        <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="jumbotron">
+            <div class="container">
+                <div class="page-header text-center">
+                    <h1>AngularJS Authentication</h1>
+                </div>
+                <p>AngularJS Application which uses OAuth Bearer Token for authentication and implements Refresh Tokens. The backend API is built using ASP.NET Web API 2, OWIN middleware, and ASP.NET Identity.</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <ng-view></ng-view>
+        </div>
+
+
+        <hr />
+        <div id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="text-muted">Created by Taiseer Joudeh. Twitter: <a target="_blank" href="http://twitter.com/tjoudeh">@tjoudeh</a></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p class="text-muted">Taiseer Joudeh Blog: <a target="_blank" href="http://bitoftech.net">bitoftech.net</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>-->
+    <script src="scripts/jquery-3.1.0.js"></script>
+    <!-- <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>-->
+    
+	<script src="scripts/jszip.min.js"></script>
+    <script src="scripts/angular-1.7.2.js"></script>
+    <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.2/angular.min.js"></script>-->
+    <script src="scripts/angularjs-sanitize.js"></script>
+    <script src="scripts/angular-route-1.7.2.js"></script>
+    <script src="scripts/angular-animate.js"></script>
+    <script src="scripts/angular-local-storage.min.js"></script>
+    <script src="scripts/loading-bar.min.js"></script>
+    <script type="text/javascript" src="scripts/linq.min.js"></script>
+    <script src="scripts/moment.js"></script>
+    <script src="scripts/knockout.js"></script>
+    <script src="scripts/jsrender.min.js"></script>
+	  <script src="scripts/zingchart.min.js"></script>
+    <!--<script src="scripts/jquery.validate.min.js"></script>
+    <script src="scripts/jquery.validate.unobtrusive.min.js"></script>-->
+   
+   <!--sync-->
+    <!--<script src="scripts/jsonganttdata.js"></script>
+    <script type="text/javascript" src="scripts/knockout-3.4.0.js"></script>
+    <script src="scripts/ej.widget.ko.js"></script>-->
+
+    <script src="scripts/mobile-detect.min.js"></script>
+   <!-- <script type="text/javascript" src="scripts/persian-date.min.js"></script>-->
+    <script type="text/javascript" src="scripts/dx.all.js"></script>
+    <!--<script type="text/javascript" src="https://cdn3.devexpress.com/jslib/19.2.7/js/dx.all.js"></script>-->
+    <!--<script type="text/javascript" src="scripts/ionicons.js"></script>-->
+ <script type="text/javascript" src="scripts/dx-data.js"></script>
+    <script type="text/javascript" src="scripts/chart-bundle.js"></script>
+    <script type="text/javascript" src="scripts/chart.js"></script>
+    <script type="text/javascript" src="scripts/html2canvas.js"></script>
+    <!--Remove-->
+    <script type="text/javascript" src="scripts/jsonganttdata.js"></script>
+    <!-- <script type="text/javascript" src="scripts/gantt.js"></script>-->
+    <!--End-->
+
+
+    <link rel="stylesheet" href="content/css/persian-datepicker.min.css" />
+    
+    <script src="scripts/persian-date.min.js"></script>
+    <script src="scripts/persian-datepicker.min.js"></script>
+
+
+    <script src="scripts/custom-tooltip.js"></script>
+    <script src="scripts/config.js?v=22016"></script>
+    <script src="scripts/core.js?v=31000"></script>
+	
+	 <link href="scripts/styles.css?v=10" rel="stylesheet" />
+    <script src="scripts/selection.min.js"></script>
+
+    <script src="app/app.js?v=3571"></script>
+
+    <!-- Load services -->
+    <script src="app/services/authInterceptorService.js?v=5"></script>
+    <script src="app/services/authService.js?v=5302015"></script>
+    <script src="app/services/weatherService.js?v=5"></script>
+    <script src="app/services/activityService.js?v=5"></script>
+    <script src="app/services/ordersService.js?v=5"></script>
+    <script src="app/services/testService.js?v=5"></script>
+    <script src="app/services/tokensManagerService.js?v=5"></script>
+    <script src="app/services/generalService.js?v=5"></script>
+    <script src="app/services/notificationService.js?v=1118500"></script>
+    <script src="app/services/locationService.js?v=5"></script>
+    <script src="app/services/airportService.js?v=5"></script>
+    <script src="app/services/aircraftService.js?v=5"></script>
+    <script src="app/services/courseService.js?v=5"></script>
+    <script src="app/services/personService.js?v=1058"></script>
+    <script src="app/services/libraryService.js?v=5010"></script>
+    <script src="app/services/organizationService.js?v=5"></script>
+    <script src="app/services/jobgroupService.js?v=5"></script>
+    <script src="app/services/flightService.js?v=35683977"></script>
+    <script src="app/services/statService.js?v=5"></script>
+	 <script src="app/services/flightBagService.js?v=1116005"></script>
+	    <script src="app/services/biService.js"></script>
+		 <script src="app/services/fuelService.js"></script>
+    <!-- Load controllers -->
+    <script src="app/controllers/indexController.js?v=5"></script>
+    <script src="app/controllers/appsController.js?v=50"></script>
+    <script src="app/controllers/homeController.js?v=50"></script>
+    <script src="app/controllers/loginController.js?v=501005"></script>
+    <script src="app/controllers/signupController.js?v=5"></script>
+
+    <script src="app/controllers/filterController.js?v=5"></script>
+
+
+    <script src="app/controllers/ordersController.js?v=5"></script>
+    <script src="app/controllers/testController.js?v=5"></script>
+    <script src="app/controllers/refreshController.js?v=5"></script>
+    <script src="app/controllers/tokensManagerController.js?v=5"></script>
+    <script src="app/controllers/associateController.js?v=5"></script>
+
+    <script src="app/controllers/aircraftSelectController.js?v=5"></script>
+    <script src="app/controllers/coursetypeSelectController.js?v=5"></script>
+    <script src="app/controllers/studyFieldSelectController.js?v=5"></script>
+    <script src="app/controllers/employeeSelectController.js?v=5"></script>
+    <script src="app/controllers/courseSelectController.js?v=5"></script>
+    <script src="app/controllers/jobgroupSelectController.js?v=5"></script>
+
+    <script src="app/controllers/locationAddController.js?v=5"></script>
+    <script src="app/controllers/locationController.js?v=5"></script>
+
+    <script src="app/controllers/organizationAddController.js?v=5"></script>
+    <script src="app/controllers/organizationController.js?v=5"></script>
+
+    <script src="app/controllers/personmiscAddController.js?v=5"></script>
+    <script src="app/controllers/personmiscController.js?v=5"></script>
+
+    <script src="app/controllers/journalAddController.js?v=5"></script>
+    <script src="app/controllers/journalController.js?v=5"></script>
+
+    <script src="app/controllers/airportAddController.js?v=5"></script>
+    <script src="app/controllers/airportController.js?v=5"></script>
+
+    <script src="app/controllers/aircraftTypeController.js?v=5"></script>
+
+    <script src="app/controllers/notificationController.js?v=5"></script>
+
+    <script src="app/controllers/courseTypeAddController.js?v=5"></script>
+    <script src="app/controllers/courseTypeController.js?v=5"></script>
+
+
+   <!-- <script src="app/controllers/courseAddController.js?v=5"></script>
+    <script src="app/controllers/courseController.js?v=5"></script>
+    <script src="app/controllers/coursepersonController.js?v=50"></script>
+    <script src="app/controllers/personcourseController.js?v=5"></script>
+    <script src="app/controllers/personbookController.js?v=5"></script>
+    <script src="app/controllers/certificateAddController.js?v=5"></script>
+    <script src="app/controllers/personcertificateController.js?v=5"></script>-->
+
+    <script src="app/controllers/personAddController.js?v=81573"></script>
+    <script src="app/controllers/personController.js?v=25336"></script>
+    <script src="app/controllers/personViewController.js?v=5"></script>
+    <script src="app/controllers/jobgroupAddController.js?v=5"></script>
+    <script src="app/controllers/jobgroupController.js?v=5"></script>
+
+    <script src="app/controllers/optionAddController.js?v=5"></script>
+    <script src="app/controllers/optionController.js?v=5"></script>
+
+    <script src="app/controllers/libraryAddController.js?v=5000"></script>
+    <script src="app/controllers/documentAddController.js?v=5"></script>
+    <script src="app/controllers/libraryController.js?v=11585"></script>
+
+    <script src="app/controllers/flightDesignController.js?v=5"></script>
+    <script src="app/controllers/flightDesignGridController.js?v=5"></script>
+    <script src="app/controllers/flightController.js?v=5"></script>
+    <script src="app/controllers/flightPlanningController.js?v=5"></script>
+    <script src="app/controllers/flightPlanningGanttViewController.js?v=5"></script>
+
+    <script src="app/controllers/flightPlanViewController.js?v=5"></script>
+
+    <!--<script src="app/controllers/flightBoardAllController.js?v=5"></script>
+    <script src="app/controllers/flightBoardController.js?v=9000"></script>-->
+    <script src="app/controllers/flightPlanRegisterController.js?v=5"></script>
+
+    <script src="app/controllers/flightPlansMaintenanceController.js?v=5"></script>
+    <script src="app/controllers/flightPlansCalendarMaintenanceController.js?v=5"></script>
+    <script src="app/controllers/planRegistersController.js?v=5"></script>
+    <script src="app/controllers/flightPlanApplyController.js?v=5"></script>
+    <script src="app/controllers/flightPlanApply2Controller.js?v=5"></script>
+    <script src="app/controllers/flightPlanPermitController.js?v=5"></script>
+    <script src="app/controllers/flightPlanCrew.js?v=5"></script>
+
+    <!--<script src="app/controllers/crewtest.js?v=5"></script>
+    <script src="app/controllers/crewassign.js?v=5"></script>
+    <script src="app/controllers/crewassign2.js?v=5"></script>-->
+    <script src="app/controllers/crewReportController.js?v=115"></script>
+    <script src="app/controllers/fuelReport.js?v=111126"></script>
+    <script src="app/controllers/flightDelaysController.js?v=5"></script>
+    <script src="app/controllers/flightPlanListController.js?v=5"></script>
+    <script src="app/controllers/flightListController.js?v=5"></script>
+    <script src="app/controllers/irregularFlightController.js?v=5"></script>
+    <script src="app/controllers/changeFlightRegisterController.js?v=600"></script>
+
+
+    <script src="app/controllers/mlistController.js?v=5"></script>
+    <script src="app/controllers/mlistAddController.js?v=5"></script>
+
+    <script src="app/controllers/planController.js?v=1500"></script>
+    <script src="app/controllers/flightReportSecurityController.js?v=5"></script>
+    <script src="app/controllers/regAvailabilityController.js?v=50"></script>
+    <script src="app/controllers/routeAddController.js?v=5"></script>
+    <script src="app/controllers/routeController.js?v=5"></script>
+    <script src="app/controllers/delayCodesController.js?v=15"></script>
+
+    <script src="app/controllers/crewassignreg.js?v=5"></script>
+
+    <script src="app/controllers/rosterDailyController.js?v=15"></script>
+  <!--  <script src="app/controllers/ceoFlightBoardController.js?v=11000"></script>-->
+    <script src="app/controllers/dailyRoster2Controller.js?v=5"></script>
+    <script src="app/controllers/crewtimereport.js?v=5101050"></script>
+    <script src="app/controllers/reportFlights.js?v=5841250"></script>
+    <script src="app/controllers/planningBoard.js?v=5"></script>
+    <script src="app/controllers/rosterController.js?v=114355"></script>
+    <script src="app/controllers/statDelayController.js?v=5"></script>
+    <script src="app/controllers/usersController.js?v=185181919"></script>
+	<script src="app/controllers/rosterReport.js?v=115"></script>
+	
+	<script src="app/controllers/gnt.js?v=2311016570"></script>
+	<script src="app/controllers/reportfdr.js?v=1252121"></script>
+    <script src="app/controllers/finreport.js?v=1000"></script>
+    <script src="app/controllers/finMonthReport.js?v=120"></script>
+	
+	<script src="app/controllers/delayReport.js?v=2211010"></script>
+	<script src="app/controllers/citypair.js?v=212015"></script>
+	<script src="app/controllers/fdps.js?v=266113270"></script> 
+	  <script src="app/controllers/ipaccessController.js?v=1030"></script>
+	  <script src="app/controllers/verify.js?v=100"></script>
+	  <script src="app/controllers/forma.js?v=11117"></script>
+	   <script src="app/controllers/board.js?v=54565"></script>
+	    <script src="app/controllers/boardtest.js?v=1117"></script>
+		 <script src="app/controllers/regflightmonthly.js?v=410010"></script>
+	  <script src="app/controllers/fixtimereport.js?v=57"></script>
+	   <script src="app/controllers/flightsMonthly.js?v=17700"></script>
+	     <script src="app/controllers/formmovaled.js?v=563"></script>
+		 
+		 
+		   <script src="app/controllers/formayearly.js?v=665"></script>
+    <script src="app/controllers/formmovaledyearly.js?v=34"></script>
+    <script src="app/controllers/citypairyearly.js?v=1005"></script>
+	 <script src="app/controllers/delayairportreport.js?v=12070"></script>
+	  <script src="app/controllers/training.js?v=1200"></script>
+	   <script src="app/controllers/nira.js?v=1201100"></script>
+	   
+	    <script src="app/controllers/asrreport.js"></script>
+    <script src="app/controllers/asradd.js?v=46"></script>
+    <script src="app/controllers/dradd.js?v=111800"></script>
+	  <script src="app/controllers/ofpAdd.js?v=1100"></script>
+    <script src="app/controllers/vrAdd.js?v=16"></script>
+    <script src="app/services/fbservice.js?v=1000"></script>
+	
+	<script src="app/controllers/reportefb.js?v=1129001115"></script>
+	<script src="app/controllers/zreportefb.js?v=1129001116"></script>
+	 <script src="app/services/schedulingService.js?v=10113100"></script>
+	  <script src="app/controllers/dutyTimeline.js?v=10"></script>
+    <script src="app/controllers/rptflightspopup.js?v=1"></script>
+
+    <script src="app/controllers/scheduling.js?v=6731"></script>
+	
+	  <script src="app/controllers/fixtime.js?v=10005"></script>
+	
+	<script src="app/controllers/fixtimereportdaily.js?v=12270"></script>
+	
+	 <script src="app/controllers/rawcmd.js"></script>
+	 
+	  <script src="app/controllers/imageviewer.js"></script>
+    <script src="app/controllers/toadd.js"></script>
+    <script src="app/controllers/ldgadd.js"></script>
+	
+	
+	
+	
+	   <script src="app/controllers/kpirpk.js"></script>
+    <script src="app/controllers/kpirpb.js"></script>
+    <script src="app/controllers/kpiftk.js"></script>
+    <script src="app/controllers/kpifbl.js"></script>
+    <script src="app/controllers/kpifrp.js"></script>
+    <script src="app/controllers/kpifc.js"></script>
+    <script src="app/controllers/kpifu.js"></script>
+    <script src="app/controllers/kpifp.js"></script>
+    <script src="app/controllers/kpirpkac.js"></script>
+    <script src="app/controllers/kpirpkreg.js"></script>
+    <script src="app/controllers/kpirpkroute.js"></script>
+
+    <script src="app/controllers/delaybikpi.js"></script>
+    <script src="app/controllers/kpiDelay.js"></script>
+    <script src="app/controllers/kpiDelayCat.js"></script>
+    <script src="app/controllers/kpiDelayTech.js"></script>
+    <script src="app/controllers/kpiDelayTech.js"></script>
+    <script src="app/controllers/kpiDelayAirport.js"></script>
+    <script src="app/controllers/tblDelayAirport.js"></script>
+    <script src="app/controllers/tblDelayedFlights.js"></script>
+    <script src="app/controllers/tblDelay.js"></script>
+    <script src="app/controllers/tblDelayTech.js"></script>
+    <script src="app/controllers/tblDelayCat.js"></script>
+
+
+    <script src="app/controllers/delaybidaily.js"></script>
+    <script src="app/controllers/tbldelayitems.js"></script>
+	
+	<script src="app/services/fdmService.js?v=10776613"></script>
+	<script src="app/controllers/fdm.js?v=20571996"></script>
+	<script src="app/controllers/fdmopscontroller.js?v=10566"></script>
+	<script src="app/controllers/fdmQAController.js?v=1057559"></script>
+    <script src="app/controllers/fdmDashboardCptNew.js?v=10578"></script>
+	<script src="app/controllers/fdmDashboardPilotMonthly.js?v=10575"></script>
+    <script src="app/controllers/fdmDashboardController.js?v=10595"></script>
+	 <script src="app/controllers/fdmRegMonthly.js?v=10595"></script>
+	   <script src="app/controllers/fdmCrewReportController.js?v=1005"></script>
+	   <script src="app/controllers/logininfo.js?v=100"></script>
+	 <!-- <script src="scripts/ej.min.js" type="text/javascript"></script>
+    <script src="scripts/properties.js" type="text/javascript"></script>
+    <script src="scripts/ej.widget.angular.min.js"></script>
+    <script src="scripts/ej.widget.ko.js"></script>-->
+</body>
+</html>

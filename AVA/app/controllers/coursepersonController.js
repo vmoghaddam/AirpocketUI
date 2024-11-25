@@ -467,6 +467,12 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         };
         $scope.selectedCourse = null;
         $scope.selected_intervals = [];
+        $scope.btn_exam = {
+            text: 'Exam',
+            type: 'default',
+            //icon: 'group',
+            width: 150,
+        }
         $scope.btn_people = {
             text: 'Follow Up',
             type: 'default',
@@ -2113,6 +2119,54 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
             }
         };
+
+
+        $scope.popup_exam_visible = false;
+        $scope.popup_exam = {
+            height: 800,
+            width: $(window).width() - 200,
+            fullScreen: true,
+            showTitle: true,
+            title: 'Exam',
+            toolbarItems: [
+
+               
+                {
+                    widget: 'dxButton', location: 'after', options: {
+                        type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
+                            $scope.popup_exam_visible = false;
+                        }
+                    }, toolbar: 'bottom'
+                }
+            ],
+
+            visible: false,
+            dragEnabled: false,
+            closeOnOutsideClick: false,
+            onShowing: function (e) {
+
+
+            },
+            onShown: function (e) {
+
+                $scope.selectedTabFolderIndex = 0;
+               // $scope.preparePeopleGrid();
+
+            },
+            onHidden: function () {
+                //$scope.dg_employees_instance.refresh();
+            },
+
+            onHiding: function () {
+                
+            },
+            bindingOptions: {
+                visible: 'popup_exam_visible',
+                
+
+            }
+        };
+
         $scope.ddd = 'dool';
         $scope.formatDate = function (dt) {
             if (!dt)
@@ -2129,46 +2183,69 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 return "";
             return moment(new Date(dt)).format('YYYY-MMM-DD HH:mm').toUpperCase();
         };
-        $scope.exam_status_click = function () {
-            switch ($scope.follow_exam.status_id) {
-                case 0:
-                    $scope.follow_exam.status_id = 1;
-                    $scope.follow_exam.date_end_actual = null;
-                    $scope.follow_exam.date_start = new Date();
-                    //addMinutes
-                    $scope.exam_btn_caption = "STARTED";
-                    ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
 
 
-                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-                    break;
-                case 1:
-                    $scope.follow_exam.status_id = 2;
-                    $scope.follow_exam.date_end_actual = new Date();
-                    $scope.exam_btn_caption = "FINISHED";
-                    ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
+
+        $scope.exam_status_click = function (st) {
+            if (st == 1) {
+                $scope.follow_exam.status_id = 1;
+                $scope.follow_exam.date_end_actual = null;
+                $scope.follow_exam.date_start = new Date();
+                $scope.exam_start_caption = 'STARTED';
+                ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
 
 
-                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-                    break;
-                case 2:
-                    $scope.follow_exam.status_id = 0;
-                    $scope.follow_exam.date_end_actual = null;
-                    $scope.follow_exam.date_start = null;
-                    $scope.exam_btn_caption = "SCHEDULED";
-                    ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
-
-
-                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-                    break;
-                default:
-                    break;
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             }
+            if (st == 2) {
+                $scope.follow_exam.status_id = 2;
+                $scope.follow_exam.date_end_actual = new Date();
+                $scope.exam_finish_caption = "FINISHED";
+                ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
+
+
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+            }
+            //switch ($scope.follow_exam.status_id) {
+            //    case 0:
+            //        $scope.follow_exam.status_id = 1;
+            //        $scope.follow_exam.date_end_actual = null;
+            //        $scope.follow_exam.date_start = new Date();
+            //        //addMinutes
+            //        $scope.exam_btn_caption = "STARTED";
+            //        ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
+
+
+            //        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+            //        break;
+            //    case 1:
+            //        $scope.follow_exam.status_id = 2;
+            //        $scope.follow_exam.date_end_actual = new Date();
+            //        $scope.exam_btn_caption = "FINISHED";
+            //        ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
+
+
+            //        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+            //        break;
+            //    case 2:
+            //        $scope.follow_exam.status_id = 0;
+            //        $scope.follow_exam.date_end_actual = null;
+            //        $scope.follow_exam.date_start = null;
+            //        $scope.exam_btn_caption = "SCHEDULED";
+            //        ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
+
+
+            //        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+            //        break;
+            //    default:
+            //        break;
+            //}
         }
         $scope.get_person_result_style = function (data) {
             if (data.result == 'PASSED' && data.status_id == 2) {
                 return {
-                    background:'#d9f2df'
+                    background: '#d9f2df'
                 };
             }
             else if (data.result == 'FAILED' && data.status_id == 2) {
@@ -2203,14 +2280,25 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         });
 
         $scope.exam_btn_caption = "";
-        $scope.exam_status_btn_class = function () {
+        $scope.exam_finish_btn_class = function () {
+            switch ($scope.follow_exam.status_id) {
+                case 0:
+                case 1:
+                    return "exam_scheduled";
+                case 2:
+                    return "exam_done";
+                default:
+                    return "";
+            }
+        };
+        $scope.exam_start_btn_class = function () {
             switch ($scope.follow_exam.status_id) {
                 case 0:
                     return "exam_scheduled";
                 case 1:
-                    return "exam_started";
                 case 2:
-                    return "exam_done";
+                    return "exam_started";
+
                 default:
                     return "";
             }
@@ -2285,14 +2373,14 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                     $scope.loadingVisible = true;
                     ztrnService.regenerate_questions(dto).then(function (response) {
 
-                        
+
 
 
                         $scope.loadingVisible = false;
                         $scope.refresh_summary();
                     }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-                 
+
 
 
                     //$scope.loadingVisible = true;
@@ -2318,10 +2406,10 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         }
         $scope.show_person_exam = function (data) {
             window.open('https://localhost:44366/#!/exam/' + data.exam_id + '/' + data.client_id);
-            ztrnService.get_ato_exam(data.exam_id,data.client_id).then(function (response) {
+            ztrnService.get_ato_exam(data.exam_id, data.client_id).then(function (response) {
                 $scope.person_exam_detail = response.Data;
                 console.log($scope.person_exam_detail);
-                
+
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         }
@@ -2355,6 +2443,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 $scope.follow_exam = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : null;
                 $scope.refresh_summary(function () {
                     if ($scope.follow_exam) {
+                        $scope.exam_start_caption = $scope.follow_exam.status_id == 0 ? 'START' : 'STARTED';
+                        $scope.exam_finish_caption = $scope.follow_exam.status_id == 2 ? 'FINISHED' : 'FINISH';
                         switch ($scope.follow_exam.status_id) {
                             case 0:
                                 $scope.exam_btn_caption = "SCHEDULED";
@@ -2370,8 +2460,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                         }
                     }
                 });
-               
-               
+
+
                 $scope.dg_syllabi_ds = response.Data.syllabi;
 
 

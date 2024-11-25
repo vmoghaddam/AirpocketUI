@@ -4363,9 +4363,20 @@ namespace EPAGriffinAPI.DAL
             var groups = await this.context.FLTGroupItems.Where(q => fltIds.Contains(q.FlightId)).ToListAsync();
             this.context.FLTGroupItems.RemoveRange(groups);
 
+            var nullable_ids = fltIds.Select(q => (Nullable<int>)q).ToList();
+            var fdpitems = await (from fi in this.context.FDPItems
+                                  join f in this.context.FDPs on fi.FDPId equals f.Id
+                                  where nullable_ids.Contains(fi.FlightId) && f.IsTemplate == false
+                                  select fi.FlightId).ToListAsync();
+            fltIds = fltIds.Except(fdpitems.Select(q => (int)q).ToList()).ToList();
 
             // var newreg = await this.context.Ac_MSN.FirstOrDefaultAsync(q => q.ID == dto.NewRegisterId);
             var flights = await this.context.FlightInformations.Where(q => fltIds.Contains(q.ID)).ToListAsync();
+
+
+
+
+
             flights = (from x in flights
                        let y = baseFlightsSTD.FirstOrDefault(q => q.FlightNumber == x.FlightNumber)
                        where y != null && ((DateTime)x.STD).ToString("HHmm") == y.XSTD

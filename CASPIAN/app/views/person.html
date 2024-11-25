@@ -1,0 +1,105 @@
+﻿<div class="box person" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'person';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;">
+            <div dx-data-grid="dg" id="grid">
+
+            </div>
+
+        </div>
+    </div>
+    <div class="rowx footer">
+
+        <div class=" col-lg-11 col-md-11 col-sm-11 col-xs-11 dx-border" style="padding:0;">
+            <table>
+                <tr>
+                    <td>  <div dx-select-box="sb_rankgroup" style="display:inline-block;background:white;"></div></td>
+                    <td style="padding-left:5px;"><div dx-check-box="chk_active"></div></td>
+                    <td style="padding-left:5px;"><div dx-button="btn_search"></div></td>
+                    <td style="padding-left:5px;"> <div dx-button="btn_view"></div></td>
+                    <td style="padding-left:5px;"><div dx-button="btn_new"></div></td>
+                    <td style="padding-left:5px;">  <div dx-button="btn_edit"></div></td>
+					 <td style="padding-left:5px;">  <div dx-button="btn_sms"></div></td>
+					 <td style="padding-left:5px;">  <div dx-button="btn_training"></div></td>
+					  <td style="padding-left:5px;">  <div dx-button="btn_opc"></div></td>
+                    <td style="padding-left:5px;"> <div dx-button="btn_delete"></div></td>
+                </tr>
+            </table>
+          
+            
+            
+           
+            
+          
+
+           
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+            <div dx-button="btn_filter"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+<div id="popup_sms" dx-popup="popup_sms">
+        <div style="padding:0px">
+            <div class="col-lg-12 margin-bottom-5 padding-7">
+                <label>Message</label>
+                <div dx-text-area="txt_sms_message" class="dx-border" style="margin-top:0px;" dx-validator="{validationGroup:'smsmessageperson',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+        </div>
+
+
+    </div>
+	
+	<div id="popup_notify2" dx-popup="popup_notify2">
+        <div style="padding:10px 0 0 0">
+            <div class="col-lg-3 padding-0">
+                 
+                <div   dx-data-grid="dg_emp3" dx-item-alias="emp"></div>
+                <!-- <div style="padding:7px;text-align:center" ng-show="countDownVisible">Sent SMS(s) status will be refreshed in <span style="display:inline-block;font-weight:bold;font-size:14px">{{counter}}</span> seconds.</div>-->
+               
+                <div class=" dx-border" style="padding-top:10px">
+                    <!--<div dx-select-box="sb_notification2" dx-validator="{validationGroup:'notmessage2',  validationRules: [{ type: 'required'}]}"></div>-->
+                    <!--<div ng-show="freeSMS" style="margin-top:5px;">
+                        <div class="col-lg-6 padding-0  ">
+                            <div dx-text-box="text_msgrec"></div>
+                        </div>
+                        <div class="col-lg-6 padding-0  " style="padding-left:10px">
+                            <div dx-text-box="text_msgno"></div>
+                        </div>
+                        <div style="clear:both"></div>
+
+                    </div>-->
+                    <div style="margin-top:20px;margin-bottom:5px;font-weight:bold;font-size:14px;">Message</div>
+                    <div dx-text-area="txt_MessageNotify2" dx-validator="{validationGroup:'notmessage2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 col-12   padding-0" style="padding-left:10px">
+                <div dx-data-grid="dg_history"></div>
+
+            </div>
+            <div style="clear:both"></div>
+            <div style="padding:7px;text-align:center" ng-show="countDownVisible2">Sent SMS(s) status will be refreshed in <span style="display:inline-block;font-weight:bold;font-size:14px">{{counter2}}</span> seconds.</div>
+        </div>
+
+    </div>
+
+    <div ng-include="'app/views/personAdd.html?v=4003112'"></div>
+    <div ng-include="'app/views/personView.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+

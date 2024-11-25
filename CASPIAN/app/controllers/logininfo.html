@@ -1,0 +1,73 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box logininfo" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+        <div class=" col-lg-12 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div dx-data-grid="dg_access" id="dg_access" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-8 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+
+
+
+                    <td></td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div class="dx-border" style="padding:10px;">
+            <div class="margin-bottom-5 padding-7">
+                <label>IP(s)</label>
+                <div dx-text-area="txt_ips" dx-validator="{validationGroup:'ipsadd',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+            <div style="clear:both"></div>
+            <div class="margin-bottom-5 padding-7">
+                <label>User(s)</label>
+                <div dx-tag-box="tag_users"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</div>

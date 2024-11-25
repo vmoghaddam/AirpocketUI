@@ -1,0 +1,343 @@
+﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+
+
+    .chartBox {
+        border: 1px solid #e0e0e0;
+        background-color: white;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_flight .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .generalInfo {
+        height: 205px;
+        margin: 2px;
+        width: 49.3%;
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box fdmDashboardPilot" style="height:100%;display:none;overflow-y:hidden">
+
+  
+
+
+    <div class="rowx" style="border: 1px solid #e0e0e0;padding: 5px 10px 5px 10px;">
+        <table>
+            <tr>
+                <td style="width:100px; padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yf"></div></td>
+                <td style="width:100px; padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_mf"></div></td>
+                <td style="width:100px; padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yt"></div></td>
+                <td style="width:100px; padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_mt"></div></td>
+                <!--<td class="dx-border center" style="width:200px;display:inline-block" dx-select-box="sb_cpt"></td>-->
+                <td style="width:120px;margin-left:10px" dx-button="btn_search"></td>
+				<td style="width:100px;margin-left:10px" dx-button="btn_FDMEvents"></td>
+            
+            </tr>
+        </table>
+        <!--<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <table style="width:100%">
+                <tr>
+
+                    <td style="width:100px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yf"></div></td>
+                    <td style="width:100px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_mf"></div></td>
+                    <td style="width:100px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yt"></div></td>
+                    <td style="width:100px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_mt"></div></td>
+                    <td class="dx-border center" style="display:inline-block" dx-select-box="sb_cpt"></td>
+                    <td style="margin-left:10px" dx-button="btn_search"></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12" style="direction:rtl">
+            <table style="width:100%">
+                <tr>
+                    <td style="margin-left:10px" dx-button="btn_FDMEvents"></td>
+
+                    <td></td>
+                </tr>
+            </table>
+        </div>-->
+    </div>
+    <div class="rowx content" style="clear:both">
+
+        <div dx-scroll-view="fdm_scroll">
+            <div ng-show="isContentVisible">
+                <div class="col-lg-6" style="padding:20px">
+                    <div class="chartBox">
+                        <div style="padding-left: 15% !important" dx-pie-chart="phaseChart"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6" style="padding:20px">
+                    <div class="chartBox">
+                        <div style="padding-left: 15% !important" id="typeChart" dx-pie-chart="typeChart"></div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div style="padding:20px">
+                    <div class="chartBox" id="typeLineChart" dx-chart="typeLineChart"></div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div style="padding:20px">
+                    <div class="chartBox" id="typeScoreChart" dx-chart="typeScoreChart"></div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div style="padding:20px">
+                    <div class="chartBox" style="padding-top:10px;">
+
+                        <div id="scoresChart" dx-chart="scoresChart"></div>
+
+
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+                <div style="padding:20px">
+                    <div class="chartBox" style="padding-top:10px;">
+
+                        <div id="eventsNameChart" dx-chart="eventsNameChart"></div>
+
+
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div style="padding:20px 20px 20px  20px; ">
+                    <div class="chartBox" style="padding-top:10px;">
+
+                        <div id="eventsScoreChart" dx-chart="eventsScoreChart"></div>
+
+
+                    </div>
+
+                </div>
+                <div style="clear:both"></div>
+
+                <div style="padding:20px" ng-show="isCPT">
+
+                    <div class="chartBox" style="padding-top:10px;">
+
+
+                        <div id="cptEventsDailyChart" dx-chart="cptEventsDailyChart"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+                <div style="padding:20px" ng-show="isCPT">
+                    <div class="chartBox" style="padding-top:10px;">
+
+                        <div id="cptFoEventsChart" dx-chart="cptFoEventsChart"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <div style="padding:20px" ng-show="isCPT">
+                    <div class="chartBox" style="padding-top:10px;">
+
+                        <div id="cptNotResEventsChart" dx-chart="cptNotResEventsChart"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <div style="padding:20px" ng-show="isCPT">
+                    <div class="chartBox" style="padding-top:10px;">
+
+                        <div id="cptIpEventsChart" dx-chart="cptIpEventsChart"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <div style="padding:20px">
+                    <div class="chartBox" style="padding-top:10px;">
+
+                        <div id="regCptEventsChart" dx-chart="regCptEventsChart"></div>
+
+
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div style="padding:20px">
+                    <div class="chartBox" style="padding-top:10px;">
+
+                        <div id="eventsTreeMap" dx-tree-map="eventsTreeMap"></div>
+
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="popup_fdm" dx-popup="popup_fdm">
+        <div dx-data-grid="dg_fdmEvents"></div>
+       
+    </div>
+
+   
+    <div dx-load-panel="loadPanel"></div>
+
+</div>

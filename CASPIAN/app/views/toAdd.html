@@ -1,0 +1,126 @@
+﻿<style>
+    .ctd {
+        border: 1px solid #eee;
+        text-align: center;
+    }
+
+    .ctd-empty {
+        border: 0px solid #eee;
+        text-align: center;
+    }
+
+    .ctr {
+        /*height:30px;*/
+    }
+
+    .ctd-center {
+        background-color: lightseagreen;
+    }
+
+    .ctd-selected {
+        background-color: red;
+    }
+    ._tbl1 td {font-size:13px;padding:3px !important;}
+    ._tbl1 tr {height:55px;}
+</style>
+<div ng-controller="toAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px; ">
+
+            <div id="scroll_dradd" dx-scroll-view="scroll_asradd" style="margin-top:5px;padding:0 5px 0 5px">
+                <table style="margin-top:10px;border:0px solid #eee;width:100%" class="dx-border _tbl1">
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold">
+                            Reg
+                        </td>
+                        <td style="padding:7px;text-align:left;" colspan="5"><div dx-text-box="txt_reg" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> Airport </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_airport" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Date </td>
+                        <td style="padding:7px;text-align:left;"><div dx-date-box="txt_date" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Flt No </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_fltNo" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> Information </td>
+                        <td style="padding:7px;text-align:left;" colspan="3"><div dx-text-box="txt_info" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Time </td>
+                        <td style="padding:7px;text-align:left;"><div dx-date-box="txt_time" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> R/W </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_rw" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> TA </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_ta" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> FE </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_fe" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> Wind </td>
+                        <td style="padding:7px;text-align:left;" colspan="2"><div dx-text-box="txt_wind" class="center"></div></td>
+                        <td style="padding: 7px;text-align:right; font-weight: bold"> Visibility </td>
+                        <td style="padding:7px;text-align:left;" colspan="2"><div dx-text-box="txt_visibility" class="center"></div></td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> Cloud </td>
+                        <td style="padding:7px;text-align:left;" colspan="2"><div dx-text-box="txt_cloud" class="center"></div></td>
+                        <td style="padding: 7px;text-align:right; font-weight: bold"> Temp </td>
+                        <td style="padding:7px;text-align:left;" colspan="2"><div dx-text-box="txt_temp" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> QNH </td>
+                        <td style="padding:7px;text-align:left;" colspan="2"><div dx-text-box="txt_qhn" class="center"></div></td>
+                        <td style="padding: 7px;text-align:right; font-weight: bold"> Dew P </td>
+                        <td style="padding:7px;text-align:left;" colspan="2"><div dx-text-box="txt_dewp" class="center"></div></td>
+                    </tr>
+                    <tr style="height:35px !important">
+                        <td style="padding: 7px;text-align:left; font-weight: bold" colspan="6"> WX condition/Other </td>
+
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding:7px;text-align:left;" colspan="6"><div dx-text-box="txt_wx" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> ZFW </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_zfw" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> TO Fuel </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_toFuel" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> TO Weight </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_toWeight" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> Flap </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_flap" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> Stab Trim </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_stab" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> CG </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_cg" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> V1 </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_v1" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> VR </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_vr" class="center"></div></td>
+                        <td style="padding: 7px;text-align:center; font-weight: bold"> V2 </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_v2" class="center"></div></td>
+                    </tr>
+                    <tr style="border-bottom:1px solid gray">
+                        <td style="padding: 7px;text-align:left; font-weight: bold"> Fuel To ALT </td>
+                        <td style="padding:7px;text-align:left;"><div dx-text-box="txt_altFuel" class="center"></div></td>
+                    </tr>
+                </table>
+                
+                  
+
+
+
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

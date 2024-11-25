@@ -1,0 +1,786 @@
+
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+
+
+    .chartBox {
+        border: 1px solid #e0e0e0;
+        background-color: white;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_flight .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .generalInfo {
+        height: 200px;
+        /*margin: 2px;*/
+        width: 24%;
+    }
+
+    .generalInfoXS {
+        height: 205px;
+        width: 49%;
+        display: inline-block !important
+    }
+</style>
+
+
+
+
+<div class="box fdmDashboardPilot" style="height:100%;display:none;overflow-y:hidden">
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+
+    <div class="rowx" style="border: 1px solid #e0e0e0;padding: 5px 10px 5px 10px;">
+        <table class="visible-lg visible-md visible-sm">
+            <tr>
+
+                <td style="width:100px; padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yf"></div></td>
+                <td style="width:100px; padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_mf"></div></td>
+                <td style="width:100px; padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yt"></div></td>
+                <td style="width:100px; padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_mt"></div></td>
+                <td class="dx-border center" style="width:200px;display:inline-block" dx-select-box="sb_cpt"></td>
+                <td style="width:120px;margin-left:10px" dx-button="btn_search"></td>
+
+                <!--<td style="width:100px;margin-left:10px" dx-button="btn_FDMEvents"></td>-->
+            </tr>
+        </table>
+        <table class="visible-xs" style="width:100%;table-layout:fixed">
+            <tr>
+
+                <td style="padding:0 2px 3px 0 !important" class="dx-border col-xs-3"><div class="center" dx-select-box="sb_yf"></div></td>
+                <td style="padding: 0 2px 3px 0 !important" class="dx-border col-xs-3"><div class="center" dx-select-box="sb_mf"></div></td>
+                <td style="padding: 0 2px 3px 0 !important" class="dx-border col-xs-3"><div class="center" dx-select-box="sb_yt"></div></td>
+                <td style="padding: 0 2px 3px 0 !important" class="dx-border col-xs-3"><div class="center" dx-select-box="sb_mt"></div></td>
+
+                <!--<td style="width:100px;margin-left:10px" dx-button="btn_FDMEvents"></td>-->
+            </tr>
+
+            <tr style="margin-top:5px">
+                <td class="dx-border center col-xs-7" colspan="2" dx-select-box="sb_cpt"></td>
+                <td class=" center col-xs-5" colspan="2" style="margin-left:10px" dx-button="btn_search"></td>
+
+            </tr>
+        </table>
+
+
+
+    </div>
+    <div class="rowx content" style="clear:both">
+        <div dx-scroll-view="fdm_scroll">
+
+            <div class='visible-lg'>
+
+                <div>
+                    <div class="col-lg-3" style="padding:2px">
+                        <div class="chartBox" style="width:100%">
+                            <div dx-pie-chart="phaseEvent"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3" style="padding:2px">
+                        <div class="chartBox" style="width:100%">
+                            <div dx-pie-chart="phaseScore"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3" style="padding:2px">
+                        <div class="chartBox" style="width:100%">
+                            <div dx-pie-chart="eventDoughnut"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3" style="padding:2px">
+                        <div class="chartBox" style="width:100%">
+                            <div id="typeChart" dx-pie-chart="scoreDoughnut"></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+                <div>
+                    <div class="col-lg-3 col-md-3  " style="padding: 2px; height: 100px">
+                        <div class="chartBox" style="width: 100%; height: 100%">
+                            <p style="text-align: center; font-size: 16px; padding-top: 5px">Flights</p>
+                            <p style="text-align: center; font-size: 30px">{{ds_cptEventsGeneral.TotalFlightCount}}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3 " style="padding: 2px; height: 100px">
+                        <div class="chartBox" style="width: 100%;height:100%">
+                            <p style="text-align: center; font-size: 16px; padding-top: 5px">Events</p>
+                            <p style="text-align: center; font-size: 30px">{{ds_cptEventsGeneral.TotalEventsCount}}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-3  " style="padding: 2px; height:100px">
+                        <div class="chartBox" style="width:100%;height:100%">
+                            <p style="text-align: center; font-size: 16px; padding-top: 5px">Scores</p>
+                            <p style="text-align: center; font-size: 30px">{{ds_cptEventsGeneral.TotalScores}}</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 colmd-3" style="padding: 2px; height: 100px">
+                        <div style="width: 100%">
+                            <div class="chartBox col-lg-6" style="height: 100%;border-right: none !important">
+                                <p style="text-align: center; font-size: 16px; padding-top: 5px">Events per flight</p>
+                                <p style="text-align: center; font-size: 30px">{{ds_cptEventsGeneral.EventPerFlight.toFixed(2)}}</p>
+                            </div>
+                            <div class="chartBox col-lg-6" style="height:100%">
+                                <p style="text-align: center; font-size: 16px; padding-top: 5px">Score per flight</p>
+                                <p style="text-align: center; font-size: 30px">{{ds_cptEventsGeneral.ScorePerFlight.toFixed(2)}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class='col-lg-12' style='padding:10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+
+                        <div id="typeLineChart" dx-chart="typeLineChart"></div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class='col-lg-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+
+                        <div id="typeScoreChart" dx-chart="typeScoreChart"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+                <div class='col-lg-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+
+                        <div id="cptRouteChart" dx-chart="cptRouteChart"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+                <div class='col-lg-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="eventPerFlightRoute" dx-chart="eventPerFlightRoute"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+
+
+                <div class='col-lg-12' style='padding: 10px 2px 10px 2px' ng-show="isCPT">
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+
+                        <div id="cptFoEventsChart" dx-chart="cptFoEventsChart"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+
+                <div class='col-lg-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="eventsTreeMap" dx-tree-map="eventsTreeMap"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <div class='col-lg-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+
+                        <div id="regCptEventsChart" dx-chart="regCptEventsChart"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+                <div class='col-lg-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+
+                        <div id="registerScoresChart" dx-chart="registerScoresChart"></div>
+
+
+                    </div>
+                </div>
+
+
+                <div style="clear:both"></div>
+
+                <div class='col-lg-12' style='padding: 10px 2px 10px 2px; margin-bottom: 2%'>
+                    <div dx-data-grid="dg_cptEvents" id="dg_cptEvents" class="content" style="overflow-y:hidden; width: 100% !important" dx-item-alias="row"> </div>
+                </div>
+
+
+
+            </div>
+            <div class='visible-sm'>
+
+                <div class="col-md-3 col-sm-3 col-xs-3 generalInfo chartBox" style='width:24%;height:150px; margin-left: 5px'>
+                    <p style="font-size: 16px; padding-top: 5px">Flights</p>
+                    <p style="text-align: center; font-size: 60px;padding-top: 0px">{{ds_cptEventsGeneral.TotalFlightCount}}</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 generalInfo chartBox" style='width: 24%; height: 150px; margin-left: 5px' ng-click="showEvents()">
+                    <p style="font-size: 16px; padding-top: 5px">Events</p>
+                    <p style="text-align: center; font-size: 60px;padding-top: 0px">{{ds_cptEventsGeneral.TotalEventsCount}}</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 generalInfo chartBox" style='width: 24%; height: 150px; margin-left: 5px'>
+                    <p style="font-size: 16px; padding-top: 5px">Scores</p>
+                    <p style="text-align: center; font-size: 60px;padding-top: 0px">{{ds_cptEventsGeneral.TotalScores}}</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 generalInfo chartBox" style='width: 24%; height: 150px; padding: 0 !important; margin-left: 5px '>
+                    <div class="chartBox" style="height: 75px">
+                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px;margin-bottom: 0!important">Events per flight</p>
+                        <p style="text-align: center; font-size: 23px">{{ds_cptEventsGeneral.EventPerFlight.toFixed(2)}}</p>
+                    </div>
+                    <div class="chartBox" style="height: 75px">
+                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px;margin-bottom: 0!important">Score per flight</p>
+                        <p style="text-align: center; font-size: 23px">{{ds_cptEventsGeneral.ScorePerFlight.toFixed(2)}}</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-sm-6" style="margin: 5px 0px 5px 5px;width:49%; padding:0 !important">
+                    <div class="chartBox" style="padding-left: 4%">
+                        <div style="" dx-pie-chart="phaseEventXS"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6" style="margin: 5px 0px 5px 5px; width: 49%; padding: 0 !important ">
+                    <div class="chartBox" style="padding-left: 4%">
+                        <div style="" dx-pie-chart="phaseScoreXS"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6" style="margin: 5px 0px 5px 5px; width: 49%; padding: 0 !important ">
+                    <div class="chartBox" style="padding-left: 4%">
+                        <div style="" dx-pie-chart="eventDoughnutXS"></div>
+                    </div>
+                </div>
+                <div class="col-sm-6" style="margin: 5px 0px 5px 5px; width: 49%; padding: 0 !important ">
+                    <div class="chartBox" style="padding-left: 4%">
+                        <div style="" id="typeChart" dx-pie-chart="scoreDoughnutXS"></div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class='col-sm-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="typeLineChartXS" dx-chart="typeLineChartXS"></div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class='col-sm-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="typeScoreChartXS" dx-chart="typeScoreChartXS"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+
+                <div class='col-sm-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="cptRouteChartXS" dx-chart="cptRouteChartXS"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <div class='col-sm-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="eventPerFlightRoute" dx-chart="eventPerFlightRoute"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+
+                <div class='col-sm-12' style='padding:10px 0 10px 0' ng-show="isCPT">
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="cptFoEventsChartXS" dx-chart="cptFoEventsChartXS"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <div class='col-sm-12' style='padding:10px 0 10px 0' ng-show="isCPT">
+                    <div dx-data-grid="dg_cptEvents" id="dg_cptEvents" class="content" style="overflow-y: hidden; width: 100% !important" dx-item-alias="row"> </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <div class='col-sm-12' style='padding:10px 0 10px 0' ng-show="isCPT">
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="eventsTreeMapXS" dx-tree-map="eventsTreeMapXS"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <div class='col-sm-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="regCptEventsChartXS" dx-chart="regCptEventsChartXS"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+                <div class='col-sm-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="registerScoresChartXS" dx-chart="registerScoresChartXS"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+                <div class='col-sm-12' style='padding: 10px 0 10px 0; margin-bottom: 2%'>
+                    <div dx-data-grid="dg_cptEvents" id="dg_cptEvents" class="content" style="overflow-y: hidden; width: 100% !important" dx-item-alias="row"> </div>
+                </div>
+
+
+            </div>
+
+
+            <div class='visible-md'>
+                <div class="col-md-3 col-sm-3 col-xs-3 generalInfo chartBox" style='width:25%;height:150px'>
+                    <p style="font-size: 16px; padding-top: 5px">Flights</p>
+                    <p style="text-align: center; font-size: 60px;padding-top: 0px">{{ds_cptEventsGeneral.TotalFlightCount}}</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 generalInfo chartBox" style='width:24%;height:150px' ng-click="showEvents()">
+                    <p style="font-size: 16px; padding-top: 5px">Events</p>
+                    <p style="text-align: center; font-size: 60px;padding-top: 0px">{{ds_cptEventsGeneral.TotalEventsCount}}</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 generalInfo chartBox" style='width:25%;height:150px'>
+                    <p style="font-size: 16px; padding-top: 5px">Scores</p>
+                    <p style="text-align: center; font-size: 60px;padding-top: 0px">{{ds_cptEventsGeneral.TotalScores}}</p>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3 generalInfo chartBox" style='width:24%;height:150px;padding:0 !important'>
+                    <div class="chartBox" style="height: 75px">
+                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px;margin-bottom: 0!important">Events per flight</p>
+                        <p style="text-align: center; font-size: 23px">{{ds_cptEventsGeneral.EventPerFlight.toFixed(2)}}</p>
+                    </div>
+                    <div class="chartBox" style="height: 75px">
+                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px;margin-bottom: 0!important">Score per flight</p>
+                        <p style="text-align: center; font-size: 23px">{{ds_cptEventsGeneral.ScorePerFlight.toFixed(2)}}</p>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class="col-md-6" style="padding: 5px 5px 5px 5px ">
+                    <div class="chartBox" style="padding-left: 15%">
+                        <div style="" dx-pie-chart="phaseEventXS"></div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding: 5px 5px 5px 5px ">
+                    <div class="chartBox" style="padding-left: 15%">
+                        <div style="" dx-pie-chart="phaseScoreXS"></div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding: 5px 5px 5px 5px ">
+                    <div class="chartBox" style="padding-left: 15%">
+                        <div style="" dx-pie-chart="eventDoughnutXS"></div>
+                    </div>
+                </div>
+                <div class="col-md-6" style="padding: 5px 5px 5px 5px ">
+                    <div class="chartBox" style="padding-left: 15%">
+                        <div style="" id="typeChart" dx-pie-chart="scoreDoughnutXS"></div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class='col-md-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="typeLineChartXS" dx-chart="typeLineChartXS"></div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class='col-md-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="typeScoreChartXS" dx-chart="typeScoreChartXS"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+
+                <div class='col-md-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="cptRouteChartXS" dx-chart="cptRouteChartXS"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+                <div class='col-md-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="eventPerFlightRoute" dx-chart="eventPerFlightRoute"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+
+                <div class='col-md-12' style='padding:10px 0 10px 0' ng-show="isCPT">
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="cptFoEventsChartXS" dx-chart="cptFoEventsChartXS"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+
+                <div class='col-md-12' style='padding:10px 0 10px 0' ng-show="isCPT">
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="eventsTreeMapXS" dx-tree-map="eventsTreeMapXS"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <div class='col-md-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="regCptEventsChartXS" dx-chart="regCptEventsChartXS"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+                <div class='col-md-12' style='padding:10px 0 10px 0'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+
+                        <div id="registerScoresChartXS" dx-chart="registerScoresChartXS"></div>
+
+
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class='col-md-12' style='padding: 10px 0 10px 0; margin-bottom: 2%'>
+                    <div dx-data-grid="dg_cptEvents" id="dg_cptEvents" class="content" style="overflow-y: hidden; width: 100% !important" dx-item-alias="row"> </div>
+                </div>
+
+
+
+            </div>
+            <div class='visible-xs'>
+
+                <div class="col-xs-6 generalInfo chartBox" style='width:50%;height:150px'>
+                    <p style="font-size: 16px; padding-top: 5px">Flights</p>
+                    <p style="text-align: center; font-size: 40px;padding-top: 0px">{{ds_cptEventsGeneral.TotalFlightCount}}</p>
+                </div>
+                <div class="col-xs-6 generalInfo chartBox" style='width:49%;height:150px' ng-click="showEvents()">
+                    <p style="font-size: 16px; padding-top: 5px">Events</p>
+                    <p style="text-align: center; font-size: 40px;padding-top: 0px">{{ds_cptEventsGeneral.TotalEventsCount}}</p>
+                </div>
+                <div class="col-xs-6 generalInfo chartBox" style='width:50%;height:150px'>
+                    <p style="font-size: 16px; padding-top: 5px">Scores</p>
+                    <p style="text-align: center; font-size: 40px;padding-top: 0px">{{ds_cptEventsGeneral.TotalScores}}</p>
+                </div>
+                <div class="col-xs-6 generalInfo chartBox" style='width:49%;height:150px;padding:0 !important'>
+                    <div class="chartBox" style="height: 75px">
+                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px;margin-bottom: 0!important">Events per flight</p>
+                        <p style="text-align: center; font-size: 23px">{{ds_cptEventsGeneral.EventPerFlight.toFixed(2)}}</p>
+                    </div>
+                    <div class="chartBox" style="height: 75px">
+                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px;margin-bottom: 0!important">Score per flight</p>
+                        <p style="text-align: center; font-size: 23px">{{ds_cptEventsGeneral.ScorePerFlight.toFixed(2)}}</p>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="col-xs-12" style="padding:0px 2px 0 2px !important;margin-top: 1%">
+                    <div class="chartBox" style="padding-left: 23px">
+                        <div dx-pie-chart="phaseEventXS"></div>
+                    </div>
+                </div>
+                <div class="col-xs-12" style="padding:0px 2px 0 2px !important">
+                    <div class="chartBox" style="padding-left: 23px">
+                        <div dx-pie-chart="phaseScoreXS"></div>
+                    </div>
+                </div>
+                <div class="col-xs-12" style="padding:0px 2px 0 2px !important">
+                    <div class="chartBox" style="padding-left: 23px">
+                        <div dx-pie-chart="eventDoughnutXS"></div>
+                    </div>
+                </div>
+                <div class="col-xs-12" style="padding:0px 2px 0 2px !important">
+                    <div class="chartBox" style="padding-left: 23px">
+                        <div id="typeChartXS" dx-pie-chart="scoreDoughnutXS"></div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class='col-xs-12' style='padding:10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="typeLineChartXS" dx-chart="typeLineChartXS"></div>
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class='col-xs-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="typeScoreChartXS" dx-chart="typeScoreChartXS"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+                <div class='col-xs-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="cptRouteChartXS" dx-chart="cptRouteChartXS"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+                <div class='col-xs-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="eventPerFlightRoute" dx-chart="eventPerFlightRoute"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+
+                <div class='col-xs-12' style='padding: 10px 2px 10px 2px' ng-show="isCPT">
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="cptFoEventsChartXS" dx-chart="cptFoEventsChartXS"></div>
+
+
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+
+
+                <div class='col-xs-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="regCptEventsChartXS" dx-chart="regCptEventsChartXS"></div>
+
+
+                    </div>
+                </div>
+
+
+                <div style="clear:both"></div>
+
+
+
+                <div class='col-xs-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="eventsTreeMapXS" dx-tree-map="eventsTreeMapXS"></div>
+                    </div>
+                </div>
+
+                <div style="clear:both"></div>
+                <div class='col-xs-12' style='padding: 10px 2px 10px 2px'>
+                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                        <div id="registerScoresChartXS" dx-chart="registerScoresChartXS"></div>
+
+
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div class='col-xs-12' style='padding: 10px 2px 10px 2px; margin-bottom: 2%'>
+                    <div dx-data-grid="dg_cptEvents" id="dg_cptEvents" class="content" style="overflow-y: hidden; width: 100% !important" dx-item-alias="row"> </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div style="clear:both"></div>
+
+
+
+
+<div dx-load-panel="loadPanel"></div>
+
+

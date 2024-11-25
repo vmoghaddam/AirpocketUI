@@ -1,0 +1,258 @@
+.print-visible{
+display:block !important;
+}
+.red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_flight .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .dx-tab {
+        background-color: gray !important;
+    }
+
+    .section-header {
+        background-color: lightgrey;
+        font-weight: bold;
+    }
+
+    .section-table {
+        width: 100%;
+    }
+
+        .section-table tr {
+            border-bottom: 1px solid #bbb;
+        }
+
+            .section-table tr td {
+                padding: 7px;
+                width: 25%;
+            }
+
+                .section-table tr td:nth-child(odd) {
+                    text-align: left;
+                    color: black
+                }
+
+                .section-table tr td:nth-child(even) {
+                    text-align: right;
+                    color: black;
+                }
+
+                    .section-table tr td:nth-child(even) span {
+                        color: black;
+                    }
+
+                .section-table tr td:nth-child(odd) span {
+                    color: black;
+                }
+
+    .z5000 {
+    }
+
+    .h70 {
+        height: 70px;
+    }
+
+    .left80 {
+        margin-left: 160px;
+    }
+
+    .sig {
+        display: inline-block;
+        position: relative;
+    }
+
+    .sig_img {
+        position: absolute;
+        top: 25px;
+        left: 0;
+        width: 300px;
+        height:120px;
+    }
+
+    pre {
+        font-size: 15px;
+        border: none !important;
+        background: white !important;
+    }
+
+        pre .prop {
+            color: red;
+            font-weight: bold;
+            display: inline-block;
+            min-width: 70px;
+            text-align: center;
+            border-color: #ccc;
+            border-width: 1px;
+            border-style: solid;
+            width: 90px;
+        }
+
+            pre .prop.selected {
+                border-color: red;
+            }
+
+    .noborder {
+        border: 1px solid #ccc !important;
+    }
+
+    .alignleft {
+        text-align: left !important;
+    }
+       .station {
+        background-color: dimgray;
+    }
+
+        .station.selected {
+            background-color: lightseagreen !important;
+        }
+
+    .selected-obj {
+        background: #306b65 !important;
+    }
+    .windc td {
+        border: 1px solid #ddd;
+        text-align: center;
+        padding: 10px;
+    }
+    .hasInfo {
+        background-color: darkslategray !important;
+    }

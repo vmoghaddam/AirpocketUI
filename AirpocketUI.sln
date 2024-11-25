@@ -35,6 +35,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KISHAIR_PULSEPOCKET", "KISH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KISHAIR", "KISHAIR\KISHAIR.csproj", "{62CF000C-7F93-4829-A80D-CD3E3C454ED0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CASPIAN", "CASPIAN\CASPIAN.csproj", "{CEAEC013-78F7-4923-A535-AE8EE6298E6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -105,6 +107,10 @@ Global
 		{62CF000C-7F93-4829-A80D-CD3E3C454ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62CF000C-7F93-4829-A80D-CD3E3C454ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62CF000C-7F93-4829-A80D-CD3E3C454ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEAEC013-78F7-4923-A535-AE8EE6298E6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEAEC013-78F7-4923-A535-AE8EE6298E6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEAEC013-78F7-4923-A535-AE8EE6298E6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEAEC013-78F7-4923-A535-AE8EE6298E6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

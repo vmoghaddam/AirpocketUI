@@ -2535,7 +2535,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
 
         },
-        height: $(window).height() - 320,
+        height:470,
         bindingOptions: {
 
             dataSource: 'selected_exam.template',
@@ -2556,7 +2556,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             $scope.loadingVisible = true;
             ztrnService.generateQuestions({ exam_id: $scope.selected_exam.id }).then(function (response) {
 
-                $scope.clearEntity();
+                //$scope.clearEntity();
 
 
                 General.ShowNotify(Config.Text_SavedOk, 'success');

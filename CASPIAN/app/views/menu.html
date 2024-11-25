@@ -1,0 +1,272 @@
+﻿<style>
+    #mySidenav .box-app {
+        width: 189px;
+        float: left;
+    }
+
+        #mySidenav .box-app .logo img {
+            width: 45%;
+        }
+</style>
+<div id="mySidenav" class="sidenav">
+    <a href="" class="closebtn" data-ng-click="closeMenu()">&times;</a>
+    <!--<a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>-->
+    <div style="align-items:center;text-align:center;display:none" class="library _menu" id="module2">
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:left;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/library/83/-1/-1','library_book')">
+                    <img src="content/images/books.png" />
+                    <div class="title-small">Books</div>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/library/85/-1/-1','library_video')">
+                    <img src="content/images/Videos.png" />
+                    <div class="title-small">Videos</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/library/84/-1/-1','library_paper')">
+                    <img src="content/images/Papers.png" />
+                    <div class="title-small">Papers</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/document','library_document')">
+                    <img src="content/images/docs.png" />
+                    <div class="title-small">Documents</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/person/book','library_people')">
+                    <img src="../../content/images/study.png" />
+                    <div class="title-small">People</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/notification','library_notification')">
+                    <img src="content/images/notification.png" />
+                    <div class="title-small">Notifications</div>
+                </a>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="col-lg-1 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/publisher','library_publisher')">
+                    <img src="content/images/publisher.png" />
+                    <div class="title">Publishers</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/author','library_author')">
+                    <img src="content/images/quill.png" />
+                    <div class="title">Autors</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/journal','library_journal')">
+                    <img src="content/images/newspaper.png" />
+                    <div class="title">Journals</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-1 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/conference','library_conference')">
+                    <img src="content/images/teamwork.png" class="w70" />
+                    <div class="title">Conferences</div>
+                </a>
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
+
+    <div style="align-items:center;text-align:center;display:none" class="profile _menu" id="module1">
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:left;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/person','profile_person')">
+                    <img src="content/images/group.png" />
+                    <div class="title-small">Employees</div>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:left;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/course/person','profile_course_person')">
+                    <img src="content/images/course.png" />
+                    <div class="title-small">Courses</div>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:left;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/person/certificate','profile_person_certificate')">
+                    <img src="content/images/certificates.png" />
+                    <div class="title-small">Certificates</div>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:left;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/person/course','profile_person_course')">
+                    <img src="content/images/setting.png" />
+                    <div class="title-small">Employees Courses</div>
+                </a>
+            </div>
+
+        </div>
+        <div class="col-lg-2-15 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:left;padding:0px 0px 0 0;">
+            <div class="box-app">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/course','profile_course')">
+                    <img src="content/images/cabinets.png" />
+                    <div class="title-small">Archive</div>
+                </a>
+            </div>
+
+        </div>
+
+        <div style="clear:both"></div>
+
+        <div class="col-lg-1-10 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/course/type','profile_course_type')">
+                    <img src="content/images/types.png" />
+                    <div class="title">Course Types</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-1-10 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/location','profile_location')">
+                    <img src="../../content/images/office.png" />
+                    <div class="title">Departments</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-1-10 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/aircrafttype','profile_aircrafttype')">
+                    <img src="content/images/actype.png" />
+                    <div class="title">Aircraft Types</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-1-10 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/option/59','profile_educationfield')">
+                    <img src="content/images/fields.png" />
+                    <div class="title">Education Fields</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-1-10 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/option/36','profile_post')">
+                    <img src="content/images/diagram.png" />
+                    <div class="title">Posts</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-1-10 col-md-3 col-sm-3 col-xs-3 col-inline" style="text-align:right;padding:0px 0px 0 0;">
+            <div class="box-app-small">
+                <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/jobgroup','profile_group')">
+                    <img src="content/images/circle.png" />
+                    <div class="title">Groups</div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="align-items:center;text-align:center;display:none" class="flight _menu" id="module3">
+
+        <div class="home-box" style="height:100%;border-radius:0;padding:5px">
+
+            <div class="thin-scroll" style="margin-top:10px;height:93%;overflow-y:auto">
+                <div style="border-bottom:1px solid gray;background:#03A9F4">
+                    <div class="box-app" style="padding-top:0;width:120px;" ng-show="true">
+                        <a class="logo" style="text-decoration:none;" href="#">
+                            <img src="content/images/home.png">
+                            <div class="title-small ng-binding" style="color:white;font-size:16px">Home</div>
+                        </a>
+                    </div>
+                    <div class="box-app" style="padding-top:0;width:120px"  >
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="apps()">
+                            <img src="content/images/apps.png">
+                            <div class="title-small ng-binding" style="color:white;font-size:16px">Apps</div>
+                        </a>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <!--<div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_board',3)">
+                    <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/flight/board'  , 'flight_board')">
+                        <img src="content/images/date.png">
+                        <div class="title-small ng-binding" style="color:gray;font-size:1em">Flights View</div>
+                    </a>
+                </div>-->
+                <div class="box-app" style="padding-top:0" ng-show="true">
+                    <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/board/ceo'  , 'flight_board_ceo')">
+                        <img src="content/images/date.png">
+                        <div class="title-small ng-binding" style="color:gray;font-size:1em">Flights View</div>
+                    </a>
+                </div>
+              
+	 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('fdm_handling',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/fdm/ops'  , 'fdm_handling')">
+                            <img src="content/images/fdmops.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Events Handling</div>
+                        </a>
+                    </div>
+					
+					
+						 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('fdm_summary',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/fdm/qa'  , 'fdm_summary')">
+                            <img src="content/images/fdmqa.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Events Summary</div>
+                        </a>
+                    </div>
+					
+					 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('fdm_dashboard',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/fdm/dashboard'  , 'fdm_dashboard')">
+                            <img src="content/images/fdmdashboardmain.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">FDM Main Dashboard</div>
+                        </a>
+                    </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
