@@ -63,25 +63,32 @@ app.controller('formsController', ['$scope', '$location', '$routeParams', '$root
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
                         var _rstr = Enumerable.From($scope.reasons).Where('$.id==' + $scope.reason).FirstOrDefault().title;
-                        var dto = {
-                            UserId: $rootScope.employeeId,
-                            DateFrom: new Date($scope.dt_from),
-                            DateTo: new Date($scope.dt_to),
-                            ReasonStr: _rstr,
-                            Reason: $scope.reason,
-                            Remark: $scope.remark,
-                            OperatorId: -1,
-                            Id: -1,
-                        };
-                        $scope.loadingVisible = true;
-                        flightService.updateFormVacation(dto).then(function (response) {
-                            $scope.loadingVisible = false;
+                        var storedUserData = localStorage.getItem('ls.userData');
 
-                            $scope.bind();
-                            $scope.popup_newform_visible = false;
+                        if (storedUserData) {
+                            $scope.user_data = JSON.parse(storedUserData)
 
-                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                            var dto = {
+                                UserId: $scope.user_data.UserId,
+                                DateFrom: new Date($scope.dt_from),
+                                DateTo: new Date($scope.dt_to),
+                                ReasonStr: _rstr,
+                                Reason: $scope.reason,
+                                Remark: $scope.remark,
+                                OperatorId: -1,
+                                Id: -1,
+                            };
+                            $scope.loadingVisible = true;
+                            flightService.updateFormVacation(dto).then(function (response) {
+                                $scope.loadingVisible = false;
 
+                                $scope.bind();
+                                $scope.popup_newform_visible = false;
+
+                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+                        }
+                       
                     }
                 }, toolbar: 'bottom'
             },
@@ -123,12 +130,13 @@ app.controller('formsController', ['$scope', '$location', '$routeParams', '$root
     };
 
     $scope.dt_from = new Date();
+    $scope.dt_from.setDate($scope.dt_from.getDate() + 10)
     $scope.date_from = {
         type: "date",
         width: '100%',
         pickerType: "rollers",
         displayFormat: "yyyy-MMM-dd",
-
+        min: $scope.dt_from,
         onValueChanged: function (arg) {
 
         },
@@ -138,6 +146,7 @@ app.controller('formsController', ['$scope', '$location', '$routeParams', '$root
         }
     };
     $scope.dt_to = new Date();
+    $scope.dt_to.setDate($scope.dt_to.getDate() + 10)
     $scope.date_to = {
         type: "date",
         width: '100%',
