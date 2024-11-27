@@ -195,28 +195,28 @@ namespace EPAGriffinAPI.Controllers
         public async Task<IHttpActionResult> PostVisitBookFile(int employeeId, int fileId)
         {
             // return Ok(client);
-            try
-            {
-                HttpClient client = new HttpClient();
+            //try
+            //{
+            //    HttpClient client = new HttpClient();
 
-                await client.PostAsync("https://fleet.caspianairlines.com/apinetplan/odata/visitfile/" + employeeId + "/" + fileId, null);
-                return Ok(true);
-            }
-            catch(Exception ex)
-            {
-                return Ok(true);
-            }
-           
-
-            //var status = await unitOfWork.UserActivityRepository.VisitBookFlie(employeeId, fileId);
-
-            //var saveResult = await unitOfWork.SaveAsync();
-            //if (saveResult.Code != HttpStatusCode.OK)
-            //    return saveResult;
+            //    await client.PostAsync("https://fleet.caspianairlines.com/apinetplan/odata/visitfile/" + employeeId + "/" + fileId, null);
+            //    return Ok(true);
+            //}
+            //catch(Exception ex)
+            //{
+            //    return Ok(true);
+            //}
 
 
+            var status = await unitOfWork.UserActivityRepository.VisitBookFlie(employeeId, fileId);
 
-            //return Ok(true);
+            var saveResult = await unitOfWork.SaveAsync();
+            if (saveResult.Code != HttpStatusCode.OK)
+                return saveResult;
+
+
+
+            return Ok(true);
         }
 
         [Route("odata/sign/book/{employeeId}/{bookid}/{code}")]
