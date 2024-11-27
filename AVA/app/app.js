@@ -913,6 +913,10 @@ app.config(function ($routeProvider) {
         controller: "formsVacationController",
         templateUrl: "/app/views/formsvacation.html?v=1229"
     });
+    $routeProvider.when("/forms/vacation/responsible", {
+        controller: "forms_vacation_responsibleController",
+        templateUrl: "/app/views/form_vacation_responsible.html?v=1229"
+    });
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });

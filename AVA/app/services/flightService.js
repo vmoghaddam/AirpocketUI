@@ -4038,6 +4038,36 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     };
     serviceFactory.getReqNew = _getReqNew;
 
+    var _getReqApproved = function () {
+
+
+        var deferred = $q.defer();
+        $http.get(serviceRequest + 'api/vacation/forms/approved').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getReqApproved = _getReqApproved;
+
+     var _getReqResponsibleAll = function (id) {
+
+
+        var deferred = $q.defer();
+         $http.get(serviceRequest + 'api/vacation/forms/responsible/all/' + id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getReqResponsibleAll = _getReqResponsibleAll;
+
 
     var _getReqAcc = function () {
 
@@ -4082,6 +4112,19 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
         return deferred.promise;
     };
     serviceFactory.updateFormVacation = _updateFormVacation;
+
+   var _actionRequest = function (entity) {
+        var deferred = $q.defer();
+       $http.post(serviceRequest + 'api/request/action', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.actionRequest = _actionRequest;
 
     /////////////////////////
     serviceFactory.getOFP = _getOFP;

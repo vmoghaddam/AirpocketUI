@@ -151,6 +151,7 @@
     <Content Include="app\controllers\formmovaled.js" />
     <Content Include="app\controllers\formmovaledyearly.js" />
     <Content Include="app\controllers\formsVacation.js" />
+    <Content Include="app\controllers\form_vacation_responsible.js" />
     <Content Include="app\controllers\fuelbi.js" />
     <Content Include="app\controllers\fuelbiKPI.js" />
     <Content Include="app\controllers\fuelbiRoute.js" />
@@ -440,6 +441,7 @@
     <Content Include="app\views\formmovaled.html" />
     <Content Include="app\views\formmovaledyearly.html" />
     <Content Include="app\views\formsVacation.html" />
+    <Content Include="app\views\form_vacation_responsible.html" />
     <Content Include="app\views\fuelbi.html" />
     <Content Include="app\views\fuelbiKPI.html" />
     <Content Include="app\views\fuelbiRoute.html" />

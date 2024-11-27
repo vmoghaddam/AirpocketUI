@@ -16,7 +16,8 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
         if (config.url.startsWith(vira_api)) {
             if (authDataVIRA) {
 
-                config.headers.Authorization = 'Bearer ' + authDataVIRA.token;
+                //config.headers.Authorization = 'Bearer ' + authDataVIRA.token;
+                config.headers.Authorization = 'Bearer ' + authData.token;
             }
         }
         else
@@ -41,8 +42,8 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
             //        return $q.reject(rejection);
             //    }
             //}
-            authService.logOut();
-            $location.path('/login');
+            ////authService.logOut();
+            ////$location.path('/login');
         }
         return $q.reject(rejection);
     }

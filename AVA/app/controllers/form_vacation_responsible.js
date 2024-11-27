@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('formsVacationController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'authService', '$route', function ($scope, $location, $routeParams, $rootScope, flightService, authService, $route) {
+app.controller('forms_vacation_responsibleController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'authService', '$route', function ($scope, $location, $routeParams, $rootScope, flightService, authService, $route) {
 
     $scope.caption = 'Requests';
     $scope.url = 'api/vacation/forms/all';
@@ -61,7 +61,7 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
                 return;
             }
             $scope.entity = JSON.parse(JSON.stringify($scope.dg_selected));
-            $scope.old_status = $scope.entity.Status;
+            $scope.old_status = $scope.entity.ResponsibleActionId;
             $scope.popup_newform_visible = true;
         }
 
@@ -111,13 +111,13 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
 
             //  $scope.$broadcast('getFilterQuery', null);
             $scope.dg_ds = null;
-            //$scope.bind_new(function () {
-            $scope.bind_approved(function () {
+            // $scope.bind_new(function () {
+            $scope.bind_all_responsible(function () {
 
-                $scope.bind_acc(function () {
-                    $scope.bind_rej();
+                //$scope.bind_acc(function () {
+                //    $scope.bind_rej();
 
-                });
+                //});
             });
         }
 
@@ -368,7 +368,25 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
 
         { dataField: 'Remark', caption: 'Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350 },
         { dataField: 'OperationRemak', caption: 'Ops. Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350, },
-        { dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
+        {
+            dataField: 'ResponsibleActionId',
+            caption: 'Status',
+            allowResizing: true,
+            alignment: 'center',
+            allowEditing: false,
+            width: 120,
+            fixed: true,
+            fixedPosition: 'right',
+            cellTemplate: function (container, options) {
+                var value = options.value; // Access the cell value
+                if (value === 2) {
+                    container.text('Rejected'); // Render 'Rejected'
+                } else {
+                    container.text(''); // Render empty or default text
+                }
+            }
+        },
+
         { dataField: 'DateStatus', caption: '', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', fixed: true, fixedPosition: 'right' },
     ];
 
@@ -465,8 +483,8 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
         onRowPrepared: function (e) {
             if (e.rowType === "data") {
                 //$scope.styleCell(e, e.data.Status);
-                if (!e.data.Status) { } else
-                    if (e.data.Status == 'Accepted') { e.rowElement.css("backgroundColor", "#b3ffe0"); }
+                if (!e.data.ResponsibleActionId) { } else
+                    if (e.data.ResponsibleActionId == 1) { e.rowElement.css("backgroundColor", "#b3ffe0"); }
                     else { e.rowElement.css("backgroundColor", "#ffeecc"); }
             }
         },
@@ -492,7 +510,7 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
 
         { dataField: 'Remark', caption: 'Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350 },
         { dataField: 'OperationRemak', caption: 'Ops. Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350, },
-        { dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
+        { dataField: 'ResponsibleActionId', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
         { dataField: 'DateStatus', caption: '', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', fixed: true, fixedPosition: 'right' },
     ];
 
@@ -589,8 +607,8 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
         onRowPrepared: function (e) {
             if (e.rowType === "data") {
                 //$scope.styleCell(e, e.data.Status);
-                if (!e.data.Status) { } else
-                    if (e.data.Status == 'Accepted') { e.rowElement.css("backgroundColor", "#e6fff5"); }
+                if (!e.data.ResponsibleActionId) { } else
+                    if (e.data.ResponsibleActionId == 1) { e.rowElement.css("backgroundColor", "#e6fff5"); }
                     else { e.rowElement.css("backgroundColor", "#ffd480"); }
             }
         },
@@ -675,21 +693,7 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
         //}
 
     };
-    $scope.bind_approved = function (callback) {
-        flightService.getReqApproved().then(function (response) {
-            console.log(response);
-            $scope.dg_ds = Enumerable.From(response).Where('$.Status != "Accepted" && $.Status != "Rejected"').ToArray();
-            //$scope.dg_ds = response;
-
-            if (callback)
-                callback();
-
-
-
-        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-    };
-    //  $scope.bind_new = function (callback) {
+    //$scope.bind_new = function (callback) {
     //    flightService.getReqNew().then(function (response) {
     //        console.log(response);
 
@@ -703,34 +707,59 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
     //    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
     //};
-    $scope.bind_acc = function (callback) {
-        flightService.getReqAcc().then(function (response) {
-            console.log(response);
+    $scope.bind_all_responsible = function (callback) {
 
-            $scope.dg_ds_acc = response;
+        // Get the value associated with the key 'username'
+        var storedUserData = localStorage.getItem('ls.userData');
+        console.log('----User Data-----', storedUserData)
 
-            if (callback)
-                callback();
+        if (storedUserData) {
+            $scope.user_data = JSON.parse(storedUserData)
+            flightService.getReqResponsibleAll($scope.user_data.EmployeeId).then(function (response) {
 
+                console.log('----response----', response);
+                $scope.dg_ds = Enumerable.From(response).Where('$.ResponsibleActionId != 1 && $.ResponsibleActionId != 2').ToArray();
+                $scope.dg_ds_acc = Enumerable.From(response).Where('$.ResponsibleActionId==' + 1).ToArray();
+                $scope.dg_ds_rej = Enumerable.From(response).Where('$.ResponsibleActionId==' + 2).ToArray();
 
-
-        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-    };
-    $scope.bind_rej = function (callback) {
-        flightService.getReqRej().then(function (response) {
-            console.log(response);
-
-            $scope.dg_ds_rej = response;
-
-            if (callback)
-                callback();
+                if (callback)
+                    callback();
 
 
 
-        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        }
+
 
     };
+    //$scope.bind_acc = function (callback) {
+    //    flightService.getReqAcc().then(function (response) {
+    //        console.log(response);
+
+    //        $scope.dg_ds_acc = response;
+
+    //        if (callback)
+    //            callback();
+
+
+
+    //    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+    //};
+    //$scope.bind_rej = function (callback) {
+    //    flightService.getReqRej().then(function (response) {
+    //        console.log(response);
+
+    //        $scope.dg_ds_rej = response;
+
+    //        if (callback)
+    //            callback();
+
+
+
+    //    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+    //};
     /////////////////////////////
     $scope.dt_from = new Date();
     $scope.date_from = {
@@ -795,10 +824,10 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
         dataSource: $scope.statusds,
         displayExpr: 'title',
         placeholder: '',
-        valueExpr: 'title',
+        valueExpr: 'id',
 
         bindingOptions: {
-            value: 'entity.Status'
+            value: 'entity.ResponsibleActionId'
 
         }
     };
@@ -816,7 +845,7 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
     $scope.txt_remarkops = {
 
         bindingOptions: {
-            value: 'entity.OperationRemak',
+            value: 'entity.ResponsibleRemark',
             height: '320',
 
         }
@@ -889,37 +918,31 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
 
 
                         var dto = {
-                            Id: $scope.entity.Id,
-                            UserId: $scope.entity.UserId,
-                            DateFrom: new Date($scope.entity.DateFrom),
-                            DateTo: new Date($scope.entity.DateTo),
-                            ReasonStr: $scope.entity.ReasonStr,
-                            Reason: $scope.entity.Reason,
-                            Remark: $scope.entity.Remark,
-                            OperationRemak: $scope.entity.OperationRemak,
-                            Status: $scope.entity.Status,
-                            OperatorId: $scope.entity.OperatorId,
+                            employee_id: $scope.user_data.EmployeeId,
+                            form_id: $scope.entity.Id,
+                            action_id: $scope.entity.ResponsibleActionId,
+                            remark: $scope.entity.Remark
                         };
                         $scope.loadingVisible = true;
-                        flightService.updateFormVacation(dto).then(function (response) {
+                        flightService.actionRequest(dto).then(function (response) {
                             $scope.loadingVisible = false;
 
                             //$scope.dg_selected = response;
                             //alert($scope.old_status);
                             //alert(dto.Status);
-                            if ($scope.old_status != dto.Status) {
+                            if ($scope.old_status != dto.action_id) {
                                 if (!$scope.old_status)
-                                    $scope.dg_ds = Enumerable.From($scope.dg_ds).Where('$.Id!=' + dto.Id).ToArray();
-                                if ($scope.old_status == 'Accepted')
-                                    $scope.dg_ds_acc = Enumerable.From($scope.dg_ds_acc).Where('$.Id!=' + dto.Id).ToArray();
-                                if ($scope.old_status == 'Rejected')
-                                    $scope.dg_ds_rej = Enumerable.From($scope.dg_ds_rej).Where('$.Id!=' + dto.Id).ToArray();
+                                    $scope.dg_ds = Enumerable.From($scope.dg_ds).Where('$.Id!=' + dto.form_id).ToArray();
+                                if ($scope.old_status == 1)
+                                    $scope.dg_ds_acc = Enumerable.From($scope.dg_ds_acc).Where('$.Id!=' + dto.form_id).ToArray();
+                                if ($scope.old_status == 2)
+                                    $scope.dg_ds_rej = Enumerable.From($scope.dg_ds_rej).Where('$.Id!=' + dto.form_id).ToArray();
 
-                                if (dto.Status == 'Accepted')
+                                if (dto.action_id == 1)
                                     $scope.dg_ds_acc.push(response);
-                                if (dto.Status == 'Rejected')
+                                if (dto.action_id == 2)
                                     $scope.dg_ds_rej.push(response);
-                                if (!dto.Status)
+                                if (!dto.action_id)
                                     $scope.dg_ds.push(response);
 
 
@@ -993,8 +1016,7 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
 
         $scope.doRefresh = true;
         //$scope.bind_new();
-        $scope.bind_approved();
-
+        $scope.bind_all_responsible();
     });
     $scope.$on('onTemplateSearch', function (event, prms) {
 
@@ -1007,7 +1029,7 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
     $scope.$on('onOrganizationHide', function (event, prms) {
 
         //$scope.bind_new();
-        $scope.bind_approved();
+        $scope.bind_all_responsible();
 
     });
     //////////////////////////////////////////
