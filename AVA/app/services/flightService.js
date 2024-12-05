@@ -4023,6 +4023,25 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     };
     serviceFactory.getFlightPax = _getFlightPax;
 
+
+    ///////////////REQUESTS ///////////////////////
+
+    var _getApprovedRequests = function () {
+
+
+        var deferred = $q.defer();
+        $http.get(serviceRequest + 'api/vacation/forms/all').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getApprovedRequests = _getApprovedRequests;
+
+
     var _getReqNew = function () {
 
 
@@ -4125,6 +4144,22 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
         return deferred.promise;
     };
     serviceFactory.actionRequest = _actionRequest;
+
+
+    var _getRequesterDuties = function (id) {
+
+
+        var deferred = $q.defer();
+        $http.get(serviceRequest + 'api/forms/employee/timeline/'+id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getRequesterDuties = _getRequesterDuties;
 
     /////////////////////////
     serviceFactory.getOFP = _getOFP;

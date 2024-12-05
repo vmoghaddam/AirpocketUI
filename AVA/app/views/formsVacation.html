@@ -46,17 +46,15 @@
 
                 <table style="width:100%">
                     <tr>
-                        <td style="width:50%;">
+                        <td style="width:30%;">
                             <div style="background:#ccc;padding:10px;">USER</div>
                             <div style="border:1px solid #ccc;padding:10px;">
                                 <table style="width:100%;">
                                     <tr>
-                                        <td style="padding-right:5px;width:70%;">
+                                        <td  colspan="2">
                                             <div dx-text-box="txt_name"></div>
                                         </td>
-                                        <td>
-                                            <div dx-text-box="txt_group"></div>
-                                        </td>
+                                        
                                     </tr>
 
                                 </table>
@@ -67,7 +65,7 @@
 
                                         </td>
                                         <td>
-                                            <div dx-text-box="txt_pid"></div>
+                                            <div dx-text-box="txt_group"></div>
                                         </td>
                                     </tr>
 
@@ -100,9 +98,13 @@
 
                         </td>
 
+                        <td style="width:40%;padding-left:5px">
+                            <div style="background:#ccc;padding:10px;">DUTIES</div>
+                            <div dx-data-grid="dg_duties" id="dg_duties"></div>
 
+                        </td>
 
-                        <td style="width:50%;padding-left:5px">
+                        <td style="width:30%;padding-left:5px">
                             <div style="background:#ccc;padding:10px;">OPS</div>
                             <div style="border:1px solid #ccc;padding:10px;">
 

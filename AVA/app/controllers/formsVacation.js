@@ -1,5 +1,6 @@
 ﻿'use strict';
-app.controller('formsVacationController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'authService', '$route', function ($scope, $location, $routeParams, $rootScope, flightService, authService, $route) {
+app.controller('formsVacationController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'authService', '$route', 'schedulingService',
+    function ($scope, $location, $routeParams, $rootScope, flightService, authService, $route, schedulingService) {
 
     $scope.caption = 'Requests';
     $scope.url = 'api/vacation/forms/all';
@@ -638,7 +639,7 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
         return filters;
     };
     $scope.bind = function () {
-
+        
 
         $scope.dg_ds = {
             store: {
@@ -866,10 +867,130 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
 
         }
     };
+
+
+
+    $scope.dg_duties_columns = [
+        
+        { dataField: 'DateStartLocal', caption: 'Start', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 150, format: 'yyyy-MM-dd HH:mm', sortIndex: 0, sortOrder: 'asc', fixed: true, fixedPosition: 'left' },
+        { dataField: 'DateEndLocal', caption: 'End', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 150, format: 'yyyy-MM-dd HH:mm',  fixed: true, fixedPosition: 'left' },
+        { dataField: 'DutyTypeTitle', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'InitRoute', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false,  },
+      
+         
+    ];
+
+
+    $scope.dg_selected_duties = null;
+    $scope.dg_instance_duties = null;
+    $scope.dg_ds_duties = null;
+    $scope.dg_duties = {
+        headerFilter: {
+            visible: false
+        },
+        filterRow: {
+            visible: false,
+            showOperationChooser: true,
+        },
+        showRowLines: true,
+        showColumnLines: true,
+        sorting: { mode: 'none' },
+
+        noDataText: '',
+
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'infinite' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'single' },
+
+        columnAutoWidth: false,
+        height: 445,
+        width: '100%',
+        
+        columns: $scope.dg_duties_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_instance_duties)
+                $scope.dg_instance_duties = e.component;
+
+        },
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData[0];
+
+            if (!data) {
+                $scope.dg_selected_duties = null;
+            }
+            else
+                $scope.dg_selected_duties = data;
+
+
+        },
+        onRowPrepared: function (e) {
+            if (e.rowType === "data") {
+                //$scope.styleCell(e, e.data.Status);
+                if (e.data.conflict) {
+                    e.rowElement.css("backgroundColor", "#ff704d");
+                } 
+            }
+        },
+        
+        
+        bindingOptions: {
+            dataSource: 'dg_ds_duties'
+        }
+    };
+    
+        $scope.saveDuty = function ( callback) {
+            //2023
+
+            //100008 Requested Off
+            var dto = {
+                DateStart: new Date($scope.entity.DateFrom),
+                DateEnd: new Date($scope.entity.DateTo),
+                CityId: -1,
+                CrewId: $scope.entity.EmployeeId,
+                DutyType: 100008,
+                Remark: $scope.entity.Remark,
+                EXTRERRP:  0,
+            }
+            dto.BL = 0;
+            dto.FX = 0;
+             
+            
+            $scope.loadingVisible = true;
+
+            schedulingService.saveDuty(dto).then(function (response) {
+                $scope.loadingVisible = false;
+                //2023
+                if (response.Code == '406') {
+
+                    General.ShowNotify(response.message, 'error');
+                    return;
+
+                }
+                ////////////
+                console.log('saveDuty   ',response);
+                
+                callback();
+
+
+
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        };
+
+
+
+    var duties_width = 1200;
+    if ($(window).width() - 100 < 1200)
+        duties_width = $(window).width();
+    
+
     $scope.popup_newform_visible = false;
     $scope.popup_newform = {
         height: 610,
-        width: 850,
+        width: duties_width,//$(window).width()-100,
         title: 'Form',
         showTitle: true,
 
@@ -886,8 +1007,17 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
                             General.ShowNotify(Config.Text_FillRequired, 'error');
                             return;
                         }
+                        var not_allowed = [1165, 1167, 1170, 1168, 300010, 5000, 5001, 300014, 100001, 100025];
+                        var conflict_types = Enumerable.From($scope.dg_ds_duties).Where(function (x) { return x.conflict == true && not_allowed.indexOf(x.DutyType) != -1; }).ToArray();
+                        if (conflict_types && conflict_types.length > 0) {
+                            General.ShowNotify('Interuption Error', 'error');
+                            return;
+                        }
+                        
 
 
+                        $scope.saveDuty(function () { alert('x'); });
+                        return;
                         var dto = {
                             Id: $scope.entity.Id,
                             UserId: $scope.entity.UserId,
@@ -950,6 +1080,29 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
 
         },
         onShown: function (e) {
+            $scope.dg_instance_duties.refresh();
+            flightService.getRequesterDuties($scope.dg_selected.Id).then(function (response) {
+                //11-30
+                console.log('getApprovedRequests   ' + response);
+                $.each(response, function (_i, _d) {
+                    var dt_start = Number(moment(_d.DateStartLocal).format('YYYYMMDD'));
+                    var dt_end = Number(moment(_d.DateEndLocal).format('YYYYMMDD'));
+                    var req_start = Number(moment($scope.entity.DateFrom).format('YYYYMMDD'));
+                    var req_end = Number(moment($scope.entity.DateTo).format('YYYYMMDD'));
+                    if (
+                        (dt_start >= req_start && dt_start <= req_end) ||
+                        (dt_end >= req_start && dt_end <= req_end) ||
+                        (req_start >= dt_start && req_start <= dt_end) ||
+                        (req_end >= dt_start && req_end <= dt_end)
+                    )
+                        _d.conflict = true;
+
+                });
+                $scope.dg_ds_duties = response;
+
+
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
         },
         onHiding: function () {

@@ -955,7 +955,7 @@ var netProfile = 'https://_netprofile.apvaresh.com/';
 var apireportflight = 'https://ava.apireportflight.airpocket.app/'; //* 
 var zreportflight = apireportflight;
 var apixls = 'https://ava.apixls.airpocket.app/'; //*
-var apiScheduling = 'https://ava.apischeduling.airpocket.app/';
+var apiScheduling = 'https://ava.apischeduling.aerotango.app/';
 var zapiScheduling = "https://ava.apischeduling.airpocket.app/";
 
 var apiExternal = 'https://_xpi.airpocket.app/';
