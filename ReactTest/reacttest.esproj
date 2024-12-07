@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.128-alpha">
+  <PropertyGroup>
+    <StartupCommand>npm run dev</StartupCommand>
+    <JavaScriptTestRoot>src\</JavaScriptTestRoot>
+    <JavaScriptTestFramework>Jest</JavaScriptTestFramework>
+    <!-- Allows the build (or compile) script located on package.json to run on Build -->
+    <ShouldRunBuildScript>false</ShouldRunBuildScript>
+    <!-- Folder where production build objects will be placed -->
+    <PublishAssetsDirectory>$(MSBuildProjectDirectory)\dist</PublishAssetsDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="src\api\" />
+    <Folder Include="src\components\common\" />
+    <Folder Include="src\components\layout\" />
+    <Folder Include="src\components\specific\" />
+    <Folder Include="src\context\" />
+    <Folder Include="src\hooks\" />
+    <Folder Include="src\utils\" />
+    <Folder Include="src\styles\" />
+    <Folder Include="src\store\" />
+    <Folder Include="src\routes\" />
+    <Folder Include="src\pages\" />
+  </ItemGroup>
+</Project>
