@@ -147,7 +147,7 @@ namespace EPAGriffinAPI.Providers
                         return;
                     }
                     //اگر شماره همراه وارد نشده بود؟
-                    if (ConfigurationManager.AppSettings["twofactor"]!="0" /*&& roles.Contains("Dispatch") && !remoteIpAddresss.StartsWith("192.168.")*/ && !verified && !string.IsNullOrEmpty(user.PhoneNumber) && context.UserName.ToLower()!= "mohammadi")
+                    if (ConfigurationManager.AppSettings["twofactor"]!="0" && !roles.Contains("Two Factor Authentication Disabled") /*roles.Contains("Dispatch")*/ /*&& !remoteIpAddresss.StartsWith("192.168.")*/ && !verified && !string.IsNullOrEmpty(user.PhoneNumber))
                     {
                         // if (string.IsNullOrEmpty(user.PhoneNumber))
                         // {
@@ -159,8 +159,10 @@ namespace EPAGriffinAPI.Providers
                         int verification = rnd.Next(10000, 99999);
                         Magfa m = new Magfa();
                         var smsResult = m.enqueue(1, user.PhoneNumber, "AirPocket" + "\n" + "Verification Code: " + verification + "\n" + context.UserName)[0] ;
-                        
-                       // var res2= m.enqueue(1, "09124449584", "AirPocket" + "\n"+context.UserName+"\n" + "Verification Code: " + verification)[0];
+
+                        await unitOfWork.PersonRepository.SaveTryLogin(context.UserName, remoteIpAddresss+"_code_"+verification);
+
+                        // var res2= m.enqueue(1, "09124449584", "AirPocket" + "\n"+context.UserName+"\n" + "Verification Code: " + verification)[0];
                         //var cipher = StringCipher.Encrypt(context.UserName + "_**_" + context.Password + "_**_" + verification.ToString(), "atrina");
                         var cipher = AesOperation.EncryptString(ckey, context.UserName + "_**_" + context.Password + "_**_" + verification.ToString());
 

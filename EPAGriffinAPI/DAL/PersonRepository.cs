@@ -981,6 +981,29 @@ namespace EPAGriffinAPI.DAL
 
         }
 
+        internal async Task<bool> SaveTryLogin(string username, string ip)
+        {
+            try
+            {
+                var item = new UserLogin()
+                {
+                    UserName = username,
+                    ActionId = 0,
+                    DateAction = DateTime.Now,
+                    Ip = ip,
+                };
+                this.context.UserLogins.Add(item);
+                await this.context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+
+        }
+
         internal bool DeleteIPs(List<int> ids)
         {
             var _ips = this.context.IPAccesses.Where(q => ids.Contains(q.Id)).ToList();

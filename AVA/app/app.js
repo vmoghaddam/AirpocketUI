@@ -979,6 +979,7 @@ var zapinet = 'https://ava.apinet.airpocket.app/';
 var zfuel = 'https://ava.apifuel.airpocket.app/';
 /*var zapitrn = 'https://ava.apitrn.airpocket.app/';*/
 var zapitrn = 'http://localhost:4005/';
+zapitrn = 'https://ava.apitrn.airpocket.app/';
 //'http://localhost:58908/';
 //'http://localhost:40654/';
 var serviceRequest = 'http://localhost:9066/';
@@ -991,9 +992,10 @@ app.constant('ngAuthSettings', {
 });
 
 //app.config(function ($httpProvider) {
-app.config(['$httpProvider', function ($httpProvider) {
+app.config(['$httpProvider' , function ($httpProvider ) {
 
     $httpProvider.interceptors.push('authInterceptorService');
+   
 }]);
 
 

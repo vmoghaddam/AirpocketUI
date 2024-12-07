@@ -40,7 +40,9 @@ app.controller('appsController', ['$scope', '$location', 'authService', 'ngAuthS
                
                 break;
             case 3:
+                // alert('x');
                 ok = $rootScope.HasAccessToFlightPocket();
+                ok = true;
             case 5:
                
                 ok = false;

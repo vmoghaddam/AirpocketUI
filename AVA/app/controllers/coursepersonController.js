@@ -699,7 +699,9 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             bindingOptions: {},
             onClick: function (e) {
                 $scope.build($scope.date);
-                $scope.$broadcast('getFilterQuery', null);
+               // $scope.$broadcast('getFilterQuery', null);
+                $scope.doRefresh = true;
+                $scope.bind();
             }
 
         };
@@ -2438,10 +2440,11 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
             trnService.getCoursePeopleSessions($scope.selectedCourse.Id).then(function (response) {
                 $scope.loadingVisible = false;
-
+                
                 $scope.follow_course = response.Data.course;
-                $scope.follow_exam = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : null;
+                $scope.follow_exam = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : {};
                 $scope.refresh_summary(function () {
+                 
                     if ($scope.follow_exam) {
                         $scope.exam_start_caption = $scope.follow_exam.status_id == 0 ? 'START' : 'STARTED';
                         $scope.exam_finish_caption = $scope.follow_exam.status_id == 2 ? 'FINISHED' : 'FINISH';
@@ -2461,7 +2464,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                     }
                 });
 
-
+               
                 $scope.dg_syllabi_ds = response.Data.syllabi;
 
 
@@ -2599,7 +2602,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 $scope.loadingVisible = false;
 
 
-
+              
 
                 $scope.startTimer();
 
@@ -3352,7 +3355,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             return filters;
         };
         $scope.bind = function () {
-            if (!$scope.dg_ds && $scope.doRefresh) {
+            alert('x');
+;            if (!$scope.dg_ds && $scope.doRefresh) {
                 $scope.dg_ds = {
                     store: {
                         type: "odata",
@@ -3789,7 +3793,9 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                     $scope.build($scope.initDate);
 
                 });
-                $scope.$broadcast('getFilterQuery', null);
+                //$scope.$broadcast('getFilterQuery', null);
+                $scope.doRefresh = true;
+                $scope.bind();
             }, 500);
 
             // $scope.selectedTabIndex = 0;

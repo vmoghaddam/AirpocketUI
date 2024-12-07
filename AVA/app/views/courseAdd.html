@@ -254,6 +254,34 @@
                             </table>
                         </div>
                         <div dx-data-grid="dg_session" id="dg_session"></div>
+                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+                            Participants Count: <span style="display:inline-block;margin-left:3px;">{{entity.Attendants}}</span>
+                        </div>
+                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+
+                            Participants Rosters <span ng-show="!entity.Date_Sessions_Synced">Not</span>  Synced
+
+                        </div>
+                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+
+                            Instructor(s) Rosters <span ng-show="!entity.Date_Sessions_Instructor_Synced">Not</span>  Synced
+
+                        </div>
+                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+
+                            Participants List <span ng-show="!entity.Date_Sign_Ins1">Not</span>  Signed
+
+                        </div>
+                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+
+                            Exam <span ng-show="!entity.Date_Sign_Ins1">Not</span>  Created
+
+                        </div>
+                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+
+                            Exam <span ng-show="!entity.Date_Sign_Ins1">Not</span>  Created
+
+                        </div>
                     </div>
 
 

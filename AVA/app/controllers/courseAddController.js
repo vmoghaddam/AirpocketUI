@@ -37,19 +37,19 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         DateEnd: null,
         DateEndP: null,
         Instructor: null,
-        Location: null,
+        Location: 'AVA TRAINING CENTER',
         Department: null,
-        OrganizationId: null,
+        OrganizationId: 10,
         Duration: null,
         DurationUnitId: null,
-        StatusId: null,
+        StatusId: 1,
         Remark: null,
         Capacity: null,
         Tuition: null,
         CurrencyId: null,
         DateDeadlineRegistration: null,
         DateDeadlineRegistrationP: null,
-        TrainingDirector: null,
+        TrainingDirector: 'CAPT. PEYMAN HOUSHYAR',
         Title: null,
         AircraftTypeId: null,
         AircraftModelId: null,
@@ -57,7 +57,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         Recurrent: null,
         Interval: null,
         CalanderTypeId: 12,
-        StatusId: null,
+        StatusId: 1,
         IsInside: null,
         Quarantine: null,
         DateStartPractical: null,
@@ -73,7 +73,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         CurrencyId: null,
 
         //04-30
-        HoldingType: null,
+        HoldingType: 'Attendance Class',
         Instructor2Id: null,
         Cost: null,
 
@@ -107,19 +107,19 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         $scope.entity.DateEnd = null;
         $scope.entity.DateEndP = null;
         $scope.entity.Instructor = null;
-        $scope.entity.Location = null;
+        $scope.entity.Location = 'AVA TRAINING CENTER';
         $scope.entity.Department = null;
-        $scope.entity.OrganizationId = null;
+        $scope.entity.OrganizationId = 10;
         $scope.entity.Duration = null;
         $scope.entity.DurationUnitId = null;
-        $scope.entity.StatusId = null;
+        $scope.entity.StatusId = 1;
         $scope.entity.Remark = null;
         $scope.entity.Capacity = null;
         $scope.entity.Tuition = null;
         $scope.entity.CurrencyId = null;
         $scope.entity.DateDeadlineRegistration = null;
         $scope.entity.DateDeadlineRegistrationP = null;
-        $scope.entity.TrainingDirector = null;
+        $scope.entity.TrainingDirector = 'CAPT. PEYMAN HOUSHYAR';
         $scope.entity.Title = null;
         $scope.entity.AircraftTypeId = null;
         $scope.entity.AircraftModelId = null;
@@ -127,7 +127,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         $scope.entity.Recurrent = null;
         $scope.entity.Interval = null;
         $scope.entity.CalanderTypeId = 12;
-        $scope.entity.StatusId = null;
+        $scope.entity.StatusId = 1;
         $scope.entity.IsInside = null;
         $scope.entity.Quarantine = null;
         $scope.entity.DateStartPractical = null;
@@ -140,7 +140,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         $scope.entity.CustomerId = null;
         $scope.entity.No = null;
         //04-30
-        $scope.entity.HoldingType = null;
+        $scope.entity.HoldingType = 'Attendance Class';
         $scope.entity.Instructor2Id = null;
 
         $scope.entity.Cost = null;
@@ -182,69 +182,71 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         if ($scope.tempData.ReadOnly == 100)
             $scope.IsEditable = false;
         ////////////////////////////
-        $scope.entity.Id = data.Id;
-        $scope.entity.CourseTypeId = data.CourseTypeId;
-        $scope.entity.DateStart = data.DateStart;
-        $scope.entity.DateStartP = data.DateStartP;
-        $scope.entity.DateEnd = data.DateEnd;
-        $scope.entity.DateEndP = data.DateEndP;
-        $scope.entity.Instructor = data.Instructor;
-        $scope.entity.Location = data.Location;
-        $scope.entity.Department = data.Department;
-        $scope.entity.OrganizationId = data.OrganizationId;
-        $scope.entity.Duration = data.Duration;
-        $scope.entity.DurationUnitId = data.DurationUnitId;
-        $scope.entity.StatusId = data.StatusId;
-        $scope.entity.Remark = data.Remark;
-        $scope.entity.Capacity = data.Capacity;
-        $scope.entity.Tuition = data.Tuition;
-        $scope.entity.CurrencyId = data.CurrencyId;
-        $scope.entity.DateDeadlineRegistration = data.DateDeadlineRegistration;
-        $scope.entity.DateDeadlineRegistrationP = data.DateDeadlineRegistrationP;
-        $scope.entity.TrainingDirector = data.TrainingDirector;
-        $scope.entity.Title = data.Title;
-        $scope.entity.AircraftTypeId = data.AircraftTypeId;
-        $scope.entity.AircraftModelId = data.AircraftModelId;
-        $scope.entity.CaoTypeId = data.CaoTypeId;
-        $scope.entity.Recurrent = data.Recurrent;
-        $scope.entity.Interval = data.Interval;
-        $scope.entity.CalanderTypeId = data.CalanderTypeId;
-        console.log('cal', $scope.entity.CalanderTypeId);
-        $scope.entity.IsInside = data.IsInside;
-        $scope.entity.Quarantine = data.Quarantine;
-        $scope.entity.DateStartPractical = data.DateStartPractical;
-        $scope.entity.DateEndPractical = data.DateEndPractical;
-        $scope.entity.DateStartPracticalP = data.DateStartPracticalP;
-        $scope.entity.DateEndPracticalP = data.DateEndPracticalP;
-        $scope.entity.DurationPractical = data.DurationPractical;
-        $scope.entity.DurationPracticalUnitId = data.DurationPracticalUnitId;
-        $scope.entity.IsGeneral = data.IsGeneral;
-        $scope.entity.CustomerId = data.CustomerId;
-        $scope.entity.No = data.No;
-        $scope.entity.CurrencyId = data.CurrencyId;
-        $scope.entity.IsNotificationEnabled = data.IsNotificationEnabled;
-        $scope.entity.CourseRelatedAircraftTypes = data.CourseRelatedAircraftTypes;
-        $scope.entity.CourseRelatedCourseTypes = data.CourseRelatedCourseTypes;
-        $scope.entity.CourseRelatedStudyFields = data.CourseRelatedStudyFields;
-        $scope.entity.CourseRelatedEmployees = data.CourseRelatedEmployees;
-        $scope.entity.CourseRelatedCourses = data.CourseRelatedCourses;
-        $scope.entity.CourseRelatedGroups = data.CourseRelatedGroups;
-        $scope.entity.CourseCatRates = data.CourseCatRates;
-        $scope.entity.CourseAircraftTypes = data.CourseAircraftTypes;
+        //$scope.entity.Id = data.Id;
+        //$scope.entity.CourseTypeId = data.CourseTypeId;
+        //$scope.entity.DateStart = data.DateStart;
+        //$scope.entity.DateStartP = data.DateStartP;
+        //$scope.entity.DateEnd = data.DateEnd;
+        //$scope.entity.DateEndP = data.DateEndP;
+        //$scope.entity.Instructor = data.Instructor;
+        //$scope.entity.Location = data.Location;
+        //$scope.entity.Department = data.Department;
+        //$scope.entity.OrganizationId = data.OrganizationId;
+        //$scope.entity.Duration = data.Duration;
+        //$scope.entity.DurationUnitId = data.DurationUnitId;
+        //$scope.entity.StatusId = data.StatusId;
+        //$scope.entity.Remark = data.Remark;
+        //$scope.entity.Capacity = data.Capacity;
+        //$scope.entity.Tuition = data.Tuition;
+        //$scope.entity.CurrencyId = data.CurrencyId;
+        //$scope.entity.DateDeadlineRegistration = data.DateDeadlineRegistration;
+        //$scope.entity.DateDeadlineRegistrationP = data.DateDeadlineRegistrationP;
+        //$scope.entity.TrainingDirector = data.TrainingDirector;
+        //$scope.entity.Title = data.Title;
+        //$scope.entity.AircraftTypeId = data.AircraftTypeId;
+        //$scope.entity.AircraftModelId = data.AircraftModelId;
+        //$scope.entity.CaoTypeId = data.CaoTypeId;
+        //$scope.entity.Recurrent = data.Recurrent;
+        //$scope.entity.Interval = data.Interval;
+        //$scope.entity.CalanderTypeId = data.CalanderTypeId;
+        
+        //$scope.entity.IsInside = data.IsInside;
+        //$scope.entity.Quarantine = data.Quarantine;
+        //$scope.entity.DateStartPractical = data.DateStartPractical;
+        //$scope.entity.DateEndPractical = data.DateEndPractical;
+        //$scope.entity.DateStartPracticalP = data.DateStartPracticalP;
+        //$scope.entity.DateEndPracticalP = data.DateEndPracticalP;
+        //$scope.entity.DurationPractical = data.DurationPractical;
+        //$scope.entity.DurationPracticalUnitId = data.DurationPracticalUnitId;
+        //$scope.entity.IsGeneral = data.IsGeneral;
+        //$scope.entity.CustomerId = data.CustomerId;
+        //$scope.entity.No = data.No;
+        //$scope.entity.CurrencyId = data.CurrencyId;
+        //$scope.entity.IsNotificationEnabled = data.IsNotificationEnabled;
+        //$scope.entity.CourseRelatedAircraftTypes = data.CourseRelatedAircraftTypes;
+        //$scope.entity.CourseRelatedCourseTypes = data.CourseRelatedCourseTypes;
+        //$scope.entity.CourseRelatedStudyFields = data.CourseRelatedStudyFields;
+        //$scope.entity.CourseRelatedEmployees = data.CourseRelatedEmployees;
+        //$scope.entity.CourseRelatedCourses = data.CourseRelatedCourses;
+        //$scope.entity.CourseRelatedGroups = data.CourseRelatedGroups;
+        //$scope.entity.CourseCatRates = data.CourseCatRates;
+        //$scope.entity.CourseAircraftTypes = data.CourseAircraftTypes;
+        //$scope.entity.HoldingType = data.HoldingType;
+        //$scope.entity.Instructor2Id = data.Instructor2Id;
+        //$scope.entity.Cost = data.Cost;
+        //$scope.entity.SMSIns1 = data.SMSIns1;
+        //$scope.entity.SMSIns2 = data.SMSIns2;
+        //$scope.entity.SMSIns1Status = data.SMSIns1Status;
+        //$scope.entity.SMSIns2Status = data.SMSIns2Status;
+        //$scope.entity.SMSInsDate = data.SMSInsDate;
+
+        $scope.entity = JSON.parse( JSON.stringify(data));
 
         $scope.entity.Sessions = sessions;
         $scope.entity.Syllabi = syllabi;
 
         //04-30
-        $scope.entity.HoldingType = data.HoldingType;
-        $scope.entity.Instructor2Id = data.Instructor2Id;
-
-        $scope.entity.Cost = data.Cost;
-        $scope.entity.SMSIns1 = data.SMSIns1;
-        $scope.entity.SMSIns2 = data.SMSIns2;
-        $scope.entity.SMSIns1Status = data.SMSIns1Status;
-        $scope.entity.SMSIns2Status = data.SMSIns2Status;
-        $scope.entity.SMSInsDate = data.SMSInsDate;
+        
 
         if (!exams || exams == null)
             $scope.selected_exam = {
@@ -535,7 +537,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
 
         },
-        height: 730-200,
+        height: 730-400,
         bindingOptions: {
 
             dataSource: 'entity.Sessions',

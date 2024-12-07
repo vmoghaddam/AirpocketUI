@@ -172,12 +172,12 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
     $scope.selectedTabId = null;
     $scope.tabs = [
         { text: "New", id: 'new' },
-        { text: "Accepted", id: 'accpeted' },
-        { text: "Rejected", id: 'rejected' },
+        { text: "Archived", id: 'accpeted' },
+      //  { text: "Rejected", id: 'rejected' },
 
 
     ];
-
+    $scope.btn_view_visible = false;
     $scope.$watch("selectedTabIndex", function (newValue) {
         //ati
         try {
@@ -186,7 +186,7 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
             $scope.selectedTabId = id;
             $('#' + id).fadeIn();
 
-
+            $scope.btn_view_visible = id == 'accpeted';
             if ($scope.dg_instance)
                 $scope.dg_instance.refresh();
             if ($scope.dg_instance_acc)
@@ -226,24 +226,18 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
     $scope.filters = [];
 
     $scope.dg_columns_publisher = [
-        {
-            cellTemplate: function (container, options) {
-                $("<div style='text-align:center'/>")
-                    .html(options.rowIndex + 1)
-                    .appendTo(container);
-            }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
-        },
+        
         { dataField: 'DateCreate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', sortIndex: 0, sortOrder: 'desc', fixed: true, fixedPosition: 'left' },
-        { dataField: 'ReasonStr', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+      //  { dataField: 'ReasonStr', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+      //  { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250 },
         { dataField: 'DateFrom', caption: 'From', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', },
         { dataField: 'DateTo', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', },
 
         { dataField: 'Remark', caption: 'Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350 },
-        { dataField: 'OperationRemak', caption: 'Ops. Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350, },
+     //   { dataField: 'OperationRemak', caption: 'Ops. Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350, },
         // { dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
-        { dataField: 'DateStatus', caption: '', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', fixed: true, fixedPosition: 'right' },
+       // { dataField: 'DateStatus', caption: '', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', fixed: true, fixedPosition: 'right' },
     ];
     $scope.dg_columns = [];
     $scope.dg_columns = $scope.dg_columns_publisher;
@@ -349,45 +343,51 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
             dataSource: 'dg_ds'
         }
     };
-
+    ////////////////////////////////
+    $scope.format_date = function (dt) {
+        if (!dt)
+            return null;
+        return moment(dt).format('YYYY-MMM-DD');
+    }
     ////////Accepted/////////////////////
     $scope.dg_columns_acc = [
-        {
-            cellTemplate: function (container, options) {
-                $("<div style='text-align:center'/>")
-                    .html(options.rowIndex + 1)
-                    .appendTo(container);
-            }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
-        },
-        { dataField: 'DateCreate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', sortIndex: 0, sortOrder: 'desc', fixed: true, fixedPosition: 'left' },
-        { dataField: 'ReasonStr', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-        { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250 },
-        { dataField: 'DateFrom', caption: 'From', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', },
-        { dataField: 'DateTo', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', },
+        
+       // { dataField: 'DateCreate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'yy-MM-dd', sortIndex: 0, sortOrder: 'desc', fixed: true, fixedPosition: 'left' },
+       // { dataField: 'ReasonStr', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+       // { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 200, fixed: true, fixedPosition: 'left' },
+        { dataField: 'DateFrom', caption: 'From', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 80, format: 'MMM-dd', },
+        { dataField: 'DateTo', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 80, format: 'MMM-dd', },
 
         { dataField: 'Remark', caption: 'Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350 },
-        { dataField: 'OperationRemak', caption: 'Ops. Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350, },
+        { dataField: 'SchedulingRemark', caption: 'Scheduling Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350, },
         {
-            dataField: 'ResponsibleActionId',
+            dataField: 'ResponsibleAction',
             caption: 'Status',
             allowResizing: true,
             alignment: 'center',
             allowEditing: false,
             width: 120,
-            fixed: true,
+            fixed: false,
             fixedPosition: 'right',
-            cellTemplate: function (container, options) {
-                var value = options.value; // Access the cell value
-                if (value === 2) {
-                    container.text('Rejected'); // Render 'Rejected'
-                } else {
-                    container.text(''); // Render empty or default text
-                }
-            }
+            dataType: 'string'
         },
 
-        { dataField: 'DateStatus', caption: '', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', fixed: true, fixedPosition: 'right' },
+        { dataField: 'ResponsibleActionDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd',  fixed: false, fixedPosition: 'right' },
+        {
+            dataField: 'Status',
+            caption: 'Scheduling',
+            allowResizing: true,
+            alignment: 'center',
+            allowEditing: false,
+            width: 100,
+            fixed: true,
+            fixedPosition: 'right',
+            dataType: 'string',
+            sortIndex: 0, sortOrder: 'desc'
+        },
+
+        { dataField: 'DateStatus', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 100, format: 'yy-MMM-dd', fixed: true, fixedPosition: 'right' },
     ];
 
 
@@ -436,8 +436,17 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
 
         },
         onCellPrepared: function (e) {
+            if (e.rowType === "data" && e.column.dataField == "ResponsibleAction") {
+                $scope.styleCell(e, e.data.ResponsibleActionId==1);
+            }
             if (e.rowType === "data" && e.column.dataField == "Status") {
-                $scope.styleCell(e, e.data.Status);
+                $scope.styleCell(e, !e.data.Status?'null': e.data.Status=='Accepted');
+            }
+            if (e.rowType === "data" && e.column.dataField == "ResponsibleActionDate") {
+                $scope.styleCell(e, e.data.ResponsibleActionId == 1);
+            }
+            if (e.rowType === "data" && e.column.dataField == "DateStatus") {
+                $scope.styleCell(e, !e.data.Status ? 'null' : e.data.Status == 'Accepted');
             }
             if (e.rowType === "data" && e.column.dataField == "ReasonStr") {
                 var clr = "";
@@ -484,8 +493,8 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
             if (e.rowType === "data") {
                 //$scope.styleCell(e, e.data.Status);
                 if (!e.data.ResponsibleActionId) { } else
-                    if (e.data.ResponsibleActionId == 1) { e.rowElement.css("backgroundColor", "#b3ffe0"); }
-                    else { e.rowElement.css("backgroundColor", "#ffeecc"); }
+                    if (e.data.ResponsibleActionId == 1) { e.rowElement.css("backgroundColor", "#b3ffec"); }
+                    else { e.rowElement.css("backgroundColor", "#ffd1b3"); }
             }
         },
         bindingOptions: {
@@ -510,8 +519,8 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
 
         { dataField: 'Remark', caption: 'Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350 },
         { dataField: 'OperationRemak', caption: 'Ops. Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 350, },
-        { dataField: 'ResponsibleActionId', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
-        { dataField: 'DateStatus', caption: '', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', fixed: true, fixedPosition: 'right' },
+        { dataField: 'ResponsibleAction', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
+        { dataField: 'ResponsibleActionDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', fixed: true, fixedPosition: 'right' },
     ];
 
 
@@ -619,12 +628,19 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
     ///////////////////////////
 
     $scope.styleCell = function (e, value) {
+        if (value == 'null')
+            return;
         if (!value) {
 
-            e.cellElement.css("backgroundColor", "#a6a6a6");
-            e.cellElement.css("color", "#fff");
-            return;
+            e.cellElement.css("backgroundColor", "#ff9966");
+            e.cellElement.css("color", "#000");
+
         }
+        else {
+            e.cellElement.css("backgroundColor", "#00e6ac");
+            e.cellElement.css("color", "#000");
+        }
+        return;
         if (value > 45)
             return;
         //moradi2
@@ -684,7 +700,7 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
 
         };
 
-        $scope.dg_instance.refresh();
+      //  $scope.dg_instance.refresh();
         //if ($scope.doRefresh) {
         //    $scope.filters = $scope.getFilters();
         //    $scope.dg_ds.filter = $scope.filters;
@@ -708,27 +724,20 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
 
     //};
     $scope.bind_all_responsible = function (callback) {
+        flightService.getReqResponsibleAll($rootScope.employeeId).then(function (response) {
 
-        // Get the value associated with the key 'username'
-        var storedUserData = localStorage.getItem('ls.userData');
-        console.log('----User Data-----', storedUserData)
+            $scope.ds_all = response;
+            $scope.dg_ds = Enumerable.From($scope.ds_all).Where('$.ResponsibleActionId != 1 && $.ResponsibleActionId != -1').ToArray();
+            $scope.dg_ds_acc = Enumerable.From($scope.ds_all).Where('$.ResponsibleActionId==1  || $.ResponsibleActionId==-1').ToArray();
+          
 
-        if (storedUserData) {
-            $scope.user_data = JSON.parse(storedUserData)
-            flightService.getReqResponsibleAll($scope.user_data.EmployeeId).then(function (response) {
-
-                console.log('----response----', response);
-                $scope.dg_ds = Enumerable.From(response).Where('$.ResponsibleActionId != 1 && $.ResponsibleActionId != 2').ToArray();
-                $scope.dg_ds_acc = Enumerable.From(response).Where('$.ResponsibleActionId==' + 1).ToArray();
-                $scope.dg_ds_rej = Enumerable.From(response).Where('$.ResponsibleActionId==' + 2).ToArray();
-
-                if (callback)
-                    callback();
+            if (callback)
+                callback();
 
 
 
-            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-        }
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        
 
 
     };
@@ -795,12 +804,12 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
     };
     $scope.reasons = [
         { id: 1, title: 'Vacation' },
-        { id: 2, title: 'Medical Care' },
-        { id: 3, title: 'Other' },
+       // { id: 2, title: 'Medical Care' },
+     //   { id: 3, title: 'Other' },
     ];
     $scope.statusds = [
         { id: 1, title: 'Accepted' },
-        { id: 2, title: 'Rejected' },
+        { id: -1, title: 'Rejected' },
 
     ];
 
@@ -838,7 +847,7 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
         rtlEnabled: true,
         bindingOptions: {
             value: 'entity.Remark',
-            height: '170',
+            height: '235',
 
         }
     };
@@ -846,9 +855,31 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
 
         bindingOptions: {
             value: 'entity.ResponsibleRemark',
-            height: '320',
+            height: '115',
 
         }
+    };
+    $scope.txt_remarksch = {
+        readOnly: true,
+        bindingOptions: {
+            value: 'entity.SchedulingRemark',
+           
+            height: '110',
+
+        }
+    };
+    $scope.txt_status_sch = {
+        readOnly: true,
+        bindingOptions: {
+            value: 'entity.Status',
+        }
+    };
+    $scope.get_sch_style = function () {
+        if ($scope.entity.Status == 'Accepted')
+            return { background:'#00e6ac'};
+        if ($scope.entity.Status == 'Rejected')
+            return { background:'#ff9966'};
+
     };
     $scope.txt_name = {
         readOnly: true,
@@ -895,10 +926,48 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
 
         }
     };
+    $scope.get_height_style = function () {
+        var _height = $(window).height() - 140;
+        return { height: _height };
+    }
+    $scope.click_action = function (request, action_id) {
+        if (!request.ResponsibleRemark) {
+            General.ShowNotify('Please fill the Remark field.', 'error');
+            return;
+        }
+        var dto = {
+            employee_id: $rootScope.employeeId,
+            form_id: request.Id,
+            action_id: action_id  ,
+            remark: request.ResponsibleRemark
+        };
+        
+        $scope.loadingVisible = true;
+        flightService.actionRequest(dto).then(function (response) {
+            $scope.loadingVisible = false;
+            $scope.ds_all = Enumerable.From($scope.ds_all).Where('$.Id!=' + response.Id).ToArray();
+            $scope.ds_all.push(JSON.parse(JSON.stringify(response)));
+            $scope.dg_ds = Enumerable.From($scope.ds_all).Where('$.ResponsibleActionId != 1 && $.ResponsibleActionId != -1').ToArray();
+            $scope.dg_ds_acc = Enumerable.From($scope.ds_all).Where('$.ResponsibleActionId==1  || $.ResponsibleActionId==-1').ToArray();
+
+            $scope.popup_newform_visible = false;
+
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+    }
     $scope.popup_newform_visible = false;
+    $scope.popup_width = 850;
+    if ($(window).width() < 850)
+        $scope.popup_width = $(window).width() - 20;
+    $scope.popup_height = 610;
+    if ($(window).height() < $scope.popup_height)
+        $scope.popup_height = $(window).height()-10;
+
+    $scope.get_xs_height = function () {
+        return { height:$scope.popup_height - 110 };
+    };
     $scope.popup_newform = {
-        height: 610,
-        width: 850,
+       // height: 610,
+        //width: 850,
         title: 'Form',
         showTitle: true,
 
@@ -918,36 +987,18 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
 
 
                         var dto = {
-                            employee_id: $scope.user_data.EmployeeId,
+                            employee_id: $rootScope.employeeId,
                             form_id: $scope.entity.Id,
                             action_id: $scope.entity.ResponsibleActionId,
-                            remark: $scope.entity.Remark
+                            remark: $scope.entity.ResponsibleRemark
                         };
                         $scope.loadingVisible = true;
                         flightService.actionRequest(dto).then(function (response) {
                             $scope.loadingVisible = false;
-
-                            //$scope.dg_selected = response;
-                            //alert($scope.old_status);
-                            //alert(dto.Status);
-                            if ($scope.old_status != dto.action_id) {
-                                if (!$scope.old_status)
-                                    $scope.dg_ds = Enumerable.From($scope.dg_ds).Where('$.Id!=' + dto.form_id).ToArray();
-                                if ($scope.old_status == 1)
-                                    $scope.dg_ds_acc = Enumerable.From($scope.dg_ds_acc).Where('$.Id!=' + dto.form_id).ToArray();
-                                if ($scope.old_status == 2)
-                                    $scope.dg_ds_rej = Enumerable.From($scope.dg_ds_rej).Where('$.Id!=' + dto.form_id).ToArray();
-
-                                if (dto.action_id == 1)
-                                    $scope.dg_ds_acc.push(response);
-                                if (dto.action_id == 2)
-                                    $scope.dg_ds_rej.push(response);
-                                if (!dto.action_id)
-                                    $scope.dg_ds.push(response);
-
-
-                            }
-
+                            $scope.ds_all = Enumerable.From($scope.ds_all).Where('$.Id!=' + response.Id).ToArray();
+                            $scope.ds_all.push(JSON.parse(JSON.stringify(response)));
+                            $scope.dg_ds = Enumerable.From($scope.ds_all).Where('$.ResponsibleActionId != 1 && $.ResponsibleActionId != -1').ToArray();
+                            $scope.dg_ds_acc = Enumerable.From($scope.ds_all).Where('$.ResponsibleActionId==1  || $.ResponsibleActionId==-1').ToArray();
 
                             $scope.popup_newform_visible = false;
 
@@ -978,14 +1029,14 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
         onHiding: function () {
 
             //$scope.clearEntity();
-            $scope.dg_instance.refresh();
+           // $scope.dg_instance.refresh();
             $scope.popup_newform_visible = false;
 
         },
         onHidden: function () {
 
-            if ($scope.dg_instance)
-                $scope.dg_instance.refresh();
+            //if ($scope.dg_instance)
+            //    $scope.dg_instance.refresh();
             if ($scope.dg_instance_acc)
                 $scope.dg_instance_acc.refresh();
             if ($scope.dg_instance_rej)
@@ -996,6 +1047,9 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
         },
         bindingOptions: {
             visible: 'popup_newform_visible',
+            'toolbarItems[0].visible': '!entity.Status',
+            width: 'popup_width',
+            height:'popup_height'
 
 
         }
@@ -1007,7 +1061,7 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
     }
     else {
         $rootScope.page_title = '> ' + $scope.caption;
-        $('.vacations').fadeIn();
+       
     }
     //////////////////////////////////////////
     $scope.$on('getFilterResponse', function (event, prms) {
@@ -1032,6 +1086,36 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
         $scope.bind_all_responsible();
 
     });
+    $scope.$on('$viewContentLoaded', function () {
+
+        $('.vacations').fadeIn(400, function () {
+            ////////////////////////////////
+            setTimeout(function () {
+                $scope.dg_ds = null;
+                // $scope.bind_new(function () {
+                $scope.bind_all_responsible(function () {
+
+                    //$scope.bind_acc(function () {
+                    //    $scope.bind_rej();
+
+                    //});
+                });
+            }, 1000);
+
+
+
+
+
+
+
+
+            ///////////////////////////////////
+        });
+
+
+    });
+
+
     //////////////////////////////////////////
     $rootScope.$broadcast('OrganizationLoaded', null);
     ///end

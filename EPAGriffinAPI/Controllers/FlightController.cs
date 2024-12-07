@@ -6880,6 +6880,7 @@ namespace EPAGriffinAPI.Controllers
         // [Authorize]
         public async Task<IHttpActionResult> GetLeg(int id)
         {
+           
             var leg = await unitOfWork.FlightRepository.GetViewLegTime().FirstOrDefaultAsync(q => q.ID == id);
             return Ok(leg);
 

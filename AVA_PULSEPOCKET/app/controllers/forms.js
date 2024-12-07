@@ -63,15 +63,11 @@ app.controller('formsController', ['$scope', '$location', '$routeParams', '$root
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
                         var _rstr = Enumerable.From($scope.reasons).Where('$.id==' + $scope.reason).FirstOrDefault().title;
-                        var storedUserData = localStorage.getItem('ls.userData');
-
-                        if (storedUserData) {
-                            $scope.user_data = JSON.parse(storedUserData)
-
+                        
                             var dto = {
-                                UserId: $scope.user_data.UserId,
-                                DateFrom: new Date($scope.dt_from),
-                                DateTo: new Date($scope.dt_to),
+                                UserId: $rootScope.employeeId,
+                                DateFrom: moment(new Date($scope.dt_from)).format('YYYY-MM-DD') ,
+                                DateTo: moment(new Date($scope.dt_to)).format('YYYY-MM-DD') ,
                                 ReasonStr: _rstr,
                                 Reason: $scope.reason,
                                 Remark: $scope.remark,
@@ -87,7 +83,7 @@ app.controller('formsController', ['$scope', '$location', '$routeParams', '$root
 
                             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-                        }
+                       
                        
                     }
                 }, toolbar: 'bottom'
@@ -163,9 +159,9 @@ app.controller('formsController', ['$scope', '$location', '$routeParams', '$root
     };
     $scope.reasons = [
         { id: 1, title: 'Vacation' },
-        { id: 2, title: 'Medical Care' },
-        { id: 8, title: 'Off' },
-        { id: 3, title: 'Other' },
+        //{ id: 2, title: 'Medical Care' },
+      //  { id: 8, title: 'Off' },
+       // { id: 3, title: 'Other' },
     ];
 
     $scope.reason = 1;

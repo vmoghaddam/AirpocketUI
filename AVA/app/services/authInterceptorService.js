@@ -9,6 +9,7 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
         config.headers = config.headers || {};
 
         var authData = localStorageService.get('authorizationData');
+        var userData = localStorageService.get('userData');
 
         var authDataVIRA = localStorageService.get('authorizationMnt');
         
@@ -24,6 +25,9 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
         if (authData) {
 
             config.headers.Authorization = 'Bearer ' + authData.token;
+            config.headers.Reqkey = userData.UserId;
+            config.headers.Reqname = authData.userName;
+            config.headers.Reqroles = userData.Roles;
         }
       
         return config;
