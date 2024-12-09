@@ -98,6 +98,7 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        padding-left: 0px !important;
     }
 
         /* Hide the browser's default checkbox */
@@ -158,7 +159,7 @@
                     <div style="padding: 0 3px 0 3px">
                         <div ng-repeat="course in instructor_courses" class="card-container" data-ng-click="navigate('/trn/instructor/course/' + course.CourseId,'trn-instructor-course',2)">
 
-                            <div class="title">{{course.Title}}</div>
+                            <div class="title">{{course.Title}} ({{course.CourseId}})</div>
 
                             <div class="date-range">
                                 <div class="col-sm-6 col-xs-6">
@@ -178,12 +179,12 @@
                                 </div>
                             </div>
                             <div class="date-range">
-                                <div class="col-sm-6 col-xs-6">
-                                    <p style="display: inline-block">Attendance List</p> <div class="container"><input type="checkbox" ng-checked="course.Date_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div>
+                                <div class="col-sm-12 col-xs-12">
+                                   <div class="container"><input type="checkbox" ng-checked="course.Date_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div> <p style="display: inline-block">Participants List</p> 
                                 </div>
-                                <div class="col-sm-6 col-xs-6">
+                                <!--<div class="col-sm-6 col-xs-6">
                                     <p style="display: inline-block">Exam Result</p> <div class="container"><input type="checkbox" ng-checked="course.Date_Exam_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div>
-                                </div>
+                                </div>-->
                             </div>
 
                         </div>
@@ -195,7 +196,7 @@
                     <div style="padding: 0 3px 0 3px">
                         <div ng-repeat="course in director_courses" class="card-container" data-ng-click="navigate('/trn/instructor/course/' + course.CourseId,'trn-instructor-course',2)">
 
-                            <div class="title" style="background-color: lightgray; color: black">{{course.Title}}</div>
+                            <div class="title" style="background-color: lightgray; color: black">{{course.Title}} ({{course.CourseId}})</div>
 
                             <div class="date-range">
                                 <div class="col-sm-6 col-xs-6">
@@ -215,11 +216,11 @@
                             </div>
                             <div class="date-range">
                                 <div class="col-sm-6 col-xs-6">
-                                    <p style="display: inline-block">Attendance List</p> <div class="container"><input type="checkbox" ng-checked="course.Date_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div>
+                                    <div class="container"><input type="checkbox" ng-checked="course.Date_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div>   <p style="display: inline-block">Attendance List</p> 
                                 </div>
-                                <div class="col-sm-6 col-xs-6">
+                                <!--<div class="col-sm-6 col-xs-6">
                                     <p style="display: inline-block">Exam Result</p> <div class="container"><input type="checkbox" ng-checked="course.Date_Exam_Sign_Ins1 != null ? true : false"> <span class="checkmark"></span></div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>

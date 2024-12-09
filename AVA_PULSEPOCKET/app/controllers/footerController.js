@@ -48,19 +48,19 @@
         if ($scope.is_crew) {
 
 
-            $('.footerhome').width('20%').show();
-            $('.footertrnexam').width('20%').show();
-            $('.footertrnattendance').width('20%').show();
-            $('.footertrsurvay').width('20%').show();
-            $('.footertrnquestions').width('20%').show();
+            $('.footertrnpanel').width('50%').show();
+            //$('.footertrnexam').width('20%').show();
+            $('.footertrnattendance').width('50%').show();
+            //$('.footertrsurvay').width('20%').show();
+            //$('.footertrnquestions').width('20%').show();
 
         }
         else {
-            $('.footerhome').width('20%').show();
-            $('.footertrnexam').width('20%').show();
-            $('.footertrnattendance').width('20%').show();
-            $('.footertrsurvay').width('20%').show();
-            $('.footertrnquestions').width('20%').show();
+            $('.footertrnpanel').width('50%').show();
+            //$('.footertrnexam').width('20%').show();
+            $('.footertrnattendance').width('50%').show();
+            //$('.footertrsurvay').width('20%').show();
+            //$('.footertrnquestions').width('20%').show();
         }
 
 

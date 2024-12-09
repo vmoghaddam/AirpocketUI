@@ -108,7 +108,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
     $scope.popup_attendance_visible = false;
     $scope.popup_height = '100%';
     $scope.popup_width = '100%';
-    $scope.popup_attendance_title = 'Attendance List';
+    $scope.popup_attendance_title = 'Participants List';
     $scope.popup_instance = null;
 
     $scope.popup_attendance = {
