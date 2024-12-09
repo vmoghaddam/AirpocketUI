@@ -19,6 +19,5 @@
     <Folder Include="src\styles\" />
     <Folder Include="src\store\" />
     <Folder Include="src\routes\" />
-    <Folder Include="src\pages\" />
   </ItemGroup>
 </Project>
