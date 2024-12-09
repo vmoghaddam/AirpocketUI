@@ -245,6 +245,9 @@
                                 <tr>
                                     <td>Sessions</td>
                                     <td style="width:35px;padding:0 3px 0 3px">
+                                        <a ng-show="IsEditable" ng-click="addSessionAll()" href="" class='w3-button w3-block w3-green' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-star"></i></a>
+                                    </td>
+                                    <td style="width:35px;padding:0 3px 0 3px">
                                         <a ng-show="IsEditable" ng-click="addSession()" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-plus"></i></a>
                                     </td>
                                     <td style="width:35px;padding:0 3px 0 3px">
@@ -254,32 +257,39 @@
                             </table>
                         </div>
                         <div dx-data-grid="dg_session" id="dg_session"></div>
-                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
-                            Participants Count: <span style="display:inline-block;margin-left:3px;">{{entity.Attendants}}</span>
+                        <div style="border: 1px solid #ccc; margin-top: 5px; padding: 5px; background: #a2d3d5 ">
+                            Participants Count: <span style="display:inline-block;margin-left:3px;font-weight:bold">{{entity.Attendants}}</span>
                         </div>
-                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+                        <div style="border: 1px solid #ccc; margin-top: 5px; padding: 5px; background: #a2d3d5 ">
 
-                            Participants Rosters <span ng-show="!entity.Date_Sessions_Synced">Not</span>  Synced
-
+                            Participants Rosters: <span ng-show="!entity.Date_Sessions_Synced" style="font-weight: bold">Not</span>  
+                            <span style="font-weight:bold">Synced</span>
+                                                                                                                                     
+                            <span style="display:inline-block;color:red;margin-left:10px;" ng-show="entity.SyncedErrors>0">({{entity.SyncedErrors}} Errors)</span>
                         </div>
-                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+                        <div style="border: 1px solid #ccc; margin-top: 5px; padding: 5px; background: #a2d3d5 ">
 
-                            Instructor(s) Rosters <span ng-show="!entity.Date_Sessions_Instructor_Synced">Not</span>  Synced
-
-                        </div>
-                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
-
-                            Participants List <span ng-show="!entity.Date_Sign_Ins1">Not</span>  Signed
+                            Instructor(s) Rosters: <span ng-show="!entity.Date_Sessions_Instructor_Synced" style="font-weight: bold">Not</span>   <span style="font-weight:bold">Synced</span>
 
                         </div>
-                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+                        <div style="border: 1px solid #ccc; margin-top: 5px; padding: 5px; background: #a2d3d5 ">
 
-                            Exam <span ng-show="!entity.Date_Sign_Ins1">Not</span>  Created
+                            Participants List: <span ng-show="!entity.Date_Sign_Ins1" style="font-weight: bold">Not</span>   <span style="font-weight:bold">Signed</span>
 
                         </div>
-                        <div style="border:1px solid #ccc;margin-top:5px;padding:5px">
+                        <div style="border: 1px solid #ccc; margin-top: 5px; padding: 5px; background: #a2d3d5 ">
 
-                            Exam <span ng-show="!entity.Date_Sign_Ins1">Not</span>  Created
+                            Exam: <span ng-show="!entity.HasExam" style="font-weight: bold">Not</span>  <span style="font-weight:bold">Created</span>
+
+                        </div>
+                        <div style="border: 1px solid #ccc; margin-top: 5px; padding: 5px; background: #a2d3d5 " ng-show="entity.HasExam">
+
+                            Exam Status: <span style="display: inline-block; margin-left: 3px; font-weight: bold">{{entity.ExamStatus}}</span>
+
+                        </div>
+                        <div style="border: 1px solid #ccc; margin-top: 5px; padding: 5px; background: #a2d3d5 ">
+
+                            Director: <span ng-show="!entity.Date_Sign_Director" style="font-weight: bold">Not</span>   <span style="font-weight:bold">Signed</span>
 
                         </div>
                     </div>
@@ -393,7 +403,7 @@
                             <table style="width:100%;">
                                 <tr>
                                     <td>Questions Template</td>
-                                     
+
                                 </tr>
                             </table>
                         </div>
@@ -401,8 +411,8 @@
                         <div style="margin-top:5px;border:1px solid #ccc">
                             <table style="width:100%">
                                 <tr>
-                                    
-                                    <td style="width:100%" >
+
+                                    <td style="width:100%">
                                         <div dx-button="btn_generate"></div>
                                     </td>
                                 </tr>
@@ -485,6 +495,31 @@
         </div>
 
     </div>
+
+
+    <div id="popup_sessionall" dx-popup="popup_sessionall">
+
+        <div class="padding-7 dx-border" style="padding:0;margin-top:3px">
+            <div class="col-lg-12  margin-bottom-5 padding-5">
+                <label>Date</label>
+                <div class="center" dx-date-box="date_session" dx-validator="{validationGroup:'crsessionall',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-5">
+                <label>Start</label>
+                <div class="center" dx-date-box="start_session" dx-validator="{validationGroup:'crsessionall',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Duration (minutes)</label>
+                <div dx-number-box="txt_session_duration" class="center" dx-validator="{validationGroup:'crsessionall',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+
+            <div style="clear:both"></div>
+
+        </div>
+
+    </div>
+
 
     <div id="popup_syllabus" dx-popup="popup_syllabus">
 

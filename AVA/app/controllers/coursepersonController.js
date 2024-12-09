@@ -794,21 +794,45 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 fixed: true, fixedPosition: 'left',
             },
             {
-                dataField: "HoldingType", caption: '',
+                dataField: "Synced", caption: '',
                 width: 55,
                 allowFiltering: false,
                 allowSorting: false,
                 cellTemplate: function (container, options) {
-                    var fn = 'offlineclass';
-                    if (options.value == 'Online Class')
-                        fn = 'onlineclass';
-
+                    var fn = 'sync-not-24';
+                    switch (options.value) {
+                        case -1:
+                            fn = 'sync-error-24';
+                            break;
+                        case 1:
+                            fn = 'sync-24';
+                            break;
+                         
+                        default:
+                            break;
+                    }
                     $("<div>")
-                        .append("<img style='width:30px' src='content/images/" + fn + ".png' />")
+                        .append("<img src='content/images/" + fn + ".png' />")
                         .appendTo(container);
                 },
                 fixed: true, fixedPosition: 'left',
             },
+            //{
+            //    dataField: "HoldingType", caption: '',
+            //    width: 55,
+            //    allowFiltering: false,
+            //    allowSorting: false,
+            //    cellTemplate: function (container, options) {
+            //        var fn = 'offlineclass';
+            //        if (options.value == 'Online Class')
+            //            fn = 'onlineclass';
+
+            //        $("<div>")
+            //            .append("<img style='width:30px' src='content/images/" + fn + ".png' />")
+            //            .appendTo(container);
+            //    },
+            //    fixed: true, fixedPosition: 'left',
+            //},
             {
                 dataField: "AttForm", caption: '',
                 width: 55,
@@ -828,21 +852,24 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
             },
             { dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left', },
-            { dataField: 'No', caption: 'Class Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'left' },
-            { dataField: 'CourseType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200, fixed: true, fixedPosition: 'left' },
+            { dataField: 'No', caption: 'Class Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left' },
+            { dataField: 'Attendants', caption: 'P/S', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left' },
             { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: true, fixedPosition: 'left' },
+            { dataField: 'DateStart', caption: 'DateStart', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130, sortIndex: 0, sortOrder: "desc" },
+            { dataField: 'DateEnd', caption: 'DateEnd', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+            { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
+            { dataField: 'Organization', caption: 'Organization', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
+            { dataField: 'CourseType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200, fixed: false, fixedPosition: 'left' },
 
             //{ dataField: 'CaoTypeTitle', caption: 'Cao Type', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 200 },
             { dataField: 'Duration', caption: 'Duration (hrs)', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-            { dataField: 'DateStart', caption: 'DateStart', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130, sortIndex: 0, sortOrder: "desc" },
-            { dataField: 'DateEnd', caption: 'DateEnd', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
             { dataField: 'Recurrent', caption: 'Recurrent', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 100 },
 
             { dataField: 'Interval', caption: 'Interval', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 70 },
             { dataField: 'CalendarType', caption: '', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
 
-            { dataField: 'Organization', caption: 'Organization', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
-            { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
+            
+           
             { dataField: 'TrainingDirector', caption: 'Training Director', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
             { dataField: 'JobGroups', caption: 'Groups', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
 
@@ -1835,9 +1862,9 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         //////////////////////////////
 
         var tabs_folder = [
-            { text: "EXAM", id: 'exam', visible_btn: false },
+           // { text: "EXAM", id: 'exam', visible_btn: false },
             { text: "PARTICIPANTS", id: 'participants', visible_btn: false },
-            { text: "SYLLABI", id: 'syllabi', visible_btn: false },
+           // { text: "SYLLABI", id: 'syllabi', visible_btn: false },
 
 
 
@@ -1990,6 +2017,14 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
 
                                 $scope.loadingVisible = false;
+
+                                //EmployeeId
+                                $.each($scope.dg_people_ds, function (_i, _d) {
+                                    var _it = Enumerable.From(response.Data.fdps).Where(function (x) { return x.CrewId == _d.EmployeeId }).ToArray();
+                                    if (_it.length > 0)
+                                        _d.IsSessionsSynced = true;
+                                });
+
                                 if (!response.Data.errors || response.Data.errors.length == 0)
                                     General.ShowNotify(Config.Text_SavedOk, 'success');
                                 else {
@@ -1997,7 +2032,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                                     $scope.popup_syncerrors_visible = true;
                                 }
 
-
+                                //$scope.dg_people_ds
 
 
 
@@ -2476,9 +2511,25 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                             .appendTo(container);
                     }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
                 });
+                $scope.dg_people_instance.addColumn({
+                    dataField: "IsSessionsSynced", caption: '',
+                    width: 55,
+                    allowFiltering: false,
+                    allowSorting: false,
+                    cellTemplate: function (container, options) {
+                        var fn = 'sync-not-24';
+                        if (options.value)
+                            fn = 'sync-24';
+                         
+                        $("<div>")
+                            .append("<img src='content/images/" + fn + ".png' />")
+                            .appendTo(container);
+                    },
+                    fixed: true, fixedPosition: 'left',
+                });
                 $scope.dg_people_instance.addColumn({ dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left', sortIndex: 0, sortOrder: "desc" });
-                $scope.dg_people_instance.addColumn({ dataField: 'LastName', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 200, fixed: true, fixedPosition: 'left', sortIndex: 1, sortOrder: "asc" });
-                $scope.dg_people_instance.addColumn({ dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 200, fixed: true, fixedPosition: 'left', });
+                $scope.dg_people_instance.addColumn({ dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250, fixed: true, fixedPosition: 'left', sortIndex: 1, sortOrder: "asc" });
+              //  $scope.dg_people_instance.addColumn({ dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 200, fixed: true, fixedPosition: 'left', });
 
                 $scope.ds_sessions = response.Data.sessions;
 
@@ -2497,7 +2548,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                     _d.fieldAttendance = 'SessionAttendance' + _d.Key;
                     _d.captionAttendance = "Attendance";
-                    $scope.dg_people_instance.addColumn({ dataField: 'SessionAttendance' + _d.Key, caption: "Attendance", allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 });
+                    //$scope.dg_people_instance.addColumn({ dataField: 'SessionAttendance' + _d.Key, caption: "Attendance", allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 });
 
                     //}
 
@@ -2506,10 +2557,14 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 $.each(response.Data.people, function (_i, _d) {
 
-                    var dobj = { Id: _d.Id, PersonId: _d.PersonId, Name: _d.Name, FirstName: _d.FirstName, LastName: _d.LastName, JobGroup: _d.JobGroup };
+                    var dobj = {
+                        Id: _d.Id, PersonId: _d.PersonId, Name: _d.Name, FirstName: _d.FirstName, LastName: _d.LastName, JobGroup: _d.JobGroup
+                        , IsSessionsSynced: _d.IsSessionsSynced, EmployeeId: _d.EmployeeId
+                    };
                     $scope.ds_people.push(dobj);
                     var obj = {
                         Id: _d.Id, PersonId: _d.PersonId, Name: _d.Name, FirstName: _d.FirstName, LastName: _d.LastName, JobGroup: _d.JobGroup,
+                        IsSessionsSynced: _d.IsSessionsSynced,
                         JobGroupCode: _d.JobGroupCode,
                         JobGroupCode2: _d.JobGroupCode2,
                         CoursePeopleStatus: _d.CoursePeopleStatus,
@@ -2544,20 +2599,20 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 $scope.dg_people_instance.addColumn({ dataField: 'SMSDateSent', caption: 'Notif. Date', allowResizing: true, alignment: 'center', dataType: 'datetime', format: 'MM-dd-yyyy HH:mm', allowEditing: false, width: 150, });
                 $scope.dg_people_instance.addColumn({ dataField: 'SMSStatus', caption: 'Notif. Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200, });
 
-                $scope.dg_people_instance.addColumn(
-                    {
-                        dataField: "Id", caption: '',
-                        width: 120,
-                        allowFiltering: false,
-                        allowSorting: false,
-                        cellTemplate: 'AttendanceTemplate',
-                        name: 'attendance',
-                        fixed: true,
-                        fixedPosition: 'right',
-                        //visible:false,
+                //$scope.dg_people_instance.addColumn(
+                //    {
+                //        dataField: "Id", caption: '',
+                //        width: 120,
+                //        allowFiltering: false,
+                //        allowSorting: false,
+                //        cellTemplate: 'AttendanceTemplate',
+                //        name: 'attendance',
+                //        fixed: true,
+                //        fixedPosition: 'right',
+                //        //visible:false,
 
-                    }
-                );
+                //    }
+                //);
 
                 $scope.dg_people_instance.addColumn(
                     {
@@ -3355,7 +3410,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             return filters;
         };
         $scope.bind = function () {
-            alert('x');
+            
 ;            if (!$scope.dg_ds && $scope.doRefresh) {
                 $scope.dg_ds = {
                     store: {
@@ -3773,6 +3828,27 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             $scope.bind();
 
         });
+
+        $scope.$on('InitFollowUp', function (event, prms) {
+            $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
+            if (!$scope.dg_selected) {
+                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                return;
+            }
+            $scope.courseEmployee.Id = $scope.dg_selected.Id;
+            $scope.selectedCourse = $scope.dg_selected;
+            $scope.selected_intervals = [];
+            if ($scope.selectedCourse.Intervals) {
+                var p1 = $scope.selectedCourse.Intervals.split('-');
+                $.each(p1, function (_i, _d) {
+                    var p2 = _d.split('_');
+                    $scope.selected_intervals.push({ title: p2[0], code: p2[1], value: p2[2] });
+                });
+            }
+
+            $scope.popup_people_visible = true;
+        });
+       
         //////////////////////////////////////////
         $('.sum-wrapper').height($(window).height() - 200);
 

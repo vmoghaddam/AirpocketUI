@@ -550,9 +550,9 @@
                     <td style="padding-right:3px;"> <div ng-show="IsEditable" dx-button="btn_new"></div></td>
                     <td style="padding-right:3px;"> <div dx-button="btn_edit"></div></td>
                     <td style="padding-right:3px;"> <div dx-button="btn_people"></div></td>
-                    <td style="padding-right:3px;"> <div dx-button="btn_exam"></div></td>
-                    <td style="padding-right:3px;"> <div dx-button="btn_notify"></div></td>
-                    <td style="padding-right:3px;"> <div dx-button="btn_syncroster"></div></td>
+                   <!-- <td style="padding-right:3px;"> <div dx-button="btn_exam"></div></td>-->
+                   <!-- <td style="padding-right:3px;"> <div dx-button="btn_notify"></div></td>-->
+                  <!--  <td style="padding-right:3px;"> <div dx-button="btn_syncroster"></div></td>-->
                     <td ng-show="dg_selected" style="padding-right:3px;"> <div id="uploader_file" dx-file-uploader="uploader_file" class="invisibleuploader"></div> </td>
                     <td style="padding-right:3px;"><div ng-show="IsEditable" dx-button="btn_delete"></div></td>
                 </tr>
@@ -697,6 +697,19 @@
             <div dx-tabs="tabs_folder_options">
 
             </div>
+            <div class="tabfolder participants">
+
+                <div dx-data-grid="dg_people" id="dg_people" dx-item-alias="row">
+
+                    <div data-options="dxTemplate:{ name:'updateResultTemplate' }">
+                        <a ng-click="updateResult(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Update Result</a>
+                    </div>
+                    <div data-options="dxTemplate:{ name:'AttendanceTemplate' }">
+                        <a ng-click="updateAttendance(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Attendance</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="tabfolder exam" style="border:1px solid #ccc" ng-style="{ 'height': (windowHeight - 150) + 'px' }">
 
                 <div class="col-lg-2   padding-0" style="padding:0;margin-top:0px;">
@@ -712,11 +725,11 @@
                                 </div>
                             </div>
                             <!--<div class="col-lg-12 col-md-6" style="padding: 0 !important">
-                                <div class="personal-input-group">
-                                    <label for="end">Finishing at</label>
-                                    <input type="text" id="firstname" ng-model="formatDateTime(follow_exam.date_end_scheduled)" readonly>
-                                </div>
-                            </div>-->
+                        <div class="personal-input-group">
+                            <label for="end">Finishing at</label>
+                            <input type="text" id="firstname" ng-model="formatDateTime(follow_exam.date_end_scheduled)" readonly>
+                        </div>
+                    </div>-->
 
                         </div>
                         <div class="profile-card" style="width: 100%; display: inline-block; padding: 5px; margin-bottom: 5px;">
@@ -827,20 +840,21 @@
                                 <div class="progress-bar" ng-style="{ 'width': getProgressBarWidth(data.total_answered, data.total_questions) + '%' }"></div>
                             </div>
                             <!--<div class="results">
-                                    <div class="answers" style="font-size:20px;font-weight:normal">
-                                        <span class="true-answers" ng-style="{ 'color': '#005657' }">{{ data.score }}</span>
+                            <div class="answers" style="font-size:20px;font-weight:normal">
+                                <span class="true-answers" ng-style="{ 'color': '#005657' }">{{ data.score }}</span>
 
-                                    </div>
-                                    <span class="result" style="font-size:16px;font-weight:normal" ng-class="{
-                                'txt-success': data.result === 'PASSED',
-                                'txt-warning': data.result === 'RE-EXAM',
-                                'txt-danger': data.result === 'FAILED'
-                            }">{{ data.result }}</span>
-                                </div>-->
+                            </div>
+                            <span class="result" style="font-size:16px;font-weight:normal" ng-class="{
+                        'txt-success': data.result === 'PASSED',
+                        'txt-warning': data.result === 'RE-EXAM',
+                        'txt-danger': data.result === 'FAILED'
+                    }">{{ data.result }}</span>
+                        </div>-->
                             <table style="width:100%">
                                 <tr>
                                     <td>
                                         <i class='fas fa-square' style='font-size: 18px; color: #47807f'></i><span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.correct_answer}}</span>
+                                        pa
                                     </td>
 
                                     <td>
@@ -886,18 +900,6 @@
                 <div style="clear:both"></div>
 
 
-            </div>
-            <div class="tabfolder participants">
-                
-                <div dx-data-grid="dg_people" id="dg_people" dx-item-alias="row">
-
-                    <div data-options="dxTemplate:{ name:'updateResultTemplate' }">
-                        <a ng-click="updateResult(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Update Result</a>
-                    </div>
-                    <div data-options="dxTemplate:{ name:'AttendanceTemplate' }">
-                        <a ng-click="updateAttendance(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Attendance</a>
-                    </div>
-                </div>
             </div>
 
 

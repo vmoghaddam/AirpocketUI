@@ -8503,6 +8503,7 @@ namespace EPAGriffinAPI.DAL
         //7-11
         public bool sendWelcome()
         {
+            return false;
             //var opscrew = this.context.OpsCrewPhones.Select(q => q.CellPhone).ToList().Select(q => q.Replace(" ", ""));
             //var crews = this.context.ViewCrews.ToList();
             //var users = this.context.AspNetUsers.ToList();

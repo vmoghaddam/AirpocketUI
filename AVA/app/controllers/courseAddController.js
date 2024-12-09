@@ -485,7 +485,12 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     };
     ////////////////////////////
     $scope.addSession = function () {
+        $scope.sessionDate = $scope.entity.DateStart;
         $scope.popup_session_visible = true;
+    };
+    $scope.addSessionAll = function () {
+        $scope.sessionDate = $scope.entity.DateStart;
+        $scope.popup_sessionall_visible = true;
     };
     $scope.removeSession = function () {
         var dg_selected = $rootScope.getSelectedRow($scope.dg_session_instance);
@@ -494,6 +499,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             return;
         }
         $scope.entity.Sessions = Enumerable.From($scope.entity.Sessions).Where('$.Key!="' + dg_selected.Key + '"').ToArray();
+        $scope.session_changed = 1;
     };
     $scope.dg_session_columns = [
 
@@ -600,9 +606,19 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                         console.log(obj);
                         $scope.entity.Sessions.push(obj);
 
-                        $scope.sessionDate = null;
-                        $scope.sessionStart = null;
-                        $scope.sessionEnd = null;
+                        var difference = $scope.sessionEnd.getTime() - $scope.sessionStart.getTime(); // This will give difference in milliseconds
+                        var resultInMinutes = Math.round(difference / 60000);
+
+                       
+                        var _new_start = new Date($scope.sessionEnd.addMinutes(15));
+                        var _new_end = new Date(new Date(_new_start).addMinutes(resultInMinutes));
+
+
+                        //$scope.sessionDate = null;
+                        $scope.sessionStart = new Date(_new_start);
+                      
+                        $scope.sessionEnd = new Date(_new_end);
+                        $scope.session_changed = 1;
                     }
                 }, toolbar: 'bottom'
             },
@@ -643,6 +659,100 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         $scope.popup_session_visible = false;
 
     };
+    ///////////////////////////////////
+    $scope.session_duration = 120;
+    $scope.txt_session_duration = {
+        min: 1,
+        bindingOptions: {
+            value: 'session_duration',
+        }
+    };
+    $scope.popup_sessionall_visible = false;
+    $scope.popup_sessionall_title = 'Sessions';
+    $scope.popup_sessionall = {
+        elementAttr: {
+            //  id: "elementId",
+            class: "popup_sessionall"
+        },
+        shading: true,
+        //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
+        height: 300,
+        width: 350,
+        fullScreen: false,
+        showTitle: true,
+        dragEnabled: true,
+        toolbarItems: [
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'success', text: 'Save', icon: 'check', validationGroup: 'crsessionall', bindingOptions: { disabled: 'IsApproved' }, onClick: function (arg) {
+
+                        var result = arg.validationGroup.validate();
+                        if (!result.isValid) {
+                            General.ShowNotify(Config.Text_FillRequired, 'error');
+                            return;
+                        }
+
+                        var date = (new Date($scope.sessionDate)).getDatePartArray();
+                        var start = (new Date($scope.sessionStart)).getTimePartArray();
+                        var _start = new Date(date[0], date[1], date[2], start[0], start[1], 0, 0);
+
+                        $scope.entity.Sessions = [];
+                        //entity.Duration
+                        var _cnt = $scope.entity.Duration * 60 / $scope.session_duration;
+                        var session_start = _start;
+                        while ($scope.entity.Sessions.length < _cnt) {
+                            var session_end = General.add_minutes(session_start, $scope.session_duration); 
+                            var obj = { DateStart: session_start, DateEnd: session_end };
+                            obj.Key = $scope.getSessionKey(obj);
+                            $scope.entity.Sessions.push(obj);
+
+                            session_start = General.add_minutes(session_end,15);  ;
+                        }
+                        $scope.session_changed = 1;
+                        $scope.popup_sessionall_visible = false;
+                        
+                    }
+                }, toolbar: 'bottom'
+            },
+
+            { widget: 'dxButton', location: 'after', options: { type: 'danger', text: 'Close', icon: 'remove', }, toolbar: 'bottom' }
+        ],
+
+        visible: false,
+
+        closeOnOutsideClick: false,
+        onTitleRendered: function (e) {
+
+        },
+        onShowing: function (e) {
+
+        },
+        onShown: function (e) {
+
+
+        },
+        onHiding: function () {
+
+
+            $scope.popup_sessionall_visible = false;
+
+        },
+        bindingOptions: {
+            visible: 'popup_sessionall_visible',
+
+            title: 'popup_sessionall_title',
+
+        }
+    };
+
+    //close button
+    $scope.popup_sessionall.toolbarItems[1].options.onClick = function (e) {
+
+        $scope.popup_sessionall_visible = false;
+
+    };
+
+    //////////////////////////////////////
 
     $scope.sessionDate = null;
     $scope.sessionStart = null;
@@ -650,6 +760,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     $scope.date_session = {
         type: "date",
         width: '100%',
+        displayFormat: "yyyy-MM-dd",
         //pickerType: 'rollers',
         interval: 15,
         onValueChanged: function (arg) {
@@ -862,6 +973,10 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         scrollByThumb: true,
         bindingOptions: { height: 'scroll_height', }
     };
+
+
+    $scope.session_changed = 0;
+
     $scope.pop_width = 500;
     $scope.pop_height = 350;
     $scope.popup_add_visible = false;
@@ -872,142 +987,149 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         showTitle: true,
 
         toolbarItems: [
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'educationadd', onClick: function (e) {
+
+            //            $rootScope.$broadcast('InitStudyFieldSelect', null);
+            //        }
+            //    }, toolbar: 'bottom', bindingOptions: { visible: 'btn_visible_education', disabled: 'IsMainDisabled' }
+            //},
+
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'educationadd', bindingOptions: { visible: 'btn_visible_education', }, onClick: function (e) {
+            //            var dg_selected = $rootScope.getSelectedRow($scope.dg_education_instance);
+            //            if (!dg_selected) {
+            //                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+            //                return;
+            //            }
+            //            $scope.entity.CourseRelatedStudyFields = Enumerable.From($scope.entity.CourseRelatedStudyFields).Where('$.Id!=' + dg_selected.Id).ToArray();
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+
+
+
+            //{
+            //    widget: 'dxButton', location: 'before', toolbar: 'bottom', options: {
+            //        type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'aircrafttypeadd', bindingOptions: { visible: 'btn_visible_aircrafttype', }, onClick: function (e) {
+            //            // $scope.popup_aircrafttype_visible = true;
+            //            $rootScope.$broadcast('InitAircraftSelect', null);
+            //        }
+            //    }
+            //},
+            ////{ widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'aircrafttypeadd', bindingOptions: { visible: 'btn_visible_aircrafttype' } }, toolbar: 'bottom' },
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'aircrafttypeadd', bindingOptions: { visible: 'btn_visible_aircrafttype' }, onClick: function (e) {
+            //            var dg_selected = $rootScope.getSelectedRow($scope.dg_aircrafttype_instance);
+            //            if (!dg_selected) {
+            //                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+            //                return;
+            //            }
+            //            $scope.entity.CourseRelatedAircraftTypes = Enumerable.From($scope.entity.CourseRelatedAircraftTypes).Where('$.Id!=' + dg_selected.Id).ToArray();
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+
+
+
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'coursetypeadd', bindingOptions: { visible: 'btn_visible_coursetype' }, onClick: function (e) {
+
+            //            $rootScope.$broadcast('InitCourseTypeSelect', null);
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+            //// { widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'coursetypeadd', bindingOptions: { visible: 'btn_visible_coursetype' } }, toolbar: 'bottom' },
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'coursetypeadd', bindingOptions: { visible: 'btn_visible_coursetype' }, onClick: function (e) {
+            //            var dg_selected = $rootScope.getSelectedRow($scope.dg_coursetype_instance);
+            //            if (!dg_selected) {
+            //                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+            //                return;
+            //            }
+            //            $scope.entity.CourseRelatedCourseTypes = Enumerable.From($scope.entity.CourseRelatedCourseTypes).Where('$.Id!=' + dg_selected.Id).ToArray();
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'courseadd', bindingOptions: { visible: 'btn_visible_course' }, onClick: function (e) {
+            //            $rootScope.$broadcast('InitCourseSelect', null);
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+            ////{ widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'courseadd', bindingOptions: { visible: 'btn_visible_course' } }, toolbar: 'bottom' },
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'courseadd', bindingOptions: { visible: 'btn_visible_course' }, onClick: function (e) {
+            //            var dg_selected = $rootScope.getSelectedRow($scope.dg_course_instance);
+            //            if (!dg_selected) {
+            //                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+            //                return;
+            //            }
+            //            $scope.entity.CourseRelatedCourses = Enumerable.From($scope.entity.CourseRelatedCourses).Where('$.Id!=' + dg_selected.Id).ToArray();
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+
+
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'groupadd', bindingOptions: { visible: 'btn_visible_group' }, onClick: function (e) {
+            //            $rootScope.$broadcast('InitJobGroupSelect', null);
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+            //// { widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'groupadd', bindingOptions: { visible: 'btn_visible_group' } }, toolbar: 'bottom' },
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'groupadd', bindingOptions: { visible: 'btn_visible_group' }, onClick: function (e) {
+            //            var dg_selected = $rootScope.getSelectedRow($scope.dg_group_instance);
+            //            if (!dg_selected) {
+            //                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+            //                return;
+            //            }
+            //            $scope.entity.CourseRelatedGroups = Enumerable.From($scope.entity.CourseRelatedGroups).Where('$.Id!=' + dg_selected.Id).ToArray();
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+
+
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'employeeadd', bindingOptions: { visible: 'btn_visible_employee' }, onClick: function (e) {
+            //            $rootScope.$broadcast('InitEmployeeSelect', null);
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+            //// { widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'employeeadd', bindingOptions: { visible: 'btn_visible_employee' } }, toolbar: 'bottom' },
+            //{
+            //    widget: 'dxButton', location: 'before', options: {
+            //        type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'employeeadd', bindingOptions: { visible: 'btn_visible_employee' }, onClick: function (e) {
+            //            var dg_selected = $rootScope.getSelectedRow($scope.dg_employee_instance);
+            //            if (!dg_selected) {
+            //                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+            //                return;
+            //            }
+            //            $scope.entity.CourseRelatedEmployees = Enumerable.From($scope.entity.CourseRelatedEmployees).Where('$.Id!=' + dg_selected.Id).ToArray();
+            //        }
+            //    }, toolbar: 'bottom'
+            //},
+
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'educationadd', onClick: function (e) {
-
-                        $rootScope.$broadcast('InitStudyFieldSelect', null);
+                    type: 'default', text: 'Follow Up', width: 150,   onClick: function (e) {
+                        if ($scope.entity.Id)
+                            $rootScope.$broadcast('InitFollowUp', $scope.entity.Id);
                     }
-                }, toolbar: 'bottom', bindingOptions: { visible: 'btn_visible_education', disabled: 'IsMainDisabled' }
+                }, toolbar: 'bottom', 
             },
-
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'educationadd', bindingOptions: { visible: 'btn_visible_education', }, onClick: function (e) {
-                        var dg_selected = $rootScope.getSelectedRow($scope.dg_education_instance);
-                        if (!dg_selected) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $scope.entity.CourseRelatedStudyFields = Enumerable.From($scope.entity.CourseRelatedStudyFields).Where('$.Id!=' + dg_selected.Id).ToArray();
-                    }
-                }, toolbar: 'bottom'
-            },
-
-
-
-            {
-                widget: 'dxButton', location: 'before', toolbar: 'bottom', options: {
-                    type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'aircrafttypeadd', bindingOptions: { visible: 'btn_visible_aircrafttype', }, onClick: function (e) {
-                        // $scope.popup_aircrafttype_visible = true;
-                        $rootScope.$broadcast('InitAircraftSelect', null);
-                    }
-                }
-            },
-            //{ widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'aircrafttypeadd', bindingOptions: { visible: 'btn_visible_aircrafttype' } }, toolbar: 'bottom' },
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'aircrafttypeadd', bindingOptions: { visible: 'btn_visible_aircrafttype' }, onClick: function (e) {
-                        var dg_selected = $rootScope.getSelectedRow($scope.dg_aircrafttype_instance);
-                        if (!dg_selected) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $scope.entity.CourseRelatedAircraftTypes = Enumerable.From($scope.entity.CourseRelatedAircraftTypes).Where('$.Id!=' + dg_selected.Id).ToArray();
-                    }
-                }, toolbar: 'bottom'
-            },
-
-
-
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'coursetypeadd', bindingOptions: { visible: 'btn_visible_coursetype' }, onClick: function (e) {
-
-                        $rootScope.$broadcast('InitCourseTypeSelect', null);
-                    }
-                }, toolbar: 'bottom'
-            },
-            // { widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'coursetypeadd', bindingOptions: { visible: 'btn_visible_coursetype' } }, toolbar: 'bottom' },
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'coursetypeadd', bindingOptions: { visible: 'btn_visible_coursetype' }, onClick: function (e) {
-                        var dg_selected = $rootScope.getSelectedRow($scope.dg_coursetype_instance);
-                        if (!dg_selected) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $scope.entity.CourseRelatedCourseTypes = Enumerable.From($scope.entity.CourseRelatedCourseTypes).Where('$.Id!=' + dg_selected.Id).ToArray();
-                    }
-                }, toolbar: 'bottom'
-            },
-
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'courseadd', bindingOptions: { visible: 'btn_visible_course' }, onClick: function (e) {
-                        $rootScope.$broadcast('InitCourseSelect', null);
-                    }
-                }, toolbar: 'bottom'
-            },
-            //{ widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'courseadd', bindingOptions: { visible: 'btn_visible_course' } }, toolbar: 'bottom' },
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'courseadd', bindingOptions: { visible: 'btn_visible_course' }, onClick: function (e) {
-                        var dg_selected = $rootScope.getSelectedRow($scope.dg_course_instance);
-                        if (!dg_selected) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $scope.entity.CourseRelatedCourses = Enumerable.From($scope.entity.CourseRelatedCourses).Where('$.Id!=' + dg_selected.Id).ToArray();
-                    }
-                }, toolbar: 'bottom'
-            },
-
-
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'groupadd', bindingOptions: { visible: 'btn_visible_group' }, onClick: function (e) {
-                        $rootScope.$broadcast('InitJobGroupSelect', null);
-                    }
-                }, toolbar: 'bottom'
-            },
-            // { widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'groupadd', bindingOptions: { visible: 'btn_visible_group' } }, toolbar: 'bottom' },
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'groupadd', bindingOptions: { visible: 'btn_visible_group' }, onClick: function (e) {
-                        var dg_selected = $rootScope.getSelectedRow($scope.dg_group_instance);
-                        if (!dg_selected) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $scope.entity.CourseRelatedGroups = Enumerable.From($scope.entity.CourseRelatedGroups).Where('$.Id!=' + dg_selected.Id).ToArray();
-                    }
-                }, toolbar: 'bottom'
-            },
-
-
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'employeeadd', bindingOptions: { visible: 'btn_visible_employee' }, onClick: function (e) {
-                        $rootScope.$broadcast('InitEmployeeSelect', null);
-                    }
-                }, toolbar: 'bottom'
-            },
-            // { widget: 'dxButton', location: 'before', options: { type: 'default', text: 'Edit', width: 120, icon: 'edit', validationGroup: 'employeeadd', bindingOptions: { visible: 'btn_visible_employee' } }, toolbar: 'bottom' },
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'employeeadd', bindingOptions: { visible: 'btn_visible_employee' }, onClick: function (e) {
-                        var dg_selected = $rootScope.getSelectedRow($scope.dg_employee_instance);
-                        if (!dg_selected) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $scope.entity.CourseRelatedEmployees = Enumerable.From($scope.entity.CourseRelatedEmployees).Where('$.Id!=' + dg_selected.Id).ToArray();
-                    }
-                }, toolbar: 'bottom'
-            },
-
-
             { widget: 'dxButton', location: 'after', options: { type: 'success', text: 'Save', icon: 'check', validationGroup: 'courseadd', bindingOptions: {} }, toolbar: 'bottom' },
             { widget: 'dxButton', location: 'after', options: { type: 'danger', text: 'Close', icon: 'remove', }, toolbar: 'bottom' }
 
@@ -1031,6 +1153,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
         },
         onShown: function (e) {
+            $scope.session_changed = 0;
             $scope.bindTeachers();
             if ($scope.isNew) {
                 //$scope.selected_exam = { id: -1, template:[]};
@@ -1126,37 +1249,41 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             height: 'pop_height',
             title: 'popup_add_title',
 
-            'toolbarItems[0].visible': 'btn_visible_education',
-            'toolbarItems[1].visible': 'btn_visible_education',
-            // 'toolbarItems[2].visible': 'btn_visible_education',
-            'toolbarItems[2].visible': 'btn_visible_aircrafttype',
-            'toolbarItems[3].visible': 'btn_visible_aircrafttype',
-            //'toolbarItems[5].visible': 'btn_visible_aircrafttype',
-            'toolbarItems[4].visible': 'btn_visible_coursetype',
-            'toolbarItems[5].visible': 'btn_visible_coursetype',
-            // 'toolbarItems[8].visible': 'btn_visible_coursetype',
-            'toolbarItems[6].visible': 'btn_visible_course',
-            'toolbarItems[7].visible': 'btn_visible_course',
-            //'toolbarItems[11].visible': 'btn_visible_course',
-            'toolbarItems[8].visible': 'btn_visible_group',
-            'toolbarItems[9].visible': 'btn_visible_group',
-            //'toolbarItems[14].visible': 'btn_visible_group',
-            'toolbarItems[10].visible': 'btn_visible_employee',
-            'toolbarItems[11].visible': 'btn_visible_employee',
-            //'toolbarItems[17].visible': 'btn_visible_employee',
-            'toolbarItems[12].visible': 'IsEditable',
+            //'toolbarItems[0].visible': 'btn_visible_education',
+            'toolbarItems[1].visible': 'IsEditable',
+
+
+            //'toolbarItems[0].visible': 'btn_visible_education',
+            //'toolbarItems[1].visible': 'btn_visible_education',
+            //// 'toolbarItems[2].visible': 'btn_visible_education',
+            //'toolbarItems[2].visible': 'btn_visible_aircrafttype',
+            //'toolbarItems[3].visible': 'btn_visible_aircrafttype',
+            ////'toolbarItems[5].visible': 'btn_visible_aircrafttype',
+            //'toolbarItems[4].visible': 'btn_visible_coursetype',
+            //'toolbarItems[5].visible': 'btn_visible_coursetype',
+            //// 'toolbarItems[8].visible': 'btn_visible_coursetype',
+            //'toolbarItems[6].visible': 'btn_visible_course',
+            //'toolbarItems[7].visible': 'btn_visible_course',
+            ////'toolbarItems[11].visible': 'btn_visible_course',
+            //'toolbarItems[8].visible': 'btn_visible_group',
+            //'toolbarItems[9].visible': 'btn_visible_group',
+            ////'toolbarItems[14].visible': 'btn_visible_group',
+            //'toolbarItems[10].visible': 'btn_visible_employee',
+            //'toolbarItems[11].visible': 'btn_visible_employee',
+            ////'toolbarItems[17].visible': 'btn_visible_employee',
+            //'toolbarItems[12].visible': 'IsEditable',
         }
     };
 
     //close button
-    $scope.popup_add.toolbarItems[13].options.onClick = function (e) {
+    $scope.popup_add.toolbarItems[2].options.onClick = function (e) {
 
         $scope.popup_add_visible = false;
     };
 
 
     //save button
-    $scope.popup_add.toolbarItems[12].options.onClick = function (e) {
+    $scope.popup_add.toolbarItems[1].options.onClick = function (e) {
        
         var result = e.validationGroup.validate();
 
@@ -1205,6 +1332,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         dto.Instructor2Id = $scope.entity.Instructor2Id;
 
         dto.Cost = $scope.entity.Cost;
+        dto.session_changed = $scope.session_changed;
 
         var _groups = []
         $.each($scope.selected_exam.groups, function (_i, _d) {
