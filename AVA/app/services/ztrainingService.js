@@ -197,6 +197,18 @@ app.factory('ztrnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', funct
         return deferred.promise;
     };
 
+    var _saveCoursePeopleStatusAll = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/course/people/status/all/save', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
     var _getCourse = function (cid) {
 
         var deferred = $q.defer();
@@ -1153,6 +1165,7 @@ var _saveSyllabus = function (entity) {
     serviceFactory.saveCoursePeople = _saveCoursePeople;
     serviceFactory.deleteCoursePeople = _deleteCoursePeople;
     serviceFactory.saveCoursePeopleStatus = _saveCoursePeopleStatus;
+    serviceFactory.saveCoursePeopleStatusAll = _saveCoursePeopleStatusAll;
     serviceFactory.getCourseSessions = _getCourseSessions;
     serviceFactory.getCoursePeople = _getCoursePeople;
     serviceFactory.getCoursePeopleSessions = _getCoursePeopleSessions;

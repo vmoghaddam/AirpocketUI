@@ -19,7 +19,7 @@
     }
 
     .cell-img {
-        height: 40px;
+        height: 24px;
     }
 
 
@@ -550,10 +550,11 @@
                     <td style="padding-right:3px;"> <div ng-show="IsEditable" dx-button="btn_new"></div></td>
                     <td style="padding-right:3px;"> <div dx-button="btn_edit"></div></td>
                     <td style="padding-right:3px;"> <div dx-button="btn_people"></div></td>
-                   <!-- <td style="padding-right:3px;"> <div dx-button="btn_exam"></div></td>-->
-                   <!-- <td style="padding-right:3px;"> <div dx-button="btn_notify"></div></td>-->
-                  <!--  <td style="padding-right:3px;"> <div dx-button="btn_syncroster"></div></td>-->
-                    <td ng-show="dg_selected" style="padding-right:3px;"> <div id="uploader_file" dx-file-uploader="uploader_file" class="invisibleuploader"></div> </td>
+                    <td style="padding-right:3px;"> <div dx-button="btn_done"></div></td>
+                    <!-- <td style="padding-right:3px;"> <div dx-button="btn_exam"></div></td>-->
+                    <!-- <td style="padding-right:3px;"> <div dx-button="btn_notify"></div></td>-->
+                    <!--  <td style="padding-right:3px;"> <div dx-button="btn_syncroster"></div></td>-->
+                    <!-- <td ng-show="dg_selected" style="padding-right:3px;"> <div id="uploader_file" dx-file-uploader="uploader_file" class="invisibleuploader"></div> </td>-->
                     <td style="padding-right:3px;"><div ng-show="IsEditable" dx-button="btn_delete"></div></td>
                 </tr>
             </table>
@@ -681,10 +682,20 @@
                             <input type="text" id="firstname" ng-model="follow_course.Instructor" readonly>
                         </div>
                     </div>
-                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                    <!--<div class="col-lg-12 col-md-6" style="padding: 0 !important">
+        <div class="personal-input-group">
+            <label for="instructors">Training Director</label>
+            <input type="text" id="firstname" ng-model="follow_course.TrainingDirector" readonly>
+        </div>
+    </div>-->
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important" ng-show="follow_course.Date_Sign_Ins1">
                         <div class="personal-input-group">
-                            <label for="instructors">Training Director</label>
-                            <input type="text" id="firstname" ng-model="follow_course.TrainingDirector" readonly>
+                            <div style="background: #7fe6e6;border:1px solid #ddd;text-align:center;font-weight:bold;padding:7px;">Participants Form: Signed</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important" ng-show="follow_course.Date_Sign_Director">
+                        <div class="personal-input-group">
+                            <div style="background: #7fe6e6;border:1px solid #ddd;text-align:center;font-weight:bold;padding:7px;">Director: Signed</div>
                         </div>
                     </div>
                 </div>

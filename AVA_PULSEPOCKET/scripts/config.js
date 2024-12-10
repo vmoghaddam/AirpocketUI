@@ -61,6 +61,7 @@ Config.MenuItems = [
 
     { key: 'trn-instructor-panel', title: 'Training', url: '/trn/instructor/panel', icon: '../../content/images/booksg.png' },
     { key: 'trn-instructor-course', title: 'Training Course', url: '/trn/instructor/course', icon: '../../content/images/booksg.png' },
+    { key: 'trn-director-course', title: 'Training Course', url: '/trn/director/course', icon: '../../content/images/booksg.png' },
     { key: 'forms', title: 'Schedule', url: '/forms', icon: '../../content/images/booksg.png' },
   
 ];

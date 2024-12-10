@@ -107,6 +107,7 @@
     <Content Include="app\controllers\refreshController.js" />
     <Content Include="app\controllers\signupController.js" />
     <Content Include="app\controllers\tokensManagerController.js" />
+    <Content Include="app\controllers\trn_director_course.js" />
     <Content Include="app\controllers\trn_instructor_course.js" />
     <Content Include="app\controllers\trn_instructor_panel.js" />
     <Content Include="app\controllers\trn_questions.js" />
@@ -162,6 +163,7 @@
     <Content Include="app\views\refresh.html" />
     <Content Include="app\views\signup.html" />
     <Content Include="app\views\tokens.html" />
+    <Content Include="app\views\trn_director_course.html" />
     <Content Include="app\views\trn_instructor_course.html" />
     <Content Include="app\views\trn_instructor_panel.html" />
     <Content Include="app\views\trn_questions.html" />

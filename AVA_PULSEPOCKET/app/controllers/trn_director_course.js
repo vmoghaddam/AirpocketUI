@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('trn_instructor_courseController', ['$scope', '$location', 'authService', '$routeParams', '$rootScope', '$window', 'instructorService', function ($scope, $location, authService, $routeParams, $rootScope, $window, instructorService) {
+app.controller('trn_director_courseController', ['$scope', '$location', 'authService', '$routeParams', '$rootScope', '$window', 'instructorService', function ($scope, $location, authService, $routeParams, $rootScope, $window, instructorService) {
 
     $scope.course_id = $routeParams.id;
 
@@ -13,15 +13,15 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
     $rootScope.show_attendance = function () {
         $scope.popup_attendance_visible = true;
     }
-    
+
     $rootScope.show_signcourse = function () {
         General.Confirm('Are you sure?', function (res) {
             if (res) {
-               instructorService.sign_attendance_coures($scope.instructor).then(function (response) {
-                   General.ShowNotify(Config.Text_SavedOk, 'success');
-                   $scope.bind();
+                instructorService.sign_director($scope.instructor).then(function (response) {
+                    General.ShowNotify(Config.Text_SavedOk, 'success');
+                    $scope.bind();
                 });
-               
+
 
             }
         });
@@ -192,8 +192,8 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
             title: 'popup_attendance_title',
             height: 'popup_height',
             width: 'popup_width',
-           // 'toolbarItems[0].visible': 'isEditable',
-           // 'toolbarItems[2].visible': 'isEditable',
+            // 'toolbarItems[0].visible': 'isEditable',
+            // 'toolbarItems[2].visible': 'isEditable',
 
         }
     };
@@ -388,7 +388,7 @@ app.controller('trn_instructor_courseController', ['$scope', '$location', 'authS
 
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-       
+
 
     }
 

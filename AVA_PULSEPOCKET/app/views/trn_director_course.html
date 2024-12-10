@@ -457,9 +457,8 @@
                 align-items: flex-start;
             }
         }
-       
-
     }
+
     .dx-item.dx-toolbar-item.dx-toolbar-label {
         max-width: 150px !important;
     }
@@ -517,8 +516,12 @@
                     </tr>
 
                     <tr>
-                        <th class="table_head" colspan="1">Director</th>
-                        <td class="table_data" colspan="3">{{course.TrainingDirector}}</td>
+                        <th class="table_head" colspan="1">Instructor(s)</th>
+                        <td class="table_data" colspan="3">{{course.Instructor}}</td>
+                    </tr>
+                    <tr>
+                        <th class="table_head" colspan="1">Signed at</th>
+                        <td class="table_data" colspan="3">  {{course.Date_Sign_Ins1 | date: 'yyyy-MM-dd HH:mm'}}</td>
                     </tr>
                     <tr>
                         <th class="table_head" colspan="4" style="background: #eee;text-align:left">
@@ -546,19 +549,19 @@
                     <tr ng-repeat="p in participants">
                         <td class="table_data" colspan="3" style="font-size:12px;text-align:left">{{p.Name}}</td>
                         <td class="table_data" style="text-align:center">{{p.Presence}}%</td>
-                       
+
 
                     </tr>
 
                 </table>
 
-               
+
 
             </div>
 
             <div style="margin-top:6px;border:1px solid #ccc;text-align:center;padding:5px; font-weight:bold">
-                <div ng-show="!course.Date_Sign_Ins1">Not Signed</div>
-                <div ng-show="course.Date_Sign_Ins1">Signed at {{course.Date_Sign_Ins1 | date: 'yyyy-MM-dd HH:mm'}}</div>
+                <div ng-show="!course.Date_Sign_Director">Not Signed</div>
+                <div ng-show="course.Date_Sign_Director">Signed at {{course.Date_Sign_Director | date: 'yyyy-MM-dd HH:mm'}}</div>
 
             </div>
 
@@ -637,26 +640,26 @@
                 <div id="scroll_checklist" dx-scroll-view="scroll_checklist" style="padding: 5px">
                     <!-- Attendance Sections -->
                     <div class="attend_section" ng-repeat="session in sessions_attend">
-                        <div ng-click="toggle_attendance_details(session.Id)" 
-                             style="align-content: center;font-size: 13px; font-weight: bold; padding-left: 8px; height: 38px; border-radius: 0" 
+                        <div ng-click="toggle_attendance_details(session.Id)"
+                             style="align-content: center;font-size: 13px; font-weight: bold; padding-left: 8px; height: 38px; border-radius: 0"
                              ng-style="{'background-color': session.showDetails ? '#ff8052' : '#fff', 'color': session.showDetails ? '#fff' : '#000'}" ng-if="!isLargeScreen()">
-                       
-                           <table style="width:100%">
-                               <tr>
-                                   <td style="width:80%;">
-                                       {{session.DateStart | date: 'yyyy-MM-dd'}}  {{session.DateStart | date: 'HH:mm'}}
-                                   </td>
-                                   <td style="width:10%;">
-                                       <i class='fas fa-user-alt' style="color:gray;"></i>
-                                       {{session.total}}
-                                   </td>
-                                   <td style="width:10%;">
-                                       <i class='fas fa-user-check' style="color:seagreen;"></i>
-                                       {{session.present}}
-                                   </td>
-                               </tr>
 
-                           </table>
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:80%;">
+                                        {{session.DateStart | date: 'yyyy-MM-dd'}}  {{session.DateStart | date: 'HH:mm'}}
+                                    </td>
+                                    <td style="width:10%;">
+                                        <i class='fas fa-user-alt' style="color:gray;"></i>
+                                        {{session.total}}
+                                    </td>
+                                    <td style="width:10%;">
+                                        <i class='fas fa-user-check' style="color:seagreen;"></i>
+                                        {{session.present}}
+                                    </td>
+                                </tr>
+
+                            </table>
                         </div>
 
                         <!-- Desktop Table -->
@@ -675,7 +678,7 @@
                                     <td>{{person.NID}}</td>
                                     <td>{{person.Name}}</td>
                                     <td>{{person.Departman}}</td>
-                                    <td><input ng-click='on_status_changed(session.Id, session.Key, session.CourseId, person.PersonId)' ng-model="person.press" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></td>
+                                    <td><input readonly ng-model="person.press" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></td>
                                     <td>{{person.remark}}</td>
                                 </tr>
                             </tbody>
@@ -686,7 +689,7 @@
                             <div class="attendance_trn_card" ng-repeat="person in session.people">
                                 <div class="trn_card-details" style="border-bottom: 1px solid lightgray;align-content:center">
                                     <div class="col-sm-9 col-xs-9" style="display:inline-block; text-align: left; font-size: 13px">{{person.Name}}</div>
-                                    <div class="col-sm-3 col-xs-3" style="display:inline-block; text-align: right"><input ng-click='on_status_changed(session.Id, session.Key, session.CourseId, person.PersonId)' ng-model="person.press" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></div>
+                                    <div class="col-sm-3 col-xs-3" style="display:inline-block; text-align: right"><input disabled ng-model="person.press" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></div>
                                 </div>
                             </div>
                         </div>
@@ -1128,7 +1131,7 @@
         <div class="rowx footer app-footer" ng-include="'app/views/footer.html?v=2036'" ng-init="type = 'trn-instructor-course';" style="padding:0;flex:0 0 45px"></div>
 
     </div>
-   
+     
     <div dx-load-panel="loadPanel"></div>
 
 </div>

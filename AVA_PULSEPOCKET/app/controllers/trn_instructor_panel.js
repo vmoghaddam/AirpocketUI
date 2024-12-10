@@ -94,7 +94,20 @@ app.controller('trn_instructor_panelController', ['$scope', '$location', 'authSe
         }
 
     };
-
+    $scope.get_course_title_style = function (course) {
+        if (course.Date_Sign_Ins1)
+            return {
+                'background': '#99ffcc',
+                'color':'black'
+            };
+    }
+    $scope.get_course_title_style_director = function (course) {
+        if (course.Date_Sign_Director)
+            return {
+                'background': '#99ffcc',
+                'color': 'black'
+            };
+    }
     $scope.bind_active = function () {
         instructorService.get_instructor_course($rootScope.userId).then(function (response) {
 

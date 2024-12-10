@@ -690,6 +690,46 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             }
 
         };
+        $scope.btn_done = {
+            text: 'Close',
+            type: 'success',
+            //icon: 'search',
+            width: 180,
+
+            bindingOptions: {},
+            onClick: function (e) {
+                $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
+                if (!$scope.dg_selected) {
+                    General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                    return;
+                }
+
+                var data = $scope.dg_selected;
+                if (!data.Date_Sign_Ins1) {
+                    General.ShowNotify('The selected course should be signed by the instructor(s).', 'error');
+                    return;
+                }
+                if (!data.Date_Sign_Director) {
+                    General.ShowNotify('The selected course should be signed by the director.', 'error');
+                    return;
+                }
+
+                $scope.close_course(data);
+
+            }
+
+        };
+        $scope.close_course = function (crs) {
+            $scope.loadingVisible = true;
+            ztrnService.saveCoursePeopleStatusAll({CourseId:crs.Id}).then(function (response) {
+                //$scope.selectedEmployees
+                $scope.doRefresh = true;
+
+                $scope.loadingVisible = false;
+                $scope.bind();
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+        };
         $scope.btn_search = {
             text: 'Search',
             type: 'success',
@@ -705,6 +745,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             }
 
         };
+        
+      
         $scope.btn_print = {
             text: 'Print',
             type: 'default',
@@ -834,13 +876,31 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             //    fixed: true, fixedPosition: 'left',
             //},
             {
-                dataField: "AttForm", caption: '',
+                dataField: "Date_Sign_Ins1", caption: '',
                 width: 55,
                 name: 'AttForm',
                 allowFiltering: false,
                 allowSorting: false,
                 cellTemplate: function (container, options) {
                     var fn = options.value ? 'attform' : 'certification-document';
+                    if (options.value)
+                        $("<div>")
+                            .append("<img class='cell-img' src='content/images/" + fn + ".png' />")
+                            .appendTo(container);
+                    else
+                        $("<div>").appendTo(container);
+                },
+                fixed: true, fixedPosition: 'left',
+
+            },
+            {
+                dataField: "Date_Sign_Director", caption: '',
+                width: 55,
+                name: 'AttForm',
+                allowFiltering: false,
+                allowSorting: false,
+                cellTemplate: function (container, options) {
+                    var fn = options.value ? 'signed' : 'certification-document';
                     if (options.value)
                         $("<div>")
                             .append("<img class='cell-img' src='content/images/" + fn + ".png' />")
@@ -2457,6 +2517,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         };
         $scope.refresh_summary = function (callback) {
             //get_exam_results
+            return;
             ztrnService.get_exam_summary($scope.follow_exam.id).then(function (response) {
 
                 $scope.follow_exam.summary = Enumerable.From(response.Data).OrderByDescending('$.result_id').ThenByDescending('$.score').ToArray();

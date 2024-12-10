@@ -197,6 +197,12 @@ app.config(function ($routeProvider) {
         controller: "trn_instructor_courseController",
         templateUrl: "app/views/trn_instructor_course.html?v="+version,
 
+   });
+    //12-09
+    $routeProvider.when("/trn/director/course/:id", {
+        controller: "trn_director_courseController",
+        templateUrl: "app/views/trn_director_course.html?v=" + version,
+
     });
 
  

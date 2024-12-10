@@ -93,6 +93,19 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
         return deferred.promise;
     };
 
+    var _sign_director = function (entity) {
+
+        var deferred = $q.defer();
+        $http.post('https://ava.apitrn.airpocket.app/api/course/sign/director', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(/*Exceptions.getMessage(err)*/ JSON.stringify(err));
+        });
+
+        return deferred.promise;
+    };
+
     var _sign_exam_coures = function (entity) {
 
         var deferred = $q.defer();
@@ -132,6 +145,7 @@ app.factory('instructorService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
     serviceFactory.sign_attendance_coures = _sign_attendance_coures;
     serviceFactory.sign_exam_coures = _sign_exam_coures;
+    serviceFactory.sign_director = _sign_director;
 
     
 
