@@ -1,18 +1,24 @@
 ﻿﻿'use strict';
-app.controller('boardController', ['$scope', '$location', '$routeParams', '$rootScope', '$timeout', 'flightService', 'grhService', 'weatherService', 'aircraftService', 'authService', 'notificationService', '$route', '$window', 'fbService', '$http', '$q', 'logService', function ($scope, $location, $routeParams, $rootScope, $timeout, flightService, grhService, weatherService, aircraftService, authService, notificationService, $route, $window, fbService, $http,$q,logService) {
+app.controller('boardController', ['$scope', '$location', '$routeParams', '$rootScope', '$timeout', 'flightService', 'weatherService', 'aircraftService', 'authService', 'notificationService', '$route', '$window', 'fbService', '$http','$q','logService', function ($scope, $location, $routeParams, $rootScope, $timeout, flightService, weatherService, aircraftService, authService, notificationService, $route, $window, fbService, $http,$q,logService) {
     $scope.prms = $routeParams.prms;
 
     var hourWidth = 85;
     authService.setModule($rootScope.moduleId);
     $rootScope.setTheme();
-    $scope.isPGS=$rootScope.userName.toLowerCase() == 'pgs' || $rootScope.userName.toLowerCase() == 'ops.pgs';
+	$scope.IsCAA= $rootScope.userName.toLowerCase() == 'caa' || $rootScope.userName.toLowerCase() == 'cabin.service';
+	
+    $scope.isPGS=$rootScope.userName.toLowerCase().startsWith('pgs.') || $rootScope.userName.toLowerCase() == 'ops.pgs';
     $scope.IsPlanning = $rootScope.HasMenuAccess('flight_planning', 3);
     //flight_planning-edit
     $scope.IsStaion =$rootScope.roles &&  $rootScope.roles.indexOf('Station') != -1;
 
     $scope.IsFuelReadOnly = false;
     $scope.IsJLAccess = $rootScope.HasMenuAccess('flight_board_jl', 3) || $scope.IsStaion;
-    $scope.IsCLAccess = $rootScope.HasMenuAccess('flight_board_jl', 3) || $rootScope.userName.toLowerCase().startsWith('trans.') || $scope.IsStaion || $rootScope.userName.toLowerCase().startsWith('d.najafi');
+    $scope.IsCLAccess = $rootScope.HasMenuAccess('flight_board_jl', 3) 
+	|| $rootScope.userName.toLowerCase().startsWith('trans.') 
+	|| $scope.IsStaion 
+	|| $rootScope.userName.toLowerCase().startsWith('d.najafi')
+	|| $rootScope.HasViewFSG;
     //ops.rezabandehlou
     $scope.IsJLOG = false;
     if ($rootScope.userName.toLowerCase() == 'ops.rezabandehlou' || $rootScope.userName.toLowerCase() == 'demo' || $rootScope.userName.toLowerCase() == 'razbani'
@@ -28,7 +34,8 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
 	|| $rootScope.userName.toLowerCase().startsWith('line.')
 	|| $rootScope.roles.indexOf('F/M') != -1
 	|| ($rootScope.roles &&  $rootScope.roles.indexOf('Dispatch') != -1)
-	|| $rootScope.userName.toLowerCase().startsWith('cs.');
+	|| $rootScope.userName.toLowerCase().startsWith('cs.')
+	||  $rootScope.HasViewFSG();
     $scope.airport = $routeParams.airport;
     $scope.airportEntity = null;
     $scope.filterVisible = false;
@@ -48,7 +55,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
     $scope.IsSave = $scope.IsEditable || $scope.IsStaion || $scope.IsRemark;
 
     //divargar-ok
-    $scope.IsComm =true ||  $rootScope.userName.toLowerCase().startsWith('comm.') || $rootScope.userName.toLowerCase().startsWith('com.') || $rootScope.userName.toLowerCase().startsWith('demo');
+    $scope.IsComm =$rootScope.IsFlightPlan() ||  $rootScope.userName.toLowerCase().startsWith('comm.') || $rootScope.userName.toLowerCase().startsWith('com.') || $rootScope.userName.toLowerCase().startsWith('demo');
 	$scope.NotIsComm = !$scope.IsComm;
    // $scope.IsComm = true;
     //alert((new Date()).yyyymmddtime(false));
@@ -206,6 +213,8 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
         }, function (err) { });
     };
     $scope.showLogX = function (isApply) {
+		 if (/*$rootScope.userName.toLowerCase()=='caa'*/ $scope.IsCAA)
+			return;
         if ($rootScope.userName.toLowerCase()=='mehregan')
 			return;
         //if (!$scope.ati_selectedFlights || $scope.ati_selectedFlights.length == 0) {
@@ -506,7 +515,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
 
             $scope.getIrRoute();
         },
-        searchExpr: ["IATA", "Country", "SortName", "City"],
+        searchExpr: ["IATA" ],
         displayExpr: "IATA",
         valueExpr: 'Id',
         bindingOptions: {
@@ -526,7 +535,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
 
             $scope.getIrRoute();
         },
-        searchExpr: ["IATA", "Country", "SortName", "City"],
+        searchExpr: ["IATA" ],
         displayExpr: "IATA",
         valueExpr: 'Id',
         bindingOptions: {
@@ -3869,7 +3878,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
             if (!$scope.isBaseDisabled)
                 $scope.planEntity.FromAirport = arg.selectedItem.Id;
         },
-        searchExpr: ["IATA", "Country", "SortName", "City"],
+        searchExpr: ["IATA" ],
         displayExpr: "IATA",
         valueExpr: 'Id',
         bindingOptions: {
@@ -3909,7 +3918,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
         },
-        searchExpr: ["IATA", "Country", "SortName", "City"],
+        searchExpr: ["IATA" ],
         displayExpr: "IATA",
         valueExpr: 'Id',
         bindingOptions: {
@@ -4541,8 +4550,16 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
     $scope.dateto = General.getDayLastHour(new Date(2019, 5, 6, 0, 0, 0)); //General.getDayLastHour( (new Date(Date.now())) );
 
     $scope._datefrom = new Date();
+	
+	
+//09-03
 
-
+    $scope._dateto_x = (new Date()).addDays(3);
+	
+	
+	$scope._min_date=$scope.IsCAA?(new Date()).addDays(-14):new Date(1980,1,1);
+	$scope._max_date=$scope.IsCAA?(new Date()).addDays(3):new Date(2100,1,1);;
+	
     $scope.date_from = {
         type: "date",
         placeholder: 'From',
@@ -4550,7 +4567,32 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
         displayFormat: "yyyy-MM-dd",
         bindingOptions: {
             value: '_datefrom',
+			 max:'_max_date',
+			min:'_min_date',
 
+        }
+    };
+	 $scope.date_to_x = {
+        type: "date",
+        placeholder: 'From',
+        width: '100%',
+        displayFormat: "yyyy-MM-dd",
+        bindingOptions: {
+            value: '_dateto_x',
+            max:'_max_date',
+			min:'_min_date',
+        }
+    };
+	 $scope.date_to_xxs = {
+        type: "date",
+        placeholder: 'From',
+        pickerType: 'rollers',
+        width: '100%',
+        displayFormat: "yy-MM-dd",
+        bindingOptions: {
+            value: '_dateto_x',
+            max:'_max_date',
+			min:'_min_date',
         }
     };
     $scope.date_fromxs = {
@@ -4561,6 +4603,8 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
         displayFormat: "yy-MM-dd",
         bindingOptions: {
             value: '_datefrom',
+			 max:'_max_date',
+			min:'_min_date',
 
         }
     };
@@ -4590,24 +4634,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
 
 
 
-    $scope.date_to = {
-        type: "datetime",
-        displayFormat: "yyyy-MM-dd HH:mm",
-        width: '100%',
-        //pickerType: 'rollers',
-        interval: 15,
-        onValueChanged: function (arg) {
-            if (arg.value) {
-                var d = new Date(arg.value);
-
-            }
-
-        },
-        bindingOptions: {
-            value: 'dateto',
-
-        }
-    };
+   
 
     ///////////////////////////////////
     $scope.filterStatus = null;
@@ -6049,7 +6076,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
             //else $scope.entity_redirect.ToAirportIATA = null;
 
         },
-        searchExpr: ["IATA", "Country", "SortName", "City"],
+        searchExpr: ["IATA" ],
         displayExpr: "IATA",
         valueExpr: 'Id',
         bindingOptions: {
@@ -7694,6 +7721,19 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
                             flightService.cancelFlightsGroup(entity).then(function (response) {
                                 General.ShowNotify(Config.Text_SavedOk, 'success');
                                 $scope.loadingVisible = false;
+								
+								
+								//if (response.flights_crew && response.flights_crew.length>0){
+									
+									/* var myDialog = DevExpress.ui.dialog.custom({
+											rtlEnabled: true,
+											title: "ERROR",
+												message: 'Assigend crews (visible or hidden) found. The flight(s): '+response.flights_crew.join(',')+' cannot be cancelled.',
+											buttons: [{ text: "OK", onClick: function () { } }]
+										});
+										myDialog.show();
+								    }*/
+								
                                 $.each(response.flights, function (_i, _flt) {
                                     var aflt = Enumerable.From($scope.ganttData.flights).Where('$.ID==' + _flt.ID).FirstOrDefault();
                                     if (aflt) {
@@ -10255,7 +10295,8 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
                                 else
                                     //$scope.popup_cl_visible = true;
                                    // $scope.popup_clnew_visible = true;
-									 
+								  // alert($rootScope.HasAccessToCrewList());
+									 if ($rootScope.HasAccessToCrewList())
 									$scope.popup_clgd_visible = true;
                             });
 
@@ -11511,6 +11552,8 @@ dto.ChrCapacity = $scope.mchr.Capacity;
     };
     $scope.getCrewAbs = function (fid) {
         //5-8
+		//12-05
+		console.log('$rootScope.HasAccessToCrewList()',$rootScope.HasAccessToCrewList());
         if (!$rootScope.HasAccessToCrewList()) {
             $scope.dg_crew_abs_ds = [];
             return;
@@ -15385,9 +15428,14 @@ dto.ChrCapacity = $scope.mchr.Capacity;
     //9-21
     //zooti
 	$scope.getFlightCaption=function(f){
+		var dh=f.PlanId==-1?'':'*';
 	   if (f.FlightStatusID==4)
-		   return (f.notes? f.FlightNumber+"("+f.notes+")":f.FlightNumber);
-		return f.FlightNumber;
+		   return (f.notes? f.FlightNumber+"("+f.notes+")":f.FlightNumber)+dh;
+		return f.FlightNumber+dh;
+	};
+	
+	$scope.isFuelVisible=function(f){
+        return !f.FuelPlanned;
 	};
 	$scope.isNewTimeVisible=function(f){
 		try{
@@ -16451,39 +16499,6 @@ dto.ChrCapacity = $scope.mchr.Capacity;
         }
 
     }
-
-    //$scope.getProgressStyle = function (flight) {
-
-    //    console.log('-----flight------',flight)
-       
-    //    //grhService.get_cehck_list(flight.ID).then(function (response) {
-
-    //    //    $scope.formData = response.Data;
-
-    //    //    console.log('------Flight Progress-------',$scope.formData);
-
-    //    //});
-
-
-    //    //if (now < std) {
-    //    //    $scope.percent = '0%';
-    //    //    return { width: '0%' };  // Flight hasn't started yet
-    //    //} else if (now > sta) {
-    //    //    $scope.percent = '1000%';
-    //    //    return { width: '100%' };  // Flight has completed
-    //    //} else {
-    //    //    var totalDuration = sta - std;
-    //    //    var elapsed = now - std;
-    //    //    var progressPercentage = (elapsed / totalDuration) * 100;
-    //    //    $scope.percent = progressPercentage + '%';
-    //    //return { width: progressPercentage + '%' };
-    //    //}
-    //    return { width: flight.progress + '%' };
-        
-    //};
-
-  
-
     $scope.addToGantt = function (flt, res) {
         var gres = Enumerable.From($scope.ganttData.resources).Where('$.resourceId==' + res.resourceId).FirstOrDefault();
         if (!gres) {
@@ -16887,10 +16902,21 @@ dto.ChrCapacity = $scope.mchr.Capacity;
     $scope.grounds = [];
 	$scope.old_selected_date=null;
     $scope.bindFlights = function (callback) { 
+	
+	    
+	    
 		$scope.old_selected_date=$scope.selectedDate;
         $scope.baseDate = (new Date(Date.now())).toUTCString();
         dfrom = $scope._datefrom;
         $scope.datefrom = General.getDayFirstHour(new Date(dfrom));
+		
+		if ($scope.IsCAA){
+			var _dcnt_=  Math.floor(($scope._dateto_x - $scope.datefrom) / 86400000)+1;
+			 
+			$scope.days_count=_dcnt_; 
+		}
+		
+		
         $scope.dateEnd = General.getDayLastHour(new Date(new Date(dfrom).addDays($scope.days_count - 1)));
 
         var now = new Date();
@@ -16952,6 +16978,13 @@ dto.ChrCapacity = $scope.mchr.Capacity;
                     var flights = Enumerable.From(response.flights).Where('$.RegisterID==' + _d.resourceId)
                         .OrderBy(function (x) { return moment(x.STD).format('YYYYDDMMHHmm') }).ThenBy('Number($.ID)')
                         .ToArray();
+						//09-08
+					if ($scope.IsCAA){
+					//	flights = Enumerable.From(response.flights).Where('$.FlightStatusID!=4'  )
+                       // .OrderBy(function (x) { return moment(x.STD).format('YYYYDDMMHHmm') }).ThenBy('Number($.ID)')
+                     //   .ToArray();
+						
+					}
                     //if (_d.resourceId == 69)
 
                     $.each(flights, function (_j, _q) {
@@ -17017,6 +17050,11 @@ dto.ChrCapacity = $scope.mchr.Capacity;
                 //];
 
                 //5-17
+				//getRegStr(res.resourceName)
+				if ($scope.IsCAA){
+					response.resources = Enumerable.From(response.resources).Where(function(res){ return $scope.getRegStr(res.resourceName)!='CNL'; }).OrderBy(function (x) { return $scope.getResOrderIndex($scope.getRegStr(x.resourceName)); }).ToArray();
+				}
+				else
                 response.resources = Enumerable.From(response.resources).OrderBy(function (x) { return $scope.getResOrderIndex($scope.getRegStr(x.resourceName)); }).ToArray();
 
                 $scope.ganttData = response;
@@ -17361,6 +17399,7 @@ dto.ChrCapacity = $scope.mchr.Capacity;
     };
     ///////////////////////////////////////
     //2020-10-27 1 s
+	//2024-06-30
     $scope.getNoCrew = function () {
         if ($scope.dg_nocrew_ds == null) {
             $scope.loadingVisible = true;
@@ -17368,8 +17407,16 @@ dto.ChrCapacity = $scope.mchr.Capacity;
                 $scope.loadingVisible = false;
 				//2023-05-10
                 console.log(response);
-				var _ds=Enumerable.From(response).Where(function(x){ return x.JobGroup=='F/M' && !x.InActive;}).ToArray();
-                $scope.dg_nocrew_ds = _ds;
+				if ($rootScope.HasDispatch() || $rootScope.userName == 'demo' || $rootScope.HasViewFSG()){
+					var _ds=Enumerable.From(response).Where(function(x){ return   !x.InActive;}).ToArray();
+                    $scope.dg_nocrew_ds = _ds;
+				}
+				else
+				{
+					var _ds=Enumerable.From(response).Where(function(x){ return x.JobGroup=='F/M' && !x.InActive;}).ToArray();
+                    $scope.dg_nocrew_ds = _ds;
+				}
+				
 
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
@@ -17833,7 +17880,7 @@ dto.ChrCapacity = $scope.mchr.Capacity;
         searchEnabled: true,
         dataSource: $rootScope.getDatasourceAirport(),
 
-        searchExpr: ["IATA", "Country", "SortName", "City"],
+        searchExpr: ["IATA" ],
         displayExpr: "IATA",
         valueExpr: 'IATA',
         bindingOptions: {
@@ -17937,8 +17984,131 @@ dto.ChrCapacity = $scope.mchr.Capacity;
 
         }
     };
+	/////////////////////////////////10-15
+	///Upload Excel
+	$scope.btn_uploadxls = {
+        hint: 'Upload XLSX',
+        type: 'default',
+        icon: '	fas fa-upload',
+        width: '100%',
+
+        onClick: function (e) {
+            $scope.popup_uploadxls_visible = true;
+        }
+    };
+	$scope._uploadFromDate = null;
+$scope._uploadToDate = null;
+$scope.uploadFromDate = {
+        type: "date",
+        width: '100%',
+        displayFormat: "yyyy-MM-dd",
+        bindingOptions: {
+            value: '_uploadFromDate',
+        }
+    };
+
+$scope.uploadToDate = {
+        type: "date",
+        width: '100%',
+        displayFormat: "yyyy-MM-dd",
+        bindingOptions: {
+            value: '_uploadToDate',
+        }
+    };
+
+	$scope.xlsFileData = [];
+    $scope.xlsFileName = null;
+	$scope.isFileUploaded = false;
+    $scope.xlsUploader = {
+        multiple: false,
+        selectButtonText:'Upload XLSX',
+        labelText: '',
+        accept: ".xlsx",
+        uploadMethod: 'POST',
+        uploadMode: "instantly",
+        rtlEnabled: true,
+		uploadUrl: "https://ava.xls.airpocket.app/api/plan/uploadxlsplan",
+        //uploadUrl: "https://api.apvaresh.ir/api/uploadfile",
+        onValueChanged: function (arg) {
+        },
+        onUploaded: function (e) {
+			var _fn = "";
+			if ( e.request.responseText ) {
+				_fn = e.request.responseText;
+				_fn = _fn.replace('"','').replace('"','');
+			}
+			$scope.xlsFileName = _fn;
+			if($scope.xlsFileName != null) {
+				$scope.isFileUploaded = true;
+			   }
+        },
+        bindingOptions: {
+            value: 'xlsFileData'
+        }
+    }
+
+	$scope.popup_uploadxls_visible = false;
+    $scope.popup_uploadxls_title = 'Upload XLSX Plan';
+
+    $scope.popup_uploadxls = {
+        elementAttr: {
+            class: "popup_uploadxlsx"
+        },
+        shading: true,
+        height: 350,
+        width: 330,
+        fullScreen: false,
+        showTitle: true,
+        dragEnabled: true,
+        toolbarItems: [
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'success', text: 'Save', icon: 'check', validationGroup: 'uploaddates', bindingOptions: { disabled: 'IsApproved' }, onClick: function (arg) {
+						console.log(1);
+                        var result = arg.validationGroup.validate();
+                        if (!result.isValid) {
+                            General.ShowNotify(Config.Text_FillRequired, 'error');
+                            return;
+                        }
+						if($scope._uploadFromDate > $scope._uploadToDate){
+							General.ShowNotify("Invalid Dates!", 'error');
+                            return;
+						}
+						if(!$scope.isFileUploaded){
+							General.ShowNotify("No file has been uploaded yet!", 'error');
+                            return;
+						}
+                       
+                        $scope.loadingVisible = true;
+						flightService.getImportFlightsNew($scope.xlsFileName, moment($scope._uploadFromDate).format("YYYY-MM-DD"), moment($scope._uploadToDate).format("YYYY-MM-DD")).then(function (ee) {
+						   $scope.loadingVisible = false;
+							alert(ee.message);
+							$scope.popup_uploadxls_visible = false;
+						}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                    }
+                }, toolbar: 'bottom'
+            },
+
+            { widget: 'dxButton', location: 'after', options: { type: 'danger', text: 'Close', icon: 'remove', 
+onClick: function(arg){$scope.popup_uploadxls_visible = false;}
+															  }, toolbar: 'bottom' }
+        ],
+        visible: false,
+        closeOnOutsideClick: false,
+        bindingOptions: {
+            visible: 'popup_uploadxls_visible',
+            title: 'popup_uploadxls_title',
+        },
+		onHiding: function(){
+			$scope.xlsFileName = null;
+			$scope.isFileUploaded = false;
+			$scope._uploadFromDate = null;
+			$scope._uploadToDate = null;
+		}
+    };
+
     ////////////10-12 excel////////////
-    $scope.IsFileUploaderVisible = true;
+    $scope.IsFileUploaderVisible = $rootScope.IsFlightPlan();
     $scope.uploaderValueImage = [];
     $scope.uploadedFileImage = null;
     $scope.uploader_file = {
@@ -17951,7 +18121,7 @@ dto.ChrCapacity = $scope.mchr.Capacity;
         uploadMethod: 'POST',
         uploadMode: "instantly",
         rtlEnabled: true,
-        uploadUrl: "https://_api.apvaresh.ir/api/uploadfile",
+        uploadUrl: "https://ava.api.airpocket.app/api/uploadfile",
         onValueChanged: function (arg) {
 
         },
@@ -19074,7 +19244,8 @@ height: function () {
                                 else
                                     //$scope.popup_cl_visible = true;
                                    // $scope.popup_clnew_visible = true;
-									 
+								  // alert($rootScope.HasAccessToCrewList());
+									 if ($rootScope.HasAccessToCrewList())
 									$scope.popup_clgd_visible = true;
                             });
 

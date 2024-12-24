@@ -1924,6 +1924,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         var tabs_folder = [
            // { text: "EXAM", id: 'exam', visible_btn: false },
             { text: "PARTICIPANTS", id: 'participants', visible_btn: false },
+            { text: "EXAM", id: 'exam', visible_btn: false },
            // { text: "SYLLABI", id: 'syllabi', visible_btn: false },
 
 
@@ -2136,7 +2137,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                         onValueChanged: function (arg) {
 
                         },
-                        onUploadStarted: function (e) { $scope.loadingVisible = true; },
+                     onUploadStarted: function (e) { $scope.loadingVisible = true; },
                         onUploaded: function (e) {
                             $scope.uploadedFileImage = e.request.responseText;
                             console.log('upload message', e.request);
@@ -2517,7 +2518,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         };
         $scope.refresh_summary = function (callback) {
             //get_exam_results
-            return;
+            //return;
             ztrnService.get_exam_summary($scope.follow_exam.id).then(function (response) {
 
                 $scope.follow_exam.summary = Enumerable.From(response.Data).OrderByDescending('$.result_id').ThenByDescending('$.score').ToArray();

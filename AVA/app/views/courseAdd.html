@@ -262,9 +262,9 @@
                         </div>
                         <div style="border: 1px solid #ccc; margin-top: 5px; padding: 5px; background: #a2d3d5 ">
 
-                            Participants Rosters: <span ng-show="!entity.Date_Sessions_Synced" style="font-weight: bold">Not</span>  
+                            Participants Rosters: <span ng-show="!entity.Date_Sessions_Synced" style="font-weight: bold">Not</span>
                             <span style="font-weight:bold">Synced</span>
-                                                                                                                                     
+
                             <span style="display:inline-block;color:red;margin-left:10px;" ng-show="entity.SyncedErrors>0">({{entity.SyncedErrors}} Errors)</span>
                         </div>
                         <div style="border: 1px solid #ccc; margin-top: 5px; padding: 5px; background: #a2d3d5 ">
@@ -429,6 +429,27 @@
 
         </div>
 
+        <div class="tab subjects" style="display:none;padding-top:0;">
+            <div style="padding:5px;">
+                <div>
+                    <div style="background:gray;color:white;font-weight:bold;padding:7px;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td>Syllabi</td>
+                                <td style="width:35px;padding:0 3px 0 3px">
+                                    <a ng-show="IsEditable" ng-click="addSyllabus()" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-plus"></i></a>
+                                </td>
+                                <td style="width:35px;padding:0 3px 0 3px">
+                                    <a ng-show="IsEditable" ng-click="removeSyllabus()" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;width:32px;border-radius:50%'><i class="fas fa-times"></i></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div dx-data-grid="dg_syllabi" id="dg_syllabi"></div>
+                </div>
+            </div>
+        </div>
+
         <div class="tab aircrafttype" style="display:none;padding-top:0;">
             <div dx-data-grid="dg_aircrafttype" id="dg_aircrafttype"></div>
 
@@ -524,14 +545,41 @@
     <div id="popup_syllabus" dx-popup="popup_syllabus">
 
         <div class="padding-7 dx-border" style="padding:0;margin-top:3px">
-            <div class="col-lg-12  margin-bottom-5 padding-5">
-                <label>Title</label>
-                <div dx-text-box="txt_syllabi" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
+            <!--<div class="col-lg-12  margin-bottom-5 padding-5">
+        <label>Title</label>
+        <div dx-text-box="txt_syllabi" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
+    </div>-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Type</label>
+                <div dx-select-box="sb_syl_CourseTypeId" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
             </div>
-            <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-5">
+            <div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Instructor</label>
+                <div dx-select-box="sb_syl_Instructor"></div>
+            </div>
+            <div style="clear:both"></div>
+            <div>
+                <div class="col-lg-3" ng-repeat="s in entity.Sessions" style="padding:5px">
+                    <div style="border: 1px solid #c5c6c3; border-radius: 5px" ng-style="get_syl_session_style(s,null)">
+                        <div style="border-bottom: 1px solid #c5c6c3; padding: 7px; text-align: center"> {{formatDate(s.DateStart)}}</div>
+                        <div>
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="padding:7px;text-align:center">{{formatTime(s.DateStart)}}</td>
+                                    <td style="padding:7px;text-align:center">{{formatTime(s.DateEnd)}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+               
+                <div style="clear:both"></div>
+            </div>
+            <!--<div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-5">
                 <label>Hours</label>
                 <div class="center" dx-date-box="hrs_syllabi" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
-            </div>
+            </div>-->
 
 
 
