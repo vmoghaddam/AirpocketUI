@@ -209,6 +209,8 @@
                     <td style="width:130px;text-align:left;padding-right:5px">  <div dx-button="btn_edit"></div></td>
                     <td style="width:160px;text-align:left;padding-right:5px">  <div dx-button="btn_password"></div></td>
                     <td style="width:130px;text-align:left;padding-right:5px">  <div dx-button="btn_role"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px" ng-show="IsUserDisabled"><div dx-button="btn_disable"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px" ng-show="IsUserEnabled"><div dx-button="btn_enable"></div></td>
                     <td style="width:130px;text-align:left;padding-right:5px">    <div dx-button="btn_delete"></div></td>
 
 
@@ -296,5 +298,4 @@
     </div>
 
 
-    <div ng-include="'app/views/trn_questions.html?vx=2'"></div>
 </div>
