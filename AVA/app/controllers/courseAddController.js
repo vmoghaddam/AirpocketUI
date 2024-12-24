@@ -378,6 +378,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     ////////////////////////////
     var tabs = [
         { text: "Main", id: 'main', visible_btn: false },
+        { text: "Subjects", id: 'subjects', visible_btn: false },
         { text: "Exam", id: 'exam', visible_btn: false },
         //{ text: "Aircraft Type", id: 'aircrafttype', visible_btn: false, visible: $scope.type == 'active' },
 
@@ -804,8 +805,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     $scope.dg_syllabi_columns = [
 
         { dataField: "Title", caption: "Title", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, sortIndex: 0, sortOrder: "asc" },
+        { dataField: "Instructor", caption: "Instructor", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, sortIndex: 0, sortOrder: "asc",width:250 },
 
-        { dataField: 'Duration', caption: 'Duration(mm)', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, encodeHtml: false, width: 100, },
+        { dataField: 'Duration', caption: 'Duration(mm)', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, encodeHtml: false, width: 130, },
 
     ];
     $scope.dg_syllabi_selected = null;
@@ -843,7 +845,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
 
         },
-        height: 270,
+        height: 470,
         bindingOptions: {
 
             dataSource: 'entity.Syllabi',
@@ -874,6 +876,59 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             value: 'syllabi_title',
         }
     };
+    $scope.sb_syl_CourseTypeId = {
+        dataSource: $rootScope.getDatasourceCourseTypeNew(),
+        showClearButton: true,
+        searchEnabled: true,
+        searchExpr: ["Title"],
+        valueExpr: "Id",
+        displayExpr: "Title",
+        onSelectionChanged: function (e) {
+
+            $scope.syllabi_title = e.selectedItem? e.selectedItem.Title:null;
+
+        },
+        bindingOptions: {
+            value: 'syllabi_type',
+
+        }
+
+    };
+    $scope.sb_syl_Instructor = {
+
+        showClearButton: true,
+        searchEnabled: true,
+        searchExpr: ["Name"],
+        valueExpr: "Id",
+        displayExpr: "Name",
+        onSelectionChanged: function (e) {
+
+            $scope.syllabi_instructor_title = e.selectedItem ? e.selectedItem.Name : null;;
+
+        },
+        bindingOptions: {
+            value: 'syllabi_instructor',
+            dataSource: 'ds_teachers'
+
+        }
+
+    };
+    $scope.formatDate = function (dt) {
+        if (!dt)
+            return "";
+        return moment(new Date(dt)).format('YYYY-MMM-DD').toUpperCase();
+    };
+    $scope.formatTime = function (dt) {
+        if (!dt)
+            return "";
+        return moment(new Date(dt)).format('HH:mm').toUpperCase();
+    };
+    //#dde0e2
+    $scope.get_syl_session_style = function (s, crs) {
+        return {
+            'background': '#e5e8e9'
+        };
+    }
     $scope.popup_syllabus_visible = false;
     $scope.popup_syllabus_title = 'Syllabus';
     $scope.popup_syllabus = {
@@ -883,8 +938,8 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         },
         shading: true,
         //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
-        height: 300,
-        width: 400,
+        height:450,
+        width: 600,
         fullScreen: false,
         showTitle: true,
         dragEnabled: true,
@@ -903,9 +958,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                         var hrs = (new Date($scope.syllabi_hrs)).getTimePartArray();
                         var mm = hrs[0] * 60 + hrs[1];
 
-                        var id = -1 * ($scope.entity.Syllabi.length + 1);
+                        var id = $scope.syllabi_id;// -1 * ($scope.entity.Syllabi.length + 1);
 
-                        var obj = { Id: id, Duration: mm, Title: $scope.syllabi_title };
+                        var obj = { Id: id, Duration: mm, Title: $scope.syllabi_title, TypeId: $scope.syllabi_type, InstructorId: $scope.syllabi_instructor,  Instructor: $scope.syllabi_instructor_title};
 
                         console.log(obj);
                         $scope.entity.Syllabi.push(obj);
@@ -935,7 +990,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         },
         onHiding: function () {
 
-
+            $scope.syllabi_id = -1 * ($scope.entity.Syllabi.length + 1);
             $scope.popup_syllabus_visible = false;
 
         },

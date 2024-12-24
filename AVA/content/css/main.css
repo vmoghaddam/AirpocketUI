@@ -46,6 +46,11 @@
     /*background: linear-gradient(to bottom right, #009688 20%, #53e3a6 95%);*/
     border-bottom: 2px solid #03A9F4;
 }
+.theme-cherry {
+    background: #46202f;
+    /*background: linear-gradient(to bottom right, #009688 20%, #53e3a6 95%);*/
+    border-bottom: 2px solid #150102;
+}
 
 .theme-purple {
     background: #9C27B0;
@@ -1488,6 +1493,7 @@ h1 {
 }
 .e-gantt-template-taskbar.scheduled, .scheduled {
     background-color: #ffd480 !important;
+    background-color:#d4b5a5 !important;
     color: #000;
     font-weight: normal !important;
 }
@@ -1500,7 +1506,9 @@ h1 {
 
 .e-gantt-template-taskbar.departed, .departed {
     background-color: #00ff00 !important;
+    background-color: #5cb35b !important;
     color: #000;
+    color:whitesmoke;
 }
 .e-gantt-template-taskbar.takeoff, .takeoff {
     background-color: #00ff00 !important;
@@ -1513,6 +1521,7 @@ h1 {
 }
 .e-gantt-template-taskbar.offblocked, .offblocked {
     background-color: #80ffff !important;
+    background-color: #8df2cd !important;
     color: #000;
 }
 
@@ -1522,6 +1531,7 @@ h1 {
 }
 .e-gantt-template-taskbar.onblocked, .onblocked {
     background-color: #66b3ff !important;
+    background-color: #79c4f0 !important;
     color: #000;
 }
 
@@ -1559,8 +1569,9 @@ h1 {
 .e-gantt-template-taskbar.arrived, .arrived {
     background-color: #99ccff !important;
     background-color: #009900 !important;
+    background-color: #347c3f !important;
     color: #000;
-    color:#fff;
+    color: #fff;
 }
 
 .e-gantt-template-taskbar.cancel, .cancel {
@@ -1587,8 +1598,9 @@ h1 {
     color: #000;
 }
 
-.e-gantt-template-taskbar.redirect, .redirect,.redirected {
+.e-gantt-template-taskbar.redirect, .redirect, .redirected {
     background-color: #e6e600 !important;
+    background-color: #fcde64 !important;
     color: #000;
 }
 
@@ -1604,32 +1616,38 @@ h1 {
 
 .e-gantt-template-taskbar.returntoramp, .returntoramp {
     background-color: #862d59 !important;
+    background-color: #d17242 !important;
     color: #fff;
 }
 
 .e-gantt-template-taskbar.boarding, .boarding {
     background-color: #ff66ff !important;
+    background-color: #f451a1 !important;
     color: #fff;
 }
 
 
 .e-gantt-template-taskbar.gateclosed, .gateclosed {
     background-color: #cc33ff !important;
+    background-color: #a94b6e !important;
     color: #fff;
 }
 .e-gantt-template-taskbar.ready, .ready {
     background-color: #9900cc !important;
+    background-color: #b532e0 !important;
     color: #fff;
 }
- 
+
 
 .e-gantt-template-taskbar.start, .start {
     background-color: #80ffff !important;
+    background-color: #8df1f2 !important;
     color: #000;
 }
 
 .e-gantt-template-taskbar.taxi, .taxi {
     background-color: #00b3b3 !important;
+    background-color: #8df2aa !important;
     color: #fff;
 }
 
