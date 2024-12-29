@@ -556,6 +556,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     $scope.getSessionKey = function (obj) {
         return moment(obj.DateStart).format('YYYY-MM-DD-HH-mm-') + moment(obj.DateEnd).format('HH-mm');
     };
+   
 
 
 
@@ -925,9 +926,23 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     };
     //#dde0e2
     $scope.get_syl_session_style = function (s, crs) {
-        return {
-            'background': '#e5e8e9'
-        };
+        var key = Enumerable.From($scope.new_syllabi.Sessions).Where(function (x) { return x.Key == s.Key; }).FirstOrDefault();
+        if (!key)
+            return {
+                'background': '#e5e8e9'
+            };
+        else
+            return {
+                'background': '#83b3b5'
+            };
+    }
+    $scope.click_syl_session = function (s, crs) {
+        // console.log(s);
+        var key = Enumerable.From($scope.new_syllabi.Sessions).Where(function (x) { return x.Key == s.Key; }).FirstOrDefault();
+        if (key)
+            $scope.new_syllabi.Sessions = Enumerable.From($scope.new_syllabi.Sessions).Where(function (x) { return x.Key != s.Key; }).ToArray();
+        else
+            $scope.new_syllabi.Sessions.push(s);
     }
     $scope.popup_syllabus_visible = false;
     $scope.popup_syllabus_title = 'Syllabus';
@@ -938,8 +953,8 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         },
         shading: true,
         //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
-        height:450,
-        width: 600,
+        height:510,
+        width: 900,
         fullScreen: false,
         showTitle: true,
         dragEnabled: true,
@@ -958,9 +973,22 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                         var hrs = (new Date($scope.syllabi_hrs)).getTimePartArray();
                         var mm = hrs[0] * 60 + hrs[1];
 
-                        var id = $scope.syllabi_id;// -1 * ($scope.entity.Syllabi.length + 1);
+                        //var id = $scope.syllabi_id;
+                        // -1 * ($scope.entity.Syllabi.length + 1);
 
-                        var obj = { Id: id, Duration: mm, Title: $scope.syllabi_title, TypeId: $scope.syllabi_type, InstructorId: $scope.syllabi_instructor,  Instructor: $scope.syllabi_instructor_title};
+                        //var obj = {
+                        //    Id: id, Duration: mm, Title: $scope.syllabi_title, TypeId: $scope.syllabi_type,
+                        //    InstructorId: $scope.syllabi_instructor, Instructor: $scope.syllabi_instructor_title
+                        //};
+
+                        $scope.new_syllabi.Title = $scope.syllabi_title;
+                        $scope.new_syllabi.TypeId = $scope.syllabi_type;
+                        $scope.new_syllabi.InstructorId = $scope.syllabi_instructor;
+                        $scope.new_syllabi.Instructor = $scope.syllabi_instructor_title;
+                        $scope.new_syllabi.Duration = mm;
+
+                        var obj = JSON.parse( JSON.stringify($scope.new_syllabi));
+
 
                         console.log(obj);
                         $scope.entity.Syllabi.push(obj);
@@ -982,15 +1010,33 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
         },
         onShowing: function (e) {
+            $scope.course_sessions = Enumerable.From($scope.entity.Sessions)
+                //.GroupBy("$.ArgNum", null, (key, g) => {
+                .GroupBy(function (item) { return moment(item.DateStart).format('YYYY-MMM-DD'); }, null, (key, g) => {
+                    return {
+                        Date:key,
+                       
+                        items: Enumerable.From(g.source).OrderBy('$.DateStart').ToArray(),
+                       
 
+
+                    }
+                })
+
+                .ToArray();
+            $scope.syllabi_id = -1 * ($scope.entity.Syllabi.length + 1);
+            $scope.new_syllabi = {
+                Id: $scope.syllabi_id,
+                Sessions: []
+            };
         },
         onShown: function (e) {
 
 
         },
         onHiding: function () {
-
-            $scope.syllabi_id = -1 * ($scope.entity.Syllabi.length + 1);
+            //2024-12-28
+            
             $scope.popup_syllabus_visible = false;
 
         },

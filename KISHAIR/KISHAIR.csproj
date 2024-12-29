@@ -689,6 +689,7 @@
     <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="logo.png" />
+    <Content Include="ofpb.html" />
     <Content Include="pdfjs\api\draft\display_api.js.html" />
     <Content Include="pdfjs\api\draft\doc_helper.js.html" />
     <Content Include="pdfjs\api\draft\external-Promise.html" />
