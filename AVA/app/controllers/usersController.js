@@ -1,6 +1,8 @@
 ﻿'use strict';
 app.controller('usersController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route) {
     $scope.prms = $routeParams.prms;
+    $scope.IsUserDisabled = false;
+    $scope.IsUserEnabled= false;
     $scope.dto = {
         UserName: '',
         FirstName: '',
@@ -34,7 +36,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         //itemTemplate: function (data) {
         //    return $rootScope.getSbTemplateAirport(data);
         //},
-         
+
         searchExpr: ["Name"],
         displayExpr: "Name",
         valueExpr: 'PersonId',
@@ -49,6 +51,8 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
                 $scope.dto.FirstName = $scope.employee.FirstName;
                 $scope.dto.LastName = $scope.employee.LastName;
                 $scope.dto.PhoneNumber = $scope.employee.Mobile;
+                if ($scope.employee.Mobile)
+                    $scope.dto.Password = $scope.employee.Mobile;
             }
             // $scope.fillSchedule2();
 
@@ -59,6 +63,82 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         }
     };
 
+    $scope.btn_disable = {
+        text: 'Disable',
+        type: 'default',
+
+        width: 150,
+
+        onClick: function (e) {
+            $scope.selected = $rootScope.getSelectedRow($scope.dg_flight_total_instance);
+            if (!$scope.selected) {
+                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                return;
+            }
+            General.Confirm("The selected user will be disabled. Are you sure?", function (res) {
+                if (res) {
+
+                    var dto = { Id: $scope.selected.Id, };
+                    $scope.loadingVisible = true;
+                    authService.disable(dto).then(function (response) {
+                        $scope.loadingVisible = false;
+                        General.ShowNotify(Config.Text_SavedOk, 'success');
+                        $scope.dg_flight_total_ds = null;
+                        $scope.dg_flight_ds = null;
+
+                        $scope.getUsers();
+
+
+
+                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify2(err.message, 'error', 5000); });
+
+                }
+            });
+
+        }
+
+    };
+
+
+    $scope.btn_enable = {
+        text: 'Enable',
+        type: 'default',
+
+        width: 150,
+
+        onClick: function (e) {
+            $scope.selected = $rootScope.getSelectedRow($scope.dg_flight_total_instance);
+            if (!$scope.selected) {
+                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                return;
+            }
+            if (!$scope.selected.LockoutEnabled) {
+                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                return;
+            }
+            General.Confirm("The selected user will be enabled. Are you sure?", function (res) {
+                if (res) {
+
+                    var dto = { Id: $scope.selected.Id, };
+                    $scope.loadingVisible = true;
+                    authService.enable(dto).then(function (response) {
+                        $scope.loadingVisible = false;
+                        General.ShowNotify(Config.Text_SavedOk, 'success');
+                        $scope.dg_flight_total_ds = null;
+                        $scope.dg_flight_ds = null;
+
+                        $scope.getUsers();
+
+
+
+                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify2(err.message, 'error', 5000); });
+
+                }
+            });
+
+        }
+
+    };
 
 
     $scope.btn_search = {
@@ -69,27 +149,27 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         validationGroup: 'ctrsearch',
         bindingOptions: {},
         onClick: function (e) {
-    //        var dto = {
-    //            Email: 'ati1@email.com',
-    //            UserName: 'ati1',
-    //            Password: '1234@aA',
-    //            FirstName: 'Atrina',
-    //            LastName: 'Moghaddam',
-    //        };
-    //        authService.register2(dto).then(function (response) {
-    //            alert('ok');
-    //            console.log(response);
+            //        var dto = {
+            //            Email: 'ati1@email.com',
+            //            UserName: 'ati1',
+            //            Password: '1234@aA',
+            //            FirstName: 'Atrina',
+            //            LastName: 'Moghaddam',
+            //        };
+            //        authService.register2(dto).then(function (response) {
+            //            alert('ok');
+            //            console.log(response);
 
 
-    //        },
-    //function (err) {
-    //    $scope.message = err.message;
-    //    General.ShowNotify(err.message, 'error');
-        
-    //});
+            //        },
+            //function (err) {
+            //    $scope.message = err.message;
+            //    General.ShowNotify(err.message, 'error');
+
+            //});
 
 
-    //        return;
+            //        return;
             $scope.dg_flight_total_ds = null;
             $scope.dg_flight_ds = null;
             //var caption = 'From ' + moment($scope.dt_from).format('YYYY-MM-DD') + ' to ' + moment($scope.dt_to).format('YYYY-MM-DD');
@@ -98,14 +178,14 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         }
 
     };
-    
+
     function generatePassword() {
         var length = 8;
-        var capital="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        var numbers="0123456789";
+        var capital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var numbers = "0123456789";
         var charset = "abcdefghijklmnopqrstuvwxyz";
         var retVal = "";
-        retVal += capital.charAt(Math.floor(Math.random() *capital.length));
+        retVal += capital.charAt(Math.floor(Math.random() * capital.length));
         for (var i = 0, n = charset.length; i < 4; ++i) {
             retVal += charset.charAt(Math.floor(Math.random() * n));
         }
@@ -131,7 +211,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
                 PhoneNumber: '',
                 Station: '',
                 Password: '1234@aA', //generatePassword(),
-                Roles:null,
+                Roles: null,
             };
             $scope.popup_add_visible = true;
         },
@@ -140,39 +220,39 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
     };
     $scope.IsEdit = false;
     $scope.btn_edit = {
-         text: 'Edit',
+        text: 'Edit',
         type: 'default',
-         icon: 'edit',
+        icon: 'edit',
         width: 120,
-        
+
         onClick: function (e) {
-           var selected = $rootScope.getSelectedRow($scope.dg_flight_total_instance);
-           if (!selected) {
+            var selected = $rootScope.getSelectedRow($scope.dg_flight_total_instance);
+            if (!selected) {
                 General.ShowNotify(Config.Text_NoRowSelected, 'error');
                 return;
             }
-           $scope.IsEdit = true;
-           $scope.IsDisabled = selected.PersonId;
-           $scope.dto = {
-               Id:selected.Id,
-               UserName: selected.UserName,
-               FirstName: selected.FirstName,
-               LastName: selected.LastName,
-               Email: selected.Email,
-               Password: selected.PasswordHash, //generatePassword(),
-               PhoneNumber: selected.PhoneNumber,
-               Station:selected.SecurityStamp,
-               Roles: null,
+            $scope.IsEdit = true;
+            $scope.IsDisabled = selected.PersonId;
+            $scope.dto = {
+                Id: selected.Id,
+                UserName: selected.UserName,
+                FirstName: selected.FirstName,
+                LastName: selected.LastName,
+                Email: selected.Email,
+                Password: selected.PasswordHash, //generatePassword(),
+                PhoneNumber: selected.PhoneNumber,
+                Station: selected.SecurityStamp,
+                Roles: null,
 
             };
             $scope.personId = selected.PersonId;
-           $scope.getUserRoles(selected.Id, function (ds) {
-               $scope.dto.Roles = Enumerable.From(ds).Select('$.Name').ToArray();
-               $scope.popup_add_visible = true;
-           });
-        
+            $scope.getUserRoles(selected.Id, function (ds) {
+                $scope.dto.Roles = Enumerable.From(ds).Select('$.Name').ToArray();
+                $scope.popup_add_visible = true;
+            });
 
-            
+
+
         }
 
     };
@@ -201,7 +281,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         width: 130,
 
         onClick: function (e) {
-            
+
             $scope.popup_role_visible = true;
 
         }
@@ -212,7 +292,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         type: 'danger',
         icon: 'clear',
         width: 120,
-        
+
         onClick: function (e) {
 
             var selected = $rootScope.getSelectedRow($scope.dg_flight_total_instance);
@@ -231,7 +311,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
                         General.ShowNotify(Config.Text_SavedOk, 'success');
                         $scope.dg_flight_total_ds = null;
                         $scope.dg_flight_ds = null;
-                        
+
                         $scope.getUsers();
 
 
@@ -247,6 +327,9 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         return pad(Math.floor(mm / 60)).toString() + ':' + pad(mm % 60).toString();
     };
     $scope.getUsers = function () {
+
+        $scope.IsUserDisabled = false;
+        $scope.IsUserEnabled = false;
 
         $scope.loadingVisible = true;
         authService.getUsers().then(function (response) {
@@ -273,7 +356,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
 
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     };
-    $scope.getUserRoles = function (id,callback) {
+    $scope.getUserRoles = function (id, callback) {
 
         $scope.loadingVisible = true;
         authService.getUserRoles(id).then(function (response) {
@@ -288,7 +371,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
     };
 
 
-    $scope.getClaims = function (  callback) {
+    $scope.getClaims = function (callback) {
 
         $scope.loadingVisible = true;
         authService.getClaims().then(function (response) {
@@ -302,7 +385,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     };
 
-    $scope.getRoleClaims = function (id,callback) {
+    $scope.getRoleClaims = function (id, callback) {
 
         $scope.loadingVisible = true;
         authService.getRoleClaims(id).then(function (response) {
@@ -333,7 +416,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         $scope.getUserRoles(id, function (data) {
             var ds = [];
             $.each($scope.roles, function (_i, _d) {
-                var row = { Id: _d.Id, Name2: _d.Name2, Selected: 0 ,Name:_d.Name,userId:id};
+                var row = { Id: _d.Id, Name2: _d.Name2, Selected: 0, Name: _d.Name, userId: id };
                 var exist = Enumerable.From(data).Where("$.RoleId=='" + _d.Id + "'").FirstOrDefault();
                 if (exist)
                     row.Selected = 1;
@@ -388,13 +471,12 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     };
 
-     
+
     //////////////////////////////////
     $scope.nameChanged = function () {
         if ($scope.IsEdit)
             return;
-        if (!$scope.dto.FirstName && !$scope.dto.LastName)
-        {
+        if (!$scope.dto.FirstName && !$scope.dto.LastName) {
             $scope.dto.UserName = '';
             return;
         }
@@ -405,7 +487,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         hoverStateEnabled: false,
 
         valueChangeEvent: 'keyup',
-        onValueChanged:function(e){
+        onValueChanged: function (e) {
             $scope.nameChanged();
         },
         bindingOptions: {
@@ -444,7 +526,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
     };
     $scope.txt_phone = {
         hoverStateEnabled: false,
-        
+
         bindingOptions: {
             value: 'dto.PhoneNumber',
             disabled: 'isPropDisabled',
@@ -454,7 +536,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         hoverStateEnabled: false,
         bindingOptions: {
             value: 'dto.Password',
-            
+
 
         }
     };
@@ -467,14 +549,14 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
 
         }
     };
-    $scope.tag_roles= {
+    $scope.tag_roles = {
         displayExpr: 'Name2',
         valueExpr: 'Name',
         hideSelectedItems: true,
         searchEnabled: true,
         bindingOptions: {
             dataSource: 'roles',
-            value:'dto.Roles',
+            value: 'dto.Roles',
 
         }
     };
@@ -482,8 +564,8 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         showClearButton: true,
         searchEnabled: true,
         dataSource: $rootScope.getDatasourceAirport(),
-        
-        
+
+
         searchExpr: ["IATA", "Country", "SortName", "City"],
         displayExpr: "IATA",
         valueExpr: 'IATA',
@@ -547,7 +629,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
     //save button
     $scope.popup_add.toolbarItems[0].options.onClick = function (e) {
         //sook
-       // alert($scope.dto.Roles);
+        // alert($scope.dto.Roles);
         var result = e.validationGroup.validate();
 
         if (!result.isValid) {
@@ -569,26 +651,25 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
                     FirstName: '',
                     LastName: '',
                     Email: '',
-                    PhoneNumber:'',
+                    PhoneNumber: '',
                     Password: '1234@aA', //generatePassword(),
-                    Station:'',
+                    Station: '',
                     Roles: null,
-                    PersonId:null,
+                    PersonId: null,
                 };
                 $scope.personId = null;
                 console.log(response);
 
 
             },
-                     function (err) {
-                         $scope.loadingVisible = false;
-                         $scope.message = err.message;
-                         General.ShowNotify(err.message, 'error');
+                function (err) {
+                    $scope.loadingVisible = false;
+                    $scope.message = err.message;
+                    General.ShowNotify(err.message, 'error');
 
-                     });
+                });
         }
-        else
-        {
+        else {
             console.log($scope.dto);
             if ($scope.personId)
                 $scope.dto.PersonId = $scope.personId;
@@ -597,7 +678,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
             authService.updateUser($scope.dto).then(function (response) {
                 $scope.loadingVisible = false;
                 $scope.dto = {
-                    Id:null,
+                    Id: null,
                     UserName: '',
                     FirstName: '',
                     LastName: '',
@@ -611,20 +692,20 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
 
 
             },
-                                function (err) {
-                                    $scope.loadingVisible = false;
-                                    $scope.message = err.message;
-                                    General.ShowNotify(err.message, 'error');
+                function (err) {
+                    $scope.loadingVisible = false;
+                    $scope.message = err.message;
+                    General.ShowNotify(err.message, 'error');
 
-                                });
+                });
         }
-        
+
 
     };
     /////////////////////////////////////
     $scope.popup_password_visible = false;
     $scope.popup_password_title = 'Password';
-    
+
     $scope.popup_password = {
 
         fullScreen: false,
@@ -651,12 +732,12 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         onHiding: function () {
 
             // $scope.clearEntity();
-             
+
             $scope.popup_password_visible = false;
 
         },
         onContentReady: function (e) {
-           
+
         },
         bindingOptions: {
             visible: 'popup_password_visible',
@@ -678,8 +759,8 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
             General.ShowNotify(Config.Text_FillRequired, 'error');
             return;
         }
-        var dto={Id:$scope.selected.Id,Password:$scope.newPassword}
-        
+        var dto = { Id: $scope.selected.Id, Password: $scope.newPassword }
+
         $scope.loadingVisible = true;
         authService.setPassword(dto).then(function (response) {
             $scope.loadingVisible = false;
@@ -688,12 +769,12 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
 
 
         },
-                  function (err) {
-                      $scope.loadingVisible = false;
-                      $scope.message = err.message;
-                      General.ShowNotify(err.message, 'error');
+            function (err) {
+                $scope.loadingVisible = false;
+                $scope.message = err.message;
+                General.ShowNotify(err.message, 'error');
 
-                  });
+            });
 
     };
     /////////////////////////////
@@ -708,7 +789,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         height: 600,
         toolbarItems: [
 
-          //  { widget: 'dxButton', location: 'after', options: { type: 'success', text: 'Save', icon: 'check', validationGroup: 'password', bindingOptions: {} }, toolbar: 'bottom' },
+            //  { widget: 'dxButton', location: 'after', options: { type: 'success', text: 'Save', icon: 'check', validationGroup: 'password', bindingOptions: {} }, toolbar: 'bottom' },
             { widget: 'dxButton', location: 'after', options: { type: 'danger', text: 'Close', icon: 'remove', }, toolbar: 'bottom' }
         ],
 
@@ -797,10 +878,10 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
     $scope.dg_flight_total_columns = [
 
 
-         { dataField: 'UserName', caption: 'UserName', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left',  },
-          { dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left',   },
-           { dataField: 'LastName', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left',   },
-            { dataField: 'PhoneNumber', caption: 'Phone', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left',   },
+        { dataField: 'UserName', caption: 'UserName', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', },
+        { dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', },
+        { dataField: 'LastName', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', },
+        { dataField: 'PhoneNumber', caption: 'Phone', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', },
         // { dataField: 'Email', caption: 'Email', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', width: 300 },
 
 
@@ -848,11 +929,23 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
             if (!data) {
                 $scope.dg_flight_ds = null;
                 $scope.dg_flight_total_selected = null;
-                 
+
             }
             else {
                 $scope.dg_flight_total_selected = data;
                 $scope.fillUserRoles(data.Id);
+            }
+
+
+            if (data.PersonId) {
+
+                $scope.IsUserDisabled = true;
+                $scope.IsUserEnabled = false;
+            }
+            if (data.LockoutEnabled) {
+
+                $scope.IsUserDisabled = false;
+                $scope.IsUserEnabled = true;
             }
 
             //nono
@@ -945,9 +1038,9 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
                 location: "before",
                 template: function () {
                     return $("<div/>")
-                       // .addClass("informer")
+                        // .addClass("informer")
                         .append(
-                           "<span style='color:white;'>Users</span>"
+                            "<span style='color:white;'>Users</span>"
                         );
                 }
             });
@@ -962,8 +1055,13 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         },
         onRowPrepared: function (e) {
             if (e.rowType === "data" && e.data.PersonId) {
-               
+
                 e.rowElement.css("backgroundColor", "#b3ffcc");
+            }
+            if (e.rowType === "data" && e.data.LockoutEnabled) {
+
+                e.rowElement.css("backgroundColor", "#666666");
+                e.rowElement.css("color", "white");
             }
             //42 %  10
 
@@ -974,9 +1072,9 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
     };
     //////////////////////////////////
     $scope.dg_flight_columns = [
-               { dataField: 'Selected', caption: '', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, fixed: false, fixedPosition: 'left' ,width:90},
-          { dataField: 'Name2', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false,  fixed: false, fixedPosition: 'left' },
-             
+        { dataField: 'Selected', caption: '', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, fixed: false, fixedPosition: 'left', width: 90 },
+        { dataField: 'Name2', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left' },
+
 
     ];
 
@@ -1031,39 +1129,38 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
             if (e.column.dataField != 'Selected')
                 return;
 
-            
+
             var old = e.value;
             var newValue = e.value == 0 ? 1 : 0;
-            var dto = {userId:e.data.userId,role:e.data.Name};
+            var dto = { userId: e.data.userId, role: e.data.Name };
             if (newValue == 1) {
                 $scope.loadingVisible = true;
                 authService.addUserRole(dto).then(function (response) {
                     $scope.loadingVisible = false;
                     e.data.Selected = newValue;
-                    
-                },
-                  function (err) {
-                        $scope.loadingVisible = false;
-                          $scope.message = err.message;
-                          General.ShowNotify(err.message, 'error');
 
-                });
+                },
+                    function (err) {
+                        $scope.loadingVisible = false;
+                        $scope.message = err.message;
+                        General.ShowNotify(err.message, 'error');
+
+                    });
             }
-            else
-            {
+            else {
                 $scope.loadingVisible = true;
                 authService.removeUserRole(dto).then(function (response) {
                     $scope.loadingVisible = false;
                     e.data.Selected = newValue;
                 },
-                  function (err) {
-                      $scope.loadingVisible = false;
-                      $scope.message = err.message;
-                      General.ShowNotify(err.message, 'error');
+                    function (err) {
+                        $scope.loadingVisible = false;
+                        $scope.message = err.message;
+                        General.ShowNotify(err.message, 'error');
 
-                  });
+                    });
             }
-           
+
         },
         summary: {
             totalItems: [{
@@ -1079,21 +1176,21 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
 
                 summaryType: "custom"
             },
-                {
-                    name: "SITATimeTotal",
-                    showInColumn: "SITATime2",
-                    displayFormat: "{0}",
+            {
+                name: "SITATimeTotal",
+                showInColumn: "SITATime2",
+                displayFormat: "{0}",
 
-                    summaryType: "custom"
-                }
+                summaryType: "custom"
+            }
                 ,
-                {
-                    name: "FixTimeTotal",
-                    showInColumn: "FixTime2",
-                    displayFormat: "{0}",
+            {
+                name: "FixTimeTotal",
+                showInColumn: "FixTime2",
+                displayFormat: "{0}",
 
-                    summaryType: "custom"
-                }
+                summaryType: "custom"
+            }
             ],
             calculateCustomSummary: function (options) {
                 if (options.name === "FlightTimeTotal") {
@@ -1172,9 +1269,9 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
                 location: "before",
                 template: function () {
                     return $("<div/>")
-                       // .addClass("informer")
+                        // .addClass("informer")
                         .append(
-                           "<span style='color:white;'>User Roles</span>"
+                            "<span style='color:white;'>User Roles</span>"
                         );
                 }
             });
@@ -1200,14 +1297,14 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
     $scope.dg_claims_columns = [
         {
             caption: 'User Access', columns: [
-                  { dataField: 'Name', caption: 'Role', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left',   },
+                { dataField: 'Name', caption: 'Role', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', },
 
-         { dataField: 'ClaimValue', caption: 'Module', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left' },
-          { dataField: 'Claim', caption: 'Access', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left' },
+                { dataField: 'ClaimValue', caption: 'Module', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left' },
+                { dataField: 'Claim', caption: 'Access', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left' },
 
             ]
         },
-          
+
 
     ];
 
@@ -1255,7 +1352,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
 
 
         },
-        
+
         "export": {
             enabled: false,
             fileName: "CREW_TIMES",
@@ -1286,7 +1383,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
                 e.rowElement.css('background', '#ffccff');
 
         },
-       
+
         bindingOptions: {
             dataSource: 'dg_claims_ds'
         }
@@ -1297,8 +1394,8 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
             caption: 'Role Access', columns: [
                 //  { dataField: 'Name', caption: 'Role', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', },
 
-         { dataField: 'ClaimValue', caption: 'Module', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left' },
-          { dataField: 'Claim', caption: 'Access', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left' },
+                { dataField: 'ClaimValue', caption: 'Module', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left' },
+                { dataField: 'Claim', caption: 'Access', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left' },
 
             ]
         },
@@ -1331,7 +1428,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height:480,
+        height: 480,
 
         columns: $scope.dg_rc_columns,
         onContentReady: function (e) {
@@ -1351,8 +1448,8 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
 
         },
 
-        
-         
+
+
 
         bindingOptions: {
             dataSource: 'dg_rc_ds'
@@ -1360,10 +1457,10 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
     };
     /////////////////////////////////
     $scope.dg_role_columns = [
-       
-           { dataField: 'Name', caption: 'Role', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', },
 
-      
+        { dataField: 'Name', caption: 'Role', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', },
+
+
 
 
     ];
@@ -1430,7 +1527,7 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
     if (!authService.isAuthorized()) {
 
         authService.redirectToLogin();
-        
+
     }
     else if ($rootScope.userName.toLowerCase() != 'razbani' && $rootScope.userName.toLowerCase() != 'demo')
         $rootScope.navigatehome();
