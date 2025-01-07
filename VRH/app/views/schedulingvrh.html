@@ -686,9 +686,9 @@
                 <div ng-repeat="x in rangeFdps">
                     <div style="padding:3px;border:1px solid #ccc;background:#eee;font-size:12px;font-weight:bold;text-align:center">{{formatNOs(x.no)}}</div>
                     <div style="border:1px solid #ccc;">
-                        <div ng-repeat="y in x.fdps" style="border:1px solid #4da6ff; width:99%;margin:3px;display:inline-block ">
+                        <div ng-repeat="y in x.fdps" style="border:1px solid #4da6ff; width:99%;margin:3px;display:inline-block " ng-show="getActionShow(y.rank)">
                             <table style="width:100%">
-                                <tr>
+                                <tr >
                                     <td style="font-size:11px; font-weight:bold;padding:2px 2px 2px 5px;border-right:1px solid #4da6ff;width:50px">{{y.rank}}</td>
                                     <td style="text-align:center;width:25px;padding:2px;"><a href="" ng-show="isExtendFDPVisible(y)" ng-click="extendFDP(y)"><i class="fa fa-plus-circle" style="color:green;font-size:19px; "></i></a></td>
                                     <td style="font-size:11px;font-weight:bold;padding:2px;text-align:center;border-right:0px solid #4da6ff">{{y.scheduleName}}</td>
@@ -709,9 +709,9 @@
 
 
 
-                <div ng-repeat="x in rangeCrews" style="border:1px solid #4da6ff; width:99%;margin:3px;display:inline-block ">
+                <div ng-repeat="x in rangeCrews" style="border:1px solid #4da6ff; width:99%;margin:3px;display:inline-block " ng-show="getActionShow(x.rank)">
                     <table style="width:100%">
-                        <tr>
+                        <tr >
 
                             <td style="font-size:11px; font-weight:bold;padding:2px 2px 2px 5px;border-right:1px solid #4da6ff;width:50px">{{x.rank}}</td>
                             <td style="font-size:11px;font-weight:bold;padding:2px;text-align:center;border-right:0px solid #4da6ff">{{x.name}}</td>
@@ -737,10 +737,10 @@
                     <div style="border:0px solid #ccc;">
 
                         <table style="width:100%">
-                            h:
+                           
 
 
-                            <tr ng-repeat="y in x.items">
+                            <tr ng-repeat="y in x.items" ng-show="getActionShow(y.rank)" >
                                 <td style="border: 1px solid #ccc; font-size: 11px; font-weight: bold; padding: 2px 2px 2px 5px;   width: 50px">{{y.rank}}</td>
 
                                 <td style="border: 1px solid #ccc; font-size: 12px; font-weight: normal; padding: 2px 2px 2px 5px;   ">{{y.scheduleName}}</td>
@@ -2266,7 +2266,7 @@
 
     <div id="popup_crews" dx-popup="popup_crews">
         <div style="padding:0px 0 0 0;overflow-y:auto;height:350px;">
-            <div ng-repeat="y in shiftFlight.crew" style="border:1px solid #4da6ff;min-width:46%;margin:3px;display:inline-block;background:#eee ">
+            <div ng-repeat="y in shiftFlight.crew" style="border:1px solid #4da6ff;min-width:46%;margin:3px;display:inline-block;background:#eee " ng-show="getActionShow(y.rank )">
 
                 <table style="width:100%">
                     <tr>

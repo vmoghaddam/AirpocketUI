@@ -6168,8 +6168,8 @@ if ($scope.entity.Person.LOAD_CONTROL_ExpireDate)
                 return;
             }
 			 var y=3;
-			if ($scope.group_root=='100' || $scope.group_root=='200'  || $scope.group_root=='400'  || $scope.group_root=='500' || $scope.group_root=='300' || $scope.group_root=='600' || $scope.group_root=='670')
-				y=2;
+			//if ($scope.group_root=='100' || $scope.group_root=='200'  || $scope.group_root=='400'  || $scope.group_root=='500' || //$scope.group_root=='300' || $scope.group_root=='600' || $scope.group_root=='670')
+			//	y=2;
             $scope.entity.Person.ExpireDate2 = (new Date(e.value)).addYears(y);
         },
         bindingOptions: {

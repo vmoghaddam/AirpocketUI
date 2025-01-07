@@ -1,7 +1,8 @@
 ﻿'use strict';
 app.controller('crewReportController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'weatherService', 'aircraftService', 'authService', 'notificationService', '$route', function ($scope, $location, $routeParams, $rootScope, flightService, weatherService, aircraftService, authService, notificationService, $route) {
     $scope.prms = $routeParams.prms;
-
+$scope.IsCockpit = $rootScope.userName.toLowerCase() == 'ops.abdi' || $rootScope.userName.toLowerCase() == 'ops.darabian' 
+	|| $rootScope.userName.toLowerCase() == 'ops.jamali'? false : true;
     //////////////////////////////////
     $scope.dsUrl = null;
     $scope.filterVisible = false;
@@ -1165,11 +1166,11 @@ app.controller('crewReportController', ['$scope', '$location', '$routeParams', '
         return filters;
     };
 
-    $scope.jgroup = 'Cockpit';
+    $scope.jgroup =$scope.IsCockpit? 'Cockpit': 'Cabin';
     $scope.sb_group = {
         showClearButton: false,
         searchEnabled: true,
-        dataSource: ['Cockpit', 'Cabin'],
+        dataSource:$scope.IsCockpit? ['Cockpit', 'Cabin']:['Cabin'],
 
 
         bindingOptions: {

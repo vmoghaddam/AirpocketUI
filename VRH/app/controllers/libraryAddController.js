@@ -207,13 +207,14 @@ app.controller('libraryAddController', ['$scope', '$location', 'libraryService',
     $scope.$watch("selectedTabIndex", function (newValue) {
 
         try {
+			  
             $scope.selectedTab = tabs[newValue];
             $('.tab').hide();
             $('.' + $scope.selectedTab.id).fadeIn(100, function () {
 
 
             });
-
+             $scope.btn_visible_employee = newValue ==2;
             $scope.dg_aircrafttype_instance.repaint();
             //$scope.dg_coursetype_instance.repaint();
             $scope.dg_education_instance.repaint();
@@ -241,8 +242,8 @@ app.controller('libraryAddController', ['$scope', '$location', 'libraryService',
             $scope.btn_visible_education = newValue == 4;
             //$scope.btn_visible_course = newValue == 4;
            // $scope.btn_visible_group = newValue == 3;
-            $scope.btn_visible_employee = newValue ==2;
-
+           
+          
            
 
 
@@ -1614,21 +1615,23 @@ app.controller('libraryAddController', ['$scope', '$location', 'libraryService',
     /////////////////////////////
     $scope.tempData = null;
     $scope.bookKey = null;
-    $scope.$on('InitAddHazard', function (event, prms) {
+    $scope.$on('InitAddLibrary', function (event, prms) {
 
-        
+
         $scope.tempData = null;
 
         if (!prms.Id) {
 
             $scope.isNew = true;
-            
+            $scope.bookKey = $scope.generateINT();
+            $scope.popup_add_title = 'New';
+            $scope.entity.FolderId = prms.FolderId;
 
         }
 
         else {
 
-             
+            $scope.popup_add_title = 'Edit';
             $scope.tempData = prms;
             $scope.isNew = false;
 

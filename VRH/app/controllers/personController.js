@@ -403,7 +403,8 @@ app.controller('personController', ['$scope', '$location', '$routeParams', '$roo
 		{ dataField: 'RemainRSP', caption: 'F/P',name:'RSP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
 		{ dataField: 'Remain4', caption: 'F/M',name:'FM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
 		{ dataField: 'Remain5', caption: 'A/T/M',name:'ATM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'Remain6', caption: 'NAV.',name:'NAV', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
+		{ dataField: 'Remain6', caption: 'R-NAV.',name:'NAV', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
+				{ dataField: 'Remain2', caption: 'G-NAV.',name:'GNAV', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
 		{ dataField: 'Remain7', caption: 'A/I',name:'AI', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
 			{ dataField: 'Remain3', caption: 'DEICING',name:'DEICING', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
 		
@@ -643,6 +644,11 @@ app.controller('personController', ['$scope', '$location', '$routeParams', '$roo
                 e.cellElement.html('?'); 
 			
             }*/
+			
+			if (e.value=='50000')
+									e.cellElement.html('✓');
+			 
+			
 			
             if (e.column.dataField=="RemainTypeAirbus")   {
 				if (e.value=='-100000')
@@ -905,6 +911,7 @@ $scope.dg_instance.columnOption('RSP', 'visible', e.value == 'F/D');
 $scope.dg_instance.columnOption('FM', 'visible', e.value == 'F/D');
 $scope.dg_instance.columnOption('ATM', 'visible', e.value == 'F/D');
 $scope.dg_instance.columnOption('NAV', 'visible', e.value == 'F/D');
+			$scope.dg_instance.columnOption('GNAV', 'visible', e.value == 'F/D');
 $scope.dg_instance.columnOption('AI', 'visible', e.value == 'F/D');
 			
 $scope.dg_instance.columnOption('SMSL2', 'visible',  e.value == 'QA' ||  e.value == 'CRM' || e.value == 'ADMINISTRATIVE' || e.value == 'PUBLIC RELATIONS');

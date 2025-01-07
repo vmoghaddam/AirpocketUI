@@ -1,6 +1,8 @@
 ﻿'use strict';
 app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams', '$rootScope', '$timeout', 'flightService', 'weatherService', 'aircraftService', 'authService', 'notificationService', '$route', '$window', function ($scope, $location, $routeParams, $rootScope, $timeout, flightService, weatherService, aircraftService, authService, notificationService, $route, $window) {
     $scope.OnlyRoster = false;
+	$scope.IsCockpit = $rootScope.userName.toLowerCase() == 'ops.abdi' || $rootScope.userName.toLowerCase() == 'ops.darabian' 
+		|| $rootScope.userName.toLowerCase() == 'ops.jamali' ? false : true;
     if ($rootScope.userName.toLowerCase() == 'train.moradi' || $rootScope.userName.toLowerCase() == 'mohammadifard')
         $scope.OnlyRoster = true;
     //soltani
@@ -1295,12 +1297,13 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     $scope.dt_from = new Date();//new Date(2021,11,1).addDays(0);
     $scope.dt_to = new Date($scope.dt_from).addDays(14);
     
-    $scope.rank = 'IP,P1';
+    $scope.rank =$scope.IsCockpit? 'IP,P1':'ISCCM,SCCM';
     $scope.sb_rank = {
         placeholder: 'Rank',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: ['IP,P1','P2', 'TRE', 'TRI', 'P1', 'ISCCM,SCCM', 'CCM', 'ISCCM', 'SCCM'],
+        dataSource:$scope.IsCockpit? ['IP,P1','P2', 'TRE', 'TRI', 'P1', 'ISCCM,SCCM', 'CCM', 'ISCCM', 'SCCM']
+		:[ 'ISCCM,SCCM', 'CCM', 'ISCCM', 'SCCM'],
 
         onSelectionChanged: function (arg) {
 

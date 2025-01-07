@@ -1,9 +1,11 @@
 'use strict';
-app.controller('qaOperationPopup', ['$scope', 'qaService', '$routeParams', '$rootScope', '$window', function ($scope, qaService, $routeParams, $rootScope, $window) {
+app.controller('qaOperationPopup', ['$scope', 'qaService', '$routeParams', '$rootScope','$window', function ($scope, qaService, $routeParams, $rootScope, $window) {
+     
 
     $scope.isNotLocked = true;
-    $scope.Type = null;
-    $scope.isResponsible = false;
+    //$scope.Type = null;
+    $scope.Type = $routeParams.type;
+	$scope.isResponsible = false;
 
     $scope.popup_operation_visible = false;
     $scope.popup_height = $(window).height() - 100;
@@ -101,16 +103,25 @@ app.controller('qaOperationPopup', ['$scope', 'qaService', '$routeParams', '$roo
                     }
                 }, toolbar: 'bottom'
             },
+			{
+                widget: 'dxButton', location: 'before' ,options: {
+                    type: 'default' , text: 'Print', onClick: function (e) {
 
-            {
-                widget: 'dxButton', location: 'after', options: {
-                    type: 'default', text: 'Print', icon: 'print', validationGroup: 'result', onClick: function (e) {
-                        if ($scope.tempData.Type == 8)
-                            $window.open('https://report.apvaresh.com/frmreportview.aspx?type=17&fid=' + $scope.tempData.Priority, '_blank')
+                      //qaService.qa_print_xls($scope.tempData.Id).then(function(response){
+					  //console.log(response); 
+					  //});
+						if($scope.tempData.Type == 3){
+						   $window.open('https://report.apvaresh.com/frmreportview.aspx?type=mor&fid='+ $scope.tempData.Id, '_blank')
+						}else if($scope.tempData.Type == 0){
+							$window.open('https://report.apvaresh.com/frmreportview.aspx?type=csr&fid=' + $scope.tempData.Id, '_blank')
+						}else{
+							return;
+						}
                     }
-                }, toolbar: 'bottom'
+                }, toolbar: 'bottom',
+				
+              
             },
-
         ],
 
         visible: false,
@@ -176,7 +187,7 @@ app.controller('qaOperationPopup', ['$scope', 'qaService', '$routeParams', '$roo
     $scope.$on('InitOperationPopup', function (event, prms) {
 
 		$scope.tempData = prms;
-		console.log($scope.tempData);
+		console.log("tempData",$scope.tempData);
 		
         $scope.Type = $scope.tempData.Type;
         $scope.isNotLocked = $scope.tempData.isNotLocked

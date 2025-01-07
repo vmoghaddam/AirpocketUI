@@ -5,11 +5,11 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
     $scope.popupselectedTabIndex = -1;
     $scope.popupselectedTabId = null;
     $scope.tabs = [
-       // { text: "Active", id: 'active' },
+        // { text: "Active", id: 'active' },
         { text: "Active", id: 'new' },
         { text: "Closed", id: 'determined' },
-      
-       // { text: "In Progress", id: 'open' },
+
+        // { text: "In Progress", id: 'open' },
 
     ];
 
@@ -29,8 +29,8 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
 
     $scope.entity.type = $routeParams.type;
     $scope.selected_type = Number($scope.entity.type);
-	
-	
+
+
 
 
     $scope.$watch("selectedTabIndex", function (newValue) {
@@ -59,10 +59,10 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
             }
             if ($scope.dg_new_instance)
                 $scope.dg_new_instance.refresh();
-            if ( $scope.dg_open_instance)
+            if ($scope.dg_open_instance)
                 $scope.dg_open_instance.refresh();
-            if ( $scope.dg_determined_instance)
-                 $scope.dg_determined_instance.refresh();
+            if ($scope.dg_determined_instance)
+                $scope.dg_determined_instance.refresh();
 
         }
         catch (e) {
@@ -200,28 +200,49 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
 
     $scope.bind_forms = function () {
         $scope.entity.type = $scope.selected_type;
-        qaService.getQAStatus($scope.entity).then(function (response) {
-            // $rootScope.dg_open_ds = response.Data.Open;
-            $rootScope.dg_new_ds = response.Data.Active;
-            $rootScope.dg_determined_ds = response.Data.Determined;
-            $scope.loadingVisible = false;
-            console.log($rootScope.dg_determined_ds);
+        //qaService.getQAStatus($scope.entity).then(function (response) {
+        //    qaService.qa_get_visited($rootScope.employeeId, $scope.selected_type).then(function (response2) {
+        //        $rootScope.dg_new_ds = response.Data.Active;
+        //        $rootScope.dg_determined_ds = response.Data.Determined;
+        //        $scope.loadingVisible = false;
+        //    });
+        //});
 
+        qaService.getQAStatus($scope.entity).then(function (response) {
+            qaService.qa_get_visited($rootScope.employeeId, $scope.selected_type).then(function (response2) {
+                var visitedForms = Enumerable.From(response2.Data).Select('$.form_id').ToArray();
+
+                $rootScope.dg_new_ds = Enumerable.From(response.Data.Active)
+                    .Select(item => {
+                        item.isVisited = visitedForms.includes(item.Id) ? true : false;
+                        return item;
+                    })
+                    .ToArray();
+
+                $rootScope.dg_determined_ds = Enumerable.From(response.Data.Determined)
+                    .Select(item => {
+                        item.isVisited = visitedForms.includes(item.Id) ? true : false;
+                        return item;
+                    })
+                    .ToArray();
+
+                $scope.loadingVisible = false;
+            });
         });
+
+
     }
 
     $scope.bind = function () {
-        console.log($scope.entity);
 
         qaService.getQAByEmployee($rootScope.employeeId).then(function (response2) {
             $scope.qaStatus = response2.Data;
-            console.log('qastatus', response2.Data);
             $scope.bind_forms();
-             
+
         });
 
 
-       
+
     };
 
 
@@ -271,18 +292,18 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
 
 
 
-        { dataField: 'Category', caption: 'Status',name:'Category', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+        { dataField: 'Category', caption: 'Status', name: 'Category', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         { dataField: 'DateStatus', caption: 'Status Date', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 120 },
-      //  { dataField: 'TypeTitle', caption: 'Form Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 180 },
+        //  { dataField: 'TypeTitle', caption: 'Form Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 180 },
         { dataField: 'FormNo', caption: 'Form No', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 180 },
-       
-		{ dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120 },
+
+        { dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120 },
         { dataField: 'Route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         { dataField: 'Register', caption: 'Reg', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         { dataField: 'FlightDate', caption: 'Flight Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
         { dataField: 'EmployeeName', caption: 'Reporter', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 300 },
         { dataField: 'DateOccurrence', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
-       // { dataField: 'ReviewResultTitle', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+        // { dataField: 'ReviewResultTitle', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
 
         { dataField: 'DeadLine', caption: 'DeadLine', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
         {
@@ -306,7 +327,7 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
     $scope.get_height = function () {
         var h = $(window).height() - 110;
         return {
-            'height':h+'px',
+            'height': h + 'px',
         }
     }
 
@@ -364,81 +385,207 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
         onRowClick: function (e) {
 
 
-               var data = {
+            var data = {
                 Id: e.data.Id,
                 Type: $scope.selected_type,
                 EmployeeId: $rootScope.employeeId,
                 isNotDetermined: true,
                 Category: 'new',
                 ProducerId: e.data.EmployeeId,
-				    FlightId: e.data.FlightId,
-                   Priority: e.data.Priority,
-                   Entity: e.data
+                FlightId: e.data.FlightId,
+                Priority: e.data.Priority,
+                Entity: e.data
             };
 
 
             if (e.data.Status == 1)
                 data.isNotLocked = false;
-            else 
+            else
                 data.isNotLocked = true;
 
 
             switch ($scope.selected_type) {
-                
+
                 case 0:
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQACabin', data);
                     break;
                 case 1:
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQAGround', data);
                     break;
                 case 2:
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitVHR', data);
                     break;
                 case 3:
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQAMaintenance', data);
                     break;
                 case 4:
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQACatering', data);
                     break;
                 case 5:
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQASecurity', data);
                     break;
                 case 6:
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQADispatch', data);
                     break;
-					  case 7:
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                case 7:
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQADispatch', data);
                     break;
-					  case 8:
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                case 8:
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQADispatch', data);
                     break;
-					 case 9:
-     $rootScope.$broadcast('InitOperationPopup', data);
-     //$rootScope.$broadcast('InitQADispatch', data);
-     break;
+                case 9:
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
+                    //$rootScope.$broadcast('InitQADispatch', data);
+                    break;
 
             }
         },
 
         onRowPrepared: function (e) {
+
+          
             if (e.rowType == 'data' && e.data && e.data.Status == 1) {
                 e.rowElement.css('background', '#ccffcc');
                 $scope.dg_new_ds.ReviewResultTitle = "Closed"
             }
-			
-			 if (e.rowType == 'data' && e.data && e.data.DeadLine != null) {
-     e.rowElement.css('background', '#ffcc99');
 
- }
+            if (e.rowType == 'data' && e.data && e.data.DeadLine != null) {
+                e.rowElement.css('background', '#ffcc99');
+
+            }
+            if (e.rowType == 'data' && e.data && e.data.isVisited == true && e.rowElement) {
+                $(e.rowElement).css('font-weight', 'bold');
+            }
+
 
         },
 
@@ -500,21 +647,21 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
 
 
         { dataField: 'FormNo', caption: 'Form No', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 180 },
-       { dataField: 'DeadLine', caption: 'DeadLine', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
-{
-    dataField: 'Priority', caption: 'Priority', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150,
-    cellTemplate: function (container, options) {
-        var priority = options.data.Priority;
-        var priorityText = (priority === 0) ? 'Critical' : priority;
-        var priorityText = (priority === 1) ? 'Major' : priority;
-        var priorityText = (priority === 2) ? 'Minor' : priority;
+        { dataField: 'DeadLine', caption: 'DeadLine', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
+        {
+            dataField: 'Priority', caption: 'Priority', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150,
+            cellTemplate: function (container, options) {
+                var priority = options.data.Priority;
+                var priorityText = (priority === 0) ? 'Critical' : priority;
+                var priorityText = (priority === 1) ? 'Major' : priority;
+                var priorityText = (priority === 2) ? 'Minor' : priority;
 
-        $("<div>")
-            .html(priorityText)
-            .appendTo(container);
-    }
-},
-		{ dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
+                $("<div>")
+                    .html(priorityText)
+                    .appendTo(container);
+            }
+        },
+        { dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
         { dataField: 'Route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         { dataField: 'Register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         { dataField: 'FlightDate', caption: 'Flight Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
@@ -585,17 +732,17 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
 
         onRowClick: function (e) {
 
-			
-                var data = {
+
+            var data = {
                 Id: e.data.Id,
-                    Type: $scope.selected_type,
+                Type: $scope.selected_type,
                 EmployeeId: $rootScope.employeeId,
                 isNotDetermined: true,
                 Category: 'open',
                 ProducerId: e.data.EmployeeId,
-					 FlightId: e.data.FlightId,
-                    Priority: e.data.Priority,
-                    Entity: e.data
+                FlightId: e.data.FlightId,
+                Priority: e.data.Priority,
+                Entity: e.data
             };
             if (e.data.Status == 1)
                 data.isNotLocked = false;
@@ -604,45 +751,164 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
 
             switch ($scope.selected_type) {
                 case '0':
-                    $rootScope.$broadcast('InitOperationPopup', data);
-                    //$rootScope.$broadcast('InitQACabin', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     break;
                 case '1':
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQAGround', data);
                     break;
                 case '2':
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitVHR', data);
                     break;
                 case '3':
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQAMaintenance', data);
                     break;
                 case '4':
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQACatering', data);
                     break;
                 case '5':
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQASecurity', data);
                     break;
                 case '6':
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQADispatch', data);
                     break;
-					  case '7':
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                case '7':
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQADispatch', data);
                     break;
-					 case '8':
-                    $rootScope.$broadcast('InitOperationPopup', data);
+                case '8':
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
                     //$rootScope.$broadcast('InitQADispatch', data);
                     break;
-					 case '9':
-     $rootScope.$broadcast('InitOperationPopup', data);
-     //$rootScope.$broadcast('InitQADispatch', data);
-     break;
+                case '9':
+                    qaService.qa_update_visited($rootScope.employeeId, $scope.selected_type, e.data.Id).then(function (response) {
+                        $rootScope.$broadcast('InitOperationPopup', data);
+                        $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                            .Select(item => {
+                                if (item.Id == e.data.Id) {
+                                    item.isVisited = true;
+                                }
+                                return item;
+                            })
+                            .ToArray();
+                        if ($scope.dg_new_instance)
+                            $scope.dg_new_instance.refresh();
+                    });
+                    //$rootScope.$broadcast('InitQADispatch', data);
+                    break;
 
             }
         },
@@ -665,10 +931,15 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
             if (e.rowType == 'data' && e.data && e.data.Status == 1)
                 e.rowElement.css('background', '#ccffcc');
 
-			 if (e.rowType == 'data' && e.data && e.data.DeadLine != null) {
-     e.rowElement.css('background', '#ffcc99');
+            if (e.rowType == 'data' && e.data && e.data.DeadLine != null) {
+                e.rowElement.css('background', '#ffcc99');
 
- }
+            }
+
+            if (e.rowType == 'data' && e.data && e.data.isVisited == true) {
+                e.rowElement.css(' font-weight', 'bold');
+
+            }
 
         },
 
@@ -697,20 +968,20 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
 
         { dataField: 'FormNo', caption: 'FormNo', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 180 },
         { dataField: 'DeadLine', caption: 'DeadLine', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
-{
-    dataField: 'Priority', caption: 'Priority', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150,
-    cellTemplate: function (container, options) {
-        var priority = options.data.Priority;
-        var priorityText = (priority === 0) ? 'Critical' : priority;
-        var priorityText = (priority === 1) ? 'Major' : priority;
-        var priorityText = (priority === 2) ? 'Minor' : priority;
+        {
+            dataField: 'Priority', caption: 'Priority', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150,
+            cellTemplate: function (container, options) {
+                var priority = options.data.Priority;
+                var priorityText = (priority === 0) ? 'Critical' : priority;
+                var priorityText = (priority === 1) ? 'Major' : priority;
+                var priorityText = (priority === 2) ? 'Minor' : priority;
 
-        $("<div>")
-            .html(priorityText)
-            .appendTo(container);
-    },
-},
-		{ dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120 },
+                $("<div>")
+                    .html(priorityText)
+                    .appendTo(container);
+            },
+        },
+        { dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120 },
         { dataField: 'Route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         { dataField: 'Register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         { dataField: 'Flight Date', caption: 'FlightDate', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
@@ -768,7 +1039,7 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-       height: $(window).height() - 155,
+        height: $(window).height() - 155,
 
         columns: $scope.dg_determined_columns,
         onContentReady: function (e) {
@@ -780,15 +1051,15 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
         onRowClick: function (e) {
 
 
-              var data = {
+            var data = {
                 Id: e.data.Id,
-                  Type: $scope.selected_type,
+                Type: $scope.selected_type,
                 EmployeeId: $rootScope.employeeId,
                 isNotDetermined: true,
                 ProducerId: e.data.EmployeeId,
-				   FlightId: e.data.FlightId,
-                  Priority: e.data.Priority,
-                  Entity: e.data
+                FlightId: e.data.FlightId,
+                Priority: e.data.Priority,
+                Entity: e.data
             };
 
             if (e.data.Status == 1)
@@ -800,44 +1071,144 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
             switch ($scope.selected_type) {
                 case '0':
                     $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
                     //$rootScope.$broadcast('InitQACabin', data);
                     break;
                 case '1':
                     $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
                     //$rootScope.$broadcast('InitQAGround', data);
                     break;
                 case '2':
                     $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
                     //$rootScope.$broadcast('InitVHR', data);
                     break;
                 case '3':
                     $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
                     //$rootScope.$broadcast('InitQAMaintenance', data);
                     break;
                 case '4':
                     $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
                     //$rootScope.$broadcast('InitQACatering', data);
                     break;
                 case '5':
                     $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
                     //$rootScope.$broadcast('InitQASecurity', data);
                     break;
                 case '6':
                     $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
                     //$rootScope.$broadcast('InitQADispatch', data);
                     break;
-					  case '7':
+                case '7':
                     $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
                     //$rootScope.$broadcast('InitQADispatch', data);
                     break;
-					 case '8':
+                case '8':
                     $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
                     //$rootScope.$broadcast('InitQADispatch', data);
                     break;
-					 case '9':
-     $rootScope.$broadcast('InitOperationPopup', data);
-     //$rootScope.$broadcast('InitQADispatch', data);
-     break;
+                case '9':
+                    $rootScope.$broadcast('InitOperationPopup', data);
+                    $rootScope.dg_new_ds = Enumerable.From($rootScope.dg_new_ds)
+                        .Select(item => {
+                            if (item.Id == e.data.Id) {
+                                item.isVisited = true;
+                            }
+                            return item;
+                        })
+                        .ToArray();
+                    if ($scope.dg_new_instance)
+                        $scope.dg_new_instance.refresh();
+                    //$rootScope.$broadcast('InitQADispatch', data);
+                    break;
 
             }
 
@@ -863,11 +1234,15 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
 
             }
 
-			 if (e.rowType == 'data' && e.data && e.data.DeadLine != null) {
-     e.rowElement.css('background', '#ffcc99');
+            if (e.rowType == 'data' && e.data && e.data.DeadLine != null) {
+                e.rowElement.css('background', '#ffcc99');
 
- }
+            }
 
+            if (e.rowType == 'data' && e.data && e.data.isVisited == true) {
+                e.rowElement.css(' font-weight', 'bold');
+
+            }
         },
 
         bindingOptions: {
@@ -904,11 +1279,11 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
 
     //////////////////////////////////
 
-   
+
     $scope.get_title = function () {
         switch ($scope.selected_type) {
             case 0:
-               return 'Cabin Safety Reports';
+                return 'Cabin Safety Reports';
                 break;
             case 1:
                 return 'Ground Incident/Accident/Damage Report';
@@ -948,45 +1323,45 @@ app.controller('qaReportStatus', ['$http', '$scope', '$location', '$routeParams'
         authService.redirectToLogin();
     }
     else {
-		 //$rootScope.Title = $routeParams.title.replaceAll('_','/');
-		//2024-01-17
-		//console.log('type',$scope.entity.type);
-	    //console.log('Route Params',$routeParams.type);
-		//switch($routeParams.type){
-		//	case '0':
-		//		$rootScope.page_title = '> ' + 'Cabin Safety Reports';
-		//		break;
-		//		case '1':
-		//		$rootScope.page_title = '> ' + 'Ground Incident/Accident/Damage Report';
-		//		break;
-		//		case '2':
-		//		$rootScope.page_title = '> ' + 'Voluntary Hazard Reporting';
-		//		break;
-		//		case '3':
-		//		$rootScope.page_title = '> ' + 'Maintenance Occurence Repor';
-		//		break;
-		//		case '4':
-		//		$rootScope.page_title = '> ' + 'Catering Hazard Report';
-		//		break;
-		//		case '5':
-		//		$rootScope.page_title = '> ' + 'Security Hazard Report';
-		//		break;
-		//		case '6':
-		//		$rootScope.page_title = '> ' + 'Dispatch Hazard Report';
-		//		break;
-		//		case '7':
-		//		$rootScope.page_title = '> ' + 'Cyber Security Report';
-		//		break;
-		//		case '8':
-		//		$rootScope.page_title = '> ' + 'Air Safety Report';
-		//		break;
-		//		case '9':
-		//		$rootScope.page_title = '> ' + 'Voyage Report';
-		//		break;
-		//	default:
-		//		$rootScope.page_title = '> ' + 'Others';
-		//		break;
-		//}
+        //$rootScope.Title = $routeParams.title.replaceAll('_','/');
+        //2024-01-17
+        //console.log('type',$scope.entity.type);
+        //console.log('Route Params',$routeParams.type);
+        //switch($routeParams.type){
+        //	case '0':
+        //		$rootScope.page_title = '> ' + 'Cabin Safety Reports';
+        //		break;
+        //		case '1':
+        //		$rootScope.page_title = '> ' + 'Ground Incident/Accident/Damage Report';
+        //		break;
+        //		case '2':
+        //		$rootScope.page_title = '> ' + 'Voluntary Hazard Reporting';
+        //		break;
+        //		case '3':
+        //		$rootScope.page_title = '> ' + 'Maintenance Occurence Repor';
+        //		break;
+        //		case '4':
+        //		$rootScope.page_title = '> ' + 'Catering Hazard Report';
+        //		break;
+        //		case '5':
+        //		$rootScope.page_title = '> ' + 'Security Hazard Report';
+        //		break;
+        //		case '6':
+        //		$rootScope.page_title = '> ' + 'Dispatch Hazard Report';
+        //		break;
+        //		case '7':
+        //		$rootScope.page_title = '> ' + 'Cyber Security Report';
+        //		break;
+        //		case '8':
+        //		$rootScope.page_title = '> ' + 'Air Safety Report';
+        //		break;
+        //		case '9':
+        //		$rootScope.page_title = '> ' + 'Voyage Report';
+        //		break;
+        //	default:
+        //		$rootScope.page_title = '> ' + 'Others';
+        //		break;
+        //}
         $rootScope.page_title = '> ' + 'Safety Forms';
 
 

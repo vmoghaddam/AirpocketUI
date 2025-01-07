@@ -246,18 +246,31 @@ function ($scope, $location, $routeParams, $rootScope, flightService, weatherSer
             caption: 'Fuel',
             fixed: false, fixedPosition: 'right',
             columns: [
-                //{ dataField: 'FuelUnit', caption: '', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 40, fixed: false, fixedPosition: 'left' },
-				 { dataField: 'UpLift', caption: 'UpLift', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, },
+				{caption:'Estimated',columns:[
+				  { dataField: 'FPTripFuel', caption: 'OFP Trip', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, },
+                { dataField: 'FPFuel', caption: 'OFP Total', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, },
+				]},
+				{caption:'Actual',columns:[
+				    { dataField: 'UpLift', caption: 'UpLift', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, },
+			
 				 { dataField: 'FuelTotal', caption: 'Total', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, },
                
                
-				
-               // { dataField: 'Taxi', caption: 'Taxi', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, },
+
 				  { dataField: 'UsedFuel', caption: 'Trip', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, },
 				 { dataField: 'Remaining', caption: 'Rem.', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, },
+				 { dataField: 'FuelUsedEng1', caption: 'Eng1', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, },
+				 { dataField: 'FuelUsedEng2', caption: 'Eng2', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, },
+				]},
+				{caption:'Extra Fuel',columns:[
+							  { dataField: 'ExtraFuel', caption: 'Extra', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, },
+				  					 { dataField: 'ALT3', caption: 'Due', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200, },
+				]},
+   
+				
+
                
-                { dataField: 'FPTripFuel', caption: 'OFP Trip', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, },
-                { dataField: 'FPFuel', caption: 'OFP Total', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, },
+              
 
                 { dataField: 'DifTripFuel', caption: 'Diff OFP Trip', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120,},
 				  { dataField: 'DifTripFuelPercent', caption: '%', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 70,},

@@ -66,7 +66,7 @@ app.factory('notificationService', ['$http', '$q', 'ngAuthSettings', '$rootScope
         entity.SenderId = $rootScope.userId;
 
         var deferred = $q.defer();
-        $http.post($rootScope.serviceUrl + 'odata/notifications/flight/save', entity).then(function (response) {
+        $http.post(/*$rootScope.serviceUrl*/msgUrl + 'odata/notifications/flight/save', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -93,7 +93,7 @@ app.factory('notificationService', ['$http', '$q', 'ngAuthSettings', '$rootScope
     var _getSMSHistory = function (fid) {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/notifications/sms/' + fid+'/'+  $rootScope.userName.replace(".", "")  ).then(function (response) {
+        $http.get(/*serviceBase*/msgUrl + 'odata/notifications/sms/' + fid+'/'+  $rootScope.userName.replace(".", "")  ).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 

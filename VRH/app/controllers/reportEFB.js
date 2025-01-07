@@ -621,6 +621,7 @@ $scope.jlObj = null;
 				 var sob = 0;
         var sobValue = null;
         var sobprops = ['prop_pax_adult', 'prop_pax_child', 'prop_pax_infant', crewAId, crewBId, crewCId];
+          $scope.OFP=$scope.entity;
 
 
 				  $.each( $scope.OFP.props, function (_i, _d) {

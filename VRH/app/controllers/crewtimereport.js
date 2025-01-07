@@ -1,6 +1,8 @@
 ﻿'use strict';
 app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route','$window', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route,$window) {
     $scope.prms = $routeParams.prms;
+	 $scope.IsCockpit = $rootScope.userName.toLowerCase() == 'ops.abdi' || $rootScope.userName.toLowerCase() == 'ops.darabian'
+		 || $rootScope.userName.toLowerCase() == 'ops.jamali' ? false : true;
 	$scope.search=function(){
 	 $scope.dg_flight_total_ds = null;
             $scope.dg_flight_ds = null;
@@ -33,8 +35,12 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
         
         width: 120,
         
-        bindingOptions: {},
+        bindingOptions: {
+		  visible:'IsCockpit'
+		},
         onClick: function (e) {
+			if (!$scope.IsCockpit)
+				return;
            $window.open(apixls +'api/xls/crew/flights/-1?df='+moment(new Date($scope.dt_from)).format('YYYY-MM-DD')+'&dt='
 						+moment(new Date($scope.dt_to)).format('YYYY-MM-DD'), '_blank');
         }
@@ -70,11 +76,18 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
     $scope.formatMinutes = function (mm) {
         return pad(Math.floor(mm / 60)).toString() + ':' + pad(mm % 60).toString();
     };
+	
     $scope.getCrewFlightsTotal = function (df, dt) {
 
         $scope.loadingVisible = true;
         flightService.getCrewFlightsTotal(df, dt).then(function (response) {
             $scope.loadingVisible = false;
+			if (!$scope.IsCockpit){
+			   response=Enumerable.From(response).Where(function(x){ return x.JobGroup=='ISCCM' 
+																	|| x.JobGroup=='SCCM'
+																	|| x.JobGroup=='CCM'
+																   }).ToArray();
+			}
             $.each(response, function (_i, _d) {
 
                 // _d.DurationH = Math.floor(_d.FlightTime / 60);

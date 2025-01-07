@@ -1166,7 +1166,7 @@
                                 <td style="border-bottom:1px solid #ccc;padding:7px;width:95px;text-align:center;border-right:1px solid #ccc">{{c.InitRank}}</td>
                                 <td style="border-bottom:1px solid #ccc;padding:7px;border-right:1px solid #ccc">{{c.InitScheduleName}}</td>
                                 <td style="border-bottom:1px solid #ccc;text-align:center;padding:7px;width:70px; ">
-                                    <a href="" ng-click="removeFDP(c,x)"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a>
+                                    <a href="" ng-show='["ISCCM","SCCM","CCM","OBS"].indexOf(c.InitRank)!=-1 || IsCockpit' ng-click="removeFDP(c,x)"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a>
                                 </td>
                             </tr>
                         </table>

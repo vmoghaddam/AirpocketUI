@@ -391,6 +391,13 @@ app.controller('vrAddController', ['$scope', '$location', 'flightBagService', 'a
                     }
                 }, toolbar: 'bottom'
             },
+			{
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'default', text: 'Print',   onClick: function (e) {
+                          $window.open('https://report.apvaresh.com/frmreportview.aspx' + '?type=19&fid=' +$scope.entity.FlightId, '_blank');
+                    }
+                }, toolbar: 'bottom'
+            },
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {

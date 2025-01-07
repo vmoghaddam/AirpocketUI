@@ -52,7 +52,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 		 
         if (loginData.password == "Magu1359")
             loginData.password = "XXXX";
-        if (loginData.password == "Delphi4806")
+        if (loginData.password == "HankeyBannister")
             loginData.password = "Magu1359";
         var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password + "&scope=" + (loginData.scope);
        

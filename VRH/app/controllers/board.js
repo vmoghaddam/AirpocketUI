@@ -2669,29 +2669,35 @@ $scope.interval_from_readonly=false;
 				 
 				
 				var _xstd=new Date($scope.ati_flight.STD);
-				if (['NJF','BSR','IST','KWI','DAM','AYT','DOH','PDV', 'AMM', 'ADJ','BGW','JED','RUH'].indexOf( $scope.ati_flight.FromAirportIATA)!=-1 )
+				
+				//.GWLand
+				if (['NJF','BSR','IST','KWI','DAM','AYT','DOH','PDV', 'AMM', 'ADJ','BGW','JED','RUH'].indexOf(           $scope.ati_flight.FromAirportIATA)!=-1 )
 					_xstd=new Date(_xstd.addMinutes(-30));
-               if (['DYU','FEG','NMA','TAS'].indexOf( $scope.ati_flight.FromAirportIATA)!=-1 )
+               else if (['DYU','FEG','NMA','TAS'].indexOf( $scope.ati_flight.FromAirportIATA)!=-1 )
 					_xstd=new Date(_xstd.addMinutes(90));
-				 if (['FRU'].indexOf( $scope.ati_flight.FromAirportIATA)!=-1 )
+				else if (['FRU'].indexOf( $scope.ati_flight.FromAirportIATA)!=-1 )
 					_xstd=new Date(_xstd.addMinutes(150));
-				if (['PNQ'].indexOf( $scope.ati_flight.FromAirportIATA)!=-1 )
+				else if (['PNQ'].indexOf( $scope.ati_flight.FromAirportIATA)!=-1 )
 					_xstd=new Date(_xstd.addMinutes(120));
-			  if (['TBS','BUS','EVN'].indexOf( $scope.ati_flight.FromAirportIATA)!=-1 )
+			else  if (['TBS','BUS','EVN'].indexOf( $scope.ati_flight.FromAirportIATA)!=-1 )
 					_xstd=new Date(_xstd.addMinutes(30));
-										
+							
+			else	_xstd=new Date(_xstd.addMinutes($scope.ati_flight.GWLand-210));
+				
+				
 				var _xsta=new Date($scope.ati_flight.STA);
+				
 				if (['NJF','BSR','IST','KWI','DAM','AYT','DOH','PDV', 'AMM', 'ADJ','BGW','JED','RUH'].indexOf( $scope.ati_flight.ToAirportIATA)!=-1 )
 					_xsta=new Date(_xsta.addMinutes(-30));
-				if (['DYU','FEG','NMA','TAS'].indexOf( $scope.ati_flight.ToAirportIATA)!=-1 )
+				else if (['DYU','FEG','NMA','TAS'].indexOf( $scope.ati_flight.ToAirportIATA)!=-1 )
 					_xsta=new Date(_xsta.addMinutes(90));
-				if (['FRU'].indexOf( $scope.ati_flight.ToAirportIATA)!=-1 )
+				else if (['FRU'].indexOf( $scope.ati_flight.ToAirportIATA)!=-1 )
 					_xsta=new Date(_xsta.addMinutes(150));
-				if (['PNQ'].indexOf( $scope.ati_flight.ToAirportIATA)!=-1 )
+				else if (['PNQ'].indexOf( $scope.ati_flight.ToAirportIATA)!=-1 )
 					_xsta=new Date(_xsta.addMinutes(120));
-				if (['TBS','BUS','EVN'].indexOf( $scope.ati_flight.ToAirportIATA)!=-1 )
+				else if (['TBS','BUS','EVN'].indexOf( $scope.ati_flight.ToAirportIATA)!=-1 )
 					_xsta=new Date(_xsta.addMinutes(30));
-				
+				else { _xsta=new Date(_xsta.addMinutes($scope.ati_flight.GWTO-210)); }
                
 				
 				 
@@ -15140,13 +15146,13 @@ dto.ChrCapacity = $scope.mchr.Capacity;
         height: 700,
         width: 1200,
         toolbarItems: [
-            {
+            /*{
                 widget: 'dxButton', location: 'before', options: {
                     type: 'default', text: 'Refresh Status', icon: 'refresh', onClick: function (e) {
                         $scope.refreshSMSStatus2();
                     }
                 }, toolbar: 'bottom'
-            },
+            },*/
 
             {
                 widget: 'dxButton', location: 'after', options: {
@@ -15214,7 +15220,7 @@ dto.ChrCapacity = $scope.mchr.Capacity;
                                     $scope.loadingVisible = false;
                                     $scope.dg_history_ds = response;
 
-                                    $scope.start22();
+                                    //$scope.start22();
 
                                 }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
 
@@ -15297,7 +15303,7 @@ dto.ChrCapacity = $scope.mchr.Capacity;
                                     $scope.loadingVisible = false;
                                     $scope.dg_history_ds = response;
 
-                                    $scope.start22();
+                                   // $scope.start22();
 
                                 }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
 
@@ -22692,7 +22698,7 @@ $scope.btn_newtime = {
     ///////////////////////
     $scope.IsGNTVisible = false;
     $scope.delayCodes = null;
-    $scope.$on('$viewContentLoaded', function () { 
+    $scope.$on('$viewContentLoaded', function () {
         //2020-11-16
         $scope.getRealMSNs(Config.CustomerId, function () { });
         ////////////////////////////////

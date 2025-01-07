@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('homeController', ['$scope', '$routeParams', 'authService', 'activityService', 'libraryService', 'flightService', '$rootScope','mapService'
 ,'$sce','qaService','$location', '$window',
 function ($scope, $routeParams, authService, activityService, libraryService,flightService, $rootScope,mapService,$sce,qaService,$location,$window) {
@@ -1955,7 +1955,7 @@ function ($scope, $routeParams, authService, activityService, libraryService,fli
 					   
   //});
 
-			  }, 30*1000);
+			  }, 60*1000);
 			//////////
 			
 			
@@ -2128,6 +2128,7 @@ function ($scope, $routeParams, authService, activityService, libraryService,fli
     //           });
 
 
+            
 
 
            
@@ -2257,7 +2258,7 @@ function ($scope, $routeParams, authService, activityService, libraryService,fli
 					   
   //});
 
-			  }, 30*1000);
+			  }, 60*1000);
 			
 			  ////////////////////////////
 		}
@@ -2271,155 +2272,153 @@ function ($scope, $routeParams, authService, activityService, libraryService,fli
     position: 'top right',
      
 };
-*/
+*/	 
+     
+
+            //2024-03-26 ////////////////
+
+            $scope.ShowForm = function (e) {
+                var data = {
+                    Id: e.data.EntityId,
+                    Type: e.data.Type,
+                    EmployeeId: $rootScope.employeeId,
+                    isNotDetermined: true,
+                    Category: 'open',
+                    ProducerId: e.data.EmployeeId,
+                    FlightId: e.data.FlightId,
+                    Priority: e.data.FlightId,
+                    Entity: e.data
+                };
+                console.log('show_form',data);
+                //if (e.data.Status == 1)
+                //    data.isNotLocked = false;
+                //else
+                //    data.isNotLocked = true;
+
+				 qaService.setReceiverLog(e.data.Id).then(function (res) {
+     console.log(res);
+ });
+                $rootScope.$broadcast('InitOperationPopup', data);
+                
+            }
+
+
+            $scope.SafetyForm = function (e) {
+                $location.path("/qa/status/" + e.data.Type + "/SafetyForms");
+            }
+
+
+
+
+            $scope.dg_qa_notif_columns = [
+
+                {
+                    dataField: "Id",
+                    caption: '',
+                    width: 140,
+                    allowFiltering: false,
+                    allowSorting: false,
+                    cellTemplate: 'ShowFormTemplate',
+                    name: 'Show',
+                    fixed: true,
+                    fixedPosition: 'right',
+                },
+
+               {
+                    dataField: "Id",
+                    caption: '',
+                    width: 140,
+                    allowFiltering: false,
+                    allowSorting: false,
+                    cellTemplate: 'SafetyFormTemplate',
+                    name: 'Safety Forms',
+                    fixed: true,
+                    fixedPosition: 'right',
+                },
+                { dataField: 'DateStatus', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
+
+                { dataField: 'TypeTitle', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false},
+                { dataField: 'ReferrerName', caption: 'Referrer/Reporter', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 230 },
+               // { dataField: 'ReviewResultTitle', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+                { dataField: 'DeadLine', caption: 'DeadLine', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
+                { dataField: 'Priority', caption: 'Priority', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
+
+
+
+
+            ];
+            $scope.dg_qa_notif_selected = null;
+            $scope.dg_qa_notif_instance = null;
+            $rootScope.dg_qa_notif_ds = null;
+            $scope.dg_qa_notif = {
+
+                
+
+                wordWrapEnabled: true,
+                rowAlternationEnabled: false,
+                headerFilter: {
+                    visible: false
+                },
+                filterRow: {
+                    visible: false,
+                    showOperationChooser: true,
+                },
+                showRowLines: true,
+                showColumnLines: true,
+                sorting: { mode: 'none' },
+
+                noDataText: '',
+
+                allowColumnReordering: true,
+                allowColumnResizing: true,
+                scrolling: { mode: 'infinite' },
+                paging: { pageSize: 100 },
+                showBorders: true,
+                selection: { mode: 'single' },
+
+                columnAutoWidth: false,
+                height: 300,
+                width: '100%',
+
+                columns: $scope.dg_qa_notif_columns,
+                onContentReady: function (e) {
+                   
+
+                },
+
+                //onRowClick: function (e) {
+
+                  
+                //},
+
+                onRowPrepared: function (e) {
+                
+                },
+
+                onSelectionChanged: function (e) {
+                    var data = e.selectedRowsData[0];
+
+
+                    if (!data) {
+                        $scope.dg_qa_notif_selected = null;
+                    }
+                    else
+                        $scope.dg_qa_notif_selected = data;
+
+
+                },
+
+                bindingOptions: {
+                    dataSource: 'dg_qa_notif_ds'
+                },
+                columnChooser: {
+                    enabled: false
+                },
+
+            };
 
 
 
     //////////////////////////////////
-
-
-
-    //2024-03-26 ////////////////
-
-    $scope.ShowForm = function (e) {
-        var data = {
-            Id: e.data.EntityId,
-            Type: e.data.Type,
-            EmployeeId: $rootScope.employeeId,
-            isNotDetermined: true,
-            Category: 'open',
-            ProducerId: e.data.EmployeeId,
-            FlightId: e.data.FlightId,
-            Priority: e.data.FlightId,
-            Entity: e.data
-        };
-        console.log('show_form', data);
-        //if (e.data.Status == 1)
-        //    data.isNotLocked = false;
-        //else
-        //    data.isNotLocked = true;
-        qaService.setReceiverLog(e.data.Id).then(function (res) {
-            console.log(res);
-        });
-        $rootScope.$broadcast('InitOperationPopup', data);
-
-    }
-
-
-    $scope.SafetyForm = function (e) {
-        $location.path("/qa/status/" + e.data.Type + "/SafetyForms");
-    }
-
-
-
-
-    $scope.dg_qa_notif_columns = [
-
-        {
-            dataField: "Id",
-            caption: '',
-            width: 140,
-            allowFiltering: false,
-            allowSorting: false,
-            cellTemplate: 'ShowFormTemplate',
-            name: 'Show',
-            fixed: true,
-            fixedPosition: 'right',
-        },
-
-        {
-            dataField: "Id",
-            caption: '',
-            width: 140,
-            allowFiltering: false,
-            allowSorting: false,
-            cellTemplate: 'SafetyFormTemplate',
-            name: 'Safety Forms',
-            fixed: true,
-            fixedPosition: 'right',
-        },
-        { dataField: 'DateStatus', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
-        { dataField: 'TypeTitle', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false },
-        { dataField: 'Category', caption: 'Category', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 80 },
-        { dataField: 'Name', caption: 'Referrer/Reporter', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 230 },
-        // { dataField: 'ReviewResultTitle', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'DeadLine', caption: 'DeadLine', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
-        { dataField: 'Priority', caption: 'Priority', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
-
-
-
-
-    ];
-    $scope.dg_qa_notif_selected = null;
-    $scope.dg_qa_notif_instance = null;
-    $rootScope.dg_qa_notif_ds = null;
-    $scope.dg_qa_notif = {
-
-
-
-        wordWrapEnabled: true,
-        rowAlternationEnabled: false,
-        headerFilter: {
-            visible: false
-        },
-        filterRow: {
-            visible: false,
-            showOperationChooser: true,
-        },
-        showRowLines: true,
-        showColumnLines: true,
-        sorting: { mode: 'none' },
-
-        noDataText: '',
-
-        allowColumnReordering: true,
-        allowColumnResizing: true,
-        scrolling: { mode: 'infinite' },
-        paging: { pageSize: 100 },
-        showBorders: true,
-        selection: { mode: 'single' },
-
-        columnAutoWidth: false,
-        height: 300,
-        width: '100%',
-
-        columns: $scope.dg_qa_notif_columns,
-        onContentReady: function (e) {
-
-
-        },
-
-        //onRowClick: function (e) {
-
-
-        //},
-
-        onRowPrepared: function (e) {
-
-        },
-
-        onSelectionChanged: function (e) {
-            var data = e.selectedRowsData[0];
-
-
-            if (!data) {
-                $scope.dg_qa_notif_selected = null;
-            }
-            else
-                $scope.dg_qa_notif_selected = data;
-
-
-        },
-
-        bindingOptions: {
-            dataSource: 'dg_qa_notif_ds'
-        },
-        columnChooser: {
-            enabled: false
-        },
-
-    };
-
-
 
 }]);

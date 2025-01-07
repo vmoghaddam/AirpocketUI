@@ -267,8 +267,10 @@ app.controller('reportFDRController', ['$scope', '$location', '$routeParams', '$
        
        {
            caption: 'Aircraft', columns: [
-                 { dataField: 'AircraftType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, sortIndex: 1, sortOrder: 'asc' },
-        { dataField: 'Register', caption: 'Reg', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, sortIndex: 2, sortOrder: 'asc' },
+                 { dataField: 'AircraftType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, sortIndex: 1, sortOrder: 'asc' },
+        { dataField: 'Register', caption: 'Reg', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110, sortIndex: 2, sortOrder: 'asc' },
+			   	{ dataField: 'FPTripFuel', caption: 'FDM', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 120 },
+                { dataField: 'FPFuel', caption: 'EGPWS', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 120 },
            ]
        },
       {
@@ -319,10 +321,9 @@ app.controller('reportFDRController', ['$scope', '$location', '$routeParams', '$
                 { dataField: 'FuelRemaining', caption: 'Remainig', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
                 { dataField: 'FuelUplift', caption: 'Uplift', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
                 { dataField: 'FuelUsed', caption: 'Used', allowResizing: true, alignment: 'center', dataType: 'numer', allowEditing: false, width: 100 },
-				  { dataField: 'FPTripFuel', caption: 'OFP(Trip)', allowResizing: true, alignment: 'center', dataType: 'numer', allowEditing: false, width: 120 },
+				  
                 { dataField: 'FuelTotal', caption: 'Total', allowResizing: true, alignment: 'center', dataType: 'numer', allowEditing: false, width: 100 },
-				
-                { dataField: 'FPFuel', caption: 'OFP(Total)', allowResizing: true, alignment: 'center', dataType: 'numer', allowEditing: false, width: 130 },
+			
                // { dataField: 'FuelUnit', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
                 
             ]

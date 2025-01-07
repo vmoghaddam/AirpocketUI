@@ -518,7 +518,7 @@ app.controller('drAddController', ['$scope', '$location', 'flightBagService', 'a
 
     $scope.txt_PIFCPTRemark = {
         text: '',
-		readOnly: true,
+		//readOnly: true,
         bindingOptions: {
             value: 'entity.PIFCPTRemark',
         }
@@ -603,6 +603,29 @@ app.controller('drAddController', ['$scope', '$location', 'flightBagService', 'a
         }
     };
     ////////////////////////
+		$scope.save=function(prm,callback){
+		$scope.entity.User = $rootScope.userTitle;
+
+                        $scope.loadingVisible = true;
+                        flightBagService.saveDR($scope.entity).then(function (response2) {
+                            $scope.loadingVisible = false;
+                            if (response2.IsSuccess) {
+                               
+                                console.log('DR', response2.Data);
+                                if (prm==0)
+								{
+									 General.ShowNotify(Config.Text_SavedOk, 'success');
+									$scope.popup_add_visible = false;
+							
+							    }
+							    else callback();
+                            }
+
+
+                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+		
+	};
+	
     $scope.popup_add_visible = false;
     $scope.popup_height = $(window).height()-100;
     $scope.popup_width = 800;
@@ -627,7 +650,11 @@ app.controller('drAddController', ['$scope', '$location', 'flightBagService', 'a
                        // else {
                        //     General.ShowNotify("You are OFFLINE.Please check your internet connection", 'error');
                        // }
+							
+						//$scope.popup_dr_sign_visible=true;
+						$scope.save(1,function(){
 							$scope.popup_dr_sign_visible=true;
+						});
 
                     }
                 }, toolbar: 'bottom'
@@ -636,19 +663,7 @@ app.controller('drAddController', ['$scope', '$location', 'flightBagService', 'a
                 widget: 'dxButton', location: 'after', options: {
                     type: 'default', text: 'Save', icon: 'check', validationGroup: 'dradd', onClick: function (e) {
 
-                        $scope.entity.User = $rootScope.userTitle;
-
-                        $scope.loadingVisible = true;
-                        flightBagService.saveDR($scope.entity).then(function (response2) {
-                            $scope.loadingVisible = false;
-                            if (response2.IsSuccess) {
-                                General.ShowNotify(Config.Text_SavedOk, 'success');
-                                console.log('DR', response2.Data);
-                                $scope.popup_add_visible = false;
-                            }
-
-
-                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                         $scope.save(0);
 
 
 
