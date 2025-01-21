@@ -68,6 +68,31 @@
 
 
     }
+    if ($scope.type == 'trn-director-course') {
+        $('.footeritem').hide();
+        if ($scope.is_crew) {
+
+
+            $('.footertrnpanel').width('50%').show();
+            //$('.footertrnexam').width('20%').show();
+           // $('.footertrnattendance').width('33.3333%').show();
+            $('.footertrnsigncourse').width('33.3333%').show();
+
+            //$('.footertrsurvay').width('20%').show();
+            //$('.footertrnquestions').width('20%').show();
+
+        }
+        else {
+            $('.footertrnpanel').width('50%').show();
+            //$('.footertrnexam').width('20%').show();
+            $('.footertrnsigncourse').width('33.3333%').show();
+            //$('.footertrsurvay').width('20%').show();
+            //$('.footertrnquestions').width('20%').show();
+        }
+
+
+
+    }
 
     if ($scope.type == 'applibrary') {
         $('.footeritem').hide();

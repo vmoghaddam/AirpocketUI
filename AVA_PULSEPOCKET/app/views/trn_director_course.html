@@ -472,11 +472,11 @@
 
         <div class="rowx content" style="clear:both;background:#f0f3f5; ">
             <div class="info-container" style="overflow-y:auto">
-                <table class="tbl_course" style="background:white">
+                <table class="tbl_course" style="background:white" ng-click="click_subject(course)">
                     <tr>
                         <th class="table_head" colspan="4" style="background: #d9d9d9;text-align:center">
                             <div>{{course.Title}}</div>
-                            <div style="padding-top:3px;font-size:13px;font-weight:normal">({{course.CertificateType}})</div>
+                            <!-- <div style="padding-top:3px;font-size:13px;font-weight:normal">({{course.CertificateType}})</div>-->
 
                         </th>
                     </tr>
@@ -489,9 +489,9 @@
                         <td class="table_data" style="min-width:95px;">{{course.Status}}</td>
                     </tr>
                     <!--<tr>
-        <th class="table_head" colspan="2">Type of Class Holding</th>
-        <td class="table_data" colspan="2">{{course.HoldingType}}</td>
-    </tr>-->
+                        <th class="table_head" colspan="2">Type of Class Holding</th>
+                        <td class="table_data" colspan="2">{{course.HoldingType}}</td>
+                    </tr>-->
 
                     <tr>
                         <th class="table_head">Start</th>
@@ -515,7 +515,7 @@
 
                     </tr>
 
-                    <tr>
+                    <tr ng-show="followup.subjects.length==0">
                         <th class="table_head" colspan="1">Instructor(s)</th>
                         <td class="table_data" colspan="3">{{course.Instructor}}</td>
                     </tr>
@@ -523,7 +523,7 @@
                         <th class="table_head" colspan="1">Signed at</th>
                         <td class="table_data" colspan="3">  {{course.Date_Sign_Ins1 | date: 'yyyy-MM-dd HH:mm'}}</td>
                     </tr>
-                    <tr>
+                    <!--<tr>
                         <th class="table_head" colspan="4" style="background: #eee;text-align:left">
                             Sessions
 
@@ -539,20 +539,47 @@
                         <td class="table_data" style="text-align:center">{{session.DateStart | date: 'HH:mm'}}</td>
                         <td class="table_data" style="text-align:center">{{session.DateEnd | date: 'HH:mm'}}</td>
 
-                    </tr>
-                    <tr>
+                    </tr>-->
+                    <tr ng-show="followup.subjects.length==0">
                         <th class="table_head" colspan="4" style="background: #eee;text-align:left">
                             Participants
 
                         </th>
                     </tr>
-                    <tr ng-repeat="p in participants">
+                    <tr ng-show="followup.subjects.length==0" ng-repeat="p in participants">
                         <td class="table_data" colspan="3" style="font-size:12px;text-align:left">{{p.Name}}</td>
                         <td class="table_data" style="text-align:center">{{p.Presence}}%</td>
 
 
                     </tr>
 
+                </table>
+
+
+                <table class="tbl_course" style="background:white;margin-top:5px;" ng-show="followup.subjects.length>0">
+                    <tr>
+                        <th class="table_head" colspan="4" style="background: #d9d9d9;text-align:center">
+                            <div>Subjects</div>
+
+
+                        </th>
+                    </tr>
+                    <tr ng-repeat="sub in followup.people_grps" ng-click="click_subject(sub)"> 
+                        <th class="table_head" colspan="4" style="text-align:center;padding:0;">
+                            <div style="background: #eee;padding:5px;">{{sub.Title}}</div>
+                            <div style="background: #eee;padding:5px;font-weight:normal;padding-top:0;">{{sub.Instructor}}</div>
+                            <div ng-repeat="p in sub.people" style="border-bottom:1px dashed #ccc">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td style="text-align:left;padding:5px;">{{p.Name}}</td>
+                                        <td style="text-align:center;padding:5px;font-weight:normal">{{p.Presence}}%</td>
+                                    </tr>
+
+                                </table>
+                            </div>
+                           
+                        </th>
+                    </tr>
                 </table>
 
 
@@ -678,7 +705,7 @@
                                     <td>{{person.NID}}</td>
                                     <td>{{person.Name}}</td>
                                     <td>{{person.Departman}}</td>
-                                    <td><input readonly ng-model="person.press" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></td>
+                                    <td><input readonly ng-model="person.IsPresent" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></td>
                                     <td>{{person.remark}}</td>
                                 </tr>
                             </tbody>
@@ -689,7 +716,7 @@
                             <div class="attendance_trn_card" ng-repeat="person in session.people">
                                 <div class="trn_card-details" style="border-bottom: 1px solid lightgray;align-content:center">
                                     <div class="col-sm-9 col-xs-9" style="display:inline-block; text-align: left; font-size: 13px">{{person.Name}}</div>
-                                    <div class="col-sm-3 col-xs-3" style="display:inline-block; text-align: right"><input disabled ng-model="person.press" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></div>
+                                    <div class="col-sm-3 col-xs-3" style="display:inline-block; text-align: right"><input disabled ng-model="person.IsPresent" ng-true-value="1" ng-false-value="0" style="margin: 0px !important" type="checkbox"></div>
                                 </div>
                             </div>
                         </div>
@@ -1128,10 +1155,10 @@
         </div>
 
 
-        <div class="rowx footer app-footer" ng-include="'app/views/footer.html?v=2036'" ng-init="type = 'trn-instructor-course';" style="padding:0;flex:0 0 45px"></div>
+        <div class="rowx footer app-footer" ng-include="'app/views/footer.html?v=2036'" ng-init="type = 'trn-director-course';" style="padding:0;flex:0 0 45px"></div>
 
     </div>
-     
+
     <div dx-load-panel="loadPanel"></div>
 
 </div>

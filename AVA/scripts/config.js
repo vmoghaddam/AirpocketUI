@@ -70,17 +70,21 @@ Config.MenuItems = [
     //{ moduleId: 2, key: 'library_conference', title: 'Conferences', url: '/conference', icon: 'content/images/teamwork2.png' },
 
 
-     { moduleId: 1, key: 'profile_users', title: 'Users', url: '/users', icon: 'content/images/shield.png' },
-	   { moduleId: 1, key: 'profile_dashboard', title: 'Dashboard', url: '/trn/dashboard', icon: 'content/images/trndashboard.png' },
-	    { moduleId: 1, key: 'profile_schedules', title: 'Schedules', url: '/trn/schedule/coursetype', icon: 'content/images/trnschedules.png' },
+    //{ moduleId: 1, key: 'profile_users', title: 'Users', url: '/users', icon: 'content/images/shield.png' },
     { moduleId: 1, key: 'profile_person', title: 'Profiles', url: '/person', icon: 'content/images/group2.png' },
-	 { moduleId: 1, key: 'profile_course_type', title: 'Course Type', url: '/course/type', icon: 'content/images/types2.png' },
     { moduleId: 1, key: 'profile_course_person', title: 'Courses', url: '/course/person', icon: 'content/images/course2.png' },
-	{ moduleId: 1, key: 'profile_person_certificate', title: 'Training History', url: '/trn/stat', icon: 'content/images/trnstat.png' },
-    { moduleId: 1, key: 'profile_person_certificate', title: 'Training Profile', url: '/person/certificate', icon: 'content/images/trnprofile.png' },
-	 { moduleId: 1, key: 'profile_person_certificate', title: 'Training Profile (Groups)', url: '/groups/expiring', icon: 'content/images/trnprofile.png' },
-	{ moduleId: 1, key: 'profile_person_certificate', title: 'Certificates', url: '/expiring/coursetype', icon: 'content/images/certificates2.png' },
-	 { moduleId: 1, key: 'profile_course_person', title: 'Teachers', url: '/teachers', icon: 'content/images/teacher.png' },
+    { moduleId: 1, key: 'profile_schedules', title: 'Schedules', url: '/trn/schedule/coursetype', icon: 'content/images/trnschedules.png' },
+	   { moduleId: 1, key: 'profile_dashboard', title: 'Dashboard', url: '/trn/dashboard', icon: 'content/images/trndashboard.png' },
+    { moduleId: 1, key: 'profile_person_certificate', title: 'History', url: '/trn/stat', icon: 'content/images/trnstat.png' },
+   
+    { moduleId: 1, key: 'profile_course_type', title: 'Course Type', url: '/course/type', icon: 'content/images/types2.png' },
+    { moduleId: 1, key: 'profile_course_person', title: 'Instructors', url: '/teachers', icon: 'content/images/teacher.png' },
+   
+	
+   // { moduleId: 1, key: 'profile_person_certificate', title: 'Training Profile', url: '/person/certificate', icon: 'content/images/trnprofile.png' },
+	// { moduleId: 1, key: 'profile_person_certificate', title: 'Training Profile (Groups)', url: '/groups/expiring', icon: 'content/images/trnprofile.png' },
+	//{ moduleId: 1, key: 'profile_person_certificate', title: 'Certificates', url: '/expiring/coursetype', icon: 'content/images/certificates2.png' },
+	
 	
 	
     //{ moduleId: 1, key: 'profile_person_course', title: 'Employees Courses', url: '/person/course', icon: 'content/images/setting2.png' },
@@ -88,17 +92,17 @@ Config.MenuItems = [
    
      
    
-    { moduleId: 1, key: 'profile_location', title: 'Departments', url: '/location', icon: 'content/images/office2.png' },
+   // { moduleId: 1, key: 'profile_location', title: 'Departments', url: '/location', icon: 'content/images/office2.png' },
     
-    { moduleId: 1, key: 'profile_aircrafttype', title: 'Aircraft Types', url: '/aircrafttype', icon: 'content/images/actype2.png' },
+    //{ moduleId: 1, key: 'profile_aircrafttype', title: 'Aircraft Types', url: '/aircrafttype', icon: 'content/images/actype2.png' },
     
-    { moduleId: 1, key: 'profile_educationfield', title: 'Education Fields', url: '/option/59', icon: 'content/images/fields2.png' },
+   // { moduleId: 1, key: 'profile_educationfield', title: 'Education Fields', url: '/option/59', icon: 'content/images/fields2.png' },
     
-    { moduleId: 1, key: 'profile_post', title: 'Posts', url: '/option/36', icon: 'content/images/diagram2.png' },
+    //{ moduleId: 1, key: 'profile_post', title: 'Posts', url: '/option/36', icon: 'content/images/diagram2.png' },
   
-    { moduleId: 1, key: 'profile_group', title: 'Groups', url: '/jobgroup', icon: 'content/images/circle2.png' },
+   // { moduleId: 1, key: 'profile_group', title: 'Groups', url: '/jobgroup', icon: 'content/images/circle2.png' },
 
-    { moduleId: 1, key: 'profile_airports', title: 'Airports', url: '/airport', icon: 'content/images/airport.png' },
+   // { moduleId: 1, key: 'profile_airports', title: 'Airports', url: '/airport', icon: 'content/images/airport.png' },
 
 { moduleId: 3, key: 'profile_person', title: 'Employees', url: '/person', icon: 'content/images/group2.png' },
     { moduleId: 3, key: 'flight_planning', title: 'Planning', url: '/commercial/planning', icon: 'content/images/actype2.png' },

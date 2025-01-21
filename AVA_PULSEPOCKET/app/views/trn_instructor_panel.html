@@ -219,7 +219,7 @@
             <div id="director" style="display:none;height:100%" class="tabc">
                 <div id="scrlcurs" dx-scroll-view="scroll_course">
                     <div style="padding: 5px 7px 0 7px">
-                        <div ng-repeat="course in director_courses" class="card-container" style="margin-bottom:7px;" data-ng-click="navigate('/trn/director/course/' + course.CourseId,'trn-director-course',2)">
+                        <div ng-repeat="course in director_courses" class="card-container" style="margin-bottom:7px;" data-ng-click="navigate('/trn/director/course/' + course.Id,'trn-director-course',2)">
 
                             <div class="title" ng-style="get_course_title_style_director(course)">{{course.Title}} ({{course.CourseId}})</div>
 

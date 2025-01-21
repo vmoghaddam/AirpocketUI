@@ -12598,7 +12598,7 @@ namespace EPAGriffinAPI.DAL
             //var flights = await this.context.ViewLegTimes.Where(q => ids.Contains(q.ID)).OrderBy(q => q.STDDay).ThenBy(q => q.STD).ThenBy(q => q.Register).ToListAsync();
             var rep = 60;
             if (flights.First().ToAirportIATA == "NJF")
-                rep = 75;
+                rep = 90;
             MaxFDPStats stat = new MaxFDPStats();
             stat.ReportingTime = ((DateTime)flights.First().DepartureLocal).AddMinutes(-rep);
             stat.Sectors = ids.Count - (dh == null ? 0 : (int)dh);
@@ -13777,7 +13777,7 @@ namespace EPAGriffinAPI.DAL
 
 
                 if (dto.items.First().to == "NJF")
-                    rep_time = 75;
+                    rep_time = 90;
                 else
                     rep_time = 60;
 

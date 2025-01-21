@@ -1595,12 +1595,12 @@ $scope.entity.Person.TRG16ExpireDate= data.TRG16ExpireDate;
     ////////////////////////
     var tabs = [
         { text: "Main", id: 'main', visible_btn: false },
-        { text: "Education", id: 'education', visible_btn: false },
+        //{ text: "Education", id: 'education', visible_btn: false },
         //  { text: "حساب بانکی", id: 'account', visible_btn: false },
         //{ text: "Certificate", id: 'certificate', visible_btn: true },
-        { text: "Document", id: 'file', visible_btn: false, visible_btn2: true },
-        { text: "Experience", id: 'experience', visible_btn: false, visible: $scope.isView },
-        { text: "Rating", id: 'rating', visible_btn: false, visible: $scope.isView },
+       // { text: "Document", id: 'file', visible_btn: false, visible_btn2: true },
+       // { text: "Experience", id: 'experience', visible_btn: false, visible: $scope.isView },
+       // { text: "Rating", id: 'rating', visible_btn: false, visible: $scope.isView },
         { text: "Aircraft Type", id: 'aircrafttype', visible_btn: false, visible: $scope.isView },
        // { text: "Certificates", id: 'certificate', visible_btn: false, visible: $scope.isView },
        // { text: "Courses", id: 'course', visible_btn: false, visible: $scope.isView },
@@ -1655,15 +1655,15 @@ $scope.entity.Person.TRG16ExpireDate= data.TRG16ExpireDate;
 
            
             
-            $scope.btn_visible_education = newValue == 1;
+          //  $scope.btn_visible_education = newValue == 1;
             
            
-            $scope.btn_visible_file = newValue == 2;
-            $scope.btn_visible_experience = newValue == 3;
-            $scope.btn_visible_rating = newValue ==4;
-            $scope.btn_visible_aircrafttype = newValue == 5;
+           // $scope.btn_visible_file = newValue == 2;
+           // $scope.btn_visible_experience = newValue == 3;
+           // $scope.btn_visible_rating = newValue ==4;
+            $scope.btn_visible_aircrafttype = newValue == 1;
         
-            $scope.btn_visible_course = newValue == 7;
+          //  $scope.btn_visible_course = newValue == 7;
 
             
 
@@ -3968,7 +3968,7 @@ $scope.date_Type737IssueDate = {
                 }, toolbar: 'bottom'
             },
 
-
+            ///lllll
             {
                 widget: 'dxButton', location: 'before', options: {
                     type: 'default', text: 'Add', width: 120, icon: 'plus', validationGroup: 'aircraftadd', bindingOptions: { visible: 'btn_visible_aircrafttype', disabled: 'IsMainDisabled' }, onClick: function (e) {
