@@ -17,7 +17,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
     };
 	 $scope.sb_director = {
-        dataSource: ['SHAHRZAD AMINI', 'SAJAD HOSSEINI TALEGHANI'],
+        dataSource: ['SHAHRZAD AMINI', 'ROUHOLLAH HASHEMIAN'],
         showClearButton: true,
         searchEnabled: true,
 

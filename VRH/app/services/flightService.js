@@ -4059,6 +4059,31 @@ var _getFlightsWeekList = function () {
         return deferred.promise;
     };
     serviceFactory.getFlightsWeekList = _getFlightsWeekList;
+    var _get_fixtiem = function () {
+        var deferred = $q.defer();
+        $http.get('http://localhost:9076/' + 'api/get/fixtime').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_fixtiem = _get_fixtiem;
+	
+     var _save_fixtiem = function (entity) {
+        var deferred = $q.defer();
+         $http.post('http://localhost:9076/' + 'api/save/fixtime', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.save_fixtiem = _save_fixtiem;
 	
 
 

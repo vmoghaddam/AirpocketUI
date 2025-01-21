@@ -1053,13 +1053,13 @@ app.controller('citypairController', ['$scope', '$location', '$routeParams', '$r
             value: 'reg',
         }
     };
-    $scope.year = 2023;
+    $scope.year = 2024;
     $scope.month = null;
     $scope.sb_year = {
         placeholder: 'Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [2018, 2019, 2020, 2021,2022,2023],
+        dataSource: [2018, 2019, 2020, 2021,2022,2023,2024],
 
         onSelectionChanged: function (arg) {
 

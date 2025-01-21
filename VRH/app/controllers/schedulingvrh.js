@@ -3,14 +3,19 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
     //06-13
 	 
     $scope.IsCabin = true;
-    $scope.IsCockpit = $rootScope.userName.toLowerCase() == 'ops.abdi' ? false : true;
+    $scope.IsCockpit = $rootScope.userName.toLowerCase() == 'ops.abdi' || $rootScope.userName.toLowerCase() == 'ops.darabian' 
+		|| $rootScope.userName.toLowerCase() == 'ops.jamali' ? false : true;
+	$scope.IsConfirm=$rootScope.userName.toLowerCase() != 'ops.darabian' && $rootScope.userName.toLowerCase() != 'ops.jamali';
     $scope.getActionShow = function (grp, x) {
-        return true;
-        if (['TRE', 'TRI', 'LTC', 'IP', 'P1', 'P2', 'FO', 'CPT'].indexOf(grp) != -1) {
+		console.log(grp);
+		if (!grp)
+			return true;
+        //return true;
+        if (['TRE', 'TRI', 'LTC', 'IP', 'P1', 'P2', 'FO', 'CPT' ].indexOf(grp) != -1) {
             return $scope.IsCockpit;
         }
-        if (['ISCCM', 'SCCM', 'CCM'].indexOf(grp) != -1) {
-            return $scope.IsCabin;
+        if (['ISCCM', 'SCCM', 'CCM','OBS','CHECK'].indexOf(grp) != -1) {
+            return true;
         }
     }
 
@@ -30,8 +35,10 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
     $scope.Operator = $rootScope.CustomerName.toUpperCase();
     $scope.firstHour = new Date(General.getDayFirstHour(new Date()));
     $scope.editable = true;
-    $scope.isAdmin =
-        $route.current.isAdmin;
+    //$scope.isAdmin =
+    //    $route.current.isAdmin;
+
+    $scope.isAdmin = false;
 
     $scope.bottom = 385 + 50; $scope.prms = $routeParams.prms;
     $scope.footerfilter = true;
@@ -261,9 +268,10 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         width: 170,
         // bindingOptions: { disabled: 'btnGanttDisabled' },
         onClick: function (e) {
-
-
-            $window.open('https://apvaresh.ir/#!/scheduling/grid', '_blank');
+            //$window.open('https://apvaresh.ir/#!/duty/timeline', '_blank');
+            
+            //$window.open('https://apvaresh.ir/#!/duty/timeline/z', '_blank');
+			$window.open('https://apvaresh.ir/#!/scheduling/grid', '_blank');
         }
 
     };
@@ -589,6 +597,10 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             'toolbarItems[0].options.value': 'rptcd_dateFrom',
             'toolbarItems[1].options.value': 'rptcd_dateTo',
             'toolbarItems[2].options.value': 'rptcd_caco',
+			 'toolbarItems[4].visible': 'IsConfirm',
+			  'toolbarItems[5].visible': 'IsConfirm',
+			   'toolbarItems[6].visible': 'IsConfirm',
+			  'toolbarItems[7].visible': 'IsConfirm',
         }
     };
 
@@ -1063,6 +1075,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         width: 175,
 
         onClick: function (e) {
+			return;
             $scope.smsRecsKeys = [];
 
             if ($scope.ati_selectedFlights && $scope.ati_selectedFlights.length > 0) {
@@ -1397,6 +1410,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         width: 175,
 
         onClick: function (e) {
+			return;
             $scope.smsRecsKeys = [];
 
 
@@ -3677,7 +3691,8 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
              var values = matrix.match(/-?[\d\.]+/g);  
 			// alert(values[5] );
 			// alert(values[5] + 30);
-             var transformText = 'translateY(' + (Number(values[5])+ty) + 'px) translateX(' + values[4] + 'px)';  
+            // var transformText = 'translateY(' + (Number(values[5])+ty) + 'px) translateX(' + values[4] + 'px)';  
+			   var transformText = 'translateY(' + ((values && values[5]?Number(values[5]):0)+ty) + 'px) translateX(' + (values && values[4]?values[4]:0) + 'px)'; 
 			// console.log(transformText);
              parent.css({ transform: transformText }) ;
 			
@@ -4880,7 +4895,8 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
     $scope.ganttData = null;
 
     $scope.checkConflict = function (flights) {
-        var hasConflict = false;
+        return false;
+		var hasConflict = false;
         $.each(flights, function (_i, _d) {
             _d.Route = _d.FromAirportIATA + '-' + _d.ToAirportIATA;
             var f = Enumerable.From(flights).Where(function (x) {
@@ -5989,6 +6005,11 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
     //hoohoo
     //2020-11-22  
     $scope.notifyPos = function (id) {
+		if (!$scope.IsConfirm)
+		{
+			General.ShowNotify('access denied', 'error'); 
+			return;
+		}
 
         var fdp = Enumerable.From($scope.ati_fdps).Where('($.crewId==' + id + ' && $.key=="' + $scope.selectedFlightsKey.Id + '")').ToArray()[0];
 
@@ -6812,7 +6833,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
                         buttons: [{ text: "Ok", onClick: function () { } }]
                     });
                     _myDialog.show();
-                    //return;
+                    return;
                 }
 
 
@@ -6827,7 +6848,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
                             buttons: [{ text: "Ok", onClick: function () { } }]
                         });
                         _myDialog.show();
-                      //  return;
+                        return;
                     }
                 }
 
@@ -6860,7 +6881,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
 
                 // if (!crew.RemainCCRM || crew.RemainCCRM < 0)
                 //     expired.push('CCRM ' + (crew.CCRMExpired ? moment(crew.CCRMExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
-                if (crew.JobGroupCode.startsWith('00101'))
+               // if (crew.JobGroupCode.startsWith('00101'))
                     if (!crew.RemainCRM || crew.RemainCRM < 0)
                         expired.push('CRM ' + (crew.CRMExpired ? moment(crew.CRMExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
 
@@ -6893,8 +6914,8 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
                     //ColdWXExpired
                 }
                 else {
-                    if (!crew.RemainRecurrent || crew.RemainRecurrent < 0)
-                        expired.push('OPC ' + (crew.RecurrentExpired ? moment(crew.RecurrentExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+                  //  if (!crew.RemainRecurrent || crew.RemainRecurrent < 0)
+                  //      expired.push('OPC ' + (crew.RecurrentExpired ? moment(crew.RecurrentExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
                 }
 
                 if (crew.RemainFirstAid < 0)
@@ -6912,7 +6933,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
                     });
 					//2024-01-13
                     myDialog.show();
-                     //return;
+                     return;
                 }
 
 
@@ -7152,6 +7173,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
     /////////////////
     $scope.checkConflict2 = function (flights) {
         //2022-01-23
+		 return false;
         var hasConflict = false;
         $.each(flights, function (_i, _d) {
 
@@ -7187,6 +7209,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
     };
     $scope.checkContinuity2 = function (flights) {
         //2022-01-23
+		return false;
         var hasError = false;
         var ordered = Enumerable.From(flights).OrderBy(function (x) { return new Date(x.offblock); }).ToArray();
         $.each(ordered, function (_i, _d) {
@@ -7751,6 +7774,8 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             $('.crewpos').removeClass('selected');
             $elem.addClass('selected');
             $scope.selectedPos = { rank: rank, index: index };
+			console.log('selected pos',$scope.selectedPos);
+			
             $scope.fillFilteredCrew();
         }
         else {

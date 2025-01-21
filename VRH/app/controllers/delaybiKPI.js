@@ -3798,7 +3798,7 @@ app.controller('delaykpiController', ['$scope', '$location', '$routeParams', '$r
     $scope.salesPopupVisible = false;
     $scope.salesPopupTitle = "";
     $scope.drillDownDataGrid = {};
-    $scope.ds_yearstr = ['1398', '1399', '1400'];
+    $scope.ds_yearstr = ['1401','1402','1403'];
     $scope.dataGridOptions = {
 
         bindingOptions: {
@@ -6078,7 +6078,7 @@ app.controller('delaykpiController', ['$scope', '$location', '$routeParams', '$r
     //////////////////////////////////////////
     $scope.pdate = null;
     $scope.dobind = false;
-    $scope.ds_year = [1398, 1399, 1400];
+    $scope.ds_year = [1401,1402,1403];
     $scope.ds_month = [
         { title: 'فروردین', id: 1 },
         { title: 'اردیبهشت', id: 2 },
@@ -6110,6 +6110,7 @@ app.controller('delaykpiController', ['$scope', '$location', '$routeParams', '$r
                 $scope.ds_yearmonth = Enumerable.From($scope.ds_month).Where('$.id>=9').OrderBy('$.id').ToArray();
                 break;
             default:
+				  $scope.ds_yearmonth = Enumerable.From($scope.ds_month).OrderBy('$.id').ToArray();
                 break;
         }
 
@@ -6178,7 +6179,7 @@ app.controller('delaykpiController', ['$scope', '$location', '$routeParams', '$r
         $scope.nowYear = $scope.pdate.year();
         $scope.nowMonth = $scope.pdate.month();
 
-        $scope.year = 1400;// $scope.pdate.year();
+        $scope.year = 1403;// $scope.pdate.year();
         //$scope.month = 1;
         setTimeout(function () {
             $scope.dobind = true;

@@ -449,10 +449,10 @@ app.factory('qaService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functio
         return deferred.promise;
     }
 
-      var _getCabinEventReport = function (ymf, ymt) {
+    var _getCabinEventReport = function (ymf, ymt) {
 
         var deferred = $q.defer();
-          $http.get(apiQA + 'api/qa/csr/event/report/' + ymf + "/" + ymt).then(function (response) {
+        $http.get(apiQA + 'api/qa/csr/event/report/' + ymf + "/" + ymt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
             deferred.reject(Exceptions.getMessage(err));
@@ -804,10 +804,10 @@ app.factory('qaService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functio
         return deferred.promise;
     }
 
-	 var _saveFeedBack = function (entity) {
+    var _saveFeedBack = function (entity) {
         console.log(entity);
         var deferred = $q.defer();
-          $http.post(apiQA + 'api/qa/save/feedback', entity).then(function (response) {
+        $http.post(apiQA + 'api/qa/save/feedback', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
             deferred.reject(Exceptions.getMessage(err));
@@ -827,9 +827,9 @@ app.factory('qaService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functio
         return deferred.promise;
     }
 
-      var _dltFeedBack = function (id) {
+    var _dltFeedBack = function (id) {
         var deferred = $q.defer();
-          $http.get(apiQA + 'api/qa/delete/feedback' + '/' + id).then(function (response) {
+        $http.get(apiQA + 'api/qa/delete/feedback' + '/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
             deferred.reject(Exceptions.getMessage(err));
@@ -837,42 +837,42 @@ app.factory('qaService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functio
 
         return deferred.promise;
     }
-  
-var _getDateVisit = function (employeeId) {
 
-    var deferred = $q.defer();
-    $http.get(apiQA + 'api/get/datevisit/' + employeeId).then(function (response) {
-        deferred.resolve(response.data);
-    }, function (err, status) {
-        deferred.reject(Exceptions.getMessage(err));
-    })
+    var _getDateVisit = function (employeeId) {
 
-    return deferred.promise;
-}
+        var deferred = $q.defer();
+        $http.get(apiQA + 'api/get/datevisit/' + employeeId).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            deferred.reject(Exceptions.getMessage(err));
+        })
 
- var _setDateVisit = function (employeeId, type) {
+        return deferred.promise;
+    }
 
-    var deferred = $q.defer();
-     $http.get(apiQA + 'api/set/datevisit/' + employeeId + '/' + type).then(function (response) {
-        deferred.resolve(response.data);
-    }, function (err, status) {
-        deferred.reject(Exceptions.getMessage(err));
-    })
+    var _setDateVisit = function (employeeId, type) {
 
-    return deferred.promise;
-}
- 
- 
- var _getVoyageReport = function (id) {
+        var deferred = $q.defer();
+        $http.get(apiQA + 'api/set/datevisit/' + employeeId + '/' + type).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            deferred.reject(Exceptions.getMessage(err));
+        })
 
-    var deferred = $q.defer();
-    $http.get(apiQA + 'api/get/voyage/' + id ).then(function (response) {
-        deferred.resolve(response.data);
-    }, function (err, status) {
-        deferred.reject(Exceptions.getMessage(err));
-    })
+        return deferred.promise;
+    }
 
-    return deferred.promise;
+
+    var _getVoyageReport = function (id) {
+
+        var deferred = $q.defer();
+        $http.get(apiQA + 'api/get/voyage/' + id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            deferred.reject(Exceptions.getMessage(err));
+        })
+
+        return deferred.promise;
     }
 
     var _setReceiverLog = function (id) {
@@ -899,6 +899,45 @@ var _getDateVisit = function (employeeId) {
         return deferred.promise;
     }
 
+    var _qa_print_xls = function (id) {
+
+        var deferred = $q.defer();
+        $http.get('https://report.apvaresh.com/frmreportview.aspx?type=mor&fid=' + id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            deferred.reject(Exceptions.getMessage(err));
+        })
+
+        return deferred.promise;
+    }
+
+
+    var _qa_update_visited = function (employee_id, form_type, form_id) {
+
+        var deferred = $q.defer();
+        $http.get('http://localhost:9080/' + 'api/qa/update/visited/form/' + employee_id + '/' + form_type + '/' + form_id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            deferred.reject(Exceptions.getMessage(err));
+        })
+
+        return deferred.promise;
+    }
+
+    var _qa_get_visited = function (employee_id, form_type) {
+
+        var deferred = $q.defer();
+        $http.get('http://localhost:9080/' + 'api/qa/get/visited/form/' + employee_id + '/' + form_type).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            deferred.reject(Exceptions.getMessage(err));
+        })
+
+        return deferred.promise;
+    }
+
+    serviceFactory.qa_update_visited = _qa_update_visited;
+    serviceFactory.qa_get_visited = _qa_get_visited;
 
     serviceFactory.getQAByEmployee = _getQAByEmployee;
     serviceFactory.getQAStatus = _getQAStatus;
@@ -988,16 +1027,19 @@ var _getDateVisit = function (employeeId) {
     serviceFactory.getQAFormByRegister = _getQAFormByRegister;
     serviceFactory.getQAFormByRoute = _getQAFormByRoute;
 
- serviceFactory.saveFeedBack = _saveFeedBack;
+    serviceFactory.saveFeedBack = _saveFeedBack;
     serviceFactory.getFeedBack = _getFeedBack;
     serviceFactory.dltFeedBack = _dltFeedBack;
 
-	serviceFactory.getDateVisit = _getDateVisit;
-serviceFactory.setDateVisit = _setDateVisit;
-    serviceFactory.setReceiverLog = _setReceiverLog;
+    serviceFactory.getDateVisit = _getDateVisit;
+    serviceFactory.setDateVisit = _setDateVisit;
 
-	 serviceFactory.getVoyageReport = _getVoyageReport;
+    serviceFactory.getVoyageReport = _getVoyageReport;
+    serviceFactory.setReceiverLog = _setReceiverLog;
     serviceFactory.qaNotification = _qaNotification;
+
+    serviceFactory.qa_print_xls = _qa_print_xls;
+
     return serviceFactory;
 
 }]);

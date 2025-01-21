@@ -43,19 +43,6 @@ app.factory('qahService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     }
 	serviceFactory.getHazardLog = _getHazardLog;
 	
-	
-	var _getCategories = function (pid) {
-        var deferred = $q.defer();
-        $http.get(zqasms + 'qasms/event/categories/' +pid ).then(function (response) {
-            deferred.resolve(response.data);
-        }, function (err, status) {
-            deferred.reject(Exceptions.getMessage(err));
-        })
-
-        return deferred.promise;
-    }
-	serviceFactory.getCategories = _getCategories;
-	
 	return serviceFactory;
 
 }]);

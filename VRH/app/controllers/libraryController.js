@@ -16,7 +16,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
     $scope.IsNotDocument = !$route.current.isDocument;
 
     $scope._type = $routeParams.type;
-
+     
     $scope._publisher = $routeParams.publisher;
     $scope._author = $routeParams.author;
 
@@ -98,7 +98,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                             $scope.tree_selected.Items = $scope.tree_selected.Items - 1;
                             $scope.tree_instance.refresh();
                         }
-
+                      
 
                         $scope.doRefresh = true;
                         $scope.bind();
@@ -117,12 +117,12 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         icon: 'plus',
         width: 120,
         onClick: function (e) {
-
+            
             if (!$scope.IsDocument && !$scope.tree_selected) {
                 General.ShowNotify('Please select a folder.', 'error');
                 return;
             }
-            var data = { Id: null, FolderId: $scope.tree_selected ? $scope.tree_selected.Id : null };
+            var data = { Id: null, FolderId: $scope.tree_selected? $scope.tree_selected.Id:null };
             if ($scope.IsDocument) {
                 $rootScope.$broadcast('InitAddDocument', data);
 
@@ -146,7 +146,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
             if ($scope.tree_selected)
                 $scope.folderId = $scope.tree_selected.Id;
 
-
+          
 
             $scope.IsEditFolder = false;
             $scope.popup_folder_visible = true;
@@ -160,7 +160,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         icon: 'edit',
 
         onClick: function (e) {
-
+             
 
             if (!$scope.tree_selected) {
                 General.ShowNotify(Config.Text_NoRowSelected, 'error');
@@ -200,7 +200,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                 $scope.tree_instance.refresh();
                 $scope.tree_selected = null;
                 $scope.folderId = null;
-
+              
 
 
 
@@ -236,7 +236,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
     $scope.btn_view = {
         text: 'View',
         type: 'default',
-        // icon: 'edit',
+       // icon: 'edit',
         width: 120,
 
         onClick: function (e) {
@@ -287,7 +287,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                 return;
             }
 
-
+           
             $scope.popup_move_visible = true;
 
         }
@@ -413,12 +413,12 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         //    },
         //    fixed: true, fixedPosition: 'left',
         //},
-        { dataField: 'FileCount', caption: 'Files', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 60, fixed: true, fixedPosition: 'left', },
+         { dataField: 'FileCount', caption: 'Files', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 60, fixed: true, fixedPosition: 'left', },
         { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 500, fixed: true, fixedPosition: 'left', sortIndex: 1, sortOrder: "asc" },
-
+        
         { dataField: 'Edition', caption: 'Revision', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'Issue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 200 },
-        { dataField: 'Category', caption: 'Category', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
+        {dataField: 'Issue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 200 },
+       { dataField: 'Category', caption: 'Category', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
         { dataField: 'Publisher', caption: 'Publisher', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300 },
         { dataField: 'DateEffective', caption: 'Effective', allowResizing: true, dataType: 'string', allowEditing: false, width: 200, alignment: 'center' },
         { dataField: 'DateRelease', caption: 'Publication Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 200 },
@@ -499,7 +499,9 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                 }
                 //zool
                 libraryService.getBookFiles(data.Id).then(function (response) {
-                    $scope.bookFiles = response;
+					 console.log ('bookFiles',$scope.bookFiles);
+					if (response)
+                    $scope.bookFiles =Enumerable.From( response).OrderBy('$.SysUrl').ToArray();
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
                 ///////////////////////////////////
@@ -543,6 +545,8 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         { dataField: 'DateEffective', caption: 'Effective', allowResizing: true, dataType: 'string', allowEditing: false, width: 130, alignment: 'center' },
         
         { dataField: 'DateExposure', caption: 'Exposure Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+		   { dataField: 'Visited', caption: 'Visited', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
+		//  { dataField: 'Visited', caption: 'Visited', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, fixed: true, fixedPosition: 'left' },
         {
             dataField: "Id", caption: '',
             width: 130,
@@ -650,8 +654,8 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
     //$scope.dg_employees_height = $(window).height() - 200;
     /////////////////////////////////////////////////
     $scope.dg_file_columns = [
-        //{ dataField: "Remark", caption: "Remark", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: true },
-
+      //{ dataField: "Remark", caption: "Remark", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: true },
+      
         { dataField: "SysUrl", caption: "File(s)", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, },
         //8-11
         {
@@ -661,27 +665,27 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
             allowSorting: false,
             cellTemplate: 'renameTemplate',
             name: 'rename',
-
+            
             //visible:false,
 
         },
+        
+      //{ dataField: "FileType", caption: "File Type", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, width: 150 },
+      {
+          dataField: "Id", caption: '',
+          width: 60,
+          allowFiltering: false,
+          allowSorting: false,
+          cellTemplate: function (container, options) {
 
-        //{ dataField: "FileType", caption: "File Type", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, width: 150 },
-        {
-            dataField: "Id", caption: '',
-            width: 60,
-            allowFiltering: false,
-            allowSorting: false,
-            cellTemplate: function (container, options) {
-
-                $("<div>")
-                    .append("<a  href='downloadhandler.ashx?t=bookfile&id=" + options.value + "' class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:8px !important;border-radius:50%;width:40px'> <i class='icon ion-md-cloud-download ion-20'></i></a>")
-                    .appendTo(container);
+              $("<div>")
+                  .append("<a  href='downloadhandler.ashx?t=bookfile&id=" + options.value + "' class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:8px !important;border-radius:50%;width:40px'> <i class='icon ion-md-cloud-download ion-20'></i></a>")
+                  .appendTo(container);
 
 
-            },
-            fixed: true, fixedPosition: 'right',
-        }
+          },
+          fixed: true, fixedPosition: 'right',
+      }
 
     ];
     $scope.dg_file_selected = null;
@@ -719,7 +723,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
             if (!data) {
                 $scope.dg_file_selected = null;
             }
-            else { $scope.dg_file_selected = data; console.log('book file', data.Id); }
+            else { $scope.dg_file_selected = data; console.log('book file',data.Id); }
 
 
         },
@@ -727,7 +731,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         bindingOptions: {
 
             dataSource: 'bookFiles',
-
+             
         },
         // dataSource:ds
 
@@ -760,21 +764,21 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                     .append("<img src='content/images/" + fn + ".png' />")
                     .appendTo(container);
             },
-            fixed: true, fixedPosition: 'left', sortIndex: 0, sortOrder: "desc"
+            fixed: true, fixedPosition: 'left',  sortIndex: 0, sortOrder: "desc"
         },
-        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, fixed: true, fixedPosition: 'left', width: 200 },
-        { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: true, fixedPosition: 'left', sortIndex: 1, sortOrder: "asc" },
-
+        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, fixed: true, fixedPosition: 'left',  width:200 },
+        { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false,  fixed: true, fixedPosition: 'left', sortIndex: 1, sortOrder: "asc" },
+       
         { dataField: 'Mobile', caption: 'Mobile', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-
+        
         { dataField: 'PID', caption: 'Personnel Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
         //{ dataField: 'DateJoinCompany', caption: 'Join Company', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
         //{ dataField: 'CaoCardNumber', caption: 'CAO No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
-        // { dataField: 'NDTNumber', caption: 'NDT No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
+       // { dataField: 'NDTNumber', caption: 'NDT No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
 
 
         { dataField: 'DateVisit', caption: 'Visit Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
-        // { dataField: 'DateDownload', caption: 'Download Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+       // { dataField: 'DateDownload', caption: 'Download Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
 
 
 
@@ -866,18 +870,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                         }
 
                         $scope.Notify.Message =
-                           // 'Dear ' + '[#Name]' + ',' + '\r\n'
-                           // + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                          //  + '\r\n'
-                           // + '\r\n'
-                           // + '<strong>' + $scope.dg_selected.Title + '</strong>'
-                          //  + '\r\n'
-                           // + '\r\n'
-                          //  + 'Your(s) sincerely' + '\r\n'
-                           // + $rootScope.userTitle
-                           // + '\r\n'
-                           // + moment().format('MMMM Do YYYY, h:mm:ss a');
-                             "همکار گرامی، در کتابخانه الکترونیک، مستندات  "
+                                 "همکار گرامی، در کتابخانه الکترونیک، مستندات  "
                         + '\r\n'
                         + $scope.dg_selected.Title
                             // + "\n"
@@ -915,7 +908,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
 
             $scope.pop_height_employees = $(window).height() - 30; //630; //size.height;
             $scope.dg_height_full = $scope.pop_height_employees - 133;
-            $scope.dg_employees_height = $scope.dg_height_full - 81 - 30;
+            $scope.dg_employees_height = $scope.dg_height_full - 81-30;
             $scope.scroll_height_full = $scope.pop_height_employees - 133;
 
 
@@ -1108,10 +1101,10 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                             var tempid = $scope.folderId;
                             if (!$scope.IsEditFolder) {
 
-
+                               
                                 $scope.tree_ds.push(response);
 
-
+                               
                                 $scope.folderId = tempid;
 
                                 $scope.folder = null;
@@ -1120,7 +1113,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                             }
                             else {
                                 var row = Enumerable.From($scope.tree_ds).Where('$.Id==' + response.Id).FirstOrDefault();
-
+                                
                                 //row = JSON.parse(JSON.stringify(response));
                                 row.TitleFormated = response.TitleFormated;
                                 row.Title = response.Title;
@@ -1128,14 +1121,14 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                                 row.ParentId = response.ParentId;
                                 row.TitleFormatedSpace = response.TitleFormatedSpace;
                                 row.Items = response.Items;
-                                // $scope.tree_selected = JSON.parse(JSON.stringify(response));
+                               // $scope.tree_selected = JSON.parse(JSON.stringify(response));
                                 $scope.tree_ds = Enumerable.From($scope.tree_ds).OrderBy('$.Fullcode').ToArray();
                                 console.log($scope.tree_ds);
                                 console.log(row);
                                 $scope.tree_instance.refresh();
                                 $scope.popup_folder_visible = false;
                             }
-
+                           
                             // $scope.$broadcast('getFilterQuery', null);
                             // $scope.popup_folder_visible = false;
 
@@ -1402,7 +1395,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
     $scope._fileData = null;
     $scope.txt_filename = {
         hoverStateEnabled: false,
-
+         
         bindingOptions: {
             value: '_fileName',
         }
@@ -1433,7 +1426,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                             $scope._fileData.SysUrl = $scope._fileName;
 
                             General.ShowNotify(Config.Text_SavedOk, 'success');
-
+ 
 
                             $scope.popup_rename_visible = false;
 
@@ -1472,7 +1465,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         onHiding: function () {
             $scope._fileName = null;
             $scope._fileId = null;
-
+           
             $scope.popup_rename_visible = false;
             // $rootScope.$broadcast('onPersonHide', null);
         },
@@ -1558,8 +1551,8 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
     };
     $scope.txt_MessageNotify = {
         hoverStateEnabled: false,
+		  rtlEnabled:true,
         height: 300,
-        rtlEnabled:true,
         bindingOptions: {
             value: 'Notify.Message',
 
@@ -1582,7 +1575,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         return filters;
     };
     $scope.bind = function () {
-        var url = !$scope.IsDocument ? 'odata/library/books/folder/' + Config.CustomerId + '/' + $scope.tree_selected.Fullcode + '/0' : 'odata/library/documents/' + Config.CustomerId;
+        var url = !$scope.IsDocument ? 'odata/library/books/folder/' + Config.CustomerId + '/' + $scope.tree_selected.Fullcode + '/0' : 'odata/library/documents/' + Config.CustomerId ;
         if (!$scope.dg_book_ds /*&& $scope.doRefresh*/) {
 
             $scope.dg_book_ds = {
@@ -1592,7 +1585,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                     key: "Id",
                     version: 4,
                     onLoaded: function (e) {
-                        // $scope.loadingVisible = false;
+                        //$scope.loadingVisible = false;
                         //filter
                         $rootScope.$broadcast('OnDataLoaded', null);
                     },
@@ -1600,13 +1593,13 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
 
                         $scope.dsUrl = General.getDsUrl(e);
 
-                        // $scope.$apply(function () {
-                        //    $scope.loadingVisible = true;
-                        // });
+                        //$scope.$apply(function () {
+                           //$scope.loadingVisible = true;
+                        ///});
                         $rootScope.$broadcast('OnDataLoading', null);
                     },
                 },
-                // filter: [['OfficeCode', 'startswith', $scope.ParentLocation.FullCode]],
+                //filter: [['OfficeCode', 'startswith', $scope.ParentLocation.FullCode]],
                 sort: [{ getter: "DateCreate", desc: true }],
 
             };
@@ -1700,7 +1693,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, encodeHtml: false },
         // { dataField: 'FullCode', caption: 'Code', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, encodeHtml: false, width: 200, sortIndex: 0, sortOrder: "asc" },
         { dataField: 'Items', caption: 'Items', allowResizing: true, alignment: 'center', dataType: 'string', width: 100, allowEditing: false },
-        { dataField: 'Files', caption: 'Files', allowResizing: true, alignment: 'center', dataType: 'string', width: 100, allowEditing: false },
+         { dataField: 'Files', caption: 'Files', allowResizing: true, alignment: 'center', dataType: 'string', width: 100, allowEditing: false },
     ];
 
     $scope.tree_selected = null;
@@ -1767,7 +1760,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         },
         height: $(window).height() - 180,
         // dataStructure:'tree',
-        wordWrapEnabled: true,
+        wordWrapEnabled:true,
         bindingOptions: {
             dataSource: 'tree_ds',
             expandedRowKeys: 'expandedRow',
@@ -1896,7 +1889,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
         $scope.tree_selected.Items = $scope.tree_selected.Items + 1;
         $scope.tree_instance.refresh();
     });
-
+    
     $scope.$on('onLibraryHide', function (event, prms) {
 
         $scope.bind();

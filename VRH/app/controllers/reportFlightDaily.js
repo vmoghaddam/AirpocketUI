@@ -1597,6 +1597,13 @@ $scope.sb_timeunit = {
                         return data.value;
                     }
                 },
+				 {
+                    column: "TotalSeat",
+                    summaryType: "sum",
+                    customizeText: function (data) {
+                        return data.value;
+                    }
+                },
                 {
                     column: "OverSeat",
                     summaryType: "sum",

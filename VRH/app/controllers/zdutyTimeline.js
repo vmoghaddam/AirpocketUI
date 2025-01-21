@@ -1,7 +1,8 @@
 'use strict';
  
 app.controller('zdutyTimelineController', ['$scope', '$location', '$routeParams', '$rootScope', '$timeout', 'flightService', 'weatherService', 'aircraftService', 'authService', 'notificationService', '$route', '$window', 'zschedulingService', function ($scope, $location, $routeParams, $rootScope, $timeout, flightService, weatherService, aircraftService, authService, notificationService, $route, $window, schedulingService) {
-  
+  $scope.IsCockpit = $rootScope.userName.toLowerCase() == 'ops.abdi' || $rootScope.userName.toLowerCase() == 'ops.darabian'
+	  || $rootScope.userName.toLowerCase() == 'ops.jamali' ? false : true;
    $scope.OnlyRoster = false;
     if ($rootScope.userName.toLowerCase() == 'train.moradi' || $rootScope.userName.toLowerCase() == 'mohammadifard')
         $scope.OnlyRoster = true;
@@ -3757,12 +3758,13 @@ $scope.destroy_menu();
     $scope.dt_from = new Date();//new Date(2021,11,1).addDays(0);
     $scope.dt_to = new Date($scope.dt_from).addDays(14);
 
-    $scope.rank = 'COCKPIT';
+    $scope.rank =$scope.IsCockpit? 'COCKPIT':'CABIN';
     $scope.sb_rank = {
         placeholder: 'Rank',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: ['COCKPIT','CABIN','IP,P1', 'P2', 'TRE', 'TRI', 'P1', 'ISCCM,SCCM', 'CCM', 'ISCCM', 'SCCM'],
+        dataSource:$scope.IsCockpit? ['COCKPIT','CABIN','IP,P1', 'P2', 'TRE', 'TRI', 'P1', 'ISCCM,SCCM', 'CCM', 'ISCCM', 'SCCM']
+		:['CABIN','ISCCM,SCCM', 'CCM', 'ISCCM', 'SCCM'],
 
         onSelectionChanged: function (arg) {
 

@@ -105,16 +105,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
-                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,-2)">
-                                    <div class="caption">
-                                        Not Downloaded
-                                    </div>
-                                    <div class="value">
-                                        {{dg_book_selected.NotDownloaded}}
-                                    </div>
-                                </div>
-                            </div>
+                             
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
                                 <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,1)">
                                     <div class="caption">
@@ -125,16 +116,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
-                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,2)">
-                                    <div class="caption">
-                                        Downloaded
-                                    </div>
-                                    <div class="value">
-                                        {{dg_book_selected.Downloaded}}
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
                                 <div class="card-number cn w3-win-phone-green">
@@ -142,7 +124,7 @@
                                         Total
                                     </div>
                                     <div class="value">
-                                        {{dg_book_selected.Total}}
+                                        {{dg_book_selected.NotVisited+dg_book_selected.Visited}}
                                     </div>
                                 </div>
                             </div>
@@ -202,7 +184,7 @@
     </div>
 
 
-    <div ng-include="'app/views/documentAdd.html'"></div>
+    <div ng-include="'app/views/documentAdd.html?v=100'"></div>
 
     <div dx-load-panel="loadPanel"></div>
 </div>

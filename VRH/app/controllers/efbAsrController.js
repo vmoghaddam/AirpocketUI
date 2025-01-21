@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('asrAddController', ['$scope', '$location', 'flightBagService', 'authService', '$routeParams', '$rootScope', '$window', function ($scope, $location, flightBagService, authService, $routeParams, $rootScope, $window) {
     $scope.isNew = true;
     $scope.isEditable = false;
