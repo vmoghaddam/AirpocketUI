@@ -18,17 +18,17 @@ namespace Report
             //img.ImageUrl = "http://fleet.flypersia.aero/airpocket/upload/clientsfiles/201911121654139_0_54982.jpg";
         }
 
-        private void img_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void img_BeforePrint(object sender, CancelEventArgs e)
         {
             
         }
 
-        private void RptCabinTrainingCard_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void RptCabinTrainingCard_BeforePrint(object sender, CancelEventArgs e)
         {
            
         }
 
-        private void Detail_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void Detail_BeforePrint(object sender, CancelEventArgs e)
         {
             var rank = Convert.ToString(GetCurrentColumnValue("Rank"));
 

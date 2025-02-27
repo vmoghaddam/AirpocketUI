@@ -41,7 +41,7 @@ namespace Report
            
         }
 
-        private void xrSubreport1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrSubreport1_BeforePrint(object sender, CancelEventArgs e)
         {
             XRSubreport subreport = sender as XRSubreport;
             XtraReport reportSource = subreport.ReportSource as XtraReport;

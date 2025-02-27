@@ -154,11 +154,11 @@
             this.xrPictureBox4.LocationFloat = new DevExpress.Utils.PointFloat(808.3334F, 113F);
             this.xrPictureBox4.Name = "xrPictureBox4";
             this.xrPictureBox4.SizeF = new System.Drawing.SizeF(166.6666F, 62.68946F);
-            this.xrPictureBox4.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrPictureBox4_BeforePrint);
+            this.xrPictureBox4.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.xrPictureBox4_BeforePrint);
             // 
             // lblOpsTrn
             // 
-            this.lblOpsTrn.Font = new System.Drawing.Font("Calibri", 15F, System.Drawing.FontStyle.Bold);
+            this.lblOpsTrn.Font = new DevExpress.Drawing.DXFont("Calibri", 15F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblOpsTrn.LocationFloat = new DevExpress.Utils.PointFloat(394.9685F, 678F);
             this.lblOpsTrn.Multiline = true;
             this.lblOpsTrn.Name = "lblOpsTrn";
@@ -172,7 +172,7 @@
             // 
             // lblClassId
             // 
-            this.lblClassId.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold);
+            this.lblClassId.Font = new DevExpress.Drawing.DXFont("Calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblClassId.LocationFloat = new DevExpress.Utils.PointFloat(193.06F, 113F);
             this.lblClassId.Multiline = true;
             this.lblClassId.Name = "lblClassId";
@@ -185,7 +185,7 @@
             // 
             // lblCourseId
             // 
-            this.lblCourseId.Font = new System.Drawing.Font("Calibri", 13F, System.Drawing.FontStyle.Bold);
+            this.lblCourseId.Font = new DevExpress.Drawing.DXFont("Calibri", 13F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblCourseId.LocationFloat = new DevExpress.Utils.PointFloat(167.03F, 735F);
             this.lblCourseId.Multiline = true;
             this.lblCourseId.Name = "lblCourseId";
@@ -195,11 +195,11 @@
             this.lblCourseId.StylePriority.UseTextAlignment = false;
             this.lblCourseId.Text = "01, Rev: 2";
             this.lblCourseId.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblCourseId.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblCourseId_BeforePrint);
+            this.lblCourseId.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.lblCourseId_BeforePrint);
             // 
             // lblDate
             // 
-            this.lblDate.Font = new System.Drawing.Font("Calibri", 13F, System.Drawing.FontStyle.Bold);
+            this.lblDate.Font = new DevExpress.Drawing.DXFont("Calibri", 13F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblDate.LocationFloat = new DevExpress.Utils.PointFloat(1011.88F, 735F);
             this.lblDate.Multiline = true;
             this.lblDate.Name = "lblDate";
@@ -209,11 +209,11 @@
             this.lblDate.StylePriority.UseTextAlignment = false;
             this.lblDate.Text = "JUL.2023";
             this.lblDate.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblDate.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblIssueNo_BeforePrint);
+            this.lblDate.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.lblIssueNo_BeforePrint);
             // 
             // lblFormNo
             // 
-            this.lblFormNo.Font = new System.Drawing.Font("Calibri", 13F, System.Drawing.FontStyle.Bold);
+            this.lblFormNo.Font = new DevExpress.Drawing.DXFont("Calibri", 13F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblFormNo.LocationFloat = new DevExpress.Utils.PointFloat(731.88F, 735F);
             this.lblFormNo.Multiline = true;
             this.lblFormNo.Name = "lblFormNo";
@@ -223,11 +223,11 @@
             this.lblFormNo.StylePriority.UseTextAlignment = false;
             this.lblFormNo.Text = "01, Rev: 1";
             this.lblFormNo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblFormNo.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblIssueNo_BeforePrint);
+            this.lblFormNo.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.lblIssueNo_BeforePrint);
             // 
             // lblIssueNo
             // 
-            this.lblIssueNo.Font = new System.Drawing.Font("Calibri", 13F, System.Drawing.FontStyle.Bold);
+            this.lblIssueNo.Font = new DevExpress.Drawing.DXFont("Calibri", 13F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblIssueNo.LocationFloat = new DevExpress.Utils.PointFloat(461.2F, 735F);
             this.lblIssueNo.Multiline = true;
             this.lblIssueNo.Name = "lblIssueNo";
@@ -237,11 +237,11 @@
             this.lblIssueNo.StylePriority.UseTextAlignment = false;
             this.lblIssueNo.Text = "01, Rev: 1";
             this.lblIssueNo.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblIssueNo.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblIssueNo_BeforePrint);
+            this.lblIssueNo.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.lblIssueNo_BeforePrint);
             // 
             // lblHead
             // 
-            this.lblHead.Font = new System.Drawing.Font("Calibri", 15F, System.Drawing.FontStyle.Bold);
+            this.lblHead.Font = new DevExpress.Drawing.DXFont("Calibri", 15F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblHead.LocationFloat = new DevExpress.Utils.PointFloat(664.85F, 676F);
             this.lblHead.Multiline = true;
             this.lblHead.Name = "lblHead";
@@ -254,7 +254,7 @@
             // 
             // lblInstructor
             // 
-            this.lblInstructor.Font = new System.Drawing.Font("Calibri", 15F, System.Drawing.FontStyle.Bold);
+            this.lblInstructor.Font = new DevExpress.Drawing.DXFont("Calibri", 15F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblInstructor.LocationFloat = new DevExpress.Utils.PointFloat(59.13512F, 676F);
             this.lblInstructor.Multiline = true;
             this.lblInstructor.Name = "lblInstructor";
@@ -267,7 +267,7 @@
             // 
             // lblDuration
             // 
-            this.lblDuration.Font = new System.Drawing.Font("Calibri", 19F, System.Drawing.FontStyle.Bold);
+            this.lblDuration.Font = new DevExpress.Drawing.DXFont("Calibri", 19F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblDuration.LocationFloat = new DevExpress.Utils.PointFloat(777.93F, 558F);
             this.lblDuration.Multiline = true;
             this.lblDuration.Name = "lblDuration";
@@ -280,7 +280,7 @@
             // 
             // lblTo
             // 
-            this.lblTo.Font = new System.Drawing.Font("Calibri", 19F, System.Drawing.FontStyle.Bold);
+            this.lblTo.Font = new DevExpress.Drawing.DXFont("Calibri", 19F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblTo.LocationFloat = new DevExpress.Utils.PointFloat(537.3F, 558F);
             this.lblTo.Multiline = true;
             this.lblTo.Name = "lblTo";
@@ -293,7 +293,7 @@
             // 
             // lblFrom
             // 
-            this.lblFrom.Font = new System.Drawing.Font("Calibri", 19F, System.Drawing.FontStyle.Bold);
+            this.lblFrom.Font = new DevExpress.Drawing.DXFont("Calibri", 19F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblFrom.LocationFloat = new DevExpress.Utils.PointFloat(294.89F, 558F);
             this.lblFrom.Multiline = true;
             this.lblFrom.Name = "lblFrom";
@@ -306,7 +306,7 @@
             // 
             // lblCer
             // 
-            this.lblCer.Font = new System.Drawing.Font("Calibri", 29F, System.Drawing.FontStyle.Bold);
+            this.lblCer.Font = new DevExpress.Drawing.DXFont("Calibri", 29F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblCer.LocationFloat = new DevExpress.Utils.PointFloat(55.6933F, 485.1786F);
             this.lblCer.Multiline = true;
             this.lblCer.Name = "lblCer";
@@ -319,7 +319,7 @@
             // 
             // lblExpire
             // 
-            this.lblExpire.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold);
+            this.lblExpire.Font = new DevExpress.Drawing.DXFont("Calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblExpire.LocationFloat = new DevExpress.Utils.PointFloat(975F, 111F);
             this.lblExpire.Multiline = true;
             this.lblExpire.Name = "lblExpire";
@@ -332,7 +332,7 @@
             // 
             // lblIssue
             // 
-            this.lblIssue.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold);
+            this.lblIssue.Font = new DevExpress.Drawing.DXFont("Calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblIssue.LocationFloat = new DevExpress.Utils.PointFloat(975F, 76F);
             this.lblIssue.Multiline = true;
             this.lblIssue.Name = "lblIssue";
@@ -345,7 +345,7 @@
             // 
             // lblCerNo
             // 
-            this.lblCerNo.Font = new System.Drawing.Font("Calibri", 16F, System.Drawing.FontStyle.Bold);
+            this.lblCerNo.Font = new DevExpress.Drawing.DXFont("Calibri", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblCerNo.LocationFloat = new DevExpress.Utils.PointFloat(225.86F, 76F);
             this.lblCerNo.Multiline = true;
             this.lblCerNo.Name = "lblCerNo";
@@ -358,7 +358,7 @@
             // 
             // lblName
             // 
-            this.lblName.Font = new System.Drawing.Font("Calibri", 29F, System.Drawing.FontStyle.Bold);
+            this.lblName.Font = new DevExpress.Drawing.DXFont("Calibri", 29F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblName.LocationFloat = new DevExpress.Utils.PointFloat(133.4904F, 338.3365F);
             this.lblName.Multiline = true;
             this.lblName.Name = "lblName";
@@ -376,7 +376,7 @@
             this.xrPictureBox1.Name = "xrPictureBox1";
             this.xrPictureBox1.SizeF = new System.Drawing.SizeF(1169F, 836.1113F);
             this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.xrPictureBox1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrPictureBox1_BeforePrint);
+            this.xrPictureBox1.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.xrPictureBox1_BeforePrint);
             // 
             // xrPictureBox2
             // 
@@ -385,7 +385,7 @@
             this.xrPictureBox2.Name = "xrPictureBox2";
             this.xrPictureBox2.SizeF = new System.Drawing.SizeF(1169F, 836.1113F);
             this.xrPictureBox2.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.xrPictureBox2.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrPictureBox2_BeforePrint);
+            this.xrPictureBox2.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.xrPictureBox2_BeforePrint);
             // 
             // xrPictureBox3
             // 
@@ -467,15 +467,15 @@
             this.jsonDataSource1});
             this.DataSource = this.jsonDataSource1;
             this.ExportOptions.Pdf.PageRange = "1";
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
+            this.Margins = new DevExpress.Drawing.DXMargins(0, 0, 0, 0);
             this.PageHeight = 827;
             this.PageWidth = 1169;
-            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
             this.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.Version = "19.2";
-            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.rptFPC_BeforePrint);
+            this.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.rptFPC_BeforePrint);
             this.AfterPrint += new System.EventHandler(this.rptFPC_AfterPrint);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 

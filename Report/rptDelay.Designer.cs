@@ -232,7 +232,7 @@
             // 
             // xrLabel2
             // 
-            this.xrLabel2.Font = new System.Drawing.Font("B Nazanin", 13F, System.Drawing.FontStyle.Bold);
+            this.xrLabel2.Font = new DevExpress.Drawing.DXFont("B Nazanin", 13F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(456.8762F, 36.49999F);
             this.xrLabel2.Multiline = true;
             this.xrLabel2.Name = "xrLabel2";
@@ -329,7 +329,7 @@
             // xrTableCell42
             // 
             this.xrTableCell42.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell42.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell42.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell42.Multiline = true;
             this.xrTableCell42.Name = "xrTableCell42";
             this.xrTableCell42.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -375,7 +375,7 @@
             // xrTableCell39
             // 
             this.xrTableCell39.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell39.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell39.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell39.Multiline = true;
             this.xrTableCell39.Name = "xrTableCell39";
             this.xrTableCell39.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -421,7 +421,7 @@
             // xrTableCell36
             // 
             this.xrTableCell36.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell36.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell36.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell36.Multiline = true;
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -467,7 +467,7 @@
             // xrTableCell33
             // 
             this.xrTableCell33.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell33.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell33.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell33.Multiline = true;
             this.xrTableCell33.Name = "xrTableCell33";
             this.xrTableCell33.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -513,7 +513,7 @@
             // xrTableCell30
             // 
             this.xrTableCell30.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell30.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell30.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell30.Multiline = true;
             this.xrTableCell30.Name = "xrTableCell30";
             this.xrTableCell30.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -559,7 +559,7 @@
             // xrTableCell27
             // 
             this.xrTableCell27.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell27.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell27.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell27.Multiline = true;
             this.xrTableCell27.Name = "xrTableCell27";
             this.xrTableCell27.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -605,7 +605,7 @@
             // xrTableCell24
             // 
             this.xrTableCell24.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell24.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell24.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell24.Multiline = true;
             this.xrTableCell24.Name = "xrTableCell24";
             this.xrTableCell24.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -651,7 +651,7 @@
             // xrTableCell21
             // 
             this.xrTableCell21.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell21.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell21.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell21.Multiline = true;
             this.xrTableCell21.Name = "xrTableCell21";
             this.xrTableCell21.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -696,7 +696,7 @@
             // xrTableCell18
             // 
             this.xrTableCell18.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell18.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell18.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell18.Multiline = true;
             this.xrTableCell18.Name = "xrTableCell18";
             this.xrTableCell18.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -741,7 +741,7 @@
             // xrTableCell15
             // 
             this.xrTableCell15.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell15.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell15.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell15.Multiline = true;
             this.xrTableCell15.Name = "xrTableCell15";
             this.xrTableCell15.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -786,7 +786,7 @@
             // xrTableCell12
             // 
             this.xrTableCell12.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell12.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell12.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell12.Multiline = true;
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -832,7 +832,7 @@
             // xrTableCell9
             // 
             this.xrTableCell9.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell9.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell9.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell9.Multiline = true;
             this.xrTableCell9.Name = "xrTableCell9";
             this.xrTableCell9.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -877,7 +877,7 @@
             // xrTableCell6
             // 
             this.xrTableCell6.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell6.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell6.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell6.Multiline = true;
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -922,7 +922,7 @@
             // xrTableCell3
             // 
             this.xrTableCell3.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell3.Font = new System.Drawing.Font("B Nazanin", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell3.Font = new DevExpress.Drawing.DXFont("B Nazanin", 11F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
             this.xrTableCell3.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -936,7 +936,7 @@
             // xrTableCell2
             // 
             this.xrTableCell2.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell2.Font = new System.Drawing.Font("B Nazanin", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell2.Font = new DevExpress.Drawing.DXFont("B Nazanin", 11F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -950,7 +950,7 @@
             // xrTableCell43
             // 
             this.xrTableCell43.BackColor = System.Drawing.Color.Gainsboro;
-            this.xrTableCell43.Font = new System.Drawing.Font("B Nazanin", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell43.Font = new DevExpress.Drawing.DXFont("B Nazanin", 11F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell43.Multiline = true;
             this.xrTableCell43.Name = "xrTableCell43";
             this.xrTableCell43.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
@@ -1012,7 +1012,7 @@
             this.xrSubreport1.Name = "xrSubreport1";
             this.xrSubreport1.ReportSource = new Report.rptDelaySub();
             this.xrSubreport1.SizeF = new System.Drawing.SizeF(473.4585F, 22.99999F);
-            this.xrSubreport1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.xrSubreport1_BeforePrint);
+            this.xrSubreport1.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.xrSubreport1_BeforePrint);
             // 
             // xrTable2
             // 
@@ -1050,7 +1050,7 @@
             // 
             // xrTableCell59
             // 
-            this.xrTableCell59.Font = new System.Drawing.Font("B Nazanin", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell59.Font = new DevExpress.Drawing.DXFont("B Nazanin", 11F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell59.Multiline = true;
             this.xrTableCell59.Name = "xrTableCell59";
             this.xrTableCell59.StylePriority.UseFont = false;
@@ -1080,7 +1080,7 @@
             // 
             // xrTableCell65
             // 
-            this.xrTableCell65.Font = new System.Drawing.Font("B Nazanin", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell65.Font = new DevExpress.Drawing.DXFont("B Nazanin", 11F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell65.Multiline = true;
             this.xrTableCell65.Name = "xrTableCell65";
             this.xrTableCell65.StylePriority.UseFont = false;
@@ -1110,7 +1110,7 @@
             // 
             // xrTableCell62
             // 
-            this.xrTableCell62.Font = new System.Drawing.Font("B Nazanin", 11F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell62.Font = new DevExpress.Drawing.DXFont("B Nazanin", 11F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell62.Multiline = true;
             this.xrTableCell62.Name = "xrTableCell62";
             this.xrTableCell62.StylePriority.UseFont = false;
@@ -1121,7 +1121,7 @@
             // 
             // xrLabel1
             // 
-            this.xrLabel1.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrLabel1.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(617.4153F, 0F);
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
@@ -1148,7 +1148,7 @@
             // 
             // xrTableCell64
             // 
-            this.xrTableCell64.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell64.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell64.Multiline = true;
             this.xrTableCell64.Name = "xrTableCell64";
             this.xrTableCell64.StylePriority.UseFont = false;
@@ -1178,7 +1178,7 @@
             // 
             // xrTableCell69
             // 
-            this.xrTableCell69.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell69.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell69.Multiline = true;
             this.xrTableCell69.Name = "xrTableCell69";
             this.xrTableCell69.StylePriority.UseFont = false;
@@ -1200,7 +1200,7 @@
             // 
             // xrTableCell67
             // 
-            this.xrTableCell67.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell67.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell67.Multiline = true;
             this.xrTableCell67.Name = "xrTableCell67";
             this.xrTableCell67.StylePriority.UseFont = false;
@@ -1222,7 +1222,7 @@
             // 
             // xrTableCell66
             // 
-            this.xrTableCell66.Font = new System.Drawing.Font("B Nazanin", 10F, System.Drawing.FontStyle.Bold);
+            this.xrTableCell66.Font = new DevExpress.Drawing.DXFont("B Nazanin", 10F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrTableCell66.Multiline = true;
             this.xrTableCell66.Name = "xrTableCell66";
             this.xrTableCell66.StylePriority.UseFont = false;
@@ -1251,9 +1251,9 @@
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.jsonDataSource1});
             this.DataSource = this.jsonDataSource1;
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(22, 33, 122, 25);
+            this.Margins = new DevExpress.Drawing.DXMargins(22, 33, 122, 25);
             this.PageHeight = 850;
             this.PageWidth = 1100;
             this.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;

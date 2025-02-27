@@ -65,9 +65,9 @@
             this.Detail,
             this.PageHeader,
             this.PageFooter});
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(21, 28, 17, 12);
+            this.Margins = new DevExpress.Drawing.DXMargins(21, 28, 17, 12);
             this.PageHeight = 850;
             this.PageWidth = 1100;
             this.Version = "19.2";

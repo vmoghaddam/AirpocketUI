@@ -23,7 +23,7 @@ namespace Report
         public string Id { get; set; }
         DateTime? expire = null;
 
-        private void rptFPCAVA_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptFPCAVA_BeforePrint(object sender, CancelEventArgs e)
         {
             var ds = this.DataSource as JsonDataSource;
             // ds.Fill();

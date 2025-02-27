@@ -106,7 +106,7 @@
             // 
             // xrLabel1
             // 
-            this.xrLabel1.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.xrLabel1.Font = new DevExpress.Drawing.DXFont("Times New Roman", 12F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.xrLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(27.05155F, 754.5001F);
             this.xrLabel1.Multiline = true;
@@ -129,7 +129,7 @@
             // 
             // xrLabel2
             // 
-            this.xrLabel2.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.xrLabel2.Font = new DevExpress.Drawing.DXFont("Times New Roman", 12F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.xrLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(27.05155F, 783.5F);
             this.xrLabel2.Multiline = true;
@@ -144,7 +144,7 @@
             // 
             // lblExpTitle
             // 
-            this.lblExpTitle.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblExpTitle.Font = new DevExpress.Drawing.DXFont("Times New Roman", 12F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.lblExpTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblExpTitle.LocationFloat = new DevExpress.Utils.PointFloat(235.6584F, 783.0002F);
             this.lblExpTitle.Multiline = true;
@@ -156,11 +156,11 @@
             this.lblExpTitle.StylePriority.UseTextAlignment = false;
             this.lblExpTitle.Text = "Valid Until:";
             this.lblExpTitle.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblExpTitle.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblExpTitle_BeforePrint);
+            this.lblExpTitle.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.lblExpTitle_BeforePrint);
             // 
             // lblCerNo
             // 
-            this.lblCerNo.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblCerNo.Font = new DevExpress.Drawing.DXFont("Times New Roman", 12F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.lblCerNo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblCerNo.LocationFloat = new DevExpress.Utils.PointFloat(144.0132F, 754.5001F);
             this.lblCerNo.Multiline = true;
@@ -175,7 +175,7 @@
             // 
             // lblIssue
             // 
-            this.lblIssue.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblIssue.Font = new DevExpress.Drawing.DXFont("Times New Roman", 12F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.lblIssue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblIssue.LocationFloat = new DevExpress.Utils.PointFloat(144.0132F, 783.5F);
             this.lblIssue.Multiline = true;
@@ -190,7 +190,7 @@
             // 
             // lblExpire
             // 
-            this.lblExpire.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblExpire.Font = new DevExpress.Drawing.DXFont("Times New Roman", 12F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.lblExpire.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblExpire.LocationFloat = new DevExpress.Utils.PointFloat(324.4437F, 783.0002F);
             this.lblExpire.Multiline = true;
@@ -202,11 +202,11 @@
             this.lblExpire.StylePriority.UseTextAlignment = false;
             this.lblExpire.Text = "2024/09/02";
             this.lblExpire.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            this.lblExpire.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblExpire_BeforePrint);
+            this.lblExpire.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.lblExpire_BeforePrint);
             // 
             // lblName
             // 
-            this.lblName.Font = new System.Drawing.Font("Times New Roman", 19F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblName.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.lblName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblName.LocationFloat = new DevExpress.Utils.PointFloat(133.9617F, 324F);
             this.lblName.Multiline = true;
@@ -221,7 +221,7 @@
             // 
             // lblNID
             // 
-            this.lblNID.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.lblNID.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.lblNID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblNID.LocationFloat = new DevExpress.Utils.PointFloat(589.32F, 371.0927F);
             this.lblNID.Multiline = true;
@@ -236,7 +236,7 @@
             // 
             // lblCer
             // 
-            this.lblCer.Font = new System.Drawing.Font("Times New Roman", 19F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblCer.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.lblCer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblCer.LocationFloat = new DevExpress.Utils.PointFloat(54.92008F, 462.7559F);
             this.lblCer.Multiline = true;
@@ -251,7 +251,7 @@
             // 
             // lblFrom
             // 
-            this.lblFrom.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.lblFrom.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.lblFrom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblFrom.LocationFloat = new DevExpress.Utils.PointFloat(394.4309F, 513.9966F);
             this.lblFrom.Multiline = true;
@@ -266,7 +266,7 @@
             // 
             // lblTo
             // 
-            this.lblTo.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.lblTo.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.lblTo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblTo.LocationFloat = new DevExpress.Utils.PointFloat(560.1215F, 513.9966F);
             this.lblTo.Multiline = true;
@@ -281,7 +281,7 @@
             // 
             // lblDuration
             // 
-            this.lblDuration.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.lblDuration.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.lblDuration.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblDuration.LocationFloat = new DevExpress.Utils.PointFloat(742.1594F, 513.9966F);
             this.lblDuration.Multiline = true;
@@ -296,7 +296,7 @@
             // 
             // xrLabel5
             // 
-            this.xrLabel5.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.xrLabel5.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(0F, 285.2516F);
             this.xrLabel5.Multiline = true;
@@ -311,7 +311,7 @@
             // 
             // xrLabel6
             // 
-            this.xrLabel6.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.xrLabel6.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(436.9561F, 371.0927F);
             this.xrLabel6.Multiline = true;
@@ -326,7 +326,7 @@
             // 
             // xrLabel7
             // 
-            this.xrLabel7.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.xrLabel7.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(0F, 417.9921F);
             this.xrLabel7.Multiline = true;
@@ -341,7 +341,7 @@
             // 
             // xrLabel8
             // 
-            this.xrLabel8.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.xrLabel8.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(335.0515F, 513.9966F);
             this.xrLabel8.Multiline = true;
@@ -356,7 +356,7 @@
             // 
             // xrLabel9
             // 
-            this.xrLabel9.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.xrLabel9.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(528.3762F, 513.9966F);
             this.xrLabel9.Multiline = true;
@@ -371,7 +371,7 @@
             // 
             // xrLabel10
             // 
-            this.xrLabel10.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.xrLabel10.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(697.1594F, 513.9966F);
             this.xrLabel10.Multiline = true;
@@ -386,7 +386,7 @@
             // 
             // xrLabel11
             // 
-            this.xrLabel11.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.xrLabel11.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(778.4941F, 513.9966F);
             this.xrLabel11.Multiline = true;
@@ -401,7 +401,7 @@
             // 
             // xrLabel12
             // 
-            this.xrLabel12.Font = new System.Drawing.Font("Times New Roman", 19F, System.Drawing.FontStyle.Italic);
+            this.xrLabel12.Font = new DevExpress.Drawing.DXFont("Times New Roman", 19F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel12.LocationFloat = new DevExpress.Utils.PointFloat(0F, 562.5283F);
             this.xrLabel12.Multiline = true;
@@ -416,7 +416,7 @@
             // 
             // lblHead
             // 
-            this.lblHead.Font = new System.Drawing.Font("Times New Roman", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblHead.Font = new DevExpress.Drawing.DXFont("Times New Roman", 18F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.lblHead.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblHead.LocationFloat = new DevExpress.Utils.PointFloat(54.92008F, 615.1057F);
             this.lblHead.Multiline = true;
@@ -431,7 +431,7 @@
             // 
             // xrLabel13
             // 
-            this.xrLabel13.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Italic);
+            this.xrLabel13.Font = new DevExpress.Drawing.DXFont("Times New Roman", 18F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(34.7835F, 648.6185F);
             this.xrLabel13.Multiline = true;
@@ -446,7 +446,7 @@
             // 
             // lblInstructor
             // 
-            this.lblInstructor.Font = new System.Drawing.Font("Times New Roman", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.lblInstructor.Font = new DevExpress.Drawing.DXFont("Times New Roman", 18F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.lblInstructor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.lblInstructor.LocationFloat = new DevExpress.Utils.PointFloat(766.8961F, 615.1057F);
             this.lblInstructor.Multiline = true;
@@ -461,7 +461,7 @@
             // 
             // xrLabel14
             // 
-            this.xrLabel14.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Italic);
+            this.xrLabel14.Font = new DevExpress.Drawing.DXFont("Times New Roman", 18F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel14.LocationFloat = new DevExpress.Utils.PointFloat(910.9891F, 648.6185F);
             this.xrLabel14.Multiline = true;
@@ -476,7 +476,7 @@
             // 
             // xrLabel15
             // 
-            this.xrLabel15.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.xrLabel15.Font = new DevExpress.Drawing.DXFont("Times New Roman", 12F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.xrLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(957.7108F, 760.5002F);
             this.xrLabel15.Multiline = true;
@@ -491,7 +491,7 @@
             // 
             // xrLabel16
             // 
-            this.xrLabel16.Font = new System.Drawing.Font("Times New Roman", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.xrLabel16.Font = new DevExpress.Drawing.DXFont("Times New Roman", 12F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.xrLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(56)))), ((int)(((byte)(100)))));
             this.xrLabel16.LocationFloat = new DevExpress.Utils.PointFloat(957.7108F, 783.5002F);
             this.xrLabel16.Multiline = true;
@@ -510,14 +510,14 @@
             this.TopMargin,
             this.BottomMargin,
             this.Detail});
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
+            this.Margins = new DevExpress.Drawing.DXMargins(0, 0, 0, 0);
             this.PageHeight = 827;
             this.PageWidth = 1169;
-            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
             this.Version = "19.2";
-            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.rptFPCVaresh_BeforePrint);
+            this.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.rptFPCVaresh_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
         }

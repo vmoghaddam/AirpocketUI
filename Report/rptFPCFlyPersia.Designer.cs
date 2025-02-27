@@ -129,7 +129,7 @@
             // 
             // lblExpire
             // 
-            this.lblExpire.Font = new System.Drawing.Font("Clarendon Blk BT", 14F, System.Drawing.FontStyle.Bold);
+            this.lblExpire.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 14F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblExpire.LocationFloat = new DevExpress.Utils.PointFloat(952.5876F, 119.5F);
             this.lblExpire.Multiline = true;
             this.lblExpire.Name = "lblExpire";
@@ -142,7 +142,7 @@
             // 
             // lblIssue
             // 
-            this.lblIssue.Font = new System.Drawing.Font("Clarendon Blk BT", 14F, System.Drawing.FontStyle.Bold);
+            this.lblIssue.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 14F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblIssue.LocationFloat = new DevExpress.Utils.PointFloat(952.5876F, 83F);
             this.lblIssue.Multiline = true;
             this.lblIssue.Name = "lblIssue";
@@ -155,7 +155,7 @@
             // 
             // lblClassId
             // 
-            this.lblClassId.Font = new System.Drawing.Font("Clarendon Blk BT", 14F, System.Drawing.FontStyle.Bold);
+            this.lblClassId.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 14F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblClassId.LocationFloat = new DevExpress.Utils.PointFloat(238F, 119.5F);
             this.lblClassId.Multiline = true;
             this.lblClassId.Name = "lblClassId";
@@ -168,7 +168,7 @@
             // 
             // lblCerNo
             // 
-            this.lblCerNo.Font = new System.Drawing.Font("Clarendon Blk BT", 14F, System.Drawing.FontStyle.Bold);
+            this.lblCerNo.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 14F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblCerNo.LocationFloat = new DevExpress.Utils.PointFloat(238F, 83F);
             this.lblCerNo.Multiline = true;
             this.lblCerNo.Name = "lblCerNo";
@@ -181,7 +181,7 @@
             // 
             // lblHead
             // 
-            this.lblHead.Font = new System.Drawing.Font("Clarendon Blk BT", 12F, System.Drawing.FontStyle.Bold);
+            this.lblHead.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 12F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblHead.LocationFloat = new DevExpress.Utils.PointFloat(720.9319F, 600.7771F);
             this.lblHead.Multiline = true;
             this.lblHead.Name = "lblHead";
@@ -194,7 +194,7 @@
             // 
             // lblOpsTrn
             // 
-            this.lblOpsTrn.Font = new System.Drawing.Font("Clarendon Blk BT", 12F, System.Drawing.FontStyle.Bold);
+            this.lblOpsTrn.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 12F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblOpsTrn.LocationFloat = new DevExpress.Utils.PointFloat(402.8354F, 600.777F);
             this.lblOpsTrn.Multiline = true;
             this.lblOpsTrn.Name = "lblOpsTrn";
@@ -207,7 +207,7 @@
             // 
             // lblInstructor
             // 
-            this.lblInstructor.Font = new System.Drawing.Font("Clarendon Blk BT", 12F, System.Drawing.FontStyle.Bold);
+            this.lblInstructor.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 12F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblInstructor.LocationFloat = new DevExpress.Utils.PointFloat(79F, 600.777F);
             this.lblInstructor.Multiline = true;
             this.lblInstructor.Name = "lblInstructor";
@@ -220,7 +220,7 @@
             // 
             // lblDuration
             // 
-            this.lblDuration.Font = new System.Drawing.Font("Clarendon Blk BT", 16F, System.Drawing.FontStyle.Bold);
+            this.lblDuration.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblDuration.LocationFloat = new DevExpress.Utils.PointFloat(823.9999F, 484.9999F);
             this.lblDuration.Multiline = true;
             this.lblDuration.Name = "lblDuration";
@@ -233,7 +233,7 @@
             // 
             // lblTo
             // 
-            this.lblTo.Font = new System.Drawing.Font("Clarendon Blk BT", 16F, System.Drawing.FontStyle.Bold);
+            this.lblTo.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblTo.LocationFloat = new DevExpress.Utils.PointFloat(524.8051F, 484.9999F);
             this.lblTo.Multiline = true;
             this.lblTo.Name = "lblTo";
@@ -246,7 +246,7 @@
             // 
             // lblFrom
             // 
-            this.lblFrom.Font = new System.Drawing.Font("Clarendon Blk BT", 16F, System.Drawing.FontStyle.Bold);
+            this.lblFrom.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 16F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblFrom.LocationFloat = new DevExpress.Utils.PointFloat(269.3376F, 484.9999F);
             this.lblFrom.Multiline = true;
             this.lblFrom.Name = "lblFrom";
@@ -259,7 +259,7 @@
             // 
             // lblCer
             // 
-            this.lblCer.Font = new System.Drawing.Font("Clarendon Blk BT", 20F, System.Drawing.FontStyle.Bold);
+            this.lblCer.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 20F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblCer.LocationFloat = new DevExpress.Utils.PointFloat(53.40695F, 405.5176F);
             this.lblCer.Multiline = true;
             this.lblCer.Name = "lblCer";
@@ -272,7 +272,7 @@
             // 
             // lblName
             // 
-            this.lblName.Font = new System.Drawing.Font("Clarendon Blk BT", 26F);
+            this.lblName.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 26F);
             this.lblName.LocationFloat = new DevExpress.Utils.PointFloat(38.99997F, 304.4382F);
             this.lblName.Multiline = true;
             this.lblName.Name = "lblName";
@@ -285,7 +285,7 @@
             // 
             // lblOpsTrnCaption
             // 
-            this.lblOpsTrnCaption.Font = new System.Drawing.Font("Embassy BT", 22F, System.Drawing.FontStyle.Bold);
+            this.lblOpsTrnCaption.Font = new DevExpress.Drawing.DXFont("Embassy BT", 22F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblOpsTrnCaption.LocationFloat = new DevExpress.Utils.PointFloat(402.8355F, 561.746F);
             this.lblOpsTrnCaption.Multiline = true;
             this.lblOpsTrnCaption.Name = "lblOpsTrnCaption";
@@ -298,7 +298,7 @@
             // 
             // xrLabel14
             // 
-            this.xrLabel14.Font = new System.Drawing.Font("Embassy BT", 22F, System.Drawing.FontStyle.Bold);
+            this.xrLabel14.Font = new DevExpress.Drawing.DXFont("Embassy BT", 22F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel14.LocationFloat = new DevExpress.Utils.PointFloat(700.0986F, 561.746F);
             this.xrLabel14.Multiline = true;
             this.xrLabel14.Name = "xrLabel14";
@@ -311,7 +311,7 @@
             // 
             // xrLabel13
             // 
-            this.xrLabel13.Font = new System.Drawing.Font("Embassy BT", 22F, System.Drawing.FontStyle.Bold);
+            this.xrLabel13.Font = new DevExpress.Drawing.DXFont("Embassy BT", 22F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(163.5042F, 561.746F);
             this.xrLabel13.Multiline = true;
             this.xrLabel13.Name = "xrLabel13";
@@ -324,7 +324,7 @@
             // 
             // lblGenDate
             // 
-            this.lblGenDate.Font = new System.Drawing.Font("Calibri", 11F);
+            this.lblGenDate.Font = new DevExpress.Drawing.DXFont("Calibri", 11F);
             this.lblGenDate.LocationFloat = new DevExpress.Utils.PointFloat(982.6102F, 655.0706F);
             this.lblGenDate.Multiline = true;
             this.lblGenDate.Name = "lblGenDate";
@@ -337,7 +337,7 @@
             // 
             // xrLabel11
             // 
-            this.xrLabel11.Font = new System.Drawing.Font("Calibri", 11F);
+            this.xrLabel11.Font = new DevExpress.Drawing.DXFont("Calibri", 11F);
             this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(540.8342F, 655.0706F);
             this.xrLabel11.Multiline = true;
             this.xrLabel11.Name = "xrLabel11";
@@ -350,7 +350,7 @@
             // 
             // lblIssueNo
             // 
-            this.lblIssueNo.Font = new System.Drawing.Font("Calibri", 11F);
+            this.lblIssueNo.Font = new DevExpress.Drawing.DXFont("Calibri", 11F);
             this.lblIssueNo.LocationFloat = new DevExpress.Utils.PointFloat(74.30502F, 655.0706F);
             this.lblIssueNo.Multiline = true;
             this.lblIssueNo.Name = "lblIssueNo";
@@ -363,7 +363,7 @@
             // 
             // xrLabel10
             // 
-            this.xrLabel10.Font = new System.Drawing.Font("Clarendon Blk BT", 40F, System.Drawing.FontStyle.Bold);
+            this.xrLabel10.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 40F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(38.99997F, 185.0507F);
             this.xrLabel10.Multiline = true;
             this.xrLabel10.Name = "xrLabel10";
@@ -376,7 +376,7 @@
             // 
             // xrLabel9
             // 
-            this.xrLabel9.Font = new System.Drawing.Font("Embassy BT", 29F, System.Drawing.FontStyle.Bold);
+            this.xrLabel9.Font = new DevExpress.Drawing.DXFont("Embassy BT", 29F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(903.1666F, 469.9096F);
             this.xrLabel9.Multiline = true;
             this.xrLabel9.Name = "xrLabel9";
@@ -389,7 +389,7 @@
             // 
             // xrLabel8
             // 
-            this.xrLabel8.Font = new System.Drawing.Font("Embassy BT", 29F, System.Drawing.FontStyle.Bold);
+            this.xrLabel8.Font = new DevExpress.Drawing.DXFont("Embassy BT", 29F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(773.1666F, 469.9096F);
             this.xrLabel8.Multiline = true;
             this.xrLabel8.Name = "xrLabel8";
@@ -402,7 +402,7 @@
             // 
             // xrLabel7
             // 
-            this.xrLabel7.Font = new System.Drawing.Font("Embassy BT", 29F, System.Drawing.FontStyle.Bold);
+            this.xrLabel7.Font = new DevExpress.Drawing.DXFont("Embassy BT", 29F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(463.9717F, 469.9096F);
             this.xrLabel7.Multiline = true;
             this.xrLabel7.Name = "xrLabel7";
@@ -415,7 +415,7 @@
             // 
             // xrLabel6
             // 
-            this.xrLabel6.Font = new System.Drawing.Font("Embassy BT", 29F, System.Drawing.FontStyle.Bold);
+            this.xrLabel6.Font = new DevExpress.Drawing.DXFont("Embassy BT", 29F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(163.5043F, 469.9096F);
             this.xrLabel6.Multiline = true;
             this.xrLabel6.Name = "xrLabel6";
@@ -428,7 +428,7 @@
             // 
             // xrLabel5
             // 
-            this.xrLabel5.Font = new System.Drawing.Font("Embassy BT", 29F, System.Drawing.FontStyle.Bold);
+            this.xrLabel5.Font = new DevExpress.Drawing.DXFont("Embassy BT", 29F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(39.00017F, 360.0931F);
             this.xrLabel5.Multiline = true;
             this.xrLabel5.Name = "xrLabel5";
@@ -441,7 +441,7 @@
             // 
             // xrLabel4
             // 
-            this.xrLabel4.Font = new System.Drawing.Font("Embassy BT", 29F, System.Drawing.FontStyle.Bold);
+            this.xrLabel4.Font = new DevExpress.Drawing.DXFont("Embassy BT", 29F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(38.99997F, 257.7485F);
             this.xrLabel4.Multiline = true;
             this.xrLabel4.Name = "xrLabel4";
@@ -454,7 +454,7 @@
             // 
             // lblExpiryCaption
             // 
-            this.lblExpiryCaption.Font = new System.Drawing.Font("Embassy BT", 20F, System.Drawing.FontStyle.Bold);
+            this.lblExpiryCaption.Font = new DevExpress.Drawing.DXFont("Embassy BT", 20F, DevExpress.Drawing.DXFontStyle.Bold);
             this.lblExpiryCaption.LocationFloat = new DevExpress.Utils.PointFloat(781F, 119.5F);
             this.lblExpiryCaption.Multiline = true;
             this.lblExpiryCaption.Name = "lblExpiryCaption";
@@ -467,7 +467,7 @@
             // 
             // xrLabel3
             // 
-            this.xrLabel3.Font = new System.Drawing.Font("Embassy BT", 20F, System.Drawing.FontStyle.Bold);
+            this.xrLabel3.Font = new DevExpress.Drawing.DXFont("Embassy BT", 20F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(796.161F, 79F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
@@ -480,7 +480,7 @@
             // 
             // xrLabel2
             // 
-            this.xrLabel2.Font = new System.Drawing.Font("Embassy BT", 20F, System.Drawing.FontStyle.Bold);
+            this.xrLabel2.Font = new DevExpress.Drawing.DXFont("Embassy BT", 20F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(114.5255F, 119.5F);
             this.xrLabel2.Multiline = true;
             this.xrLabel2.Name = "xrLabel2";
@@ -493,7 +493,7 @@
             // 
             // xrLabel1
             // 
-            this.xrLabel1.Font = new System.Drawing.Font("Embassy BT", 20F, System.Drawing.FontStyle.Bold);
+            this.xrLabel1.Font = new DevExpress.Drawing.DXFont("Embassy BT", 20F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(79F, 78.99999F);
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
@@ -527,14 +527,14 @@
             this.TopMargin,
             this.BottomMargin,
             this.Detail});
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(0, 0, 0, 0);
+            this.Margins = new DevExpress.Drawing.DXMargins(0, 0, 0, 0);
             this.PageHeight = 827;
             this.PageWidth = 1169;
-            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
             this.Version = "19.2";
-            this.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.rptFPCFlyPersia_BeforePrint);
+            this.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.rptFPCFlyPersia_BeforePrint);
             this.AfterPrint += new System.EventHandler(this.rptFPCFlyPersia_AfterPrint);
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 

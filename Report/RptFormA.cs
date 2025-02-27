@@ -14,7 +14,7 @@ namespace Report
             InitializeComponent();
         }
 
-        private void RptFormA_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void RptFormA_BeforePrint(object sender, CancelEventArgs e)
         {
             string airline = WebConfigurationManager.AppSettings["customer"];
             lbl_airline.Text = airline;

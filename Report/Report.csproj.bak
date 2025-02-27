@@ -1,0 +1,665 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{894472CB-A68E-4E73-B443-A8ADB7F38136}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Report</RootNamespace>
+    <AssemblyName>Report</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44350</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Charts.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.CodeParser.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="DevExpress.DataAccess.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Office.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Pdf.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v19.2.Export, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Sparkline.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.Resources.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Web.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Xpo.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraCharts.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v19.2.Core, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v19.2, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v19.2.Web, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v19.2.Web.WebForms, Version=19.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="index.html" />
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="frmReportView.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomFontConverter.cs" />
+    <Compile Include="CustomFontsHelper.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper.cs" />
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Person.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="frmReportView.aspx.cs">
+      <DependentUpon>frmReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmReportView.aspx.designer.cs">
+      <DependentUpon>frmReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportFunctions.cs" />
+    <Compile Include="rptApt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptApt.Designer.cs">
+      <DependentUpon>rptApt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptAptDailyCaspian.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptAptDailyCaspian.Designer.cs">
+      <DependentUpon>rptAptDailyCaspian.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptAptInt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptAptInt.Designer.cs">
+      <DependentUpon>rptAptInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptAptRange.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptAptRange.Designer.cs">
+      <DependentUpon>RptAptRange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptASR.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptASR.Designer.cs">
+      <DependentUpon>rptASR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptAtt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptAtt.Designer.cs">
+      <DependentUpon>rptAtt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptAttFormFlyPersia.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptAttFormFlyPersia.Designer.cs">
+      <DependentUpon>RptAttFormFlyPersia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptAttNew.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptAttNew.Designer.cs">
+      <DependentUpon>rptAttNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptCabinTrainingCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptCabinTrainingCard.Designer.cs">
+      <DependentUpon>RptCabinTrainingCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptCertificates.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptCertificates.Designer.cs">
+      <DependentUpon>rptCertificates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptCityPair.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptCityPair.Designer.cs">
+      <DependentUpon>rptCityPair.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptCourseProfile.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptCourseProfile.Designer.cs">
+      <DependentUpon>RptCourseProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptCourseProfileAtlas.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptCourseProfileAtlas.Designer.cs">
+      <DependentUpon>RptCourseProfileAtlas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptCourseProfileAVA.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptCourseProfileAVA.Designer.cs">
+      <DependentUpon>RptCourseProfileAVA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptCourseProfileAVA1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptCourseProfileAVA1.Designer.cs">
+      <DependentUpon>rptCourseProfileAVA1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptCourses.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptCourses.Designer.cs">
+      <DependentUpon>rptCourses.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptCSR.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptCSR.Designer.cs">
+      <DependentUpon>rptCSR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptDelay.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptDelay.Designer.cs">
+      <DependentUpon>rptDelay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptDelayInt.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptDelayInt.Designer.cs">
+      <DependentUpon>rptDelayInt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptDelaySub.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptDelaySub.Designer.cs">
+      <DependentUpon>rptDelaySub.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptEASAFCLCompliant16X.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptEASAFCLCompliant16X.Designer.cs">
+      <DependentUpon>RptEASAFCLCompliant16X.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptFormA.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptFormA.Designer.cs">
+      <DependentUpon>RptFormA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptFormAYear.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptFormAYear.Designer.cs">
+      <DependentUpon>RptFormAYear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptFPC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptFPC.Designer.cs">
+      <DependentUpon>rptFPC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptFPCAir1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptFPCAir1.Designer.cs">
+      <DependentUpon>rptFPCAir1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptFPCAVA.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptFPCAVA.Designer.cs">
+      <DependentUpon>rptFPCAVA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptFPCFlyPersia.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptFPCFlyPersia.Designer.cs">
+      <DependentUpon>rptFPCFlyPersia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptFPCPasco.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptFPCPasco.Designer.cs">
+      <DependentUpon>rptFPCPasco.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptFPCVaresh.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptFPCVaresh.Designer.cs">
+      <DependentUpon>rptFPCVaresh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptGeneral7Row.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptGeneral7Row.Designer.cs">
+      <DependentUpon>RptGeneral7Row.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptLog18.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptLog18.Designer.cs">
+      <DependentUpon>rptLog18.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptLogA.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptLogA.Designer.cs">
+      <DependentUpon>rptLogA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptMOR.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptMOR.Designer.cs">
+      <DependentUpon>rptMOR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptMovaled.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptMovaled.Designer.cs">
+      <DependentUpon>RptMovaled.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptMovaledYear.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptMovaledYear.Designer.cs">
+      <DependentUpon>rptMovaledYear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptOPC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptOPC.Designer.cs">
+      <DependentUpon>rptOPC.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptRoster.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptRoster.Designer.cs">
+      <DependentUpon>rptRoster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptRosterFP.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptRosterFP.Designer.cs">
+      <DependentUpon>rptRosterFP.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptRosterSecurity.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptRosterSecurity.Designer.cs">
+      <DependentUpon>rptRosterSecurity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptVR.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptVR.Designer.cs">
+      <DependentUpon>rptVR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptVRKarun.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptVRKarun.Designer.cs">
+      <DependentUpon>rptVRKarun.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrainingCard.cs" />
+    <Compile Include="ViewCourseNew.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCoursePeople.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCourseSession.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewCourseSessionPresence.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewLogBook18.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewSyllabu.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="XtraReport1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XtraReport1.Designer.cs">
+      <DependentUpon>XtraReport1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptTwoPageLogBook.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptTwoPageLogBook.Designer.cs">
+      <DependentUpon>RptTwoPageLogBook.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RptFlight.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RptFlight.Designer.cs">
+      <DependentUpon>RptFlight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XtraReport2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XtraReport2.Designer.cs">
+      <DependentUpon>XtraReport2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XtraReport3.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XtraReport3.Designer.cs">
+      <DependentUpon>XtraReport3.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\B-NAZANIN.TTF" />
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptApt.resx">
+      <DependentUpon>rptApt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptAptDailyCaspian.resx">
+      <DependentUpon>rptAptDailyCaspian.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptAptInt.resx">
+      <DependentUpon>rptAptInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptAptRange.resx">
+      <DependentUpon>RptAptRange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptASR.resx">
+      <DependentUpon>rptASR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptAtt.resx">
+      <DependentUpon>rptAtt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptAttFormFlyPersia.resx">
+      <DependentUpon>RptAttFormFlyPersia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptAttNew.resx">
+      <DependentUpon>rptAttNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptCabinTrainingCard.resx">
+      <DependentUpon>RptCabinTrainingCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptCertificates.resx">
+      <DependentUpon>rptCertificates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptCityPair.resx">
+      <DependentUpon>rptCityPair.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptCourseProfile.resx">
+      <DependentUpon>RptCourseProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptCourseProfileAtlas.resx">
+      <DependentUpon>RptCourseProfileAtlas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptCourseProfileAVA.resx">
+      <DependentUpon>RptCourseProfileAVA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptCourseProfileAVA1.resx">
+      <DependentUpon>rptCourseProfileAVA1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptCourses.resx">
+      <DependentUpon>rptCourses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptCSR.resx">
+      <DependentUpon>rptCSR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptDelay.resx">
+      <DependentUpon>rptDelay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptDelayInt.resx">
+      <DependentUpon>rptDelayInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptDelaySub.resx">
+      <DependentUpon>rptDelaySub.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptEASAFCLCompliant16X.resx">
+      <DependentUpon>RptEASAFCLCompliant16X.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptFlight.resx">
+      <DependentUpon>RptFlight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptFormA.resx">
+      <DependentUpon>RptFormA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptFormAYear.resx">
+      <DependentUpon>RptFormAYear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptFPC.resx">
+      <DependentUpon>rptFPC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptFPCAir1.resx">
+      <DependentUpon>rptFPCAir1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptFPCAVA.resx">
+      <DependentUpon>rptFPCAVA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptFPCFlyPersia.resx">
+      <DependentUpon>rptFPCFlyPersia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptFPCPasco.resx">
+      <DependentUpon>rptFPCPasco.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptFPCVaresh.resx">
+      <DependentUpon>rptFPCVaresh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptLog18.resx">
+      <DependentUpon>rptLog18.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptLogA.resx">
+      <DependentUpon>rptLogA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptMOR.resx">
+      <DependentUpon>rptMOR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptMovaled.resx">
+      <DependentUpon>RptMovaled.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptMovaledYear.resx">
+      <DependentUpon>rptMovaledYear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptOPC.resx">
+      <DependentUpon>rptOPC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptRoster.resx">
+      <DependentUpon>rptRoster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptRosterFP.resx">
+      <DependentUpon>rptRosterFP.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptRosterSecurity.resx">
+      <DependentUpon>rptRosterSecurity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptVR.resx">
+      <DependentUpon>rptVR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptVRKarun.resx">
+      <DependentUpon>rptVRKarun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraReport1.resx">
+      <DependentUpon>XtraReport1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptGeneral7Row.resx">
+      <DependentUpon>RptGeneral7Row.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RptTwoPageLogBook.resx">
+      <DependentUpon>RptTwoPageLogBook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraReport2.resx">
+      <DependentUpon>XtraReport2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraReport3.resx">
+      <DependentUpon>XtraReport3.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>18402</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44351/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44351/</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

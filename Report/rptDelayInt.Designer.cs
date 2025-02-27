@@ -51,7 +51,7 @@
             this.TopMargin,
             this.BottomMargin,
             this.Detail});
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
             this.PageHeight = 850;
             this.PageWidth = 1100;

@@ -171,7 +171,7 @@
             this.sqlDataSource1});
             this.DataMember = "_VRepLog";
             this.DataSource = this.sqlDataSource1;
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Version = "19.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 

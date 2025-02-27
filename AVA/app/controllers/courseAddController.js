@@ -701,6 +701,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                         $scope.entity.Sessions = [];
                         //entity.Duration
                         var _cnt = $scope.entity.Duration * 60 / $scope.session_duration;
+                        var _ellapsed = 0;
                         var session_start = _start;
                         while ($scope.entity.Sessions.length < _cnt) {
                             var session_end = General.add_minutes(session_start, $scope.session_duration); 
@@ -708,7 +709,19 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                             obj.Key = $scope.getSessionKey(obj);
                             $scope.entity.Sessions.push(obj);
 
-                            session_start = General.add_minutes(session_end,15);  ;
+                            _ellapsed += $scope.session_duration;
+                            console.log('_ellapsed   '+_ellapsed);
+                            if (_ellapsed < 8 * 60) {
+                                session_start = General.add_minutes(session_end, 15);
+                            }
+                            else {
+                                var _date2 = (new Date(session_start).addDays(1)).getDatePartArray();
+                                var _hhmm = (new Date($scope.sessionStart)).getTimePartArray();
+                                var _start2 = new Date(_date2[0], _date2[1], _date2[2], _hhmm[0], _hhmm[1], 0, 0);
+                                session_start = _start2;
+                                _ellapsed = 0;
+                            }
+                             
                         }
                         $scope.session_changed = 1;
                         $scope.popup_sessionall_visible = false;
@@ -2355,6 +2368,103 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         displayFormat: $rootScope.DateBoxFormat,
         bindingOptions: {
             value: 'entity.DateEnd',
+
+        }
+    };
+    $scope.btn_persiandate = {
+        //text: 'Search',
+        type: 'default',
+        icon: 'event',
+        width: 35,
+        //validationGroup: 'dlasearch',
+        bindingOptions: {},
+        onClick: function (e) {
+
+            $scope.popup_date_visible = true;
+        }
+
+    };
+    $scope.popup_date_visible = false;
+    $scope.popup_date_title = 'Date Picker';
+    var pd1 = null;
+    var pd2 = null;
+    $scope.popup_date = {
+        title: 'Shamsi Date Picker',
+        shading: true,
+        //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
+        height: 200,
+        width: 300,
+        fullScreen: false,
+        showTitle: true,
+        dragEnabled: true,
+
+
+        visible: false,
+
+        closeOnOutsideClick: false,
+        onTitleRendered: function (e) {
+            // $(e.titleElement).addClass('vahid');
+            // $(e.titleElement).css('background-color', '#f2552c');
+        },
+        onShowing: function (e) {
+
+
+
+
+        },
+        onShown: function (e) {
+
+            pd1 = $(".date1").pDatepicker({
+                format: 'l',
+                autoClose: true,
+                calendar: {
+                    persian: {
+                        locale: 'en'
+                    }
+                },
+                onSelect: function (unix) {
+
+                    console.log(new Date(unix));
+                    $scope.$apply(function () {
+
+                        $scope.entity.DateStart = new Date(unix);
+                    });
+
+                },
+
+            });
+            if ($scope.entity.DateStart)
+                pd1.setDate(new Date($scope.entity.DateStart.getTime()));
+            pd2 = $(".date2").pDatepicker({
+                format: 'l',
+                autoClose: true,
+                calendar: {
+                    persian: {
+                        locale: 'en'
+                    }
+                },
+                onSelect: function (unix) {
+                    $scope.$apply(function () {
+                        $scope.entity.DateEnd = new Date(unix);
+                    });
+                },
+
+            });
+            if ($scope.entity.DateEnd)
+                pd2.setDate(new Date($scope.entity.DateEnd.getTime()));
+
+        },
+        onHiding: function () {
+            pd1.destroy();
+            pd2.destroy();
+            $scope.popup_date_visible = false;
+
+        },
+        showCloseButton: true,
+        bindingOptions: {
+            visible: 'popup_date_visible',
+
+
 
         }
     };

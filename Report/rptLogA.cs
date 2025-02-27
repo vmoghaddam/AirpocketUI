@@ -32,7 +32,7 @@ namespace Report
             
         }
 
-        private void lblCur_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblCur_BeforePrint(object sender, CancelEventArgs e)
         {
         
         }
@@ -72,13 +72,13 @@ namespace Report
 
         }
 
-        private void lblPre_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblPre_BeforePrint(object sender, CancelEventArgs e)
         {
             // (sender as XRLabel).Text = formatMinutes(blSum);
           
         }
 
-        private void lblAll_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblAll_BeforePrint(object sender, CancelEventArgs e)
         {
             // var x = this.GetCurrentRow();
            
@@ -106,7 +106,7 @@ namespace Report
             (sender as XRLabel).Text =formatMinutes( rows.Sum(q => q.BlockTime) + (init_total_time));
         }
 
-        private void xrTableCell46_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrTableCell46_BeforePrint(object sender, CancelEventArgs e)
         {
             
         }
@@ -118,7 +118,7 @@ namespace Report
             (sender as XRLabel).Text = formatMinutes(rows.Sum(q => q.MultiPilotTime)+ initMulti);
         }
 
-        private void xrTableCell49_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrTableCell49_BeforePrint(object sender, CancelEventArgs e)
         {
 
         }
@@ -336,12 +336,12 @@ namespace Report
             e.Text = formatMinutes(Convert.ToInt32(e.Value));
         }
 
-        private void xrTableCell42_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrTableCell42_BeforePrint(object sender, CancelEventArgs e)
         {
             
         }
 
-        private void xrTableCell71_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrTableCell71_BeforePrint(object sender, CancelEventArgs e)
         {
             var text = (sender as XRLabel).Text;
             if (string.IsNullOrEmpty(text))
@@ -357,7 +357,7 @@ namespace Report
             (sender as XRLabel).Text = formatMinutes(0 + single_time);
         }
 
-        private void xrTableCell4_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrTableCell4_BeforePrint(object sender, CancelEventArgs e)
         {
 
         }

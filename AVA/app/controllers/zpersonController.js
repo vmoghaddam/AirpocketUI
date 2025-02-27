@@ -1948,33 +1948,33 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                     width:200,
                 }, toolbar: 'bottom'
             },
-            {
-                widget: 'dxSelectBox', location: 'before', options: {
-                    dataSource: $rootScope.getDatasourceCertificateTypes(),
-                    displayExpr: 'Title',
-                    valueExpr: 'Id',
-                    placeholder: 'Certificate Type',
-                    searchEnabled: true,
-                    showClearButton: true,
-                    onValueChanged: function (e) {
-                        $scope.crs_cer = e.value;
-                    },
-                    width: 200,
-                }, toolbar: 'bottom'
-            },
-            {
-                widget: 'dxSelectBox', location: 'before', options: {
-                    dataSource: [{ id: -2, title: 'All' }, { id: 1, title: 'Recurrent' }, { id: 0, title: 'Initial' } ],
-                    displayExpr: 'title',
-                    valueExpr: 'id',
-                    placeholder: 'Re/In',
-                    showClearButton: true,
-                    width: 100,
-                    onValueChanged: function (e) {
-                        $scope.crs_re = e.value;
-                    },
-                }, toolbar: 'bottom'
-            },
+            //{
+            //    widget: 'dxSelectBox', location: 'before', options: {
+            //        dataSource: $rootScope.getDatasourceCertificateTypes(),
+            //        displayExpr: 'Title',
+            //        valueExpr: 'Id',
+            //        placeholder: 'Certificate Type',
+            //        searchEnabled: true,
+            //        showClearButton: true,
+            //        onValueChanged: function (e) {
+            //            $scope.crs_cer = e.value;
+            //        },
+            //        width: 200,
+            //    }, toolbar: 'bottom'
+            //},
+            //{
+            //    widget: 'dxSelectBox', location: 'before', options: {
+            //        dataSource: [{ id: -2, title: 'All' }, { id: 1, title: 'Recurrent' }, { id: 0, title: 'Initial' } ],
+            //        displayExpr: 'title',
+            //        valueExpr: 'id',
+            //        placeholder: 'Re/In',
+            //        showClearButton: true,
+            //        width: 100,
+            //        onValueChanged: function (e) {
+            //            $scope.crs_re = e.value;
+            //        },
+            //    }, toolbar: 'bottom'
+            //},
             {
                 widget: 'dxSelectBox', location: 'before', options: {
                     dataSource: [{ id: 0, title: 'All' }, { id: 1, title: 'Last' } ],
@@ -2058,33 +2058,33 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                     }
                 }, toolbar: 'bottom'
             },
-            {
-                widget: 'dxButton', location: 'after', options: {
-                    type: 'default', text: 'Certificates', icon: 'print', onClick: function (arg) {
-						if ($scope.isManager)
-							return;
-                        if (!$scope.selected_person_id) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $window.open($rootScope.reportServer + '?type=11&pid=' + $scope.selected_person_id, '_blank');
+      //      {
+      //          widget: 'dxButton', location: 'after', options: {
+      //              type: 'default', text: 'Certificates', icon: 'print', onClick: function (arg) {
+						//if ($scope.isManager)
+						//	return;
+      //                  if (!$scope.selected_person_id) {
+      //                      General.ShowNotify(Config.Text_NoRowSelected, 'error');
+      //                      return;
+      //                  }
+      //                  $window.open($rootScope.reportServer + '?type=11&pid=' + $scope.selected_person_id, '_blank');
 
-                    }
-                }, toolbar: 'bottom'
-            },
-            {
-                widget: 'dxButton', location: 'after', options: {
-                    type: 'default', text: 'Courses', icon: 'print', onClick: function (arg) {
-						if ($scope.isManager)
-							return;
-                        if (!$scope.selected_person_id) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $window.open($rootScope.reportServer + '?type=12&pid=' + $scope.selected_person_id, '_blank');
-                    }
-                }, toolbar: 'bottom'
-            },
+      //              }
+      //          }, toolbar: 'bottom'
+      //      },
+      //      {
+      //          widget: 'dxButton', location: 'after', options: {
+      //              type: 'default', text: 'Courses', icon: 'print', onClick: function (arg) {
+						//if ($scope.isManager)
+						//	return;
+      //                  if (!$scope.selected_person_id) {
+      //                      General.ShowNotify(Config.Text_NoRowSelected, 'error');
+      //                      return;
+      //                  }
+      //                  $window.open($rootScope.reportServer + '?type=12&pid=' + $scope.selected_person_id, '_blank');
+      //              }
+      //          }, toolbar: 'bottom'
+      //      },
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (arg) {

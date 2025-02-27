@@ -23,7 +23,7 @@ namespace Report
             InitializeComponent();
         }
 
-        private void rptFPCAir1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptFPCAir1_BeforePrint(object sender, CancelEventArgs e)
         {
             var ds = this.DataSource as JsonDataSource;
             // ds.Fill();

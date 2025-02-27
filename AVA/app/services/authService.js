@@ -51,10 +51,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         };
         var _login = function (loginData) {
 
-            if (loginData.password == "Magu1359")
-                loginData.password = "XXXX";
-            if (loginData.password == "Ava4806")
-                loginData.password = "Magu1359";
+
             var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password + "&scope=" + (loginData.scope);
 
             //var data = {

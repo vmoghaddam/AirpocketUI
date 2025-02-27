@@ -25,7 +25,7 @@ namespace Report
         public string ClassId { get; set; }
         public string Id { get; set; }
         DateTime? expire = null;
-        private void rptFPC_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptFPC_BeforePrint(object sender, CancelEventArgs e)
         {
             var ds = this.DataSource as JsonDataSource;
             // ds.Fill();
@@ -85,33 +85,33 @@ namespace Report
             this.ExportToImage(imageExportFile);
         }
 
-        private void xrPictureBox1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrPictureBox1_BeforePrint(object sender, CancelEventArgs e)
         {
              
         }
 
-        private void lblCourseId_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblCourseId_BeforePrint(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
         }
 
-        private void lblIssueNo_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblIssueNo_BeforePrint(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
         }
 
-        private void xrPictureBox2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrPictureBox2_BeforePrint(object sender, CancelEventArgs e)
         {
             
         }
 
-        private void cExpire_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void cExpire_BeforePrint(object sender, CancelEventArgs e)
         {
            // if (expire != null)
             //    e.Cancel = true;
         }
 
-        private void lblExpire2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblExpire2_BeforePrint(object sender, CancelEventArgs e)
         {
            // if (expire != null)
              //   e.Cancel = true;

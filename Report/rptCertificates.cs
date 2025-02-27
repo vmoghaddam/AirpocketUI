@@ -13,7 +13,7 @@ namespace Report
             InitializeComponent();
         }
 
-        private void GroupHeader1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void GroupHeader1_BeforePrint(object sender, CancelEventArgs e)
         {
             var str = Convert.ToString(GetCurrentColumnValue("ImageUrl"));
            // img.ImageUrl = str;
@@ -50,7 +50,7 @@ namespace Report
 
         }
 
-        private void Detail_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void Detail_BeforePrint(object sender, CancelEventArgs e)
         {
            
         }

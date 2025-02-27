@@ -422,6 +422,8 @@ TRG16ExpireDate:null,
         DocumentTypeId: null,
         Id: null,
         DocumentType: null,
+        DateIssue: null,
+        DateExpire:null,
         Documents:[],
     };
     $scope.entityEducation = {
@@ -550,6 +552,9 @@ TRG16ExpireDate:null,
         $scope.entityDocument.Id = data.Id;
         $scope.entityDocument.DocumentType = data.DocumentType;
         $scope.entityDocument.Documents = data.Documents;
+
+        $scope.entityDocument.DateIssue = data.DateIssue;
+        $scope.entityDocument.DateExpire = data.DateExpire;
     };
     $scope.entityDocument2 = {};
     $scope.bindDocumnetView = function (data) {
@@ -596,6 +601,8 @@ TRG16ExpireDate:null,
         $scope.entityDocument.DocumentTypeId = null;
         $scope.entityDocument.Id = null;
         $scope.entityDocument.DocumentType = null;
+        $scope.entityDocument.DateIssue = null;
+        $scope.entityDocument.DateExpire = null;
         $scope.entityDocument.Documents = [];
         $scope.uploader_document_instance.reset();
     };
@@ -1420,6 +1427,9 @@ $scope.entity.Person.TRG16ExpireDate= data.TRG16ExpireDate;
         $scope.entity.Person.Expreienses = data.Expreienses;
         $scope.entity.Person.AircraftTypes = data.AircraftTypes;
         $scope.entity.Person.Documents = data.Documents;
+        $.each($scope.entity.Person.Documents, function (_i, _d) {
+            _d.Count = _d.Documents.length;
+        });
         $scope.entity.Person.Ratings = data.Ratings;
        
         $scope.entity.Person.Certificates = data.Certificates;
@@ -1479,7 +1489,7 @@ $scope.entity.Person.TRG16ExpireDate= data.TRG16ExpireDate;
         if (data.Locations && data.Locations.length > 0) {
             $scope.bindLocation(data.Locations[0]);
         }
-
+        $scope.bindPersoncourses();
         //alert($scope.entity.Person.DateTypeIssue);
 
 
@@ -1598,7 +1608,7 @@ $scope.entity.Person.TRG16ExpireDate= data.TRG16ExpireDate;
         //{ text: "Education", id: 'education', visible_btn: false },
         //  { text: "حساب بانکی", id: 'account', visible_btn: false },
         //{ text: "Certificate", id: 'certificate', visible_btn: true },
-       // { text: "Document", id: 'file', visible_btn: false, visible_btn2: true },
+        { text: "Document", id: 'file', visible_btn: false, visible_btn2: true },
        // { text: "Experience", id: 'experience', visible_btn: false, visible: $scope.isView },
        // { text: "Rating", id: 'rating', visible_btn: false, visible: $scope.isView },
         { text: "Aircraft Type", id: 'aircrafttype', visible_btn: false, visible: $scope.isView },
@@ -1624,6 +1634,7 @@ $scope.entity.Person.TRG16ExpireDate= data.TRG16ExpireDate;
     $scope.btn_location_rating = 'after';
     $scope.tabs = tabs;
     $scope.selectedTabIndex = 0;
+    $scope.tab_file = false;
     $scope.$watch("selectedTabIndex", function (newValue) {
 
         try {
@@ -1657,11 +1668,11 @@ $scope.entity.Person.TRG16ExpireDate= data.TRG16ExpireDate;
             
           //  $scope.btn_visible_education = newValue == 1;
             
-           
-           // $scope.btn_visible_file = newValue == 2;
+
+            $scope.tab_file = newValue == 1;
            // $scope.btn_visible_experience = newValue == 3;
            // $scope.btn_visible_rating = newValue ==4;
-            $scope.btn_visible_aircrafttype = newValue == 1;
+            $scope.btn_visible_aircrafttype = newValue == 2;
         
           //  $scope.btn_visible_course = newValue == 7;
 
@@ -1687,6 +1698,257 @@ $scope.entity.Person.TRG16ExpireDate= data.TRG16ExpireDate;
         }
 
     };
+    //////////////////////////
+    $scope.ds_doc_type = [];
+    $scope.doc_selected = null;
+    $scope.get_doc_class = function (id) {
+        if ($scope.doc_selected == id)
+            return "doc-box doc-box-selected";
+        return "doc-box";
+    }
+    $scope.click_doc = function (id) {
+        $scope.doc_selected = id;
+        $scope.ds_doc_type = [];
+        $scope.btn_visible_file = false;
+        // alert($scope.doc_selected);
+        switch (id) {
+            case 'part1':
+                $scope.btn_visible_file = true;
+                $scope.btn_visible_crt = false;
+                $scope.ds_doc_type = [
+                    {
+                        "Id": 46,
+                        "Title": "Birth Certificate",
+                        "ParentId": 44,
+                        "IsSystem": true,
+                        "OrderIndex": 2,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+                    {
+                        "Id": 47,
+                        "Title": "National Card",
+                        "ParentId": 44,
+                        "IsSystem": true,
+                        "OrderIndex": 3,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+                    {
+                        "Id": 48,
+                        "Title": "Passport",
+                        "ParentId": 44,
+                        "IsSystem": true,
+                        "OrderIndex": 4,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+                    {
+                        "Id": 1186,
+                        "Title": "Crew Member Certificate",
+                        "ParentId": 44,
+                        "IsSystem": false,
+                        "OrderIndex": 104,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+                    {
+                        "Id": 301050,
+                        "Title": "Educational Doc.",
+                        "ParentId": 44,
+                        "IsSystem": false,
+                        "OrderIndex": 105,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+
+                ];
+               
+                break;
+            case 'part9':
+                $scope.btn_visible_file = true;
+                $scope.btn_visible_crt = false;
+                //Other Official Documents
+                $scope.ds_doc_type = [
+                    {
+                        "Id": 1186,
+                        "Title": "Crew Member Certificate",
+                        "ParentId": 44,
+                        "IsSystem": false,
+                        "OrderIndex": 104,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+                    {
+                        "Id": 301051,
+                        "Title": "Other Official Documents",
+                        "ParentId": 44,
+                        "IsSystem": false,
+                        "OrderIndex": 104,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+                ];
+                break;
+            case 'part3':
+                $scope.btn_visible_file = true;
+                $scope.btn_visible_crt = false;
+                $scope.ds_doc_type = [
+                    {
+                        "Id": 49,
+                        "Title": "Medical Record",
+                        "ParentId": 44,
+                        "IsSystem": true,
+                        "OrderIndex": 5,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+                ];
+                break;
+            case 'part4':
+                $scope.btn_visible_file = true;
+                $scope.btn_visible_crt = false;
+                $scope.ds_doc_type = [
+                    {
+                        "Id": 301052,
+                        "Title": "LogBook Record",
+                        "ParentId": 44,
+                        "IsSystem": true,
+                        "OrderIndex": 5,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+                ];
+                break;
+            case 'part2':
+                $scope.btn_visible_file = true;
+                $scope.btn_visible_crt = false;
+                $scope.ds_doc_type = [
+                    {
+                        "Id": 1181,
+                        "Title": "Flight Crew Licence",
+                        "ParentId": 44,
+                        "IsSystem": false,
+                        "OrderIndex": 100,
+                        "Parent": "Document Type",
+                        "CreatorId": null,
+                        "Prop1": null
+                    },
+                ];
+                break;
+            case 'part8':
+                $scope.btn_visible_file = false;
+                $scope.btn_visible_crt = true;
+                $scope.dg_courses_instance.refresh();
+                break;
+            default:
+                break;
+        }
+        var ids = Enumerable.From($scope.ds_doc_type).Select('$.Id').ToArray();
+        $scope.ds_dg_file = Enumerable.From($scope.entity.Person.Documents).Where(function (x) { return ids.indexOf(x.DocumentTypeId) != -1; }).ToArray();
+    }
+    $scope.get_doc_style = function (id) {
+        var color = '';
+        switch (id) {
+            case 'part1':
+                color = '#ff8bfe';
+                break;
+            case 'part2':
+                color = '#a5ff01';
+                break;
+            case 'part3':
+                color = '#ddd';
+                break;
+            case 'part4':
+                color = '#f7ed7e';
+                break;
+            case 'part5':
+                color = '#b1ffff';
+                break;
+            case 'part6':
+                color = '#ffff01';
+                break;
+            case 'part7':
+                color = '#01ffff';
+                break;
+            case 'part8':
+                color = '#01ffff';
+                break;
+            case 'part9':
+                color = '#ff0823';
+                break;
+
+            default:
+                color = '#eee';
+                break;
+        }
+        if (id == $scope.doc_selected)
+            return {
+                'border-color': color,
+                'background':color
+            };
+        return {
+            'border-color':color
+        };
+    }
+    $scope.get_content_style = function () {
+        var id = $scope.doc_selected;
+        var color = '';
+        switch (id) {
+            case 'part1':
+                color = '#ff8bfe';
+                break;
+            case 'part2':
+                color = '#a5ff01';
+                break;
+            case 'part3':
+                color = '#ddd';
+                break;
+            case 'part4':
+                color = '#f7ed7e';
+                break;
+            case 'part5':
+                color = '#b1ffff';
+                break;
+            case 'part6':
+                color = '#ffff01';
+                break;
+            case 'part7':
+                color = '#01ffff';
+                break;
+            case 'part8':
+                color = '#01ffff';
+                break;
+            case 'part9':
+                color = '#ff0823';
+                break;
+
+            default:
+                color = '#eee';
+                break;
+        }
+        
+        return {
+            'border-color': color
+        };
+    }
+    $scope.is_dg_file_visible = function () {
+        var visible = ['part1', 'part2', 'part3', 'part4', 'part5', 'part6', 'part7','part9'];
+        return visible.indexOf($scope.doc_selected) != -1;
+    }
+    $scope.is_dg_courses_visible = function () {
+        var visible = ['part8'];
+        return visible.indexOf($scope.doc_selected) != -1;
+    }
     /////////////////////////
     $scope.IsMainDisabled = false;
     $scope.IsNIDDisabled = false;
@@ -3508,19 +3770,39 @@ $scope.date_Type737IssueDate = {
     $scope.sb_DocumentTypeId = {
         showClearButton: true,
         searchEnabled: true,
-        dataSource: $rootScope.getDatasourceOption(44),
+        //dataSource: $rootScope.getDatasourceOption(44),
         displayExpr: "Title",
         valueExpr: 'Id',
-        bindingOptions: {
-            value: 'entityDocument.DocumentTypeId',
-            
-        },
+        
         onSelectionChanged: function (e) {
 
             $scope.entityDocument.DocumentType = e.selectedItem ? e.selectedItem.Title : null;
+            
 
 
         },
+        bindingOptions: {
+            dataSource: 'ds_doc_type',
+            value: 'entityDocument.DocumentTypeId',
+        }
+    };
+    $scope.date_issue_doc = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+        bindingOptions: {
+            value: 'entityDocument.DateIssue',
+
+        }
+    };
+    $scope.date_expire_doc = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+        bindingOptions: {
+            value: 'entityDocument.DateExpire',
+
+        }
     };
     $scope.sb_DocumentTypeId2 = {
         showClearButton: true,
@@ -3799,7 +4081,7 @@ $scope.date_Type737IssueDate = {
         bindingOptions: { height: 'scroll_height', }
     };
     var dg_selected = null;
-    $scope.dg_height = 200;
+    $scope.dg_height = 153;
     $scope.pop_width = 600;
     $scope.pop_height = 350;
     $scope.popup_add_visible = false;
@@ -4001,7 +4283,27 @@ $scope.date_Type737IssueDate = {
                     }
                 }, toolbar: 'bottom'
             },
-
+            ////certificates
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'default', text: 'Add Certificate', width: 190, icon: 'plus', validationGroup: 'certificateadd', bindingOptions: { visible: 'btn_visible_crt', disabled: 'IsMainDisabled' }, onClick: function (e) {
+                       // alert('x');
+                        $scope.popup_cer_visible = true;
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'certificateadd', bindingOptions: { visible: 'btn_visible_crt', disabled: 'IsMainDisabled' }, onClick: function (e) {
+                        dg_selected = $rootScope.getSelectedRow($scope.dg_aircrafttype_instance);
+                        if (!dg_selected) {
+                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                            return;
+                        }
+                        $scope.entity.Person.AircraftTypes = Enumerable.From($scope.entity.Person.AircraftTypes).Where('$.Id!=' + dg_selected.Id).ToArray();
+                    }
+                }, toolbar: 'bottom'
+            },
 
             { widget: 'dxButton', location: 'after', options: { type: 'success', text: 'Save', icon: 'check', validationGroup: 'personadd', bindingOptions: {} }, toolbar: 'bottom' },
             { widget: 'dxButton', location: 'after', options: { type: 'danger', text: 'Close', icon: 'remove', }, toolbar: 'bottom' }
@@ -4040,7 +4342,7 @@ $scope.date_Type737IssueDate = {
             if ($scope.pop_width > 1400)
                 $scope.pop_width = 1400;
             $scope.pop_height = $(window).height() - 30;
-            $scope.dg_height = $scope.pop_height - 133;
+            $scope.dg_height = $scope.pop_height - 153;
             $scope.scroll_height = $scope.pop_height - 140;
 
            
@@ -4081,19 +4383,28 @@ $scope.date_Type737IssueDate = {
             'toolbarItems[15].visible': 'btn_visible_aircrafttype',
             'toolbarItems[16].visible': 'btn_visible_aircrafttype',
             'toolbarItems[17].visible': 'btn_visible_aircrafttype',
-            'toolbarItems[18].visible': 'IsEditable',
+
+            'toolbarItems[18].visible': 'btn_visible_crt',
+            'toolbarItems[19].visible': 'btn_visible_crt',
+
+            'toolbarItems[20].visible': 'IsEditable',
         }
     };
 
+    
+    //$scope.popup_add.toolbarItems[18].options.onClick = function (e) {
+
+    //}
+
+
     //close button
-    $scope.popup_add.toolbarItems[19].options.onClick = function (e) {
-        
-        
+    $scope.popup_add.toolbarItems[21].options.onClick = function (e) {
+
+
         $scope.popup_add_visible = false;
     };
-
     //save button
-    $scope.popup_add.toolbarItems[18].options.onClick = function (e) {
+    $scope.popup_add.toolbarItems[20].options.onClick = function (e) {
        
 		
         var result = e.validationGroup.validate();
@@ -4717,6 +5028,455 @@ if ($scope.entity.Person.IssueDate23)
         //});
 
     };
+
+    ////////////////////////////
+    $scope.popup_cer_visible = false;
+    $scope.popup_cer = {
+        elementAttr: {
+            //  id: "elementId",
+            class: "popup_cer"
+        },
+        shading: true,
+        title: 'Courses',
+        //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
+        height: 700,
+        width: $(window).width() - 400,
+        fullScreen: false,
+        showTitle: true,
+        dragEnabled: true,
+
+        toolbarItems: [
+
+
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'success', text: 'Save', icon: 'remove', validationGroup: 'pceradd', onClick: function (e) {
+
+                        var result = e.validationGroup.validate();
+
+                        if (!result.isValid) {
+                            General.ShowNotify(Config.Text_FillRequired, 'error');
+                            return;
+                        }
+                        var dto = {};
+
+                        //doolo
+
+
+                        dto.Id = -1;
+                        dto.PersonId = $scope.entity.Person.PersonId;
+                        dto.CustomerId = Config.CustomerId;
+                        dto.IsGeneral = 1;
+                        dto.CourseTypeId = $scope.course_Type;
+                        dto.CertificateNo = $scope.course_CertificateNo;
+                        dto.Title = $scope.course_Title;
+                        dto.DateStart = moment($scope.course_DateStart).format('YYYY-MM-DD');
+                        dto.DateEnd = moment($scope.course_DateEnd).format('YYYY-MM-DD');
+                        dto.DateIssue = moment($scope.course_DateIssue).format('YYYY-MM-DD');
+                        dto.DateExpire = moment($scope.course_DateExpire).format('YYYY-MM-DD');
+                        dto.OrganizationId = $scope.course_OrganizationId;
+                        dto.Location = $scope.course_Location;
+                        dto.Instructor = $scope.course_Instructor;
+                        dto.TrainingDirector = $scope.course_TrainingDirector;
+                        dto.Duration = $scope.course_Duration;
+                        dto.DurationUnitId = 27;
+                        dto.Interval = $scope.course_Interval;
+                        dto.CalanderTypeId = $scope.course_CalanderTypeId;
+                        // dto.Recurrent = $scope.entity.Recurrent;
+                        // dto.Remark = $scope.entity.Remark;
+                        dto.IsNotificationEnabled = 0;
+                        //dto.Sessions = Enumerable.From($scope.entity.Sessions).Select('$.Key').ToArray();
+                        console.log(dto);
+
+                        $scope.loadingVisible = true;
+                        trnService.saveCertificate(dto).then(function (response) {
+
+
+                            $scope.clear_course();
+
+                            General.ShowNotify(Config.Text_SavedOk, 'success');
+
+
+                            var exists = Enumerable.From($scope.personCourses).Where('$.Id==' + response.Data.Id).FirstOrDefault();
+                            if (exists) {
+                                $scope.personCourses = Enumerable.From($scope.personCourses).Where('$.Id!=' + response.Data.Id).ToArray();
+                            }
+                            $scope.personCourses.push(response.Data);
+
+
+
+                            $scope.loadingVisible = false;
+                            $scope.bindPersoncourses();
+
+                            // $scope.popup_cer_visible = false;
+
+
+
+
+                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+                        //////////////////
+
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'danger', text: 'Close', icon: 'remove', onClick: function (arg) {
+
+                        $scope.popup_cer_visible = false;
+
+                    }
+                }, toolbar: 'bottom'
+            }
+        ],
+        visible: false,
+
+        closeOnOutsideClick: false,
+        onTitleRendered: function (e) {
+            // $(e.titleElement).addClass('vahid');
+            // $(e.titleElement).css('background-color', '#f2552c');
+        },
+        onShowing: function (e) {
+
+
+
+
+        },
+        onShown: function (e) {
+            // $scope.getCrewAbs2($scope.flight.ID);
+            if ($scope.dg_arccourse_instance)
+                $scope.dg_arccourse_instance.refresh();
+
+
+        },
+        onHiding: function () {
+            $scope.clear_course();
+            $scope.dg_arccourse_instance.clearSelection();
+            $scope.dg_arccourse_ds = null;
+
+            $scope.popup_cer_visible = false;
+
+        },
+        bindingOptions: {
+            visible: 'popup_cer_visible',
+            // 'toolbarItems[0].options.value': 'crs_result',
+            // 'toolbarItems[1].options.value': 'rptcd_dateTo',
+            // 'toolbarItems[2].options.value': 'rptcd_caco',
+
+
+        }
+    };
+    $scope.clear_course = function () {
+        $scope.course_Type = null;
+        $scope.course_CertificateNo = null;
+        $scope.course_Title = null;
+        $scope.course_DateStart = null;
+        $scope.course_DateEnd = null;
+        $scope.course_DateIssue = null;
+        $scope.course_DateExpire = null;
+        $scope.course_OrganizationId = null;
+        $scope.course_Location = null;
+        $scope.course_Instructor = null;
+        $scope.course_TrainingDirector = null;
+        $scope.course_Duration = null;
+
+        $scope.course_Interval = null;
+        $scope.course_CalanderTypeId = null;
+    };
+    $scope.dg_arccourse_columns = [
+        { dataField: 'Organization', caption: 'Organization', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: true, fixedPosition: 'left' },
+
+        { dataField: 'DateStart', caption: 'DateStart', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130, sortIndex: 0, sortOrder: "desc" },
+        { dataField: 'DateEnd', caption: 'DateEnd', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+        { dataField: 'No', caption: 'Class Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'left' },
+
+        { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
+        { dataField: 'TrainingDirector', caption: 'Training Director', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
+
+        { dataField: 'Recurrent', caption: 'Recurrent', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 100 },
+        { dataField: 'Duration', caption: 'Duration (hrs)', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+
+
+
+    ];
+    $scope.dg_arccourse_selected = null;
+    $scope.dg_arccourse_instance = null;
+    $scope.dg_arccourses_ds = null;
+    $scope.dg_arccourse_height = 540;
+    $scope.dg_arccourse = {
+        sorting: {
+            mode: "single"
+        },
+        headerFilter: {
+            visible: false
+        },
+        filterRow: {
+            visible: true,
+            showOperationChooser: true,
+        },
+        showRowLines: true,
+        showColumnLines: true,
+
+
+        noDataText: '',
+
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'standard' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'single' },
+
+        columnAutoWidth: false,
+
+
+        columns: $scope.dg_arccourse_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_arccourse_instance)
+                $scope.dg_arccourse_instance = e.component;
+
+            //$scope.dg_cduties_height = $(window).height() - 131;
+        },
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData[0];
+
+            if (!data) {
+                $scope.dg_arccourse_selected = null;
+
+            }
+            else {
+                console.log('dg_course', data);
+                $scope.dg_arccourse_selected = data;
+                $scope.course_Title = data.Title;
+                $scope.course_OrganizationId = Number(data.OrganizationId);
+                $scope.course_Location = data.Location;
+                $scope.course_Instructor = data.Instructor;
+                $scope.course_TrainingDirector = data.TrainingDirector;
+                $scope.course_Duration = data.Duration;
+                $scope.course_Interval = data.Interval;
+                $scope.course_CalanderTypeId = data.CalanderTypeId;
+                $scope.course_DateStart = new Date(data.DateStart);
+                $scope.course_DateEnd = new Date(data.DateEnd);
+
+            }
+        },
+
+        onRowPrepared: function (e) {
+
+        },
+        bindingOptions: {
+            dataSource: 'dg_arccourses_ds',
+            height: 'dg_arccourse_height',
+        }
+    };
+    $scope.course_Type = null;
+    $scope.course_TypeItem = null;
+    $scope.course_set_expire = function () {
+        if ($scope.course_Interval && $scope.course_CalanderTypeId && $scope.course_DateIssue) {
+            if ($scope.course_CalanderTypeId == 12) {
+                $scope.course_DateExpire = (new Date($scope.course_DateIssue)).addYears($scope.course_Interval);
+
+            }
+            if ($scope.course_CalanderTypeId == 13)
+                $scope.course_DateExpire = (new Date($scope.course_DateIssue)).addMonths($scope.course_Interval);
+            if ($scope.course_CalanderTypeId == 14)
+                $scope.course_DateExpire = (new Date($scope.course_DateIssue)).addDays($scope.course_Interval);
+        }
+    };
+    $scope.sb_course_type = {
+        dataSource: $rootScope.getDatasourceCourseTypeNew(),
+        placeholder: 'Select Course Type',
+        showClearButton: true,
+        searchEnabled: true,
+        searchExpr: ["Title"],
+        valueExpr: "Id",
+        displayExpr: "Title",
+        onSelectionChanged: function (e) {
+            $scope.course_TypeItem = e.selectedItem;
+            if (!e.selectedItem)
+                return;
+            //if (!$scope.course_Interval)
+            $scope.course_Interval = e.selectedItem.Interval;
+            //if (!$scope.course_Duration)
+            $scope.course_Duration = e.selectedItem.Duration;
+            //if (!$scope.course_CalanderTypeId)
+            $scope.course_CalanderTypeId = e.selectedItem.CalenderTypeId;
+            //if ($scope.isNew) {
+            //    if (e.selectedItem && e.selectedItem.Interval)
+            //        $scope.entity.Interval = e.selectedItem.Interval;
+            //    if (e.selectedItem && e.selectedItem.CalenderTypeId)
+            //        $scope.entity.CalanderTypeId = e.selectedItem.CalenderTypeId;
+            //    if (e.selectedItem && e.selectedItem.Duration)
+            //        $scope.entity.Duration = e.selectedItem.Duration;
+            //}
+            //$scope.selectedType = e.selectedItem;
+            //$scope.certype = null;
+            //$scope.ctgroups = null;
+            //if (e.selectedItem) {
+            //    $scope.certype = e.selectedItem.CertificateType;
+
+            //    $scope.ctgroups = e.selectedItem.JobGroups;
+            //}
+            $scope.course_set_expire();
+
+            $scope.dg_arccourse_instance.clearSelection();
+
+            $scope.loadingVisible = true;
+            trnService.getCoursesByTypeOutside(e.selectedItem.Id, 3).then(function (response) {
+                $scope.loadingVisible = false;
+                $scope.dg_arccourses_ds = response.Data;
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+        },
+        bindingOptions: {
+            value: 'course_Type',
+
+        }
+
+    };
+    $scope.date_course_resultissue = {
+        width: '100%',
+        type: 'date',
+        onValueChanged: function (e) {
+
+            $scope.course_set_expire();
+        },
+        displayFormat: $rootScope.DateBoxFormat,
+        bindingOptions: {
+            value: 'course_DateIssue',
+            // disabled: 'isCertidicateDisabled',
+        }
+    };
+    $scope.txt_course_Title = {
+        hoverStateEnabled: false,
+        bindingOptions: {
+            value: 'course_Title',
+        }
+    };
+    $scope.txt_course_Instructor = {
+        hoverStateEnabled: false,
+        bindingOptions: {
+            value: 'course_Instructor',
+        }
+    };
+    $scope.txt_course_TrainingDirector = {
+        hoverStateEnabled: false,
+        bindingOptions: {
+            value: 'course_TrainingDirector',
+        }
+    };
+
+
+    $scope.date_course_DateStart = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+        bindingOptions: {
+            value: 'course_DateStart',
+
+        }
+    };
+    $scope.date_course_DateEnd = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+        onValueChanged: function (e) {
+            if (e.value) {
+                $scope.course_DateIssue = (new Date(e.value)).addDays(1);
+            }
+
+        },
+        bindingOptions: {
+            value: 'course_DateEnd',
+
+        }
+    };
+
+    $scope.txt_course_Location = {
+        hoverStateEnabled: false,
+        bindingOptions: {
+            value: 'course_Location',
+        }
+    };
+
+    $scope.txt_course_Duration = {
+        min: 1,
+
+        bindingOptions: {
+            value: 'course_Duration',
+        }
+    };
+    $scope.txt_course_Interval = {
+        min: 1,
+        onValueChanged: function (e) {
+
+            $scope.course_set_expire();
+        },
+        bindingOptions: {
+            value: 'course_Interval',
+        }
+    };
+    $scope.sb_course_DurationUnitId = {
+        showClearButton: true,
+        searchEnabled: true,
+        dataSource: $rootScope.getDatasourceOption(26),
+        displayExpr: "Title",
+        valueExpr: 'Id',
+        bindingOptions: {
+            value: 'course_DurationUnitId',
+
+        }
+    };
+    $scope.sb_course_CalanderTypeId = {
+        showClearButton: true,
+        searchEnabled: true,
+        dataSource: $rootScope.getDatasourceOption(11),
+        displayExpr: "Title",
+        valueExpr: 'Id',
+        onValueChanged: function (e) {
+
+            $scope.course_set_expire();
+        },
+        bindingOptions: {
+            value: 'course_CalanderTypeId',
+
+        }
+    };
+    $scope.sb_course_OrganizationId = {
+        dataSource: $rootScope.getDatasourceAirline(),
+        showClearButton: true,
+        searchEnabled: true,
+        searchExpr: ["Title"],
+        valueExpr: "Id",
+        displayExpr: "Title",
+
+        bindingOptions: {
+            value: 'course_OrganizationId',
+
+        }
+
+    };
+
+    $scope.date_course_resultexpire = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+        bindingOptions: {
+            value: 'course_DateExpire',
+            // disabled: 'isCertidicateDisabled',
+        }
+    };
+    $scope.txt_course_resultno = {
+        hoverStateEnabled: false,
+
+        bindingOptions: {
+            value: 'course_CertificateNo',
+            //disabled:'isCertidicateDisabled',
+        }
+    };
     ////////////////////////////
     $scope.pop_width_file = 750;
     $scope.pop_height_file = 600;
@@ -4759,6 +5519,11 @@ if ($scope.entity.Person.IssueDate23)
                             $scope.clearEntityDocumnet();
                             $scope.popup_file_visible = false;
                         }
+
+                        var ids = Enumerable.From($scope.ds_doc_type).Select('$.Id').ToArray();
+                        $scope.ds_dg_file = Enumerable.From($scope.entity.Person.Documents).Where(function (x) { return ids.indexOf(x.DocumentTypeId) != -1; }).ToArray();
+
+
                     }
                 }, toolbar: 'bottom'
             },
@@ -5283,7 +6048,10 @@ if ($scope.entity.Person.IssueDate23)
     };
 
     $scope.dg_file_columns = [
-        { dataField: "DocumentType", caption: "DocumentType", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, width: 250 },
+        { dataField: "DocumentType", caption: "Type", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, width: 250 },
+        { dataField: "Count", caption: "Count", allowResizing: true, alignment: "center", dataType: 'string', allowEditing: false, width: 90 },
+        { dataField: 'DateIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
+        { dataField: 'DateExpire', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
         { dataField: "Remark", caption: "Remark", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false },
         
       
@@ -5326,12 +6094,13 @@ if ($scope.entity.Person.IssueDate23)
         },
         bindingOptions: {
 
-            dataSource: 'entity.Person.Documents',
+            dataSource: 'ds_dg_file',
             height: 'dg_height',
         },
         // dataSource:ds
 
     };
+    $scope.ds_dg_file = [];
     ///////////////////////////
     $scope.dg_upload_columns = [
         
@@ -8445,7 +9214,7 @@ $scope.date_TRG16IssueDate = {
         if ($scope.pop_width > 1400)
             $scope.pop_width = 1400;
         $scope.pop_height = $(window).height() - 30;
-        $scope.dg_height = $scope.pop_height - 133;
+        $scope.dg_height = $scope.pop_height - 153;
         $scope.scroll_height = $scope.pop_height - 140;
 		
 		personService.getGroups(Config.CustomerId).then(function (response) {
@@ -8457,6 +9226,152 @@ $scope.date_TRG16IssueDate = {
         
 
     });
+
+    ///////////////////////////////////////
+    $scope.personCourses = null;
+    $scope.dg_courses_columns = [
+        {
+            dataField: "CoursePeopleStatusId", caption: '',
+            width: 55,
+            allowFiltering: false,
+            allowSorting: false,
+            cellTemplate: function (container, options) {
+                //var fn = options.value == 1 ? 'registered-24' : 'red';
+                var fn = 'pending-24';
+                if (options.value == 1)
+                    fn = 'registered-24';
+                else if (options.value == 0)
+                    fn = 'red';
+
+
+                $("<div>")
+                    .append("<img src='content/images/" + fn + ".png' />")
+                    .appendTo(container);
+            },
+            fixed: true, fixedPosition: 'left',//  sortIndex: 0, sortOrder: "desc"
+        },
+        { dataField: 'No', caption: 'Class Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+        //{ dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 140 },
+        { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 300, fixed: true, fixedPosition: 'left' },
+       // { dataField: 'CourseType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'DateStart', caption: 'Start', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150, sortIndex: 0, sortOrder: "desc" },
+        { dataField: 'DateEnd', caption: 'End', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
+        { dataField: 'CoursePeopleStatus', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'DateIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
+        { dataField: 'DateExpire', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
+       // { dataField: 'CertificateNo', caption: 'Cer. NO', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+       // { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+       // { dataField: 'TrainingDirector', caption: 'Director', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'Organization', caption: 'Center', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+       
+
+
+
+    ];
+    $scope.dg_courses_selected = null;
+    $scope.dg_courses_instance = null;
+    $scope.dg_courses_ds = null;
+    //$scope.pop_height = $(window).height() - 30;
+   // $scope.dg_height = $scope.pop_height - 153;
+    $scope.dg_courses_height = $(window).height() - 153 - 30;
+    $scope.dg_courses = {
+        sorting: {
+            mode: "single"
+        },
+        headerFilter: {
+            visible: false
+        },
+        filterRow: {
+            visible: true,
+            showOperationChooser: true,
+        },
+        showRowLines: true,
+        showColumnLines: true,
+
+
+        noDataText: '',
+
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'standard' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'single' },
+
+        columnAutoWidth: false,
+        // height: $(window).height()-130,
+
+        columns: $scope.dg_courses_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_courses_instance)
+                $scope.dg_courses_instance = e.component;
+
+            //$scope.dg_cduties_height = $(window).height() - 131;
+        },
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData[0];
+
+            if (!data) {
+                $scope.dg_courses_selected = null;
+
+            }
+            else {
+                $scope.dg_courses_selected = data;
+
+            }
+        },
+
+        onRowPrepared: function (e) {
+            if (e.data && !e.data.IsNotificationEnabled) {
+                e.rowElement.css('background', '#f2f2f2');
+
+            }
+
+        },
+        bindingOptions: {
+            dataSource: 'dg_courses_ds',
+            height: 'dg_courses_height',
+        }
+    };
+
+    $scope.bindPersoncoursesFirst = function (callback) {
+        if (!$scope.personCourses) {
+            $scope.loadingVisible = true;
+            trnService.getPersonCourses($scope.entity.Person.PersonId).then(function (response) {
+                $scope.loadingVisible = false;
+                $scope.personCourses = response.Data;
+                callback();
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        }
+        else callback();
+    };
+    $scope.bindPersoncourses = function () {
+        $scope.bindPersoncoursesFirst(function () {
+
+            var ds = $scope.personCourses;
+            //if ($scope.crs_result == 0 || $scope.crs_result == 1) {
+            //    ds = Enumerable.From(ds).Where('$.CoursePeopleStatusId==' + $scope.crs_result).ToArray();
+            //}
+            //if ($scope.crs_ctype) {
+            //    ds = Enumerable.From(ds).Where('$.CourseTypeId==' + $scope.crs_ctype).ToArray();
+            //}
+            //if ($scope.crs_cer) {
+            //    ds = Enumerable.From(ds).Where('$.CertificateTypeId==' + $scope.crs_cer).ToArray();
+            //}
+            //if ($scope.crs_re == 0 || $scope.crs_re == 1) {
+            //    ds = Enumerable.From(ds).Where('$.Recurrent==' + $scope.crs_re).ToArray();
+            //}
+            //if ($scope.crs_last) {
+            //    ds = Enumerable.From(ds).Where('$.RankLast==1').ToArray();
+            //}
+
+            $scope.dg_courses_ds = ds;
+
+        });
+
+    };
+
     //////////////////////////////
 	//accordion
 	var accordionTabs = 4;

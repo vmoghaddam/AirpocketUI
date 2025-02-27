@@ -247,14 +247,14 @@
             this.tableH});
             this.Detail.HeightF = 50F;
             this.Detail.Name = "Detail";
-            this.Detail.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Detail_BeforePrint);
+            this.Detail.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.Detail_BeforePrint);
             // 
             // tableH
             // 
             this.tableH.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.tableH.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.tableH.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
             this.tableH.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.tableH.Name = "tableH";
             this.tableH.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
@@ -548,13 +548,13 @@
             this.xrTable1});
             this.Detail1.HeightF = 30F;
             this.Detail1.Name = "Detail1";
-            this.Detail1.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.Detail1_BeforePrint);
+            this.Detail1.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.Detail1_BeforePrint);
             // 
             // xrTable1
             // 
             this.xrTable1.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTable1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTable1.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTable1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrTable1.Name = "xrTable1";
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
@@ -588,7 +588,7 @@
             // 
             // xrTableCell33
             // 
-            this.xrTableCell33.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell33.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell33.Multiline = true;
             this.xrTableCell33.Name = "xrTableCell33";
             this.xrTableCell33.StylePriority.UseFont = false;
@@ -597,20 +597,20 @@
             // 
             // lblDate
             // 
-            this.lblDate.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.lblDate.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.lblDate.Multiline = true;
             this.lblDate.Name = "lblDate";
             this.lblDate.StylePriority.UseFont = false;
             this.lblDate.Text = "1400/01/01";
             this.lblDate.Weight = 0.66318058654645473D;
-            this.lblDate.BeforePrint += new System.Drawing.Printing.PrintEventHandler(this.lblDate_BeforePrint);
+            this.lblDate.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.lblDate_BeforePrint);
             this.lblDate.AfterPrint += new System.EventHandler(this.lblDate_AfterPrint);
             // 
             // xrTableCell35
             // 
             this.xrTableCell35.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[FlightNumber]")});
-            this.xrTableCell35.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell35.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell35.Multiline = true;
             this.xrTableCell35.Name = "xrTableCell35";
             this.xrTableCell35.StylePriority.UseFont = false;
@@ -621,7 +621,7 @@
             // 
             this.xrTableCell36.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[FromAirportIATA]")});
-            this.xrTableCell36.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell36.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell36.Multiline = true;
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.StylePriority.UseFont = false;
@@ -632,7 +632,7 @@
             // 
             this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ToAirportIATA]")});
-            this.xrTableCell37.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell37.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell37.Multiline = true;
             this.xrTableCell37.Name = "xrTableCell37";
             this.xrTableCell37.StylePriority.UseFont = false;
@@ -643,7 +643,7 @@
             // 
             this.xrTableCell38.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DepLocal]")});
-            this.xrTableCell38.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell38.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell38.Multiline = true;
             this.xrTableCell38.Name = "xrTableCell38";
             this.xrTableCell38.StylePriority.UseFont = false;
@@ -654,7 +654,7 @@
             // 
             this.xrTableCell39.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ArrLocal]")});
-            this.xrTableCell39.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell39.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell39.Multiline = true;
             this.xrTableCell39.Name = "xrTableCell39";
             this.xrTableCell39.StylePriority.UseFont = false;
@@ -665,7 +665,7 @@
             // 
             this.xrTableCell40.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Dep]")});
-            this.xrTableCell40.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell40.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell40.Multiline = true;
             this.xrTableCell40.Name = "xrTableCell40";
             this.xrTableCell40.StylePriority.UseFont = false;
@@ -676,7 +676,7 @@
             // 
             this.xrTableCell41.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Arr]")});
-            this.xrTableCell41.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell41.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell41.Multiline = true;
             this.xrTableCell41.Name = "xrTableCell41";
             this.xrTableCell41.StylePriority.UseFont = false;
@@ -687,7 +687,7 @@
             // 
             this.xrTableCell42.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[AircraftType]")});
-            this.xrTableCell42.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell42.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell42.Multiline = true;
             this.xrTableCell42.Name = "xrTableCell42";
             this.xrTableCell42.StylePriority.UseFont = false;
@@ -698,7 +698,7 @@
             // 
             this.xrTableCell43.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Register]")});
-            this.xrTableCell43.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrTableCell43.Font = new DevExpress.Drawing.DXFont("Segoe UI", 9F);
             this.xrTableCell43.Multiline = true;
             this.xrTableCell43.Name = "xrTableCell43";
             this.xrTableCell43.StylePriority.UseFont = false;
@@ -709,7 +709,7 @@
             // 
             this.xrTableCell44.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[IP]")});
-            this.xrTableCell44.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.xrTableCell44.Font = new DevExpress.Drawing.DXFont("Segoe UI", 8.5F);
             this.xrTableCell44.Multiline = true;
             this.xrTableCell44.Name = "xrTableCell44";
             this.xrTableCell44.StylePriority.UseFont = false;
@@ -720,7 +720,7 @@
             // 
             this.xrTableCell45.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[CPT]")});
-            this.xrTableCell45.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.xrTableCell45.Font = new DevExpress.Drawing.DXFont("Segoe UI", 8.5F);
             this.xrTableCell45.Multiline = true;
             this.xrTableCell45.Name = "xrTableCell45";
             this.xrTableCell45.StylePriority.UseFont = false;
@@ -731,7 +731,7 @@
             // 
             this.xrTableCell46.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SCCM]")});
-            this.xrTableCell46.Font = new System.Drawing.Font("Segoe UI", 8.5F);
+            this.xrTableCell46.Font = new DevExpress.Drawing.DXFont("Segoe UI", 8.5F);
             this.xrTableCell46.Multiline = true;
             this.xrTableCell46.Name = "xrTableCell46";
             this.xrTableCell46.StylePriority.UseFont = false;
@@ -860,12 +860,12 @@
             this.jsonDataSource2,
             this.jsonDataSource3});
             this.DataSource = this.jsonDataSource3;
-            this.Font = new System.Drawing.Font("Arial", 9.75F);
+            this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
-            this.Margins = new System.Drawing.Printing.Margins(23, 26, 24, 25);
+            this.Margins = new DevExpress.Drawing.DXMargins(23, 26, 24, 25);
             this.PageHeight = 827;
             this.PageWidth = 1169;
-            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
+            this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
             this.Version = "19.2";
             ((System.ComponentModel.ISupportInitialize)(this.tableH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();

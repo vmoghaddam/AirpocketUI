@@ -125,6 +125,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         ];
         //alert($scope.month + '   ' + $scope.year);
         $scope.build = function (_date) {
+           // persianDate.toLocale('en');
             var _ch = ($(window).height() - 190) * 1.0 / 6.4;
 
 
@@ -147,6 +148,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 var c = dayIndex - 1;
                 var inactiveBack = (new Date($scope.year, $scope.month, 0)).getDate();
+                
                 var inactiveBackYear = (new Date($scope.year, $scope.month, 0)).getFullYear();
                 var inactiveBackMonth = (new Date($scope.year, $scope.month, 0)).getMonth();
                 var inactiveForward = (new Date($scope.year, $scope.month + 1, 1)).getDate();
@@ -155,9 +157,13 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 while (c >= 0) {
                     var data_date = inactiveBackYear + '-' + pad(Number(inactiveBackMonth) + 1) + '-' + pad(Number(inactiveBack));
+                    var p_date = new persianDate(new Date(inactiveBackYear, inactiveBackMonth, inactiveBack)).format("YYYY-MM-DD");
                     var isToday = data_date == today ? ' today' : '';
                     var html = "<div class='day-wrapper" + isToday + "' data-date='" + data_date + "' style='min-height:" + _ch + "px'>"
-                        + "<div class='day-caption _inactive'>" + inactiveBack + "</div>"
+                        + "<div class='day-caption _inactive'>" + inactiveBack
+                        + "<span style='display:inline-block;margin-left:3px;font-size:12px'>"+ "(" + p_date + ")"+"</span>"
+                       // + "(" + p_date + ")"
+                        + "</div>"
                         + "</div>";
                     $('#d' + c).html(html);
                     $scope.calendar.push({ cell: 'd' + c, date: data_date });
@@ -168,10 +174,13 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 while (dayMonth <= lastDay) {
 
                     var data_date = $scope.year + '-' + pad(Number($scope.month) + 1) + '-' + pad(Number(dayMonth));
+                    var p_date = new persianDate(new Date($scope.year, $scope.month, dayMonth)).format("YYYY-MM-DD");
                     var isToday = data_date == today ? ' today' : '';
 
                     var html = "<div class='day-wrapper" + isToday + "' data-date='" + data_date + "' style='min-height:" + _ch + "px'>"
-                        + "<div class='day-caption'>" + dayMonth + "</div>"
+                        + "<div class='day-caption'>" + dayMonth
+                        + "<span style='display:inline-block;margin-left:3px;font-size:12px;color:gray'>" + "(" + p_date + ")" + "</span>"
+                        + "</div>"
                         //+ "<div class='event flight'><i class='fas fa-plane'></i><span>4<span></div>"
                         //+ "<div class='event office'><span>OFFICE<span></div>"
                         + "</div>";
@@ -190,9 +199,12 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 while (dayIndex <= 41) {
                     var data_date = inactiveForwardYear + '-' + pad(Number(inactiveForwardMonth) + 1) + '-' + pad(Number(inactiveForward));
+                    var p_date = new persianDate(new Date(inactiveForwardYear, inactiveForwardMonth, inactiveForward)).format("YYYY-MM-DD");
                     var isToday = data_date == today ? ' today' : '';
                     var html = "<div class='day-wrapper" + isToday + "' data-date='" + data_date + "' style='min-height:" + _ch + "px'>"
-                        + "<div class='day-caption _inactive'>" + inactiveForward + "</div>"
+                        + "<div class='day-caption _inactive'>" + inactiveForward
+                        + "<span style='display:inline-block;margin-left:3px;font-size:12px;'>" + "(" + p_date + ")" + "</span>"
+                        + "</div>"
                         + "</div>";
                     $('#d' + dayIndex).html(html);
                     $scope.calendar.push({ cell: 'd' + dayIndex, date: data_date });
@@ -707,11 +719,11 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 var data = $scope.dg_selected;
                 if (!data.Date_Sign_Ins1) {
                     General.ShowNotify('The selected course should be signed by the instructor(s).', 'error');
-                    return;
+                  //  return;
                 }
                 if (!data.Date_Sign_Director) {
                     General.ShowNotify('The selected course should be signed by the director.', 'error');
-                    return;
+                  //  return;
                 }
 
                 $scope.close_course(data);
@@ -911,13 +923,25 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 fixed: true, fixedPosition: 'left',
 
             },
-            { dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left', },
-            { dataField: 'No', caption: 'Class Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left' },
+            //{ dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left', },
+            { dataField: 'No', caption: 'Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90, fixed: true, fixedPosition: 'left' },
             { dataField: 'Attendants', caption: 'P/S', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left' },
             { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: true, fixedPosition: 'left' },
-            { dataField: 'DateStart', caption: 'DateStart', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130, sortIndex: 0, sortOrder: "desc" },
-            { dataField: 'DateEnd', caption: 'DateEnd', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+             
             { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
+            {
+                caption: 'Start', alignment: 'center', columns: [
+                    { dataField: 'DateStart', caption: 'A/D', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120, sortIndex: 0, sortOrder: "desc" },
+                    { dataField: 'PDateStart', caption: 'P/E', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 120 },
+                ]
+            },
+            {
+                caption: 'End', alignment: 'center', columns: [
+                    { dataField: 'DateEnd', caption: 'A/D', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
+                    { dataField: 'PDateEnd', caption: 'P/E', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 120 },
+                ]
+            },
+
             { dataField: 'Organization', caption: 'Organization', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
             { dataField: 'CourseType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200, fixed: false, fixedPosition: 'left' },
 

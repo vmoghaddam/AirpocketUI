@@ -295,7 +295,7 @@ namespace Report
 
         }
 
-        private void xrPictureBox1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrPictureBox1_BeforePrint(object sender, CancelEventArgs e)
         {
             //e.Cancel = true;
         }

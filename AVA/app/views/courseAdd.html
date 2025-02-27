@@ -119,6 +119,10 @@
                             <label>End Date</label>
                             <div dx-date-box="date_DateEnd" class="center"></div>
                         </div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-1  margin-bottom-0 padding-7">
+                            <div>&nbsp;</div>
+                            <div dx-button="btn_persiandate"></div>
+                        </div>
 
 
                         <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
@@ -549,9 +553,9 @@
 
         <div class="padding-7 dx-border" style="padding:0;margin-top:3px">
             <!--<div class="col-lg-12  margin-bottom-5 padding-5">
-        <label>Title</label>
-        <div dx-text-box="txt_syllabi" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
-    </div>-->
+                <label>Title</label>
+                <div dx-text-box="txt_syllabi" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
+            </div>-->
             <div class="col-lg-5" style="padding:5px">
 
                 <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
@@ -606,7 +610,7 @@
                         </div>
 
 
-                        
+
                     </div>
                     <div style="clear:both"></div>
 
@@ -616,11 +620,11 @@
             <div style="clear:both"></div>
 
 
-           
+
             <!--<div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-5">
-        <label>Hours</label>
-        <div class="center" dx-date-box="hrs_syllabi" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
-    </div>-->
+                <label>Hours</label>
+                <div class="center" dx-date-box="hrs_syllabi" dx-validator="{validationGroup:'crsyllabi',  validationRules: [{ type: 'required'}]}"></div>
+            </div>-->
 
 
 
@@ -629,7 +633,25 @@
         </div>
 
     </div>
+    <div id="popup_date" dx-popup="popup_date">
+        <div class="margin-bottom-5 padding-7 dx-border" style="padding:25px 0 10px 0">
+            <div>
+                <label style="width:45px;text-align:right;margin-right:5px;">From</label>
 
+                <input type="text" class="date1 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+            <div style="margin-top:15px;">
+                <label style="width:45px;text-align:right; margin-right:5px;">To</label>
+
+                <input type="text" class="date2 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+
+
+
+        </div>
+
+
+    </div>
 
     <div ng-include="'app/views/aircraftSelect.html'"></div>
     <div ng-include="'app/views/coursetypeSelect.html'"></div>

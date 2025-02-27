@@ -15,12 +15,12 @@ namespace Report
             InitializeComponent();
         }
 
-        private void Detail1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void Detail1_BeforePrint(object sender, CancelEventArgs e)
         {
 
         }
         public string pdate { get; set; }
-        private void Detail_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void Detail_BeforePrint(object sender, CancelEventArgs e)
         {
             var ds = this.DataSource as JsonDataSource;
             // ds.Fill();
@@ -35,7 +35,7 @@ namespace Report
             
         }
 
-        private void lblDate_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblDate_BeforePrint(object sender, CancelEventArgs e)
         {
             var cell = sender as XRTableCell;
             cell.Text = pdate;

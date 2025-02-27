@@ -24,7 +24,7 @@ namespace Report
         public string ClassId { get; set; }
         public string Id { get; set; }
         DateTime? expire = null;
-        private void rptFPC_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptFPC_BeforePrint(object sender, CancelEventArgs e)
         {
             //xrPictureBox1.ImageSource.Image.Save("FPC.png");
 
@@ -89,29 +89,29 @@ namespace Report
             this.ExportToImage(imageExportFile);
         }
 
-        private void xrPictureBox1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrPictureBox1_BeforePrint(object sender, CancelEventArgs e)
         {
             if (expire == null)
                 e.Cancel = true;
         }
 
-        private void lblCourseId_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblCourseId_BeforePrint(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
         }
 
-        private void lblIssueNo_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblIssueNo_BeforePrint(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
         }
 
-        private void xrPictureBox2_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrPictureBox2_BeforePrint(object sender, CancelEventArgs e)
         {
           //  if (expire != null)
           //      e.Cancel = true;
         }
 
-        private void xrPictureBox4_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrPictureBox4_BeforePrint(object sender, CancelEventArgs e)
         {
               if (expire != null)
                    e.Cancel = true;

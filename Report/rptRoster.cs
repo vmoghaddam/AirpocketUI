@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Drawing;
+ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
@@ -38,7 +38,7 @@ namespace Report
         public float cellFontSize2 = 8.0f;
         public List<RosterRow> RosterRows { get; set; }
 
-        private void rptRoster_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptRoster_BeforePrint(object sender, CancelEventArgs e)
         {
             var ds = this.DataSource as JsonDataSource;
             // ds.Fill();
@@ -78,12 +78,12 @@ namespace Report
 
         }
 
-        private void Detail1_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void Detail1_BeforePrint(object sender, CancelEventArgs e)
         {
 
         }
         
-        private void DetailReport_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void DetailReport_BeforePrint(object sender, CancelEventArgs e)
         {
             table.BeginInit();
             XRTableRow row = table.Rows[0];
@@ -111,7 +111,7 @@ namespace Report
             if (hasIP)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -122,7 +122,7 @@ namespace Report
             if (hasCPT)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -133,7 +133,7 @@ namespace Report
             if (hasFO)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -144,7 +144,7 @@ namespace Report
             if (hasSAFETY)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -155,7 +155,7 @@ namespace Report
             if (hasCHECK)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -166,7 +166,7 @@ namespace Report
             if (hasOBS)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -177,7 +177,7 @@ namespace Report
             if (hasFM)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize2, FontStyle.Regular);
@@ -188,7 +188,7 @@ namespace Report
             else
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize2, FontStyle.Regular);
@@ -199,7 +199,7 @@ namespace Report
             if (hasISCCM)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -210,7 +210,7 @@ namespace Report
             if (hasSCCM)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -221,7 +221,7 @@ namespace Report
             if (hasCCM)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -232,7 +232,7 @@ namespace Report
             if (hasCHECKC)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -243,7 +243,7 @@ namespace Report
             if (hasOBSC)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Regular);
@@ -261,7 +261,7 @@ namespace Report
             table.EndInit();
         }
 
-        private void Detail_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void Detail_BeforePrint(object sender, CancelEventArgs e)
         {
             var cockpitCellWidth = 90;
             var fmWidth = 60;
@@ -305,7 +305,7 @@ namespace Report
             if (hasIP)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -316,7 +316,7 @@ namespace Report
             if (hasCPT)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -327,7 +327,7 @@ namespace Report
             if (hasFO)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -338,7 +338,7 @@ namespace Report
             if (hasSAFETY)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -349,7 +349,7 @@ namespace Report
             if (hasCHECK)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -360,7 +360,7 @@ namespace Report
             if (hasOBS)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -371,7 +371,7 @@ namespace Report
             if (hasFM || 1==1)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize2, FontStyle.Bold);
@@ -382,7 +382,7 @@ namespace Report
             if (hasISCCM)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -393,7 +393,7 @@ namespace Report
             if (hasSCCM)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -404,7 +404,7 @@ namespace Report
             if (hasCCM)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -415,7 +415,7 @@ namespace Report
             if (hasCHECKC)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);
@@ -426,7 +426,7 @@ namespace Report
             if (hasOBSC)
             {
                 XRTableCell cell = new XRTableCell();
-                cell.TextTrimming = StringTrimming.None;
+                cell.TextTrimming = DevExpress.Drawing.DXStringTrimming.None;
                 // cell.Font.FontFamily = "Segoe UI";
                 //cell.Font.Size = 
                 cell.Font = new Font("Segoe UI", cellFontSize, FontStyle.Bold);

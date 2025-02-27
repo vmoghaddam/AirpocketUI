@@ -234,6 +234,18 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
         return deferred.promise;
     };
+    var _getCoursesByTypeOutside = function (tid, sid) {
+
+        var deferred = $q.defer();
+        $http.get(serviceBaseTRN + 'api/course/bytype/outside/' + tid + '/' + sid).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
 
     var _getCourseView = function (cid) {
 
@@ -811,7 +823,8 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     serviceFactory.getCourseSessions = _getCourseSessions;
     serviceFactory.getCoursePeople = _getCoursePeople;
     serviceFactory.getCoursePeopleSessions = _getCoursePeopleSessions;
-	serviceFactory.getNotApplicables=_getNotApplicables;
+    serviceFactory.getNotApplicables = _getNotApplicables;
+    serviceFactory.getCoursesByTypeOutside = _getCoursesByTypeOutside;
     return serviceFactory;
 
 }]);

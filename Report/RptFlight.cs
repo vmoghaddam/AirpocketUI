@@ -43,7 +43,7 @@ namespace Report
              
         }
 
-        private void xrTableCell113_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void xrTableCell113_BeforePrint(object sender, CancelEventArgs e)
         {
           
         }

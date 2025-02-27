@@ -24,7 +24,7 @@ namespace Report
         public string Id { get; set; }
         DateTime? expire = null;
 
-        private void rptFPCVaresh_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void rptFPCVaresh_BeforePrint(object sender, CancelEventArgs e)
         {
 
             var ds = this.DataSource as JsonDataSource;
@@ -77,13 +77,13 @@ namespace Report
            // xrPictureBox1.Visible = false;
         }
 
-        private void lblExpTitle_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblExpTitle_BeforePrint(object sender, CancelEventArgs e)
         {
             if (expire == null)
                 e.Cancel = true;
         }
 
-        private void lblExpire_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void lblExpire_BeforePrint(object sender, CancelEventArgs e)
         {
             if (expire == null)
                 e.Cancel = true;

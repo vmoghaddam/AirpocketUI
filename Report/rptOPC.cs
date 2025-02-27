@@ -18,7 +18,7 @@ namespace Report
             _pic = pid == "1" ? "PIC" : "FO";
         }
 
-        private void Detail_BeforePrint(object sender, System.Drawing.Printing.PrintEventArgs e)
+        private void Detail_BeforePrint(object sender, CancelEventArgs e)
         {
             lblPIC.Text = _pic;
             var ds = this.DataSource as JsonDataSource;

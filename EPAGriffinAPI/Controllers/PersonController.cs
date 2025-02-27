@@ -405,6 +405,51 @@ namespace EPAGriffinAPI.Controllers
 
         }
 
+
+        [Route("odata/users/password/all")]
+
+        [AcceptVerbs("GET")]
+        public async Task<IHttpActionResult> PostUserPasswordAll()
+        {
+            //var dbctx = new EPAGRIFFINEntities();
+            //var people = from x in dbctx.People
+            //             where !string.IsNullOrEmpty(x.UserId) && !string.IsNullOrEmpty(x.Telegram)
+            //             select x ;
+
+            //foreach(var p in people)
+            //{
+            //    ApplicationUserManager UserManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //    var user = await UserManager.FindByIdAsync(p.UserId);
+            //    if (user != null)
+            //    {
+            //        var token = await UserManager.GeneratePasswordResetTokenAsync(p.UserId);
+            //        IdentityResult result = await UserManager.ResetPasswordAsync(p.UserId, token, p.Telegram);
+            //    }
+               
+
+            //}
+
+           // var password = Convert.ToString(dto.Password);
+
+           // string Id = Convert.ToString(dto.Id);
+           
+
+           
+
+
+            //if (!result.Succeeded)
+            //{
+            //    return new CustomActionResult(HttpStatusCode.BadRequest, GetErrorResult(result));
+
+            //}
+
+            return Ok(true);
+
+
+
+
+        }
+
         [Route("odata/users/disable")]
 
         [AcceptVerbs("POST")]
