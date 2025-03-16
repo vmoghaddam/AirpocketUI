@@ -114,6 +114,7 @@
     <Content Include="app\controllers\dutyTimeline.js" />
     <Content Include="app\controllers\employeeSelectController.js" />
     <Content Include="app\controllers\employeeSelectCourse.js" />
+    <Content Include="app\controllers\exam_client.js" />
     <Content Include="app\controllers\expiringCourseType.js" />
     <Content Include="app\controllers\expiringGroup.js" />
     <Content Include="app\controllers\fdps.js" />
@@ -320,6 +321,7 @@
     <Content Include="app\services\activityService.js" />
     <Content Include="app\services\aircraftService.js" />
     <Content Include="app\services\airportService.js" />
+    <Content Include="app\services\atoService.js" />
     <Content Include="app\services\atoServices.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
@@ -404,6 +406,7 @@
     <Content Include="app\views\dutyTimeline.html" />
     <Content Include="app\views\employeeSelect.html" />
     <Content Include="app\views\employeeSelectCourse.html" />
+    <Content Include="app\views\exam_client.html" />
     <Content Include="app\views\expiringCourseType.html" />
     <Content Include="app\views\expiringGroup.html" />
     <Content Include="app\views\fdps.html" />

@@ -416,8 +416,11 @@
                             <table style="width:100%">
                                 <tr>
 
-                                    <td style="width:100%">
+                                    <td style="width:70%">
                                         <div dx-button="btn_generate"></div>
+                                    </td>
+                                    <td style="width:30%;padding-left:5px;">
+                                        <div dx-button="btn_questions_list"></div>
                                     </td>
                                 </tr>
 
@@ -547,7 +550,11 @@
         </div>
 
     </div>
-
+    <div id="popup_questions" dx-popup="popup_questions">
+        <div class="padding-7 dx-border" style="padding:0;margin-top:3px">
+            <div dx-data-grid="dg_questions" id="dg_questions"></div>
+        </div>
+    </div>
 
     <div id="popup_syllabus" dx-popup="popup_syllabus">
 

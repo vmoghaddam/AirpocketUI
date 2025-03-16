@@ -792,6 +792,21 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
         return deferred.promise;
     };
     serviceFactory.generateQuestions = _generateQuestions;
+
+
+
+    var _getExamQuestions = function (id) {
+        var deferred = $q.defer();
+        $http.get(/*serviceBaseTRN*/zapitrn + 'api/exam/questions/' + id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getExamQuestions = _getExamQuestions;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;

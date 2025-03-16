@@ -360,7 +360,7 @@
     }
 
     .btn_exam {
-        opacity: 0.7;
+        opacity: 1;
     }
 
         .btn_exam:hover {
@@ -377,7 +377,7 @@
 </style>
 
 <div class="box courseperson" style="height:100%;display:none;overflow-y:hidden">
-   
+
     <div ng-include="'app/views/header.html'" class="rowx header"></div>
     <div class="rowx content" style="clear:both">
         <div class=" col-lg-12  col1 col-grid" style="padding:0;padding-right:2px;padding-left:2px;">
@@ -691,11 +691,11 @@
                         </div>
                     </div>
                     <!--<div class="col-lg-12 col-md-6" style="padding: 0 !important">
-        <div class="personal-input-group">
-            <label for="instructors">Training Director</label>
-            <input type="text" id="firstname" ng-model="follow_course.TrainingDirector" readonly>
-        </div>
-    </div>-->
+                        <div class="personal-input-group">
+                            <label for="instructors">Training Director</label>
+                            <input type="text" id="firstname" ng-model="follow_course.TrainingDirector" readonly>
+                        </div>
+                    </div>-->
                     <div class="col-lg-12 col-md-6" style="padding: 0 !important" ng-show="follow_course.Date_Sign_Ins1">
                         <div class="personal-input-group">
                             <div style="background: #7fe6e6;border:1px solid #ddd;text-align:center;font-weight:bold;padding:7px;">Participants Form: Signed</div>
@@ -734,7 +734,7 @@
                 <div class="col-lg-2   padding-0" style="padding:0;margin-top:0px;">
                     <div class="profile-container">
 
-                        <div class="profile-card" style="width: 100%; display: inline-block;padding:5px;margin-bottom:5px;">
+                        <!--<div class="profile-card" style="width: 100%; display: inline-block;padding:5px;margin-bottom:5px;">
                             <div class="section-title" style="font-size:15px">Scheduled</div>
 
                             <div class="col-lg-12 col-md-6" style="padding: 0 !important">
@@ -743,21 +743,16 @@
                                     <input type="text" id="start" ng-model="formatDateTime(follow_exam.exam_date)" readonly>
                                 </div>
                             </div>
-                            <!--<div class="col-lg-12 col-md-6" style="padding: 0 !important">
-                        <div class="personal-input-group">
-                            <label for="end">Finishing at</label>
-                            <input type="text" id="firstname" ng-model="formatDateTime(follow_exam.date_end_scheduled)" readonly>
-                        </div>
-                    </div>-->
 
-                        </div>
+
+                        </div>-->
                         <div class="profile-card" style="width: 100%; display: inline-block; padding: 5px; margin-bottom: 5px;">
                             <div class="section-title" style="font-size:15px">Actual</div>
 
                             <div class="col-lg-12 col-md-6" style="padding: 0 !important">
                                 <div class="personal-input-group">
                                     <label for="start">Started at</label>
-                                    <input type="text" id="start" ng-model="formatDateTime(follow_exam.date_start)" readonly>
+                                    <input type="text" id="start" ng-model="formatDateTime_temp(follow_exam.date_start)" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-6" style="padding: 0 !important">
@@ -801,22 +796,25 @@
                         </div>
 
 
-                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
-                            <div class="section-title " style="text-align:center;margin-bottom:0;padding:3px" ng-class="exam_pause_btn_class()" ng-click="exam_pause_click(1)">{{exam_pause_caption}}</div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;" ng-show="exam_start_caption=='STARTED'">
+                            <div class="section-title " style="text-align:center;margin-bottom:0;padding:3px" ng-class="exam_pause_btn_class()" ng-click="exam_pause_click(3)">{{exam_pause_caption}}</div>
                         </div>
 
-                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
-                            <div class="section-title " style="text-align:center;margin-bottom:0;padding:3px" ng-class="exam_pause_btn_class()" ng-click="exam_resume_click(1)">{{exam_resume_caption}}</div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;" ng-show="exam_resume_caption">
+                            <div class="section-title " style="text-align:center;margin-bottom:0;padding:3px" ng-class="exam_pause_btn_class()" ng-click="exam_resume_click(4)">{{exam_resume_caption}}</div>
                         </div>
 
                         <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
                             <div class="section-title " style="text-align:center;margin-bottom:0;padding:5px 5px 5px 5px" ng-class="exam_finish_btn_class()" ng-click="exam_status_click(2)">{{exam_finish_caption}}</div>
                         </div>
                         <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
-                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 3px; background: #bf5074; font-weight: normal; font-size: 14px; " ng-click="regenerate_all()">Regenerate All</div>
+                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 5px; background: #ffcc99; font-weight: bold; font-size: 14px; " ng-click="show_questions()">Questions</div>
                         </div>
                         <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
-                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 3px; background: #fe8b93;font-weight:normal;font-size:14px;" ng-click="regenerate_selected()">Regenerate Selected</div>
+                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 5px; background: #bf5074; font-weight: bold; font-size: 14px; " ng-click="regenerate_all()">Regenerate All</div>
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 5px; background: #fe8b93;font-weight:bold;font-size:14px;" ng-click="regenerate_selected()">Regenerate Selected</div>
                         </div>
 
 
@@ -859,21 +857,21 @@
                                 <div class="progress-bar" ng-style="{ 'width': getProgressBarWidth(data.total_answered, data.total_questions) + '%' }"></div>
                             </div>
                             <!--<div class="results">
-                            <div class="answers" style="font-size:20px;font-weight:normal">
-                                <span class="true-answers" ng-style="{ 'color': '#005657' }">{{ data.score }}</span>
+                                    <div class="answers" style="font-size:20px;font-weight:normal">
+                                        <span class="true-answers" ng-style="{ 'color': '#005657' }">{{ data.score }}</span>
 
-                            </div>
-                            <span class="result" style="font-size:16px;font-weight:normal" ng-class="{
-                        'txt-success': data.result === 'PASSED',
-                        'txt-warning': data.result === 'RE-EXAM',
-                        'txt-danger': data.result === 'FAILED'
-                    }">{{ data.result }}</span>
-                        </div>-->
+                                    </div>
+                                    <span class="result" style="font-size:16px;font-weight:normal" ng-class="{
+                                'txt-success': data.result === 'PASSED',
+                                'txt-warning': data.result === 'RE-EXAM',
+                                'txt-danger': data.result === 'FAILED'
+                            }">{{ data.result }}</span>
+                                </div>-->
                             <table style="width:100%">
                                 <tr>
                                     <td>
                                         <i class='fas fa-square' style='font-size: 18px; color: #47807f'></i><span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.correct_answer}}</span>
-                                        pa
+
                                     </td>
 
                                     <td>
@@ -1328,7 +1326,11 @@
             </div>
         </div>
     </div>
-
+    <div id="popup_questions" dx-popup="popup_questions">
+        <div class="padding-7 dx-border" style="padding:0;margin-top:3px">
+            <div dx-data-grid="dg_questions" id="dg_questions"></div>
+        </div>
+    </div>
 
     <div ng-include="'app/views/courseAdd.html?v=1256887'" ng-init="type = 'active';"></div>
     <div ng-include="'app/views/employeeSelectCourse.html?v=100'"></div>

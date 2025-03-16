@@ -814,7 +814,15 @@ app.config(function ($routeProvider) {
   $routeProvider.when("/forms/vacation/responsible", {
      controller: "forms_vacation_responsibleController",
      templateUrl: "/app/views/form_vacation_responsible.html?v=1130"
- });
+  });
+
+
+    $routeProvider.when("/exam/client/:id/:cid", {
+        controller: "exam_client_controller",
+        templateUrl: "/app/views/exam_client.html?v=" + '5673'
+    });
+
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   

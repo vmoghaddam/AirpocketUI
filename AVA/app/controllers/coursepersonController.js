@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.controller('coursepersonController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService', 'ztrnService', '$window', '$compile', '$interval'
-    , function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService, ztrnService, $window, $compile, $interval) {
+app.controller('coursepersonController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService', 'ztrnService', 'atoService', '$window', '$compile', '$interval'
+    , function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService, ztrnService, atoService, $window, $compile, $interval) {
         $scope.prms = $routeParams.prms;
         $scope.IsEditable = $rootScope.HasTrainingAdmin();
         $scope.windowHeight = $(window).height();
@@ -2378,7 +2378,25 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             return moment(new Date(dt)).format('YYYY-MMM-DD HH:mm').toUpperCase();
         };
 
+        $scope.formatDateTime_temp = function (dt) {
+            console.log('date start', dt);
+            if (!dt)
+                return "";
+            return moment(new Date(dt)).format('YYYY-MMM-DD HH:mm').toUpperCase();
+        };
 
+        $scope.exam_pause_click = function (st) {
+            $scope.follow_exam.is_running = 0;
+            
+            $scope.exam_pause_caption = 'PAUSED';
+           
+            $scope.exam_resume_caption = $scope.exam_pause_caption == 'PAUSED' ? 'RESUME' : null;
+        }
+        $scope.exam_resume_click = function (st) {
+            $scope.follow_exam.is_running = 1;
+            $scope.exam_pause_caption = 'PAUSE';
+            $scope.exam_resume_caption = $scope.exam_pause_caption == 'PAUSED' ? 'RESUME' : null;
+        }
 
         $scope.exam_status_click = function (st) {
             if (st == 1) {
@@ -2386,6 +2404,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 $scope.follow_exam.date_end_actual = null;
                 $scope.follow_exam.date_start = new Date();
                 $scope.exam_start_caption = 'STARTED';
+                $scope.exam_finish_caption = "FINISH";
                 ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
 
 
@@ -2395,6 +2414,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 $scope.follow_exam.status_id = 2;
                 $scope.follow_exam.date_end_actual = new Date();
                 $scope.exam_finish_caption = "FINISHED";
+                $scope.exam_start_caption = 'START';
                 ztrnService.set_exam_status({ exam_id: $scope.follow_exam.id, status: $scope.follow_exam.status_id }).then(function (response) {
 
 
@@ -2559,7 +2579,203 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
             return $scope.selected_exam_people.indexOf(person_id) != -1;
         }
+        $scope.show_questions = function () {
+            $scope.loadingVisible = true;
+            trnService.getExamQuestions($scope.follow_exam.id).then(function (response) {
+                console.log(response);
+                $scope.loadingVisible = false;
+                $scope.ds_questions = response.questions;
+                $scope.popup_questions_visible = true;
 
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        }
+        $scope.popup_questions_visible = false;
+
+        $scope.popup_questions = {
+            elementAttr: {
+                //  id: "elementId",
+                class: "popup_questions"
+            },
+            shading: true,
+            //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
+            height: 830,
+            width: 1300,
+            fullScreen: false,
+            showTitle: true,
+            dragEnabled: true,
+            toolbarItems: [
+
+
+                { widget: 'dxButton', location: 'after', options: { type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) { $scope.popup_questions_visible = false; } }, toolbar: 'bottom' }
+            ],
+
+            visible: false,
+
+            closeOnOutsideClick: false,
+            onTitleRendered: function (e) {
+
+            },
+            onShowing: function (e) {
+
+
+            },
+            onShown: function (e) {
+
+                if ($scope.dg_questions_instance)
+                    $scope.dg_questions_instance.refresh();
+            },
+            onHiding: function () {
+                //2024-12-28
+                if ($scope.dg_questions_instance)
+                    $scope.dg_questions_instance.refresh();
+
+                $scope.popup_questions_visible = false;
+
+            },
+            title: 'Questions',
+            bindingOptions: {
+                visible: 'popup_questions_visible',
+
+
+
+            }
+        };
+
+        $scope.dg_questions_columns = [
+            { dataField: "category", caption: "Category", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, sortIndex: 0, sortOrder: "asc", width: 150 },
+
+            { dataField: "english_title", caption: "Question", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, sortIndex: 1, sortOrder: "asc", minWidth: 600 },
+
+            { dataField: 'correct_answer_title', caption: 'Answer', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, encodeHtml: false, minWidth: 400, },
+
+        ];
+        $scope.dg_questions_selected = null;
+        $scope.dg_questions_instance = null;
+        $scope.dg_questions = {
+            showRowLines: true,
+            showColumnLines: true,
+            sorting: { mode: 'multiple' },
+
+            noDataText: '',
+            showColumnHeaders: true,
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            scrolling: { mode: 'infinite' },
+            paging: { pageSize: 100 },
+            showBorders: true,
+            selection: { mode: 'single' },
+
+            filterRow: { visible: false, showOperationChooser: true, },
+            columnAutoWidth: false,
+            columns: $scope.dg_questions_columns,
+            onContentReady: function (e) {
+                if (!$scope.dg_questions_instance)
+                    $scope.dg_questions_instance = e.component;
+
+            },
+            onSelectionChanged: function (e) {
+                var data = e.selectedRowsData[0];
+
+                if (!data) {
+                    $scope.dg_questions_selected = null;
+                }
+                else
+                    $scope.dg_questions_selected = data;
+
+
+            },
+            summary: {
+                totalItems: [
+
+
+                    {
+                        column: "category",
+                        summaryType: "count",
+                        customizeText: function (data) {
+                            return "Count: " + data.value;
+                        }
+                    },
+
+
+
+                ],
+                calculateCustomSummary: function (options) {
+                    if (options.name === "FlightTimeTotal") {
+                        if (options.summaryProcess === "start") {
+                            options.totalValueMinutes = 0;
+                            options.totalValue = '';
+
+                        }
+                        if (options.summaryProcess === "calculate") {
+
+                            options.totalValueMinutes = options.totalValueMinutes + options.value.FlightTime;
+                            options.totalValue = pad(Math.floor(options.totalValueMinutes / 60)).toString() + ':' + pad(options.totalValueMinutes % 60).toString();
+
+
+
+                        }
+                    }
+
+                    if (options.name === "BlockTimeTotal") {
+                        if (options.summaryProcess === "start") {
+                            options.totalValueMinutes = 0;
+                            options.totalValue = '';
+
+                        }
+                        if (options.summaryProcess === "calculate") {
+
+                            options.totalValueMinutes = options.totalValueMinutes + options.value.BlockTime;
+                            options.totalValue = pad(Math.floor(options.totalValueMinutes / 60)).toString() + ':' + pad(options.totalValueMinutes % 60).toString();
+
+
+
+                        }
+                    }
+
+                    if (options.name === "MissionTotal") {
+                        if (options.summaryProcess === "start") {
+                            options.totalValueMinutes = 0;
+                            options.totalValue = '';
+
+                        }
+                        if (options.summaryProcess === "calculate") {
+
+                            options.totalValueMinutes = options.totalValueMinutes + options.value.Misson;
+                            options.totalValue = pad(Math.floor(options.totalValueMinutes / 60)).toString() + ':' + pad(options.totalValueMinutes % 60).toString();
+
+
+
+                        }
+                    }
+
+                    if (options.name === "FixTimeTotal") {
+                        if (options.summaryProcess === "start") {
+                            options.totalValueMinutes = 0;
+                            options.totalValue = '';
+
+                        }
+                        if (options.summaryProcess === "calculate") {
+
+                            options.totalValueMinutes = options.totalValueMinutes + options.value.FixTimeTotal;
+                            options.totalValue = pad(Math.floor(options.totalValueMinutes / 60)).toString() + ':' + pad(options.totalValueMinutes % 60).toString();
+
+                        }
+                    }
+
+
+
+
+                }
+            },
+            height: 700,
+            bindingOptions: {
+
+                dataSource: 'ds_questions',
+                // height: 'dg_height',
+            },
+            // dataSource:ds
+
+        };
         $scope.regenerate_selected = function () {
             if ($scope.selected_exam_people.length == 0)
                 return;
@@ -2603,7 +2819,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
         }
         $scope.show_person_exam = function (data) {
-            window.open('https://localhost:44366/#!/exam/' + data.exam_id + '/' + data.client_id);
+            console.log('dsdsddsd', data);
+            window.open('https://localhost:44385/#!/exam/client/' + data.exam_id + '/' + data.person_id );
             ztrnService.get_ato_exam(data.exam_id, data.client_id).then(function (response) {
                 $scope.person_exam_detail = response.Data;
               //  console.log($scope.person_exam_detail);
@@ -2643,7 +2860,17 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 $scope.refresh_summary(function () {
 
                     if ($scope.follow_exam) {
-                        $scope.exam_start_caption = $scope.follow_exam.status_id == 0 ? 'START' : 'STARTED';
+                        //$scope.exam_pause_caption = $scope.follow_exam.status_id == 0 ? 'PAUSE'
+                        $scope.exam_pause_caption = 'PAUSE';
+                        
+                        if ($scope.follow_exam.status_id != 0 && $scope.follow_exam.is_running == 0) {
+                            $scope.exam_pause_caption = 'PAUSED';
+                        }
+                        if ($scope.follow_exam.status_id == 2) {
+                            $scope.exam_pause_caption = 'PAUSE';
+                        }
+                        $scope.exam_resume_caption = $scope.exam_pause_caption == 'PAUSED' ? 'RESUME' : null;
+                        $scope.exam_start_caption = $scope.follow_exam.status_id == 1 ? 'STARTED' : 'START';
                         $scope.exam_finish_caption = $scope.follow_exam.status_id == 2 ? 'FINISHED' : 'FINISH';
                         switch ($scope.follow_exam.status_id) {
                             case 0:
@@ -2783,7 +3010,9 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                         ImgUrl: _d.ImgUrl,
                         SMSStatus: _d.SMSStatus,
                         SMSDateSent: _d.SMSDateSent,
-                        EmployeeId: _d.EmployeeId
+                        EmployeeId: _d.EmployeeId,
+                        ExamResult: _d.ExamResult,
+                        ExamStatus: _d.ExamStatus,
 
                     };
                     $.each($scope.ds_sessions, function (_i, _s) {
@@ -2799,6 +3028,12 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 });
 
+                $scope.dg_people_instance.addColumn({
+                    caption: 'Exam', columns: [
+                        { dataField: 'ExamResult', caption: 'Score', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, },
+                        { dataField: 'ExamStatus', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, }
+                    ]
+                });
 
                 $scope.dg_people_instance.addColumn({ dataField: 'CoursePeopleStatus', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, });
                 $scope.dg_people_instance.addColumn({ dataField: 'DateIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'datetime', format: 'MM-dd-yyyy', allowEditing: false, width: 150, });
