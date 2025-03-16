@@ -298,9 +298,6 @@ app.controller('personAddController', ['$scope', '$location', 'personService', '
         Manufacturer: null,
         AircraftType:null,
     };
-	
-	
-
     $scope.bindEntityAircrafttype = function (data) {
         $scope.entityAircrafttype.Id = data.Id;
         $scope.entityAircrafttype.AircraftTypeId = data.AircraftTypeId;

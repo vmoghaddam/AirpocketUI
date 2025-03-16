@@ -209,9 +209,11 @@
     <Content Include="app\controllers\organizationController.js" />
     <Content Include="app\controllers\partNumberSelection.js" />
     <Content Include="app\controllers\personAddController.js" />
+    <Content Include="app\controllers\personController.js" />
+    <Content Include="app\controllers\_personAddController.js" />
     <Content Include="app\controllers\personbookController.js" />
     <Content Include="app\controllers\personcertificateController.js" />
-    <Content Include="app\controllers\personController.js" />
+    <Content Include="app\controllers\_personController.js" />
     <Content Include="app\controllers\personcourseController.js" />
     <Content Include="app\controllers\personmiscAddController.js" />
     <Content Include="app\controllers\personmiscController.js" />
@@ -503,6 +505,8 @@
     <Content Include="app\views\partNumberSelection.html" />
     <Content Include="app\views\person.html" />
     <Content Include="app\views\personAdd.html" />
+    <Content Include="app\views\_person.html" />
+    <Content Include="app\views\_personAdd.html" />
     <Content Include="app\views\personbook.html" />
     <Content Include="app\views\personcertificate.html" />
     <Content Include="app\views\personcourse.html" />
