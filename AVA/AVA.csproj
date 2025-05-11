@@ -117,6 +117,7 @@
     <Content Include="app\controllers\exam_client.js" />
     <Content Include="app\controllers\expiringCourseType.js" />
     <Content Include="app\controllers\expiringGroup.js" />
+    <Content Include="app\controllers\fdm_main.js" />
     <Content Include="app\controllers\fdps.js" />
     <Content Include="app\controllers\fdpsfly.js" />
     <Content Include="app\controllers\filterController.js" />
@@ -330,6 +331,7 @@
     <Content Include="app\services\biService.js" />
     <Content Include="app\services\courseService.js" />
     <Content Include="app\services\fbService.js" />
+    <Content Include="app\services\fdmService.js" />
     <Content Include="app\services\flightBagService.js" />
     <Content Include="app\services\flightService.js" />
     <Content Include="app\services\fuelService.js" />
@@ -411,6 +413,7 @@
     <Content Include="app\views\exam_client.html" />
     <Content Include="app\views\expiringCourseType.html" />
     <Content Include="app\views\expiringGroup.html" />
+    <Content Include="app\views\fdm_main.html" />
     <Content Include="app\views\fdps.html" />
     <Content Include="app\views\fdpsfly.html" />
     <Content Include="app\views\filter.html" />
