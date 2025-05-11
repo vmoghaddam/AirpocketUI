@@ -50,6 +50,7 @@
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v24.2.Core, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.CodeParser.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Data.Desktop.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Drawing.v24.2, Version=24.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -409,6 +410,12 @@
     <Compile Include="rptVRKarun.Designer.cs">
       <DependentUpon>rptVRKarun.cs</DependentUpon>
     </Compile>
+    <Compile Include="rptWxCharts.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptWxCharts.Designer.cs">
+      <DependentUpon>rptWxCharts.cs</DependentUpon>
+    </Compile>
     <Compile Include="TrainingCard.cs" />
     <Compile Include="ViewCourseNew.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -606,6 +613,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="rptVRKarun.resx">
       <DependentUpon>rptVRKarun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptWxCharts.resx">
+      <DependentUpon>rptWxCharts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="XtraReport1.resx">
       <DependentUpon>XtraReport1.cs</DependentUpon>

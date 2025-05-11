@@ -41,6 +41,8 @@ Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "reacttest", "ReactTest\reac
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "vira", "Vira\vira.esproj", "{E92E23CF-5461-42E3-88AA-6CFFABCA0E4A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManager", "FileManager\FileManager.csproj", "{EDCB9124-C4E1-48CE-9120-0FA6BB5A96C9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +129,10 @@ Global
 		{E92E23CF-5461-42E3-88AA-6CFFABCA0E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E92E23CF-5461-42E3-88AA-6CFFABCA0E4A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E92E23CF-5461-42E3-88AA-6CFFABCA0E4A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EDCB9124-C4E1-48CE-9120-0FA6BB5A96C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDCB9124-C4E1-48CE-9120-0FA6BB5A96C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDCB9124-C4E1-48CE-9120-0FA6BB5A96C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDCB9124-C4E1-48CE-9120-0FA6BB5A96C9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
