@@ -1,0 +1,462 @@
+﻿<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+
+
+    .chartBox {
+        border: 1px solid #e0e0e0;
+        background-color: white;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_flight .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+    .generalInfo {
+        /*height: 205px;*/
+        /*margin: 2px;*/
+        /*width: 49.3%;*/
+    }
+
+
+    #dg_events .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_events .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_events .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_events .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .dx-scrollable-native.dx-scrollable-vertical, .dx-scrollable-native.dx-scrollable-vertical .dx-scrollable-container {
+        overflow-x: auto;
+    }
+
+    .thin-scroll3::-webkit-scrollbar {
+        width: 2em;
+        height: 2em;
+    }
+
+    .thin-scroll3::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    .phase-box {
+        border: 1px solid #ccc;
+        background: white;
+        padding: 3px;
+    }
+
+    .phase-box-title {
+    }
+
+    .phase-box-score {
+    }
+
+    .phase-box-score-total {
+    }
+
+    .type-card {
+        background: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 0px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+
+    .type-header {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 0px;
+        text-align: left;
+    }
+</style>
+
+<div class="box zfdm_main" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div style="width:100%">
+            <!-- TAB NAVIGATION -->
+            <ul class="nav nav-tabs">
+                <li style="width:25%;text-align:center" ng-class="{active: activeTab === 'fleet'}">
+                    <a style="color: white" ng-style="{'background-color': activeTab === 'fleet' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'fleet'; instanceReferesh()">Fleet</a>
+                </li>
+                <li style="width: 25%; text-align: center" ng-class="{active: activeTab === 'pilots'}">
+                    <a style="color: white" ng-style="{'background-color': activeTab === 'pilots' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'pilots'; instanceReferesh()">Pilots</a>
+                </li>
+                <li style="width: 25%; text-align: center" ng-class="{active: activeTab === 'routes'}">
+                    <a style="color: white" ng-style="{'background-color': activeTab === 'routes' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'routes'; instanceReferesh()">Routes</a>
+                </li>
+                <li style="width: 25%; text-align: center" ng-class="{active: activeTab === 'events'}">
+                    <a style="color: white" ng-style="{'background-color': activeTab === 'events' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'events'; instanceReferesh()">Events</a>
+                </li>
+
+
+            </ul>
+            <div dx-scroll-view="scroll_1">
+
+
+                <!-- TAB CONTENT -->
+                <div class="tab-content ">
+                    <div ng-show="activeTab === 'fleet'">
+                        <div class="row " style="padding:5px;">
+                            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+                                <div class="type-card">
+                                    <div class="type-header" style="padding:7px;background:#eee;text-align:center">B737</div>
+                                    <div>
+                                        <div class="col-lg-2 col-md-3" style="padding :0;">
+                                            <div class="  generalInfo chartBox" style="height:140px">
+                                                <p style="font-size: 16px; padding : 10px;margin:0;padding-bottom:0">Score per flight</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px">{{ result_type_737.score_per_flight}}</p>
+                                            </div>
+                                            <div class="  generalInfo chartBox" ng-click="showEvents()" style="height:140px">
+                                                <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Total Scores</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px">{{ result_type_737.total_score}}</p>
+                                            </div>
+                                            <div class="   generalInfo chartBox" style="height:140px">
+                                                <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Total Flights</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px ">{{ result_type_737.flight_count}}</p>
+                                            </div>
+
+
+
+                                            <div ng-show="false">
+
+                                                <div class="col-lg-6 col-md-6 generalInfo" style="padding:0 !important">
+                                                    <div class="chartBox" style="height: 102.5px">
+                                                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px">Events per flight</p>
+                                                        <p style="text-align: center; font-size: 20px">{{ result_type_737.flight_count.toFixed(0)}}</p>
+                                                    </div>
+                                                    <div class="chartBox" style="height: 102.5px">
+                                                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px">Score per flight</p>
+                                                        <p style="text-align: center; font-size: 20px">{{ result_type_737.flight_count.toFixed(0)}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-8 col-md-6" style="padding:0; padding-right:0px;">
+                                            <div class=" chartBox" style='padding-bottom:9px'>
+                                                <div id="pie_737_total_event" dx-pie-chart="pie_737_total_event"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-2 col-md-3" style="padding :0;">
+                                            <div class="  generalInfo chartBox" style="background: #d98c8c; height: 140px">
+                                                <p style="font-size: 16px; padding : 10px;margin:0;padding-bottom:0">High Score</p>
+                                                <p style="text-align: center; font-size: 30px;padding : 10px;margin:0;padding-bottom:15px;padding-top:25px">{{ result_type_737.high_score}}</p>
+                                            </div>
+                                            <div class="  generalInfo chartBox" style="background: #ffe699; height: 140px" ng-click="showEvents()">
+                                                <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Medium Score</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px ">{{ result_type_737.medium_score}}</p>
+                                            </div>
+                                            <div class="   generalInfo chartBox" style="background: #b3e6cc; height: 140px">
+                                                <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Low Score</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px">{{ result_type_737.low_score}}</p>
+                                            </div>
+                                        </div>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" style="padding: 0px; padding-top: 0px; padding-left: 5px">
+                                <div class="type-card">
+                                    <div class="type-header" style="padding:7px;background:#eee;text-align:center">MD</div>
+                                    <div>
+                                        <div class="col-lg-2 col-md-3" style="padding :0;">
+                                            <div class="  generalInfo chartBox" style="height:140px">
+                                                <p style="font-size: 16px; padding : 10px;margin:0;padding-bottom:0">Score per flight</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px">{{ result_type_md.score_per_flight}}</p>
+                                            </div>
+                                            <div class="  generalInfo chartBox" ng-click="showEvents()" style="height:140px">
+                                                <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Total Scores</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px">{{ result_type_md.total_score}}</p>
+                                            </div>
+                                            <div class="   generalInfo chartBox" style="height:140px">
+                                                <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Total Flights</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px ">{{ result_type_md.flight_count}}</p>
+                                            </div>
+
+
+
+                                            <div ng-show="false">
+
+                                                <div class="col-lg-6 col-md-6 generalInfo" style="padding:0 !important">
+                                                    <div class="chartBox" style="height: 102.5px">
+                                                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px">Events per flight</p>
+                                                        <p style="text-align: center; font-size: 20px">{{ result_type_md.flight_count.toFixed(0)}}</p>
+                                                    </div>
+                                                    <div class="chartBox" style="height: 102.5px">
+                                                        <p style="font-size: 16px; padding-top: 5px; padding-left: 14px">Score per flight</p>
+                                                        <p style="text-align: center; font-size: 20px">{{ result_type_md.flight_count.toFixed(0)}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-8 col-md-6" style="padding:0; padding-right:0px;">
+                                            <div class=" chartBox" style='padding-bottom:9px'>
+                                                <div id="pie_md_total_event" dx-pie-chart="pie_md_total_event"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-2 col-md-3" style="padding :0;">
+                                            <div class="  generalInfo chartBox" style="background: #d98c8c; height: 140px">
+                                                <p style="font-size: 16px; padding : 10px;margin:0;padding-bottom:0">High Score</p>
+                                                <p style="text-align: center; font-size: 30px;padding : 10px;margin:0;padding-bottom:15px;padding-top:25px">{{ result_type_md.high_score}}</p>
+                                            </div>
+                                            <div class="  generalInfo chartBox" style="background: #ffe699; height: 140px" ng-click="showEvents()">
+                                                <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Medium Score</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px ">{{ result_type_md.medium_score}}</p>
+                                            </div>
+                                            <div class="   generalInfo chartBox" style="background: #b3e6cc; height: 140px">
+                                                <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Low Score</p>
+                                                <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px">{{ result_type_md.low_score}}</p>
+                                            </div>
+                                        </div>
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <!--<div class="col-lg-3 col-md-3" style="padding :0;"></div>
+    <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+        <div class="type-card" style="margin-top:10px">
+            <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
+                <div id="bar_type_comparison" dx-chart="bar_type_comparison"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3" style="padding :0;"></div>-->
+
+
+                            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+                                <div class="type-card" style="margin-top:10px">
+                                    <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
+                                        <div id="bar_reg_737" dx-chart="bar_reg_737"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+                                <div class="type-card" style="margin-top:10px">
+                                    <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
+                                        <div id="bar_reg_md" dx-chart="bar_reg_md"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+                                <div class="type-card" style="margin-top:10px">
+                                    <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
+                                        <div id="bar_cpt_737" dx-chart="bar_cpt_737"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+                                <div class="type-card" style="margin-top:10px">
+                                    <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
+                                        <div id="bar_cpt_md" dx-chart="bar_cpt_md"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+                                <div class="type-card" style="margin-top:10px">
+                                    <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
+                                        <div id="bar_route_737" dx-chart="bar_route_737"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+                                <div class="type-card" style="margin-top:10px">
+                                    <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
+                                        <div id="bar_route_md" dx-chart="bar_route_md"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+
+
+            <table>
+                <tr>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+
+                    <td style="padding-right:3px;"> <div dx-button="btn_search"></div></td>
+
+                </tr>
+            </table>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

@@ -72,11 +72,13 @@ namespace Report
             //  lblCourseId.Text = Convert.ToString(data.CourseId).ToUpper();
 
             string groupcode = Convert.ToString(data.JobGroupCode);
-         
+
+            img_ins1.ImageUrl = "https://ava.airpocket.app/upload/ins/" + data.CustomerId+".png";
+
            // lblOpsTrn.Visible = groupcode.StartsWith("0000110") || groupcode.StartsWith("00101") || groupcode.StartsWith("00102") || groupcode.StartsWith("000010602");
            // lblOpsTrnCaption.Visible = lblOpsTrn.Visible;
 
-           
+
         }
 
         string folder = WebConfigurationManager.AppSettings["folder"];

@@ -828,6 +828,12 @@ app.config(function ($routeProvider) {
     });
 
 
+    $routeProvider.when("/fdm/main/z", {
+        controller: "zfdm_main_controller",
+        templateUrl: "/app/views/zfdm_main.html?v=" + '5673'
+    });
+
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   
