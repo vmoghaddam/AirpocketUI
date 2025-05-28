@@ -735,7 +735,7 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
             fdmService.get_fmd_all($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response) {
 
                 $scope.result_type = response.Data.result_type;
-                $scope.result_route = response.Data.result_route_flight;
+               // $scope.result_route = response.Data.result_register;
                 $scope.result_type_737 = response.Data.result_type[0];
                 $scope.pie_737_total_event_ds = [
                     { level: 'Low', Count: $scope.result_type_737.low_count },
@@ -752,10 +752,10 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
                     { level: 'High', Count: $scope.result_type_md.high_count }
                 ];
                 $scope.bar_type_comparison_ds = $scope.result_type;
-                $scope.result_register_flight = response.Data.result_register_flight;
+                $scope.result_register = response.Data.result_register;
 
-                $scope.bar_reg_737_ds = Enumerable.From($scope.result_register_flight).Where('$.ac_type=="B737"').OrderByDescending('$.score_per_flight').ToArray();
-                $scope.bar_reg_md_ds = Enumerable.From($scope.result_register_flight).Where('$.ac_type=="MD"').OrderByDescending('$.score_per_flight').ToArray();
+                $scope.bar_reg_737_ds = Enumerable.From($scope.result_register).Where('$.ac_type=="B737"').OrderByDescending('$.score_per_flight').ToArray();
+                $scope.bar_reg_md_ds = Enumerable.From($scope.result_register).Where('$.ac_type=="MD"').OrderByDescending('$.score_per_flight').ToArray();
 
                 $scope.bar_route_737_ds = Enumerable.From($scope.result_route).Where('$.ac_type=="B737"').OrderByDescending('$.score_per_flight').Take(10).ToArray();
                 $scope.bar_route_md_ds = Enumerable.From($scope.result_route).Where('$.ac_type=="MD"').OrderByDescending('$.score_per_flight').Take(10).ToArray();
@@ -764,7 +764,7 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
 
                 //////////////////////////////////////
                 fdmService.get_fmd_crew($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response2) {
-                    $scope.result_crew = response2.Data.result_register_flight_crew;
+                    $scope.result_crew = response2.Data.result_type_crew;
                    
                     $scope.bar_cpt_737_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').Take(10).ToArray();
                     $scope.bar_cpt_md_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').Take(10).ToArray();
