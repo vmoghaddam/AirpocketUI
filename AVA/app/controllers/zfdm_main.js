@@ -5,6 +5,7 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
 
         $scope.prms = $routeParams.prms;
         $scope.activeTab = 'fleet';
+        $scope.activeTab2 = 'B737';
 
 
         $scope.btn_search = {
@@ -144,6 +145,64 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
                 'size': 'pie_size'
             },
         };
+
+
+        $scope.pie_737_total_event_pilot = {
+            type: "doughnut",
+            //  size: {
+            //     height:400,
+
+            //  },
+            // palette: 'bright',
+            palette: ['#66cc97', '#ffcc33', '#bf4040'],
+            series: [
+                {
+                    argumentField: 'level',
+                    valueField: 'Count',
+                    label: {
+                        visible: true,
+                        connector: {
+                            visible: true,
+                            width: 1,
+                        },
+                        customizeText(arg) {
+                            return arg.value;
+                        },
+                    },
+
+                },
+            ],
+            //title: 'Events',
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                const point = e.target;
+
+                toggleVisibility(point);
+            },
+            onLegendClick(e) {
+                const arg = e.target;
+
+                toggleVisibility(e.component.getAllSeries()[0].getPointsByArg(arg)[0]);
+            },
+            legend: {
+                //verticalAlignment: 'bottom',
+                //horizontalAlignment: 'center',
+                verticalAlignment: 'top',
+                horizontalAlignment: 'right',
+                itemTextPosition: 'right',
+
+            },
+            bindingOptions:
+            {
+                dataSource: 'pie_737_total_event_pilot_ds',
+                'size': 'pie_size'
+            },
+        };
+
+
+
 
         $scope.pie_md_total_event = {
             type: "doughnut",
@@ -763,13 +822,133 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
               //  $scope.build();
 
                 //////////////////////////////////////
+
                 fdmService.get_fmd_crew($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response2) {
+                    //get_fmd_crew_phase
                     $scope.result_crew = response2.Data.result_type_crew;
+                    fdmService.get_fmd_crew_phase($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response_phase) {
+                        console.log(response_phase.Data.result_type_crew_phase);
+                        
+                        $.each($scope.result_crew, function (_i, _d) {
+                            var phase = Enumerable.From(response_phase.Data.result_type_crew_phase).Where(function (x) { return x.crew_id == _d.crew_id; }).OrderByDescending('$.total_score').ToArray();
+                            _d.ds_phase = phase;
+                           _d.ds_phase_scores = Enumerable.From(phase).Select('$.total_score').ToArray();
+                            _d.ds_phase_labels = Enumerable.From(phase).Select('$.phase').ToArray();
+                        });
+
+
+                        $scope.bar_cpt_737_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').Take(10).ToArray();
+                        $scope.bar_cpt_md_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').Take(10).ToArray();
+
+
+                        $scope.ds_cpt_737 = Enumerable.From($scope.result_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').ToArray();
+                        $scope.ds_cpt_MD = Enumerable.From($scope.result_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').ToArray();
+
+
+                        console.log('$scope.result_cre', $scope.bar_cpt_737_ds);
+                        /////////////////////
+
+                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
                    
-                    $scope.bar_cpt_737_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').Take(10).ToArray();
-                    $scope.bar_cpt_md_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').Take(10).ToArray();
-                    console.log('$scope.result_cre', $scope.bar_cpt_737_ds);
+
+                    ///////////////////
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+                $scope.$watch('ds_cpt_737', function (newVal) {
+                    if (!newVal) return;
+
+                    setTimeout(() => {
+                        newVal.forEach((c, i) => {
+
+                            const canvas = document.getElementById(`chart-${i}`);
+                            if (!canvas) return;
+
+                            const ctx = canvas.getContext('2d');
+
+                            new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: c.ds_phase_labels, // مثلاً ['Takeoff', 'Cruise', 'Landing']
+                                    datasets: [{
+                                        label: 'Total Score',
+                                        data: c.ds_phase_scores, // مثلاً [10, 12, 7]
+                                        backgroundColor: '#cccccc',//'rgba(75, 192, 192, 0.6)',
+                                        borderColor: 'gray',//'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    indexAxis: 'y',
+                                    responsive: true,
+                                    elements: {
+                                        bar: {
+                                            borderWidth: 1
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    }, 0); // برای اطمینان از اینکه DOM آماده‌ست
+                });
+
+                $scope.$watch('ds_cpt_MD', function (newVal) {
+                    if (!newVal) return;
+
+                    setTimeout(() => {
+                        newVal.forEach((c, i) => {
+
+                            const canvas = document.getElementById(`chartMD-${i}`);
+                            if (!canvas) return;
+
+                            const ctx = canvas.getContext('2d');
+
+                            new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: c.ds_phase_labels, // مثلاً ['Takeoff', 'Cruise', 'Landing']
+                                    datasets: [{
+                                        label: 'Total Score',
+                                        data: c.ds_phase_scores, // مثلاً [10, 12, 7]
+                                        backgroundColor: '#cccccc',//'rgba(75, 192, 192, 0.6)',
+                                        borderColor: 'gray',//'rgba(75, 192, 192, 1)',
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    indexAxis: 'y',
+                                    responsive: true,
+                                    elements: {
+                                        bar: {
+                                            borderWidth: 1
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            display: false
+                                        }
+                                    },
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    }, 0); // برای اطمینان از اینکه DOM آماده‌ست
+                });
+
+
                 ///////////////////////////////////////
                 //fdmService.get_fmd_route($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response) {
 
