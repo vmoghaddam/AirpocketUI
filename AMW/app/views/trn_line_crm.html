@@ -1,0 +1,215 @@
+﻿<style>
+    .form-header {
+        text-align: center;
+        margin-bottom: 20px;
+        border: 1px solid #dee2e6;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+        .form-header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .form-header .form-info {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+    .form-section {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .flat-input, .flat-select-box .dx-dropdowneditor-input {
+        border: 1px solid #dee2e6 !important;
+        background-color: #ffffff !important;
+        padding: 0.375rem 0.75rem;
+        border-radius: 0;
+        box-shadow: none !important;
+        transition: border-color 0.15s ease-in-out !important;
+    }
+
+        .flat-input:focus, .flat-select-box .dx-dropdowneditor-input:focus {
+            border-color: #80bdff !important;
+            outline: none;
+            box-shadow: none !important;
+        }
+
+    .text-box, .date-box {
+        background-color: white;
+        border: 1px solid lightgray;
+        padding: 7px 5px;
+        width: 100%;
+    }
+
+    .assessment-options label {
+        margin-right: 10px;
+    }
+
+    .form-section h4 {
+        margin-top: 20px;
+    }
+
+    .sb_rate {
+        background-color: white;
+        border: 1px solid lightgray;
+        padding: 7px 5px;
+    }
+
+    .title {
+        border: 1px solid lightgray;
+        background-color: whitesmoke;
+        margin-bottom: 0px;
+        border-bottom: 0px;
+        padding: 10px
+    }
+
+    .description {
+        vertical-align: middle !important;
+    }
+</style>
+
+<div class="container" style="margin-top:5px">
+   
+    <h4 class="title">Basic Information</h4>
+    <div class="form-section">
+        <form>
+            <div class="form-group row">
+                <label for="date" class="col-sm-3 col-form-label">Date</label>
+                <div class="col-sm-3">
+                    <div dx-date-box class="date-box" style="width:100%" ng-model="formData.date"></div>
+                </div>
+                <label for="crewMembersName" class="col-sm-3 col-form-label">Crew Members Name & Grade</label>
+                <div class="col-sm-3">
+                    <div class="text-box" dx-text-box ng-model="formData.crewMembersName"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="typeOfCheck" class="col-sm-3 col-form-label">Type of Check</label>
+                <div class="col-sm-9">
+                    <div class="text-box" dx-text-box ng-model="formData.typeOfCheck"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <h4 class="title">Category Observable Actions – Crew Member</h4>
+    <div class="form-section">
+        <h4 class="title">Workload Management</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-11">Description</th>
+                    <th class="col-sm-1" style="text-align:center">R</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.workloadManagement">
+                    <td class="description">{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="sb_rate" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 class="title">Communications</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-11">Description</th>
+                    <th class="col-sm-1" style="text-align:center">R</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.communications">
+                    <td class="description">{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="sb_rate" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 class="title">Leadership and Teamwork</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-11">Description</th>
+                    <th class="col-sm-1" style="text-align:center">R</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.leadershipTeamwork">
+                    <td class="description">{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="sb_rate" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 class="title">Situation Awareness</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-11">Description</th>
+                    <th class="col-sm-1" style="text-align:center">R</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.situationAwareness">
+                    <td class="description">{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="sb_rate" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 class="title">Problem Solving and Decision Making</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-11">Description</th>
+                    <th class="col-sm-1" style="text-align:center">R</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.problemSolving">
+                    <td class="description">{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="sb_rate" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-section">
+        <div class="form-group row">
+            <label for="finalAssessment" class="col-sm-12 col-form-label">Final Assessment & Grade</label>
+            <div class="col-sm-12">
+                <div class="text-box" dx-text-box ng-model="formData.finalAssessment"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="comments" class="col-sm-12 col-form-label">Special Comments on Overall CRM Performance</label>
+            <div class="col-sm-12">
+                <div dx-text-area ng-model="formData.comments" class="text-box" dx-multiline="true"></div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="title">Signatures</h4>
+    <div class="form-section">
+        <div class="form-group row">
+            <label for="crewMemberSignature" class="col-sm-3 col-form-label">Crew Member Signature</label>
+            <div class="col-sm-9">
+                <div dx-text-box ng-model="formData.crewMemberSignature" class="text-box"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="instructorSignature" class="col-sm-3 col-form-label">Instructor Name & Signature</label>
+            <div class="col-sm-9">
+                <div dx-text-box ng-model="formData.instructorSignature" class="text-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <div dx-button="btn_save"></div>
+</div>

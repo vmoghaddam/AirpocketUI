@@ -1,0 +1,389 @@
+﻿<link href="sfstyles/ejthemes/default-theme/ej.web.all.min.css" rel="stylesheet" />
+<link href="sfstyles/default.css" rel="stylesheet" />
+<link href="sfstyles/default-responsive.css" rel="stylesheet" />
+<link href="sfstyles/ejthemes/responsive-css/ej.responsive.css" rel="stylesheet" />
+
+<style>
+    .rect {
+        text-align: center;
+        font-size: 11px;
+        padding-top: 10px;
+        height: 100%;
+        color: white;
+        font-weight: bold;
+    }
+
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.overlap {
+        background-color: #f44336;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.gap {
+        background-color: orange;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.new {
+        background-color: #2196F3;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.updated {
+        background-color: #4CAF50;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .e-gantt-parenttaskbar-innerdiv.e-chartexpand.e-parentTask {
+        display: none;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-childtaskbar {
+        border: 2px solid yellow
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 25px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 55px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-navigator {
+        min-width: 200px !important;
+    }
+
+    .dx-scheduler-view-switcher {
+        display: none !important;
+    }
+
+    .dx-scheduler-view-switcher-label {
+        display: none !important
+    }
+</style>
+
+<div ng-controller="flightPlanRegsiterController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px 0 0 0" >
+            <div class=" col-lg-4 col-md-3 col-sm-9 col-xs-9 col1 class="dx-border"" style="padding-right:2px;padding-left:2px;  ">
+                <div class="filter-container box  ">
+                    <div class="header">{{plan.Title2}}</div>
+
+                    <div class="content dx-border" ng-show="IsDetailsVisible">
+                        <div dx-scroll-view="scroll_1" style="padding:0px 0px 0 0;">
+                            <div class="col-lg-6 margin-bottom-5 padding-7">
+                                <label>From</label>
+                                <div class="center" dx-date-box="date_from"></div>
+                            </div>
+                            <div class="col-lg-6  margin-bottom-5 padding-7">
+                                <label>To</label>
+                                <div class="center" dx-date-box="date_to"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Interval</label>
+                                <div dx-select-box="sb_interval"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7" ng-show="isCustomVisible">
+                                <label>Month(s)</label>
+                                <div dx-tag-box="tag_months"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7" ng-show="isCustomVisible">
+                                <label>Day(s)</label>
+                                <div dx-tag-box="tag_days"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7" style="padding:5px;">
+                                <div dx-scheduler="schedulerOptions">
+                                    <div data-options="dxTemplate:{name:'dataCellTemplate'}" style="height:20px">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+            <div class=" col-lg-8 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+                <div class="filter-container box  ">
+                    <div style="text-align:center;margin:0 3px 5px 3px;border:1px solid #e0e0e0;min-height:30px" id="range_container">
+
+                    </div>
+                    <div id="gantt_container_ba">
+                        <div id="resourceGanttpr" style="height:170px;width:100%;" />
+                    </div>
+                   
+
+                    <div dx-data-grid="dg_reg" id="dg_reg" class="content" style="overflow-y:hidden;margin:3px"></div>
+                    <table style="width:100%;margin-top:11px;margin-bottom:14px" class="dx-border" ng-show="EditVisible">
+                        <tr>
+                            <td style="width:60px;text-align:right;padding-right:7px">From</td>
+                            <td style="width:120px"> <div class="center" dx-date-box="date_from_entity" dx-validator="{validationGroup:'fpregisteradd',  validationRules: [{ type: 'required'}]}"></div></td>
+                            <td style="width:60px;text-align:right;padding-right:7px">To</td>
+                            <td style="width:120px"> <div class="center" dx-date-box="date_to_entity" dx-validator="{validationGroup:'fpregisteradd',  validationRules: [{ type: 'required'}]}"></div></td>
+                            <td style="width:80px;text-align:right;padding-right:7px">Register</td>
+                            <td> <div dx-select-box="sb_msn" dx-validator="{validationGroup:'fpregisteradd',  validationRules: [{ type: 'required'}]}"></div></td>
+                            <td style="width:50px;padding-left:5px">  <div dx-button="btn_add"></div></td>
+                            <td style="width:45px">  <div dx-button="btn_delete"></div></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <!--<div class="rowx footer">
+
+        <div dx-button="btn_register"></div>
+        <div dx-button="btn_approve"></div>
+
+    </div>-->
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <div id="popup_registers" dx-popup="popup_registers">
+        <div style="padding:0px 0 0 0" class="dx-border1">
+            <div class=" col-lg-3 col-md-1 col-sm-1 col-xs-1" style="padding:0;">
+                <div dx-data-grid="dg_res" id="dg_res" class="content" style="overflow-y:hidden"></div>
+            </div>
+            <div class=" col-lg-9 col-md-1 col-sm-1 col-xs-1" style="padding:0 0px 0 5px; " ng-show="IsRegistersVisible">
+                <div style="border:1px solid #e0e0e0;min-height:500px">
+                    <div class="col-lg-3   padding-7 dx-border">
+                        <label>From</label>
+                        <div class="center" dx-date-box="date_from"></div>
+                    </div>
+                    <div class="col-lg-3    padding-7 dx-border">
+                        <label>To</label>
+                        <div class="center" dx-date-box="date_to"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="text-align:center;margin:0 3px 5px 3px;border:1px solid #e0e0e0;min-height:30px" id="range_container">
+
+                    </div>
+                   
+
+
+                    <div dx-data-grid="dg_reg" id="dg_reg" class="content" style="overflow-y:hidden;margin:3px"></div>
+                    <table style="width:100%;margin-top:5px;" class="dx-border" ng-show="EditVisible">
+                        <tr>
+                            <td style="width:60px;text-align:right;padding-right:7px">From</td>
+                            <td style="width:120px"> <div class="center" dx-date-box="date_from_entity" dx-validator="{validationGroup:'fpregisteradd',  validationRules: [{ type: 'required'}]}"></div></td>
+                            <td style="width:60px;text-align:right;padding-right:7px">To</td>
+                            <td style="width:120px"> <div class="center" dx-date-box="date_to_entity" dx-validator="{validationGroup:'fpregisteradd',  validationRules: [{ type: 'required'}]}"></div></td>
+                            <td style="width:80px;text-align:right;padding-right:7px">Register</td>
+                            <td> <div dx-select-box="sb_msn" dx-validator="{validationGroup:'fpregisteradd',  validationRules: [{ type: 'required'}]}"></div></td>
+                            <td style="width:50px;padding-left:5px">  <div dx-button="btn_add"></div></td>
+                            <td style="width:45px">  <div dx-button="btn_delete"></div></td>
+                        </tr>
+
+                    </table>
+                </div>
+
+
+
+
+            </div>
+
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <script type="text/x-jsrender" id="taskbarTemplate">
+        <!--{{if  #get("array").data.length>0}}
+        {{:~renderCompleted(#data['taskId'],#get("array").data.length)}} {{/if}}-->
+       
+
+
+
+
+
+        <div class="e-gantt-template-taskbar bg-color {{statusClass:#data['taskId']}}" style="border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+            <div>
+
+                {{if #data['resourceNames']}}
+                <div id="task-{{:#data['taskId']}}" style="text-align:center">
+
+                    <span class="tasknametext" style=" z-index:1;font-size:11px;font-weight:normal;  top:6px; font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative"> {{:#data['taskName']}}{{:#data['from']}}</span>
+
+
+                </div>
+
+
+                <!--<span class="resourcenametext" style="position:absolute;z-index:1;font-size:12px;color:white;top:25px;left:40px;font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;opacity:0.5">{{:#data['resourceNames']}}</span>
+                <span class="progresstext" style="margin-top:22px;margin-right:4px;position:relative;float:right;color:white;z-index:1;font-family:'Segoe UI';font-size:14px;">{{:#data['status']}}%</span>-->
+                {{else}}
+                <!--<span style="margin:6px 14px 0 0;position:relative;float:right;color:white;z-index:1;">{{:#data['status']}}% {{:#data['taskName']}}</span>-->
+               
+                <div id="task-{{:#data['taskId']}}" style="text-align:center">
+
+
+
+                    <span class="tasknametext" style=" z-index:1;font-size:14px;color:white;top:7px;left:40px;font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;"> {{:#data['taskName']}}{{:#data['from']}}</span>
+
+
+                </div>
+                {{/if}}
+            </div>
+
+            {{if #data['status']>0}}
+            <div class="e-gantt-template-progressbar KKK" style="font-size:10px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:10px;">
+                {{round: ~getDelay(#data['taskId'])  }}
+
+            </div>
+
+            {{/if}}
+
+
+        </div>
+
+
+
+        {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+    </script>
+
+    <script id="leftlableTemplate" type="text/x-jsrender">
+
+        <div style="padding-top:5px;">
+            <span>{{:#data['taskName']}}  [{{:status}}%]</span>
+        </div>
+
+    </script>
+
+    <script type="text/x-jsrender" id="columnTemplate">
+
+
+
+        <!--{{if #data['resourceNames']}}
+        <div style="display:inline-block;position:relative;left:10px;top:1px">
+            <img src="../content/images/gantt/{{:#data['resourceNames']}}.png" height="40px" />
+        </div>
+        <div style='display:inline-block;width:100%;position:relative;left:10px;top:2px'>{{:#data['resourceNames']}}</div>
+        {{/if}}-->
+        {{if #data['assigned']}}
+        <div style="text-align:center"><i style='font-size:22px;color:green' class='icon ion-ios-airplane'></i></div>
+        {{/if}}
+         
+    </script>
+     
+    <script type="text/x-jsrender" id="columnTemplateRegister">
+
+
+        {{:~registerTemplate(#data['resourceId'],#data)}}
+        <!--['resourceName'] <div style="text-align:left">{{:#data}}</div>-->
+
+
+    </script>
+
+
+</div>

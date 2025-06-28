@@ -1,0 +1,204 @@
+﻿<style>
+
+    /* Header Styling */
+    .header {
+        flex: 0 0 50px; /* Fixed height of 60px */
+    }
+
+    /* Footer Styling */
+    .footer {
+        flex: 0 0 45px; /* Fixed height of 60px */
+    }
+
+    /* Content Styling */
+    .content {
+        flex: 1; /* Grow to fill the remaining space */
+        overflow-y: auto; /* Allow scrolling if content overflows */
+        background-color: white;
+        box-sizing: border-box;
+    }
+
+    .text-box {
+        padding-left: 5px
+    }
+</style>
+
+
+<div style=" margin: 0; padding: 0; height: 100%; font-family: Arial, sans-serif; display: flex; flex-direction: column;">
+    <!-- Header Section -->
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <!-- Content Section -->
+    <div class="content">
+        <div dx-tabs="tabs_options"></div>
+        <div id="active" class="tabc" style="width: 100%; padding: 5px">
+            <div class="col-lg-8 col-md-12 col-sm-12 no-padding" style="padding: 0 5px 0 10px">
+                <div class="dx-border" style="border: 1px solid lightgray; padding: 10px;">
+                    <div class="row">
+                        <!-- NIS No. -->
+                        <div class="col-lg-4 col-md-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="txt_nis_no" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">NIS No.:</label>
+                                <div dx-text-box="txt_nis_no" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+                        <!-- Description -->
+                        <div class="col-lg-4 col-md-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="txt_desc" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Description:</label>
+                                <div dx-text-box="txt_desc" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+                        <!-- Part No. -->
+                        <div class="col-lg-4 col-md-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="txt_pn" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Part No.:</label>
+                                <div dx-text-box="txt_pn" class="flex-grow-1 text-box"></div>
+                                <div dx-button="btn_pn" style="margin-left:5px"></div>
+                            </div>
+                        </div>
+                        <!-- Priority -->
+                        <div class="col-lg-4 col-md-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="sb_priority" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Priority:</label>
+                                <div dx-select-box="sb_priority" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+                        <!-- Date From -->
+                        <div class="col-lg-4 col-md-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="dt_from" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Date From:</label>
+                                <div dx-date-box="dt_from" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+                        <!-- Date To -->
+                        <div class="col-lg-4 col-md-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="dt_to" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Date To:</label>
+                                <div dx-date-box="dt_to" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+                        <!-- Search Button -->
+                        <div class="col-lg-12 col-md-6" style="text-align:end; ">
+                            <div dx_button="btn_search"></div>
+                        </div>
+                    </div>
+                </div>
+                <div dx-data-grid="dg_nis" id="dg_nis" class="content" style="overflow-y: hidden; padding: 5px 0 0 0; width: 100%;" dx-item-alias="row"></div>
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-sm-12 no-padding" style="padding: 0 10px 0 5px">
+                <div dx-data-grid="dg_inter" id="dg_inter" class="content" style="overflow-y: hidden; padding: 5px 0 0 0; width: 100%;" dx-item-alias="row"></div>
+                <div dx-data-grid="dg_info" id="dg_info" class="content" style="overflow-y: hidden; padding: 5px 0 0 0; width: 100%;" dx-item-alias="row"></div>
+            </div>
+        </div>
+
+        <div id="mrf" class="tabc" style="width: 100%; padding: 5px">
+            <div class="dx-border" style="border: 1px solid lightgray; padding: 10px;">
+                <div class="row">
+                    <!-- NIS No. -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_archive_nis" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">NIS No.:</label>
+                            <div dx-text-box="txt_archive_nis" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                    <!-- MRF No. -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_archive_mrf" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">MRF No.:</label>
+                            <div dx-text-box="txt_archive_mrf" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                    <!-- Part No. -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_archive_pn" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Part No.:</label>
+                            <div dx-text-box="txt_archive_pn" class="flex-grow-1 text-box"></div>
+                            <div dx-button="btn_pn" style="margin-left:5px" class="ms-3"></div>
+                        </div>
+                    </div>
+                    <!-- Date From -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="dt_archive_from" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Date From:</label>
+                            <div dx-date-box="dt_archive_from" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                    <!-- Date To -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="dt_archive_to" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Date To:</label>
+                            <div dx-date-box="dt_archive_to" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                    <!-- Search Button -->
+                    <div class="col-lg-2 col-md-6" style="text-align: end; ">
+                        <div dx_button="btn_archive_search"></div>
+                    </div>
+                </div>
+            </div>
+            <div dx-data-grid="dg_archive" id="dg_archive" class="content" style="overflow-y: hidden; padding: 5px 0 0 0; width: 100%;" dx-item-alias="row"></div>
+        </div>
+
+        <div id="archive" class="tabc" style="width: 100%; padding: 5px">
+            <div class="dx-border" style="border: 1px solid lightgray; padding: 10px;">
+                <div class="row">
+                    <!-- NIS No. -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_archive_nis" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">NIS No.:</label>
+                            <div dx-text-box="txt_archive_nis" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                    <!-- MRF No. -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_archive_mrf" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">MRF No.:</label>
+                            <div dx-text-box="txt_archive_mrf" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                    <!-- Part No. -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_archive_pn" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Part No.:</label>
+                            <div dx-text-box="txt_archive_pn" class="flex-grow-1 text-box"></div>
+                            <div dx-button="btn_pn" style="margin-left: 5px" class="ms-3"></div>
+                        </div>
+                    </div>
+                    <!-- Date From -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="dt_archive_from" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Date From:</label>
+                            <div dx-date-box="dt_archive_from" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                    <!-- Date To -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="dt_archive_to" class="form-label mb-0 me-2" style="width: 80px; text-align: right;">Date To:</label>
+                            <div dx-date-box="dt_archive_to" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                    <!-- Search Button -->
+                    <div class="col-lg-2 col-md-6" style="text-align:end">
+                        <div dx_button="btn_archive_search"></div>
+                    </div>
+                </div>
+            </div>
+            <div dx-data-grid="dg_archive" id="dg_archive" class="content" style="overflow-y: hidden; padding: 5px 0 0 0; width: 100%;" dx-item-alias="row"></div>
+        </div>
+
+    </div>
+
+    <!-- Footer Section -->
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+
+        <div ng-include="'app/views/vira_part_number_selection.html'"></div>
+    </div>
+</div>

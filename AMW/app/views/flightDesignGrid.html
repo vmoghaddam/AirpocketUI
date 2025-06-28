@@ -1,0 +1,88 @@
+﻿<div ng-controller="flightDesignGridController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+
+        <div dx-data-grid="dg" id="dg" class="content" style="overflow-y:hidden"></div>
+    </div>
+
+
+
+
+
+
+     
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+    <div id="popup_item" dx-popup="popup_item">
+        <div style="padding:10px 0 0 0" class="dx-border">
+            <div class="col-lg-5 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Aircraft Type</label>
+                <div dx-select-box="sb_type" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-7 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Register</label>
+                <div dx-select-box="sb_msn"></div>
+            </div>
+            <!--<div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+        <label>From</label>
+        <div dx-select-box="sb_FromAirport" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+    </div>
+    <div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+        <label>To</label>
+        <div dx-select-box="sb_ToAirport" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+    </div>-->
+            <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>From</label>
+                <div dx-select-box="sb_FromAirport" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>To</label>
+                <div dx-select-box="sb_ToAirport" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Departure</label>
+                <div class="center" dx-date-box="time_start" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Hour(s)</label>
+                <div class="center" dx-number-box="text_flighth" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Minute(s)</label>
+                <div class="center" dx-number-box="text_flightm" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Arrival</label>
+                <div class="center" dx-date-box="time_end"></div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Number</label>
+                <div class="center" dx-text-box="text_flightnumber" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-9 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Type</label>
+                <div dx-select-box="sb_flighttype" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+
+            <!--<div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+        <div dx-check-box="chb_SMS"></div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+        <div dx-check-box="chb_Email"></div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+        <div dx-check-box="chb_AppNotification"></div>
+    </div>-->
+        </div>
+
+    </div>
+
+
+
+    
+</div>
