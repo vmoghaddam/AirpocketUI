@@ -28,5 +28,8 @@ namespace Report
         public Nullable<System.DateTime> SessionEnd { get; set; }
         public string Instructor2 { get; set; }
         public string Instructor { get; set; }
+        public Nullable<int> CourseTypeId { get; set; }
+        public string CourseType { get; set; }
+        public Nullable<int> CertificateTypeId { get; set; }
     }
 }

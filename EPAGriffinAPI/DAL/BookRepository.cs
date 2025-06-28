@@ -508,7 +508,9 @@ namespace EPAGriffinAPI.DAL
                 }
                 else
                 {
+                    //Modified for FLYKISH
                     qry = qry.Where(q => q.FullCode.StartsWith(x.code));
+                    //qry = qry.Where(q => q.FullCode == x.FullCode);
                     var grps = qry.ToList();
                     _grps = _grps.Concat(grps).ToList();
 
@@ -751,13 +753,13 @@ namespace EPAGriffinAPI.DAL
                         + "<br/>"
                        //+ "(" + x.Category + ")"
                        //  + "<br/>"
-                       + "مرتبط با حیطه کاری شما، بارگزاری گردیده است. جهت انجام وظایف خود منطبق با دستورالعمل های به روز شرکت به سامانه کتابخانه الکترونیک طی 24 ساعت آبنده مراجعه نمایید."
+                       + "مرتبط با حیطه کاری شما، بارگزاری گردیده است. جهت انجام وظایف خود منطبق با دستورالعمل های به روز شرکت به سامانه کتابخانه الکترونیک طی 24 ساعت آینده مراجعه نمایید."
                         + "<br/>"
-                        + "https://airpocket.karunair.ir/pulsepocket/"
+                        + "https://atlas.pulsepocket.app/"
                         + "<br/>"
-                         + "https://skybag.karunair.ir/"
+                         + "https://pgs.skybag.aerok.tech/"
                         + "<br/>"
-                        + "شرکت هواپیمایی کارون";
+                        + "شرکت هواپیمایی اطلس";
 
                     //+ "مستندات (اسم کتاب) مرتبط با حیطه کاری شما در کتابخانه الکترونیک بارگزاری گردیده است.";
                     var _sms = "همکار گرامی، در کتابخانه الکترونیک، مستندات  "
@@ -766,13 +768,13 @@ namespace EPAGriffinAPI.DAL
                           // + "\n"
                           // + "(" + x.Category + ")"
                           + "\n"
-                           + "مرتبط با حیطه کاری شما، بارگزاری گردیده است. جهت انجام وظایف خود منطبق با دستورالعمل های به روز شرکت به سامانه کتابخانه الکترونیک طی 24 ساعت آبنده مراجعه نمایید."
+                           + "مرتبط با حیطه کاری شما، بارگزاری گردیده است. جهت انجام وظایف خود منطبق با دستورالعمل های به روز شرکت به سامانه کتابخانه الکترونیک طی 24 ساعت آینده مراجعه نمایید."
                              + "\n"
- + "https://airpocket.karunair.ir/pulsepocket/"
+ + "https://atlas.pulsepocket.app/"
  + "\n"
- + "https://skybag.karunair.ir/"
+ + "https://pgs.skybag.aerok.tech/"
   + "\n"
-                         + "شرکت هواپیمایی کارون";
+                         + "شرکت هواپیمایی اطلس";
 
 
                     //var _sms= "Dear " + x.Name + ","+ "\n\n"

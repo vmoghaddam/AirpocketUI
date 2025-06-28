@@ -452,6 +452,21 @@ namespace Report
                         ASPxWebDocumentViewer1.OpenReport(rptfp);
                         break;
 
+                    case "grh":
+                        string grh_id = Request.QueryString["fid"];
+
+                        var rptgrh = new rptTest(grh_id);
+                        ASPxWebDocumentViewer1.OpenReport(rptgrh);
+                        break;
+                    case "hazard":
+                        string hazard_id = Request.QueryString["fid"];
+
+                        var rpthazard = new rptHazard(hazard_id);
+                        
+                      
+                        ASPxWebDocumentViewer1.OpenReport(rpthazard);
+                        break;
+
                     default: break;
                 }
 

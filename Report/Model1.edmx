@@ -507,17 +507,20 @@
           <Property Name="ASD_AWZ_ExpireDate" Type="datetime2" Precision="7" />
           <Property Name="ASD_SRY_IssueDate" Type="datetime2" Precision="7" />
           <Property Name="ASD_SRY_ExpireDate" Type="datetime2" Precision="7" />
+          <Property Name="FTSL1IssueDate" Type="datetime2" Precision="7" />
+          <Property Name="FTSL1ExpireDate" Type="datetime2" Precision="7" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ppa_ava.dbo.ViewCourseNew' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ppa_varesh.dbo.ViewCourseNew' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewCourseNew">
           <Key>
             <PropertyRef Name="Id" />
             <PropertyRef Name="CourseTypeId" />
             <PropertyRef Name="DateStart" />
             <PropertyRef Name="Recurrent" />
-            <PropertyRef Name="Sessions" />
             <PropertyRef Name="PeopleCount" />
+            <PropertyRef Name="Synced" />
+            <PropertyRef Name="Sessions" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="CourseTypeId" Type="int" Nullable="false" />
@@ -529,6 +532,10 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCourseNew' does not have a primary
           <Property Name="Year" Type="int" />
           <Property Name="DateStart" Type="date" Nullable="false" />
           <Property Name="DateEnd" Type="date" />
+          <Property Name="PYear" Type="nvarchar" MaxLength="4" />
+          <Property Name="PMonthName" Type="nvarchar" MaxLength="255" />
+          <Property Name="PDateStart" Type="nvarchar" MaxLength="500" />
+          <Property Name="PDateEnd" Type="nvarchar" MaxLength="500" />
           <Property Name="Instructor" Type="nvarchar" MaxLength="1001" />
           <Property Name="Location" Type="nvarchar" MaxLength="500" />
           <Property Name="Department" Type="nvarchar" MaxLength="500" />
@@ -546,9 +553,9 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCourseNew' does not have a primary
           <Property Name="IsInside" Type="bit" />
           <Property Name="IsGeneral" Type="bit" />
           <Property Name="CustomerId" Type="int" />
-          <Property Name="No" Type="varchar" MaxLength="204" />
+          <Property Name="No" Type="varchar" MaxLength="200" />
           <Property Name="IsNotificationEnabled" Type="bit" />
-          <Property Name="Sessions" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Sessions" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="PeopleCount" Type="int" Nullable="false" />
           <Property Name="Organization" Type="nvarchar" MaxLength="1000" />
           <Property Name="DurationUnit" Type="nvarchar" MaxLength="1000" />
@@ -575,9 +582,28 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCourseNew' does not have a primary
           <Property Name="SMSInsDate" Type="datetime2" Precision="7" />
           <Property Name="AttForm" Type="varchar" MaxLength="1000" />
           <Property Name="Intervals" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Date_Sign_Ins1" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sign_Ins2" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sign_Director" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sign_Staff" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sign_OPS" Type="datetime2" Precision="7" />
+          <Property Name="Date_Exam_Sign_Ins1" Type="datetime2" Precision="7" />
+          <Property Name="Date_Exam_Sign_Ins2" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sessions_Synced" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sessions_Instructor_Synced" Type="datetime2" Precision="7" />
+          <Property Name="Attendants" Type="int" />
+          <Property Name="Synced" Type="int" Nullable="false" />
+          <Property Name="SyncedErrors" Type="int" />
+          <Property Name="SesstionsCount" Type="int" />
+          <Property Name="PLCount" Type="int" />
+          <Property Name="PLTotal" Type="int" />
+          <Property Name="PLRemain" Type="int" />
+          <Property Name="PLStatus" Type="float" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="ParentTitle" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ppa_ava.dbo.ViewCoursePeople' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ppa_varesh.dbo.ViewCoursePeople' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewCoursePeople">
           <Key>
             <PropertyRef Name="Id" />
@@ -618,7 +644,7 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCoursePeople' does not have a prim
           <Property Name="Recurrent" Type="bit" Nullable="false" />
           <Property Name="Interval" Type="int" />
           <Property Name="CalanderTypeId" Type="int" />
-          <Property Name="No" Type="varchar" MaxLength="204" />
+          <Property Name="No" Type="varchar" MaxLength="200" />
           <Property Name="DurationUnit" Type="nvarchar" MaxLength="1000" />
           <Property Name="CalendarType" Type="nvarchar" MaxLength="1000" />
           <Property Name="Organization" Type="nvarchar" MaxLength="1000" />
@@ -627,7 +653,7 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCoursePeople' does not have a prim
           <Property Name="GroupId" Type="int" />
           <Property Name="JobGroup" Type="nvarchar" MaxLength="500" />
           <Property Name="JobGroupCode" Type="varchar" MaxLength="500" />
-          <Property Name="JobGroupRoot" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="JobGroupRoot" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="SexId" Type="int" Nullable="false" />
           <Property Name="NID" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="500" Nullable="false" />
@@ -664,9 +690,27 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCoursePeople' does not have a prim
           <Property Name="ExamResult" Type="int" />
           <Property Name="ExamDate" Type="datetime2" Precision="7" />
           <Property Name="Year" Type="int" />
+          <Property Name="ExamStatus" Type="varchar" MaxLength="255" />
+          <Property Name="Date_Sign_Ins1" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sign_Ins2" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sign_Director" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sign_Staff" Type="datetime2" Precision="7" />
+          <Property Name="Date_Sign_OPS" Type="datetime2" Precision="7" />
+          <Property Name="Course_Date_Sign_Ins1" Type="datetime2" Precision="7" />
+          <Property Name="Course_Date_Sign_Ins2" Type="datetime2" Precision="7" />
+          <Property Name="Course_Date_Sign_Director" Type="datetime2" Precision="7" />
+          <Property Name="Course_Date_Sign_Staff" Type="datetime2" Precision="7" />
+          <Property Name="Course_Date_Sign_OPS" Type="datetime2" Precision="7" />
+          <Property Name="Course_Date_Exam_Sign_Ins1" Type="datetime2" Precision="7" />
+          <Property Name="Course_Date_Exam_Sign_Ins2" Type="datetime2" Precision="7" />
+          <Property Name="IsSessionsSynced" Type="bit" />
+          <Property Name="SessionsCount" Type="int" />
+          <Property Name="PresenceCount" Type="int" />
+          <Property Name="Presence" Type="float" />
+          <Property Name="ParentId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ppa_ava.dbo.ViewCourseSession' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ppa_varesh.dbo.ViewCourseSession' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewCourseSession">
           <Key>
             <PropertyRef Name="Id" />
@@ -676,6 +720,7 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCourseSession' does not have a pri
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="CourseId" Type="int" Nullable="false" />
           <Property Name="DateStart" Type="datetime" />
+          <Property Name="Date" Type="date" />
           <Property Name="DateEnd" Type="datetime" />
           <Property Name="DateStartUtc" Type="datetime" />
           <Property Name="DateEndUtc" Type="datetime" />
@@ -693,7 +738,8 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCourseSession' does not have a pri
           <Property Name="PMonth" Type="int" />
           <Property Name="PDayName" Type="nvarchar" MaxLength="4000" />
           <Property Name="No" Type="nvarchar" MaxLength="500" />
-          <Property Name="Instructor" Type="nvarchar" MaxLength="500" />
+          <Property Name="Instructor" Type="nvarchar" MaxLength="1001" />
+          <Property Name="InstructorId" Type="int" />
           <Property Name="Title" Type="nvarchar" MaxLength="500" />
           <Property Name="CT_Title" Type="nvarchar" MaxLength="500" />
           <Property Name="CustomerId" Type="int" />
@@ -704,9 +750,10 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCourseSession' does not have a pri
           <Property Name="IsGeneral" Type="bit" />
           <Property Name="StatusId" Type="int" />
           <Property Name="Status" Type="varchar" MaxLength="11" />
+          <Property Name="ParentId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ppa_ava.dbo.ViewCourseSessionPresence' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ppa_varesh.dbo.ViewCourseSessionPresence' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewCourseSessionPresence">
           <Key>
             
@@ -714,6 +761,11 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCourseSessionPresence' does not ha
             
             <PropertyRef Name="CourseId" />
             
+            <PropertyRef Name="NID" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="EmployeeId" />
             <PropertyRef Name="PersonId" />
             <PropertyRef Name="SessionKey" />
           </Key>
@@ -731,32 +783,51 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewCourseSessionPresence' does not ha
           <Property Name="AttendancePercent" Type="numeric" Precision="26" Scale="12" />
           <Property Name="CourseSessionPresenceId" Type="int" />
           <Property Name="IsPresent" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Instructor1Id" Type="int" />
+          <Property Name="Instructor2Id" Type="int" />
+          <Property Name="Instructor" Type="nvarchar" MaxLength="2004" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="JobGroup" Type="nvarchar" MaxLength="500" />
+          <Property Name="NID" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="1001" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="500" />
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ppa_ava.dbo.ViewLogBook18' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ppa_varesh.dbo.ViewLogBook18' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewLogBook18">
           <Key>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             <PropertyRef Name="FlightId" />
             <PropertyRef Name="CrewId" />
           </Key>
-          <Property Name="FlightId" Type="int" Nullable="false" />
-          <Property Name="CrewId" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" />
-          <Property Name="ArrStn" Type="nvarchar" MaxLength="255" />
-          <Property Name="XDepStn" Type="nvarchar" MaxLength="255" />
+          <Property Name="YM" Type="nvarchar" MaxLength="4000" />
+          <Property Name="CrewId" Type="int" Nullable="false" />
+          <Property Name="ArrStn" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="XDepStn" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Dep2" Type="nvarchar" MaxLength="255" />
           <Property Name="Arr2" Type="nvarchar" MaxLength="255" />
-          <Property Name="FltNo" Type="nvarchar" MaxLength="50" />
-          <Property Name="ACReg" Type="nvarchar" MaxLength="50" />
-          <Property Name="ACType" Type="varchar" MaxLength="6" />
+          <Property Name="FltNo" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="ACReg" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="ACType" Type="varchar" MaxLength="4" Nullable="false" />
           <Property Name="OffBlock" Type="datetime" />
-          <Property Name="_OffBlock" Type="datetime" />
-          <Property Name="_OnBlock" Type="datetime" />
-          <Property Name="OffBlockLocal" Type="datetime" />
           <Property Name="OnBlock" Type="datetime" />
+          <Property Name="OffBlockLocal" Type="datetime" />
           <Property Name="OnBlockLocal" Type="datetime" />
-          <Property Name="blockoffstation" Type="datetime" />
-          <Property Name="blockonstation" Type="datetime" />
           <Property Name="DayTakeOff" Type="int" />
           <Property Name="NightTakeOff" Type="int" />
           <Property Name="DayLanding" Type="int" />
@@ -769,16 +840,157 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewLogBook18' does not have a primary
           <Property Name="COPILOTTime" Type="int" />
           <Property Name="IPTime" Type="int" />
           <Property Name="DUALTime" Type="int" />
-          <Property Name="Pos" Type="varchar" MaxLength="7" />
+          <Property Name="Pos" Type="nvarchar" MaxLength="255" />
           <Property Name="PICName" Type="nvarchar" MaxLength="1001" />
-          <Property Name="DepStn" Type="nvarchar" MaxLength="1715" />
+          <Property Name="DepStn" Type="nvarchar" MaxLength="1515" />
           <Property Name="IPNAME" Type="nvarchar" MaxLength="1001" />
-          <Property Name="CPTNAME" Type="nvarchar" MaxLength="1001" />
-          <Property Name="PIC" Type="nvarchar" MaxLength="1001" />
-          <Property Name="SIC" Type="varchar" MaxLength="500" />
+          <Property Name="CPTNAME" Type="varchar" MaxLength="500" />
+          <Property Name="duration" Type="int" />
+          <Property Name="duration2" Type="int" />
+          <Property Name="bbb" Type="int" />
+          <Property Name="iiiaaa" Type="nvarchar" MaxLength="255" />
+          <Property Name="iccc" Type="nvarchar" MaxLength="511" />
+          <Property Name="Id" Type="uniqueidentifier" />
+          <Property Name="DiffBlock" Type="int" />
+          <Property Name="Net1" Type="int" />
+          <Property Name="Net2" Type="int" />
+          <Property Name="_OffBlock" Type="datetime" Nullable="false" />
+          <Property Name="_OnBlock" Type="datetime" Nullable="false" />
+          <Property Name="blockoffstation" Type="datetime" Nullable="false" />
+          <Property Name="blockonstation" Type="datetime" Nullable="false" />
+          <Property Name="PIC" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="SIC" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="FlightId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ppa_varesh.dbo.ViewQAGround' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewQAGround">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="flightCancelled" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FlightId" Type="int" />
+          <Property Name="AirportId" Type="int" />
+          <Property Name="Airport" Type="nvarchar" MaxLength="255" />
+          <Property Name="AirportName" Type="nvarchar" MaxLength="500" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" />
+          <Property Name="DamageById" Type="int" />
+          <Property Name="DamageBy" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DateOccurrence" Type="datetime" />
+          <Property Name="OperationPhase" Type="nvarchar" MaxLength="200" />
+          <Property Name="Area" Type="nvarchar" MaxLength="200" />
+          <Property Name="Register" Type="nvarchar" MaxLength="50" />
+          <Property Name="AircraftType" Type="nvarchar" MaxLength="50" />
+          <Property Name="FlightNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="DelayBlockOff" Type="int" />
+          <Property Name="DelayTakeoff" Type="int" />
+          <Property Name="FlightStatusID" Type="int" />
+          <Property Name="flightCancelled" Type="int" Nullable="false" />
+          <Property Name="FlightDate" Type="date" />
+          <Property Name="DamageDetails" Type="nvarchar(max)" />
+          <Property Name="EmployeesFatalityNr" Type="int" />
+          <Property Name="EmployeesNonFatalityNr" Type="int" />
+          <Property Name="PassengersFatalityNr" Type="int" />
+          <Property Name="PassengersNonFatalityNr" Type="int" />
+          <Property Name="OthersFatalityNr" Type="int" />
+          <Property Name="OthersNonFatalityNr" Type="int" />
+          <Property Name="VETyresCon" Type="int" />
+          <Property Name="VEBrakesCon" Type="int" />
+          <Property Name="VESteeringCon" Type="int" />
+          <Property Name="VELightsCon" Type="int" />
+          <Property Name="VEWipersCon" Type="int" />
+          <Property Name="VEProtectionCon" Type="int" />
+          <Property Name="VEWarningDevicesCon" Type="int" />
+          <Property Name="VEStabilizersCon" Type="int" />
+          <Property Name="VETowHitchCon" Type="int" />
+          <Property Name="VEFieldofVisionCon" Type="int" />
+          <Property Name="VEFromDrivingPoCon" Type="int" />
+          <Property Name="VESerialFleetNr" Type="nvarchar" MaxLength="200" />
+          <Property Name="VEType" Type="nvarchar" MaxLength="200" />
+          <Property Name="VEOwner" Type="nvarchar" MaxLength="200" />
+          <Property Name="VEArea" Type="nvarchar" MaxLength="200" />
+          <Property Name="VEAge" Type="int" />
+          <Property Name="VELastOverhaul" Type="nvarchar" MaxLength="200" />
+          <Property Name="VERemarks" Type="nvarchar(max)" />
+          <Property Name="PersonnelName1" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelJobTitle1" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelCompany1" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelStaffNr1" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelLicense1" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelName2" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelJobTitle2" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelCompany2" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelStaffNr2" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelLicense2" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelName3" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelJobTitle3" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelCompany3" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelStaffNr3" Type="nvarchar" MaxLength="200" />
+          <Property Name="PersonnelLicense3" Type="nvarchar" MaxLength="200" />
+          <Property Name="WXVisibilityM" Type="int" />
+          <Property Name="WXVisibilityKM" Type="int" />
+          <Property Name="WXWind" Type="int" />
+          <Property Name="WXTemperature" Type="int" />
+          <Property Name="WXWeatherTitle" Type="nvarchar" MaxLength="1000" />
+          <Property Name="WXWeatherId" Type="int" />
+          <Property Name="WXSurfaceTitle" Type="nvarchar" MaxLength="1000" />
+          <Property Name="WXSurfaceId" Type="int" />
+          <Property Name="WXLightingTitle" Type="nvarchar" MaxLength="1000" />
+          <Property Name="WXLightingId" Type="int" />
+          <Property Name="ContributoryFactors" Type="nvarchar(max)" />
+          <Property Name="SketchURL" Type="nvarchar" MaxLength="200" />
+          <Property Name="Event" Type="nvarchar(max)" />
+          <Property Name="CorrectiveActionTaken" Type="nvarchar(max)" />
+          <Property Name="OtherSuggestions" Type="nvarchar(max)" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="1003" />
+          <Property Name="JobGroup" Type="nvarchar" MaxLength="500" />
+          <Property Name="DateSign" Type="datetime" />
+          <Property Name="DamageRemark" Type="nvarchar" MaxLength="255" />
+          <Property Name="status" Type="int" />
+          <Property Name="dateStatus" Type="datetime" />
+          <Property Name="StatusEmployeeId" Type="int" />
+          <Property Name="StatusEmployeeName" Type="nvarchar" MaxLength="1003" />
+          <Property Name="Result" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Route" Type="nvarchar" MaxLength="511" />
+          <Property Name="FlightDelay" Type="time" Precision="7" />
+          <Property Name="ScheduledGroundTime" Type="time" Precision="7" />
+          <Property Name="DelayReason" Type="nvarchar" MaxLength="255" />
+          <Property Name="Delay" Type="int" />
+          <Property Name="FormNo" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ppa_varesh.dbo.ViewQAHazard' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewQAHazard">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="FlightId" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="EmployeeId" Type="int" />
+          <Property Name="DateOccurrence" Type="datetime" />
+          <Property Name="AffectedArea" Type="nvarchar" MaxLength="200" />
+          <Property Name="HazardDescription" Type="nvarchar(max)" />
+          <Property Name="RecommendedAction" Type="nvarchar(max)" />
+          <Property Name="status" Type="int" />
+          <Property Name="dateStatus" Type="datetime" />
+          <Property Name="StatusEmployeeId" Type="int" />
+          <Property Name="DateSign" Type="datetime" />
+          <Property Name="StatusEmployeeName" Type="nvarchar" MaxLength="1003" />
+          <Property Name="Result" Type="nvarchar" MaxLength="4000" />
+          <Property Name="DateReport" Type="datetime" />
+          <Property Name="EmployeeName" Type="nvarchar" MaxLength="200" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="TelNumber" Type="nvarchar" MaxLength="200" />
+          <Property Name="RelatedDepartment" Type="nvarchar" MaxLength="200" />
+          <Property Name="DelayReason" Type="nvarchar" MaxLength="255" />
+          <Property Name="Delay" Type="int" />
+          <Property Name="FlightId" Type="int" Nullable="false" />
+          <Property Name="FormNo" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ppa_varesh.dbo.ViewSyllabus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewSyllabus">
           <Key>
             <PropertyRef Name="Id" />
@@ -798,6 +1010,9 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="SessionEnd" Type="datetime" />
           <Property Name="Instructor2" Type="nvarchar" MaxLength="1001" />
           <Property Name="Instructor" Type="nvarchar" MaxLength="1001" />
+          <Property Name="CourseTypeId" Type="int" />
+          <Property Name="CourseType" Type="nvarchar" MaxLength="500" />
+          <Property Name="CertificateTypeId" Type="int" />
         </EntityType>
         <EntityContainer Name="PPAModelStoreContainer">
           <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
@@ -813,6 +1028,10 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewCourseNew].[Year] AS [Year], 
     [ViewCourseNew].[DateStart] AS [DateStart], 
     [ViewCourseNew].[DateEnd] AS [DateEnd], 
+    [ViewCourseNew].[PYear] AS [PYear], 
+    [ViewCourseNew].[PMonthName] AS [PMonthName], 
+    [ViewCourseNew].[PDateStart] AS [PDateStart], 
+    [ViewCourseNew].[PDateEnd] AS [PDateEnd], 
     [ViewCourseNew].[Instructor] AS [Instructor], 
     [ViewCourseNew].[Location] AS [Location], 
     [ViewCourseNew].[Department] AS [Department], 
@@ -858,7 +1077,26 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewCourseNew].[SMSIns2Status] AS [SMSIns2Status], 
     [ViewCourseNew].[SMSInsDate] AS [SMSInsDate], 
     [ViewCourseNew].[AttForm] AS [AttForm], 
-    [ViewCourseNew].[Intervals] AS [Intervals]
+    [ViewCourseNew].[Intervals] AS [Intervals], 
+    [ViewCourseNew].[Date_Sign_Ins1] AS [Date_Sign_Ins1], 
+    [ViewCourseNew].[Date_Sign_Ins2] AS [Date_Sign_Ins2], 
+    [ViewCourseNew].[Date_Sign_Director] AS [Date_Sign_Director], 
+    [ViewCourseNew].[Date_Sign_Staff] AS [Date_Sign_Staff], 
+    [ViewCourseNew].[Date_Sign_OPS] AS [Date_Sign_OPS], 
+    [ViewCourseNew].[Date_Exam_Sign_Ins1] AS [Date_Exam_Sign_Ins1], 
+    [ViewCourseNew].[Date_Exam_Sign_Ins2] AS [Date_Exam_Sign_Ins2], 
+    [ViewCourseNew].[Date_Sessions_Synced] AS [Date_Sessions_Synced], 
+    [ViewCourseNew].[Date_Sessions_Instructor_Synced] AS [Date_Sessions_Instructor_Synced], 
+    [ViewCourseNew].[Attendants] AS [Attendants], 
+    [ViewCourseNew].[Synced] AS [Synced], 
+    [ViewCourseNew].[SyncedErrors] AS [SyncedErrors], 
+    [ViewCourseNew].[SesstionsCount] AS [SesstionsCount], 
+    [ViewCourseNew].[PLCount] AS [PLCount], 
+    [ViewCourseNew].[PLTotal] AS [PLTotal], 
+    [ViewCourseNew].[PLRemain] AS [PLRemain], 
+    [ViewCourseNew].[PLStatus] AS [PLStatus], 
+    [ViewCourseNew].[ParentId] AS [ParentId], 
+    [ViewCourseNew].[ParentTitle] AS [ParentTitle]
     FROM [dbo].[ViewCourseNew] AS [ViewCourseNew]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewCoursePeople" EntityType="Self.ViewCoursePeople" store:Type="Views" store:Schema="dbo">
@@ -930,7 +1168,25 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewCoursePeople].[JobGroupCode2] AS [JobGroupCode2], 
     [ViewCoursePeople].[ExamResult] AS [ExamResult], 
     [ViewCoursePeople].[ExamDate] AS [ExamDate], 
-    [ViewCoursePeople].[Year] AS [Year]
+    [ViewCoursePeople].[Year] AS [Year], 
+    [ViewCoursePeople].[ExamStatus] AS [ExamStatus], 
+    [ViewCoursePeople].[Date_Sign_Ins1] AS [Date_Sign_Ins1], 
+    [ViewCoursePeople].[Date_Sign_Ins2] AS [Date_Sign_Ins2], 
+    [ViewCoursePeople].[Date_Sign_Director] AS [Date_Sign_Director], 
+    [ViewCoursePeople].[Date_Sign_Staff] AS [Date_Sign_Staff], 
+    [ViewCoursePeople].[Date_Sign_OPS] AS [Date_Sign_OPS], 
+    [ViewCoursePeople].[Course_Date_Sign_Ins1] AS [Course_Date_Sign_Ins1], 
+    [ViewCoursePeople].[Course_Date_Sign_Ins2] AS [Course_Date_Sign_Ins2], 
+    [ViewCoursePeople].[Course_Date_Sign_Director] AS [Course_Date_Sign_Director], 
+    [ViewCoursePeople].[Course_Date_Sign_Staff] AS [Course_Date_Sign_Staff], 
+    [ViewCoursePeople].[Course_Date_Sign_OPS] AS [Course_Date_Sign_OPS], 
+    [ViewCoursePeople].[Course_Date_Exam_Sign_Ins1] AS [Course_Date_Exam_Sign_Ins1], 
+    [ViewCoursePeople].[Course_Date_Exam_Sign_Ins2] AS [Course_Date_Exam_Sign_Ins2], 
+    [ViewCoursePeople].[IsSessionsSynced] AS [IsSessionsSynced], 
+    [ViewCoursePeople].[SessionsCount] AS [SessionsCount], 
+    [ViewCoursePeople].[PresenceCount] AS [PresenceCount], 
+    [ViewCoursePeople].[Presence] AS [Presence], 
+    [ViewCoursePeople].[ParentId] AS [ParentId]
     FROM [dbo].[ViewCoursePeople] AS [ViewCoursePeople]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewCourseSession" EntityType="Self.ViewCourseSession" store:Type="Views" store:Schema="dbo">
@@ -938,6 +1194,7 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewCourseSession].[Id] AS [Id], 
     [ViewCourseSession].[CourseId] AS [CourseId], 
     [ViewCourseSession].[DateStart] AS [DateStart], 
+    [ViewCourseSession].[Date] AS [Date], 
     [ViewCourseSession].[DateEnd] AS [DateEnd], 
     [ViewCourseSession].[DateStartUtc] AS [DateStartUtc], 
     [ViewCourseSession].[DateEndUtc] AS [DateEndUtc], 
@@ -956,6 +1213,7 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewCourseSession].[PDayName] AS [PDayName], 
     [ViewCourseSession].[No] AS [No], 
     [ViewCourseSession].[Instructor] AS [Instructor], 
+    [ViewCourseSession].[InstructorId] AS [InstructorId], 
     [ViewCourseSession].[Title] AS [Title], 
     [ViewCourseSession].[CT_Title] AS [CT_Title], 
     [ViewCourseSession].[CustomerId] AS [CustomerId], 
@@ -965,7 +1223,8 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewCourseSession].[Organization] AS [Organization], 
     [ViewCourseSession].[IsGeneral] AS [IsGeneral], 
     [ViewCourseSession].[StatusId] AS [StatusId], 
-    [ViewCourseSession].[Status] AS [Status]
+    [ViewCourseSession].[Status] AS [Status], 
+    [ViewCourseSession].[ParentId] AS [ParentId]
     FROM [dbo].[ViewCourseSession] AS [ViewCourseSession]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewCourseSessionPresence" EntityType="Self.ViewCourseSessionPresence" store:Type="Views" store:Schema="dbo">
@@ -983,14 +1242,26 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewCourseSessionPresence].[Attendance] AS [Attendance], 
     [ViewCourseSessionPresence].[AttendancePercent] AS [AttendancePercent], 
     [ViewCourseSessionPresence].[CourseSessionPresenceId] AS [CourseSessionPresenceId], 
-    [ViewCourseSessionPresence].[IsPresent] AS [IsPresent]
+    [ViewCourseSessionPresence].[IsPresent] AS [IsPresent], 
+    [ViewCourseSessionPresence].[ParentId] AS [ParentId], 
+    [ViewCourseSessionPresence].[Instructor1Id] AS [Instructor1Id], 
+    [ViewCourseSessionPresence].[Instructor2Id] AS [Instructor2Id], 
+    [ViewCourseSessionPresence].[Instructor] AS [Instructor], 
+    [ViewCourseSessionPresence].[Title] AS [Title], 
+    [ViewCourseSessionPresence].[JobGroup] AS [JobGroup], 
+    [ViewCourseSessionPresence].[NID] AS [NID], 
+    [ViewCourseSessionPresence].[FirstName] AS [FirstName], 
+    [ViewCourseSessionPresence].[LastName] AS [LastName], 
+    [ViewCourseSessionPresence].[Name] AS [Name], 
+    [ViewCourseSessionPresence].[Mobile] AS [Mobile], 
+    [ViewCourseSessionPresence].[EmployeeId] AS [EmployeeId]
     FROM [dbo].[ViewCourseSessionPresence] AS [ViewCourseSessionPresence]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewLogBook18" EntityType="Self.ViewLogBook18" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [ViewLogBook18].[FlightId] AS [FlightId], 
-    [ViewLogBook18].[CrewId] AS [CrewId], 
     [ViewLogBook18].[Date] AS [Date], 
+    [ViewLogBook18].[YM] AS [YM], 
+    [ViewLogBook18].[CrewId] AS [CrewId], 
     [ViewLogBook18].[ArrStn] AS [ArrStn], 
     [ViewLogBook18].[XDepStn] AS [XDepStn], 
     [ViewLogBook18].[Dep2] AS [Dep2], 
@@ -999,13 +1270,9 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewLogBook18].[ACReg] AS [ACReg], 
     [ViewLogBook18].[ACType] AS [ACType], 
     [ViewLogBook18].[OffBlock] AS [OffBlock], 
-    [ViewLogBook18].[_OffBlock] AS [_OffBlock], 
-    [ViewLogBook18].[_OnBlock] AS [_OnBlock], 
-    [ViewLogBook18].[OffBlockLocal] AS [OffBlockLocal], 
     [ViewLogBook18].[OnBlock] AS [OnBlock], 
+    [ViewLogBook18].[OffBlockLocal] AS [OffBlockLocal], 
     [ViewLogBook18].[OnBlockLocal] AS [OnBlockLocal], 
-    [ViewLogBook18].[blockoffstation] AS [blockoffstation], 
-    [ViewLogBook18].[blockonstation] AS [blockonstation], 
     [ViewLogBook18].[DayTakeOff] AS [DayTakeOff], 
     [ViewLogBook18].[NightTakeOff] AS [NightTakeOff], 
     [ViewLogBook18].[DayLanding] AS [DayLanding], 
@@ -1023,9 +1290,142 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewLogBook18].[DepStn] AS [DepStn], 
     [ViewLogBook18].[IPNAME] AS [IPNAME], 
     [ViewLogBook18].[CPTNAME] AS [CPTNAME], 
+    [ViewLogBook18].[duration] AS [duration], 
+    [ViewLogBook18].[duration2] AS [duration2], 
+    [ViewLogBook18].[bbb] AS [bbb], 
+    [ViewLogBook18].[iiiaaa] AS [iiiaaa], 
+    [ViewLogBook18].[iccc] AS [iccc], 
+    [ViewLogBook18].[Id] AS [Id], 
+    [ViewLogBook18].[DiffBlock] AS [DiffBlock], 
+    [ViewLogBook18].[Net1] AS [Net1], 
+    [ViewLogBook18].[Net2] AS [Net2], 
+    [ViewLogBook18].[_OffBlock] AS [_OffBlock], 
+    [ViewLogBook18].[_OnBlock] AS [_OnBlock], 
+    [ViewLogBook18].[blockoffstation] AS [blockoffstation], 
+    [ViewLogBook18].[blockonstation] AS [blockonstation], 
     [ViewLogBook18].[PIC] AS [PIC], 
-    [ViewLogBook18].[SIC] AS [SIC]
+    [ViewLogBook18].[SIC] AS [SIC], 
+    [ViewLogBook18].[FlightId] AS [FlightId]
     FROM [dbo].[ViewLogBook18] AS [ViewLogBook18]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewQAGround" EntityType="Self.ViewQAGround" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewQAGround].[Id] AS [Id], 
+    [ViewQAGround].[FlightId] AS [FlightId], 
+    [ViewQAGround].[AirportId] AS [AirportId], 
+    [ViewQAGround].[Airport] AS [Airport], 
+    [ViewQAGround].[AirportName] AS [AirportName], 
+    [ViewQAGround].[Title] AS [Title], 
+    [ViewQAGround].[DamageById] AS [DamageById], 
+    [ViewQAGround].[DamageBy] AS [DamageBy], 
+    [ViewQAGround].[DateOccurrence] AS [DateOccurrence], 
+    [ViewQAGround].[OperationPhase] AS [OperationPhase], 
+    [ViewQAGround].[Area] AS [Area], 
+    [ViewQAGround].[Register] AS [Register], 
+    [ViewQAGround].[AircraftType] AS [AircraftType], 
+    [ViewQAGround].[FlightNumber] AS [FlightNumber], 
+    [ViewQAGround].[DelayBlockOff] AS [DelayBlockOff], 
+    [ViewQAGround].[DelayTakeoff] AS [DelayTakeoff], 
+    [ViewQAGround].[FlightStatusID] AS [FlightStatusID], 
+    [ViewQAGround].[flightCancelled] AS [flightCancelled], 
+    [ViewQAGround].[FlightDate] AS [FlightDate], 
+    [ViewQAGround].[DamageDetails] AS [DamageDetails], 
+    [ViewQAGround].[EmployeesFatalityNr] AS [EmployeesFatalityNr], 
+    [ViewQAGround].[EmployeesNonFatalityNr] AS [EmployeesNonFatalityNr], 
+    [ViewQAGround].[PassengersFatalityNr] AS [PassengersFatalityNr], 
+    [ViewQAGround].[PassengersNonFatalityNr] AS [PassengersNonFatalityNr], 
+    [ViewQAGround].[OthersFatalityNr] AS [OthersFatalityNr], 
+    [ViewQAGround].[OthersNonFatalityNr] AS [OthersNonFatalityNr], 
+    [ViewQAGround].[VETyresCon] AS [VETyresCon], 
+    [ViewQAGround].[VEBrakesCon] AS [VEBrakesCon], 
+    [ViewQAGround].[VESteeringCon] AS [VESteeringCon], 
+    [ViewQAGround].[VELightsCon] AS [VELightsCon], 
+    [ViewQAGround].[VEWipersCon] AS [VEWipersCon], 
+    [ViewQAGround].[VEProtectionCon] AS [VEProtectionCon], 
+    [ViewQAGround].[VEWarningDevicesCon] AS [VEWarningDevicesCon], 
+    [ViewQAGround].[VEStabilizersCon] AS [VEStabilizersCon], 
+    [ViewQAGround].[VETowHitchCon] AS [VETowHitchCon], 
+    [ViewQAGround].[VEFieldofVisionCon] AS [VEFieldofVisionCon], 
+    [ViewQAGround].[VEFromDrivingPoCon] AS [VEFromDrivingPoCon], 
+    [ViewQAGround].[VESerialFleetNr] AS [VESerialFleetNr], 
+    [ViewQAGround].[VEType] AS [VEType], 
+    [ViewQAGround].[VEOwner] AS [VEOwner], 
+    [ViewQAGround].[VEArea] AS [VEArea], 
+    [ViewQAGround].[VEAge] AS [VEAge], 
+    [ViewQAGround].[VELastOverhaul] AS [VELastOverhaul], 
+    [ViewQAGround].[VERemarks] AS [VERemarks], 
+    [ViewQAGround].[PersonnelName1] AS [PersonnelName1], 
+    [ViewQAGround].[PersonnelJobTitle1] AS [PersonnelJobTitle1], 
+    [ViewQAGround].[PersonnelCompany1] AS [PersonnelCompany1], 
+    [ViewQAGround].[PersonnelStaffNr1] AS [PersonnelStaffNr1], 
+    [ViewQAGround].[PersonnelLicense1] AS [PersonnelLicense1], 
+    [ViewQAGround].[PersonnelName2] AS [PersonnelName2], 
+    [ViewQAGround].[PersonnelJobTitle2] AS [PersonnelJobTitle2], 
+    [ViewQAGround].[PersonnelCompany2] AS [PersonnelCompany2], 
+    [ViewQAGround].[PersonnelStaffNr2] AS [PersonnelStaffNr2], 
+    [ViewQAGround].[PersonnelLicense2] AS [PersonnelLicense2], 
+    [ViewQAGround].[PersonnelName3] AS [PersonnelName3], 
+    [ViewQAGround].[PersonnelJobTitle3] AS [PersonnelJobTitle3], 
+    [ViewQAGround].[PersonnelCompany3] AS [PersonnelCompany3], 
+    [ViewQAGround].[PersonnelStaffNr3] AS [PersonnelStaffNr3], 
+    [ViewQAGround].[PersonnelLicense3] AS [PersonnelLicense3], 
+    [ViewQAGround].[WXVisibilityM] AS [WXVisibilityM], 
+    [ViewQAGround].[WXVisibilityKM] AS [WXVisibilityKM], 
+    [ViewQAGround].[WXWind] AS [WXWind], 
+    [ViewQAGround].[WXTemperature] AS [WXTemperature], 
+    [ViewQAGround].[WXWeatherTitle] AS [WXWeatherTitle], 
+    [ViewQAGround].[WXWeatherId] AS [WXWeatherId], 
+    [ViewQAGround].[WXSurfaceTitle] AS [WXSurfaceTitle], 
+    [ViewQAGround].[WXSurfaceId] AS [WXSurfaceId], 
+    [ViewQAGround].[WXLightingTitle] AS [WXLightingTitle], 
+    [ViewQAGround].[WXLightingId] AS [WXLightingId], 
+    [ViewQAGround].[ContributoryFactors] AS [ContributoryFactors], 
+    [ViewQAGround].[SketchURL] AS [SketchURL], 
+    [ViewQAGround].[Event] AS [Event], 
+    [ViewQAGround].[CorrectiveActionTaken] AS [CorrectiveActionTaken], 
+    [ViewQAGround].[OtherSuggestions] AS [OtherSuggestions], 
+    [ViewQAGround].[EmployeeId] AS [EmployeeId], 
+    [ViewQAGround].[EmployeeName] AS [EmployeeName], 
+    [ViewQAGround].[JobGroup] AS [JobGroup], 
+    [ViewQAGround].[DateSign] AS [DateSign], 
+    [ViewQAGround].[DamageRemark] AS [DamageRemark], 
+    [ViewQAGround].[status] AS [status], 
+    [ViewQAGround].[dateStatus] AS [dateStatus], 
+    [ViewQAGround].[StatusEmployeeId] AS [StatusEmployeeId], 
+    [ViewQAGround].[StatusEmployeeName] AS [StatusEmployeeName], 
+    [ViewQAGround].[Result] AS [Result], 
+    [ViewQAGround].[Route] AS [Route], 
+    [ViewQAGround].[FlightDelay] AS [FlightDelay], 
+    [ViewQAGround].[ScheduledGroundTime] AS [ScheduledGroundTime], 
+    [ViewQAGround].[DelayReason] AS [DelayReason], 
+    [ViewQAGround].[Delay] AS [Delay], 
+    [ViewQAGround].[FormNo] AS [FormNo]
+    FROM [dbo].[ViewQAGround] AS [ViewQAGround]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ViewQAHazard" EntityType="Self.ViewQAHazard" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewQAHazard].[Id] AS [Id], 
+    [ViewQAHazard].[EmployeeId] AS [EmployeeId], 
+    [ViewQAHazard].[DateOccurrence] AS [DateOccurrence], 
+    [ViewQAHazard].[AffectedArea] AS [AffectedArea], 
+    [ViewQAHazard].[HazardDescription] AS [HazardDescription], 
+    [ViewQAHazard].[RecommendedAction] AS [RecommendedAction], 
+    [ViewQAHazard].[status] AS [status], 
+    [ViewQAHazard].[dateStatus] AS [dateStatus], 
+    [ViewQAHazard].[StatusEmployeeId] AS [StatusEmployeeId], 
+    [ViewQAHazard].[DateSign] AS [DateSign], 
+    [ViewQAHazard].[StatusEmployeeName] AS [StatusEmployeeName], 
+    [ViewQAHazard].[Result] AS [Result], 
+    [ViewQAHazard].[DateReport] AS [DateReport], 
+    [ViewQAHazard].[EmployeeName] AS [EmployeeName], 
+    [ViewQAHazard].[Email] AS [Email], 
+    [ViewQAHazard].[TelNumber] AS [TelNumber], 
+    [ViewQAHazard].[RelatedDepartment] AS [RelatedDepartment], 
+    [ViewQAHazard].[DelayReason] AS [DelayReason], 
+    [ViewQAHazard].[Delay] AS [Delay], 
+    [ViewQAHazard].[FlightId] AS [FlightId], 
+    [ViewQAHazard].[FormNo] AS [FormNo]
+    FROM [dbo].[ViewQAHazard] AS [ViewQAHazard]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="ViewSyllabus" EntityType="Self.ViewSyllabus" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -1042,7 +1442,10 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
     [ViewSyllabus].[SessionStart] AS [SessionStart], 
     [ViewSyllabus].[SessionEnd] AS [SessionEnd], 
     [ViewSyllabus].[Instructor2] AS [Instructor2], 
-    [ViewSyllabus].[Instructor] AS [Instructor]
+    [ViewSyllabus].[Instructor] AS [Instructor], 
+    [ViewSyllabus].[CourseTypeId] AS [CourseTypeId], 
+    [ViewSyllabus].[CourseType] AS [CourseType], 
+    [ViewSyllabus].[CertificateTypeId] AS [CertificateTypeId]
     FROM [dbo].[ViewSyllabus] AS [ViewSyllabus]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -1552,6 +1955,8 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="ASD_AWZ_ExpireDate" Type="DateTime" Precision="7" />
           <Property Name="ASD_SRY_IssueDate" Type="DateTime" Precision="7" />
           <Property Name="ASD_SRY_ExpireDate" Type="DateTime" Precision="7" />
+          <Property Name="FTSL1IssueDate" Type="DateTime" Precision="7" />
+          <Property Name="FTSL1ExpireDate" Type="DateTime" Precision="7" />
         </EntityType>
         <EntityContainer Name="ppa_cspnEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="People" EntityType="Self.Person" />
@@ -1561,6 +1966,8 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <EntitySet Name="ViewSyllabus" EntityType="PPAModel.ViewSyllabu" />
           <EntitySet Name="ViewCoursePeoples" EntityType="PPAModel.ViewCoursePeople" />
           <EntitySet Name="ViewLogBook18" EntityType="PPAModel.ViewLogBook18" />
+          <EntitySet Name="ViewQAGrounds" EntityType="PPAModel.ViewQAGround" />
+          <EntitySet Name="ViewQAHazards" EntityType="PPAModel.ViewQAHazard" />
         </EntityContainer>
         <EntityType Name="ViewCourseSession">
           <Key>
@@ -1588,7 +1995,7 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="PMonth" Type="Int32" />
           <Property Name="PDayName" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="No" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="Instructor" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Instructor" Type="String" MaxLength="1001" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CT_Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CustomerId" Type="Int32" />
@@ -1599,12 +2006,20 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="IsGeneral" Type="Boolean" />
           <Property Name="StatusId" Type="Int32" />
           <Property Name="Status" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
+          <Property Name="InstructorId" Type="Int32" />
+          <Property Name="ParentId" Type="Int32" />
         </EntityType>
         <EntityType Name="ViewCourseSessionPresence">
           <Key>
             <PropertyRef Name="CourseId" />
             <PropertyRef Name="SessionKey" />
             <PropertyRef Name="PersonId" />
+            <PropertyRef Name="NID" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="EmployeeId" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="SessionId" Type="Int32" Nullable="false" />
@@ -1620,6 +2035,18 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="AttendancePercent" Type="Decimal" Precision="26" Scale="12" />
           <Property Name="CourseSessionPresenceId" Type="Int32" />
           <Property Name="IsPresent" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Instructor1Id" Type="Int32" />
+          <Property Name="Instructor2Id" Type="Int32" />
+          <Property Name="Instructor" Type="String" MaxLength="2004" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="JobGroup" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NID" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="1001" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ViewCourseNew">
           <Key>
@@ -1629,6 +2056,7 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
             <PropertyRef Name="Recurrent" />
             <PropertyRef Name="Sessions" />
             <PropertyRef Name="PeopleCount" />
+            <PropertyRef Name="Synced" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="CourseTypeId" Type="Int32" Nullable="false" />
@@ -1656,9 +2084,9 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="IsInside" Type="Boolean" />
           <Property Name="IsGeneral" Type="Boolean" />
           <Property Name="CustomerId" Type="Int32" />
-          <Property Name="No" Type="String" MaxLength="204" FixedLength="false" Unicode="false" />
+          <Property Name="No" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="IsNotificationEnabled" Type="Boolean" />
-          <Property Name="Sessions" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Sessions" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PeopleCount" Type="Int32" Nullable="false" />
           <Property Name="Organization" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="DurationUnit" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
@@ -1686,6 +2114,29 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="AttForm" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="Year" Type="Int32" />
           <Property Name="Intervals" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="PYear" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="PMonthName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PDateStart" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PDateEnd" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Date_Sign_Ins1" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sign_Ins2" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sign_Director" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sign_Staff" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sign_OPS" Type="DateTime" Precision="7" />
+          <Property Name="Date_Exam_Sign_Ins1" Type="DateTime" Precision="7" />
+          <Property Name="Date_Exam_Sign_Ins2" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sessions_Synced" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sessions_Instructor_Synced" Type="DateTime" Precision="7" />
+          <Property Name="Attendants" Type="Int32" />
+          <Property Name="Synced" Type="Int32" Nullable="false" />
+          <Property Name="SyncedErrors" Type="Int32" />
+          <Property Name="SesstionsCount" Type="Int32" />
+          <Property Name="PLCount" Type="Int32" />
+          <Property Name="PLTotal" Type="Int32" />
+          <Property Name="PLRemain" Type="Int32" />
+          <Property Name="PLStatus" Type="Double" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="ParentTitle" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ViewSyllabu">
           <Key>
@@ -1706,6 +2157,9 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="SessionEnd" Type="DateTime" Precision="3" />
           <Property Name="Instructor2" Type="String" MaxLength="1001" FixedLength="false" Unicode="true" />
           <Property Name="Instructor" Type="String" MaxLength="1001" FixedLength="false" Unicode="true" />
+          <Property Name="CourseTypeId" Type="Int32" />
+          <Property Name="CourseType" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CertificateTypeId" Type="Int32" />
         </EntityType>
         <EntityType Name="ViewCoursePeople">
           <Key>
@@ -1747,7 +2201,7 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="Recurrent" Type="Boolean" Nullable="false" />
           <Property Name="Interval" Type="Int32" />
           <Property Name="CalanderTypeId" Type="Int32" />
-          <Property Name="No" Type="String" MaxLength="204" FixedLength="false" Unicode="false" />
+          <Property Name="No" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DurationUnit" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="CalendarType" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Organization" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
@@ -1756,7 +2210,7 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="GroupId" Type="Int32" />
           <Property Name="JobGroup" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="JobGroupCode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="JobGroupRoot" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="JobGroupRoot" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
           <Property Name="SexId" Type="Int32" Nullable="false" />
           <Property Name="NID" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
@@ -1793,6 +2247,24 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="ExamResult" Type="Int32" />
           <Property Name="ExamDate" Type="DateTime" Precision="7" />
           <Property Name="Year" Type="Int32" />
+          <Property Name="ExamStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Sign_Ins1" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sign_Ins2" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sign_Director" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sign_Staff" Type="DateTime" Precision="7" />
+          <Property Name="Date_Sign_OPS" Type="DateTime" Precision="7" />
+          <Property Name="Course_Date_Sign_Ins1" Type="DateTime" Precision="7" />
+          <Property Name="Course_Date_Sign_Ins2" Type="DateTime" Precision="7" />
+          <Property Name="Course_Date_Sign_Director" Type="DateTime" Precision="7" />
+          <Property Name="Course_Date_Sign_Staff" Type="DateTime" Precision="7" />
+          <Property Name="Course_Date_Sign_OPS" Type="DateTime" Precision="7" />
+          <Property Name="Course_Date_Exam_Sign_Ins1" Type="DateTime" Precision="7" />
+          <Property Name="Course_Date_Exam_Sign_Ins2" Type="DateTime" Precision="7" />
+          <Property Name="IsSessionsSynced" Type="Boolean" />
+          <Property Name="SessionsCount" Type="Int32" />
+          <Property Name="PresenceCount" Type="Int32" />
+          <Property Name="Presence" Type="Double" />
+          <Property Name="ParentId" Type="Int32" />
         </EntityType>
         <EntityType Name="ViewLogBook18">
           <Key>
@@ -1802,21 +2274,21 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="FlightId" Type="Int32" Nullable="false" />
           <Property Name="CrewId" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Precision="0" />
-          <Property Name="ArrStn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="XDepStn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ArrStn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="XDepStn" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Dep2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Arr2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="FltNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ACReg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ACType" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="FltNo" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ACReg" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ACType" Type="String" MaxLength="4" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="OffBlock" Type="DateTime" Precision="3" />
-          <Property Name="C_OffBlock" Type="DateTime" Precision="3" />
-          <Property Name="C_OnBlock" Type="DateTime" Precision="3" />
+          <Property Name="C_OffBlock" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="C_OnBlock" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="OffBlockLocal" Type="DateTime" Precision="3" />
           <Property Name="OnBlock" Type="DateTime" Precision="3" />
           <Property Name="OnBlockLocal" Type="DateTime" Precision="3" />
-          <Property Name="blockoffstation" Type="DateTime" Precision="3" />
-          <Property Name="blockonstation" Type="DateTime" Precision="3" />
+          <Property Name="blockoffstation" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="blockonstation" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="DayTakeOff" Type="Int32" />
           <Property Name="NightTakeOff" Type="Int32" />
           <Property Name="DayLanding" Type="Int32" />
@@ -1829,13 +2301,146 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <Property Name="COPILOTTime" Type="Int32" />
           <Property Name="IPTime" Type="Int32" />
           <Property Name="DUALTime" Type="Int32" />
-          <Property Name="Pos" Type="String" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="Pos" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="PICName" Type="String" MaxLength="1001" FixedLength="false" Unicode="true" />
-          <Property Name="DepStn" Type="String" MaxLength="1715" FixedLength="false" Unicode="true" />
+          <Property Name="DepStn" Type="String" MaxLength="1515" FixedLength="false" Unicode="true" />
           <Property Name="IPNAME" Type="String" MaxLength="1001" FixedLength="false" Unicode="true" />
-          <Property Name="CPTNAME" Type="String" MaxLength="1001" FixedLength="false" Unicode="true" />
-          <Property Name="PIC" Type="String" MaxLength="1001" FixedLength="false" Unicode="true" />
-          <Property Name="SIC" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CPTNAME" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PIC" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SIC" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="YM" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="duration" Type="Int32" />
+          <Property Name="duration2" Type="Int32" />
+          <Property Name="bbb" Type="Int32" />
+          <Property Name="iiiaaa" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="iccc" Type="String" MaxLength="511" FixedLength="false" Unicode="true" />
+          <Property Name="Id" Type="Guid" />
+          <Property Name="DiffBlock" Type="Int32" />
+          <Property Name="Net1" Type="Int32" />
+          <Property Name="Net2" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ViewQAGround">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="flightCancelled" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FlightId" Type="Int32" />
+          <Property Name="AirportId" Type="Int32" />
+          <Property Name="Airport" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AirportName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DamageById" Type="Int32" />
+          <Property Name="DamageBy" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DateOccurrence" Type="DateTime" Precision="3" />
+          <Property Name="OperationPhase" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Register" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AircraftType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FlightNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DelayBlockOff" Type="Int32" />
+          <Property Name="DelayTakeoff" Type="Int32" />
+          <Property Name="FlightStatusID" Type="Int32" />
+          <Property Name="flightCancelled" Type="Int32" Nullable="false" />
+          <Property Name="FlightDate" Type="DateTime" Precision="0" />
+          <Property Name="DamageDetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeesFatalityNr" Type="Int32" />
+          <Property Name="EmployeesNonFatalityNr" Type="Int32" />
+          <Property Name="PassengersFatalityNr" Type="Int32" />
+          <Property Name="PassengersNonFatalityNr" Type="Int32" />
+          <Property Name="OthersFatalityNr" Type="Int32" />
+          <Property Name="OthersNonFatalityNr" Type="Int32" />
+          <Property Name="VETyresCon" Type="Int32" />
+          <Property Name="VEBrakesCon" Type="Int32" />
+          <Property Name="VESteeringCon" Type="Int32" />
+          <Property Name="VELightsCon" Type="Int32" />
+          <Property Name="VEWipersCon" Type="Int32" />
+          <Property Name="VEProtectionCon" Type="Int32" />
+          <Property Name="VEWarningDevicesCon" Type="Int32" />
+          <Property Name="VEStabilizersCon" Type="Int32" />
+          <Property Name="VETowHitchCon" Type="Int32" />
+          <Property Name="VEFieldofVisionCon" Type="Int32" />
+          <Property Name="VEFromDrivingPoCon" Type="Int32" />
+          <Property Name="VESerialFleetNr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VEType" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VEOwner" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VEArea" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VEAge" Type="Int32" />
+          <Property Name="VELastOverhaul" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="VERemarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelName1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelJobTitle1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelCompany1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelStaffNr1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelLicense1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelName2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelJobTitle2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelCompany2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelStaffNr2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelLicense2" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelName3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelJobTitle3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelCompany3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelStaffNr3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PersonnelLicense3" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="WXVisibilityM" Type="Int32" />
+          <Property Name="WXVisibilityKM" Type="Int32" />
+          <Property Name="WXWind" Type="Int32" />
+          <Property Name="WXTemperature" Type="Int32" />
+          <Property Name="WXWeatherTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="WXWeatherId" Type="Int32" />
+          <Property Name="WXSurfaceTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="WXSurfaceId" Type="Int32" />
+          <Property Name="WXLightingTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="WXLightingId" Type="Int32" />
+          <Property Name="ContributoryFactors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SketchURL" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Event" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CorrectiveActionTaken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OtherSuggestions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="EmployeeName" Type="String" MaxLength="1003" FixedLength="false" Unicode="true" />
+          <Property Name="JobGroup" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DateSign" Type="DateTime" Precision="3" />
+          <Property Name="DamageRemark" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="dateStatus" Type="DateTime" Precision="3" />
+          <Property Name="StatusEmployeeId" Type="Int32" />
+          <Property Name="StatusEmployeeName" Type="String" MaxLength="1003" FixedLength="false" Unicode="true" />
+          <Property Name="Result" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Route" Type="String" MaxLength="511" FixedLength="false" Unicode="true" />
+          <Property Name="FlightDelay" Type="Time" Precision="7" />
+          <Property Name="ScheduledGroundTime" Type="Time" Precision="7" />
+          <Property Name="DelayReason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Delay" Type="Int32" />
+          <Property Name="FormNo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ViewQAHazard">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="FlightId" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeId" Type="Int32" />
+          <Property Name="DateOccurrence" Type="DateTime" Precision="3" />
+          <Property Name="AffectedArea" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="HazardDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RecommendedAction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Int32" />
+          <Property Name="dateStatus" Type="DateTime" Precision="3" />
+          <Property Name="StatusEmployeeId" Type="Int32" />
+          <Property Name="DateSign" Type="DateTime" Precision="3" />
+          <Property Name="StatusEmployeeName" Type="String" MaxLength="1003" FixedLength="false" Unicode="true" />
+          <Property Name="Result" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="DateReport" Type="DateTime" Precision="3" />
+          <Property Name="EmployeeName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TelNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="RelatedDepartment" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DelayReason" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Delay" Type="Int32" />
+          <Property Name="FlightId" Type="Int32" Nullable="false" />
+          <Property Name="FormNo" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1846,6 +2451,8 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <EntitySetMapping Name="People">
             <EntityTypeMapping TypeName="PPAModel.Person">
               <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="FTSL1ExpireDate" ColumnName="FTSL1ExpireDate" />
+                <ScalarProperty Name="FTSL1IssueDate" ColumnName="FTSL1IssueDate" />
                 <ScalarProperty Name="ASD_SRY_ExpireDate" ColumnName="ASD_SRY_ExpireDate" />
                 <ScalarProperty Name="ASD_SRY_IssueDate" ColumnName="ASD_SRY_IssueDate" />
                 <ScalarProperty Name="ASD_AWZ_ExpireDate" ColumnName="ASD_AWZ_ExpireDate" />
@@ -2350,6 +2957,9 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <EntitySetMapping Name="ViewCourseSessions">
             <EntityTypeMapping TypeName="PPAModel.ViewCourseSession">
               <MappingFragment StoreEntitySet="ViewCourseSession">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="InstructorId" ColumnName="InstructorId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="StatusId" ColumnName="StatusId" />
                 <ScalarProperty Name="IsGeneral" ColumnName="IsGeneral" />
@@ -2387,6 +2997,18 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <EntitySetMapping Name="ViewCourseSessionPresences">
             <EntityTypeMapping TypeName="PPAModel.ViewCourseSessionPresence">
               <MappingFragment StoreEntitySet="ViewCourseSessionPresence">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="NID" ColumnName="NID" />
+                <ScalarProperty Name="JobGroup" ColumnName="JobGroup" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Instructor" ColumnName="Instructor" />
+                <ScalarProperty Name="Instructor2Id" ColumnName="Instructor2Id" />
+                <ScalarProperty Name="Instructor1Id" ColumnName="Instructor1Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="IsPresent" ColumnName="IsPresent" />
                 <ScalarProperty Name="CourseSessionPresenceId" ColumnName="CourseSessionPresenceId" />
                 <ScalarProperty Name="AttendancePercent" ColumnName="AttendancePercent" />
@@ -2407,6 +3029,29 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <EntitySetMapping Name="ViewCourseNews">
             <EntityTypeMapping TypeName="PPAModel.ViewCourseNew">
               <MappingFragment StoreEntitySet="ViewCourseNew">
+                <ScalarProperty Name="ParentTitle" ColumnName="ParentTitle" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="PLStatus" ColumnName="PLStatus" />
+                <ScalarProperty Name="PLRemain" ColumnName="PLRemain" />
+                <ScalarProperty Name="PLTotal" ColumnName="PLTotal" />
+                <ScalarProperty Name="PLCount" ColumnName="PLCount" />
+                <ScalarProperty Name="SesstionsCount" ColumnName="SesstionsCount" />
+                <ScalarProperty Name="SyncedErrors" ColumnName="SyncedErrors" />
+                <ScalarProperty Name="Synced" ColumnName="Synced" />
+                <ScalarProperty Name="Attendants" ColumnName="Attendants" />
+                <ScalarProperty Name="Date_Sessions_Instructor_Synced" ColumnName="Date_Sessions_Instructor_Synced" />
+                <ScalarProperty Name="Date_Sessions_Synced" ColumnName="Date_Sessions_Synced" />
+                <ScalarProperty Name="Date_Exam_Sign_Ins2" ColumnName="Date_Exam_Sign_Ins2" />
+                <ScalarProperty Name="Date_Exam_Sign_Ins1" ColumnName="Date_Exam_Sign_Ins1" />
+                <ScalarProperty Name="Date_Sign_OPS" ColumnName="Date_Sign_OPS" />
+                <ScalarProperty Name="Date_Sign_Staff" ColumnName="Date_Sign_Staff" />
+                <ScalarProperty Name="Date_Sign_Director" ColumnName="Date_Sign_Director" />
+                <ScalarProperty Name="Date_Sign_Ins2" ColumnName="Date_Sign_Ins2" />
+                <ScalarProperty Name="Date_Sign_Ins1" ColumnName="Date_Sign_Ins1" />
+                <ScalarProperty Name="PDateEnd" ColumnName="PDateEnd" />
+                <ScalarProperty Name="PDateStart" ColumnName="PDateStart" />
+                <ScalarProperty Name="PMonthName" ColumnName="PMonthName" />
+                <ScalarProperty Name="PYear" ColumnName="PYear" />
                 <ScalarProperty Name="Intervals" ColumnName="Intervals" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="AttForm" ColumnName="AttForm" />
@@ -2469,6 +3114,9 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <EntitySetMapping Name="ViewSyllabus">
             <EntityTypeMapping TypeName="PPAModel.ViewSyllabu">
               <MappingFragment StoreEntitySet="ViewSyllabus">
+                <ScalarProperty Name="CertificateTypeId" ColumnName="CertificateTypeId" />
+                <ScalarProperty Name="CourseType" ColumnName="CourseType" />
+                <ScalarProperty Name="CourseTypeId" ColumnName="CourseTypeId" />
                 <ScalarProperty Name="Instructor" ColumnName="Instructor" />
                 <ScalarProperty Name="Instructor2" ColumnName="Instructor2" />
                 <ScalarProperty Name="SessionEnd" ColumnName="SessionEnd" />
@@ -2489,6 +3137,24 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <EntitySetMapping Name="ViewCoursePeoples">
             <EntityTypeMapping TypeName="PPAModel.ViewCoursePeople">
               <MappingFragment StoreEntitySet="ViewCoursePeople">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="Presence" ColumnName="Presence" />
+                <ScalarProperty Name="PresenceCount" ColumnName="PresenceCount" />
+                <ScalarProperty Name="SessionsCount" ColumnName="SessionsCount" />
+                <ScalarProperty Name="IsSessionsSynced" ColumnName="IsSessionsSynced" />
+                <ScalarProperty Name="Course_Date_Exam_Sign_Ins2" ColumnName="Course_Date_Exam_Sign_Ins2" />
+                <ScalarProperty Name="Course_Date_Exam_Sign_Ins1" ColumnName="Course_Date_Exam_Sign_Ins1" />
+                <ScalarProperty Name="Course_Date_Sign_OPS" ColumnName="Course_Date_Sign_OPS" />
+                <ScalarProperty Name="Course_Date_Sign_Staff" ColumnName="Course_Date_Sign_Staff" />
+                <ScalarProperty Name="Course_Date_Sign_Director" ColumnName="Course_Date_Sign_Director" />
+                <ScalarProperty Name="Course_Date_Sign_Ins2" ColumnName="Course_Date_Sign_Ins2" />
+                <ScalarProperty Name="Course_Date_Sign_Ins1" ColumnName="Course_Date_Sign_Ins1" />
+                <ScalarProperty Name="Date_Sign_OPS" ColumnName="Date_Sign_OPS" />
+                <ScalarProperty Name="Date_Sign_Staff" ColumnName="Date_Sign_Staff" />
+                <ScalarProperty Name="Date_Sign_Director" ColumnName="Date_Sign_Director" />
+                <ScalarProperty Name="Date_Sign_Ins2" ColumnName="Date_Sign_Ins2" />
+                <ScalarProperty Name="Date_Sign_Ins1" ColumnName="Date_Sign_Ins1" />
+                <ScalarProperty Name="ExamStatus" ColumnName="ExamStatus" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="ExamDate" ColumnName="ExamDate" />
                 <ScalarProperty Name="ExamResult" ColumnName="ExamResult" />
@@ -2563,6 +3229,16 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
           <EntitySetMapping Name="ViewLogBook18">
             <EntityTypeMapping TypeName="PPAModel.ViewLogBook18">
               <MappingFragment StoreEntitySet="ViewLogBook18">
+                <ScalarProperty Name="Net2" ColumnName="Net2" />
+                <ScalarProperty Name="Net1" ColumnName="Net1" />
+                <ScalarProperty Name="DiffBlock" ColumnName="DiffBlock" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="iccc" ColumnName="iccc" />
+                <ScalarProperty Name="iiiaaa" ColumnName="iiiaaa" />
+                <ScalarProperty Name="bbb" ColumnName="bbb" />
+                <ScalarProperty Name="duration2" ColumnName="duration2" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="YM" ColumnName="YM" />
                 <ScalarProperty Name="SIC" ColumnName="SIC" />
                 <ScalarProperty Name="PIC" ColumnName="PIC" />
                 <ScalarProperty Name="CPTNAME" ColumnName="CPTNAME" />
@@ -2600,6 +3276,129 @@ warning 6002: The table/view 'ppa_ava.dbo.ViewSyllabus' does not have a primary 
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="CrewId" ColumnName="CrewId" />
                 <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewQAGrounds">
+            <EntityTypeMapping TypeName="PPAModel.ViewQAGround">
+              <MappingFragment StoreEntitySet="ViewQAGround">
+                <ScalarProperty Name="FormNo" ColumnName="FormNo" />
+                <ScalarProperty Name="Delay" ColumnName="Delay" />
+                <ScalarProperty Name="DelayReason" ColumnName="DelayReason" />
+                <ScalarProperty Name="ScheduledGroundTime" ColumnName="ScheduledGroundTime" />
+                <ScalarProperty Name="FlightDelay" ColumnName="FlightDelay" />
+                <ScalarProperty Name="Route" ColumnName="Route" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="StatusEmployeeName" ColumnName="StatusEmployeeName" />
+                <ScalarProperty Name="StatusEmployeeId" ColumnName="StatusEmployeeId" />
+                <ScalarProperty Name="dateStatus" ColumnName="dateStatus" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="DamageRemark" ColumnName="DamageRemark" />
+                <ScalarProperty Name="DateSign" ColumnName="DateSign" />
+                <ScalarProperty Name="JobGroup" ColumnName="JobGroup" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="OtherSuggestions" ColumnName="OtherSuggestions" />
+                <ScalarProperty Name="CorrectiveActionTaken" ColumnName="CorrectiveActionTaken" />
+                <ScalarProperty Name="Event" ColumnName="Event" />
+                <ScalarProperty Name="SketchURL" ColumnName="SketchURL" />
+                <ScalarProperty Name="ContributoryFactors" ColumnName="ContributoryFactors" />
+                <ScalarProperty Name="WXLightingId" ColumnName="WXLightingId" />
+                <ScalarProperty Name="WXLightingTitle" ColumnName="WXLightingTitle" />
+                <ScalarProperty Name="WXSurfaceId" ColumnName="WXSurfaceId" />
+                <ScalarProperty Name="WXSurfaceTitle" ColumnName="WXSurfaceTitle" />
+                <ScalarProperty Name="WXWeatherId" ColumnName="WXWeatherId" />
+                <ScalarProperty Name="WXWeatherTitle" ColumnName="WXWeatherTitle" />
+                <ScalarProperty Name="WXTemperature" ColumnName="WXTemperature" />
+                <ScalarProperty Name="WXWind" ColumnName="WXWind" />
+                <ScalarProperty Name="WXVisibilityKM" ColumnName="WXVisibilityKM" />
+                <ScalarProperty Name="WXVisibilityM" ColumnName="WXVisibilityM" />
+                <ScalarProperty Name="PersonnelLicense3" ColumnName="PersonnelLicense3" />
+                <ScalarProperty Name="PersonnelStaffNr3" ColumnName="PersonnelStaffNr3" />
+                <ScalarProperty Name="PersonnelCompany3" ColumnName="PersonnelCompany3" />
+                <ScalarProperty Name="PersonnelJobTitle3" ColumnName="PersonnelJobTitle3" />
+                <ScalarProperty Name="PersonnelName3" ColumnName="PersonnelName3" />
+                <ScalarProperty Name="PersonnelLicense2" ColumnName="PersonnelLicense2" />
+                <ScalarProperty Name="PersonnelStaffNr2" ColumnName="PersonnelStaffNr2" />
+                <ScalarProperty Name="PersonnelCompany2" ColumnName="PersonnelCompany2" />
+                <ScalarProperty Name="PersonnelJobTitle2" ColumnName="PersonnelJobTitle2" />
+                <ScalarProperty Name="PersonnelName2" ColumnName="PersonnelName2" />
+                <ScalarProperty Name="PersonnelLicense1" ColumnName="PersonnelLicense1" />
+                <ScalarProperty Name="PersonnelStaffNr1" ColumnName="PersonnelStaffNr1" />
+                <ScalarProperty Name="PersonnelCompany1" ColumnName="PersonnelCompany1" />
+                <ScalarProperty Name="PersonnelJobTitle1" ColumnName="PersonnelJobTitle1" />
+                <ScalarProperty Name="PersonnelName1" ColumnName="PersonnelName1" />
+                <ScalarProperty Name="VERemarks" ColumnName="VERemarks" />
+                <ScalarProperty Name="VELastOverhaul" ColumnName="VELastOverhaul" />
+                <ScalarProperty Name="VEAge" ColumnName="VEAge" />
+                <ScalarProperty Name="VEArea" ColumnName="VEArea" />
+                <ScalarProperty Name="VEOwner" ColumnName="VEOwner" />
+                <ScalarProperty Name="VEType" ColumnName="VEType" />
+                <ScalarProperty Name="VESerialFleetNr" ColumnName="VESerialFleetNr" />
+                <ScalarProperty Name="VEFromDrivingPoCon" ColumnName="VEFromDrivingPoCon" />
+                <ScalarProperty Name="VEFieldofVisionCon" ColumnName="VEFieldofVisionCon" />
+                <ScalarProperty Name="VETowHitchCon" ColumnName="VETowHitchCon" />
+                <ScalarProperty Name="VEStabilizersCon" ColumnName="VEStabilizersCon" />
+                <ScalarProperty Name="VEWarningDevicesCon" ColumnName="VEWarningDevicesCon" />
+                <ScalarProperty Name="VEProtectionCon" ColumnName="VEProtectionCon" />
+                <ScalarProperty Name="VEWipersCon" ColumnName="VEWipersCon" />
+                <ScalarProperty Name="VELightsCon" ColumnName="VELightsCon" />
+                <ScalarProperty Name="VESteeringCon" ColumnName="VESteeringCon" />
+                <ScalarProperty Name="VEBrakesCon" ColumnName="VEBrakesCon" />
+                <ScalarProperty Name="VETyresCon" ColumnName="VETyresCon" />
+                <ScalarProperty Name="OthersNonFatalityNr" ColumnName="OthersNonFatalityNr" />
+                <ScalarProperty Name="OthersFatalityNr" ColumnName="OthersFatalityNr" />
+                <ScalarProperty Name="PassengersNonFatalityNr" ColumnName="PassengersNonFatalityNr" />
+                <ScalarProperty Name="PassengersFatalityNr" ColumnName="PassengersFatalityNr" />
+                <ScalarProperty Name="EmployeesNonFatalityNr" ColumnName="EmployeesNonFatalityNr" />
+                <ScalarProperty Name="EmployeesFatalityNr" ColumnName="EmployeesFatalityNr" />
+                <ScalarProperty Name="DamageDetails" ColumnName="DamageDetails" />
+                <ScalarProperty Name="FlightDate" ColumnName="FlightDate" />
+                <ScalarProperty Name="flightCancelled" ColumnName="flightCancelled" />
+                <ScalarProperty Name="FlightStatusID" ColumnName="FlightStatusID" />
+                <ScalarProperty Name="DelayTakeoff" ColumnName="DelayTakeoff" />
+                <ScalarProperty Name="DelayBlockOff" ColumnName="DelayBlockOff" />
+                <ScalarProperty Name="FlightNumber" ColumnName="FlightNumber" />
+                <ScalarProperty Name="AircraftType" ColumnName="AircraftType" />
+                <ScalarProperty Name="Register" ColumnName="Register" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="OperationPhase" ColumnName="OperationPhase" />
+                <ScalarProperty Name="DateOccurrence" ColumnName="DateOccurrence" />
+                <ScalarProperty Name="DamageBy" ColumnName="DamageBy" />
+                <ScalarProperty Name="DamageById" ColumnName="DamageById" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AirportName" ColumnName="AirportName" />
+                <ScalarProperty Name="Airport" ColumnName="Airport" />
+                <ScalarProperty Name="AirportId" ColumnName="AirportId" />
+                <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewQAHazards">
+            <EntityTypeMapping TypeName="PPAModel.ViewQAHazard">
+              <MappingFragment StoreEntitySet="ViewQAHazard">
+                <ScalarProperty Name="FormNo" ColumnName="FormNo" />
+                <ScalarProperty Name="FlightId" ColumnName="FlightId" />
+                <ScalarProperty Name="Delay" ColumnName="Delay" />
+                <ScalarProperty Name="DelayReason" ColumnName="DelayReason" />
+                <ScalarProperty Name="RelatedDepartment" ColumnName="RelatedDepartment" />
+                <ScalarProperty Name="TelNumber" ColumnName="TelNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmployeeName" ColumnName="EmployeeName" />
+                <ScalarProperty Name="DateReport" ColumnName="DateReport" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="StatusEmployeeName" ColumnName="StatusEmployeeName" />
+                <ScalarProperty Name="DateSign" ColumnName="DateSign" />
+                <ScalarProperty Name="StatusEmployeeId" ColumnName="StatusEmployeeId" />
+                <ScalarProperty Name="dateStatus" ColumnName="dateStatus" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="RecommendedAction" ColumnName="RecommendedAction" />
+                <ScalarProperty Name="HazardDescription" ColumnName="HazardDescription" />
+                <ScalarProperty Name="AffectedArea" ColumnName="AffectedArea" />
+                <ScalarProperty Name="DateOccurrence" ColumnName="DateOccurrence" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

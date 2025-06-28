@@ -512,5 +512,7 @@ namespace Report
         public Nullable<System.DateTime> ASD_AWZ_ExpireDate { get; set; }
         public Nullable<System.DateTime> ASD_SRY_IssueDate { get; set; }
         public Nullable<System.DateTime> ASD_SRY_ExpireDate { get; set; }
+        public Nullable<System.DateTime> FTSL1IssueDate { get; set; }
+        public Nullable<System.DateTime> FTSL1ExpireDate { get; set; }
     }
 }
