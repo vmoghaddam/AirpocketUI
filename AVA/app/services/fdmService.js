@@ -54,6 +54,57 @@ app.factory('fdmService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     serviceFactory.get_fmd_route = _get_fmd_route;
 
 
+    var _get_fmd_events = function (dt1, dt2) {
+        var deferred = $q.defer();
+        $http.get(api_fdm + "api/fdm/V2/events/all/" + dt1 + "/" + dt2).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            // deferred.reject(Exeptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    }
+    serviceFactory.get_fmd_events = _get_fmd_events;
+
+
+
+    var _get_fmd_crew_id = function (cid,dt1, dt2) {
+        var deferred = $q.defer();
+        $http.get(api_fdm + "api/fdm/V2/crew/"+cid+"/" + dt1 + "/" + dt2).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            // deferred.reject(Exeptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    }
+    serviceFactory.get_fmd_crew_id = _get_fmd_crew_id;
+
+    var _get_fmd_crew_phase_id = function (cid,dt1, dt2) {
+        var deferred = $q.defer();
+        $http.get(api_fdm + "api/fdm/V2/crew/phase/"+cid+"/" + dt1 + "/" + dt2).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            // deferred.reject(Exeptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    }
+    serviceFactory.get_fmd_crew_phase_id = _get_fmd_crew_phase_id;
+
+    var _get_fmd_crew_phase_route_id = function (cid,dt1, dt2) {
+        var deferred = $q.defer();
+        $http.get(api_fdm + "api/fdm/V2/crew/route/phase/"+cid+"/" + dt1 + "/" + dt2).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            // deferred.reject(Exeptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    }
+    serviceFactory.get_fmd_crew_phase_route_id = _get_fmd_crew_phase_route_id;
+
+
 
     return serviceFactory;
 

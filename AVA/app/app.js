@@ -833,6 +833,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/zfdm_main.html?v=" + '5673'
     });
 
+    $routeProvider.when("/fdm/crew/z/:crew_id/:dt1/:dt2", {
+        controller: "zfdm_crew_controller",
+        templateUrl: "/app/views/zfdm_crew.html?v=" + '5673'
+    });
+
 
     $routeProvider.otherwise({ redirectTo: "/home" });
 

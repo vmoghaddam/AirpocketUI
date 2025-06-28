@@ -779,14 +779,781 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
         $scope.bar_route_md_series = {
             name: 'Routes', valueField: 'score_per_flight', color: "#ac39ac", hoverStyle: { color: "#000000" }, barWidth: 50
         };
+        //////////////////////////////////////
+
+        $scope.bar_events_737 = {
+            palette: 'Office',
+            tooltip: {
+                enabled: true,
+                location: 'edge',
+                customizeTooltip(arg) {
+                    return {
+                        text: arg.valueText ,//`${arg.seriesName} years: ${arg.valueText}`,
+                    };
+                },
+                format: {
+                    type: "fixedPoint",
+                    precision: 0
+                },
+            },
+            title: {
+                text: 'Top Events (B737)', subtitle: { text: 'Click on each bar to see the details' }
+            },
+            commonSeriesSettings: {
+                argumentField: 'event_name',
+                type: 'bar',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: {
+                    visible: false,
+
+                },
+                point: {
+                    hoverStyle: {
+                        color: "#000000"
+                    }
+                }
+            },
+
+
+            // title: 'Score per Flight Comparison',
+            legend: {
+                verticalAlignment: 'bottom',
+                horizontalAlignment: 'center',
+            },
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                e.target.select();
+            },
+            rotated: true,
+            argumentAxis: {
+                label: {
+                   // overlappingBehavior: "rotate",
+                   // rotationAngle: 90,
+                    font: {
+                        size:10
+                    }
+                    //customizeText: function (d) {
+                    //    return $scope.convertYearMonth(this.value);
+                    //},
+                }
+            },
+
+            valueAxis: {
+                tickInterval: 0.1,
+
+            },
+            //size: {
+            //    height: function (x) { return $(window).height() - 100; },
+
+            //},
+            onPointClick(e) {
+                e.target.select();
+                if (e.target && e.target.argument) {
+
+                    console.log(e.target);
+                    //$scope.result_events
+                    $scope.bar_events_737_regs_ds = Enumerable.From($scope.result_events.events_register).Where(function (x) { return x.ac_type == e.target.data.ac_type && x.event_name == e.target.data.event_name; }).ToArray();
+                    $scope.bar_events_737_phase_ds = Enumerable.From($scope.result_events.events_type_phase).Where(function (x) { return x.ac_type == e.target.data.ac_type && x.event_name == e.target.data.event_name; }).ToArray();
+                    $scope.bar_events_737_route_ds = Enumerable.From($scope.result_events.events_type_route).Where(function (x) { return x.ac_type == e.target.data.ac_type && x.event_name == e.target.data.event_name; }).ToArray();
+                    console.log('regs', $scope.bar_events_737_regs_ds);
+                    //if (_phase)
+                    //    $scope.ds_phase_event = _phase.Items;
+                }
+                //e.target.argument
+                //e.target.value
+            },
+            bindingOptions:
+            {
+                dataSource: 'bar_events_737_ds',
+                series: 'bar_events_737_series',
+                // 'argumentAxis.categories': 'yearMonth2',
+                'size.height': 'chart_size_full_height'
+            },
+        };
+        $scope.bar_events_737_series = {
+            name: 'Events', valueField: 'count', color: "#c6538c", hoverStyle: { color: "#000000" }, barWidth: 50
+        };
+
+
+
+
+        $scope.bar_events_737_regs = {
+            palette: 'Office',
+            tooltip: {
+                enabled: true,
+                location: 'edge',
+                customizeTooltip(arg) {
+                    return {
+                        text: arg.valueText ,//`${arg.seriesName} years: ${arg.valueText}`,
+                    };
+                },
+                format: {
+                    type: "fixedPoint",
+                    precision: 0
+                },
+            },
+           // title: 'Top Events',
+            commonSeriesSettings: {
+                argumentField: 'register',
+                type: 'bar',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: {
+                    visible: false,
+
+                },
+                point: {
+                    hoverStyle: {
+                        color: "#000000"
+                    }
+                }
+            },
+
+
+            // title: 'Score per Flight Comparison',
+            legend: {
+                verticalAlignment: 'bottom',
+                horizontalAlignment: 'center',
+            },
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                e.target.select();
+            },
+            rotated: false,
+            argumentAxis: {
+                label: {
+                    // overlappingBehavior: "rotate",
+                    // rotationAngle: 90,
+                    font: {
+                        size: 10
+                    }
+                    //customizeText: function (d) {
+                    //    return $scope.convertYearMonth(this.value);
+                    //},
+                }
+            },
+
+            valueAxis: {
+                tickInterval: 0.1,
+
+            },
+            //size: {
+            //    height: function (x) { return $(window).height() - 100; },
+
+            //},
+            bindingOptions:
+            {
+                dataSource: 'bar_events_737_regs_ds',
+                series: 'bar_events_737_regs_series',
+                // 'argumentAxis.categories': 'yearMonth2',
+                'size.height': 'chart_size_half_height'
+            },
+        };
+        $scope.bar_events_737_regs_series = {
+            name: 'Registers', valueField: 'count', color: "#ff6600", hoverStyle: { color: "#000000" }, barWidth: 50
+        };
+
+
+
+
+        $scope.bar_events_737_phase = {
+            palette: 'Office',
+            tooltip: {
+                enabled: true,
+                location: 'edge',
+                customizeTooltip(arg) {
+                    return {
+                        text: arg.valueText ,//`${arg.seriesName} years: ${arg.valueText}`,
+                    };
+                },
+                format: {
+                    type: "fixedPoint",
+                    precision: 0
+                },
+            },
+           // title: 'Top Events',
+            commonSeriesSettings: {
+                argumentField: 'phase',
+                type: 'bar',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: {
+                    visible: false,
+
+                },
+                point: {
+                    hoverStyle: {
+                        color: "#000000"
+                    }
+                }
+            },
+
+
+            // title: 'Score per Flight Comparison',
+            legend: {
+                verticalAlignment: 'bottom',
+                horizontalAlignment: 'center',
+            },
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                e.target.select();
+            },
+            rotated: false,
+            argumentAxis: {
+                label: {
+                    // overlappingBehavior: "rotate",
+                    // rotationAngle: 90,
+                    font: {
+                        size: 10
+                    }
+                    //customizeText: function (d) {
+                    //    return $scope.convertYearMonth(this.value);
+                    //},
+                }
+            },
+
+            valueAxis: {
+                tickInterval: 0.1,
+
+            },
+            //size: {
+            //    height: function (x) { return $(window).height() - 100; },
+
+            //},
+            bindingOptions:
+            {
+                dataSource: 'bar_events_737_phase_ds',
+                series: 'bar_events_737_phase_series',
+                // 'argumentAxis.categories': 'yearMonth2',
+                'size.height': 'chart_size_half_height'
+            },
+        };
+        $scope.bar_events_737_phase_series = {
+            name: 'Phases', valueField: 'count', color: "#476b6b", hoverStyle: { color: "#000000" }, barWidth: 50
+        };
+
+
+
+        $scope.bar_events_737_route = {
+            palette: 'Office',
+            tooltip: {
+                enabled: true,
+                location: 'edge',
+                customizeTooltip(arg) {
+                    return {
+                        text: arg.valueText ,//`${arg.seriesName} years: ${arg.valueText}`,
+                    };
+                },
+                format: {
+                    type: "fixedPoint",
+                    precision: 0
+                },
+            },
+            // title: 'Top Events',
+            commonSeriesSettings: {
+                argumentField: 'route_iata',
+                type: 'bar',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: {
+                    visible: false,
+
+                },
+                point: {
+                    hoverStyle: {
+                        color: "#000000"
+                    }
+                }
+            },
+
+
+            // title: 'Score per Flight Comparison',
+            legend: {
+                verticalAlignment: 'bottom',
+                horizontalAlignment: 'center',
+            },
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                e.target.select();
+            },
+            rotated: true,
+            argumentAxis: {
+                label: {
+                    // overlappingBehavior: "rotate",
+                    // rotationAngle: 90,
+                    font: {
+                        size: 10
+                    }
+                    //customizeText: function (d) {
+                    //    return $scope.convertYearMonth(this.value);
+                    //},
+                }
+            },
+
+            valueAxis: {
+                tickInterval: 0.1,
+
+            },
+            //size: {
+            //    height: function (x) { return $(window).height() - 100; },
+
+            //},
+            bindingOptions:
+            {
+                dataSource: 'bar_events_737_route_ds',
+                series: 'bar_events_737_route_series',
+                // 'argumentAxis.categories': 'yearMonth2',
+                'size.height': 'chart_size_full_height'
+            },
+        };
+        $scope.bar_events_737_route_series = {
+            name: 'Routes', valueField: 'count', color: "#5c85d6", hoverStyle: { color: "#000000" }, barWidth: 50
+        };
         ///////////////////////////////////
+        $scope.bar_events_md = {
+            palette: 'Office',
+            tooltip: {
+                enabled: true,
+                location: 'edge',
+                customizeTooltip(arg) {
+                    return {
+                        text: arg.valueText,//`${arg.seriesName} years: ${arg.valueText}`,
+                    };
+                },
+                format: {
+                    type: "fixedPoint",
+                    precision: 0
+                },
+            },
+            title: {
+                text: 'Top Events (MD)', subtitle: { text: 'Click on each bar to see the details' }
+            },
+            commonSeriesSettings: {
+                argumentField: 'event_name',
+                type: 'bar',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: {
+                    visible: false,
+
+                },
+                point: {
+                    hoverStyle: {
+                        color: "#000000"
+                    }
+                }
+            },
+
+
+            // title: 'Score per Flight Comparison',
+            legend: {
+                verticalAlignment: 'bottom',
+                horizontalAlignment: 'center',
+            },
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                e.target.select();
+            },
+            rotated: true,
+            argumentAxis: {
+                label: {
+                    // overlappingBehavior: "rotate",
+                    // rotationAngle: 90,
+                    font: {
+                        size: 10
+                    }
+                    //customizeText: function (d) {
+                    //    return $scope.convertYearMonth(this.value);
+                    //},
+                }
+            },
+
+            valueAxis: {
+                tickInterval: 0.1,
+
+            },
+            //size: {
+            //    height: function (x) { return $(window).height() - 100; },
+
+            //},
+            onPointClick(e) {
+                e.target.select();
+                if (e.target && e.target.argument) {
+
+                    console.log(e.target);
+                    //$scope.result_events
+                    $scope.bar_events_md_regs_ds = Enumerable.From($scope.result_events.events_register).Where(function (x) { return x.ac_type == e.target.data.ac_type && x.event_name == e.target.data.event_name; }).ToArray();
+                    $scope.bar_events_md_phase_ds = Enumerable.From($scope.result_events.events_type_phase).Where(function (x) { return x.ac_type == e.target.data.ac_type && x.event_name == e.target.data.event_name; }).ToArray();
+                    $scope.bar_events_md_route_ds = Enumerable.From($scope.result_events.events_type_route).Where(function (x) { return x.ac_type == e.target.data.ac_type && x.event_name == e.target.data.event_name; }).ToArray();
+                    $scope.bar_events_md_crew_ds = Enumerable.From($scope.result_events.events_crew).Where(function (x) { return x.ac_type == e.target.data.ac_type && x.event_name == e.target.data.event_name; }).ToArray();
+                    console.log('regs', $scope.bar_events_md_crew_ds);
+                    //if (_phase)
+                    //    $scope.ds_phase_event = _phase.Items;
+                }
+                //e.target.argument
+                //e.target.value
+            },
+            bindingOptions:
+            {
+                dataSource: 'bar_events_md_ds',
+                series: 'bar_events_md_series',
+                // 'argumentAxis.categories': 'yearMonth2',
+                'size.height': 'chart_size_full_height'
+            },
+        };
+        $scope.bar_events_md_series = {
+            name: 'Events', valueField: 'count', color: "#997a00", hoverStyle: { color: "#000000" }, barWidth: 50
+        };
+
+
+
+
+        $scope.bar_events_md_regs = {
+            palette: 'Office',
+            tooltip: {
+                enabled: true,
+                location: 'edge',
+                customizeTooltip(arg) {
+                    return {
+                        text: arg.valueText,//`${arg.seriesName} years: ${arg.valueText}`,
+                    };
+                },
+                format: {
+                    type: "fixedPoint",
+                    precision: 0
+                },
+            },
+            // title: 'Top Events',
+            commonSeriesSettings: {
+                argumentField: 'register',
+                type: 'bar',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: {
+                    visible: false,
+
+                },
+                point: {
+                    hoverStyle: {
+                        color: "#000000"
+                    }
+                }
+            },
+
+
+            // title: 'Score per Flight Comparison',
+            legend: {
+                verticalAlignment: 'bottom',
+                horizontalAlignment: 'center',
+            },
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                e.target.select();
+            },
+            rotated: false,
+            argumentAxis: {
+                label: {
+                    // overlappingBehavior: "rotate",
+                    // rotationAngle: 90,
+                    font: {
+                        size: 10
+                    }
+                    //customizeText: function (d) {
+                    //    return $scope.convertYearMonth(this.value);
+                    //},
+                }
+            },
+
+            valueAxis: {
+                tickInterval: 0.1,
+
+            },
+            //size: {
+            //    height: function (x) { return $(window).height() - 100; },
+
+            //},
+            bindingOptions:
+            {
+                dataSource: 'bar_events_md_regs_ds',
+                series: 'bar_events_md_regs_series',
+                // 'argumentAxis.categories': 'yearMonth2',
+                'size.height': 'chart_size_half_height'
+            },
+        };
+        $scope.bar_events_md_regs_series = {
+            name: 'Registers', valueField: 'count', color: "#ff6600", hoverStyle: { color: "#000000" }, barWidth: 50
+        };
+
+
+
+
+        $scope.bar_events_md_phase = {
+            palette: 'Office',
+            tooltip: {
+                enabled: true,
+                location: 'edge',
+                customizeTooltip(arg) {
+                    return {
+                        text: arg.valueText,//`${arg.seriesName} years: ${arg.valueText}`,
+                    };
+                },
+                format: {
+                    type: "fixedPoint",
+                    precision: 0
+                },
+            },
+            // title: 'Top Events',
+            commonSeriesSettings: {
+                argumentField: 'phase',
+                type: 'bar',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: {
+                    visible: false,
+
+                },
+                point: {
+                    hoverStyle: {
+                        color: "#000000"
+                    }
+                }
+            },
+
+
+            // title: 'Score per Flight Comparison',
+            legend: {
+                verticalAlignment: 'bottom',
+                horizontalAlignment: 'center',
+            },
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                e.target.select();
+            },
+            rotated: false,
+            argumentAxis: {
+                label: {
+                    // overlappingBehavior: "rotate",
+                    // rotationAngle: 90,
+                    font: {
+                        size: 10
+                    }
+                    //customizeText: function (d) {
+                    //    return $scope.convertYearMonth(this.value);
+                    //},
+                }
+            },
+
+            valueAxis: {
+                tickInterval: 0.1,
+
+            },
+            //size: {
+            //    height: function (x) { return $(window).height() - 100; },
+
+            //},
+            bindingOptions:
+            {
+                dataSource: 'bar_events_md_phase_ds',
+                series: 'bar_events_md_phase_series',
+                // 'argumentAxis.categories': 'yearMonth2',
+                'size.height': 'chart_size_half_height'
+            },
+        };
+        $scope.bar_events_md_phase_series = {
+            name: 'Phases', valueField: 'count', color: "#476b6b", hoverStyle: { color: "#000000" }, barWidth: 50
+        };
+
+
+
+        $scope.bar_events_md_crew = {
+            palette: 'Office',
+            tooltip: {
+                enabled: true,
+                location: 'edge',
+                customizeTooltip(arg) {
+                    return {
+                        text: arg.valueText,//`${arg.seriesName} years: ${arg.valueText}`,
+                    };
+                },
+                format: {
+                    type: "fixedPoint",
+                    precision: 0
+                },
+            },
+            // title: 'Top Events',
+            commonSeriesSettings: {
+                argumentField: 'last_name',
+                type: 'bar',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: {
+                    visible: false,
+
+                },
+                point: {
+                    hoverStyle: {
+                        color: "#000000"
+                    }
+                }
+            },
+
+
+            // title: 'Score per Flight Comparison',
+            legend: {
+                verticalAlignment: 'bottom',
+                horizontalAlignment: 'center',
+            },
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                e.target.select();
+            },
+            rotated: false,
+            argumentAxis: {
+                label: {
+                    // overlappingBehavior: "rotate",
+                    // rotationAngle: 90,
+                    font: {
+                        size: 10
+                    }
+                    //customizeText: function (d) {
+                    //    return $scope.convertYearMonth(this.value);
+                    //},
+                }
+            },
+
+            valueAxis: {
+                tickInterval: 0.1,
+
+            },
+            //size: {
+            //    height: function (x) { return $(window).height() - 100; },
+
+            //},
+            bindingOptions:
+            {
+                dataSource: 'bar_events_md_crew_ds',
+                series: 'bar_events_md_crew_series',
+                // 'argumentAxis.categories': 'yearMonth2',
+                'size.height': 'chart_size_half_height'
+            },
+        };
+        $scope.bar_events_md_crew_series = {
+            name: 'Pilots', valueField: 'count', color: "#476b6b", hoverStyle: { color: "#000000" }, barWidth: 50
+        };
+
+
+
+        $scope.bar_events_md_route = {
+            palette: 'Office',
+            tooltip: {
+                enabled: true,
+                location: 'edge',
+                customizeTooltip(arg) {
+                    return {
+                        text: arg.valueText,//`${arg.seriesName} years: ${arg.valueText}`,
+                    };
+                },
+                format: {
+                    type: "fixedPoint",
+                    precision: 0
+                },
+            },
+            // title: 'Top Events',
+            commonSeriesSettings: {
+                argumentField: 'route_iata',
+                type: 'bar',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: {
+                    visible: false,
+
+                },
+                point: {
+                    hoverStyle: {
+                        color: "#000000"
+                    }
+                }
+            },
+
+
+            // title: 'Score per Flight Comparison',
+            legend: {
+                verticalAlignment: 'bottom',
+                horizontalAlignment: 'center',
+            },
+            export: {
+                enabled: false,
+            },
+            onPointClick(e) {
+                e.target.select();
+            },
+            rotated: true,
+            argumentAxis: {
+                label: {
+                    // overlappingBehavior: "rotate",
+                    // rotationAngle: 90,
+                    font: {
+                        size: 10
+                    }
+                    //customizeText: function (d) {
+                    //    return $scope.convertYearMonth(this.value);
+                    //},
+                }
+            },
+
+            valueAxis: {
+                tickInterval: 0.1,
+
+            },
+            //size: {
+            //    height: function (x) { return $(window).height() - 100; },
+
+            //},
+            bindingOptions:
+            {
+                dataSource: 'bar_events_md_route_ds',
+                series: 'bar_events_md_route_series',
+                // 'argumentAxis.categories': 'yearMonth2',
+                'size.height': 'chart_size_full_height'
+            },
+        };
+        $scope.bar_events_md_route_series = {
+            name: 'Routes', valueField: 'count', color: "#5c85d6", hoverStyle: { color: "#000000" }, barWidth: 50
+        };
+
+        /////////////////////////////////////
         $rootScope.page_title = '> FDM';
         $('.zfdm_main').fadeIn();
         /////////////////////////////////////////
         $scope.formatDateYYYYMMDD = function (dt) {
             return moment(dt).format('YYYY-MM-DD');
         };
-
+        $scope.get_type_content_style = function () {
+            var h = $(window).height() - 210;
+            return {
+                height: h + 'px',
+            };
+        }
+        $scope.chart_size_full_height = $(window).height() - 240;
+        $scope.chart_size_half_height = $scope.chart_size_full_height / 2;
+        $scope.chart_size_3rows_height = $scope.chart_size_full_height / 3;
         $scope.result_type_737 = null;
         $scope.bind = function () {
 
@@ -822,6 +1589,14 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
               //  $scope.build();
 
                 //////////////////////////////////////
+                fdmService.get_fmd_events($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response_events) {
+                    $scope.result_events = response_events.Data;
+                    $scope.bar_events_737_ds = Enumerable.From($scope.result_events.events_type).Where('$.ac_type=="B737"').OrderByDescending('$.count').Take(15).ToArray();
+                    $scope.bar_events_md_ds = Enumerable.From($scope.result_events.events_type).Where('$.ac_type=="MD"').OrderByDescending('$.count').Take(15).ToArray();
+
+                    console.log('events ', $scope.bar_events_737_ds);
+
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
                 fdmService.get_fmd_crew($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response2) {
                     //get_fmd_crew_phase
@@ -959,6 +1734,14 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
 
 
 
+        };
+
+
+        $scope.go_crew = function (x) {
+            var dt1 = moment($scope.dt_from).format('YYYY_MM_DD');
+            var dt2 = moment($scope.dt_to).format('YYYY_MM_DD');
+           // $location.path("/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2);
+            $window.open("#!/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2,'_blank')
         };
 
 

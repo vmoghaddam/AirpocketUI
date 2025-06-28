@@ -42,9 +42,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -211,6 +208,8 @@
     <Content Include="app\controllers\partNumberSelection.js" />
     <Content Include="app\controllers\personAddController.js" />
     <Content Include="app\controllers\personController.js" />
+    <Content Include="app\controllers\stby_controller.js" />
+    <Content Include="app\controllers\zfdm_crew.js" />
     <Content Include="app\controllers\zfdm_main.js" />
     <Content Include="app\controllers\_personAddController.js" />
     <Content Include="app\controllers\personbookController.js" />
@@ -509,6 +508,8 @@
     <Content Include="app\views\partNumberSelection.html" />
     <Content Include="app\views\person.html" />
     <Content Include="app\views\personAdd.html" />
+    <Content Include="app\views\stby.html" />
+    <Content Include="app\views\zfdm_crew.html" />
     <Content Include="app\views\zfdm_main.html" />
     <Content Include="app\views\_person.html" />
     <Content Include="app\views\_personAdd.html" />
