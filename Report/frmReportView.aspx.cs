@@ -1,10 +1,13 @@
 ﻿using DevExpress.DataAccess.Json;
 using DevExpress.XtraPrinting.Caching;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
@@ -172,6 +175,53 @@ namespace Report
                         dataSource.Fill();
                         rptasr.DataSource = dataSource;
                         ASPxWebDocumentViewer1.OpenReport(rptasr);
+                        break;
+                    case "18E":
+                        List<_person> cer_ids = new List<_person>();
+                        using (WebClient client = new WebClient())
+                        {
+                            // اگر نیاز به تنظیم encoding باشد:
+                            client.Headers[HttpRequestHeader.ContentType] = "application/json";
+
+                            string json = client.DownloadString("http://localhost:4005/api/certificate/flykish/all");
+
+                            cer_ids = JsonConvert.DeserializeObject<List<_person>>(json);
+                             
+                        }
+
+                        foreach(var x in cer_ids)
+                        {
+                            string cerId_e = x.Id.ToString();
+                            var rptfpc_e = new rptFPCAVA(); //new rptFPCAir1(); //new rptFPC();
+                            dataSource = new JsonDataSource();
+                            //var rptfpcurl_e = apiUrlExtTemp + "/api/certificate/" + cerId;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                            var rptfpcurl_e = /*"https://ava.apitrn.airpocket.app/"*/"http://localhost:4005" + "/api/certificate/" + cerId_e;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                            dataSource.JsonSource = new UriJsonSource(new Uri(rptfpcurl_e));
+                            dataSource.Fill();
+                            var format = "pdf";
+                            rptfpc_e.DataSource = dataSource;
+                            string contentType = string.Format("application/{0}", format);
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                switch (format)
+                                {
+                                    case "pdf":
+                                        contentType = "application/pdf";
+                                        rptfpc_e.ExportToPdf(ms);
+                                        break;
+                                        // ...
+                                }
+                                ms.Position = 0;
+
+                                // ذخیره در فایل
+                                string filePath = @"C:\Users\vahid\Desktop\ava\FlyKishCertificates\"+(x.Name.Replace(" ","_")+"__"+x.Title)+".pdf"; // مسیر دلخواه
+                                using (FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                                {
+                                    ms.CopyTo(file);
+                                }
+                            }
+                        }
+                       
                         break;
                     case "18":
                         string cerId = Request.QueryString["id"];
@@ -534,5 +584,12 @@ namespace Report
             }
 
         }
+    }
+
+    public class _person
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Title { get; set; }
     }
 }

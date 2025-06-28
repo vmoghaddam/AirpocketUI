@@ -42,9 +42,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\lib\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -117,6 +114,7 @@
     <Content Include="app\controllers\exam_client.js" />
     <Content Include="app\controllers\expiringCourseType.js" />
     <Content Include="app\controllers\expiringGroup.js" />
+    <Content Include="app\controllers\fdm_main.js" />
     <Content Include="app\controllers\fdps.js" />
     <Content Include="app\controllers\fdpsfly.js" />
     <Content Include="app\controllers\filterController.js" />
@@ -210,6 +208,9 @@
     <Content Include="app\controllers\partNumberSelection.js" />
     <Content Include="app\controllers\personAddController.js" />
     <Content Include="app\controllers\personController.js" />
+    <Content Include="app\controllers\stby_controller.js" />
+    <Content Include="app\controllers\zfdm_crew.js" />
+    <Content Include="app\controllers\zfdm_main.js" />
     <Content Include="app\controllers\_personAddController.js" />
     <Content Include="app\controllers\personbookController.js" />
     <Content Include="app\controllers\personcertificateController.js" />
@@ -330,6 +331,7 @@
     <Content Include="app\services\biService.js" />
     <Content Include="app\services\courseService.js" />
     <Content Include="app\services\fbService.js" />
+    <Content Include="app\services\fdmService.js" />
     <Content Include="app\services\flightBagService.js" />
     <Content Include="app\services\flightService.js" />
     <Content Include="app\services\fuelService.js" />
@@ -411,6 +413,7 @@
     <Content Include="app\views\exam_client.html" />
     <Content Include="app\views\expiringCourseType.html" />
     <Content Include="app\views\expiringGroup.html" />
+    <Content Include="app\views\fdm_main.html" />
     <Content Include="app\views\fdps.html" />
     <Content Include="app\views\fdpsfly.html" />
     <Content Include="app\views\filter.html" />
@@ -505,6 +508,9 @@
     <Content Include="app\views\partNumberSelection.html" />
     <Content Include="app\views\person.html" />
     <Content Include="app\views\personAdd.html" />
+    <Content Include="app\views\stby.html" />
+    <Content Include="app\views\zfdm_crew.html" />
+    <Content Include="app\views\zfdm_main.html" />
     <Content Include="app\views\_person.html" />
     <Content Include="app\views\_personAdd.html" />
     <Content Include="app\views\personbook.html" />
