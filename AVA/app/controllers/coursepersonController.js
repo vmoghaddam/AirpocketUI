@@ -1590,6 +1590,10 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 visible: true,
                 showOperationChooser: true,
             },
+            editing: {
+                allowUpdating: true,
+                mode: 'cell'
+            },
             showRowLines: true,
             showColumnLines: true,
             sorting: { mode: 'none' },
@@ -1667,6 +1671,20 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                     e.cellElement.css('background', '#99ffd6');
                 }
 
+            },
+            onRowUpdated: function (e) {
+                //if (!e.key.Selected) {
+                //    e.key.HH = null;
+                //    e.key.MM = null;
+                //}
+               // alert('x');
+                console.log('score update', e);
+                //e.data.ExamResult
+                //e.key.Id
+                ztrnService.update_score({ id: e.key.Id, score: e.data.ExamResult }).then(function (response) {
+                    //$scope.selectedEmployees
+                    
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             },
             bindingOptions: {
                 dataSource: 'dg_people_ds', //'dg_employees_ds',
@@ -2020,6 +2038,17 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 },
                 {
                     widget: 'dxButton', location: 'before', options: {
+                        type: 'default', text: 'Copy', onClick: function (e) {
+                            if (!$scope.IsEditable) {
+                                General.ShowNotify("You Do Not Have Enough Access Privileges.", 'error');
+                                return;
+                            }
+                            $scope.popup_copy_visible = true;
+                        }
+                    }, toolbar: 'bottom'
+                },
+                {
+                    widget: 'dxButton', location: 'before', options: {
                         type: 'danger', text: 'Remove', onClick: function (e) {
                             if (!$scope.IsEditable) {
                                 General.ShowNotify("You Do Not Have Enough Access Privileges.", 'error');
@@ -2315,6 +2344,187 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         };
 
 
+        $scope.popup_copy_visible = false;
+        $scope.popup_copy_title = 'Copy';
+        $scope.popup_copy = {
+            elementAttr: {
+                //  id: "elementId",
+                class: "popup_copy"
+            },
+            shading: true,
+            //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
+            height: $(window).height() - 200,
+            width:   $(window).width() - 200,
+            fullScreen: false,
+            showTitle: true,
+            dragEnabled: true,
+            toolbarItems: [
+                {
+                    widget: 'dxButton', location: 'after', options: {
+                        type: 'success', text: 'Save', icon: 'check', validationGroup: 'copypeople', bindingOptions: { disabled: 'IsApproved' }, onClick: function (arg) {
+
+                            var result = arg.validationGroup.validate();
+                            if (!result.isValid) {
+                                General.ShowNotify(Config.Text_FillRequired, 'error');
+                                return;
+                            }
+                             
+                            //$scope.source_course
+                            //$scope.selectedCourse.Id
+
+                            $scope.loadingVisible = true;
+                            ztrnService.copy_people({ source_id: $scope.source_course, destination_id: $scope.selectedCourse.Id}).then(function (response) {
+
+                                $scope.dg_people_instance.option('columns', []);
+                                $scope.ds_people = [];
+                                $scope.ds_sessions = [];
+                                $scope.dg_people_ds = [];
+                                $scope.selectedTabFolderIndex = 0;
+                                $scope.preparePeopleGrid();
+
+                                $scope.loadingVisible = false;
+                                $scope.popup_copy_visible = false;
+                               
+                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+                        }
+                    }, toolbar: 'bottom'
+                },
+
+                { widget: 'dxButton', location: 'after', options: { type: 'danger', text: 'Close', icon: 'remove', }, toolbar: 'bottom' }
+            ],
+
+            visible: false,
+
+            closeOnOutsideClick: false,
+            onTitleRendered: function (e) {
+
+            },
+            onShowing: function (e) {
+                if ($scope.dg_copy_people_instance)
+                    $scope.dg_copy_people_instance.refresh();
+
+            },
+            onShown: function (e) {
+
+                if ($scope.dg_copy_people_instance)
+                    $scope.dg_copy_people_instance.refresh();
+            },
+            onHiding: function () {
+                //2024-12-28
+               
+
+                $scope.popup_copy_visible = false;
+
+            },
+            bindingOptions: {
+                visible: 'popup_copy_visible',
+
+                title: 'popup_copy_title',
+
+            }
+        };
+
+        //close button
+        $scope.popup_copy.toolbarItems[1].options.onClick = function (e) {
+
+            $scope.popup_copy_visible = false;
+
+        };
+
+        $scope.dg_copy_people_columns = [
+            { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, encodeHtml: false, width: 200, sortIndex: 0, sortOrder: "asc" },
+            { dataField: "Name", caption: "Name", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, },
+            
+
+        ];
+        
+        $scope.dg_copy_people_instance = null;
+        $scope.dg_copy_people = {
+            showRowLines: true,
+            showColumnLines: true,
+            sorting: { mode: 'multiple' },
+            filterRow: {
+                visible: true,
+                showOperationChooser: true,
+            },
+            noDataText: '',
+            
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            scrolling: { mode: 'infinite' },
+            paging: { pageSize: 100 },
+            showBorders: true,
+            selection: { mode: 'single' },
+
+
+            columnAutoWidth: false,
+            columns: $scope.dg_copy_people_columns,
+            onContentReady: function (e) {
+                if (!$scope.dg_copy_people_instance)
+                    $scope.dg_copy_people_instance = e.component;
+
+            },
+            onSelectionChanged: function (e) {
+               
+
+            },
+            height: $(window).height() - 400,
+            bindingOptions: {
+
+                dataSource: 'ds_copy_people',
+                // height: 'dg_height',
+            },
+            // dataSource:ds
+
+        };
+
+        $scope.sb_courses = {
+            
+            showClearButton: true,
+            searchEnabled: true,
+            searchExpr: ["Title"],
+            //valueExpr: "Id",
+            displayExpr: "Title",
+            itemTemplate: function (data) {
+                return "<div>"
+                    + "<div class='tmpl-col-left'>" + data.Title + "(" + data.Attendants+")" + "</div>"
+                    + "<div class='tmpl-col-right'>" + data.Id + "</div>"
+
+
+                    + "</div>";
+            },
+            onSelectionChanged: function (e) {
+
+                
+                if (e.selectedItem) {
+                    //$scope.certype = e.selectedItem.CertificateType;
+
+                    //$scope.ctgroups = e.selectedItem.JobGroups;
+
+
+                    //war
+                    ztrnService.getCoursePeopleNames(e.selectedItem.Id).then(function (response2) {
+                         
+                        $scope.ds_copy_people = response2.Data;
+                        $scope.source_course = e.selectedItem.Id;
+
+                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+
+
+                }
+
+            },
+            bindingOptions: {
+                dataSource: 'dg_ds',
+
+            }
+
+        };
+
+
+
         $scope.popup_exam_visible = false;
         $scope.popup_exam = {
             height: 800,
@@ -2379,7 +2589,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         };
 
         $scope.formatDateTime_temp = function (dt) {
-            console.log('date start', dt);
+           // console.log('date start', dt);
             if (!dt)
                 return "";
             return moment(new Date(dt)).format('YYYY-MMM-DD HH:mm').toUpperCase();
@@ -2582,7 +2792,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
         $scope.show_questions = function () {
             $scope.loadingVisible = true;
             trnService.getExamQuestions($scope.follow_exam.id).then(function (response) {
-                console.log(response);
+               // console.log(response);
                 $scope.loadingVisible = false;
                 $scope.ds_questions = response.questions;
                 $scope.popup_questions_visible = true;
@@ -2819,7 +3029,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
         }
         $scope.show_person_exam = function (data) {
-            console.log('dsdsddsd', data);
+          //  console.log('dsdsddsd', data);
             window.open('https://localhost:44385/#!/exam/client/' + data.exam_id + '/' + data.person_id );
             ztrnService.get_ato_exam(data.exam_id, data.client_id).then(function (response) {
                 $scope.person_exam_detail = response.Data;
@@ -2857,6 +3067,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 $scope.follow_course = response.Data.course;
                 $scope.follow_exam = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : {};
+                console.log('follow exam', $scope.follow_exam);
                 $scope.refresh_summary(function () {
 
                     if ($scope.follow_exam) {
@@ -3028,13 +3239,21 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 });
 
-                $scope.dg_people_instance.addColumn({
-                    caption: 'Exam', columns: [
-                        { dataField: 'ExamResult', caption: 'Score', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, },
-                        { dataField: 'ExamStatus', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, }
-                    ]
-                });
+                if ($scope.follow_exam && $scope.follow_exam.exam_date)
+                    $scope.dg_people_instance.addColumn({
+                        caption: 'Exam', columns: [
+                            { dataField: 'ExamResult', caption: 'Score', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, },
+                            { dataField: 'ExamStatus', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, }
+                        ]
+                    });
 
+                if ($scope.follow_course && $scope.follow_course.ExamType)
+                    $scope.dg_people_instance.addColumn({
+                        caption: 'Exam', columns: [
+                            { dataField: 'ExamResult', caption: 'Score', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: true, width: 80, },
+                            //{ dataField: 'ExamStatus', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, }
+                        ]
+                    });
                 $scope.dg_people_instance.addColumn({ dataField: 'CoursePeopleStatus', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, });
                 $scope.dg_people_instance.addColumn({ dataField: 'DateIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'datetime', format: 'MM-dd-yyyy', allowEditing: false, width: 150, });
                 $scope.dg_people_instance.addColumn({ dataField: 'DateExpire', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'datetime', format: 'MM-dd-yyyy', allowEditing: false, width: 150, });

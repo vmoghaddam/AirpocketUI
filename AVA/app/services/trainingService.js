@@ -807,6 +807,52 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
         return deferred.promise;
     };
     serviceFactory.getExamQuestions = _getExamQuestions;
+
+
+    var _getCoursesByTypeOutside = function (tid, sid) {
+
+        var deferred = $q.defer();
+        $http.get(serviceBaseTRN + 'api/course/bytype/outside/' + tid + '/' + sid).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getCoursesByTypeOutside = _getCoursesByTypeOutside;
+
+
+    var _getPersonFolder = function (nid) {
+
+        var deferred = $q.defer();
+        $http.get(serviceBaseTRN + 'api/files/get/' + nid).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getPersonFolder = _getPersonFolder;
+
+
+
+    var _get_profiles_course_types = function () {
+
+        var deferred = $q.defer();
+        $http.get(serviceBaseTRN + 'api/profile/course/types/' ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_profiles_course_types = _get_profiles_course_types;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;

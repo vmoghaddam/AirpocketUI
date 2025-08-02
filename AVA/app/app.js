@@ -838,6 +838,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/zfdm_crew.html?v=" + '5673'
     });
 
+    $routeProvider.when("/exams", {
+        controller: "trnexamController",
+        templateUrl: "/app/views/trn_exam.html?v=1999"
+    });
+
 
     $routeProvider.otherwise({ redirectTo: "/home" });
 

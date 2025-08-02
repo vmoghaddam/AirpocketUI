@@ -1,0 +1,793 @@
+﻿<style>
+    .stSelected {
+        background: green !important;
+        color: white !important;
+    }
+
+    .dx-fileuploader-input-wrapper {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+        .dx-fileuploader-input-wrapper .dx-button-content {
+            background: green;
+            color: white;
+        }
+
+    .dx-fileuploader-container {
+    }
+
+    .cell-img {
+        height: 24px;
+    }
+
+
+
+
+
+    .row_odd .cal_day {
+        background: #ffe6cc;
+    }
+
+    .row_even .cal_day {
+        background: #ccf2ff;
+    }
+
+
+    ._cal .days-row {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days-row td {
+            text-align: center;
+            border: 1px solid gray;
+            padding: 5px;
+            width: 14.28571%;
+            background: #ddd;
+        }
+
+    ._cal .days {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days td {
+            border: 1px solid #ccc;
+            width: 14.28571%;
+            padding: 3px;
+        }
+
+            ._cal .days td .day-wrapper {
+                padding: 2px;
+                /*min-height: 65px;*/
+            }
+
+
+            ._cal .days td .day-caption {
+                color: black;
+                text-align: right;
+                padding: 1px;
+            }
+
+            ._cal .days td .today .day-caption {
+                color: green;
+                font-weight: bold;
+            }
+
+            ._cal .days td .day-caption._inactive {
+                color: #ccc !important;
+            }
+
+            ._cal .days td .today .day-caption._inactive {
+                color: green !important;
+                font-weight: bold;
+            }
+
+            ._cal .days td:has(> .today) {
+                background: #ccffe6;
+            }
+
+    ._cal .event {
+        padding: 3px;
+        margin: 2px 0 0 0;
+        text-align: center;
+    }
+
+        ._cal .event.d1165 {
+            background-color: #00cc99;
+        }
+
+        ._cal .event.d10000 {
+            background-color: #66ff66;
+        }
+
+        ._cal .event span {
+            display: inline-block;
+            margin-left: 5px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        ._cal .event i {
+            font-size: 15px;
+        }
+
+    .thin-scroll0::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .thin-scroll0::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    ._xheader.selected {
+        background: #b3ffd9;
+        border-bottom: 2px solid #00cc66 !important;
+    }
+
+    ._header_child {
+        display: none;
+    }
+
+
+    ._event {
+        margin: 3px;
+    }
+
+    ._session {
+        padding: 5px;
+        background: #adebeb;
+        color: black;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    ._expired {
+        padding: 5px;
+        background: #ffc34d;
+        color: black;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    ._session ._title {
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+    ._expired ._title {
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    ._session.selected {
+        background: #99ff33;
+    }
+
+    .personal-input-group {
+        padding: 7px;
+        width: 100%;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+        width: 45%;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .section-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .input-group.full-width {
+        width: 100%;
+    }
+
+    .profile-container {
+        margin: auto;
+        padding: 7px
+    }
+
+    .profile-card {
+        background-color: white;
+        padding: 20px;
+        border: 1px solid lightgray;
+        margin-bottom: 20px;
+    }
+
+    .profile-container label {
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .profile-container input, select, textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+
+        .profile-container input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+    .dx-tab {
+        background: #ccc;
+    }
+
+    .exam_scheduled {
+        background: #ccc;
+    }
+
+    .exam_started {
+        background: #47807f;
+        color: white;
+    }
+
+    .exam_done {
+        background: #007bd9;
+        color: white;
+    }
+
+
+
+    /*******8*/
+    .tiles {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+        font-family: Arial, sans-serif;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+        .tiles .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+    .name {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .exam-question-count {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .ruler-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 20px 0;
+    }
+
+    .ruler-unit {
+        flex-grow: 1;
+        position: relative;
+        height: 20px;
+    }
+
+    .ruler-number {
+        position: absolute;
+        top: -20px;
+        font-size: 12px;
+        right: 2px
+    }
+
+    .ruler-tick {
+        width: 1px;
+        height: 10px;
+        background-color: #333;
+        position: absolute;
+        bottom: 0;
+    }
+
+    .long-tick {
+        height: 15px;
+    }
+
+    .progress-bar-container {
+        position: relative;
+        height: 5px;
+        background-color: #ddd;
+        margin: 10px 0;
+    }
+
+    .progress-bar {
+        height: 100%;
+        background-color: #3498db;
+    }
+
+    .answers-count {
+        position: absolute;
+        bottom: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: bold;
+    }
+
+    .results {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .answers {
+        display: flex;
+        gap: 10px; /* Adjust this gap value to control spacing between true-answers and false-answers */
+    }
+
+    .true-answers, .false-answers {
+        font-size: 16px;
+        font-weight: normal;
+    }
+
+    .result {
+        font-size: 24px;
+        font-weight: bold;
+        color: #3498db;
+    }
+
+    .txt-success {
+        color: #005657;
+    }
+
+    .txt-warning {
+        color: #ce9884;
+    }
+
+    .txt-danger {
+        color: #ae4450;
+    }
+
+    .btn_exam {
+        opacity: 1;
+    }
+
+        .btn_exam:hover {
+            opacity: 1;
+        }
+
+    .participants .dx-datagrid-text-content {
+        font-size: 12px !important;
+    }
+
+    .participants .dx-datagrid .dx-row > td {
+        padding: 5px;
+        font-size: 13px !important;
+    }
+</style>
+
+<div class="box trnexam" style="height:100%;display:none;overflow-y:hidden">
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-12  col1 col-grid" style="padding:0;padding-right:2px;padding-left:2px;">
+            <div dx-data-grid="dg" id="grid"></div>
+        </div>
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <!--<div dx-button="btn_search"></div>
+            <div ng-show="IsEditable" dx-button="btn_new"></div>
+            <div dx-button="btn_edit"></div>
+
+            <div dx-button="btn_people"></div>
+
+            <div dx-button="btn_notify"></div>
+            <div dx-button="btn_syncroster"></div>
+
+
+            <div ng-show="IsEditable" dx-button="btn_delete"></div>
+            -->
+
+            <table>
+                <tr>
+                    <td style="padding-right:3px;"> <div dx-button="btn_search"></div></td>
+                    <td style="padding-right:3px;"> <div ng-show="IsEditable" dx-button="btn_new"></div></td>
+                    <td style="padding-right:3px;"> <div dx-button="btn_edit"></div></td>
+                    <td style="padding-right:3px;"> <div dx-button="btn_people"></div></td>
+
+                    <!-- <td style="padding-right:3px;"> <div dx-button="btn_exam"></div></td>-->
+                    <!-- <td style="padding-right:3px;"> <div dx-button="btn_notify"></div></td>-->
+                    <!--  <td style="padding-right:3px;"> <div dx-button="btn_syncroster"></div></td>-->
+                    <!-- <td ng-show="dg_selected" style="padding-right:3px;"> <div id="uploader_file" dx-file-uploader="uploader_file" class="invisibleuploader"></div> </td>-->
+                    <td style="padding-right:3px;"><div ng-show="IsEditable" dx-button="btn_delete"></div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+
+    <div id="popup_add" dx-popup="popup_add">
+        <div>
+            <div class="col-lg-6 padding-0" style="padding:0 10px 0 10px">
+                <div style="border:1px solid #ccc" class="dx-border">
+                    <div style="background:gray;padding:7px; color:white;">
+                        Course
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Course</label>
+                        <div dx-select-box="sb_courses" dx-validator="{validationGroup:'addexam',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Start Date</label>
+                        <div dx-date-box="date_DateStart" class="center" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>End Date</label>
+                        <div dx-date-box="date_DateEnd" class="center"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Instructor</label>
+                        <div dx-text-box="txt_instructor"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Instructor 2</label>
+                        <div dx-text-box="txt_instructor2"></div>
+                    </div>
+                    <!--<div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Instructor</label>
+                        <div dx-text-box="course_location" class="center"></div>
+                    </div>-->
+                    <div style="clear:both"></div>
+                </div>
+                <div style="border:1px solid #ccc;margin-top:5px;" class="dx-border">
+                    <div style="background:gray;padding:7px; color:white;">
+                        Exam
+                    </div>
+                    <div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Remark</label>
+                        <div dx-text-box="exam_remark" class="center" dx-validator="{validationGroup:'addexam',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Exam Date</label>
+                        <div dx-date-box="exam_date_scheduled" class="center" dx-validator="{validationGroup:'addexam',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>-</label>
+                        <div dx-date-box="exam_time_scheduled" class="center" dx-validator="{validationGroup:'addexam',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Duration(mm)</label>
+                        <div dx-number-box="exam_duration" class="center" dx-validator="{validationGroup:'addexam',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Location</label>
+                        <div dx-text-box="exam_location" class="center"></div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Phone</label>
+                        <div dx-text-box="exam_location_phone" class="center"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Address</label>
+                        <div dx-text-box="exam_location_address" class="center"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+
+
+                <div style="clear:both"></div>
+            </div>
+
+            <div class="col-lg-6 padding-0" style="padding:0 10px 0 10px">
+                <div>
+                    <div style="background:gray;color:white;font-weight:bold;padding:7px;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td>Questions Template</td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div dx-data-grid="dg_exam_template" id="dg_exam_template"></div>
+                    <div style="margin-top:5px;border:1px solid #ccc">
+                        <table style="width:100%">
+                            <tr>
+
+                                <td style="width:70%">
+                                    <div dx-button="btn_generate"></div>
+                                </td>
+                                <td style="width:30%;padding-left:5px;">
+                                    <div dx-button="btn_questions_list"></div>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div id="popup_people" dx-popup="popup_people">
+        <div class="col-lg-3   padding-0" style="padding:0;margin-top:0px;">
+            <div class="profile-container">
+                <div class="profile-card" style="width: 100%; display: inline-block">
+                    <div class="section-title">Course Information</div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="course_title">Title</label>
+                            <input type="text" id="course_title" ng-model="selected_exam.course_title" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="start">From</label>
+                            <input type="text" id="start" ng-model="formatDate(selected_exam.course_start)" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="end">To</label>
+                            <input type="text" id="firstname" ng-model="formatDate(selected_exam.course_end)" readonly>
+                        </div>
+                    </div>
+                    
+                   
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="instructors">Instructor(s)</label>
+                            <input type="text" id="firstname" ng-model="selected_exam.instructor" readonly>
+                        </div>
+                    </div>
+                    <!--<div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="instructors">Training Director</label>
+                            <input type="text" id="firstname" ng-model="follow_course.TrainingDirector" readonly>
+                        </div>
+                    </div>-->
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important" ng-show="follow_course.Date_Sign_Ins1">
+                        <div class="personal-input-group">
+                            <div style="background: #7fe6e6;border:1px solid #ddd;text-align:center;font-weight:bold;padding:7px;">Participants Form: Signed</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important" ng-show="follow_course.Date_Sign_Director">
+                        <div class="personal-input-group">
+                            <div style="background: #7fe6e6;border:1px solid #ddd;text-align:center;font-weight:bold;padding:7px;">Director: Signed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="col-lg-9   padding-0" style="padding:0;margin-top:0px;">
+            <div dx-tabs="tabs_folder_options">
+
+            </div>
+            <!--<div class="tabfolder participants">
+
+                <div dx-data-grid="dg_people" id="dg_people" dx-item-alias="row">
+
+                    <div data-options="dxTemplate:{ name:'updateResultTemplate' }">
+                        <a ng-click="updateResult(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Update Result</a>
+                    </div>
+                    <div data-options="dxTemplate:{ name:'AttendanceTemplate' }">
+                        <a ng-click="updateAttendance(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Attendance</a>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="tabfolder exam" style="border:1px solid #ccc" ng-style="{ 'height': (windowHeight - 150) + 'px' }">
+
+                <div class="col-lg-2   padding-0" style="padding:0;margin-top:0px;">
+                    <div class="profile-container">
+
+                        
+                        <div class="profile-card" style="width: 100%; display: inline-block; padding: 5px; margin-bottom: 5px;">
+                            <div class="section-title" style="font-size:15px">Actual</div>
+
+                            <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                                <div class="personal-input-group">
+                                    <label for="start">Started at</label>
+                                    <input type="text" id="start" ng-model="formatDateTime_temp(follow_exam.date_start)" readonly>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                                <div class="personal-input-group">
+                                    <label for="end">Finished at</label>
+                                    <input type="text" id="firstname" ng-model="formatDateTime(follow_exam.date_end_actual)" readonly>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block; padding: 5px; margin-bottom: 5px;">
+
+
+                            <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                                <table style="width:100%;">
+                                    <tr style="border-bottom:1px solid #eee">
+                                        <td style="text-align:left;padding:5px;">Total Questions</td>
+                                        <td style="text-align:center;padding:8px;">{{follow_exam.total_questions}}</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid #eee">
+                                        <td style="text-align:left;padding:5px;">Participants</td>
+                                        <td style="text-align:center;padding:8px;">{{follow_exam.participants}}</td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid #eee">
+                                        <td style="text-align:left;padding:5px;">Passed</td>
+                                        <td style="text-align:center;padding:8px;">{{follow_exam.passed}}</td>
+                                    </tr>
+                                    <tr style="border-bottom:0px solid #eee">
+                                        <td style="text-align:left;padding:5px;">Failed</td>
+                                        <td style="text-align:center;padding:8px;">{{follow_exam.failed}}</td>
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                            <div class="section-title " style="text-align:center;margin-bottom:0;padding:5px 5px 5px 5px" ng-class="exam_start_btn_class()" ng-click="exam_status_click(1)">{{exam_start_caption}}</div>
+                        </div>
+
+
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;" ng-show="exam_start_caption=='STARTED'">
+                            <div class="section-title " style="text-align:center;margin-bottom:0;padding:3px" ng-class="exam_pause_btn_class()" ng-click="exam_pause_click(3)">{{exam_pause_caption}}</div>
+                        </div>
+
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;" ng-show="exam_resume_caption">
+                            <div class="section-title " style="text-align:center;margin-bottom:0;padding:3px" ng-class="exam_pause_btn_class()" ng-click="exam_resume_click(4)">{{exam_resume_caption}}</div>
+                        </div>
+
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                            <div class="section-title " style="text-align:center;margin-bottom:0;padding:5px 5px 5px 5px" ng-class="exam_finish_btn_class()" ng-click="exam_status_click(2)">{{exam_finish_caption}}</div>
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 5px; background: #ffcc99; font-weight: bold; font-size: 14px; " ng-click="show_questions()">Questions</div>
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 5px; background: #bf5074; font-weight: bold; font-size: 14px; " ng-click="regenerate_all()">Regenerate All</div>
+                        </div>
+                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                            <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 5px; background: #fe8b93;font-weight:bold;font-size:14px;" ng-click="regenerate_selected()">Regenerate Selected</div>
+                        </div>
+
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="col-lg-10   padding-0" style="padding:10px;margin-top:0px;">
+                    <div class="col-lg-4 col-md-4" ng-repeat="data in follow_exam.summary" style="padding: 0 5px 0 5px !important">
+                        <div class="tiles" style="margin-bottom:15px;" ng-style="get_person_result_style(data)" ng-click="show_person_exam(data)">
+                            <div class="header">
+
+                                <table style="width:100%">
+                                    <tr>
+                                        <td><span class="name" style="width:100%;font-size:13px;color:black;text-align:left">{{ data.name }}</span><span style="font-size:11px;display:inline-block;margin-left:3px;">({{data.exam_id}})</span></td>
+                                        <td style="width:30px;text-align:right;padding-right:0px;">
+                                            <span ng-show="is_exam_person_selected(data.person_id)" ng-click="exam_person_click(data.person_id,$event)">
+                                                <i class='fas fa-check-circle' style='font-size:24px;color:gray'></i>
+                                            </span>
+                                            <span ng-show="!is_exam_person_selected(data.person_id)" ng-click="exam_person_click(data.person_id,$event)">
+                                                <i class='far fa-circle' style='font-size: 24px; color: gray'></i>
+                                            </span>
+
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="ruler-bar" style="margin:25px 0 0px 0">
+                                <div class="ruler-unit" ng-repeat="n in [].constructor(data.total_questions) track by $index">
+                                    <div class="ruler-number" ng-if="$index % 5 === 0">{{ $index }}</div>
+                                    <div class="ruler-tick" ng-class="{'long-tick': $index % 5 === 0}"></div>
+                                </div>
+                            </div>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" ng-style="{ 'width': getProgressBarWidth(data.total_answered, data.total_questions) + '%' }"></div>
+                            </div>
+                            <!--<div class="results">
+                                    <div class="answers" style="font-size:20px;font-weight:normal">
+                                        <span class="true-answers" ng-style="{ 'color': '#005657' }">{{ data.score }}</span>
+
+                                    </div>
+                                    <span class="result" style="font-size:16px;font-weight:normal" ng-class="{
+                                'txt-success': data.result === 'PASSED',
+                                'txt-warning': data.result === 'RE-EXAM',
+                                'txt-danger': data.result === 'FAILED'
+                            }">{{ data.result }}</span>
+                                </div>-->
+                            <table style="width:100%">
+                                <tr>
+                                    <td>
+                                        <i class='fas fa-square' style='font-size: 18px; color: #47807f'></i><span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.correct_answer}}</span>
+
+                                    </td>
+
+                                    <td>
+                                        <i class='fas fa-square' style='font-size: 18px; color: #851d30'></i>
+                                        <span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.wrong_answer}}</span>
+
+                                    </td>
+
+                                    <td>
+                                        <i class='far fa-square' style='font-size:18px;color:gray'></i>
+                                        <span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.ignored}}</span>
+                                    </td>
+
+                                    <td>
+                                        <i class='fas fa-star' style='font-size: 18px; color: #d481cc'></i>
+                                        <span style="display: inline-block; margin-left: 3px;position: relative;top: -1px;"> {{data.score}}</span>
+
+                                    </td>
+                                    <td></td>
+                                    <td style="text-align:right">
+
+                                        <span ng-show="data.status_id==2" style="font-weight:bold;">
+                                            {{data.result}}
+                                        </span>
+                                        <span ng-show="data.status_id==1" style="font-size:11px;">
+                                            Proceeding
+                                        </span>
+                                        <span ng-show="data.status_id==0" style="font-size:11px;">
+                                            Waiting
+                                        </span>
+
+                                    </td>
+
+
+
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div style="clear:both"></div>
+
+
+            </div>
+
+
+            
+
+
+
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+</div>

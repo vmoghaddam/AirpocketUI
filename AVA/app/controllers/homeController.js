@@ -68,11 +68,11 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
 
 
         /////////////////////////////////
-        Chart.defaults.global.pointHitDetectionRadius = 1;
-        Chart.defaults.global.tooltips.enabled = false;
-        Chart.defaults.global.tooltips.mode = 'index';
-        Chart.defaults.global.tooltips.position = 'nearest';
-        Chart.defaults.global.pointHitDetectionRadius = 1;
+        //Chart.defaults.global.pointHitDetectionRadius = 1;
+        //Chart.defaults.global.tooltips.enabled = false;
+        //Chart.defaults.global.tooltips.mode = 'index';
+        //Chart.defaults.global.tooltips.position = 'nearest';
+        //Chart.defaults.global.pointHitDetectionRadius = 1;
         var customTooltips = function (tooltip) {
 
             // Tooltip Element
@@ -145,7 +145,7 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
             tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
             tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
         };
-        Chart.defaults.global.tooltips.custom = CustomTooltips;
+       // Chart.defaults.global.tooltips.custom = CustomTooltips;
 
         ////////////////////////////
         var random = function random() {
