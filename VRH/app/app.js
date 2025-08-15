@@ -13,11 +13,17 @@ app.config(function ($routeProvider) {
     });
 
     
-     
+
+    $routeProvider.when("/fixtimeaddController", {
+        controller: "fix-time-addController",
+        templateUrl: "/app/views/fix-time-add.html"
+    });
+
     $routeProvider.when("/apps", {
         controller: "appsController",
         templateUrl: "/app/views/apps.html?v=" + "33442"
     });
+
     $routeProvider.when("/home", {
         controller: "homeController",
         templateUrl: "/app/views/home.html?v="+'54'
@@ -756,7 +762,7 @@ var signFiles = 'https://fbpocket.ir/upload/signs/';
 
 var comAPI='https://api.apvaresh.com/'; 
 var msgUrl="https://msg.apvaresh.com/"; 
-var apiLog='https://apilog.apvaresh.com/';
+var apiLog='https://yapilog.apvaresh.com/';
 var zlog='https://zlog.apvaresh.com/'; 
 var schUrl='https://sch.apvaresh.com/'; 
 var apigd='https://apigd.apvaresh.com/'; 
@@ -777,7 +783,7 @@ var apiplanning='https://apiplanning.apvaresh.com/';
 var apilogdefault='https://var.apilogdefault.airpocket.online/'; 
 var apiapsb='https://apiapsb.apvaresh.com/';
 var apiprofile='https://apiprofile.apvaresh.com/';
-var apiauth='https://auth.apvaresh.com/';
+var apiauth='https://xauth.apvaresh.com/';
 var atcfiles='https://files.airpocket.online/varesh/atc/';
 var apiCAO='https://apicao.apvaresh.com/';
 var apiQA = 'https://apiqatemp.apvaresh.com/';

@@ -1,0 +1,76 @@
+﻿<style>
+    #dg_fix_time {
+        margin-bottom: 80px;
+        padding: 0;
+        background-color: gray;
+       color: white;
+        padding: 0;
+       
+    }
+
+    .footer.fixed-bottom {
+        z-index: 1000;
+    }
+   /* #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }*/
+
+        /*#dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }*/
+
+   /* #dg_fix_time .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }*/
+
+    /*#dg_fix_time .dx-datagrid-header-panel .dx-toolbar {
+        margin: 0;
+        padding-right: 20px;
+        background-color: transparent;
+        padding-left: 10px;
+    }*/
+/*
+    #dg_fix_time .dx-datagrid-header-panel .dx-toolbar-items-container {
+        height: 35px;
+    }*/
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="box" style="height:100%;overflow-y:hidden">
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+
+    <div dx-data-grid="dg_fix_time" id="dg_fix_time" dx-instance="dgInstance"></div>
+
+
+    <footer class="footer fixed-bottom bg-light border-top py-2">
+        <div style="float: left" class="container justify-content-start gap-2 ">
+            <div style="margin: 0px 5px 0px 0px; " dx-button="btn_add"></div>
+            <div style="margin: 0px 5px 0px 0px" dx-button="btn_edit"></div>
+            <div style="margin: 0px 5px 0px 0px" dx-button="btn_delete"></div>
+        </div>
+    </footer>
+
+    <div dx-popup="popup_edit"></div>
+    <div dx-popup="popup_add"></div>
+
+</div>
+
+
+
+

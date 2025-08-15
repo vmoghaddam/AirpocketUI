@@ -32,7 +32,45 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
         return deferred.promise;
     };
-    //odata/flights/routes/destination/airline/{id}/{from}
+
+    
+    var _get_fixtime = function () {
+        var deferred = $q.defer();
+        $http.get('http://localhost:12271/' + 'api/fixtime')
+            .then(function (response) {
+                deferred.resolve(response.data);
+            })
+            .catch(function (err) {
+               
+                var safeError = err;
+                if (err && err.data && typeof err.data !== 'string') {
+                    safeError = {
+                        data: JSON.stringify(err.data),
+                        status: err.status,
+                        statusText: err.statusText
+                    };
+                }
+                deferred.reject(Exceptions.getMessage(safeError));
+            });
+
+        return deferred.promise;
+    };
+
+    serviceFactory.get_fixtime = _get_fixtime;
+
+
+    var _save_fixtime = function (newflight) {
+
+        var deferred = $q.defer();
+        $http.post('http://localhost:12271/' + 'api/fixtime/saves', newflight).then(function (response) {
+            deferred.resolve(response.data);
+        });
+        return deferred.promise;
+    };
+    serviceFactory.save_fixtime = _save_fixtime;
+
+
+
     var _getRouteDestination = function (airlineid,from) {
 
 
@@ -52,7 +90,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/airport/iata/' + iata  ).then(function (response) {
+        $http.get( + 'odata/airport/iata/' + iata  ).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
