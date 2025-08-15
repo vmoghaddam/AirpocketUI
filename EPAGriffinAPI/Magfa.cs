@@ -140,7 +140,7 @@ namespace EPAGriffinAPI
         public List<string> getStatus(List<Int64> refIds)
         {
             List<string> result = new List<string>();
-            if (1 == 2)
+            if (1 == 1)
             {
                 com.magfa.sms.SoapSmsQueuableImplementationService sq = new com.magfa.sms.SoapSmsQueuableImplementationService();
                 sq.Credentials = new System.Net.NetworkCredential(username, password);
@@ -230,7 +230,7 @@ namespace EPAGriffinAPI
                 }
 
             }
-            else if (1 == 1)
+            else if (1 == 2)
             {
                 RestClient client = new RestClient("9354957316", "Rhbsms99@");
                 foreach (var _ref_id in refIds)
@@ -284,7 +284,7 @@ namespace EPAGriffinAPI
         }
         public string getStatus(Int64 refid)
         {
-            if (1 == 2)
+            if (1 == 1)
             {
                 com.magfa.sms.SoapSmsQueuableImplementationService sq = new com.magfa.sms.SoapSmsQueuableImplementationService();
                 sq.Credentials = new System.Net.NetworkCredential(username, password);

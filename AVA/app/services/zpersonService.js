@@ -196,6 +196,18 @@ app.factory('zpersonService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fu
         );
     };	
     serviceFactory.getProfiles = _getProfiles;
+    var _getProfilesNew = function (cid, active, grp) {
+
+        return $http.get(apiprofile + 'api/profiles/main/new/' + cid + '/' + active + '/' + grp).then(function (results) {
+
+            // console.log(results);
+
+            return results;
+        }
+            //    , function (error) { console.log('errors'); console.log(error); }
+        );
+    };
+    serviceFactory.getProfilesNew = _getProfilesNew;
     serviceFactory.getGroups = _getGroups;
     serviceFactory.saveHistory = _saveHistory;
     serviceFactory.getCrewLight = _getCrewLight;

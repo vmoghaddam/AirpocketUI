@@ -367,12 +367,13 @@
             opacity: 1;
         }
 
-    .participants .dx-datagrid-text-content{
-        font-size:12px !important;
+    .participants .dx-datagrid-text-content {
+        font-size: 12px !important;
     }
-    .participants .dx-datagrid .dx-row > td{
-        padding:5px;
-        font-size:13px !important;
+
+    .participants .dx-datagrid .dx-row > td {
+        padding: 5px;
+        font-size: 13px !important;
     }
 </style>
 
@@ -1331,6 +1332,33 @@
             <div dx-data-grid="dg_questions" id="dg_questions"></div>
         </div>
     </div>
+
+
+    <div id="popup_copy" dx-popup="popup_copy">
+
+        <div class="padding-7 dx-border" style="padding:0;margin-top:3px">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Source Course</label>
+                <div dx-select-box="sb_courses" dx-validator="{validationGroup:'copypeople',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+
+
+
+
+
+            <div style="clear:both"></div>
+
+
+
+
+
+
+        </div>
+        <div dx-data-grid="dg_copy_people" id="dg_copy_people"></div>
+
+    </div>
+
 
     <div ng-include="'app/views/courseAdd.html?v=1256887'" ng-init="type = 'active';"></div>
     <div ng-include="'app/views/employeeSelectCourse.html?v=100'"></div>

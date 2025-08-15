@@ -209,6 +209,7 @@
     <Content Include="app\controllers\personAddController.js" />
     <Content Include="app\controllers\personController.js" />
     <Content Include="app\controllers\stby_controller.js" />
+    <Content Include="app\controllers\trn_exam.js" />
     <Content Include="app\controllers\zfdm_crew.js" />
     <Content Include="app\controllers\zfdm_main.js" />
     <Content Include="app\controllers\_personAddController.js" />
@@ -509,6 +510,7 @@
     <Content Include="app\views\person.html" />
     <Content Include="app\views\personAdd.html" />
     <Content Include="app\views\stby.html" />
+    <Content Include="app\views\trn_exam.html" />
     <Content Include="app\views\zfdm_crew.html" />
     <Content Include="app\views\zfdm_main.html" />
     <Content Include="app\views\_person.html" />

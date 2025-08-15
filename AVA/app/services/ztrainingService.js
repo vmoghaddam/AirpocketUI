@@ -1148,7 +1148,80 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.get_templates = _get_templates;
-	
+
+
+
+    //war
+    var _getCourseTypeSubjects = function (cid) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/course/types/subjects/' + cid).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getCourseTypeSubjects = _getCourseTypeSubjects;
+
+    var _copy_people = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/course/people/copy', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.copy_people = _copy_people;
+
+
+    var _getCoursePeopleNames = function (cid) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/course/people/names/' + cid).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getCoursePeopleNames = _getCoursePeopleNames;
+
+    var _update_score = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/course/save/score', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.update_score = _update_score;
+
+
+
+    var _get_exams = function (cid) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/exams'  ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_exams = _get_exams;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;

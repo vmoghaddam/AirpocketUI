@@ -1,10 +1,10 @@
 ﻿'use strict';
 app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$rootScope', 'zpersonService', 'authService', 'notificationService', 'flightService', '$route', 'ztrnService', '$window', '$timeout', function ($scope, $location, $routeParams, $rootScope, personService, authService, notificationService, flightService, $route, trnService, $window, $timeout) {
     $scope.prms = $routeParams.prms;
-	 $scope.isManager=$rootScope.HasDepartmentManager();
-	 $scope.is_export_enabled=!$scope.isManager;
+    $scope.isManager = $rootScope.HasDepartmentManager();
+    $scope.is_export_enabled = !$scope.isManager;
     $scope.IsEditable = $rootScope.IsProfileEditable(); //$rootScope.roles.indexOf('Admin') != -1;
-	$scope.IsNewVisible= $scope.IsEditable || $rootScope.HasHR();//$rootScope.roles.indexOf('Profiles-Ground-Edit')!=-1 || $rootScope.roles.indexOf('Profiles-Crew-Edit')!=-1;
+    $scope.IsNewVisible = $scope.IsEditable || $rootScope.HasHR();//$rootScope.roles.indexOf('Profiles-Ground-Edit')!=-1 || $rootScope.roles.indexOf('Profiles-Crew-Edit')!=-1;
     $scope.IsCoursesVisible = $rootScope.roles.indexOf('Admin') != -1 || $rootScope.userName.toLowerCase() == 'abbaspour' || $rootScope.userName.toLowerCase() == 'dehghan';
     $scope.IsAccountEdit = $rootScope.roles.indexOf('Crew Scheduler') != -1;
     $scope.editButtonIcon = 'edit';
@@ -14,25 +14,25 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         $scope.editButtonText = 'View';
         $scope.editButtonIcon = 'card';
     }
-	$scope.changeBtnContentAt = 1024;
-	//$scope.windowWidth = screen.width;
-	//$(window).resize(function() {
-  	//	$scope.windowWidth = screen.width;
-	//})
+    $scope.changeBtnContentAt = 1024;
+    //$scope.windowWidth = screen.width;
+    //$(window).resize(function() {
+    //	$scope.windowWidth = screen.width;
+    //})
     //////////////////////////////////
     $scope.dsUrl = null;
     $scope.filterVisible = false;
     $scope.btn_delete = {
-        text: screen.width> $scope.changeBtnContentAt ? 'Delete' : '',
+        text: screen.width > $scope.changeBtnContentAt ? 'Delete' : '',
         type: 'danger',
-        icon: screen.width> $scope.changeBtnContentAt ? '':'clear',
-        width: screen.width> $scope.changeBtnContentAt ? 100 : 36,
-		
+        icon: screen.width > $scope.changeBtnContentAt ? '' : 'clear',
+        width: screen.width > $scope.changeBtnContentAt ? 100 : 36,
+
         bindingOptions: {
             visible: 'IsEditable'
         },
         onClick: function (e) {
-           
+
             $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
             if (!$scope.dg_selected) {
                 General.ShowNotify(Config.Text_NoRowSelected, 'error');
@@ -52,19 +52,19 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
 
 
 
-                    }, function (err) {  $scope.loadingVisible = false; General.ShowNotify2(err.message, 'error',5000); });
+                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify2(err.message, 'error', 5000); });
 
                 }
             });
         }
     };
     $scope.btn_view = {
-        text: screen.width> $scope.changeBtnContentAt ? 'View' : '',
+        text: screen.width > $scope.changeBtnContentAt ? 'View' : '',
         type: 'default',
-        icon: screen.width> $scope.changeBtnContentAt ? '':'card',
-        width: screen.width> $scope.changeBtnContentAt ? 100 : 36,
-		
-        visible:false,
+        icon: screen.width > $scope.changeBtnContentAt ? '' : 'card',
+        width: screen.width > $scope.changeBtnContentAt ? 100 : 36,
+
+        visible: false,
         bindingOptions: {},
         onClick: function (e) {
             $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
@@ -78,11 +78,11 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
 
     };
     $scope.btn_new = {
-        text: screen.width> $scope.changeBtnContentAt ? 'New' : '',
+        text: screen.width > $scope.changeBtnContentAt ? 'New' : '',
         type: 'default',
-        icon: screen.width> $scope.changeBtnContentAt ? '':'plus',
-        width: screen.width> $scope.changeBtnContentAt ? 100 : 36,
-		
+        icon: screen.width > $scope.changeBtnContentAt ? '' : 'plus',
+        width: screen.width > $scope.changeBtnContentAt ? 100 : 36,
+
         onClick: function (e) {
 
             var data = { Id: null };
@@ -90,20 +90,20 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             $rootScope.$broadcast('InitZAddPerson', data);
         },
         bindingOptions: {
-            visible:'IsNewVisible'
+            visible: 'IsNewVisible'
         }
 
     };
-   
+
     $scope.btn_edit = {
-		text: screen.width> $scope.changeBtnContentAt ? 'View/Edit' : '',
+        text: screen.width > $scope.changeBtnContentAt ? 'View/Edit' : '',
         type: 'default',
-        icon: screen.width> $scope.changeBtnContentAt ? '':'edit',
-        width: screen.width> $scope.changeBtnContentAt ? 115 : 36,
-        
-        bindingOptions:{
+        icon: screen.width > $scope.changeBtnContentAt ? '' : 'edit',
+        width: screen.width > $scope.changeBtnContentAt ? 115 : 36,
+
+        bindingOptions: {
             //icon: screen.width> $scope.changeBtnContentAt ? '':'edit',
-           // text:'editButtonText',
+            // text:'editButtonText',
         },
         onClick: function (e) {
             $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
@@ -133,10 +133,10 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
 
     //};
     $scope.btn_search = {
-        text: screen.width> $scope.changeBtnContentAt ? 'Search' : '',
+        text: screen.width > $scope.changeBtnContentAt ? 'Search' : '',
         type: 'success',
-        icon: screen.width> $scope.changeBtnContentAt ? '':'search',
-        width: screen.width> $scope.changeBtnContentAt ? 95 : 36,
+        icon: screen.width > $scope.changeBtnContentAt ? '' : 'search',
+        width: screen.width > $scope.changeBtnContentAt ? 95 : 36,
 
         bindingOptions: {},
         onClick: function (e) {
@@ -212,14 +212,14 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             allowSorting: false,
             cellTemplate: function (container, options) {
                 $("<div>")
-                    .append($("<img>", { "src": $rootScope.clientsFilesUrl + (options.value ? options.value : 'imguser.png'), "css": { height: '50px',width:'50px', borderRadius: '100%' } }))
+                    .append($("<img>", { "src": $rootScope.clientsFilesUrl + (options.value ? options.value : 'imguser.png'), "css": { height: '50px', width: '50px', borderRadius: '100%' } }))
                     .appendTo(container);
             }
         },
         {
             caption: 'Base',
             columns: [
-               // { dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false,width:150 },
+                // { dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false,width:150 },
                 //{
                 //    dataField: "ImageUrl",
                 //    width: 100,
@@ -233,7 +233,7 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
                 //    }
                 //},
                 { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
-                 { dataField: 'ScheduleName', caption: 'Schedule', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
+                { dataField: 'ScheduleName', caption: 'Schedule', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
                 { dataField: 'NID', caption: 'National Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
                 { dataField: 'Mobile', caption: 'Mobile', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
                 { dataField: 'Email', caption: 'Email', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 200 },
@@ -254,32 +254,32 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         {
             caption: 'Passport',
             columns: [
-               // { dataField: 'PassportNumber', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
-               // { dataField: 'DatePassportIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
-               // { dataField: 'DatePassportExpire', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
-                 { dataField: 'RemainPassport', caption: 'Remain', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+                // { dataField: 'PassportNumber', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
+                // { dataField: 'DatePassportIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+                // { dataField: 'DatePassportExpire', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+                { dataField: 'RemainPassport', caption: 'Remain', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
                 //{ dataField: 'IsPassportExpired', caption: 'Expired', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 80 },
             ]
         },
         {
             caption: 'Medical Checkup',
             columns: [
-               
-               // { dataField: 'DateLastCheckUP', caption: 'Last', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
-               // { dataField: 'DateNextCheckUP', caption: 'Next', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
+
+                // { dataField: 'DateLastCheckUP', caption: 'Last', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
+                // { dataField: 'DateNextCheckUP', caption: 'Next', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 150 },
                 { dataField: 'RemainMedical', caption: 'Remain', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-               // { dataField: 'IsMedicalExpired', caption: 'Expired', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 80 },
+                // { dataField: 'IsMedicalExpired', caption: 'Expired', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 80 },
             ]
         },
         {
             caption: 'CAO',
             columns: [
-               // { dataField: 'CaoCardNumber', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
-                 
-              //  { dataField: 'DateCaoCardIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
-               // { dataField: 'DateCaoCardExpire', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+                // { dataField: 'CaoCardNumber', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
+
+                //  { dataField: 'DateCaoCardIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+                // { dataField: 'DateCaoCardExpire', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
                 { dataField: 'RemainCAO', caption: 'Remain', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-               // { dataField: 'IsCAOExpired', caption: 'Expired', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 80 },
+                // { dataField: 'IsCAOExpired', caption: 'Expired', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 80 },
 
             ]
         }
@@ -287,12 +287,12 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         {
             caption: 'NDT',
             columns: [
-               // { dataField: 'NDTNumber', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
+                // { dataField: 'NDTNumber', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
 
-               // { dataField: 'DateIssueNDT', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+                // { dataField: 'DateIssueNDT', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
                 //{ dataField: 'DateExpireNDT', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
                 { dataField: 'RemainNDT', caption: 'Remain', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-               // { dataField: 'IsNDTExpired', caption: 'Expired', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 80 },
+                // { dataField: 'IsNDTExpired', caption: 'Expired', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 80 },
 
             ]
         }
@@ -305,171 +305,174 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
     ];
 
     $scope.rankDs = ['TRI', 'TRE', 'LTC', 'P1', 'P2', 'ISCCM', 'SCCM', 'CCM'];
-    $scope.groupDs = ['Cockpit', 'Cabin' ];
+    $scope.groupDs = ['Cockpit', 'Cabin'];
     $scope.dg_columns2 = [
-	  {
-		  name:'_row',
+        {
+            name: '_row',
             cellTemplate: function (container, options) {
                 $("<div style='text-align:center'/>")
                     .html(options.rowIndex + 1)
                     .appendTo(container);
-            }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader',fixed: screen.width> 1024 ? true : false, fixedPosition: 'left'
+            }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader', fixed: screen.width > 1024 ? true : false, fixedPosition: 'left'
         },
-       
-       //{
-       //    dataField: "ImageUrl",
-       //    width: 60,
-       //    alignment: 'center',
-       //    caption: '',
-       //    allowFiltering: false,
-       //    allowSorting: false,
-       //    cellTemplate: function (container, options) {
-       //        $("<div>")
-       //            .append($("<img>", { "src": $rootScope.clientsFilesUrl + (options.value ? options.value : 'imguser.png'), "css": { height: '40px', width: '40px', borderRadius: '100%' } }))
-       //            .appendTo(container);
-       //    }
-       //},
-        { dataField: 'InActive', caption: 'InActive', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: true, width: 80, fixed: screen.width> 1024 ? true : false, fixedPosition: 'left' },
-		 { dataField: 'IsDeleted', caption: 'O/A',name:'oae', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: true, width: 60, fixed: screen.width> 1024 ? true : false, fixedPosition: 'left',visible:true },
+
+        //{
+        //    dataField: "ImageUrl",
+        //    width: 60,
+        //    alignment: 'center',
+        //    caption: '',
+        //    allowFiltering: false,
+        //    allowSorting: false,
+        //    cellTemplate: function (container, options) {
+        //        $("<div>")
+        //            .append($("<img>", { "src": $rootScope.clientsFilesUrl + (options.value ? options.value : 'imguser.png'), "css": { height: '40px', width: '40px', borderRadius: '100%' } }))
+        //            .appendTo(container);
+        //    }
+        //},
+        { dataField: 'InActive', caption: 'InActive', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: true, width: 80, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left' },
+        { dataField: 'IsDeleted', caption: 'O/A', name: 'oae', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: true, width: 60, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left', visible: true },
         {
             dataField: 'JobGroupRoot', caption: 'Group', allowResizing: true
-                     
+
             , alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left',
-			visible: screen.width> 1024 ? true : false
+            visible: screen.width > 1024 ? true : false
         },
-		 /*{
-            dataField: 'PostRoot', caption: 'Post', allowResizing: true
-                     
-            , alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left',
-			visible: screen.width> 1024 ? true : false
-        },*/
+        /*{
+           dataField: 'PostRoot', caption: 'Post', allowResizing: true
+                    
+           , alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left',
+           visible: screen.width> 1024 ? true : false
+       },*/
         {
             dataField: 'JobGroup', caption: 'Pos.', allowResizing: true
-                     
-            , alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: screen.width> 1024 ? true : false, fixedPosition: 'left'
+
+            , alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left'
         },
-		{
-            dataField: 'HomeBase', caption: 'H/B',name:'HB', allowResizing: true
-                     
-            , alignment: 'center', dataType: 'string', allowEditing: false, width: 90, fixed: screen.width> 1024 ? true : false, fixedPosition: 'left'
+        {
+            dataField: 'HomeBase', caption: 'H/B', name: 'HB', allowResizing: true
+
+            , alignment: 'center', dataType: 'string', allowEditing: false, width: 90, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left'
         },
-	  
-       { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width:300, fixed: screen.width> 1024 ? true : false, fixedPosition: 'left' },
-              //  { dataField: 'ScheduleName', caption: 'Schedule', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
 
-               { dataField: 'Mobile', caption: 'Mobile',allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
-			   { dataField: 'NID', caption: 'NID',allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
-        { dataField: 'RemainMedical', caption: 'Medical',name:'medical',  allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-         { dataField: 'RemainPassport', caption: 'Passport',name:'passport', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left' },
+        //  { dataField: 'ScheduleName', caption: 'Schedule', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
 
-          { dataField: 'RemainLicence', caption: 'Licence', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-		  { dataField: 'RemainPROFICIENCY_ASSESSMENT', caption: 'PROF',name:'PROF', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120,visible:false },
-		  { dataField: 'RemainRouteCheck', caption: 'ROUTE',name:'ROUTE', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120,visible:false },
-           { dataField: 'RemainProficiency', caption: 'LPC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-            { dataField: 'RemainProficiencyOPC', caption: 'OPC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-             { dataField: 'RemainLPR', caption: 'LPR', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'Mobile', caption: 'Mobile', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
+        { dataField: 'NID', caption: 'NID', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
+        { dataField: 'RemainMedical', caption: 'Medical', name: 'medical', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainPassport', caption: 'Passport', name: 'passport', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
 
-             { dataField: 'RemainAvSec', caption: 'TRG07B', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-		 { dataField: 'RemainTRG02', caption: 'TRG02', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },	
-		  { dataField: 'RemainTRG01', caption: 'TRG01', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90,visible:false },	
-		  { dataField: 'RemainTRG07A', caption: 'TRG07A', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90,visible:false },	
-		  { dataField: 'RemainTRG16', caption: 'TRG16', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90,visible:false },	
-              
-			  { dataField: 'RemainSMS', caption: 'SMS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-			  
-			  { dataField: 'RemainSMSL1L2L3', caption: 'SMS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90,visible:false },
-			 
+        { dataField: 'RemainLicence', caption: 'Licence', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainPROFICIENCY_ASSESSMENT', caption: 'PROF', name: 'PROF', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, visible: false },
+        { dataField: 'RemainRouteCheck', caption: 'ROUTE', name: 'ROUTE', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, visible: false },
+        { dataField: 'RemainProficiency', caption: 'LPC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainProficiencyOPC', caption: 'OPC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainLPR', caption: 'LPR', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
 
-			 { dataField: 'RemainSMSL2L3', caption: 'SMS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90,visible:false },
-			{ dataField: 'Remain18', caption: 'SMSL2',name:'SMSL2', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain19', caption: 'SMS',name:'SMSL3', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'RemainLOAD_CONTROL', caption: 'LOAD',name:'LOAD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
+        { dataField: 'RemainAvSec', caption: 'TRG07B', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainTRG02', caption: 'TRG02', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainTRG01', caption: 'TRG01', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },
+        { dataField: 'RemainTRG07A', caption: 'TRG07A', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },
+        { dataField: 'RemainTRG16', caption: 'TRG16', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },
+
+        { dataField: 'RemainSMS', caption: 'SMS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+
+        { dataField: 'RemainSMSL1L2L3', caption: 'SMS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },
+
+
+        { dataField: 'RemainSMSL2L3', caption: 'SMS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },
+        { dataField: 'Remain18', caption: 'SMSL2', name: 'SMSL2', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain19', caption: 'SMS', name: 'SMSL3', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainLOAD_CONTROL', caption: 'LOAD', name: 'LOAD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
 
         //7-12
         { dataField: 'RemainSEPTP', caption: 'SEPT-P', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-        { dataField: 'RemainSEPT', caption: 'ESET',name:'ESET', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainSEPT', caption: 'ESET', name: 'ESET', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
 
 
         { dataField: 'RemainDG', caption: 'DG', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-                { dataField: 'RemainCRM', caption: 'CRM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-                { dataField: 'RemainCCRM', caption: 'CCRM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainCRM', caption: 'CRM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainCCRM', caption: 'CCRM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
         //moradi
-        { dataField: 'RemainFirstAid', caption: 'FirstAid', name: 'FirstAid', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible:false },
+        { dataField: 'RemainFirstAid', caption: 'FirstAid', name: 'FirstAid', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },
         { dataField: 'RemainLine', caption: 'Line', name: 'Line', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
-		{ dataField: 'RemainRecurrent', caption: 'Recurrent',name:'Recurrent', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
+        { dataField: 'RemainRecurrent', caption: 'Recurrent', name: 'Recurrent', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
         { dataField: 'RemainCAO', caption: 'GRT', name: 'GRT', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
-         { dataField: 'RemainEGPWS', caption: 'FMT', name: 'FMT', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 ,visible:true},
-		 
- { dataField: 'RemainHotWeather', caption: 'HOTWX',name:'HOTWX', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-  { dataField: 'RemainColdWeather', caption: 'COLDWX',name:'COLDWX', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-  { dataField: 'RemainCMC', caption: 'CMC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-        //nasiri
-       
-		
+        { dataField: 'RemainEGPWS', caption: 'FMT', name: 'FMT', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: true },
 
-        { dataField: 'RemainType737', caption: 'Type',name:'Type', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainTypeMD', caption: 'Check',name:'FlightCheck', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
+        { dataField: 'RemainHotWeather', caption: 'HOTWX', name: 'HOTWX', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainColdWeather', caption: 'COLDWX', name: 'COLDWX', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        { dataField: 'RemainCMC', caption: 'CMC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        //nasiri
+
+
+
+        { dataField: 'RemainType737', caption: 'Type', name: 'Type', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainTypeMD', caption: 'Check', name: 'FlightCheck', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
         //moradi2
-      
-		// { dataField: 'RemainTypeAirbus', caption: 'FRMS', name: 'FRMS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
-		
-			{ dataField: 'RemainHF', caption: 'HF',name:'HF', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainASD', caption: 'ASD',name:'ASD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		//{ dataField: 'Remain1', caption: 'ASD IKA',name:'ASDIKA', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainGOM', caption: 'GOM',name:'GOM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-        { dataField: 'RemainASF', caption: 'ASF',name:'ASF', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainCC', caption: 'CC',name:'CC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainERP', caption: 'ERP',name:'ERP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		
-		{ dataField: 'RemainMB', caption: 'M&B',name:'MB', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainMP', caption: 'M&P',name:'MP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		
-		{ dataField: 'RemainMB', caption: 'LOADSHEET',name:'LOADSHEET', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120,visible:false },
-		{ dataField: 'RemainPS', caption: 'PS',name:'PS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainANNEX', caption: 'ANNEX',name:'ANNEX', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainDRM', caption: 'DRM',name:'DRM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainFMTD', caption: 'FMT.',name:'FMTD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainMEL', caption: 'MEL',name:'MEL', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainMET', caption: 'MET',name:'MET', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		//{ dataField: 'RemainPER', caption: 'PERF.',name:'PER', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainLRC', caption: 'COMM',name:'RC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainCALR', caption: 'CALR',name:'CALR', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainRSP', caption: 'F/P',name:'RSP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'Remain4', caption: 'F/M',name:'FM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'Remain5', caption: 'A/T/M',name:'ATM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'Remain6', caption: 'NAV.',name:'NAV', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'Remain7', caption: 'A/I',name:'AI', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		{ dataField: 'RemainSpecialApproval', caption: 'S/A',name:'SA', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain3', caption: 'DEICING',name:'DEICING', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-		
-		{ dataField: 'Remain14', caption: 'EWIS',name:'EWIS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-     		{ dataField: 'Remain15', caption: 'FTS',name:'FTS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain16', caption: 'PART145',name:'PART145', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain12', caption: 'PARTM',name:'PARTM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain17', caption: 'MOE',name:'MOE', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain8', caption: 'ATL',name:'ATL', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain9', caption: 'RAMP',name:'RAMP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-	    	{ dataField: 'Remain10', caption: 'ENGINE',name:'ENGINE', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain11', caption: 'B737',name:'B737', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain13', caption: 'LEGISLATION',name:'LEGISLATION', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			
-		
-			
-			{ dataField: 'Remain20', caption: 'AIROPS',name:'AIROPS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain21', caption: 'OM',name:'OM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain24', caption: 'CAME',name:'CAME', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			
-			{ dataField: 'Remain22', caption: 'ANALYSIS',name:'ANALYSIS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain23', caption: 'AUDIT',name:'AUDIT', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			
-{ dataField: 'Remain25', caption: 'MPA',name:'MPA', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			{ dataField: 'Remain26', caption: 'ADSB',name:'ADSB', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-			
-			{ dataField: 'Remain27', caption: 'FCL',name:'FCL', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-							
-			{ dataField: 'RemainType737', caption: 'TYPE.',name:'TYPEM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
-				
+
+        // { dataField: 'RemainTypeAirbus', caption: 'FRMS', name: 'FRMS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
+
+        { dataField: 'RemainHF', caption: 'HF', name: 'HF', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainASD', caption: 'ASD', name: 'ASD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        //{ dataField: 'Remain1', caption: 'ASD IKA',name:'ASDIKA', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
+        { dataField: 'RemainGOM', caption: 'GOM', name: 'GOM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainASF', caption: 'ASF', name: 'ASF', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainCC', caption: 'CC', name: 'CC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainERP', caption: 'ERP', name: 'ERP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+
+        { dataField: 'RemainMB', caption: 'M&B', name: 'MB', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainMP', caption: 'M&P', name: 'MP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+
+        { dataField: 'RemainMB', caption: 'LOADSHEET', name: 'LOADSHEET', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, visible: false },
+        { dataField: 'RemainPS', caption: 'PS', name: 'PS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainANNEX', caption: 'ANNEX', name: 'ANNEX', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainDRM', caption: 'DRM', name: 'DRM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainFMTD', caption: 'FMT.', name: 'FMTD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainMEL', caption: 'MEL', name: 'MEL', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainMET', caption: 'MET', name: 'MET', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        //{ dataField: 'RemainPER', caption: 'PERF.',name:'PER', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
+        { dataField: 'RemainLRC', caption: 'COMM', name: 'RC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainCALR', caption: 'CALR', name: 'CALR', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainRSP', caption: 'F/P', name: 'RSP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain4', caption: 'F/M', name: 'FM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain5', caption: 'A/T/M', name: 'ATM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain6', caption: 'NAV.', name: 'NAV', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain7', caption: 'A/I', name: 'AI', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'RemainSpecialApproval', caption: 'S/A', name: 'SA', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain3', caption: 'DEICING', name: 'DEICING', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+
+        { dataField: 'Remain14', caption: 'EWIS', name: 'EWIS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain15', caption: 'FTS', name: 'FTS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain16', caption: 'PART145', name: 'PART145', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain12', caption: 'PARTM', name: 'PARTM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain17', caption: 'MOE', name: 'MOE', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain8', caption: 'ATL', name: 'ATL', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain9', caption: 'RAMP', name: 'RAMP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain10', caption: 'ENGINE', name: 'ENGINE', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain11', caption: 'B737', name: 'B737', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain13', caption: 'LEGISLATION', name: 'LEGISLATION', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+
+
+
+        { dataField: 'Remain20', caption: 'AIROPS', name: 'AIROPS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain21', caption: 'OM', name: 'OM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain24', caption: 'CAME', name: 'CAME', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+
+        { dataField: 'Remain22', caption: 'ANALYSIS', name: 'ANALYSIS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain23', caption: 'AUDIT', name: 'AUDIT', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+
+        { dataField: 'Remain25', caption: 'MPA', name: 'MPA', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        { dataField: 'Remain26', caption: 'ADSB', name: 'ADSB', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+
+        { dataField: 'Remain27', caption: 'FCL', name: 'FCL', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+
+        { dataField: 'RemainType737', caption: 'TYPE.', name: 'TYPEM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+
     ];
+
+    //war
+    $scope.dg_columns3 = [];
 
     //nasiri
     $scope._cer = $rootScope.getCertificateTypeList();
@@ -485,8 +488,8 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
 
         $rootScope.$broadcast('InitImageViewer', data);
     };
-    $scope.is_crew=false;
-	$scope.is_cockpit=false;
+    $scope.is_crew = false;
+    $scope.is_cockpit = false;
     $scope.dg_selected = null;
     $scope.dg_instance = null;
     $scope.dg_ds = null;
@@ -525,19 +528,18 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         },
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
-			
-			$scope.is_crew=false;
-	        $scope.is_cockpit=false;
+
+            $scope.is_crew = false;
+            $scope.is_cockpit = false;
 
             if (!data) {
                 $scope.dg_selected = null;
             }
-            else
-			{   
-		        $scope.dg_selected = data;
-				$scope.is_crew=data.JobGroupCode.startsWith('00102') || data.JobGroupCode.startsWith('00101');
-	            $scope.is_cockpit=data.JobGroupCode.startsWith('00101');
-		    }
+            else {
+                $scope.dg_selected = data;
+                $scope.is_crew = data.JobGroupCode.startsWith('00102') || data.JobGroupCode.startsWith('00101');
+                $scope.is_cockpit = data.JobGroupCode.startsWith('00101');
+            }
 
 
         },
@@ -546,90 +548,90 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             fileName: "Employees",
             allowExportSelectedData: true
         },
-		customizeExportData: function(cols, rows){  
-            rows.forEach(function(row){
-				var rowValues =  row.values;  
-                for(let i = 0; i< rowValues.length; i++){  
-                    if(rowValues[i] == -100000)  
-                       rowValues[i] = "";  
-                }  
-            });  
-        }, 
+        customizeExportData: function (cols, rows) {
+            rows.forEach(function (row) {
+                var rowValues = row.values;
+                for (let i = 0; i < rowValues.length; i++) {
+                    if (rowValues[i] == -100000)
+                        rowValues[i] = "";
+                }
+            });
+        },
         onCellPrepared: function (e) {
-			 
-            
-			if (e.rowType!='data' || ['InActive','JobGroupRoot','JobGroup','Name','Mobile'].indexOf(e.column.dataField)!=-1 || e.column.name=='_row')
-				return;
-			if (e.rowType=='data' && ['IsDeleted'].indexOf(e.column.dataField)!=-1){
-				if (e.data.IsDeleted)
-					e.cellElement.css("backgroundColor", "#ff99ff");
-			}
-			else
-			$scope.styleCell(e, e.data[e.column.dataField]);
-			 /*
-            if (e.rowType === "data" && e.column.dataField == "RemainMedical") {
-                $scope.styleCell(e, e.data.RemainMedical);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainPassport") {
-                $scope.styleCell(e, e.data.RemainPassport);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainLicence") {
-                $scope.styleCell(e, e.data.RemainLicence);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainProficiency") {
-                $scope.styleCell(e, e.data.RemainProficiency);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainProficiencyOPC") {
-                $scope.styleCell(e, e.data.RemainProficiencyOPC);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainLPR") {
-                $scope.styleCell(e, e.data.RemainLPR);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainAvSec") {
-                $scope.styleCell(e, e.data.RemainAvSec);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainSMS") {
-                $scope.styleCell(e, e.data.RemainSMS);
-            }
 
-            if (e.rowType === "data" && e.column.dataField == "RemainCRM") {
-                $scope.styleCell(e, e.data.RemainCRM);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainCCRM") {
-                $scope.styleCell(e, e.data.RemainCCRM);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainSEPT") {
-                $scope.styleCell(e, e.data.RemainSEPT);
-            }
-            
-            if (e.rowType === "data" && e.column.dataField == "RemainSEPTP") {
-                $scope.styleCell(e, e.data.RemainSEPTP);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainDG") {
-                $scope.styleCell(e, e.data.RemainDG);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainFirstAid") {
-                $scope.styleCell(e, e.data.RemainFirstAid);
-            }
 
-            
-            if (e.rowType === "data" && e.column.dataField == "RemainLine") {
-                $scope.styleCell(e, e.data.RemainLine);
+            if (e.rowType != 'data' || ['InActive', 'JobGroupRoot', 'JobGroup', 'Name', 'Mobile'].indexOf(e.column.dataField) != -1 || e.column.name == '_row')
+                return;
+            if (e.rowType == 'data' && ['IsDeleted'].indexOf(e.column.dataField) != -1) {
+                if (e.data.IsDeleted)
+                    e.cellElement.css("backgroundColor", "#ff99ff");
             }
-            if (e.rowType === "data" && e.column.dataField == "RemainEGPWS") {
-                $scope.styleCell(e, e.data.RemainEGPWS);
-            }
-            if (e.rowType === "data" && e.column.dataField == "RemainCAO") {
-                $scope.styleCell(e, e.data.RemainCAO);
-            }
-  
-           if (e.rowType === "data" && e.column.dataField == "RemainRecurrent") {
-                $scope.styleCell(e, e.data.RemainRecurrent);
-            }
-			 if (e.rowType === "data" && e.column.dataField == "RemainCMC") {
-                $scope.styleCell(e, e.data.RemainCMC);
-            }
-            */
+            else
+                $scope.styleCell(e, e.data[e.column.dataField]);
+            /*
+           if (e.rowType === "data" && e.column.dataField == "RemainMedical") {
+               $scope.styleCell(e, e.data.RemainMedical);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainPassport") {
+               $scope.styleCell(e, e.data.RemainPassport);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainLicence") {
+               $scope.styleCell(e, e.data.RemainLicence);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainProficiency") {
+               $scope.styleCell(e, e.data.RemainProficiency);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainProficiencyOPC") {
+               $scope.styleCell(e, e.data.RemainProficiencyOPC);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainLPR") {
+               $scope.styleCell(e, e.data.RemainLPR);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainAvSec") {
+               $scope.styleCell(e, e.data.RemainAvSec);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainSMS") {
+               $scope.styleCell(e, e.data.RemainSMS);
+           }
+
+           if (e.rowType === "data" && e.column.dataField == "RemainCRM") {
+               $scope.styleCell(e, e.data.RemainCRM);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainCCRM") {
+               $scope.styleCell(e, e.data.RemainCCRM);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainSEPT") {
+               $scope.styleCell(e, e.data.RemainSEPT);
+           }
+           
+           if (e.rowType === "data" && e.column.dataField == "RemainSEPTP") {
+               $scope.styleCell(e, e.data.RemainSEPTP);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainDG") {
+               $scope.styleCell(e, e.data.RemainDG);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainFirstAid") {
+               $scope.styleCell(e, e.data.RemainFirstAid);
+           }
+
+           
+           if (e.rowType === "data" && e.column.dataField == "RemainLine") {
+               $scope.styleCell(e, e.data.RemainLine);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainEGPWS") {
+               $scope.styleCell(e, e.data.RemainEGPWS);
+           }
+           if (e.rowType === "data" && e.column.dataField == "RemainCAO") {
+               $scope.styleCell(e, e.data.RemainCAO);
+           }
+ 
+          if (e.rowType === "data" && e.column.dataField == "RemainRecurrent") {
+               $scope.styleCell(e, e.data.RemainRecurrent);
+           }
+            if (e.rowType === "data" && e.column.dataField == "RemainCMC") {
+               $scope.styleCell(e, e.data.RemainCMC);
+           }
+           */
 
             /*
             if (e.rowType === 'data'
@@ -661,110 +663,107 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
                 && ((!e.value && e.value!=0) || e.value == '-100000')) {
                  
                 e.cellElement.html('?'); 
-			
+        	
             }*/
-			
-           // if (e.column.dataField=="RemainTypeAirbus")   {
-			//	if (e.value=='-100000')
-			//						e.cellElement.html('?');
-			//	else e.cellElement.html('✓');
-			//}
-			//else
-			//	if (e.column.dataField=="RemainEGPWS"){
-			//		if (e.value=='-100000')
-			//						e.cellElement.html('?');
-			//		else e.cellElement.html('✓');
-			//	}
-			//else
 
-			if ((!e.value && e.value!=0) || e.value == '-100000') 
-			{ 
-		if ( e.column.name=='_row') return;
-		       
-				//if (e.rowType === 'data' && (e.column.dataField == "RemainASD" || e.column.dataField == "Remain1" || e.column.dataField == "Remain3"))
-				//	e.cellElement.html('N/A');
-				//else
-				e.cellElement.html('?');
-			}
+            // if (e.column.dataField=="RemainTypeAirbus")   {
+            //	if (e.value=='-100000')
+            //						e.cellElement.html('?');
+            //	else e.cellElement.html('✓');
+            //}
+            //else
+            //	if (e.column.dataField=="RemainEGPWS"){
+            //		if (e.value=='-100000')
+            //						e.cellElement.html('?');
+            //		else e.cellElement.html('✓');
+            //	}
+            //else
 
-          //  if (e.rowType === 'data' && e.value == '1000000')
-          //  {
-           //     e.cellElement.html('N/A');
-          //  }
-               
+            if ((!e.value && e.value != 0) || e.value == '-100000') {
+                if (e.column.name == '_row') return;
+
+                //if (e.rowType === 'data' && (e.column.dataField == "RemainASD" || e.column.dataField == "Remain1" || e.column.dataField == "Remain3"))
+                //	e.cellElement.html('N/A');
+                //else
+                e.cellElement.html('?');
+            }
+
+            //  if (e.rowType === 'data' && e.value == '1000000')
+            //  {
+            //     e.cellElement.html('N/A');
+            //  }
+
         },
-        onCellClick:function(e){
-			 if (!e.column.dataField){
-				 return;
-			 }
-			 else
-			 
-            if (e.column.dataField == 'InActive' /*|| e.rowType!='data' ||  e.column.name=='_row'*/) {
-				 
-                General.Confirm("Are you sure?", function (res) {
-                    if (res) {
+        onCellClick: function (e) {
+            if (!e.column.dataField) {
+                return;
+            }
+            else
 
-                        var newvalue = !e.value;
-                        e.data.InActive = newvalue;
-                        personService.active({ Id: e.data.Id }).then(function (response) {
+                if (e.column.dataField == 'InActive' /*|| e.rowType!='data' ||  e.column.name=='_row'*/) {
 
-                            $scope.dg_instance.refresh(true);
+                    General.Confirm("Are you sure?", function (res) {
+                        if (res) {
 
-                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                            var newvalue = !e.value;
+                            e.data.InActive = newvalue;
+                            personService.active({ Id: e.data.Id }).then(function (response) {
+
+                                $scope.dg_instance.refresh(true);
+
+                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+                        }
+                    });
+
+
+                }
+                else {
+                    //return;
+                    //nasiri  
+                    if ($scope._cerRemFields.indexOf(e.column.dataField) != -1) {
+                        if (!e.data)
+                            return;
+                        var typ = Enumerable.From($scope._cerDetails).Where('$.RemField=="' + e.column.dataField + '"').FirstOrDefault();
+                        $scope.loadingVisible = true;
+                        trnService.getCertificateObj(e.data.PersonId, typ.type, typ.title).then(function (response) {
+
+                            $scope.loadingVisible = false;
+                            var emp = response.Data.employee;
+
+                            var _caption = emp.Name + ', ' + (typ.caption ? typ.caption : typ.title)
+                                + ', ' + 'ISSUE: ' + (typ.issue ? $scope.formatDate(emp[typ.issue]) : '')
+                                + ', ' + 'EXPIRE: ' + (typ.expire ? $scope.formatDate(emp[typ.expire]) : '');
+                            if (response.Data.certificate && response.Data.certificate.ImgUrl) {
+                                //$scope.showImage({ url: $rootScope.clientsFilesUrl + "/" + response.Data.certificate.ImgUrl, caption: _caption });
+                                $window.open($rootScope.clientsFilesUrl + "/" + response.Data.certificate.ImgUrl, '_blank');
+                            }
+                            else
+                                if (response.Data.document && response.Data.document.FileUrl) {
+                                    //$scope.showImage({ url: $rootScope.clientsFilesUrl + "/" + response.Data.document.FileUrl, caption: _caption });}
+                                    $window.open($rootScope.clientsFilesUrl + "/" + response.Data.document.FileUrl, '_blank');
+                                }
+
+
+
+
+                                else {
+                                    General.ShowNotify('The related DOCUMENT not found', 'error');
+                                }
+                        }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
+
 
                     }
-                });
-
-
-            }
-            else {
-				//return;
-                //nasiri  
-                if ($scope._cerRemFields.indexOf(e.column.dataField) != -1) {
-					if (!e.data)
-						return;
-                    var typ = Enumerable.From($scope._cerDetails).Where('$.RemField=="' + e.column.dataField + '"').FirstOrDefault();
-                    $scope.loadingVisible = true;
-                    trnService.getCertificateObj(e.data.PersonId, typ.type,typ.title).then(function (response) {
-
-                        $scope.loadingVisible = false;
-                        var emp = response.Data.employee;
-
-                        var _caption = emp.Name + ', ' + (typ.caption ? typ.caption : typ.title)
-                            + ', ' + 'ISSUE: ' + (typ.issue ? $scope.formatDate(emp[typ.issue]) : '')
-                            + ', ' + 'EXPIRE: ' + (typ.expire ? $scope.formatDate(emp[typ.expire]) : '');
-                         if (response.Data.certificate && response.Data.certificate.ImgUrl)
-                          
-							{ 
-							   //$scope.showImage({ url: $rootScope.clientsFilesUrl + "/" + response.Data.certificate.ImgUrl, caption: _caption });
-							    $window.open($rootScope.clientsFilesUrl + "/" + response.Data.certificate.ImgUrl, '_blank');
-							}
-							else
-						if (response.Data.document && response.Data.document.FileUrl)
-                           
-							{  
-							    //$scope.showImage({ url: $rootScope.clientsFilesUrl + "/" + response.Data.document.FileUrl, caption: _caption });}
-					 			 $window.open($rootScope.clientsFilesUrl + "/" + response.Data.document.FileUrl, '_blank');
-					        }
-
-                        
-							
-
-                        else {
-                            General.ShowNotify('The related DOCUMENT not found', 'error');
-                        }
-                    }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
-
-                    
                 }
-            }
         },
         editing: {
             allowUpdating: false,
             mode: 'cell'
         },
         bindingOptions: {
-            dataSource: 'dg_ds'
+            dataSource: 'dg_ds',
+            //war
+            columns: 'dg_columns3'
         }
     };
 
@@ -774,30 +773,28 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
 
             return;
         }
-        if (value>90)
+        if (value > 90)
             return;
         //moradi2
-         //12-14
-        if ((!value && value!==0) || value == -100000) {
+        //12-14
+        if ((!value && value !== 0) || value == -100000) {
             //#a6a6a6
-			//11-09
-			if (e.rowType === 'data' && (e.column.dataField == "RemainASD" || e.column.dataField == "Remain1"  || e.column.dataField == "Remain3"   ))
-			{
-				  return;
-			}
-			else
-			{
-				e.cellElement.css("backgroundColor", "#a6a6a6");
+            //11-09
+            if (e.rowType === 'data' && (e.column.dataField == "RemainASD" || e.column.dataField == "Remain1" || e.column.dataField == "Remain3")) {
+                return;
+            }
+            else {
+                e.cellElement.css("backgroundColor", "#a6a6a6");
                 e.cellElement.css("color", "#fff");
-                 return;
-			}
-            
+                return;
+            }
+
         }
-		if (value>60 && value<=90 /*&& e.column.dataField!="RemainTypeAirbus" && e.column.dataField!="RemainEGPWS"*/){
+        if (value > 60 && value <= 90 /*&& e.column.dataField!="RemainTypeAirbus" && e.column.dataField!="RemainEGPWS"*/) {
             e.cellElement.css("backgroundColor", "#ffff00");
             e.cellElement.css("color", "#000");
         }
-        else if (value>30 && value<=60 /*&& e.column.dataField!="RemainTypeAirbus" && e.column.dataField!="RemainEGPWS"*/){
+        else if (value > 30 && value <= 60 /*&& e.column.dataField!="RemainTypeAirbus" && e.column.dataField!="RemainEGPWS"*/) {
             e.cellElement.css("backgroundColor", "#ffd9b3");
             e.cellElement.css("color", "#000");
         }
@@ -805,7 +802,7 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             e.cellElement.css("backgroundColor", "#ffa64d");
             e.cellElement.css("color", "#000");
         }
-		else if (value > 0 && value <= 10 /*&& e.column.dataField!="RemainTypeAirbus" && e.column.dataField!="RemainEGPWS"*/) {
+        else if (value > 0 && value <= 10 /*&& e.column.dataField!="RemainTypeAirbus" && e.column.dataField!="RemainEGPWS"*/) {
             e.cellElement.css("backgroundColor", "#ff6600");
             e.cellElement.css("color", "#000");
         }
@@ -817,202 +814,202 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
     }
     $scope.doRefresh = false;
     $scope.showActive = false;
-	
-	
-	
-	
-	
-    $scope.rankGroup ='';
-	//nool
-	var _ranks=['Cockpit','Cabin','F/D','GRND','COMM','CAMO','MAINTENANCE','TRAINING','LEGAL','QA','FINANCIAL','HR','IT','SECURITY','MANAGEMENT',
-	'FLIGT_OPS_STAFF',
-	'ENG_AND_MAINT_STAFF',
-	'MNG_STAFF',
-	'SECURITY_STAFF',
-	
-	'All'];
+
+
+
+
+
+    $scope.rankGroup = '';
+    //nool
+    var _ranks = ['Cockpit', 'Cabin', 'F/D', 'GRND', 'COMM', 'CAMO', 'MAINTENANCE', 'TRAINING', 'LEGAL', 'QA', 'FINANCIAL', 'HR', 'IT', 'SECURITY', 'MANAGEMENT',
+        'FLIGT_OPS_STAFF',
+        'ENG_AND_MAINT_STAFF',
+        'MNG_STAFF',
+        'SECURITY_STAFF',
+
+        'All'];
     $scope.sb_rankgroup = {
-        width:230,
+        width: 230,
         showClearButton: false,
         searchEnabled: false,
         //dataSource: ['Cockpit','Cabin','F/D','GRND','COMM','CAMO','MAINTENANCE','TRAINING','LEGAL','QA','All'],
-		 
-		
+
+
         //readOnly:true,
         onValueChanged: function (e) {
-             
-			$scope.dg_instance.beginUpdate();
-       
-	   
-	   ///////2023-08-30
-	   
-	       $scope.dg_instance.columnOption('oae', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
-			 
-			$scope.dg_instance.columnOption('medical', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
-$scope.dg_instance.columnOption('passport', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
 
-$scope.dg_instance.columnOption('Licence', 'visible', e.value == 'Cockpit'  );
-$scope.dg_instance.columnOption('HOTWX', 'visible', e.value == 'Cockpit' || e.value == 'F/D');
-$scope.dg_instance.columnOption('COLDWX', 'visible', e.value == 'Cockpit' || e.value == 'F/D');
-
-$scope.dg_instance.columnOption('LPC', 'visible', e.value == 'Cockpit');
-$scope.dg_instance.columnOption('OPC', 'visible', e.value == 'Cockpit');
-$scope.dg_instance.columnOption('LPR', 'visible', e.value == 'Cockpit');
-$scope.dg_instance.columnOption('GRT', 'visible', e.value == 'Cockpit');
-
-$scope.dg_instance.columnOption('Line', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
-			
-$scope.dg_instance.columnOption('AvSec', 'visible', e.value == 'Cockpit' || e.value == 'Cabin'         );
-$scope.dg_instance.columnOption('TRG07B', 'visible', e.value == 'Cockpit' || e.value == 'Cabin'         );
-			
-			//$scope.dg_instance.columnOption('CyberSec', 'visible',   e.value == 'COMM');
-			$scope.dg_instance.columnOption('RemainSMS','visible',e.value == 'Cockpit' || e.value == 'Cabin');
-$scope.dg_instance.columnOption('RemainSMSL1L2L3','visible',e.value != 'MANAGEMENT' && e.value != 'QA' && e.value != 'Cockpit' && e.value != 'Cabin');
-$scope.dg_instance.columnOption('RemainSMSL2L3','visible',e.value == 'MANAGEMENT');
-			
-$scope.dg_instance.columnOption('SEPT-P', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
-$scope.dg_instance.columnOption('SEPT-T', 'visible', e.value == 'Cockpit' );
-$scope.dg_instance.columnOption('ESET', 'visible', e.value == 'Cockpit' );
-$scope.dg_instance.columnOption('DG', 'visible', e.value == 'Cockpit' || e.value == 'Cabin' || e.value == 'F/D' || e.value == 'GRND' || e.value == 'COMM_');
-$scope.dg_instance.columnOption('CRM', 'visible', e.value == 'Cockpit' || e.value == 'Cabin' );
-$scope.dg_instance.columnOption('CCRM', 'visible', e.value == 'Cockpit' || e.value == 'Cabin' );
-$scope.dg_instance.columnOption('FirstAid', 'visible', e.value == 'Cabin');
-$scope.dg_instance.columnOption('FMT', 'visible', e.value == 'Cabin' ||  e.value == 'Cockpit');
- 
-$scope.dg_instance.columnOption('FlightCheck', 'visible', false);
-$scope.dg_instance.columnOption('TYPEM', 'visible',e.value == 'MAINTENANCE');
-$scope.dg_instance.columnOption('Recurrent', 'visible', e.value == 'Cabin');
-$scope.dg_instance.columnOption('CMC', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
-			
-$scope.dg_instance.columnOption('HF', 'visible',e.value=='SECURITY' ||  e.value == 'F/D'   || e.value=='CAMO'    || e.value=='MAINTENANCE'     );
-			
-$scope.dg_instance.columnOption('ASD', 'visible',   e.value == 'GRND' || e.value == 'COMM_'     || e.value=='SECURITY');
-			
-$scope.dg_instance.columnOption('DEICING', 'visible',   e.value == 'GRND' || e.value == 'COMM_' || e.value == 'MAINTENANCE'  );
-			
-//$scope.dg_instance.columnOption('ASDIKA', 'visible',   e.value == 'COMM'  || e.value == 'GRND'  || e.value=='MAINTENANCE');
-//$scope.dg_instance.columnOption('GOM', 'visible', e.value == 'GRND' || e.value == 'COMM');
-//$scope.dg_instance.columnOption('ASF', 'visible', e.value == 'GRND' || e.value == 'COMM');
-//$scope.dg_instance.columnOption('CC', 'visible', e.value == 'GRND' || e.value == 'COMM');
-$scope.dg_instance.columnOption('LOAD', 'visible', e.value == 'GRND' || e.value == 'COMM_');
-			
-$scope.dg_instance.columnOption('ERP', 'visible', e.value == 'F/D' || e.value == 'GRND' || e.value == 'COMM_' || e.value=='SECURITY'    || e.value=='QA'  || e.value=='MANAGEMENT'      );
-$scope.dg_instance.columnOption('TRG01','visible',e.value == 'MANAGEMENT' ||  e.value == 'All' || e.value == 'F/D' || e.value == 'GRND' || e.value == 'COMM' || e.value=='SECURITY' || e.value=='QA' || e.value=='CAMO' || e.value == 'MAINTENANCE'  || e.value=='LEGAL' || e.value=='IT' || e.value=='FINANCIAL' || e.value=='CEO' || e.value=='HR'  || e.value=='TRAINING');			
-$scope.dg_instance.columnOption('TRG07A','visible',e.value == 'MANAGEMENT')
-$scope.dg_instance.columnOption('TRG16', 'visible',   e.value=='SECURITY');			
-$scope.dg_instance.columnOption('MB', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('MP', 'visible', e.value == 'F/D');
-//$scope.dg_instance.columnOption('LOADSHEET', 'visible',  e.value == 'GRND' || e.value == 'COMM');
-//$scope.dg_instance.columnOption('PS', 'visible', e.value == 'GRND' || e.value == 'COMM');
-//$scope.dg_instance.columnOption('ANNEX', 'visible', e.value == 'F/D');
-//$scope.dg_instance.columnOption('DRM', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('FMTD', 'visible', /*e.value == 'F/D'*/false);
-//$scope.dg_instance.columnOption('MEL', 'visible',   e.value=='CAMO');
-$scope.dg_instance.columnOption('MET', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('PER', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('RC', 'visible', e.value == 'F/D'   );
-$scope.dg_instance.columnOption('CALR', 'visible', e.value == 'F/D'   );
-$scope.dg_instance.columnOption('AI', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('NAV', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('ATM', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('RSP', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('FM', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('SA', 'visible', e.value == 'F/D');
-$scope.dg_instance.columnOption('PROF', 'visible', e.value == 'F/D' || e.value == 'GRND' || e.value == 'COMM_');
-$scope.dg_instance.columnOption('ROUTE', 'visible', e.value == 'F/D');
-  $scope.dg_instance.columnOption('SMSL3', 'visible',  e.value == 'QA');
+            $scope.dg_instance.beginUpdate();
 
 
+            ///////2023-08-30
 
-			
+            $scope.dg_instance.columnOption('oae', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+
+            $scope.dg_instance.columnOption('medical', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+            $scope.dg_instance.columnOption('passport', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+
+            $scope.dg_instance.columnOption('Licence', 'visible', e.value == 'Cockpit');
+            $scope.dg_instance.columnOption('HOTWX', 'visible', e.value == 'Cockpit' || e.value == 'F/D');
+            $scope.dg_instance.columnOption('COLDWX', 'visible', e.value == 'Cockpit' || e.value == 'F/D');
+
+            $scope.dg_instance.columnOption('LPC', 'visible', e.value == 'Cockpit');
+            $scope.dg_instance.columnOption('OPC', 'visible', e.value == 'Cockpit');
+            $scope.dg_instance.columnOption('LPR', 'visible', e.value == 'Cockpit');
+            $scope.dg_instance.columnOption('GRT', 'visible', e.value == 'Cockpit');
+
+            $scope.dg_instance.columnOption('Line', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+
+            $scope.dg_instance.columnOption('AvSec', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+            $scope.dg_instance.columnOption('TRG07B', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+
+            //$scope.dg_instance.columnOption('CyberSec', 'visible',   e.value == 'COMM');
+            $scope.dg_instance.columnOption('RemainSMS', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+            $scope.dg_instance.columnOption('RemainSMSL1L2L3', 'visible', e.value != 'MANAGEMENT' && e.value != 'QA' && e.value != 'Cockpit' && e.value != 'Cabin');
+            $scope.dg_instance.columnOption('RemainSMSL2L3', 'visible', e.value == 'MANAGEMENT');
+
+            $scope.dg_instance.columnOption('SEPT-P', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+            $scope.dg_instance.columnOption('SEPT-T', 'visible', e.value == 'Cockpit');
+            $scope.dg_instance.columnOption('ESET', 'visible', e.value == 'Cockpit');
+            $scope.dg_instance.columnOption('DG', 'visible', e.value == 'Cockpit' || e.value == 'Cabin' || e.value == 'F/D' || e.value == 'GRND' || e.value == 'COMM_');
+            $scope.dg_instance.columnOption('CRM', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+            $scope.dg_instance.columnOption('CCRM', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+            $scope.dg_instance.columnOption('FirstAid', 'visible', e.value == 'Cabin');
+            $scope.dg_instance.columnOption('FMT', 'visible', e.value == 'Cabin' || e.value == 'Cockpit');
+
+            $scope.dg_instance.columnOption('FlightCheck', 'visible', false);
+            $scope.dg_instance.columnOption('TYPEM', 'visible', e.value == 'MAINTENANCE');
+            $scope.dg_instance.columnOption('Recurrent', 'visible', e.value == 'Cabin');
+            $scope.dg_instance.columnOption('CMC', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+
+            $scope.dg_instance.columnOption('HF', 'visible', e.value == 'SECURITY' || e.value == 'F/D' || e.value == 'CAMO' || e.value == 'MAINTENANCE');
+
+            $scope.dg_instance.columnOption('ASD', 'visible', e.value == 'GRND' || e.value == 'COMM_' || e.value == 'SECURITY');
+
+            $scope.dg_instance.columnOption('DEICING', 'visible', e.value == 'GRND' || e.value == 'COMM_' || e.value == 'MAINTENANCE');
+
+            //$scope.dg_instance.columnOption('ASDIKA', 'visible',   e.value == 'COMM'  || e.value == 'GRND'  || e.value=='MAINTENANCE');
+            //$scope.dg_instance.columnOption('GOM', 'visible', e.value == 'GRND' || e.value == 'COMM');
+            //$scope.dg_instance.columnOption('ASF', 'visible', e.value == 'GRND' || e.value == 'COMM');
+            //$scope.dg_instance.columnOption('CC', 'visible', e.value == 'GRND' || e.value == 'COMM');
+            $scope.dg_instance.columnOption('LOAD', 'visible', e.value == 'GRND' || e.value == 'COMM_');
+
+            $scope.dg_instance.columnOption('ERP', 'visible', e.value == 'F/D' || e.value == 'GRND' || e.value == 'COMM_' || e.value == 'SECURITY' || e.value == 'QA' || e.value == 'MANAGEMENT');
+            $scope.dg_instance.columnOption('TRG01', 'visible', e.value == 'MANAGEMENT' || e.value == 'All' || e.value == 'F/D' || e.value == 'GRND' || e.value == 'COMM' || e.value == 'SECURITY' || e.value == 'QA' || e.value == 'CAMO' || e.value == 'MAINTENANCE' || e.value == 'LEGAL' || e.value == 'IT' || e.value == 'FINANCIAL' || e.value == 'CEO' || e.value == 'HR' || e.value == 'TRAINING');
+            $scope.dg_instance.columnOption('TRG07A', 'visible', e.value == 'MANAGEMENT')
+            $scope.dg_instance.columnOption('TRG16', 'visible', e.value == 'SECURITY');
+            $scope.dg_instance.columnOption('MB', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('MP', 'visible', e.value == 'F/D');
+            //$scope.dg_instance.columnOption('LOADSHEET', 'visible',  e.value == 'GRND' || e.value == 'COMM');
+            //$scope.dg_instance.columnOption('PS', 'visible', e.value == 'GRND' || e.value == 'COMM');
+            //$scope.dg_instance.columnOption('ANNEX', 'visible', e.value == 'F/D');
+            //$scope.dg_instance.columnOption('DRM', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('FMTD', 'visible', /*e.value == 'F/D'*/false);
+            //$scope.dg_instance.columnOption('MEL', 'visible',   e.value=='CAMO');
+            $scope.dg_instance.columnOption('MET', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('PER', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('RC', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('CALR', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('AI', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('NAV', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('ATM', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('RSP', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('FM', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('SA', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('PROF', 'visible', e.value == 'F/D' || e.value == 'GRND' || e.value == 'COMM_');
+            $scope.dg_instance.columnOption('ROUTE', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('SMSL3', 'visible', e.value == 'QA');
 
 
 
 
-			
-//$scope.dg_instance.columnOption('SMSL2', 'visible',  e.value == 'QA');
 
-//$scope.dg_instance.columnOption('OM', 'visible',  e.value == 'QA');
-//$scope.dg_instance.columnOption('AIROPS', 'visible',  e.value == 'QA'  || e.value=='TRAINING');	
-//$scope.dg_instance.columnOption('CAME', 'visible',  e.value == 'QA'  ||  e.value == 'CAMO');
-//$scope.dg_instance.columnOption('ANALYSIS', 'visible',  e.value == 'QA');
-$scope.dg_instance.columnOption('AUDIT', 'visible',  e.value == 'QA_');
-$scope.dg_instance.columnOption('EWIS', 'visible', e.value == 'MAINTENANCE'   ||  e.value == 'CAMO');
-$scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     ||  e.value == 'CAMO');
-//$scope.dg_instance.columnOption('PART145', 'visible', e.value == 'MAINTENANCE'     ||  e.value == 'CAMO'  || e.value=='TRAINING'  );
-//$scope.dg_instance.columnOption('PARTM', 'visible', e.value == 'MAINTENANCE'    ||  e.value == 'CAMO');
-//$scope.dg_instance.columnOption('MOE', 'visible', e.value == 'MAINTENANCE'     ||  e.value == 'CAMO'  || e.value=='TRAINING');
-//$scope.dg_instance.columnOption('ATL', 'visible', e.value == 'MAINTENANCE'  ||  e.value == 'CAMO');
-//$scope.dg_instance.columnOption('RAMP', 'visible', e.value == 'MAINTENANCE');
-//$scope.dg_instance.columnOption('ENGINE', 'visible', e.value == 'MAINTENANCE');
-//$scope.dg_instance.columnOption('B737', 'visible', e.value == 'MAINTENANCE'  );
-//$scope.dg_instance.columnOption('LEGISLATION', 'visible', e.value == 'MAINTENANCE');
-			
-//$scope.dg_instance.columnOption('MPA', 'visible', e.value == 'CAMO');
-//$scope.dg_instance.columnOption('ADSB', 'visible', e.value == 'CAMO');
-//$scope.dg_instance.columnOption('FCL', 'visible', e.value == 'TRAINING');
-	   ////////
 
-			 $scope.dg_instance.endUpdate();
+
+
+
+            //$scope.dg_instance.columnOption('SMSL2', 'visible',  e.value == 'QA');
+
+            //$scope.dg_instance.columnOption('OM', 'visible',  e.value == 'QA');
+            //$scope.dg_instance.columnOption('AIROPS', 'visible',  e.value == 'QA'  || e.value=='TRAINING');	
+            //$scope.dg_instance.columnOption('CAME', 'visible',  e.value == 'QA'  ||  e.value == 'CAMO');
+            //$scope.dg_instance.columnOption('ANALYSIS', 'visible',  e.value == 'QA');
+            $scope.dg_instance.columnOption('AUDIT', 'visible', e.value == 'QA_');
+            $scope.dg_instance.columnOption('EWIS', 'visible', e.value == 'MAINTENANCE' || e.value == 'CAMO');
+            $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE' || e.value == 'CAMO');
+            //$scope.dg_instance.columnOption('PART145', 'visible', e.value == 'MAINTENANCE'     ||  e.value == 'CAMO'  || e.value=='TRAINING'  );
+            //$scope.dg_instance.columnOption('PARTM', 'visible', e.value == 'MAINTENANCE'    ||  e.value == 'CAMO');
+            //$scope.dg_instance.columnOption('MOE', 'visible', e.value == 'MAINTENANCE'     ||  e.value == 'CAMO'  || e.value=='TRAINING');
+            //$scope.dg_instance.columnOption('ATL', 'visible', e.value == 'MAINTENANCE'  ||  e.value == 'CAMO');
+            //$scope.dg_instance.columnOption('RAMP', 'visible', e.value == 'MAINTENANCE');
+            //$scope.dg_instance.columnOption('ENGINE', 'visible', e.value == 'MAINTENANCE');
+            //$scope.dg_instance.columnOption('B737', 'visible', e.value == 'MAINTENANCE'  );
+            //$scope.dg_instance.columnOption('LEGISLATION', 'visible', e.value == 'MAINTENANCE');
+
+            //$scope.dg_instance.columnOption('MPA', 'visible', e.value == 'CAMO');
+            //$scope.dg_instance.columnOption('ADSB', 'visible', e.value == 'CAMO');
+            //$scope.dg_instance.columnOption('FCL', 'visible', e.value == 'TRAINING');
+            ////////
+
+            $scope.dg_instance.endUpdate();
             $scope.$broadcast('getFilterQuery', null);
         },
         bindingOptions: {
             value: 'rankGroup',
-			dataSource:'ds_ranks',
-            
+            dataSource: 'ds_ranks',
+
         }
     };
-	
-	
-	if ($rootScope.HasDepartmentManager() && !$rootScope.HasHR() ){
-		 trnService.getManagerGroups( $rootScope.employeeId).then(function (response) {
-			 
+
+
+    if ($rootScope.HasDepartmentManager() && !$rootScope.HasHR()) {
+        trnService.getManagerGroups($rootScope.employeeId).then(function (response) {
+
             $scope.loadingVisible = false;
-             
+
             //$scope.schedule_crs_ins.dataSource = response;
-			$scope.ds_ranks=response;
-			$scope.rankGroup =$scope.ds_ranks && $scope.ds_ranks.length>0 ? $scope.ds_ranks[0]:'';
-			//console.log($scope.ds_rank);
-			//console.log($scope.rankGroup);
+            $scope.ds_ranks = response;
+            $scope.rankGroup = $scope.ds_ranks && $scope.ds_ranks.length > 0 ? $scope.ds_ranks[0] : '';
+            //console.log($scope.ds_rank);
+            //console.log($scope.rankGroup);
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-		 
-	}
-	else{
-		$scope.ds_ranks= _ranks ;
-		$scope.rankGroup ='Cockpit';
-	}
-	
-	
-	
+
+    }
+    else {
+        $scope.ds_ranks = _ranks;
+        $scope.rankGroup = 'Cockpit';
+    }
+
+
+
     $scope.chk_active = {
         text: 'Only Actives',
-        onValueChanged:function(e){
+        onValueChanged: function (e) {
             $scope.$broadcast('getFilterQuery', null);
         },
         bindingOptions: {
             value: 'showActive',
-			
-             
+
+
         }
     };
 
     ////////////////////
     //3-16
-	$scope.btn_opc = {
+    $scope.btn_opc = {
         text: 'OPC Card',
         type: 'default',
         //icon: 'plus',
         width: 140,
         onClick: function (e) {
-			  $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
+            $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
             if (!$scope.dg_selected) {
                 General.ShowNotify(Config.Text_NoRowSelected, 'error');
                 return;
             }
             var data = $scope.dg_selected;
-			var _pid=data.JobGroup=='P2'?'0':'1';
-			console.log(data);
-            $window.open($rootScope.zreportServerTRNForms+'?type=opc&nid='+data.NID+'&pid='+_pid, '_blank');
+            var _pid = data.JobGroup == 'P2' ? '0' : '1';
+            console.log(data);
+            $window.open($rootScope.zreportServerTRNForms + '?type=opc&nid=' + data.NID + '&pid=' + _pid, '_blank');
         },
         bindingOptions: {
 
@@ -1020,42 +1017,42 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
     };
     $scope.btn_sms = {
-        text: screen.width> $scope.changeBtnContentAt ? 'Notify' : '',
+        text: screen.width > $scope.changeBtnContentAt ? 'Notify' : '',
         type: 'default',
-        icon: screen.width> $scope.changeBtnContentAt ? '':'email',
-        width: screen.width> $scope.changeBtnContentAt ? 100 : 36,
-		
+        icon: screen.width > $scope.changeBtnContentAt ? '' : 'email',
+        width: screen.width > $scope.changeBtnContentAt ? 100 : 36,
+
         onClick: function (e) {
             //var selected = $rootScope.getSelectedRows($scope.dg_instance);
             //if (!selected) {
             //    General.ShowNotify(Config.Text_NoRowSelected, 'error');
             //    return;
             //}
-           
+
             //$scope.popup_sms_visible = true;
             $scope.popup_notify2_visible = true;
         },
         bindingOptions: {
-           
+
         }
 
     };
     //moradi2
     $scope.btn_training = {
-        text: screen.width> $scope.changeBtnContentAt ? 'Training' : '',
+        text: screen.width > $scope.changeBtnContentAt ? 'Training' : '',
         type: 'default',
-        icon: screen.width> $scope.changeBtnContentAt ? '':'event',
-        width: screen.width> $scope.changeBtnContentAt ? 110 : 36,
-		
-       // onClick: function (e) {
+        icon: screen.width > $scope.changeBtnContentAt ? '' : 'event',
+        width: screen.width > $scope.changeBtnContentAt ? 110 : 36,
+
+        // onClick: function (e) {
         //    $window.open('#!/training/', '_blank');
         //},
-		onClick: function (e) {
+        onClick: function (e) {
             var obj = $rootScope.getSelectedRow($scope.dg_instance);
             if (obj)
-				$window.open('https://fleet.flypersia.aero/trncard/frmreportview.aspx?type=11&pid='+(obj.PersonId*2+1237), '_blank') ;
-               // $scope.selected_person_id = obj.PersonId;
-		         //https://fleet.flypersia.aero/trncard/frmreportview.aspx?type=11&pid=238
+                $window.open('https://fleet.flypersia.aero/trncard/frmreportview.aspx?type=11&pid=' + (obj.PersonId * 2 + 1237), '_blank');
+            // $scope.selected_person_id = obj.PersonId;
+            //https://fleet.flypersia.aero/trncard/frmreportview.aspx?type=11&pid=238
             //$scope.popup_course_visible = true;
         },
         bindingOptions: {
@@ -1093,7 +1090,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
                         var result = arg.validationGroup.validate();
 
-                        if (!result.isValid ) {
+                        if (!result.isValid) {
                             General.ShowNotify(Config.Text_FillRequired, 'error');
                             return;
                         }
@@ -1138,10 +1135,10 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
         },
         onShown: function (e) {
-             
+
         },
         onHiding: function () {
-           
+
             $scope.popup_sms_visible = false;
 
         },
@@ -1203,12 +1200,12 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                         $scope.dto_user.Id = $scope.user.Id;
                         $scope.IsUserEdit = true;
                     }
-                     
+
                     $scope.popup_user_visible = true;
                 });
             });
-           
-           
+
+
         },
         bindingOptions: {
             //visible: 'IsEditable'
@@ -1224,8 +1221,8 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         width: 150,
 
         onClick: function (e) {
-            $scope.selectedPassword  = $rootScope.getSelectedRow($scope.dg_instance);
-            if (!$scope.selectedPassword ) {
+            $scope.selectedPassword = $rootScope.getSelectedRow($scope.dg_instance);
+            if (!$scope.selectedPassword) {
                 General.ShowNotify(Config.Text_NoRowSelected, 'error');
                 return;
             }
@@ -1237,7 +1234,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             personService.getCrewLight(Config.CustomerId, $scope.selectedPassword.Id).then(function (response) {
                 $scope.loadingVisible = false;
                 var _data = response[0];
-                
+
                 if (!_data.UserId) {
                     General.ShowNotify("user not found", 'error');
                     return;
@@ -1245,7 +1242,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                 $scope.selectedPassword = _data;
                 $scope.popup_password_visible = true;
             });
-          
+
 
         }
 
@@ -1369,7 +1366,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
         },
         onShown: function (e) {
-           
+
 
         },
         onHiding: function () {
@@ -1414,15 +1411,15 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
     //save button
     $scope.popup_user.toolbarItems[0].options.onClick = function (e) {
         //sook
-        
+
         var result = e.validationGroup.validate();
 
         if (!result.isValid) {
             General.ShowNotify(Config.Text_FillRequired, 'error');
             return;
         }
-         $scope.dto_user.Email = $scope.dto_user.FirstName.replace(/\s/g, '') + '.' + $scope.dto_user.LastName.replace(/\s/g, '') + '@airpocket.ir';
-         $scope.loadingVisible = true;
+        $scope.dto_user.Email = $scope.dto_user.FirstName.replace(/\s/g, '') + '.' + $scope.dto_user.LastName.replace(/\s/g, '') + '@airpocket.ir';
+        $scope.loadingVisible = true;
         if (!$scope.IsUserEdit) {
             //if ($scope.personId)
             //    $scope.dto.PersonId = $scope.personId;
@@ -1454,7 +1451,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                 });
         }
         else {
-          
+
             authService.updateUser($scope.dto_user).then(function (response) {
                 $scope.loadingVisible = false;
                 $scope.dto_user = {
@@ -1516,7 +1513,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
     $scope.personId = null;
     $scope.employee = null;
     $scope.IsUserEdit = false;
-   
+
     $scope.txtuser_UserName = {
         hoverStateEnabled: false,
         bindingOptions: {
@@ -1537,12 +1534,12 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
         valueChangeEvent: 'keyup',
         onValueChanged: function (e) {
-           // $scope.nameChanged();
+            // $scope.nameChanged();
         },
-        readOnly:true,
+        readOnly: true,
         bindingOptions: {
             value: 'dto_user.FirstName',
-             
+
         }
     };
     $scope.txtuser_LastName = {
@@ -1551,18 +1548,18 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         onValueChanged: function (e) {
             //$scope.nameChanged();
         },
-        readOnly:true,
+        readOnly: true,
         bindingOptions: {
             value: 'dto_user.LastName',
-            
+
         }
     };
     $scope.txtuser_phone = {
         hoverStateEnabled: false,
-        readOnly:true,
+        readOnly: true,
         bindingOptions: {
             value: 'dto_user.PhoneNumber',
-             
+
         }
     };
     $scope.sb_employees = {
@@ -1589,10 +1586,10 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                 $scope.userId = null;
             }
             else {
-                 
+
 
                 $scope.user = Enumerable.From($scope.users).Where('$.Id=="' + $scope.employee.UserId + '"').FirstOrDefault();
-                
+
             }
 
             $scope.dto_user.UserId = null;
@@ -1601,11 +1598,11 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             if ($scope.user) {
                 $scope.dto_user.UserId = $scope.user.Id;
                 $scope.dto_user.UserName = $scope.user.UserName;
-                
+
                 $scope.IsUserEdit = true;
             }
-            
-            
+
+
 
         },
         bindingOptions: {
@@ -1625,30 +1622,71 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         }
         if ($scope.showActive)
             filters.push(['InActive', '=', false]);
-        if ($scope.rankGroup!='All')
+        if ($scope.rankGroup != 'All')
             filters.push(['JobGroupRoot', '=', $scope.rankGroup]);
 
         return filters;
     };
     $scope.bind = function () {
-          
-		$scope.loadingVisible = true;
-		var active=$scope.showActive?1:-1;
-		var grp=$scope.rankGroup=='All'?'-1':$scope.rankGroup.replace('/','x');
-        personService.getProfiles(Config.CustomerId,active,grp).then(function (response2) {
+
+        $scope.loadingVisible = true;
+        var active = $scope.showActive ? 1 : -1;
+        var grp = $scope.rankGroup == 'All' ? '-1' : $scope.rankGroup.replace('/', 'x');
+        personService.getProfilesNew(Config.CustomerId, active, grp).then(function (response2) {
             $scope.loadingVisible = false;
-            $scope.dg_ds=response2.data;
-			 
+            $scope.dg_ds = response2.data.result;
+            $scope.corse_types = response2.data.course_types;
+            $scope.dg_columns3.push({
+                name: '_row',
+                cellTemplate: function (container, options) {
+                    $("<div style='text-align:center'/>")
+                        .html(options.rowIndex + 1)
+                        .appendTo(container);
+                }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader', fixed: screen.width > 1024 ? true : false, fixedPosition: 'left'
+            });
+
+            // $scope.dg_columns3.push();
+            $scope.dg_columns3.push({ dataField: 'InActive', caption: 'InActive', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: true, width: 80, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left' });
+            $scope.dg_columns3.push({ dataField: 'IsDeleted', caption: 'O/A', name: 'oae', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: true, width: 60, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left', visible: true });
+            $scope.dg_columns3.push({
+                dataField: 'JobGroupRoot', caption: 'Group', allowResizing: true
+
+                , alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left',
+                visible: screen.width > 1024 ? true : false
+            });
+
+            $scope.dg_columns3.push({ dataField: 'JobGroup', caption: 'Pos.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left' });
+            $scope.dg_columns3.push({ dataField: 'HomeBase', caption: 'H/B', name: 'HB', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left' });
+
+            $scope.dg_columns3.push({ dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: screen.width > 1024 ? true : false, fixedPosition: 'left' });
+
+
+            $scope.dg_columns3.push({ dataField: 'Mobile', caption: 'Mobile', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 });
+            $scope.dg_columns3.push({ dataField: 'NID', caption: 'NID', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 });
+           // $scope.dg_columns3.push({ dataField: 'RemainMedical', caption: 'Medical', name: 'medical', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 });
+           // $scope.dg_columns3.push({ dataField: 'RemainPassport', caption: 'Passport', name: 'passport', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 });
+
+            $.each($scope.corse_types, function (_i, _d) {
+                var clmn = {
+                    caption: _d.abbreviation,
+                    dataField: _d.course_type_id == -1 ? _d.title: 'remain_' + _d.title.replaceAll(' ', '_'),
+                    alignment: 'center', dataType: 'number', allowEditing: false, width: 90
+                };
+                $scope.dg_columns3.push(clmn);
+            });
+
+
+
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-		return;
-		
+        return;
+
         if (!$scope.dg_ds) {
             $scope.dg_ds = {
                 store: {
                     type: "odata",
-                    url: /*$rootScope.serviceUrl*/netProfile + 'odata/employees/light/' + ($scope.isCrew?'crew/':'') + Config.CustomerId,
+                    url: /*$rootScope.serviceUrl*/netProfile + 'odata/employees/light/' + ($scope.isCrew ? 'crew/' : '') + Config.CustomerId,
                     key: "Id",
-                     version: 4,
+                    version: 4,
                     onLoaded: function (e) {
                         // $scope.loadingVisible = false;
                         //filter
@@ -1691,11 +1729,11 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
     //training 2021-07  
     //chico
     $scope.btn_courses = {
-        text: screen.width> $scope.changeBtnContentAt ? 'Courses' : '',
+        text: screen.width > $scope.changeBtnContentAt ? 'Courses' : '',
         type: 'default',
-        icon: screen.width> $scope.changeBtnContentAt ? '':'doc',
-        width: screen.width> $scope.changeBtnContentAt ? 105 : 36,
-		
+        icon: screen.width > $scope.changeBtnContentAt ? '' : 'doc',
+        width: screen.width > $scope.changeBtnContentAt ? 105 : 36,
+
         onClick: function (e) {
             var obj = $rootScope.getSelectedRow($scope.dg_instance);
             if (obj)
@@ -1730,7 +1768,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             fixed: true, fixedPosition: 'left',//  sortIndex: 0, sortOrder: "desc"
         },
         { dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 140 },
-        { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 300,fixed:true,fixedPosition:'left' },
+        { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 300, fixed: true, fixedPosition: 'left' },
         { dataField: 'CourseType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
         { dataField: 'DateStart', caption: 'Start', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150, sortIndex: 0, sortOrder: "desc" },
         { dataField: 'DateEnd', caption: 'End', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
@@ -1743,7 +1781,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         { dataField: 'Organization', caption: 'Center', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
         { dataField: 'No', caption: 'Class Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
 
- 
+
 
     ];
     $scope.dg_courses_selected = null;
@@ -1798,9 +1836,9 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         },
 
         onRowPrepared: function (e) {
-            if (e.data && !e.data.IsNotificationEnabled  ) {
+            if (e.data && !e.data.IsNotificationEnabled) {
                 e.rowElement.css('background', '#f2f2f2');
-                
+
             }
 
         },
@@ -1813,7 +1851,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
     $scope.dg_arccourse_columns = [
         { dataField: 'Organization', caption: 'Organization', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: true, fixedPosition: 'left' },
-        
+
         { dataField: 'DateStart', caption: 'DateStart', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130, sortIndex: 0, sortOrder: "desc" },
         { dataField: 'DateEnd', caption: 'DateEnd', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
         { dataField: 'No', caption: 'Class Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'left' },
@@ -1823,8 +1861,8 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
         { dataField: 'Recurrent', caption: 'Recurrent', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 100 },
         { dataField: 'Duration', caption: 'Duration (hrs)', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
-       
-        
+
+
 
     ];
     $scope.dg_arccourse_selected = null;
@@ -1856,7 +1894,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-         
+
 
         columns: $scope.dg_arccourse_columns,
         onContentReady: function (e) {
@@ -1873,10 +1911,10 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
             }
             else {
-                console.log('dg_course',data);
+                console.log('dg_course', data);
                 $scope.dg_arccourse_selected = data;
                 $scope.course_Title = data.Title;
-                $scope.course_OrganizationId = Number( data.OrganizationId);
+                $scope.course_OrganizationId = Number(data.OrganizationId);
                 $scope.course_Location = data.Location;
                 $scope.course_Instructor = data.Instructor;
                 $scope.course_TrainingDirector = data.TrainingDirector;
@@ -1890,7 +1928,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         },
 
         onRowPrepared: function (e) {
-            
+
         },
         bindingOptions: {
             dataSource: 'dg_arccourses_ds',
@@ -1911,7 +1949,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             class: "popup_course"
         },
         shading: true,
-        title:'Courses',
+        title: 'Courses',
         //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
         height: 800,
         width: $(window).width() - 200,
@@ -1920,15 +1958,15 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         dragEnabled: true,
 
         toolbarItems: [
-            
+
             {
                 widget: 'dxSelectBox', location: 'before', options: {
-                    dataSource: [{ id: -2, title: 'All' }, { id: 1, title: 'Passed' }, { id: 0, title: 'Failed' }, { id: -1, title: 'Unknown'}],
+                    dataSource: [{ id: -2, title: 'All' }, { id: 1, title: 'Passed' }, { id: 0, title: 'Failed' }, { id: -1, title: 'Unknown' }],
                     displayExpr: 'title',
                     valueExpr: 'id',
                     placeholder: 'Result',
                     showClearButton: true,
-                    width:120,
+                    width: 120,
                     onValueChanged: function (e) {
                         $scope.crs_result = e.value;
                     },
@@ -1940,12 +1978,12 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                     displayExpr: 'Title',
                     valueExpr: 'Id',
                     placeholder: 'Course Type',
-                    searchEnabled:true,
+                    searchEnabled: true,
                     showClearButton: true,
                     onValueChanged: function (e) {
                         $scope.crs_ctype = e.value;
                     },
-                    width:200,
+                    width: 200,
                 }, toolbar: 'bottom'
             },
             //{
@@ -1977,7 +2015,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             //},
             {
                 widget: 'dxSelectBox', location: 'before', options: {
-                    dataSource: [{ id: 0, title: 'All' }, { id: 1, title: 'Last' } ],
+                    dataSource: [{ id: 0, title: 'All' }, { id: 1, title: 'Last' }],
                     displayExpr: 'title',
                     valueExpr: 'id',
                     placeholder: 'Last/All',
@@ -1990,15 +2028,15 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             },
             {
                 widget: 'dxButton', location: 'before', options: {
-                    width:40,
-                    type: 'success',  icon: 'find', onClick: function (arg) {
+                    width: 40,
+                    type: 'success', icon: 'find', onClick: function (arg) {
 
                         if (!$scope.selected_person_id) {
                             General.ShowNotify(Config.Text_NoRowSelected, 'error');
                             return;
                         }
                         $scope.bindPersoncourses();
-                        
+
 
                     }
                 }, toolbar: 'bottom'
@@ -2006,8 +2044,8 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'default', text: 'Add Certificate', icon: 'add', onClick: function (arg) {
-						if ($scope.isManager)
-							return;
+                        if ($scope.isManager)
+                            return;
                         if ($scope.selected_person_id)
                             $scope.popup_cer_visible = true;
 
@@ -2016,10 +2054,10 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             },
             {
                 widget: 'dxButton', location: 'after', options: {
-                    width:130,
-                    type: 'danger', text: 'Remove',  onClick: function (arg) {
-						if ($scope.isManager)
-							return;
+                    width: 130,
+                    type: 'danger', text: 'Remove', onClick: function (arg) {
+                        if ($scope.isManager)
+                            return;
                         if ($scope.selected_person_id) {
                             var selected = $rootScope.getSelectedRow($scope.dg_courses_instance);
                             if (!selected) {
@@ -2058,33 +2096,33 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                     }
                 }, toolbar: 'bottom'
             },
-      //      {
-      //          widget: 'dxButton', location: 'after', options: {
-      //              type: 'default', text: 'Certificates', icon: 'print', onClick: function (arg) {
-						//if ($scope.isManager)
-						//	return;
-      //                  if (!$scope.selected_person_id) {
-      //                      General.ShowNotify(Config.Text_NoRowSelected, 'error');
-      //                      return;
-      //                  }
-      //                  $window.open($rootScope.reportServer + '?type=11&pid=' + $scope.selected_person_id, '_blank');
+            //      {
+            //          widget: 'dxButton', location: 'after', options: {
+            //              type: 'default', text: 'Certificates', icon: 'print', onClick: function (arg) {
+            //if ($scope.isManager)
+            //	return;
+            //                  if (!$scope.selected_person_id) {
+            //                      General.ShowNotify(Config.Text_NoRowSelected, 'error');
+            //                      return;
+            //                  }
+            //                  $window.open($rootScope.reportServer + '?type=11&pid=' + $scope.selected_person_id, '_blank');
 
-      //              }
-      //          }, toolbar: 'bottom'
-      //      },
-      //      {
-      //          widget: 'dxButton', location: 'after', options: {
-      //              type: 'default', text: 'Courses', icon: 'print', onClick: function (arg) {
-						//if ($scope.isManager)
-						//	return;
-      //                  if (!$scope.selected_person_id) {
-      //                      General.ShowNotify(Config.Text_NoRowSelected, 'error');
-      //                      return;
-      //                  }
-      //                  $window.open($rootScope.reportServer + '?type=12&pid=' + $scope.selected_person_id, '_blank');
-      //              }
-      //          }, toolbar: 'bottom'
-      //      },
+            //              }
+            //          }, toolbar: 'bottom'
+            //      },
+            //      {
+            //          widget: 'dxButton', location: 'after', options: {
+            //              type: 'default', text: 'Courses', icon: 'print', onClick: function (arg) {
+            //if ($scope.isManager)
+            //	return;
+            //                  if (!$scope.selected_person_id) {
+            //                      General.ShowNotify(Config.Text_NoRowSelected, 'error');
+            //                      return;
+            //                  }
+            //                  $window.open($rootScope.reportServer + '?type=12&pid=' + $scope.selected_person_id, '_blank');
+            //              }
+            //          }, toolbar: 'bottom'
+            //      },
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (arg) {
@@ -2112,8 +2150,8 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             // $scope.getCrewAbs2($scope.flight.ID);
             if ($scope.dg_courses_instance)
                 $scope.dg_courses_instance.refresh();
-            
-           
+
+
         },
         onHiding: function () {
 
@@ -2125,11 +2163,11 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         },
         bindingOptions: {
             visible: 'popup_course_visible',
-           // 'toolbarItems[0].options.value': 'crs_result',
-           // 'toolbarItems[1].options.value': 'rptcd_dateTo',
-           // 'toolbarItems[2].options.value': 'rptcd_caco',
-            
-             
+            // 'toolbarItems[0].options.value': 'crs_result',
+            // 'toolbarItems[1].options.value': 'rptcd_dateTo',
+            // 'toolbarItems[2].options.value': 'rptcd_caco',
+
+
         }
     };
 
@@ -2151,7 +2189,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
         toolbarItems: [
 
-            
+
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', icon: 'remove', validationGroup: 'pceradd', onClick: function (e) {
@@ -2163,8 +2201,8 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                             return;
                         }
                         var dto = {};
-                       
-                         //doolo
+
+                        //doolo
 
 
                         dto.Id = -1;
@@ -2195,7 +2233,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                         $scope.loadingVisible = true;
                         trnService.saveCertificate(dto).then(function (response) {
 
-                            
+
                             $scope.clear_course();
 
                             General.ShowNotify(Config.Text_SavedOk, 'success');
@@ -2205,14 +2243,14 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                             if (exists) {
                                 $scope.personCourses = Enumerable.From($scope.personCourses).Where('$.Id!=' + response.Data.Id).ToArray();
                             }
-                                $scope.personCourses.push(response.Data);
-                            
+                            $scope.personCourses.push(response.Data);
+
 
 
                             $scope.loadingVisible = false;
                             $scope.bindPersoncourses();
-                             
-                           // $scope.popup_cer_visible = false;
+
+                            // $scope.popup_cer_visible = false;
 
 
 
@@ -2258,7 +2296,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             $scope.clear_course();
             $scope.dg_arccourse_instance.clearSelection();
             $scope.dg_arccourse_ds = null;
-           
+
             $scope.popup_cer_visible = false;
 
         },
@@ -2323,18 +2361,18 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             $scope.dg_courses_ds = ds;
 
         });
-       
+
     };
     $scope.getDatasourceEmployees = function (cid) {
         return new DevExpress.data.DataSource({
             store:
 
                 new DevExpress.data.ODataStore({
-                    url: serviceBaseTRN + 'api/employees/abs/query/' ,
-                     
+                    url: serviceBaseTRN + 'api/employees/abs/query/',
+
                 }),
 
-            sort: ['JobGroup','LastName','FirstName'],
+            sort: ['JobGroup', 'LastName', 'FirstName'],
         });
     };
 
@@ -2347,16 +2385,16 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         //    return $rootScope.getSbTemplateAirport(data);
         //},
 
-        searchExpr: ["Name","JobGroup","NID","PID"],
+        searchExpr: ["Name", "JobGroup", "NID", "PID"],
         displayExpr: "Name",
-         valueExpr: 'PersonId',
+        valueExpr: 'PersonId',
         onSelectionChanged: function (arg) {
             $scope.dg_courses_instance.clearSelection();
             $scope.dg_courses_ds = null;
             $scope.personCourses = null;
-            $scope.selected_person  = null;
+            $scope.selected_person = null;
             if (arg.selectedItem) {
-                $scope.selected_person  = arg.selectedItem ;
+                $scope.selected_person = arg.selectedItem;
                 $scope.bindPersoncourses();
             }
 
@@ -2364,7 +2402,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         itemTemplate: "field",
         bindingOptions: {
             value: 'selected_person_id',
-			readOnly:'isManager'
+            readOnly: 'isManager'
 
         }
     };
@@ -2385,7 +2423,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
     };
     $scope.sb_course_type = {
         dataSource: $rootScope.getDatasourceCourseTypeNew(),
-        placeholder:'Select Course Type',
+        placeholder: 'Select Course Type',
         showClearButton: true,
         searchEnabled: true,
         searchExpr: ["Title"],
@@ -2396,11 +2434,11 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             if (!e.selectedItem)
                 return;
             //if (!$scope.course_Interval)
-                $scope.course_Interval = e.selectedItem.Interval;
+            $scope.course_Interval = e.selectedItem.Interval;
             //if (!$scope.course_Duration)
-                $scope.course_Duration = e.selectedItem.Duration;
+            $scope.course_Duration = e.selectedItem.Duration;
             //if (!$scope.course_CalanderTypeId)
-                $scope.course_CalanderTypeId = e.selectedItem.CalenderTypeId;
+            $scope.course_CalanderTypeId = e.selectedItem.CalenderTypeId;
             //if ($scope.isNew) {
             //    if (e.selectedItem && e.selectedItem.Interval)
             //        $scope.entity.Interval = e.selectedItem.Interval;
@@ -2422,7 +2460,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             $scope.dg_arccourse_instance.clearSelection();
 
             $scope.loadingVisible = true;
-            trnService.getCoursesByType(e.selectedItem.Id,3).then(function (response) {
+            trnService.getCoursesByType(e.selectedItem.Id, 3).then(function (response) {
                 $scope.loadingVisible = false;
                 $scope.dg_arccourses_ds = response.Data;
 
@@ -2466,7 +2504,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
             value: 'course_TrainingDirector',
         }
     };
-   
+
 
     $scope.date_course_DateStart = {
         width: '100%',
@@ -2483,9 +2521,9 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         displayFormat: $rootScope.DateBoxFormat,
         onValueChanged: function (e) {
             if (e.value) {
-                $scope.course_DateIssue =   (new Date(e.value)).addDays(1);
+                $scope.course_DateIssue = (new Date(e.value)).addDays(1);
             }
-             
+
         },
         bindingOptions: {
             value: 'course_DateEnd',
@@ -2557,7 +2595,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         }
 
     };
-    
+
     $scope.date_course_resultexpire = {
         width: '100%',
         type: 'date',
@@ -2577,7 +2615,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
     };
     ////////////////////////////////////////////
     $scope.$on('getFilterResponse', function (event, prms) {
-        
+
         $scope.filters = prms;
 
         $scope.doRefresh = true;
@@ -2684,13 +2722,13 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
         }
     };
-     
+
     $scope.dg_emp3_columns = [
 
         { dataField: 'JobGroup', caption: 'Rank', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90, },
-        
+
         // { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', width: 250 },
-        { dataField: 'LastName', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', width: 150, sortIndex: 0, sortOrder:'asc' }, 
+        { dataField: 'LastName', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', width: 150, sortIndex: 0, sortOrder: 'asc' },
         { dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', width: 150 },
         { dataField: 'Mobile', caption: 'Mobile', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, },
 
@@ -2705,15 +2743,15 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
         { dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 140 },
         //{ dataField: 'TypeStr', caption: 'Type', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'Message', caption: 'Message', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false,   },
-         
+        { dataField: 'Message', caption: 'Message', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, },
+
         //{ dataField: 'RefId', caption: 'Ref', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         { dataField: 'DateSent', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 140, /*format: 'EEE MM-dd'*/ format: 'yy-MM-dd HH:mm', sortIndex: 0, sortOrder: "desc" },
         { dataField: 'Sender', caption: 'Sender', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'left', width: 150 },
 
     ];
 
-     
+
 
 
     $scope.dg_emp3_selected = null;
@@ -2844,7 +2882,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
     };
 
     $scope.start22 = function () {
-		return;
+        return;
         $scope.counter2 = 30;
         $scope.countDownVisible2 = true;
         $scope.countdown2();
@@ -2857,7 +2895,7 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
     };
     $scope.refreshSMSStatus2 = function () {
-		
+
         $scope.stop2();
         var ids = Enumerable.From($scope.dg_history_ds).Where('$.RefId && $.Status!="Delivered" && $.Status!="Delivered"').OrderByDescending('$.Id').Take(100).Select('$.RefId').ToArray();
         if (!ids || ids.length == 0)
@@ -2902,8 +2940,8 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
         fullScreen: false,
         showTitle: true,
         height: 730,
-        width: $(window).width()-100,
-        toolbarItems: [  
+        width: $(window).width() - 100,
+        toolbarItems: [
             {
                 widget: 'dxButton', location: 'before', options: {
                     type: 'default', text: 'Refresh Status', icon: 'refresh', onClick: function (e) {
@@ -2917,90 +2955,90 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
                     type: 'success', text: 'Send', icon: 'check', validationGroup: 'notmessage2', onClick: function (e) {
                         ////////////////
 
- 
-                          
-
-                            if ($scope.msgrec && $scope.msgno) {
-                                $scope.Notify2.Names2.push($scope.msgrec);
-                                $scope.Notify2.Mobiles2.push($scope.msgno);
-
-                            }
 
 
-                            var result = e.validationGroup.validate();
-                            if (!result.isValid) {
-                                General.ShowNotify(Config.Text_FillRequired, 'error');
-                                return;
-                            }
 
-                            if ((!$scope.selectedEmps3 || $scope.selectedEmps3.length == 0) && ($scope.Notify2.Names2 == null || $scope.Notify2.Names2.length == 0)) {
-                                General.ShowNotify("Please select flight crews.", 'error');
-                                return;
-                            }
-                            var recs = $scope.selectedEmps3 ? Enumerable.From($scope.dg_emp3_ds).Where(function (x) { return $scope.selectedEmps3.indexOf(x.Id) != -1; }).OrderBy('$.Name').ToArray() : null;
-                            if ((!recs || recs.length == 0) && ($scope.Notify2.Names2 == null || $scope.Notify2.Names2.length == 0)) {
-                                General.ShowNotify("Please select flight crews.", 'error');
-                                return;
-                            }
-                             
-                            $scope.Notify2.ObjectId = -1;
-                            $scope.Notify2.FlightId = null;
+                        if ($scope.msgrec && $scope.msgno) {
+                            $scope.Notify2.Names2.push($scope.msgrec);
+                            $scope.Notify2.Mobiles2.push($scope.msgno);
 
-                            $scope.Notify2.Message = $scope.Notify2.Message;
-                            // if ($scope.msgrec && $scope.msgno) {
-                            //     $scope.Notify2.Messages2.push($scope.Notify2.Message);
-                            // }
-                            var temp = Enumerable.From(recs).Select('{EmployeeId:$.Id,Name:$.Name, FDPItemId:$.FDPItemId}').ToArray();
+                        }
 
-                            $.each(temp, function (_i, _d) {
-                                $scope.Notify2.Employees.push(_d.EmployeeId);
-                                $scope.Notify2.Names.push(_d.Name);
-                                 
 
-                            });
+                        var result = e.validationGroup.validate();
+                        if (!result.isValid) {
+                            General.ShowNotify(Config.Text_FillRequired, 'error');
+                            return;
+                        }
 
-                            $scope.Notify2.SenderName = $rootScope.userName;
+                        if ((!$scope.selectedEmps3 || $scope.selectedEmps3.length == 0) && ($scope.Notify2.Names2 == null || $scope.Notify2.Names2.length == 0)) {
+                            General.ShowNotify("Please select flight crews.", 'error');
+                            return;
+                        }
+                        var recs = $scope.selectedEmps3 ? Enumerable.From($scope.dg_emp3_ds).Where(function (x) { return $scope.selectedEmps3.indexOf(x.Id) != -1; }).OrderBy('$.Name').ToArray() : null;
+                        if ((!recs || recs.length == 0) && ($scope.Notify2.Names2 == null || $scope.Notify2.Names2.length == 0)) {
+                            General.ShowNotify("Please select flight crews.", 'error');
+                            return;
+                        }
+
+                        $scope.Notify2.ObjectId = -1;
+                        $scope.Notify2.FlightId = null;
+
+                        $scope.Notify2.Message = $scope.Notify2.Message;
+                        // if ($scope.msgrec && $scope.msgno) {
+                        //     $scope.Notify2.Messages2.push($scope.Notify2.Message);
+                        // }
+                        var temp = Enumerable.From(recs).Select('{EmployeeId:$.Id,Name:$.Name, FDPItemId:$.FDPItemId}').ToArray();
+
+                        $.each(temp, function (_i, _d) {
+                            $scope.Notify2.Employees.push(_d.EmployeeId);
+                            $scope.Notify2.Names.push(_d.Name);
+
+
+                        });
+
+                        $scope.Notify2.SenderName = $rootScope.userName;
+                        $scope.loadingVisible = true;
+                        notificationService.notifyFlight($scope.Notify2).then(function (response) {
+
+
+
+                            General.ShowNotify(Config.Text_SavedOk, 'success');
+
+
+                            $scope.Notify2.Employees = [];
+                            $scope.Notify2.Dates = [];
+                            $scope.Notify2.Names = [];
+                            $scope.Notify2.FDPs = [];
+                            ///7-20//////////////
+                            $scope.Notify2.Names2 = [],
+                                $scope.Notify2.Mobiles2 = [],
+                                $scope.Notify2.Messages2 = [];
+                            //////////////////////
+                            $scope.Notify2.Message = null;
+                            if (!$scope.freeSMS)
+                                $scope.Notify2.TypeId = -1;
+
                             $scope.loadingVisible = true;
-                            notificationService.notifyFlight($scope.Notify2).then(function (response) {
+                            notificationService.getSMSHistoryTraining().then(function (response) {
 
+                                $scope.loadingVisible = false;
+                                $scope.dg_history_ds = response;
 
-
-                                General.ShowNotify(Config.Text_SavedOk, 'success');
-
-
-                                $scope.Notify2.Employees = [];
-                                $scope.Notify2.Dates = [];
-                                $scope.Notify2.Names = [];
-                                $scope.Notify2.FDPs = [];
-                                ///7-20//////////////
-                                $scope.Notify2.Names2 = [],
-                                    $scope.Notify2.Mobiles2 = [],
-                                    $scope.Notify2.Messages2 = [];
-                                //////////////////////
-                                $scope.Notify2.Message = null;
-                                if (!$scope.freeSMS)
-                                    $scope.Notify2.TypeId = -1;
-
-                                $scope.loadingVisible = true;
-                                notificationService.getSMSHistoryTraining().then(function (response) {
-
-                                    $scope.loadingVisible = false;
-                                    $scope.dg_history_ds = response;
-
-                                    $scope.start22();
-
-                                }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
-
-
-                                // $scope.popup_notify_visible = false;
-
-
-
+                                $scope.start22();
 
                             }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
 
 
-                         
+                            // $scope.popup_notify_visible = false;
+
+
+
+
+                        }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
+
+
+
 
 
                     }
@@ -3024,31 +3062,31 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
         },
         onShown: function (e) {
-            
-            $scope.dg_history_instance.refresh(); 
+
+            $scope.dg_history_instance.refresh();
             $scope.loadingVisible = true;
-           
+
             $scope.Notify2.TypeId = 10020;
             $scope.buildMessage();
-                if (!$scope.dg_emp3_ds) {
-                    //Config.CustomerId
-                    flightService.getDispatchSmsEmployees(Config.CustomerId).then(function (response) {
+            if (!$scope.dg_emp3_ds) {
+                //Config.CustomerId
+                flightService.getDispatchSmsEmployees(Config.CustomerId).then(function (response) {
 
-                        $scope.dg_emp3_ds = response;
+                    $scope.dg_emp3_ds = response;
 
-                    }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
-                }
+                }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
+            }
 
             notificationService.getSMSHistoryTraining().then(function (response) {
 
-                    $scope.loadingVisible = false;
-                    $scope.dg_history_ds = response;
+                $scope.loadingVisible = false;
+                $scope.dg_history_ds = response;
 
 
 
-                }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
+            }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
 
-            
+
 
 
             //  $scope.selectedNotificationTypeId2 = 10016;
@@ -3057,9 +3095,9 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
 
         },
         onHiding: function () {
-             
+
             $scope.stop2();
-             
+
             if ($scope.dg_emp3_instance)
                 $scope.dg_emp3_instance.clearSelection();
             if (!$scope.freeSMS)
@@ -3096,12 +3134,12 @@ $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE'     |
     //////////////////////////////////////
     //////////////////////////////////////////
     $scope.$on('$viewContentLoaded', function () {
-       
+
         setTimeout(function () {
             $scope.showActive = true;
-            
+
             //$scope.$broadcast('getFilterQuery', null);
-        },  500);
+        }, 500);
     });
     $rootScope.$broadcast('PersonLoaded', null);
     ///end
