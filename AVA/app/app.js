@@ -842,6 +842,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/zfdm_crew.html?v=" + '5673'
     });
 
+    $routeProvider.when("/exams", {
+        controller: "trnexamController",
+        templateUrl: "/app/views/trn_exam.html?v=1999"
+    });
+
 
     $routeProvider.otherwise({ redirectTo: "/home" });
 
@@ -904,10 +909,10 @@ var apiCAO='https://ava.apicaox.airpocket.app/';
 
 var zapinet='https://ava.apinet.airpocket.app/';
 var zfuel='https://ava.apifuel.airpocket.app/';
-var zapitrn='https://ava.apitrn.airpocket.app/';
+var zapitrn = 'http://localhost:4005/';//'https://ava.apitrn.airpocket.app/';
 var vira_api = "https://lmmcore.online/";
 var zapinet2 = 'https://ava.zapinet.airpocket.app/';
-var api_fdm = 'http://localhost:22554/';
+var api_fdm = 'http://localhost:22556/';
 
 var temp_url='https://ava.temp.apinet.airpocket.app/';
     //'http://localhost:58908/';

@@ -25,11 +25,12 @@ app.controller('employeeSelectCourseController', ['$scope', '$location', 'authSe
         }
     };
     $scope.dg_columns = [
-        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, sortIndex: 0, sortOrder: "asc" },
-        { dataField: 'LastName', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, sortIndex: 1, sortOrder: "asc" },
-        { dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width:170 },
-        { dataField: 'NID', caption: 'National Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
-        { dataField: 'PID', caption: 'Personnel Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
+        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250, sortIndex: 0, sortOrder: "asc" },
+        //{ dataField: 'LastName', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, sortIndex: 1, sortOrder: "asc" },
+       // { dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width:170 },
+        { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 250, sortIndex: 1, sortOrder: "asc" },
+        { dataField: 'NID', caption: 'NID', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
+        //{ dataField: 'PID', caption: 'Personnel Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
         
         
     ];
@@ -67,7 +68,9 @@ app.controller('employeeSelectCourseController', ['$scope', '$location', 'authSe
             else
                 $scope.dg_selected = data;
 
+            console.log($scope.dg_selected);
 
+            
         },
         bindingOptions: {
 
@@ -81,7 +84,7 @@ app.controller('employeeSelectCourseController', ['$scope', '$location', 'authSe
     /////////////////////////////
     $scope.dg_height = 100;
     $scope.pop_width = 900;
-    $scope.pop_height = 500;
+    $scope.pop_height = $(window).height()-100;
     $scope.popup_add_visible = false;
     $scope.popup_add_title = 'Employees';
     $scope.popup_add = {
@@ -103,7 +106,7 @@ app.controller('employeeSelectCourseController', ['$scope', '$location', 'authSe
                 $scope.pop_width = size.width;
                 $scope.pop_height = size.height;
             }
-            $scope.dg_height = $scope.pop_height - 100;
+            $scope.dg_height = $scope.pop_height - 300;
             //var size = $rootScope.get_windowSizePadding(40);
             //$scope.pop_width = size.width;
             //if ($scope.pop_width > 1200)

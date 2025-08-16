@@ -1148,7 +1148,179 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.get_templates = _get_templates;
-	
+
+
+
+    //war
+    var _getCourseTypeSubjects = function (cid) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/course/types/subjects/' + cid).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getCourseTypeSubjects = _getCourseTypeSubjects;
+
+    var _copy_people = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/course/people/copy', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.copy_people = _copy_people;
+
+
+    var _getCoursePeopleNames = function (cid) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/course/people/names/' + cid).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getCoursePeopleNames = _getCoursePeopleNames;
+
+    var _update_score = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/course/save/score', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.update_score = _update_score;
+
+
+
+    var _get_exams = function (cid) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/exams'  ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_exams = _get_exams;
+    /////////////////////////
+    var _save_exam = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/trn/exam/save', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.save_exam = _save_exam;
+    //api/trn/exam/questions/generate/new
+    var _save_exam_questions = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/trn/exam/questions/generate/new', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.save_exam_questions = _save_exam_questions;
+    var _get_courses = function () {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/course/query/').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_courses = _get_courses;
+    //api/trn/exam/template/{id}
+    var _get_temps = function (id) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/trn/exam/template/'+id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_temps = _get_temps;
+
+    //api/trn/exam/follow/
+    var _get_exam_followup = function (id) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/trn/exam/follow/' + id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_exam_followup = _get_exam_followup;
+    //api/trn/exam/people/{id}
+    var _get_exam_people = function (id) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/trn/exam/people/'+id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_exam_people = _get_exam_people;
+
+
+
+    
+    //api/trn/exam/questions/generate/new
+    var _save_press_all = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/course/session/pres/save/all', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.save_press_all = _save_press_all;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;

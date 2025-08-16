@@ -458,15 +458,15 @@
                                             <div style="border:1px solid #ccc">
                                                 <div style="padding:7px;font-weight:bold;background:#ddd">{{c.crew_name}}</div>
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
-                                                    <div class="  generalInfo chartBox"  >
+                                                    <div class="  generalInfo chartBox">
                                                         <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">S/F</p>
                                                         <p style="text-align: center; font-size: 14px; font-weight :bold;padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.score_per_flight}}</p>
                                                     </div>
-                                                    <div class="  generalInfo chartBox" ng-click="showEvents()"  >
+                                                    <div class="  generalInfo chartBox" ng-click="showEvents()">
                                                         <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Scores</p>
                                                         <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.total_score}}</p>
                                                     </div>
-                                                    <div class="   generalInfo chartBox"  >
+                                                    <div class="   generalInfo chartBox">
                                                         <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Flights</p>
                                                         <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 5px; margin: 0; padding-bottom: 10px; padding-top: 0px ">{{c.flight_count}}</p>
                                                     </div>
@@ -510,15 +510,15 @@
                                             <div style="border:1px solid #ccc">
                                                 <div style="padding:7px;font-weight:bold;background:#ddd">{{c.crew_name}}</div>
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
-                                                    <div class="  generalInfo chartBox"  >
+                                                    <div class="  generalInfo chartBox">
                                                         <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">S/F</p>
                                                         <p style="text-align: center; font-size: 14px; font-weight :bold;padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.score_per_flight}}</p>
                                                     </div>
-                                                    <div class="  generalInfo chartBox" ng-click="showEvents()"  >
+                                                    <div class="  generalInfo chartBox" ng-click="showEvents()">
                                                         <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Scores</p>
                                                         <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.total_score}}</p>
                                                     </div>
-                                                    <div class="   generalInfo chartBox"  >
+                                                    <div class="   generalInfo chartBox">
                                                         <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Flights</p>
                                                         <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 5px; margin: 0; padding-bottom: 10px; padding-top: 0px ">{{c.flight_count}}</p>
                                                     </div>
@@ -598,7 +598,7 @@
                                             <div class="type-card" style="margin-top:0px">
                                                 <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
                                                     <div id="bar_events_737_route" dx-chart="bar_events_737_route"></div>
-                                                   
+
                                                 </div>
                                             </div>
                                         </div>
@@ -625,7 +625,7 @@
                                                 <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
                                                     <div id="bar_events_md_regs" dx-chart="bar_events_md_regs"></div>
                                                     <div id="bar_events_md_phase" dx-chart="bar_events_md_phase"></div>
-                                                   <!-- <div id="bar_events_md_crew" dx-chart="bar_events_md_crew"></div>-->
+                                                    <!-- <div id="bar_events_md_crew" dx-chart="bar_events_md_crew"></div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -647,6 +647,82 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <div ng-show="activeTab === 'routes'">
+                        <div class="row " style="padding:5px;">
+                            <ul class="nav nav-tabs">
+                                <li style="width:50%;text-align:center" ng-class="{active: activeTab2 === 'B737'}">
+                                    <a style="color: white;padding:7px" ng-style="{'background-color': activeTab2 === 'B737' ? '#00ccff' : '#bfbfbf'}" href="" ng-click="activeTab2 = 'B737'">B737</a>
+                                </li>
+                                <li style="width: 50%; text-align: center" ng-class="{active: activeTab2 === 'MD'}">
+                                    <a style="color: white;padding:7px" ng-style="{'background-color': activeTab2 === 'MD' ? '#00ccff' : '#bfbfbf'}" href="" ng-click="activeTab2 = 'MD'">MD</a>
+                                </li>
+
+                            </ul>
+                            <div class="tab-content ">
+                                <div ng-show="activeTab2 === 'B737'">
+                                    <div style="padding:5px;overflow-y:auto;" ng-style="get_type_content_style()">
+                                        <div ng-repeat="c in ds_route_737" class="col-lg-3" style="padding:5px" ng-click="go_crew(c)">
+                                            <div style="border:1px solid #ccc">
+                                                <div style="padding:7px;font-weight:bold;background:#ddd">{{c.route}}</div>
+                                                <div class="col-lg-2 col-md-3" style="padding :0;">
+                                                    <div class="  generalInfo chartBox">
+                                                        <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">S/F</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight :bold;padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.score_per_flight}}</p>
+                                                    </div>
+                                                    <div class="  generalInfo chartBox" ng-click="showEvents()">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Scores</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.total_score}}</p>
+                                                    </div>
+                                                    <div class="   generalInfo chartBox">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Flights</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 5px; margin: 0; padding-bottom: 10px; padding-top: 0px ">{{c.count}}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-lg-8 col-md-6" style="padding:7px;">
+                                                    <canvas id="chart-route-{{$index}}" width="100" height="60"></canvas>
+                                                </div>
+
+                                                <div class="col-lg-2 col-md-3" style="padding :0;">
+                                                    <div class="  generalInfo chartBox" style="background: #ffb3b3; ">
+                                                        <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">H.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.high_score}}</p>
+                                                    </div>
+                                                    <div class="  generalInfo chartBox" style="background: #ffe6cc; " ng-click="showEvents()">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">M.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px ">{{ c.medium_score}}</p>
+                                                    </div>
+                                                    <div class="   generalInfo chartBox" style="background: #ccfff2; ">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">L.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.low_score}}</p>
+                                                    </div>
+                                                </div>
+
+
+                                                <div style="clear:both"></div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div ng-show="activeTab2 === 'MD'">
+                                    <div style="padding:5px;   ">
+                                        <div style="clear:both"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+
+                        </div>
                     </div>
 
 

@@ -1,261 +1,294 @@
 ﻿'use strict';
-app.controller('reportEFBController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', 'flightBagService', '$sce', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route, flightBagService, $sce) {
-    $scope.prms = $routeParams.prms;
-    $scope.IsFBVisible =true;
-    $scope.IsVrVisible=true;
-    $scope.IsVrVisible=true;
-	var vrs=['m.saghi','pirveysi','h.pirveisi','m.kadivar','mirzaei','rasouli','m.miri','n.sabouri','izadkhah'];
-	$scope.IsVrVisible=vrs.indexOf($rootScope.userName.toLowerCase())==-1;
-	
-	$scope.ASRVR=true;
-	 if ($rootScope.userName.toLowerCase()=='hemati')   $scope.ASRVR=false;
-	 
+app.controller('fix-time-addController', ['$scope', '$compile', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', 'flightBagService', '$sce', function ($scope, $compile, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route, flightBagService, $sce) {
 
-    $scope.isOPSStaff = false;
    
-		
+   
+    //$scope.flights = [
+    //    { id: 1, route: "Tehran → Shiraz", duration: "1h 30m", remark: "On time" },
+    //    { id: 2, route: "Mashhad → Tabriz", duration: "2h", remark: "Delayed" }
+    //];
+    $scope.flights = [];
+    $scope.dg_fix_time_columns = [
+        { dataField: 'Route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 170 },
+        { dataField: 'Duration', caption: 'Duration', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 170 },
+        { dataField: 'remark', caption: 'Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 250 }
+    ];
 
-    $scope.IsFBVisible = $scope.IsFBVisible || $scope.isOPSStaff;
 
-    var isTaxiVisible = false;
-    if ($rootScope.userName.toLowerCase() == 'ashrafi')
-        isTaxiVisible = true;
-	// printElem($('#ofp-doc'));
-    $scope.btn_search = {
-        text: 'Search',
-        type: 'success',
-        icon: 'search',
-        width: 120,
-        // validationGroup: 'ctrsearch',bind 
-        bindingOptions: {},
-        onClick: function (e) {
-            $scope.dg_flight_ds = null;
-            $scope.doRefresh = true;
-            $scope.bind();
-            //var result = e.validationGroup.validate();
+    $scope.dg_fix_time = {
 
-            //if (!result.isValid) {
-            //    General.ShowNotify(Config.Text_FillRequired, 'error');
-            //    return;
-            //}
-            //$scope.dg_flight_total_ds = null;
-            //$scope.dg_flight_ds = null;
-            //var caption = 'From ' + moment($scope.dt_from).format('YYYY-MM-DD') + ' to ' + moment($scope.dt_to).format('YYYY-MM-DD');
-            //$scope.dg_flight_total_instance.columnOption('date', 'caption', caption);
-            //$scope.getCrewFlightsTotal($scope.dt_from, $scope.dt_to);
-        }
-
-    };
-	
-	 $scope.btn_print = {
-        text: 'Print',
-        type: 'default',
+        height: $(window).height() - 110,
+        selection: { mode: 'single' },
+          
+        dataSource: $scope.flights,
+        columns: $scope.dg_fix_time_columns,
        
+        onInitialized: function (e) {
+            $scope.dgInstance = e.component;
+        },
+         onSelectionChanged: function (e) {
+             var data = e.selectedRowsData[0];
+             $scope.selectedRow = data;
+        },
+       
+    };
+
+    flightService.get_fixtime().then(function (data) {
+        $scope.flights = data;
+        $scope.dg_fix_time.dataSource = data;
+        if ($scope.dgInstance) {
+            $scope.dgInstance.option('dataSource', data);
+            $scope.dgInstance.refresh();
+        }
+        
+        console.log("Fixtimes loaded:", data);
+    }).catch(function (errorMsg) {
+        console.error("Error loading fixtimes:", errorMsg);
+    });
+
+    
+
+    
+    $scope.popup_add_visible = false;
+    
+
+    $scope.btn_add = {
+        text: 'Add',
+        type: 'success',
         width: 120,
-        // validationGroup: 'ctrsearch',bind 
-        bindingOptions: {},
-        onClick: function (e) {
-			if ($scope.selectedTabId=='ofp')
-                printElem($('#ofp-doc'),1);
-			if ($scope.selectedTabId=='log')
-                printElem($('#log-con'));
-			if ($scope.selectedTabId=='metar')
-                printElem($('#metar-con'));
-				if ($scope.selectedTabId=='taf')
-                printElem($('#taf-con'));
-				if ($scope.selectedTabId=='notam')
-                printElem($('#notam-con'));
-			
-        }
-
-    };
-    $scope.btn_asr = {
-        text: 'ASR',
-        type: 'default',
-        //icon: 'search',
-        width: '100%', //37,
-
-        onClick: function (e) {
-
-            var flt = $rootScope.getSelectedRow($scope.dg_flight_instance);
-            if (!flt) {
-                General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                return;
-            }
-            var data = { FlightId: flt.ID };
-           
-            $rootScope.$broadcast('InitAsrAddEFB', data);
-			 console.log('init asr efb');
-
-        },
-        bindingOptions: {
-            disabled: '!selectedFlight || !selectedFlight.AttASR'
+        onClick: function () {
+            $scope.newFlight = { Route: "", Duration: "" }; 
+            $scope.popup_add_visible = true;
+            $scope.$applyAsync(); 
         }
     };
 
-    $scope.btn_vr = {
-        text: 'Voyage Report',
-        type: 'default',
-        //icon: 'search',
-        width: '100%', //37,
-
-        onClick: function (e) {
-            var flt = $rootScope.getSelectedRow($scope.dg_flight_instance);
-            if (!flt) {
-                General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                return;
-            }
-            var data = { FlightId: flt.ID };
-
-            $rootScope.$broadcast('InitVrAdd', data);
-
-        },
-        bindingOptions: {
-            disabled: '!selectedFlight || !selectedFlight.AttVoyageReport'
-        }
-    };
-    $scope.btn_dr = {
-        text: 'Dispatch Release',
-        type: 'default',
-        //icon: 'search',
-        width: '100%', //37,
-
-        onClick: function (e) {
-
-            var flt = $rootScope.getSelectedRow($scope.dg_flight_instance);
-            if (!flt) {
-                General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                return;
-            }
-            var data = { FlightId: flt.ID };
-
-            $rootScope.$broadcast('InitDrAdd', data);
-
-
-
-        },
-        bindingOptions: {
-            disabled: '!selectedFlight'
-        }
-    };
-	$scope.btn_to = {
-        text: 'TO',
-        type: 'default',
-        //icon: 'search',
-        width: '100%', //37,
-
-        onClick: function (e) {
-
-            var flt = $rootScope.getSelectedRow($scope.dg_flight_instance);
-            if (!flt) {
-                General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                return;
-            }
-            var data = { FlightId: flt.ID,Flight: flt};
-
-            $rootScope.$broadcast('InitTOAdd', data);
-
-        },
-         
-    };
-    $scope.btn_lnd = {
-        text: 'LND',
-        type: 'default',
-        //icon: 'search',
-        width: '100%', //37,
-
-        onClick: function (e) {
-
-            var flt = $rootScope.getSelectedRow($scope.dg_flight_instance);
-            if (!flt) {
-                General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                return;
-            }
-            var data = { FlightId: flt.ID, Flight: flt };
-
-            $rootScope.$broadcast('InitLdgAdd', data);
-
-        },
-
-    };
-    $scope.btn_ofp = {
-        text: 'OFP',
-        type: 'default',
-        //icon: 'search',
-        width: '100%', //37,
-
-        onClick: function (e) {
-            var flt = $rootScope.getSelectedRow($scope.dg_flight_instance);
-            if (!flt) {
-                General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                return;
-            }
-            var data = { FlightId: flt.ID };
-
-            $rootScope.$broadcast('InitOFPAdd', data);
-
-        },
-        bindingOptions: {
-            disabled: 'IsLegLocked'
-        }
-    };
-    $scope.btn_log = {
-        text: 'Log',
-        type: 'default',
-        //icon: 'search',
-        width: '100%', //37,
-
-        onClick: function (e) {
-            var flt = $rootScope.getSelectedRow($scope.dg_flight_instance);
-            if (!flt) {
-                General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                return;
-            }
-            var data = { FlightId: flt.ID };
-
-            $rootScope.$broadcast('InitLogAdd', data);
-
-        },
-        bindingOptions: {
-            disabled: 'IsLegLocked'
-        }
-    };
-
-    ////10-13////////////
-    $scope.btn_jl = {
-        text: 'Journey Log',
-        type: 'default',
-        //icon: 'search',
-        width: '100%', //37,
-
-        onClick: function (e) {
-            var flt = $rootScope.getSelectedRow($scope.dg_flight_instance);
-            if (!flt) {
-                General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                return;
-            }
-
-            $scope.bindJL(flt.FlightId);
+    $scope.popup_add = {
+        toolbarItems: [
             
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'default', text: 'Save', icon: 'check',
+                    onClick: function () {
+                        console.log('Save clicked', $scope.newFlight);
+                        flightService.save_fixtime($scope.newFlight).then(function (response2) {
+                            if (response2.IsSuccess) {
+                                General.ShowNotify(Config.Text_SavedOk, 'success');
+                                
+                                $scope.flights.push(angular.copy($scope.newFlight));
+                                $scope.dg_fix_time.dataSource = $scope.flights;
+                                if ($scope.dgInstance) $scope.dgInstance.refresh();
 
-        },
+                                $scope.popup_add_visible = false;
+                            } else {
+                                General.ShowNotify('Failed to save', 'error');
+                            }
+                        }, function (err) {
+                            $scope.loadingVisible = false;
+                            General.ShowNotify(err.message || 'Error occurred', 'error');
+                        });
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'danger', text: 'Close', icon: 'remove',
+                    onClick: function () {
+                        $scope.popup_add_visible = false;
+                    }
+                }, toolbar: 'bottom'
+            },
+        ],
+        width: 400,
+        height: 300,
+        showTitle: true,
+        title: "Add Flight",
+        visible: false,
+        dragEnabled: true,
+        closeOnOutsideClick: true,
         bindingOptions: {
-            disabled: '!selectedFlight'
+            visible: "popup_add_visible"
+        },
+        contentTemplate: function (e) {
+            var template = angular.element(`
+            <div style="padding:10px">
+                <div class="form-group">
+                    <label>Route</label>
+                    <input type="text" class="form-control" ng-model="newFlight.Route">
+                </div>
+                <div class="form-group">
+                    <label>Duration</label>
+                    <input type="text" class="form-control" ng-model="newFlight.Duration">
+                </div>
+            </div>
+        `);
+            e.append(template);
+            $compile(template)($scope);
+        }
+    };
+
+
+    $scope.popup_edit_visible = false;   
+    
+    $scope.btn_edit = {
+        text: 'Edit',
+        type: 'default',
+        width: 120,
+        bindingOptions: {},
+        onClick: function () {
+            if (!$scope.selectedRow) {
+                DevExpress.ui.notify("Please select a row to edit", "error", 3000);
+                return;
+            }
+            
+           
+            $scope.editingFlight = angular.copy($scope.selectedRow);
+            
+            $scope.popup_edit_visible = true;
         }
     };
     
-	
-$scope.jlObj = null;
-    $scope.jl = {asr:false,vr:false,pos1:false,pos2:false,sign:''};
-	 $scope.bindJL = function (fid) {
-      
+    
+    $scope.popup_edit = {
+
+
+        toolbarItems: [
+
+           
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'default', text: 'Save', icon: 'check', validationGroup: 'logadd', onClick: function () {
+                        console.log("hey", $scope.editingFlight);
+                        flightService.save_fixtime($scope.editingFlight).then(function (response) {
+                           
+                            if (response.IsSuccess) {
+                                let index = $scope.flights.findIndex(f => f.Route === $scope.editingFlight.Route);
+                                if (index !== -1) {
+                                    $scope.flights[index] = angular.copy($scope.editingFlight);
+                                    $scope.dg_fix_time.dataSource = $scope.flights;
+                                    if ($scope.dgInstance) $scope.dgInstance.refresh();
+                                    $scope.popup_edit_visible = false;
+                                    DevExpress.ui.notify("Flight updated successfully", "success", 2000);
+                                }
+                            } else {
+                                DevExpress.ui.notify("Failed to update flight", "error", 3000);
+                            }
+                        }).catch(function (err) {
+                            DevExpress.ui.notify(err.message || "Error occurred", "error", 3000);
+                        });
+                    }
+
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'before', options: {
+                    type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
+                        $scope.popup_edit_visible = false;
+                    }
+                }, toolbar: 'bottom'
+            },
+        ],
+
+
+        width: 400,
+        height: 300,
+        showTitle: true,
+        title: "Edit Flight",
+        visible: false,
+        dragEnabled: true,
+        closeOnOutsideClick: true,
+        bindingOptions: {
+            visible: "popup_edit_visible"
+        },
+        contentTemplate: function (e) {
+            var template = angular.element(`
+                <div style="padding:10px">
+                    <div class="form-group">
+                        <label>Route</label>
+                        <input type="text" class="form-control" ng-model="editingFlight.Route">
+                    </div>
+                    <div class="form-group">
+                        <label>Duration</label>
+                        <input type="text" class="form-control" ng-model="editingFlight.Duration">
+                    </div>
+                 
+                </div>
+            `);
+            e.append(template);
+            $compile(template)($scope);
+        },
+           
+    };
+    
+
+    $scope.bind = function () {
+        $scope.gridOptions.dataSource = $scope.flights;
+    };
+
+    $scope.btn_delete = {
+        text: 'Delete',
+        type: 'danger',
+        width: 120,
+        bindingOptions: {},
+        onClick: function (e) {
+            if (!$scope.selectedRow) {
+                DevExpress.ui.notify("Please select a row to delete", "error", 3000);
+                return;
+            }
+           
+            const index = $scope.flights.indexOf($scope.selectedRow);
+            console.log(index);
+        console.log(index);
+            if (index !== -1) {
+                $scope.flights.splice(index, 1);
+                $scope.selectedRow = null;
+                let gridInstance = $("#dg_fix_time").dxDataGrid("instance");
+                gridInstance.refresh();
+            }
+        }
+
+    };
+
+    
+    if (!authService.isAuthorized()) {
+
+        authService.redirectToLogin();
+    }
+    else {
+        $rootScope.page_title = ' > Fix Time';
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    $scope.jlObj = null;
+    $scope.jl = { asr: false, vr: false, pos1: false, pos2: false, sign: '' };
+    $scope.bindJL = function (fid) {
+
         $scope.jl = { asr: false, vr: false, pos1: false, pos2: false, sign: '' };
         //jl.ReportingTime
 
         $scope.loadingVisible = true;
 
         flightBagService.getJL(fid).then(function (response) {
-			console.log(response);
+            console.log(response);
             $scope.loadingVisible = false;
             //_d.BlockTime2 = $scope.formatMinutes(_d.BlockTime);
             //if (_d.JLSignedBy) {
@@ -269,7 +302,7 @@ $scope.jlObj = null;
             $scope.jl = response;
             $scope.jl.STD2 = CreateDate($scope.jl.STD);
             $scope.jl.DutyEnd2 = CreateDate($scope.jl.DutyEnd);
-           
+
             //response.legs[i]
             //$scope.jl.ReportingTime
             $scope.jl.StartTime = (CreateDate(response.legs[0].STD)).addMinutes(-60);
@@ -323,7 +356,7 @@ $scope.jlObj = null;
             //bahrami-6-2
             $scope.jl.crewscockpit = [];
             $scope.jl.crewscabin = [];
-            console.log('cockpit',cockpit);
+            console.log('cockpit', cockpit);
             $.each(cockpit, function (_i, co) {
                 if (_i == 0) {
                     co.TotalDuty = $scope.jl.Duty;
@@ -331,7 +364,7 @@ $scope.jlObj = null;
                 }
                 if (co.Position == "Captain")
                     co.Position = "CPT";
-                if (co.Position == "P2" || co.Position == "FO"  )
+                if (co.Position == "P2" || co.Position == "FO")
                     co.Position = "F/O";
                 if (co.IsPositioning)
                     co.Position = 'DH';
@@ -421,30 +454,30 @@ $scope.jlObj = null;
                 $("#_jlsign").attr('src', $scope.jl.sign);
 
             $scope.isContentVisible = true;
-            console.log('jl jl jl jl',$scope.jl);
-			
-       $scope.popup_jl_visible = true;
+            console.log('jl jl jl jl', $scope.jl);
+
+            $scope.popup_jl_visible = true;
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
 
- 
+
 
     };
 
     $scope.__bindJL = function (fid) {
-        $scope.jl = { asr: false, vr: false, pos1: false, pos2: false ,sign:''};  
+        $scope.jl = { asr: false, vr: false, pos1: false, pos2: false, sign: '' };
         $scope.loadingVisible = true;
 
         flightBagService.getJL(fid).then(function (response) {
             $scope.loadingVisible = false;
-            
-            
+
+
             $scope.jlObj = response;
             $scope.jl = response;
             if (response.legs[0].JLSignedBy)
                 $scope.jl.sign = signFiles + response.legs[0].JLSignedBy + ".jpg";
             console.log($scope.jlObj);
-           
+
 
             $scope.jl.sectors = [];
             for (var i = 0; i < 6; i++) {
@@ -563,7 +596,7 @@ $scope.jlObj = null;
 
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
- 
+
 
     };
 
@@ -580,8 +613,8 @@ $scope.jlObj = null;
         }
         return obj;
     };
-	//oooo
-    function printElem($elem,ofp) {
+    //oooo
+    function printElem($elem, ofp) {
 
         var contents = $elem.html();//'<h1>Vahid</h1>' $elem.html();
         var frame1 = $('<iframe id="_iframe" />');
@@ -616,102 +649,102 @@ $scope.jlObj = null;
         frameDoc.document.write('</body></html>');
         frameDoc.document.close();
         setTimeout(function () {
-			//nilo
-			if (ofp){
-			   /////////////////
-				 var sob = 0;
-        var sobValue = null;
-        var sobprops = ['prop_pax_adult', 'prop_pax_child', 'prop_pax_infant', crewAId, crewBId, crewCId];
-          $scope.OFP=$scope.entity;
+            //nilo
+            if (ofp) {
+                /////////////////
+                var sob = 0;
+                var sobValue = null;
+                var sobprops = ['prop_pax_adult', 'prop_pax_child', 'prop_pax_infant', crewAId, crewBId, crewCId];
+                $scope.OFP = $scope.entity;
 
 
-				  $.each( $scope.OFP.props, function (_i, _d) {
-            
-            if (_d.PropName == sobId) {
- 
-                 sobValue = _d.PropValue;
-             }
+                $.each($scope.OFP.props, function (_i, _d) {
 
-             
-            if (_d.PropValue)
-                $('#_iframe').contents().find('#'+_d.PropName).val(_d.PropValue);
-            if (_d.PropName == 'prop_pax_adult') {
-                 $('#_iframe').contents().find('#'+_d.PropName).val($scope.selectedFlight.PaxAdult);
-                
-            }
-            if (_d.PropName == 'prop_pax_child'  ) {
-                 $('#_iframe').contents().find('#'+_d.PropName).val($scope.selectedFlight.PaxChild);
-                 
-            }
-            if (_d.PropName == 'prop_pax_infant'  ) {
-                $('#_iframe').contents().find('#'+_d.PropName).val($scope.selectedFlight.PaxInfant);
-               
-            }
-            //prop_offblock
+                    if (_d.PropName == sobId) {
 
-            if (_d.PropName == 'prop_offblock'  ) {
-                 $('#_iframe').contents().find('#'+_d.PropName).val(toTime(($scope.selectedFlight.BlockOff)));
-                
-            }
-            //prop_takeoff
-            if (_d.PropName == 'prop_takeoff'  ) {
-                 
-                 $('#_iframe').contents().find('#'+_d.PropName).val(toTime(($scope.selectedFlight.TakeOff)));
-                 
-            }
-            //prop_landing
-            if (_d.PropName == 'prop_landing' ) {
-                 $('#_iframe').contents().find('#'+_d.PropName).val(toTime( ($scope.selectedFlight.Landing)));
-                 
-            }
-            //prop_onblock
-            if (_d.PropName == 'prop_onblock'  ) {
-                 $('#_iframe').contents().find('#'+_d.PropName).val(toTime($scope.selectedFlight.BlockOn));
-                
+                        sobValue = _d.PropValue;
+                    }
+
+
+                    if (_d.PropValue)
+                        $('#_iframe').contents().find('#' + _d.PropName).val(_d.PropValue);
+                    if (_d.PropName == 'prop_pax_adult') {
+                        $('#_iframe').contents().find('#' + _d.PropName).val($scope.selectedFlight.PaxAdult);
+
+                    }
+                    if (_d.PropName == 'prop_pax_child') {
+                        $('#_iframe').contents().find('#' + _d.PropName).val($scope.selectedFlight.PaxChild);
+
+                    }
+                    if (_d.PropName == 'prop_pax_infant') {
+                        $('#_iframe').contents().find('#' + _d.PropName).val($scope.selectedFlight.PaxInfant);
+
+                    }
+                    //prop_offblock
+
+                    if (_d.PropName == 'prop_offblock') {
+                        $('#_iframe').contents().find('#' + _d.PropName).val(toTime(($scope.selectedFlight.BlockOff)));
+
+                    }
+                    //prop_takeoff
+                    if (_d.PropName == 'prop_takeoff') {
+
+                        $('#_iframe').contents().find('#' + _d.PropName).val(toTime(($scope.selectedFlight.TakeOff)));
+
+                    }
+                    //prop_landing
+                    if (_d.PropName == 'prop_landing') {
+                        $('#_iframe').contents().find('#' + _d.PropName).val(toTime(($scope.selectedFlight.Landing)));
+
+                    }
+                    //prop_onblock
+                    if (_d.PropName == 'prop_onblock') {
+                        $('#_iframe').contents().find('#' + _d.PropName).val(toTime($scope.selectedFlight.BlockOn));
+
+                    }
+
+                    if (sobprops.indexOf(_d.PropName) != -1) {
+                        var vlu = _toNum($('#_iframe').contents().find('#' + _d.PropName).val());
+                        if (!isNaN(vlu))
+                            sob += vlu;
+                    }
+
+                });
+
+
+                if (sob != sobValue) {
+                    $('#_iframe').contents().find('#' + sobId).val(sob);
+
+                }
+                if (true) {
+                    var times = $('#_iframe').contents().find("input[data-info^='time_']");// $("input[data-info^='time_']");
+                    var objs = [];
+                    $.each(times, function (_w, _t) {
+                        var data = $(_t).data('info');
+                        objs.push({ id: $(_t).attr('id'), index: Number(data.split('_')[1]), value: data.split('_')[2] });
+                    });
+                    objs = Enumerable.From(objs).OrderBy('$.index').ToArray();
+                    var to = CreateDate($scope.selectedFlight.TakeOff);
+                    $.each(objs, function (_w, _t) {
+                        to = new Date(to.addMinutes(_t.value));
+                        $('#_iframe').contents().find('#' + _t.id).val(toTime(to));
+
+                    });
+                }
+
+
+                if ($scope.url_sign)
+                    $('#_iframe').contents().find('#sig_pic_img').attr('src', $scope.url_sign);
+                else
+                    $('#_iframe').contents().find('#sig_pic_img').attr('src', '');
+
+                /////END OFP
             }
 
-            if (sobprops.indexOf(_d.PropName) != -1) {
-                var vlu = _toNum( $('#_iframe').contents().find('#'+_d.PropName).val());
-                if (!isNaN(vlu))
-                    sob += vlu;
-            }
-             
-        });
-				
-				
-				 if (sob != sobValue) {
-             $('#_iframe').contents().find('#'+sobId).val(sob);
-            
-        } 
-        if (true) {
-            var times = $('#_iframe').contents().find("input[data-info^='time_']");// $("input[data-info^='time_']");
-            var objs = [];
-            $.each(times, function (_w, _t) {
-                var data = $(_t).data('info');
-                objs.push({ id: $(_t).attr('id'), index: Number(data.split('_')[1]), value: data.split('_')[2] });
-            });
-            objs = Enumerable.From(objs).OrderBy('$.index').ToArray();
-            var to = CreateDate ($scope.selectedFlight.TakeOff);
-            $.each(objs, function (_w, _t) {
-                to = new Date(to.addMinutes(_t.value));
-                $('#_iframe').contents().find('#' + _t.id).val(toTime(to));
-                
-            });
-        }
 
-        
-        if ($scope.url_sign)
-           $('#_iframe').contents().find('#sig_pic_img').attr('src', $scope.url_sign);
-        else
-            $('#_iframe').contents().find('#sig_pic_img').attr('src', '');
-				
-				/////END OFP
-			}
-			
-			
-			
-			
-			
+
+
+
             var pos1 = $('#_iframe').contents().find('#pos1');
             var pos2 = $('#_iframe').contents().find('#pos2');
             var vr = $('#_iframe').contents().find('#vr');
@@ -732,9 +765,9 @@ $scope.jlObj = null;
                 window.frames["frame1"].focus();
                 window.frames["frame1"].print();
                 frame1.remove();
-            },2000);
-             
-           
+            }, 2000);
+
+
         }, 500);
     }
     $scope.scroll_jl_height = 200;
@@ -755,14 +788,14 @@ $scope.jlObj = null;
         toolbarItems: [
 
 
-              
+
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'default', text: 'Print', icon: 'print', bindingOptions: { disabled: 'IsApproved' }, onClick: function (arg) {
 
 
                         printElem($('#jl'));
-                        
+
 
                     }
 
@@ -784,7 +817,7 @@ $scope.jlObj = null;
         onShown: function (e) {
 
             $('#pos1').prop('checked', $scope.jl.pos1);
-             
+
             $('#pos2').prop('checked', $scope.jl.pos2);
             $('#vr').prop('checked', $scope.jl.vr);
             $('#asr').prop('checked', $scope.jl.asr);
@@ -792,12 +825,12 @@ $scope.jlObj = null;
                 $("#_jlsign").attr('src', $scope.jl.sign);
         },
         onHiding: function () {
-            $scope.jl = { asr: false, vr: false, pos1: false, pos2: false,sign:'' };
+            $scope.jl = { asr: false, vr: false, pos1: false, pos2: false, sign: '' };
             $('#pos1').prop('checked', $scope.jl.pos1);
             $('#pos2').prop('checked', $scope.jl.pos2);
             $('#vr').prop('checked', $scope.jl.vr);
             $('#asr').prop('checked', $scope.jl.asr);
-            $("#_jlsign").attr('src','');
+            $("#_jlsign").attr('src', '');
             $scope.popup_jl_visible = false;
 
         },
@@ -805,26 +838,14 @@ $scope.jlObj = null;
             visible: 'popup_jl_visible',
 
             title: 'popup_jl_title',
-             
+
 
         }
     };
-   /////////////////////////
+    /////////////////////////
 
 
-    $scope.btn_persiandate = {
-        //text: 'Search',
-        type: 'default',
-        icon: 'event',
-        width: 35,
-        //validationGroup: 'dlasearch',
-        bindingOptions: {},
-        onClick: function (e) {
-
-            $scope.popup_date_visible = true;
-        }
-
-    };
+    
     $scope.popup_date_visible = false;
     $scope.popup_date_title = 'Date Picker';
     var pd1 = null;
@@ -944,7 +965,7 @@ $scope.jlObj = null;
 
             $.each(response, function (_i, _d) {
                 _d.BlockTime2 = $scope.formatMinutes(_d.BlockTime);
-               _d.FlightTime2 = $scope.formatMinutes(_d.FlightTime);
+                _d.FlightTime2 = $scope.formatMinutes(_d.FlightTime);
                 if (_d.JLSignedBy) {
                     //$scope.isEditable = false;
                     _d.url_sign = signFiles + _d.PICId + ".jpg";
@@ -952,24 +973,24 @@ $scope.jlObj = null;
                     _d.signDate = moment(new Date(_d.JLDatePICApproved)).format('YYYY-MM-DD HH:mm');
                 }
 
-            //    var std = (new Date(_d.STDDay));
-            //    persianDate.toLocale('en');
-            //    _d.STDDayPersian = new persianDate(std).format("DD-MM-YYYY");
-            //    _d.FlightTime2 = $scope.formatMinutes(_d.FlightTime);
-            //    _d.SITATime2 = $scope.formatMinutes(_d.SITATime);
-            //    _d.FlightTimeActual2 = $scope.formatMinutes(_d.FlightTimeActual);
-            //    _d.BlockTime2 = $scope.formatMinutes(_d.BlockTime);
+                //    var std = (new Date(_d.STDDay));
+                //    persianDate.toLocale('en');
+                //    _d.STDDayPersian = new persianDate(std).format("DD-MM-YYYY");
+                //    _d.FlightTime2 = $scope.formatMinutes(_d.FlightTime);
+                //    _d.SITATime2 = $scope.formatMinutes(_d.SITATime);
+                //    _d.FlightTimeActual2 = $scope.formatMinutes(_d.FlightTimeActual);
+                //    _d.BlockTime2 = $scope.formatMinutes(_d.BlockTime);
 
-           
 
-            //    _d.TaxiTO = subtractDates(_d.Takeoff, _d.ChocksOut);
-            //    _d.TaxiLND = subtractDates(_d.ChocksIn, _d.Landing);
-            //    _d.TaxiTO2 = $scope.formatMinutes(_d.TaxiTO);
-            //    _d.TaxiLND2 = $scope.formatMinutes(_d.TaxiLND);
 
-            //    //magu6
-            //    _d.TotalPaxAll = _d.TotalPax + _d.PaxInfant;
-             });
+                //    _d.TaxiTO = subtractDates(_d.Takeoff, _d.ChocksOut);
+                //    _d.TaxiLND = subtractDates(_d.ChocksIn, _d.Landing);
+                //    _d.TaxiTO2 = $scope.formatMinutes(_d.TaxiTO);
+                //    _d.TaxiLND2 = $scope.formatMinutes(_d.TaxiLND);
+
+                //    //magu6
+                //    _d.TotalPaxAll = _d.TotalPax + _d.PaxInfant;
+            });
             $scope.dg_flight_ds = response;
 
 
@@ -1108,7 +1129,7 @@ $scope.jlObj = null;
         { Id: 4, Title: 'Starting' },
         { Id: 5, Title: 'All' },
     ];
-    $scope.fstatus =5;
+    $scope.fstatus = 5;
     $scope.sb_Status = {
         placeholder: 'Status',
         showClearButton: false,
@@ -1131,7 +1152,7 @@ $scope.jlObj = null;
 
     $scope.asrvrDs = [
         { Id: 1, Title: 'ASR & VR' },
-        
+
         { Id: 5, Title: 'All' },
     ];
     $scope.fasrvr = 5;
@@ -1149,7 +1170,7 @@ $scope.jlObj = null;
         valueExpr: 'Id',
         bindingOptions: {
             value: 'fasrvr',
-			 
+
 
 
         }
@@ -1379,7 +1400,7 @@ $scope.jlObj = null;
         { text: "METAR", id: 'metar' },
         { text: "TAF", id: 'taf' },
         { text: "NOTAM", id: 'notam' },
-		  { text: "CHARTS", id: 'charts' },
+        { text: "CHARTS", id: 'charts' },
     ];
 
     $scope.$watch("selectedTabIndex", function (newValue) {
@@ -1461,7 +1482,7 @@ $scope.jlObj = null;
         }
 
     };
-     
+
     ///////////////////////////////////
     $scope.dg_flight_columns = [];
 
@@ -1476,19 +1497,19 @@ $scope.jlObj = null;
         //    }, name: 'row', caption: '#', width: 70, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader' 
         //},
         //{ dataField: 'RN', caption: '#', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 70, name: 'rn', fixed: true, fixedPosition: 'left', visible: false },
-    
+
         { dataField: 'STDDay', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 110, format: 'yy-MMM-dd', sortIndex: 0, sortOrder: 'asc', fixed: true, fixedPosition: 'left' },
         //{ dataField: 'PDate', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'left' },
         //{ dataField: 'FlightType', caption: 'Day', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'left', fixed: true, fixedPosition: 'left' },
-        { dataField: 'AttASR', caption: 'ASR', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 50, fixed: true, fixedPosition: 'left',visible:$scope.ASRVR },
-        { dataField: 'AttVoyageReport', caption: 'VR', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 50, fixed: true, fixedPosition: 'left',visible:$scope.ASRVR },
+        { dataField: 'AttASR', caption: 'ASR', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 50, fixed: true, fixedPosition: 'left', visible: $scope.ASRVR },
+        { dataField: 'AttVoyageReport', caption: 'VR', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 50, fixed: true, fixedPosition: 'left', visible: $scope.ASRVR },
         { dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90, fixed: false, fixedPosition: 'left', fixed: true, fixedPosition: 'left' },
         { dataField: 'FlightStatus', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', fixed: true, fixedPosition: 'left' },
         //{ dataField: 'AircraftType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90, sortIndex: 1, sortOrder: 'asc' },
         { dataField: 'Register', caption: 'Reg', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, sortIndex: 2, sortOrder: 'asc' },
         { dataField: 'FromAirportIATA', caption: 'From', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
         { dataField: 'ToAirportIATA', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
-        //{ dataField: 'STDLocal', caption: 'Sch. Dep.', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm', },minWidth
+        //{ dataField: 'STDLocal', caption: 'Sch. Dep.', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm', },
         //{ dataField: 'STALocal', caption: 'Sch. Arr.', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
         //{ dataField: 'DepartureLocal', caption: 'Dep.', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm', sortIndex: 2, sortOrder: 'asc' },
         //{ dataField: 'ArrivalLocal', caption: 'Arr.', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm' },
@@ -1515,14 +1536,14 @@ $scope.jlObj = null;
         // { dataField: 'CabinTotal', caption: 'Cabin', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, },
         { dataField: 'P1Name', caption: 'Captain', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
         { dataField: 'IPName', caption: 'IP', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        
+
         //   { dataField: 'FO', caption: 'FO', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
         //   { dataField: 'Safety', caption: 'Safety', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
 
 
 
         { dataField: 'BlockTime2', caption: 'Block Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
-       // { dataField: 'FlightTime2', caption: 'Flight Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
+        // { dataField: 'FlightTime2', caption: 'Flight Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
 
         //{ dataField: 'TaxiTO2', caption: 'Taxi T/O', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right', visible: isTaxiVisible },
         //{ dataField: 'TaxiLND2', caption: 'Taxi LND', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right', visible: isTaxiVisible },
@@ -1557,8 +1578,8 @@ $scope.jlObj = null;
         $scope.selectedFlightCrews = [];
         //$scope.loadingVisible = true;
         flightBagService.getAppLegCrews(flightId).then(function (response) {
-            $scope.selectedFlightCrews = response ;
-            
+            $scope.selectedFlightCrews = response;
+
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     };
     var toTime = function (dt) {
@@ -1578,8 +1599,8 @@ $scope.jlObj = null;
         }
     };
     function CreateDate(s) {
-		if (!s)
-			return null;
+        if (!s)
+            return null;
         s = s.toString();
         var prts = s.split('T');
         var dts = prts[0].split('-');
@@ -1593,56 +1614,56 @@ $scope.jlObj = null;
         $('.prop').html(' ');
 
         //9-11
-        
+
         var sob = 0;
         var sobValue = null;
         var sobprops = ['prop_pax_adult', 'prop_pax_child', 'prop_pax_infant', crewAId, crewBId, crewCId];
 
-        
 
-        $.each( props, function (_i, _d) {
-            
+
+        $.each(props, function (_i, _d) {
+
             if (_d.PropName == sobId) {
 
                 sobValue = _d.PropValue;
             }
 
-             
+
             if (_d.PropValue)
                 $('#' + _d.PropName).val(_d.PropValue);
             if (_d.PropName == 'prop_pax_adult') {
                 $('#' + _d.PropName).val($scope.selectedFlight.PaxAdult);
-                
+
             }
-            if (_d.PropName == 'prop_pax_child'  ) {
+            if (_d.PropName == 'prop_pax_child') {
                 $('#' + _d.PropName).val($scope.selectedFlight.PaxChild);
-                 
+
             }
-            if (_d.PropName == 'prop_pax_infant'  ) {
+            if (_d.PropName == 'prop_pax_infant') {
                 $('#' + _d.PropName).val($scope.selectedFlight.PaxInfant);
-               
+
             }
             //prop_offblock
 
-            if (_d.PropName == 'prop_offblock'  ) {
+            if (_d.PropName == 'prop_offblock') {
                 $('#' + _d.PropName).val(toTime(($scope.selectedFlight.BlockOff)));
-                
+
             }
             //prop_takeoff
-            if (_d.PropName == 'prop_takeoff'  ) {
-                 
+            if (_d.PropName == 'prop_takeoff') {
+
                 $('#' + _d.PropName).val(toTime(($scope.selectedFlight.TakeOff)));
-                 
+
             }
             //prop_landing
-            if (_d.PropName == 'prop_landing' ) {
-                $('#' + _d.PropName).val(toTime( ($scope.selectedFlight.Landing)));
-                 
+            if (_d.PropName == 'prop_landing') {
+                $('#' + _d.PropName).val(toTime(($scope.selectedFlight.Landing)));
+
             }
             //prop_onblock
-            if (_d.PropName == 'prop_onblock'  ) {
+            if (_d.PropName == 'prop_onblock') {
                 $('#' + _d.PropName).val(toTime($scope.selectedFlight.BlockOn));
-                
+
             }
 
             if (sobprops.indexOf(_d.PropName) != -1) {
@@ -1650,13 +1671,13 @@ $scope.jlObj = null;
                 if (!isNaN(vlu))
                     sob += vlu;
             }
-             
+
         });
 
         if (sob != sobValue) {
             $('#' + sobId).val(sob);
-            
-        } 
+
+        }
         if (true) {
             var times = $("input[data-info^='time_']");
             var objs = [];
@@ -1665,22 +1686,22 @@ $scope.jlObj = null;
                 objs.push({ id: $(_t).attr('id'), index: Number(data.split('_')[1]), value: data.split('_')[2] });
             });
             objs = Enumerable.From(objs).OrderBy('$.index').ToArray();
-            var to = CreateDate ($scope.selectedFlight.TakeOff);
+            var to = CreateDate($scope.selectedFlight.TakeOff);
             $.each(objs, function (_w, _t) {
                 to = new Date(to.addMinutes(_t.value));
                 $('#' + _t.id).val(toTime(to));
-                
+
             });
         }
 
-        
+
         if ($scope.url_sign)
             $('#sig_pic_img').attr('src', $scope.url_sign);
         else
             $('#sig_pic_img').attr('src', '');
-		
+
     };
-	function _printElem($elem) {
+    function _printElem($elem) {
 
         var contents = $elem.html();//'<h1>Vahid</h1>' $elem.html();
         var frame1 = $('<iframe />');
@@ -1718,7 +1739,7 @@ $scope.jlObj = null;
             frame1.remove();
         }, 500);
     }
-	 $scope._COR = function (r) {
+    $scope._COR = function (r) {
         //if (r.FRE)
         //    return r.FRE;
         return r.COR;
@@ -1729,12 +1750,12 @@ $scope.jlObj = null;
             return '';
         return d;
     }
-	$scope._Time = function (d) {
+    $scope._Time = function (d) {
         if (!d)
             return d;
         return d.substr(0, 5);
     }
-	 $scope.fillSOB = function () {
+    $scope.fillSOB = function () {
         var _sob = ($scope.selectedFlight.PaxAdult ? $scope.selectedFlight.PaxAdult : 0)
             + ($scope.selectedFlight.PaxChild ? $scope.selectedFlight.PaxChild : 0)
             + ($scope.selectedFlight.PaxInfant ? $scope.selectedFlight.PaxInfant : 0);
@@ -1781,94 +1802,93 @@ $scope.jlObj = null;
             });
         }
     }
-	 $scope.fuel_total = 0;
+    $scope.fuel_total = 0;
     $scope.plan_fuel_offblock = 0;
     $scope.plan_fuel_takeoff = 0;
-	
-	 $scope.getPlannedFuelValue=function(x){
-		
-		if (x.prm=='TOF')
-		{
-			var p_tof = Enumerable.From($scope.entity.JFuel).Where('$._key=="fuel_tof"').FirstOrDefault();
-			return p_tof.pvalue;
-		}
-		else if (x.prm=='OFF BLK'){
-			var p_offblock = Enumerable.From($scope.entity.JFuel).Where('$._key=="fuel_offblk"').FirstOrDefault();
-			return p_offblock.pvalue;
-		}
-		else
-			return x.value;
-	};
-	
-	$scope.fillOFP =function(data,callback){
-		 data.JPlan = data.JPlan ? JSON.parse(data.JPlan) : [];
+
+    $scope.getPlannedFuelValue = function (x) {
+
+        if (x.prm == 'TOF') {
+            var p_tof = Enumerable.From($scope.entity.JFuel).Where('$._key=="fuel_tof"').FirstOrDefault();
+            return p_tof.pvalue;
+        }
+        else if (x.prm == 'OFF BLK') {
+            var p_offblock = Enumerable.From($scope.entity.JFuel).Where('$._key=="fuel_offblk"').FirstOrDefault();
+            return p_offblock.pvalue;
+        }
+        else
+            return x.value;
+    };
+
+    $scope.fillOFP = function (data, callback) {
+        data.JPlan = data.JPlan ? JSON.parse(data.JPlan) : [];
         data.JAPlan1 = data.JAPlan1 ? JSON.parse(data.JAPlan1) : [];
         data.JAPlan2 = data.JAPlan2 ? JSON.parse(data.JAPlan2) : [];
-		data.JFuel = data.JFuel ? JSON.parse(data.JFuel) : [];
-          var _ejf=['HOLD','ZFW','TOW','LW','REQ','EZFW','ETOW','ELW'];
-		data.JFuel=Enumerable.From( data.JFuel).Where(function(x){return _ejf.indexOf(x.prm)==-1;}).ToArray();
-		
-		console.log('FUEL',data.JFuel);
-		
-		 data.JCSTBL = data.JCSTBL ? JSON.parse(data.JCSTBL) : [];
+        data.JFuel = data.JFuel ? JSON.parse(data.JFuel) : [];
+        var _ejf = ['HOLD', 'ZFW', 'TOW', 'LW', 'REQ', 'EZFW', 'ETOW', 'ELW'];
+        data.JFuel = Enumerable.From(data.JFuel).Where(function (x) { return _ejf.indexOf(x.prm) == -1; }).ToArray();
+
+        console.log('FUEL', data.JFuel);
+
+        data.JCSTBL = data.JCSTBL ? JSON.parse(data.JCSTBL) : [];
         data.JALDRF = data.JALDRF ? JSON.parse(data.JALDRF) : [];
-         data.JALDRF_FL = Enumerable.From(data.JALDRF).Where('$.FL =="'+data.FLL+'"').FirstOrDefault();
-        data.JALDRF = Enumerable.From(data.JALDRF).Where('$.FL !="'+data.FLL+'"').ToArray();
-        
-        
+        data.JALDRF_FL = Enumerable.From(data.JALDRF).Where('$.FL =="' + data.FLL + '"').FirstOrDefault();
+        data.JALDRF = Enumerable.From(data.JALDRF).Where('$.FL !="' + data.FLL + '"').ToArray();
+
+
         data.JWTDRF = data.JWTDRF ? JSON.parse(data.JWTDRF) : [];
-		
+
         console.log('JPlan', data.JPlan);
         $scope.plan_fuel_offblock = 0;
         $scope.plan_fuel_takeoff = 0;
         try {
-			
+
             $scope.fuel_total = $scope.flight.FuelRemaining + $scope.flight.FuelUplift;
             var p_offblock = Enumerable.From(data.JFuel).Where('$._key=="fuel_offblk"').FirstOrDefault();
-			//data.JFuel.OFFPlanned=JSON.parse( JSON.stringify( p_offblock ));
-			p_offblock.pvalue=p_offblock.value;
+            //data.JFuel.OFFPlanned=JSON.parse( JSON.stringify( p_offblock ));
+            p_offblock.pvalue = p_offblock.value;
             if (p_offblock)
                 $scope.plan_fuel_offblock = p_offblock.value;
 
 
             var p_tof = Enumerable.From(data.JFuel).Where('$._key=="fuel_tof"').FirstOrDefault();
             if (p_tof)
-			  $scope.plan_fuel_takeoff = p_tof.value;
-             
-			 
-			//data.JFuel.TOFPlanned=JSON.parse( JSON.stringify( p_tof ));
-			// 	console.log('pln fue',data.JFuel);
-            p_tof.pvalue=p_tof.value;
-			p_tof.value = $scope.fuel_total - 200;
+                $scope.plan_fuel_takeoff = p_tof.value;
+
+
+            //data.JFuel.TOFPlanned=JSON.parse( JSON.stringify( p_tof ));
+            // 	console.log('pln fue',data.JFuel);
+            p_tof.pvalue = p_tof.value;
+            p_tof.value = $scope.fuel_total - 200;
             p_offblock.value = $scope.fuel_total;
 
             $.each(data.JPlan, function (_i, _d) {
                 _d._FRE = _d.FRE;
                 _d.FRE = $scope.fuel_total - _d.FUS;
             });
-			
-			var _alt_remain=Number($scope.fuel_total)-Number(data.FPTripFuel)-200;
-			var _extra=$scope.fuel_total - $scope.plan_fuel_offblock;
-			
-			$.each(data.JAPlan1, function (_i, _d) {
+
+            var _alt_remain = Number($scope.fuel_total) - Number(data.FPTripFuel) - 200;
+            var _extra = $scope.fuel_total - $scope.plan_fuel_offblock;
+
+            $.each(data.JAPlan1, function (_i, _d) {
                 _d._FRE = _d.FRE;
-                _d.FRE = Number(_d.FRE)+_extra;
+                _d.FRE = Number(_d.FRE) + _extra;
             });
-			$.each(data.JAPlan2, function (_i, _d) {
+            $.each(data.JAPlan2, function (_i, _d) {
                 _d._FRE = _d.FRE;
-                _d.FRE = Number(_d.FRE)+_extra;
+                _d.FRE = Number(_d.FRE) + _extra;
             });
 
         }
         catch (e_f) {
         }
 
-        
-      
-       
 
 
-        
+
+
+
+
         console.log('plan offblock   ASDASDASDASD ', $scope.plan_fuel_offblock);
         try {
 
@@ -1883,45 +1903,45 @@ $scope.jlObj = null;
         catch (eer) {
 
         }
-		
-		try{
-			//alert($scope.fuel_total);
-			//alert(data.FPTripFuel);
-			 $scope.DIST=data.JPlan[data.JPlan.length-1].TDS;
-			
-		}
-		catch(e_a1){
-		}
-       
-	    data.WDCLB_DS=data.WDCLB ? data.WDCLB.split('*'):[];
-		data.WDDES_DS=data.WDDES ? data.WDDES.split('*'):[];
-		
-		var WDTMP_p1=data.WDTMP ? (data.WDTMP.split('^')[0]).split('_'):[];
-		var WDTMP_p2=data.WDTMP? (data.WDTMP.split('^')[1]).replaceAll('_','').replaceAll('FL', '<span class="spfl">FL').replaceAll(':', '</span>').split('*'):[];
-		data.WDTMP_DS1=WDTMP_p1;
-		data.WDTMP_DS2=[];
-		$.each(WDTMP_p2,function(_h,_k){
-			data.WDTMP_DS2.push(
-			{
-				id:_h,
-				txt:_k
-			}
-			);
-			
-		});
-		
-		console.log('WDTMP');
-		console.log(data.WDTMP_DS1);
-		console.log(data.WDTMP_DS2);
-		
-		
+
+        try {
+            //alert($scope.fuel_total);
+            //alert(data.FPTripFuel);
+            $scope.DIST = data.JPlan[data.JPlan.length - 1].TDS;
+
+        }
+        catch (e_a1) {
+        }
+
+        data.WDCLB_DS = data.WDCLB ? data.WDCLB.split('*') : [];
+        data.WDDES_DS = data.WDDES ? data.WDDES.split('*') : [];
+
+        var WDTMP_p1 = data.WDTMP ? (data.WDTMP.split('^')[0]).split('_') : [];
+        var WDTMP_p2 = data.WDTMP ? (data.WDTMP.split('^')[1]).replaceAll('_', '').replaceAll('FL', '<span class="spfl">FL').replaceAll(':', '</span>').split('*') : [];
+        data.WDTMP_DS1 = WDTMP_p1;
+        data.WDTMP_DS2 = [];
+        $.each(WDTMP_p2, function (_h, _k) {
+            data.WDTMP_DS2.push(
+                {
+                    id: _h,
+                    txt: _k
+                }
+            );
+
+        });
+
+        console.log('WDTMP');
+        console.log(data.WDTMP_DS1);
+        console.log(data.WDTMP_DS2);
+
+
         $scope.entity = data;
         setTimeout(function () {
             callback();
         }, 100);
-		
-	};
-	 function isNumeric(str) {
+
+    };
+    function isNumeric(str) {
         if (typeof str != "string") return false // we only process strings!  
         return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
             !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
@@ -1933,104 +1953,104 @@ $scope.jlObj = null;
         $scope.OFP = null;
         $scope.OFPHtml = '';
         //$scope.loadingVisible = true;
-		$scope.entity={};
-		 $('.prop').val('');
+        $scope.entity = {};
+        $('.prop').val('');
         flightBagService.getAppLegOFP(flightId).then(function (response) {
-		    $scope.fillOFP(response,function(){
-				$scope.props = response.props;
-				 var updates = [];
-                 var takeOffChanged = false;
-                 var sob = 0;
-                 var sobValue = null;
-                 var sobprops = ['prop_pax_adult', 'prop_pax_child', 'prop_pax_infant', crewAId, crewBId, crewCId];
-                 $('#prop_fuel_req').attr('readonly', true).addClass('noborder');
-				 $.each($scope.props, function (_i, _d) {
-
-                                                
-                                                if (_d.PropName == 'prop_fuel_extra') {
-                                                    
-                                                    if ($scope.fuel_total)
-                                                        $('#' + _d.PropName).val($scope.fuel_total - $scope.plan_fuel_offblock);
-                                                    else
-                                                       $('#' + _d.PropName).val(0);
-                                                    $('#' + _d.PropName + '_due').val($scope.selectedFlight.ALT3);
-                                                }
-
-                                                else
-                                                    if (_d.PropValue)
-                                                        $('#' + _d.PropName).val(_d.PropValue);
-
-                                                if (_d.PropName.includes('_usd_') && isNumeric(_d.PropValue)) {
-
-                                                    try {
-                                                        var ofp = $('#' + _d.PropName).data('ofp');
-                                                        var diff = Number($('#' + _d.PropName).val()) - Number(ofp);
+            $scope.fillOFP(response, function () {
+                $scope.props = response.props;
+                var updates = [];
+                var takeOffChanged = false;
+                var sob = 0;
+                var sobValue = null;
+                var sobprops = ['prop_pax_adult', 'prop_pax_child', 'prop_pax_infant', crewAId, crewBId, crewCId];
+                $('#prop_fuel_req').attr('readonly', true).addClass('noborder');
+                $.each($scope.props, function (_i, _d) {
 
 
-                                                        var diffId = $('#' + _d.PropName).attr('id').replace('_usd_', '_dusd_');
-                                                        $('#' + diffId).val(diff);
-                                                    }
-                                                    catch (ex) {
+                    if (_d.PropName == 'prop_fuel_extra') {
 
-                                                    }
+                        if ($scope.fuel_total)
+                            $('#' + _d.PropName).val($scope.fuel_total - $scope.plan_fuel_offblock);
+                        else
+                            $('#' + _d.PropName).val(0);
+                        $('#' + _d.PropName + '_due').val($scope.selectedFlight.ALT3);
+                    }
 
-                                                }
+                    else
+                        if (_d.PropValue)
+                            $('#' + _d.PropName).val(_d.PropValue);
 
-                                                if (_d.PropName == 'prop_fuel_req' && $scope.dr) {
-                                                    $('#' + _d.PropName).val($scope.dr.MinFuelRequiredPilotReq);
-                                                    updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: $scope.selectedFlight.PaxAdult });
-                                                }
+                    if (_d.PropName.includes('_usd_') && isNumeric(_d.PropValue)) {
+
+                        try {
+                            var ofp = $('#' + _d.PropName).data('ofp');
+                            var diff = Number($('#' + _d.PropName).val()) - Number(ofp);
 
 
-                                                if (_d.PropName == 'prop_pax_adult' /*&& $scope.flight.PaxAdult != _d.PropValue*/) {
-                                                    $('#' + _d.PropName).val($scope.selectedFlight.PaxAdult);
-                                                    updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: $scope.selectedFlight.PaxAdult });
-                                                    
-                                                }
-                                                if (_d.PropName == 'prop_pax_child' /*&& $scope.flight.PaxChild != _d.PropValue*/) {
-                                                    $('#' + _d.PropName).val($scope.selectedFlight.PaxChild);
-                                                    updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: $scope.selectedFlight.PaxChild });
-                                                }
-                                                if (_d.PropName == 'prop_pax_infant' /*&& $scope.flight.PaxInfant != _d.PropValue*/) {
-                                                    $('#' + _d.PropName).val($scope.selectedFlight.PaxInfant);
-                                                    updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: $scope.selectedFlight.PaxInfant });
-                                                }
-                                                //prop_offblock
+                            var diffId = $('#' + _d.PropName).attr('id').replace('_usd_', '_dusd_');
+                            $('#' + diffId).val(diff);
+                        }
+                        catch (ex) {
 
-                                                if (_d.PropName == 'prop_offblock' /*&& toTime(CreateDate($scope.flight.BlockOff)) != _d.PropValue*/) {
-                                                    $('#' + _d.PropName).val(toTime(CreateDate($scope.selectedFlight.BlockOff)));
-                                                    updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: toTime(CreateDate($scope.selectedFlight.BlockOff)) });
-                                                }
-                                                //prop_takeoff
-                                                if (_d.PropName == 'prop_takeoff' /*&& toTime(CreateDate($scope.flight.TakeOff)) != _d.PropValue*/) {
-                                                    takeOffChanged = true;
-                                                    $('#' + _d.PropName).val(toTime(CreateDate($scope.selectedFlight.TakeOff)));
-                                                    updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: toTime(CreateDate($scope.selectedFlight.TakeOff)) });
-                                                }
-                                                //prop_landing
-                                                if (_d.PropName == 'prop_landing' /*&& toTime(CreateDate($scope.flight.Landing)) != _d.PropValue*/) {
-                                                    $('#' + _d.PropName).val(toTime(CreateDate($scope.selectedFlight.Landing)));
-                                                    updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: toTime(CreateDate($scope.selectedFlight.Landing)) });
-                                                }
-                                                //prop_onblock
-                                                if (_d.PropName == 'prop_onblock' /*&& toTime(CreateDate($scope.flight.BlockOn)) != _d.PropValue*/) {
-                                                    $('#' + _d.PropName).val(toTime(CreateDate($scope.selectedFlight.BlockOn)));
-                                                    updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: toTime(CreateDate($scope.selectedFlight.BlockOn)) });
-                                                }
+                        }
 
-                                                
+                    }
 
-                 });
-				 $scope.fillSOB();
-                 $scope.fillETA();
-				
-				
-			});
-			/*
+                    if (_d.PropName == 'prop_fuel_req' && $scope.dr) {
+                        $('#' + _d.PropName).val($scope.dr.MinFuelRequiredPilotReq);
+                        updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: $scope.selectedFlight.PaxAdult });
+                    }
+
+
+                    if (_d.PropName == 'prop_pax_adult' /*&& $scope.flight.PaxAdult != _d.PropValue*/) {
+                        $('#' + _d.PropName).val($scope.selectedFlight.PaxAdult);
+                        updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: $scope.selectedFlight.PaxAdult });
+
+                    }
+                    if (_d.PropName == 'prop_pax_child' /*&& $scope.flight.PaxChild != _d.PropValue*/) {
+                        $('#' + _d.PropName).val($scope.selectedFlight.PaxChild);
+                        updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: $scope.selectedFlight.PaxChild });
+                    }
+                    if (_d.PropName == 'prop_pax_infant' /*&& $scope.flight.PaxInfant != _d.PropValue*/) {
+                        $('#' + _d.PropName).val($scope.selectedFlight.PaxInfant);
+                        updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: $scope.selectedFlight.PaxInfant });
+                    }
+                    //prop_offblock
+
+                    if (_d.PropName == 'prop_offblock' /*&& toTime(CreateDate($scope.flight.BlockOff)) != _d.PropValue*/) {
+                        $('#' + _d.PropName).val(toTime(CreateDate($scope.selectedFlight.BlockOff)));
+                        updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: toTime(CreateDate($scope.selectedFlight.BlockOff)) });
+                    }
+                    //prop_takeoff
+                    if (_d.PropName == 'prop_takeoff' /*&& toTime(CreateDate($scope.flight.TakeOff)) != _d.PropValue*/) {
+                        takeOffChanged = true;
+                        $('#' + _d.PropName).val(toTime(CreateDate($scope.selectedFlight.TakeOff)));
+                        updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: toTime(CreateDate($scope.selectedFlight.TakeOff)) });
+                    }
+                    //prop_landing
+                    if (_d.PropName == 'prop_landing' /*&& toTime(CreateDate($scope.flight.Landing)) != _d.PropValue*/) {
+                        $('#' + _d.PropName).val(toTime(CreateDate($scope.selectedFlight.Landing)));
+                        updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: toTime(CreateDate($scope.selectedFlight.Landing)) });
+                    }
+                    //prop_onblock
+                    if (_d.PropName == 'prop_onblock' /*&& toTime(CreateDate($scope.flight.BlockOn)) != _d.PropValue*/) {
+                        $('#' + _d.PropName).val(toTime(CreateDate($scope.selectedFlight.BlockOn)));
+                        updates.push({ OFPId: $scope.entity.Id, PropName: _d.PropName, User: $rootScope.userTitle, PropValue: toTime(CreateDate($scope.selectedFlight.BlockOn)) });
+                    }
+
+
+
+                });
+                $scope.fillSOB();
+                $scope.fillETA();
+
+
+            });
+            /*
             $scope.OFP = response;
              
             if (response) {
-		
+    	
                 if (response.JLSignedBy) {
                    
                     $scope.url_sign = signFiles + response.PICId + ".png";
@@ -2059,17 +2079,17 @@ $scope.jlObj = null;
 
                     var $sob = $('#prop_pax_infant').nextAll('.prop:first');
                     sobId = ($sob.attr('id'));
-                   		console.log('sig_disp_img', signFiles+$scope.OFP.User +".png");
+                                console.log('sig_disp_img', signFiles+$scope.OFP.User +".png");
            $('#sig_disp_img').attr('src', signFiles+$scope.OFP.User +".png");
                     $scope.fillProps($scope.OFP.props);
-				 
+                 
                 }, 500);
             }*/
 
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     };
 
-$scope.stations = [];
+    $scope.stations = [];
     $scope.selectedStations = [];
     $scope.getStationClass = function (x) {
         var index = $scope.selectedStations.indexOf(x);
@@ -2097,7 +2117,7 @@ $scope.stations = [];
         dates = Enumerable.From(dates).Distinct().ToArray();
         $.each(dates, function (_i, _d) {
             var sigwx = {
-               // source: g,
+                // source: g,
                 date: _d,
                 items: [],
             };
@@ -2142,7 +2162,7 @@ $scope.stations = [];
         }
 
     };
-   
+
     $scope.scroll_taf = {
         width: '100%',
         bounceEnabled: false,
@@ -2213,10 +2233,10 @@ $scope.stations = [];
     $scope.filterNOTAM = function () {
         $scope.filteredNOTAM = Enumerable.From($scope.NOTAM)
             .Where(function (x) { return $scope.selectedStations.indexOf(x.StationId) != -1; })
-             .OrderBy(function (x) { return $scope.stations.indexOf(x.StationId); }).ThenByDescending(function (x) {
-                 return Number(moment(new Date(x.observation_time)).format('YYMMDDHHmm'));
+            .OrderBy(function (x) { return $scope.stations.indexOf(x.StationId); }).ThenByDescending(function (x) {
+                return Number(moment(new Date(x.observation_time)).format('YYMMDDHHmm'));
 
-             })
+            })
             .ToArray();
     };
     $scope.stationClick = function (x) {
@@ -2231,11 +2251,11 @@ $scope.stations = [];
         $scope.filterNOTAM();
 
     };
-    $scope.bindWX= function (flightId) {
-       
+    $scope.bindWX = function (flightId) {
+
         //$scope.loadingVisible = true;
         flightBagService.getMETAR(flightId).then(function (response) {
-            
+
             $scope.Metar = response.Data;
             $scope.filterMetar();
             flightBagService.getTAF(flightId).then(function (response2) {
@@ -2315,10 +2335,10 @@ $scope.stations = [];
                 $scope.selectedFlight = data;
                 $scope.bindCrews($scope.selectedFlight.FlightId);
                 $scope.bindOFP($scope.selectedFlight.FlightId);
-				 $scope.bindStations();
+                $scope.bindStations();
                 $scope.bindWX($scope.selectedFlight.FlightId);
             }
-              
+
 
         },
         summary: {
@@ -2878,12 +2898,12 @@ $scope.stations = [];
             e.component.endUpdate();
         },
         onRowPrepared: function (e) {
-          
+
 
             if (!$scope.isOPSStaff && e.rowType == 'data' && e.data && (e.data.AttASR == 1 || e.data.AttVoyageReport == 1)) {
                 e.rowElement.css('background', '#d9d9d9');
             }
-            
+
         },
 
         onCellPrepared: function (e) {
@@ -2915,21 +2935,7 @@ $scope.stations = [];
         },
 
     };
-    //////////////////////////////////
-    if (!authService.isAuthorized()) {
-
-        authService.redirectToLogin();
-    }
-    else {
-        $rootScope.page_title = '> EFB Report';
-
-
-        $('.reportEFB').fadeIn(400, function () {
-
-        });
-    }
-    //////////////////////////////////////////
-
+   
     $scope.$on('$viewContentLoaded', function () {
 
         $('.tabc').height($(window).height() - 200);
