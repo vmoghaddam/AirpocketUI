@@ -51,5 +51,8 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> FixedFlightTime { get; set; }
         public Nullable<System.DateTime> ChocksOut { get; set; }
         public int DutyType { get; set; }
+        public Nullable<int> JLFlightTime { get; set; }
+        public Nullable<int> JLBlockTime { get; set; }
+        public Nullable<int> PositionId { get; set; }
     }
 }

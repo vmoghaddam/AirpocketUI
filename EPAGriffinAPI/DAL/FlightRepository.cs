@@ -4369,7 +4369,7 @@ namespace EPAGriffinAPI.DAL
                                   join f in this.context.FDPs on fi.FDPId equals f.Id
                                   where nullable_ids.Contains(fi.FlightId) && f.IsTemplate == false
                                   select fi.FlightId).ToListAsync();
-            fltIds = fltIds.Except(fdpitems.Select(q => (int)q).ToList()).ToList();
+            //fltIds = fltIds.Except(fdpitems.Select(q => (int)q).ToList()).ToList();
 
             // var newreg = await this.context.Ac_MSN.FirstOrDefaultAsync(q => q.ID == dto.NewRegisterId);
             var flights = await this.context.FlightInformations.Where(q => fltIds.Contains(q.ID)).ToListAsync();
@@ -4398,7 +4398,13 @@ namespace EPAGriffinAPI.DAL
 
 
                 var y = legs.FirstOrDefault(q => q.ID == x.ID);
-                if (y.AircraftType[0] != newResisgerObj.AircraftType[0])
+                if ((y.AircraftType[0] != newResisgerObj.AircraftType2[0]) && fdpitems.Count > 0)
+                {
+                    result = "Unable to apply register change due to aircraft type change involving current crew assignment.";
+                    return new CustomActionResult(HttpStatusCode.NotFound, result);
+                }
+
+                if ((y.AircraftType[0] != newResisgerObj.AircraftType2[0]) && fdpitems.Count == 0)
                 {
                     changedTypes.Add(y.ID);
                     typeChangeDtoList.Add(new TypeChangeDto()
@@ -4412,6 +4418,9 @@ namespace EPAGriffinAPI.DAL
                         STALocal = y.STALocal,
                     });
                 }
+
+              
+
                 var changeLog = new FlightChangeHistory()
                 {
                     Date = DateTime.Now,
@@ -4484,7 +4493,7 @@ namespace EPAGriffinAPI.DAL
                 //piano
                 result = new List<object>() { fdpstr, fdpitemstr, crewStr, fltStr, typeChangeDtoList, fltIds };
 
-            }
+            } 
             else
                 result = new List<object>() { fltIds };
             //if (!isvalid)
@@ -14729,7 +14738,7 @@ namespace EPAGriffinAPI.DAL
             if (fdp != null)
             {
                 this.context.FDPs.Remove(fdp);
-                await context.SaveAsync();
+                await context.SaveChangesAsync();
             }
             return new CustomActionResult(HttpStatusCode.OK, true);
         }

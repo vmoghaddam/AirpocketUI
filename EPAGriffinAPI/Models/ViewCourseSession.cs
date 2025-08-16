@@ -45,5 +45,8 @@ namespace EPAGriffinAPI.Models
         public Nullable<System.DateTime> DateStartUtc { get; set; }
         public Nullable<System.DateTime> DateEndUtc { get; set; }
         public string Key { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<int> InstructorId { get; set; }
+        public Nullable<int> ParentId { get; set; }
     }
 }

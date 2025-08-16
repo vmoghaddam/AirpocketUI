@@ -30,5 +30,7 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> Files84 { get; set; }
         public Nullable<int> Files85 { get; set; }
         public Nullable<int> Files86 { get; set; }
+        public string order_sequence { get; set; }
+        public string order_title { get; set; }
     }
 }

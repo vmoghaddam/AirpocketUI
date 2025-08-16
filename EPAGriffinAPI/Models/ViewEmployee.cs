@@ -339,5 +339,6 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> JobGroupParentId { get; set; }
         public Nullable<System.DateTime> Type737ExpireDate { get; set; }
         public Nullable<System.DateTime> TypeMDExpireDate { get; set; }
+        public string LicNo { get; set; }
     }
 }

@@ -25,6 +25,8 @@ namespace EPAGriffinAPI.Models
         public string Remark { get; set; }
         public int Id { get; set; }
         public int DocumentTypeId { get; set; }
+        public Nullable<System.DateTime> DateIssue { get; set; }
+        public Nullable<System.DateTime> DateExpire { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Document> Documents { get; set; }

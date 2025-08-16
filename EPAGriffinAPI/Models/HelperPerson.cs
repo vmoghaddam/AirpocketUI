@@ -171,5 +171,8 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> RemainPhase3 { get; set; }
         public Nullable<int> RemainGround { get; set; }
         public Nullable<int> RemainFirstAidCockpit { get; set; }
+        public Nullable<int> RemainTypeFoker50 { get; set; }
+        public Nullable<int> RemainTypeFoker100 { get; set; }
+        public Nullable<int> RemainTRG07A { get; set; }
     }
 }

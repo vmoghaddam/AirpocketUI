@@ -6885,16 +6885,16 @@ console.log($scope.currentAssigned);
         $.each($scope.ati_flights, function (_i, _d) {
            // console.log('2024-09-25 has crew   ',_d.OTypeId+'   '+_d.FlightNumber);
             var _cbn = /*_d.ISCCM +*/ _d.SCCM + _d.CCM;
-			var cabin_limit=4;
+			var cabin_limit=3;
 			if (_d.OTypeId==26)
 				cabin_limit=6;
 			var cabin_extra=3;
 			if (_d.OTypeId==26)
-				cabin_extra=5;
-            _d.hasCabinExtra = _d.SCCM > 1 || _d.CCM > cabin_extra;
+				cabin_extra=3;
+            _d.hasCabinExtra = _d.SCCM + _d.CCM > cabin_extra;
             _d.hasCockpitExtra = _d.P1 > 1 || _d.P2 > 1 || _d.IP > 1;
 
-            if (((_d.P1 >= 1 && _d.P2 >= 1) || (_d.IP >= 1 && _d.P2 >= 1) || (_d.IP >= 1 && _d.P1 >= 1)) && /*_d.SCCM>=1 && _d.CCM>=3*/ _cbn >= cabin_limit)
+            if (((_d.P1 >= 1 && _d.P2 >= 1) || (_d.IP >= 1 && _d.P2 >= 1) || (_d.IP >= 1 && _d.P1 >= 1) || (_d.P1 >= 1 && _d.P1 >= 1) || (_d.IP >= 1 && _d.IP >= 1) ) && /*_d.SCCM>=1 && _d.CCM>=3*/ _cbn >= cabin_limit)
                 _d.hasCrewAll = true;
             _d.crew = Enumerable.From(_d.crew).OrderBy('$.order').ToArray();
             //if (flight.FlightStatusID==4)

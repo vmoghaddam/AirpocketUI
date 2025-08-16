@@ -26,6 +26,10 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> RosterPositionId { get; set; }
         public Nullable<System.DateTime> Pickup { get; set; }
         public string Remark { get; set; }
+        public Nullable<System.DateTime> offblock { get; set; }
+        public Nullable<System.DateTime> takeoff { get; set; }
+        public Nullable<System.DateTime> landing { get; set; }
+        public Nullable<System.DateTime> onblock { get; set; }
     
         public virtual FDP FDP { get; set; }
         public virtual FlightInformation FlightInformation { get; set; }

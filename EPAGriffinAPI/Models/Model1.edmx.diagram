@@ -171,7 +171,6 @@
         <EntityTypeShape EntityType="EPAGRIFFINModel.G_OpOneDelayType" Width="1.5" PointX="30.375" PointY="20.5" />
         <AssociationConnector Association="EPAGRIFFINModel.FK_G_DelayCode_G_DelayCode" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.FlightStatu" Width="1.5" PointX="28.5" PointY="54.625" />
-        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewMSN" Width="1.5" PointX="41.375" PointY="1.125" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.AvgFlight" Width="1.5" PointX="30.375" PointY="10.75" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanGroup" Width="1.5" PointX="39" PointY="57.5" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.FlightPlanDay" Width="1.5" PointX="10.5" PointY="64.875" />
@@ -535,7 +534,6 @@
         <EntityTypeShape EntityType="EPAGRIFFINModel.RptFDPMonthlyPersian" Width="1.5" PointX="90.375" PointY="21.75" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.RptDeadHead" Width="1.5" PointX="76.375" PointY="66.875" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.RptReposition" Width="1.5" PointX="90.375" PointY="7.75" />
-        <EntityTypeShape EntityType="EPAGRIFFINModel.AppFuel" Width="1.5" PointX="25.375" PointY="90.75" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.ViewFlightsGantt" Width="1.5" PointX="68.375" PointY="77.25" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.FlightInformation" Width="1.5" PointX="90.875" PointY="31.625" />
         <AssociationConnector Association="EPAGRIFFINModel.FK_FlightInformation_Ac_MSN" />
@@ -588,6 +586,9 @@
         <AssociationConnector Association="EPAGRIFFINModel.FK_EmployeeBookStatus_Book_Id" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.BookCourse" Width="1.5" PointX="11.25" PointY="1.125" />
         <AssociationConnector Association="EPAGRIFFINModel.fk_bc_book" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.ViewMSN" Width="1.5" PointX="0.75" PointY="46.75" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_course_parent" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.AppFuel" Width="1.5" PointX="86.375" PointY="81.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

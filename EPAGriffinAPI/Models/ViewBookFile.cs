@@ -27,5 +27,8 @@ namespace EPAGriffinAPI.Models
         public int Id { get; set; }
         public Nullable<int> ChapterId { get; set; }
         public string Chapter { get; set; }
+        public string FolderPath { get; set; }
+        public string BookPath { get; set; }
+        public string FilePath { get; set; }
     }
 }

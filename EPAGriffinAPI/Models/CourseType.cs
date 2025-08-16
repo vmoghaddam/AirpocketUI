@@ -34,6 +34,12 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> CertificateTypeId { get; set; }
         public Nullable<int> IDX { get; set; }
         public Nullable<int> Mandatory { get; set; }
+        public string IssueField { get; set; }
+        public string ExpireField { get; set; }
+        public Nullable<bool> ShowInProfile { get; set; }
+        public Nullable<bool> ShowInList { get; set; }
+        public Nullable<bool> IsMonitoringEnabled { get; set; }
+        public string Abbreviation { get; set; }
     
         public virtual CourseCategory CourseCategory { get; set; }
         public virtual LicenseResultBasic LicenseResultBasic { get; set; }

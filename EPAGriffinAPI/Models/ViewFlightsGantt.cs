@@ -291,5 +291,14 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> ExBagWeight { get; set; }
         public Nullable<long> ExBagCost { get; set; }
         public Nullable<int> TotalTrafficLoad { get; set; }
+        public Nullable<int> exctra_bags_weight { get; set; }
+        public Nullable<decimal> email_weight { get; set; }
+        public Nullable<decimal> fob { get; set; }
+        public int FuelRemaining { get; set; }
+        public int FuelRemained { get; set; }
+        public int FuelUplift { get; set; }
+        public int FuelUpliftLitr { get; set; }
+        public int FuelUsed { get; set; }
+        public int FuelTotal { get; set; }
     }
 }

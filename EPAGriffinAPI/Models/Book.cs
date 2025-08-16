@@ -66,6 +66,8 @@ namespace EPAGriffinAPI.Models
         public Nullable<System.DateTime> DateValidUntil { get; set; }
         public string BookKey { get; set; }
         public Nullable<int> CourseId { get; set; }
+        public string FileUrlX { get; set; }
+        public string SysUrlX { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BookChapter> BookChapters { get; set; }
