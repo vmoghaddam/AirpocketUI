@@ -1725,9 +1725,75 @@ app.controller('zfdm_main_controller', ['$scope', '$location', '$routeParams', '
 
 
                 ///////////////////////////////////////
-                //fdmService.get_fmd_route($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response) {
+                //war
+                fdmService.get_fmd_route($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (responsex) {
+                    $scope.ds_route_type = responsex.Data.result_type_route;
+                    $.each($scope.ds_route_type, function (_i, _d) {
+                        //var phase = Enumerable.From(response_phase.Data.result_type_crew_phase).Where(function (x) { return x.crew_id == _d.crew_id; }).OrderByDescending('$.total_score').ToArray();
+                        //_d.ds_phase = phase;
+                        _d.ds_reg_scores = Enumerable.From(_d.registers).Select('$.score_per_flight').ToArray();
+                        _d.ds_reg_labels = Enumerable.From(_d.registers).Select('$.register').ToArray();
+                    });
+                    $scope.result_register_route = responsex.Data.result_register_route;
+                    $scope.ds_route_737 = Enumerable.From(responsex.Data.result_type_route).Where("$.ac_type=='B737'").OrderByDescending('$.score_per_flight').ToArray();
+                    $scope.ds_route_md = Enumerable.From(responsex.Data.result_type_route).Where("$.ac_type=='MD'").OrderByDescending('$.score_per_flight').ToArray();
 
-                //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                    $scope.bar_route_737_ds = $scope.ds_route_737;
+                    $scope.bar_route_md_ds = $scope.ds_route_md;
+
+                    $scope.$watch('bar_route_737_ds', function (newVal) {
+                        if (!newVal) return;
+
+                        setTimeout(() => {
+                            newVal.forEach((c, i) => {
+
+                                const canvas = document.getElementById(`chart-route-${i}`);
+                                if (!canvas) return;
+
+                                const ctx = canvas.getContext('2d');
+
+                                new Chart(ctx, {
+                                    type: 'bar',
+                                    data: {
+                                        labels: c.ds_reg_labels, // مثلاً ['Takeoff', 'Cruise', 'Landing']
+                                        datasets: [{
+                                            label: 'S/F',
+                                            data: c.ds_reg_scores, // مثلاً [10, 12, 7]
+                                            backgroundColor: '#cccccc',//'rgba(75, 192, 192, 0.6)',
+                                            borderColor: 'gray',//'rgba(75, 192, 192, 1)',
+                                            borderWidth: 1
+                                        }]
+                                    },
+                                    options: {
+                                        indexAxis: 'y',
+                                        responsive: true,
+                                        elements: {
+                                            bar: {
+                                                borderWidth: 1
+                                            }
+                                        },
+                                        plugins: {
+                                            legend: {
+                                                display: false
+                                            }
+                                        },
+                                        scales: {
+                                            x: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    }
+                                });
+                            });
+                        }, 0); // برای اطمینان از اینکه DOM آماده‌ست
+                    });
+
+
+
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+
+
                 ///////////////////////////////////////
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });

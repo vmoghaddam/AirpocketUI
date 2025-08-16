@@ -74,6 +74,12 @@ namespace Report
             string groupcode = Convert.ToString(data.JobGroupCode);
 
             img_ins1.ImageUrl = "https://ava.airpocket.app/upload/ins/" + data.CustomerId+".png";
+            if (data.Customer != "-1")
+            {
+                img_ins2.ImageUrl = "https://ava.airpocket.app/upload/ins/" + data.Customer + ".png";
+            }
+            else
+                img_ins1.LocationF =  new Point(255, 660);
 
            // lblOpsTrn.Visible = groupcode.StartsWith("0000110") || groupcode.StartsWith("00101") || groupcode.StartsWith("00102") || groupcode.StartsWith("000010602");
            // lblOpsTrnCaption.Visible = lblOpsTrn.Visible;

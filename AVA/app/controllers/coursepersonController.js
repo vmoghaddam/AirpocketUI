@@ -3068,6 +3068,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 $scope.follow_course = response.Data.course;
                 $scope.follow_exam = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : {};
                 console.log('follow exam', $scope.follow_exam);
+                //08-09
+
                 $scope.refresh_summary(function () {
 
                     if ($scope.follow_exam) {

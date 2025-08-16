@@ -266,11 +266,11 @@ var serviceForms = 'http://localhost:9066/';
 
 ////////////////////////////////////////////
 //FLYPERSIA
-var serviceBase = 'https://fleet.flypersiaairlines.ir/zapinet/'; //'https://net.apvaresh.com/';
+var serviceBase = 'https://ava.apinet.airpocket.app/token/'; //'https://net.apvaresh.com/';
 var webBase = 'https://fleet.flypersiaairlines.ir/'; //'https://apvaresh.com/';
 var clientBase = 'https://ava.pulsepocket.app/'; //'https://cp.apvaresh.com/';
-var serviceBase2 = 'https://fleet.flypersiaairlines.ir/zapinet/';// 'https://net.apvaresh.com/';
-var serviceBaseTRN = 'https://fleet.flypersiaairlines.ir/zapi/';
+var serviceBase2 = 'https://ava.apinet.airpocket.app/token/';// 'https://net.apvaresh.com/';
+var serviceBaseTRN = 'https://ava.api.airpocket.app/';
 
 var zlib = 'https://https://ava.apilib.airpocket.app/';   //*****
 var apiQA = 'https://https://ava.apiqa.airpocket.app/';  //*****

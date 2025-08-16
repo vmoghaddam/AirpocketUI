@@ -407,6 +407,7 @@
                     <td style="padding-right:3px;"> <div dx-button="btn_search"></div></td>
                     <td style="padding-right:3px;"> <div ng-show="IsEditable" dx-button="btn_new"></div></td>
                     <td style="padding-right:3px;"> <div dx-button="btn_edit"></div></td>
+                    <td style="padding-right:3px;"> <div dx-button="btn_questions"></div></td>
                     <td style="padding-right:3px;"> <div dx-button="btn_people"></div></td>
 
                     <!-- <td style="padding-right:3px;"> <div dx-button="btn_exam"></div></td>-->
@@ -495,7 +496,7 @@
                 <div style="clear:both"></div>
             </div>
 
-            <div class="col-lg-6 padding-0" style="padding:0 10px 0 10px">
+            <!--<div class="col-lg-6 padding-0" style="padding:0 10px 0 10px">
                 <div>
                     <div style="background:gray;color:white;font-weight:bold;padding:7px;">
                         <table style="width:100%;">
@@ -522,12 +523,56 @@
 
                     </div>
                 </div>
+            </div>-->
+
+
+            <div class="col-lg-6 padding-0" style="padding:0 10px 0 10px">
+                <div>
+                    <div style="background:gray;color:white;font-weight:bold;padding:7px;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td>People</td>
+
+                            </tr>
+                        </table>
+                    </div>
+                    <div dx-data-grid="dg_exam_people" id="dg_exam_people"></div>
+
+                </div>
             </div>
 
 
         </div>
 
     </div>
+
+    <div id="popup_questions" dx-popup="popup_questions">
+        <div class="col-lg-3   padding-0" style="padding:0;margin-top:0px;">
+            <div class="dx-border" dx-select-box="sb_templates" style="margin-bottom:10px;"></div>
+            <div dx-data-grid="dg_exam_template" id="dg_exam_template"></div>
+        </div>
+        <div class="col-lg-9   padding-0" style="padding:0;margin-top:0px;padding-left:10px;">
+            <div style="background:gray;color:white;font-weight:bold;padding:10px;">
+                <table style="width:100%;">
+                    <tr>
+                        <td>Questions</td>
+
+                    </tr>
+                </table>
+            </div>
+            <div dx-data-grid="dg_questions" id="dg_questions"></div>
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_questions2" dx-popup="popup_questions2">
+        <div class="padding-7 dx-border" style="padding:0;margin-top:3px">
+            <div dx-data-grid="dg_questions2" id="dg_questions2"></div>
+        </div>
+    </div>
+
 
     <div id="popup_people" dx-popup="popup_people">
         <div class="col-lg-3   padding-0" style="padding:0;margin-top:0px;">
@@ -552,20 +597,15 @@
                             <input type="text" id="firstname" ng-model="formatDate(selected_exam.course_end)" readonly>
                         </div>
                     </div>
-                    
-                   
+
+
                     <div class="col-lg-12 col-md-6" style="padding: 0 !important">
                         <div class="personal-input-group">
                             <label for="instructors">Instructor(s)</label>
                             <input type="text" id="firstname" ng-model="selected_exam.instructor" readonly>
                         </div>
                     </div>
-                    <!--<div class="col-lg-12 col-md-6" style="padding: 0 !important">
-                        <div class="personal-input-group">
-                            <label for="instructors">Training Director</label>
-                            <input type="text" id="firstname" ng-model="follow_course.TrainingDirector" readonly>
-                        </div>
-                    </div>-->
+
                     <div class="col-lg-12 col-md-6" style="padding: 0 !important" ng-show="follow_course.Date_Sign_Ins1">
                         <div class="personal-input-group">
                             <div style="background: #7fe6e6;border:1px solid #ddd;text-align:center;font-weight:bold;padding:7px;">Participants Form: Signed</div>
@@ -577,6 +617,28 @@
                         </div>
                     </div>
                 </div>
+
+
+
+                <div class="profile-card" style="width: 100%; display: inline-block">
+                    <div class="section-title">Exam Information</div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="course_title">Remark</label>
+                            <input type="text" id="course_title" ng-model="selected_exam.remark" readonly>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-6" style="padding: 0 !important">
+                        <div class="personal-input-group">
+                            <label for="start">Date</label>
+                            <input type="text" id="start" ng-model="formatDateTime(selected_exam.exam_date)" readonly>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
             </div>
 
 
@@ -604,7 +666,7 @@
                 <div class="col-lg-2   padding-0" style="padding:0;margin-top:0px;">
                     <div class="profile-container">
 
-                        
+
                         <div class="profile-card" style="width: 100%; display: inline-block; padding: 5px; margin-bottom: 5px;">
                             <div class="section-title" style="font-size:15px">Actual</div>
 
@@ -711,6 +773,7 @@
                                     <div class="ruler-number" ng-if="$index % 5 === 0">{{ $index }}</div>
                                     <div class="ruler-tick" ng-class="{'long-tick': $index % 5 === 0}"></div>
                                 </div>
+                                
                             </div>
                             <div class="progress-bar-container">
                                 <div class="progress-bar" ng-style="{ 'width': getProgressBarWidth(data.total_answered, data.total_questions) + '%' }"></div>
@@ -726,6 +789,7 @@
                                 'txt-danger': data.result === 'FAILED'
                             }">{{ data.result }}</span>
                                 </div>-->
+                            
                             <table style="width:100%">
                                 <tr>
                                     <td>
@@ -779,7 +843,7 @@
             </div>
 
 
-            
+
 
 
 
