@@ -928,7 +928,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             { dataField: 'Attendants', caption: 'P/S', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left' },
             { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: true, fixedPosition: 'left' },
              
-            { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 350 },
+            { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
             {
                 caption: 'Start', alignment: 'center', columns: [
                     { dataField: 'DateStart', caption: 'A/D', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120, sortIndex: 0, sortOrder: "desc" },
@@ -942,7 +942,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 ]
             },
 
-            { dataField: 'Organization', caption: 'Organization', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 100 },
+            { dataField: 'Organization', caption: 'Organization', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
             { dataField: 'CourseType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200, fixed: false, fixedPosition: 'left' },
 
             //{ dataField: 'CaoTypeTitle', caption: 'Cao Type', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 200 },
@@ -1045,19 +1045,6 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 if (clmn.name == "AttForm" && e.data.AttForm)
                     $window.open($rootScope.clientsFilesUrl + e.data.AttForm, '_blank');
-            },
-			onRowPrepared: function (e) {
-               if (e.data && e.data.StatusId==1 ) {
-                   e.rowElement.css('background','#ffe6cc' );
-				   
-                
-               }
-			   if (e.data && e.data.StatusId==2 ) {
-                   e.rowElement.css('background', '#ffffcc');
-				   
-                
-               }
-               //#e6ffe6
             },
             bindingOptions: {
                 dataSource: 'dg_ds',
@@ -1823,9 +1810,6 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             }
 
         };
-
-       
-
         $scope.sb_syl_session = {
 
             showClearButton: true,
@@ -2102,67 +2086,6 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                         }
                     }, toolbar: 'bottom'
                 },
-				{
-                    widget: 'dxButton', location: 'before', options: {
-                        type: 'default', text: 'Check All', onClick: function (e) {
-                            General.Confirm("Are you sure?", function (res) {
-                             if (res) {
-									var dto = { value:true,cid:$scope.selectedCourse.Id };
-                                    $scope.loadingVisible = true;
-								    ztrnService.save_press_all(dto).then(function (response) {
-										$scope.loadingVisible = false;
-										//dg_people_ds
-										$.each($scope.dg_people_ds,function(_i,_d){
-											for (var key in _d) {
-												if (key.indexOf("Session") != -1 && key.indexOf("SessionAttendance") == -1) {
-													if (_d.hasOwnProperty(key)) {
-														_d[key]=true;
-														 
-												  }  
-												}
-												
-											}
-											
-										});
-                         
-									}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-                  
-                            }
-                           });
-                        }
-                    }, toolbar: 'bottom'
-                },
-				{
-                    widget: 'dxButton', location: 'before', options: {
-                        type: 'danger', text: 'Uncheck All', onClick: function (e) {
-                            General.Confirm("Are you sure?", function (res) {
-                             if (res) {
-									var dto = { value:false,cid:$scope.selectedCourse.Id };
-                                    $scope.loadingVisible = true;
-								    ztrnService.save_press_all(dto).then(function (response) {
-										$scope.loadingVisible = false;
-										$.each($scope.dg_people_ds,function(_i,_d){
-											for (var key in _d) {
-												if (key.indexOf("Session") != -1 && key.indexOf("SessionAttendance") == -1) {
-													if (_d.hasOwnProperty(key)) {
-														_d[key]=false;
-														 
-												  }  
-												}
-												
-											}
-											
-										});
-                         
-									}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-                  
-                            }
-                           });
-                        }
-                    }, toolbar: 'bottom'
-                },
                 //{
                 //    widget: 'dxButton', location: 'after', options: {
                 //        type: 'default', text: 'Result', onClick: function (e) {
@@ -2414,8 +2337,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             },
             bindingOptions: {
                 visible: 'popup_people_visible',
-                'toolbarItems[7].visible': 'IsUploadVisible',
-                'toolbarItems[7].options.uploadUrl': 'upload_url',
+                'toolbarItems[5].visible': 'IsUploadVisible',
+                'toolbarItems[5].options.uploadUrl': 'upload_url',
 
             }
         };
@@ -3145,6 +3068,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 $scope.follow_course = response.Data.course;
                 $scope.follow_exam = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : {};
                 console.log('follow exam', $scope.follow_exam);
+                //08-09
+
                 $scope.refresh_summary(function () {
 
                     if ($scope.follow_exam) {

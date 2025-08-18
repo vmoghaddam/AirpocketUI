@@ -16,7 +16,7 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
         CertificateTypeId: null,
         Duration: null,
         Mandatory: null,
-
+        CourseTypes: [],
         JobGroups: [],
     };
 
@@ -34,6 +34,7 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
         $scope.entity.Duration = null;
         $scope.entity.Mandatory = null;
         $scope.entity.JobGroups = [];
+        $scope.entity.CourseTypes = [];
     };
 
     $scope.bind = function (data) {
@@ -51,6 +52,7 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
         $scope.entity.CertificateTypeId = data.CertificateTypeId;
         $scope.entity.Duration = data.Duration;
         $scope.entity.JobGroups = data.JobGroups;
+        $scope.entity.CourseTypes2 = data.CourseTypes;
     };
 
 
@@ -156,6 +158,7 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
     $scope.dg_group_selected = null;
     $scope.dg_group_instance = null;
     $scope.dg_group = {
+          
         showRowLines: true,
         showColumnLines: true,
         sorting: { mode: 'multiple' },
@@ -200,8 +203,77 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
         // dataSource:ds
 
     };
+
+
+
+    $scope.dg_type_columns = [
+
+        { dataField: "Title", caption: "Title", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, },
+
+    ];
+    $scope.dg_type_selected = null;
+    $scope.dg_type_instance = null;
+    $scope.dg_type = {
+        keyExpr: "Id", 
+        showRowLines: true,
+        showColumnLines: true,
+        sorting: { mode: 'multiple' },
+        filterRow: {
+            visible: true,
+            showOperationChooser: true,
+        },
+        noDataText: '',
+        showColumnHeaders: false,
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'infinite' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'multiple' },
+
+
+        columnAutoWidth: false,
+        columns: $scope.dg_type_columns,
+
+        onContentReady: function (e) {
+            if (!$scope.dg_type_instance)
+                $scope.dg_type_instance = e.component;
+
+           
+        },
+
+        onSelectionChanged: function (e) {
+            var ids = e.selectedRowKeys.map(function (k) { return +k; });
+
+            $scope.entity.CourseTypes = ($scope.ds_course_types || []).filter(function (ct) {
+                return ids.indexOf(+ct.Id) !== -1;
+            });
+
+
+            var data = e.selectedRowsData[0];
+
+            if (!data) {
+                $scope.dg_type_selected = null;
+            }
+            else
+                $scope.dg_type_selected = data;
+
+
+
+        },
+        height: 370,
+        bindingOptions: {
+
+            dataSource: 'ds_course_types',
+            selectedRowKeys: 'entity.CourseTypes2'
+
+            // height: 'dg_height',
+        },
+        // dataSource:ds
+
+    };
     /////////////////////////////
-    $scope.pop_width = 1000;
+    $scope.pop_width = 1500;
     $scope.pop_height = 550;
     $scope.popup_add_visible = false;
     $scope.popup_add_title = 'New';
@@ -235,7 +307,10 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
         onShown: function (e) {
 
             if ($scope.isNew) {
-
+                trnService.get_course_types().then(function (response) {
+                    console.log(response);
+                    $scope.ds_course_types = response.Data;
+                });
             }
 
             //var dsclient = $rootScope.getClientsDatasource($scope.LocationId);
@@ -245,25 +320,44 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
                 var _dt = {};
                 JSON.copy($scope.tempData, _dt);
                 $scope.loadingVisible = true;
+                trnService.get_course_types().then(function (response) {
+                    console.log(response);
+                    $scope.ds_course_types = response.Data;
+                });
                 trnService.getCourseTypeGroups($scope.tempData.Id).then(function (response) {
                     $scope.loadingVisible = false;
                     _dt.JobGroups = response.Data;
-                    $scope.bind(_dt);
-					trnService.getNotApplicables($scope.tempData.Id).then(function (response2) { 
-					   console.log('aapli',response2);
-					    //response2.Data
-						
-						$.each($scope.grp_ds,function(_i,_d){
-		                    _d.selected=false;
-		                    var exist=Enumerable.From(response2.Data).Where(function(x){ return x==_d.title;}).FirstOrDefault();
-		                    if (exist)
-			                   _d.selected=true;
-		  
-		                });
-						
-						
-						
-					}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+                    //$scope.bind(_dt);
+                    trnService.get_course_types($scope.tempData.Id).then(function (response2) {
+                        $.each($scope.grp_ds, function (_i, _d) {
+                            _d.selected = false;
+                            var exist = Enumerable.From(response2.Data).Where(function (x) { return x == _d.title; }).FirstOrDefault();
+                            if (exist)
+                                _d.selected = true;
+
+                        });
+
+                        trnService.getCourseTypeSubject($scope.tempData.Id).then(function (response3) {
+                            _dt.CourseTypes = Enumerable.From($scope.ds_course_types)
+                                .Select("$.Id")
+                                .Intersect(Enumerable.From(response3.Data)
+                                    .Select("$.course_type_id")).ToArray()
+
+
+                            //var selectedIds = Enumerable.From(response3.Data)
+                            //    .Select("$.course_type_id")
+                            //    .ToArray();
+
+                            //_dt.CourseTypes = Enumerable.From($scope.ds_course_types)
+                            //    .Where(function (x) { return selectedIds.indexOf(x.Id) !== -1; })
+                            //    .ToArray();
+                            console.log(_dt.CourseTypes)
+                            $scope.bind(_dt);
+                        });
+
+
+
+                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
             }
@@ -276,7 +370,7 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
         onHiding: function () {
 
             $scope.clearEntity();
-			$.each($scope.grp_ds,function(_i,_d){_d.selected=false;});
+            $.each($scope.grp_ds, function (_i, _d) { _d.selected = false; });
 
             $scope.popup_add_visible = false;
             $rootScope.$broadcast('onCourseTypeHide', null);
@@ -298,9 +392,9 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
     //save button
     //2022-03-07
     $scope.popup_add.toolbarItems[0].options.onClick = function (e) {
-        var not_applicables=Enumerable.From($scope.grp_ds).Where('$.selected').Select('$.title').ToArray();
-		 
-		
+        var not_applicables = Enumerable.From($scope.grp_ds).Where('$.selected').Select('$.title').ToArray();
+
+
         var result = e.validationGroup.validate();
 
         if (!result.isValid) {
@@ -318,7 +412,8 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
             $scope.entity.Id = -1;
         $scope.entity.Mandatory = $scope.entity.Mandatory ? 1 : 0;
         $scope.entity.CalenderTypeId = 13;
-		$scope.entity.not_applicables=not_applicables;
+        $scope.entity.not_applicables = not_applicables;
+        //$scope.entity.CourseTypes = $scope.dg_type_selected
         $scope.loadingVisible = true;
         trnService.saveCourseType($scope.entity).then(function (response) {
             $scope.loadingVisible = false;
@@ -374,31 +469,31 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
         });
         $scope.dg_group_instance.refresh();
     });
-   ///////////////////////////////////////
-   $scope.grp_ds=[
-        {title:'Cockpit',selected:false},
-		{title:'Cabin',selected:false},
-		{title:'F/D',selected:false},
-		{title:'GRND',selected:false},
-		{title:'COMM',selected:false},
-		{title:'CAMO',selected:false},
-		{title:'MAINTENANCE',selected:false},
-		{title:'TRAINING',selected:false},
-		{title:'LEGAL',selected:false},
-		{title:'QA',selected:false},
-		{title:'FINANCIAL',selected:false},
-		{title:'HR',selected:false},
-		{title:'IT',selected:false},
-		{title:'SECURITY',selected:false},
-		{title:'MANAGEMENT',selected:false}
-		  
-		  
-	 ];
-   $scope.grp_selected=function(x){
-	
-	};
-   
-   ///////////////////////////////////
+    ///////////////////////////////////////
+    $scope.grp_ds = [
+        { title: 'Cockpit', selected: false },
+        { title: 'Cabin', selected: false },
+        { title: 'F/D', selected: false },
+        { title: 'GRND', selected: false },
+        { title: 'COMM', selected: false },
+        { title: 'CAMO', selected: false },
+        { title: 'MAINTENANCE', selected: false },
+        { title: 'TRAINING', selected: false },
+        { title: 'LEGAL', selected: false },
+        { title: 'QA', selected: false },
+        { title: 'FINANCIAL', selected: false },
+        { title: 'HR', selected: false },
+        { title: 'IT', selected: false },
+        { title: 'SECURITY', selected: false },
+        { title: 'MANAGEMENT', selected: false }
+
+
+    ];
+    $scope.grp_selected = function (x) {
+
+    };
+
+    ///////////////////////////////////
     $scope.tempData = null;
     $scope.$on('InitAddCourseType', function (event, prms) {
 
