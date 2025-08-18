@@ -14,7 +14,7 @@ app.config(function ($routeProvider) {
 
     
 
-    $routeProvider.when("/fixtimeaddController", {
+    $routeProvider.when("/fixtime", {
         controller: "fix-time-addController",
         templateUrl: "/app/views/fix-time-add.html"
     });
