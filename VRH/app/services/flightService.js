@@ -69,7 +69,18 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     };
     serviceFactory.save_fixtime = _save_fixtime;
 
+    var _delete_FixTime = function (entity) {
+        var deferred = $q.defer();
+        $http.post('http://localhost:12271/' + 'api/fixtime/delete', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err) {
 
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.delete_fixtime = _delete_FixTime;
 
     var _getRouteDestination = function (airlineid,from) {
 

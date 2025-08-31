@@ -36,7 +36,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
     var _get_fixtime = function() {
         var deferred = $q.defer();
-        $http.get('http://localhost:12271/ + ', api / fixtime, ")"
+        $http.get('http://localhost:12271/'+ 'api / fixtime')
             .then(function(response) {
                 deferred.resolve(response.data);
             })
@@ -51,7 +51,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
                     };
                 }
                 deferred.reject(Exceptions.getMessage(safeError));
-            }));
+            });
 
         return deferred.promise;
     };
@@ -60,8 +60,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
 
 
-
-
+   
 
     ////var _save_fixtime = function () {
     ////    var deferred = $q.defer();

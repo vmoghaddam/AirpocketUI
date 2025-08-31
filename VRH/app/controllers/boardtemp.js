@@ -9,7 +9,7 @@ app.controller('boardtempController', ['$scope', '$location', '$routeParams', '$
     $scope.IsPlanning = $rootScope.HasMenuAccess('flight_planning', 3);
 
     $scope.IsFuelReadOnly = false;
-    
+     
    
     $scope.airport = $routeParams.airport;
     $scope.airportEntity = null;
