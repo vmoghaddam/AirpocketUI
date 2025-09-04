@@ -1321,6 +1321,21 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.save_press_all = _save_press_all;
+
+
+
+    var _delete_exam = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/trn/exam/delete', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.delete_exam = _delete_exam;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;
