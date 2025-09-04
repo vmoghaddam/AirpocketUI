@@ -61,7 +61,7 @@ namespace EPAGriffinAPI.Models
         public Nullable<System.DateTime> Arrival { get; set; }
         public Nullable<int> BlockTime { get; set; }
         public Nullable<int> FlightTime { get; set; }
-        public Nullable<int> Freight { get; set; }
+        public int Freight { get; set; }
         public Nullable<decimal> FPTripFuel { get; set; }
         public Nullable<int> MaxWeightTO { get; set; }
         public Nullable<int> MaxWeightLND { get; set; }

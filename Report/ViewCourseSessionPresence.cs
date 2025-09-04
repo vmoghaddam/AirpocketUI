@@ -28,5 +28,17 @@ namespace Report
         public Nullable<decimal> AttendancePercent { get; set; }
         public Nullable<int> CourseSessionPresenceId { get; set; }
         public int IsPresent { get; set; }
+        public Nullable<int> ParentId { get; set; }
+        public Nullable<int> Instructor1Id { get; set; }
+        public Nullable<int> Instructor2Id { get; set; }
+        public string Instructor { get; set; }
+        public string Title { get; set; }
+        public string JobGroup { get; set; }
+        public string NID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Name { get; set; }
+        public string Mobile { get; set; }
+        public int EmployeeId { get; set; }
     }
 }

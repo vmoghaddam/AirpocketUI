@@ -51,6 +51,7 @@ namespace EPAGriffinAPI.Models
         public string Model { get; set; }
         public Nullable<int> AircraftTypeId { get; set; }
         public string AircraftType { get; set; }
+        public string AircraftType2 { get; set; }
         public Nullable<int> ManufacturerId { get; set; }
         public string Manufacturer { get; set; }
         public string AirlineOperators { get; set; }

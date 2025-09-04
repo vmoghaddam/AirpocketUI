@@ -31,5 +31,17 @@ namespace EPAGriffinAPI.Models
         public Nullable<decimal> FtLeg { get; set; }
         public Nullable<decimal> BtLeg { get; set; }
         public Nullable<decimal> PaxLeg { get; set; }
+        public Nullable<int> LoadFactor { get; set; }
+        public Nullable<decimal> Res1 { get; set; }
+        public Nullable<decimal> Res2 { get; set; }
+        public Nullable<decimal> Res3 { get; set; }
+        public Nullable<decimal> Res4 { get; set; }
+        public Nullable<decimal> Res5 { get; set; }
+        public Nullable<int> ResInt1 { get; set; }
+        public Nullable<int> ResInt2 { get; set; }
+        public Nullable<int> ResInt3 { get; set; }
+        public Nullable<int> ResInt4 { get; set; }
+        public Nullable<int> ResInt5 { get; set; }
+        public Nullable<int> ResInt6 { get; set; }
     }
 }

@@ -137,7 +137,6 @@ namespace EPAGriffinAPI.Models
         public virtual DbSet<G_DelayCode> G_DelayCode { get; set; }
         public virtual DbSet<G_OpOneDelayType> G_OpOneDelayType { get; set; }
         public virtual DbSet<FlightStatu> FlightStatus { get; set; }
-        public virtual DbSet<ViewMSN> ViewMSNs { get; set; }
         public virtual DbSet<AvgFlight> AvgFlights { get; set; }
         public virtual DbSet<FlightPlanGroup> FlightPlanGroups { get; set; }
         public virtual DbSet<FlightPlanDay> FlightPlanDays { get; set; }
@@ -435,7 +434,6 @@ namespace EPAGriffinAPI.Models
         public virtual DbSet<RptFDPMonthlyPersian> RptFDPMonthlyPersians { get; set; }
         public virtual DbSet<RptDeadHead> RptDeadHeads { get; set; }
         public virtual DbSet<RptReposition> RptRepositions { get; set; }
-        public virtual DbSet<AppFuel> AppFuels { get; set; }
         public virtual DbSet<ViewFlightsGantt> ViewFlightsGantts { get; set; }
         public virtual DbSet<FlightInformation> FlightInformations { get; set; }
         public virtual DbSet<ViewPlanFlight> ViewPlanFlights { get; set; }
@@ -443,6 +441,8 @@ namespace EPAGriffinAPI.Models
         public virtual DbSet<ViewEmployee> ViewEmployees { get; set; }
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<BookCourse> BookCourses { get; set; }
+        public virtual DbSet<ViewMSN> ViewMSNs { get; set; }
+        public virtual DbSet<AppFuel> AppFuels { get; set; }
     
         public virtual int GetOverDuty(string aDate, Nullable<int> aDuty, Nullable<int> aFlight, Nullable<int> aPID)
         {

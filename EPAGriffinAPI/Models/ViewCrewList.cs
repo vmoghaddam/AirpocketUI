@@ -37,5 +37,10 @@ namespace EPAGriffinAPI.Models
         public Nullable<long> Rank { get; set; }
         public string Mobile { get; set; }
         public string Address { get; set; }
+        public Nullable<System.DateTime> DefaultReportingTime { get; set; }
+        public Nullable<double> MaxFDPExtended { get; set; }
+        public Nullable<System.DateTime> DateBirth { get; set; }
+        public string Gen { get; set; }
+        public Nullable<System.DateTime> DatePassportExpire { get; set; }
     }
 }

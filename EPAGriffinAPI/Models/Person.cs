@@ -504,6 +504,31 @@ namespace EPAGriffinAPI.Models
         public Nullable<System.DateTime> GroundExpireDate { get; set; }
         public Nullable<System.DateTime> FirstAidCockpitIssueDate { get; set; }
         public Nullable<System.DateTime> FirstAidCockpitExpireDate { get; set; }
+        public Nullable<System.DateTime> TypeFoker50IssueDate { get; set; }
+        public Nullable<System.DateTime> TypeFoker100IssueDate { get; set; }
+        public Nullable<System.DateTime> TypeFoker50ExpireDate { get; set; }
+        public Nullable<System.DateTime> TypeFoker100ExpireDate { get; set; }
+        public Nullable<System.DateTime> SMSL2IssueDate { get; set; }
+        public Nullable<System.DateTime> SMSL2ExpireDate { get; set; }
+        public Nullable<System.DateTime> SMSL3IssueDate { get; set; }
+        public Nullable<System.DateTime> SMSL3ExpireDate { get; set; }
+        public Nullable<System.DateTime> AMPIssueDate { get; set; }
+        public Nullable<System.DateTime> AMPExpireDate { get; set; }
+        public Nullable<System.DateTime> ASD_THR_IssueDate { get; set; }
+        public Nullable<System.DateTime> ASD_THR_ExpireDate { get; set; }
+        public Nullable<System.DateTime> ASD_SYZ_IssueDate { get; set; }
+        public Nullable<System.DateTime> ASD_SYZ_ExpireDate { get; set; }
+        public Nullable<System.DateTime> ASD_MHD_IssueDate { get; set; }
+        public Nullable<System.DateTime> ASD_MHD_ExpireDate { get; set; }
+        public Nullable<System.DateTime> ASD_TBZ_IssueDate { get; set; }
+        public Nullable<System.DateTime> ASD_TBZ_ExpireDate { get; set; }
+        public Nullable<System.DateTime> ASD_AWZ_IssueDate { get; set; }
+        public Nullable<System.DateTime> ASD_AWZ_ExpireDate { get; set; }
+        public Nullable<System.DateTime> ASD_SRY_IssueDate { get; set; }
+        public Nullable<System.DateTime> ASD_SRY_ExpireDate { get; set; }
+        public Nullable<System.DateTime> FTSL1IssueDate { get; set; }
+        public Nullable<System.DateTime> FTSL1ExpireDate { get; set; }
+        public string PID { get; set; }
     
         public virtual Option Option { get; set; }
         public virtual Option Option1 { get; set; }

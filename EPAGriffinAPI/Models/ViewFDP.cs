@@ -109,5 +109,6 @@ namespace EPAGriffinAPI.Models
         public Nullable<bool> CP { get; set; }
         public Nullable<int> Extension { get; set; }
         public int IsExtension { get; set; }
+        public Nullable<decimal> C_maxfdp { get; set; }
     }
 }

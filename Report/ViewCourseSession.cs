@@ -45,5 +45,8 @@ namespace Report
         public Nullable<bool> IsGeneral { get; set; }
         public Nullable<int> StatusId { get; set; }
         public string Status { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public Nullable<int> InstructorId { get; set; }
+        public Nullable<int> ParentId { get; set; }
     }
 }

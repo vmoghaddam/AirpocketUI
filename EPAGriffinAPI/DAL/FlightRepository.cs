@@ -18,6 +18,7 @@ using System.Data;
 using System.IO;
 using System.Diagnostics;
 using System.Configuration;
+using System.Web.Http.Results;
 
 namespace EPAGriffinAPI.DAL
 {
@@ -1949,10 +1950,10 @@ namespace EPAGriffinAPI.DAL
 
             var nullable_ids = dto.ids.Select(q => (Nullable<int>)q).ToList();
             var fdpitems = await (from fi in this.context.FDPItems
-                              join f in this.context.FDPs on fi.FDPId equals f.Id
-                              where nullable_ids.Contains(fi.FlightId) && f.IsTemplate == false
-                              select fi.FlightId).ToListAsync();
-            if (fdpitems!=null && fdpitems.Count>0)
+                                  join f in this.context.FDPs on fi.FDPId equals f.Id
+                                  where nullable_ids.Contains(fi.FlightId) && f.IsTemplate == false
+                                  select fi.FlightId).ToListAsync();
+            if (fdpitems != null && fdpitems.Count > 0)
             {
                 return new CustomActionResult(HttpStatusCode.BadRequest, "flight crew error");
             }
@@ -3448,16 +3449,16 @@ namespace EPAGriffinAPI.DAL
             var fltids_null = fltIds.Select(q => (Nullable<int>)q).ToList();
 
             var fltids_crew = await (from fi in this.context.FDPItems
-                                  join f in this.context.FDPs on fi.FDPId equals f.Id
-                                  where fltids_null.Contains(fi.FlightId) && f.IsTemplate == false
-                                  select fi.FlightId).ToListAsync();
+                                     join f in this.context.FDPs on fi.FDPId equals f.Id
+                                     where fltids_null.Contains(fi.FlightId) && f.IsTemplate == false
+                                     select fi.FlightId).ToListAsync();
             //fltIds = (from x in fltIds
             //         where !fltids_crew.Contains(x)
             //         select x).ToList();
 
             var flights = await this.context.FlightInformations.Where(q => fltIds.Contains(q.ID)).ToListAsync();
             var fltids_crew_int = fltids_crew.Select(q => (int)q).ToList();
-            var flights_crew = await this.context.FlightInformations.Where(q => fltids_crew_int.Contains(q.ID)).Select(q=>q.FlightNumber).ToListAsync();
+            var flights_crew = await this.context.FlightInformations.Where(q => fltids_crew_int.Contains(q.ID)).Select(q => q.FlightNumber).ToListAsync();
 
 
             flights = (from x in flights
@@ -3557,7 +3558,7 @@ namespace EPAGriffinAPI.DAL
             var nullfids = dto.fids.Select(q => (Nullable<int>)q).ToList();
 
             var offCrewIds = (from q in this.context.ViewFlightCrewNews
-                              where nullfids.Contains(q.FlightId)  
+                              where nullfids.Contains(q.FlightId)
                               group q by q.FlightId into grp
                               select new offcrew() { flightId = grp.Key, crews = grp.Select(w => w.CrewId).ToList() }
 
@@ -3573,8 +3574,8 @@ namespace EPAGriffinAPI.DAL
                 //offIds = offCrewIds
                 offcrews = offCrewIds,
                 fltIds = fltIds,
-                flights_crew=flights_crew,
-                flights_crew_ids= fltids_crew
+                flights_crew = flights_crew,
+                flights_crew_ids = fltids_crew
 
             });
         }
@@ -4368,7 +4369,7 @@ namespace EPAGriffinAPI.DAL
                                   join f in this.context.FDPs on fi.FDPId equals f.Id
                                   where nullable_ids.Contains(fi.FlightId) && f.IsTemplate == false
                                   select fi.FlightId).ToListAsync();
-            fltIds = fltIds.Except(fdpitems.Select(q => (int)q).ToList()).ToList();
+            //fltIds = fltIds.Except(fdpitems.Select(q => (int)q).ToList()).ToList();
 
             // var newreg = await this.context.Ac_MSN.FirstOrDefaultAsync(q => q.ID == dto.NewRegisterId);
             var flights = await this.context.FlightInformations.Where(q => fltIds.Contains(q.ID)).ToListAsync();
@@ -4397,7 +4398,13 @@ namespace EPAGriffinAPI.DAL
 
 
                 var y = legs.FirstOrDefault(q => q.ID == x.ID);
-                if (y.AircraftType[0] != newResisgerObj.AircraftType[0])
+                if ((y.AircraftType[0] != newResisgerObj.AircraftType2[0]) && fdpitems.Count > 0)
+                {
+                    result = "Unable to apply register change due to aircraft type change involving current crew assignment.";
+                    return new CustomActionResult(HttpStatusCode.NotFound, result);
+                }
+
+                if ((y.AircraftType[0] != newResisgerObj.AircraftType2[0]) && fdpitems.Count == 0)
                 {
                     changedTypes.Add(y.ID);
                     typeChangeDtoList.Add(new TypeChangeDto()
@@ -4411,6 +4418,9 @@ namespace EPAGriffinAPI.DAL
                         STALocal = y.STALocal,
                     });
                 }
+
+              
+
                 var changeLog = new FlightChangeHistory()
                 {
                     Date = DateTime.Now,
@@ -4483,7 +4493,7 @@ namespace EPAGriffinAPI.DAL
                 //piano
                 result = new List<object>() { fdpstr, fdpitemstr, crewStr, fltStr, typeChangeDtoList, fltIds };
 
-            }
+            } 
             else
                 result = new List<object>() { fltIds };
             //if (!isvalid)
@@ -9179,6 +9189,9 @@ namespace EPAGriffinAPI.DAL
             }
             return iddels;
         }
+
+
+     
         internal async Task<dynamic> SMSDuties(List<int> Ids, DateTime date, string username = "")
         {
             try
@@ -9359,7 +9372,7 @@ namespace EPAGriffinAPI.DAL
 
                     //var exist = histories.Where(q => q.ResId == x.Id).FirstOrDefault();
                     var exist = histories.Where(q => q.ResId == x.Id).ToList();
-                    if (exist != null && exist.Count>0)
+                    if (exist != null && exist.Count > 0)
                     {
                         // this.context.SMSHistories.Remove(exist);
                         this.context.SMSHistories.RemoveRange(exist);
@@ -9383,7 +9396,7 @@ namespace EPAGriffinAPI.DAL
                     });
                     //var existcps = await this.context.CrewPickupSMS.FirstOrDefaultAsync(q => q.FDPId == x.Id && q.CrewId == x.CrewId);
                     var existcps = await this.context.CrewPickupSMS.Where(q => q.FDPId == x.Id && q.CrewId == x.CrewId).ToListAsync();
-                    if (existcps != null && existcps.Count()>0)
+                    if (existcps != null && existcps.Count() > 0)
                         //  this.context.CrewPickupSMS.Remove(existcps);
                         this.context.CrewPickupSMS.RemoveRange(existcps);
                     var cps = new CrewPickupSM()
@@ -12206,10 +12219,10 @@ namespace EPAGriffinAPI.DAL
         }
 
         //baba
-       
-        
-        
-        
+
+
+
+
         public async Task<CustomActionResult> GetUpdatedFlightsNew(int airport, DateTime baseDate, DateTime? fromDate, DateTime? toDate, int customer, int tzoffset, int userid)
         {
             baseDate = baseDate.ToUniversalTime();
@@ -14725,7 +14738,7 @@ namespace EPAGriffinAPI.DAL
             if (fdp != null)
             {
                 this.context.FDPs.Remove(fdp);
-                await context.SaveAsync();
+                await context.SaveChangesAsync();
             }
             return new CustomActionResult(HttpStatusCode.OK, true);
         }
@@ -19353,7 +19366,7 @@ namespace EPAGriffinAPI.DAL
 
                 try
                 {
-                     result = new NiraHistory()
+                    result = new NiraHistory()
                     {
                         FlightId = leg.ID,
                         Arrival = leg.Arrival,
@@ -19406,7 +19419,7 @@ namespace EPAGriffinAPI.DAL
                         Register = leg.Register,
                         DateSend = DateTime.Now,
                         Remark = remark + "_" + url,
-                        NEWSTATUS=msg
+                        NEWSTATUS = msg
                     };
                     _context.NiraHistories.Add(result);
                     await _context.SaveAsync();
@@ -20051,11 +20064,12 @@ namespace EPAGriffinAPI.DAL
                                        Freight = grp.Sum(q => q.Freight)
                                    }).FirstOrDefaultAsync();
             if (flightInt == null)
-                flightInt = new DelayReportFlightSum() { 
-                 Freight=0,
-                  Total=0,
-                   Pax=0,
-                    Seats=0,
+                flightInt = new DelayReportFlightSum()
+                {
+                    Freight = 0,
+                    Total = 0,
+                    Pax = 0,
+                    Seats = 0,
 
                 };
 
@@ -20114,11 +20128,11 @@ namespace EPAGriffinAPI.DAL
                     Total = 0,
                     Pax = 0,
                     Seats = 0,
-                    SeatsDiff=0,
+                    SeatsDiff = 0,
                 };
 
-            flightPast.LF = (flightPast.Seats - flightPastInt.Seats)!=0? Math.Round((double)((flightPast.Pax - flightPastInt.Pax) * 100.0 / (flightPast.Seats - flightPastInt.Seats)), 2, MidpointRounding.AwayFromZero):0;
-            flightPastInt.LF = flightPastInt.Seats!=0? Math.Round((double)(flightPastInt.Pax * 100.0 / flightPastInt.Seats), 2, MidpointRounding.AwayFromZero):0;
+            flightPast.LF = (flightPast.Seats - flightPastInt.Seats) != 0 ? Math.Round((double)((flightPast.Pax - flightPastInt.Pax) * 100.0 / (flightPast.Seats - flightPastInt.Seats)), 2, MidpointRounding.AwayFromZero) : 0;
+            flightPastInt.LF = flightPastInt.Seats != 0 ? Math.Round((double)(flightPastInt.Pax * 100.0 / flightPastInt.Seats), 2, MidpointRounding.AwayFromZero) : 0;
 
             flight.TotalDiff = flightPast.Total == 0 ? 100 : Math.Round((double)((flight.Total - flightPast.Total) * 100.0 / flightPast.Total), 2, MidpointRounding.AwayFromZero);
             flight.PaxDiff = flightPast.Pax == 0 ? 100 : Math.Round((double)((flight.Pax - flightPast.Pax) * 100.0 / flightPast.Pax), 2, MidpointRounding.AwayFromZero);
@@ -21791,7 +21805,7 @@ namespace EPAGriffinAPI.DAL
         }
         internal async Task<object> GetNoCrews()
         {
-            var query = await this.context.ViewEmployeeLights.Where(q => q.JobGroupCode.StartsWith("00103") || q.JobGroupCode.StartsWith("004") || q.JobGroupCode.StartsWith("005")).OrderBy(q => q.JobGroup).ThenBy(q => q.LastName).ThenBy(q => q.FirstName).ToListAsync();
+            var query = await this.context.ViewEmployeeLights.Where(q => q.JobGroupCode.StartsWith("00103") || q.JobGroupCode.StartsWith("004") || q.JobGroupCode.StartsWith("005") || q.JobGroupCode.StartsWith("10012")).OrderBy(q => q.JobGroup).ThenBy(q => q.LastName).ThenBy(q => q.FirstName).ToListAsync();
             return query;
         }
         internal async Task<CustomActionResult> deleteFixTime(string route, string userName)
@@ -22172,7 +22186,7 @@ namespace EPAGriffinAPI.DAL
                             if (exist.StandBy == null)
                                 exist.StandBy = 0;
                             exist.StandBy += x.Count;
-                            exist.FixTimeTotal = (int)exist.FixTimeTotal + x.Count*120;
+                            exist.FixTimeTotal = (int)exist.FixTimeTotal + x.Count * 120;
                         }
                         // if (x.DutyTypeTitle == "OTHER AIRLINE STBY")
                         //    exist.StandBy += x.Count;

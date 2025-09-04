@@ -1,0 +1,158 @@
+﻿<style>
+    #grid .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #grid .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #grid .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #grid .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .datepicker-plot-area {
+        box-sizing: border-box;
+        overflow: hidden;
+        min-height: 70px;
+        display: block;
+        width: 300px !important;
+        min-width: 200px;
+        padding: 10px !important;
+        position: absolute;
+        font: 12px tahoma;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
+
+        .datepicker-plot-area .datepicker-day-view .table-days td span {
+            display: block;
+            width: 100%;
+            height: 30px !important;
+            line-height: 30px !important;
+            padding: 0;
+            margin: 0px;
+        }
+
+    .dx-placeholder {
+        margin-left: 5px !important
+    }
+
+    .td-field {
+        padding: 7px;
+        text-align: left
+    }
+
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+
+    .data_grid {
+        vertical-align: middle !important;
+    }
+</style>
+<div class="box vira_inventory" style="height:100%;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class="col-lg-6 col-md-6">
+            <div style="width: 100%; border: 1px solid #ccc;margin-top:5px">
+                <div class="td-title" style="width: 100%">Filter Panel</div>
+                <table style="margin-top:10px;color:black" class="dx-border">
+                    <tr>
+                        <td class="td-field" style="font-weight:bold">Req. No. :</td>
+                        <td class="td-field"><div dx-text-box="txt_filter_reqNo" class="center" style="width: 100%"></div></td>
+
+                        <td class="td-field" style="font-weight:bold">Priority:</td>
+                        <td class="td-field"><div dx-select-box="sb_filter_priority" class="center"></div></td>
+
+                        <!--<td class="td-field" style="font-weight:bold">Priority:</td>-->
+                        <td class="td-field"><div dx-select-box="sb_filter_type" class="center"></div></td>
+
+                    </tr>
+                    <tr>
+                        <td class="td-field" style="font-weight:bold">Description:</td>
+                        <td class="td-field"><div dx-text-box="txt_filter_desc" class="center"></div></td>
+
+                        <td class="td-field" style="font-weight:bold">Part No. :</td>
+                        <td class="td-field"><div dx-text-box="txt_filter_partNo" class="center"></div></td>
+
+                        <!--<td class="td-field" style="font-weight:bold">Priority:</td>-->
+                        <td class="td-field"><div dx-select-box="sb_filter_stat" class="center"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="td-field">
+                            <div dx-button="btn_search"></div>
+                        </td>
+
+
+                    </tr>
+                </table>
+                <div>
+                    <div dx-data-grid="dg_filter_req" id="dg_filter_req" class="content data_grid" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            <div style="width: 100%; border: 1px solid #ccc;margin-top:5px">
+                <div class="td-title" style="width: 100%">Request</div>
+                <table style="margin-top:10px;color:black" class="dx-border">
+                    <tr>
+                        <td class="td-field" style="font-weight:bold">Request No. :</td>
+                        <td class="td-field"><div dx-text-box="txt_reqNo" class="center" style="width: 100%"></div></td>
+
+                        <td class="td-field" style="font-weight:bold">Priority:</td>
+                        <td class="td-field"><div dx-text-box="txt_priority" class="center"></div></td>
+
+                        <td class="td-field" style="font-weight:bold">Date:</td>
+                        <td class="td-field"><div dx-date-box="dt_date" class="center" style="width: 100%"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="td-field" style="font-weight:bold">DeadLine:</td>
+                        <td class="td-field"><div dx-date-box="dt_deadline" class="center" style="width: 100%"></div></td>
+
+                        <td class="td-field" style="font-weight:bold">Status:</td>
+                        <td class="td-field"><div dx-text-box="txt_status" class="center"></div></td>
+
+                        <td class="td-field" style="font-weight:bold">Serial No. :</td>
+                        <td class="td-field"><div dx-text-box="txt_serialNo" class="center"></div></td>
+                    </tr>
+                </table>
+                <div>
+                    <div dx-data-grid="dg_req" id="dg_req" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+                <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>-->
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+

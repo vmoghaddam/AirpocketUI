@@ -37,5 +37,8 @@ namespace EPAGriffinAPI.Models
         public Nullable<System.DateTime> PickupLocal { get; set; }
         public string Code { get; set; }
         public string PID { get; set; }
+        public int PersonId { get; set; }
+        public string BaseAirport { get; set; }
+        public Nullable<int> BaseAirportId { get; set; }
     }
 }

@@ -25,13 +25,13 @@ namespace Report
         public string ACReg { get; set; }
         public string ACType { get; set; }
         public Nullable<System.DateTime> OffBlock { get; set; }
-        public Nullable<System.DateTime> C_OffBlock { get; set; }
-        public Nullable<System.DateTime> C_OnBlock { get; set; }
+        public System.DateTime C_OffBlock { get; set; }
+        public System.DateTime C_OnBlock { get; set; }
         public Nullable<System.DateTime> OffBlockLocal { get; set; }
         public Nullable<System.DateTime> OnBlock { get; set; }
         public Nullable<System.DateTime> OnBlockLocal { get; set; }
-        public Nullable<System.DateTime> blockoffstation { get; set; }
-        public Nullable<System.DateTime> blockonstation { get; set; }
+        public System.DateTime blockoffstation { get; set; }
+        public System.DateTime blockonstation { get; set; }
         public Nullable<int> DayTakeOff { get; set; }
         public Nullable<int> NightTakeOff { get; set; }
         public Nullable<int> DayLanding { get; set; }
@@ -51,5 +51,15 @@ namespace Report
         public string CPTNAME { get; set; }
         public string PIC { get; set; }
         public string SIC { get; set; }
+        public string YM { get; set; }
+        public Nullable<int> duration { get; set; }
+        public Nullable<int> duration2 { get; set; }
+        public Nullable<int> bbb { get; set; }
+        public string iiiaaa { get; set; }
+        public string iccc { get; set; }
+        public Nullable<System.Guid> Id { get; set; }
+        public Nullable<int> DiffBlock { get; set; }
+        public Nullable<int> Net1 { get; set; }
+        public Nullable<int> Net2 { get; set; }
     }
 }

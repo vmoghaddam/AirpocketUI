@@ -79,5 +79,7 @@ namespace EPAGriffinAPI.Models
         public Nullable<bool> LastCourse { get; set; }
         public Nullable<bool> IsGeneral { get; set; }
         public Nullable<int> CustomerId { get; set; }
+        public Nullable<int> InstructorId { get; set; }
+        public Nullable<int> ParentId { get; set; }
     }
 }

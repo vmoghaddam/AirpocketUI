@@ -629,7 +629,7 @@ namespace EPAGriffinAPI.Controllers
 
             return Ok(result);
 
-        }
+        } 
 
         [Route("odata/flight/change/history/{id}")]
         [EnableQuery]

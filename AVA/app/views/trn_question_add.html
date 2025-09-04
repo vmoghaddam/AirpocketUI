@@ -1,0 +1,199 @@
+﻿<style>
+
+    .qustions-container {
+        /*max-width: 800px;*/
+        /*margin: auto;*/
+        background: #fff;
+        padding: 7px;
+        border-radius: 8px;
+        margin-top: 0px;
+        overflow-y: hidden;
+    }
+
+    h5 {
+        text-align: center;
+        color: black;
+    }
+
+    .question-block {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .qlabel {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+        cursor: pointer;
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    button {
+        width: 48%;
+        padding: 15px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .btn_submit {
+        width: 100%;
+        padding: 15px;
+        background-color: #009688;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    button:disabled {
+        background-color: #d3d3d3;
+    }
+
+    button:hover:not(:disabled) {
+        background-color: #008380;
+    }
+
+    .qheader {
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        padding: 7px;
+    }
+
+    input[type="radio"] {
+        /*position: absolute;*/
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    .checkmark {
+        height: 20px;
+        width: 20px;
+        background-color: #eee;
+        border-radius: 50%;
+        margin: 0 5px 0 5px;
+        position: relative;
+    }
+
+    .qlabel:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    input:checked ~ .checkmark {
+        background-color: #009688;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .checkmark:after {
+        top: 6px;
+        left: 6px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .right_class {
+        margin-bottom: 20px;
+        padding: 10px;
+        padding-top: 5px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        direction: rtl
+    }
+
+    .left_class {
+        margin-bottom: 20px;
+        padding: 10px;
+        padding-top: 2px;
+        border: 1px solid #e0e0e0;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+        direction: ltr
+    }
+
+    .correct-answer {
+        background-color: lightgreen;
+    }
+</style>
+
+
+
+
+<div ng-controller="trn_question_addController">
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-6 col-md-8 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <div dx-data-grid="dg_question" id="dg_question" class="content" style="overflow-y:hidden"></div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; margin-top: 6px;">
+                <div dx-select-box="sb_category" style="flex: 1; background-color: white; padding-right: 2px; padding-left: 2px; border: 2px solid #e0e0e0 "></div>
+                <div dx-button="btn_question" style="flex: 0 0 auto;"></div>
+            </div>
+
+        </div>
+        <div class=" col-lg-6 col-md-8 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <div dx-data-grid="dg_answers" id="dg_answers" class="content" style="overflow-y:hidden"></div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 6px;">
+                <div dx-button="btn_answers"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup_questions" dx-popup="popup_questions">
+        <div style="color: black; background-color: lightgray;font-weight: bold; border: 1px solid #e0e0e0; height:25px; padding: 4px 0px 0px 5px">Category</div>
+        <div dx-select-box="sb_category" style=" background-color: white; padding-right: 2px; padding-left: 2px; border: 1px solid #e0e0e0; height: 35px"></div>
+
+        <div style="color: black; background-color: lightgray; font-weight: bold; border: 1px solid #e0e0e0; height: 25px; padding: 4px 0px 0px 5px; margin-top: 7px">Title</div>
+        <div dx-text-box="txt_title" style="background-color: white; padding-right: 2px; padding-left: 2px ;border: 1px solid #e0e0e0 ; height: 35px"></div>
+
+    </div>
+
+    <div id="popup_answers" dx-popup="popup_answers">
+        <div style="color: black; background-color: lightgray;font-weight: bold; border: 1px solid #e0e0e0; height:25px; padding: 4px 0px 0px 5px">Question</div>
+        <div dx-text-box="txt_question" style=" background-color: white; padding-right: 2px; padding-left: 2px; border: 1px solid #e0e0e0; height: 35px"></div>
+        <div style="color: black; background-color: lightgray; font-weight: bold; border: 1px solid #e0e0e0; margin-top: 7px; height: 25px; padding: 4px 0px 0px 5px ">Title</div>
+        <div dx-text-box="txt_title" style="background-color: white; padding-right: 2px; padding-left: 2px;border: 1px solid #e0e0e0 ; height: 35px"></div>
+        <div style="display: flex; align-items: center; gap: 8px; margin-top: 6px; height: 35px;">
+            <div style="color: black; font-weight: bold;">Is Answer</div>
+            <div dx-check-box="chb_isAnswer"></div>
+        </div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

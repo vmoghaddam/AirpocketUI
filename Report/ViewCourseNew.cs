@@ -70,5 +70,28 @@ namespace Report
         public string AttForm { get; set; }
         public Nullable<int> Year { get; set; }
         public string Intervals { get; set; }
+        public string PYear { get; set; }
+        public string PMonthName { get; set; }
+        public string PDateStart { get; set; }
+        public string PDateEnd { get; set; }
+        public Nullable<System.DateTime> Date_Sign_Ins1 { get; set; }
+        public Nullable<System.DateTime> Date_Sign_Ins2 { get; set; }
+        public Nullable<System.DateTime> Date_Sign_Director { get; set; }
+        public Nullable<System.DateTime> Date_Sign_Staff { get; set; }
+        public Nullable<System.DateTime> Date_Sign_OPS { get; set; }
+        public Nullable<System.DateTime> Date_Exam_Sign_Ins1 { get; set; }
+        public Nullable<System.DateTime> Date_Exam_Sign_Ins2 { get; set; }
+        public Nullable<System.DateTime> Date_Sessions_Synced { get; set; }
+        public Nullable<System.DateTime> Date_Sessions_Instructor_Synced { get; set; }
+        public Nullable<int> Attendants { get; set; }
+        public int Synced { get; set; }
+        public Nullable<int> SyncedErrors { get; set; }
+        public Nullable<int> SesstionsCount { get; set; }
+        public Nullable<int> PLCount { get; set; }
+        public Nullable<int> PLTotal { get; set; }
+        public Nullable<int> PLRemain { get; set; }
+        public Nullable<double> PLStatus { get; set; }
+        public Nullable<int> ParentId { get; set; }
+        public string ParentTitle { get; set; }
     }
 }

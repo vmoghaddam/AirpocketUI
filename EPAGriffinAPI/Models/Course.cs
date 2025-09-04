@@ -28,6 +28,7 @@ namespace EPAGriffinAPI.Models
             this.CourseCatRates = new HashSet<CourseCatRate>();
             this.PersonCourses = new HashSet<PersonCourse>();
             this.CourseSessions = new HashSet<CourseSession>();
+            this.Course1 = new HashSet<Course>();
         }
     
         public int Id { get; set; }
@@ -82,6 +83,17 @@ namespace EPAGriffinAPI.Models
         public Nullable<System.DateTime> SMSInsDate { get; set; }
         public Nullable<decimal> Cost { get; set; }
         public string AttForm { get; set; }
+        public Nullable<System.DateTime> Date_Sign_Ins1 { get; set; }
+        public Nullable<System.DateTime> Date_Sign_Ins2 { get; set; }
+        public Nullable<System.DateTime> Date_Sign_Director { get; set; }
+        public Nullable<System.DateTime> Date_Sign_Staff { get; set; }
+        public Nullable<System.DateTime> Date_Sign_OPS { get; set; }
+        public Nullable<System.DateTime> Date_Exam_Sign_Ins1 { get; set; }
+        public Nullable<System.DateTime> Date_Exam_Sign_Ins2 { get; set; }
+        public Nullable<System.DateTime> Date_Sessions_Synced { get; set; }
+        public Nullable<System.DateTime> Date_Sessions_Instructor_Synced { get; set; }
+        public Nullable<int> ParentId { get; set; }
+        public string ExamType { get; set; }
     
         public virtual AircraftModel AircraftModel { get; set; }
         public virtual AircraftType AircraftType { get; set; }
@@ -109,5 +121,8 @@ namespace EPAGriffinAPI.Models
         public virtual ICollection<PersonCourse> PersonCourses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CourseSession> CourseSessions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Course> Course1 { get; set; }
+        public virtual Course Course2 { get; set; }
     }
 }

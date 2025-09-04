@@ -1,0 +1,3241 @@
+<style>
+    .dx-border .dx-texteditor-input {
+        padding: 7px 4px 7px 4px !important;
+    }
+
+    .margin-bottom-5 {
+        margin-bottom: 1px !important;
+    }
+
+    .padding-7 {
+        padding: 5px 5px 2px 5px !important;
+    }
+	.card-header.show{
+		color: #0c63e4;
+    	background-color: #e7f1ff;
+    	box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+	}
+	.card {
+	    margin-left: 1rem;
+    	margin-right: 1rem;
+	}
+</style>
+<div ng-controller="zpersonAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div dx-tabs="tabs_options">
+
+        </div>
+        <div class="tab main dx-border">
+            <div id="scrollview" dx-scroll-view="scroll_main">
+				<div class="d-lg-none" style="padding-top:5px;"> 
+				<div id="accordion">
+  <div class="card">
+    <div class="card-header show" id="heading1">
+      <h5 style="font-weight: 400;">
+        Base
+      </h5>
+    </div>
+
+    <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#accordion">
+      <div class="card-body">
+        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding:0px 5px 0px  5px; max-width: 250px;">
+                        <div style="border:1px solid #aaa; border-radius:5px;">
+                            <div style="text-align:center;padding-top:2px ;">
+                                <img ng-src="{{img_url}}" style="max-width: 95%;" />
+                            </div>
+                            <div id="uploader_image" dx-file-uploader="uploader_image" class="invisibleuploader"></div>
+                        </div>
+		</div>
+		<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7" style="padding-top: 0;">
+			<label>Pass/ID</label>
+            <div dx-text-box="txt_nid" class="center ltr" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required',   }]}"></div>
+		</div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>First Name</label>
+			  <div dx-text-box="txt_FirstName" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+          </div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>Last Name</label>
+			  <div dx-text-box="txt_LastName" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+		</div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>Identity No</label>
+			  <div dx-text-box="txt_IDNo" class="center ltr"></div>
+		</div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7" >
+			  <label>Gender</label>
+			  <div dx-select-box="sb_Sex" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+		</div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>Mobile</label>
+			  <div dx-text-box="txt_Mobile" class="center ltr" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required',   }]}"></div>
+		</div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>Birth Date</label>
+			  <div dx-date-box="date_DateBirth" class="center"></div>
+		</div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>Email</label>
+			  <div dx-text-box="txt_Email" dx-validator="emailValidationRules"></div>
+		</div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>Passport No</label>
+			  <div dx-text-box="txt_PassportNumber" class="center ltr f16"></div>
+		</div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>Passport Expiry</label>
+			  <a ng-click="doc_click('Passport')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+			<a ng-show="!isNew" ng-click="savedoc_click('Passport')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+			  <div dx-date-box="date_DatePassportExpire" class="center"></div>
+		</div>
+		  
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7" style="padding-bottom: 10px !important;">
+			  <label>VISA Expire Date</label>
+			  <div dx-date-box="date_VisaExpireDate" class="center"></div>
+		</div>
+		  
+		  <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12  margin-bottom-5 padding-7">
+			  <label>City</label>
+			  <div dx-select-box="sb_city"></div>
+		</div>
+		  <div class="col-lg-5 col-md-3 col-sm-12 col-xs-12  margin-bottom-5 padding-7">
+			  <label>Address</label>
+			  <div dx-text-box="txt_Address"></div>
+		</div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>Postal Code</label>
+			  <div class="center ltr f16" dx-text-box="txt_PostalCode"></div>
+			  </div>
+		  <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6  margin-bottom-5 padding-7">
+			  <label>Tel</label>
+			  <div dx-text-box="txt_phone" class="center ltr f16"></div>
+			  </div>
+		  <div style="clear:both"></div>
+		  
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading2">
+      <h5 style="font-weight: 400;">
+        Organizational
+      </h5>
+    </div>
+    <div id="collapse2" class="collapse" aria-labelledby="heading2" data-parent="#accordion">
+      <div class="card-body">
+         <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Department</label>
+                            <div dx-select-box="sb_location" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+						 <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Personnel Id</label>
+                            <div dx-text-box="txt_PID" class="center ltr f16" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+						 <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Flight Time (hh:mm)</label>
+                            <div dx-text-box="txt_initflt" class="center ltr f16"  ></div>
+                        </div>
+						<div style="clear:both"></div>
+                        <!--<div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Post</label>
+                            <div dx-select-box="sb_post"></div>
+                        </div>-->
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Group</label>
+                            <div dx-select-box="sb_group"></div>
+                        </div>
+						 <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Post</label>
+                            <div dx-select-box="sb_group2"></div>
+                        </div>
+                       
+
+                        <div style="clear:both"></div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Schedule Name</label>
+                            <div dx-text-box="txt_ScheduleName" class="center ltr f16"></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Code</label>
+                            <div dx-text-box="txt_Code" class="center ltr f16"></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Join Company</label>
+                            <div dx-date-box="date_DateCompany" class="center"></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Tel</label>
+                            <div dx-text-box="txt_ephone" class="center ltr f16"></div>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Home Base</label>
+                            <div dx-select-box="sb_Base"></div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <div>&nbsp;</div>
+                            <div dx-check-box="chk_inactive" class="center" style="margin-top:10px;"></div>
+                        </div>
+							   <div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <div>&nbsp;</div>
+                            <div dx-check-box="chk_lifus" class="center" style="margin-top:10px;"></div>
+                        </div>
+                        
+                           <div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <div>&nbsp;</div>
+                            <div dx-check-box="chk_other" class="center" style="margin-top:10px;"></div>
+                        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="heading3">
+      <h5 style="font-weight: 400;">
+        Licensing
+      </h5>
+    </div>
+    <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordion">
+      <div class="card-body">
+		  <div style="margin-top:10px;padding-left:0px;" ng-show="['tri','tre','ltc','p1','p2'].indexOf(group_title.toLowerCase())!=-1">
+        <div class="col-lg-4" style="padding:0; ">
+                        <div style="margin:5px 5px 5px  5px;padding-bottom:7px" class="groupbox">
+                            <div class="caption">
+                                Flight Crew Licence
+                                <a ng-click="doc_click('Flight Crew Licence')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+                                <a ng-show="!isNew" ng-click="savedoc_click('Flight Crew Licence')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-6    padding-7" style="padding-bottom:0">
+                                <label>Title of Licence</label>
+                                <div dx-text-box="txt_LicenceTitle" class="ltr f16"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6  margin-bottom-5 padding-7">
+                                <label>No</label>
+                                <div dx-text-box="txt_NDTNumber" class="center ltr f16"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12    padding-7" style="padding-bottom:0">
+                                <label>Date of Initial Issue</label>
+                                <div dx-date-box="date_LicenceInitialIssue" class="center"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-6 col-sm-6 col-xs-12    padding-7" style="padding-bottom:0;">
+                                <label>Ratings, Certificates and privilleges</label>
+                                <div dx-text-box="txt_RaitingCertificates" class="ltr f16"></div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6    padding-7">
+                                <label>Valid Until</label>
+                                <div dx-date-box="date_LicenceExpireDate"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6    padding-7">
+                                <label>IR Valid Until</label>
+                                <div dx-date-box="date_LicenceIRExpireDate"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-6 col-sm-12 col-xs-12    padding-7" style="padding-bottom:0 !important">
+                                <label>Description</label>
+                                <div dx-text-box="txt_LicenceDescription" class="ltr"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                    </div>
+					 <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding:0;">
+                        <div style="margin:5px 5px 5px  5px;height:310px;" class="groupbox">
+                            <div class="caption">
+                                CMC
+                                <a ng-click="doc_click('Crew Member Certificate')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Crew Member Certificate')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Employed By</label>
+                                    <div dx-text-box="txt_CMCEmployedBy" class="ltr "></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Occupation</label>
+                                    <div dx-text-box="txt_CMCOccupation" class="ltr "></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Date Of Expiry</label>
+                                    <div dx-date-box="date_CrewMemberCertificateExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding:0 ">
+                        <div style="margin:5px 5px 5px  5px;height:310px;" class="groupbox">
+                            <div class="caption">
+                                Medical Certificate
+                                <a ng-click="doc_click('Medical Certificate')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Medical Certificate')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Class</label>
+                                    <div dx-number-box="txt_MedicalClass" class="center ltr f16"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue</label>
+                                    <div dx-date-box="date_DateLastCheckUP" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Exp</label>
+                                    <div dx-date-box="date_DateNextCheckUP" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Limitation</label>
+                                    <div dx-text-box="txt_MedicalLimitation"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding:0; ">
+                        <div style="margin:5px 5px 5px  5px;height:310px;" class="groupbox">
+                            <div class="caption">
+                                LPC
+                                <a ng-click="doc_click('LPC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								  <a ng-show="!isNew" ng-click="savedoc_click('LPC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Date Of Check</label>
+                                    <div dx-date-box="date_ProficiencyCheckDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Valid Until</label>
+                                    <div dx-date-box="date_ProficiencyValidUntil" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Description</label>
+                                    <div dx-text-box="txt_ProficiencyDescriptionOPC" class="ltr"></div>
+                                </div>
+								
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding:0; ">
+                        <div style="margin:5px 5px 5px  5px;height:310px;" class="groupbox">
+                            <div class="caption">
+                                OPC
+                                <a ng-click="doc_click('OPC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								  <a ng-show="!isNew" ng-click="savedoc_click('OPC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Date Of Check</label>
+                                    <div dx-date-box="date_ProficiencyCheckDateOPC" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Valid Until</label>
+                                    <div dx-date-box="date_ProficiencyValidUntilOPC" class="center"></div>
+                                </div>
+                                <!--<div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Description</label>
+                                    <div dx-text-box="txt_ProficiencyDescriptionOPC" class="ltr"></div>
+                                </div>-->
+								<div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>FSTD OPERATOR</label>
+                                    <div dx-text-box="txt_fstd2" class="ltr"></div>
+                                </div>
+								  <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Examiner</label>
+                                    <div dx-text-box="txt_examiner" class="ltr"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+         
+                    <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding:0; ">
+                        <div style="margin:5px 5px 5px  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                              IP
+							  <a ng-click="doc_click('OPC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+							    <a ng-show="!isNew" ng-click="savedoc_click('IP')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                                
+                            </div>
+                            <div style="padding: 0 5px">
+                               
+
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>TRI Expire Date</label>
+                                    <div dx-date-box="date_TRIExpire" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>TRE Expire Date</label>
+                                    <div dx-date-box="date_TREExpire" class="center"></div>
+                                </div>
+
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding:0; ">
+                        <div style="margin:5px 5px 5px  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                ICAO LPR
+                                <a ng-click="doc_click('LPR')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('LPR')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Level</label>
+                                    <div dx-select-box="sb_ICAOLPRLevel" class="center ltr f16"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Valid Until</label>
+                                    <div dx-date-box="date_ICAOLPRValidUntil" class="center"></div>
+                                </div>
+
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+		</div> <!-- end of cockpit licenses -->
+		  <div style="margin-top:10px;padding-left:0px;" ng-show="['isccm','sccm','ccm'].indexOf(group_title.toLowerCase())!=-1">
+					   <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding:0;">
+                        <div style="margin:5px 5px 5px  5px;padding-bottom:5px " class="groupbox">
+                            <div class="caption">
+                                CMC
+                                <a ng-click="doc_click('Crew Member Certificate')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Crew Member Certificate')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+							<div class='col-lg-6' style='padding:0'>
+							  <div style="padding: 0 5px">
+							   <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Employed By</label>
+                                    <div dx-text-box="txt_CMCEmployedBy" class="ltr "></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Occupation</label>
+                                    <div dx-text-box="txt_CMCOccupation" class="ltr "></div>
+                                </div>
+							  </div>
+							</div>
+							<div class='col-lg-6' style='padding:0'>
+							  <div style="padding: 0 5px">
+							  <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Date Of Expiry</label>
+                                    <div dx-date-box="date_CrewMemberCertificateExpireDate" class="center"></div>
+                                </div>
+							  </div>
+							</div>
+                             <div style="clear:both"></div>
+
+                        </div>
+                    </div>
+					
+					<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6" style="padding:0 ">
+                        <div style="margin:5px 5px 5px  5px; padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Medical Certificate
+                                <a ng-click="doc_click('Medical Certificate')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Medical Certificate')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+							
+							<div class='col-lg-6' style='padding:0'>
+							  <div style="padding: 0 5px">
+							    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Class</label>
+                                    <div dx-number-box="txt_MedicalClass" class="center ltr f16"></div>
+                                </div>
+								<div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Limitation</label>
+                                    <div dx-text-box="txt_MedicalLimitation"></div>
+                                </div>
+							  </div>
+							</div>
+							<div class='col-lg-6' style='padding:0'>
+							  <div style="padding: 0 5px">
+							    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Exp</label>
+                                    <div dx-date-box="date_DateNextCheckUP" class="center"></div>
+                                </div>
+							  </div>
+							</div>
+							 <div style="clear:both"></div>
+                           
+
+                        </div>
+                    </div>
+		  </div> <!-- end of cabin licenses -->
+      </div>
+    </div>
+  </div>
+<div class="card">
+    <div class="card-header" id="heading4">
+      <h5 style="font-weight: 400;">
+        Training
+      </h5>
+    </div>
+    <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordion">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+				</div>
+                <div class="d-none d-lg-block" style="padding-top:5px;">
+                    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-3" style="padding:0px 5px 5px  5px;width:20%">
+                        <div style="border:1px solid #aaa; border-radius:5px;">
+
+                            <div style="text-align:center;padding-top:2px ;height:185px;line-height: 225px;">
+                                <img ng-src="{{img_url}}" style="max-height:202px;max-width: 238px" />
+                            </div>
+                            <div id="uploader_image" dx-file-uploader="uploader_image" class="invisibleuploader"></div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-10 col-md-9 col-sm-9 col-xs-9" style="padding:0px 10px 5px 5px;width:80%">
+                        <div class="groupbox" style="padding-bottom:9px;">
+                            <div class="caption">Base</div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Pass/ID</label>
+                                <div dx-text-box="txt_nid" class="center ltr" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required',   }]}"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>First Name</label>
+                                <div dx-text-box="txt_FirstName" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Last Name</label>
+                                <div dx-text-box="txt_LastName" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Identity No</label>
+                                <div dx-text-box="txt_IDNo" class="center ltr"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Gender</label>
+                                <div dx-select-box="sb_Sex" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Mobile</label>
+                                <div dx-text-box="txt_Mobile" class="center ltr" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required',   }]}"></div>
+                            </div>
+                            <div style="clear:both"></div>
+
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Birth Date</label>
+                                <div dx-date-box="date_DateBirth" class="center"></div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" style="padding-bottom: 10px !important;">
+                                <label>Email</label>
+                                <div dx-text-box="txt_Email" dx-validator="emailValidationRules"></div>
+                            </div>
+
+
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Passport No</label>
+                                <div dx-text-box="txt_PassportNumber" class="center ltr"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Passport Expire Date</label>
+                                <div dx-date-box="date_DatePassportExpire" class="center"></div>
+                            </div>
+							 <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>&nbsp;</label>
+                                <div> <a ng-click="doc_click('Passport')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Passport')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+								</div>
+
+                            </div>
+							 
+							
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>VISA Expire Date</label>
+                                <div dx-date-box="date_VisaExpireDate" class="center"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>City</label>
+                                <div dx-select-box="sb_city"></div>
+                            </div>
+                            <div class="col-lg-5 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Address</label>
+                                <div dx-text-box="txt_Address"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Postal Code</label>
+                                <div class="center ltr f16" dx-text-box="txt_PostalCode"></div>
+                            </div>
+                            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Tel</label>
+                                <div dx-text-box="txt_phone" class="center ltr"></div>
+                            </div>
+                            <div style="clear:both"></div>
+
+                        </div>
+
+
+
+                    </div>
+					
+					
+					
+
+                    <div style="clear:both"></div>
+					
+					 
+					    <div style="margin:5px 10px 0  5px" class="groupbox">
+                        <div class="caption">Organizational</div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Department</label>
+                            <div dx-select-box="sb_location" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+						 <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Personnel Id</label>
+                            <div dx-text-box="txt_PID" class="center ltr f16" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+						 <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Flight Time (hh:mm)</label>
+                            <div dx-text-box="txt_initflt" class="center ltr f16"  ></div>
+                        </div>
+						<div style="clear:both"></div>
+                        <!--<div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Post</label>
+                            <div dx-select-box="sb_post"></div>
+                        </div>-->
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Group</label>
+                            <div dx-select-box="sb_group"></div>
+                        </div>
+						 <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Post</label>
+                            <div dx-select-box="sb_group2"></div>
+                        </div>
+                       
+
+                        <div style="clear:both"></div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Schedule Name</label>
+                            <div dx-text-box="txt_ScheduleName" class="center ltr f16"></div>
+                        </div>
+                       <!-- <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Code</label>
+                            <div dx-text-box="txt_Code" class="center ltr f16"></div>
+                        </div>-->
+                        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Join Company</label>
+                            <div dx-date-box="date_DateCompany" class="center"></div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Tel</label>
+                            <div dx-text-box="txt_ephone" class="center ltr f16"></div>
+                        </div>
+                    
+                        <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Home Base</label>
+                            <div dx-select-box="sb_Base" dx-validator="{validationGroup:'personadd',  validationRules: [{ type: 'required'}]}"></div>
+                        </div>
+                        <div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <div>&nbsp;</div>
+                            <div dx-check-box="chk_inactive" class="center" style="margin-top:10px;"></div>
+                        </div>
+						<div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <div>&nbsp;</div>
+                            <div dx-check-box="chk_lifus" class="center" style="margin-top:10px;"></div>
+                        </div>
+                           <div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <div>&nbsp;</div>
+                            <div dx-check-box="chk_other" class="center" style="margin-top:10px;"></div>
+                        </div>  
+                        <div style="clear:both"></div>
+                    </div>
+					<div style='clear:both'></div>
+					<hr>
+					 <div style="margin-top:10px;padding-left:0px;" ng-show="['tri','tre','ltc','p1','p2'].indexOf(group_title.toLowerCase())!=-1">
+					    <div class="col-lg-4" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:7px" class="groupbox">
+                            <div class="caption">
+                                Flight Crew Licence
+                                <a ng-click="doc_click('Flight Crew Licence')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+                                <a ng-show="!isNew" ng-click="savedoc_click('Flight Crew Licence')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div class="col-lg-5 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                <label>Title of Licence</label>
+                                <div dx-text-box="txt_LicenceTitle" class="ltr f16"></div>
+                            </div>
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>No</label>
+                                <div dx-text-box="txt_NDTNumber" class="center ltr f16"></div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                <label>Date of Initial Issue</label>
+                                <div dx-date-box="date_LicenceInitialIssue" class="center"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0; padding-top:1px !important">
+                                <label>Ratings, Certificates and privilleges</label>
+                                <div dx-text-box="txt_RaitingCertificates" class="ltr f16"></div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12    padding-7">
+                                <label>Valid Until</label>
+                                <div dx-date-box="date_LicenceExpireDate"></div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-12    padding-7">
+                                <label>IR Valid Until</label>
+                                <div dx-date-box="date_LicenceIRExpireDate"></div>
+                            </div>
+                            <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0 !important">
+                                <label>Description</label>
+                                <div dx-text-box="txt_LicenceDescription" class="ltr"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                    </div>
+					 <div class="col-lg-2" style="padding:0;">
+                        <div style="margin:2px 5px 0  5px;height:300px;" class="groupbox">
+                            <div class="caption">
+                                CMC
+                                <a ng-click="doc_click('Crew Member Certificate')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Crew Member Certificate')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Employed By</label>
+                                    <div dx-text-box="txt_CMCEmployedBy" class="ltr "></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Occupation</label>
+                                    <div dx-text-box="txt_CMCOccupation" class="ltr "></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Date Of Expiry</label>
+                                    <div dx-date-box="date_CrewMemberCertificateExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:2px 5px 0  5px;height:300px;" class="groupbox">
+                            <div class="caption">
+                                Medical Certificate
+                                <a ng-click="doc_click('Medical Certificate')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Medical Certificate')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Class</label>
+                                    <div dx-number-box="txt_MedicalClass" class="center ltr f16"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue</label>
+                                    <div dx-date-box="date_DateLastCheckUP" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Exp</label>
+                                    <div dx-date-box="date_DateNextCheckUP" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Limitation</label>
+                                    <div dx-text-box="txt_MedicalLimitation"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+                    <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;height:300px;" class="groupbox">
+                            <div class="caption">
+                                LPC
+                                <a ng-click="doc_click('LPC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								  <a ng-show="!isNew" ng-click="savedoc_click('LPC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Date Of Check</label>
+                                    <div dx-date-box="date_ProficiencyCheckDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Valid Until</label>
+                                    <div dx-date-box="date_ProficiencyValidUntil" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Description</label>
+                                    <div dx-text-box="txt_ProficiencyDescriptionOPC" class="ltr"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;height:300px;" class="groupbox">
+                            <div class="caption">
+                                OPC
+                                <a ng-click="doc_click('OPC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								  <a ng-show="!isNew" ng-click="savedoc_click('OPC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Date Of Check</label>
+                                    <div dx-date-box="date_ProficiencyCheckDateOPC" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Valid Until</label>
+                                    <div dx-date-box="date_ProficiencyValidUntilOPC" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>FSTD OPERATOR</label>
+                                    <div dx-text-box="txt_fstd2" class="ltr"></div>
+                                </div>
+								 <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Examiner</label>
+                                    <div dx-text-box="txt_examiner" class="ltr"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+         <div style="clear:both"></div>
+                    <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                              IP
+							  <a ng-click="doc_click('OPC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+							    <a ng-show="!isNew" ng-click="savedoc_click('IP')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                                
+                            </div>
+                            <div style="padding: 0 5px">
+                               
+
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>TRI Expire Date</label>
+                                    <div dx-date-box="date_TRIExpire" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>TRE Expire Date</label>
+                                    <div dx-date-box="date_TREExpire" class="center"></div>
+                                </div>
+
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                ICAO LPR
+                                <a ng-click="doc_click('LPR')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('LPR')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Level</label>
+                                    <div dx-select-box="sb_ICAOLPRLevel" class="center ltr f16"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Valid Until</label>
+                                    <div dx-date-box="date_ICAOLPRValidUntil" class="center"></div>
+                                </div>
+
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                ESET
+                                <a ng-click="doc_click('SEPT')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SEPT')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SEPTIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SEPTExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					 <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SEPT 
+                                <a ng-click="doc_click('SEPTP')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SEPTP')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SEPTPIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SEPTPExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Dangerous Goods
+                                <a ng-click="doc_click('DG')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('DG')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DangerousGoodsIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DangerousGoodsExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                CRM
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_UpsetRecoveryTrainingIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_UpsetRecoveryTrainingExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					<div style="clear:both"></div>
+                    <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                CCRM
+                                <a ng-click="doc_click('CCRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CCRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_CCRMIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_CCRMExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					 <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS 
+                                <a ng-click="doc_click('SMS')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMS')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SMSIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SMSExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					 <!-- <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L2
+                                <a ng-click="doc_click('SMSL2')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL2')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue18" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire18" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L3
+                                <a ng-click="doc_click('SMSL3')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL3')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue19" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire19" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>-->
+                  
+
+
+                    <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                AVSEC-TRG-07B
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_AviationSecurityIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_AviationSecurityExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+<!--<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                AVSEC-TRG-02
+                                <a ng-click="doc_click('TRG02')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('TRG02')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue2" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire2" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>-->
+                    <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Cold Weather Operation
+                                <a ng-click="doc_click('COLDWX')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('COLDWX')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_ColdWeatherOperationIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_ColdWeatherOperationExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Hot Weather Operation
+                                <a ng-click="doc_click('HOTWX')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('HOTWX')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_HotWeatherOperationIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_HotWeatherOperationExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+					 
+						 
+					<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Line Check
+                                <a ng-click="doc_click('Line Check')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Line Check')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_LineIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_LineExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+						 <div style="clear:both"></div>
+				   		 
+						  <div class="col-lg-2" style="padding:0;width:16.5%">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                GRT
+                                <a ng-click="doc_click('GRT')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('GRT')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateCaoCardIssue" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateCaoCardExpire" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+<div class="col-lg-2" style="padding:0;width:16.5%">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                FMT
+                                <a ng-click="doc_click('FMT')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('FMT')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_EGPWSIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_EGPWSExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                       <!-- <div class="col-lg-2" style="padding:0;width:16.5%">
+                            <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                                <div class="caption">
+                                    Recurrent Training
+                                    <a ng-click="doc_click('ANNUALRECURRENT')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+									 <a ng-show="!isNew" ng-click="savedoc_click('ANNUALRECURRENT')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                                </div>
+                                <div style="padding: 0 5px">
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                        <label>Issue Date</label>
+                                        <div dx-date-box="date_RecurrentIssueDate" class="center"></div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                        <label>Expire Date</label>
+                                        <div dx-date-box="date_RecurrentExpireDate" class="center"></div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+
+                            </div>
+                        </div>-->
+						.
+						
+						
+				 
+					 
+					<div style="clear:both"></div>
+						 
+						
+						 
+						 
+					<!--end of cockpit -->
+					 </div>
+					 
+					 <div style="clear:both"></div>
+					 
+					 <!--cabin box-->
+					  <div style="margin-top:10px;padding-left:0px;" ng-show="['isccm','sccm','ccm'].indexOf(group_title.toLowerCase())!=-1">
+					   <div class="col-lg-4" style="padding:0;">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px " class="groupbox">
+                            <div class="caption">
+                                CMC
+                                <a ng-click="doc_click('Crew Member Certificate')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Crew Member Certificate')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+							<div class='col-lg-6' style='padding:0'>
+							  <div style="padding: 0 5px">
+							   <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Employed By</label>
+                                    <div dx-text-box="txt_CMCEmployedBy" class="ltr "></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Occupation</label>
+                                    <div dx-text-box="txt_CMCOccupation" class="ltr "></div>
+                                </div>
+							  </div>
+							</div>
+							<div class='col-lg-6' style='padding:0'>
+							  <div style="padding: 0 5px">
+							  <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Date Of Expiry</label>
+                                    <div dx-date-box="date_CrewMemberCertificateExpireDate" class="center"></div>
+                                </div>
+							  </div>
+							</div>
+                             <div style="clear:both"></div>
+
+                        </div>
+                    </div>
+					
+					<div class="col-lg-4" style="padding:0 ">
+                        <div style="margin:2px 5px 0  5px; padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Medical Certificate
+                                <a ng-click="doc_click('Medical Certificate')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Medical Certificate')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+							
+							<div class='col-lg-6' style='padding:0'>
+							  <div style="padding: 0 5px">
+							    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Class</label>
+                                    <div dx-number-box="txt_MedicalClass" class="center ltr f16"></div>
+                                </div>
+								<div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Limitation</label>
+                                    <div dx-text-box="txt_MedicalLimitation"></div>
+                                </div>
+							  </div>
+							</div>
+							<div class='col-lg-6' style='padding:0'>
+							  <div style="padding: 0 5px">
+							    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Exp</label>
+                                    <div dx-date-box="date_DateNextCheckUP" class="center"></div>
+                                </div>
+							  </div>
+							</div>
+							 <div style="clear:both"></div>
+                           
+
+                        </div>
+                    </div>
+					<!--<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Annual SEPT
+                                <a ng-click="doc_click('SEPT')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SEPT')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SEPTIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SEPTExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>-->
+					 <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SEPT 
+                                <a ng-click="doc_click('SEPTP')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SEPTP')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SEPTPIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SEPTPExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                  
+                    <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Dangerous Goods
+                                <a ng-click="doc_click('DG')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('DG')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DangerousGoodsIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DangerousGoodsExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+  <div style="clear:both"></div>
+                    <!--<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                CRM
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_UpsetRecoveryTrainingIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_UpsetRecoveryTrainingExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>-->
+					
+                    <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                CCRM
+                                <a ng-click="doc_click('CCRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CCRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_CCRMIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_CCRMExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					 <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS 
+                                <a ng-click="doc_click('SMS')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMS')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SMSIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SMSExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					<!--  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L2
+                                <a ng-click="doc_click('SMSL2')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL2')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue18" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire18" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L3
+                                <a ng-click="doc_click('SMSL3')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL3')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue19" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire19" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>-->
+                  
+
+
+                    <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                AVSEC-TRG-07B
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_AviationSecurityIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_AviationSecurityExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+<!--<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                AVSEC-TRG-02
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue2" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire2" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>-->
+					
+					    <!-- <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                First Aid
+                                <a ng-click="doc_click('FIRSTAID')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('FIRSTAID')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_FirstAidIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_FirstAidExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>-->
+ 
+ 	<!--<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Line Check
+                                <a ng-click="doc_click('HOTWX')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('HOTWX')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_LineIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_LineExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+
+                    </div>-->
+						<div class="col-lg-2" style="padding:0;width:16.5%">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                FMT
+                                <a ng-click="doc_click('FMT')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('FMT')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_EGPWSIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_EGPWSExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                        <div class="col-lg-2" style="padding:0;width:16.5%">
+                            <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                                <div class="caption">
+                                    Recurrent Training
+                                    <a ng-click="doc_click('ANNUALRECURRENT')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+									 <a ng-show="!isNew" ng-click="savedoc_click('ANNUALRECURRENT')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                                </div>
+                                <div style="padding: 0 5px">
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                        <label>Issue Date</label>
+                                        <div dx-date-box="date_RecurrentIssueDate" class="center"></div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                        <label>Expire Date</label>
+                                        <div dx-date-box="date_RecurrentExpireDate" class="center"></div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+
+                            </div>
+                        </div>
+						
+						
+						<div   class="col-lg-2" style="padding:0; "  >
+                            <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                                <div class="caption">
+                                    LINE 737
+                                    <a ng-click="doc_click('x')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+									 <a ng-show="!isNew" ng-click="savedoc_click('x')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                                </div>
+                                <div style="padding: 0 5px">
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                        <label>Issue Date</label>
+                                        <div dx-date-box="date_Type737IssueDate" class="center"></div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                        <label>Expire Date</label>
+                                        <div dx-date-box="date_Type737ExpireDate" class="center"></div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+
+                            </div>
+                        </div>
+						<div style="clear:both"></div>
+						 <div   class="col-lg-2" style="padding:0; " >
+                            <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                                <div class="caption">
+                                    LINE MD
+                                    <a ng-click="doc_click('x')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+									 <a ng-show="!isNew" ng-click="savedoc_click('x')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                                </div>
+                                <div style="padding: 0 5px">
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                        <label>Issue Date</label>
+                                        <div dx-date-box="date_TypeMDIssueDate" class="center"></div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                        <label>Expire Date</label>
+                                        <div dx-date-box="date_TypeMDExpireDate" class="center"></div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+
+                            </div>
+                        </div>
+						
+						 <div   class="col-lg-2" style="padding:0; " >
+                            <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                                <div class="caption">
+                                    LINE AIRBUS
+                                    <a ng-click="doc_click('x')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+									 <a ng-show="!isNew" ng-click="savedoc_click('x')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                                </div>
+                                <div style="padding: 0 5px">
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                        <label>Issue Date</label>
+                                        <div dx-date-box="date_TypeAirbusIssueDate" class="center"></div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                        <label>Expire Date</label>
+                                        <div dx-date-box="date_TypeAirbusExpireDate" class="center"></div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+   
+                
+						
+            
+
+                      
+						 
+						
+						  
+					
+						<div style="clear:both"></div>
+						
+					 </div>
+
+                 
+                    
+
+                  
+                     
+                    
+                    
+					  
+                   
+                 
+				 
+
+                        
+                    <div style="clear:both"></div>
+					<!--GROUND COMM 12-10-->
+					<div ng-show='group_root=="0000106" && parent_code!="000010601"'>
+					  
+					 <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L1
+                                <a ng-click="doc_click('SMS')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMS')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SMSIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SMSExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L2
+                                <a ng-click="doc_click('SMSL2')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL2')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue18" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire18" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L3
+                                <a ng-click="doc_click('SMSL3')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL3')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue19" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire19" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					 <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Airside Safety & Driving
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_ASDIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_ASDExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                      </div>
+					  
+					 <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  0px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                DGR
+                                <a ng-click="doc_click('DG')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('DG')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DangerousGoodsIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DangerousGoodsExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					  
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                TRG-01
+                                <a ng-click="doc_click('TRG01')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('TRG01')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_TRG01IssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_TRG01ExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                TRG-02
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue2" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire2" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+				 
+					<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                ERP
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_ERPIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_ERPExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                LOAD CONTROL
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_LOAD_CONTROL_IssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_LOAD_CONTROL_ExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                      </div>
+					   
+					  
+					   <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                               Anti De-Icing
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue3" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire3" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                      </div>
+					    <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Proficiency Assessment
+                                <a ng-click="doc_click('ProficiencyAssessment')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('ProficiencyAssessment')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_PROFICIENCY_ASSESSMENT_IsuueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_PROFICIENCY_ASSESSMENT_ExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <!--End of Ground-->
+					</div>
+					
+					
+					
+					
+					
+					<div style='clear:both'></div>
+					<!--2023-10-01-->
+				
+					
+					<div style='clear:both'></div>
+					
+					
+					<!--End Of COMMERCIAL -->
+					<!--DISPATCH-->
+					<div ng-show='group_title=="Flight Dispatcher" || group_title=="Dispatch" || group_title=="Flight Control"'>
+					 
+					  
+					   <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                COLD-WX
+                                <a ng-click="doc_click('COLDWX')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('COLDWX')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_ColdWeatherOperationIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_ColdWeatherOperationExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:2px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                HOT-WX
+                                <a ng-click="doc_click('HOTWX')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('HOTWX')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_HotWeatherOperationIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_HotWeatherOperationExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+					 
+					 <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  0px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                DGR
+                                <a ng-click="doc_click('DG')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('DG')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DangerousGoodsIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DangerousGoodsExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					
+					
+					<!-- <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                FMT
+                                <a ng-click="doc_click('FMT')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('FMT')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_FMTDIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_FMTDExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					 <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                HF
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_HFIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_HFExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>-->
+					
+					
+					
+					
+					<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                MET
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_METIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_METExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					
+					
+					<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                               COMM
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_RCIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_RCExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					
+<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                TRG-01
+                                <a ng-click="doc_click('TRG01')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('TRG01')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_TRG01IssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_TRG01ExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                TRG-02
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue2" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire2" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Flight Planning
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_FPIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_FPExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+						
+                   <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Flight Monitoring
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue4" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire4" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+						
+ <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                ATM
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue5" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire5" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+						
+ <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Navigation
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue6" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire6" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+						
+ <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                AV INDUCT
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue7" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire7" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					 <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L1
+                                <a ng-click="doc_click('SMS')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMS')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SMSIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SMSExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L2
+                                <a ng-click="doc_click('SMSL2')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL2')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue18" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire18" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L3
+                                <a ng-click="doc_click('SMSL3')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL3')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue19" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire19" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					 <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                ERP
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_ERPIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_ERPExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                HF
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_HFIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_HFExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>   
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                M & B
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_WBIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_WBExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                M & P
+                                <a ng-click="doc_click('MP')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('MP')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_MPIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_MPExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					
+					
+
+
+<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                               CALR
+
+                                <a ng-click="doc_click('CALR')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CALR')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_CALRIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_CALRExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					
+					
+
+
+<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Special Approval
+                                <a ng-click="doc_click('SpecialApproval')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SpecialApproval')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SpecialApprovalIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SpecialApprovalExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Route Check
+                                <a ng-click="doc_click('RouteCheck')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('RouteCheck')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_RouteCheckIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_RouteCheckExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+                     <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Proficiency Assessment
+                                <a ng-click="doc_click('ProficiencyAssessment')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('ProficiencyAssessment')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_PROFICIENCY_ASSESSMENT_IsuueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_PROFICIENCY_ASSESSMENT_ExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					<!--20223-10-08-->
+					  <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                Licence
+                                <a ng-click="doc_click('Flight Crew Licence')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('Flight Crew Licence')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                             <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                <label>No</label>
+                                <div dx-text-box="txt_NDTNumber" class="center"></div>
+                            </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_LicenceInitialIssue" class="center"></div>
+									 
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+					
+				
+					
+					
+					
+
+					
+					
+					
+					
+					
+					
+					
+					  
+					<!--END OF DISPATCH -->  
+					</div>
+					
+					<!--MAINTENANCE-->
+                   
+					
+					<!--qa-->
+				 
+					<!--CAMO-->
+                  
+					<!--training-->
+                
+					
+					<!--LEGAL-->
+					
+					
+                 
+				 
+				 <!--MANAGEMENT-->
+				
+				 
+				 
+				 
+                  <!--CATERING-->
+
+
+<!--LOGISTIC-->
+
+
+
+<!--IT-->
+
+
+
+<!--OPERATION-->
+
+
+<!--SUPPORT-->
+
+
+<!--ADMINISTRATIVE-->
+
+
+
+
+
+<!--PUBLIC RELATIONS-->
+<div ng-show='group_root=="650"'>
+ 
+	     <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L1
+                                <a ng-click="doc_click('SMS')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMS')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SMSIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SMSExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L2
+                                <a ng-click="doc_click('SMSL2')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL2')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue18" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire18" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L3
+                                <a ng-click="doc_click('SMSL3')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL3')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue19" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire19" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+	     
+					<div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                ERP
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue45" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire45" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+        </div>
+	 
+		 
+    <!--END OF PUBLIC RELATIONS --> 
+</div>
+
+
+<!--MANAGEMENT-->
+
+
+
+
+<!--SECURITY-->
+
+
+<!--CRM-->
+
+
+
+           <!--POST BOXES-->
+		   <div style='clear:both'></div>
+		   <div ng-show='post_visible'>
+		        <div style='padding:7px;background:#ffcc99;border:1px solid #ccc;margin-bottom:5px;margin-top:5px;font-weight:bold'>
+		          DERIVED FROM POST
+		       </div>
+			   <!--management-->
+			    
+					<div ng-show='group_manager || post_manager'>
+				 <div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                TRG-01
+                                <a ng-click="doc_click('TRG01')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('TRG01')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_TRG01IssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_TRG01ExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					   
+					   
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                 TRG-02
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue2" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire2" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                TRG-07A
+                                <a ng-click="doc_click('TRG07A')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('TRG07A')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_TRG07AIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_TRG07AExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					 <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L1
+                                <a ng-click="doc_click('SMS')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMS')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SMSIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SMSExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L2
+                                <a ng-click="doc_click('SMSL2')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL2')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue18" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire18" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L3
+                                <a ng-click="doc_click('SMSL3')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL3')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue19" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire19" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					 
+					  
+					 
+					
+				 
+				     <!--END OF MANAGEMENT --> 
+                  </div>
+			   <!--qa-->
+				  <div ng-show='post_title=="safety officer" || post_title=="safety auditor"'>
+					
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                TRG-01
+                                <a ng-click="doc_click('TRG01')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('TRG01')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_TRG01IssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_TRG01ExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					   
+					   
+					<div class="col-lg-2" style="padding:0 ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                 TRG-02
+                                <a ng-click="doc_click('AVSEC')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('AVSEC')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue2" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire2" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					 
+					   
+					  
+					 
+					 
+					 
+                     <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L1
+                                <a ng-click="doc_click('SMS')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMS')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_SMSIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_SMSExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L2
+                                <a ng-click="doc_click('SMSL2')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL2')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue18" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire18" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  <div class="col-lg-2" style="padding:0;">
+
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                SMS L3
+                                <a ng-click="doc_click('SMSL3')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('SMSL3')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_DateIssue19" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_DateExpire19" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					  
+
+					 
+					  
+   
+					 
+					  
+             
+					    
+					   
+					  
+                       <div class="col-lg-2" style="padding:0; ">
+                        <div style="margin:5px 5px 0  5px;padding-bottom:5px" class="groupbox">
+                            <div class="caption">
+                                ERP
+                                <a ng-click="doc_click('CRM')" href=""><i class="icon ion-md-information-circle ion-20 " style="color:deepskyblue"></i></a>
+								 <a ng-show="!isNew" ng-click="savedoc_click('CRM')" href=""><i class='fas fa-plus-circle' style='font-size:19px;color:forestgreen'></i></a>
+                            </div>
+                            <div style="padding: 0 5px">
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7" style="padding-bottom:0">
+                                    <label>Issue Date</label>
+                                    <div dx-date-box="date_ERPIssueDate" class="center"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-6 col-sm-12 col-12    padding-7">
+                                    <label>Expire Date</label>
+                                    <div dx-date-box="date_ERPExpireDate" class="center"></div>
+                                </div>
+                                <div style="clear:both"></div>
+                            </div>
+
+                        </div>
+                    </div>
+					
+				 
+					  
+					   <!--END OF QA --> 
+                  </div>
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+			   
+		   </div>
+		   
+		   
+           <!-- END OF POST BOXES -->		   
+
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+
+        <div class="tab education" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_education" id="dg_education"></div>
+
+        </div>
+
+        <!--<div class="tab certificate dx-border" style="display:none;padding-top:0;">
+            <div id="scrollview" dx-scroll-view="scroll_certificate">
+
+            </div>
+        </div>-->
+
+        <div class="tab file" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_file" id="dg_file"></div>
+        </div>
+
+        <div class="tab experience" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_exp" id="dg_exp"></div>
+        </div>
+
+        <div class="tab rating" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_rating" id="dg_rating"></div>
+        </div>
+        <div class="tab aircrafttype" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_aircrafttype" id="dg_aircrafttype"></div>
+        </div>
+        <!--<div class="tab certificate " style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_certificate" id="dg_certificate"></div>
+        </div>
+        <div class="tab course " style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_course" id="dg_course"></div>
+        </div>-->
+        <!--<div class="tab membership " style="display:none;padding-top:0;">
+            <div id="scrollview" dx-scroll-view="scroll_rating">
+
+            </div>
+        </div>-->
+
+
+
+    </div>
+    <div id="popup_file_view" dx-popup="popup_file_view" class="dx-border">
+        <div class="col-lg-5 col-md-6 col-sm-12    margin-bottom-5 padding-7">
+            <label>Document Type</label>
+            <div dx-select-box="sb_DocumentTypeId2" dx-validator="{validationGroup:'fileadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+        <div class="col-lg-7 col-md-6 col-sm-12    margin-bottom-5 padding-7">
+            <label>Remark</label>
+            <div dx-text-box="txt_DocumentTitle2"></div>
+        </div>
+
+
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <div dx-data-grid="dg_upload2" id="dg_upload2"></div>
+        </div>
+
+    </div>
+
+    <div id="popup_file" dx-popup="popup_file" class="dx-border">
+        <div class="col-lg-5 col-md-6 col-sm-12    margin-bottom-5 padding-7">
+            <label>Document Type</label>
+            <div dx-select-box="sb_DocumentTypeId" dx-validator="{validationGroup:'fileadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+        <div class="col-lg-7 col-md-6 col-sm-12    margin-bottom-5 padding-7">
+            <label>Remark</label>
+            <div dx-text-box="txt_DocumentTitle"></div>
+        </div>
+
+        <div class="col-lg-3 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <div id="uploader_document" dx-file-uploader="uploader_document" class="invisibleuploader"></div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <div dx-data-grid="dg_upload" id="dg_upload"></div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <div id="btn_delete_file" dx-button="btn_delete_file"></div>
+        </div>
+    </div>
+    <div id="popup_education" dx-popup="popup_education" class="dx-border">
+        <!--<div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Field</label>
+            <div dx-text-box="txt_EducationField" dx-validator="{validationGroup:'educationadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>-->
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Field of Study</label>
+            <div dx-select-box="sb_EducationField" dx-validator="{validationGroup:'educationadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>College</label>
+            <div dx-text-box="txt_EducationCollege" dx-validator="{validationGroup:'educationadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Degree</label>
+            <div dx-select-box="sb_EducationDegreeId" dx-validator="{validationGroup:'educationadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Date</label>
+            <div dx-date-box="date_EducationDateCatch"></div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Remark</label>
+            <div dx-text-box="txt_EducationRemark"></div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <div id="uploader_edu" dx-file-uploader="uploader_edu" class="invisibleuploader"></div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>File Type</label>
+            <div dx-text-box="txt_EducationFileType"></div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>File</label>
+            <div dx-text-box="txt_EducationSysUrl"></div>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <a ng-href="{{download}}" class='w3-button w3-block w3-blue' style=' margin:25px auto 0px auto;text-decoration:none' target='_blank'>Download</a>
+            <!-- <div dx-text-box="txt_EducationFileUrl"></div>-->
+        </div>
+
+    </div>
+    <div id="popup_exp" dx-popup="popup_exp" class="dx-border">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Job Title</label>
+            <div dx-text-box="txt_ExpJobTitle" dx-validator="{validationGroup:'experienceadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Organization</label>
+            <div dx-text-box="txt_ExpOrganization" dx-validator="{validationGroup:'experienceadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Aircraft Type</label>
+            <div dx-select-box="sb_ExpAircraftTypeId"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Date From</label>
+            <div dx-date-box="date_ExpDateStart"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Date To</label>
+            <div dx-date-box="date_ExpDateEnd"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Remark</label>
+            <div dx-text-area="txt_ExpRemark"></div>
+        </div>
+    </div>
+
+    <div id="popup_rating" dx-popup="popup_rating" class="dx-border">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Aircraft Type</label>
+            <div dx-select-box="sb_RatingAircraftTypeId" dx-validator="{validationGroup:'ratingadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Organization</label>
+            <div dx-select-box="sb_OrganizationId"></div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Issue Date</label>
+            <div dx-date-box="date_RatingDateIssue"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Expire Date</label>
+            <div dx-date-box="date_RatingDateExpire"></div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Rate</label>
+            <div dx-select-box="sb_RatingCategoryId" dx-validator="{validationGroup:'ratingadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+    </div>
+    <div id="popup_aircrafttype" dx-popup="popup_aircrafttype" class="dx-border">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Aircraft Type</label>
+            <div dx-select-box="sb_AircraftTypeId" dx-validator="{validationGroup:'aircrafttypeadd',  validationRules: [{ type: 'required'}]}"></div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Remark</label>
+            <div dx-text-box="txt_AircraftTypeRemark"></div>
+        </div>
+
+    </div>
+ <div id="popup_file2" dx-popup="popup_file2" class="dx-border">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <div dx-text-box="txt_pdoc"></div>
+        </div>
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <div id="uploader_document2" dx-file-uploader="uploader_document2" class="invisibleuploader"></div>
+        </div>
+
+
+
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

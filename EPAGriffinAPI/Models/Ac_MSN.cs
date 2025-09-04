@@ -76,6 +76,26 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> CPT3Limit { get; set; }
         public Nullable<int> CPT4Limit { get; set; }
         public string AircraftType { get; set; }
+        public Nullable<int> deffects_no { get; set; }
+        public Nullable<int> eng1_remaining { get; set; }
+        public Nullable<int> eng2_remaining { get; set; }
+        public Nullable<int> landing_gear_remaining { get; set; }
+        public Nullable<int> apu_remaining { get; set; }
+        public Nullable<int> ht1_remaining { get; set; }
+        public Nullable<int> ht2_remaining { get; set; }
+        public Nullable<int> ht3_remaining { get; set; }
+        public Nullable<int> first_due_remaining { get; set; }
+        public Nullable<int> total_flight_cycle { get; set; }
+        public Nullable<int> total_flight_minute { get; set; }
+        public string serial_no { get; set; }
+        public Nullable<System.DateTime> date_initial { get; set; }
+        public string maintenance_setting_group { get; set; }
+        public Nullable<System.DateTime> date_initial_landing_gear { get; set; }
+        public Nullable<System.DateTime> date_initial_apu { get; set; }
+        public Nullable<System.DateTime> date_initial_ht1 { get; set; }
+        public Nullable<System.DateTime> date_initial_ht2 { get; set; }
+        public Nullable<System.DateTime> date_initial_ht3 { get; set; }
+        public Nullable<System.DateTime> date_initial_due { get; set; }
     
         public virtual AircraftModel AircraftModel { get; set; }
         public virtual Organization Organization { get; set; }

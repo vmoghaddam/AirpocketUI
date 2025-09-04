@@ -59,7 +59,7 @@
                         <div dx-text-box="txt_Remark"></div>
                     </div>
                 </div>
-                <div class="padding-0 col-lg-4" style="padding-left:10px">
+                <!--<div class="padding-0 col-lg-4" style="padding-left:10px">
                     <div style="background:gray;color:white;font-weight:bold;padding:7px;">
                         <table style="width:100%;">
                             <tr>
@@ -74,29 +74,44 @@
                         </table>
                     </div>
                     <div dx-data-grid="dg_group" id="dg_group"></div>
+                </div>-->
+                <div class="padding-0 col-lg-4" style="padding-left:10px">
+                    <div style="background:gray;color:white;font-weight:bold;padding:7px;">
+                        <table style="width:100%;">
+                            <tr>
+                                <td>Course Type</td>
+                                <td style="width:35px;padding:0 3px 0 3px">
+                                </td>
+                                <td style="width:35px;padding:0 3px 0 3px">
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                    <div dx-data-grid="dg_type" id="dg_type"></div>
                 </div>
-				<div class="padding-0 col-lg-4" style="padding-left:10px">
+                <div class="padding-0 col-lg-4" style="padding-left:10px">
                     <div style="background:gray;color:white;font-weight:bold;padding:7px;">
                         <table style="width:100%;">
                             <tr>
                                 <td>Not Applicable</td>
                                 <td style="width:35px;padding:0 3px 0 3px">
-                                 </td>
+                                </td>
                                 <td style="width:35px;padding:0 3px 0 3px">
                                 </td>
                             </tr>
                         </table>
-						
+
                     </div>
-					<div style='border:1px solid #ccc;padding:7px;height:382px'>
-						   <div class="col-lg-6 col-xs-12 col-sm-12 col-md-12" ng-repeat="x in grp_ds" style='padding:10px;'>
+                    <div style='border:1px solid #ccc;padding:7px;height:382px'>
+                        <div class="col-lg-6 col-xs-12 col-sm-12 col-md-12" ng-repeat="x in grp_ds" style='padding:10px;'>
 
-                                <input type="checkbox" style="text-align:right" ng-model="x.selected" ng-model="x.selected" ng-change="grp_selected(x)" /> {{x.title}}
+                            <input type="checkbox" style="text-align:right" ng-model="x.selected" ng-model="x.selected" ng-change="grp_selected(x)" /> {{x.title}}
 
-                            </div>
-                            <div style="clear:both"></div>
-						</div>
-                     
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
                 </div>
                 <div style="clear:both"></div>
 

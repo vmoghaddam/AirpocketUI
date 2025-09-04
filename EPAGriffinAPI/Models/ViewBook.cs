@@ -62,12 +62,13 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> RemainingDeadLine { get; set; }
         public Nullable<System.DateTime> DateValidUntil { get; set; }
         public Nullable<int> RemainingValid { get; set; }
-        public Nullable<int> Total { get; set; }
+        public int Total { get; set; }
         public Nullable<int> Visited { get; set; }
         public Nullable<int> NotVisited { get; set; }
-        public Nullable<int> Downloaded { get; set; }
-        public Nullable<int> NotDownloaded { get; set; }
+        public int Downloaded { get; set; }
+        public int NotDownloaded { get; set; }
         public Nullable<int> FileCount { get; set; }
         public Nullable<int> Issue { get; set; }
+        public Nullable<int> ParentFolder { get; set; }
     }
 }

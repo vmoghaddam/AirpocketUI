@@ -30,6 +30,19 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
         return deferred.promise;
     };
+
+    var _getCourseTypeSubject = function (cid) {
+
+        var deferred = $q.defer();
+        $http.get(serviceBaseTRN + 'api/course/type/subject/' + cid).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
     var _getCourseSessions = function (cid) {
 
         var deferred = $q.defer();
@@ -853,6 +866,19 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
         return deferred.promise;
     };
     serviceFactory.get_profiles_course_types = _get_profiles_course_types;
+    var _get_course_types = function () {
+
+        var deferred = $q.defer();
+        $http.get('https://ava.apitrn.airpocket.app/api/course/types').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_course_types = _get_course_types;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;
@@ -869,6 +895,7 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     serviceFactory.getCourseTypes = _getCourseTypes;
     serviceFactory.getCoursesByType = _getCoursesByType;
     serviceFactory.getCourseTypeGroups = _getCourseTypeGroups;
+    serviceFactory.getCourseTypeSubject = _getCourseTypeSubject;
     serviceFactory.getCertificateTypes = _getCertificateTypes;
     serviceFactory.saveCourseType = _saveCourseType;
     serviceFactory.deleteCourseType = _deleteCourseType;

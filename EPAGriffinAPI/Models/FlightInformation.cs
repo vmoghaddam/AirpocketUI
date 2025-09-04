@@ -318,6 +318,17 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> FuelUsedEng2 { get; set; }
         public Nullable<int> ACTUALTANKERINGFUEL { get; set; }
         public string LTR2 { get; set; }
+        public Nullable<int> FuelRemaining { get; set; }
+        public Nullable<int> FuelUplift { get; set; }
+        public Nullable<int> FuelTotal { get; set; }
+        public Nullable<int> FuelRemained { get; set; }
+        public Nullable<int> FuelUsed { get; set; }
+        public Nullable<int> FuelUpliftLitr { get; set; }
+        public string CCPreFlightCheckRemark { get; set; }
+        public string FlightTypeOPS { get; set; }
+        public string AttForms { get; set; }
+        public Nullable<int> PaxMale { get; set; }
+        public Nullable<int> PaxFemale { get; set; }
     
         public virtual Ac_MSN Ac_MSN { get; set; }
         public virtual AircraftType AircraftType { get; set; }

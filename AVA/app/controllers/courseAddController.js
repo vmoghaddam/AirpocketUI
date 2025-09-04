@@ -426,6 +426,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             $scope.dg_course_instance.repaint();
             $scope.dg_group_instance.repaint();
             $scope.dg_employee_instance.repaint();
+			
+			if ($scope.dg_syllabi_instance)
+				$scope.dg_syllabi_instance.refresh();
 
             var myVar = setInterval(function () {
 
@@ -825,10 +828,17 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
     //////////////////////////////
     $scope.dg_syllabi_columns = [
-
+        {
+            name: '_row',
+            cellTemplate: function (container, options) {
+                $("<div style='text-align:center'/>")
+                    .html(options.rowIndex + 1)
+                    .appendTo(container);
+            }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader', fixed: screen.width > 1024 ? true : false, fixedPosition: 'left'
+        },
         { dataField: "Title", caption: "Title", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, sortIndex: 0, sortOrder: "asc", minWidth: 300 },
         { dataField: "Instructor", caption: "Instructor", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, sortIndex: 0, sortOrder: "asc", width: 250 },
-
+        
         { dataField: 'Duration', caption: 'Duration(mm)', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, encodeHtml: false, width: 130, },
         { dataField: "Remark", caption: "Remark", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, sortIndex: 0, sortOrder: "asc", width: 250 },
     ];
@@ -867,7 +877,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
 
         },
-        height: 470,
+        height: 580,
         bindingOptions: {
 
             dataSource: 'entity.Syllabi',
@@ -880,6 +890,8 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     $scope.fill_syllabi = function (item) {
         $scope.syllabi_type = item.CourseTypeId;
         $scope.syllabi_instructor = item.CurrencyId;
+        $scope.syllabi_instructor2 = item.Instructor2Id;
+        $scope.syllabi_interval = item.Interval;
         $scope.syllabi_id = item.Id;
         $scope.syllabi_title = item.Title;
         $scope.syllabi_remark = item.Remark;
@@ -961,6 +973,25 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         }
 
     };
+
+    $scope.sb_syl_ins2 = {
+
+        showClearButton: true,
+        searchEnabled: true,
+        searchExpr: ["Name"],
+        valueExpr: "Id",
+        displayExpr: "Name",
+        onSelectionChanged: function (e) {
+
+            $scope.syllabi_instructor2_title = e.selectedItem ? e.selectedItem.Name : null;;
+
+        },
+        bindingOptions: {
+            value: 'syllabi_instructor2',
+            dataSource: 'ds_teachers'
+        }
+
+    };
     $scope.txt_syl_Remark = {
         hoverStateEnabled: false,
         bindingOptions: {
@@ -1007,7 +1038,11 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         if (key)
             $scope.new_syllabi.Sessions = Enumerable.From($scope.new_syllabi.Sessions).Where(function (x) { return x.Key != s.Key; }).ToArray();
         else
-            $scope.new_syllabi.Sessions.push(s);
+		{
+			if (!$scope.new_syllabi.Sessions)
+				$scope.new_syllabi.Sessions=[];
+			$scope.new_syllabi.Sessions.push(s);
+		}
     }
     $scope.popup_syllabus_visible = false;
     $scope.popup_syllabus_title = 'Syllabus';
@@ -1049,7 +1084,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                         $scope.new_syllabi.Title = $scope.syllabi_title;
                         $scope.new_syllabi.CourseTypeId = $scope.syllabi_type;
                         $scope.new_syllabi.CurrencyId = $scope.syllabi_instructor;
+						
                         $scope.new_syllabi.Instructor = $scope.syllabi_instructor_title;
+                        $scope.new_syllabi.Instructor2 = $scope.syllabi_instructor2;
                         $scope.new_syllabi.Duration = $scope.syllabi_duration;
                         $scope.new_syllabi.Remark = $scope.syllabi_remark;
                         $scope.new_syllabi.Interval = $scope.syllabi_interval;
@@ -1065,6 +1102,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                                 exist.CourseTypeId = obj.CourseTypeId;
                                 exist.CurrencyId = obj.CurrencyId;
                                 exist.Instructor = obj.Instructor;
+                                exist.Instructor2 = obj.Instructor2;
                                 exist.Duration = obj.Duration;
                                 exist.Remark = obj.Remark;
                                 exist.Interval = obj.Interval;
@@ -1078,6 +1116,8 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                             $scope.syllabi_type = null;
                             $scope.syllabi_instructor = null;
                             $scope.syllabi_instructor_title = null;
+                            $scope.syllabi_instructor2 = null;
+                            $scope.syllabi_instructor2_title = null;
                             $scope.syllabi_duration = null;
 
                             $scope.syllabi_id = -1 * ($scope.entity.Syllabi.length + 1);
@@ -1093,7 +1133,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                             obj.Title = $scope.new_syllabi.Title;
                             obj.TypeId = $scope.new_syllabi.TypeId;
                             obj.InstructorId = $scope.new_syllabi.InstructorId;
+							 obj.CurrencyId = $scope.new_syllabi.CurrencyId;
                             obj.Instructor = $scope.new_syllabi.Instructor;
+                            obj.Instructor2 = $scope.new_syllabi.Instructor2;
                             obj.Duration = $scope.new_syllabi.Duration;
                             obj.Remark = $scope.new_syllabi.Remark;
                             obj.Interval = $scope.new_syllabi.Interval;
@@ -1177,7 +1219,10 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         $scope.syllabi_type = null;
         $scope.syllabi_instructor = null;
         $scope.syllabi_instructor_title = null;
+        $scope.syllabi_instructor2 = null;
+        $scope.syllabi_instructor2_title = null;
         $scope.syllabi_duration = null;
+        $scope.syllabi_interval = null;
         $scope.new_syllabi = {
             Id: $scope.syllabi_id,
             Sessions: []
@@ -1381,7 +1426,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             if ($scope.pop_width > 1300)
                 $scope.pop_width = 1300;
 
-            $scope.pop_height = 730; //$(window).height() - 70; //630; //size.height;
+            $scope.pop_height = 770; //$(window).height() - 70; //630; //size.height;
             $scope.dg_height = $scope.pop_height - 133;
             $scope.scroll_height = $scope.pop_height - 160;
            
@@ -1574,10 +1619,12 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         dto.session_changed = $scope.session_changed;
 
         var _groups = []
+		if ($scope.selected_exam)
         $.each($scope.selected_exam.groups, function (_i, _d) {
             _groups.push(_d.Id);
         });
 
+if ($scope.selected_exam)
         dto.exams.push({
             id: $scope.selected_exam.id,
             course_id: $scope.selected_exam.course_id,
@@ -2618,7 +2665,20 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                 ztrnService.getCourseTypeSubjects(e.selectedItem.Id).then(function (response2) {
                     console.log('subjects', response2);
                     if (response2.Data && response2.Data.length > 0) {
-                        $scope.entity.Syllabi = [];
+						$.each(response2.Data, function (_i, _d) {
+							var _exst=Enumerable.From($scope.entity.Syllabi).Where('$.CourseTypeId=='+_d.course_type_id).FirstOrDefault();
+							if (!_exst){
+								var _ns = {
+                                Id: -1 * ($scope.entity.Syllabi.length + 1),
+                                CourseTypeId: _d.course_type_id,
+                                Duration: _d.duration,
+                                Interval: _d.interval,
+                                Title:_d.title
+                            };
+                            $scope.entity.Syllabi.push(_ns);
+							}
+						});
+                        /*$scope.entity.Syllabi = [];
                         $.each(response2.Data, function (_i, _d) {
                             var _ns = {
                                 Id: -1 * ($scope.entity.Syllabi.length + 1),
@@ -2628,7 +2688,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                                 Title:_d.title
                             };
                             $scope.entity.Syllabi.push(_ns);
-                        });
+                        });*/
                     }
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });

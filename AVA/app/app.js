@@ -698,6 +698,10 @@ app.config(function ($routeProvider) {
         controller: "trnDashboardController",
         templateUrl: "/app/views/trndashboard.html"
     });
+    $routeProvider.when("/trn/question/add", {
+        controller: "trn_question_addController",
+        templateUrl: "/app/views/trn_question_add.html"
+    });
 	
 	 $routeProvider.when("/duty/timeline/z", {
         controller: "zdutyTimelineController",
@@ -884,7 +888,7 @@ var apireportflight='https://ava.apireportflight.airpocket.app/'; //*
 var zreportflight=apireportflight ;
 var apixls='https://ava.apixls.airpocket.app/'; //*
 var apiScheduling='https://ava.apischeduling.aerotango.app/';
- var zapiScheduling="https://ava.apischeduling.aerotango.app/";
+ var zapiScheduling="https://ava.apischeduling.aerotango.app/"; 
 
 var apiExternal = 'https://_xpi.airpocket.app/';
 var airlineCode = 'vrh';
@@ -905,7 +909,7 @@ var apiCAO='https://ava.apicaox.airpocket.app/';
 
 var zapinet='https://ava.apinet.airpocket.app/';
 var zfuel='https://ava.apifuel.airpocket.app/';
-var zapitrn = 'http://localhost:4005/';//'https://ava.apitrn.airpocket.app/';
+var zapitrn = 'https://ava.apitrn.airpocket.app/';
 var vira_api = "https://lmmcore.online/";
 var zapinet2 = 'https://ava.zapinet.airpocket.app/';
 var api_fdm = 'http://localhost:22556/';

@@ -149,6 +149,8 @@ namespace EPAGriffinAPI.ViewModels
             public string code { get; set; }
             public string code2 { get; set; }
             public string code3 { get; set; }
+            public string FullCode { get; set; }
+            public string FullCode2 { get; set; }
             public bool selected {get;set;}
         }
 
