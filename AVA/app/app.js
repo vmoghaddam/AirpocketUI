@@ -848,6 +848,12 @@ app.config(function ($routeProvider) {
     });
 
 
+    $routeProvider.when("/fdm/sand", {
+        controller: "fdm_sand_controller",
+        templateUrl: "/app/views/fdm_sand.html?v=" + '5673'
+    });
+
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   

@@ -115,6 +115,7 @@
     <Content Include="app\controllers\expiringCourseType.js" />
     <Content Include="app\controllers\expiringGroup.js" />
     <Content Include="app\controllers\fdm_main.js" />
+    <Content Include="app\controllers\fdm_sand.js" />
     <Content Include="app\controllers\fdps.js" />
     <Content Include="app\controllers\fdpsfly.js" />
     <Content Include="app\controllers\filterController.js" />
@@ -415,6 +416,7 @@
     <Content Include="app\views\expiringCourseType.html" />
     <Content Include="app\views\expiringGroup.html" />
     <Content Include="app\views\fdm_main.html" />
+    <Content Include="app\views\fdm_sand.html" />
     <Content Include="app\views\fdps.html" />
     <Content Include="app\views\fdpsfly.html" />
     <Content Include="app\views\filter.html" />
