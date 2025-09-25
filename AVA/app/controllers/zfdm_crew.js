@@ -6,7 +6,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
         $scope.prms = $routeParams.prms;
 
         $scope.crew_id = $routeParams.crew_id;
-
+        $scope.ac_type = $routeParams.ac_type;
 
         $scope.dt_from = new Date(2024, 10, 1);
         $scope.dt_to = new Date(2025, 5, 1);
@@ -124,7 +124,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
         }
 
         ////////////////////////////////////////
-        var lowColor = '#0099cc';
+        var lowColor = '#A0E5C2';
         var medColor = '#ffcc66';
         var highColor = '#ff1a1a';
         $scope.monthConvert = function (monthNo) {
@@ -563,10 +563,178 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
             name: 'Registers', valueField: 'event_count', color: "#ff3377", hoverStyle: { color: "#000000" }, barWidth: 50
         };
 
+        //----------EWMA-------------------------
+        const COLOR_DAILY = "#F59E0B";   // نارنجی
+        const COLOR_EWMA = "#3B82F6";   // آبی
+        const COLOR_CPOS = "#8B5CF6";   // بنفش (CUSUM+)
+        const COLOR_CNEG = "#22C55E";   // سبز  (CUSUM-)
+        const COLOR_ALARM = "#EF4444";   // قرمز
+        const THRESHOLD = 100; // آستانه دلخواه CUSUM+
+        const Color_flight = "#6CA6D9";
+        const Color_event = "#FFB000";
+        const color_event_per100 = "#C2410C";
+        const color_avg_event_per100 = "#8B5CF6";
 
+        $scope.CaptainEWMAEventsChart = {
 
+            bindingOptions: { dataSource: 'CaptainEWMAEvents' },
 
+            palette: "Material",
+            title: "EWMA & CUSUM (Alarm on Increase Only)",
+            commonSeriesSettings: {
+                argumentField: "Date",
+                type: "spline",
+                point: { visible: true, size: 1 }, // نقطه‌ها مثل تصویر
+                hoverMode: "allArgumentPoints"
+            },
+            series: [
+                { name: "Daily Event Rate / 100 flights", valueField: "Daily", axis: "rateAxis", width: 1, color: COLOR_DAILY },
+                { name: "EWMA", valueField: "EWMA", axis: "rateAxis", width: 1, color: COLOR_EWMA },
 
+                { name: "CUSUM+", valueField: "CusumPos", axis: "cusumAxis", width: 1, color: COLOR_CPOS },
+                { name: "CUSUM-", valueField: "CusumNeg", axis: "cusumAxis", width: 1, color: COLOR_CNEG },
+
+                // مارکرهای آلارم روی EWMA
+                {
+                    name: "Alarm ",
+                    type: "scatter",
+                    valueField: "AlarmEWMA",
+                    axis: "rateAxis",
+                    color: COLOR_ALARM,
+
+                    point: { visible: true, size: 4, symbol: "triangleDown", border: { visible: false } },
+
+                }
+            ],
+            argumentAxis: {
+                argumentType: "datetime",
+                label: {
+                    format: 'dd MMM yyyy',      // سال را هم نشان می‌دهد
+                    overlappingBehavior: 'rotate' // اختیاری
+                },
+                grid: { visible: true }
+            },
+            valueAxis: [
+                {
+                    name: "rateAxis",
+                    title: { text: "Events per 100 Flights" },
+                    position: "left",
+                    grid: { visible: true },
+                    constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
+                },
+                {
+                    name: "cusumAxis",
+                    title: { text: "CUSUM" },
+                    position: "right",
+                    grid: { visible: false },
+                    constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
+                }
+            ],
+            crosshair: { enabled: true, label: { visible: true } },
+            legend: { visible: true, verticalAlignment: "bottom", horizontalAlignment: "center" },
+            tooltip: {
+                enabled: true,
+                shared: true,
+                customizeTooltip: function (arg) {
+                    const d = DevExpress.localization.formatDate(arg.argument, "yyyy-MM-dd");
+                    const p = arg.points;
+                    const get = (name) => {
+                        const item = p.find(x => x.seriesName === name);
+                        return item ? item.value.toFixed(1) : "-";
+                    };
+                    return {
+                        text:
+                            `Date: ${d}\n` +
+                            `Daily: ${get("Daily Event Rate / 100 flights")}\n` +
+                            `EWMA: ${get("EWMA")}\n` +
+                            `CUSUM+: ${get("CUSUM+")}\n` +
+                            `CUSUM-: ${get("CUSUM-")}` +
+                            `Alarm: ${get("Alarm")}`
+                    };
+                }
+            },
+            margin: { left: 70, right: 70, top: 10, bottom: 20 }
+        };
+
+        //---------Pareto-------------------------------
+
+        $scope.CaptainParetoChart = {
+
+            bindingOptions: { dataSource: 'CaptainPareto' },
+            palette: "Material",
+            title: "Pareto Chart Of Event Titles (Count & Cumulative %)",
+
+            series: [
+                { name: "EventCount", valueField: "Count", argumentField: "EventTitle", axis: "countAxis", color: COLOR_DAILY, type: 'bar' },
+                { name: "Cumulative Percentage", valueField: "Cumulative", argumentField: "EventTitle", axis: "cumulativeAxis", width: 1, color: COLOR_EWMA, type: 'spline', point: { visible: true, size: 1 } },
+            ],
+            argumentAxis: {
+
+                label: {
+                    visible: true,
+                    overlappingBehavior: 'rotate', // اختیاری
+                    rotationAngle: 90, // چرخش 45 درجه
+                    staggeringSpacing: 5,
+                    customizeText: function (arg) {
+                        // کوتاه کردن متن اگر طولانی است
+                        if (arg.value && arg.value.length > 30) {
+                            return arg.value.substring(0, 27) + '...';
+                        }
+                        return arg.value;
+                    }
+
+                },
+                grid: { visible: true },
+                discreteAxisDivisionMode: 'crossLabels'
+            },
+            valueAxis: [
+                {
+                    name: "countAxis",
+                    title: { text: "Event Count" },
+                    position: "left",
+                    grid: { visible: true },
+                    //constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
+                },
+                {
+                    name: "cumulativeAxis",
+                    title: { text: "Cumulative Percentage" },
+                    position: "right",
+                    grid: { visible: false },
+                    //constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
+                }
+            ],
+            crosshair: { enabled: true, label: { visible: true } },
+            legend: { visible: true, verticalAlignment: "bottom", horizontalAlignment: "center" },
+            /*tooltip: {
+                enabled: true,
+                shared: true,
+                customizeTooltip: function (arg) {
+                    const d = DevExpress.localization.formatDate(arg.argument, "yyyy-MM-dd");
+                    const p = arg.points;
+                    const get = (name) => {
+                        const item = p.find(x => x.seriesName === name);
+                        return item ? item.value.toFixed(1) : "-";
+                    };
+                    return {
+                        text:
+                            `Date: ${d}\n` +
+                            `Daily: ${get("Daily Event Rate / 100 flights")}\n` +
+                            `EWMA: ${get("EWMA")}\n` +
+                            `CUSUM+: ${get("CUSUM+")}\n` +
+                            `CUSUM-: ${get("CUSUM-")}` +
+                            `Alarm: ${get("Alarm")}`
+                    };
+                }
+            },
+            */
+            margin: { left: 80, right: 80, top: 20, bottom: 20 },
+            size: {
+                height: 600,
+                width: '100%'
+            }
+        };
+
+        ////-----------------------------------------------------
         $scope.bar_event = {
             palette: 'Office',
             tooltip: {
@@ -647,10 +815,6 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
             name: 'Events', valueField: 'count', color: "#73264d", hoverStyle: { color: "#000000" }, barWidth: 50
         };
 
-
-
-
-
         $scope.bar_route = {
             palette: 'Office',
             tooltip: {
@@ -730,12 +894,134 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
         $scope.bar_route_series = {
             name: 'Routes', valueField: 'count', color: "#2d5986", hoverStyle: { color: "#000000" }, barWidth: 50
         };
+
+        // === CPT–FO Chart (Flights & Events/100) ===
+        $scope.bar_cpt_fo_ds = [];
+
+        $scope.bar_cpt_fo = {
+            palette: 'Office',
+            tooltip: { enabled: true, shared: true },
+            commonSeriesSettings: {
+                argumentField: 'fo_name',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                label: { visible: false },
+                type: 'bar'
+            },
+            title: 'CPT–FO (Events & Events/100 Flights)',
+            legend: { verticalAlignment: 'bottom', horizontalAlignment: 'center' },
+            export: { enabled: false },
+            // اگر Route شما rotated=true است، این را هم true بگذارید تا هم‌جهت شوند
+            rotated: false,
+            argumentAxis: {
+                label: {
+                    position: 'bottom',
+                    overlappingBehavior: "rotate", rotationAngle: 90,
+                    font: { size: 10 }
+                }
+            },
+            valueAxis: [
+                {
+                    name: 'countAxis',
+                    position: 'left',          // محور Flights پایین
+                    title: { text: 'Events' }
+                },
+                {
+                    name: 'rateAxis',
+                    position: 'right',             // محور Events/100 بالا
+                    title: { text: 'Events / 100 Flights' },
+                    grid: { visible: false }
+                }
+            ],
+            series: [
+                { name: 'Event Count', valueField: 'event_count', axis: 'countAxis', type: 'bar', color: Color_event },
+                { name: 'Flight Count', valueField: 'flight_count', axis: 'countAxis', type: 'bar', color: Color_flight },
+                { name: 'Events/100', valueField: 'total_count_per_100', axis: 'rateAxis', type: 'spline', color: color_event_per100, width: 1, point: { visible: false, size: 3 }}
+            ],
+            bindingOptions: {
+                dataSource: 'bar_cpt_fo_ds',
+                'size.height': 'chart_size_full_height'
+            }
+        };
+
+        //------------------- Captain Monthly Mix (year_month) ===
+        $scope.cpt_month_mix_ds = [];
+        $scope.cpt_month_mix =
+        {
+            title: 'Captain Monthly Events ',
+            tooltip: { enabled: true, shared: true },
+            legend: { verticalAlignment: 'bottom', horizontalAlignment: 'center' },
+
+            commonSeriesSettings: {
+                argumentField: 'year_month',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                type: 'stackedBar',        // ← مهم: پیش‌فرض رو stackedBar بذار
+                // barPadding: 0.2
+                barGroupPadding: 0.01
+            },
+            valueAxis: [
+                { name: 'countAxis', position: 'left', title: { text: 'Event Count' } },
+                { name: 'rateAxis', position: 'right', title: { text: 'Event Count / 100 Flights' }, grid: { visible: false } }
+            ],
+            argumentAxis: {
+                type: 'discrete',
+                position: 'bottom',
+                label: { overlappingBehavior: 'stagger', font: { size: 10 } }
+            },
+
+            series: [
+                // اگر می‌خواهی تعداد پرواز هم ستون جداگانه داشته باشد (در کنار استک L/M/H):
+                {
+                    name: 'Flights', valueField: 'flight_count', axis: 'countAxis',
+                    type: 'stackedBar', stack: 'flights', color: Color_flight, opacity: 0.75
+                },
+
+                // سه ستون «روی هم» برای Low / Medium / High (همه در یک stack به نام 'sev')
+                {
+                    name: 'Low', valueField: 'low_count', axis: 'countAxis',
+                    stack: 'sev', color: lowColor, opacity: 0.95
+                },
+                {
+                    name: 'Medium', valueField: 'medium_count', axis: 'countAxis',
+                    stack: 'sev', color: '#F59E0B', opacity: 0.95
+                },
+                {
+                    name: 'High', valueField: 'high_count', axis: 'countAxis',
+                    stack: 'sev', color: '#EF4444', opacity: 0.95
+                },
+
+                // خط نرخ (محور راست)
+                {
+                    name: 'Events/100 Flights', valueField: 'total_count_per_100', axis: 'rateAxis',
+                    type: 'spline', width: 2, color: color_event_per100, point: { visible: false, size: 1 }
+                },
+                {
+                    name: 'Captains Average (Events/100)', valueField: 'avg_total_count_per100', axis: 'rateAxis',
+                    type: 'spline', width: 2, color: color_avg_event_per100, point: { visible: false, size: 1 }
+                }
+            ],
+
+            bindingOptions:
+            {
+                dataSource: 'cpt_month_mix_ds',
+                //'size.height': 'chart_size_full_height'
+            },
+            margin: { left: 80, right: 80, top: 20, bottom: 20 },
+            size: {
+                height: 500,
+                width: '100%'
+            }
+        };
+
+
         ///////////////////////////////////////
-        $scope.bind = function () {
+        $scope.bind = function ()
+        {
             fdmService.get_fmd_crew_id($scope.crew_id, $scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response) {
                 $scope.result_type_crew = response.Data.result_type_crew[0];
                 $scope.crew_name = response.Data.result_type_crew[0].crew_name;
-                $scope.bar_event_ds = response.Data.result_events;
+               // $scope.bar_event_ds = response.Data.result_events;
                 $scope.bar_route_ds = Enumerable.From(response.Data.result_type_crew_route).Where(function (x) { return x.count > 0; }).OrderByDescending('$.count').ToArray();
                 $scope.pie_score_ds = [
                     { title: 'High', value: $scope.result_type_crew.high_score },
@@ -770,6 +1056,116 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+            //-------EWMA---------------------
+            fdmService.get_fmd_ewma_captain($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to), $scope.crew_id).then(function (res)
+            {
+                //if (res.IsSuccess) {
+                //$scope.ds_ewma_all = res.Data.items;
+                // بعد از دریافت پاسخ سرویس:
+                $scope.CaptainEWMAEvents = (res && res.Data && res.Data.items) ? res.Data.items.map(function (r)
+                {
+                    const alarm = (r.Alarm !== undefined) ? r.Alarm : true;
+
+                    return {
+                        Date: new Date(r.Date),
+                        Daily: r.EventRatePer100,
+                        EWMA: r.Ewma,
+                        CusumPos: r.CusumPos,
+                        CusumNeg: r.CusumNeg,
+                        Alarm: r.Alarm,
+                        AlarmEWMA: alarm ? r.Ewma : null // فقط وقتی آلارم دارد مقدار EWMA؛ وگرنه null
+
+                    };
+                }) : [];
+
+                //console.log('CaptainEWMAevents ', $scope.captainEWMAEvents);
+                //}
+            });
+            //-----------------pareto-----------------
+            fdmService.get_fmd_cpt_pareto($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to), 20, $scope.crew_id).then(function (res)
+            {
+                if (res.IsSuccess)
+                {
+                    $scope.CaptainPareto = res.Data.Items || [];
+                }
+                else
+                {
+                    console.error('Error fetching Pareto data:', res.Data);
+                    $scope.CaptainPareto = []; // در صورت خطا، آرایه را خالی کنید
+
+                }
+            }).catch(function (error)
+            {
+                console.error('API Call Failed:', error);
+                $scope.CaptainPareto = [];
+            });
+            //---------------CPT FO-----------------------
+            fdmService.get_fmd_cpt_fo($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (res) {
+                var all = (res && res.Data && res.Data.combined) ? res.Data.combined : [];
+                //var ac = $scope.selected_ac_type || null;   // مثل 'A320'
+                
+                var pairs = Enumerable.From(all).Where(function (x) { return Number(x.cpt_id) === Number($scope.crew_id) && x.ac_type === $scope.ac_type; });
+                //if (ac) pairs = pairs.Where(function (x) { return x.ac_type === $scope.ac_type; });
+                var byFo = pairs.OrderByDescending("$.total_count_per_100").Select(function (x)
+                {
+                        return {
+                            fo_id: x.fo_id,
+                            fo_name: x.fo_name,
+                            ac_type: x.ac_type,
+                            flight_count: x.flight_count,
+                            event_count: x.event_count,
+                            total_count_per_100: x.total_count_per_100 
+                        };
+                    })
+                    .ToArray();
+
+                    $scope.bar_cpt_fo_ds = byFo;
+                }, function (err) {
+                    console.error('get_events_cpt_fo error', err);
+                    $scope.bar_cpt_fo_ds = [];
+            }); 
+
+            // --- Monthly CPT ------------------------
+            fdmService.get_fmd_monthlyCPT($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (res)
+            {
+                var items = (res && res.Data && res.Data.items) ? res.Data.items : [];
+                var cptId = Number($scope.crew_id);
+                console.log('ca_type', $scope.ac_type);
+                // فقط رکوردهای کاپیتان منتخب و همین ac_type
+                var q = Enumerable.From(items)
+                    .Where(function (x) { return Number(x.crew_id) === cptId && x.ac_type === $scope.ac_type; });
+
+                var byMonth = q.OrderBy("$.year").ThenBy("$.month")
+                    .Select(function (x) {
+                        return {
+                            year: x.year,
+                            month: x.month,
+                            year_month: x.year_month,
+
+                            // داده‌های Count برای ستون‌های stacked
+                            flight_count: x.flight_count,
+                            low_count: x.low_count,
+                            medium_count: x.medium_count,
+                            high_count: x.high_count,
+                            total_count_per_100: x.total_count_per_100,
+                            avg_total_count_per100:
+                                (x.FleetAvg && x.FleetAvg.avg_total_count_per100 != null)
+                                    ? x.FleetAvg.avg_total_count_per100
+                                    : null
+                        };
+                    })
+                    .ToArray();
+
+                $scope.cpt_month_mix_ds = byMonth;
+
+                }, function (err) {
+                    console.error('get_cpt_monthly error', err);
+                    $scope.cpt_month_mix_ds = [];
+                });
+            //})();
+
+
         }
         ///////////////////////////////////////
         $scope.$on('$viewContentLoaded', function () {

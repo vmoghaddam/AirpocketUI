@@ -1,4 +1,94 @@
 ﻿<style>
+    
+    /* قاب اسکرول جدول ماتریسی */
+    .matrix-wrap {
+        max-width: 100%;
+        overflow: auto;
+        position: relative
+    }
+
+    /* جدول ماتریسی با سلول‌های چسبان (sticky) */
+    .matrix {
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 12px;
+        min-width: 600px
+    }
+
+        .matrix th, .matrix td {
+            border: 1px solid #ddd;
+            padding: 4px 6px;
+            white-space: nowrap
+        }
+
+        /* هدر بالا را ثابت نگه‌دار */
+        .matrix thead th {
+            position: sticky;
+            top: 0;
+            z-index: 5;
+            background: #f9f9f9
+        }
+
+        /* ستون اول (نام CPT) را فریز کن */
+        .matrix .sticky-col {
+            position: sticky;
+            left: 0;
+            z-index: 6;
+            background: #fff
+        }
+
+        .matrix thead .sticky-col {
+            z-index: 7;
+            background: #eee
+        }
+        /* خانه گوشه بالا-چپ */
+
+        /* عرض‌ها: ستون اول پهن‌تر برای نام‌ها؛ بقیه هم‌اندازه و باریک */
+        .matrix .sticky-col {
+            width: 160px;
+            min-width: 160px;
+            max-width: 240px
+        }
+
+        .matrix td:not(.sticky-col), .matrix th.fo {
+            width: 70px;
+            min-width: 70px;
+            max-width: 70px;
+            text-align: right
+        }
+
+        /* ریز بهبودهای ظاهری */
+        .matrix thead th {
+            text-align: center
+        }
+
+    .muted-tip {
+        font-size: 11px;
+        color: #777;
+        margin-top: 6px
+    }
+    /* اجازه‌ی چندخطی شدن فقط برای هدرهای FO */
+    .matrix th.fo {
+        white-space: normal !important; /* لغو nowrap عمومی */
+        word-break: break-word; /* اگر واژه خیلی بلند بود بشکند */
+        overflow-wrap: anywhere; /* هرجا لازم بود بشکند */
+        text-align: center;
+        line-height: 1.15;
+        padding: 4px 6px;
+    }
+    /* ظرف داخلی لیبل، کمک به شکستن بهتر خطوط */
+    .fo-label {
+        display: block;
+        line-height: 1.15;
+        hyphens: auto; /* در صورت پشتیبانی مرورگر، هجّا بندی */
+    }
+    /* عرض ستون‌ها ثابت و باریک بماند (مثل قبل) */
+    .matrix td:not(.sticky-col), .matrix th.fo {
+        width: 70px;
+        min-width: 70px;
+        max-width: 70px; /* یا 60px اگر می‌خواهی باریک‌تر باشند */
+    }
+
     .red {
         background: red !important;
     }
@@ -233,27 +323,64 @@
         <div style="width:100%">
             <!-- TAB NAVIGATION -->
             <ul class="nav nav-tabs">
-                <li style="width:25%;text-align:center" ng-class="{active: activeTab === 'fleet'}">
+                <li style="width:20%;text-align:center" ng-class="{active: activeTab === 'overview'}">
+                    <a style="color: white" ng-style="{'background-color': activeTab === 'overview' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'overview'; instanceReferesh()">OverView</a>
+
+                <li style="width:20%;text-align:center" ng-class="{active: activeTab === 'fleet'}">
                     <a style="color: white" ng-style="{'background-color': activeTab === 'fleet' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'fleet'; instanceReferesh()">Fleet</a>
                 </li>
-                <li style="width: 25%; text-align: center" ng-class="{active: activeTab === 'pilots'}">
+                <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'pilots'}">
                     <a style="color: white" ng-style="{'background-color': activeTab === 'pilots' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'pilots'; instanceReferesh()">Pilots</a>
                 </li>
-                <li style="width: 25%; text-align: center" ng-class="{active: activeTab === 'events'}">
+                <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'events'}">
                     <a style="color: white" ng-style="{'background-color': activeTab === 'events' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'events'; instanceReferesh()">Events</a>
                 </li>
-                <li style="width: 25%; text-align: center" ng-class="{active: activeTab === 'routes'}">
+                <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'routes'}">
                     <a style="color: white" ng-style="{'background-color': activeTab === 'routes' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'routes'; instanceReferesh()">Routes</a>
                 </li>
-
-
-
             </ul>
             <div dx-scroll-view="scroll_1">
-
-
                 <!-- TAB CONTENT -->
                 <div class="tab-content ">
+                    <!-- TAB OverView -->
+                    <div ng-show="activeTab === 'overview'">
+                        <div class="row " style="padding:5px;">
+                            <ul class="nav nav-tabs">
+                                <li style="width:50%;text-align:center" ng-class="{active: activeTab2 === 'EWMA'}">
+                                    <a style="color: white;padding:7px" ng-style="{'background-color': activeTab2 === 'EWMA' ? '#00ccff' : '#bfbfbf'}" href="" ng-click="activeTab2 = 'EWMA'">EWMA</a>
+                                </li>
+                                <li style="width: 50%; text-align: center" ng-class="{active: activeTab2 === 'MD'}">
+                                    <a style="color: white;padding:7px" ng-style="{'background-color': activeTab2 === 'MD' ? '#00ccff' : '#bfbfbf'}" href="" ng-click="activeTab2 = 'MD'">MD</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content ">
+                                <div ng-show="activeTab2 === 'EWMA'">
+                                    <div class="row " style="padding:5px;">
+                                        <div class="type-card">
+                                            <div class="type-header" style="padding:7px;background:#eee;text-align:center">AllEvents</div>
+                                            <div id="chart_ewma_all" dx-chart="allEWMAEventsChart"></div>
+                                            <div id="chart_pareto_all" dx-chart="AllParetoChart"></div>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div ng-show="activeTab2 === 'MD'">
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- TAB Fleet  -->
                     <div ng-show="activeTab === 'fleet'">
                         <div class="row " style="padding:5px;">
                             <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
@@ -437,7 +564,6 @@
 
                         </div>
                     </div>
-
                     <!-- TAB pilots -->
                     <div ng-show="activeTab === 'pilots'">
                         <div class="row " style="padding:5px;">
@@ -454,7 +580,7 @@
                             <div class="tab-content ">
                                 <div ng-show="activeTab2 === 'B737'">
                                     <div style="padding:5px;overflow-y:auto;" ng-style="get_type_content_style()">
-                                        <div ng-repeat="c in ds_cpt_737" class="col-lg-3" style="padding:5px" ng-click="go_crew(c)">
+                                        <div ng-repeat="c in ds_cpt_737 track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px" ng-click="go_crew(c)">
                                             <div style="border:1px solid #ccc">
                                                 <div style="padding:7px;font-weight:bold;background:#ddd">{{c.crew_name}}</div>
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
@@ -474,7 +600,9 @@
                                                 </div>
 
                                                 <div class="col-lg-8 col-md-6" style="padding:7px;">
-                                                    <canvas id="chart-{{$index}}" width="100" height="60"></canvas>
+                                                    <!----canvas id="chart-{{$index}}" width="100" height="60"></canvas-->
+                                                    <canvas id="b737-chart-{{c.crew_id || $index}}" class="w-100" height="140"></canvas>
+
                                                 </div>
 
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
@@ -499,14 +627,66 @@
 
 
                                         </div>
-
                                     </div>
-                                </div>
+                                    <div style="clear:both"></div>
+                                    <!-- all cpts comparison -->
 
+                                    <div class="col-lg-12" style="padding:2px">
+                                        <div class="chartBox" style="width:100%">
+                                            <div id="chart_cpt_all" dx-chart="cpt_all_B737_chart"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Top Pairs — B737 -->
+                                    <div class="type-card" style="margin-top:10px">
+                                        <div class="type-header" style="padding:7px;background:#eee;text-align:center">Top Pairs — B737 (events per 100 flights)</div>
+                                        <div style="padding:10px">
+                                            <div ng-if="!pairs.list737.length" class="text-muted" style="padding:8px">داده‌ای برای B737 در این بازه نیست.</div>
+                                            <canvas ng-if="pairs.list737.length" id="topPairsChartB737" style="width:100%;height:100%"></canvas>
+                                        </div>
+                                    </div>
+
+                                    <!-- Matrix — B737 (CPT rows × FO columns) -->
+                                    <div class="type-card" style="margin-top:10px">
+                                        <div class="type-header" style="padding:7px;background:#eee;text-align:center">
+                                            B737 — Matrix (CPT × FO) — /100 flights
+                                        </div>
+
+                                        <div class="matrix-wrap" style="padding:10px">
+                                            <div ng-if="!pairs.matrix737.rows.length" class="text-muted" style="padding:8px">
+                                                داده‌ای برای B737 در این بازه یافت نشد.
+                                            </div>
+
+                                            <table ng-if="pairs.matrix737.rows.length" class="matrix">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="sticky-col">CPT \ FO</th>
+                                                        <th class="fo" ng-repeat="fo in pairs.matrix737.fos track by $index" ng-attr-title="{{fo}}">
+                                                            <span class="fo-label">{{fo}}</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr ng-repeat="r in pairs.matrix737.rows track by $index">
+                                                        <td class="sticky-col">{{r.cpt}}</td>
+                                                        <td ng-repeat="fo in pairs.matrix737.fos track by $index" class="text-right">
+                                                            {{ r[fo] == null ? '-' : (r[fo] | number:1) }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <div class="muted-tip">* برای خوانایی، حداکثر 20 CPT و 20 FO نمایش داده می‌شود.</div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
 
                                 <div ng-show="activeTab2 === 'MD'">
                                     <div style="padding:5px;overflow-y:auto; " ng-style="get_type_content_style()">
-                                        <div ng-repeat="c in ds_cpt_MD" class="col-lg-3" style="padding:5px">
+                                        <div ng-repeat="c in ds_cpt_MD track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px">
                                             <div style="border:1px solid #ccc">
                                                 <div style="padding:7px;font-weight:bold;background:#ddd">{{c.crew_name}}</div>
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
@@ -526,7 +706,7 @@
                                                 </div>
 
                                                 <div class="col-lg-8 col-md-6" style="padding:7px;">
-                                                    <canvas id="chartMD-{{$index}}" width="100" height="60"></canvas>
+                                                    <canvas id="md-chart-{{c.crew_id || $index}}" width="100" height="60"></canvas>
                                                 </div>
 
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
@@ -553,15 +733,68 @@
                                         </div>
 
                                     </div>
+
+                                    <!-- all cpts comparison -->
+
+                                    <div class="col-lg-12" style="padding:2px">
+                                        <div class="chartBox" style="width:100%">
+                                            <div id="chart_cpt_MD_all" dx-chart="cpt_all_MD_chart"></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="type-card" style="margin-top:10px">
+                                        <div class="type-header" style="padding:7px;background:#eee;text-align:center">
+                                            Top Pairs — MD (events per 100 flights)
+                                        </div>
+                                        <div style="height:420px;padding:10px">
+                                            <div ng-if="!pairs.listMD.length" class="text-muted" style="padding:8px">داده‌ای برای MD در این بازه نیست.</div>
+                                            <canvas ng-if="pairs.listMD.length" id="topPairsChartMD" style="width:100%;height:100%"></canvas>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="type-card" style="margin-top:10px">
+                                        <div class="type-header" style="padding:7px;background:#eee;text-align:center">
+                                            MD — Matrix (CPT × FO) — /100 flights
+                                        </div>
+
+                                        <div class="matrix-wrap" style="padding:10px">
+                                            <div ng-if="!pairs.matrixMD.rows.length" class="text-muted" style="padding:8px">
+                                                داده‌ای برای MD در این بازه یافت نشد.
+                                            </div>
+
+                                            <table ng-if="pairs.matrixMD.rows.length" class="matrix">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="sticky-col">CPT \ FO</th>
+                                                        <th class="fo" ng-repeat="fo in pairs.matrixMD.fos track by $index" ng-attr-title="{{fo}}">
+                                                            <span class="fo-label">{{fo}}</span>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    <tr ng-repeat="r in pairs.matrixMD.rows track by $index">
+                                                        <td class="sticky-col">{{r.cpt}}</td>
+                                                        <td ng-repeat="fo in pairs.matrixMD.fos track by $index" class="text-right">
+                                                            {{ r[fo] == null ? '-' : (r[fo] | number:1) }}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <div class="muted-tip">* برای خوانایی، حداکثر 20 CPT و 20 FO نمایش داده می‌شود.</div>
+                                        </div>
+                                    </div>
+
+
                                 </div>
-
-
 
                             </div>
                         </div>
 
                     </div>
-
                     <!--TAB EVENTS-->
                     <div ng-show="activeTab === 'events'">
                         <div class="row " style="padding:5px;">
@@ -648,7 +881,7 @@
                         </div>
 
                     </div>
-
+                    <!--TAB ROUTS-->
                     <div ng-show="activeTab === 'routes'">
                         <div class="row " style="padding:5px;">
                             <ul class="nav nav-tabs">
@@ -663,7 +896,7 @@
                             <div class="tab-content ">
                                 <div ng-show="activeTab2 === 'B737'">
                                     <div style="padding:5px;overflow-y:auto;" ng-style="get_type_content_style()">
-                                        <div ng-repeat="c in ds_route_737" class="col-lg-3" style="padding:5px" ng-click="go_crew(c)">
+                                        <div ng-repeat="c in ds_route_737 track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px" ng-click="go_crew(c)">
                                             <div style="border:1px solid #ccc">
                                                 <div style="padding:7px;font-weight:bold;background:#ddd">{{c.route}}</div>
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
@@ -683,7 +916,7 @@
                                                 </div>
 
                                                 <div class="col-lg-8 col-md-6" style="padding:7px;">
-                                                    <canvas id="chart-route-{{$index}}" width="100" height="60"></canvas>
+                                                    <canvas id="b737-route-chart-{{c.crew_id || $index}}" width="100" height="60"></canvas>
                                                 </div>
 
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
@@ -712,9 +945,55 @@
                                     </div>
                                 </div>
                                 <div ng-show="activeTab2 === 'MD'">
-                                    <div style="padding:5px;   ">
-                                        <div style="clear:both"></div>
+                                    <div style="padding:5px;overflow-y:auto;" ng-style="get_type_content_style()">
+                                        <div ng-repeat="c in ds_route_md track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px" ng-click="go_crew(c)">
+                                            <div style="border:1px solid #ccc">
+                                                <div style="padding:7px;font-weight:bold;background:#ddd">{{c.route}}</div>
+                                                <div class="col-lg-2 col-md-3" style="padding :0;">
+                                                    <div class="  generalInfo chartBox">
+                                                        <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">S/F</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight :bold;padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.score_per_flight}}</p>
+                                                    </div>
+                                                    <div class="  generalInfo chartBox" ng-click="showEvents()">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Scores</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.total_score}}</p>
+                                                    </div>
+                                                    <div class="   generalInfo chartBox">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Flights</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 5px; margin: 0; padding-bottom: 10px; padding-top: 0px ">{{c.count}}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-lg-8 col-md-6" style="padding:7px;">
+                                                    <canvas id="md-route-chart-{{c.crew_id || $index}}" width="100" height="60"></canvas>
+                                                </div>
+
+                                                <div class="col-lg-2 col-md-3" style="padding :0;">
+                                                    <div class="  generalInfo chartBox" style="background: #ffb3b3; ">
+                                                        <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">H.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.high_score}}</p>
+                                                    </div>
+                                                    <div class="  generalInfo chartBox" style="background: #ffe6cc; " ng-click="showEvents()">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">M.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px ">{{ c.medium_score}}</p>
+                                                    </div>
+                                                    <div class="   generalInfo chartBox" style="background: #ccfff2; ">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">L.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.low_score}}</p>
+                                                    </div>
+                                                </div>
+
+
+                                                <div style="clear:both"></div>
+
+                                            </div>
+
+
+                                        </div>
+
                                     </div>
+
                                 </div>
 
                             </div>
@@ -725,16 +1004,9 @@
                         </div>
                     </div>
 
-
-
                 </div>
             </div>
         </div>
-
-
-
-
-
     </div>
 
     <div class="rowx footer">
