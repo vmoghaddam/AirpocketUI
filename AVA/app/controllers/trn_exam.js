@@ -34,7 +34,7 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
 
             bindingOptions: {},
             onClick: function (e) {
-                $scope.build($scope.date);
+                //$scope.build($scope.date);
                 // $scope.$broadcast('getFilterQuery', null);
                 $scope.doRefresh = true;
                 $scope.bind();
@@ -101,7 +101,7 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
 
 
 
-             
+
 
 
 
@@ -134,7 +134,7 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
                 if ($scope.selected_exam.exam_type_id == 2) {
                     $scope.ds_template = $scope.ds_airbus;
                 }
-                
+
                 ztrnService.get_temps($scope.selected_exam.id).then(function (response) {
                     $scope.loadingVisible = false;
                     console.log(response);
@@ -144,12 +144,12 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
                         if (temp)
                             temp.total = _d.total;
                     });
-                    console.log('dfgdfgdfgdfgdfg',$scope.ds_template);
+                    console.log('dfgdfgdfgdfgdfg', $scope.ds_template);
                     $scope.popup_questions_visible = true;
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-               
+
 
 
 
@@ -201,81 +201,55 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
             width: 120,
 
             onClick: function (e) {
-
-
-                if ($scope.active_header == '_list_header') {
-                    $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
-                    if (!$scope.dg_selected) {
-                        General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                        return;
-                    }
-
-                    General.Confirm(Config.Text_DeleteConfirm, function (res) {
-                        if (res) {
-
-                            var dto = { Id: $scope.dg_selected.Id, };
-                            $scope.loadingVisible = true;
-                            trnService.deleteCourse(dto).then(function (response) {
-                                $scope.loadingVisible = false;
-                                if (response.IsSuccess) {
-                                    General.ShowNotify(Config.Text_SavedOk, 'success');
-                                    $scope.doRefresh = true;
-                                    $scope.bind();
-                                    $scope.build($scope.date);
-                                }
-                                else
-                                    General.ShowNotify(response.Errors[0], 'error');
-
-
-
-
-                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-                        }
-                    });
+                $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
+                if (!$scope.dg_selected) {
+                    General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                    return;
                 }
-                else {
-                    //07-09
-                    if ($scope.schedule_cid == -1) {
-                        General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                        return;
-                    }
-                    var id = $scope.schedule_cid;
+                var data = $scope.dg_selected;
 
-
-
-                    General.Confirm(Config.Text_DeleteConfirm, function (res) {
-                        if (res) {
-
-                            var dto = { Id: $scope.schedule_cid, };
-                            $scope.loadingVisible = true;
-                            trnService.deleteCourse(dto).then(function (response) {
-                                $scope.loadingVisible = false;
-                                if (response.IsSuccess) {
-                                    General.ShowNotify(Config.Text_SavedOk, 'success');
-                                    $scope.doRefresh = true;
-                                    $scope.bind();
-                                    $scope.build($scope.date);
-                                }
-                                else
-                                    General.ShowNotify(response.Errors[0], 'error');
-
-
-
-
-                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-                        }
-                    });
-
-
-
+                if (data.status_id != null) {
+                    General.ShowNotify('The record can not be deleted due to the staus of the selected exam.', 'error');
+                    return;
                 }
+
+                General.Confirm(Config.Text_DeleteConfirm, function (res) {
+                    if (res) {
+
+                        var dto = { id: data.id, };
+                       
+                        $scope.loadingVisible = true;
+                        ztrnService.delete_exam(dto).then(function (response) {
+                            $scope.loadingVisible = false;
+                            if (response.IsSuccess) {
+                                General.ShowNotify(Config.Text_SavedOk, 'success');
+                                $scope.doRefresh = true;
+                                $scope.bind();
+                               
+                            }
+                            else
+                                General.ShowNotify(response.Errors[0], 'error');
+
+
+
+
+                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+                    }
+                });
+
+
+
 
 
 
 
             }
+
+
+
+
+
         };
         //////////////////////////
         $scope.dg_columns = [
@@ -286,59 +260,59 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
                         .appendTo(container);
                 }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
             },
-            {
-                dataField: "StatusId", caption: '',
-                width: 55,
-                allowFiltering: false,
-                allowSorting: false,
-                cellTemplate: function (container, options) {
-                    var fn = 'pending-24';
-                    switch (options.value) {
-                        case 1:
-                            fn = 'pending-24';
-                            break;
-                        case 4:
-                            fn = 'canceled-24';
-                            break;
-                        case 2:
-                            fn = 'Attended-24';
-                            break;
+            //{
+            //    dataField: "StatusId", caption: '',
+            //    width: 55,
+            //    allowFiltering: false,
+            //    allowSorting: false,
+            //    cellTemplate: function (container, options) {
+            //        var fn = 'pending-24';
+            //        switch (options.value) {
+            //            case 1:
+            //                fn = 'pending-24';
+            //                break;
+            //            case 4:
+            //                fn = 'canceled-24';
+            //                break;
+            //            case 2:
+            //                fn = 'Attended-24';
+            //                break;
 
-                        case 3:
-                            fn = 'passed-24';
-                            break;
-                        default:
-                            break;
-                    }
-                    $("<div>")
-                        .append("<img src='content/images/" + fn + ".png' />")
-                        .appendTo(container);
-                },
-                fixed: true, fixedPosition: 'left',
-            },
+            //            case 3:
+            //                fn = 'passed-24';
+            //                break;
+            //            default:
+            //                break;
+            //        }
+            //        $("<div>")
+            //            .append("<img src='content/images/" + fn + ".png' />")
+            //            .appendTo(container);
+            //    },
+            //    fixed: true, fixedPosition: 'left',
+            //},
 
             //{ dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left', },
-            { dataField: 'No', caption: 'Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90, fixed: true, fixedPosition: 'left', sortIndex: 0, sortOrder: "desc" },
+            { dataField: 'id', caption: 'Exam Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left', },
 
             { dataField: 'remark', caption: 'Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: true, fixedPosition: 'left' },
 
             //{ dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
-            { dataField: 'exam_date', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
+            { dataField: 'exam_date', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120, sortIndex: 0, sortOrder: "desc" },
             {
                 caption: 'Start', alignment: 'center', columns: [
-                    { dataField: 'date_start', caption: 'A/D', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yyyy-MM-dd HH:mm' },
-                    { dataField: 'PDateStart', caption: 'P/E', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 120 },
+                    { dataField: 'date_start', caption: 'A/D', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 150, format: 'yyyy-MM-dd HH:mm' },
+                    // { dataField: 'PDateStart', caption: 'P/E', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 120 },
                 ]
             },
             {
                 caption: 'End', alignment: 'center', columns: [
-                    { dataField: 'date_end_actual', caption: 'A/D', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yyyy-MM-dd HH:mm' },
-                    { dataField: 'PDateEnd', caption: 'P/E', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 120 },
+                    { dataField: 'date_end_actual', caption: 'A/D', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 150, format: 'yyyy-MM-dd HH:mm' },
+                    // { dataField: 'PDateEnd', caption: 'P/E', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 120 },
                 ]
             },
 
             { dataField: 'course_no', caption: 'Course No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110, fixed: true, fixedPosition: 'left' },
-            { dataField: 'attendants', caption: 'P/S', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left' },
+            { dataField: 'exam_type', caption: 'P/S', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left' },
             { dataField: 'course_title', caption: 'Course', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: true, fixedPosition: 'left' },
 
         ];
@@ -391,6 +365,16 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
                 }
 
 
+
+            },
+            onRowPrepared: function (e) {
+                if (e.data) {
+                    if (e.data.status_id == 2)
+                        e.rowElement.css('background', '#b3f0ff');
+                    if (e.data.status_id == 1)
+                        e.rowElement.css('background', '#ffff99');
+
+                }
 
             },
             onCellClick: function (e) {
@@ -515,7 +499,7 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
 
             },
             onHidden: function () {
-
+                $scope.bind();
 
             },
             bindingOptions: {
@@ -539,13 +523,18 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
         };
 
         $scope.popup_add.toolbarItems[0].options.onClick = function (e) {
-
+            if ($scope.selected_exam.status_id != null && $scope.selected_exam.status_id !=0) {
+                General.ShowNotify('The record can not be edited due to the staus of the selected exam.', 'error');
+                return;
+            }
             var result = e.validationGroup.validate();
 
             if (!result.isValid) {
                 General.ShowNotify(Config.Text_FillRequired, 'error');
                 return;
             }
+            // alert($scope.selected_exam.status_id);
+            console.log($scope.selected_exam);
             var dto = {};
             if ($scope.isNew)
                 dto.id = -1;
@@ -567,7 +556,61 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
             ztrnService.save_exam(dto).then(function (response) {
                 $scope.loadingVisible = false;
                 General.ShowNotify(Config.Text_SavedOk, 'success');
+                if (!$scope.isNew) {
 
+
+                    $scope.popup_add_visible = false;
+                }
+                else {
+                    $scope.selected_exam = {
+                        "id": null,
+                        "course_id": null,
+                        "exam_date": null,
+                        "exam_date_persian": null,
+                        "location_title": null,
+                        "location_address": null,
+                        "location_phone": null,
+                        "remark": null,
+                        "status_id": null,
+                        "created_by": null,
+                        "confirmed_by": null,
+                        "created_date": null,
+                        "confirmed_date": null,
+                        "exam_type_id": null,
+                        "signed_by_ins1_date": null,
+                        "signed_by_ins2_date": null,
+                        "signed_by_director_date": null,
+                        "signed_by_staff_date": null,
+                        "duration": null,
+                        "date_start": null,
+                        "date_end_scheduled": null,
+                        "date_end_actual": null,
+                        "date_start_scheduled": null,
+                        "groups": [],
+                        "people": [],
+                        "template": [
+                            { category_id: 1, category: 'Air condition', total: null },
+                            { category_id: 2, category: 'APU', total: null },
+                            { category_id: 3, category: 'Automatic Flight', total: null },
+                            { category_id: 4, category: 'Communication', total: null },
+                            { category_id: 5, category: 'Electrical', total: null },
+                            { category_id: 6, category: 'Emergency', total: null },
+                            { category_id: 7, category: 'Engine', total: null },
+                            { category_id: 8, category: 'Fire Protection', total: null },
+                            { category_id: 9, category: 'Flight Control', total: null },
+                            { category_id: 10, category: 'Flight instrument', total: null },
+                            { category_id: 11, category: 'Fuel', total: null },
+                            { category_id: 12, category: 'General', total: null },
+                            { category_id: 13, category: 'Hydraulic', total: null },
+                            { category_id: 14, category: 'Ice&rain Protection', total: null },
+                            { category_id: 15, category: 'Landing Gear', total: null },
+                            { category_id: 16, category: 'Limitation', total: null },
+                            { category_id: 17, category: 'Navigation', total: null },
+                            { category_id: 18, category: 'Pneumatic', total: null },
+                            { category_id: 19, category: 'Warning System', total: null },
+                        ],
+                    };
+                }
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
@@ -1132,9 +1175,10 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
                         type: 'success', text: 'Generate Questions', onClick: function (e) {
                             var dto = {};
                             dto.exam_id = $scope.selected_exam.id;
-                            if ($scope.template_type = 'B737')
+                           // alert($scope.template_type);
+                            if ($scope.template_type == 'B737')
                                 dto.type_id = 1;
-                            if ($scope.template_type = 'AIRBUS')
+                            if ($scope.template_type == 'AIRBUS')
                                 dto.type_id = 2;
                             dto.templates = $scope.ds_template;
                             $scope.loadingVisible = true;
@@ -1264,7 +1308,7 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
             // { text: "EXAM", id: 'exam', visible_btn: false },
             // { text: "PARTICIPANTS", id: 'participants', visible_btn: false },
             { text: "EXAM", id: 'exam', visible_btn: false },
-            // { text: "SYLLABI", id: 'syllabi', visible_btn: false },
+            { text: "Result", id: 'examresults', visible_btn: false },
 
 
 
@@ -1281,7 +1325,7 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
 
                 });
 
-                //  $scope.dg_people_instance.repaint();
+                $scope.dg_result_instance.repaint();
                 //  $scope.dg_syllabi_instance.repaint();
 
             }
@@ -1663,7 +1707,189 @@ app.controller('trnexamController', ['$scope', '$location', '$routeParams', '$ro
                     return "";
             }
         };
+        $scope.show_person_exam = function (data) {
+            console.log('dsdsddsd', data);
+            window.open('https://ato.airpocket.app/#!/exam/client/' + data.exam_id + '/' + data.person_id);
+            ztrnService.get_ato_exam(data.exam_id, data.client_id).then(function (response) {
+                $scope.person_exam_detail = response.Data;
+                //  console.log($scope.person_exam_detail);
 
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        }
+
+        ///////////////////////////////////////////
+        $scope.dg_result_columns = [
+            {
+                cellTemplate: function (container, options) {
+                    $("<div style='text-align:center'/>")
+                        .html(options.rowIndex + 1)
+                        .appendTo(container);
+                }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+            },
+
+
+            //{ dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left', },
+            { dataField: 'last_name', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 300, fixed: true, fixedPosition: 'left', sortIndex: 0, sortOrder: "desc" },
+
+            { dataField: 'first_name', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 200, fixed: true, fixedPosition: 'left' },
+            { dataField: 'nid', caption: 'NID', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'left' },
+
+            //{ dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
+            { dataField: 'date_start', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 120 },
+            { dataField: 'score', caption: 'Score', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: true, fixedPosition: 'right' },
+            { dataField: 'result', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110, fixed: true, fixedPosition: 'right' },
+
+
+
+            { dataField: 'total_questions', caption: 'Total', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left' },
+            { dataField: 'correct_answer', caption: 'True', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left' },
+            { dataField: 'wrong_answer', caption: 'False', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left' },
+
+
+        ];
+
+        $scope.dg_result_selected = null;
+        $scope.dg_result_instance = null;
+        $scope.dg_result_ds = null;
+        $scope.dg_result_height = $(window).height() - 155;
+        $scope.dg_result = {
+            headerFilter: {
+                visible: false
+            },
+            filterRow: {
+                visible: true,
+                showOperationChooser: true,
+            },
+            showRowLines: true,
+            showColumnLines: true,
+            sorting: { mode: 'multiple' },
+
+            noDataText: '',
+
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            scrolling: { mode: 'infinite' },
+            paging: { pageSize: 100 },
+            showBorders: true,
+            selection: { mode: 'single' },
+
+            columnAutoWidth: false,
+            // height: $(window).height() - 155,
+
+            columns: $scope.dg_result_columns,
+            onContentReady: function (e) {
+                if (!$scope.dg_result_instance)
+                    $scope.dg_result_instance = e.component;
+
+            },
+            onSelectionChanged: function (e) {
+                var data = e.selectedRowsData[0];
+
+                if (!data) {
+                    $scope.dg_result_selected = null;
+                    $scope.selected_result = null;
+                }
+                else {
+                    $scope.dg_result_selected = data;
+                    $scope.selected_result = data;
+
+                }
+
+
+
+            },
+            onCellPrepared: function (e) {
+
+
+                if (e.rowType == 'data') {
+                    if (e.data.result_id == 1)
+                        e.cellElement.css("backgroundColor", "#b3ffd9");
+                    else if (e.data.result_id == -1)
+                        e.cellElement.css("backgroundColor", "#ffcccc");
+                    //else if (e.data.result_id == 0)
+                    //    e.cellElement.css("backgroundColor", "#ff99ff");
+                }
+
+
+
+            },
+            onCellClick: function (e) {
+
+                $scope.show_person_exam(e.data);
+            },
+            "export": {
+                enabled: true,
+                fileName: "exam_results",
+                allowExportSelectedData: true
+            },
+            bindingOptions: {
+                dataSource: 'follow_exam.summary',
+                height: 'dg_height',
+            }
+        };
+
+
+
+        $scope.selected_exam_people = [];
+        $scope.exam_person_click = function (person_id, $event) {
+            $event.stopPropagation();
+            var idx = $scope.selected_exam_people.indexOf(person_id);
+            if (idx == -1)
+                $scope.selected_exam_people.push(person_id);
+            else {
+                $scope.selected_exam_people = Enumerable.From($scope.selected_exam_people).Where('$!=' + person_id).ToArray();
+            }
+        }
+
+        $scope.is_exam_person_selected = function (person_id) {
+
+            return $scope.selected_exam_people.indexOf(person_id) != -1;
+        }
+        $scope.regenerate_selected = function () {
+            if ($scope.selected_exam_people.length == 0)
+                return;
+            General.Confirm("Are sure you want to regenerate exam questions for the selected participants?", function (res) {
+                if (res) {
+                    var dto = { main_exam_id: $scope.follow_exam.id };
+                    dto.person_ids = $scope.selected_exam_people;
+
+                    $scope.loadingVisible = true;
+                    ztrnService.regenerate_questions(dto).then(function (response) {
+
+
+
+
+                        $scope.loadingVisible = false;
+                        $scope.refresh_summary();
+                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+
+
+
+                    //$scope.loadingVisible = true;
+                    //trnService.deleteCourse(dto).then(function (response) {
+                    //    $scope.loadingVisible = false;
+                    //    if (response.IsSuccess) {
+                    //        General.ShowNotify(Config.Text_SavedOk, 'success');
+                    //        $scope.doRefresh = true;
+                    //        $scope.bind();
+                    //        $scope.build($scope.date);
+                    //    }
+                    //    else
+                    //        General.ShowNotify(response.Errors[0], 'error');
+
+
+
+
+                    //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+                }
+            });
+
+        }
+
+        /////////////////////////////////////
         $scope.bind_course = function () {
             ztrnService.get_courses().then(function (response) {
                 $scope.loadingVisible = false;

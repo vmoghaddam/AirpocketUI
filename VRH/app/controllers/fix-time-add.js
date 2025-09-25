@@ -204,14 +204,24 @@ app.controller('fix-time-addController', ['$scope', '$compile', '$location', '$r
                 DevExpress.ui.notify("Please select a row to delete", "error", 3000);
                 return;
             }
+            
+            flightService.delete_fixtime($scope.selectedRow).then(function (response) {
+                if (response.IsSuccess) {
+                    General.ShowNotify(Config.Text_SavedOk, 'success');
+                    const index = $scope.ds_fix_time.indexOf($scope.selectedRow);
+                    if (index !== -1) {
+                        $scope.ds_fix_time.splice(index, 1);
+                        $scope.entity.FixTimes = angular.copy($scope.ds_fix_time);
+                        $scope.selectedRow = null;
+                        let gridInstance = $("#dg_fix_time").dxDataGrid("instance");
+                        gridInstance.refresh();
+                    }
+                } else {
+                    General.ShowNotify("Save failed", "error");
+                }
+            });
 
-            const index = $scope.ds_fix_time.indexOf($scope.selectedRow);
-            if (index !== -1) {
-                $scope.ds_fix_time.splice(index, 1);
-                $scope.selectedRow = null;
-                let gridInstance = $("#dg_fix_time").dxDataGrid("instance");
-                gridInstance.refresh();
-            }
+            
         }
 
     };

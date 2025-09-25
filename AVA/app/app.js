@@ -837,7 +837,7 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/zfdm_main.html?v=" + '5673'
     });
 
-    $routeProvider.when("/fdm/crew/z/:crew_id/:dt1/:dt2", {
+    $routeProvider.when("/fdm/crew/z/:crew_id/:dt1/:dt2/:ac_type", {
         controller: "zfdm_crew_controller",
         templateUrl: "/app/views/zfdm_crew.html?v=" + '5673'
     });
@@ -845,6 +845,12 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/exams", {
         controller: "trnexamController",
         templateUrl: "/app/views/trn_exam.html?v=1999"
+    });
+
+
+    $routeProvider.when("/fdm/sand", {
+        controller: "fdm_sand_controller",
+        templateUrl: "/app/views/fdm_sand.html?v=" + '5673'
     });
 
 

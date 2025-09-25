@@ -375,6 +375,28 @@
         padding: 5px;
         font-size: 13px !important;
     }
+
+
+    #dg_result .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_result .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_result .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_result .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
 </style>
 
 <div class="box trnexam" style="height:100%;display:none;overflow-y:hidden">
@@ -731,9 +753,9 @@
                         <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
                             <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 5px; background: #ffcc99; font-weight: bold; font-size: 14px; " ng-click="show_questions()">Questions</div>
                         </div>
-                        <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
+                        <!--<div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
                             <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 5px; background: #bf5074; font-weight: bold; font-size: 14px; " ng-click="regenerate_all()">Regenerate All</div>
-                        </div>
+                        </div>-->
                         <div class="profile-card" style="width: 100%; display: inline-block;padding:0px;margin-bottom:5px;">
                             <div class="section-title btn_exam" style="text-align: center; margin-bottom: 0; padding: 5px; background: #fe8b93;font-weight:bold;font-size:14px;" ng-click="regenerate_selected()">Regenerate Selected</div>
                         </div>
@@ -773,7 +795,7 @@
                                     <div class="ruler-number" ng-if="$index % 5 === 0">{{ $index }}</div>
                                     <div class="ruler-tick" ng-class="{'long-tick': $index % 5 === 0}"></div>
                                 </div>
-                                
+
                             </div>
                             <div class="progress-bar-container">
                                 <div class="progress-bar" ng-style="{ 'width': getProgressBarWidth(data.total_answered, data.total_questions) + '%' }"></div>
@@ -789,7 +811,7 @@
                                 'txt-danger': data.result === 'FAILED'
                             }">{{ data.result }}</span>
                                 </div>-->
-                            
+
                             <table style="width:100%">
                                 <tr>
                                     <td>
@@ -841,7 +863,12 @@
 
 
             </div>
+            <div class="tabfolder examresults">
 
+                <div dx-data-grid="dg_result" id="dg_result" dx-item-alias="row">
+ 
+                </div>
+            </div>
 
 
 
