@@ -35,23 +35,23 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode3 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode4 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightPhaseId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode5 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightPhase", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode6 = new DevExpress.DataAccess.Json.JsonSchemaNode("EventTypeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode7 = new DevExpress.DataAccess.Json.JsonSchemaNode("METId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode8 = new DevExpress.DataAccess.Json.JsonSchemaNode("SigxWXId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode9 = new DevExpress.DataAccess.Json.JsonSchemaNode("RunwayConditionId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode10 = new DevExpress.DataAccess.Json.JsonSchemaNode("EventType", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode11 = new DevExpress.DataAccess.Json.JsonSchemaNode("SigxWX", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode12 = new DevExpress.DataAccess.Json.JsonSchemaNode("MET", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode13 = new DevExpress.DataAccess.Json.JsonSchemaNode("RunwayCondition", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode14 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATRisk", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode15 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATTCASAlert", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode16 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTTurning", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode17 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTGlideSlopePos", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode18 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTExtendedCenterlinePos", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode19 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTAttitudeChange", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode20 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSNrStruck", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode21 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSNrSeen", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode22 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSTime", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode6 = new DevExpress.DataAccess.Json.JsonSchemaNode("EventTypeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode7 = new DevExpress.DataAccess.Json.JsonSchemaNode("METId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode8 = new DevExpress.DataAccess.Json.JsonSchemaNode("SigxWXId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode9 = new DevExpress.DataAccess.Json.JsonSchemaNode("RunwayConditionId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode10 = new DevExpress.DataAccess.Json.JsonSchemaNode("EventType", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode11 = new DevExpress.DataAccess.Json.JsonSchemaNode("SigxWX", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode12 = new DevExpress.DataAccess.Json.JsonSchemaNode("MET", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode13 = new DevExpress.DataAccess.Json.JsonSchemaNode("RunwayCondition", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode14 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATRisk", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode15 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATTCASAlert", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode16 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTTurning", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode17 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTGlideSlopePos", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode18 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTExtendedCenterlinePos", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode19 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTAttitudeChange", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode20 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSNrStruck", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode21 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSNrSeen", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode22 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSTime", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode23 = new DevExpress.DataAccess.Json.JsonSchemaNode("BlockOn", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode24 = new DevExpress.DataAccess.Json.JsonSchemaNode("Landing", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode25 = new DevExpress.DataAccess.Json.JsonSchemaNode("TakeOff", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
@@ -78,8 +78,8 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode46 = new DevExpress.DataAccess.Json.JsonSchemaNode("Register", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode47 = new DevExpress.DataAccess.Json.JsonSchemaNode("MSN", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode48 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightStatus", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode49 = new DevExpress.DataAccess.Json.JsonSchemaNode("ArrivalRemark", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode50 = new DevExpress.DataAccess.Json.JsonSchemaNode("DepartureRemark", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode49 = new DevExpress.DataAccess.Json.JsonSchemaNode("ArrivalRemark", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode50 = new DevExpress.DataAccess.Json.JsonSchemaNode("DepartureRemark", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode51 = new DevExpress.DataAccess.Json.JsonSchemaNode("STDDay", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode52 = new DevExpress.DataAccess.Json.JsonSchemaNode("STADay", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode53 = new DevExpress.DataAccess.Json.JsonSchemaNode("STDDayLocal", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
@@ -94,13 +94,13 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode62 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightTime", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode63 = new DevExpress.DataAccess.Json.JsonSchemaNode("ScheduledFlightTime", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode64 = new DevExpress.DataAccess.Json.JsonSchemaNode("FPFlightTime", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode65 = new DevExpress.DataAccess.Json.JsonSchemaNode("PFLR", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode65 = new DevExpress.DataAccess.Json.JsonSchemaNode("PFLR", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode66 = new DevExpress.DataAccess.Json.JsonSchemaNode("PaxChild", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode67 = new DevExpress.DataAccess.Json.JsonSchemaNode("PaxInfant", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode68 = new DevExpress.DataAccess.Json.JsonSchemaNode("PaxAdult", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode69 = new DevExpress.DataAccess.Json.JsonSchemaNode("PaxTotal", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode70 = new DevExpress.DataAccess.Json.JsonSchemaNode("PaxRevenued", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode71 = new DevExpress.DataAccess.Json.JsonSchemaNode("FuelUnitID", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode71 = new DevExpress.DataAccess.Json.JsonSchemaNode("FuelUnitID", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode72 = new DevExpress.DataAccess.Json.JsonSchemaNode("FuelRemaining", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode73 = new DevExpress.DataAccess.Json.JsonSchemaNode("FuelUplift", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode74 = new DevExpress.DataAccess.Json.JsonSchemaNode("FuelUsed", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
@@ -109,29 +109,29 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode77 = new DevExpress.DataAccess.Json.JsonSchemaNode("BaggageWeight", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode78 = new DevExpress.DataAccess.Json.JsonSchemaNode("CargoWeight", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode79 = new DevExpress.DataAccess.Json.JsonSchemaNode("Freight", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode80 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightDate", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode81 = new DevExpress.DataAccess.Json.JsonSchemaNode("CargoCount", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode82 = new DevExpress.DataAccess.Json.JsonSchemaNode("BaggageCount", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode83 = new DevExpress.DataAccess.Json.JsonSchemaNode("FPFuel", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode84 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPCrewId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode85 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPRegister", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode86 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPPositionId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode87 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPFlightTypeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode88 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPFDPItemId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode89 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPDH", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode90 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPFDPId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode91 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPP1", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode92 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPInstructor", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode93 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPP2", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode94 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPSCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode95 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode80 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightDate", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode81 = new DevExpress.DataAccess.Json.JsonSchemaNode("CargoCount", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode82 = new DevExpress.DataAccess.Json.JsonSchemaNode("BaggageCount", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode83 = new DevExpress.DataAccess.Json.JsonSchemaNode("FPFuel", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode84 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPCrewId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode85 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPRegister", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode86 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPPositionId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode87 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPFlightTypeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode88 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPFDPItemId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode89 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPDH", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode90 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPFDPId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode91 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPP1", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode92 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPInstructor", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode93 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPP2", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode94 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPSCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode95 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode96 = new DevExpress.DataAccess.Json.JsonSchemaNode("NightTime", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode97 = new DevExpress.DataAccess.Json.JsonSchemaNode("DayTime", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode98 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLUserId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode99 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLApproverId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode99 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLApproverId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode100 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLDate", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode101 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLDateApproved", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode102 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLNo", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode101 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLDateApproved", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode102 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLNo", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode103 = new DevExpress.DataAccess.Json.JsonSchemaNode("SerialNo", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode104 = new DevExpress.DataAccess.Json.JsonSchemaNode("RVSM_GND_CPT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode105 = new DevExpress.DataAccess.Json.JsonSchemaNode("LTR", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
@@ -140,7 +140,7 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode108 = new DevExpress.DataAccess.Json.JsonSchemaNode("RVSM_FLT_CPT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode109 = new DevExpress.DataAccess.Json.JsonSchemaNode("RVSM_FLT_STBY", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode110 = new DevExpress.DataAccess.Json.JsonSchemaNode("RVSM_FLT_FO", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode111 = new DevExpress.DataAccess.Json.JsonSchemaNode("CARGO", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode111 = new DevExpress.DataAccess.Json.JsonSchemaNode("CARGO", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode112 = new DevExpress.DataAccess.Json.JsonSchemaNode("FuelDensity", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode113 = new DevExpress.DataAccess.Json.JsonSchemaNode("CommanderNote", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode114 = new DevExpress.DataAccess.Json.JsonSchemaNode("AttASR", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
@@ -148,13 +148,13 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode116 = new DevExpress.DataAccess.Json.JsonSchemaNode("AttRepositioning1", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode117 = new DevExpress.DataAccess.Json.JsonSchemaNode("AttRepositioning2", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode118 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLUser", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode119 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLApprover", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode119 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLApprover", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode120 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsJL", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode121 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsJLApproved", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode122 = new DevExpress.DataAccess.Json.JsonSchemaNode("PF", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode123 = new DevExpress.DataAccess.Json.JsonSchemaNode("IPName", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode124 = new DevExpress.DataAccess.Json.JsonSchemaNode("IPId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode125 = new DevExpress.DataAccess.Json.JsonSchemaNode("IPScheduleName", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode123 = new DevExpress.DataAccess.Json.JsonSchemaNode("IPName", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode124 = new DevExpress.DataAccess.Json.JsonSchemaNode("IPId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode125 = new DevExpress.DataAccess.Json.JsonSchemaNode("IPScheduleName", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode126 = new DevExpress.DataAccess.Json.JsonSchemaNode("P1Name", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode127 = new DevExpress.DataAccess.Json.JsonSchemaNode("P1Id", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode128 = new DevExpress.DataAccess.Json.JsonSchemaNode("P1ScheduleName", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
@@ -165,9 +165,9 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode133 = new DevExpress.DataAccess.Json.JsonSchemaNode("PICId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode134 = new DevExpress.DataAccess.Json.JsonSchemaNode("SIC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode135 = new DevExpress.DataAccess.Json.JsonSchemaNode("SICId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode136 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLDatePICApproved", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode136 = new DevExpress.DataAccess.Json.JsonSchemaNode("JLDatePICApproved", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode137 = new DevExpress.DataAccess.Json.JsonSchemaNode("OccurrenceDate", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode138 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsDay", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode138 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsDay", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode139 = new DevExpress.DataAccess.Json.JsonSchemaNode("SQUAWK", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode140 = new DevExpress.DataAccess.Json.JsonSchemaNode("FuelJettisoned", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode141 = new DevExpress.DataAccess.Json.JsonSchemaNode("Altitude", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
@@ -178,60 +178,60 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode146 = new DevExpress.DataAccess.Json.JsonSchemaNode("LOCAirport", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode147 = new DevExpress.DataAccess.Json.JsonSchemaNode("LOCStand", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode148 = new DevExpress.DataAccess.Json.JsonSchemaNode("LOCRunway", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode149 = new DevExpress.DataAccess.Json.JsonSchemaNode("LOCGEOLongtitude", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode150 = new DevExpress.DataAccess.Json.JsonSchemaNode("LOCGEOAltitude", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode151 = new DevExpress.DataAccess.Json.JsonSchemaNode("ActualWX", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode152 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigAP", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode153 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigATHR", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode154 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigGear", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode155 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigFlap", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode156 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigSlat", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode157 = new DevExpress.DataAccess.Json.JsonSchemaNode("Summary", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode158 = new DevExpress.DataAccess.Json.JsonSchemaNode("Result", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode159 = new DevExpress.DataAccess.Json.JsonSchemaNode("OthersInfo", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode160 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigSpoilers", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode161 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATRiskId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode162 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATIsActionTaken", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode163 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATReportedToATC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode164 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATATCInstruction", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode165 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATFrequency", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode166 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATHeading", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode167 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATClearedAltitude", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode168 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATMinVerticalSep", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode169 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATMinHorizontalSep", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode170 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATTCASAlertId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode171 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATTypeRA", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode172 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATIsRAFollowed", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode173 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATVerticalDeviation", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode174 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATOtherACType", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode175 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATMarkingColour", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode176 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATCallSign", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode177 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATLighting", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode178 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTHeading", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode179 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTTurningId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode180 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTGlideSlopePosId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode181 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTExtendedCenterlinePosId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode182 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTAttitudeChangeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode183 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTAttitudeChangeDeg", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode184 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTIsBuffet", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode185 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTIsStickShaker", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode186 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTSuspect", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode187 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTDescribeVA", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode188 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTPrecedingAC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode189 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTIsAware", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode190 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSBirdType", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode191 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSNrSeenId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode192 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSNrStruckId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode193 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSTimeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode194 = new DevExpress.DataAccess.Json.JsonSchemaNode("PICDate", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode149 = new DevExpress.DataAccess.Json.JsonSchemaNode("LOCGEOLongtitude", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode150 = new DevExpress.DataAccess.Json.JsonSchemaNode("LOCGEOAltitude", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode151 = new DevExpress.DataAccess.Json.JsonSchemaNode("ActualWX", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode152 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigAP", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode153 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigATHR", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode154 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigGear", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode155 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigFlap", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode156 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigSlat", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode157 = new DevExpress.DataAccess.Json.JsonSchemaNode("Summary", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode158 = new DevExpress.DataAccess.Json.JsonSchemaNode("Result", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode159 = new DevExpress.DataAccess.Json.JsonSchemaNode("OthersInfo", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode160 = new DevExpress.DataAccess.Json.JsonSchemaNode("ACConfigSpoilers", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode161 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATRiskId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode162 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATIsActionTaken", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode163 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATReportedToATC", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode164 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATATCInstruction", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode165 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATFrequency", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode166 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATHeading", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode167 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATClearedAltitude", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode168 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATMinVerticalSep", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode169 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATMinHorizontalSep", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode170 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATTCASAlertId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode171 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATTypeRA", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode172 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATIsRAFollowed", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode173 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATVerticalDeviation", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode174 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATOtherACType", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode175 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATMarkingColour", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode176 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATCallSign", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode177 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATLighting", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode178 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTHeading", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode179 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTTurningId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode180 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTGlideSlopePosId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode181 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTExtendedCenterlinePosId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode182 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTAttitudeChangeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode183 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTAttitudeChangeDeg", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode184 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTIsBuffet", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode185 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTIsStickShaker", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode186 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTSuspect", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode187 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTDescribeVA", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode188 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTPrecedingAC", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode189 = new DevExpress.DataAccess.Json.JsonSchemaNode("WTIsAware", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode190 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSBirdType", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode191 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSNrSeenId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode192 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSNrStruckId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode193 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSTimeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode194 = new DevExpress.DataAccess.Json.JsonSchemaNode("PICDate", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode195 = new DevExpress.DataAccess.Json.JsonSchemaNode("DayNightStatusId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode196 = new DevExpress.DataAccess.Json.JsonSchemaNode("IncidentTypeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode196 = new DevExpress.DataAccess.Json.JsonSchemaNode("IncidentTypeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode197 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATXAbove", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode198 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATYAbove", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode199 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATXAstern", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode200 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATYAstern", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode201 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATHorizontalPlane", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode202 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSImpactDec", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode201 = new DevExpress.DataAccess.Json.JsonSchemaNode("AATHorizontalPlane", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode202 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSImpactDec", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode203 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsSecurityEvent", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode204 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsAirproxATC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode205 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsTCASRA", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
@@ -239,11 +239,12 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode207 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsBirdStrike", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode208 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsOthers", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode209 = new DevExpress.DataAccess.Json.JsonSchemaNode("MachNo", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode210 = new DevExpress.DataAccess.Json.JsonSchemaNode("SigxWXTypeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode210 = new DevExpress.DataAccess.Json.JsonSchemaNode("SigxWXTypeId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode211 = new DevExpress.DataAccess.Json.JsonSchemaNode("DateUpdate", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode212 = new DevExpress.DataAccess.Json.JsonSchemaNode("User", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode213 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSHeading", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode214 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSTurningId", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode213 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSHeading", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode214 = new DevExpress.DataAccess.Json.JsonSchemaNode("BSTurningId", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.XtraReports.UI.XRWatermark xrWatermark1 = new DevExpress.XtraReports.UI.XRWatermark();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -461,11 +462,9 @@
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             this.jsonDataSource1 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
-            this.xrPictureBox2 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrLabel29 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel27 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel26 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrPictureBox3 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrLabel21 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel25 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel24 = new DevExpress.XtraReports.UI.XRLabel();
@@ -473,11 +472,10 @@
             this.xrLabel22 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel10 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel9 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.PageFooter = new DevExpress.XtraReports.UI.PageFooterBand();
             this.xrLine1 = new DevExpress.XtraReports.UI.XRLine();
             this.xrPageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
-            this.xrPictureBox4 = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrRichText9)).BeginInit();
@@ -2874,7 +2872,7 @@
             // 
             this.xrCheckBox6.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrCheckBox6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckState", "[IsOthers]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckBoxState", "[IsOthers]")});
             this.xrCheckBox6.LocationFloat = new DevExpress.Utils.PointFloat(726.5001F, 10F);
             this.xrCheckBox6.Name = "xrCheckBox6";
             this.xrCheckBox6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -2886,7 +2884,7 @@
             // 
             this.xrCheckBox1.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrCheckBox1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckState", "[IsSecurityEvent]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckBoxState", "[IsSecurityEvent]")});
             this.xrCheckBox1.LocationFloat = new DevExpress.Utils.PointFloat(5.000019F, 10F);
             this.xrCheckBox1.Name = "xrCheckBox1";
             this.xrCheckBox1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -2898,7 +2896,7 @@
             // 
             this.xrCheckBox4.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrCheckBox4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckState", "[IsWakeTur]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckBoxState", "[IsWakeTur]")});
             this.xrCheckBox4.LocationFloat = new DevExpress.Utils.PointFloat(429.1667F, 10F);
             this.xrCheckBox4.Name = "xrCheckBox4";
             this.xrCheckBox4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -2910,7 +2908,7 @@
             // 
             this.xrCheckBox3.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrCheckBox3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckState", "[IsTCASRA]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckBoxState", "[IsTCASRA]")});
             this.xrCheckBox3.LocationFloat = new DevExpress.Utils.PointFloat(319.1667F, 10F);
             this.xrCheckBox3.Name = "xrCheckBox3";
             this.xrCheckBox3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -2922,7 +2920,7 @@
             // 
             this.xrCheckBox2.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrCheckBox2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckState", "[IsAirproxATC]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckBoxState", "[IsAirproxATC]")});
             this.xrCheckBox2.LocationFloat = new DevExpress.Utils.PointFloat(160F, 10F);
             this.xrCheckBox2.Name = "xrCheckBox2";
             this.xrCheckBox2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -2934,7 +2932,7 @@
             // 
             this.xrCheckBox5.Borders = DevExpress.XtraPrinting.BorderSide.None;
             this.xrCheckBox5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckState", "[IsBirdStrike]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "CheckBoxState", "[IsBirdStrike]")});
             this.xrCheckBox5.LocationFloat = new DevExpress.Utils.PointFloat(575.8334F, 10F);
             this.xrCheckBox5.Name = "xrCheckBox5";
             this.xrCheckBox5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -2959,7 +2957,6 @@
             // 
             // jsonDataSource1
             // 
-            this.jsonDataSource1.ConnectionName = "JsonConnection_asr";
             this.jsonDataSource1.Name = "jsonDataSource1";
             jsonSchemaNode1.Nodes.Add(jsonSchemaNode2);
             jsonSchemaNode1.Nodes.Add(jsonSchemaNode3);
@@ -3179,31 +3176,19 @@
             // PageHeader
             // 
             this.PageHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrPictureBox4,
-            this.xrPictureBox2,
+            this.xrPictureBox1,
             this.xrLabel29,
             this.xrLabel27,
             this.xrLabel26,
-            this.xrPictureBox3,
             this.xrLabel21,
             this.xrLabel25,
             this.xrLabel24,
             this.xrLabel23,
             this.xrLabel22,
             this.xrLabel10,
-            this.xrLabel9,
-            this.xrPictureBox1});
-            this.PageHeader.HeightF = 106.6667F;
+            this.xrLabel9});
+            this.PageHeader.HeightF = 164.3476F;
             this.PageHeader.Name = "PageHeader";
-            // 
-            // xrPictureBox2
-            // 
-            this.xrPictureBox2.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox2.ImageSource"));
-            this.xrPictureBox2.LocationFloat = new DevExpress.Utils.PointFloat(383.3333F, 1.666616F);
-            this.xrPictureBox2.Name = "xrPictureBox2";
-            this.xrPictureBox2.SizeF = new System.Drawing.SizeF(125.0033F, 91.66672F);
-            this.xrPictureBox2.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.xrPictureBox2.Visible = false;
             // 
             // xrLabel29
             // 
@@ -3215,7 +3200,7 @@
             this.xrLabel29.SizeF = new System.Drawing.SizeF(154.1667F, 23F);
             this.xrLabel29.StylePriority.UseFont = false;
             this.xrLabel29.StylePriority.UseTextAlignment = false;
-            this.xrLabel29.Text = "KARUN AIRLINES";
+            this.xrLabel29.Text = "FLYKISH AIRLINES";
             this.xrLabel29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel27
@@ -3228,7 +3213,7 @@
             this.xrLabel27.SizeF = new System.Drawing.SizeF(132.1797F, 23F);
             this.xrLabel27.StylePriority.UseFont = false;
             this.xrLabel27.StylePriority.UseTextAlignment = false;
-            this.xrLabel27.Text = "Form ID: KRU-ASR-";
+            this.xrLabel27.Text = "Form ID: FLY-ASR-";
             this.xrLabel27.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel26
@@ -3245,15 +3230,6 @@
             this.xrLabel26.StylePriority.UseTextAlignment = false;
             this.xrLabel26.Text = "FLT: ";
             this.xrLabel26.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
-            // 
-            // xrPictureBox3
-            // 
-            this.xrPictureBox3.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox3.ImageSource"));
-            this.xrPictureBox3.LocationFloat = new DevExpress.Utils.PointFloat(405.0429F, 5F);
-            this.xrPictureBox3.Name = "xrPictureBox3";
-            this.xrPictureBox3.SizeF = new System.Drawing.SizeF(114.1668F, 88.33334F);
-            this.xrPictureBox3.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.xrPictureBox3.Visible = false;
             // 
             // xrLabel21
             // 
@@ -3355,18 +3331,9 @@
             this.xrLabel9.SizeF = new System.Drawing.SizeF(154.1667F, 23F);
             this.xrLabel9.StylePriority.UseFont = false;
             this.xrLabel9.StylePriority.UseTextAlignment = false;
-            this.xrLabel9.Text = "VARESH AIRLINES";
+            this.xrLabel9.Text = "FLYKISH AIRLINES";
             this.xrLabel9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrLabel9.Visible = false;
-            // 
-            // xrPictureBox1
-            // 
-            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
-            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(449.0517F, 4.999987F);
-            this.xrPictureBox1.Name = "xrPictureBox1";
-            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(156.6668F, 91.66672F);
-            this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.xrPictureBox1.Visible = false;
             // 
             // PageFooter
             // 
@@ -3391,14 +3358,12 @@
             this.xrPageInfo1.StylePriority.UseTextAlignment = false;
             this.xrPageInfo1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             // 
-            // xrPictureBox4
+            // xrPictureBox1
             // 
-            this.xrPictureBox4.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox4.ImageSource"));
-            this.xrPictureBox4.LocationFloat = new DevExpress.Utils.PointFloat(4.999631F, 14.33337F);
-            this.xrPictureBox4.Name = "xrPictureBox4";
-            this.xrPictureBox4.SizeF = new System.Drawing.SizeF(197.5004F, 78.99996F);
-            this.xrPictureBox4.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.xrPictureBox4.Visible = false;
+            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
+            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(4.999634F, 19.99995F);
+            this.xrPictureBox1.Name = "xrPictureBox1";
+            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(130.2083F, 100F);
             // 
             // rptASR
             // 
@@ -3412,8 +3377,11 @@
             this.jsonDataSource1});
             this.DataSource = this.jsonDataSource1;
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
-            this.Margins = new DevExpress.Drawing.DXMargins(12, 14, 35, 11);
-            this.Version = "19.2";
+            this.Margins = new DevExpress.Drawing.DXMargins(12F, 14F, 35.13158F, 10.54868F);
+            this.Version = "24.2";
+            xrWatermark1.Id = "Watermark1";
+            this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {
+            xrWatermark1});
             ((System.ComponentModel.ISupportInitialize)(this.xrTable10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrRichText9)).EndInit();
@@ -3612,7 +3580,6 @@
         private DevExpress.XtraReports.UI.XRPageBreak xrPageBreak1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel10;
         private DevExpress.XtraReports.UI.XRLabel xrLabel9;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
         private DevExpress.XtraReports.UI.XRLabel xrLabel17;
         private DevExpress.XtraReports.UI.XRPanel xrPanel13;
         private DevExpress.XtraReports.UI.XRRichText xrRichText9;
@@ -3655,7 +3622,6 @@
         private DevExpress.XtraReports.UI.PageFooterBand PageFooter;
         private DevExpress.XtraReports.UI.XRLine xrLine1;
         private DevExpress.XtraReports.UI.XRPageInfo xrPageInfo1;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox3;
         private DevExpress.XtraReports.UI.XRLabel xrLabel27;
         private DevExpress.XtraReports.UI.XRLabel xrLabel26;
         private DevExpress.XtraReports.UI.XRTable xrTable10;
@@ -3669,8 +3635,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell126;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell127;
         private DevExpress.XtraReports.UI.XRLabel xrLabel28;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox2;
         private DevExpress.XtraReports.UI.XRLabel xrLabel29;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox4;
+        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
     }
 }

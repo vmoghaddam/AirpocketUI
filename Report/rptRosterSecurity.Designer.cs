@@ -39,19 +39,19 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode8 = new DevExpress.DataAccess.Json.JsonSchemaNode("ArrLocal", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode9 = new DevExpress.DataAccess.Json.JsonSchemaNode("Dep", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode10 = new DevExpress.DataAccess.Json.JsonSchemaNode("Arr", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode11 = new DevExpress.DataAccess.Json.JsonSchemaNode("IP", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode11 = new DevExpress.DataAccess.Json.JsonSchemaNode("IP", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode12 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode13 = new DevExpress.DataAccess.Json.JsonSchemaNode("FO", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode14 = new DevExpress.DataAccess.Json.JsonSchemaNode("SAFETY", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode15 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECK", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode16 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBS", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode17 = new DevExpress.DataAccess.Json.JsonSchemaNode("ISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode14 = new DevExpress.DataAccess.Json.JsonSchemaNode("SAFETY", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode15 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECK", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode16 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBS", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode17 = new DevExpress.DataAccess.Json.JsonSchemaNode("ISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode18 = new DevExpress.DataAccess.Json.JsonSchemaNode("SCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode19 = new DevExpress.DataAccess.Json.JsonSchemaNode("CCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode20 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode21 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode19 = new DevExpress.DataAccess.Json.JsonSchemaNode("CCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode20 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode21 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode22 = new DevExpress.DataAccess.Json.JsonSchemaNode("FM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode23 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONING", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode23 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONING", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode24 = new DevExpress.DataAccess.Json.JsonSchemaNode("positioning", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode25 = new DevExpress.DataAccess.Json.JsonSchemaNode("duties", true, DevExpress.DataAccess.Json.JsonNodeType.Array);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode26 = new DevExpress.DataAccess.Json.JsonSchemaNode("DutyType", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
@@ -75,56 +75,6 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode44 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode45 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasOBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode46 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasCHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(rptRosterSecurity));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode97 = new DevExpress.DataAccess.Json.JsonSchemaNode("root", true);
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode98 = new DevExpress.DataAccess.Json.JsonSchemaNode("main", true, DevExpress.DataAccess.Json.JsonNodeType.Array);
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode99 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightNumber", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode100 = new DevExpress.DataAccess.Json.JsonSchemaNode("Register", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode101 = new DevExpress.DataAccess.Json.JsonSchemaNode("FromAirportIATA", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode102 = new DevExpress.DataAccess.Json.JsonSchemaNode("ToAirportIATA", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode103 = new DevExpress.DataAccess.Json.JsonSchemaNode("DepLocal", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode104 = new DevExpress.DataAccess.Json.JsonSchemaNode("ArrLocal", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode105 = new DevExpress.DataAccess.Json.JsonSchemaNode("Dep", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode106 = new DevExpress.DataAccess.Json.JsonSchemaNode("Arr", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode107 = new DevExpress.DataAccess.Json.JsonSchemaNode("IP", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode108 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode109 = new DevExpress.DataAccess.Json.JsonSchemaNode("FO", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode110 = new DevExpress.DataAccess.Json.JsonSchemaNode("SAFETY", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode111 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECK", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode112 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBS", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode113 = new DevExpress.DataAccess.Json.JsonSchemaNode("ISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode114 = new DevExpress.DataAccess.Json.JsonSchemaNode("SCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode115 = new DevExpress.DataAccess.Json.JsonSchemaNode("CCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode116 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode117 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode118 = new DevExpress.DataAccess.Json.JsonSchemaNode("FM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode119 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONING", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode120 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONINGCABIN", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode121 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONINGCOCKPIT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode122 = new DevExpress.DataAccess.Json.JsonSchemaNode("positioning", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode123 = new DevExpress.DataAccess.Json.JsonSchemaNode("duties", true, DevExpress.DataAccess.Json.JsonNodeType.Array);
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode124 = new DevExpress.DataAccess.Json.JsonSchemaNode("DutyType", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode125 = new DevExpress.DataAccess.Json.JsonSchemaNode("DutyTypeTitle", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode126 = new DevExpress.DataAccess.Json.JsonSchemaNode("items", true, DevExpress.DataAccess.Json.JsonNodeType.Array);
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode127 = new DevExpress.DataAccess.Json.JsonSchemaNode("Title", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode128 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsCockpit", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode129 = new DevExpress.DataAccess.Json.JsonSchemaNode("JobGroup", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode130 = new DevExpress.DataAccess.Json.JsonSchemaNode("GroupOrder", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode131 = new DevExpress.DataAccess.Json.JsonSchemaNode("itemsStr", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode132 = new DevExpress.DataAccess.Json.JsonSchemaNode("date", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode133 = new DevExpress.DataAccess.Json.JsonSchemaNode("pdate", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode134 = new DevExpress.DataAccess.Json.JsonSchemaNode("day", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode135 = new DevExpress.DataAccess.Json.JsonSchemaNode("revision", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode136 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasIP", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode137 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasCPT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode138 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasFO", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode139 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasSAFETY", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode140 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasOBS", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode141 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasCHECK", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode142 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode143 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasOBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode144 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasCHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode145 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasFM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode47 = new DevExpress.DataAccess.Json.JsonSchemaNode("root", true);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode48 = new DevExpress.DataAccess.Json.JsonSchemaNode("main", true, DevExpress.DataAccess.Json.JsonNodeType.Array);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode49 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightNumber", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
@@ -136,21 +86,21 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode55 = new DevExpress.DataAccess.Json.JsonSchemaNode("ArrLocal", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode56 = new DevExpress.DataAccess.Json.JsonSchemaNode("Dep", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode57 = new DevExpress.DataAccess.Json.JsonSchemaNode("Arr", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode58 = new DevExpress.DataAccess.Json.JsonSchemaNode("IP", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode58 = new DevExpress.DataAccess.Json.JsonSchemaNode("IP", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode59 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode60 = new DevExpress.DataAccess.Json.JsonSchemaNode("FO", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode61 = new DevExpress.DataAccess.Json.JsonSchemaNode("SAFETY", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode62 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECK", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode63 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBS", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode64 = new DevExpress.DataAccess.Json.JsonSchemaNode("ISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode61 = new DevExpress.DataAccess.Json.JsonSchemaNode("SAFETY", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode62 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECK", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode63 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBS", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode64 = new DevExpress.DataAccess.Json.JsonSchemaNode("ISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode65 = new DevExpress.DataAccess.Json.JsonSchemaNode("SCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode66 = new DevExpress.DataAccess.Json.JsonSchemaNode("CCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode67 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode68 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode69 = new DevExpress.DataAccess.Json.JsonSchemaNode("FM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode70 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONING", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode71 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONINGCABIN", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
-            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode72 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONINGCOCKPIT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(object));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode67 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode68 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode69 = new DevExpress.DataAccess.Json.JsonSchemaNode("FM", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode70 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONING", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode71 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONINGCABIN", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode72 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONINGCOCKPIT", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode73 = new DevExpress.DataAccess.Json.JsonSchemaNode("positioning", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode74 = new DevExpress.DataAccess.Json.JsonSchemaNode("duties", true, DevExpress.DataAccess.Json.JsonNodeType.Array);
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode75 = new DevExpress.DataAccess.Json.JsonSchemaNode("DutyType", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
@@ -175,6 +125,57 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode94 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasOBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode95 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasCHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode96 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasFM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode97 = new DevExpress.DataAccess.Json.JsonSchemaNode("root", true);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode98 = new DevExpress.DataAccess.Json.JsonSchemaNode("main", true, DevExpress.DataAccess.Json.JsonNodeType.Array);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode99 = new DevExpress.DataAccess.Json.JsonSchemaNode("FlightNumber", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode100 = new DevExpress.DataAccess.Json.JsonSchemaNode("Register", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode101 = new DevExpress.DataAccess.Json.JsonSchemaNode("FromAirportIATA", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode102 = new DevExpress.DataAccess.Json.JsonSchemaNode("ToAirportIATA", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode103 = new DevExpress.DataAccess.Json.JsonSchemaNode("DepLocal", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode104 = new DevExpress.DataAccess.Json.JsonSchemaNode("ArrLocal", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode105 = new DevExpress.DataAccess.Json.JsonSchemaNode("Dep", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode106 = new DevExpress.DataAccess.Json.JsonSchemaNode("Arr", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode107 = new DevExpress.DataAccess.Json.JsonSchemaNode("IP", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode108 = new DevExpress.DataAccess.Json.JsonSchemaNode("CPT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode109 = new DevExpress.DataAccess.Json.JsonSchemaNode("FO", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode110 = new DevExpress.DataAccess.Json.JsonSchemaNode("SAFETY", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode111 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECK", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode112 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBS", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode113 = new DevExpress.DataAccess.Json.JsonSchemaNode("ISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode114 = new DevExpress.DataAccess.Json.JsonSchemaNode("SCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode115 = new DevExpress.DataAccess.Json.JsonSchemaNode("CCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode116 = new DevExpress.DataAccess.Json.JsonSchemaNode("CHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode117 = new DevExpress.DataAccess.Json.JsonSchemaNode("OBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode118 = new DevExpress.DataAccess.Json.JsonSchemaNode("FM", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode119 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONING", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode120 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONINGCABIN", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode121 = new DevExpress.DataAccess.Json.JsonSchemaNode("POSITIONINGCOCKPIT", true, DevExpress.DataAccess.Json.JsonNodeType.Property);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode122 = new DevExpress.DataAccess.Json.JsonSchemaNode("positioning", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode123 = new DevExpress.DataAccess.Json.JsonSchemaNode("duties", true, DevExpress.DataAccess.Json.JsonNodeType.Array);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode124 = new DevExpress.DataAccess.Json.JsonSchemaNode("DutyType", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode125 = new DevExpress.DataAccess.Json.JsonSchemaNode("DutyTypeTitle", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode126 = new DevExpress.DataAccess.Json.JsonSchemaNode("items", true, DevExpress.DataAccess.Json.JsonNodeType.Array);
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode127 = new DevExpress.DataAccess.Json.JsonSchemaNode("Title", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode128 = new DevExpress.DataAccess.Json.JsonSchemaNode("IsCockpit", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode129 = new DevExpress.DataAccess.Json.JsonSchemaNode("JobGroup", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode130 = new DevExpress.DataAccess.Json.JsonSchemaNode("GroupOrder", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode131 = new DevExpress.DataAccess.Json.JsonSchemaNode("itemsStr", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode132 = new DevExpress.DataAccess.Json.JsonSchemaNode("date", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<System.DateTime>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode133 = new DevExpress.DataAccess.Json.JsonSchemaNode("pdate", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode134 = new DevExpress.DataAccess.Json.JsonSchemaNode("day", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(string));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode135 = new DevExpress.DataAccess.Json.JsonSchemaNode("revision", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<long>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode136 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasIP", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode137 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasCPT", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode138 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasFO", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode139 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasSAFETY", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode140 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasOBS", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode141 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasCHECK", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode142 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasISCCM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode143 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasOBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode144 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasCHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode145 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasFM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(rptRosterSecurity));
+            DevExpress.XtraReports.UI.XRWatermark xrWatermark1 = new DevExpress.XtraReports.UI.XRWatermark();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
@@ -206,7 +207,6 @@
             this.xrTableCell28 = new DevExpress.XtraReports.UI.XRTableCell();
             this.jsonDataSource1 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
             this.ReportHeader = new DevExpress.XtraReports.UI.ReportHeaderBand();
-            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.Detail1 = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable1 = new DevExpress.XtraReports.UI.XRTable();
@@ -225,8 +225,9 @@
             this.xrTableCell44 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell45 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell46 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.jsonDataSource2 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
             this.jsonDataSource3 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
+            this.jsonDataSource2 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
+            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.tableH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -470,7 +471,6 @@
             // 
             // jsonDataSource1
             // 
-            this.jsonDataSource1.ConnectionName = "jsonConnectionRoster";
             this.jsonDataSource1.Name = "jsonDataSource1";
             jsonSchemaNode2.Nodes.Add(jsonSchemaNode3);
             jsonSchemaNode2.Nodes.Add(jsonSchemaNode4);
@@ -523,15 +523,8 @@
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPictureBox1});
-            this.ReportHeader.HeightF = 80.16666F;
+            this.ReportHeader.HeightF = 110F;
             this.ReportHeader.Name = "ReportHeader";
-            // 
-            // xrPictureBox1
-            // 
-            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
-            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.xrPictureBox1.Name = "xrPictureBox1";
-            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(141.6667F, 72.16666F);
             // 
             // DetailReport
             // 
@@ -592,7 +585,7 @@
             this.xrTableCell33.Multiline = true;
             this.xrTableCell33.Name = "xrTableCell33";
             this.xrTableCell33.StylePriority.UseFont = false;
-            this.xrTableCell33.Text = "AVA";
+            this.xrTableCell33.Text = "MEHR";
             this.xrTableCell33.Weight = 0.64422914300030587D;
             // 
             // lblDate
@@ -738,63 +731,8 @@
             this.xrTableCell46.Text = "POURDAHANDEH, ABEDINZADEH, DABIRCHIAN";
             this.xrTableCell46.Weight = 1.9558499536751879D;
             // 
-            // jsonDataSource2
-            // 
-            this.jsonDataSource2.ConnectionName = "JsonConnection 2";
-            this.jsonDataSource2.Name = "jsonDataSource2";
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode99);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode100);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode101);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode102);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode103);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode104);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode105);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode106);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode107);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode108);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode109);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode110);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode111);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode112);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode113);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode114);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode115);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode116);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode117);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode118);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode119);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode120);
-            jsonSchemaNode98.Nodes.Add(jsonSchemaNode121);
-            jsonSchemaNode126.Nodes.Add(jsonSchemaNode127);
-            jsonSchemaNode126.Nodes.Add(jsonSchemaNode128);
-            jsonSchemaNode126.Nodes.Add(jsonSchemaNode129);
-            jsonSchemaNode126.Nodes.Add(jsonSchemaNode130);
-            jsonSchemaNode123.Nodes.Add(jsonSchemaNode124);
-            jsonSchemaNode123.Nodes.Add(jsonSchemaNode125);
-            jsonSchemaNode123.Nodes.Add(jsonSchemaNode126);
-            jsonSchemaNode123.Nodes.Add(jsonSchemaNode131);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode98);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode122);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode123);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode132);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode133);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode134);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode135);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode136);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode137);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode138);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode139);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode140);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode141);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode142);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode143);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode144);
-            jsonSchemaNode97.Nodes.Add(jsonSchemaNode145);
-            this.jsonDataSource2.Schema = jsonSchemaNode97;
-            // 
             // jsonDataSource3
             // 
-            this.jsonDataSource3.ConnectionName = "JsonConnection 2";
             this.jsonDataSource3.Name = "jsonDataSource3";
             jsonSchemaNode48.Nodes.Add(jsonSchemaNode49);
             jsonSchemaNode48.Nodes.Add(jsonSchemaNode50);
@@ -847,6 +785,66 @@
             jsonSchemaNode47.Nodes.Add(jsonSchemaNode96);
             this.jsonDataSource3.Schema = jsonSchemaNode47;
             // 
+            // jsonDataSource2
+            // 
+            this.jsonDataSource2.Name = "jsonDataSource2";
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode99);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode100);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode101);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode102);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode103);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode104);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode105);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode106);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode107);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode108);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode109);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode110);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode111);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode112);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode113);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode114);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode115);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode116);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode117);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode118);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode119);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode120);
+            jsonSchemaNode98.Nodes.Add(jsonSchemaNode121);
+            jsonSchemaNode126.Nodes.Add(jsonSchemaNode127);
+            jsonSchemaNode126.Nodes.Add(jsonSchemaNode128);
+            jsonSchemaNode126.Nodes.Add(jsonSchemaNode129);
+            jsonSchemaNode126.Nodes.Add(jsonSchemaNode130);
+            jsonSchemaNode123.Nodes.Add(jsonSchemaNode124);
+            jsonSchemaNode123.Nodes.Add(jsonSchemaNode125);
+            jsonSchemaNode123.Nodes.Add(jsonSchemaNode126);
+            jsonSchemaNode123.Nodes.Add(jsonSchemaNode131);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode98);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode122);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode123);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode132);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode133);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode134);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode135);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode136);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode137);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode138);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode139);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode140);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode141);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode142);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode143);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode144);
+            jsonSchemaNode97.Nodes.Add(jsonSchemaNode145);
+            this.jsonDataSource2.Schema = jsonSchemaNode97;
+            // 
+            // xrPictureBox1
+            // 
+            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
+            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 10.00001F);
+            this.xrPictureBox1.Name = "xrPictureBox1";
+            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(200F, 81.25F);
+            // 
             // rptRosterSecurity
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -862,11 +860,14 @@
             this.DataSource = this.jsonDataSource3;
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
-            this.Margins = new DevExpress.Drawing.DXMargins(23, 26, 24, 25);
+            this.Margins = new DevExpress.Drawing.DXMargins(23F, 26F, 24F, 25.16668F);
             this.PageHeight = 827;
             this.PageWidth = 1169;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
-            this.Version = "19.2";
+            this.Version = "24.2";
+            xrWatermark1.Id = "Watermark1";
+            this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {
+            xrWatermark1});
             ((System.ComponentModel.ISupportInitialize)(this.tableH)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -880,7 +881,6 @@
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.DataAccess.Json.JsonDataSource jsonDataSource1;
         private DevExpress.XtraReports.UI.ReportHeaderBand ReportHeader;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
         private DevExpress.XtraReports.UI.XRTable tableH;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow1;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
@@ -927,5 +927,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell46;
         private DevExpress.DataAccess.Json.JsonDataSource jsonDataSource2;
         private DevExpress.DataAccess.Json.JsonDataSource jsonDataSource3;
+        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
     }
 }
