@@ -1120,6 +1120,7 @@
     <Content Include="scripts\momenttz.js" />
     <Content Include="scripts\persian-date.min.js" />
     <Content Include="scripts\persian-datepicker.min.js" />
+    <Content Include="scripts\plotly-3.0.1.js" />
     <Content Include="scripts\properties.js" />
     <Content Include="scripts\selection.min.js" />
     <Content Include="scripts\styles.css" />
