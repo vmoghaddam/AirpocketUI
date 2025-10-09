@@ -5,9 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
+//using System.Net.Http;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.UI;
@@ -37,6 +38,9 @@ namespace Report
                 string apiReportFlight = WebConfigurationManager.AppSettings["api_reportflight"];
                 string apiCao = WebConfigurationManager.AppSettings["api_cao"];
                 string apiapsbUrl = WebConfigurationManager.AppSettings["apiapsb_url"];
+
+
+                string api_certificates = "http://localhost:4005/";
                 // string apiCao = "https://ava.apicaox.airpocket.app/";
 
                 string type = Request.QueryString["type"];
@@ -517,6 +521,300 @@ namespace Report
                         ASPxWebDocumentViewer1.OpenReport(rpthazard);
                         break;
 
+
+                    //case "course":
+                    //    var base_folder = @"C:\Users\vahid\Desktop\ava\output_certificates\";
+                    //    string course_id = Request.QueryString["cid"];
+                    //    List<_person> course_cer_ids = new List<_person>();
+                    //    using (WebClient client = new WebClient())
+                    //    {
+                    //        // اگر نیاز به تنظیم encoding باشد:
+                    //        client.Headers[HttpRequestHeader.ContentType] = "application/json";
+
+                    //        string json = client.DownloadString(api_certificates+"api/certificate/course/all/" +course_id);
+
+                    //        course_cer_ids = JsonConvert.DeserializeObject<List<_person>>(json);
+
+                    //    }
+                    //    string new_path = base_folder+"course_"+course_id;
+                    //    string zip_path = base_folder + "course_" + course_id+"_zip";
+
+                    //    if (Directory.Exists(new_path))
+                    //        Directory.Delete(new_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                    //    Directory.CreateDirectory(new_path);
+
+
+
+                    //    if (Directory.Exists(zip_path))
+                    //        Directory.Delete(zip_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                    //    Directory.CreateDirectory(zip_path);
+                    //    foreach (var x in course_cer_ids)
+                    //    {
+                    //        string cerId_e = x.Id.ToString();
+                    //        var rptfpc_e = new rptFPCAVA(); //new rptFPCAir1(); //new rptFPC();
+                    //        dataSource = new JsonDataSource();
+                    //        //var rptfpcurl_e = apiUrlExtTemp + "/api/certificate/" + cerId;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                    //        var rptfpcurl_e = /*"https://ava.apitrn.airpocket.app/"*/api_certificates + "/api/certificate/" + cerId_e;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                    //        dataSource.JsonSource = new UriJsonSource(new Uri(rptfpcurl_e));
+                    //        dataSource.Fill();
+                    //        var format = "pdf";
+                    //        rptfpc_e.DataSource = dataSource;
+                    //        string contentType = string.Format("application/{0}", format);
+                    //        using (MemoryStream ms = new MemoryStream())
+                    //        {
+                    //            switch (format)
+                    //            {
+                    //                case "pdf":
+                    //                    contentType = "application/pdf";
+                    //                    rptfpc_e.ExportToPdf(ms);
+                    //                    break;
+                    //                    // ...
+                    //            }
+                    //            ms.Position = 0;
+
+                    //            // ذخیره در فایل
+                    //            string filePath =  new_path + @"\" + (x.Title+"_"+x.Name.Replace(" ", "_") ) +"_"+course_id+ ".pdf"; // مسیر دلخواه
+                    //            using (FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                    //            {
+                    //                ms.CopyTo(file);
+                    //            }
+                    //        }
+                    //    }
+
+                        
+                    //    string sourceDir = new_path;
+                    //    string zipPath = zip_path+@"\"+"course_"+course_id+".zip";
+
+                    //    // اگر فایل مقصد وجود دارد، حذفش کن تا خطا نگیری (اختیاری)
+                    //    if (File.Exists(zipPath)) File.Delete(zipPath);
+
+                    //    // includeBaseDirectory=false یعنی محتوای فولدر، نه خود فولدر، در ریشه‌ی زیپ قرار می‌گیرند
+                    //    ZipFile.CreateFromDirectory(sourceDir, zipPath, CompressionLevel.Optimal, includeBaseDirectory: false);
+
+                    //    //Response.Clear();
+                    //    //Response.Buffer = false; // برای فایل‌های بزرگ مفید است
+                    //    //Response.ContentType = "application/zip";
+
+                    //    //// برای سازگاری با نام فارسی/یونیکد
+                    //    //Response.AddHeader("Content-Disposition",
+                    //    //    $"attachment; filename=\"{zipPath}\"; filename*=UTF-8''{Uri.EscapeDataString(zipPath)}");
+
+                    //    //var fi = new FileInfo(zipPath);
+                    //    //Response.AddHeader("Content-Length", fi.Length.ToString());
+
+                    //    //// ارسال کارا از روی دیسک (بدون خواندن کامل در حافظه)
+                    //    //Response.TransmitFile(zipPath);
+
+                    //    //// End باعث ThreadAbortException می‌شود؛ بهتر است:
+                    //    //Response.Flush();
+                    //    //HttpContext.Current.ApplicationInstance.CompleteRequest();
+
+                    //    break;
+
+                    case "courses":
+                        var base_folder = @"C:\Users\vahid\Desktop\ava\output_certificates\";
+                        var cids= Request.QueryString["cid"].Split('_');
+                        foreach(var course_id in cids)
+                        {
+                            try
+                            {
+                                // string course_id = Request.QueryString["cid"];
+                                List<_person> course_cer_ids = new List<_person>();
+                                using (WebClient client = new WebClient())
+                                {
+                                    // اگر نیاز به تنظیم encoding باشد:
+                                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
+
+                                    string json = client.DownloadString(api_certificates + "api/certificate/course/all/" + course_id);
+
+                                    course_cer_ids = JsonConvert.DeserializeObject<List<_person>>(json);
+
+                                }
+                                string new_path = base_folder + "course_" + course_id + "_" + course_cer_ids.First().Remark;
+                                string zip_path = base_folder + "course_" + course_id + "_zip";
+
+                                if (Directory.Exists(new_path))
+                                    Directory.Delete(new_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                                Directory.CreateDirectory(new_path);
+
+
+
+                                if (Directory.Exists(zip_path))
+                                    Directory.Delete(zip_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                                Directory.CreateDirectory(zip_path);
+                                foreach (var x in course_cer_ids)
+                                {
+                                    string cerId_e = x.Id.ToString();
+                                    var rptfpc_e = new rptFPCAVA(); //new rptFPCAir1(); //new rptFPC();
+                                    dataSource = new JsonDataSource();
+                                    //var rptfpcurl_e = apiUrlExtTemp + "/api/certificate/" + cerId;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                                    var rptfpcurl_e = /*"https://ava.apitrn.airpocket.app/"*/api_certificates + "/api/certificate/" + cerId_e;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                                    dataSource.JsonSource = new UriJsonSource(new Uri(rptfpcurl_e));
+                                    dataSource.Fill();
+                                    var format = "pdf";
+                                    rptfpc_e.DataSource = dataSource;
+                                    string contentType = string.Format("application/{0}", format);
+                                    using (MemoryStream ms = new MemoryStream())
+                                    {
+                                        switch (format)
+                                        {
+                                            case "pdf":
+                                                contentType = "application/pdf";
+                                                rptfpc_e.ExportToPdf(ms);
+                                                break;
+                                                // ...
+                                        }
+                                        ms.Position = 0;
+
+                                        // ذخیره در فایل
+                                        string filePath = new_path + @"\" + (x.Title + "_" + x.Name.Replace(" ", "_")) + "_" + course_id + ".pdf"; // مسیر دلخواه
+                                        using (FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                                        {
+                                            ms.CopyTo(file);
+                                        }
+                                    }
+                                }
+
+
+                                string sourceDir = new_path;
+                                string zipPath = zip_path + @"\" + "course_" + course_id + ".zip";
+
+                                // اگر فایل مقصد وجود دارد، حذفش کن تا خطا نگیری (اختیاری)
+                                if (File.Exists(zipPath)) File.Delete(zipPath);
+
+                                // includeBaseDirectory=false یعنی محتوای فولدر، نه خود فولدر، در ریشه‌ی زیپ قرار می‌گیرند
+                                ZipFile.CreateFromDirectory(sourceDir, zipPath, CompressionLevel.Optimal, includeBaseDirectory: false);
+
+                                //Response.Clear();
+                                //Response.Buffer = false; // برای فایل‌های بزرگ مفید است
+                                //Response.ContentType = "application/zip";
+
+                                //// برای سازگاری با نام فارسی/یونیکد
+                                //Response.AddHeader("Content-Disposition",
+                                //    $"attachment; filename=\"{zipPath}\"; filename*=UTF-8''{Uri.EscapeDataString(zipPath)}");
+
+                                //var fi = new FileInfo(zipPath);
+                                //Response.AddHeader("Content-Length", fi.Length.ToString());
+
+                                //// ارسال کارا از روی دیسک (بدون خواندن کامل در حافظه)
+                                //Response.TransmitFile(zipPath);
+
+                                //// End باعث ThreadAbortException می‌شود؛ بهتر است:
+                                //Response.Flush();
+                                //HttpContext.Current.ApplicationInstance.CompleteRequest();
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                           
+                        }
+
+
+
+
+
+                        break;
+
+
+                    //case "people":
+                    //    var pbase_folder = @"C:\Users\vahid\Desktop\ava\output_certificates\";
+                    //    string people_ids = Request.QueryString["pid"];
+                    //    List<_person> people_cer_ids = new List<_person>();
+                    //    using (WebClient client = new WebClient())
+                    //    {
+                    //        // اگر نیاز به تنظیم encoding باشد:
+                    //        client.Headers[HttpRequestHeader.ContentType] = "application/json";
+
+                    //        string json = client.DownloadString(api_certificates + "api/certificate/people/all/" + people_ids);
+
+                    //        course_cer_ids = JsonConvert.DeserializeObject<List<_person>>(json);
+
+                    //    }
+                    //    var _a1 = DateTime.Now.ToString("yyyy-MMM-dd");
+
+                    //    string pnew_path = pbase_folder + "certificates_" + _a1;
+                    //    string pzip_path = pbase_folder + "certificates_" + _a1 + "_zip";
+
+                    //    if (Directory.Exists(pnew_path))
+                    //        Directory.Delete(pnew_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                    //    Directory.CreateDirectory(pnew_path);
+
+
+
+                    //    if (Directory.Exists(pzip_path))
+                    //        Directory.Delete(pzip_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                    //    Directory.CreateDirectory(pzip_path);
+                    //    foreach (var x in course_cer_ids)
+                    //    {
+                    //        string cerId_e = x.Id.ToString();
+                    //        var rptfpc_e = new rptFPCAVA(); //new rptFPCAir1(); //new rptFPC();
+                    //        dataSource = new JsonDataSource();
+                    //        //var rptfpcurl_e = apiUrlExtTemp + "/api/certificate/" + cerId;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                    //        var rptfpcurl_e = /*"https://ava.apitrn.airpocket.app/"*/api_certificates + "/api/certificate/" + cerId_e;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                    //        dataSource.JsonSource = new UriJsonSource(new Uri(rptfpcurl_e));
+                    //        dataSource.Fill();
+                    //        var format = "pdf";
+                    //        rptfpc_e.DataSource = dataSource;
+                    //        string contentType = string.Format("application/{0}", format);
+                    //        using (MemoryStream ms = new MemoryStream())
+                    //        {
+                    //            switch (format)
+                    //            {
+                    //                case "pdf":
+                    //                    contentType = "application/pdf";
+                    //                    rptfpc_e.ExportToPdf(ms);
+                    //                    break;
+                    //                    // ...
+                    //            }
+                    //            ms.Position = 0;
+
+                    //            // ذخیره در فایل
+                    //            string filePath = pnew_path + @"\" + (x.Name.Replace(" ", "_") + "__" + x.Title) +"_"+x.Id+  ".pdf"; // مسیر دلخواه
+                    //            using (FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                    //            {
+                    //                ms.CopyTo(file);
+                    //            }
+                    //        }
+                    //    }
+
+
+                    //    string psourceDir = pnew_path;
+                    //    string pzipPath = pzip_path + @"\" + "certificates_" + _a1 + ".zip";
+
+                    //    // اگر فایل مقصد وجود دارد، حذفش کن تا خطا نگیری (اختیاری)
+                    //    if (File.Exists(pzipPath)) File.Delete(pzipPath);
+
+                    //    // includeBaseDirectory=false یعنی محتوای فولدر، نه خود فولدر، در ریشه‌ی زیپ قرار می‌گیرند
+                    //    ZipFile.CreateFromDirectory(psourceDir, pzipPath, CompressionLevel.Optimal, includeBaseDirectory: false);
+
+                    //    //Response.Clear();
+                    //    //Response.Buffer = false; // برای فایل‌های بزرگ مفید است
+                    //    //Response.ContentType = "application/zip";
+
+                    //    //// برای سازگاری با نام فارسی/یونیکد
+                    //    //Response.AddHeader("Content-Disposition",
+                    //    //    $"attachment; filename=\"{zipPath}\"; filename*=UTF-8''{Uri.EscapeDataString(zipPath)}");
+
+                    //    //var fi = new FileInfo(zipPath);
+                    //    //Response.AddHeader("Content-Length", fi.Length.ToString());
+
+                    //    //// ارسال کارا از روی دیسک (بدون خواندن کامل در حافظه)
+                    //    //Response.TransmitFile(zipPath);
+
+                    //    //// End باعث ThreadAbortException می‌شود؛ بهتر است:
+                    //    //Response.Flush();
+                    //    //HttpContext.Current.ApplicationInstance.CompleteRequest();
+
+                    //    break;
+
+
                     default: break;
                 }
 
@@ -591,5 +889,6 @@ namespace Report
         public int Id { get; set; }
         public string Name { get; set; }
         public string Title { get; set; }
+        public string Remark { get; set; }
     }
 }
