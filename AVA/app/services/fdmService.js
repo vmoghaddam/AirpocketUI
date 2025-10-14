@@ -159,7 +159,19 @@ app.factory('fdmService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     }
     serviceFactory.get_fmd_crew_phase_route_id = _get_fmd_crew_phase_route_id;
 
-    ///////war
+    var _get_fmd_event_info = function ( dt1, dt2,type,register_id,cpt_id,route,phase) {
+        var deferred = $q.defer();
+        console.log(api_fdm+"api/fdm/V2/eventsInfo/" + dt1 + "/" + dt2 + "/" + type + "/" + register_id + "/" + cpt_id + "/" + encodeURIComponent(route) + "/" + phase + "/");
+        $http.get(api_fdm + "api/fdm/V2/eventsInfo/" +  dt1 + "/" + dt2 + "/" + type + "/" + register_id + "/" + cpt_id + "/" + encodeURIComponent(route) + "/"+phase+"/").then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            // deferred.reject(Exeptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    }
+    serviceFactory.get_fmd_event_info = _get_fmd_event_info;
+
 
     return serviceFactory;
 

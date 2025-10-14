@@ -908,7 +908,7 @@ var apiplanning='https://ava.apiplanning.airpocket.app/'; //*
 var apilogdefault='https://ava.apilogdefault.airpocket.app/'; //*
 var apiapsb='https://ava.apiapsb.airpocket.app/';
 var apiprofile='https://ava.apiprofile.airpocket.app/';
-var apiauth='https://ava.apinet.airpocket.app//'; //*
+var apiauth ='https://aerotango.app/apinetauth/'; //*
 var atcfiles='https://files.airpocket.app/air1/atc/';
 
 var apiCAO='https://ava.apicaox.airpocket.app/';

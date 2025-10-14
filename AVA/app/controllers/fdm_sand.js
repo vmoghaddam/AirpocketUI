@@ -103,6 +103,145 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
         };
         $scope.pie_size = { height: 409 };
+        //----Event Info Table--------------------
+
+        $scope.dg_events_columns = [
+            //{
+            //    cellTemplate: function (container, options) {
+            //        $("<div style='text-align:center'/>")
+            //            .html(options.rowIndex + 1)
+            //            .appendTo(container);
+            //    }, name: 'row', caption: '#', barWidth: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+            //}, 
+            { dataField: 'std', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 110, format: 'yy-MMM-dd', sortIndex: 0, sortOrder: 'asc', fixed: false, fixedPosition: 'left' },
+            { dataField: 'flight_number', caption: 'FlightNumber', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'severity', caption: 'Severity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+           // { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+            
+            { dataField: 'event_name', caption: 'Event Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250 },
+            { dataField: 'ac_type2', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+
+            { dataField: 'phase', caption: 'Phase', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'state_name', caption: 'StateName', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'route', caption: 'route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            //{ dataField: 'arr_iata', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+
+
+            { dataField: 'cp1_name', caption: 'P1', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110 },
+            { dataField: 'cp2_name', caption: 'P2', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'ip1_name', caption: 'IP', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+
+           //  { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 350 },
+
+            // { dataField: 'Duration', caption: 'Duration', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
+            // { dataField: 'Value', caption: 'Value', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
+            //{ dataField: 'BlockOff', caption: 'BlockOff', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'BlockOn', caption: 'BlockOn', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'TakeOff', caption: 'TakeOff', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'Landing', caption: 'Landing', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'STD', caption: 'STD', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm', },
+            //{ dataField: 'STA', caption: 'STA', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+
+        ];
+        $scope.dg_events_selected = null;
+        $scope.dg_events_instance = null;
+        $scope.dg_events_ds = null;
+        $scope.dg_events_height = 400;
+
+        $scope.dg_events =
+        {
+            onContentReady: function (e) {
+                if (!$scope.dg_events_instance)
+                    $scope.dg_events_instance = e.component;
+
+            },
+            columns: $scope.dg_events_columns,
+
+            bindingOptions: {
+                "dataSource": "dg_events_ds",
+                "height": "dg_events_height",
+
+            },
+            wordWrapEnabled: true,
+            rowAlternationEnabled: false,
+            headerFilter: {
+                visible: false
+            },
+            filterRow: {
+                visible: true,
+                showOperationChooser: true,
+            },
+            showRowLines: true,
+            showColumnLines: true,
+            sorting: { mode: 'none' },
+
+            noDataText: '',
+
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            scrolling: { mode: 'infinite' },
+            paging: { pageSize: 100 },
+            showBorders: true,
+            selection: { mode: 'multiple' },
+            columnAutoWidth: false,
+
+            onSelectionChanged: function (e) {
+                //var data = e.selectedRowsData[0];
+
+                //if (!data) {
+                //    $scope.dg_master_selected = null;
+                //}
+                //else
+                //    $scope.dg_master_selected = data;
+
+
+            },
+
+            "export": {
+                enabled: false,
+                fileName: "File",
+                allowExportSelectedData: false
+            },
+
+
+            /* onRowPrepared: function (e) {
+                 if (e.data && e.data.Severity && e.data.Severity == 'High') e.rowElement.css('background', '#ff8566');
+                 if (e.data && e.data.Severity && e.data.Severity == 'Medium') e.rowElement.css('background', '#ffd480');
+                 //  e.rowElement.css('background', '#ffccff');
+         
+             },
+         
+             onCellPrepared: function (options) {
+                 var data = options.data;
+                 var column = options.column;
+                 var fieldHtml = "";
+         
+                 if (data && options.value && column.caption == 'Current') {
+                     fieldHtml += "<span style='font-weight:bold'>" + options.value + "</span>";
+                     options.cellElement.html(fieldHtml);
+                 }
+                 if (data && options.value && column.caption == 'Delayed') {
+                     fieldHtml += "<span style='color:#cc5200'>" + options.value + "</span>";
+                     options.cellElement.html(fieldHtml);
+                 }
+                 if (data && options.value && column.dataField.includes('Diff')) {
+                     var cls = options.value <= 0 ? 'pos' : 'neg';
+                     fieldHtml += "<div class='" + cls + "'>"
+                         + "<span style='font-size:12px'>" + options.value + "%" + "</span>"
+                         + (options.value <= 0 ? "<i class='fa fa-caret-down fsymbol-small'></i>" : "<i class='fa fa-caret-up fsymbol-small'></i>")
+                         + "</div>";
+                     options.cellElement.html(fieldHtml);
+                 }
+         
+         
+         
+             },*/
+        };
+
+
+
+
         //----------EWMA-------------------------
         //const COLOR_DAILY = "#F59E0B";   // نارنجی
         //const COLOR_EWMA = "#3B82F6";   // آبی
@@ -764,7 +903,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 location: 'edge',
                 customizeTooltip(arg) {
                     return {
-                        text: arg.seriesName + ': ' + arg.valueText,//`${arg.seriesName} years: ${arg.valueText}`,
+                        text: arg.seriesName + ': ' + arg.valueText,
                     };
                 },
                 format: {
@@ -772,6 +911,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     precision: 2
                 },
             },
+
             commonSeriesSettings: {
                 argumentField: 'register',
                 type: 'bar',
@@ -779,17 +919,45 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 selectionMode: 'allArgumentPoints',
                 label: {
                     visible: false,
-
                 },
                 point: {
                     hoverStyle: {
                         color: "#000000"
                     }
                 }
+               
             },
 
+            onPointClick: function (e) {
+                var register_id = e.target.data.register_id;
+                console.log("Clicked register_id:", register_id);
 
-            // title: 'Score per Flight Comparison',
+                fdmService.get_fmd_event_info(
+                    $scope.formatDateYYYYMMDD($scope.dt_from),
+                    $scope.formatDateYYYYMMDD($scope.dt_to),
+                    "B737",
+                    register_id,
+                    "0",
+                    "-",
+                    "-"
+                ).then(function (response) {
+                    //console.warn("Yesss", response.Data);
+
+                    // $scope.dg_events_ds = response.data.data?.Items;
+                    // $scope.dg_events_ds = response.data.data?.Items || [];
+                    if (response.Data ) {
+                        //console.warn("Yesss", response.Data);
+
+                        $scope.dg_events_ds = response.Data.Items;
+                    } else {
+                        console.warn("No Items in response", response.Data);
+                        $scope.dg_events_ds = [];
+                    }
+
+
+                });
+            },
+
             legend: {
                 verticalAlignment: 'bottom',
                 horizontalAlignment: 'center',
@@ -797,36 +965,30 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-            onPointClick(e) {
-                e.target.select();
-            },
 
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
                     rotationAngle: 90,
-                    //customizeText: function (d) {
-                    //    return $scope.convertYearMonth(this.value);
-                    //},
                 }
             },
 
             valueAxis: {
                 tickInterval: 0.1,
-
+                title:"Score per Flight"
             },
+
             size: {
                 height: 400,
-
             },
-            bindingOptions:
-            {
+
+            bindingOptions: {
                 dataSource: 'bar_reg_737_ds',
                 series: 'bar_reg_737_series',
-                // 'argumentAxis.categories': 'yearMonth2',
-                //size: 'chrt_size'
-            },
+            }
         };
+
+
         $scope.bar_reg_737_series = {
             name: 'Registers', valueField: 'score_per_flight', color: "#660033", hoverStyle: { color: "#000000" }, barWidth: 50
         };
@@ -846,6 +1008,32 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     precision: 2
                 },
             },
+            onPointClick: function (e) {
+                var register_id = e.target.data.register_id;
+                console.log("Clicked register_id:", register_id);
+
+                fdmService.get_fmd_event_info(
+                    $scope.formatDateYYYYMMDD($scope.dt_from),
+                    $scope.formatDateYYYYMMDD($scope.dt_to),
+                    "MD",
+                    register_id,
+                    "0",
+                    "-",
+                    "-"
+                ).then(function (response) {
+                    
+                    // $scope.dg_events_ds = response.data.data?.Items;
+                    if (response.Data) {
+                        //console.warn("Yesss", response.Data);
+
+                        $scope.dg_events_ds = response.Data.Items;
+                    } else {
+                        console.warn("No Items in response", response.Data);
+                        $scope.dg_events_ds = [];
+                    }
+                });
+            },
+
             commonSeriesSettings: {
                 argumentField: 'register',
                 type: 'bar',
@@ -871,10 +1059,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-            onPointClick(e) {
-                e.target.select();
-            },
-
+            
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -887,7 +1072,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
-
+                title: "Score per Flight"
             },
             size: {
                 height: 400,
@@ -920,6 +1105,30 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     precision: 2
                 },
             },
+            onPointClick: function (e) {
+                var cpt_id = e.target.data.crew_id;
+                console.log("Clicked cpt_id:", cpt_id);
+
+                fdmService.get_fmd_event_info(
+                    $scope.formatDateYYYYMMDD($scope.dt_from),
+                    $scope.formatDateYYYYMMDD($scope.dt_to),
+                    "B737",
+                    "0",
+                    cpt_id,
+                    "-",
+                    "-"
+                ).then(function (response) {
+                    if (response.Data) {
+                        $scope.dg_events_ds = response.Data.Items;
+                    } else {
+                        console.warn("No Items in response", response.Data);
+                        $scope.dg_events_ds = [];
+                    }
+
+
+                });
+            },
+
             commonSeriesSettings: {
                 argumentField: 'crew_name',
                 type: 'bar',
@@ -945,10 +1154,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-            onPointClick(e) {
-                e.target.select();
-            },
-
+           
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -961,7 +1167,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
-
+                title: "Score per Flight"
             },
             size: {
                 height: 500,
@@ -994,6 +1200,30 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     precision: 2
                 },
             },
+            onPointClick: function (e) {
+                var cpt_id = e.target.data.crew_id;
+                console.log("Clicked cpt_id:", cpt_id);
+
+                fdmService.get_fmd_event_info(
+                    $scope.formatDateYYYYMMDD($scope.dt_from),
+                    $scope.formatDateYYYYMMDD($scope.dt_to),
+                    "MD",
+                    "0",
+                    cpt_id,
+                    "-",
+                    "-"
+                ).then(function (response) {
+                    if (response.Data) {
+                        $scope.dg_events_ds = response.Data.Items;
+                    } else {
+                        console.warn("No Items in response", response.Data);
+                        $scope.dg_events_ds = [];
+                    }
+
+
+                });
+            },
+
             commonSeriesSettings: {
                 argumentField: 'crew_name',
                 type: 'bar',
@@ -1019,10 +1249,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-            onPointClick(e) {
-                e.target.select();
-            },
-
+           
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -1035,6 +1262,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
+                title: "Score per Flight"
 
             },
             size: {
@@ -1068,6 +1296,30 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     precision: 2
                 },
             },
+            onPointClick: function (e) {
+                var route = e.target.data.route;
+                console.log("Clicked route:", route);
+
+                fdmService.get_fmd_event_info(
+                    $scope.formatDateYYYYMMDD($scope.dt_from),
+                    $scope.formatDateYYYYMMDD($scope.dt_to),
+                    "B737",
+                    "0",
+                    "0",
+                    route,
+                    "-"
+                ).then(function (response) {
+                    if (response.Data) {
+                        $scope.dg_events_ds = response.Data.Items;
+                    } else {
+                        console.warn("No Items in response", response.Data);
+                        $scope.dg_events_ds = [];
+                    }
+
+
+                });
+            },
+
             commonSeriesSettings: {
                 argumentField: 'route',
                 type: 'bar',
@@ -1093,10 +1345,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-            onPointClick(e) {
-                e.target.select();
-            },
-
+            
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -1109,6 +1358,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
+                title: "Score per Flight"
 
             },
             size: {
@@ -1142,6 +1392,28 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     precision: 2
                 },
             },
+            onPointClick: function (e) {
+                var route = e.target.data.route;
+                console.log("Clicked route:", route);
+
+                fdmService.get_fmd_event_info(
+                    $scope.formatDateYYYYMMDD($scope.dt_from),
+                    $scope.formatDateYYYYMMDD($scope.dt_to),
+                    "MD",
+                    "0",
+                    "0",
+                    route,
+                    "-"
+                ).then(function (response) {
+                    if (response.Data) {
+                        $scope.dg_events_ds = response.Data.Items;
+                    } else {
+                        console.warn("No Items in response", response.Data);
+                        $scope.dg_events_ds = [];
+                    }
+                });
+            },
+
             commonSeriesSettings: {
                 argumentField: 'route',
                 type: 'bar',
@@ -1167,10 +1439,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-            onPointClick(e) {
-                e.target.select();
-            },
-
+            
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -1183,6 +1452,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
+                title: "Score per Flight"
 
             },
             size: {
@@ -1356,6 +1626,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
+                title: "Event Count"
 
             },
             //size: {
@@ -1433,7 +1704,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
-
+                title: "Event Count"
             },
             //size: {
             //    height: function (x) { return $(window).height() - 100; },
@@ -1510,6 +1781,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
+                title: "Event Count"
 
             },
             //size: {
@@ -1590,7 +1862,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
-
+                title: "Event Count"
             },
             //size: {
             //    height: function (x) { return $(window).height() - 100; },
@@ -1684,7 +1956,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
-
+                title: "Event Count"
             },
             //size: {
             //    height: function (x) { return $(window).height() - 100; },
@@ -1761,7 +2033,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
-
+                title: "Event Count"
             },
             //size: {
             //    height: function (x) { return $(window).height() - 100; },
@@ -1838,7 +2110,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
-
+                title: "Event Count"
             },
             //size: {
             //    height: function (x) { return $(window).height() - 100; },
@@ -1915,7 +2187,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
-
+                title: "Event Count"
             },
             //size: {
             //    height: function (x) { return $(window).height() - 100; },
@@ -2094,7 +2366,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             ///------------CPT FO-----------------------
             $scope.refreshPairs();
             //-----------------------------------
-            fdmService.get_fmd_all($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response) {
+            fdmService.get_fmd_all($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response)
+            {
 
                 $scope.result_type = response.Data.result_type;
                 // $scope.result_route = response.Data.result_register;
@@ -2226,6 +2499,16 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             // $location.path("/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2);
             $window.open("#!/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2 + "/"+x.ac_type, '_blank' )
         };
+
+        $scope.show_events = function (x) {
+            console.log('go_events', x);
+            //fdmService.get_fmd_event_info($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response)
+
+            //$scope.dg_events_ds
+            // $location.path("/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2);
+            $window.open("#!/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2 + "/" + x.ac_type, '_blank')
+        };
+
 
         ///////////////////////////////////////
         $scope.$on('$viewContentLoaded', function () {
