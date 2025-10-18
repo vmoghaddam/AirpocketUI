@@ -1,0 +1,171 @@
+﻿using DevExpress.DataAccess.Json;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Net;
+using System.Web;
+
+namespace Report
+{
+    /// <summary>
+    /// Summary description for FileHandler
+    /// </summary>
+    public class FileHandler : IHttpHandler
+    {
+        string api_certificates = "http://localhost:4005/";
+        public void ProcessRequest(HttpContext context)
+        {
+            //string param = context.Request.QueryString["t"];
+            //if (param == "clientfiles")
+            //{
+            //    if (context.Request.Files.Count > 0)
+            //    {
+            //        List<string> fileNames = new List<string>();
+            //        HttpFileCollection files = context.Request.Files;
+            //        for (int i = 0; i < files.Count; i++)
+            //        {
+            //            HttpPostedFile file = files[i];
+            //            var ext = System.IO.Path.GetExtension(file.FileName);
+            //            var date = DateTime.Now;
+
+            //            int rndint = RandomNumber(1, 100000);
+            //            var key = date.Year.ToString() + date.Month.ToString() + date.Day.ToString() + date.Hour.ToString() + date.Minute.ToString() + date.Second.ToString() +
+            //                date.Millisecond.ToString() + "_" + i.ToString() + "_" + rndint.ToString() + ext;
+            //            var fname = context.Server.MapPath("~/upload/clientsfiles/" + key);
+            //            file.SaveAs(fname);
+            //            fileNames.Add(key);
+            //        }
+
+
+            //        //var records = Objs.xls_bill.getJSON("bill.xlsx");
+            //        context.Response.ContentType = "text/plain";
+            //        context.Response.Write(string.Join("@", fileNames));
+            //    }
+            //}
+
+
+
+
+            JsonDataSource dataSource = null;
+            string param = context.Request.QueryString["type"];
+            if (param == "courses")
+            {
+                var base_folder = @"C:\Users\vahid\Desktop\ava\output_certificates\";
+                var cids = context.Request.QueryString["cid"].Split('_');
+                foreach (var course_id in cids)
+                {
+                    try
+                    {
+                        // string course_id = Request.QueryString["cid"];
+                        List<_person> course_cer_ids = new List<_person>();
+                        using (WebClient client = new WebClient())
+                        {
+                            // اگر نیاز به تنظیم encoding باشد:
+                            client.Headers[HttpRequestHeader.ContentType] = "application/json";
+
+                            string json = client.DownloadString(api_certificates + "api/certificate/course/all/" + course_id);
+
+                            course_cer_ids = JsonConvert.DeserializeObject<List<_person>>(json);
+
+                        }
+                        string new_path = base_folder + "course_" + course_id + "_" + course_cer_ids.First().Remark;
+                        string zip_path = base_folder + "course_" + course_id + "_zip";
+
+                        if (Directory.Exists(new_path))
+                            Directory.Delete(new_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                        Directory.CreateDirectory(new_path);
+
+
+
+                        if (Directory.Exists(zip_path))
+                            Directory.Delete(zip_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                        Directory.CreateDirectory(zip_path);
+                        foreach (var x in course_cer_ids)
+                        {
+                            string cerId_e = x.Id.ToString();
+                            var rptfpc_e = new rptFPCAVA(); //new rptFPCAir1(); //new rptFPC();
+                            dataSource = new JsonDataSource();
+                            //var rptfpcurl_e = apiUrlExtTemp + "/api/certificate/" + cerId;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                            var rptfpcurl_e = /*"https://ava.apitrn.airpocket.app/"*/api_certificates + "/api/certificate/" + cerId_e;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                            dataSource.JsonSource = new UriJsonSource(new Uri(rptfpcurl_e));
+                            dataSource.Fill();
+                            var format = "pdf";
+                            rptfpc_e.DataSource = dataSource;
+                            string contentType = string.Format("application/{0}", format);
+                            using (MemoryStream ms = new MemoryStream())
+                            {
+                                switch (format)
+                                {
+                                    case "pdf":
+                                        contentType = "application/pdf";
+                                        rptfpc_e.ExportToPdf(ms);
+                                        break;
+                                        // ...
+                                }
+                                ms.Position = 0;
+
+                                // ذخیره در فایل
+                                string filePath = new_path + @"\" + (x.Title + "_" + x.Name.Replace(" ", "_")) + "_" + course_id + ".pdf"; // مسیر دلخواه
+                                using (FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                                {
+                                    ms.CopyTo(file);
+                                }
+                            }
+                        }
+
+
+                        string sourceDir = new_path;
+                        string zipPath = zip_path + @"\" + "course_" + course_id + ".zip";
+
+                        // اگر فایل مقصد وجود دارد، حذفش کن تا خطا نگیری (اختیاری)
+                        if (File.Exists(zipPath)) File.Delete(zipPath);
+
+                        // includeBaseDirectory=false یعنی محتوای فولدر، نه خود فولدر، در ریشه‌ی زیپ قرار می‌گیرند
+                        ZipFile.CreateFromDirectory(sourceDir, zipPath, CompressionLevel.Optimal, includeBaseDirectory: false);
+
+                        //Response.Clear();
+                        //Response.Buffer = false; // برای فایل‌های بزرگ مفید است
+                        //Response.ContentType = "application/zip";
+
+                        //// برای سازگاری با نام فارسی/یونیکد
+                        //Response.AddHeader("Content-Disposition",
+                        //    $"attachment; filename=\"{zipPath}\"; filename*=UTF-8''{Uri.EscapeDataString(zipPath)}");
+
+                        //var fi = new FileInfo(zipPath);
+                        //Response.AddHeader("Content-Length", fi.Length.ToString());
+
+                        //// ارسال کارا از روی دیسک (بدون خواندن کامل در حافظه)
+                        //Response.TransmitFile(zipPath);
+
+                        //// End باعث ThreadAbortException می‌شود؛ بهتر است:
+                        //Response.Flush();
+                        HttpContext.Current.ApplicationInstance.CompleteRequest();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+                }
+
+
+
+            }
+
+
+        }
+
+        public bool IsReusable
+        {
+            get
+            {
+                return false;
+            }
+        }
+    }
+}
