@@ -5402,26 +5402,34 @@ namespace EPAGriffinAPI.DAL
         //xdelx
         public virtual void DeleteFlight(Models.FlightInformation entityToDelete)
         {
-            if (context.Entry(entityToDelete).State == EntityState.Detached)
+            try
             {
-                this.context.FlightInformations.Attach(entityToDelete);
-            }
+                if (context.Entry(entityToDelete).State == EntityState.Detached)
+                {
+                    this.context.FlightInformations.Attach(entityToDelete);
+                }
 
-            if (entityToDelete.FlightPlanId != null)
-            {
-                var plan = (from x in this.context.FlightPlanItems
-                            join y in this.context.FlightPlans on x.FlightPlanId equals y.Id
-                            where x.Id == entityToDelete.FlightPlanId
-                            select y).FirstOrDefault();
-                if (plan != null)
-                    this.context.UpdatedPlanFlights.Add(new UpdatedPlanFlight() { Date = ((DateTime)entityToDelete.STD).Date, PlanId = plan.Id, Status = 2 });
+                if (entityToDelete.FlightPlanId != null)
+                {
+                    var plan = (from x in this.context.FlightPlanItems
+                                join y in this.context.FlightPlans on x.FlightPlanId equals y.Id
+                                where x.Id == entityToDelete.FlightPlanId
+                                select y).FirstOrDefault();
+                    if (plan != null)
+                        this.context.UpdatedPlanFlights.Add(new UpdatedPlanFlight() { Date = ((DateTime)entityToDelete.STD).Date, PlanId = plan.Id, Status = 2 });
+                }
+                var fdpitems = context.FDPItems.Where(q => q.FlightId == entityToDelete.ID).Select(q => q.FDPId).ToList();
+                var fdps = context.FDPs.Where(q => fdpitems.Contains(q.Id)).ToList();
+                var offs = context.OffItems.Where(q => q.FlightId == entityToDelete.ID).ToList();
+                context.OffItems.RemoveRange(offs);
+                context.FDPs.RemoveRange(fdps);
+                this.context.FlightInformations.Remove(entityToDelete);
             }
-            var fdpitems = context.FDPItems.Where(q => q.FlightId == entityToDelete.ID).Select(q => q.FDPId).ToList();
-            var fdps = context.FDPs.Where(q => fdpitems.Contains(q.Id)).ToList();
-            var offs = context.OffItems.Where(q => q.FlightId == entityToDelete.ID).ToList();
-            context.OffItems.RemoveRange(offs);
-            context.FDPs.RemoveRange(fdps);
-            this.context.FlightInformations.Remove(entityToDelete);
+            catch(Exception ex)
+            {
+                int i = 0;
+            }
+          
         }
 
         public object UpdateLogUser(List<int> ids, string username)

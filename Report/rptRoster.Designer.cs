@@ -312,6 +312,7 @@
             this.xrLabel1,
             this.lblDate,
             this.lblRev});
+            this.ReportHeader.HeightF = 125.75F;
             this.ReportHeader.Name = "ReportHeader";
             // 
             // xrLabel1

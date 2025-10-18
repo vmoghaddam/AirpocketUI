@@ -147,7 +147,7 @@ namespace EPAGriffinAPI.Providers
                         return;
                     }
                     //اگر شماره همراه وارد نشده بود؟
-                    if (ConfigurationManager.AppSettings["twofactor"]!="0" && !roles.Contains("Two Factor Authentication Disabled") /*roles.Contains("Dispatch")*/ /*&& !remoteIpAddresss.StartsWith("192.168.")*/ && !verified && !string.IsNullOrEmpty(user.PhoneNumber))
+                    if (ConfigurationManager.AppSettings["twofactor"]!="0" && !roles.Contains("Two Factor Authentication Disabled") /*roles.Contains("Dispatch")*/ && !remoteIpAddresss.StartsWith("192.168.") && !verified && !string.IsNullOrEmpty(user.PhoneNumber))
                     {
                         // if (string.IsNullOrEmpty(user.PhoneNumber))
                         // {

@@ -3200,7 +3200,7 @@
             this.xrLabel29.SizeF = new System.Drawing.SizeF(154.1667F, 23F);
             this.xrLabel29.StylePriority.UseFont = false;
             this.xrLabel29.StylePriority.UseTextAlignment = false;
-            this.xrLabel29.Text = "FLYKISH AIRLINES";
+            this.xrLabel29.Text = "NASIM AIRLINES";
             this.xrLabel29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel27
@@ -3213,7 +3213,7 @@
             this.xrLabel27.SizeF = new System.Drawing.SizeF(132.1797F, 23F);
             this.xrLabel27.StylePriority.UseFont = false;
             this.xrLabel27.StylePriority.UseTextAlignment = false;
-            this.xrLabel27.Text = "Form ID: FLY-ASR-";
+            this.xrLabel27.Text = "Form ID: NSM-ASR-";
             this.xrLabel27.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel26
@@ -3331,7 +3331,7 @@
             this.xrLabel9.SizeF = new System.Drawing.SizeF(154.1667F, 23F);
             this.xrLabel9.StylePriority.UseFont = false;
             this.xrLabel9.StylePriority.UseTextAlignment = false;
-            this.xrLabel9.Text = "FLYKISH AIRLINES";
+            this.xrLabel9.Text = "NASIM AIRLINES";
             this.xrLabel9.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrLabel9.Visible = false;
             // 
@@ -3361,9 +3361,9 @@
             // xrPictureBox1
             // 
             this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
-            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(4.999634F, 19.99995F);
+            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(3.063003F, 10.00001F);
             this.xrPictureBox1.Name = "xrPictureBox1";
-            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(130.2083F, 100F);
+            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(200F, 100F);
             // 
             // rptASR
             // 
