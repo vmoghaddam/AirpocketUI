@@ -18,6 +18,11 @@ app.config(function ($routeProvider) {
         controller: "fix-time-addController",
         templateUrl: "/app/views/fix-time-add.html"
     });
+    $routeProvider.when("/rptCityPairDaily", {
+        controller: "rptCityPairDailyController",
+        templateUrl: "/app/views/rptCityPairDaily.html"
+    });
+
 
     $routeProvider.when("/apps", {
         controller: "appsController",
