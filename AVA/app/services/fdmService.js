@@ -172,6 +172,19 @@ app.factory('fdmService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     }
     serviceFactory.get_fmd_event_info = _get_fmd_event_info;
 
+    var _get_fmd_event_info_new = function (dt1, dt2, type, register_id, cpt_id, route, phase,severity) {
+        var deferred = $q.defer();
+
+        $http.get(api_fdm + "api/fdm/V2/events/" + dt1 + "/" + dt2 + "/" + type + "/" + register_id + "/" + cpt_id + "/" + encodeURIComponent(route) + "/" + phase + "/" + severity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+            // deferred.reject(Exeptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    }
+    serviceFactory.get_fmd_event_info_new = _get_fmd_event_info_new;
+
 
     return serviceFactory;
 

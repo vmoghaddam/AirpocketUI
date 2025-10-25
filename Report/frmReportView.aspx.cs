@@ -40,7 +40,7 @@ namespace Report
                 string apiapsbUrl = WebConfigurationManager.AppSettings["apiapsb_url"];
 
 
-                string api_certificates = "http://localhost:4005/";
+                string api_certificates = "https://ava.apitrn.aerotango.app/";
                 // string apiCao = "https://ava.apicaox.airpocket.app/";
 
                 string type = Request.QueryString["type"];
@@ -688,7 +688,7 @@ namespace Report
 
                                 // includeBaseDirectory=false یعنی محتوای فولدر، نه خود فولدر، در ریشه‌ی زیپ قرار می‌گیرند
                                 ZipFile.CreateFromDirectory(sourceDir, zipPath, CompressionLevel.Optimal, includeBaseDirectory: false);
-
+                                SendZipFile(zipPath, "report.zip");
                                 //Response.Clear();
                                 //Response.Buffer = false; // برای فایل‌های بزرگ مفید است
                                 //Response.ContentType = "application/zip";
@@ -881,6 +881,35 @@ namespace Report
                 throw new Exception(exmsg);
             }
 
+        }
+
+
+        private void SendZipFile(string physicalPath, string downloadName)
+        {
+            var fi = new System.IO.FileInfo(physicalPath);
+            if (!fi.Exists)
+            {
+                Response.StatusCode = 404;
+                Response.End(); // یا بهتر: CompleteRequest بعد از نوشتن پیام خطا
+                return;
+            }
+
+            Response.Clear();
+            Response.Buffer = false; // برای فایل‌های بزرگ
+            Response.ContentType = "application/zip";
+
+            // ساپورت نام فایل UTF-8
+            var encoded = Uri.EscapeDataString(downloadName);
+            Response.AddHeader("Content-Disposition",
+                $"attachment; filename=\"{encoded}\"; filename*=UTF-8''{encoded}");
+
+            Response.AddHeader("Content-Length", fi.Length.ToString());
+
+            // سریع و کم‌مصرف: می‌سپاره به IIS
+            Response.TransmitFile(fi.FullName);
+
+            Response.Flush();
+            HttpContext.Current.ApplicationInstance.CompleteRequest(); // بهتر از Response.End
         }
     }
 

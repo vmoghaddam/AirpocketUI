@@ -196,11 +196,11 @@
             // xrLabel11
             // 
             this.xrLabel11.Font = new DevExpress.Drawing.DXFont("Clarendon Blk BT", 12F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(262.6567F, 660F);
+            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(220.1567F, 660F);
             this.xrLabel11.Multiline = true;
             this.xrLabel11.Name = "xrLabel11";
             this.xrLabel11.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel11.SizeF = new System.Drawing.SizeF(111.3248F, 33.83325F);
+            this.xrLabel11.SizeF = new System.Drawing.SizeF(214.6581F, 33.83325F);
             this.xrLabel11.StylePriority.UseFont = false;
             this.xrLabel11.StylePriority.UseTextAlignment = false;
             this.xrLabel11.Text = "Instructor";
