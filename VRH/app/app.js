@@ -732,7 +732,12 @@ app.config(function ($routeProvider) {
         controller: "qahazardlog",
         templateUrl: "/app/views/qahazardlog.html"
     });
-   
+
+    $routeProvider.when("/fixtime/summary", {
+        controller: "fixtime_summary_controller",
+        templateUrl: "/app/views/fixtime_summary.html"
+    });
+
 
    	
 

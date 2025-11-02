@@ -135,6 +135,21 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
         return deferred.promise;
     };
 
+    var _getFixTimeByRoute = function (pyear, period, rank, acType) {
+
+
+
+        var deferred = $q.defer();
+        $http.get('http://localhost:3486/' + 'api/fixtime/route/' + pyear + '/' + period + '/' + rank + '/' + acType).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
     var _getAverageRouteTime = function (from,to) {
 
 
@@ -4441,6 +4456,7 @@ var _getFlightsWeekList = function () {
 
 
     serviceFactory.getFormAYearlyReport = _getFormAYearlyReport;
+    serviceFactory.getFixTimeByRoute = _getFixTimeByRoute;
 
     return serviceFactory;
 

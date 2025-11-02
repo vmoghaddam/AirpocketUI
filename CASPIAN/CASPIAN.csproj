@@ -117,6 +117,7 @@
     <Content Include="app\controllers\fixtime.js" />
     <Content Include="app\controllers\fixtimereport.js" />
     <Content Include="app\controllers\fixtimereportdaily.js" />
+    <Content Include="app\controllers\fixtime_summary_controller.js" />
     <Content Include="app\controllers\flightBoardAllController.js" />
     <Content Include="app\controllers\flightBoardController-5-19-2020\flightBoardController.js" />
     <Content Include="app\controllers\flightBoardController.js" />
@@ -319,6 +320,7 @@
     <Content Include="app\views\fixtime.js" />
     <Content Include="app\views\fixtimereport.html" />
     <Content Include="app\views\fixtimereportdaily.html" />
+    <Content Include="app\views\fixtime_summary.html" />
     <Content Include="app\views\flight.html" />
     <Content Include="app\views\flightboard.html" />
     <Content Include="app\views\flightboardall.html" />
