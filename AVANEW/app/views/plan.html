@@ -1,0 +1,517 @@
+﻿<link href="sfstyles/ejthemes/default-theme/ej.web.all.min.css" rel="stylesheet" />
+<link href="sfstyles/default.css" rel="stylesheet" />
+<link href="sfstyles/default-responsive.css" rel="stylesheet" />
+<link href="sfstyles/ejthemes/responsive-css/ej.responsive.css" rel="stylesheet" />
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+</style>
+
+
+
+
+
+<div class="box plan" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'flightplanview';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class=" col-lg-7 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div dx-data-grid="dg" id="dg" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+        </div>
+        <div class=" col-lg-5 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <div dx-tabs="tabs_options">
+
+                    </div>
+
+                    <div class="content " ng-show="IsDetailsVisible">
+                        <div class="tab legs ">
+                            <div dx-data-grid="dg_leg" id="dg_leg" class="content" style="overflow-y:hidden"></div>
+                        </div>
+                        <!-- <div dx-data-grid="dg_reg" id="dg_reg" class="content" style="overflow-y:hidden"></div>-->
+                        <div class="tab information dx-border">
+                            <div id="scrollview" dx-scroll-view="scroll_info">
+                                <!--<div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                <label>Title</label>
+                                <div dx-text-box="{readOnly:true,}"  ></div>
+                            </div>-->
+                                <div class="col-lg-4 margin-bottom-5 padding-7">
+                                    <label>From</label>
+                                    <div class="center" dx-date-box="date_from"></div>
+                                </div>
+                                <div class="col-lg-4  margin-bottom-5 padding-7">
+                                    <label>To</label>
+                                    <div class="center" dx-date-box="date_to"></div>
+                                </div>
+                                <div class="col-lg-4 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Interval</label>
+                                    <div dx-text-box="text_interval"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Month(s)</label>
+                                    <div dx-text-box="text_month"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Day(s)</label>
+                                    <div dx-text-box="text_day"></div>
+                                </div>
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                                    <label>Type(s)</label>
+                                    <div dx-text-box="text_type"></div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                      
+                        <div class="tab registers ">
+                            <div dx-data-grid="dg_reg" id="dg_reg" class="content" style="overflow-y:hidden"></div>
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-8 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+
+            <div dx-button="btn_new"></div>
+            <!--<div dx-button="btn_append"></div>-->
+            <div dx-button="btn_edit"></div>
+            <!--<div dx-button="btn_approve"></div>-->
+            <div dx-button="btn_interval"></div>
+
+          <!--  <div dx-button="btn_edit_plan"></div>-->
+            <div dx-button="btn_delete"></div>
+
+
+
+        </div>
+        <!--<div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>-->
+        <div class=" col-lg-4 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+            <!--<div dx-button="btn_gantt"></div>
+            <div dx-button="btn_gantt_base"></div>
+
+            <div dx-button="btn_filter"></div>-->
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+    <div id="popup_add" dx-popup="popup_add">
+        <div style="padding:5px 0 0 0" class="col-lg-6">
+            <div dx-data-grid="dg2" id="dg2" class="content" style="overflow-y:hidden"></div>
+        </div>
+        <div style="padding:5px 0 0 0" class="dx-border col-lg-6">
+
+            <div dx-scroll-view="scroll_add">
+
+
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>Date</label>
+                    <div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Aircraft Type</label>
+                    <div dx-select-box="sb_type" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Register</label>
+                    <div dx-select-box="sb_msn"></div>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Base</label>
+                    <div dx-select-box="sb_Base" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+                <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>From</label>
+                    <div dx-select-box="sb_FromAirport" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>To</label>
+                    <div dx-select-box="sb_ToAirport" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Departure</label>
+                    <div class="center" dx-date-box="time_start" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Flight Hour(s)</label>
+                    <div class="center" dx-number-box="text_flighth" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Flight Minute(s)</label>
+                    <div class="center" dx-number-box="text_flightm" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Arrival</label>
+                    <div class="center" dx-date-box="time_end"></div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Flight Number</label>
+                    <div class="center" dx-text-box="text_flightnumber" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-9 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Flight Type</label>
+                    <div dx-select-box="sb_flighttype" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+                <div style="clear:both"></div>
+
+                <!--<div class="groupbox" style="border:1px #e0e0e0 solid !important;margin-top:5px;  margin-right:8px;">
+                    <div class="caption">Date Range</div>
+
+                    <div class="col-lg-6  margin-bottom-5 padding-7">
+                        <label>To</label>
+                        <div class="center" dx-date-box="date_to" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Interval</label>
+
+                        <div dx-select-box="sb_interval" dx-validator="{validationGroup:'flightplan',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Month(s)</label>
+                        <div dx-tag-box="tag_months"></div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Day(s)</label>
+                        <div dx-tag-box="tag_days"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>-->
+
+
+
+
+
+            </div>
+
+
+            <!-- <div id="context-menu" dx-context-menu="cellContextMenuOptions"></div>-->
+            <!--<div class=" col-lg-6 col-md-1 col-sm-1 col-xs-1" style="padding:0;">
+                <div dx-scheduler="schedulerOptions">
+                    <div data-options="dxTemplate:{name:'dataCellTemplate'}" style="height:20px">
+
+                    </div>
+                </div>
+            </div>-->
+
+        </div>
+
+
+    </div>
+
+
+    <div id="popup_interval" dx-popup="popup_interval">
+        <div style="padding:5px 0 0 0" class="dx-border">
+            <div class=" col-lg-6 col-md-1 col-sm-1 col-xs-1" style="padding:0;padding-right:5px;">
+
+                <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Base</label>
+                    <div dx-text-box="text_base"></div>
+
+                </div>
+
+                <!--<div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Aircraft Type</label>
+                    <div dx-select-box="txt_type"></div>
+                </div>-->
+                <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Register</label>
+                    <div dx-text-box="text_msn"></div>
+                </div>
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>From</label>
+                    <div class="center" dx-date-box="date_from2" dx-validator="{validationGroup:'flightplaninterval',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6  margin-bottom-5 padding-7">
+                    <label>To</label>
+                    <div class="center" dx-date-box="date_to2" dx-validator="{validationGroup:'flightplaninterval',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Interval</label>
+
+                    <div dx-select-box="sb_interval2" dx-validator="{validationGroup:'flightplaninterval',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Month(s)</label>
+                    <div dx-tag-box="tag_months"></div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Day(s)</label>
+                    <div dx-tag-box="tag_days"></div>
+                </div>
+
+
+
+
+
+
+
+
+                <div style="clear:both"></div>
+
+
+
+                <!-- <div id="context-menu" dx-context-menu="cellContextMenuOptions"></div>-->
+            </div>
+            <div class=" col-lg-6 col-md-1 col-sm-1 col-xs-1" style="padding:0;">
+                <div dx-scheduler="schedulerOptions">
+                    <div data-options="dxTemplate:{name:'dataCellTemplate'}" style="height:20px">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div ng-include="'app/views/flightplanningganttview.html'"></div>
+    <div ng-include="'app/views/flightdesigngrid.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <script type="text/x-jsrender" id="taskbarTemplate">
+        <!--{{if  #get("array").data.length>0}}
+        {{:~renderCompleted(#data['taskId'],#get("array").data.length)}} {{/if}}-->
+        sC
+
+
+        <div class="e-gantt-template-taskbar bg-color {{statusClass:#data['taskId']}}" style="border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+            ac
+            so
+
+            <div>
+
+
+
+                {{if #data['resourceNames']}}
+                <div id="task-{{:#data['taskId']}}" style="text-align:center">
+
+                    <span class="tasknametext" style=" z-index:1;font-size:13px;font-weight:normal;  top:6px; font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative"> {{:#data['taskName']}}{{:#data['from']}}</span>
+
+
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <!--<span class="resourcenametext" style="position:absolute;z-index:1;font-size:12px;color:white;top:25px;left:40px;font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;opacity:0.5">{{:#data['resourceNames']}}</span>
+                <span class="progresstext" style="margin-top:22px;margin-right:4px;position:relative;float:right;color:white;z-index:1;font-family:'Segoe UI';font-size:14px;">{{:#data['status']}}%</span>-->
+                {{else}}
+                <!--<span style="margin:6px 14px 0 0;position:relative;float:right;color:white;z-index:1;">{{:#data['status']}}% {{:#data['taskName']}}</span>-->
+                <div id="task-{{:#data['taskId']}}" style="text-align:center">
+
+                    er
+
+                    <span class="tasknametext" style=" z-index:1;font-size:14px;color:white;top:7px;left:40px;font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;"> {{:#data['taskName']}}{{:#data['from']}}</span>
+
+
+                </div>
+                {{/if}}
+            </div>
+
+            {{if #data['status']>0}}
+            <div class="e-gantt-template-progressbar KKK" style="font-size:10px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:10px;">
+                {{round: ~getDelay(#data['taskId'])  }}
+
+            </div>
+
+            {{/if}}
+
+
+        </div>
+
+
+
+        {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+    </script>
+    <script type="text/x-jsrender" id="taskbarTemplate1">
+
+        <div class="e-gantt-template-taskbar bg-color vahid {{:#data['notes']}}" style="border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0); ">
+            <!--<table style="width:100%;height:36px;position:absolute;top:0;left:0;">
+                <tr>
+                    <td style="width:25%; background:red"></td>
+                    <td style="width:75%; background:skyblue">
+
+
+                    </td>
+
+                </tr>
+            </table>-->
+
+            <div>
+                {{if #data['resourceNames']}}
+
+                <div>{{:#data['taskId']}}</div>
+                {{else}}
+                <span style="margin:6px 14px 0 0;position:relative;float:right;color:white;z-index:1;">{{:#data['status']}}%</span>
+                {{/if}}
+
+            </div>
+            <div class="e-gantt-template-progressbar" style="font-size:13px;overflow:visible;opacity:1;background:red">
+
+            </div>
+        </div>
+    </script>
+    <script id="leftlableTemplate" type="text/x-jsrender">
+
+        <div style="padding-top:5px;">
+            <span>{{:#data['taskName']}}  [{{:status}}%]</span>
+        </div>
+
+    </script>
+
+</div>

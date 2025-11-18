@@ -1,0 +1,292 @@
+﻿<style>
+    .tile-inf {
+        border: 1px solid #ccc;
+        margin: 5px 5px 5px 0;
+        text-align: center;
+        border-radius: 2px;
+        padding: 3px;
+        background: white;
+    }
+
+        .tile-inf .caption {
+            font-size: 14px;
+            padding: 4px 1px 3px 1px;
+            color: #666666 !important;
+            font-weight: normal
+        }
+
+        .tile-inf .value {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 1px 1px 2px 1px;
+        }
+
+        .tile-inf td {
+            background: white;
+        }
+
+    .thin-scroll4::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .thin-scroll4::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        outline: 1px solid slategrey;
+    }
+
+    .padding-5 .dx-popup-content {
+        padding: 0px !important;
+    }
+</style>
+<div ng-controller="fuelbiRouteController" class="bifuelroute">
+
+    <div id="popup" dx-popup="popup" class="padding-5">
+        <div id="scroll_1" dx-scroll-view="scroll_1">
+            <div style="padding:20px 10px">
+                <div dx-tag-box="tagRoutes" style="padding:4px;margin-bottom:5px;"></div>
+                <div style="border:1px solid #ccc">
+                    <div style="padding:10px;background:#eee;margin-bottom:10px;font-weight:bold">Used Fuel</div>
+                    <div style="padding:0 5px 5px 0px">
+                        <div class="col-lg-7 padding-0" style="padding-right:10px">
+                            <div dx-chart="chart_main" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+                        <div class="col-lg-5 padding-0" style="padding-left:10px">
+                            <div dx-chart="chart_mainstack" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tile-inf-container thin-scroll4" style="margin:20px 30px 20px 30px;overflow-x:auto;padding:5px;text-align:-webkit-center">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="x in summeries">
+                                        <div class="tile-inf">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td style="text-align:center;padding :5px 5px; border-right:1px solid #ccc;width:37%">
+
+                                                        <div style="font-size:13px;font-weight:bold;" ng-style="{color:getColorFromSet($index)}">{{x.Arg}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">Sum.</div>
+                                                        <div class="value">{{x.Sum}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">Avg.</div>
+                                                        <div class="value">{{x.Avg}}</div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div style="text-align:center;padding:20px 20px">
+                            <div class="padding-0" style="width:25%;display:inline-block" ng-repeat="x in mainPies">
+                                <div class="pies1" dx-pie-chart="x"></div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div style="border:1px solid #ccc;margin-top:20px;">
+                    <div style="padding:10px;background:#eee;margin-bottom:10px;font-weight:bold;">Fuel Per Revenue Passengers(kilo) Kilometers (APK) &  Per Available Seats(kilo) Kilometers (ASK)</div>
+                    <div style="padding:0 5px 5px 0px">
+                        <div class="col-lg-7 padding-0">
+                            <div dx-chart="chart_rpk" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+                        <div class="col-lg-5 padding-0" style="padding-left:10px">
+                            <div dx-chart="chart_rpktotal" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tile-inf-container thin-scroll4" style="margin:20px 30px 20px 30px;overflow-x:auto;padding:5px;text-align:-webkit-center">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="x in summeries">
+                                        <div class="tile-inf">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td style="text-align:center;padding :5px 5px; border-right:1px solid #ccc;width:37%">
+
+                                                        <div style="font-size:13px;font-weight:bold;" ng-style="{color:getColorFromSet($index)}">{{x.Arg}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">RPK</div>
+                                                        <div class="value">{{ (x.SumPaxKiloDistanceKM)}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">Avg/RPK</div>
+                                                        <div class="value">{{x.AvgPerPaxKiloDistanceKM}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">ASK</div>
+                                                        <div class="value">{{ (x.SumSeatKiloDistanceKM)}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">Avg/ASK</div>
+                                                        <div class="value">{{x.AvgPerSeatKiloDistanceKM}}</div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div style="border:1px solid #ccc;margin-top:20px;">
+                    <div style="padding:10px;background:#eee;margin-bottom:10px;font-weight:bold;">Used Fuel Per Leg</div>
+                    <div style="padding:0 5px 5px 0px">
+                        <div class="col-lg-7 padding-0" style="padding-right:10px">
+                            <div dx-chart="chart_leg" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+                        <div class="col-lg-5 padding-0" style="padding-left:10px">
+                            <div dx-chart="chart_legtotal" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div class="tile-inf-container thin-scroll4" style="margin:20px 30px 20px 30px;overflow-x:auto;padding:5px;text-align:-webkit-center">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="x in summeries">
+                                        <div class="tile-inf">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td style="text-align:center;padding :5px 5px; border-right:1px solid #ccc;width:37%">
+
+                                                        <div style="font-size:13px;font-weight:bold;" ng-style="{color:getColorFromSet($index)}">{{x.Arg}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">Legs</div>
+                                                        <div class="value">{{x.SumLeg}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">Avg/Leg</div>
+                                                        <div class="value">{{x.AvgPerLeg}}</div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="clear:both"></div>
+
+                    </div>
+                </div>
+
+                <div style="border:1px solid #ccc;margin-top:20px;">
+                    <div style="padding:10px;background:#eee;margin-bottom:10px;font-weight:bold;">Used Fuel Per Pax</div>
+                    <div style="padding:0 5px 5px 0px">
+                        <div class="col-lg-7 padding-0" style="padding-right:10px">
+                            <div dx-chart="chart_pax" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+                        <div class="col-lg-5 padding-0" style="padding-left:10px">
+                            <div dx-chart="chart_paxtotal" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tile-inf-container thin-scroll4" style="margin:20px 30px 20px 30px;overflow-x:auto;padding:5px;text-align:-webkit-center">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="x in summeries">
+                                        <div class="tile-inf">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td style="text-align:center;padding :5px 5px; border-right:1px solid #ccc;width:37%">
+
+                                                        <div style="font-size:13px;font-weight:bold;" ng-style="{color:getColorFromSet($index)}">{{x.Arg}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">Pax</div>
+                                                        <div class="value">{{x.SumPax}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">Avg/Pax</div>
+                                                        <div class="value">{{x.AvgPerPax}}</div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                         
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+
+                <div style="border:1px solid #ccc;margin-top:20px;">
+                    <div style="padding:10px;background:#eee;margin-bottom:10px;font-weight:bold;">Used Fuel Per Block Time</div>
+                    <div style="padding:0 5px 5px 0px">
+                        <div class="col-lg-7 padding-0" style="padding-left:10px;">
+                            <div dx-chart="chart_block" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+                        <div class="col-lg-5 padding-0" style="padding-right:10px;">
+                            <div dx-chart="chart_blocktotal" style="margin-top:0px;border:0px solid #ddd"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="tile-inf-container thin-scroll4" style="margin:20px 30px 20px 30px;overflow-x:auto;padding:5px;text-align:-webkit-center">
+                            <table>
+                                <tr>
+                                    <td ng-repeat="x in summeries">
+                                        <div class="tile-inf">
+                                            <table style="width:100%">
+                                                <tr>
+                                                    <td style="text-align:center;padding :5px 5px; border-right:1px solid #ccc;width:37%">
+
+                                                        <div style="font-size:13px;font-weight:bold;" ng-style="{color:getColorFromSet($index)}">{{x.Arg}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">BL</div>
+                                                        <div class="value">{{formatMinutes(x.SumBlock)}}</div>
+                                                    </td>
+                                                    <td style="text-align:center;padding :5px 10px;">
+                                                        <div class="caption">Avg/BL</div>
+                                                        <div class="value">{{x.AvgPerBlock}}</div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

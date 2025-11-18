@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManager", "FileManager\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMW", "AMW\AMW.csproj", "{0950EABB-13C6-46DE-BA9C-9217CEC68A3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AVANEW", "AVANEW\AVANEW.csproj", "{0B15636A-8F0F-4097-A4C5-86EFA8D311B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,10 @@ Global
 		{0950EABB-13C6-46DE-BA9C-9217CEC68A3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0950EABB-13C6-46DE-BA9C-9217CEC68A3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0950EABB-13C6-46DE-BA9C-9217CEC68A3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B15636A-8F0F-4097-A4C5-86EFA8D311B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B15636A-8F0F-4097-A4C5-86EFA8D311B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B15636A-8F0F-4097-A4C5-86EFA8D311B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B15636A-8F0F-4097-A4C5-86EFA8D311B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

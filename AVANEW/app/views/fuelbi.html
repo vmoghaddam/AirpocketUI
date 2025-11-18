@@ -1,0 +1,495 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .fuContent {
+        overflow-y: scroll; /* has to be scroll, not auto */
+        -webkit-overflow-scrolling: touch;
+        height: calc(100vh - 170px);
+    }
+
+    @media (max-width: 600px) {
+        .fuHeader {
+            display: none;
+        }
+
+        .fuContent {
+            height: calc(100vh - 170px);
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .fuContent {
+            height: calc(100vh - 230px);
+        }
+    }
+
+    .thin-scroll3::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .thin-scroll3::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    .tile-total {
+        border: 1px solid #ccc;
+        margin : 5px 5px 5px 0;
+        text-align: center;
+        border-radius:2px;
+        padding:3px;
+        background:white;
+
+    }
+
+        .tile-total .caption {
+            font-size: 14px;
+            padding: 4px 1px 3px 1px;
+            color: #666666 !important;
+            font-weight: normal
+        }
+
+        .tile-total .value {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 1px 1px 2px 1px;
+        }
+
+    .tbl-inf td {
+        padding: 5px;
+        min-width: 100px;
+    }
+
+        .tbl-inf td:nth-child(even) {
+            text-align: left
+        }
+
+        .tbl-inf td:nth-child(odd) {
+            text-align: right;
+        }
+
+    .tile-container {
+        
+        display: inline-flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        
+    }
+
+        .tile-container .tile-total {
+            
+            display: inline-block;
+            width:16.6%;
+            min-width:220px;
+        }
+    .tile-total td {
+        background:white;
+    }
+    
+    .thin-scroll4::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .thin-scroll4::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        outline: 1px solid slategrey;
+    }
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+</style>
+
+<div class="box fuel" style="height:100%;display:none;overflow-y:hidden">
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content1" style="clear:both">
+        <!--<div class="col-lg-1 hidden visible-lg  padding-0">
+            Left
+        </div>-->
+        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 padding-0">
+            <div class="dx-border fuHeader" style="border:0px solid gray;padding:5px; ">
+                <table style="width:100%">
+                    <tr>
+
+                        <td style="width:200px">
+                            <div dx-select-box="sb_period"></div>
+                        </td>
+                        <td ng-show="period==1" style="width:100px;padding:0 5px 0 5px">
+                            <div dx-select-box="sb_year" class="center"></div>
+                        </td>
+                        <td></td>
+                        <td> </td>
+                    </tr>
+
+                </table>
+
+
+                <div class="tile-container thin-scroll4">
+                    <div class="tile-total">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="text-align:center;padding :5px 10px;padding-right:13px;border-right:1px solid #ccc">
+                                    <i class="fas fa-plane-departure" style="font-size:18px;color:gray"></i>
+                                    <div>Legs</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Total</div>
+                                    <div class="value">{{total.legs}}</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Avg.</div>
+                                    <div class="value">{{total.legsAvg}}</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="tile-total">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="text-align:center;padding :5px 10px;padding-right:13px;border-right:1px solid #ccc">
+                                    <i class="fas fa-fire" style="font-size:18px;color:#ff471a"></i>
+                                    <div>Used</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Total(K)</div>
+                                    <div class="value">{{total.used}}</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Avg.(K)</div>
+                                    <div class="value">{{total.usedAvg}}</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
+                    <div class="tile-total">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="text-align:center;padding :5px 10px;padding-right:13px;border-right:1px solid #ccc">
+                                    <i class="fas fa-gas-pump" style="font-size:18px;color:#008080"></i>
+                                    <div>Uplift</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Total(K)</div>
+                                    <div class="value">{{total.uplift}}</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Avg.(K)</div>
+                                    <div class="value">{{total.upliftAvg}}</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
+
+
+                    <div class="tile-total">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="text-align:center;padding :5px 10px;padding-right:13px;border-right:1px solid #ccc">
+                                    <i class="fas fa-user" style="font-size:18px;color:#e600e6"></i>
+                                    <div>Pax</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Total(K)</div>
+                                    <div class="value">{{total.pax}}</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Avg.(K)</div>
+                                    <div class="value">{{total.paxAvg}}</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
+
+
+
+                    <div class="tile-total">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="text-align:center;padding :5px 10px;padding-right:13px;border-right:1px solid #ccc">
+                                    <i class="fas fa-weight" style="font-size:18px;color:#e68a00"></i>
+                                    <div>Weight</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Total(K)</div>
+                                    <div class="value">{{total.weight}}</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Avg.(K)</div>
+                                    <div class="value">{{total.weightAvg}}</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
+
+                    <div class="tile-total">
+                        <table style="width:100%">
+                            <tr>
+                                <td style="text-align:center;padding :5px 10px;padding-right:13px;border-right:1px solid #ccc">
+                                    <i class="fas fa-route" style="font-size:18px;color:#008ae6"></i>
+                                    <div>Dist.</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Total(K)</div>
+                                    <div class="value">{{total.distance}}</div>
+                                </td>
+                                <td style="text-align:center;padding :5px 10px;">
+                                    <div class="caption">Avg.(K)</div>
+                                    <div class="value">{{total.distanceAvg}}</div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+            <div dx-tabs="tabs_options"></div>
+            <div class="fuContent thin-scroll3" style="padding:5px;  ">
+                <div ng-show="activeTab=='overall'" class="padding-0" style="padding:0 15px 25px 15px; border:1px solid #ccc;background:white">
+                    <div class="col-lg-8 padding-0">
+                        <div dx-chart="bar_monthly" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-lg-4 padding-0">
+                        <div dx-pie-chart="pie_used" style="margin-top:20px"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+                    <div class="col-lg-7 padding-0">
+
+                    </div>
+                    <div style="clear:both"></div>
+
+                </div>
+
+                <div ng-show="activeTab=='overall'" class="padding-0" style="padding:0 15px 25px 15px; border:1px solid #ccc;background:white;margin-top:20px">
+                    <div class="col-lg-7 padding-0" style="padding-right:20px;">
+                        <div dx-chart="chart_monthly_rpk" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-lg-5 padding-0" style="padding-left:20px;">
+                        <div dx-chart="chart_monthly_rpktotalpanes" style="margin-top:20px"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+
+                </div>
+
+                <div ng-show="activeTab=='overall'" class="padding-0" style="padding:0 15px 25px 15px; border:1px solid #ccc;background:white;margin-top:20px">
+                    <div class="col-lg-7 padding-0" style="padding-right:20px;">
+                        <div dx-chart="chart_monthly_rpb" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-lg-5 padding-0" style="padding-left:20px;">
+                        <div dx-chart="chart_monthly_rpbtotalpanes" style="margin-top:20px"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+
+                </div>
+
+                <div ng-show="activeTab=='overall'" class="padding-0" style="padding:0 15px 25px 15px; border:1px solid #ccc;background:white;margin-top:20px">
+                    <div class="col-lg-7 padding-0" style="padding-right:20px;">
+                        <div dx-chart="line_flight" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-lg-5 padding-0" style="padding-left:20px;">
+                        <div dx-chart="line_flight_det" style="margin-top:20px"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+
+                </div>
+
+
+                <div ng-show="activeTab=='overall'" class="padding-0" style="padding:0 15px 25px 15px; border:1px solid #ccc;background:white;margin-top:20px">
+                    <div class="col-lg-7 padding-0" style="padding-right:20px;">
+                        <div dx-chart="line_pax" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-lg-5 padding-0" style="padding-left:20px;">
+                        <div dx-chart="line_pax_det" style="margin-top:20px"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+
+                </div>
+
+                <div ng-show="activeTab=='overall'" class="padding-0" style="padding:0 15px 25px 15px; border:1px solid #ccc;background:white;margin-top:20px">
+                    <div class="col-lg-7 padding-0" style="padding-right:20px;">
+                        <div dx-chart="line_leg" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-lg-5 padding-0" style="padding-left:20px;">
+                        <div dx-chart="line_leg_det" style="margin-top:20px"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+
+                </div>
+
+                <div ng-show="activeTab=='route'" class="padding-0" style="margin-top:10px;padding:0 15px 25px 15px; border:1px solid #ccc;background:white">
+                    <div class="col-lg-6 padding-0" style="padding-right:20px">
+                        <div dx-chart="chart_routes" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-lg-6 padding-0" style="padding-left:20px;">
+                        <div dx-chart="chart_routes_rpk" style="margin-top:20px"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="margin-top:30px;">
+                        <div ng-repeat="r in routeCards" class="col-lg-3" style="margin-bottom:10px;" ng-click="showRoutePage(r.Route)"
+                             on-finish-render="ngRepeatFinished">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:1px solid #ccc">
+                                    <tr>
+                                        <td rowspan="2" style="width:25%;border-right:1px solid #eee;padding:5px;text-align:center;font-weight:bold;background:#eee">{{r.Route}}</td>
+                                        <td style="width: 20%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;">Used</td>
+                                        <td style="width: 20%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;">Per Leg</td>
+                                        <td style="width: 17%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;">Per Pax</td>
+                                        <td style="width: 18%; border-right: 0px solid #eee; padding: 5px; text-align: center; font-size: 12px;">Per RPK</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 20%; border-right: 1px solid #eee; padding: 5px; text-align: center;font-weight:bold">{{r.UsedKilo}}</td>
+                                        <td style="width: 20%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;font-weight:bold">{{r.UsedPerLeg}}</td>
+                                        <td style="width: 17%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;font-weight:bold">{{r.UsedPerPax}}</td>
+                                        <td style="width: 18%; border-right: 0px solid #eee; padding: 5px; text-align: center; font-size: 12px;font-weight:bold">{{r.UsedPerPaxKiloDistanceKM}}</td>
+                                    </tr>
+                                </table>
+                                <div style="padding:10px;">
+                                    <canvas class="chart chartjs-render-monitor" data-route="{{r.Route}}" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+
+
+
+                <div ng-show="activeTab=='aircraft'" class="padding-0" style="margin-top:10px;padding:0 15px 25px 15px; border:1px solid #ccc;background:white">
+                    <div class="col-lg-7 padding-0">
+                        <div dx-chart="bar_type" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-lg-5 padding-0">
+                        <div dx-pie-chart="pie_type" style="margin-top:20px"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="margin-top:50px;">
+                        <div ng-repeat="r in aircraftCards" class="col-lg-4" style="margin-bottom:10px;"
+                             on-finish-render="ngRepeatFinishedRegs">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:1px solid #ccc">
+                                    <tr>
+                                        <td rowspan="1" style="width:17%;border-right:1px solid #eee;padding:5px;text-align:center;font-weight:bold;background:#eee">{{r.Register}}</td>
+                                        <td style="width: 19%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;">Used</td>
+                                        <td style="width: 15%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;">B/L</td>
+                                        <td style="width: 15%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;">Per Leg</td>
+                                        <td style="width: 17%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;">Per Pax</td>
+                                        <td style="width: 17%; border-right: 0px solid #eee; padding: 5px; text-align: center; font-size: 12px;">Per RPK</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;background:#eee;font-size:12px">{{r.AircraftType}}</td>
+                                        <td style="width: 19%; border-right: 1px solid #eee; padding: 5px; text-align: center;font-weight:bold">{{r.UsedKilo}}</td>
+                                        <td style="width: 15%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;font-weight:bold">{{formatMinutes(r.BlockTime)}}</td>
+                                        <td style="width: 15%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;font-weight:bold">{{r.UsedPerLeg}}</td>
+                                        <td style="width: 17%; border-right: 1px solid #eee; padding: 5px; text-align: center; font-size: 12px;font-weight:bold">{{r.UsedPerPax}}</td>
+                                        <td style="width: 17%; border-right: 0px solid #eee; padding: 5px; text-align: center; font-size: 12px;font-weight:bold">{{r.UsedPerPaxKiloDistanceKM}}</td>
+                                    </tr>
+                                </table>
+                                <div style="padding:10px;">
+                                    <canvas class="chart chartjs-render-monitor-reg" data-reg="{{r.Register}}" height="100" width="322" style="display: block; height: 90px; width: 100%; "></canvas>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+
+                </div>
+
+
+                <div ng-show="activeTab=='aircraft'" class="padding-0" style="padding:0 15px 25px 15px; border:1px solid #ccc;background:white;margin-top:20px">
+                    <div class="col-lg-7 padding-0" style="padding-right:20px;">
+                        <div dx-chart="chart_monthly_rpkreg" style="margin-top:20px"></div>
+                    </div>
+                    <div class="col-lg-5 padding-0" style="padding-left:20px;">
+                        <div dx-chart="chart_monthly_rpktotalreg" style="margin-top:20px"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+
+                </div>
+
+                <!--<div class="padding-0" style="margin-top:10px;padding:0 15px 25px 15px; border:1px solid #ccc;background:white">
+        <div class="col-lg-7 padding-0">
+            <div dx-chart="line_distance" style="margin-top:20px"></div>
+        </div>
+        <div class="col-lg-5 padding-0">
+            <div dx-chart="line_distance_det" style="margin-top:20px"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+    <div class="padding-0" style="margin-top:10px;padding:0 15px 25px 15px; border:1px solid #ccc;background:white">
+        <div class="col-lg-7 padding-0">
+            <div dx-chart="line_weight" style="margin-top:20px"></div>
+        </div>
+        <div class="col-lg-5 padding-0">
+            <div dx-chart="line_weight_det" style="margin-top:20px"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+    <div class="padding-0" style="margin-top:10px; padding:0 15px 25px 15px; border:1px solid #ccc;background:white">
+        <div class="col-lg-12 padding-0">
+            <div dx-chart="line_pax" style="margin-top:20px"></div>
+        </div>
+
+        <div style="clear:both"></div>
+
+    </div>-->
+
+                <div style="clear:both"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+
+    <div class="fuMenu hidden-lg" style="border:1px solid black">
+        Menu
+    </div>
+
+
+    <div ng-include="'app/views/fuelbiRoute.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+
+</div>

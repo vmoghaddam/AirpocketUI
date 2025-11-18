@@ -1,0 +1,2537 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .fuContent {
+        overflow-y: scroll; /* has to be scroll, not auto */
+        -webkit-overflow-scrolling: touch;
+        height: calc(100vh - 95px);
+    }
+
+    @media (max-width: 600px) {
+        .fuHeader {
+            display: none;
+        }
+
+        .fuContent {
+            height: calc(100vh - 170px);
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .fuContent {
+            height: calc(100vh - 95px);
+        }
+    }
+
+    .thin-scroll3::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .thin-scroll3::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    .tile-total {
+        border: 1px solid #ccc;
+        margin: 5px 5px 5px 0;
+        text-align: center;
+        border-radius: 2px;
+        padding: 3px;
+        background: white;
+    }
+
+        .tile-total .caption {
+            font-size: 14px;
+            padding: 4px 1px 3px 1px;
+            color: #666666 !important;
+            font-weight: normal
+        }
+
+        .tile-total .value {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 1px 1px 2px 1px;
+        }
+
+    .tbl-inf td {
+        padding: 5px;
+        min-width: 100px;
+    }
+
+        .tbl-inf td:nth-child(even) {
+            text-align: left
+        }
+
+        .tbl-inf td:nth-child(odd) {
+            text-align: right;
+        }
+
+    .tile-container {
+        display: inline-flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+        .tile-container .tile-total {
+            display: inline-block;
+            width: 16.6%;
+            min-width: 220px;
+        }
+
+    .tile-total td {
+        background: white;
+    }
+
+    .thin-scroll4::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .thin-scroll4::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        outline: 1px solid slategrey;
+    }
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .iblock {
+        /*clear:both !important;
+        display:inline-block !important;
+        float:none !important;*/
+    }
+
+    .tdchart {
+        height: 90px;
+    }
+
+        .tdchart canvas {
+            height: 90px !important;
+        }
+
+    .dx-area-row-cell {
+        background: blanchedalmond !important;
+    }
+
+        .dx-area-row-cell.dx-bottom-border {
+            background: blanchedalmond !important;
+        }
+
+    .dx-area-column-cell {
+        background: blanchedalmond;
+    }
+
+    .dx-area-row-cell.dx-bottom-border td {
+        color: black !important;
+        font-weight: bold;
+        /*text-align: center !important;*/
+    }
+
+        .dx-area-row-cell.dx-bottom-border td span:not(.dx-expand) {
+            font-family: Tahoma !important;
+            /*text-align:center !important;*/
+        }
+
+    .dx-pivotgrid-container * {
+        border-color: gray !important;
+    }
+
+    .dx-pivotgrid-area td {
+        text-align: center !important;
+    }
+
+    #dg_pivot .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_pivot .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_pivot .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_pivot .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .off-type {
+        background: #eee;
+        color: black;
+    }
+
+    .on-type {
+        background: #a6a6a6 !important;
+        color: white;
+    }
+    .cart-height-1 {
+        height:230px;
+    }
+        .cart-height-1:hover {
+            background: currentcolor;
+        }
+</style>
+<div class="box delaykpi" style="height:100%;display:none;overflow-y:hidden">
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content1" style="clear:both">
+        <div dx-tabs="tabs_options"></div>
+
+        <div class="fuContent thin-scroll3" style="padding:8px 0 8px 8px;  ">
+            <div ng-show="activeTab=='overall'" class="kpi-container">
+                <div style="padding:8px 0 8px 8px;  ">
+                    <table style="width:100%; ">
+                        <tr>
+                            <td><div style="font-weight:bold;font-size:18px;margin:0 0 10px 0;padding-left:15px">Summary</div></td>
+                            <td class="dx-border" style="width:100px;padding:0 0px 10px 5px"><div dx-select-box="sb_year" class="center"></div></td>
+                            <td class="dx-border" style="width:100px;padding:0 0px 10px 5px"><div dx-select-box="sb_month" class="center"></div></td>
+                            <td class="dx-border" style="width:50px;padding:0 15px 10px 5px"><div dx-button="btn_reload"></div></td>
+                        </tr>
+                    </table>
+                    <div class="padding-0" style="padding:0 15px 15px 15px; border:0px solid #ccc; ">
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px; ">
+
+                            <div style="text-align:center;color:gray;font-weight:bold;padding-bottom:5px">OnTime Flights</div>
+                            <div dx-pie-chart="pie_ontime_delayed" style="margin-top:10px"></div>
+
+                        </div>
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px; ">
+
+                            <div style="text-align:center;color:gray;font-weight:bold;padding-bottom:5px">Delays Occurance</div>
+                            <div dx-pie-chart="pie_delays_count" style="margin-top:10px"></div>
+
+                        </div>
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px; ">
+
+                            <div style="text-align:center;color:gray;font-weight:bold;padding-bottom:5px">Delays Duration</div>
+                            <div dx-polar-chart="polar_delays_time" style="margin-top:-15px"></div>
+
+                        </div>
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px; ">
+
+                            <div style="text-align:center;color:gray;font-weight:bold;padding-bottom:5px">Delayed Flights Count</div>
+                            <div dx-pie-chart="pie_flights_count" style="margin-top:10px"></div>
+
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+                <div style="font-weight:bold;font-size:18px;margin:0 0 10px 0;padding-left:15px;">KPIs</div>
+                <div class="padding-0" style="padding:0 15px 25px 15px; border:0px solid #ccc;padding:0;">
+                    <!--Delay-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DL')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DL
+                                        <div style="font-weight:normal;font-size:13px;">Total Delay</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.DelayDiff)">{{current.DelayDiff}}%</span>
+                                        <i ng-show="current.DelayDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.DelayDiff)"></i>
+                                        <i ng-show="current.DelayDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.DelayDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-dl" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{formatMinutes(current.Delay)}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{formatMinutes(current.PreDelay)}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <!--Delay per Cycle-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DC')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DC
+                                        <div style="font-weight:normal;font-size:13px;">Delay(minute) / Total Performed Cycles</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.DelayPerLegDiff)">{{current.DelayPerLegDiff}}%</span>
+                                        <i ng-show="current.DelayPerLegDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.DelayPerLegDiff)"></i>
+                                        <i ng-show="current.DelayPerLegDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.DelayPerLegDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" class="tdchart" style="padding:5px; ">
+                                        <canvas class="chart-dc" style="  width: 100%; "></canvas>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.DelayPerLeg}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreDelayPerLeg}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!--OnTime Flights per All Flights-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('OTFC')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        OTFC
+                                        <div style="font-weight:normal;font-size:13px;">OnTime Flights per All Performed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle( 1,current.OnTimeFlightsPerAllDiff)">{{current.OnTimeFlightsPerAllDiff}}%</span>
+                                        <i ng-show="current.OnTimeFlightsPerAllDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle( 1,current.OnTimeFlightsPerAllDiff)"></i>
+                                        <i ng-show="current.OnTimeFlightsPerAllDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle( 1,current.OnTimeFlightsPerAllDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-otfc" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.OnTimeFlightsPerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreOnTimeFlightsPerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--Delayed Flights per All Flights-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DFC')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DFC
+                                        <div style="font-weight:normal;font-size:13px;">Delayed Flights per All Performed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.DelayedFlightsPerAllDiff)">{{current.DelayedFlightsPerAllDiff}}%</span>
+                                        <i ng-show="current.DelayedFlightsPerAllDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.DelayedFlightsPerAllDiff)"></i>
+                                        <i ng-show="current.DelayedFlightsPerAllDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.DelayedFlightsPerAllDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-df" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.DelayedFlightsPerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreDelayedFlightsPerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--Delayed Flights per OnTime Flights-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DOTF')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DOTF
+                                        <div style="font-weight:normal;font-size:13px;">Delayed Flights per All OnTime Performed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.DelayedFlightsPerOnTimeDiff)">{{current.DelayedFlightsPerOnTimeDiff}}%</span>
+                                        <i ng-show="current.DelayedFlightsPerOnTimeDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.DelayedFlightsPerOnTimeDiff)"></i>
+                                        <i ng-show="current.DelayedFlightsPerOnTimeDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.DelayedFlightsPerOnTimeDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-dotf" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.DelayedFlightsPerOnTime}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreDelayedFlightsPerOnTime}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!---30 Delayed Flights per All Flights-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DFC-30')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DFC-30
+                                        <div style="font-weight:normal;font-size:13px;">-30 mins Delayed Flights per All Performed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.FltDelayUnder30PerAllDiff)">{{current.FltDelayUnder30PerAllDiff}}%</span>
+                                        <i ng-show="current.FltDelayUnder30PerAllDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayUnder30PerAllDiff)"></i>
+                                        <i ng-show="current.FltDelayUnder30PerAllDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayUnder30PerAllDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-dfcu30" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.FltDelayUnder30PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreFltDelayUnder30PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--+30 Delayed Flights per All Flights-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DFC+30')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DFC+30
+                                        <div style="font-weight:normal;font-size:13px;">+30 mins Delayed Flights per All Performed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.FltDelayOver30PerAllDiff)">{{current.FltDelayOver30PerAllDiff}}%</span>
+                                        <i ng-show="current.FltDelayOver30PerAllDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver30PerAllDiff)"></i>
+                                        <i ng-show="current.FltDelayOver30PerAllDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver30PerAllDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-dfco30" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.FltDelayOver30PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreFltDelayOver30PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--+3 hrs Delayed Flights per All Flights-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DFC+180')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DFC+180
+                                        <div style="font-weight:normal;font-size:13px;">+3 hrs Delayed Flights per All Performed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.FltDelayOver180PerAllDiff)">{{current.FltDelayOver180PerAllDiff}}%</span>
+                                        <i ng-show="current.FltDelayOver180PerAllDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver180PerAllDiff)"></i>
+                                        <i ng-show="current.FltDelayOver180PerAllDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver180PerAllDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-dfco180" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.FltDelayOver180PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreFltDelayOver180PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <!--30-60 Delayed Flights per All Flights-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DFC3060')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DFC30-60
+                                        <div style="font-weight:normal;font-size:13px;">30-60 mins Delayed Flights per All Performed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.FltDelay3060PerAllDiff)">{{current.FltDelay3060PerAllDiff}}%</span>
+                                        <i ng-show="current.FltDelay3060PerAllDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay3060PerAllDiff)"></i>
+                                        <i ng-show="current.FltDelay3060PerAllDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay3060PerAllDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-dfc3060" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.FltDelay3060PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreFltDelay3060PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--60-120 Delayed Flights per All Flights-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DFC60120')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DFC60-120
+                                        <div style="font-weight:normal;font-size:13px;">60-120 mins Delayed Flights per All Performed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.FltDelay60120PerAllDiff)">{{current.FltDelay60120PerAllDiff}}%</span>
+                                        <i ng-show="current.FltDelay60120PerAllDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay60120PerAllDiff)"></i>
+                                        <i ng-show="current.FltDelay60120PerAllDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay60120PerAllDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-dfc60120" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.FltDelay60120PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreFltDelay60120PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--120-180 Delayed Flights per All Flights-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('DFC120180')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DFC120-180
+                                        <div style="font-weight:normal;font-size:13px;">120-180 mins Delayed Flights per All Performed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.FltDelay120180PerAllDiff)">{{current.FltDelay120180PerAllDiff}}%</span>
+                                        <i ng-show="current.FltDelay120180PerAllDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay120180PerAllDiff)"></i>
+                                        <i ng-show="current.FltDelay120180PerAllDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay120180PerAllDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-dfc120180" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.FltDelay120180PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreFltDelay120180PerAll}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!--OnTime Flights-->
+                    <!--<div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('OTF')">
+        <div style="border:1px solid #ccc">
+            <table style="width:100%;border-bottom:0px solid #ccc">
+                <tr>
+                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                        OTF
+                        <div style="font-weight:normal;font-size:13px;">OnTime Flights</div>
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(1,current.OnTimeFlightCountDiff)">{{current.OnTimeFlightCountDiff}}%</span>
+                        <i ng-show="current.OnTimeFlightCountDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(1,current.OnTimeFlightCountDiff)"></i>
+                        <i ng-show="current.OnTimeFlightCountDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(1,current.OnTimeFlightCountDiff)"></i>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="3" style="padding:5px;" class="tdchart">
+                        <canvas class="chart-otf" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                        <div style="clear:both"></div>
+                    </td>
+                </tr>
+                <tr style="border-top:1px dashed #ddd">
+
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                </tr>
+                <tr>
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.OnTimeFlightCount}}</td>
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreOnTimeFlightCount}}</td>
+                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                </tr>
+            </table>
+
+        </div>
+
+    </div>-->
+                    <!--Delayed Flights 30+-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('FD30')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DF30
+                                        <div style="font-weight:normal;font-size:13px;">+30 mins Delayed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.FltDelayOver30Diff)">{{current.FltDelayOver30Diff}}%</span>
+                                        <i ng-show="current.FltDelayOver30Diff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver30Diff)"></i>
+                                        <i ng-show="current.FltDelayOver30Diff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver30Diff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-fd30" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.FltDelayOver30}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreFltDelayOver30}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--Delayed Flights 180+-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('FD180')">
+                        <div style="border:1px solid #ccc" class="cart-height-1">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DF180
+                                        <div style="font-weight:normal;font-size:13px;">+3 hrs Delayed Flights</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.FltDelayOver180Diff)">{{current.FltDelayOver180Diff}}%</span>
+                                        <i ng-show="current.FltDelayOver180Diff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver180Diff)"></i>
+                                        <i ng-show="current.FltDelayOver180Diff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver180Diff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-fd180" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.FltDelayOver180}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PreFltDelayOver180}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div style="clear:both"></div>
+                    <!--Pax in Delayed Flights 180+-->
+                    <!--<div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPI('FBL')">
+        <div style="border:1px solid #ccc">
+            <table style="width:100%;border-bottom:0px solid #ccc">
+                <tr>
+                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                        PDF180
+                        <div style="font-weight:normal;font-size:13px;">Pax in Flights Delayed +180 minutes</div>
+
+
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,current.PaxDelayOver180Diff)">{{current.PaxDelayOver180Diff}}%</span>
+                        <i ng-show="current.PaxDelayOver180Diff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.PaxDelayOver180Diff)"></i>
+                        <i ng-show="current.PaxDelayOver180Diff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,current.PaxDelayOver180Diff)"></i>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="3" style="padding:5px;" class="tdchart">
+                        <canvas class="chart-pfd180" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                        <div style="clear:both"></div>
+                    </td>
+                </tr>
+                <tr style="border-top:1px dashed #ddd">
+
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                </tr>
+                <tr>
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{current.PaxDelayOver180}}</td>
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{current.PrePaxDelayOver180}}</td>
+                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                </tr>
+            </table>
+
+        </div>
+
+    </div>-->
+
+
+
+
+
+
+                    <div style="clear:both"></div>
+                    <div class="col-lg-2" style="margin-bottom:10px;" ng-click="showRoutePage(r.Route)">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;padding-bottom:0; font-size:13px">Cycles</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 2px 5px">
+                                        <span style="display:inline-block;font-size:17px" ng-style="getDiffStyle(1,currentFlights.FlightCountDiff)">{{currentFlights.FlightCountDiff}}%</span>
+                                        <i ng-show="currentFlights.FlightCountDiff>0" class="fa fa-caret-up" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(1,currentFlights.FlightCountDiff)"></i>
+                                        <i ng-show="currentFlights.FlightCountDiff<0" class="fa fa-caret-down" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(1,currentFlights.FlightCountDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{currentFlights.FlightCount}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{currentFlights.PreFlightCount}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-2" style="margin-bottom:10px;" ng-click="showRoutePage(r.Route)">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;padding-bottom:0; font-size:13px">Block Time</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 2px 5px">
+                                        <span style="display:inline-block;font-size:17px" ng-style="getDiffStyle(0,currentFlights.BlockTimeDiff)">{{currentFlights.BlockTimeDiff}}%</span>
+                                        <i ng-show="currentFlights.BlockTimeDiff>0" class="fa fa-caret-up" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(0,currentFlights.BlockTimeDiff)"></i>
+                                        <i ng-show="currentFlights.BlockTimeDiff<0" class="fa fa-caret-down" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(0,currentFlights.BlockTimeDiff)"></i>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{formatMinutes(currentFlights.BlockTime)}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{formatMinutes(currentFlights.PreBlockTime)}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-2" style="margin-bottom:10px;" ng-click="showKPI('FD-30')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;padding-bottom:0; font-size:13px">-30 mins Delayed Flights  </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 2px 5px">
+                                        <span style="display:inline-block;font-size:17px" ng-style="getDiffStyle(-1,current.FltDelayUnder30Diff)">{{current.FltDelayUnder30Diff}}%</span>
+                                        <i ng-show="current.FltDelayUnder30Diff>0" class="fa fa-caret-up" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayUnder30Diff)"></i>
+                                        <i ng-show="current.FltDelayUnder30Diff<0" class="fa fa-caret-down" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayUnder30Diff)"></i>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{(current.FltDelayUnder30)}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{(current.PreFltDelayUnder30)}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <div class="col-lg-2" style="margin-bottom:10px;" ng-click="showKPI('FD3060')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;padding-bottom:0; font-size:13px">30 to 60 mins Delayed Flights  </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 2px 5px">
+                                        <span style="display:inline-block;font-size:17px" ng-style="getDiffStyle(-1,current.FltDelay3060Diff)">{{current.FltDelay3060Diff}}%</span>
+                                        <i ng-show="current.FltDelay3060Diff>0" class="fa fa-caret-up" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay3060Diff)"></i>
+                                        <i ng-show="current.FltDelay3060Diff<0" class="fa fa-caret-down" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay3060Diff)"></i>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{(current.FltDelay3060)}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{(current.PreFltDelay3060)}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-2" style="margin-bottom:10px;" ng-click="showKPI('FD60120')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;padding-bottom:0; font-size:13px">1 to 2 hrs Delayed Flights  </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 2px 5px">
+                                        <span style="display:inline-block;font-size:17px" ng-style="getDiffStyle(-1,current.FltDelay60120Diff)">{{current.FltDelay60120Diff}}%</span>
+                                        <i ng-show="current.FltDelay60120Diff>0" class="fa fa-caret-up" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay60120Diff)"></i>
+                                        <i ng-show="current.FltDelay60120Diff<0" class="fa fa-caret-down" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay60120Diff)"></i>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{(current.FltDelay60120)}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{(current.PreFltDelay60120)}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-2" style="margin-bottom:10px;" ng-click="showKPI('FD120180')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;padding-bottom:0; font-size:13px">2 to 3 hrs Delayed Flights  </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 2px 5px">
+                                        <span style="display:inline-block;font-size:17px" ng-style="getDiffStyle(-1,current.FltDelay120180Diff)">{{current.FltDelay120180Diff}}%</span>
+                                        <i ng-show="current.FltDelay120180Diff>0" class="fa fa-caret-up" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay120180Diff)"></i>
+                                        <i ng-show="current.FltDelay120180Diff<0" class="fa fa-caret-down" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelay120180Diff)"></i>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{(current.FltDelay120180)}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{(current.PreFltDelay120180)}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--<div class="col-lg-2" style="margin-bottom:10px;" ng-click="showKPI('FD240')">
+        <div style="border:1px solid #ccc">
+            <table style="width:100%;border-bottom:0px solid #ccc">
+                <tr>
+                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;padding-bottom:0; font-size:13px">Flights Delayed +4 hours</td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 2px 5px">
+                        <span style="display:inline-block;font-size:17px" ng-style="getDiffStyle(-1,current.FltDelayOver240Diff)">{{current.FltDelayOver240Diff}}%</span>
+                        <i ng-show="current.FltDelayOver240Diff>0" class="fa fa-caret-up" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver240Diff)"></i>
+                        <i ng-show="current.FltDelayOver240Diff<0" class="fa fa-caret-down" style="font-size:26px;margin-left:5px" ng-style="getDiffStyle(-1,current.FltDelayOver240Diff)"></i>
+                    </td>
+                </tr>
+                <tr style="border-top:1px dashed #ddd">
+
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                </tr>
+                <tr>
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{(current.FltDelayOver240)}}</td>
+                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{(current.PreFltDelayOver240)}}</td>
+                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                </tr>
+            </table>
+
+        </div>
+
+    </div>-->
+
+
+
+
+                    <div style="clear:both"></div>
+                </div>
+                <!--END OF MAIN KPI CONTAINER-->
+            </div>
+            <div ng-show="activeTab=='category'" class="kpi-container">
+                <div style="padding:8px 0 8px 8px;  ">
+
+                    <table style="width:100%; ">
+                        <tr>
+                            <td><div style="font-weight:bold;font-size:18px;margin:0 0 10px 0;padding-left:15px">Summary</div></td>
+
+                            <td class="dx-border" style="width:100px;padding:0 0px 10px 5px"><div dx-select-box="sb_year" class="center"></div></td>
+                            <td class="dx-border" style="width:100px;padding:0 15px 10px 5px"><div dx-select-box="sb_month" class="center"></div></td>
+                            <td class="dx-border" style="width:50px;padding:0 15px 10px 5px"><div dx-button="btn_reload"></div></td>
+                        </tr>
+                    </table>
+                    <div class="padding-0" style="padding:0 15px 15px 15px; border:0px solid #ccc; ">
+                        <div class="col-lg-6 iblock" style="margin-bottom:10px; ">
+
+                            <div style="color:gray;font-weight:bold;padding-bottom:5px">Duration</div>
+                            <div dx-pie-chart="pie_cats" style="margin-top:10px"></div>
+
+                        </div>
+                        <!--<div class="col-lg-4 iblock" style="margin-bottom:10px; ">
+
+            <div style="color:gray;font-weight:bold;padding-bottom:5px"> Occurance</div>
+            <div dx-pie-chart="pie_cats_count" style="margin-top:10px"></div>
+
+        </div>-->
+                        <div class="col-lg-6 iblock" style="margin-bottom:10px; ">
+
+                            <div style=" color:gray;font-weight:bold;padding-bottom:5px">Ratio</div>
+                            <div dx-chart="chart_catdurationstack" style="margin-top:10px"></div>
+
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="padding-left:10px"><div dx-check-box="chk_lateArr"></div></div>
+                </div>
+
+                <div class="padding-0" style="padding:0 15px 15px 15px; border:0px solid #ccc; ">
+                    <div ng-repeat="t in groupedCategories" on-finish-render="ngRepeatFinishedCats">
+                        <div style="font-weight:bold;font-size:16px;margin:0 0 10px 0;padding-left:15px; padding:7px;background:#eee;border-bottom:1px solid #ccc;border-top:1px solid #ccc">{{t.ICategory}}<span style="display:inline-block;margin-left:5px;font-size:16px;color:gray">KPIs</span></div>
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPICat('DL',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            DL
+                                            <div style="font-weight:normal;font-size:13px;">Total Delay </div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.DelayDiff)">{{t.current.DelayDiff}}%</span>
+                                            <i ng-show="t.current.DelayDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayDiff)"></i>
+                                            <i ng-show="t.current.DelayDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" class="tdchart" style="padding:5px; ">
+                                            <canvas class="chart-rpk chart-type" style="  width: 100%; " data-kpi="DL" data-type="{{t.ICategory}}" data-field="Delay"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;"> {{formatMinutes(t.current.Delay)}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{formatMinutes(t.current.PreDelay)}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+                        <!--Delay per Cycle-->
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPICat('DL',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            DC
+                                            <div style="font-weight:normal;font-size:13px;">Delay(minute) / Total Performed Cycles</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.DelayPerLegDiff)">{{t.current.DelayPerLegDiff}}%</span>
+                                            <i ng-show="t.current.DelayPerLegDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayPerLegDiff)"></i>
+                                            <i ng-show="t.current.DelayPerLegDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayPerLegDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" class="tdchart" style="padding:5px; ">
+                                            <canvas class="chart-rpk chart-type" style="  width: 100%; " data-kpi="DC" data-type="{{t.ICategory}}" data-field="DelayPerLeg"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.DelayPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreDelayPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <!--Occurence per Cycle-->
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPICat('DL',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            OC
+                                            <div style="font-weight:normal;font-size:13px;">Occurence / Total Performed Cycles</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.CountPerLegDiff)">{{t.current.CountPerLegDiff}}%</span>
+                                            <i ng-show="t.current.CountPerLegDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.CountPerLegDiff)"></i>
+                                            <i ng-show="t.current.CountPerLegDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.CountPerLegDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" class="tdchart" style="padding:5px; ">
+                                            <canvas class="chart-rpk chart-type" style="  width: 100%; " data-kpi="OC" data-type="{{t.ICategory}}" data-field="CountPerLeg"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.CountPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreCountPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" >
+                            <canvas class="chart-rpk chart-type-polar" style="  width: 100%; " data-type="{{t.ICategory}}"></canvas>
+                        </div>
+
+
+
+                        <div style="clear:both"></div>
+                    </div>
+
+                </div>
+
+
+
+                <!--END OF MAIN KPI CONTAINER-->
+            </div>
+
+
+            <div ng-show="activeTab=='airport'" class="kpi-container">
+                <div style="padding:8px 0 8px 8px;  ">
+
+                    <table style="width:100%; ">
+                        <tr>
+                            <td><div style="font-weight:bold;font-size:18px;margin:0 0 10px 0;padding-left:15px">Summary</div></td>
+
+                            <td class="dx-border" style="width:100px;padding:0 0px 10px 5px"><div dx-select-box="sb_year" class="center"></div></td>
+                            <td class="dx-border" style="width:100px;padding:0 15px 10px 5px"><div dx-select-box="sb_month" class="center"></div></td>
+                            <td class="dx-border" style="width:50px;padding:0 15px 10px 5px"><div dx-button="btn_reload"></div></td>
+                        </tr>
+                    </table>
+                    <div class="padding-0" style="padding:0 15px 15px 15px; border:0px solid #ccc; ">
+                        <div class="col-lg-4 iblock" style="margin-bottom:10px; ">
+
+                            <div style=" color:gray;font-weight:bold;padding-bottom:5px">Delay</div>
+                            <div dx-chart="chart_aptdelay" style="margin-top:10px"></div>
+
+                        </div>
+                        <div class="col-lg-4 iblock" style="margin-bottom:10px; ">
+
+                            <div style=" color:gray;font-weight:bold;padding-bottom:5px">Delay per Cycle</div>
+                            <div dx-chart="chart_aptdelaycycle" style="margin-top:10px"></div>
+
+                        </div>
+                        <div class="col-lg-4 iblock" style="margin-bottom:10px; ">
+
+                            <div style=" color:gray;font-weight:bold;padding-bottom:5px">Delay per Cycle</div>
+                            <div dx-chart="chart_aptdelaycycledet" style="margin-top:10px"></div>
+
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                </div>
+
+                <div class="padding-0" style="padding:0 10px 15px 10px; border:0px solid #ccc; ">
+                    <div dx-tag-box="tagAirports" style="padding:4px;margin-bottom:5px;"></div>
+
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;padding:0 2px 0 2px;" ng-click="showKPIAirport(t)" ng-repeat="t in groupedAirports2" on-finish-render="ngRepeatFinishedAirports" ng-show="filterAirport.length==0 || filterAirport.indexOf(t.Airport)!=-1">
+                        <div style="border:1px solid #ccc;height:230px;">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="4" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        {{t.Airport}}
+                                        <div style="font-weight:normal;font-size:13px;">Delay(minute) / Total Performed Cycles</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.DelayPerLegDiff)">{{t.current.DelayPerLegDiff}}%</span>
+                                        <i ng-show="t.current.DelayPerLegDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayPerLegDiff)"></i>
+                                        <i ng-show="t.current.DelayPerLegDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayPerLegDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="4" class="tdchart" style="padding:5px; ">
+                                        <canvas class="chart-rpk chart-apt" style="  width: 100%; " data-kpi="DC" data-type="{{t.AirportId}}" data-field="DelayPerLeg"></canvas>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 25%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 25%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width:25%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Delay</td>
+                                    <td style="width: 25%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Cycle</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 25%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.DelayPerLeg}}</td>
+                                    <td style="width: 25%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreDelayPerLeg}}</td>
+                                    <td style="width: 25%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;">{{formatMinutes( t.current.Delay)}}</td>
+                                    <td style="width: 25%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;">{{ ( t.current.AFlightCount)}}</td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <div style="clear:both"></div>
+
+
+
+
+                </div>
+
+
+
+                <!--END OF MAIN KPI CONTAINER-->
+            </div>
+
+
+            <div ng-show="activeTab=='technical'" class="kpi-container">
+                <div style="padding:8px 0 8px 8px;  ">
+
+                    <table style="width:100%; ">
+                        <tr>
+                            <td><div style="font-weight:bold;font-size:18px;margin:0 0 10px 0;padding-left:15px">Summary</div></td>
+
+                            <td class="dx-border" style="width:100px;padding:0 0px 10px 5px"><div dx-select-box="sb_year" class="center"></div></td>
+                            <td class="dx-border" style="width:100px;padding:0 15px 10px 5px"><div dx-select-box="sb_month" class="center"></div></td>
+                            <td class="dx-border" style="width:50px;padding:0 15px 10px 5px"><div dx-button="btn_reload"></div></td>
+                        </tr>
+                    </table>
+                    <div class="padding-0" style="padding:0 15px 15px 15px; border:0px solid #ccc; ">
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px; ">
+
+                            <div style=" color:gray;font-weight:bold;padding-bottom:5px">Duration</div>
+                            <div dx-polar-chart="polar_delaystechnical_time" style="margin-top:-15px"></div>
+
+                        </div>
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px; ">
+
+                            <div style="color:gray;font-weight:bold;padding-bottom:5px"> Occurance</div>
+                            <div dx-polar-chart="polar_delaystechnical" style="margin-top:-15px"></div>
+
+                        </div>
+                        <div class="col-lg-6 iblock" style="margin-bottom:10px; ">
+
+                            <div style=" color:gray;font-weight:bold;padding-bottom:5px">By Registers</div>
+                            <div dx-chart="chart_techreg" style="margin-top:10px"></div>
+
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+
+                </div>
+
+                <div style="font-weight:bold;font-size:18px;margin:0 0 10px 0;padding-left:15px;">KPIs</div>
+                <div class="padding-0" style="padding:0 15px 25px 15px; border:0px solid #ccc;padding:0;">
+                    <!--Delay-->
+
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPITechCat('DL')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DL
+                                        <div style="font-weight:normal;font-size:13px;">Total Delay</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,currentTechnical.DelayDiff)">{{currentTechnical.DelayDiff}}%</span>
+                                        <i ng-show="currentTechnical.DelayDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayDiff)"></i>
+                                        <i ng-show="currentTechnical.DelayDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" style="padding:5px;" class="tdchart">
+                                        <canvas class="chart-dl-tech" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                        <div style="clear:both"></div>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{formatMinutes(currentTechnical.Delay)}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{formatMinutes(currentTechnical.PreDelay)}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                    <!--Delay per Cycle-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPITechCat('DL')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DC
+                                        <div style="font-weight:normal;font-size:13px;">Delay(minute) / Total Performed Cycles</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,currentTechnical.DelayPerLegDiff)">{{currentTechnical.DelayPerLegDiff}}%</span>
+                                        <i ng-show="currentTechnical.DelayPerLegDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayPerLegDiff)"></i>
+                                        <i ng-show="currentTechnical.DelayPerLegDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayPerLegDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" class="tdchart" style="padding:5px; ">
+                                        <canvas class="chart-dc-tech" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{currentTechnical.DelayPerLeg}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{currentTechnical.PreDelayPerLeg}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--Occurence per Cycle-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPITechCat('DL')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        OC
+                                        <div style="font-weight:normal;font-size:13px;">Occurence / Total Performed Cycles</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,currentTechnical.CountPerLegDiff)">{{currentTechnical.CountPerLegDiff}}%</span>
+                                        <i ng-show="currentTechnical.CountPerLegDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.CountPerLegDiff)"></i>
+                                        <i ng-show="currentTechnical.CountPerLegDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.CountPerLegDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" class="tdchart" style="padding:5px; ">
+                                        <canvas class="chart-oc-tech" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{currentTechnical.CountPerLeg}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{currentTechnical.PreCountPerLeg}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--Delays -30 Time-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPITechCat('DL')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DT-30
+                                        <div style="font-weight:normal;font-size:13px;">Duration of Delays under 30 minutes</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,currentTechnical.DelayUnder30TimeDiff)">{{currentTechnical.DelayUnder30TimeDiff}}%</span>
+                                        <i ng-show="currentTechnical.DelayUnder30TimeDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayUnder30TimeDiff)"></i>
+                                        <i ng-show="currentTechnical.DelayUnder30TimeDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayUnder30TimeDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" class="tdchart" style="padding:5px; ">
+                                        <canvas class="chart-dt30-tech" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{formatMinutes(currentTechnical.DelayUnder30Time)}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{formatMinutes(currentTechnical.PreDelayUnder30Time)}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <!--Delays -30 Occurance-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPITechCat('DL')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DO-30
+                                        <div style="font-weight:normal;font-size:13px;">Occurance of Delays under 30 minutes</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,currentTechnical.DelayUnder30Diff)">{{currentTechnical.DelayUnder30Diff}}%</span>
+                                        <i ng-show="currentTechnical.DelayUnder30Diff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayUnder30Diff)"></i>
+                                        <i ng-show="currentTechnical.DelayUnder30Diff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayUnder30Diff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" class="tdchart" style="padding:5px; ">
+                                        <canvas class="chart-do30-tech" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{currentTechnical.DelayUnder30}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{currentTechnical.PreDelayUnder30}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <!--Delays +180 Time-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPITechCat('DL')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DT+180
+                                        <div style="font-weight:normal;font-size:13px;">Duration of Delays over 180 minutes</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,currentTechnical.DelayOver180TimeDiff)">{{currentTechnical.DelayOver180TimeDiff}}%</span>
+                                        <i ng-show="currentTechnical.DelayOver180TimeDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayOver180TimeDiff)"></i>
+                                        <i ng-show="currentTechnical.DelayOver180TimeDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayOver180TimeDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" class="tdchart" style="padding:5px; ">
+                                        <canvas class="chart-dt180-tech" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{formatMinutes(currentTechnical.DelayOver180Time)}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{formatMinutes(currentTechnical.PreDelayOver180Time)}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+
+                    <!--Delays +180 Occurance-->
+                    <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPITechCat('DL')">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        DO+180
+                                        <div style="font-weight:normal;font-size:13px;">Occurance of Delays over 180 minutes</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,currentTechnical.DelayOver180Diff)">{{currentTechnical.DelayOver180Diff}}%</span>
+                                        <i ng-show="currentTechnical.DelayOver180Diff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayOver180Diff)"></i>
+                                        <i ng-show="currentTechnical.DelayOver180Diff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,currentTechnical.DelayOver180Diff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" class="tdchart" style="padding:5px; ">
+                                        <canvas class="chart-do180-tech" height="100" width="322" style="display: block; height: 70px; width: 100%; "></canvas>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{currentTechnical.DelayOver180}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{currentTechnical.PreDelayOver180}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                    <div style="clear:both"></div>
+                </div>
+
+                <div class="padding-0" style="padding:0 15px 15px 15px; border:0px solid #ccc; ">
+                    <div ng-repeat="t in groupedTechnicalRegisters" on-finish-render="ngRepeatFinishedCatsRegs">
+                        <div style="font-weight:bold;font-size:16px;margin:0 0 10px 0;padding-left:15px; padding:7px;background:#eee;border-bottom:1px solid #ccc;border-top:1px solid #ccc">{{t.Register}}<span style="display:inline-block;margin-left:5px;font-size:16px; ">({{t.Type}})</span><span style="display:inline-block;margin-left:5px;font-size:16px;color:gray">KPIs</span></div>
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPITech('DL',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            DL
+                                            <div style="font-weight:normal;font-size:13px;">Total Delay </div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.DelayDiff)">{{t.current.DelayDiff}}%</span>
+                                            <i ng-show="t.current.DelayDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayDiff)"></i>
+                                            <i ng-show="t.current.DelayDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" class="tdchart" style="padding:5px; ">
+                                            <canvas class="chart-rpk chart-reg" style="  width: 100%; " data-kpi="DL" data-type="{{t.RegisterID}}" data-field="Delay"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.Delay}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreDelay}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+                        <!--Delay per Cycle-->
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;"  ng-click="showKPITech('DL',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            DC
+                                            <div style="font-weight:normal;font-size:13px;">Delay(minute) / Total Performed Cycles</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.DelayPerLegDiff)">{{t.current.DelayPerLegDiff}}%</span>
+                                            <i ng-show="t.current.DelayPerLegDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayPerLegDiff)"></i>
+                                            <i ng-show="t.current.DelayPerLegDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayPerLegDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" class="tdchart" style="padding:5px; ">
+                                            <canvas class="chart-rpk chart-reg" style="  width: 100%; " data-kpi="DC" data-type="{{t.RegisterID}}" data-field="DelayPerLeg"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.DelayPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreDelayPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <!--Occurence per Cycle-->
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;"  ng-click="showKPITech('DL',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            OC
+                                            <div style="font-weight:normal;font-size:13px;">Occurence / Total Performed Cycles</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.CountPerLegDiff)">{{t.current.CountPerLegDiff}}%</span>
+                                            <i ng-show="t.current.CountPerLegDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.CountPerLegDiff)"></i>
+                                            <i ng-show="t.current.CountPerLegDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.CountPerLegDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" class="tdchart" style="padding:5px; ">
+                                            <canvas class="chart-rpk chart-reg" style="  width: 100%; " data-kpi="OC" data-type="{{t.RegisterID}}" data-field="CountPerLeg"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.CountPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreCountPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <!--Delays +30 Occurance-->
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;"  ng-click="showKPITech('DL',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            DO+30
+                                            <div style="font-weight:normal;font-size:13px;">Occurance of Delays under 30 minutes</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.DelayOver30Diff)">{{t.current.DelayOver30Diff}}%</span>
+                                            <i ng-show="t.current.DelayOver30Diff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayOver30Diff)"></i>
+                                            <i ng-show="t.current.DelayOver30Diff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.DelayOver30Diff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" class="tdchart" style="padding:5px; ">
+                                            <canvas class="chart-rpk chart-reg" style="  width: 100%; " data-kpi="OC" data-type="{{t.RegisterID}}" data-field="DelayOver30"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.DelayOver30}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreDelayOver30}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div style="clear:both"></div>
+                    </div>
+
+                </div>
+
+
+
+                <!--END OF MAIN KPI CONTAINER-->
+            </div>
+
+
+            <div ng-show="activeTab=='route'" class="kpi-container">
+                <div style="padding:8px 0 8px 8px;  ">
+                    <!--<div id="sales" dx-pivot-grid="pivotGridOptions"></div>-->
+                    <table style="width:100%; ">
+                        <tr>
+                            <td class="dx-border" style="padding-right:5px;"><div dx-text-box="text_search_route" style="background:white"></div></td>
+
+                            <td class="dx-border" style="width:100px;padding:0 0px  0px 5px"><div dx-select-box="sb_year" class="center"></div></td>
+                            <td class="dx-border" style="width:100px;padding:0 15px  0px 5px"><div dx-select-box="sb_month" class="center"></div></td>
+                        </tr>
+                    </table>
+
+                    <div style="clear:both"></div>
+                </div>
+
+                <div class="padding-0" style="padding:0 15px 15px 15px; border:0px solid #ccc; ">
+                    <div ng-repeat="t in groupedRoutes" on-finish-render="ngRepeatFinishedRoutes" class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPIRoute('RPK',t)" ng-show="(t.current || t.past) && (routeSearchParts.length==0 || routeSearchParts.indexOf(t.FromAirportIATA)!=-1 || routeSearchParts.indexOf(t.ToAirportIATA)!=-1)">
+                        <div style="border:1px solid #ccc">
+                            <table style="width:100%;border-bottom:0px solid #ccc">
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                        <span style="font-size: 15px;font-weight:bold;display:inline-block;margin-right:5px">{{t.Route}}</span>
+                                        <span style="font-size: 15px;font-weight:normal;display:inline-block;margin-right:5px;color:gray"> (RPK)</span>
+
+                                        <div style="font-weight:normal;font-size:13px;">Fuel / Revenue Passengers(kilo) Kilometers</div>
+
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                        <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.UsedPerPaxKiloDistanceKMDiff)">{{t.current.UsedPerPaxKiloDistanceKMDiff}}%</span>
+                                        <i ng-show="t.current.UsedPerPaxKiloDistanceKMDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerPaxKiloDistanceKMDiff)"></i>
+                                        <i ng-show="t.current.UsedPerPaxKiloDistanceKMDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerPaxKiloDistanceKMDiff)"></i>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="3" class="tdchart" style="padding:5px; ">
+                                        <canvas class="chart-rpk chart-route" style="  width: 100%; " data-kpi="RPK" data-type="{{t.Route}}" data-field="UsedPerPaxKiloDistanceKM"></canvas>
+                                    </td>
+                                </tr>
+                                <tr style="border-top:1px dashed #ddd">
+
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.UsedPerPaxKiloDistanceKM}}</td>
+                                    <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreUsedPerPaxKiloDistanceKM}}</td>
+                                    <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!--END OF MAIN KPI CONTAINER-->
+            </div>
+
+
+            <div ng-show="activeTab=='register'" class="kpi-container">
+                <div style="padding:8px 0 8px 8px;  ">
+                    <table style="width:100%; ">
+                        <tr>
+                            <td><div style="font-weight:bold;font-size:18px;margin:0 0 10px 0;padding-left:15px">Summary</div></td>
+
+                            <td class="dx-border" style="width:100px;padding:0 0px 10px 5px"><div dx-select-box="sb_year" class="center"></div></td>
+                            <td class="dx-border" style="width:100px;padding:0 15px 10px 5px"><div dx-select-box="sb_month" class="center"></div></td>
+                        </tr>
+                    </table>
+                    <div class="padding-0" style="padding:0 15px 15px 15px; border:0px solid #ccc; ">
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;">
+
+                            <div style="text-align:center;color:gray;font-weight:bold;padding-bottom:5px">Used(K) Current,Past,Total</div>
+                            <div dx-pie-chart="pie_sum_usedreg" style="margin-top:20px"></div>
+                            <table style="width:100%;border:1px solid #ccc;margin-top:10px">
+                                <thead>
+                                    <tr style="border-bottom:1px solid #ccc">
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;"></th>
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;">%</th>
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;">Current</th>
+                                        <th style="text-align:center;width:25%;padding:3px;">Past</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="r in groupedRegisters" style="border-bottom:1px solid #ccc">
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;font-weight:bold">{{r.Register}}</td>
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;">
+                                            {{r.current.UsedKiloDiff.toFixed(1)}}
+                                        </td>
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;">{{r.current.UsedKilo.toFixed(2)}}</td>
+                                        <td style="text-align:center;padding:3px;">{{r.past.UsedKilo.toFixed(2)}}</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;">
+
+                            <div style="text-align:center;color:gray;font-weight:bold;padding-bottom:5px">Weight(tone) Current,Past,Total</div>
+                            <div dx-pie-chart="pie_sum_weightreg" style="margin-top:20px"></div>
+                            <table style="width:100%;border:1px solid #ccc;margin-top:10px">
+                                <thead>
+                                    <tr style="border-bottom:1px solid #ccc">
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;"></th>
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;">%</th>
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;">Current</th>
+                                        <th style="text-align:center;width:25%;padding:3px;">Past</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="r in groupedRegisters" style="border-bottom:1px solid #ccc">
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;font-weight:bold">{{r.Register}}</td>
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;">
+                                            {{r.current.WeightToneDiff.toFixed(1)}}
+                                        </td>
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;">{{r.current.WeightTone.toFixed(2)}}</td>
+                                        <td style="text-align:center;padding:3px;">{{r.past.WeightTone.toFixed(2)}}</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;">
+
+                            <div style="text-align:center;color:gray;font-weight:bold;padding-bottom:5px">Cycles Current,Past,Total</div>
+                            <div dx-pie-chart="pie_sum_legreg" style="margin-top:20px"></div>
+                            <table style="width:100%;border:1px solid #ccc;margin-top:10px">
+                                <thead>
+                                    <tr style="border-bottom:1px solid #ccc">
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;"></th>
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;">%</th>
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;">Current</th>
+                                        <th style="text-align:center;width:25%;padding:3px;">Past</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="r in groupedRegisters" style="border-bottom:1px solid #ccc">
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;font-weight:bold">{{r.Register}}</td>
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;">
+                                            {{r.current.LegsDiff.toFixed(1)}}
+                                        </td>
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;">{{r.current.Legs }}</td>
+                                        <td style="text-align:center;padding:3px;">{{r.past.Legs }}</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;">
+
+                            <div style="text-align:center;color:gray;font-weight:bold;padding-bottom:5px">Block Time Current,Past,Total</div>
+                            <div dx-pie-chart="pie_sum_blreg" style="margin-top:20px"></div>
+                            <table style="width:100%;border:1px solid #ccc;margin-top:10px">
+                                <thead>
+                                    <tr style="border-bottom:1px solid #ccc">
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;"></th>
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;">%</th>
+                                        <th style="text-align:center;width:25%;border-right:1px solid #ddd;padding:3px;">Current</th>
+                                        <th style="text-align:center;width:25%;padding:3px;">Past</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="r in groupedRegisters" style="border-bottom:1px solid #ccc">
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;font-weight:bold">{{r.Register}}</td>
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;">
+                                            {{r.current.BlockTimeDiff.toFixed(1)}}
+                                        </td>
+                                        <td style="text-align:center;border-right:1px solid #ddd;padding:3px;">{{formatMinutes(r.current.BlockTime) }}</td>
+                                        <td style="text-align:center;padding:3px;">{{formatMinutes(r.past.BlockTime)}}</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+
+
+                <div class="padding-0" style="padding:0 15px 15px 15px; border:0px solid #ccc; ">
+
+                    <div ng-repeat="t in groupedRegisters" on-finish-render="ngRepeatFinishedRegisters">
+                        <!--<div style="font-weight:bold;font-size:16px;margin:0 0 10px 0;padding-left:15px;">{{t.Register}}</div>-->
+
+                        <div style="font-weight:bold;font-size:16px;margin:0 0 10px 0;padding-left:15px; padding:7px;background:#eee;border-bottom:1px solid #ccc;border-top:1px solid #ccc">{{t.Register}}<span style="font-size:16px;display:inline-block;margin-left:2px">({{t.Type}})</span><span style="display:inline-block;margin-left:5px;font-size:16px;color:gray">KPIs</span></div>
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPIReg('RPK',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            RPK
+                                            <div style="font-weight:normal;font-size:13px;">Fuel / Revenue Passengers(kilo) Kilometers</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.UsedPerPaxKiloDistanceKMDiff)">{{t.current.UsedPerPaxKiloDistanceKMDiff}}%</span>
+                                            <i ng-show="t.current.UsedPerPaxKiloDistanceKMDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerPaxKiloDistanceKMDiff)"></i>
+                                            <i ng-show="t.current.UsedPerPaxKiloDistanceKMDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerPaxKiloDistanceKMDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" class="tdchart" style="padding:5px; ">
+                                            <canvas class="chart-rpk chart-reg" style="  width: 100%; " data-kpi="RPK" data-type="{{t.RegisterID}}" data-rem="{{t.Register}}" data-field="UsedPerPaxKiloDistanceKM"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.UsedPerPaxKiloDistanceKM}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreUsedPerPaxKiloDistanceKM}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+                        <!--FTK-->
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPIReg('FTK',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            FTK
+                                            <div style="font-weight:normal;font-size:13px;">Fuel / Tone Kilometers</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.UsedPerWeightToneDistanceDiff)">{{t.current.UsedPerWeightToneDistanceDiff}}%</span>
+                                            <i ng-show="t.current.UsedPerWeightToneDistanceDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerWeightToneDistanceDiff)"></i>
+                                            <i ng-show="t.current.UsedPerWeightToneDistanceDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerWeightToneDistanceDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" style="padding:5px;" class="tdchart">
+                                            <canvas class="chart-ftk chart-reg" style="  width: 100%; " data-kpi="RPK" data-type="{{t.RegisterID}}" data-rem="{{t.Register}}" data-field="UsedPerWeightToneDistance"></canvas>
+
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.UsedPerWeightToneDistance}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.UsedPerWeightToneDistance}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <!--FTB-->
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPIReg('FTB',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            FTB
+                                            <div style="font-weight:normal;font-size:13px;">Fuel / Tone Block Time</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.UsedPerWeightToneBlockTimeDiff)">{{t.current.UsedPerWeightToneBlockTimeDiff}}%</span>
+                                            <i ng-show="t.current.UsedPerWeightToneBlockTimeDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerWeightToneBlockTimeDiff)"></i>
+                                            <i ng-show="t.current.UsedPerWeightToneBlockTimeDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerWeightToneBlockTimeDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" style="padding:5px;" class="tdchart">
+                                            <canvas class="chart-ftb chart-reg" style="  width: 100%; " data-kpi="RPK" data-type="{{t.RegisterID}}" data-rem="{{t.Register}}" data-field="UsedPerWeightToneBlockTime"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.UsedPerWeightToneBlockTime}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreUsedPerWeightToneBlockTime}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <!--FBL-->
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPIReg('FBL',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            FBL
+                                            <div style="font-weight:normal;font-size:13px;">Fuel / Block Time</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.UsedPerBlockTimeDiff)">{{t.current.UsedPerBlockTimeDiff}}%</span>
+                                            <i ng-show="t.current.UsedPerBlockTimeDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerBlockTimeDiff)"></i>
+                                            <i ng-show="t.current.UsedPerBlockTimeDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerBlockTimeDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" style="padding:5px;" class="tdchart">
+                                            <canvas class="chart-fbl chart-reg" style="  width: 100%; " data-kpi="RPK" data-type="{{t.RegisterID}}" data-rem="{{t.Register}}" data-field="UsedPerBlockTime"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.UsedPerBlockTime}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreUsedPerBlockTime}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+                        <div style="clear:both"></div>
+                        <!--FC-->
+                        <div class="col-lg-3 iblock" style="margin-bottom:10px;" ng-click="showKPIReg('FC',t)">
+                            <div style="border:1px solid #ccc">
+                                <table style="width:100%;border-bottom:0px solid #ccc">
+                                    <tr>
+                                        <td colspan="3" style="text-align
+    :center;font-weight:bold;color:gray;padding:5px;font-size:15px">
+                                            FC
+                                            <div style="font-weight:normal;font-size:13px;">Fuel / Cycle</div>
+
+
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" style="text-align:center;font-weight:bold;color:gray;padding:0 5px 5px 5px">
+                                            <span style="display:inline-block;font-size:20px" ng-style="getDiffStyle(-1,t.current.UsedPerLegDiff)">{{t.current.UsedPerLegDiff}}%</span>
+                                            <i ng-show="t.current.UsedPerLegDiff>0" class="fa fa-caret-up" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerLegDiff)"></i>
+                                            <i ng-show="t.current.UsedPerLegDiff<0" class="fa fa-caret-down" style="font-size:30px;margin-left:5px" ng-style="getDiffStyle(-1,t.current.UsedPerLegDiff)"></i>
+                                        </td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td colspan="3" style="padding:5px;" class="tdchart">
+                                            <canvas class="chart-fc chart-reg" style="  width: 100%; " data-kpi="RPK" data-type="{{t.RegisterID}}" data-rem="{{t.Register}}" data-field="UsedPerLeg"></canvas>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-top:1px dashed #ddd">
+
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Current</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Past</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding-top: 5px; text-align: center; font-size: 12px;color:gray;">Avg</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;font-weight:bold;color:gray;">{{t.current.UsedPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 1px dashed #ddd; padding: 0px; text-align: center;  font-weight:bold;color:gray;">{{t.current.PreUsedPerLeg}}</td>
+                                        <td style="width: 33.333%; border-right: 0px dashed #ddd; padding: 0px; text-align: center; font-weight:bold;color:gray;"></td>
+
+                                    </tr>
+                                </table>
+
+                            </div>
+
+                        </div>
+                        <!--<div class="col-lg-3 iblock" style="margin-bottom:10px;"  ></div>-->
+
+                        <div style="clear:both"></div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <div ng-show="activeTab=='route'" class="kpi-container">
+                <!--END OF MAIN KPI CONTAINER-->
+            </div>
+
+
+            <div ng-show="activeTab=='stats'" class="kpi-container">
+                <div>
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="padding:5px;text-align:center">
+                                <div style="border:1px solid #ccc;background:#eee;padding:7px;font-weight:bold" class="show-pivot show-pivot-table on-type" ng-click="showPivotTable()">Table</div>
+                            </td>
+                            <td style="padding:5px;text-align:center">
+                                <div style="border:1px solid #ccc;background:#eee;padding:7px;font-weight:bold" class="show-pivot show-pivot-chart" ng-click="showPivotCharts()">Charts</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="padding:8px 8px 8px 8px; " ng-show="isPivotVisible">
+                    <div ng-show="IsStatsPivotVisible">
+                        <div id="pvtFuel" dx-pivot-grid="fuelPivotGridOptions"></div>
+                    </div>
+
+                    <div ng-show="IsStatsChartVisible">
+                        <div style="margin-top:20px;margin-bottom:20px; padding:15px !important;border:1px solid Gray"  >
+                            <div id="pvtFuelChart" dx-chart="fuelPivotChartOptions"></div>
+
+                        </div>
+                        <div style="margin-top:20px;margin-bottom:20px; padding:15px !important;border:1px solid Gray"  >
+                            <div id="pvtFuelChartKPI" dx-chart="fuelPivotChartKPIOptions"></div>
+
+                        </div>
+                        <div style="clear:both"></div>
+
+                        <!--<div ng-show="IsStatsChartVisible" style="margin-top:0px;padding:15px !important;border:1px solid Gray" class="col-lg-6">
+                            <div id="pvtFuelChartPax" dx-chart="fuelPivotChartPaxOptions"></div>
+
+                        </div>
+                        <div ng-show="IsStatsChartVisible" style="margin-top:0px;padding:15px !important;border:1px solid Gray" class="col-lg-6">
+                            <div id="pvtFuelChartCycle" dx-chart="fuelPivotChartCycleOptions"></div>
+
+                        </div>
+                        <div ng-show="IsStatsChartVisible" style="margin-top:0px;padding:15px !important;border:1px solid Gray" class="col-lg-6">
+                            <div id="pvtFuelChartBL" dx-chart="fuelPivotChartBLOptions"></div>
+
+                        </div>
+                        <div ng-show="IsStatsChartVisible" style="margin-top:0px;padding:15px !important;border:1px solid Gray" class="col-lg-6">
+                            <div id="pvtFuelChartDistance" dx-chart="fuelPivotChartDistanceOptions"></div>
+
+                        </div>
+                        <div style="clear:both"></div>-->
+                    </div>
+
+
+
+                    <!--<table style="width:100%; ">
+                        <tr>
+                            <td class="dx-border" style="padding-right:5px;"><div dx-text-box="text_search_route" style="background:white"></div></td>
+
+                            <td class="dx-border" style="width:100px;padding:0 0px  0px 5px"><div dx-select-box="sb_year" class="center"></div></td>
+                            <td class="dx-border" style="width:100px;padding:0 15px  0px 5px"><div dx-select-box="sb_month" class="center"></div></td>
+                        </tr>
+                    </table>-->
+
+                    <div style="clear:both"></div>
+
+                </div>
+
+
+
+                <!--END OF MAIN KPI CONTAINER-->
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div dx-popup="popupOptions">
+        <div style="padding:20px;">
+            <div data-options="dxTemplate: { name: 'content' }">
+                <div id="dg_pivot" dx-data-grid="dataGridOptions"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+
+    <div ng-include="'app/views/kpiDelay.html'"></div>
+
+    <div ng-include="'app/views/kpidelaycat.html'"></div>
+    <div ng-include="'app/views/kpidelaytech.html'"></div>
+    <div ng-include="'app/views/kpidelayairport.html'"></div>
+
+    <div ng-include="'app/views/tblDelayedFlight.html'"></div>
+    <div ng-include="'app/views/tblDelayCat.html'"></div>
+    <div ng-include="'app/views/tblDelayTech.html'"></div>
+
+</div>
+
+

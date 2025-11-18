@@ -1,0 +1,565 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/19.2.7/css/dx-gantt.min.css">
+    <script src="https://cdn3.devexpress.com/jslib/19.2.7/js/dx-gantt.min.js"></script>
+    <!-- DevExtreme themes -->
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/19.2.7/css/dx.common.css">
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/19.2.7/css/dx.light.css">
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
+    <!-- DevExtreme common scripts -->
+    <script type="text/javascript" src="https://cdn3.devexpress.com/jslib/19.2.7/js/dx.all.js"></script>
+    <style>
+        #gantt {
+            height: 700px;
+        }
+
+        .dx-gantt .dx-gantt-altRow, .dx-gantt .dx-gantt-collapsable-row {
+            background-color: #ffcc66;
+        }
+
+            .dx-gantt .dx-gantt-altRow .dx-gantt-task, .dx-gantt .dx-gantt-collapsable-row .dx-gantt-task {
+                display: none !important;
+            }
+    </style>
+</head>
+<body>
+    <div id="gantt">
+    </div>
+    <!--<div id="normal-contained"></div>-->
+    <script>
+        $(function () {
+            var tasks = [
+  {
+      "id": 1,
+      "parentId": 0,
+      "title": "CrewPocket",
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-26T00:00:00.000Z",
+      "progress": 0,
+      color:'black'
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-13T00:00:00.000Z",
+      "progress": 70,
+      "title": "مشاهده اطلاعات پروفایل",
+      "id": "75aed3ec-e497-1af9-8742-061f68744c17"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-06T00:00:00.000Z",
+      "progress": 100,
+      "title": "مشاهده برنامه پرواز",
+      "id": "a51d3a98-025a-473f-9a5b-0c6c74c12477"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-09T00:00:00.000Z",
+      "progress": 90,
+      "title": "مشاهده اطلاعات گواهینامه ها",
+      "id": "31c9ae99-2331-9958-52cf-6672a1d68aef"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-06T00:00:00.000Z",
+      "progress": 100,
+      "title": "مشاهده کتابخانه و داکیومنت ها",
+      "id": "d90a70f3-1e4f-a7fe-e925-a14245c1c5c1"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-06T00:00:00.000Z",
+      "progress": 100,
+      "title": "مشاهده بخشنامه ها، PIF، CIF",
+      "id": "ea3615b1-ac17-3b57-197e-6ca84dc2c0d4"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-13T00:00:00.000Z",
+      "progress": 80,
+      "title": "دریافت اطلاع رسانی ها",
+      "id": "934e7d28-fedc-e321-8bf4-4229ad4899ae"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-26T00:00:00.000Z",
+      "progress": 30,
+      "title": "خروجی گزارش های استاندارد",
+      "id": "4bc74775-af46-99a1-4798-e47726b43f15"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-18T00:00:00.000Z",
+      "progress": 80,
+      "title": "امکان استفاده مستقل",
+      "id": "8383d84e-b0d9-7d32-c708-7243ee28781a"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-18T00:00:00.000Z",
+      "progress": 80,
+      "title": "دریافت فایل های پروازی",
+      "id": "db11e992-b646-53c5-0441-e5202edc37ae"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-26T00:00:00.000Z",
+      "progress": 80,
+      "title": "حالت استفاده مهماندار و خلبان",
+      "id": "9585d566-bcdc-5129-f2da-1fa8bb654285"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-15T00:00:00.000Z",
+      "progress": 90,
+      "title": "ثبت زمان های Pickup و Dispatch",
+      "id": "a9e6653c-17d6-32fc-d428-ca7d2476a454"
+  },
+  {
+      "parentId": 1,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-26T00:00:00.000Z",
+      "progress": 80,
+      "title": "انتقال اطلاعات به سرور شرکت",
+      "id": "25dda274-cdb5-c72d-610e-baa3438626e0"
+  },
+  {
+      "id": 2,
+      "parentId": 0,
+      "title": "AirPocket",
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-09T00:00:00.000Z",
+      "progress": 0
+  },
+  {
+      "id": 3,
+      "parentId": 0,
+      "title": "BIPocket(CeoPocket)",
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-21T00:00:00.000Z",
+      "progress": 0
+  },
+  {
+      "id": 4,
+      "parentId": 0,
+      "title": "TechPocket",
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-21T00:00:00.000Z",
+      "progress": 0
+  },
+  {
+      "id": 5,
+      "parentId": 0,
+      "title": "GroundPocket",
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-21T00:00:00.000Z",
+      "progress": 100
+  },
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-25T00:00:00.000Z",
+      "progress": 80,
+      "title": "تابلو پروازها (Gant View)",
+      "id": "13d7cda5-8e6a-97b9-e918-6bdf5d4b35ca"
+  },
+  {
+      "parentId": 3,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-21T00:00:00.000Z",
+      "progress": 70,
+      "title": "داشبورد کلی وضعیت ایرلاین",
+      "id": "93d4358b-d474-ac98-4532-839854441459"
+  },
+  {
+      "parentId": 4,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-25T00:00:00.000Z",
+      "progress": 80,
+      "title": "تابلو پروازها (Gant View)",
+      "id": "10e6acbf-6ca1-b1ad-9405-c33b47f9bc78"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-25T00:00:00.000Z",
+      "progress": 80,
+      "title": "تابلو پروازها (Gant View)",
+      "id": "45a8b74d-9cfc-de8d-4879-731ee135e3da"
+  },
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-25T00:00:00.000Z",
+      "progress": 80,
+      "title": "تابلو پروازها (Tile View)",
+      "id": "e29a2407-d899-289a-d4c4-a585d3f8e288"
+  },
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-05T00:00:00.000Z",
+      "progress": 60,
+      "title": "تغییر رجیستر",
+      "id": "a05aec1c-0cc9-8adc-fe2c-9a80e5061304"
+  },
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-09T00:00:00.000Z",
+      "progress": 30,
+      "title": "مشاهده مجوزهای پروازی",
+      "id": "896859cf-1983-9171-76e3-5a2d37a93531"
+  },
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-15T00:00:00.000Z",
+      "progress": 70,
+      "title": "دریافت اطلاع رسانی ها",
+      "id": "ce3a17d2-53f4-6bc6-6b7c-67b6be6d186c"
+  },
+
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-29T00:00:00.000Z",
+      "progress": 80,
+      "title": "گزارشات پروازی",
+      "id": "e6401c14-85d9-b63c-7a9e-723d6538823a"
+  },
+    
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-01T00:00:00.000Z",
+      "progress": 60,
+      "title": "گزارشات کرو",
+      "id": "805c55cb-9bdf-0f45-a104-961f19390cd7"
+  },
+  //sook
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-07T00:00:00.000Z",
+      "progress": 70,
+      "title": "تغییر وضعیت پروازها",
+      "id": "a1c54a0e-6d68-d933-22d1-a273931bb53c"
+  },
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-06T00:00:00.000Z",
+      "progress": 60,
+      "title": "تعریف پروازهای برنامه ریزی نشده",
+      "id": "47fea2d4-1141-2914-6204-5db83a1d4937"
+  },
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-01T00:00:00.000Z",
+      "progress": 70,
+      "title": "گزارش تاخیرات",
+      "id": "8274b401-1461-5bd4-9ed7-0737142d53ae"
+  },
+  {
+      "parentId": 2,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-02T00:00:00.000Z",
+      "progress": 70,
+      "title": "گزارش سوخت",
+      "id": "e1d7932a-d37a-d72b-e996-91a5078e8b85"
+  },
+  {
+      "parentId": 3,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-05-14T00:00:00.000Z",
+      "progress": 80,
+      "title": "داشبورد تاخیرات",
+      "id": "f8365193-110e-76e7-4b71-a5265c1976a9"
+  },
+  {
+      "parentId": 3,
+      "start": "2020-05-04T00:00:00.000Z",
+      "end": "2020-05-14T00:00:00.000Z",
+      "progress": 0,
+      "title": "داشبورد سوخت",
+      "id": "c1b85165-d428-3ef8-495d-352aa1a65c79"
+  },
+  {
+      "parentId": 3,
+      "start": "2020-05-04T00:00:00.000Z",
+      "end": "2020-05-14T00:00:00.000Z",
+      "progress": 0,
+      "title": "داشبورد کرو",
+      "id": "6dcb5268-3e88-5657-72e6-160eca6787e5"
+  },
+  {
+      "parentId": 3,
+      "start": "2020-05-04T00:00:00.000Z",
+      "end": "2020-05-21T00:00:00.000Z",
+      "progress": 0,
+      "title": "داشبورد مسافران",
+      "id": "47e9e410-34d9-e229-80af-9918612bda4a"
+  },
+  {
+      "parentId": 3,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-25T00:00:00.000Z",
+      "progress": 80,
+      "title": "تابلو پروازها (Gant View)",
+      "id": "fa77a770-4ea7-88bd-bd17-1cce3c1956d9"
+  },
+  {
+      "parentId": 3,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-25T00:00:00.000Z",
+      "progress": 80,
+      "title": "تابلو پروازها (Tile View)",
+      "id": "b867d368-f929-195e-1c54-88ef6645521c"
+  },
+  {
+      "parentId": 3,
+      "start": "2020-05-10T00:00:00.000Z",
+      "end": "2020-05-15T00:00:00.000Z",
+      "progress": 0,
+      "title": "مشاهده پروفایل ها",
+      "id": "d11a4a18-baf8-ce4e-c34e-95475cc6a9aa"
+  },
+  {
+      "parentId": 3,
+      "start": "2020-05-10T00:00:00.000Z",
+      "end": "2020-05-15T00:00:00.000Z",
+      "progress": 0,
+      "title": "مشاهده داکیومنت ها و گواهینامه ها",
+      "id": "91852356-8616-b9c1-ad98-d4dc7cef3cd8"
+  },
+  {
+      "parentId": 4,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-25T00:00:00.000Z",
+      "progress": 80,
+      "title": "تابلو پروازها (Tile View)",
+      "id": "4501b20e-999b-13b2-7bf0-a768449d4582"
+  },
+  {
+      "parentId": 4,
+      "start": "2020-05-10T00:00:00.000Z",
+      "end": "2020-05-15T00:00:00.000Z",
+      "progress": 0,
+      "title": "مشاهده پروفایل ها",
+      "id": "3600cb06-97c2-f2c9-ffc2-f6a16cc229ed"
+  },
+  {
+      "parentId": 4,
+      "start": "2020-05-10T00:00:00.000Z",
+      "end": "2020-05-15T00:00:00.000Z",
+      "progress": 0,
+      "title": "مشاهده داکیومنت ها و گواهینامه ها",
+      "id": "2190ec12-9815-3aca-9600-922aaa3858e7"
+  },
+  {
+      "parentId": 4,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-15T00:00:00.000Z",
+      "progress": 70,
+      "title": "دریافت اطلاع رسانی ها",
+      "id": "cbe845b4-d71a-5756-286b-9e5d6a85172d"
+  },
+  {
+      "parentId": 4,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-29T00:00:00.000Z",
+      "progress": 80,
+      "title": "گزارشات پروازی",
+      "id": "5ad1eb73-2cd4-d493-a2f5-e2c403eab2c4"
+  },
+  //{
+  //    "parentId": 4,
+  //    "start": "2020-03-20T00:00:00.000Z",
+  //    "end": "2020-05-21T00:00:00.000Z",
+  //    "progress": 0,
+  //    "title": "اتصال به سیستم CAMO",
+  //    "id": "ec516727-51c3-a992-8d3b-ea1e4c3a94dd"
+  //},
+  {
+      "parentId": 4,
+      "start": "2020-05-07T00:00:00.000Z",
+      "end": "2020-05-17T00:00:00.000Z",
+      "progress": 0,
+      "title": "ورود داده های Technical Log",
+      "id": "a0295caa-9213-bddc-d2d5-34791b5c5bcd"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-25T00:00:00.000Z",
+      "progress": 80,
+      "title": "تابلو پروازها (Tile View)",
+      "id": "673116c9-7713-82ae-b6a2-abef6dadac4c"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-05-10T00:00:00.000Z",
+      "end": "2020-05-15T00:00:00.000Z",
+      "progress": 0,
+      "title": "مشاهده پروفایل ها",
+      "id": "9e10a997-3c3b-eb62-125c-f4babed1cc6f"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-05-10T00:00:00.000Z",
+      "end": "2020-05-15T00:00:00.000Z",
+      "progress": 0,
+      "title": "مشاهده داکیومنت ها و گواهینامه ها",
+      "id": "1cea4d87-3368-6df5-2dda-336e3089e1e8"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-03-20T00:00:00.000Z",
+      "end": "2020-04-15T00:00:00.000Z",
+      "progress": 70,
+      "title": "دریافت اطلاع رسانی ها",
+      "id": "bb90d7a8-9e1d-5a80-a34a-57b92bd560ba"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-05-09T00:00:00.000Z",
+      "end": "2020-05-25T00:00:00.000Z",
+      "progress": 0,
+      "title": "ثبت اطلاعات گیت پروازی",
+      "id": "c4901bc5-ead6-e132-a286-e1cac58d7477"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-05-09T00:00:00.000Z",
+      "end": "2020-05-25T00:00:00.000Z",
+      "progress": 0,
+      "title": "ثبت اطلاعات حراست",
+      "id": "6eec347c-4c62-e17b-35d8-d7163992a608"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-05-09T00:00:00.000Z",
+      "end": "2020-05-25T00:00:00.000Z",
+      "progress": 0,
+      "title": "ثبت اطلاعات ایستگاه",
+      "id": "3f1c43d6-3974-195a-dea7-3b4d17b82651"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-05-09T00:00:00.000Z",
+      "end": "2020-05-25T00:00:00.000Z",
+      "progress": 0,
+      "title": "ثبت اطلاعات پاکت پروازی",
+      "id": "9634fcbd-ed0c-9297-de6c-77a517c92631"
+  },
+  {
+      "parentId": 5,
+      "start": "2020-05-09T00:00:00.000Z",
+      "end": "2020-05-25T00:00:00.000Z",
+      "progress": 0,
+      "title": "ثبت اطلاعات کردیناتور",
+      "id": "51819655-b295-1687-ae0a-9ab6489e2b0e"
+  }
+            ];
+
+            var dependencies = [];
+
+            var resources = [{
+                'id': 1,
+                'text': 'Management'
+            }, {
+                'id': 2,
+                'text': 'Project Manager'
+            }, {
+                'id': 3,
+                'text': 'Analyst'
+            }, {
+                'id': 4,
+                'text': 'Developer'
+            }, {
+                'id': 5,
+                'text': 'Testers'
+            }, {
+                'id': 6,
+                'text': 'Trainers'
+            }, {
+                'id': 7,
+                'text': 'Technical Communicators'
+            }, {
+                'id': 8,
+                'text': 'Deployment Team'
+            }];
+
+            var resourceAssignments = [];
+            $("#gantt").dxGantt({
+                height: function() {
+                    return $(window).height()-20;
+                },
+                tasks: {
+                    dataSource: tasks,
+                    colorExpr:'color'
+                },
+                dependencies: {
+                    dataSource: dependencies
+                },
+                resources: {
+                    dataSource: resources
+                },
+                resourceAssignments: {
+                    dataSource: resourceAssignments
+                },
+                editing: {
+                    enabled: true
+                },
+                columns: [{
+                    dataField: "title",
+                    caption: "Subject",
+                    width: 300
+                },
+                //{
+                //    dataField: "start",
+                //    caption: "Start Date"
+                //},
+                {
+                    dataField: "end",
+                    caption: "End Date"
+                }],
+                scaleType: "weeks",
+                taskListWidth: 400
+            });
+
+            $("#normal-contained").dxButton({
+                stylingMode: "contained",
+                text: "Contained",
+                type: "normal",
+                width: 120,
+                onClick: function () {
+                    DevExpress.ui.notify("The Contained button was clicked");
+                    var xx = $('#gantt').dxGantt("instance").option('tasks.dataSource');
+                    console.log(xx);
+                    console.log(JSON.stringify(xx));
+                }
+            });
+            //////////////////////
+        });
+    </script>
+</body>
+</html>

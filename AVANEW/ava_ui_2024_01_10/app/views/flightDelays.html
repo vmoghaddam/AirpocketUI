@@ -1,0 +1,376 @@
+﻿<style>
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .summarybox {
+        /*min-width: 140px !important;*/
+        padding-right: 3px;
+    }
+
+        .summarybox .caption {
+            font-size: 13px !important;
+            margin-bottom: 0 !important;
+        }
+
+        .summarybox .td-icon {
+            width: 35% !important;
+        }
+
+    .home-box {
+        padding: 4px !important;
+    }
+</style>
+
+<div class="box flightdelays" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'person';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;">
+
+
+            <div dx-tabs="tabs_options" class="gray">
+
+            </div>
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                <div id="code" class="tabc">
+                    <div class="col-lg-7" style="padding:0;">
+                        <div dx-data-grid="dg" id="dg">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="pie_code" dx-pie-chart="pie_code"></div>
+                    </div>
+                </div>
+                <div id="source" class="tabc">
+                    <div class="col-lg-7" style="padding:0;">
+                        <div dx-data-grid="dg_src" id="dg_src">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="pie_src" dx-pie-chart="pie_src"></div>
+                        <div id="bar_src" dx-chart="bar_src"></div>
+                    </div>
+                </div>
+                <div id="register" class="tabc">
+                    <div class="col-lg-7" style="padding:0;">
+                        <div dx-data-grid="dg_reg" id="dg_reg">
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="pie_reg" dx-pie-chart="pie_reg"></div>
+                        <div id="bar_reg" dx-chart="bar_reg"></div>
+                    </div>
+                </div>
+                <div id="route" class="tabc">
+                    <div class="col-lg-7" style="padding:0;">
+                        <div dx-data-grid="dg_route" id="dg_route">
+
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div id="pie_route" dx-pie-chart="pie_route"></div>
+                        <div id="bar_route" dx-chart="bar_route"></div>
+                    </div>
+                </div>
+                <div id="details" class="tabc">
+                    
+                        <div dx-data-grid="dg_route" id="dg_route">
+
+                        </div>
+                    
+                     
+                </div>
+            </div>
+
+            <!--Tiles-->
+            <div style="margin-top:0px;background:white;border-top:0px solid #ddd;padding:7px">
+
+
+                <div class="col-lg-1  padding-0 center summarybox">
+
+                    <div class="home-box " style="padding:8px;">
+                        <table style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
+
+                                        <i class="fa fa-plane" style="font-size:25px"></i>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:5px;text-align:center" class="caption">Total</div>
+                                        <div class="libcount" style="text-align:center">
+                                            <span style="font-size:18px;font-weight:bold">{{boardSummary.flights}}</span>
+
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="col-lg-1  padding-0 center summarybox">
+
+                    <div class="home-box " style="padding:8px;">
+                        <table style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
+
+                                        <i class="fas fa-plane-arrival" style="font-size:25px;color:#3399ff !important"></i>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:5px;text-align:center" class="caption">Arrived</div>
+                                        <div class="libcount" style="text-align:center">
+                                            <span style="font-size:18px;font-weight:bold">{{boardSummary.arrived}}</span>
+
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-1  padding-0 center summarybox">
+
+                    <div class="home-box " style="padding:8px;">
+                        <table style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
+
+                                        <i class="fas fa-times-circle" style="font-size:25px;color:#e60000 !important"></i>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:5px;text-align:center" class="caption">Cancled</div>
+                                        <div class="libcount" style="text-align:center">
+                                            <span style="font-size:18px;font-weight:bold">{{boardSummary.cancled}}</span>
+
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-lg-1  padding-0 center summarybox">
+
+                    <div class="home-box " style="padding:8px;">
+                        <table style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
+
+                                        <i class="fas fa-stopwatch" style="font-size:25px;color:#ff00ff !important"></i>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:5px;text-align:center" class="caption">Block Time</div>
+                                        <div class="libcount" style="text-align:center">
+                                            <span style="font-size:18px;font-weight:bold">{{boardSummary.blockTimeStr}}</span>
+
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-1  padding-0 center summarybox">
+
+                    <div class="home-box " style="padding:8px;">
+                        <table style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
+
+                                        <i class="fas fa-stopwatch" style="font-size:25px;color:#ff00ff !important"></i>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:5px;text-align:center" class="caption">Flight Time</div>
+                                        <div class="libcount" style="text-align:center">
+                                            <span style="font-size:18px;font-weight:bold">{{boardSummary.flightTimeStr}}</span>
+
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="col-lg-1  padding-0 center summarybox">
+
+                    <div class="home-box " style="padding:8px;">
+                        <table style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
+
+                                        <i class="fas fa-user-friends" style="font-size:25px;color:#0099cc !important"></i>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:5px;text-align:center" class="caption">Pax</div>
+                                        <div class="libcount" style="text-align:center">
+                                            <span style="font-size:18px;font-weight:bold">{{boardSummary.pax}}</span>
+
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-1  padding-0 center summarybox">
+
+                    <div class="home-box " style="padding:8px;">
+                        <table style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
+
+                                        <i class="fas fa-chart-pie" style="font-size:25px;color:#0077b3 !important"></i>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:5px;text-align:center" class="caption">Pax Load</div>
+                                        <div class="libcount" style="text-align:center">
+                                            <span style="font-size:18px;font-weight:bold">{{boardSummary.paxLoad}}%</span>
+
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-1  padding-0 center summarybox">
+
+                    <div class="home-box " style="padding:8px;">
+                        <table style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
+
+                                        <i class="fas fa-hourglass-half" style="font-size:25px;color:#cc0000 !important"></i>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:5px;text-align:center" class="caption">Delay</div>
+                                        <div class="libcount" style="text-align:center">
+                                            <span style="font-size:18px;font-weight:bold">{{boardSummary.delayStr}}</span>
+
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="col-lg-1  padding-0 center summarybox">
+
+                    <div class="home-box " style="padding:8px;">
+                        <table style="width:100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width:40%;padding:0 10px 0 0;text-align:center" class="td-icon">
+
+                                        <i class="fas fa-chart-pie" style="font-size:25px;color:#cc0000 !important"></i>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom:5px;text-align:center" class="caption">Delay Ratio</div>
+                                        <div class="libcount" style="text-align:center">
+                                            <span style="font-size:18px;font-weight:bold">{{boardSummary.delayRatio}}%</span>
+
+                                            <div style="clear:both"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div style="clear:both"></div>
+            </div>
+            <!--END of Tiles-->
+            <!--<div dx-data-grid="dg" id="grid">
+
+    </div>-->
+
+        </div>
+    </div>
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+
+                <td></td>
+
+            </tr>
+        </table>
+    </div>
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+
+
+</div>
+
+
