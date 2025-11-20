@@ -61,7 +61,7 @@ namespace EPAGriffinAPI.Providers
                 var isAllowed = IPHelper.IsAllowed(remoteIpAddresss, context.UserName);
                 if (!isAllowed)
                 {
-                    context.SetError("invalid_grant", "The user name or password is incorrect." + " E300 "+remoteIpAddresss);
+                    context.SetError("invalid_grant", "The user name or password is incorrect." + " E300 ");
                     return;
                 }
 

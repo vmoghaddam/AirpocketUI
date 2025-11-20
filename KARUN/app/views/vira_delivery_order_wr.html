@@ -1,0 +1,133 @@
+﻿<div ng-controller="vira_delivery_order_wrController">
+    <div id="popup_delivery" dx-popup="popup_delivery" class="no-padding" style='padding:0 !important;'>
+        <div style="border: 1px solid #ccc " class="dx-border">
+            <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Filter Panel</div>
+            </div>
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 100px; font-size: 12px; padding-right: 5px; text-align: right ">
+                            Part No. :
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_pn" class="center" style="width: 100%"></div>
+
+                        </td>
+                        <td style="padding-left: 15px">
+                            <div dx-button="btn_pn"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 100px; font-size: 12px; padding-right: 5px; text-align: right">
+                            Description:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_desc" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 100px; font-size: 12px; padding-right: 5px; text-align: right">
+                            Fiancial Year:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_year" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 100px; font-size: 12px; padding-right: 5px; text-align: right">
+                            Date From:
+                        </td>
+                        <td>
+                            <div dx-date-box="dt_from" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 100px; font-size: 12px; padding-right: 5px; text-align: right">
+                            SN/BN:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_snbn" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 100px; font-size: 12px; padding-right: 5px; text-align: right">
+                            Paper No.:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_paper_number" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 100px; font-size: 12px; padding-right: 5px; text-align: right">
+                            Req. No.:
+                        </td>
+                        <td>
+                            <div dx-text-box="txt_req_number" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 100px; font-size: 12px; padding-right: 5px; text-align: right">
+                            Date To:
+                        </td>
+                        <td>
+                            <div dx-date-box="dt_to" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-2 padding-0" style="margin-bottom: 5px">
+                <table>
+                    <tr>
+                        <td style="padding: 5px; text-align:left">
+                            <div dx-button="btn_search"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div style="clear: both"></div>
+
+        </div>
+
+        <div style="padding: 5px 0 0 0">
+            <div dx-data-grid="dg_delivery" id="dg_delivery" class="content" style="overflow-y: hidden" dx-item-alias="row"></div>
+        </div>
+    </div>
+</div>

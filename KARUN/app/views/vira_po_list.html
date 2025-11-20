@@ -1,0 +1,338 @@
+﻿<style>
+    /* Header Styling */
+    .header {
+        flex: 0 0 50px; /* Fixed height of 60px */
+    }
+
+    /* Footer Styling */
+    .footer {
+        flex: 0 0 40px; /* Fixed height of 60px */
+    }
+
+    /* Content Styling */
+    .content {
+        flex: 1; /* Grow to fill the remaining space */
+        overflow-y: auto; /* Allow scrolling if content overflows */
+        background-color: white;
+        box-sizing: border-box;
+    }
+
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold;
+        border: 1px solid lightgray;
+        margin-bottom: 5px
+    }
+</style>
+
+<div style="margin: 0; padding: 0; height: 100%; font-family: Arial, sans-serif; display: flex; flex-direction: column;">
+    <!-- Header Section -->
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+
+    <div class="content">
+        <!-- Filter Panel Section -->
+        <div class="col-lg-5 col-md-5" style="padding:5px 5px 0 10px;">
+            <div class="dx-border" style="border: 1px solid #ccc;">
+                <div class="row mx-0">
+                    <div class="col-12 px-0">
+                        <div class="td-title text-center mb-2" style="width: 100%; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc;">
+                            Filter Panel
+                        </div>
+                    </div>
+
+                    <!-- PO No., Priority, Description, Part No., Status -->
+                    <div class="col-lg-6 col-md-12 mb-2">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_po_no" class="form-label mb-0 me-2" style="width: 80px;">PO No. :</label>
+                            <div dx-text-box="txt_po_no" class="flex-grow-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 mb-2">
+                        <div class="d-flex align-items-center">
+                            <label for="sb_priority" class="form-label mb-0 me-2" style="width: 80px;">Priority:</label>
+                            <div dx-select-box="sb_priority" class="flex-grow-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 mb-2">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_description" class="form-label mb-0 me-2" style="width: 80px;">Description :</label>
+                            <div dx-text-box="txt_description" class="flex-grow-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12 mb-2">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_part_no" class="form-label mb-0 me-2" style="width: 80px;">Part No. :</label>
+                            <div dx-text-box="txt_part_no" class="flex-grow-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 text-end mb-2" style="text-align: end;">
+                        <div dx-button="btn_search" class="flex-grow-1"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Purchase Order Section -->
+            <div class="td-title text-center mt-3" style="width: 100%">
+                Purchase
+            </div>
+            <div dx-data-grid="dg_purchase" id="dg_purchase" class="content" style="overflow-y: hidden;"></div>
+        </div>
+
+        <!-- Purchase Items Section -->
+        <div class="col-lg-7 col-md-7" style="padding:5px 10px 0 5px;">
+            <div dx-tabs="tabs_options"></div>
+            <div id="purchase" class="tabc">
+                <div class="dx-border" style="border: 1px solid #ccc;">
+                    <div class="row mx-0">
+                        <div class="col-12 px-0">
+                            <div class="td-title text-center mb-2" style="width: 100%; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc;">
+                                Purchase Items
+                            </div>
+                        </div>
+
+                        <!-- PO No., Date, Status, Priority, Company, Contract No., Remark -->
+                        <div class="col-lg-6 col-md-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="txt_po_no_detail" class="form-label mb-0 me-2" style="width: 100px;">PO No. :</label>
+                                <div dx-text-box="txt_po_no_detail" class="flex-grow-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="dt_date" class="form-label mb-0 me-2" style="width: 100px;">Date:</label>
+                                <div dx-date-box="dt_date" class="flex-grow-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="sb_status" class="form-label mb-0 me-2" style="width: 100px;">Status:</label>
+                                <div dx-select-box="sb_status" class="flex-grow-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="sb_priority_detail" class="form-label mb-0 me-2" style="width: 100px;">Priority:</label>
+                                <div dx-select-box="sb_priority_detail" class="flex-grow-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="sb_company" class="form-label mb-0 me-2" style="width: 100px;">Company:</label>
+                                <div dx-select-box="sb_company" class="flex-grow-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="txt_contract_no" class="form-label mb-0 me-2" style="width: 100px;">Contract No.:</label>
+                                <div dx-text-box="txt_contract_no" class="flex-grow-1"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <label for="txt_remark" class="form-label mb-0 me-2" style="width: 100px;">Remark:</label>
+                                <div dx-text-box="txt_remark" class="flex-grow-1"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Items Grid -->
+                <div class="mt-3">
+                    <div class="col-12 px-0">
+                        <div dx-data-grid="dg_items" id="dg_items" class="content" style="overflow-y: hidden;"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="reciving" class="tabc">
+                    <div class="dx-border">
+                        <div class="row mx-0">
+                            <div class="col-12 px-0">
+                                <div class="td-title text-center" style="width: 100%; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc;">
+                                    Receiving
+                                </div>
+                            </div>
+                        </div>
+                        <div dx-data-grid="dg_receiving" id="dg_receiving" class="content" style="overflow-y: hidden;"></div>
+
+                        <!-- Receiving and Invoice Information Section -->
+                        <div class="row mt-3">
+                            <!-- Receiving Information -->
+                            <div class="col-lg-6" style="padding: 0 5px 0 0">
+                                <div class="dx-border" style="border: 1px solid #ccc;">
+                                    <div class="td-title">Receiving Information</div>
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_rec_no" class="form-label mb-0 me-2" style="width: 80px;">No :</label>
+                                                <div dx-text-box="txt_rec_no" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="dt_rec_date" class="form-label mb-0 me-2" style="width: 80px;">Date :</label>
+                                                <div dx-date-box="dt_rec_date" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_description" class="form-label mb-0 me-2" style="width: 80px;">Description :</label>
+                                                <div dx-text-box="txt_description" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_part_no_rec" class="form-label mb-0 me-2" style="width: 80px;">Part No. :</label>
+                                                <div dx-text-box="txt_part_no_rec" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_quantity" class="form-label mb-0 me-2" style="width: 80px;">Quantity :</label>
+                                                <div dx-number-box="txt_quantity" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="sb_unit" class="form-label mb-0 me-2" style="width: 80px;">Unit :</label>
+                                                <div dx-select-box="sb_unit" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_price" class="form-label mb-0 me-2" style="width: 80px;">Price :</label>
+                                                <div dx-number-box="txt_price" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="sb_currency" class="form-label mb-0 me-2" style="width: 80px;">Currency :</label>
+                                                <div dx-select-box="sb_currency" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="dt_man_date" class="form-label mb-0 me-2" style="width: 80px;">Man. Date :</label>
+                                                <div dx-date-box="dt_man_date" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="dt_exp_date" class="form-label mb-0 me-2" style="width: 80px;">Exp. Date :</label>
+                                                <div dx-date-box="dt_exp_date" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="sb_doc_type" class="form-label mb-0 me-2" style="width: 80px;">Doc Type :</label>
+                                                <div dx-select-box="sb_doc_type" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_doc_no" class="form-label mb-0 me-2" style="width: 80px;">Doc No. :</label>
+                                                <div dx-text-box="txt_doc_no" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Invoice Information -->
+                            <div class="col-lg-6" style="padding: 0 0 0 5px">
+                                <div class="dx-border" style="border: 1px solid #ccc;">
+                                    <div class="td-title">Invoice Information</div>
+                                    <div class="row">
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_inv_no" class="form-label mb-0 me-2" style="width: 80px;">No :</label>
+                                                <div dx-text-box="txt_inv_no" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="dt_inv_date" class="form-label mb-0 me-2" style="width: 80px;">Date :</label>
+                                                <div dx-date-box="dt_inv_date" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_shipment" class="form-label mb-0 me-2" style="width: 80px;">Shipment :</label>
+                                                <div dx-text-box="txt_shipment" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_awb" class="form-label mb-0 me-2" style="width: 80px;">AWB :</label>
+                                                <div dx-text-box="txt_awb" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="dt_transport_date" class="form-label mb-0 me-2" style="width: 80px;">Transport Date :</label>
+                                                <div dx-date-box="dt_transport_date" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_transport_cost" class="form-label mb-0 me-2" style="width: 80px;">Transport Cost :</label>
+                                                <div dx-number-box="txt_transport_cost" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_tax" class="form-label mb-0 me-2" style="width: 80px;">Tax :</label>
+                                                <div dx-number-box="txt_tax" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 mb-2">
+                                            <div class="d-flex align-items-center">
+                                                <label for="txt_other_costs" class="form-label mb-0 me-2" style="width: 80px;">Other Costs :</label>
+                                                <div dx-number-box="txt_other_costs" style="width:100%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        <!-- Summary Section -->
+                        <div class="row mt-3">
+                            <div class="col-lg-3 text-end" style="margin-top:5px;padding: 0 5px 0 5px">
+                                <div class="td-title" style="margin-bottom: 0 !important">Total Ordered :</div>
+                                <div dx-number-box="txt_total_ordered"></div>
+                            </div>
+                            <div class="col-lg-3 text-end" style="margin-top:5px;padding: 0 0 0 5px">
+                                <div class="td-title" style="margin-bottom: 0 !important">Total Received :</div>
+                                <div dx-number-box="txt_total_received"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="rowx footer">
+        <table style="width: 100%; margin: 0; padding: 0;">
+            <tr>
+                <td style="text-align: center; margin: 5px" dx-button="btn_add"></td>
+
+            </tr>
+        </table>
+        <div ng-include="'app/views/vira_po.html'"></div>
+    </div>
+</div>

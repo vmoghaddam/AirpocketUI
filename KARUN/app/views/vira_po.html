@@ -1,0 +1,245 @@
+﻿<style>
+    .header {
+        flex: 0 0 50px; /* Fixed height of 60px */
+    }
+
+    /* Footer Styling */
+    .footer {
+        flex: 0 0 40px; /* Fixed height of 60px */
+    }
+
+    /* Content Styling */
+    .content {
+        flex: 1; /* Grow to fill the remaining space */
+        overflow-y: auto; /* Allow scrolling if content overflows */
+        background-color: white;
+        box-sizing: border-box;
+    }
+
+    .text-box {
+        padding-left: 5px;
+    }
+
+    .form-title {
+        width: 80px;
+        text-align: right;
+        margin-right: 5px;
+    }
+
+    .d-flex {
+        display: flex;
+        align-items: center;
+    }
+
+        .d-flex .btn-container {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div ng-controller="vira_poController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding" style="padding: 0 !important;">
+        <div class="col-lg-12 mt-3 container-fluid">
+            <div class="row">
+                <!-- First Section: Purchase Order Information -->
+                <div class="dx-border p-3 mb-3" style="border: 1px solid #ccc;">
+                    <div class="row">
+                        <!-- Date -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Date:</div>
+                                <div dx-date-box="dt_po_date" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Company -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Company:</div>
+                                <div dx-text-box="txt_company" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Purchase No -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Purchase No:</div>
+                                <div dx-text-box="txt_purchase_no" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Contract No -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Contract No:</div>
+                                <div dx-text-box="txt_contract_no" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Priority -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Priority:</div>
+                                <div dx-select-box="sb_priority" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Deadline -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Deadline:</div>
+                                <div dx-date-box="dt_deadline" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Destination -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Destination:</div>
+                                <div dx-text-box="txt_destination" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Remark -->
+                        <div class="col-lg-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Remark:</div>
+                                <div dx-text-box="txt_remark" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Section: Items -->
+                <div class="dx-border p-3 mb-3" style="border: 1px solid #ccc;">
+                    <div class="row">
+                        <!-- P/N and Buttons -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">P/N:</div>
+                                <div class="d-flex flex-grow-1 btn-container">
+                                    <div dx-text-box="txt_itemPnNo" class="text-box" style="width:122px"></div>
+                                    <div dx-button="btn_pn"></div>
+                                    <div dx-button="newPn"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ATA -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">ATA:</div>
+                                <div dx-text-box="txt_ata" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Quantity:</div>
+                                <div dx-number-box="txt_itemQuantity" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Unit -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Unit:</div>
+                                <div dx-select-box="sb_itemUnit" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Price:</div>
+                                <div dx-number-box="txt_price" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Currency -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Currency:</div>
+                                <div dx-select-box="sb_currency" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Condition -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Condition:</div>
+                                <div dx-select-box="sb_condition" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Days -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Days:</div>
+                                <div dx-number-box="txt_days" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Delivery Date -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Delivery Date:</div>
+                                <div dx-date-box="dt_delivery_date" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Reference -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Reference:</div>
+                                <div dx-text-box="txt_reference" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Model -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Model:</div>
+                                <div dx-text-box="txt_model" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Brand -->
+                        <div class="col-lg-3 col-md-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Brand:</div>
+                                <div dx-text-box="txt_brand" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Item Remark -->
+                        <div class="col-lg-6 mb-2">
+                            <div class="d-flex">
+                                <div class="form-title">Remark:</div>
+                                <div dx-text-box="txt_itemRemark" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 mb-2" style="text-align:end">
+                            <div dx-button="btn_add" class="btn btn-primary me-2"><i class="fa fa-plus"></i> Add</div>
+                            <div dx-button="btn_delete" class="btn btn-danger me-2"><i class="fa fa-trash"></i> Delete</div>
+                            <div dx-button="btn_update" class="btn btn-secondary"><i class="fa fa-refresh"></i> Update</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <!-- Data Grid -->
+                <div class="mt-3">
+                    <div dx-data-grid="dg_item" id="dg_item" class="content" style="overflow-y: hidden;" dx-item-alias="row"></div>
+                </div>
+            </div>
+        </div>
+
+        <div dx-load-panel="loadPanel"></div>
+    </div>
+</div>

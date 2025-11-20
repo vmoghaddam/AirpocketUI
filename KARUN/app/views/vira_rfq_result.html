@@ -1,0 +1,246 @@
+﻿<style>
+    /* Header Styling */
+    .header {
+        flex: 0 0 50px; /* Fixed height of 60px */
+    }
+
+    /* Footer Styling */
+    .footer {
+        flex: 0 0 50px; /* Fixed height of 60px */
+    }
+
+    /* Content Styling */
+    .content {
+        flex: 1; /* Grow to fill the remaining space */
+        overflow-y: auto; /* Allow scrolling if content overflows */
+        background-color: white;
+        box-sizing: border-box;
+    }
+
+    .text-box {
+        padding-left: 5px;
+    }
+
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold;
+        border: 1px solid lightgray;
+    }
+
+    .form-title {
+        width: 100px;
+        text-align: left;
+        margin-right: 5px;
+    }
+
+    .d-flex {
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-container {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .btn-add {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+<div style="margin: 0; padding: 0; height: 100%; font-family: Arial, sans-serif; display: flex; flex-direction: column;">
+    <!-- Header Section -->
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+
+    <div class="content">
+        <div class="row" style="padding:5px">
+            <!-- Items Section -->
+            <div class="col-lg-9">
+                <div class="dx-border">
+                    <div class="row mx-0">
+                        <div class="col-lg-12 px-0">
+                            <div class="td-title text-center" style="width: 100%; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc;">
+                                Items
+                            </div>
+                        </div>
+                    </div>
+                    <div dx-data-grid="dg_items" id="dg_items" class="content" style="overflow-y: hidden;"></div>
+
+                    <div dx-data-grid="dg_result" id="dg_result" class="content" style="overflow-y: hidden;margin-top:10px"></div>
+                </div>
+            </div>
+
+            <!-- Quotation Information and Result Section -->
+            <div class="col-lg-3" style="padding-left: 0px !important">
+                <div class="dx-border" style="border: 1px solid #ccc;">
+                    <div class="row mx-0">
+                        <div class="col-lg-12 px-0">
+                            <div class="td-title text-center" style="width: 100%; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc;">
+                                Quotation Information
+                            </div>
+                        </div>
+
+                        <!-- Company -->
+                        <div class="col-lg-12 mb-2 mt-3">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Company:</div>
+                                <div dx-select-box="sb_company" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Quotation No. -->
+                        <div class="col-lg-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Quotation No:</div>
+                                <div dx-text-box="txt_quotation_no" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Shipment -->
+                        <div class="col-lg-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Shipment:</div>
+                                <div dx-select-box="sb_shipment" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Section -->
+                <div class="dx-border" style="border: 1px solid #ccc; margin-top: 5px;">
+                    <div class="row mx-0">
+                        <div class="col-lg-12 px-0">
+                            <div class="td-title text-center" style="width: 100%; border-bottom: 1px solid #ccc; border-top: 1px solid #ccc;">
+                                Result
+                            </div>
+                        </div>
+
+                        <!-- Part No. -->
+                        <div class="col-lg-12 mb-2 mt-3">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Part No:</div>
+                                <div class="btn-container">
+                                    <div dx-text-box="txt_result_part_no" class="flex-grow-1 text-box"></div>
+                                    <div dx-button="btn_pn" class="ms-2"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-lg-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Description:</div>
+                                <div dx-text-box="txt_result_description" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Condition -->
+                        <div class="col-lg-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Condition:</div>
+                                <div dx-select-box="sb_condition" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Quantity and Unit -->
+                        <div class="col-lg-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Quantity:</div>
+                                <div dx-number-box="txt_result_quantity" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Unit:</div>
+                                <div dx-select-box="sb_result_unit" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Price and Currency -->
+                        <div class="col-lg-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Price:</div>
+                                <div dx-number-box="txt_result_price" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Currency:</div>
+                                <div dx-select-box="sb_result_currency" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Discount and MOQ -->
+                        <div class="col-lg-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Discount:</div>
+                                <div dx-number-box="txt_result_discount" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">MOQ:</div>
+                                <div dx-number-box="txt_result_moq" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Manufacture Date -->
+                        <div class="col-lg-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Man. Date:</div>
+                                <div dx-date-box="dt_man_date" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Document Type -->
+                        <div class="col-lg-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Doc. Type:</div>
+                                <div dx-select-box="sb_doc_type" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Overhaul Date -->
+                        <div class="col-lg-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Overhaul Date:</div>
+                                <div dx-date-box="dt_overhaul_date" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Remark -->
+                        <div class="col-lg-12 mb-2">
+                            <div class="d-flex align-items-center">
+                                <div class="form-title mb-0 me-2">Remark:</div>
+                                <div dx-text-box="txt_result_remark" class="flex-grow-1 text-box"></div>
+                            </div>
+                        </div>
+
+                        <!-- Add Button -->
+                        <div class="col-lg-12 text-center" style="padding: 5px">
+                            <div dx-button="btn_add_result" class="btn btn-primary btn-add"><i class="fa fa-plus"></i> Add</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rowx footer">
+        <table style="width: 100%; margin: 0; padding: 0;">
+            <tr>
+                <!-- <td style="text-align: center; margin: 5px" dx-button="btn_save"></td>-->
+            </tr>
+        </table>
+    </div>
+</div>

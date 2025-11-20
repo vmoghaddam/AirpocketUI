@@ -1,0 +1,51 @@
+﻿<style>
+    .vimg {
+        object-fit: cover;
+        /*width: 100%;*/
+        height: 250px;
+    }
+    ._rot90 {
+        -webkit-transform: translateX(-100%) rotate(-90deg); /* Safari */
+        -moz-transform: translateX(-100%) rotate(-90deg); /* Firefox 3.6 Firefox 4 */
+        -ms-transform: translateX(-100%) rotate(-90deg); /* IE9 */
+        -o-transform: translateX(-100%) rotate(-90deg); /* Opera */
+        transform: translateX(-100%) rotate(-90deg); /* W3C */
+        -webkit-transform-origin: top right;
+        -moz-transform-origin: top right;
+        -ms-transform-origin: top right;
+        -o-transform-origin: top right;
+        transform-origin: top right;
+    }
+    .rot90 {
+        
+        transition: width 1s, height 1s;
+    }
+    .dx-popup-title.dx-toolbar .dx-toolbar-item:last-child
+    {
+        max-width:1000px !important;
+    }
+</style>
+<div ng-controller="imageviewerController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:0px;">
+            <div dx-scroll-view="scroll_view" style="margin-top:5px;border-right:0px solid #eee">
+                <div   ng-style="{ 'width' : cWidth+'px' }">
+                    <img class="rot90" ng-style="{'width': imgWidth+'%'}" style="display: block; height: auto"    ng-src="{{url}}">
+                </div>
+                
+            </div>
+           
+            <!--<div>
+                <div>
+                    <ul id="images" class="docs-pictures">
+                        <li><img  src="https://apoc.ir/download/SIGWX_ADDS_20210709_2105.png" alt="Picture 1"></li>
+                        <li><img src="https://apoc.ir/download/SIGWX_ADDS_20210709_2106.png" alt="Picture 2"></li>
+                        <li><img src="https://apoc.ir/download/SIGWX_ADDS_20210709_2107.png" alt="Picture 3"></li>
+                    </ul>
+                </div>
+            </div>-->
+        </div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+
+</div>
