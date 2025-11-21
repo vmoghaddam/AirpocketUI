@@ -20,7 +20,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
 
         $scope.prms = $routeParams.prms;
-        $scope.activeTab = 'fleet';
+        $scope.activeTab = 'overview';
         $scope.activeTab2 = 'B737';
         $scope.btn_search = {
             text: 'Search',
@@ -113,26 +113,29 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             //            .appendTo(container);
             //    }, name: 'row', caption: '#', barWidth: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
             //}, 
-            { dataField: 'std', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 110, format: 'yy-MMM-dd', sortIndex: 0, sortOrder: 'asc', fixed: false, fixedPosition: 'left' },
-            { dataField: 'flight_number', caption: 'FlightNumber', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'std', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 100, format: 'yy-MM-dd', sortIndex: 0, sortOrder: 'asc', fixed: false, fixedPosition: 'left' },
+            { dataField: 'ac_type2', caption: 'Fleet', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+            { dataField: 'register', caption: 'Reg.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+            { dataField: 'flight_number', caption: 'Flight No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'event_name', caption: 'Event', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 190 },
             { dataField: 'severity', caption: 'Severity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-           // { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-            
-            { dataField: 'event_name', caption: 'Event Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250 },
-            { dataField: 'ac_type2', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
-            { dataField: 'register', caption: 'Register', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            // { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
 
-            { dataField: 'phase', caption: 'Phase', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
-            { dataField: 'state_name', caption: 'StateName', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
-            { dataField: 'route', caption: 'route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+
+
+
+            { dataField: 'phase', caption: 'Phase', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+            // { dataField: 'state_name', caption: 'State Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+
             //{ dataField: 'arr_iata', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
 
+            { dataField: 'ip1_name', caption: 'IP', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+            { dataField: 'cp1_name', caption: 'P1', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+            { dataField: 'cp2_name', caption: 'P2', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
 
-            { dataField: 'cp1_name', caption: 'P1', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110 },
-            { dataField: 'cp2_name', caption: 'P2', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
-            { dataField: 'ip1_name', caption: 'IP', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
 
-           //  { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 350 },
+            //  { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 350 },
 
             // { dataField: 'Duration', caption: 'Duration', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
             // { dataField: 'Value', caption: 'Value', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
@@ -147,7 +150,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
         $scope.dg_events_selected = null;
         $scope.dg_events_instance = null;
         $scope.dg_events_ds = null;
-        $scope.dg_events_height = 400;
+        $scope.dg_events_height = $(window).height() - 130;
 
         $scope.dg_events =
         {
@@ -183,7 +186,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             scrolling: { mode: 'infinite' },
             paging: { pageSize: 100 },
             showBorders: true,
-            selection: { mode: 'multiple' },
+            selection: { mode: 'single' },
             columnAutoWidth: false,
 
             onSelectionChanged: function (e) {
@@ -205,41 +208,317 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             },
 
 
-            /* onRowPrepared: function (e) {
-                 if (e.data && e.data.Severity && e.data.Severity == 'High') e.rowElement.css('background', '#ff8566');
-                 if (e.data && e.data.Severity && e.data.Severity == 'Medium') e.rowElement.css('background', '#ffd480');
-                 //  e.rowElement.css('background', '#ffccff');
-         
-             },
-         
-             onCellPrepared: function (options) {
-                 var data = options.data;
-                 var column = options.column;
-                 var fieldHtml = "";
-         
-                 if (data && options.value && column.caption == 'Current') {
-                     fieldHtml += "<span style='font-weight:bold'>" + options.value + "</span>";
-                     options.cellElement.html(fieldHtml);
-                 }
-                 if (data && options.value && column.caption == 'Delayed') {
-                     fieldHtml += "<span style='color:#cc5200'>" + options.value + "</span>";
-                     options.cellElement.html(fieldHtml);
-                 }
-                 if (data && options.value && column.dataField.includes('Diff')) {
-                     var cls = options.value <= 0 ? 'pos' : 'neg';
-                     fieldHtml += "<div class='" + cls + "'>"
-                         + "<span style='font-size:12px'>" + options.value + "%" + "</span>"
-                         + (options.value <= 0 ? "<i class='fa fa-caret-down fsymbol-small'></i>" : "<i class='fa fa-caret-up fsymbol-small'></i>")
-                         + "</div>";
-                     options.cellElement.html(fieldHtml);
-                 }
-         
-         
-         
-             },*/
+            onRowPrepared: function (e) {
+                if (e.data && e.data.Severity && e.data.Severity == 'High') e.rowElement.css('background', '#ff8566');
+                if (e.data && e.data.Severity && e.data.Severity == 'Medium') e.rowElement.css('background', '#ffd480');
+                //  e.rowElement.css('background', '#ffccff');
+
+            },
+
+            onCellPrepared: function (e) {
+                //lightgray
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'Medium')
+                    e.cellElement.css("backgroundColor", "#ffe699");
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'High')
+                    e.cellElement.css("backgroundColor", "#d98c8c");
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'Low')
+                    e.cellElement.css("backgroundColor", "#b3e6cc");
+
+            },
         };
 
 
+        //dg_events_md
+        $scope.dg_events_md_columns = [
+            //{
+            //    cellTemplate: function (container, options) {
+            //        $("<div style='text-align:center'/>")
+            //            .html(options.rowIndex + 1)
+            //            .appendTo(container);
+            //    }, name: 'row', caption: '#', barWidth: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+            //}, 
+            { dataField: 'std', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 100, format: 'yy-MM-dd', sortIndex: 0, sortOrder: 'asc', fixed: false, fixedPosition: 'left' },
+            { dataField: 'ac_type2', caption: 'Fleet', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+            { dataField: 'register', caption: 'Reg.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+            { dataField: 'flight_number', caption: 'Flight No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'event_name', caption: 'Event', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 190 },
+            { dataField: 'severity', caption: 'Severity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+            // { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+
+
+
+
+            { dataField: 'phase', caption: 'Phase', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+            // { dataField: 'state_name', caption: 'State Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+
+            //{ dataField: 'arr_iata', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+
+            { dataField: 'ip1_name', caption: 'IP', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+            { dataField: 'cp1_name', caption: 'P1', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+            { dataField: 'cp2_name', caption: 'P2', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+
+
+            //  { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 350 },
+
+            // { dataField: 'Duration', caption: 'Duration', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
+            // { dataField: 'Value', caption: 'Value', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
+            //{ dataField: 'BlockOff', caption: 'BlockOff', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'BlockOn', caption: 'BlockOn', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'TakeOff', caption: 'TakeOff', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'Landing', caption: 'Landing', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'STD', caption: 'STD', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm', },
+            //{ dataField: 'STA', caption: 'STA', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+
+        ];
+        $scope.dg_events_md_selected = null;
+        $scope.dg_events_md_instance = null;
+        $scope.dg_events_md_ds = null;
+        $scope.dg_events_md_height = 500; //$(window).height() - 130;
+
+        $scope.dg_events_md =
+        {
+            onContentReady: function (e) {
+                if (!$scope.dg_events_md_instance)
+                    $scope.dg_events_md_instance = e.component;
+
+            },
+            columns: $scope.dg_events_md_columns,
+
+            bindingOptions: {
+                "dataSource": "dg_events_md_ds",
+                "height": "dg_events_md_height",
+
+            },
+            wordWrapEnabled: true,
+            rowAlternationEnabled: false,
+            headerFilter: {
+                visible: false
+            },
+            filterRow: {
+                visible: true,
+                showOperationChooser: true,
+            },
+            showRowLines: true,
+            showColumnLines: true,
+            sorting: { mode: 'none' },
+
+            noDataText: '',
+
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            scrolling: { mode: 'infinite' },
+            paging: { pageSize: 100 },
+            showBorders: true,
+            selection: { mode: 'single' },
+            columnAutoWidth: false,
+
+            onSelectionChanged: function (e) {
+                //var data = e.selectedRowsData[0];
+
+                //if (!data) {
+                //    $scope.dg_master_selected = null;
+                //}
+                //else
+                //    $scope.dg_master_selected = data;
+
+
+            },
+
+            "export": {
+                enabled: false,
+                fileName: "File",
+                allowExportSelectedData: false
+            },
+
+
+            onRowPrepared: function (e) {
+                if (e.data && e.data.Severity && e.data.Severity == 'High') e.rowElement.css('background', '#ff8566');
+                if (e.data && e.data.Severity && e.data.Severity == 'Medium') e.rowElement.css('background', '#ffd480');
+                //  e.rowElement.css('background', '#ffccff');
+
+            },
+
+            onCellPrepared: function (e) {
+                //lightgray
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'Medium')
+                    e.cellElement.css("backgroundColor", "#ffe699");
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'High')
+                    e.cellElement.css("backgroundColor", "#d98c8c");
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'Low')
+                    e.cellElement.css("backgroundColor", "#b3e6cc");
+
+            },
+        };
+
+
+
+        $scope.dg_events_737_columns = [
+            //{
+            //    cellTemplate: function (container, options) {
+            //        $("<div style='text-align:center'/>")
+            //            .html(options.rowIndex + 1)
+            //            .appendTo(container);
+            //    }, name: 'row', caption: '#', barWidth: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+            //}, 
+            { dataField: 'std', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 100, format: 'yy-MM-dd', sortIndex: 0, sortOrder: 'asc', fixed: false, fixedPosition: 'left' },
+            // { dataField: 'ac_type2', caption: 'Fleet', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+            { dataField: 'register', caption: 'Reg.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+            { dataField: 'flight_number', caption: 'Flight No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'event_name', caption: 'Event', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 170 },
+            { dataField: 'severity', caption: 'Severity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+            // { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+
+
+
+
+            { dataField: 'phase', caption: 'Phase', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+            // { dataField: 'state_name', caption: 'State Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+
+            //{ dataField: 'arr_iata', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+
+            { dataField: 'ip1_name', caption: 'IP', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+            { dataField: 'cp1_name', caption: 'P1', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+            { dataField: 'cp2_name', caption: 'P2', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+
+
+            //  { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 350 },
+
+            // { dataField: 'Duration', caption: 'Duration', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
+            // { dataField: 'Value', caption: 'Value', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
+            //{ dataField: 'BlockOff', caption: 'BlockOff', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'BlockOn', caption: 'BlockOn', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'TakeOff', caption: 'TakeOff', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'Landing', caption: 'Landing', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'STD', caption: 'STD', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm', },
+            //{ dataField: 'STA', caption: 'STA', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+
+        ];
+        $scope.dg_events_737_selected = null;
+        $scope.dg_events_737_instance = null;
+        $scope.dg_events_737_ds = null;
+        $scope.dg_events_737_height = 500; //$(window).height() - 130;
+
+        $scope.dg_events_737 =
+        {
+            onContentReady: function (e) {
+                if (!$scope.dg_events_737_instance)
+                    $scope.dg_events_737_instance = e.component;
+
+            },
+            columns: $scope.dg_events_737_columns,
+
+            bindingOptions: {
+                "dataSource": "dg_events_737_ds",
+                "height": "dg_events_737_height",
+
+            },
+            // width:800,
+            wordWrapEnabled: true,
+            rowAlternationEnabled: false,
+            headerFilter: {
+                visible: false
+            },
+            filterRow: {
+                visible: true,
+                showOperationChooser: true,
+            },
+            showRowLines: true,
+            showColumnLines: true,
+            sorting: { mode: 'none' },
+
+            noDataText: '',
+
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            scrolling: { mode: 'infinite' },
+            paging: { pageSize: 100 },
+            showBorders: true,
+            selection: { mode: 'single' },
+            columnAutoWidth: false,
+
+            onSelectionChanged: function (e) {
+                //var data = e.selectedRowsData[0];
+
+                //if (!data) {
+                //    $scope.dg_master_selected = null;
+                //}
+                //else
+                //    $scope.dg_master_selected = data;
+
+
+            },
+
+            "export": {
+                enabled: false,
+                fileName: "File",
+                allowExportSelectedData: false
+            },
+
+
+            onRowPrepared: function (e) {
+                if (e.data && e.data.Severity && e.data.Severity == 'High') e.rowElement.css('background', '#ff8566');
+                if (e.data && e.data.Severity && e.data.Severity == 'Medium') e.rowElement.css('background', '#ffd480');
+                //  e.rowElement.css('background', '#ffccff');
+
+            },
+
+            onCellPrepared: function (e) {
+                //lightgray
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'Medium')
+                    e.cellElement.css("backgroundColor", "#ffe699");
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'High')
+                    e.cellElement.css("backgroundColor", "#d98c8c");
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'Low')
+                    e.cellElement.css("backgroundColor", "#b3e6cc");
+
+            },
+        };
+
+        $scope.popup_events_visible = false;
+        $scope.popup_events_title = 'Events';
+        $scope.popup_events = {
+
+            fullScreen: true,
+            showTitle: true,
+
+
+            toolbarItems: [
+                {
+                    widget: 'dxButton', location: 'before', toolbar: 'bottom', options: {
+                        type: 'danger', text: 'close', width: 120, icon: 'remove', onClick: function (e) {
+                            $scope.dg_events_ds = [];
+                            $scope.popup_events_visible = false;
+
+                        }
+                    }
+
+                },
+            ],
+            visible: false,
+            dragEnabled: false,
+            closeOnOutsideClick: false,
+            onShowing: function (e) {
+
+            },
+            onShown: function (e) {
+                $scope.dg_events_instance.repaint();
+            },
+
+            onHiding: function () {
+            },
+            onHidden: function () {
+
+            },
+
+            bindingOptions: {
+                visible: 'popup_events_visible',
+
+            }
+
+
+        };
 
 
         //----------EWMA-------------------------
@@ -255,8 +534,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             bindingOptions: { dataSource: 'allEWMAEvents' },
 
             palette: "Material",
-            title: "Early Warning Trend of Flight Events(Smoothed Daily Rate)",//"EWMA & CUSUM (Alarm on Increase Only)",
-            
+            title: "EWMA & CUSUM (Alarm on Increase Only)",
             commonSeriesSettings: {
                 argumentField: "Date",
                 type: "spline",
@@ -267,8 +545,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 { name: "Daily Event Rate / 100 flights", valueField: "Daily", axis: "rateAxis", width: 1, color: COLOR_DAILY },
                 { name: "EWMA", valueField: "EWMA", axis: "rateAxis", width: 1, color: COLOR_EWMA },
 
-                //{ name: "CUSUM+", valueField: "CusumPos", axis: "cusumAxis", width: 1, color: COLOR_CPOS },
-                //{ name: "CUSUM-", valueField: "CusumNeg", axis: "cusumAxis", width: 1, color: COLOR_CNEG },
+                { name: "CUSUM+", valueField: "CusumPos", axis: "cusumAxis", width: 1, color: COLOR_CPOS },
+                { name: "CUSUM-", valueField: "CusumNeg", axis: "cusumAxis", width: 1, color: COLOR_CNEG },
 
                 // مارکرهای آلارم روی EWMA
                 {
@@ -298,13 +576,13 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     grid: { visible: true },
                     constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
                 },
-                //{
-                //    name: "cusumAxis",
-                //    title: { text: "CUSUM" },
-                //    position: "right",
-                //    grid: { visible: false },
-                //    constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
-                //}
+                {
+                    name: "cusumAxis",
+                    title: { text: "CUSUM" },
+                    position: "right",
+                    grid: { visible: false },
+                    constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
+                }
             ],
             crosshair: { enabled: true, label: { visible: true } },
             legend: { visible: true, verticalAlignment: "bottom", horizontalAlignment: "center" },
@@ -323,8 +601,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                             `Date: ${d}\n` +
                             `Daily: ${get("Daily Event Rate / 100 flights")}\n` +
                             `EWMA: ${get("EWMA")}\n` +
-                           // `CUSUM+: ${get("CUSUM+")}\n` +
-                           // `CUSUM-: ${get("CUSUM-")}` +
+                            `CUSUM+: ${get("CUSUM+")}\n` +
+                            `CUSUM-: ${get("CUSUM-")}` +
                             `Alarm: ${get("Alarm")}`
                     };
                 }
@@ -486,6 +764,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
                 // لیست‌ها برای نمودار
                 $scope.pairs.list737 = top(rows, is737);
+
                 $scope.pairs.listMD = top(rows, isMD);
 
                 // ماتریس‌ها (محدودیت اختیاری روی اندازه برای خوانایی)
@@ -550,7 +829,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             argumentAxis: {
                 type: 'discrete',
                 position: 'bottom',
-                label: { overlappingBehavior: 'stagger', font: { size: 12 }, overlappingBehavior: 'rotate', rotationAngle:90 }
+                label: { overlappingBehavior: 'stagger', font: { size: 12 }, overlappingBehavior: 'rotate', rotationAngle: 90 }
             },
 
             series: [
@@ -663,6 +942,109 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
         };
 
         //----------------------------------------
+        //
+        $scope.get_events = function (type, register_id, cpt_id, route, phase, severity) {
+            $scope.loadingVisible = true;
+            fdmService.get_fmd_event_info_new(
+                $scope.formatDateYYYYMMDD($scope.dt_from),
+                $scope.formatDateYYYYMMDD($scope.dt_to),
+                type,
+                register_id,
+                cpt_id,
+                route,
+                phase,
+                severity
+            ).then(function (response) {
+                $scope.loadingVisible = false;
+                //console.warn("Yesss", response.Data);
+
+                // $scope.dg_events_ds = response.data.data?.Items;
+                // $scope.dg_events_ds = response.data.data?.Items || [];
+                if (response.Data) {
+                    //console.warn("Yesss", response.Data);
+
+                    $scope.dg_events_ds = response.Data.Items;
+                    $scope.popup_events_visible = true;
+                } else {
+                    console.warn("No Items in response", response.Data);
+                    $scope.dg_events_ds = [];
+                    $scope.popup_events_visible = true;
+                }
+
+
+            });
+        }
+
+
+        $scope.get_events_737 = function () {
+            $scope.loadingVisible = true;
+            fdmService.get_fmd_event_info_new(
+                $scope.formatDateYYYYMMDD($scope.dt_from),
+                $scope.formatDateYYYYMMDD($scope.dt_to),
+                'B737',
+                0,
+                0,
+                "-",
+                "-",
+                "-"
+            ).then(function (response) {
+                $scope.loadingVisible = false;
+                //console.warn("Yesss", response.Data);
+
+                // $scope.dg_events_ds = response.data.data?.Items;
+                // $scope.dg_events_ds = response.data.data?.Items || [];
+                if (response.Data) {
+                    //console.warn("Yesss", response.Data);
+
+                    $scope.dg_events_737_ds = response.Data.Items;
+                    $scope.dg_events_737_instance.repaint();
+                } else {
+                    console.warn("No Items in response", response.Data);
+                    $scope.dg_events_737_ds = [];
+
+                }
+
+
+            });
+        }
+
+        $scope.get_events_md = function () {
+            $scope.loadingVisible = true;
+            fdmService.get_fmd_event_info_new(
+                $scope.formatDateYYYYMMDD($scope.dt_from),
+                $scope.formatDateYYYYMMDD($scope.dt_to),
+                'MD',
+                0,
+                0,
+                "-",
+                "-",
+                "-"
+            ).then(function (response) {
+                $scope.loadingVisible = false;
+                //console.warn("Yesss", response.Data);
+
+                // $scope.dg_events_ds = response.data.data?.Items;
+                // $scope.dg_events_ds = response.data.data?.Items || [];
+                if (response.Data) {
+                    //console.warn("Yesss", response.Data);
+
+                    $scope.dg_events_md_ds = response.Data.Items;
+                    $scope.dg_events_md_instance.repaint();
+
+                } else {
+                    console.warn("No Items in response", response.Data);
+                    $scope.dg_events_md_ds = [];
+
+                }
+
+
+            });
+        }
+
+        $scope.show_severity = function (type, severity) {
+            $scope.get_events(type, 0, 0, "-", "-", severity);
+        }
+
         $scope.pie_737_total_event = {
             type: "doughnut",
             //  size: {
@@ -693,14 +1075,19 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 enabled: false,
             },
             onPointClick(e) {
-                const point = e.target;
+                //10-14
+                var point = e.target;
 
-                toggleVisibility(point);
+                console.log(point);
+                var data = point.data;  //level:Medium
+                $scope.get_events("B737", 0, 0, "-", "-", data.level);
+
+                // toggleVisibility(point);
             },
             onLegendClick(e) {
                 const arg = e.target;
 
-                toggleVisibility(e.component.getAllSeries()[0].getPointsByArg(arg)[0]);
+                // toggleVisibility(e.component.getAllSeries()[0].getPointsByArg(arg)[0]);
             },
             legend: {
                 //verticalAlignment: 'bottom',
@@ -708,12 +1095,13 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 verticalAlignment: 'top',
                 horizontalAlignment: 'right',
                 itemTextPosition: 'right',
+                visible: false,
 
             },
             bindingOptions:
             {
                 dataSource: 'pie_737_total_event_ds',
-                'size': 'pie_size'
+                //  'size': 'pie_size'
             },
         };
         $scope.pie_737_total_event_pilot = {
@@ -746,14 +1134,17 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 enabled: false,
             },
             onPointClick(e) {
-                const point = e.target;
+                var point = e.target;
+                alert('x');
+                console.log(e.target);
 
-                toggleVisibility(point);
+                //toggleVisibility(point);
             },
             onLegendClick(e) {
-                const arg = e.target;
-
-                toggleVisibility(e.component.getAllSeries()[0].getPointsByArg(arg)[0]);
+                var arg = e.target;
+                alert('y');
+                console.log(e.target);
+                // toggleVisibility(e.component.getAllSeries()[0].getPointsByArg(arg)[0]);
             },
             legend: {
                 //verticalAlignment: 'bottom',
@@ -799,9 +1190,11 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 enabled: false,
             },
             onPointClick(e) {
-                const point = e.target;
+                var point = e.target;
 
-                toggleVisibility(point);
+                console.log(point);
+                var data = point.data;  //level:Medium
+                $scope.get_events("MD", 0, 0, "-", "-", data.level);
             },
             onLegendClick(e) {
                 const arg = e.target;
@@ -814,12 +1207,13 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 verticalAlignment: 'top',
                 horizontalAlignment: 'right',
                 itemTextPosition: 'right',
+                visible: false,
 
             },
             bindingOptions:
             {
                 dataSource: 'pie_md_total_event_ds',
-                'size': 'pie_size'
+                // 'size': 'pie_size'
             },
         };
         $scope.bar_type_comparison = {
@@ -926,7 +1320,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                         color: "#000000"
                     }
                 }
-               
+
             },
 
             onPointClick: function (e) {
@@ -946,13 +1340,15 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
                     // $scope.dg_events_ds = response.data.data?.Items;
                     // $scope.dg_events_ds = response.data.data?.Items || [];
-                    if (response.Data ) {
+                    if (response.Data) {
                         //console.warn("Yesss", response.Data);
 
                         $scope.dg_events_ds = response.Data.Items;
+                        $scope.popup_events_visible = true;
                     } else {
                         console.warn("No Items in response", response.Data);
                         $scope.dg_events_ds = [];
+                        $scope.popup_events_visible = true;
                     }
 
 
@@ -976,7 +1372,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             valueAxis: {
                 tickInterval: 0.1,
-                title:"Score per Flight"
+                title: "Score per Flight"
             },
 
             size: {
@@ -1022,15 +1418,17 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     "-",
                     "-"
                 ).then(function (response) {
-                    
+
                     // $scope.dg_events_ds = response.data.data?.Items;
                     if (response.Data) {
                         //console.warn("Yesss", response.Data);
 
                         $scope.dg_events_ds = response.Data.Items;
+                        $scope.popup_events_visible = true;
                     } else {
                         console.warn("No Items in response", response.Data);
                         $scope.dg_events_ds = [];
+                        $scope.popup_events_visible = true;
                     }
                 });
             },
@@ -1060,7 +1458,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-            
+
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -1121,9 +1519,11 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 ).then(function (response) {
                     if (response.Data) {
                         $scope.dg_events_ds = response.Data.Items;
+                        $scope.popup_events_visible = true;
                     } else {
                         console.warn("No Items in response", response.Data);
                         $scope.dg_events_ds = [];
+                        $scope.popup_events_visible = true;
                     }
 
 
@@ -1155,7 +1555,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-           
+
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -1216,9 +1616,11 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 ).then(function (response) {
                     if (response.Data) {
                         $scope.dg_events_ds = response.Data.Items;
+                        $scope.popup_events_visible = true;
                     } else {
                         console.warn("No Items in response", response.Data);
                         $scope.dg_events_ds = [];
+                        $scope.popup_events_visible = true;
                     }
 
 
@@ -1250,7 +1652,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-           
+
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -1312,9 +1714,11 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 ).then(function (response) {
                     if (response.Data) {
                         $scope.dg_events_ds = response.Data.Items;
+                        $scope.popup_events_visible = true;
                     } else {
                         console.warn("No Items in response", response.Data);
                         $scope.dg_events_ds = [];
+                        $scope.popup_events_visible = true;
                     }
 
 
@@ -1346,7 +1750,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-            
+
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -1408,9 +1812,11 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 ).then(function (response) {
                     if (response.Data) {
                         $scope.dg_events_ds = response.Data.Items;
+                        $scope.popup_events_visible = true;
                     } else {
                         console.warn("No Items in response", response.Data);
                         $scope.dg_events_ds = [];
+                        $scope.popup_events_visible = true;
                     }
                 });
             },
@@ -1440,7 +1846,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             export: {
                 enabled: false,
             },
-            
+
             argumentAxis: {
                 label: {
                     overlappingBehavior: "rotate",
@@ -2214,6 +2620,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             return moment(dt).format('YYYY-MM-DD');
         };
         $scope.get_type_content_style = function () {
+            return {};
             var h = $(window).height() - 210;
             return {
                 height: h + 'px',
@@ -2233,8 +2640,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
         // نگه‌داشتن ریفرنس چارت‌ها برای destroy
         $scope._phaseCharts = $scope._phaseCharts || {};
-        $scope.renderPhaseCharts = function (ds, prefix)
-        {
+        $scope.renderPhaseCharts = function (ds, prefix) {
             prefix = prefix || ''; // مثلا 'md-' یا 'b737-'
             if (!ds) return;
 
@@ -2319,6 +2725,17 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
         });
 
 
+        $scope.$watch('activeTab', function (val, old) {
+
+            if ($scope.dg_events_737_instance)
+                $scope.dg_events_737_instance.refresh();
+
+            if ($scope.dg_events_md_instance)
+                $scope.dg_events_md_instance.refresh();
+
+        });
+
+
         $scope.bind = function () {
             console.log($scope.dt_from);
             //-------EWMA---------------------
@@ -2334,8 +2751,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                         Date: new Date(r.Date),
                         Daily: r.EventRatePer100,
                         EWMA: r.Ewma,
-                        //CusumPos: r.CusumPos,
-                        //CusumNeg: r.CusumNeg,
+                        CusumPos: r.CusumPos,
+                        CusumNeg: r.CusumNeg,
                         Alarm: r.Alarm,
                         AlarmEWMA: alarm ? r.Ewma : null // فقط وقتی آلارم دارد مقدار EWMA؛ وگرنه null
 
@@ -2367,8 +2784,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             ///------------CPT FO-----------------------
             $scope.refreshPairs();
             //-----------------------------------
-            fdmService.get_fmd_all($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response)
-            {
+            fdmService.get_fmd_all($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response) {
 
                 $scope.result_type = response.Data.result_type;
                 // $scope.result_route = response.Data.result_register;
@@ -2395,8 +2811,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-            fdmService.get_fmd_events($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response_events)
-            {
+            fdmService.get_fmd_events($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response_events) {
                 $scope.result_events = response_events.Data;
                 $scope.bar_events_737_ds = Enumerable.From($scope.result_events.events_type).Where('$.ac_type=="B737"').OrderByDescending('$.count').Take(15).ToArray();
                 $scope.bar_events_md_ds = Enumerable.From($scope.result_events.events_type).Where('$.ac_type=="MD"').OrderByDescending('$.count').Take(15).ToArray();
@@ -2417,11 +2832,11 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 $scope.ds_route_737 = Enumerable.From(responsex.Data.result_type_route).Where("$.ac_type=='B737'").OrderByDescending('$.score_per_flight').ToArray();
                 $scope.ds_route_md = Enumerable.From(responsex.Data.result_type_route).Where("$.ac_type=='MD'").OrderByDescending('$.score_per_flight').ToArray();
 
-               $scope.bar_route_737_ds = $scope.ds_route_737;
-               $scope.bar_route_md_ds = $scope.ds_route_md;
+                $scope.bar_route_737_ds = $scope.ds_route_737;
+                $scope.bar_route_md_ds = $scope.ds_route_md;
 
-               $scope.$evalAsync(() => $scope.renderRouteCharts($scope.ds_route_737, 'b737-route-'));
-               $scope.$evalAsync(() => $scope.renderRouteCharts($scope.ds_route_md, 'md-route-'));
+                $scope.$evalAsync(() => $scope.renderRouteCharts($scope.ds_route_737, 'b737-route-'));
+                $scope.$evalAsync(() => $scope.renderRouteCharts($scope.ds_route_md, 'md-route-'));
 
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
@@ -2472,7 +2887,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 // مقدار ثابت برای تمام نقاط سری میانگین
                 $scope.cpt_all_MD_ds.forEach(function (it) { it.avg_total_count_per100 = avg; });
 
-                
+
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
             // ---------- All CPT comparison------------------------
@@ -2490,15 +2905,17 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             //    console.error('get_fdm_all_cpts error', err);
             //    $scope.cpt_all_ds = [];
             //});
+            $scope.get_events_737();
+            $scope.get_events_md();
 
 
         };
         $scope.go_crew = function (x) {
-            console.log('go_crew',x);
+            console.log('go_crew', x);
             var dt1 = moment($scope.dt_from).format('YYYY_MM_DD');
             var dt2 = moment($scope.dt_to).format('YYYY_MM_DD');
             // $location.path("/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2);
-            $window.open("#!/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2 + "/"+x.ac_type, '_blank' )
+            $window.open("#!/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2 + "/" + x.ac_type, '_blank')
         };
 
         $scope.show_events = function (x) {
