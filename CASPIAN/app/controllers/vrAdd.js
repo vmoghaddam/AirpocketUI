@@ -578,6 +578,7 @@ app.controller('vrAddController', ['$scope', '$location', 'flightBagService', 'a
             flightBagService.epGetVRByFlight($scope.entity.FlightId).then(function (response2) {
 
                 $scope.flight = response2.Data;
+				console.log('------response-------', response2.Data)
                 if (!$scope.flight.OPSStaffStatusId)
                     $scope.flight.OPSStaffStatusId = 0;
                 if (!$scope.flight.OPSStatusId)
@@ -599,7 +600,9 @@ app.controller('vrAddController', ['$scope', '$location', 'flightBagService', 'a
                     if (response2.Data.JLSignedBy) {
                         $scope.isEditable = false;
                         $scope.url_sign3 = signFiles + response2.Data.PICId + ".jpg";
-                        $scope.PIC3 = response2.Data.PIC;
+                         $scope.PIC3 = response2.Data.PIC;
+						$scope.SgnCPTLicNo3 = response2.Data.SgnCPTLicNo;
+               
                         $scope.signDate3 = moment(new Date(response2.Data.JLDatePICApproved)).format('YYYY-MM-DD HH:mm');
                     }
                      

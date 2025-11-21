@@ -1,5 +1,5 @@
-﻿'use strict';
-app.controller('zreportEFBController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', 'flightBagService', '$sce', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route, flightBagService, $sce) {
+﻿﻿'use strict';
+app.controller('zreportEFBController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', 'flightBagService', '$sce','$window', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route, flightBagService, $sce,$window) {
     $scope.prms = $routeParams.prms;
     $scope.IsFBVisible =true;
     $scope.IsVrVisible=true;
@@ -271,8 +271,7 @@ $scope.jlObj = null;
             //response.legs[i]
             //$scope.jl.ReportingTime
             $scope.jl.StartTime = (CreateDate(response.legs[0].STD)).addMinutes(-60);
-            if (response.legs[0].JLSignedBy)
-                $scope.jl.sign = signFiles + response.legs[0].JLSignedBy + ".jpg";
+           
             console.log($scope.jlObj);
 
 
@@ -415,8 +414,21 @@ $scope.jlObj = null;
 
             $('#vr').prop('checked', $scope.jl.vr);
             $('#asr').prop('checked', $scope.jl.asr);
-            if ($scope.jl.sign)
-                $("#_jlsign").attr('src', $scope.jl.sign);
+           // if ($scope.jl.sign)
+           //     $("#_jlsign").attr('src', $scope.jl.sign);
+			
+			// if (response.legs[0].JLSignedBy)
+            //    $scope.jl.sign = signFiles + response.legs[0].JLSignedBy + ".jpg";
+			$scope.jl_pic=null;
+			$scope.jl_sign_date=null;
+			$scope.jl_pic_lic=null;
+			if (response.legs[0].JLSignedBy){
+				$scope.jl_sign_date=moment(new Date(response.legs[0].JLDatePICApproved)).format('YYYY-MM-DD HH:mm');
+				$scope.jl_pic=response.legs[0].PIC;
+				$scope.jl_pic_lic=response.legs[0].JLSignedBy;
+				$scope.jl.sign = signFiles + response.legs[0].PICId + ".jpg";
+				 $("#_jlsign").attr('src', $scope.jl.sign);
+			}
 
             $scope.isContentVisible = true;
             console.log('jl jl jl jl',$scope.jl);
@@ -1386,7 +1398,8 @@ console.log('print',$scope.OFP);
             var id = $scope.tabs[newValue].id;
             $scope.selectedTabId = id;
             $('#' + id).fadeIn();
-
+            $('#rightColumn100').height($(window).height() - 220);
+			//alert($('#rightColumn2').length);
             switch (id) {
                 case 'calendar':
                     $scope.bindCrew();
@@ -1796,14 +1809,39 @@ console.log('print',$scope.OFP);
 		else
 			return x.value;
 	};
+	$scope.getActualFuelValue=function(x){
+		
+		 if (x.prm=='TRIP FUEL')
+		{
+			 
+			return $scope.selectedFlight.FuelUsed;
+		}
+		else if (x.prm=='TOTAL RAMP FOB'){
+			 
+			return $scope.selectedFlight.FuelTotal;
+		}
+		else
+		 
+			return x.value;
+	};
 	
 	$scope.fillOFP =function(data,callback){
-		console.log('-----ofp',data);
+		$scope.lbs=['TBB','CPV','EPTBB','EPCPV','EP-TBB','EP-CPV'];
+	$scope.isLbs=function(reg){
+		return $scope.lbs.indexOf(reg)!=-1;
+	};
+	$scope.mass_unit=$scope.isLbs($scope.selectedFlight.Register)?'LBS':'KG';
 		 data.JPlan = data.JPlan ? JSON.parse(data.JPlan) : [];
         data.JAPlan1 = data.JAPlan1 ? JSON.parse(data.JAPlan1) : [];
         data.JAPlan2 = data.JAPlan2 ? JSON.parse(data.JAPlan2) : [];
 		data.JFuel = data.JFuel ? JSON.parse(data.JFuel) : [];
-          var _ejf=['HOLD','ZFW','TOW','LW','REQ','EZFW','ETOW','ELW'];
+          var _ejf=['HOLD','ZFW','TOW','LW','REQ','EZFW','ETOW','ELW','OPS.EXTRA'];
+		if (data.JFuel.length>0)
+		{
+			//data.JFuel.push({prm:'EXTRA',value:0,_key:'fuel_extra'});
+			data.JFuel.splice(data.JFuel.length-2, 0, {prm:'COMDR.EXTRA',value:0,_key:'fuel_extra'});
+			data.JFuel.splice(data.JFuel.length-2, 0, {prm:'TOTAL RAMP FOB',value:0,_key:'fuel_ramp'});
+		}
 		data.JFuel=Enumerable.From( data.JFuel).Where(function(x){return _ejf.indexOf(x.prm)==-1;}).ToArray();
 		
 		console.log('FUEL',data.JFuel);
@@ -1815,13 +1853,41 @@ console.log('print',$scope.OFP);
         
         
         data.JWTDRF = data.JWTDRF ? JSON.parse(data.JWTDRF) : [];
-		
+		$scope.selectedFlight.FuelPlanned  =$scope.selectedFlight.ALT5;
         console.log('JPlan', data.JPlan);
         $scope.plan_fuel_offblock = 0;
         $scope.plan_fuel_takeoff = 0;
         try {
+			var _tbn_total_fuel=0;
 			
-            $scope.fuel_total = $scope.flight.FuelRemaining + $scope.flight.FuelUplift;
+			$.each(data.JFuel,function(_n,_p){
+			console.log(_p.prm);
+			
+			if (_p.prm=='TOTAL FUEL'){
+				
+				
+				_tbn_total_fuel=_p.value;
+			}
+			if (_p.prm=='COMDR.EXTRA'){
+				
+				
+				if ($scope.selectedFlight.FuelPlanned)
+					_p.value=$scope.selectedFlight.FuelPlanned-_tbn_total_fuel;
+			}
+			if (_p.prm=='TOTAL RAMP FOB'){
+				
+				 
+				if ($scope.selectedFlight.FuelPlanned)
+					_p.value=$scope.selectedFlight.FuelPlanned;
+				else
+					_p.value=_tbn_total_fuel;
+				
+				
+			}
+			
+		});
+			//alert($scope.selectedFlight.FuelPlanned);
+            $scope.fuel_total =_tbn_total_fuel; //$scope.flight.FuelRemaining + $scope.flight.FuelUplift;
             var p_offblock = Enumerable.From(data.JFuel).Where('$._key=="fuel_offblk"').FirstOrDefault();
 			//data.JFuel.OFFPlanned=JSON.parse( JSON.stringify( p_offblock ));
 			p_offblock.pvalue=p_offblock.value;
@@ -1859,11 +1925,10 @@ console.log('print',$scope.OFP);
 
         }
         catch (e_f) {
+			console.log('errrrrrror',e_f);
         }
 
         
-      
-       
 
 
         
@@ -1914,17 +1979,15 @@ console.log('print',$scope.OFP);
 		
 		
         $scope.entity = data;
-		
-		
-		if ($scope.entity.PICId){
-			
-			$scope.entity.url_sign = signFiles + $scope.entity.PICId + ".png";
-                    
-                    
-                    $scope.entity.signDate = moment(new Date($scope.entity.JLDatePICApproved)).format('YYYY-MM-DD HH:mm');
-		}
-		
-		
+		 $.each($scope.entity.JFuel, function(_i, _d){
+		   if (_d.prm === "ALTN 1") {
+                _d.prm = "Alternate 1 (" + $scope.entity.ALT1 + ")";
+  }
+  
+   if (_d.prm === "ALTN 2") {
+                _d.prm = "Alternate 2 (" + $scope.entity.ALT2 + ")";
+  }
+	   });
         setTimeout(function () {
             callback();
         }, 100);
@@ -1945,6 +2008,17 @@ console.log('print',$scope.OFP);
 		$scope.entity={};
 		 $('.prop').val('');
         flightBagService.getAppLegOFP(flightId).then(function (response) {
+			console.log('ofp',response);
+			$scope.ofp_url_sign = null;
+            $scope.ofp_PIC = null;
+            $scope.ofp_signDate = null;
+			$scope.ofp_PIC_Lic = null;
+			if (response.JLSignedBy){
+			    $scope.ofp_url_sign = signFiles + response.PICId + ".png";
+                $scope.ofp_PIC = response.PIC;
+                $scope.ofp_signDate = moment(new Date(response.JLDatePICApproved)).format('YYYY-MM-DD HH:mm');;
+			    $scope.ofp_PIC_Lic = response.JLSignedBy;
+			}
 		    $scope.fillOFP(response,function(){
 				$scope.props = response.props;
 				 var updates = [];
@@ -2032,7 +2106,7 @@ console.log('print',$scope.OFP);
                  });
 				 $scope.fillSOB();
                  $scope.fillETA();
-				
+				 $('#prop_fuel_onblock').val(response.onblock_fuel);
 				
 			});
 			/*
@@ -2118,6 +2192,41 @@ $scope.stations = [];
     $scope.showAVMETSIGWX = function (valid, rem) {
         //SIGWX_IRIMO_20210824_VALID00LVLIRAN
         var dt = moment(new Date($scope.selectedFlight.STADayLocal)).format('YYYYMMDD');
+        var fn = dt + '-' + 'sig' + valid + '.png';
+        var _url = staticFilesSKYBAG + 'Weather/AVMET/' + fn;
+
+        $scope.showImage({ url: _url, caption: 'SIGWX Chart' + ' Valid: ' + rem });
+
+    };
+	 $scope.showIRIMOFF = function (valid) {
+        //FF_IRIMO_20210824_VALID00LVLIRAN
+        var dt = moment(new Date($scope.selectedFlight.STADay)).format('YYYYMMDD');
+        var fn = 'FF_IRIMO_' + dt + '_VALID' + valid + 'LVL' + 'IRAN' + '.pdf';
+        var _url = staticFilesSKYBAG + 'Weather/FF/IRIMO/' + fn;
+       // $scope.showPdf({ url: _url, caption: 'Wind & Temperature' + ' Valid: ' + valid });
+		 $window.open(_url, '_blank') 
+    };
+	$scope.showIRIMOSIGWX = function (valid, rem) {
+        //SIGWX_IRIMO_20210824_VALID00LVLIRAN
+        var dt = moment(new Date($scope.selectedFlight.STADay)).format('YYYYMMDD');
+        var fn = 'SIGWX_IRIMO_' + dt + '_VALID' + valid + 'LVL' + 'IRAN' + '.png';
+        var _url = staticFilesSKYBAG + 'Weather/SIGWX/IRIMO/' + fn;
+        $scope.showImage({ url: _url, caption: 'SIGWX Chart' + ' Valid: ' + rem });
+
+    };
+	 $scope.showSIGWX = function (valid ) {
+		 //sigwx_20231203_0006
+        //SIGWX_IRIMO_20210824_VALID00LVLIRAN
+        var dt = moment(new Date($scope.selectedFlight.STADay)).format('YYYYMMDD');
+        var fn = 'sigwx_'+dt+'_'+valid + '.png';
+        var _url = staticFilesSKYBAG + 'Weather/SIGWX/ADDS/' + fn;
+
+        $scope.showImage({ url: _url, caption: 'SIGWX Chart' + ' Valid: ' + dt+' '+valid });
+
+    };
+	 $scope.showAVMETSIGWX = function (valid, rem) {
+        //SIGWX_IRIMO_20210824_VALID00LVLIRAN
+        var dt = moment(new Date($scope.selectedFlight.STADay)).format('YYYYMMDD');
         var fn = dt + '-' + 'sig' + valid + '.png';
         var _url = staticFilesSKYBAG + 'Weather/AVMET/' + fn;
 
@@ -2274,6 +2383,7 @@ $scope.stations = [];
         var _url = staticFilesSKYBAG + 'Weather/WIND/ADDS/' + fn;
         $scope.showImage({ url: _url, caption: 'Wind & Temperature Level: ' + lvl + ' Valid: ' + valid });
     };
+	 
     $scope.showImage = function (item) {
         var data = { url: item.url, caption: item.caption };
 
@@ -2313,6 +2423,7 @@ $scope.stations = [];
         },
         onSelectionChanged: function (e) {
             var data = e.selectedRowsData[0];
+			$('#prop_fuel_onblock').val('');
 
             if (!data) {
                 $scope.dg_flight_selected = null;
@@ -2892,6 +3003,9 @@ $scope.stations = [];
             if (!$scope.isOPSStaff && e.rowType == 'data' && e.data && (e.data.AttASR == 1 || e.data.AttVoyageReport == 1)) {
                 e.rowElement.css('background', '#d9d9d9');
             }
+			if (!$scope.isOPSStaff && e.rowType == 'data' && e.data && (e.data.JLSignedBy)) {
+                e.rowElement.css('background', '#b3ffe6');
+            }
             
         },
 
@@ -2944,6 +3058,16 @@ $scope.stations = [];
         $('.tabc').height($(window).height() - 200);
         $('#rightColumn').height($(window).height() - 220);
         $('#rightColumn2').height($(window).height() - 220);
+		 $('#rightColumn100').height($(window).height() - 220);
+		 
+		
+		//var x = setInterval(function() {
+            //  var _msg='کاربر گرامی با توجه به منقضی شدن لایسنس استفاده از نرم افزار اسکای بگ دسترسی شما قطع خواهد شد لطفا از اطلاعات خود نسخه پشتیبان تهیه فرمایید';
+			// alert(_msg);
+  
+       // }, 3*60*1000);
+		
+		
     });
 
     $rootScope.$broadcast('FlightsReportLoaded', null);

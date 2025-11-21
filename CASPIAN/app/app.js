@@ -5,7 +5,7 @@ var app = angular.module('GriffinApp', ['ngRoute', 'LocalStorageModule', 'angula
  
  
 app.config(function ($routeProvider) {
-    var version = 856;
+    var version = 860;
     //ati new 2
     $routeProvider.when("/cp", {
         controller: "firstLoginController",
@@ -20,11 +20,11 @@ app.config(function ($routeProvider) {
     });
     $routeProvider.when("/home", {
         controller: "homeController",
-        templateUrl: "/app/views/home.html?v="+"672"
+        templateUrl: "/app/views/home.html?v="+"445"
     });
     $routeProvider.when("/home/:year/:month/:day", {
         controller: "homeController",
-        templateUrl: "/app/views/home.html?v=" + "1067"
+        templateUrl: "/app/views/home.html?v=" + "445"
     });
 
     $routeProvider.when("/login", {
@@ -125,13 +125,13 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/coursetype.html?v=" + version
     });
     $routeProvider.when("/flight/board", {
-         controller: "boardController",
-        templateUrl: "/app/views/board.html?v=" + "222",
+         controller: "boardController",				
+        templateUrl: "/app/views/board.html?v=" + "48",
         isAdmin: true,
     });
 	$routeProvider.when("/flight/board/old", {
         controller: "flightBoardController",
-        templateUrl: "/app/views/flightboard.html?v=" + "30311"
+        templateUrl: "/app/views/flightboard.html?v=" + "30344"
     });
     $routeProvider.when("/plan/board", {
         controller: "planBoardController",
@@ -183,7 +183,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/library", {
         controller: "libraryController",
-        templateUrl: "/app/views/library.html?v=120180",
+        templateUrl: "/app/views/library.html?v=120181",
         isDocument:false,
     });
     $routeProvider.when("/library/people", {
@@ -440,7 +440,12 @@ app.config(function ($routeProvider) {
     });
     $routeProvider.when("/users", {
         controller: "usersController",
-        templateUrl: "/app/views/users.html?v=" + "1218345"
+        templateUrl: "/app/views/users.html?v=" + "1218346"
+    });
+	
+	$routeProvider.when("/users/z", {
+        controller: "zusersController",
+        templateUrl: "/app/views/zusers.html?v=" + version
     });
  $routeProvider.when("/gnt", {
         controller: "gntController",
@@ -499,7 +504,7 @@ app.config(function ($routeProvider) {
     });
 	 $routeProvider.when("/board", {
         controller: "boardController",
-        templateUrl: "/app/views/board.html?v=222",
+        templateUrl: "/app/views/board.html?v=46",
         isAdmin: true,
     });
 	 $routeProvider.when("/board/test", {
@@ -581,7 +586,7 @@ app.config(function ($routeProvider) {
     //});
 	 $routeProvider.when("/flights/efbs", {
         controller: "zreportEFBController",
-        templateUrl: "/app/views/zreportEFB.html?v=100115"
+        templateUrl: "/app/views/zreportEFB.html?v=14"
     });
 	 $routeProvider.when("/duty/timeline", {
         controller: "dutyTimelineController",
@@ -627,45 +632,45 @@ app.config(function ($routeProvider) {
 	
 	 $routeProvider.when("/fdm", {
         controller: "fdmController",
-        templateUrl: "/app/views/fdm.html?v=20",
+        templateUrl: "/app/views/fdm.html?v=21",
 
     });
 	
 	 $routeProvider.when("/fdm/ops", {
         controller: "fdmOpsController",
-        templateUrl: "/app/views/fdmops.html?v=20",
+        templateUrl: "/app/views/fdmops.html?v=21",
 
     });
 	
 	$routeProvider.when("/fdm/dashboard", {
         controller: "fdmDashboardController",
-        templateUrl: "/app/views/fdmDashboard.html?v=20"
+        templateUrl: "/app/views/fdmDashboard.html?v=21"
     });
 
      $routeProvider.when("/fdm/dashboard/cpt/monthly", {
         controller: "fdmDashboardPilotMonthlyController",
-        templateUrl: "/app/views/fdmDashboardPilotMonthly.html"
+        templateUrl: "/app/views/fdmDashboardPilotMonthly.html?v=21"
     });
 
 
     $routeProvider.when("/fdm/dashboard/cpt/new", {
         controller: "fdmDashboardCptNew",
-        templateUrl: "/app/views/fdmDashboardCptNew.html?v=20"
+        templateUrl: "/app/views/fdmDashboardCptNew.html?v=21"
     });
 	
     $routeProvider.when("/fdm/qa", {
         controller: "fdmQAController",
-        templateUrl: "/app/views/fdmQA.html?v=20"
+        templateUrl: "/app/views/fdmQA.html?v=21"
     });
 
     $routeProvider.when("/fdm/dashboard/reg/monthly", {
         controller: "fdmRegMonthlyController",
-        templateUrl: "/app/views/fdmRegMonthly.html"
+        templateUrl: "/app/views/fdmRegMonthly.html?v=21"
     });
 
   $routeProvider.when("/fdm/crew/report/:crewId", {
         controller: "fdmCrewReportController",
-        templateUrl: "/app/views/fdmCrewReport.html"
+        templateUrl: "/app/views/fdmCrewReport.html?v=21"
     });
 	
 	
@@ -674,24 +679,67 @@ app.config(function ($routeProvider) {
         controller: "logininfoController",
         templateUrl: "/app/views/logininfo.html"
     });
+	
+	$routeProvider.when("/fdm/crew/z/:crew_id/:dt1/:dt2/:ac_type", {
+        controller: "zfdm_crew_controller",
+        templateUrl: "/app/views/zfdm_crew.html?v=" + '5673'
+    });
+
+    /*$routeProvider.when("/fdm/crew/z/:crew_id/:dt1/:dt2", {
+        controller: "zfdm_crew_controller",
+        templateUrl: "/app/views/zfdm_crew.html?v=" + '33'
+    });*/
+	
+	$routeProvider.when("/forms/vacation", {
+     controller: "formsVacationController",
+     templateUrl: "/app/views/formsvacation.html?v=1130"
+ });
+ 
+  $routeProvider.when("/forms/vacation/responsible", {
+     controller: "forms_vacation_responsibleController",
+     templateUrl: "/app/views/form_vacation_responsible.html?v=1130"
+ });
+ 
+ $routeProvider.when("/delays/flight", {
+        controller: "delayReportFlightController",
+        templateUrl: "/app/views/delayreportflight.html?v=101"
+    });						
+ 
+  $routeProvider.when("/duty/timeline/z", {
+        controller: "zdutyTimelineController",
+        templateUrl: "/app/views/zdutyTimeline.html?v=505"
+    });
+	
+	 $routeProvider.when("/fdm/sand", {
+     controller: "fdm_sand_controller",
+     templateUrl: "/app/views/fdm_sand.html?v=" + '5674'
+ });
+ 
+ 
+  $routeProvider.when("/fdm/main/z", {
+       controller: "fdm_sand_controller",
+     templateUrl: "/app/views/fdm_sand.html?v=" + '33'
+    });
+ 
+ 
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   
 
-//var protocol='http://';
-//if (window.location.href.indexOf('https') != -1)
-var	protocol='https://';
+var protocol='http://';
+if (window.location.href.indexOf('https') != -1)
+	protocol='https://';
 var _reportServer = "https://fleet.caspianairlines.com/report/frmreportview.aspx";
 var _reportServerDelay = "https://fleet.caspianairlines.com/reportdelay/frmreportview.aspx";
 var _reportServerTemp = "https://fleet.caspianairlines.com/reportTemp/frmreportview.aspx";
 var _reportServerEFB = "https://fleet.caspianairlines.com/reportefb/frmreportview.aspx";
- var serviceBase =protocol+ 'fleet.caspianairlines.com/api/';
-  var serviceBaseV2 =protocol+ 'fleet.caspianairlines.com/apiv2/';
-   var serviceBaseV3 =protocol+ 'fleet.caspianairlines.com/apiv3/';
-     var serviceBaseNet =protocol+ 'fleet.caspianairlines.com/apinetv1/';
-	    var serviceBaseNetBeta =protocol+ 'fleet.caspianairlines.com/apinetv11/';
-		 var serviceBaseNetPlan =protocol+ 'fleet.caspianairlines.com/apinetplan/';
-var webBase = protocol+ 'fleet.caspianairlines.com/';
+ var serviceBase =protocol+ '172.16.103.37/api/';
+  var serviceBaseV2 =protocol+ '172.16.103.37/apiv2/';
+   var serviceBaseV3 =protocol+ '172.16.103.37/apiv3/';
+     var serviceBaseNet =protocol+ '172.16.103.37/apinetv1/';
+	    var serviceBaseNetBeta =protocol+ '172.16.103.37/apinetv11/';
+		 var serviceBaseNetPlan =protocol+ '172.16.103.37/apinetplan/';
+var webBase = protocol+ '172.16.103.37/';
 var signFiles = 'https://fbpocket.ir/upload/signs/';
 var serviceBase2 =  'https://fleet.caspianairlines.com/fbservicea/'; 
  //var webBase = 'http://localhost:30273/';
@@ -712,15 +760,20 @@ var apiapsb='https://fleet.caspianairlines.com/apiapsb/api/';
 var apiFdm='https://fleet.caspianairlines.com/apifdm/';
 
 var apiCAO='https://fleet.caspianairlines.com/apicao/';
-
+var apiScheduling='https://fleet.caspianairlines.com/yapischeduling/';
 var apiskybag='https://fleet.caspianairlines.com/zsbapi/api/';
 var zapinet='https://fleet.caspianairlines.com/zapinet/';
-
+var apireportflight='https://fleet.caspianairlines.com/zapinet/'
 var zfuel='https://fleet.caspianairlines.com/zfuel/';
+var serviceRequest = 'https://fleet.caspianairlines.com/apiform/';
 
-if (window.location.href.indexOf('fleet.caspianairlines') != -1) {
+var zfdm='https://fleet.caspianairlines.com/zfdm/';
+var api_fdm=zfdm;
+
+if (window.location.href.indexOf('fleet.caspianairlines') != -1) { 
     var webBase = protocol+ 'fleet.caspianairlines.com/';
     var serviceBase = protocol+ 'fleet.caspianairlines.com/api/';
+    var yserviceBase = protocol+ 'fleet.caspianairlines.com/yapi/';
 	var serviceBaseV2 = protocol+ 'fleet.caspianairlines.com/apiv2/';
 	  var serviceBaseV3 =protocol+ 'fleet.caspianairlines.com/apiv3/';
 	   var serviceBaseNet =protocol+ 'fleet.caspianairlines.com/apinetv1/';
@@ -728,34 +781,36 @@ if (window.location.href.indexOf('fleet.caspianairlines') != -1) {
 	    var serviceBaseNetBeta =protocol+ 'fleet.caspianairlines.com/apinetv11/';
 	var signFiles = protocol+'fleet.caspianairlines.com/upload/signs/';
     var serviceBase2 = protocol+'fleet.caspianairlines.com/fbservicea/'; 
+	var apiLog = "https://fleet.caspianairlines.com/apilog/";
 }
 else {
     //var serviceBase = 'http://apig.epapocket.ir/';
-   var serviceBase = protocol+ 'fleet.caspianairlines.com/api/';
-     var serviceBaseV2 = protocol+ 'fleet.caspianairlines.com/apiv2/';
-	   var serviceBaseV3 =protocol+ 'fleet.caspianairlines.com/apiv3/';
-	     var serviceBaseNet =protocol+ 'fleet.caspianairlines.com/apinetv1/';
-		  var serviceBaseNetPlan =protocol+ 'fleet.caspianairlines.com/apinetplan/';
-		  var serviceBaseNetBeta =protocol+ 'fleet.caspianairlines.com/apinetv11/';
-var webBase = protocol+ 'fleet.caspianairlines.com/';
-var signFiles = protocol+'fleet.caspianairlines.com/upload/signs/';
-    var serviceBase2 = protocol+'fleet.caspianairlines.com/fbservicea/'; 
-	 _reportServer = protocol+'fleet.caspianairlines.com'+"/report/frmreportview.aspx";
-	  _reportServerDelay = protocol+'fleet.caspianairlines.com'+"/reportdelay/frmreportview.aspx";
-	 _reportServerTemp = protocol+'fleet.caspianairlines.com'+"/reporttemp/frmreportview.aspx";
+   var serviceBase = protocol+ '172.16.103.37/api/';
+     var serviceBaseV2 = protocol+ '172.16.103.37/apiv2/';
+	   var serviceBaseV3 =protocol+ '172.16.103.37/apiv3/';
+	    var yserviceBase = protocol+ '172.16.103.37/yapi/';
+	     var serviceBaseNet =protocol+ '172.16.103.37/apinetv1/';
+		  var serviceBaseNetPlan =protocol+ '172.16.103.37/apinetplan/';
+		  var serviceBaseNetBeta =protocol+ '172.16.103.37/apinetv11/';
+var webBase = protocol+ '172.16.103.37/';
+var signFiles = protocol+'172.16.103.37/upload/signs/';
+    var serviceBase2 = protocol+'172.16.103.37/fbservicea/'; 
+	 _reportServer = protocol+'172.16.103.37'+"/report/frmreportview.aspx";
+	  _reportServerDelay = protocol+'172.16.103.37'+"/reportdelay/frmreportview.aspx";
+	 _reportServerTemp = protocol+'172.16.103.37'+"/reporttemp/frmreportview.aspx";
 	 
 	 
 	 
-	 var serviceBaseAPI =protocol+'fleet.caspianairlines.com'+'/airpocketexternal/';
-	var serviceBaseAPIMSG =protocol+ 'fleet.caspianairlines.com/msgapi/';
+	 var serviceBaseAPI =protocol+'172.16.103.37'+'/airpocketexternal/';
+	var serviceBaseAPIMSG =protocol+ '172.16.103.37/msgapi/';
 	var serviceBaseAPIXLS =protocol+ '172.168.103.37/xlsapi/';
 
-var serviceBaseAPI3 =protocol+'fleet.caspianairlines.com'+'/airpocketexternal3/';
-var serviceBaseNetAPI=protocol+'fleet.caspianairlines.com'+'/airpocketexternalnet/';
-	 
+var serviceBaseAPI3 =protocol+'172.16.103.37'+'/airpocketexternal3/';
+var serviceBaseNetAPI=protocol+'172.16.103.37'+'/airpocketexternalnet/';
+	 var apiLog = protocol+'172.16.103.37'+'/apilog/';
 	 
 }
- var apiLog = "https://fleet.caspianairlines.com/apilog/";
+ 
  
    var serviceBaseBiNew = 'https://fleet.caspianairlines.com/zdelay/';
   var serviceBaseBi = 'https://fleet.caspianairlines.com/zdelay/';
@@ -799,10 +854,11 @@ app.run(['authService', 'activityService', '$rootScope', '$location', '$template
     if (window.location.href.indexOf('fleet.caspianairlines') != -1) {
     var webBase = protocol+ 'fleet.caspianairlines.com/';
     var serviceBase = protocol+ 'fleet.caspianairlines.com/api/';
+	var serviceRequest = 'https://fleet.caspianairlines.com/apiform/';
 }
 else{
-	  var serviceBase = protocol+ 'fleet.caspianairlines.com/api/';
-var webBase = protocol+ 'fleet.caspianairlines.com/';
+	  var serviceBase = protocol+ '172.16.103.37/api/';
+var webBase = protocol+ '172.16.103.37/';
 }
 
  
@@ -819,6 +875,7 @@ var webBase = protocol+ 'fleet.caspianairlines.com/';
         $templateCache.removeAll();
     });
     $rootScope.serviceUrl = serviceBase;
+    $rootScope.yserviceUrl = yserviceBase;
 	 $rootScope.serviceUrlNet = serviceBaseNet;
 	
     $rootScope.fileHandlerUrl = /*webBase*/window.location.protocol + "//" + window.location.host +"/"+ 'filehandler.ashx';
@@ -917,6 +974,16 @@ var webBase = protocol+ 'fleet.caspianairlines.com/';
            
 
         }
+		
+		 if (key == 'requests_scheduling') {
+             return $rootScope.userName.toLowerCase()=='ops.rafiei' || $rootScope.userName.toLowerCase() == 'demo';
+
+        }
+		if (key == 'requests') {
+             return $rootScope.userName.toLowerCase()=='ops.bahrami'|| $rootScope.userName.toLowerCase()=='davoodian' || $rootScope.userName.toLowerCase() == 'demo';
+
+        }
+		
 		if (key=='efb')
 		{
 			 if ($rootScope.userName.toLowerCase() == 'demo')

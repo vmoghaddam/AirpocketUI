@@ -2,8 +2,8 @@
 app.controller('schedulingController', ['$scope', '$location', '$routeParams', '$rootScope', '$timeout', 'schedulingService', 'flightService', 'weatherService', 'aircraftService', 'authService', 'notificationService', '$route', '$window', function ($scope, $location, $routeParams, $rootScope, $timeout, schedulingService, flightService, weatherService, aircraftService, authService, notificationService, $route, $window) {
 	$scope.isRoster =
         $route.current.isRoster;
-     $scope.IsFxVisible=$rootScope.userName.toLowerCase() == 'demo' || $rootScope.userName.toLowerCase() == 'ops.soltani' || $rootScope.userName.toLowerCase() == 'ops.esmaeili';
-	 $scope.isLimited=!( $rootScope.userName.toLowerCase() == 'demo' || $rootScope.userName.toLowerCase() == 'ops.soltani' || $rootScope.userName.toLowerCase() == 'ops.esmaeili' || $rootScope.userName.toLowerCase() ==  'ops.rafiei');
+     $scope.IsFxVisible=$rootScope.userName.toLowerCase() == 'demo' || $rootScope.userName.toLowerCase() == 'ops.soltani' || $rootScope.userName.toLowerCase() == 'ops.esmaeili' || $rootScope.userName.toLowerCase() ==  'ops.rafiei';
+	 $scope.isLimited=!( $rootScope.userName.toLowerCase() == 'demo' || $rootScope.userName.toLowerCase() == 'ops.soltani' || $rootScope.userName.toLowerCase() == 'ops.esmaeili' || $rootScope.userName.toLowerCase() ==  'ops.rafiei' || $rootScope.userName.toLowerCase() ==  'esmaeilim');
 	 $scope.OnlyRoster = false;
     if ($rootScope.userName.toLowerCase() == 'train.moradi' || $rootScope.userName.toLowerCase() == 'train.barzegar'  || $scope.isRoster)
         $scope.OnlyRoster = true;
@@ -22,7 +22,7 @@ app.controller('schedulingController', ['$scope', '$location', '$routeParams', '
     $scope.editable = true;
     $scope.isAdmin =
         $route.current.isAdmin;
-    if ( $scope.OnlyTraining)
+    if ( $scope.OnlyTraining)						
 		 $scope.isAdmin=true;
 
     $scope.bottom = 385 + 50;
@@ -1119,13 +1119,13 @@ app.controller('schedulingController', ['$scope', '$location', '$routeParams', '
         { id: 11, title: '10/16 - 11/15' },
         { id: 12, title: '11/16 - 12/15' },
     ];
-    $scope.fxyear = 1403;
+    $scope.fxyear = 1404;
     $scope.fxmonth = null;
     $scope.sb_fx_year = {
         placeholder: 'Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [1403,1402,1401,1400, 1399, 1398],
+        dataSource: [1404,1403,1402,1401,1400, 1399, 1398],
 
         onSelectionChanged: function (arg) {
 

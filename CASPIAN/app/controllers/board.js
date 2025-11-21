@@ -4,23 +4,23 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
     var hourWidth = 85;
     authService.setModule(3);
     $rootScope.setTheme();
-    
+	
+	
+    $scope.is_aran=$rootScope.userName.toLowerCase() == 'aran';
     $scope.IsPlanning = $rootScope.HasMenuAccess('flight_planning', 3);
-    //flight_planning-edit
     $scope.IsStaion=$rootScope.roles.indexOf('Station')!=-1;
-     
     $scope.IsFuelReadOnly=true;
     $scope.IsJLAccess = $rootScope.HasMenuAccess('flight_board_jl', 3) || $scope.IsStaion;
     $scope.IsCLAccess = $rootScope.HasMenuAccess('flight_board_jl', 3) || $rootScope.userName.toLowerCase().startsWith('trans.') || $scope.IsStaion;
-	 $scope.IsNoCrewVisible = $rootScope.userName.toLowerCase().startsWith('dis.') || $rootScope.userName.toLowerCase().startsWith('demo');
-    $scope.IsACM=   $rootScope.userName.toLowerCase().startsWith('dis.') || $rootScope.userName.toLowerCase().startsWith('it.');
-   //ops.rezabandehlou
+	 $scope.IsNoCrewVisible = $rootScope.userName.toLowerCase().startsWith('dis.') || $rootScope.userName.toLowerCase().startsWith('occ.') || $rootScope.userName.toLowerCase().startsWith('demo');
+    $scope.IsACM=   $rootScope.userName.toLowerCase().startsWith('dis.') || $rootScope.userName.toLowerCase().startsWith('it.')    || $rootScope.userName.toLowerCase().startsWith('occ.');
     $scope.IsJLOG = false;
     if ($rootScope.userName.toLowerCase() == 'ops.rezabandehlou' || $rootScope.userName.toLowerCase() == 'demo')
         $scope.IsJLOG = true;
     $scope.IsPickup = $rootScope.userName.toLowerCase().startsWith('trans.') || $rootScope.userName.toLowerCase().startsWith('aps.kouhsar');
-    $scope.IsCrewMobileVisible = $rootScope.userName.toLowerCase().startsWith('dis.') || $rootScope.userName.toLowerCase().startsWith('aps.kouhsar') || $rootScope.userName.toLowerCase().startsWith('demo') || $rootScope.userName.toLowerCase().startsWith('it.entezari');
+    $scope.IsCrewMobileVisible =$rootScope.userName.toLowerCase().startsWith('occ.') || $rootScope.userName.toLowerCase().startsWith('dis.') || $rootScope.userName.toLowerCase().startsWith('aps.kouhsar') || $rootScope.userName.toLowerCase().startsWith('demo') || $rootScope.userName.toLowerCase().startsWith('it.entezari');
     $scope.IsSMSVisible = $rootScope.userName.toLowerCase().startsWith('dis.')
+	|| $rootScope.userName.toLowerCase().startsWith('occ.')
 	|| $rootScope.userName.toLowerCase().startsWith('demo')
 	|| $rootScope.userName.toLowerCase().startsWith('aps.kouhsar')
 	|| $rootScope.userName.toLowerCase().startsWith('ops.soltani') || $rootScope.userName.toLowerCase().startsWith('ops.esmaeili')
@@ -802,8 +802,10 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
         onClick: function (e) {
 			console.log('http://fleet.caspianairlines.com/apixls/api/xls/dispatch/daily/shift?dt=' +  moment(new Date($scope.selectedDate)).format('YYYY-MM-DD'));
                     $window.open('https://fleet.caspianairlines.com/apixls/api/xls/dispatch/daily/shift?dt=' +  moment(new Date($scope.selectedDate)).format('YYYY-MM-DD'), '_blank');
-        }
-
+        },
+ bindingOptions: {
+            visible: '!is_aran'
+        },
     };
 	
 	
@@ -3854,6 +3856,11 @@ $scope.btn_addemp = {
                 $scope.jl.tel = "+982148063000";
                 $scope.jl.email = "OpsEng@Caspian.aero";
                 $scope.jl.sectors = [];
+				console.log('jl f0',response.flights[0]);
+				if (response.flights[0].FromAirportIATA=='IKA')
+					$scope.jl_etd='1:30';
+				else 
+					$scope.jl_etd='1:00';
                 for (var i = 0; i < 6; i++) {
                     var s = i + 1;
                     var sec = { sector: s };
@@ -4928,7 +4935,7 @@ $scope.btn_addemp = {
         }
     };
     $scope.remark_status_height = 80;
-	$scope.isRemarkNotEditable =!( $scope.IsEditable || $scope.IsRemark);
+	$scope.isRemarkNotEditable =!( $scope.IsEditable || $scope.IsRemark || $scope.IsStaion);
     $scope.remark_status = {
         bindingOptions: {
             value: 'logFlight.DepartureRemark',
@@ -8312,7 +8319,7 @@ $scope.btn_addemp = {
     $scope.fillDto = function (entity) {
         entity.ID = $scope.logFlight.ID;
         entity.UserId = $rootScope.userId;
-        entity.UserName = $rootScope.userName;
+        entity.UserName =$rootScope.userName && $rootScope.userName.startsWith('aps.')? '_'+$rootScope.userName : $rootScope.userName;
         entity.FlightStatusID = $scope.logFlight.FlightStatusID;
 
         entity.Delays = [];
@@ -8513,7 +8520,7 @@ $scope.btn_addemp = {
             if ($scope.IsStaion)
             {
                
-                $scope.IsSave=$scope.logFlight.FromAirportIATA==$rootScope.Station || $scope.logFlight.ToAirportIATA==$rootScope.Station;
+			    $scope.IsSave=$scope.logFlight.FromAirportIATA==$rootScope.Station || $scope.logFlight.ToAirportIATA==$rootScope.Station;
             }
             $scope.popup_mlog_instance.repaint();
             
@@ -9753,6 +9760,7 @@ flightService.sendDelayNira($scope.ati_flight.ID);
             $scope.IsSave=$scope.IsEditable || $scope.IsStaion || $scope.IsRemark;
             if ($scope.IsStaion)
             {
+               console.log('----station-------', $rootScope.Station)
                
                 $scope.IsSave=$scope.logFlight.FromAirportIATA==$rootScope.Station || $scope.logFlight.ToAirportIATA==$rootScope.Station;
             }
@@ -15468,6 +15476,17 @@ flightService.sendDelayNira($scope.ati_flight.ID);
 						if (_q.ToAirportIATA=='ADB' ) 
 							_q.GWTO=180;
 						
+						if (_q.FromAirportIATA=='ESB'  )
+							_q.GWLand=180;
+						if (_q.ToAirportIATA=='ESB' ) 
+							_q.GWTO=180;
+						
+						
+						if (_q.FromAirportIATA=='GZP'  )
+							_q.GWLand=180;
+						if (_q.ToAirportIATA=='GZP' ) 
+							_q.GWTO=180;
+						
                         $scope.modifyFlightTimes(_q);
                          
                          
@@ -16051,6 +16070,7 @@ flightService.sendDelayNira($scope.ati_flight.ID);
 
     //aptrange
     $scope.IsAptRangeVisible = $rootScope.userName.toLowerCase().startsWith('comm.') || $rootScope.userName.toLowerCase().startsWith('dis.')
+	|| $rootScope.userName.toLowerCase().startsWith('occ.')
         || $rootScope.userName.toLowerCase().startsWith('demo')
         || $rootScope.userName.toLowerCase().includes('razbani');
     $scope.btn_aptrptrange = {
@@ -16213,7 +16233,11 @@ flightService.sendDelayNira($scope.ati_flight.ID);
         width: '100%',
 
         onClick: function (e) {
-			$scope.popup_aptday_visible = true;
+			
+			 if($scope.is_aran)
+                $window.open('https://fleet.caspianairlines.com/#!/flights/report', '_blank');
+			 else
+			    $scope.popup_aptday_visible = true;
           
         }
 
@@ -16269,8 +16293,8 @@ flightService.sendDelayNira($scope.ati_flight.ID);
                             return;
                         }
 
-                         $window.open(serviceBaseAPIXLS + 'api/xls/airport/daily' + '?dt=' + moment(new Date($scope._datefrom)).format('YYYY-MM-DD')+'&origin='+ $scope.aptrptday, '_blank');
-
+                       $window.open(serviceBaseAPIXLS + 'api/xls/airport/daily' + '?dt=' + moment(new Date($scope._datefrom)).format('YYYY-MM-DD')+'&origin='+ $scope.aptrptday, '_blank');
+					 
 
                     }
                 }, toolbar: 'bottom'

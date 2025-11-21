@@ -33,13 +33,13 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
 
     };
     /////////////////////////////////////////
-    $scope.yf = 1401;
-    $scope.yt = 2022;
+    $scope.yf = 1404;
+    $scope.yt = 2025;
     $scope.sb_yf = {
         placeholder: 'Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [1401,1400,1399, 1398],
+        dataSource: [1404,1403,1402,1401,1400,1399, 1398],
 
         onSelectionChanged: function (arg) {
             $scope.bind();

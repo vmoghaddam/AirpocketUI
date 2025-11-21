@@ -31,7 +31,37 @@ namespace EPAGriffinAPI.Providers
 
             _publicClientId = publicClientId;
         }
+        public   string IsAllowedCheck(string ip, string username)
+        {
+            if (ConfigurationManager.AppSettings["ipaccess"] == "0")
+                return "X";
 
+            //return true;
+            var cacheKey = "ipaccess";
+            username = username.ToLower();
+            
+            UnitOfWork unitOfWork = new UnitOfWork();
+           
+            var access = unitOfWork.PersonRepository.GetIPAccess();
+
+            var accall = access.Where(q => q.IP == "*" && q.UserName.ToLower() == "*").FirstOrDefault();
+            if (accall != null)
+            {
+                return "A";
+            }
+            var acc1 = access.Where(q => q.IP == "*" && username.StartsWith(q.UserName.ToLower().Replace("*", ""))).FirstOrDefault();
+            if (acc1 != null)
+            { return "B"; }
+            var acc2 = access.Where(q => q.UserName.ToLower() == "*" && ip.StartsWith(q.IP.Replace("*", ""))).FirstOrDefault();
+            if (acc2 != null)
+            { return "C"; }
+            var acc3 = access.Where(q => username.StartsWith(q.UserName.ToLower().Replace("*", "")) && ip.StartsWith(q.IP.Replace(".*", ""))).FirstOrDefault();
+            if (acc3 != null)
+            { return "D"; }
+
+            //return true;
+            return "E";
+        }
 
         //2023-06-09
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
@@ -59,6 +89,12 @@ namespace EPAGriffinAPI.Providers
                 var remoteIpAddresss = context.Request.RemoteIpAddress;
                 // var ip = HttpContext.Current.Request.UserHostAddress;
                 var isAllowed = IPHelper.IsAllowed(remoteIpAddresss, context.UserName);
+                var sssss= IsAllowedCheck(remoteIpAddresss, context.UserName);
+                if (context.UserName.ToLower() == "t.test1")
+                {
+                    context.SetError("invalid_grant", remoteIpAddresss+"   "+ sssss + " E600 " );
+                    return;
+                }
                 if (!isAllowed)
                 {
                     context.SetError("invalid_grant", "The user name or password is incorrect." + " E300 "+remoteIpAddresss);
@@ -147,7 +183,7 @@ namespace EPAGriffinAPI.Providers
                         return;
                     }
                     //اگر شماره همراه وارد نشده بود؟
-                    if (ConfigurationManager.AppSettings["twofactor"]!="0" && !roles.Contains("Two Factor Authentication Disabled") /*roles.Contains("Dispatch")*/ /*&& !remoteIpAddresss.StartsWith("192.168.")*/ && !verified && !string.IsNullOrEmpty(user.PhoneNumber))
+                    if (ConfigurationManager.AppSettings["twofactor"]!="0" && !roles.Contains("Two Factor Authentication Disabled") /*roles.Contains("Dispatch")*/ && !remoteIpAddresss.StartsWith("192.168.") && !verified && !string.IsNullOrEmpty(user.PhoneNumber))
                     {
                         // if (string.IsNullOrEmpty(user.PhoneNumber))
                         // {
