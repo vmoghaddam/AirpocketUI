@@ -13,6 +13,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
 
 
         $scope.get_date_prm = function (str) {
+
             var prts = str.split('_');
             return new Date(prts[0], Number(prts[1]) - 1, prts[2]);
         }
