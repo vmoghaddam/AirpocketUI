@@ -345,29 +345,10 @@
                     <!-- TAB OverView -->
                     <div ng-show="activeTab === 'overview'">
                         <div class="row " style="padding:5px;">
-                            <div class="type-card">
-                                <div class="type-header" style="padding:7px;background:#eee;text-align:center">AllEvents</div>
-                                <div id="chart_ewma_all" dx-chart="allEWMAEventsChart">
-                                </div>
-                                <div id="chart_description" style="font-size:13px;color:#444;margin:10px 12px 18px 12px;line-height:1.5;">
-                                    <strong>How to read this chart</strong><br />
-                                    • <span style="color:#2f6fbf">Blue line (EWMA, α = 0.30)</span>: smoothed trend of daily FDM event rate per 100 flights. Smooths out daily fluctuations while highlighting emerging trends. An upward trend indicates increasing risk; downward or flat trend indicates stable or improving performance.<br />
-                                    • <span style="color:#d9534f">Red triangles (Alarms)</span>: days when <strong>CUSUM-positive</strong> exceeds threshold (kFactor = 0.50 × σ, hFactor = 10 × σ) <em>and</em> EWMA is rising. These points signal a statistically significant sustained increase in event rates and should be investigated first.<br />
-                                    • <strong>Event severity weights</strong>: High = 4, Medium = 2, Low = 1. Daily total score reflects overall impact.<br />
-                                    • <strong>Recommended action</strong>: review operations and maintenance logs around alarm dates. If multiple consecutive alarms appear, escalate to safety review for proactive risk mitigation.<br />
-                                    • <strong>Parameters reference</strong>: α (EWMA smoothing factor) = 0.30, kFactor (CUSUM sensitivity) = 0.50, hFactor (CUSUM alarm threshold) = 10.0, window for EWMA trend comparison = 3 days.
-                                </div>
-
+                            <div class="type-card" style="overflow-x:hidden">
+                                <!-- <div class="type-header" style="padding:7px;background:#eee;text-align:center">AllEvents</div>-->
+                                <div id="chart_ewma_all" dx-chart="allEWMAEventsChart"></div>
                                 <div id="chart_pareto_all" dx-chart="AllParetoChart"></div>
-                                <div id="chart_description" style="font-size:13px;color:#444;margin:10px 12px 18px 12px;line-height:1.5;">
-                                    <strong>How to read this chart</strong><br />
-                                    • <strong>Bars (Count)</strong>: Show the individual number of occurrences for each event type. Taller bars represent more frequent events.<br />
-                                    • <strong>Line (Cumulative %)</strong>: Shows the running total percentage of all events as you move from left to right. It identifies how many event types make up the majority of problems.<br />
-                                    • <strong>The "Vital Few"</strong>: Events on the left side of the chart are your most frequent types. Focusing improvement efforts on these few areas will address the largest portion of total events, following the <strong>Pareto Principle (80/20 Rule)</strong>.<br />
-                                    • <strong>Recommended action</strong>: Prioritize investigation and corrective actions for the event types at the beginning of the chart (the tallest bars). Addressing the top 3-5 categories will likely resolve a significant majority (60-80%) of all reported events.<br />
-                                    • <strong>Parameters reference</strong>: Events are sorted by frequency in descending order. Cumulative percentage calculated as running total of individual percentages.
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -412,21 +393,21 @@
 
 
                                         <div class="col-lg-8 col-md-6" style="padding:0; padding-right:0px;">
-                                            <div class=" chartBox" style='padding-bottom:9px'>
+                                            <div class=" chartBox" style='padding-bottom:18px'>
                                                 <div id="pie_737_total_event" dx-pie-chart="pie_737_total_event"></div>
                                             </div>
 
                                         </div>
                                         <div class="col-lg-2 col-md-3" style="padding :0;">
-                                            <div class="  generalInfo chartBox" style="background: #d98c8c; height: 140px">
+                                            <div class="  generalInfo chartBox" style="background: #d98c8c; height: 140px" ng-click="show_severity('B737','High')">
                                                 <p style="font-size: 16px; padding : 10px;margin:0;padding-bottom:0">High Score</p>
                                                 <p style="text-align: center; font-size: 30px;padding : 10px;margin:0;padding-bottom:15px;padding-top:25px">{{ result_type_737.high_score}}</p>
                                             </div>
-                                            <div class="  generalInfo chartBox" style="background: #ffe699; height: 140px" ng-click="showEvents()">
+                                            <div class="  generalInfo chartBox" style="background: #ffe699; height: 140px" ng-click="show_severity('B737','Medium')">
                                                 <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Medium Score</p>
                                                 <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px ">{{ result_type_737.medium_score}}</p>
                                             </div>
-                                            <div class="   generalInfo chartBox" style="background: #b3e6cc; height: 140px">
+                                            <div class="   generalInfo chartBox" style="background: #b3e6cc; height: 140px" ng-click="show_severity('B737','Low')">
                                                 <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Low Score</p>
                                                 <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px">{{ result_type_737.low_score}}</p>
                                             </div>
@@ -471,21 +452,21 @@
 
                                         </div>
                                         <div class="col-lg-8 col-md-6" style="padding:0; padding-right:0px;">
-                                            <div class=" chartBox" style='padding-bottom:9px'>
+                                            <div class=" chartBox" style='padding-bottom:18px'>
                                                 <div id="pie_md_total_event" dx-pie-chart="pie_md_total_event"></div>
                                             </div>
 
                                         </div>
                                         <div class="col-lg-2 col-md-3" style="padding :0;">
                                             <div class="  generalInfo chartBox" style="background: #d98c8c; height: 140px">
-                                                <p style="font-size: 16px; padding : 10px;margin:0;padding-bottom:0">High Score</p>
+                                                <p style="font-size: 16px; padding : 10px;margin:0;padding-bottom:0" ng-click="show_severity('MD','High')">High Score</p>
                                                 <p style="text-align: center; font-size: 30px;padding : 10px;margin:0;padding-bottom:15px;padding-top:25px">{{ result_type_md.high_score}}</p>
                                             </div>
-                                            <div class="  generalInfo chartBox" style="background: #ffe699; height: 140px" ng-click="showEvents()">
+                                            <div class="  generalInfo chartBox" style="background: #ffe699; height: 140px" ng-click="show_severity('MD','Medium')">
                                                 <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Medium Score</p>
                                                 <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px ">{{ result_type_md.medium_score}}</p>
                                             </div>
-                                            <div class="   generalInfo chartBox" style="background: #b3e6cc; height: 140px">
+                                            <div class="   generalInfo chartBox" style="background: #b3e6cc; height: 140px" ng-click="show_severity('MD','Low')">
                                                 <p style="font-size: 16px; padding: 10px; margin: 0; padding-bottom: 0 ">Low Score</p>
                                                 <p style="text-align: center; font-size: 30px; padding: 10px; margin: 0; padding-bottom: 15px; padding-top: 25px">{{ result_type_md.low_score}}</p>
                                             </div>
@@ -496,14 +477,14 @@
                             </div>
                             <div style="clear:both"></div>
                             <!--<div class="col-lg-3 col-md-3" style="padding :0;"></div>
-        <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
-            <div class="type-card" style="margin-top:10px">
-                <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
-                    <div id="bar_type_comparison" dx-chart="bar_type_comparison"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-3" style="padding :0;"></div>-->
+                            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+                                <div class="type-card" style="margin-top:10px">
+                                    <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
+                                        <div id="bar_type_comparison" dx-chart="bar_type_comparison"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-3" style="padding :0;"></div>-->
 
 
                             <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
@@ -555,7 +536,7 @@
 
                         </div>
 
-                        <div dx-data-grid="dg_events" id="dg_events" class="content" style="overflow-y:hidden;margin-top:10px"> </div>
+                       
                     </div>
                     <!-- TAB pilots -->
                     <div ng-show="activeTab === 'pilots'">
@@ -624,52 +605,55 @@
                                     <div style="clear:both"></div>
                                     <!-- all cpts comparison -->
 
-                                    <div class="col-lg-12" style="padding:2px">
+                                    <div class="col-lg-12" style="padding: 2px; overflow-x: hidden">
                                         <div class="chartBox" style="width:100%">
                                             <div id="chart_cpt_all" dx-chart="cpt_all_B737_chart"></div>
                                         </div>
                                     </div>
                                     <!-- Top Pairs — B737 -->
-                                    <div class="type-card" style="margin-top:10px">
-                                        <div class="type-header" style="padding:7px;background:#eee;text-align:center">Top Pairs — B737 (events per 100 flights)</div>
-                                        <div style="padding:10px">
-                                            <div ng-if="!pairs.list737.length" class="text-muted" style="padding:8px">داده‌ای برای B737 در این بازه نیست.</div>
+                                     <div style="clear:both"></div>
+                                    <div class="type-card" style="margin-top:10px;overflow-x:hidden">
+                                        <div class="type-header" style="padding:7px;background:#eee;text-align:center">
+                                            Top Pairs — B737 (events per 100 flights)
+                                        </div>
+                                       
+                                        <div style="height: 420px; padding: 10px;overflow-x:hidden">
+                                            <!--<div ng-if="!pairs.list737.length" class="text-muted" style="padding:8px">داده‌ای برای B737 در این بازه نیست.</div>-->
                                             <canvas ng-if="pairs.list737.length" id="topPairsChartB737" style="width:100%;height:100%"></canvas>
                                         </div>
                                     </div>
 
+                                    
                                     <!-- Matrix — B737 (CPT rows × FO columns) -->
-                                    <div class="type-card" style="margin-top:10px">
+                                    <div class="type-card" style="margin-top:10px;overflow-x:hidden">
                                         <div class="type-header" style="padding:7px;background:#eee;text-align:center">
                                             B737 — Matrix (CPT × FO) — /100 flights
                                         </div>
 
                                         <div class="matrix-wrap" style="padding:10px">
-                                            <div ng-if="!pairs.matrix737.rows.length" class="text-muted" style="padding:8px">
-                                                داده‌ای برای B737 در این بازه یافت نشد.
-                                            </div>
+                                           
 
-                                            <table ng-if="pairs.matrix737.rows.length" class="matrix">
+                                            <table ng-if="pairs.matrix737.rows.length" class="matrix" style="width:100%;">
                                                 <thead>
                                                     <tr>
                                                         <th class="sticky-col">CPT \ FO</th>
                                                         <th class="fo" ng-repeat="fo in pairs.matrix737.fos track by $index" ng-attr-title="{{fo}}">
-                                                            <span class="fo-label">{{fo}}</span>
+                                                            <span class="fo-label" style="font-size:11px;font-weight:normal">{{fo}}</span>
                                                         </th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
                                                     <tr ng-repeat="r in pairs.matrix737.rows track by $index">
-                                                        <td class="sticky-col">{{r.cpt}}</td>
-                                                        <td ng-repeat="fo in pairs.matrix737.fos track by $index" class="text-right">
+                                                        <td class="sticky-col" style="font-size:11px;">{{r.cpt}}</td>
+                                                        <td ng-repeat="fo in pairs.matrix737.fos track by $index" class="text-right" style="font-size:11px;text-align:center">
                                                             {{ r[fo] == null ? '-' : (r[fo] | number:1) }}
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
 
-                                            <div class="muted-tip">* برای خوانایی، حداکثر 20 CPT و 20 FO نمایش داده می‌شود.</div>
+                                            <!--<div class="muted-tip">* برای خوانایی، حداکثر 20 CPT و 20 FO نمایش داده می‌شود.</div>-->
                                         </div>
                                     </div>
 
@@ -741,7 +725,7 @@
                                             Top Pairs — MD (events per 100 flights)
                                         </div>
                                         <div style="height:420px;padding:10px">
-                                            <div ng-if="!pairs.listMD.length" class="text-muted" style="padding:8px">داده‌ای برای MD در این بازه نیست.</div>
+                                            <!--<div ng-if="!pairs.listMD.length" class="text-muted" style="padding:8px">داده‌ای برای MD در این بازه نیست.</div>-->
                                             <canvas ng-if="pairs.listMD.length" id="topPairsChartMD" style="width:100%;height:100%"></canvas>
                                         </div>
                                     </div>
@@ -753,31 +737,30 @@
                                         </div>
 
                                         <div class="matrix-wrap" style="padding:10px">
-                                            <div ng-if="!pairs.matrixMD.rows.length" class="text-muted" style="padding:8px">
-                                                داده‌ای برای MD در این بازه یافت نشد.
-                                            </div>
+                                            
 
-                                            <table ng-if="pairs.matrixMD.rows.length" class="matrix">
+
+                                            <table ng-if="pairs.matrixMD.rows.length" class="matrix" style="width:100%;">
                                                 <thead>
                                                     <tr>
                                                         <th class="sticky-col">CPT \ FO</th>
                                                         <th class="fo" ng-repeat="fo in pairs.matrixMD.fos track by $index" ng-attr-title="{{fo}}">
-                                                            <span class="fo-label">{{fo}}</span>
+                                                            <span class="fo-label" style="font-size:11px;font-weight:normal">{{fo}}</span>
                                                         </th>
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
                                                     <tr ng-repeat="r in pairs.matrixMD.rows track by $index">
-                                                        <td class="sticky-col">{{r.cpt}}</td>
-                                                        <td ng-repeat="fo in pairs.matrixMD.fos track by $index" class="text-right">
+                                                        <td class="sticky-col" style="font-size:11px;">{{r.cpt}}</td>
+                                                        <td ng-repeat="fo in pairs.matrixMD.fos track by $index" class="text-right" style="font-size:11px;text-align:center">
                                                             {{ r[fo] == null ? '-' : (r[fo] | number:1) }}
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
 
-                                            <div class="muted-tip">* برای خوانایی، حداکثر 20 CPT و 20 FO نمایش داده می‌شود.</div>
+                                            <!--<div class="muted-tip">* برای خوانایی، حداکثر 20 CPT و 20 FO نمایش داده می‌شود.</div>-->
                                         </div>
                                     </div>
 
@@ -830,6 +813,8 @@
                                         </div>
                                         <div style="clear:both"></div>
 
+                                        <div dx-data-grid="dg_events_737" id="dg_events_737" class="content" style="overflow-y:hidden;margin-top:10px"> </div>
+
                                     </div>
 
 
@@ -864,7 +849,7 @@
                                             </div>
                                         </div>
                                         <div style="clear:both"></div>
-
+                                        <div dx-data-grid="dg_events_md" id="dg_events_md" class="content" style="overflow-y:hidden;margin-top:10px"> </div>
                                     </div>
                                 </div>
 
@@ -1019,4 +1004,9 @@
         <div style="clear:both"></div>
     </div>
     <div dx-load-panel="loadPanel"></div>
+
+    <div id="popup_evnts" dx-popup="popup_events">
+        <div dx-data-grid="dg_events" id="dg_events" class="content" style="overflow-y:hidden;margin-top:10px"> </div>
+
+    </div>
 </div>
