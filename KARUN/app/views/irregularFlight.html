@@ -1,0 +1,426 @@
+﻿
+<style>
+    .dx-tab {
+        padding: 7px !important;
+        background-color: #898e8c;
+        color: rgba(255,255,255,0.5);
+    }
+
+        .dx-tab.dx-tab-selected {
+            color: white;
+        }
+
+        .dx-tab.dx-state-hover {
+            background-color: #ededed;
+            color: gray;
+        }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 25px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-navigator {
+        min-width: 200px !important;
+    }
+
+    .dx-scheduler-view-switcher {
+        display: none !important;
+    }
+
+    .dx-scheduler-view-switcher-label {
+        display: none !important
+    }
+</style>
+
+
+
+<div class="box irrflights" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'flights';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div dx-data-grid="dg" id="dg" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-11 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_register"></div>
+            <div dx-button="btn_approve"></div>
+            <div dx-button="btn_new"></div>
+            <div dx-button="btn_link"></div>
+            <!-- <div dx-button="btn_view"></div>-->
+            <div dx-button="btn_edit"></div>
+            <div dx-button="btn_delete"></div>
+
+
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+            <div dx-button="btn_filter"></div>
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <div id="popup_item" dx-popup="popup_item">
+        <div style="padding:10px 0 0 0" class="dx-border">
+            <!--<div class="col-lg-5 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Aircraft Type</label>
+                <div dx-select-box="sb_type" dx-validator="{validationGroup:'flightplanitemgrid',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-7 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Register</label>
+                <div dx-select-box="sb_msn"></div>
+            </div>-->
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Number</label>
+                <div class="center" dx-text-box="text_flightnumber" dx-validator="{validationGroup:'irrflight',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>From</label>
+                <div dx-select-box="sb_FromAirport" dx-validator="{validationGroup:'irrflight',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>To</label>
+                <div dx-select-box="sb_ToAirport" dx-validator="{validationGroup:'irrflight',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Departure</label>
+                <div class="center" dx-date-box="time_start" dx-validator="{validationGroup:'irrflight',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Hour(s)</label>
+                <div class="center" dx-number-box="text_flighth" dx-validator="{validationGroup:'irrflight',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Minute(s)</label>
+                <div class="center" dx-number-box="text_flightm" dx-validator="{validationGroup:'irrflight',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Arrival</label>
+                <div class="center" dx-date-box="time_end"></div>
+            </div>
+
+            <div class="col-lg-8 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Type</label>
+                <div dx-select-box="sb_flighttype" dx-validator="{validationGroup:'irrflight',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <div id="popup_link" dx-popup="popup_link">
+        <div style="padding:10px 0 0 0" class="dx-border">
+            <div class="col-lg-10 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+                <label>Linked To</label>
+                <div dx-text-box="txt_link" dx-validator="{validationGroup:'irrlink',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-1  col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7" style="padding-top:30px">
+
+                <div dx-button="btn_select"></div>
+
+            </div>
+            <div class="col-lg-1  col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7" style="padding-top:30px">
+
+
+                <div dx-button="btn_select_remove"></div>
+            </div>
+            <div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <table style="width:100%;border:1px solid #eee">
+                    <thead>
+                        <tr style="background:#ddd;color:gray;">
+
+                            <th style="padding:7px;text-align:center;width:80px;font-size:12px;font-weight:normal">
+                                From
+                            </th>
+                            <th style="padding:7px;text-align:center;width:80px;font-size:12px;font-weight:normal">
+                                To
+                            </th>
+                            <th style="padding:7px;text-align:center;width:120px;font-size:12px;font-weight:normal">
+                                Register
+                            </th>
+                            <th style="padding:7px;text-align:center; font-size:12px;font-weight:normal">
+                                Dep.
+                            </th>
+                            <th style="padding:7px;text-align:center; font-size:12px;font-weight:normal">
+                                Arr.
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none;height:30px">
+                                {{linkEntity.FromAirportIATA}}
+                            </td>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none">
+                                {{linkEntity.ToAirportIATA}}
+                            </td>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none">
+                                {{linkEntity.Register}}
+                            </td>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none">
+
+                                {{moment(linkEntity.STD)}}
+                            </td>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none">
+
+                                {{moment(linkEntity.STA)}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+                <label>Linkage Reason</label>
+                <div dx-select-box="sb_LinkedReason" dx-validator="{validationGroup:'irrlink',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-8 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+                <label>Linkage Remark</label>
+                <div dx-text-box="txt_LinkedRemark"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Number</label>
+                <div class="center" dx-text-box="text_flightnumber" dx-validator="{validationGroup:'irrlink',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>From</label>
+                <div dx-select-box="sb_link_fromairport" dx-validator="{validationGroup:'irrlink',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>To</label>
+                <div dx-select-box="sb_link_toairport" dx-validator="{validationGroup:'irrlink',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7" >
+                <label>Departure</label>
+                <div class="center" dx-date-box="time_start" dx-validator="{validationGroup:'irrlink',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Hour(s)</label>
+                <div class="center" dx-number-box="text_flighth" dx-validator="{validationGroup:'irrlink',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Minute(s)</label>
+                <div class="center" dx-number-box="text_flightm" dx-validator="{validationGroup:'irrlink',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Arrival</label>
+                <div class="center" dx-date-box="time_end"></div>
+            </div>
+
+            <div class="col-lg-8 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Type</label>
+                <div dx-select-box="sb_flighttype" dx-validator="{validationGroup:'irrlink',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+    <div id="popup_register" dx-popup="popup_register">
+        <div style="padding:10px 0 0 0" class="dx-border">
+            <div class="col-lg-6 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Type</label>
+                <div dx-select-box="sb_flighttype"></div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Number</label>
+                <div class="center" dx-text-box="text_flightnumber"></div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>From</label>
+                <div dx-select-box="sb_link_fromairport"></div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>To</label>
+                <div dx-select-box="sb_link_toairport"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Departure</label>
+                <div class="center" dx-date-box="time_start"></div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Hour(s)</label>
+                <div class="center" dx-number-box="text_flighth"></div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Flight Minute(s)</label>
+                <div class="center" dx-number-box="text_flightm"></div>
+            </div>
+            <div class="col-lg-4 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Arrival</label>
+                <div class="center" dx-date-box="time_end"></div>
+            </div>
+
+
+
+            <div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+                <label>Linked To</label>
+                <div dx-text-box="txt_link" "></div>
+            </div>
+
+            <div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <table style="width:100%;border:1px solid #eee">
+                    <thead>
+                        <tr style="background:#ddd;color:gray;">
+
+                            <th style="padding:7px;text-align:center;width:80px;font-size:12px;font-weight:normal">
+                                From
+                            </th>
+                            <th style="padding:7px;text-align:center;width:80px;font-size:12px;font-weight:normal">
+                                To
+                            </th>
+                            <th style="padding:7px;text-align:center;width:120px;font-size:12px;font-weight:normal">
+                                Register
+                            </th>
+                            <th style="padding:7px;text-align:center; font-size:12px;font-weight:normal">
+                                Dep.
+                            </th>
+                            <th style="padding:7px;text-align:center; font-size:12px;font-weight:normal">
+                                Arr.
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none;height:30px">
+                                {{linkEntity.FromAirportIATA}}
+                            </td>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none">
+                                {{linkEntity.ToAirportIATA}}
+                            </td>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none">
+                                {{linkEntity.Register}}
+                            </td>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none">
+
+                                {{moment(linkEntity.STD)}}
+                            </td>
+                            <td style="padding:7px;text-align:center;font-size:12px;font-weight:normal;color:gray;border:1px solid #eee;border-right:none">
+
+                                {{moment(linkEntity.STA)}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-5 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+                <label>Linkage Reason</label>
+                <div dx-select-box="sb_LinkedReason"></div>
+            </div>
+            <div class="col-lg-7 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+
+                <label>Linkage Remark</label>
+                <div dx-text-box="txt_LinkedRemark"></div>
+            </div>
+
+            <div class="col-lg-5 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Aircraft Type</label>
+                <div dx-select-box="sb_type" dx-validator="{validationGroup:'irrregister',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-7 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Register</label>
+                <div dx-select-box="sb_msn" dx-validator="{validationGroup:'irrregister',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <div id="popup_select" dx-popup="popup_select">
+        <div style="padding:0px 0 0 0">
+            <div style="border:1px solid #ddd;padding:15px;" class="dx-border">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:100px">
+                            Departure Date
+                        </td>
+                        <td style="width:200px">
+                            <div class="center" dx-date-box="date_std_select" dx-validator="{validationGroup:'irrflightselect',  validationRules: [{ type: 'required'}]}"></div>
+                        </td>
+                        <td></td>
+                        <td style="width:60px">
+                            <div dx-button="btn_select_search"></div>
+                        </td>
+
+                    </tr>
+                </table>
+
+            </div>
+            <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>
+
+        </div>
+
+    </div>
+
+
+
+
+</div>
