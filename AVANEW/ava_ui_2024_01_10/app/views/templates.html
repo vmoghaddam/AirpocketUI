@@ -1,0 +1,467 @@
+﻿<script type="text/x-jsrender" id="taskbarTemplate">
+    <!--{{if  #get("array").data.length>0}}
+    {{:~renderCompleted(#data['taskId'],#get("array").data.length)}} {{/if}}-->
+
+
+    <div class="e-gantt-template-taskbar bg-color {{statusClass:#data['taskId']}} task-{{:#data['taskId']}}" style="border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+
+
+        <div>
+
+
+
+            <div id="task-{{:#data['taskId']}}" style="text-align:center">
+
+                <span class="tasknametext" style=" z-index:1;font-size:12px;font-weight:normal;  top:6px; font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative">
+                    {{flightCaption:#data['taskId'] }}
+                    <!--{{:#data['taskName']}}{{:#data['from']}}-->
+                    <!--{{statusIcon:#data['taskId']}}-->
+                </span>
+
+
+
+
+
+            </div>
+
+
+        </div>
+        <!--{{testConverter:#data['taskId']+'x'+width}}
+        {{:width}}-->
+        {{if #data['status']>0}}
+
+        <div class="e-gantt-template-progressbar KKK" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;left:0 !important; border-radius:0 !important;margin-left:2px">
+
+
+
+            <!-- {{round: ~getDelay(#data['taskId'])  }}{{delayIcon:#data['taskId']}}-->
+            {{delayElement:#data['taskId']}}
+        </div>
+
+        {{/if}}
+        {{rampElement:#data['taskId']+'-'+width}}
+        {{takeOffElement:#data['taskId']+'-'+width}}
+        {{redirectElement:#data['taskId']+'-'+width}}
+        {{landingElement:#data['taskId']+'-'+width}}
+        {{arrivalDelayElement:#data['taskId']+'-'+width}}
+
+        <!--<div class="e-gantt-template-progressbar1 KKK" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;right:0 !important;left:initial !important;width:30px; border-radius:0 !important;margin-left:2px;background: #f44336 !important;opacity:1 !important;top:-1px;position:absolute;height:100%">
+            a
+        </div>-->
+
+    </div>
+
+
+
+    {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+</script>
+
+<script type="text/x-jsrender" id="taskbarTemplateLight">
+    <!--{{if  #get("array").data.length>0}}
+    {{:~renderCompleted(#data['taskId'],#get("array").data.length)}} {{/if}}-->
+
+
+    <div class="e-gantt-template-taskbar task-body bg-color {{statusClass:#data['taskId']}} task-{{:#data['taskId']}}" data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+         data-time="{{getTime2:#data['taskId']}}"
+         style="border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+
+
+
+
+
+
+        <div id="task-{{:#data['taskId']}}" style="text-align:center">
+            <!-- {{getSTDTime:#data['taskId'] }}-->
+            <!--{{getSTATime:#data['taskId'] }}-->
+            <span class="tasknametext" style=" z-index:1;font-size:11px;font-weight:normal;  top:2px; font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative;">
+                {{flightCaptionLight2:#data['taskId'] }}
+                <!--{{:#data['taskName']}}{{:#data['from']}}-->
+                <!--{{statusIcon:#data['taskId']}}-->
+            </span>
+
+
+
+
+
+        </div>
+
+
+
+        <!--{{testConverter:#data['taskId']+'x'+width}}
+        {{:width}}-->
+        {{if #data['status']>0}}
+
+        <div class="e-gantt-template-progressbar KKK" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;left:0 !important; border-radius:0 !important;margin-left:2px">
+
+
+
+            <!-- {{round: ~getDelay(#data['taskId'])  }}{{delayIcon:#data['taskId']}}-->
+            {{delayElementLight:#data['taskId']}}
+        </div>
+
+        {{/if}}
+        <!--{{takeOffElement:#data['taskId']+'-'+width}}-->
+        <!-- {{redirectElement:#data['taskId']+'-'+width}}-->
+        <!--  {{landingElement:#data['taskId']+'-'+width}}-->
+        <!-- {{arrivalDelayElementLight:#data['taskId']+'-'+width}}-->
+        <!--<div class="e-gantt-template-progressbar1 KKK" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;right:0 !important;left:initial !important;width:30px; border-radius:0 !important;margin-left:2px;background: #f44336 !important;opacity:1 !important;top:-1px;position:absolute;height:100%">
+            a
+        </div>-->
+
+    </div>
+
+
+
+    {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+</script>
+
+
+
+
+<script type="text/x-jsrender" id="taskbarTemplateLightNewCeo">
+
+
+
+    <div class="e-gantt-template-taskbar  bg-color  task-{{:#data['taskId']}}" data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+         data-time="{{getTime2:#data['taskId']}}"
+         style="background:transparent !important;border:none; border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+        <div style="width:100%;text-align:center;font-size:9px;" class="task-route">{{getFlightRoute:#data['taskId']}}</div>
+        <div id="task-{{:#data['taskId']}}" class="{{statusClass:#data['taskId']}} task-body"
+             data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+             style="text-align:center;border: 1px solid gray;">
+
+            <span class="tasknametext" style=" z-index:1;font-size:11px;font-weight:normal;  top:2px; font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative;">
+                {{flightCaptionLight2:#data['taskId'] }}
+
+            </span>
+
+        </div>
+        <div style="width:100%;text-align:center;font-size:10px;" class="task-time"> {{getTimeSch:#data['taskId']}}</div>
+        <div style="width:100%;text-align:center;font-size:11px;position:relative;top:-2px;" class="task-time">{{getTime2:#data['taskId']}}</div>
+
+
+
+
+        {{if #data['status']>0}}
+
+        <div class="e-gantt-template-progressbar KKK {{delayClass:#data['taskId']}}" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;left:0 !important; border-radius:0 !important;margin-left:2px">
+
+            {{delayElementLightCeo:#data['taskId']}}
+        </div>
+
+        {{/if}}
+
+    </div>
+
+
+
+    {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+</script>
+<script type="text/x-jsrender" id="taskbarTemplateLightNewCeoNarrow">
+
+
+
+    <div class="e-gantt-template-taskbar  bg-color  task-{{:#data['taskId']}}" data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+         data-time="{{getTime2:#data['taskId']}}"
+         style="background:transparent !important;border:none; border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+        <div style="width:100%;text-align:center;font-size:9px;" class="task-route">{{getFlightRoute:#data['taskId']}}</div>
+        <div id="task-{{:#data['taskId']}}" class="{{statusClass:#data['taskId']}} task-body"
+             data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+             style="text-align:center;border: 1px solid gray;">
+
+            <span class="tasknametext" style=" z-index:1;font-size:11px;font-weight:normal;  top:2px; font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative;">
+                {{flightCaptionLight2:#data['taskId'] }}
+
+            </span>
+
+        </div>
+        <!--<div style="width:100%;text-align:center;font-size:10px;" class="task-time"> {{getTimeSch:#data['taskId']}}</div>-->
+        <div style="width:100%;text-align:center;font-size:9px;position:relative;top:0px;" class="task-time">{{getTime2:#data['taskId']}}</div>
+
+
+
+
+        {{if #data['status']>0}}
+
+        <div class="e-gantt-template-progressbar KKK {{delayClass:#data['taskId']}}" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;left:0 !important; border-radius:0 !important;margin-left:2px">
+
+            {{delayElementLightCeo:#data['taskId']}}
+        </div>
+
+        {{/if}}
+
+    </div>
+
+
+
+    {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+</script>
+
+
+<script type="text/x-jsrender" id="taskbarTemplateBox">
+    <!--{{if  #get("array").data.length>0}}
+    {{:~renderCompleted(#data['taskId'],#get("array").data.length)}} {{/if}}-->
+
+
+    <div data-id="{{:#data['taskId']}}" class="xati e-gantt-template-taskbar bg-color {{boxTypeClass:#data['taskId']}} task-{{:#data['taskId']}}" style="border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+
+
+
+
+
+
+        <div id="task-{{:#data['taskId']}}" class="flight-item">
+
+            <span class="tasknametext" style=" z-index:1;font-size:9px;font-weight:normal;  font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative">
+
+                {{flightCaptionLight:#data['taskId'] }}
+            </span>
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!--{{testConverter:#data['taskId']+'x'+width}}
+        {{:width}}-->
+        {{if #data['status']>0}}
+
+        <div class="e-gantt-template-progressbar KKK" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;left:0 !important; border-radius:0 !important;margin-left:2px">
+
+
+
+            <!-- {{round: ~getDelay(#data['taskId'])  }}{{delayIcon:#data['taskId']}}-->
+            <!--{{delayElement:#data['taskId']}}-->
+        </div>
+
+        {{/if}}
+
+        {{boxItems:#data['taskId']+'-'+width}}
+
+
+
+
+    </div>
+
+
+
+    {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+</script>
+
+<script type="text/x-jsrender" id="taskbarTemplateBoxNew">
+    <!--{{if  #get("array").data.length>0}}
+    {{:~renderCompleted(#data['taskId'],#get("array").data.length)}} {{/if}}-->
+
+
+
+    <div data-id="{{:#data['taskId']}}" class="xati TemplateBoxNew e-gantt-template-taskbar bg-color {{boxTypeClass:#data['taskId']}} task-{{:#data['taskId']}}" style="border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);height:36px !important">
+
+        <!-- <div data-id="c{{:#data['taskId']}}" class="BoxCaption" style="font-size:9px;">Box</div>-->
+
+
+
+
+
+        <div id="task-{{:#data['taskId']}}" class="flight-item">
+            {{getSTDTime:#data['taskId'] }}
+            {{getSTATime:#data['taskId'] }}
+
+
+            <span class="tasknametext" style=" z-index:1;font-size:9px;font-weight:normal;  font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative">
+
+                {{flightCaptionBox:#data['taskId'] }}
+            </span>
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!--{{testConverter:#data['taskId']+'x'+width}}
+        {{:width}}-->
+        {{if #data['status']>0}}
+
+        <div class="e-gantt-template-progressbar " style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;left:0 !important; border-radius:0 !important;margin-left:2px">
+
+
+
+            <!-- {{round: ~getDelay(#data['taskId'])  }}{{delayIcon:#data['taskId']}}-->
+            <!--{{delayElement:#data['taskId']}}-->
+        </div>
+
+        {{/if}}
+
+        {{boxItems:#data['taskId']+'-'+width}}
+
+
+
+
+    </div>
+
+
+
+    {{:~renderCompleted(#data['taskId'],#getIndex())}}
+    {{:~renderCompleted2(#data['taskId'],#getIndex())}}
+
+</script>
+<script type="text/x-jsrender" id="_taskbarTemplateLightNew">
+    <div class="bati e-gantt-template-taskbar  bg-color  task-{{:#data['taskId']}}" data-id="{{:#data['taskId']}}"  
+         
+         style="background:transparent !important;border:none; border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+        </div>
+</script>
+
+<script type="text/x-jsrender" id="taskbarTemplateLightNew">
+
+
+
+    <div class="bati e-gantt-template-taskbar  bg-color  task-{{:#data['taskId']}}" data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+         data-time="{{getTime2:#data['taskId']}}"
+         style="background:transparent !important;border:none; border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+        <div style="width:100%;text-align:center;font-size:11px;font-weight:bold " class="task-route">{{getFlightRoute:#data['taskId']}}</div>
+        <div id="task-{{:#data['taskId']}}" class="{{statusClass:#data['taskId']}} task-body"
+             data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+             style="text-align:center;border: 1px solid gray;">
+
+            <span class="tasknametext" style=" z-index:1;font-size:11px;font-weight:normal;  top:2px; font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative;">
+              {{flightCaptionLight2:#data['taskId'] }}
+
+            </span>
+
+        </div>
+        <div style="width:100%;text-align:center;font-size:11px;font-weight:bold " class="task-time">{{getTime2:#data['taskId']}}</div>
+
+
+
+
+        {{if #data['status']>0}}
+
+        <div class="e-gantt-template-progressbar KKK {{delayClass:#data['taskId']}}" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:4px;left:0 !important; border-radius:0 !important;margin-left:2px">
+
+            {{delayElementLight:#data['taskId']}}
+        </div>
+
+        {{/if}}
+
+    </div>
+
+
+
+    {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+</script>
+<script type="text/x-jsrender" id="taskbarTemplateLightRosterSelection">
+
+
+
+    <div class="yati e-gantt-template-taskbar  bg-color  task-{{:#data['taskId']}}" data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+         data-time="{{getTime2:#data['taskId']}}"
+         style="background:transparent !important;border:none; border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+        <div style="width:100%;text-align:center;font-size:9px;color:black !important" class="task-route ">{{getFlightRoute:#data['taskId']}}</div>
+        <div id="task-{{:#data['taskId']}}" class="{{statusClass:#data['taskId']}} task-body "
+             data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+             style="text-align:center;border: 1px solid gray;padding:3px 0 3px 0;">
+
+            <span class="tasknametext " style=" z-index:1;font-size:11px;font-weight:normal;  top:2px; font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative;">
+                {{flightCaptionLight2:#data['taskId'] }}
+
+            </span>
+
+        </div>
+        <div style="width:100%;text-align:center;font-size:9px;color:black !important" class="task-time ">{{getTime2:#data['taskId']}}</div>
+
+        <!--  <div style="width:100%;text-align:center;font-size:10px;" class="task-time">{{getTime2:#data['taskId']}}</div>-->
+        {{if #data['status']>0}}
+
+        <div class=" e-gantt-template-progressbar KKK {{delayClass:#data['taskId']}}" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;left:0 !important; border-radius:0 !important;margin-left:2px">
+
+            {{delayElementLight:#data['taskId']}}
+        </div>
+
+        {{/if}}
+
+    </div>
+
+
+
+    {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+</script>
+
+<script type="text/x-jsrender" id="taskbarTemplateLightRoster">
+
+
+
+    <div class="roster-assign-task e-gantt-template-taskbar  bg-color  task-{{:#data['taskId']}}" data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+         data-time="{{getTime2:#data['taskId']}}"
+         style="background:transparent !important;border:none; border-radius:5px;overflow:hidden;-webkit-transform:translateZ(0);-webkit-mask-image: -webkit-radial-gradient(circle, white, black);">
+
+        <div style="width:100%;text-align:center;font-size:9px;" class="task-route"></div>
+        <div id="task-{{:#data['taskId']}}" class="{{statusClass:#data['taskId']}} task-body"
+             data-id="{{:#data['taskId']}}" data-linked="{{getLinkedId:#data['taskId']}}"
+             style="text-align:center;border: 1px solid gray;">
+
+            <span class="tasknametext" style=" z-index:1;font-size:11px;font-weight:normal;  top:2px; font-family:'Segoe UI';overflow:hidden;text-overflow:ellipsis;width:40%;position:relative;">
+                {{flightCaptionLight2:#data['taskId'] }}
+
+            </span>
+
+        </div>
+        <!--<div style="width:100%;text-align:center;font-size:9px;" class="task-time">{{getTime2:#data['taskId']}}</div>-->
+        {{if #data['status']>0}}
+
+        <div class="e-gantt-template-progressbar KKK {{delayClass:#data['taskId']}}" style="font-size:9px;overflow:visible;opacity:0.2;text-align:center;color:white;padding-top:1px;border:0px solid red !important;margin-top:2px;left:0 !important; border-radius:0 !important;margin-left:2px">
+
+            {{delayElementLight:#data['taskId']}}
+        </div>
+
+        {{/if}}
+
+    </div>
+
+
+
+    {{:~renderCompleted(#data['taskId'],#getIndex())}}
+
+</script>
+
+
+
+
+
+
+
+<script id="leftlableTemplate" type="text/x-jsrender">
+
+    <div style="padding-top:5px;">
+        <span>{{:#data['taskName']}}  [{{:status}}%]</span>
+    </div>
+
+</script>

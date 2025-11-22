@@ -63,12 +63,12 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
 
 
     /////////////////////////////////
-    Chart.defaults.global.pointHitDetectionRadius = 1;
-    Chart.defaults.global.tooltips.enabled = false;
-    Chart.defaults.global.tooltips.mode = 'index';
-    Chart.defaults.global.tooltips.position = 'nearest';
-    Chart.defaults.global.pointHitDetectionRadius = 1;
-    var customTooltips = function (tooltip) {
+   // Chart.defaults.global.pointHitDetectionRadius = 1;
+   // Chart.defaults.global.tooltips.enabled = false;
+  //  Chart.defaults.global.tooltips.mode = 'index';
+  //  Chart.defaults.global.tooltips.position = 'nearest';
+ //  Chart.defaults.global.pointHitDetectionRadius = 1;
+   /* var customTooltips = function (tooltip) {
 
         // Tooltip Element
         var tooltipEl = document.getElementById('chartjs-tooltip');
@@ -140,7 +140,7 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
         tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
         tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
     };
-    Chart.defaults.global.tooltips.custom = CustomTooltips;
+    Chart.defaults.global.tooltips.custom = CustomTooltips;*/
 
     ////////////////////////////
     var random = function random() {
@@ -1343,13 +1343,13 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
                 if (_d.Total > max)
                     max = _d.Total;
 
-                $scope.library.cardChartDownloadsConfig.data.labels.push(_d.MonthName);
-                $scope.library.cardChartDownloadsConfig.data.datasets[0].data.push(_d.Total);
+               // $scope.library.cardChartDownloadsConfig.data.labels.push(_d.MonthName);
+               // $scope.library.cardChartDownloadsConfig.data.datasets[0].data.push(_d.Total);
 
 
             });
-            $scope.library.cardChartDownloadsConfig.options.scales.yAxes[0].ticks.max = max + 1;
-            $scope.library.cardChartDownloads.update();
+            //$scope.library.cardChartDownloadsConfig.options.scales.yAxes[0].ticks.max = max + 1;
+            //$scope.library.cardChartDownloads.update();
             ///////////////////////////////
             max = 0;
             $.each(data.Add, function (_i, _d) {
@@ -1361,7 +1361,7 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
 
 
             });
-            $scope.library.cardChartItemsConfig.options.scales.yAxes[0].ticks.max = max + 1;
+           // $scope.library.cardChartItemsConfig.options.scales.yAxes[0].ticks.max = max + 1;
             $scope.library.cardChartItems.update();
             //////////////////////////
             libraryService.getLastExposed(Config.CustomerId, 20).then(function (response) {

@@ -111,7 +111,52 @@ app.controller('hazardAddController', ['$scope', '$location',   '$routeParams', 
         }
 
     };
-	 
+
+     /////////////////// CMS2
+     $scope.entity = {};
+
+
+     $scope.hazard_category = null;
+     $scope.sb_hazard_category = {
+         showClearButton: true,
+         searchEnabled: true,
+         displayExpr: "title",
+         //valueExpr: 'id',
+         // dataSource: ['Audit Findings','Mandatory Reports','Voluntary Report','Other'],
+         onValueChanged: function () {
+
+         },
+
+         bindingOptions: {
+             value: 'hazard_category',
+             dataSource: 'ds_hazard_category'
+
+         }
+     };
+
+     $scope.hazard_type = null;
+     $scope.sb_hazard_type = {
+         showClearButton: true,
+         searchEnabled: true,
+         displayExpr: "title",
+         //valueExpr: 'id',
+         // dataSource: ['Audit Findings','Mandatory Reports','Voluntary Report','Other'],
+         onValueChanged: function () {
+
+         },
+
+         bindingOptions: {
+             value: 'hazard_type',
+             dataSource: 'ds_hazard_type'
+
+         }
+     };
+
+     ///////////////////////////////////////////
+
+
+
+
 	$scope.get_scroll_style=function(){
 		
 		return {

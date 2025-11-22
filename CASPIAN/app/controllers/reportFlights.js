@@ -3,6 +3,7 @@ app.controller('reportFlightsController', ['$scope', '$location', '$routeParams'
     $scope.prms = $routeParams.prms;
 	 $scope.IsFBVisible = $rootScope.userName.toLowerCase().includes("demo") || $rootScope.userName.toLowerCase().includes("kabiri")
         || $rootScope.userName.toLowerCase().includes("razbani");
+    $scope.is_aran=$rootScope.userName.toLowerCase()=='aran';
 	var isTaxiVisible=false;
 	 if ($rootScope.userName.toLowerCase() == 'ashrafi')
 		 isTaxiVisible=true;
@@ -273,6 +274,8 @@ app.controller('reportFlightsController', ['$scope', '$location', '$routeParams'
         var url = 'odata/report/flights';//2019-06-06T00:00:00';
         if (prms)
             url += '?' + prms;
+		if ($scope.is_aran)
+			url+="&$filter=Register eq 'SOL' or Register eq 'SOE'&'";
 
         if (!$scope.dg_flight_ds) {
 
@@ -1230,11 +1233,10 @@ app.controller('reportFlightsController', ['$scope', '$location', '$routeParams'
         onClick: function (e) {
 
             $scope.popup_fdp_visible = true;
-
-
-
         },
-
+  bindingOptions: {
+            visible: '!is_aran'
+        },
     };
 
 

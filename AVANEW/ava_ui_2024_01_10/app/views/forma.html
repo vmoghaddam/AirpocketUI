@@ -1,0 +1,693 @@
+﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_regroute .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_regroute .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_reg .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_reg .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    #dg_route .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_route .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+    .tblcenter{
+
+    }
+        .tblcenter th {
+            text-align: center;
+            font-size: 13px;
+            padding:3px;
+            border:1px solid #bbb;
+
+        }
+        .tblcenter td {
+            text-align: center;
+            font-size: 13px;
+            padding: 3px;
+            border: 1px solid #bbb;
+        }
+            .tblcenter th:last-child {
+                border-right: none;
+            }
+        .tblcenter td:nth-child(2) {
+             text-align:left !important;
+        }
+        .tblcenter th:nth-child(2) {
+            text-align: left !important;
+        }
+        .tblcenter th span{
+            font-size:13px;
+        }
+    .tblcenter tr {
+        border-bottom:1px solid #bbb;
+    }
+        .tblcenter tr:last-child {
+            border: none;
+        }
+
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box forma" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+
+
+
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+
+                    <div id="total" class="tabc">
+                        <div dx-data-grid="dg_total" id="dg_total" class="content" style="overflow-y:hidden"></div>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div  style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+
+                    <!--<td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>-->
+                    <!--<td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_Status"></div></td>
+    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_IP"></div></td>
+    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_CPT"></div></td>-->
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yf" dx-validator="{validationGroup:'finmrpt',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yt" dx-validator="{validationGroup:'finmrpt',  validationRules: [{ type: 'required'}]}"></div></td>
+
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+
+                    <td></td>
+                    <td style="width:160px;text-align:left;padding-right:5px"><div dx-button="btn_print"></div></td>
+                    <td style="width:160px;text-align:left;padding-right:5px"><div dx-button="btn_year"></div></td>
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_print" dx-popup="popup_print">
+        <div style="padding:10px 0 0 0">
+            <div id="scrollview" dx-scroll-view="scroll_jl">
+                <div id="rtblfa" class="tbl page-a4 tbl-pad10 " style="padding:10px !important; border:none !important">
+                    <!--<table style="width:100%">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="../../airpocket/content/images/airline.png" style="margin-left:5px;position:relative;top:-10px;width:240px" />
+                                </td>
+                                <td style="width:200px">
+                                    Form A
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>-->
+                    <div style="width:100%;padding:10px">
+                        <!--<img src="../../airpocket/content/images/airline.png" style="margin-left:5px;position:relative; width:120px;float:left" />-->
+                        <div style="float:left;padding:5px 10px 5px 10px">
+                            <div style="font-weight:bold">INTERNATIONAL CIVIL AVIATION ORGANIZATION</div>
+                            <div style="margin-top:2px;font-weight:bold">AIR TRANSPORT REPORTING FORM</div>
+                            <div style="margin-top:2px;font-weight:bold">TRAFFIC - COMMERCIAL AIR CARRIERS</div>
+                        </div>
+                        <div style="float:right;width:150px;text-align:center;padding-top:5px;">
+                            <div style="font-weight:bold; ">FORM A</div>
+                            <div style="margin-top:2px;font-weight:bold; ">{{Operator}} Airlines</div>
+                            <div style="margin-top:5px">
+                               <span>Year:</span><span style="font-weight:bold;display:inline-block;margin-left:2px;">{{reportData.Year}}</span>
+                                <span style="display:inline-block;margin-left:5px;">Month:</span><span style="font-weight:bold;display:inline-block;margin-left:2px;">{{reportData.MonthName}}</span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="padding:10px;margin-top:5px;">
+                        <table class="subpage tblcenter" style="border:1px solid #bbb;width:100%;text-align:center">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <span style="font-weight:bold">ICAOE CODE</span>
+                                    </th>
+                                    <th>
+                                        <span style="font-weight:bold">DESCRIPTION</span>
+                                    </th>
+                                    <th>
+                                        <span style="font-weight:bold">UNIT</span>
+                                    </th>
+                                    <th>
+                                        <span style="font-weight:bold">TOTAL ALL SERVICES</span>
+                                        <div style="font-size:12px">(Passengers,mail and freight including all freight)</div>
+                                    </th>
+                                    <th colspan="2">
+                                        <span style="font-weight:bold">ALL FREIGHT SERVICES ONLY</span>
+                                        <div style="font-size:12px">(Included in columns d and e)</div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>
+
+                                        <div style="font-size:12px">Classified by flight stage</div>
+                                    </th>
+                                    <th colspan="2">
+                                        <div style="font-size:12px">Classified by flight stage</div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>a</th>
+                                    <th>b</th>
+                                    <th>c</th>
+                                    <th></th>
+                                    <th>f</th>
+                                    <th>g</th>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th>SCHEDULED REVENUE FLIGHTS</th>
+                                    <th></th>
+                                    <th>DOM</th>
+                                    <th>INT</th>
+                                    <th>DOM</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="width:10%;">1010</td>
+                                    <td style="width:40%;">1.Aircraft Kilometers</td>
+                                    <td style="width:10%;">000</td>
+                                    <td style="width:20%;">{{reportData.Distance}}</td>
+                                    <td style="width:10%;"></td>
+                                    <td style="width:10%;"></td>
+                                </tr>
+                                <tr>
+                                    <td>1020</td>
+                                    <td>2.Aircraft Departures</td>
+                                    <td>number</td>
+                                    <td>{{reportData.Legs}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1030</td>
+                                    <td>3.Aircraft Hours</td>
+                                    <td>number</td>
+                                    <td>{{reportData.FlightHour}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1040</td>
+                                    <td>4.Passengers Carried</td>
+                                    <td>number</td>
+                                    <td>{{reportData.PaxTotal}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1050</td>
+                                    <td>5.Freight Tonnes Carried</td>
+                                    <td>number</td>
+                                    <td>{{reportData.FreightTone}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1060</td>
+                                    <td>6.Passenger-Kilometers Performed</td>
+                                    <td>000</td>
+                                    <td>{{reportData.PaxTotalDistRound}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1070</td>
+                                    <td>7.Seat-Kilometers Available</td>
+                                    <td>000</td>
+                                    <td>{{reportData.TotalSeatDistRound}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1080</td>
+                                    <td>8.Passenger Load Factor</td>
+                                    <td>%</td>
+                                    <td>{{reportData.PaxLoad}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>9.Tonne-Kilometers Performed</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1091</td>
+                                    <td style="padding-left:10px;">a)Passengers(incl. Baggage)</td>
+                                    <td>000</td>
+                                    <td>{{reportData.PaxAllWeightDistance}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1092</td>
+                                    <td style="padding-left:10px;">b)Freight(incl. Express)</td>
+                                    <td>000</td>
+                                    <td>{{reportData.FreightToneDistance}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1093</td>
+                                    <td style="padding-left:10px;">c)Mail</td>
+                                    <td>000</td>
+                                    <td>0</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1094</td>
+                                    <td style="padding-left:10px;">d)Total(9a to 9c)</td>
+                                    <td>000</td>
+                                    <td>{{reportData.TotalToneDistance}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1100</td>
+                                    <td>10.Tonne-Kilometer Available</td>
+                                    <td>000</td>
+                                    <td>{{reportData.TotalToneDistanceAvailable}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>1110</td>
+                                    <td>11.Weight Load Factor</td>
+                                    <td>%</td>
+                                    <td>{{reportData.WeightLoadFactor}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>NON-SCHEDULED REVENUE FLIGHTS</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2010</td>
+                                    <td>12.Aircraft Kilometers</td>
+                                    <td>000</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2020</td>
+                                    <td>13.Aircraft Departures</td>
+                                    <td>number</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2030</td>
+                                    <td>14.Aircraft Hours</td>
+                                    <td>number</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2040</td>
+                                    <td>15.Passengers Carried</td>
+                                    <td>number</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2050</td>
+                                    <td>16.Freight Tonnes Carried</td>
+                                    <td>number</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2060</td>
+                                    <td>17.Passenger-Kilometers Performed</td>
+                                    <td>000</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2070</td>
+                                    <td>18.Seat-Kilometers Available</td>
+                                    <td>000</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>19.Tonne-Kilometers Performed</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2091</td>
+                                    <td style="padding-left:10px;">a)Passengers(incl. Baggage)</td>
+                                    <td>000</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2092</td>
+                                    <td style="padding-left:10px;">b)Freight(incl. Express)</td>
+                                    <td>000</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td>2094</td>
+                                    <td style="padding-left:10px;">d)Total(19a + 19b)</td>
+                                    <td>000</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2100</td>
+                                    <td>20.Tonne-Kilometer Available</td>
+                                    <td>000</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td>AIR TAXI REVENUE FLIGHTS</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>3020</td>
+                                    <td>21.Aircraft Departures</td>
+                                    <td>number</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>3030</td>
+                                    <td>22.Aircraft Hours</td>
+                                    <td>number</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>2330</td>
+                                    <td>NON REVENUE FLIGHTS</td>
+                                    <td>number</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                  
+                    <div style="text-align:right;padding-right:10px;font-size:11px;padding-top:2px">Generated by AIRPOCKET</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+
+</div>
