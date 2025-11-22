@@ -738,6 +738,11 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/fixtime_summary.html"
     });
 
+     $routeProvider.when("/duties/report", {
+        controller: "duties_report",
+        templateUrl: "/app/views/duties_report.html"
+    });
+
 
    	
 
