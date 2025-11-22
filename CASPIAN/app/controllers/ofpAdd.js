@@ -314,6 +314,17 @@ app.controller('ofpAddController', ['$scope', '$location', 'flightBagService', '
     $scope.fill = function (data) {
         $scope.entity = data;
 
+console.log($scope.entity)
+$.each($scope.entity.TextOutput.JFuel, function(_i, _d){
+		   if (_d.prm === "ALTN 1") {
+                _d.prm = "Alternate 1 (" + $scope.entity.TextOutput.ALT1 + ")";
+  }
+  
+   if (_d.prm === "ALTN 2") {
+                _d.prm = "Alternate 2 (" + $scope.entity.TextOutput.ALT2 + ")";
+  }
+	   });
+
         $scope.OFPHtml = $sce.trustAsHtml($scope.entity.TextOutput);
 
         //  $compile($("#ofp-doc").contents())($scope);

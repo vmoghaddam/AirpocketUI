@@ -1,0 +1,1147 @@
+﻿<link href="sfstyles/ejthemes/default-theme/ej.web.all.min.css?v=100" rel="stylesheet" />
+<link href="sfstyles/default.css" rel="stylesheet" />
+<link href="sfstyles/default-responsive.css" rel="stylesheet" />
+<link href="sfstyles/ejthemes/responsive-css/ej.responsive.css" rel="stylesheet" />
+<style>
+    .IP {
+        background: #00ccff !important;
+        color: black !important;
+    }
+
+    [pos^="CCM"] {
+        background: #b3ffd9 !important;
+        color: black !important;
+    }
+
+    [pos^="SCCM"] {
+        background: #66ffb3 !important;
+        color: black !important;
+    }
+
+    [pos^="OBS"] {
+        background: #ccffe6 !important;
+        color: black !important;
+    }
+
+    [pos^="P1"] {
+        background: #66e0ff !important;
+        color: black !important;
+    }
+
+    [pos^="P2"] {
+        background: #b3f0ff !important;
+        color: black !important;
+    }
+
+    [pos^="Safety"] {
+        background: #e6ccff !important;
+        color: black !important;
+    }
+
+    .cell-selected {
+        background-color: lightgreen;
+    }
+
+    
+
+    .e-schedule-week-headercell {
+        text-align: left !important;
+        padding-left: 10px !important;
+    }
+   
+
+    .dx-border .dx-texteditor-input {
+        padding: 5px !important;
+    }
+
+    .dx-toast-custom {
+        background: #ffd480;
+        color: black;
+    }
+
+    .e-headercelldiv span {
+        display: none;
+    }
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .dx-checkbox-text {
+        font-size: 12px !important;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .dx-popup-title.dx-toolbar {
+        /*background:red !important;*/
+    }
+
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: #f44336;
+        opacity: 1 !important;
+    }
+
+
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .e-gantt-parenttaskbar-innerdiv.e-chartexpand.e-parentTask {
+        display: none;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-childtaskbar {
+        border: 2px solid #ff3399;
+    }
+    /*************/
+    #ganttviewerheaderContainerejGanttChartresourceGanttba {
+    }
+
+    .e-ganttviewerheaderContainer {
+        height: 53px !important;
+    }
+
+    .e-treegrid .e-headercell {
+        height: 53px !important;
+    }
+
+    .e-ganttchart .e-schedule-day-headercell {
+        height: 30px !important;
+    }
+
+    .tabsdate1.dx-tabs {
+        /*text-align: left;*/
+        background: #e6e6e6;
+    }
+
+    .tabsdate1 .dx-tab {
+        background: #e6e6e6;
+        min-width: 150px;
+        text-align: center;
+    }
+
+        .tabsdate1 .dx-tab.dx-tab-selected {
+            color: black;
+            background: #ffdab3 !important;
+        }
+
+    .e-ganttviewerbodyContianer.e-scroller.e-js.e-widget {
+        background: rgb(250, 250, 250);
+    }
+
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        background: #fce9e9;
+    }
+
+    .e-treegrid .e-alt-row {
+        background: #fce9e9;
+    }
+    
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        border-bottom: none;
+    }
+
+    .e-ganttchart .e-ganttviewerheaderContainer {
+        background: #fce9e9;
+    }
+
+    .e-container-spreadsheet {
+        height: 100%;
+        width: 100%;
+    }
+
+    .e-rg-rangdiv {
+        opacity: 0 !important
+    }
+
+    .e-gantt-template-progressbar {
+        top: 12px !important;
+        height: 15px !important;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-template-progressbar {
+        top: 13px !important;
+        height: 15px !important;
+    }
+
+    .e-gantt-template-taskbar.linked-flight, .linked-flight {
+        display: none;
+    }
+
+    .hatch-delay {
+        background-size: 4px 4px, 4px 4px, 100% 100% !important;
+    }
+   
+
+    .tempFDP {
+        height: calc(100% - 429px);
+    }
+
+    #temp-container {
+        border: 1px solid lightgray;
+    }
+
+    .overflowy {
+        overflow-y: auto;
+    }
+
+    .error {
+        background-color: coral !important;
+    }
+
+    .flight1 {
+        background-color: moccasin !important;
+    }
+
+    .flight2 {
+        background-color: lightgreen !important;
+    }
+
+    .fc11 * {
+        font-size: 11px !important;
+    }
+
+    .fc12 * {
+        font-size: 11px !important;
+    }
+
+    #dg2 .dx-row > td {
+        padding-top: 4px !important;
+        padding-bottom: 4px !important;
+    }
+
+    #dg3 .dx-row > td {
+        padding-top: 4px !important;
+        padding-bottom: 3px !important;
+    }
+
+    #resourceGanttba2 .flight-item-selected {
+        margin-top: 0 !important;
+    }
+
+        #resourceGanttba2 .flight-item-selected .task-body {
+            background: #ff8533 !important;
+            color: #000 !important;
+        }
+
+    .gccell {
+        display: inline-block;
+        padding: 5px 6px;
+        text-align: center;
+        background: aquamarine;
+        border: 1px solid lightseagreen;
+        margin: 5px;
+    }
+
+    .flight-item-dh {
+        background: #cccccc !important;
+        font-weight: normal !important;
+    }
+
+        .flight-item-dh .task-body {
+            background: #cccccc !important;
+        }
+
+    .dh {
+        background: #cccccc !important;
+    }
+
+    .menu {
+        width: 150px;
+        box-shadow: 3px 3px 5px #888888;
+        border-style: solid;
+        border-width: 1px;
+        border-color: grey;
+        border-radius: 2px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        position: fixed;
+        display: none;
+    }
+
+    .menu-item {
+        height: 20px;
+    }
+
+        .menu-item:hover {
+            background-color: #6CB5FF;
+            cursor: pointer;
+        }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: initial !important;
+    }
+
+    .dx-tooltip-wrapper .dx-overlay-content {
+        background-color: white !important;
+    }
+
+        .dx-tooltip-wrapper .dx-overlay-content .dx-popup-content {
+            padding: 0px !important
+        }
+
+    .dx-toast-custom {
+        background: #ffd480;
+        color: black;
+    }
+
+    ._duty {
+        background: #eee;
+        padding: 6px !important;
+        font-weight: bold !important;
+    }
+
+    ._duty1167 {
+        background: #ffcc66 !important;
+    }
+
+    ._duty1168 {
+        background: #ffff00 !important;
+    }
+
+
+
+    .dx-datagrid {
+        user-select: none;
+        -webkit-user-select: none;
+    }
+    .dx-editor-cell .dx-texteditor .dx-texteditor-input {
+        height: 30px !important;
+        line-height: 30px !important;
+    }
+    /*.dx-datagrid .dx-row > td {
+        padding-bottom: 8px !important;
+        padding-top: 8px !important;
+    }*/
+
+
+    .dx-datagrid .dx-row.dx-header-row > td {
+        padding: 8px !important;
+    }
+
+    .dx-datagrid .dx-row > td {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    .dx-datagrid .dx-row.dx-header-row > td .dx-datagrid-text-content {
+        font-size: 12px !important;
+    }
+
+    .dx-dropdownlist-popup-wrapper .dx-list:not(.dx-list-select-decorator-enabled) .dx-list-item-content {
+        padding: 7px 3px !important;
+    }
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .dx-editor-cell.dx-editor-inline-block .dx-highlight-outline::before {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+
+    .dx-datagrid .dx-editor-with-menu, .dx-datagrid-container .dx-editor-with-menu {
+        height: 30px !important;
+    }
+</style>
+<div class="box roster" style="height:100%;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+        <div class=" col-lg-12 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;">
+            <!--<div dx-data-grid="dg_codes" id="dg_codes" dx-item-alias="row">
+
+                <div data-options="dxTemplate:{ name:'codeSelectTemplate' }">
+                    <a ng-click="selectCode(row.data)" href="" class='w3-button   w3-grey' style='width:70px; color:white !important;  text-decoration:none;padding:5px !important; text-align:center'>Select</a>
+
+                </div>
+
+
+
+
+            </div>-->
+            <div dx-data-grid="dg" id="grid" dx-item-alias="row">
+                <div data-options="dxTemplate:{ name:'DHTemplate' }">
+
+                    <div style="display:inline-block;font-size:11px;background:#ddd;border:1px solid #ccc;padding:0 2px 0 2px;margin-right:2px;" ng-repeat="x in row.data.DHs">
+
+                        <span style="font-size:11px;">{{x.Name}}</span><span style="display:inline-block;margin:0 2px 0 2px">-</span><span style="font-size:11px">{{x.Position}}</span>
+
+                    </div>
+                </div>
+                <div data-options="dxTemplate:{ name:'cockpitTemplate' }">
+
+                    <div style="display:inline-block;font-size:11px;background:#ddd;border:1px solid #ccc;padding:0 2px 0 2px;margin-right:4px;" ng-repeat="x in row.data.cockpit">
+
+                        <span style="font-size:12px;font-weight:bold;display:inline-block;padding:2px">{{x.name}}</span><span style="display:inline-block;margin:0 2px 0 2px;padding:2px;">-</span><span style="font-size:12px;display:inline-block;padding:2px;">{{x.pos}}</span>
+
+                    </div>
+                </div>
+                <div data-options="dxTemplate:{ name:'cabinTemplate' }">
+
+                    <div style="display:inline-block;font-size:11px;background:#ddd;border:1px solid #ccc;padding:0 2px 0 2px;margin-right:4px;" ng-repeat="x in row.data.cabin">
+
+                        <span style="font-size:12px;font-weight:bold;display:inline-block;padding:2px">{{x.name}}</span><span style="display:inline-block;margin:0 2px 0 2px;padding:2px;">-</span><span style="font-size:12px;display:inline-block;padding:2px;">{{x.pos}}</span>
+
+                    </div>
+                </div>
+                <div data-options="dxTemplate:{ name:'instructorTemplate' }">
+
+                    <div style="display:inline-block;font-size:11px;background:#ddd;border:1px solid #ccc;padding:0 2px 0 2px;margin-right:4px;" ng-repeat="x in row.data.instructor">
+
+                        <span style="font-size:12px;font-weight:bold;display:inline-block;padding:2px">{{x.name}}</span><span style="display:inline-block;margin:0 2px 0 2px;padding:2px;">-</span><span style="font-size:12px;display:inline-block;padding:2px;">{{x.pos}}</span>
+
+                    </div>
+                </div>
+                <div data-options="dxTemplate:{ name:'otherTemplate' }">
+
+                    <div style="display:inline-block;font-size:11px;background:#ddd;border:1px solid #ccc;padding:0 2px 0 2px;margin-right:4px;" ng-repeat="x in row.data.other">
+
+                        <span style="font-size:12px;font-weight:bold;display:inline-block;padding:2px">{{x.name}}</span><span style="display:inline-block;margin:0 2px 0 2px;padding:2px;">-</span><span style="font-size:12px;display:inline-block;padding:2px;">{{x.pos}}</span>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-8 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_gantt"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_stby"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_cal"></div></td>
+                    <td style="width:180px;text-align:left;padding-right:5px"><div dx-button="btn_cduties"></div></td>
+                    <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_assign"></div></td>-->
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_save"></div></td>
+                    <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_refresh"></div></td>-->
+                    <td></td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+    <div dx-load-panel="loadPanel2"></div>
+    <div id="popup_gantt" dx-popup="popup_gantt">
+        <div class="col-lg-9" style="padding:0;">
+            <div id="gantt_container_ba2" class="_print" style="position:relative;top:0;width:100%">
+                <div id="resourceGanttba2" style=" width:100%;" />
+            </div>
+        </div>
+        <div class="col-lg-3" style="padding:0;padding-left:5px;">
+            <div style="border:1px solid #ccc;">
+                <div style="background:gray;border-bottom:1px solid gray;padding:6px;font-size:12px;color:white">Crews</div>
+                <div id="gantt-crews" style="padding:5px;overflow-y:auto" class="thin-scroll2">
+                    <div ng-repeat="rec in ganttFlightCrews" style="border:1px solid #ddd;margin-bottom:10px;">
+                        <table style="background:#ccc;text-align:center;width:100%;">
+                            <tr>
+                                <td style="border-right:1px solid gray;padding:5px">{{rec.FlightNumber}}</td>
+                                <td style="border-right:1px solid gray;padding:5px">{{rec.FromAirportIATA}}-{{rec.ToAirportIATA}}</td>
+                                <td style="border-right:1px solid gray;padding:5px">{{formatTime(rec.STDLocal)}}</td>
+                                <td style="border-right:0px solid #ccc;padding:5px">{{formatTime(rec.STALocal)}}</td>
+                            </tr>
+                        </table>
+                        <div ng-if="!rec.Crews || rec.Crews.length==0" style="padding:7px;text-align:center">
+                            No Crews Assigned
+                        </div>
+                        <div ng-if="rec.Crews && rec.Crews.length>0">
+                            <div class="gccell" ng-repeat="y in rec.Crews">
+                                <span>{{y.Name}}</span><span>-</span><span>{{y.Rank}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div id="popup_assign" dx-popup="popup_assign">
+        <div id="gantt_container_ba" class="_print" style="position:relative;top:0;width:100%">
+            <div id="resourceGanttba" style=" width:100%;" />
+        </div>
+        <div>
+            <div class=" col-lg-3 col-md-9 col-sm-9 col-xs-9 col1 fc11" style="padding-right:2px;padding-left:2px;width:20%">
+                <div style="text-align:center; color:darkslategray;background-color:lightgray; padding:9px 0 8px 0;margin-left:1px;margin-right:1px;font-size:12px !important;">Flights</div>
+                <div dx-data-grid="dg2" id="dg2"></div>
+                <div dx-data-grid="dg3" id="dg3"></div>
+            </div>
+            <div class=" col-lg-5 col-md-9 col-sm-9 col-xs-9 col1  fc12" style="padding-right:2px;padding-left:2px;width:46.66%">
+                <div dx-tabs="tabs_options"></div>
+                <div>
+                    <div class=" col1" style="padding-right:0px;padding-left:0px;">
+                        <div dx-data-grid="dg_crew" dx-item-alias="crew" id="xdg_crew">
+                            <div data-options="dxTemplate:{ name:'addCrewTemplate' }">
+                                <a ng-click="addCrew(crew)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fa fa-plus" aria-hidden="true"></i></a>
+                            </div>
+                            <div data-options="dxTemplate:{ name:'infoCrewTemplate' }">
+                                <a ng-click="infoCrew(crew.data)" href="" class='w3-button w3-block w3-green' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fa fa-info" aria-hidden="true"></i></a>
+                            </div>
+                            <div data-options="dxTemplate:{ name:'calCrewTemplate' }">
+                                <a ng-click="calCrew(crew.data)" href="" class='w3-button w3-block w3-2017-marina' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-lg-4 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;">
+                <div style="  color:darkslategray;background-color:lightgray; padding:4px 10px 2px 10px;margin-left:1px;margin-right:1px">
+
+                    <table style="width:100%">
+                        <tr>
+                            <td>{{rowCrew.ScheduleName?rowCrew.ScheduleName :'Crew'}}</td>
+                            <!--<td style="width:40px">
+                                <a ng-show="dg_crew_selected && crewTempRow.Valid" ng-click="addCrewFromSummery(dg_crew_selected)" href="" class='w3-button w3-block w3-blue' style='width:30px; margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center;float:left'>+</a>
+                                <a ng-show="!(dg_crew_selected && crewTempRow.Valid)" href="" class='w3-button w3-block w3-grey' style='width:30px; margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center;float:left'>+</a>
+                            </td>-->
+                        </tr>
+                    </table>
+
+                </div>
+                <div id="temp-container" ng-style="tempContainerStyle" class="thin-scroll2 overflowy">
+                    <table style="padding:0;width:100%;text-align:center;border:1px solid #ccc;margin-bottom:5px" ng-show="rowCrew.ScheduleName">
+                        <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                            <td style="font-size:11px;padding:2px;background:#b3e0ff" ng-class="crewTempRow.Flight28Class">F28</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px;background:#b3e0ff" ng-class="crewTempRow.FlightYearClass">F12M</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px;background:#b3e0ff" ng-class="crewTempRow.Duty7Class">D7</td>
+                            <td style="border-left:1px solid #ccc; font-size:11px;padding:4px;background:#b3e0ff" ng-class="crewTempRow.Duty14Class">D14</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px;background:#b3e0ff" ng-class="crewTempRow.Duty28Class">D28</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:11px;padding:2px">{{formatMinutes(crewTempRow.Flight28)}}</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px">{{formatMinutes(crewTempRow.FlightYear)}}</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px">{{formatMinutes(crewTempRow.Duty7)}}</td>
+                            <td style="border-left:1px solid #ccc; font-size:11px;padding:4px">{{formatMinutes(crewTempRow.Duty14)}}</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px">{{formatMinutes(crewTempRow.Duty28)}}</td>
+                        </tr>
+                    </table>
+                    <div ng-repeat="x in crewTempFDPs" style="border:1px solid #ccc;margin-bottom:10px">
+                        <div ng-if="!x.isPrePost">
+                            <div ng-if="x.dutyType==1165">
+                                <div style="padding:4px;background:#eee;border-bottom:1px solid #ccc;text-align:center;font-size:12px;" ng-class="IsFDPHasErrorClass(x)">FDP</div>
+                                <div style="padding:5px;width:100%;overflow-x:auto" class="thin-scroll2">
+                                    <div style="display:table-cell;padding:5px;text-align:center" ng-repeat="y in x.Items">
+                                        <div style="padding-bottom:2px;font-size:10px">{{y.Flight.FromAirportIATA}}-{{y.Flight.ToAirportIATA}}</div>
+                                        <div ng-class="flightTileClass(y)" style="border:1px solid #ccc;padding:2px;font-size:10px;min-width:70px">{{y.Flight.FlightNumber}}</div>
+                                        <div style="padding-top:2px;font-size:10px">{{formatTime(y.Flight.STDLocal)}} {{formatTime(y.Flight.STALocal)}}</div>
+                                    </div>
+
+
+                                </div>
+                                <table style="padding:0;width:100%;text-align:center">
+                                    <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                                        <td style="font-size:11px;padding:2px;background:#eee" ng-class="x.LastLocationClass">Pre Loc.</td>
+                                        <td style="font-size:11px;padding:2px;background:#eee;border-left:1px solid #ccc" ng-class="IsDutyOverClass(x)">Max</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Duty</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Start</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px;background:#eee">End</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsRestErrorClass(x)">Rest To</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:11px;padding:2px;">{{x.PreLocation}}</td>
+                                        <td style="font-size:11px;padding:2px;border-left:1px solid #ccc">{{formatMinutes(x.MaxFDPExtended)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.Duty)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.DutyStartLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px">{{formatDateTime(x.DutyEndLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.RestToLocal)}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div ng-if="x.dutyType!=1165">
+                                <div style="padding:4px;background:#eee;border-bottom:1px solid #ccc;text-align:center;font-size:12px;" ng-class="getDutyHeaderClass(x.dutyType)">{{x.dutyTypeTitle}}</div>
+                                <table style="padding:0;width:100%;text-align:center">
+                                    <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                                        <td style="font-size:11px;padding:2px;background:#eee" ng-class="x.LastLocationClass">Pre Loc.</td>
+
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Duty</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Start</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px;background:#eee">End</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsRestErrorClass(x)">Rest To</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:11px;padding:2px">{{x.PreLocation}}</td>
+
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.Duty)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.DutyStartLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px">{{formatDateTime(x.DutyEndLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.RestToLocal)}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+
+                        </div>
+
+                        <div ng-if="x.isPrePost">
+                            <div ng-if="x.dutyType==1165">
+                                <div style="padding:4px;background:#ff99ff;border-bottom:1px solid #ccc;text-align:center;font-size:12px;">FDP</div>
+                                <div style="padding:5px;width:100%;overflow-x:auto" class="thin-scroll2">
+                                    <div style="display:table-cell;padding:5px;text-align:center" ng-repeat="y in x.flights">
+                                        <div style="padding-bottom:2px;font-size:10px">{{y.FromAirportIATA}}-{{y.ToAirportIATA}}</div>
+                                        <div class="flight1" style="border:1px solid #ccc;padding:2px;font-size:10px;min-width:70px">{{y.FlightNumber}}</div>
+                                        <div style="padding-top:2px;font-size:10px">{{formatTime(y.STDLocal)}} {{formatTime(y.STALocal)}}</div>
+                                    </div>
+
+
+                                </div>
+                                <table style="padding:0;width:100%;text-align:center">
+                                    <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                                        <td style="font-size:11px;padding:2px;background:#eee" ng-class="x.LastLocationClass">Pre Loc.</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsDutyOverClass(x)">Max</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Duty</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Start</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px;background:#eee">End</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsRestErrorClass(x)">Rest To</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:11px;padding:2px">{{x.PreLocation}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.MaxFDPExtended)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.Duty)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.DutyStartLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px">{{formatDateTime(x.DutyEndLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.RestToLocal)}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div ng-if="x.dutyType!=1165">
+                                <div style="padding:4px;background:#ff99ff;border-bottom:1px solid #ccc;text-align:center;font-size:12px;" ng-class="getDutyHeaderClass(x.dutyType)">{{x.dutyTypeTitle}}</div>
+                                <table style="padding:0;width:100%;text-align:center">
+                                    <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                                        <td style="font-size:11px;padding:2px;background:#eee" ng-class="x.LastLocationClass">Pre Loc.</td>
+
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Duty</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Start</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px;background:#eee">End</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsRestErrorClass(x)">Rest To</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:11px;padding:2px">{{x.PreLocation}}</td>
+
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.Duty)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.DutyStartLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px">{{formatDateTime(x.DutyEndLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.RestToLocal)}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<div class=" col-lg-2 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;"></div>-->
+            <div style="clear:both"></div>
+        </div>
+
+        <div style="border:1px solid #ddd;padding:0px;margin-top:5px;height:123px">
+            <div style="background-color:lightgray;color:black;text-align:center;padding:5px;">Assigned</div>
+            <div class="thin-scroll2" style="padding:0px;overflow-y:auto;height:90px">
+                <div ng-repeat="x in assignedCrewsDistinct" style="display: inline-block;min-width:12%;padding:3px 3px 0 3px">
+                    <div style="border:1px solid #80ccff; ">
+                        <div style="background:#80ccff;color:black;padding:7px;text-align:center;font-size:12px;font-weight:bold;min-height:23.6px" ng-class="x.Position" pos="{{x.Position}}">
+                            {{x.Tab}}
+                        </div>
+                        <div style="background:#f6f6f6;text-align:center;padding:7px;font-size:12px;font-weight:bold;min-height:25.6px;">
+                            <table style="width:100%">
+                                <tr>
+                                    <td>{{x.Name}} </td>
+                                    <td style="width:25px;text-align:center" rowspan="2">  <a href="" ng-click="removeAssignedCrew(x)"><i class="fas fa-minus-circle" style="color:red;font-size:19px;float:right;"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>   <div style="font-size:12px;font-weight:normal;margin-top:2px">{{x._assignedFlights}}</div></td>
+                                </tr>
+                            </table>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+
+    </div>
+
+    <div id="popup_event" dx-popup="popup_event">
+        <div style="padding:0px 0 0 0">
+            <div class="dx-border">
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>From</label>
+                    <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>&nbsp;</label>
+                    <div class="center" dx-date-box="date_from_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>To</label>
+                    <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>&nbsp;</label>
+                    <div class="center" dx-date-box="date_to_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>Remark</label>
+                    <div dx-text-area="remark_event"></div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+    <div id="popup_cal" dx-popup="popup_cal">
+        <div style="padding:0px 0 0 0">
+            <div class=" col-lg-3 col-md-1 col-sm-1 col-xs-1 " style="padding:0 5px 0 0; width:33%;  ">
+                <div dx-data-grid="dg_calcrew" id="dg_calcrew" class="content" style="overflow-y:hidden"></div>
+
+            </div>
+
+            <div class=" col-lg-9 col-md-1 col-sm-1 col-xs-1" style="padding:0 0px 0 0;  width:67%; ">
+                <div style="border:1px solid #ddd; background:#eee;padding:3px;text-align:center">
+
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:40px">
+                                <a href="" ng-click="preCrew()"><i class="fas fa-caret-left" style="font-size:22px;" ng-show="dg_calcrew_selected"></i></a>
+                            </td>
+                            <td>
+                                <span>{{dg_calcrew_selected?dg_calcrew_selected.Name+'('+dg_calcrew_selected.JobGroup+')':'-'}}</span>
+                            </td>
+                            <td style="width:40px">
+                                <a href="" ng-click="nextCrew()"><i class="fas fa-caret-right" style="font-size:22px;" ng-show="dg_calcrew_selected"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div dx-scheduler="cal_crew" dx-item-alias="duty">
+                    <div data-options="dxTemplate:{name:'appointmentTemplate'}" ng-class="xgetDutyClass(duty)">
+                        <div ng-show="duty.dutyType==1165">
+                            <table style="width:100%;">
+                                <tr>
+                                    <!--<td style="width:32px;">
+
+                                        <a class="cellposition" href="" data-ng-click="xcellPositionClicked(duty.Id)" style="background:white;width:28px;height:28px;border-radius:50%;color:gray;font-weight:bold;font-size:10px;text-align:center;display: inherit;vertical-align:middle;">
+                                            {{xgetPosition(duty.Position)}}
+                                        </a>
+
+                                    </td>-->
+                                    <td style="text-align:left;">
+                                        <div style="font-size:12px;font-weight:bold">{{duty.dutyTypeTitle}}</div>
+                                        <div style="font-size:10px; "><span style="font-size:12px; ">{{formatDateTime(duty.DutyStartLocal)}}</span><span style="font-size:12px;display:inline-block;margin-left:10px">{{formatDateTime(duty.DutyEndLocal)}}</span></div>
+                                    </td>
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                        <div ng-show="duty.dutyType!=1165">
+                            <table style="width:100%;">
+                                <tr>
+                                    <!--<td style="width:32px;">
+
+                                        <a class="cellposition" href="" data-ng-click="cellPositionClicked(duty.Id)" style="background:white;width:28px;height:28px;border-radius:50%;color:gray;font-weight:bold;font-size:10px;text-align:center;display: inherit;vertical-align:middle;">
+                                            {{xgetCaption(duty)}}
+                                        </a>
+
+                                    </td>-->
+                                    <td style="text-align:left;">
+                                        <div style="font-size:12px;font-weight:bold">{{duty.dutyTypeTitle}}</div>
+                                        <div style="font-size:10px; "><span style="font-size:12px; ">{{formatDateTime(duty.DutyStartLocal)}}</span><span style="font-size:12px;display:inline-block;margin-left:10px">{{formatDateTime(duty.DutyEndLocal)}}</span></div>
+                                    </td>
+
+                                    <td style="background:white;" ng-show="duty.dutyType!=1167 && duty.dutyType!=1168">
+                                        <a href="" ng-click="removeDutyCal(duty)"><i class="fas fa-minus-circle" style="color:red;font-size:24px; "></i></a>
+                                    </td>
+
+                                </tr>
+                                <tr ng-show="duty.Remark">
+                                    <td colspan="2" style="font-size:10px;text-align:left">{{duty.Remark}}</td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div data-options="dxTemplate: {name: 'tooltip-template'}" dx-item-alias="duty" style="background:white;border:1px solid #03A9F4;min-width:300px;">
+                        <div style="background:#03A9F4;padding:5px;">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <div style="font-size:12px;font-weight:bold">{{duty.FDPTitle}}</div>
+                                        <div style="font-size:12px; ">{{duty.FDPRemark}}</div>
+                                    </td>
+                                    <td style="width:40px">
+                                        <a href="" ng-click="xremoveAssignedFDP(duty)"><i class="fas fa-minus-circle" style="color:red;font-size:24px; "></i></a>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                        <div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="duty.DutyType==1165">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:30px">
+                                        <a href="" ng-click="prePosition2(duty)"><i class="fas fa-caret-left" style="font-size:22px;"></i></a>
+                                    </td>
+                                    <td style="font-weight:bold;">{{ duty.Position }}</td>
+                                    <td style="width:30px">
+                                        <a href="" ng-click="nextPosition2(duty)"><i class="fas fa-caret-right" style="font-size:22px;"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                        <div style="background:white;padding:7px;color:gray; ">
+                            Some information ...
+                        </div>
+
+                    </div>
+
+                    <div data-options="dxTemplate:{name:'dataCellTemplate'}" ng-class="xgetDataCellTemplateClass(duty)">
+                        <div>
+                            {{duty.text}}
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div id="context-menu" dx-context-menu="cellContextMenuOptions"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <div id="popup_error" dx-popup="popup_error">
+        <div style="padding:0px 0 0 0">
+            <div dx-data-grid="dg_error" dx-item-alias="error" id="xdg_error">
+
+                <div data-options="dxTemplate:{ name:'ecalCrewTemplate' }">
+                    <a href="" class='w3-button w3-block w3-2017-marina' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup_stby" dx-popup="popup_stby">
+        <div style="padding:0px 0 0 0">
+            <div class=" col-lg-4 col-md-1 col-sm-1 col-xs-1 " style="padding:0 5px 0 0;    ">
+                <!-- <div dx-data-grid="dg_calcrew" id="dg_calcrew" class="content" style="overflow-y:hidden"></div>-->
+
+                <div dx-data-grid="dg_crew_stby" dx-item-alias="crew">
+                    <div data-options="dxTemplate:{ name:'addStbyAMTemplate' }">
+                        <a ng-click="addStby(crew,'AM')" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center'>AM</a>
+
+                    </div>
+                    <div data-options="dxTemplate:{ name:'addStbyPMTemplate' }">
+                        <a ng-click="addStby(crew,'PM')" href="" class='w3-button w3-block w3-2017-flame' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center'>PM</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-lg-4 col-md-1 col-sm-1 col-xs-1 " style="padding:0 5px 0 0;    ">
+                <div style="  color:darkslategray;background-color:lightgray; padding:4px 10px 2px 10px;margin-left:1px;margin-right:1px">
+
+                    <table style="width:100%">
+                        <tr>
+                            <td>{{rowCrew.ScheduleName?rowCrew.ScheduleName :'Crew'}}</td>
+                            <td style="width:50px;padding-right:3px;">
+                                <!--<a ng-show="dg_crew_selected && crewTempRow.Valid" ng-click="addCrewFromSummery(dg_crew_selected)" href="" class='w3-button w3-block w3-blue' style='width:30px; margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center;float:left'>+</a>-->
+                                <a ng-show="IsStbyAMVisible" ng-click="addStby(dg_crew_stby_selected,'AM')" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center'>AM</a>
+                                <a ng-show="!IsStbyAMVisible" href="" class='w3-button w3-block w3-grey' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;float:left'>AM</a>
+                            </td>
+                            <td style="width:50px;padding-left:3px;">
+
+                                <a ng-show="IsStbyPMVisible" ng-click="addStby(dg_crew_stby_selected,'PM')" href="" class='w3-button w3-block w3-2017-flame' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center'>PM</a>
+                                <a ng-show="!IsStbyPMVisible" href="" class='w3-button w3-block w3-grey' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center;float:left'>PM</a>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div id="temp-container" ng-style="tempContainerStyle" class="thin-scroll2 overflowy">
+                    <table style="padding:0;width:100%;text-align:center;border:1px solid #ccc;margin-bottom:5px" ng-show="rowCrew.ScheduleName">
+                        <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                            <td style="font-size:11px;padding:2px;background:#b3e0ff" ng-class="crewTempRow.Flight28Class">F28</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px;background:#b3e0ff" ng-class="crewTempRow.FlightYearClass">F12M</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px;background:#b3e0ff" ng-class="crewTempRow.Duty7Class">D7</td>
+                            <td style="border-left:1px solid #ccc; font-size:11px;padding:4px;background:#b3e0ff" ng-class="crewTempRow.Duty14Class">D14</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px;background:#b3e0ff" ng-class="crewTempRow.Duty28Class">D28</td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:11px;padding:2px">{{formatMinutes(crewTempRow.Flight28)}}</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px">{{formatMinutes(crewTempRow.FlightYear)}}</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px">{{formatMinutes(crewTempRow.Duty7)}}</td>
+                            <td style="border-left:1px solid #ccc; font-size:11px;padding:4px">{{formatMinutes(crewTempRow.Duty14)}}</td>
+                            <td style="border-left:1px solid #ccc;font-size:11px;padding:4px">{{formatMinutes(crewTempRow.Duty28)}}</td>
+                        </tr>
+                    </table>
+                    <div ng-repeat="x in crewTempFDPs" style="border:1px solid #ccc;margin-bottom:5px">
+                        <div ng-if="!x.isPrePost">
+                            <div ng-if="x.dutyType==1165">
+                                <div style="padding:4px;background:#eee;border-bottom:1px solid #ccc;text-align:center;font-size:12px;" ng-class="IsFDPHasErrorClass(x)">FDP</div>
+                                <div style="padding:5px;width:100%;overflow-x:auto" class="thin-scroll2">
+                                    <div style="display:table-cell;padding:5px;text-align:center" ng-repeat="y in x.Items">
+                                        <div style="padding-bottom:2px;font-size:10px">{{y.Flight.FromAirportIATA}}-{{y.Flight.ToAirportIATA}}</div>
+                                        <div ng-class="flightTileClass(y)" style="border:1px solid #ccc;padding:2px;font-size:10px;min-width:70px">{{y.Flight.FlightNumber}}</div>
+                                        <div style="padding-top:2px;font-size:10px">{{formatTime(y.Flight.STDLocal)}} {{formatTime(y.Flight.STALocal)}}</div>
+                                    </div>
+
+
+                                </div>
+                                <table style="padding:0;width:100%;text-align:center">
+                                    <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                                        <td style="font-size:11px;padding:2px;background:#eee" ng-class="x.LastLocationClass">Pre Loc.</td>
+                                        <td style="font-size:11px;padding:2px;background:#eee;border-left:1px solid #ccc" ng-class="IsDutyOverClass(x)">Max</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Duty</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Start</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px;background:#eee">End</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsRestErrorClass(x)">Rest To</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:11px;padding:2px;">{{x.PreLocation}}</td>
+                                        <td style="font-size:11px;padding:2px;border-left:1px solid #ccc">{{formatMinutes(x.MaxFDPExtended)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.Duty)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.DutyStartLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px">{{formatDateTime(x.DutyEndLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.RestToLocal)}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div ng-if="x.dutyType!=1165">
+                                <div style="padding:4px;background:#eee;border-bottom:1px solid #ccc;text-align:center;font-size:12px;" ng-class="getDutyHeaderClass(x.dutyType)">{{x.dutyTypeTitle}}</div>
+                                <table style="padding:0;width:100%;text-align:center">
+                                    <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                                        <td style="font-size:11px;padding:2px;background:#eee" ng-class="x.LastLocationClass">Pre Loc.</td>
+
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Duty</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Start</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px;background:#eee">End</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsRestErrorClass(x)">Rest To</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:11px;padding:2px">{{x.PreLocation}}</td>
+
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.Duty)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.DutyStartLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px">{{formatDateTime(x.DutyEndLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.RestToLocal)}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+
+                        </div>
+
+                        <div ng-if="x.isPrePost">
+                            <div ng-if="x.dutyType==1165">
+                                <div style="padding:4px;background:#ff99ff;border-bottom:1px solid #ccc;text-align:center;font-size:12px;">FDP</div>
+                                <div style="padding:5px;width:100%;overflow-x:auto" class="thin-scroll2">
+                                    <div style="display:table-cell;padding:5px;text-align:center" ng-repeat="y in x.flights">
+                                        <div style="padding-bottom:2px;font-size:10px">{{y.FromAirportIATA}}-{{y.ToAirportIATA}}</div>
+                                        <div class="flight1" style="border:1px solid #ccc;padding:2px;font-size:10px;min-width:70px">{{y.FlightNumber}}</div>
+                                        <div style="padding-top:2px;font-size:10px">{{formatTime(y.STDLocal)}} {{formatTime(y.STALocal)}}</div>
+                                    </div>
+
+
+                                </div>
+                                <table style="padding:0;width:100%;text-align:center">
+                                    <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                                        <td style="font-size:11px;padding:2px;background:#eee" ng-class="x.LastLocationClass">Pre Loc.</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsDutyOverClass(x)">Max</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Duty</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Start</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px;background:#eee">End</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsRestErrorClass(x)">Rest To</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:11px;padding:2px">{{x.PreLocation}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.MaxFDPExtended)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.Duty)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.DutyStartLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px">{{formatDateTime(x.DutyEndLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.RestToLocal)}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div ng-if="x.dutyType!=1165">
+                                <div style="padding:4px;background:#ff99ff;border-bottom:1px solid #ccc;text-align:center;font-size:12px;" ng-class="getDutyHeaderClass(x.dutyType)">{{x.dutyTypeTitle}}</div>
+                                <table style="padding:0;width:100%;text-align:center">
+                                    <tr style="border-bottom:1px solid #ccc; border-top:1px solid #ccc;">
+                                        <td style="font-size:11px;padding:2px;background:#eee" ng-class="x.LastLocationClass">Pre Loc.</td>
+
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Duty</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee">Start</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px;background:#eee">End</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px;background:#eee" ng-class="IsRestErrorClass(x)">Rest To</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:11px;padding:2px">{{x.PreLocation}}</td>
+
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatMinutes(x.Duty)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.DutyStartLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc; font-size:11px;padding:2px">{{formatDateTime(x.DutyEndLocal)}}</td>
+                                        <td style="border-left:1px solid #ccc;font-size:11px;padding:2px">{{formatDateTime(x.RestToLocal)}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=" col-lg-4 col-md-1 col-sm-1 col-xs-1" style="padding:0 0px 0 3px;   ">
+                <div dx-tabs="tabs_date_options">
+
+                </div>
+                <div style="border:1px solid #bbb;height:323px">
+                    <div style="border-bottom:1px solid #ccc;padding:10px;text-align:center" class="w3-blue">StandBy AM</div>
+                    <div style="overflow-y:auto;height:283px;">
+                        <div ng-repeat="x in AmDs" class="col-lg-4" style="padding:3px !important">
+                            <div style="border:1px solid #ccc;padding:10px;background:#eee">
+                                <table style="width:100%;  ">
+                                    <tr>
+                                        <td>
+                                            <div style="font-size:13px;">{{x.JobGroup}}</div>
+                                            <div style="font-size:13px;font-weight:bold;margin-top:5px;">{{x.ScheduleName}}</div>
+
+                                        </td>
+                                        <td style="width:50px">
+                                            <a href="" ng-click="removeStby(x)"><i class="fas fa-minus-circle" style="color:red;font-size:19px;float:right;"></i></a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+                <div style="border:1px solid #bbb;height:323px;margin-top:5px">
+                    <div style="border-bottom:1px solid #ccc;padding:10px;text-align:center" class="w3-2017-flame">StandBy PM</div>
+                    <div style="overflow-y:auto;height:283px;">
+                        <div ng-repeat="x in PmDs" class="col-lg-4" style="padding:3px !important">
+                            <div style="border:1px solid #ccc;padding:10px;background:#eee">
+                                <table style="width:100%;  ">
+                                    <tr>
+                                        <td>
+                                            <div style="font-size:13px;">{{x.JobGroup}}</div>
+                                            <div style="font-size:13px;font-weight:bold;margin-top:5px;">{{x.ScheduleName}}</div>
+
+                                        </td>
+                                        <td style="width:50px">
+                                            <a href="" ng-click="removeStby(x)"><i class="fas fa-minus-circle" style="color:red;font-size:19px;float:right;"></i></a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <div id="popup_cduties" dx-popup="popup_cduties">
+        <div style="padding:0px 0 0 0">
+            <div dx-data-grid="dg_cduties" dx-item-alias="error" id="dg_cduties">
+
+                <!--<div data-options="dxTemplate:{ name:'ecalCrewTemplate' }">
+                    <a href="" class='w3-button w3-block w3-2017-marina' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fa fa-calendar" aria-hidden="true"></i></a>
+                </div>-->
+            </div>
+            
+        </div>
+    </div>
+
+
+    <div ng-include="'app/views/templates.html'"></div>
+</div>

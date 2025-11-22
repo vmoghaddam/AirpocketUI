@@ -1,0 +1,931 @@
+﻿
+
+<style>
+    .btable {
+    }
+
+        .btable tr {
+            height: 35px;
+        }
+
+        .btable td {
+            border: 1px solid gray;
+            text-align: center
+        }
+
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .cls_item_x {
+        background: #aaa !important;
+        color: black;
+    }
+
+    .cls_item_s {
+        background: green !important;
+        color: white;
+    }
+
+    .cls_item_us {
+        background: red !important;
+        color: white;
+    }
+
+
+    #dg_flight .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .dx-tab {
+        background-color: gray !important;
+    }
+
+    .section-header {
+        background-color: lightgrey;
+        font-weight: bold;
+    }
+
+    .section-table {
+        width: 100%;
+    }
+
+        .section-table tr {
+            border-bottom: 1px solid #bbb;
+        }
+
+            .section-table tr td {
+                padding: 7px;
+                width: 25%;
+            }
+
+                .section-table tr td:nth-child(odd) {
+                    text-align: left;
+                    color: black
+                }
+
+                .section-table tr td:nth-child(even) {
+                    text-align: right;
+                    color: black;
+                }
+
+                    .section-table tr td:nth-child(even) span {
+                        color: black;
+                    }
+
+                .section-table tr td:nth-child(odd) span {
+                    color: black;
+                }
+
+    .z5000 {
+    }
+
+    .h70 {
+        height: 70px;
+    }
+
+    .left80 {
+        margin-left: 160px;
+    }
+
+    .sig {
+        display: inline-block;
+        position: relative;
+    }
+
+    .sig_img {
+        position: absolute;
+        top: 25px;
+        left: 0;
+        width: auto;
+        height: 110px;
+    }
+
+    pre {
+        font-size: 15px;
+        border: none !important;
+        background: white !important;
+    }
+
+        pre .prop {
+            color: red;
+            font-weight: bold;
+            display: inline-block;
+            min-width: 70px;
+            text-align: center;
+            border-color: #ccc;
+            border-width: 1px;
+            border-style: solid;
+            width: 90px;
+        }
+
+            pre .prop.selected {
+                border-color: red;
+            }
+
+    .noborder {
+        border: 1px solid #bbb !important;
+    }
+
+    .alignleft {
+        text-align: left !important;
+    }
+
+    .station {
+        background-color: dimgray;
+    }
+
+        .station.selected {
+            background-color: lightseagreen !important;
+        }
+
+    .selected-obj {
+        background: #306b65 !important;
+    }
+
+    .windc td {
+        border: 1px solid #ddd;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .hasInfo {
+        background-color: darkslategray !important;
+    }
+
+    .pln tr td {
+        min-width: 60px;
+        text-align: center;
+        padding-left: 3px;
+        padding-right: 3px;
+        font-size: 12px;
+    }
+
+        .pln tr td div {
+            font-size: 12px;
+        }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box reportEFB" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+
+        <div class=" col-lg-4 col-md-8 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class=" col-lg-8 col-md-4 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div dx-tabs="tabs_options"></div>
+            <div id="log" class="tabc" style="border:1px solid #ccc">
+
+                <div id="rightColumn" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+
+
+
+
+                    <div id='log-con'>
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Flight</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+
+                            <table class="section-table">
+
+                                <tr>
+                                    <td colspan="2">
+                                        Date
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block">{{formatDateLong(selectedFlight.STDDay)}}</span>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Flight#
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block">{{selectedFlight.FlightNumber}}-{{selectedFlight.FlightId}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        From
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{selectedFlight.FromAirportIATA}}</span>
+                                    </td>
+                                    <td>
+                                        To
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.ToAirportIATA}}</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        STD
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{getSTD(selectedFlight)}}</span>
+
+                                    </td>
+
+
+
+                                    <td>
+
+
+
+                                        STA
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{getSTA(selectedFlight)}}</span>
+
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td colspan="2">
+                                        BlockOff
+                                    </td>
+                                    <td colspan="2">
+                                        <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block">{{getBlockOff(selectedFlight,1)}}</span>
+                                        <!--<span ng-show="showMVTTime(selectedFlight)" style="display:inline-block;margin-left:3px;">({{getBlockOffLocal(selectedFlight,1)}})</span>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        T/O
+                                    </td>
+                                    <td colspan="2">
+                                        <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block">{{getTakeOff(selectedFlight,1)}}</span>
+                                        <!--<span ng-show="showMVTTime(selectedFlight)" style="display:inline-block;margin-left:3px;">({{getTakeOffLocal(selectedFlight,1)}})</span>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        LND
+                                    </td>
+                                    <td colspan="2">
+                                        <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block">{{getLanding(selectedFlight,1)}}</span>
+                                        <!-- <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block;margin-left:3px;">({{getLandingLocal(selectedFlight,1)}})</span>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        BlockOn
+                                    </td>
+                                    <td colspan="2">
+                                        <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block">{{getBlockOn(selectedFlight,1)}}</span>
+                                        <!-- <span ng-show="showMVTTime(selectedFlight)" style="display:inline-block;margin-left:3px;">({{getBlockOnLocal(selectedFlight,1)}})</span>-->
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        PF I/C/F
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block">{{selectedFlight.PF}}</span>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Time</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td>
+                                        Block Time
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{getDuration(selectedFlight.BlockTime)}}</span>
+                                    </td>
+                                    <td>
+                                        Flight Time
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{getDuration(selectedFlight.FlightTime)}}</span>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        Night
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"></span>
+                                    </td>
+                                    <td>
+                                        Scheduled
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{getDuration(selectedFlight.ScheduledFlightTime)}}</span>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="2">
+                                        Total Delay
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block;color:red">{{getDuration(selectedFlight.DelayBlockOff)}}</span>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Fuel</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td>
+                                        Remaining
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"> {{selectedFlight.FuelRemaining}}</span>
+                                    </td>
+                                    <td>
+                                        Uplift
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.FuelUplift}}</span>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        Total
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{selectedFlight.FuelTotal}}</span>
+                                    </td>
+                                    <td>
+                                        Used
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.FuelUsed}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Density
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{selectedFlight.FuelDensity}}</span>
+                                    </td>
+                                    <td>
+                                        Unit
+                                    </td>
+                                    <td>
+                                        lbs
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Passenger</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td>
+                                        Adult
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"> {{selectedFlight.PaxAdult}}</span>
+                                    </td>
+                                    <td>
+                                        Child
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.PaxChild}}</span>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        Infant
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block">{{selectedFlight.PaxInfant}}</span>
+                                    </td>
+                                    <td>
+                                        Total
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.PaxTotal}}</span>
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Cargo/Bags</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td>
+                                        Cargo
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"> {{selectedFlight.CargoWeight}}</span>
+                                    </td>
+                                    <td>
+                                        Bags
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.BaggageWeight}}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        Total
+                                    </td>
+                                    <td colspan="2">
+                                        <span style="display:inline-block"> {{selectedFlight.Freight}}</span>
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Serial No./LTR</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+
+                                    <td style="border-right: 1px dotted #bbb">
+                                        <span style="display:inline-block"> {{selectedFlight.SerialNo}}</span>
+                                    </td>
+
+                                    <td>
+                                        <span style="display:inline-block">{{selectedFlight.LTR}}</span>
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+                        <!--
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">RVSM Check</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td style="border-right: 1px dotted #bbb;color:gray">
+                                        PHASE
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:gray;text-align:center">
+                                        CPT
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:gray;text-align:center">
+                                        STBY
+                                    </td>
+                                    <td style="color:gray;text-align:center">
+                                        F/O
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px dotted #bbb;color:gray">
+                                        GND
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:black;text-align:center">
+                                        {{selectedFlight.RVSM_GND_CPT}}
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:black;text-align:center">
+                                        {{selectedFlight.RVSM_GND_STBY}}
+                                    </td>
+                                    <td style="color:black;text-align:center">
+                                        {{selectedFlight.RVSM_GND_FO}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-right: 1px dotted #bbb;color:gray">
+                                        FLT
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:black;text-align:center">
+                                        {{selectedFlight.RVSM_FLT_CPT}}
+                                    </td>
+                                    <td style="border-right: 1px dotted #bbb;color:black;text-align:center">
+                                        {{selectedFlight.RVSM_FLT_STBY}}
+                                    </td>
+                                    <td style="color:black;text-align:center">
+                                        {{selectedFlight.RVSM_FLT_FO}}
+                                    </td>
+                                </tr>
+
+
+
+                            </table>
+                        </div>
+                         -->
+
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Notes</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr>
+                                    <td colspan="3">
+                                        <p>{{selectedFlight.CommanderNote}}</p>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td style="width:33.33%;text-align:left">
+                                    </td>
+                                    <td style="width:33.33%;text-align:left">
+                                    </td>
+                                    <!--<td style="width:33.33%;text-align:right">
+
+                                        <span style="display:inline-block;color:gray">Repositioning</span>
+                                        <span ng-show="!selectedFlight.AttRepositioning1" style="display:inline-block; margin-left:3px;"><i class="far fa-square"></i></span>
+                                        <span ng-show="selectedFlight.AttRepositioning1" style="display:inline-block; "><i class="far fa-check-square"></i></span>
+                                        <span ng-show="!selectedFlight.AttRepositioning2" style="display:inline-block; "><i class="far fa-square"></i></span>
+                                        <span ng-show="selectedFlight.AttRepositioning2" style="display:inline-block; "><i class="far fa-check-square"></i></span>
+                                    </td>-->
+                                </tr>
+
+
+                            </table>
+                        </div>
+
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">Crew</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr ng-repeat="c in selectedFlightCrews">
+                                    <td>
+                                        <span ng-show="!c.IsPositioning" style="display:inline-block">{{c.Position}}</span>
+                                        <span ng-show="c.IsPositioning" style="display:inline-block">Positioning({{c.JobGroup}})</span>
+                                    </td>
+                                    <td>
+                                        <span style="display:inline-block">{{c.Name}}</span>
+                                    </td>
+                                </tr>
+
+
+                            </table>
+                        </div>
+                        <div style="padding:7px;border-bottom:1px solid #eee" class="section-header">COMMANDER'S SIGNATURE</div>
+                        <div style="padding:0px;" class="main-bkcolor2-light-imp">
+                            <table class="section-table">
+                                <tr style="border-bottom:0px dotted #eee;text-align:left">
+                                    <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px;padding:10px;text-align:center;">
+                                        <div ng-show="selectedFlight.JLSignedBy" style="text-align:center;font-size:16px;padding:5px;">The document signed and approved by</div>
+                                        <div ng-show="selectedFlight.JLSignedBy" style="text-align:center;font-size:18px;padding:5px;">{{selectedFlight.PIC2}}</div>
+                                        <div ng-show="selectedFlight.JLSignedBy" style="text-align:center;font-size:16px;padding:5px;">{{selectedFlight.signDate}}</div>
+                                        <img style="height:200px;display: block;  margin:0 auto 0 auto" ng-show="selectedFlight.JLSignedBy" ng-src="{{selectedFlight.url_sign}}" />
+                                    </td>
+
+
+                                </tr>
+
+
+                            </table>
+                        </div>
+
+
+                        <div style="padding:10px 7px 10px 7px;border-bottom:1px solid #eee;" class="section-header" ng-show="selectedFlight.JLUser">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:85px;padding-right:5px;color:#ccc; ">Filled by</td>
+                                    <td style="font-weight:bold;text-align:right;">{{selectedFlight.JLUser}}</td>
+                                    <td style="width:85px;text-align:right;font-weight:bold">{{formatDateShort(selectedFlight.JLDate)}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="padding:10px 7px 10px 7px;border-bottom:1px solid #eee;" class="section-header" ng-show="selectedFlight.JLApprover">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:85px;padding-right:5px;color:#ccc; ">Approved by</td>
+                                    <td style="font-weight:bold;text-align:right;">{{selectedFlight.JLApprover}}</td>
+                                    <td style="width:85px;text-align:right;font-weight:bold">{{formatDateShort(selectedFlight.JLDateApproved)}}</td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+            <div id="scc" class="tabc" style="border:1px solid #ccc">
+                <div id="rightColumn2" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+                    <div style="border: 1px solid #9c9c9c; height:50px; width: 100%; position: sticky; top: 0;background-color: white; z-index: 10">
+                        <div class="col-lg-2 col-md-2 col-sm-2" style="height:50px"><p style="text-align: center; vertical-align: middle; line-height: 50px; ">Reporter:</p></div>
+                        <div class="col-lg-8 col-md-8 col-sm-8" style=" height:50px; padding: 5px"><div style="width: 100%; height: 100%; border: 1px solid lightgray; border-radius: 20px" dx-select-box="sb_reporter"> </div></div>
+                        <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center;padding:5px"><div dx-button="btn_sccFill"></div>     </div>
+                        <!--<div class="col-lg-2 col-md-2 col-sm-2" ng-click="sccFill()" style="background-color: greenyellow; padding: 7px">Fill</div>-->
+                    </div>
+
+
+                    
+
+                    <div style="padding-top:10px;" class="dx-border">
+                        <div style="margin-bottom:10px; font-weight: bold">Catering Issue</div>
+                        <div dx-text-area="txt_catering"></div>
+                        <div style="margin-bottom: 10px; margin-top: 15px; font-weight: bold">Airport Service</div>
+                        <div dx-text-area="txt_airport"></div>
+                        <div style="margin-bottom: 10px; margin-top: 15px; font-weight: bold">Technical (Cabin Interior)</div>
+                        <div dx-text-area="txt_tech"></div>
+                        <div style="margin-bottom: 10px; margin-top: 15px; font-weight: bold">Safety Issue</div>
+                        <div dx-text-area="txt_safety"></div>
+                        <div style="margin-bottom: 10px; margin-top: 15px; font-weight: bold">General Issue</div>
+                        <div dx-text-area="txt_general"></div>
+                        <!--<div dx-button="scc_report" style="margin-top: 7px; float: right"></div>-->
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="evalForm" class="tabc" style="border:1px solid #ccc">
+                <div id="rightColumn3" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+                    <div style="padding:0px;" class="main-bkcolor2-light-imp">
+
+                        <div style="border: 1px solid #9c9c9c; height: 50px; width: 100%; position: sticky; top: 0; background-color: white; z-index: 10">
+                            <div class="col-lg-2 col-md-2 col-sm-2" style="height:50px"><p style="text-align: center; vertical-align: middle; line-height: 50px; ">Reporter:</p></div>
+                            <div class="col-lg-8 col-md-8 col-sm-8" style=" height:50px; padding: 5px"><div style="width: 100%; height: 100%; border: 1px solid lightgray; border-radius: 20px" dx-select-box="sb_reporter"> </div></div>
+                            <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center;padding:5px"><div dx-button="btn_evalFill"></div>     </div>
+                            <!--<div class="col-lg-2 col-md-2 col-sm-2" ng-click="sccFill()" style="background-color: greenyellow; padding: 7px">Fill</div>-->
+                        </div>
+
+                        <div dx-data-grid="dg_eval" id="dg_eval" class="content" style="overflow-y:hidden;margin-top:5px" dx-item-alias="row"></div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="equepment" class="tabc" style="border:1px solid #ccc">
+                <div style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+                    <div style="padding:0px;" class="main-bkcolor2-light-imp">
+
+                        <div style="border: 1px solid #9c9c9c; height: 50px; width: 100%; position: sticky; top: 0; background-color: white; z-index: 10">
+                            <div class="col-lg-2 col-md-2 col-sm-2" style="height:50px"><p style="text-align: center; vertical-align: middle; line-height: 50px; ">Reporter:</p></div>
+                            <div class="col-lg-8 col-md-8 col-sm-8" style=" height:50px; padding: 5px"><div style="width: 100%; height: 100%; border: 1px solid lightgray; border-radius: 20px" dx-select-box="sb_reporter"> </div></div>
+                            <div class="col-lg-2 col-md-2 col-sm-2" style="text-align:center;padding:5px"><div dx-button="btn_equpm_fill"></div>     </div>
+                        </div>
+
+                        <div id="scroll_equeoment" dx-scroll-view="scroll_equeoment" style="margin-top:5px">
+                            <div style="padding:5px;">
+
+                                <div ng-repeat="grp in pfc_grouped" style="margin-bottom:10px">
+                                    <div style="border:1px solid lightgray;">
+                                        <div style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold;color:black">{{grp.category}}</div>
+                                        <div style="padding:10px;">
+                                            <div ng-repeat="x in grp.items">
+                                                <div style="padding:5px 0 5px 0; border-bottom:1px dotted #ccc">
+                                                    <table style="width:100%;">
+                                                        <tr>
+                                                            <td> {{x.item_title}}</td>
+                                                            <td style="width:50px;">
+                                                                <div style="background:#aaa;text-align:center;height:40px;line-height:40px;border-radius:10px;font-size:19px" ng-click="item_click(x.item_id,grp.category_id)" ng-class="get_item_class(x.item_id,grp.category_id)">
+                                                                    {{get_item_result(x.item_id,grp.category_id)}}
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <div style="margin-top:5px;">
+                                                        <textarea rows="2" style="color:#404040;background:#eee;text-align:justify;width:100%;direction:rtl;font-size:13px" ng-model="x.remark"></textarea>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                    <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_persiandate"></div></td>
+                    <td ng-show="!isOPSStaff" style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_Status"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_IP"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_CPT"></div></td>
+                    <!--<td ng-show="!isOPSStaff && ASRVR" style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_asrvr"></div></td>-->
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                    <!--<td ng-show="IsFBVisible" style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_dr"></div></td>
+                    <td ng-show="IsFBVisible" style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_ofp"></div></td>
+                    <td ng-show="IsFBVisible" style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_vr"></div></td>
+
+
+                    <td ng-show="IsFBVisible" style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_asr"></div></td>-->
+                    <!--  <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_log"></div></td>-->
+
+                    <td></td>
+                    <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_print"></div></td>-->
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_print"></div></td>
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <!--<div id="popup_date" dx-popup="popup_date">
+        <div class="margin-bottom-5 padding-7 dx-border" style="padding:25px 0 10px 0">
+            <div>
+                <label style="width:45px;text-align:right;margin-right:5px;">From</label>
+
+                <input type="text" class="date1 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+            <div style="margin-top:15px;">
+                <label style="width:45px;text-align:right; margin-right:5px;">To</label>
+
+                <input type="text" class="date2 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+
+
+
+        </div>
+
+
+    </div>-->
+
+
+
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>
+

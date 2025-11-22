@@ -3495,7 +3495,172 @@ var _saveOFPI = function (entity) {
 	
 	
 	/////////////////////
+	///////////////REQUESTS ///////////////////////
+
+    var _getApprovedRequests = function () {
+
+
+        var deferred = $q.defer();
+        $http.get(serviceRequest + 'api/vacation/forms/all').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getApprovedRequests = _getApprovedRequests;
+
+
+    var _getReqNew = function () {
+
+
+        var deferred = $q.defer();
+        $http.get(serviceRequest + 'api/vacation/forms/new').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getReqNew = _getReqNew;
+
+    var _getReqApproved = function (isCockpit) {
+
+
+        var deferred = $q.defer();
+        $http.get(serviceRequest + 'api/vacation/cspn/forms/approved/' + isCockpit ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getReqApproved = _getReqApproved;
+
+     var _getReqResponsibleAll = function (id) {
+
+
+        var deferred = $q.defer();
+         $http.get(serviceRequest + 'api/vacation/forms/responsible/all/' + id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getReqResponsibleAll = _getReqResponsibleAll;
+
+
+    var _getReqAcc = function () {
+
+
+        var deferred = $q.defer();
+        $http.get(serviceRequest + 'api/vacation/forms/acc').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getReqAcc = _getReqAcc;
+
+
+    var _getReqRej = function () {
+
+
+        var deferred = $q.defer();
+        $http.get(serviceRequest + 'api/vacation/forms/rej').then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getReqRej = _getReqRej;
+
+    var _updateFormVacation = function (entity) {
+        var deferred = $q.defer();
+        $http.post(serviceRequest + 'api/vacation/update', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.updateFormVacation = _updateFormVacation;
+
+   var _actionRequest = function (entity) {
+        var deferred = $q.defer();
+       $http.post(serviceRequest + 'api/request/action', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.actionRequest = _actionRequest;
+
+
+    var _getRequesterDuties = function (id) {
+
+
+        var deferred = $q.defer();
+        $http.get(serviceRequest + 'api/forms/employee/timeline/'+id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getRequesterDuties = _getRequesterDuties;
 	
+		var _getDelayedFlightsReport = function (df, dt, regs,types,flts,route,range) {
+
+
+        var deferred = $q.defer();
+        $http.get('https://fleet.caspianairlines.com/reportflight/' + 'api/flight/delayed?df='+df+'&dt='+dt+'&route='+route+'&regs='+regs+'&cats=&types='+types+'&flts='+flts+'&range='+range).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+	serviceFactory.getDelayedFlightsReport = _getDelayedFlightsReport;
+	
+	var _getDelayedFlightsSummary = function (df, dt, regs,types,flts,route,range) {
+
+
+        var deferred = $q.defer();
+        $http.get('https://fleet.caspianairlines.com/reportflight/' + 'api/flight/delayed/summary?df='+df+'&dt='+dt+'&route='+route+'&regs='+regs+'&cats=&types='+types+'&flts='+flts+'&range='+range).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+	serviceFactory.getDelayedFlightsSummary = _getDelayedFlightsSummary;
      
 serviceFactory.getDelayedFlights = _getDelayedFlights;
     serviceFactory.getOFP = _getOFP;

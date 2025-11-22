@@ -126,7 +126,7 @@ app.controller('fdmRegMonthlyController', ['$http', '$scope', '$location', '$rou
 
         $scope.isContentVisible = true;
 
-        fdmService.getFDMRegMonthly($scope.ymf, $scope.ymt, $scope.reg).then(function (response) {
+        fdmService.getFDMRegMonthly($scope.ymf + 1, $scope.ymt + 1, $scope.reg).then(function (response) {
             $scope.ds_regEventsMonthly = response.Data.data;
             $scope.ds_regEventsMonthlyGeneral = response.Data;
 
@@ -141,14 +141,14 @@ app.controller('fdmRegMonthlyController', ['$http', '$scope', '$location', '$rou
 
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-        fdmService.getFDMRegCptMonthly($scope.ymf, $scope.ymt, $scope.reg).then(function (response) {
+        fdmService.getFDMRegCptMonthly($scope.ymf + 1, $scope.ymt + 1, $scope.reg).then(function (response) {
             console.log(response);
             $scope.ds_regCprEventsMonthly = response.Data;
             console.log($scope.ds_regCprEventsMonthly);
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
 
-        fdmService.getRegEventsMonthly($scope.ymf, $scope.ymt, $scope.reg).then(function (response) {
+        fdmService.getRegEventsMonthly($scope.ymf + 1, $scope.ymt + 1, $scope.reg).then(function (response) {
             $scope.ds_regEventsNameMonthly = response.Data;
             $scope.arr = [];
             $.each($scope.ds_regEventsNameMonthly, function (_i, _d) {
@@ -197,7 +197,7 @@ app.controller('fdmRegMonthlyController', ['$http', '$scope', '$location', '$rou
         placeholder: 'Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [2021, 2022, 2023],
+        dataSource: [2021, 2022, 2023, 2024],
 
         onSelectionChanged: function (arg) {
 
@@ -213,7 +213,7 @@ app.controller('fdmRegMonthlyController', ['$http', '$scope', '$location', '$rou
         placeholder: 'Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [2021, 2022, 2023],
+        dataSource: [2021, 2022, 2023, 2024],
 
         onSelectionChanged: function (arg) {
 
@@ -382,7 +382,7 @@ app.controller('fdmRegMonthlyController', ['$http', '$scope', '$location', '$rou
             { valueField: 'HighScore', name: 'HighScore', color: highColor, pane: 'topPane', type: 'stackedbar', barWidth: 50, stack: 'detailed' },
             { valueField: 'MediumScore', name: 'MediumScore', color: medColor, pane: 'topPane', type: 'stackedbar', barWidth: 50, stack: 'detailed' },
             { valueField: 'LowScore', name: 'LowScore', color: lowColor, pane: 'topPane', type: 'stackedbar', barWidth: 50, stack: 'detailed' },
-            { valueField: 'Score', name: 'Score', color: scoreColor, pane: 'topPane', type: 'spline', stack: 'total' },
+            { valueField: 'Scores', name: 'Score', color: scoreColor, pane: 'topPane', type: 'spline', stack: 'total' },
             { valueField: 'FlightCount', name: 'Flights', color: totalFlight, pane: 'midPane', barWidth: 50, type: 'bar' },
             { valueField: 'HighCount', name: 'High', color: highColor, pane: 'bottomPane', type: 'stackedbar', barWidth: 50, stack: 'detailed' },
             { valueField: 'MediumCount', name: 'Medium', color: medColor, pane: 'bottomPane', type: 'stackedbar', barWidth: 50, stack: 'detailed' },
@@ -452,7 +452,7 @@ app.controller('fdmRegMonthlyController', ['$http', '$scope', '$location', '$rou
             size: 'chrt_size'
         },
     };
-    
+
     $scope.eventsMonthlyChartXS = {
         tooltip: {
             enabled: true,
@@ -895,12 +895,12 @@ app.controller('fdmRegMonthlyController', ['$http', '$scope', '$location', '$rou
             dataSource: 'ds_regEventsMonthly',
             size: 'chrt_size'
         },
-        
+
     };
 
     $scope.eventsChart = {
         type: "doughnut",
-        
+
         palette: ['#00cc99', '#ff9933', '#ff1a1a'],
         series: [
             {
@@ -947,7 +947,7 @@ app.controller('fdmRegMonthlyController', ['$http', '$scope', '$location', '$rou
             'size': 'pie_size'
         },
 
-      
+
     };
 
     $scope.scoresChart = {

@@ -9,7 +9,7 @@ app.factory('libraryService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fu
 
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/library/keywords'  ).then(function (response) {
+        $http.get(yserviceBase + 'odata/library/keywords'  ).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -22,7 +22,7 @@ app.factory('libraryService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fu
 
          
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/library/book/' + id).then(function (response) {
+        $http.get(yserviceBase + 'odata/library/book/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -131,6 +131,17 @@ app.factory('libraryService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fu
 
         return deferred.promise;
     };
+	 var _ysave = function (entity) {
+        var deferred = $q.defer();
+        $http.post($rootScope.yserviceUrl + 'odata/library/book/save', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
     var _delete = function (entity) {
         var deferred = $q.defer();
         $http.post($rootScope.serviceUrl + 'odata/library/book/delete', entity).then(function (response) {
@@ -222,6 +233,7 @@ app.factory('libraryService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fu
 
     //serviceFactory.getEmployee = _getEmployee;
     serviceFactory.save = _save;
+    serviceFactory.ysave = _ysave;
     serviceFactory.delete = _delete;
     serviceFactory.saveFolder = _saveFolder;
     serviceFactory.saveChapter = _saveChapter;

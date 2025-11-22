@@ -1,0 +1,220 @@
+﻿<link href="sfstyles/ejthemes/default-theme/ej.web.all.min.css" rel="stylesheet" />
+<link href="sfstyles/default.css" rel="stylesheet" />
+<link href="sfstyles/default-responsive.css" rel="stylesheet" />
+<link href="sfstyles/ejthemes/responsive-css/ej.responsive.css" rel="stylesheet" />
+
+<style>
+    .e-headercelldiv span {
+        display: none;
+    }
+
+    .e-rg-rangdiv {
+        opacity: 0 !important;
+    }
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .dx-checkbox-text {
+        font-size: 12px !important;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .dx-popup-title.dx-toolbar {
+        /*background:red !important;*/
+    }
+
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: #f44336 !important;
+        opacity: 1 !important;
+    }
+
+
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .e-gantt-parenttaskbar-innerdiv.e-chartexpand.e-parentTask {
+        display: none;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-childtaskbar {
+        border: 2px solid yellow
+    }
+
+    .dx-popup-content {
+        padding: 5px !important;
+    }
+</style>
+
+<div class="box " style="height:100%; overflow-y:hidden">
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <!--<div id="gantt_container">
+
+    </div>-->
+    <div id="gantt_container_ba" style="position:relative;top:0;width:100%">
+        <div id="resourceGanttba" style="height:400px;width:100%;" />
+    </div>
+
+    <div style="margin:5px 2px 0 2px;   ">
+        <div style="text-align:center;background:#ccc;padding:5px">{{AssignedCrew}}</div>
+        <div class="col-lg-12" style="padding:0 5px 0 0">
+            <div dx-data-grid="dg_crew" id="dg_crew" class="content" style="overflow-y:hidden"></div>
+        </div>
+        <!--<div class="col-lg-2" style="padding:0">
+            <div dx-data-grid="dg_sum" id="dg_sum" class="content" style="overflow-y:hidden"></div>
+        </div>-->
+        <div style="clear:both"></div>
+
+    </div>
+
+    <div class="rowx footer" style="position:fixed;bottom:0;width:100%">
+        <div class="col-lg-12   col-md-11 col-sm-11 col-xs-11" style="padding:0; ">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_box"></div>
+            <div dx-button="btn_unbox"></div>
+            <div dx-button="btn_crew_add"></div>
+            <div dx-button="btn_crew_delete"></div>
+        </div>
+    </div>
+    <div id="popup_search" dx-popup="popup_search">
+        <div style="padding:5px 0 0 0" class="dx-border">
+            <div class="col-lg-12 margin-bottom-5 padding-7">
+                <label>From</label>
+                <div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'crewsearch',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-12 margin-bottom-5 padding-7">
+                <label>To</label>
+                <div class="center" dx-date-box="date_to" dx-validator="{validationGroup:'crewsearch',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup_crew" dx-popup="popup_crew">
+        <div style="padding:0px 0 0 0">
+            <div class=" col-lg-12 col-md-1 col-sm-1 col-xs-1" style="padding:0; ">
+                <div style="margin:0px 2px 0 2px;  border:1px solid #ccc; ">
+                    <div style="text-align:center;background:#898e8c;padding:5px;color:white">{{AssignedCrew}}</div>
+                    <div id="selectedcrew" style="height:125px;padding:5px;">
+                        <div style="display:inline-block;min-width:200px;border:1px solid #ddd;margin-left:5px;border-radius:0px;text-align:center;height:115px" ng-repeat="x in dg_crew_ds">
+                            <div style="background:#ccc;text-align:center;padding:5px" ng-class="x.AvStatusId!=1?'light-red':''">{{x.JobGroup}}</div>
+                            <div style="padding:5px 10px 5px 5px;font-weight:bold">
+                                {{x.Name}}
+                            </div>
+                            <div style="padding:5px 10px 5px 5px;font-weight:normal">
+                                {{x.PID}}
+                            </div>
+                            <div style="padding:5px 10px 5px 5px;font-weight:bold;color:red;" ng-if="x.AvStatusId!=1">
+                                {{x.AvStatus}}
+                            </div>
+                            <div style="padding:5px 10px 5px 5px;font-weight:bold;color:green;" ng-if="x.AvStatusId==1">
+                                {{x.AvStatus}}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div dx-data-grid="dg_person" id="dg_person" class="content" style="overflow-y:hidden"></div>
+                <div class="dx-border" style="margin-top:5px;">
+                    <div dx-select-box="sb_group" dx-validator="{validationGroup:'crewadd',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+            </div>
+            <!--<div class=" col-lg-5 col-md-1 col-sm-1 col-xs-1" style="padding:0;padding-left:10px ">
+                <div dx-data-grid="dg_sum" id="dg_sum" class="content" style="overflow-y:hidden"></div>
+                <div dx-data-grid="dg_certificate" id="dg_certificate" class="content" style="overflow-y:hidden"></div>
+
+            </div>-->
+            <div style="clear:both"></div>
+
+
+        </div>
+    </div>
+
+    <div id="popup_crew2" dx-popup="popup_crew2">
+        <div style="padding:0px 0 0 0">
+            <div class="dx-border" style="background:#eee;border:1px solid #ddd;padding:5px;margin-bottom:2px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:160px;">  <div dx-select-box="sb_cabin" style="background:white"></div></td>
+                        <td style="width:300px">  <div dx-text-box="txt_name_filter" style="background:white"></div></td>
+                        <td></td>
+                    </tr>
+                </table>
+
+
+            </div>
+            <div class="col-lg-9" style="padding:0;border:1px solid #ddd">
+                <div dx-data-grid="dg_crew2" id="dg_crew2" class="content" style="overflow-y:hidden"></div>
+            </div>
+            <div class="col-lg-3" style="padding:0;padding-left:5px;">
+                <div style="background:#00cc66;color:white;padding:7px 10px 7px 10px;text-align:center;">
+                    {{BoxTimeStr}}
+                </div>
+                <div dx-data-grid="dg_items" id="dg_items" class="content" style="overflow-y:hidden;"></div>
+                <div style="background:#3399ff;color:white;padding:7px 10px 7px 10px;text-align:center;margin-top:5px">
+                    <span style="display:inline-block">{{selected_crew}}</span>
+                    <span style="display:inline-block;margin-left:10px">{{selected_date}}</span>
+                </div>
+                <div dx-data-grid="dg_fdp" id="dg_fdp" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+            <div style="clear:both"></div>
+
+        </div>
+    </div>
+
+
+    <div id="popup_event" dx-popup="popup_event">
+        <div style="padding:0px 0 0 0">
+            <div class="dx-border"  >
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>From</label>
+                    <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>To</label>
+                    <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+    <div ng-include="'app/views/templates.html'"></div>
+    <div ng-include="'app/views/personView.html'"></div>
+</div>

@@ -109,6 +109,7 @@
     <Content Include="app\controllers\fdmOpsController.js" />
     <Content Include="app\controllers\fdmQAController.js" />
     <Content Include="app\controllers\fdmRegMonthly.js" />
+    <Content Include="app\controllers\fdm_sand.js" />
     <Content Include="app\controllers\fdps.js" />
     <Content Include="app\controllers\filterController.js" />
     <Content Include="app\controllers\finMonthlyReport.js" />
@@ -232,7 +233,12 @@
     <Content Include="app\controllers\usersController.js" />
     <Content Include="app\controllers\verify.js" />
     <Content Include="app\controllers\vrAdd.js" />
+    <Content Include="app\controllers\zdutyTimeline.js" />
+    <Content Include="app\controllers\zfdm_crew.js" />
+    <Content Include="app\controllers\zfdm_main.js" />
     <Content Include="app\controllers\zreportEFB.js" />
+    <Content Include="app\controllers\zscheduling.js" />
+    <Content Include="app\controllers\zusersController.js" />
     <Content Include="app\controllers\_flightBoardController.js" />
     <Content Include="app\services\activityService.js" />
     <Content Include="app\services\aircraftService.js" />

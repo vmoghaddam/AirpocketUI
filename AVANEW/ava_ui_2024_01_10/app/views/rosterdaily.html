@@ -1,0 +1,80 @@
+﻿ 
+<div class="box dailyroster" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+        <div class=" col-lg-6 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div dx-data-grid="dg" id="dg" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+        </div>
+        <div class=" col-lg-6 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+
+                <div dx-data-grid="dg_leg" id="dg_leg" class="content" style="overflow-y:hidden"></div>
+
+            </div>
+
+
+        </div>
+       
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'crewreportsearch',  validationRules: [{ type: 'required'}]}"></div></td>
+
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+
+                <td></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_notify"></div></td>
+                <td style="width:250px;text-align:left;padding-right:5px"><div dx-button="btn_notifypickup"></div></td>
+                <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_notifytest"></div></td>-->
+                <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_flight"></div></td>
+    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_flight_total"></div></td>-->
+            </tr>
+        </table>
+    </div>
+
+    <div id="popup_notify" dx-popup="popup_notify">
+        <div style="padding:10px 0 0 0">
+            <div class="col-lg-7 padding-0">
+                <div dx-data-grid="dg_emp" dx-item-alias="emp">
+
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-12 col-sm-12 col-12   padding-7 dx-border">
+                <div dx-select-box="sb_notification"  ></div>
+                <div style="margin-top:20px;margin-bottom:5px;font-weight:bold;font-size:14px;">Message</div>
+                <div dx-text-area="txt_MessageNotify" dx-validator="{validationGroup:'notmessage',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div style="clear:both"></div>
+            <div style="margin-top:10px;border:1px solid #ccc">
+                <div style="background:#eee;border:1px solid #ccc;padding:7px">Receivers ({{recs.length}})</div>
+                <div style="height:120px;overflow-y:auto;padding:5px 5px 10px 5px;">
+                    <div style="display:inline-block;background:#99ffeb;border:1px solid #00cca3;padding:8px;margin-left:10px;margin-top:10px" ng-repeat="x in recs">{{x.Name}}</div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+
+</div>

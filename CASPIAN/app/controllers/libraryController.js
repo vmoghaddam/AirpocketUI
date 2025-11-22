@@ -1,7 +1,7 @@
-﻿'use strict';
-app.controller('libraryController', ['$scope', '$location', '$routeParams', '$rootScope', 'libraryService', 'authService', 'notificationService', '$route', function ($scope, $location, $routeParams, $rootScope, libraryService, authService, notificationService, $route) {
+﻿﻿'use strict';
+app.controller('libraryController', ['$scope', '$location', '$routeParams', '$rootScope', 'libraryService', 'authService', 'notificationService', '$route', '$q', '$http', function ($scope, $location, $routeParams, $rootScope, libraryService, authService, notificationService, $route, $q, $http) {
     $scope.prms = $routeParams.prms;
-    $scope.IsEditable = $rootScope.IsLibraryEditable() || $rootScope.userName.toLowerCase() == 'demo';
+    $scope.IsEditable = $rootScope.IsLibraryEditable();
     $scope.IsEditableDoc = $rootScope.IsDocEditable();
     // console.log($location.search());
     //////////////////////////////////
@@ -497,9 +497,11 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                     $scope.PublisherCaption = 'Published In';
                     $scope.publisher = data.Journal;
                 }
-                //pool
+                //zool
                 libraryService.getBookFiles(data.Id).then(function (response) {
-                    $scope.bookFiles = response;
+					 console.log ('bookFiles',$scope.bookFiles);
+					if (response)
+                    $scope.bookFiles =Enumerable.From( response).OrderBy('$.SysUrl').ToArray();
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
                 ///////////////////////////////////
@@ -532,16 +534,19 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
             },
             fixed: true, fixedPosition: 'left',
         },
-
-        { dataField: 'No', caption: 'No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left', sortIndex: 0, sortOrder: "desc" },
         { dataField: 'Category', caption: 'Category', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 400, fixed: true, fixedPosition: 'left' },
+        { dataField: 'Title', caption: 'Subject', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 400, fixed: true, fixedPosition: 'left', sortIndex: 1, sortOrder: "asc" },
 
-        { dataField: 'Sender', caption: 'Sender', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300 },
-        { dataField: 'Edition', caption: 'Edition', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'DateEffective', caption: 'Effective', allowResizing: true, dataType: 'string', allowEditing: false, width: 200, alignment: 'center' },
-        { dataField: 'DateRelease', caption: 'Publication Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 200 },
-        { dataField: 'DateExposure', caption: 'Exposure Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 200 },
+        { dataField: 'No', caption: 'No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
+       
+        { dataField: 'Sender', caption: 'Issued By', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 250 },
+        // { dataField: 'Edition', caption: 'Edition', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'DateRelease', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130, sortIndex: 0, sortOrder:'desc' },
+        { dataField: 'DateEffective', caption: 'Effective', allowResizing: true, dataType: 'string', allowEditing: false, width: 130, alignment: 'center' },
+        
+        { dataField: 'DateExposure', caption: 'Exposure Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+		   { dataField: 'Visited', caption: 'Visited', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
+		//  { dataField: 'Visited', caption: 'Visited', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, fixed: true, fixedPosition: 'left' },
         {
             dataField: "Id", caption: '',
             width: 130,
@@ -651,7 +656,20 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
     $scope.dg_file_columns = [
       //{ dataField: "Remark", caption: "Remark", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: true },
       
-      { dataField: "SysUrl", caption: "File(s)", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false,   },
+        { dataField: "SysUrl", caption: "File(s)", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, },
+        //8-11
+        {
+            dataField: "Id", caption: '',
+            width: 100,
+            allowFiltering: false,
+            allowSorting: false,
+            cellTemplate: 'renameTemplate',
+            name: 'rename',
+            
+            //visible:false,
+
+        },
+        
       //{ dataField: "FileType", caption: "File Type", allowResizing: true, alignment: "left", dataType: 'string', allowEditing: false, width: 150 },
       {
           dataField: "Id", caption: '',
@@ -705,8 +723,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
             if (!data) {
                 $scope.dg_file_selected = null;
             }
-            else
-                $scope.dg_file_selected = data;
+            else { $scope.dg_file_selected = data; console.log('book file',data.Id); }
 
 
         },
@@ -853,17 +870,16 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                         }
 
                         $scope.Notify.Message =
-                            'Dear ' + '[#Name]' + ',' + '\r\n'
-                         //   + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                           // + '\r\n'
-                            + '\r\n'
-                            + $scope.dg_selected.Title
-                            
-                            + '\r\n'
-                            + 'Your(s) sincerely' + '\r\n'
-                            + $rootScope.userTitle
-                            + '\r\n'
-                            + moment().format('MMMM Do YYYY, h:mm:ss a');
+                                 'Dear Flight Crew'
+                        + '\r\n'
+                        + 'Relevant documentation titled \"' + $scope.dg_selected.Title + '\", pertaining to your area of responsibility, has been uploaded to the Electronic Library. Kindly refer to the Electronic Library system within the next 24 hours to ensure your tasks are carried out in accordance with the company’s updated guidelines.'
+
+                        + '\r\n'
+                            + 'https://fly.pulsepocket.app/'
+							+ '\r\n'
+                            + 'https://efb.fly.myaero.tech/'
+                        + '\r\n'
+                            + 'FLY KISH AIRLINES';
 
                         $scope.popup_notify_visible = true;
                     }
@@ -1258,7 +1274,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', icon: 'check', onClick: function (e) {
 
-                        //bani
+                        //cmnt
                         $scope.Notify.ObjectId = $scope.dg_selected.Id;
                         $scope.Notify.Message = $scope.Notify.Message.replace(/\r?\n/g, '<br />');
                         var temp = Enumerable.From($scope.selectedEmployees).Select('{EmployeeId:$.EmployeeId,Name:$.Name}').ToArray();
@@ -1352,7 +1368,114 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
 
         }
     };
+    ////////////////////////////
+    //8-11
+    var _rename = function (entity) {
+        var deferred = $q.defer();
+        $http.post(serviceBaseAPI + 'api/book/file/rename', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
 
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+    $scope.renameFile = function (row) {
+        var data = row.data;
+        $scope._fileId = data.Id;
+        $scope._fileName = data.SysUrl;
+        $scope._fileData = data;
+        $scope.popup_rename_visible = true;
+    };
+    $scope._fileName = null;
+    $scope._fileId = null;
+    $scope._fileData = null;
+    $scope.txt_filename = {
+        hoverStateEnabled: false,
+         
+        bindingOptions: {
+            value: '_fileName',
+        }
+    };
+    $scope.popup_rename_visible = false;
+    $scope.popup_rename_title = 'Rename';
+    $scope.popup_rename = {
+
+        fullScreen: false,
+        showTitle: true,
+        height: 200,
+        width: 500,
+        toolbarItems: [
+
+
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'success', text: 'Save', icon: 'check', onClick: function (e) {
+
+                        if (!$scope._fileName) {
+                            General.ShowNotify('Invalid File Name', 'error');
+                            return;
+                        }
+                        $scope.loadingVisible = true;
+                        _rename({ id: $scope._fileId, name: $scope._fileName }).then(function (response) {
+
+                            $scope.loadingVisible = false;
+                            $scope._fileData.SysUrl = $scope._fileName;
+
+                            General.ShowNotify(Config.Text_SavedOk, 'success');
+ 
+
+                            $scope.popup_rename_visible = false;
+
+
+
+
+                        }, function (err) { $scope.loadingVisible = false; $scope.popup_notify_visible = false; General.ShowNotify(err.message, 'error'); });
+
+
+
+
+                    }
+                }, toolbar: 'bottom'
+            },
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
+                        $scope.popup_rename_visible = false;
+                    }
+                }, toolbar: 'bottom'
+            }
+        ],
+
+        visible: false,
+        dragEnabled: true,
+        closeOnOutsideClick: false,
+        onShowing: function (e) {
+
+
+
+        },
+        onShown: function (e) {
+
+
+        },
+        onHiding: function () {
+            $scope._fileName = null;
+            $scope._fileId = null;
+           
+            $scope.popup_rename_visible = false;
+            // $rootScope.$broadcast('onPersonHide', null);
+        },
+        position: 'right',
+        bindingOptions: {
+            visible: 'popup_rename_visible',
+
+            title: 'popup_rename_title',
+
+        }
+    };
     ////////////////////////////
     $scope.expose = {
         BookId: null,
@@ -1427,6 +1550,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
     };
     $scope.txt_MessageNotify = {
         hoverStateEnabled: false,
+		  rtlEnabled:false,
         height: 300,
         bindingOptions: {
             value: 'Notify.Message',
@@ -1460,7 +1584,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                     key: "Id",
                     version: 4,
                     onLoaded: function (e) {
-                        // $scope.loadingVisible = false;
+                        //$scope.loadingVisible = false;
                         //filter
                         $rootScope.$broadcast('OnDataLoaded', null);
                     },
@@ -1468,13 +1592,13 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
 
                         $scope.dsUrl = General.getDsUrl(e);
 
-                        // $scope.$apply(function () {
-                        //    $scope.loadingVisible = true;
-                        // });
+                        //$scope.$apply(function () {
+                           //$scope.loadingVisible = true;
+                        ///});
                         $rootScope.$broadcast('OnDataLoading', null);
                     },
                 },
-                // filter: [['OfficeCode', 'startswith', $scope.ParentLocation.FullCode]],
+                //filter: [['OfficeCode', 'startswith', $scope.ParentLocation.FullCode]],
                 sort: [{ getter: "DateCreate", desc: true }],
 
             };
@@ -1686,7 +1810,6 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
     };
 
     $scope.bindTree = function () {
-		 
         libraryService.getFolders(Config.CustomerId).then(function (response) {
             $scope.loadingVisible = false;
             $.each(response, function (_i, _d) {
@@ -1714,8 +1837,8 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
             $scope.tree_ds = response;
             $scope.expandedRow = [];
             $scope.expandedRow.push(response[0].Id);
-              console.log(response);
-            
+
+
         }, function (err) { General.ShowNotify(err.message, 'error'); });
     };
     ///////////////////////////////

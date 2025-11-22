@@ -1052,13 +1052,13 @@ if ($scope.DOMINT != -1)
             value: 'reg',
         }
     };
-    $scope.year = 2024;
+    $scope.year = 2025;
     $scope.month = null;
     $scope.sb_year = {
         placeholder: 'Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [2018, 2019, 2020, 2021,2022,2023,2024],
+        dataSource: [2018, 2019, 2020, 2021,2022,2023,2024, 2025],
 
         onSelectionChanged: function (arg) {
 

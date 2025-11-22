@@ -814,6 +814,18 @@
                             <div class="title-small ng-binding" style="color:gray;font-size:1em">Flights View(CEO)</div>
                         </a>
                     </div>
+					<div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('requests_scheduling',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/forms/vacation/responsible'  , 'requests_scheduling')">
+                            <img src="content/images/requests.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Requests</div>
+                        </a>
+                    </div>
+					 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('requests',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/forms/vacation'  , 'requests')">
+                            <img src="content/images/requests.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Requests</div>
+                        </a>
+                    </div>
                     <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_aog',3)">
                         <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/reg/availability'  , 'flight_aog')">
                             <img src="content/images/flights_total.png">
@@ -845,6 +857,12 @@
                             <div class="title-small ng-binding" style="color:gray;font-size:1em">Crew Scheduler</div>
                         </a>
                     </div> -->
+					 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_calendar_cockpit',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/duty/timeline/z'  , 'timeline')">
+                            <img src="content/images/timeline.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">TimeLine</div>
+                        </a>
+                    </div>
 					<div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_calendar_cockpit',3)">
                         <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/scheduling'  , 'scheduling')">
                             <img src="content/images/nsch.png">
@@ -887,17 +905,17 @@
                     </div>
 					
 					 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('fdm_dashboard',3)">
-                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/fdm/dashboard'  , 'fdm_dashboard')">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/fdm/main/z'  , 'fdm_dashboard')">
                             <img src="content/images/fdmdashboardmain.png">
                             <div class="title-small ng-binding" style="color:gray;font-size:1em">FDM Main Dashboard</div>
                         </a>
                     </div>
-					 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('fdm_dashboard',3)">
+					<!-- <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('fdm_dashboard',3)">
                         <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/fdm/dashboard/cpt/monthly'  , 'fdm_dashboard_cpt')">
                             <img src="content/images/fdmc.png">
                             <div class="title-small ng-binding" style="color:gray;font-size:1em">FDM Crew Dashboard</div>
                         </a>
-                    </div>
+                    </div>-->
 					
                     <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_report',3)">
                         <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/flights/report'  , 'flight_report')">
@@ -963,6 +981,12 @@
 					  <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('delays_report',3)">
                         <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/delays'  , 'delays_report')">
                             <img src="content/images/delay.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Delays Details</div>
+                        </a>
+                    </div>
+					<div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('delays_report',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/delays/flight'  , 'delays_report_flight')">
+                            <img src="content/images/fd.png">
                             <div class="title-small ng-binding" style="color:gray;font-size:1em">Delays</div>
                         </a>
                     </div>

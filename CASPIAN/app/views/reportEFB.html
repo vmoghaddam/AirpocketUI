@@ -1,6 +1,4 @@
-﻿
-
-<style>
+﻿<style>
     .red {
         background: red !important;
     }
@@ -859,37 +857,87 @@
 			
 			
 			 <div id="charts" class="tabc" style="border:1px solid #ccc">
-                <div id="rightColumn2" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
+                <div id="rightColumn100" style="padding:7px;padding-top:5px;overflow-y:auto;" class="thin-scroll">
                     <div style="padding:10px;background-color:#00cc99;color:black;font-weight:bold;text-align:center">
-                        AVIATION WEATHER CENTER
+                        SIGNIFICANT WEATHER
                     </div>
-                    <div style="border :0px solid #eee;padding:5px;font-weight:bold;margin-top:5px;" class="folder-item">
-                        Significant Weather (SIGWX)
-                    </div>
-                    <div ng-repeat="item in folderSIGWX" style="padding:5px;">
-                        <!--<div style="padding:5px;border-bottom:1px solid #ddd;">{{item.date}}</div>-->
-                        <div style="padding:7px 0 7px 0;border-bottom:1px solid #ddd">
+                    <div style="padding:2px;">
+                        <div style="border :1px solid #eee;padding:10px;font-weight:bold;margin-top:5px;background:#ccc" class="folder-item">
+                            Low Level
+                        </div>
+                        <table style="width:100%;border:1px solid #ddd" class="wind">
+                            <tr style="background-color:darkgray;color:black">
+
+                                <td colspan="4" style="font-weight:bold;padding:5px 7px 5px 7px !important">Valid(Z)</td>
+                            </tr>
+                            <tr>
+
+                                <td style="width:25%" ng-click="showIRIMOSIGWX('00','00 - 06')">00 - 06</td>
+                                <td style="width:25%" ng-click="showIRIMOSIGWX('06','06 - 12')">06 - 12</td>
+                                <td style="width:25%" ng-click="showIRIMOSIGWX('12','12 - 18')">12 - 18</td>
+                                <td style="width:25%" ng-click="showIRIMOSIGWX('18','18 - 24')">18 - 24</td>
+
+                            </tr>
+
+                        </table>
 
 
+                        <div style="border :1px solid #eee;padding:10px;font-weight:bold;margin-top:15px;background:#ccc" class="folder-item">
+                            High Level
+                        </div>
+                        <table style="width:100%;border:1px solid #ddd" class="wind">
+                            <tr style="background-color:darkgray;color:black">
+
+                                <td colspan="4" style="font-weight:bold;padding:5px 7px 5px 7px !important">Valid(Z)</td>
+                            </tr>
+                            <tr>
+
+                                <td style="width:25%" ng-click="showSIGWX('0000')">0000</td>
+                                <td style="width:25%" ng-click="showSIGWX('0006')">0006</td>
+                                <td style="width:25%" ng-click="showSIGWX('0012')">0012</td>
+                                <td style="width:25%" ng-click="showSIGWX('0018')">0018</td>
+
+                            </tr>
+
+                        </table>
+
+                        <div style="border :1px solid #eee;padding:10px;font-weight:bold;margin-top:15px;background:#ccc" class="folder-item">
 
 
+                            AVMET
+                        </div>
+                        <div style="padding:0px;">
+                            <table style="width:100%;border:1px solid #ddd" class="wind">
+                                <tr style="background-color:darkgray;color:black">
 
-                            <table>
+                                    <td colspan="4" style="font-weight:bold;padding:5px 7px 5px 7px !important">Valid(Z)</td>
+                                </tr>
                                 <tr>
 
-                                    <td ng-repeat="x in item.items" style="padding-right:10px;">
-                                        <div style="width:150px;padding:7px;background-color:#ccc;border:1px solid #ddd;text-align:center;color:black" ng-click="showImage(x)">{{x.title}}</div>
-                                    </td>
+                                    <td style="width:25%" ng-click="showAVMETSIGWX('00','00')">00</td>
+                                    <td style="width:25%" ng-click="showAVMETSIGWX('06','06')">06</td>
+                                    <td style="width:25%" ng-click="showAVMETSIGWX('12','12')">12</td>
+                                    <td style="width:25%" ng-click="showAVMETSIGWX('18','18')">18</td>
+
                                 </tr>
+
                             </table>
                         </div>
 
+
+
                     </div>
-                    <div style="border :0px solid #eee;padding:5px;font-weight:bold;margin-top:5px;" class="folder-item">
-                        Wind and Temperature
+
+                    <div style="clear:both"></div>
+
+                    <div style="padding:10px;background-color:#00cc99;color:black;font-weight:bold;text-align:center">
+                        WIND & TEMP.
                     </div>
-                    <div style="padding:0px;">
-                        <table style="width:100%;border:1px solid #ddd" class="windc">
+                    <div style="padding:2px;">
+                        <div style="border :1px solid #eee;padding:10px;font-weight:bold;margin-top:5px;;background:#ccc" class="folder-item">
+                            Aviation Weather Center
+                        </div>
+                        <table style="width:100%;border:1px solid #ddd" class="wind">
                             <tr style="background-color:darkgray;color:black">
                                 <td style="width:10%;font-weight:bold;padding:5px 7px 5px 7px !important">Level</td>
                                 <td colspan="6" style="font-weight:bold;padding:5px 7px 5px 7px !important">Valid</td>
@@ -903,7 +951,7 @@
                                 <td style="width:15%" ng-click="showWind('340','30')">+30 hr</td>
                                 <td style="width:15%" ng-click="showWind('340','36')">+36 hr</td>
                             </tr>
-                            <tr style="background: #eee;">
+                            <tr  >
                                 <td>FL 300</td>
                                 <td style="width:15%" ng-click="showWind('300','06')">+06 hr</td>
                                 <td style="width:15%" ng-click="showWind('300','12')">+12 hr</td>
@@ -921,7 +969,7 @@
                                 <td style="width:15%" ng-click="showWind('240','30')">+30 hr</td>
                                 <td style="width:15%" ng-click="showWind('240','36')">+36 hr</td>
                             </tr>
-                            <tr style="background: #eee;">
+                            <tr  >
                                 <td>FL 180</td>
                                 <td style="width:15%" ng-click="showWind('180','06')">+06 hr</td>
                                 <td style="width:15%" ng-click="showWind('180','12')">+12 hr</td>
@@ -931,30 +979,32 @@
                                 <td style="width:15%" ng-click="showWind('180','36')">+36 hr</td>
                             </tr>
                         </table>
-                    </div>
-                    <div style="padding:10px;background-color:#00cc99;color:black;font-weight:bold;text-align:center;margin-top:10px">
-                        AVMET WEATHER
-                    </div>
-                    <div style="border :0px solid #eee;padding:5px;font-weight:bold;margin-top:5px;" class="folder-item">
-                        Significant Weather (SIGWX)
-                    </div>
-                    <div style="padding:0px;">
-                        <table style="width:100%;border:1px solid #ddd" class="windc">
+
+                        <div style="border :1px solid #eee;padding:10px;font-weight:bold;margin-top:15px;background:#ccc" class="folder-item">
+                            IRIMO
+                        </div>
+                        <table style="width:100%;border:1px solid #ddd" class="wind">
                             <tr style="background-color:darkgray;color:black">
 
                                 <td colspan="4" style="font-weight:bold;padding:5px 7px 5px 7px !important">Valid(Z)</td>
                             </tr>
                             <tr>
 
-                                <td style="width:25%" ng-click="showAVMETSIGWX('00','00')">00</td>
-                                <td style="width:25%" ng-click="showAVMETSIGWX('06','06')">06</td>
-                                <td style="width:25%" ng-click="showAVMETSIGWX('12','12')">12</td>
-                                <td style="width:25%" ng-click="showAVMETSIGWX('18','18')">18</td>
+
+                                <td style="width:25%" ng-click="showIRIMOFF('06')">06</td>
+                                <td style="width:25%" ng-click="showIRIMOFF('12')">12</td>
+                                <td style="width:25%" ng-click="showIRIMOFF('18')">18</td>
+                                <td style="width:25%" ng-click="showIRIMOFF('00')">24</td>
 
                             </tr>
 
                         </table>
+
+
+
+
                     </div>
+
                     <div style="clear:both"></div>
 
                 </div>
@@ -1154,7 +1204,7 @@
                                     <td style="width:12.5%;padding:0px;font-size:11px">{{formatMinutes(jl.MaxFDP)}}</td>
                                     <td style="width:12.5%;padding:0px;font-size:11px">
                                         <div style="font-size:12px">START</div>
-                                        <div style="font-size:10px;">ETD -1:00</div>
+                                        <div style="font-size:10px;">ETD -{{jl_etd}}</div>
                                     </td>
                                     <td style="width:12.5%;padding:0px;font-size:11px">{{formatTime(jl.ReportingTime)}}</td>
                                     <td style="width:12.5%;padding:0px;font-size:11px">
@@ -1172,7 +1222,7 @@
                     </div>
                     <div class="div2" style="position:relative;padding-left:16px;margin-top:5px;padding-right:10px;">
                         <table style="width:100%;margin-left:0px;margin-top:0px;" class="jl-table">
-                            <tr>
+                            <tr>			
                                 <td style="width:12%; border-right:none;padding:2px !important;font-size:12px">OPERATION NOTES:</td>
                                 <td style="  border-left:none;;padding:2px !important;"></td>
                             </tr>

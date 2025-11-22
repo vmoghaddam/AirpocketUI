@@ -1,0 +1,249 @@
+﻿<link href="sfstyles/ejthemes/default-theme/ej.web.all.min.css" rel="stylesheet" />
+<link href="sfstyles/default.css" rel="stylesheet" />
+<link href="sfstyles/default-responsive.css" rel="stylesheet" />
+<link href="sfstyles/ejthemes/responsive-css/ej.responsive.css" rel="stylesheet" />
+<style>
+    .dx-tab {
+        padding: 7px !important;
+        background-color: #898e8c;
+        color: rgba(255,255,255,0.5);
+    }
+
+        .dx-tab.dx-tab-selected {
+            color: white;
+        }
+
+        .dx-tab.dx-state-hover {
+            background-color: #ededed;
+            color: gray;
+        }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 25px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-navigator {
+        min-width: 200px !important;
+    }
+
+    .dx-scheduler-view-switcher {
+        display: none !important;
+    }
+
+    .dx-scheduler-view-switcher-label {
+        display: none !important
+    }
+
+
+    .e-headercelldiv span {
+        display: none;
+    }
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .dx-checkbox-text {
+        font-size: 12px !important;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .dx-popup-title.dx-toolbar {
+        /*background:red !important;*/
+    }
+
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: #f44336 !important;
+        opacity: 1 !important;
+    }
+
+
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .e-gantt-parenttaskbar-innerdiv.e-chartexpand.e-parentTask {
+        display: none;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-childtaskbar {
+        border: 2px solid yellow
+    }
+</style>
+
+
+
+<div class="box flightplanapply2" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both;padding-bottom:0;">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'flightplanview';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class=" col-lg-7 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;height:100px  ">
+            <div class="filter-container box  " style="height:initial;">
+                <div dx-data-grid="dg" id="dg" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+        </div>
+        <div class=" col-lg-5 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px; height:100px  ">
+            <div class="filter-container box  " style="height:initial;">
+
+                <div dx-tabs="tabs_options">
+
+                </div>
+
+                <div class="content " ng-show="IsDetailsVisible">
+
+                    <!-- <div dx-data-grid="dg_reg" id="dg_reg" class="content" style="overflow-y:hidden"></div>-->
+
+
+
+                    <div class="tab flights ">
+
+                        <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>
+                    </div>
+                    <div class="tab permits ">
+
+                        <div dx-data-grid="dg_permits" id="dg_permits" class="content" style="overflow-y:hidden"></div>
+                    </div>
+
+                    <div class="tab crew ">
+
+                        <div dx-data-grid="dg_crew" id="dg_crew" class="content" style="overflow-y:hidden"></div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+            </div>
+
+
+        </div>
+        <div style="clear:both"></div>
+
+        <!--<div class=" col-lg-2 col-md-3 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="header">Details</div>
+
+                <div class="content ">
+
+
+                </div>
+
+
+            </div>
+        </div>-->
+
+
+
+
+    </div>
+
+    <div id="gantt_container_ba" style="margin-top:0px;border:1px solid #eee;margin-bottom:3px;background:white;">
+        <div id="resourceGanttba" style="height:135px;width:100%;" />
+    </div>
+
+    <div class="rowx footer">
+        <div class=" col-lg-9 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_approve"></div>
+
+            <!-- <div dx-button="btn_view"></div>-->
+            <!--<div dx-button="btn_approve"></div>-->
+
+
+
+
+
+
+        </div>
+        <!--<div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>-->
+        <div class=" col-lg-3 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+
+
+    <div ng-include="'app/views/templates.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+</div>
