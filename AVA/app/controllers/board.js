@@ -7,7 +7,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
     $rootScope.setTheme();
 	$scope.IsCAA= $rootScope.userName.toLowerCase() == 'caa' || $rootScope.userName.toLowerCase() == 'cabin.service';
 	
-    $scope.isPGS=$rootScope.userName.toLowerCase().startsWith('pgs.') || $rootScope.userName.toLowerCase() == 'ops.pgs';
+    $scope.isPGS=$rootScope.userName.toLowerCase() == 'pgs' || $rootScope.userName.toLowerCase() == 'ops.pgs';
     $scope.IsPlanning = $rootScope.HasMenuAccess('flight_planning', 3);
     //flight_planning-edit
     $scope.IsStaion =$rootScope.roles &&  $rootScope.roles.indexOf('Station') != -1;
@@ -25,7 +25,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
 	   || $rootScope.userName.toLowerCase() == 'ops.askari'
 	   )
         $scope.IsJLOG = true;
-    $scope.IsPickup = $rootScope.userName.toLowerCase().startsWith('trans.') || $rootScope.userName.toLowerCase().startsWith('transport') || $rootScope.userName.toLowerCase().startsWith('d.najafi');
+    $scope.IsPickup =$rootScope.HasTransport(); //$rootScope.userName.toLowerCase().startsWith('trans.') || $rootScope.userName.toLowerCase().startsWith('transport') || $rootScope.userName.toLowerCase().startsWith('d.najafi') || $rootScope.userName.toLowerCase().startsWith('c.transport');
     $scope.IsCrewMobileVisible =$rootScope.HasDispatch() || $rootScope.userName.toLowerCase().startsWith('dis') || $rootScope.userName.toLowerCase().startsWith('demo') || $rootScope.userName.toLowerCase().startsWith('trans');
     $scope.IsSMSVisible =$rootScope.HasDispatch() || $rootScope.userName.toLowerCase().startsWith('dis') || $rootScope.userName.toLowerCase().startsWith('demo') || $rootScope.userName.toLowerCase().startsWith('cs.') || $rootScope.userName.toLowerCase().startsWith('razbani');
    
@@ -55,7 +55,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
     $scope.IsSave = $scope.IsEditable || $scope.IsStaion || $scope.IsRemark;
 
     //divargar-ok
-    $scope.IsComm =$rootScope.IsFlightPlan() ||  $rootScope.userName.toLowerCase().startsWith('comm.') || $rootScope.userName.toLowerCase().startsWith('com.') || $rootScope.userName.toLowerCase().startsWith('demo');
+    $scope.IsComm =true ||  $rootScope.userName.toLowerCase().startsWith('comm.') || $rootScope.userName.toLowerCase().startsWith('com.') || $rootScope.userName.toLowerCase().startsWith('demo');
 	$scope.NotIsComm = !$scope.IsComm;
    // $scope.IsComm = true;
     //alert((new Date()).yyyymmddtime(false));
@@ -2555,7 +2555,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
         type: 'default',
         text: 'Download',
         onClick: function (e) {
-            $window.open('https://_files.airpocket.online/varesh/flt/' + $scope.fltdoc_url, '_blank');
+            $window.open('https://files.aerotango.app/ava/flt/' + $scope.fltdoc_url, '_blank');
         },
         bindingOptions: {
             visible: 'isFltDocFile'
@@ -2838,6 +2838,24 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
 
             }
             $scope.popup_creg_visible = true;
+
+
+
+        }
+    };
+	
+	  $scope.btn_creg_line = {
+        hint: 'Change Register',
+        type: 'success',
+        icon: 'fas fa-exchange-alt',
+        width: '100%',
+
+        onClick: function (e) {
+
+
+
+           
+            $scope.popup_creg_all_visible = true;
 
 
 
@@ -9201,8 +9219,11 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
         //aool
         // if ($scope.flight.FlightStatusID == 17) {
         if ($scope.logFlight.RedirectReasonId) {
-            $scope.logFlight.RedirectDate = ((new Date($scope.time_redirect_value)).addMinutes(n)).toUTCString();
-            entity.RedirectDate = ((new Date($scope.time_redirect_value)).addMinutes(n)).toUTCString();
+            //$scope.logFlight.RedirectDate = ((new Date($scope.time_redirect_value)).addMinutes(n)).toUTCString();
+            //entity.RedirectDate = ((new Date($scope.time_redirect_value)).addMinutes(n)).toUTCString();
+
+$scope.logFlight.RedirectDate = new Date();
+            entity.RedirectDate = new Date();
 
             //$scope.flight.OToAirportId = $scope.flight.ToAirportId;
             $scope.logFlight.ToAirportId = $scope.entity_redirect.Airport.Id;
@@ -9354,7 +9375,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
         },
         onShown: function (e) {
             $scope.loadingVisible = true;
-            flightService.getFlightDelays($scope.logFlight.ID).then(function (response) {
+            flightService.getFlightDelays($scope.logFlight.ID,$scope.logFlight).then(function (response) {
                 $scope.loadingVisible = false;
 
                 $.each(response, function (_i, _d) {
@@ -9847,7 +9868,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
 
 
                             $scope.loadingVisible = true;
-                            flightService.saveFlightLog(dto).then(function (response) {
+                            flightService.saveFlightLog(dto,$scope.logFlight).then(function (response) {
 								flightService.sendCaoMVT($scope.logFlight.ID);
 				//////////////////////////////////////////////////////////
 				if (['NJF','BSR','IST','KWI','AYT','DOH','PDV', 'AMM', 'ADJ','BGW','JED','RUH'].indexOf( response.flight.FromAirportIATA)!=-1 )
@@ -9977,7 +9998,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
         onShown: function (e) {
             $scope.selectedTabIndex = 0;
             $scope.loadingVisible = true;
-            flightService.getFlightDelays($scope.logFlight.ID).then(function (response) {
+            flightService.getFlightDelays($scope.logFlight.ID,$scope.logFlight).then(function (response) {
                 $scope.loadingVisible = false;
 
                 $.each(response, function (_i, _d) {
@@ -10295,8 +10316,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
                                 else
                                     //$scope.popup_cl_visible = true;
                                    // $scope.popup_clnew_visible = true;
-								  // alert($rootScope.HasAccessToCrewList());
-									 if ($rootScope.HasAccessToCrewList())
+									 
 									$scope.popup_clgd_visible = true;
                             });
 
@@ -10520,7 +10540,7 @@ dto.ChrCapacity = $scope.mchr.Capacity;
                             console.log('SAVE LOG',dto);
                             
                             $scope.loadingVisible = true;
-                            flightService.saveFlightLog(dto).then(function (response) {
+                            flightService.saveFlightLog(dto,$scope.logFlight).then(function (response) {
 								flightService.sendCaoMVT($scope.logFlight.ID);
                                 //doolkala
                                 //console.log('update log result');
@@ -10715,7 +10735,7 @@ dto.ChrCapacity = $scope.mchr.Capacity;
         }, 
         onShown: function (e) {
             $scope.loadingVisible = true;
-            flightService.getFlightDelays($scope.logFlight.ID).then(function (response) {
+            flightService.getFlightDelays($scope.logFlight.ID,$scope.logFlight).then(function (response) {
                 $scope.loadingVisible = false;
 
                 $.each(response, function (_i, _d) {
@@ -11551,9 +11571,9 @@ dto.ChrCapacity = $scope.mchr.Capacity;
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
     };
     $scope.getCrewAbs = function (fid) {
-        //5-8
-		//12-05
-		console.log('$rootScope.HasAccessToCrewList()',$rootScope.HasAccessToCrewList());
+        //2025-03-30
+		//alert($rootScope.HasAccessToCrewList());
+		//alert($rootScope.ShowOnlyFM());
         if (!$rootScope.HasAccessToCrewList()) {
             $scope.dg_crew_abs_ds = [];
             return;
@@ -11565,16 +11585,16 @@ dto.ChrCapacity = $scope.mchr.Capacity;
 
 
         $scope.loadingVisible = true;
-        flightService.getFlightCrews(fid, archived_crews).then(function (response) {
+        flightService.getFlightCrews(fid, archived_crews,$scope.logFlight.Register).then(function (response) {
             $scope.loadingVisible = false;
             $.each(response, function (_i, _d) {
                 _d.RP = _d.PickupLocal;
             });
 			
-			if ($rootScope.userName.toLowerCase()!='line')
+			if (!$rootScope.ShowOnlyFM())
                 $scope.dg_crew_abs_ds = response;
 			else
-				 $scope.dg_crew_abs_ds =Enumerable.From( response).Where('$.Position=="GE"').ToArray();
+				 $scope.dg_crew_abs_ds =Enumerable.From( response).Where('$.Position=="GE" || $.Position=="F/M"').ToArray();
 			
             
 
@@ -15433,10 +15453,6 @@ dto.ChrCapacity = $scope.mchr.Capacity;
 		   return (f.notes? f.FlightNumber+"("+f.notes+")":f.FlightNumber)+dh;
 		return f.FlightNumber+dh;
 	};
-	
-	$scope.isFuelVisible=function(f){
-        return !f.FuelPlanned;
-	};
 	$scope.isNewTimeVisible=function(f){
 		try{
 		 if (f.taskName && f.taskName.split('-')[0]=='1')
@@ -17984,131 +18000,8 @@ dto.ChrCapacity = $scope.mchr.Capacity;
 
         }
     };
-	/////////////////////////////////10-15
-	///Upload Excel
-	$scope.btn_uploadxls = {
-        hint: 'Upload XLSX',
-        type: 'default',
-        icon: '	fas fa-upload',
-        width: '100%',
-
-        onClick: function (e) {
-            $scope.popup_uploadxls_visible = true;
-        }
-    };
-	$scope._uploadFromDate = null;
-$scope._uploadToDate = null;
-$scope.uploadFromDate = {
-        type: "date",
-        width: '100%',
-        displayFormat: "yyyy-MM-dd",
-        bindingOptions: {
-            value: '_uploadFromDate',
-        }
-    };
-
-$scope.uploadToDate = {
-        type: "date",
-        width: '100%',
-        displayFormat: "yyyy-MM-dd",
-        bindingOptions: {
-            value: '_uploadToDate',
-        }
-    };
-
-	$scope.xlsFileData = [];
-    $scope.xlsFileName = null;
-	$scope.isFileUploaded = false;
-    $scope.xlsUploader = {
-        multiple: false,
-        selectButtonText:'Upload XLSX',
-        labelText: '',
-        accept: ".xlsx",
-        uploadMethod: 'POST',
-        uploadMode: "instantly",
-        rtlEnabled: true,
-		uploadUrl: "https://ava.xls.airpocket.app/api/plan/uploadxlsplan",
-        //uploadUrl: "https://api.apvaresh.ir/api/uploadfile",
-        onValueChanged: function (arg) {
-        },
-        onUploaded: function (e) {
-			var _fn = "";
-			if ( e.request.responseText ) {
-				_fn = e.request.responseText;
-				_fn = _fn.replace('"','').replace('"','');
-			}
-			$scope.xlsFileName = _fn;
-			if($scope.xlsFileName != null) {
-				$scope.isFileUploaded = true;
-			   }
-        },
-        bindingOptions: {
-            value: 'xlsFileData'
-        }
-    }
-
-	$scope.popup_uploadxls_visible = false;
-    $scope.popup_uploadxls_title = 'Upload XLSX Plan';
-
-    $scope.popup_uploadxls = {
-        elementAttr: {
-            class: "popup_uploadxlsx"
-        },
-        shading: true,
-        height: 350,
-        width: 330,
-        fullScreen: false,
-        showTitle: true,
-        dragEnabled: true,
-        toolbarItems: [
-            {
-                widget: 'dxButton', location: 'after', options: {
-                    type: 'success', text: 'Save', icon: 'check', validationGroup: 'uploaddates', bindingOptions: { disabled: 'IsApproved' }, onClick: function (arg) {
-						console.log(1);
-                        var result = arg.validationGroup.validate();
-                        if (!result.isValid) {
-                            General.ShowNotify(Config.Text_FillRequired, 'error');
-                            return;
-                        }
-						if($scope._uploadFromDate > $scope._uploadToDate){
-							General.ShowNotify("Invalid Dates!", 'error');
-                            return;
-						}
-						if(!$scope.isFileUploaded){
-							General.ShowNotify("No file has been uploaded yet!", 'error');
-                            return;
-						}
-                       
-                        $scope.loadingVisible = true;
-						flightService.getImportFlightsNew($scope.xlsFileName, moment($scope._uploadFromDate).format("YYYY-MM-DD"), moment($scope._uploadToDate).format("YYYY-MM-DD")).then(function (ee) {
-						   $scope.loadingVisible = false;
-							alert(ee.message);
-							$scope.popup_uploadxls_visible = false;
-						}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-                    }
-                }, toolbar: 'bottom'
-            },
-
-            { widget: 'dxButton', location: 'after', options: { type: 'danger', text: 'Close', icon: 'remove', 
-onClick: function(arg){$scope.popup_uploadxls_visible = false;}
-															  }, toolbar: 'bottom' }
-        ],
-        visible: false,
-        closeOnOutsideClick: false,
-        bindingOptions: {
-            visible: 'popup_uploadxls_visible',
-            title: 'popup_uploadxls_title',
-        },
-		onHiding: function(){
-			$scope.xlsFileName = null;
-			$scope.isFileUploaded = false;
-			$scope._uploadFromDate = null;
-			$scope._uploadToDate = null;
-		}
-    };
-
     ////////////10-12 excel////////////
-    $scope.IsFileUploaderVisible = $rootScope.IsFlightPlan();
+    $scope.IsFileUploaderVisible = true;
     $scope.uploaderValueImage = [];
     $scope.uploadedFileImage = null;
     $scope.uploader_file = {
@@ -18121,7 +18014,7 @@ onClick: function(arg){$scope.popup_uploadxls_visible = false;}
         uploadMethod: 'POST',
         uploadMode: "instantly",
         rtlEnabled: true,
-        uploadUrl: "https://ava.api.airpocket.app/api/uploadfile",
+        uploadUrl: "https://_api.apvaresh.ir/api/uploadfile",
         onValueChanged: function (arg) {
 
         },
@@ -18535,9 +18428,9 @@ height: function () {
                         dfrom = $scope._datefrom;
                         $scope.datefrom = General.getDayFirstHour(new Date(dfrom));
                         $scope.dateEnd = General.getDayLastHour(new Date(new Date(dfrom).addDays($scope.days_count - 1)));
-                         var _tturl='https://ava.api.airpocket.app/' + 'api/xls/' + '?dt1=' + moment(new Date($scope.datefrom)).format('YYYY-MM-DD') + '&dt2=' + moment(new Date($scope.dateEnd)).format('YYYY-MM-DD') + "&chr=" + $scope.tt_chr + "&crew=" + $scope.tt_crew + "&cnl=" + $scope.tt_cnl + "&sort=" + $scope.tt_sort + "&time=" + $scope.tt_time+"&sep=1";
+                         var _tturl='https://ava.zapi.airpocket.app/' + 'api/xls/' + '?dt1=' + moment(new Date($scope.datefrom)).format('YYYY-MM-DD') + '&dt2=' + moment(new Date($scope.dateEnd)).format('YYYY-MM-DD') + "&chr=" + $scope.tt_chr + "&crew=" + $scope.tt_crew + "&cnl=" + $scope.tt_cnl + "&sort=" + $scope.tt_sort + "&time=" + $scope.tt_time+"&sep=1";
 						console.log(_tturl);
-                        $window.open('https://ava.api.airpocket.app/' + 'api/xls/' + '?dt1=' + moment(new Date($scope.datefrom)).format('YYYY-MM-DD') + '&dt2=' + moment(new Date($scope.dateEnd)).format('YYYY-MM-DD') + "&chr=" + $scope.tt_chr + "&crew=" + $scope.tt_crew + "&cnl=" + $scope.tt_cnl + "&sort=" + $scope.tt_sort + "&time=" + $scope.tt_time+"&sep=1", '_blank');
+                        $window.open('https://ava.zapi.airpocket.app/' + 'api/xls/' + '?dt1=' + moment(new Date($scope.datefrom)).format('YYYY-MM-DD') + '&dt2=' + moment(new Date($scope.dateEnd)).format('YYYY-MM-DD') + "&chr=" + $scope.tt_chr + "&crew=" + $scope.tt_crew + "&cnl=" + $scope.tt_cnl + "&sort=" + $scope.tt_sort + "&time=" + $scope.tt_time+"&sep=1", '_blank');
                     }
                 }, toolbar: 'bottom'
             },
@@ -19244,8 +19137,7 @@ height: function () {
                                 else
                                     //$scope.popup_cl_visible = true;
                                    // $scope.popup_clnew_visible = true;
-								  // alert($rootScope.HasAccessToCrewList());
-									 if ($rootScope.HasAccessToCrewList())
+									 
 									$scope.popup_clgd_visible = true;
                             });
 
@@ -19404,7 +19296,7 @@ height: function () {
 
 
                             $scope.loadingVisible = true;
-                            flightService.saveFlightLog(dto).then(function (response) {
+                            flightService.saveFlightLog(dto,$scope.logFlight).then(function (response) {
 								if ($scope.ds_pax){
 								$.each($scope.ds_pax,function(_z,_q){
 									_q.Id=-1;
@@ -19549,7 +19441,7 @@ height: function () {
           //$scope.ds_pax=[];
             $scope.selectedTabLNIndex = 0;
             $scope.loadingVisible = true;
-            flightService.getFlightDelays($scope.logFlight.ID).then(function (response) {
+            flightService.getFlightDelays($scope.logFlight.ID,$scope.logFlight).then(function (response) {
                 $scope.loadingVisible = false;
 
                 $.each(response, function (_i, _d) {

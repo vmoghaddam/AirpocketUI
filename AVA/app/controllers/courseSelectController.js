@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('courseSelectController', ['$scope', '$location', 'authService', '$routeParams', '$rootScope', function ($scope, $location, authService, $routeParams, $rootScope) {
 
 

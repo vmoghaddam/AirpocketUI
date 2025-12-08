@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('expiringCourseTypeController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService', function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService) {
     $scope.prms = $routeParams.prms;
  $scope.isDepManager = $rootScope.HasDepartmentManager();

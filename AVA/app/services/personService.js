@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.factory('personService', ['$http', '$q', 'ngAuthSettings', '$rootScope', function ($http, $q, ngAuthSettings, $rootScope) {
 
 

@@ -4,12 +4,12 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
     var authInterceptorServiceFactory = {};
 
     var _request = function (config) {
-       
+        console.log(config);
 
         config.headers = config.headers || {};
 
         var authData = localStorageService.get('authorizationData');
-        var userData = localStorageService.get('userData');
+		 var userData = localStorageService.get('userData');
 
         var authDataVIRA = localStorageService.get('authorizationMnt');
         
@@ -17,17 +17,16 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
         if (config.url.startsWith(vira_api)) {
             if (authDataVIRA) {
 
-                //config.headers.Authorization = 'Bearer ' + authDataVIRA.token;
-                config.headers.Authorization = 'Bearer ' + authData.token;
+                config.headers.Authorization = 'Bearer ' + authDataVIRA.token;
             }
         }
         else
         if (authData) {
 
             config.headers.Authorization = 'Bearer ' + authData.token;
-            config.headers.Reqkey = userData.UserId;
+			 config.headers.Reqkey = userData.UserId;
             config.headers.Reqname = authData.userName;
-            config.headers.Reqroles = userData.Roles;
+			config.headers.Reqroles = userData.Roles;
         }
       
         return config;
@@ -46,8 +45,8 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
             //        return $q.reject(rejection);
             //    }
             //}
-            ////authService.logOut();
-            ////$location.path('/login');
+            authService.logOut();
+            $location.path('/login');
         }
         return $q.reject(rejection);
     }

@@ -1,0 +1,25 @@
+﻿<div ng-controller="signAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="font-size:14px;padding:20px;text-align:center">
+            The {{docTitle}} will be signed and approved by
+        </div>
+        <div style="font-size:14px;text-align:center;padding:10px;font-weight:bold">
+            {{commander.Name}}
+
+        </div>
+		<div style="font-size:14px;text-align:center;padding:10px; ">License Number</div>
+		<div style='padding:5px;text-align:center' class='dx-border'>
+		    <div style='margin:0 auto 0 auto;' class='center' dx-text-box="txt_licno" dx-validator="{validationGroup:'lic_sign',  validationRules: [{ type: 'required'}]}"></div>
+		</div>
+		
+        <div id="scroll_signadd" dx-scroll-view="scroll_signadd" style="margin-top:0px">
+            <div style="text-align:center;padding:10px" ng-show='url_sign'>
+                <img style="height:auto;display: block; width: 90%;margin:0 auto 0 auto" ng-src="{{url_sign}}" />
+
+            </div>
+        </div>
+        
+        <div dx-load-panel="loadPanel"></div>
+    </div>
+
+</div>

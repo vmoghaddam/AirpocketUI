@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('trainingController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route) {
     $scope.prms = $routeParams.prms;
 

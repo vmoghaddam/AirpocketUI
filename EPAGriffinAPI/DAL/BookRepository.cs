@@ -679,10 +679,11 @@ namespace EPAGriffinAPI.DAL
                 List<string> names = new List<string>();
                 List<string> numbers = new List<string>();
                 List<string> sms = new List<string>();
+                MailHelper mailHelper = new MailHelper();
                 var book = await dbSet.FirstOrDefaultAsync(q => q.Id == dto.BookId);
                 book.DatePublished = DateTime.Now;
 
-                var applicables = this.context.ViewBookApplicableEmployees.Where(q => q.BookId == dto.BookId).Select(q => new { q.EmployeeId, q.Name, q.Title, q.Type, q.Mobile,q.Category }).ToList();
+                var applicables = this.context.ViewBookApplicableEmployees.Where(q => q.BookId == dto.BookId).Select(q => new { q.EmployeeId, q.Name, q.Title, q.Type, q.Mobile, q.Category }).ToList();
 
                 string _issue = "";
                 if (book.Issue != null)
@@ -746,35 +747,35 @@ namespace EPAGriffinAPI.DAL
                     //                        + "مدیریت ایمنی و کیفی هواپیمایی آوا";
 
 
-                    var _message = "همکار گرامی، در کتابخانه الکترونیک، مستندات  "
+                    //                   var _message = "همکار گرامی، در کتابخانه الکترونیک، مستندات  "
 
-                       + "<br/>"
-                       + x.Title
-                        + "<br/>"
-                       //+ "(" + x.Category + ")"
-                       //  + "<br/>"
-                       + "مرتبط با حیطه کاری شما، بارگزاری گردیده است. جهت انجام وظایف خود منطبق با دستورالعمل های به روز شرکت به سامانه کتابخانه الکترونیک طی 24 ساعت آینده مراجعه نمایید."
-                        + "<br/>"
-                        + "https://fly.pulsepocket.app/"
-                        + "<br/>"
-                         + "https://efb.fly.myaero.tech/"
-                        + "<br/>"
-                        + "شرکت هواپیمایی فلای‌کیش";
+                    //                      + "<br/>"
+                    //                      + x.Title
+                    //                       + "<br/>"
+                    //                      //+ "(" + x.Category + ")"
+                    //                      //  + "<br/>"
+                    //                      + "مرتبط با حیطه کاری شما، بارگزاری گردیده است. جهت انجام وظایف خود منطبق با دستورالعمل های به روز شرکت به سامانه کتابخانه الکترونیک طی 24 ساعت آینده مراجعه نمایید."
+                    //                       + "<br/>"
+                    //                       + "https://fly.pulsepocket.app/"
+                    //                       + "<br/>"
+                    //                        + "https://efb.fly.myaero.tech/"
+                    //                       + "<br/>"
+                    //                       + "شرکت هواپیمایی فلای‌کیش";
 
-                    //+ "مستندات (اسم کتاب) مرتبط با حیطه کاری شما در کتابخانه الکترونیک بارگزاری گردیده است.";
-                    var _sms = "همکار گرامی، در کتابخانه الکترونیک، مستندات  "
-                        + "\n"
-                         + x.Title
-                          // + "\n"
-                          // + "(" + x.Category + ")"
-                          + "\n"
-                           + "مرتبط با حیطه کاری شما، بارگزاری گردیده است. جهت انجام وظایف خود منطبق با دستورالعمل های به روز شرکت به سامانه کتابخانه الکترونیک طی 24 ساعت آینده مراجعه نمایید."
-                             + "\n"
- + "https://fly.pulsepocket.app/"
- + "\n"
- + "https://efb.fly.myaero.tech/"
-  + "\n"
-                         + "شرکت هواپیمایی فلای‌کیش";
+                    //                   //+ "مستندات (اسم کتاب) مرتبط با حیطه کاری شما در کتابخانه الکترونیک بارگزاری گردیده است.";
+                    //                   var _sms = "همکار گرامی، در کتابخانه الکترونیک، مستندات  "
+                    //                       + "\n"
+                    //                        + x.Title
+                    //                         // + "\n"
+                    //                         // + "(" + x.Category + ")"
+                    //                         + "\n"
+                    //                          + "مرتبط با حیطه کاری شما، بارگزاری گردیده است. جهت انجام وظایف خود منطبق با دستورالعمل های به روز شرکت به سامانه کتابخانه الکترونیک طی 24 ساعت آینده مراجعه نمایید."
+                    //                            + "\n"
+                    //+ "https://fly.pulsepocket.app/"
+                    //+ "\n"
+                    //+ "https://efb.fly.myaero.tech/"
+                    // + "\n"
+                    //                        + "شرکت هواپیمایی فلای‌کیش";
 
 
                     //var _sms= "Dear " + x.Name + ","+ "\n\n"
@@ -798,40 +799,63 @@ namespace EPAGriffinAPI.DAL
                     //          + "\n" + "Date Sent: " + moment(new Date()).format('MM-DD-YYYY HH:mm');
 
 
-                    var notification = new Models.Notification()
-                    {
-                        App = dto.AppNotification,
-                        CustomerId = dto.CustomerId,
-                        DateSent = DateTime.Now,
-                        Email = dto.Email,
-                        ModuleId = 2,
-                        SMS = dto.SMS,
-                        UserId = x.EmployeeId,
-                        TypeId = 98,
-                        Message = _message,
-                    };
-                    this.context.Notifications.Add(notification);
+                    //    var notification = new Models.Notification()
+                    //    {
+                    //        App = dto.AppNotification,
+                    //        CustomerId = dto.CustomerId,
+                    //        DateSent = DateTime.Now,
+                    //        Email = dto.Email,
+                    //        ModuleId = 2,
+                    //        SMS = dto.SMS,
+                    //        UserId = x.EmployeeId,
+                    //        TypeId = 98,
+                    //        Message = _message,
+                    //    };
+                    //    this.context.Notifications.Add(notification);
 
-                    if (!string.IsNullOrEmpty(x.Mobile))
-                    {
-                        names.Add(x.Name);
-                        numbers.Add(x.Mobile);
-                        sms.Add(_sms);
-                    }
-                }
-                //send notification
-                new Thread(() =>
+                    //    if (!string.IsNullOrEmpty(x.Mobile))
+                    //    {
+                    //        names.Add(x.Name);
+                    //        numbers.Add(x.Mobile);
+                    //        sms.Add(_sms);
+                    //    }
+                    //}
+
+                    var email_body = "Dear " + x.Name + "," + "\n\n"
+                         + "A new " + x.Type + " added to your e-library: "
+                         + "\n"
+                         + x.Title
+                         + "\n"
+                         + (!string.IsNullOrEmpty(_issue) ? "Issue: " + _issue + "\n" : "")
+                         + (!string.IsNullOrEmpty(book.Edition) ? "Revision: " + book.Edition + "\n" : "")
+                         + "Please access your WebPocket account to see more details."
+                         + "\n\n"
+                         + "Date Sent: " + datesent
+                          + "\n"
+                         //+ "Url:"
+                         // + "\n"
+                         + _airline_url
+                          + "\n"
+                         + _airline_title;
+
+
+                    //var email_body = String.Join("\n", strs_email);
+
+                    new Thread(() =>
                  {
                      try
                      {
-                         int c = 0;
-                         Magfa mgf = new Magfa();
-                         foreach (var m in numbers)
-                         {
-                             var txt = sms[c];
-                             var res = mgf.enqueue(1, m, txt);
-                             c++;
-                         }
+                         //int c = 0;
+                         //Magfa mgf = new Magfa();
+                         //foreach (var m in numbers)
+                         //{
+                         //    var txt = sms[c];
+                         //    var res = mgf.enqueue(1, m, txt);
+                         //    c++;
+                         //}
+                         var email_status = mailHelper.SendEmail(email_body, "shahraeinisepehr@gmail.com", x.Name, "Crew Scheduling Department", "Crew Scheduling Notification", ConfigurationManager.AppSettings["smtp_address"]);
+
+
                      }
                      catch (Exception eex)
                      {
@@ -840,6 +864,8 @@ namespace EPAGriffinAPI.DAL
 
                  }).Start();
 
+                    
+                }
                 return true;
             }
             catch (Exception ex)

@@ -51,7 +51,7 @@ app.controller('delayReportController', ['$scope', '$location', '$routeParams', 
             var range = -1;
             if ($scope.range)
                 range = $scope.range;
-            $window.open($rootScope.reportServer + '?type=3&p=' + days + '&df=' + _dfrom+'&dt='+_dto+'&cats='+cts, '_blank');
+            $window.open(/*$rootScope.reportServer*/'https://ava.reportdelay.airpocket.app/frmreportview.aspx' + '?type=3&p=' + days + '&df=' + _dfrom+'&dt='+_dto+'&cats='+cts, '_blank');
             //flightService.getDelayReportPeriodic(_dfrom, _dto, 5).then(function (response) {
             //    $scope.loadingVisible = false;
             //    $scope.total = response;

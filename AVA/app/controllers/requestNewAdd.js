@@ -4,9 +4,8 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     $scope.entity = {
         id: 0,
         acfT_TypeId: null,
-        acfT_TypeIds: [],
         acfT_MSNIds: [],
-        priorityId: null,
+        priorityId: null, 
         requestType: null,
         sender_LocationId: null,
         sender_UserId: null,
@@ -14,8 +13,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         deadline: null,
         remark: null,
         date: new Date(),
-        requestItems: [],
-        items: []
+        requestItems: []
     }
 
 
@@ -30,16 +28,16 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     $scope.item = {
         id: 0,
         paperId: 0,
-        cmP_PartNumberId: null,
-        partNumber_TypeId: null,
-        measurementUnitId: null,
-        cmP_PositionId: null,
+        cmP_PartNumberId: 0,
+        partNumber_TypeId: 0,
+        measurementUnitId: 0,
+        cmP_PositionId: 0,
         itemNo: 0,
         ataChapter: null,
         ataTitle: "",
-        quantity: null,
+        quantity: 0,
         reference: null,
-        remark: null
+        remark:  null
     };
 
     $scope.dg_item_ds = [];
@@ -48,7 +46,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         Id: null
     };
 
-
+   
 
     $scope.popup_req_visible = false;
     $scope.popup_req = {
@@ -58,26 +56,6 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         dragEnabled: true,
         toolbarItems: [
 
-            {
-                widget: 'dxButton', location: 'after', options: {
-                    type: 'success', text: 'Save', onClick: function (e) {
-                        $scope.entity.acfT_MSNIds = $scope.dg_reg_selected_ids;
-                        $scope.entity.requestItems = $scope.dg_item_ds;
-
-                        vira_general_service.add_request($scope.entity).then(function (response) {
-
-                            if (response.errorCode === 0) {
-                                vira_general_service.document_sync_request().then(function (response2) {
-                                    General.ShowNotify(Config.Text_SavedOk, 'success');
-                                    $scope.popup_req_visible = false;
-                                });
-                            }
-                        });
-
-
-                    }
-                }, toolbar: 'bottom'
-            },
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
@@ -91,7 +69,19 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
                     }
                 }, toolbar: 'bottom'
             },
+            {
+                widget: 'dxButton', location: 'after', options: {
+                    type: 'success', text: 'Save', onClick: function (e) {
 
+                        
+                        vira_general_service.add_request($scope.entity).then(function (response) {
+
+                        });
+
+                        $scope.popup_req_visible = false;
+                    }
+                }, toolbar: 'bottom'
+            },
 
 
 
@@ -99,29 +89,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         visible: false,
         title: 'New Request',
         closeOnOutsideClick: false,
-        onShown: function (e) {
-            $scope.bind();
-            $scope.item = {
-                id: 0,
-                paperId: 0,
-                cmP_PartNumberId: null,
-                partNumber_TypeId: null,
-                measurementUnitId: null,
-                cmP_PositionId: null,
-                itemNo: 0,
-                ataChapter: null,
-                ataTitle: "",
-                quantity: null,
-                reference: null,
-                remark: null
-            };
 
-            if ($scope.dg_item_instance)
-                $scope.dg_item_instance.repaint();
-
-
-
-        },
         bindingOptions: {
             visible: 'popup_req_visible',
             'toolbarItems[0].visible': 'btn_duties_visible',
@@ -132,74 +100,37 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
     ///////////////////////////////
 
-    $scope.btn_addItem = {
-        // text: 'Save',
+    $scope.btn_saveItem = {
+        text: '',
         type: 'default',
         icon: 'plus',
-        width: 40,
-        validationGroup: 'reqitemadd',
+        width: 35,
         onClick: function (e) {
-            var result = e.validationGroup.validate();
 
-            if (!result.isValid) {
-                General.ShowNotify(Config.Text_FillRequired, 'error');
-                return;
-            }
+            $scope.valEntity.requestItems = $scope.dg_item_ds;
+            $scope.valEntity.acfT_TypeId = $scope.entity.acfT_TypeId;
 
-            var vitem = {
-                requestItems: $scope.dg_item_ds,
-                acfT_TypeId: $scope.entity.acfT_TypeId,
-                acfT_MSNIds: $scope.dg_reg_selected_ids,
-                partNumberId: $scope.selected_pn.id,
-
-                ignoreControls: $scope.dg_item_ds.length == 0,
-
-            };
-
-            //dool
-            vira_general_service.validate_request(vitem).then(function (res) {
+            vira_general_service.validate_request($scope.valEntity).then(function (res) {
                 console.log(res);
-                if (res.errorCode === 0) {
-                    //var row = $scope.dg_item_ds[$scope.dg_item_ds.length - 1];
-                    var req_item = {
-                        itemNo: $scope.dg_item_ds.length + 1,
-                        cmP_PartNumberId: $scope.selected_pn.id,
-                        partNumber_TypeId: $scope.selected_pn.partTypeId,
-                        measurementUnitId: $scope.selected_pn.measurementUnitId,
-                        cmP_PositionId: $scope.item.cmP_PositionId,
-                        ataChapter: $scope.item.ataChapter,
-                        quantity: $scope.item.quantity,
-                        reference: $scope.item.reference,
-                        remark: $scope.item.remark,
-                        partNumber: $scope.selected_pn.partNumber,
-                        description: $scope.selected_pn.description,
-                        uom: $scope.selected_pn.uom,
-                        position: $scope.position,
-
-
-                    };
-                    // $scope.item.Id = row != null ? row.Id + 1 : 1;
-                    $scope.dg_item_ds.push(req_item);
-                    // $scope.item = { Id: -1 };
-                    //$scope.entity.requestItems = [];
-                    // $scope.entity.requestItems = $scope.dg_item_ds;
-                    // $scope.entity.acfT_MSNIds = $scope.valEntity.acfT_MSNIds;
-                }
-                else {
-                    var message = res.data[0].errorMessage;
-                    General.ShowNotify(message, 'error');
-                }
-
+                if (res == 0) {
+                    var row = $scope.dg_item_ds[$scope.dg_item_ds.length - 1];
+                    $scope.item.Id = row != null ? row.Id + 1: 1;
+                    $scope.dg_item_ds.push($scope.item);
+                    $scope.item = { Id: -1 };
+                    $scope.entity.requestItems = [];
+                    $scope.entity.requestItems = $scope.dg_item_ds;
+                    $scope.entity.acfT_MSNIds = $scope.valEntity.acfT_MSNIds;
+                };
             });
         }
 
     };
 
-    $scope.btn_removeItem = {
-        //text: 'Delete',
+    $scope.btn_deleteItem = {
+        text: '',
         type: 'danger',
         icon: 'remove',
-        width: 40,
+        width: 35,
         onClick: function (e) {
             $scope.dg_item_ds = Enumerable.From($scope.dg_item_ds).Where(function (x) {
                 return x.Id != $scope.dg_item_id.Id;
@@ -222,26 +153,6 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     ////////////////////////////////
 
     $scope.bind = function () {
-
-
-        if ($rootScope.vira_locations) {
-            $scope.ds_user_locations = $rootScope.vira_user_locations;
-
-            console.log('dddddddd', $rootScope.vira_user_locations);
-
-            $scope.ds_locations = $rootScope.vira_stocks;
-
-        }
-        else {
-
-            $rootScope.fill_vira_locations(function () {
-                $scope.ds_user_locations = $rootScope.vira_user_locations;
-                console.log('dddddddd', $rootScope.vira_user_locations);
-                console.log('b', $scope.ds_user_locations);
-                $scope.ds_locations = $rootScope.vira_stocks;
-
-            });
-        }
 
         mntService.getReceiptPN(101).then(function (res) {
             $scope.itemUnit = res;
@@ -269,13 +180,13 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
             $scope.acType = res;
         });
 
-        //mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
-        //    $scope.ds_locations = response;
-        //    $scope.user = response;
-        //    $scope.entity.sender_LocationId = $scope.user[0].gI_LocationId;
-        //    $scope.entity.sender_UserId = $rootScope.vira_user_id;
-        //    $scope.entity.receiver_UserId = $rootScope.vira_user_id;
-        //});
+        mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
+            $scope.ds_locations = response;
+            $scope.user = response;
+            $scope.entity.sender_LocationId = $scope.user[0].gI_LocationId;
+            $scope.entity.sender_UserId = $rootScope.vira_user_id;
+            $scope.entity.receiver_UserId = $rootScope.vira_user_id;
+        });
 
         mntService.get_company().then(function (response) {
             $scope.ds_company = response;
@@ -341,28 +252,9 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         searchEnabled: false,
         displayExpr: 'title',
         valueExpr: 'gI_LocationId',
-        itemTemplate: function (data) {
-            //return $rootScope.getSbTemplateAirport(data);
-            var tmpl =
-                "<div>"
-                + "<div class='tmpl-col-left' style='width:50%'>" + data.title + "</div>"
-                + "<div class='tmpl-col-right' style='width:50%'>" + data.fullName + "</div>"
-
-
-
-                + "</div>";
-            return tmpl;
-        },
-        onSelectionChanged: function (e) {
-            if (!e.selectedItem) {
-                $scope.entity.sender_UserId = null;
-                return;
-            }
-            $scope.entity.sender_UserId = e.selectedItem.uM_UserId;
-        },
         bindingOptions: {
             value: 'entity.sender_LocationId',
-            dataSource: 'ds_user_locations'
+            dataSource: 'user'
         }
     }
 
@@ -384,11 +276,11 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         displayExpr: 'title',
         valueExpr: 'id',
         onSelectionChanged: function (e) {
-            console.log("eeee", e);
+            console.log("eeee",e);
         },
         bindingOptions: {
             value: 'entity.receiver_LocationId',
-            dataSource: 'ds_locations'
+            dataSource: 'ds_location'
         }
     }
 
@@ -418,12 +310,12 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         displayExpr: 'id',
         valueExpr: 'id',
         onValueChanged: function (e) {
-
+           
             $scope.dg_reg_ds = Enumerable.From($scope.registers).Where(function (x) {
                 var models = x.acfT_ModelId.split("-")[0];
                 return models == e.value;
             }).ToArray();
-
+           
         },
         bindingOptions: {
             value: 'entity.acfT_TypeId',
@@ -456,19 +348,11 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         }
     }
 
-    $scope.position = null;
     $scope.sb_position = {
         showClearButton: false,
         searchEnabled: false,
         displayExpr: "title",
         valueExpr: 'id',
-        onSelectionChanged: function (e) {
-            if (!e.selectedItem) {
-                $scope.position = null;
-                return;
-            }
-            $scope.position = e.selectedItem.title;
-        },
         bindingOptions: {
             value: 'item.cmP_PositionId',
             dataSource: 'ds_pos',
@@ -494,14 +378,13 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         }
     }
 
-    $scope.txt_itemRemark = {
+      $scope.txt_itemRemark = {
         bindingOptions: {
             value: 'item.remark'
         }
     }
 
     $scope.txt_pn = {
-        readOnly: true,
         bindingOptions: {
             value: 'item.pnTitle'
         }
@@ -510,12 +393,6 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     $scope.txt_availability = {
         bindingOptions: {
             value: 'item.availability'
-        }
-    }
-    $scope.txt_description = {
-        readOnly: true,
-        bindingOptions: {
-            value: 'item.description'
         }
     }
 
@@ -603,15 +480,14 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
             }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
         },
 
-        //{ dataField: 'ata', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'ataChapter', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 180 },
-        { dataField: 'partNumber', caption: 'P/N', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 200 },
-
-        { dataField: 'reference', caption: 'Reference', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 160 },
-        { dataField: 'position', caption: 'Position', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 160 },
-        { dataField: 'quantity', caption: 'QTY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-        { dataField: 'uom', caption: 'UOM', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'ata', caption: 'No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'ata', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'ata', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, minWidth: 200 },
+        { dataField: 'pn', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'reference', caption: 'Reference', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'position', caption: 'Position', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'quantity', caption: 'Quantity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'unit', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
 
 
     ];
@@ -647,7 +523,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         selection: { mode: 'single' },
 
         columnAutoWidth: false,
-        height: $(window).height() - 440,
+        height: $(window).height() - 630,
         width: '100%',
         columns: $scope.dg_item_columns,
         onContentReady: function (e) {
@@ -698,22 +574,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
     };
 
-    $scope.reg = null;
-    $scope.tag_reg = {
 
-        showSelectionControls: true,
-        applyValueMode: "instantly",
-
-        showClearButton: true,
-        searchEnabled: true,
-        searchExpr: ["regsiter"],
-        displayExpr: "register",
-        valueExpr: 'id',
-        bindingOptions: {
-            value: 'dg_reg_selected_ids',
-            dataSource: 'dg_reg_ds'
-        }
-    };
     $scope.dg_reg_columns = [
 
 
@@ -723,7 +584,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
     ];
 
 
-    $scope.dg_reg_selected_ids = null;
+
     $scope.dg_reg_selected = null;
     $scope.dg_reg_instance = null;
     $scope.dg_reg_ds = [];
@@ -781,8 +642,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
         },
 
         onSelectionChanged: function (e) {
-            // $scope.valEntity.acfT_MSNIds = Enumerable.From(e.selectedRowsData).Select(function (x) { return x.id }).ToArray();
-            $scope.dg_reg_selected_ids = Enumerable.From(e.selectedRowsData).Select(function (x) { return x.id }).ToArray();
+            $scope.valEntity.acfT_MSNIds = Enumerable.From(e.selectedRowsData).Select(function (x) { return x.id }).ToArray();
             var data = e.selectedRowsData[0];
 
             $scope.dg_reg_id.id = e.selectedRowsData[0].id;
@@ -833,7 +693,7 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
         $scope.tempData = prms;
 
-
+        $scope.bind();
 
         $scope.popup_req_visible = true;
 
@@ -842,17 +702,11 @@ app.controller('RequestNewAddController', ['$scope', '$location', 'mntService', 
 
 
     $scope.$on('InitPNSelected', function (event, prms) {
-        $scope.selected_pn = prms;
-        console.log($scope.selected_pn);
 
         $scope.item.cmP_PartNumberId = prms.id;
         $scope.item.partNumber_TypeId = prms.partTypeId;
         $scope.valEntity.partNumberId = prms.id;
         $scope.item.pnTitle = prms.partNumber;
-        $scope.item.description = prms.partNumber;
-        $scope.item.ataChapter = prms.ataChapter;
-        $scope.item.measurementUnitId = prms.measurementUnitId;
-        $scope.item.reference = prms.ipC_Reference;
     });
 
 

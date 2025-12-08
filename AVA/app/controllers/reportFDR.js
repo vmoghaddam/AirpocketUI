@@ -19,9 +19,10 @@ app.controller('reportFDRController', ['$scope', '$location', '$routeParams', '$
         }
 
     };
+	$scope.is_name_visible=$rootScope.userName.toLowerCase() != 'airsa' && $rootScope.userName.toLowerCase() == 'e.askari' && $rootScope.userName.toLowerCase() == 'm.razavi';
 	$scope.get_class=function(){
 		
-		if ($rootScope.userName.toLowerCase() == 'airsa')
+		if ($rootScope.userName.toLowerCase() == 'airsa' || $rootScope.userName.toLowerCase() == 'e.askari' || $rootScope.userName.toLowerCase() == 'm.razavi')
 			return '_hidden';
 		else
 			return '';
@@ -312,11 +313,11 @@ app.controller('reportFDRController', ['$scope', '$location', '$routeParams', '$
         {
             caption: 'Cockpit',
             columns: [
-                //{ dataField: 'IPSCH', caption: 'IP', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+                { dataField: 'IPSCH', caption: 'IP', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120,visible:$scope.is_name_visible},
                 { dataField: 'IPCode', caption: 'IP Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
-                //{ dataField: 'P1SCH', caption: 'CPT', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+                { dataField: 'P1SCH', caption: 'CPT', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 ,visible:$scope.is_name_visible},
                 { dataField: 'P1Code', caption: 'P1 Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
-               // { dataField: 'P2SCH', caption: 'FO', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+                { dataField: 'P2SCH', caption: 'FO', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120,visible:$scope.is_name_visible },
                 { dataField: 'P2Code', caption: 'P2 Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
                 { dataField: 'PFLRTitle', caption: 'I/C/F', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
             ]

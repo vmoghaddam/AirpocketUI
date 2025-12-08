@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('personcertificateController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'ztrnService','zpersonService', function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService,personService) {
     $scope.prms = $routeParams.prms;
 	$scope.IsEditable=$rootScope.HasTrainingAdmin();

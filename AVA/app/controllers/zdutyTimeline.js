@@ -1406,7 +1406,7 @@ app.controller('zdutyTimelineController', ['$scope', '$location', '$routeParams'
             width: _width + 'px'
         }
     };
-    //2024-06-22
+     //2024-06-22
     $scope.get_crew_style = function (res) {
         var bcolor = '#d9d9d9';
         switch (res.ac_type) {
@@ -1433,12 +1433,10 @@ app.controller('zdutyTimelineController', ['$scope', '$location', '$routeParams'
         }
     }
     $scope.getResStyle = function (res) {
-        
         var _width = $scope.ganttData && $scope.ganttData.dates ? $scope.ganttData.dates.length * date_cell_width : 1000;
         return {
             width: _width + 'px',
-            height: (res.maxTop + duty_height + 5) + 'px',
-           // background:bcolor
+            height: (res.maxTop + duty_height + 5 ) + 'px'
         };
     };
     $scope.getResCaptionStyle = function (res) {
@@ -1678,7 +1676,7 @@ app.controller('zdutyTimelineController', ['$scope', '$location', '$routeParams'
         schedulingService.getCrewForGanttByDateNew(_code, '', _dt).then(function (response) {
 
             $scope.loadingVisible = false;
-            //2024-06-21
+			//2024-06-21
             $.each(response, function (_i, _d) {
 
                 _d.ac_type = $scope.get_ac_type(_d.item.ValidationMessage, _d.JobGroup);
@@ -1688,7 +1686,6 @@ app.controller('zdutyTimelineController', ['$scope', '$location', '$routeParams'
             if ($scope.ac_type != 'ALL') {
                 response = Enumerable.From(response).Where('$.ac_type=="' + $scope.ac_type + '"').ToArray();
             }
-           
 
             //$scope.ds_crew = response;
 
@@ -3189,7 +3186,6 @@ $scope.destroy_menu();
         $scope.getCrew(function (crews) {
             //nool
             $scope.getDuties(_df, _dt, function (dts) {
-                
                 $scope.duties = dts;
                 crews.duties = [];
 
@@ -3249,9 +3245,6 @@ $scope.destroy_menu();
                         _d.maxTop = 0;
 
                     $scope.totalHeight += _d.maxTop;
-                    //2024-06-21
-                   
-                  
 
 
                 });
@@ -3441,14 +3434,10 @@ $scope.destroy_menu();
         }
     }
 
-    //2024-06-23
     $scope.getDutyClass = function (duty) {
         var str = '';
         if (duty.DutyType == 1165 && duty.OutOfHomeBase)
             str += "-oh";
-        if (duty.DutyType == 1165 && duty.InitRoute.includes('(o)'))
-            str = "-obs";
-
         return 'obj-duty duty-' + duty.DutyType+str;
     }
 
@@ -3493,7 +3482,6 @@ $scope.destroy_menu();
         $scope.loadingVisible = true;
         var ed = (new Date($scope.dateEnd)).toUTCDateTimeDigits(); //(new Date($scope.dateto)).toUTCDateTimeDigits();
         //flightService.getFlightsGantt(Config.CustomerId, (new Date($scope.datefrom)).toUTCDateTimeDigits(), ed, offset, /*($scope.IsAdmin ? null : $scope.airportEntity.Id)*/-1, 0, filter).then(function (response) {
-        
         flightService.getFlightsGantt(Config.CustomerId, (new Date($scope.datefrom)).toUTCDateTimeDigits(), ed, offset, null, filter).then(function (response) {
             try {
                 $scope.loadingVisible = false;
@@ -3509,9 +3497,7 @@ $scope.destroy_menu();
                 }
                 $scope.tabsdatevisible = true;
 
-               
-                
-               
+
                 $.each(response.resources, function (_i, _d) {
                     _d.text = _d.resourceName;
                     var flights = Enumerable.From(response.flights).Where('$.RegisterID==' + _d.resourceId)
@@ -3826,8 +3812,7 @@ $scope.destroy_menu();
     ///////////////////// 
     $scope.dt_from = new Date();//new Date(2021,11,1).addDays(0);
     $scope.dt_to = new Date($scope.dt_from).addDays(14);
-
-    $scope.ac_type = 'ALL';
+ $scope.ac_type = 'ALL';
     $scope.sb_type = {
         placeholder: 'A/C Type',
         showClearButton: false,
@@ -3844,7 +3829,6 @@ $scope.destroy_menu();
 
         }
     };
-
     $scope.rank = 'COCKPIT';
     $scope.sb_rank = {
         placeholder: 'Rank',
@@ -5510,14 +5494,12 @@ $scope.destroy_menu();
             width: _width + 'px'
         }
     };
-    
+    //2023
     $scope.getResStyle_flt = function (res) {
-       
         var _width = $scope.ganttFlightData && $scope.ganttFlightData.dates ? $scope.ganttFlightData.dates.length * date_cell_width_flt : 1000;
         return {
             width: _width + 'px',
-            height: (res.maxTop + duty_height_flt + 15) + 'px',
-            
+            height: (res.maxTop + duty_height_flt + 15) + 'px'
         };
     };
     $scope.getResCaptionStyle_flt = function (res) {

@@ -1,9 +1,9 @@
 ﻿'use strict';
 app.factory('neerjaService', ['$http', '$q', 'ngAuthSettings', '$rootScope', function ($http, $q, ngAuthSettings, $rootScope) {
     var serviceFactory = {};
-    var apicore = 'https://faap.api.airpocket.app/';
+    var apicore='https://faap.api.airpocket.app/';
     var _get_pfc_items = function (flt_id) {
-
+      
         var deferred = $q.defer();
         $http.get(apicore + 'neerja/pfc/items/' + flt_id + '/' + $rootScope.employeeId).then(function (response) {
             deferred.resolve(response.data);
@@ -32,21 +32,23 @@ app.factory('neerjaService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     };
 
     serviceFactory.get_pfc_items_grouped = _get_pfc_items_grouped;
+	
+	
+	 var _get_pfc_items_grouped_ap = function (flt_id, crew_id) {
 
-    var _get_pfc_items_grouped_ap = function (flt_id, crew_id) {
+     var deferred = $q.defer();
+     $http.get('https://faap.api.airpocket.app/neerja/pfc/items/grouped/' + flt_id + '/' + crew_id).then(function (response) {
+         deferred.resolve(response.data);
+     }, function (err, status) {
 
-        var deferred = $q.defer();
-        $http.get(apicore + 'neerja/pfc/items/grouped/' + flt_id + '/' + crew_id).then(function (response) {
-            deferred.resolve(response.data);
-        }, function (err, status) {
+         deferred.reject(Exceptions.getMessage(err));
+     });
 
-            deferred.reject(Exceptions.getMessage(err));
-        });
+     return deferred.promise;
+ };
 
-        return deferred.promise;
-    };
+ serviceFactory.get_pfc_items_grouped_ap = _get_pfc_items_grouped_ap;
 
-    serviceFactory.get_pfc_items_grouped_ap = _get_pfc_items_grouped_ap;
 
     var _get_scc = function (flt_id, crew_id) {
 
@@ -103,8 +105,22 @@ app.factory('neerjaService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
         return deferred.promise;
     };
+	
+	  var _get_scc_report = function (crew_id, fligth_id) {
+        var deferred = $q.defer();
+
+        $http.get(apixls + 'api/scc/report/' + crew_id + '/' + fligth_id).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
     serviceFactory.save_scc = _save_scc;
     serviceFactory.get_eval = _get_eval;
+    serviceFactory.get_scc_report = _get_scc_report;
 
     return serviceFactory;
 

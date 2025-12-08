@@ -2846,7 +2846,7 @@ app.factory('zschedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope'
     var _getFormAReport = function (yf, yt) {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/forma/' + yf + '/' + yt).then(function (response) {
+        $http.get('https://apicao.airpocket.app/' + 'api/cao/report/forma/year/' + yf).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -2860,7 +2860,7 @@ app.factory('zschedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope'
     var _getFormAYearlyReport = function (yf, yt) {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/forma/yearly/' + yf + '/' + yt).then(function (response) {
+        $http.get('https://apicao.airpocket.app/' + 'api/cao/report/forma/year/' + yf).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 

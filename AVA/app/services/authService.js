@@ -51,7 +51,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         };
         var _login = function (loginData) {
 
-
+           
             var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password + "&scope=" + (loginData.scope);
 
             //var data = {
@@ -616,6 +616,33 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
             return deferred.promise;
         };
+		
+		var _disable = function (entity) {
+        var deferred = $q.defer();
+        $http.post('https://ava.apinet.airpocket.app/'+ 'odata/users/disable', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    authServiceFactory.disable = _disable;
+    var _enable = function (entity) {
+        var deferred = $q.defer();
+        $http.post('https://ava.apinet.airpocket.app/' + 'odata/users/enable', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    authServiceFactory.enable = _enable;
+		
+		
         authServiceFactory.changeTel = _changeTel;
         authServiceFactory.resend = _resend;
         authServiceFactory.setModule = _setModule;

@@ -3,9 +3,13 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
     //06-13
 	 
     $scope.IsCabin = true;
-    $scope.IsCockpit = $rootScope.userName.toLowerCase() == 'ops.abdi' ? false : true;
+    $scope.IsCockpit =  $rootScope.userName.toLowerCase() == 'cs.pakniat' ? false : true;
+	console.log('-------username-------',$rootScope.userName.toLowerCase());
     $scope.getActionShow = function (grp, x) {
-        return true;
+        //return true;
+		if (!grp)
+			return true; 
+			
         if (['TRE', 'TRI', 'LTC', 'IP', 'P1', 'P2', 'FO', 'CPT'].indexOf(grp) != -1) {
             return $scope.IsCockpit;
         }
@@ -14,21 +18,21 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         }
     }
 
+/////////request//////
 
-    $scope.btn_req = {
-        text: 'Requests',
-        type: 'default',
+ $scope.btn_req = {
+     text: 'Requests',
+     type: 'default',
 
-        width: 160,
+     width: 160,
 
-        onClick: function (e) {
-            $window.open('https://localhost:44385/#!/forms/vacation', '_blank');
+     onClick: function (e) {
+         $window.open('https://ava.airpocket.app/#!/forms/vacation', '_blank');
 
 
-        }
+     }
 
-    };
-
+ };
 
     $scope.OnlyRoster = false;
     if ($rootScope.userName.toLowerCase() == 'train.moradi' || $rootScope.userName.toLowerCase() == 'mohammadifard')
@@ -153,7 +157,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         }
     };
 
-    //2024-06-23
+ //2024-06-23
     $scope.get_ac_type = function (message, rank) {
         var type_part = null;
         var result = [];
@@ -161,22 +165,21 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             type_part = message.split('*')[0];
         }
         if (!type_part) {
-            if (['ISCCM', 'SCCM', 'CCM', 'CCI', 'CCE', 'SCC', 'CC'].indexOf(rank) != -1)
-                return 'ALL';
-            else
+            //if (['ISCCM', 'SCCM', 'CCM', 'CCI', 'CCE', 'SCC', 'CC'].indexOf(rank) != -1)
+            //    return 'ALL';
+            //else
                 return 'UNKNOWN';
         }
         if (type_part.includes('73'))
             result.push('737');
         if (type_part.includes('MD') || type_part.includes('M82') || type_part.includes('M83') || type_part.includes('M88'))
             result.push('MD');
-        if (type_part.includes('310') || type_part.includes('320') || type_part.includes('330') || type_part.includes('340'))
-            result.push('AIRBUS');
+        if (type_part.includes('310') || type_part.includes('320') || type_part.includes('330') || type_part.includes('340') || type_part.includes('AB'))
+            result.push('AB');
 
         return result.join(',');
 
     };
-
     $scope.fillCrew = function () {
 
 
@@ -188,15 +191,22 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         schedulingService.getCrewForRosterByDateNew(1, _dt).then(function (response) {
 
             $scope.loadingVisible = false;
-            //2024-06-23
+			//2024-06-23
             $.each(response, function (_i, _d) {
 
                 _d.ac_type = $scope.get_ac_type(_d.ValidationMessage, _d.JobGroup);
+				_d.JobGroup2=_d.JobGroup;
+				if (_d.FlightLate==1)
+					_d.JobGroup2+='2';
                  
             });
+			 //$.each(response,function(_i,_d){
+			//	_d.JobGroup2=_d.JobGroup;
+			//	if (_d.FlightLate==1)
+			//		_d.JobGroup2+='2';
+			//});
 
             $scope.ds_crew = response;
-            console.log('ds_crew', $scope.ds_crew);
             if ($scope.IsCabin && $scope.IsCockpit) {
                 $scope.ds_crew_roster = Enumerable.From($scope.ds_crew).ToArray();
             }
@@ -208,7 +218,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
                     if ($scope.IsCabin) {
                         $scope.ds_crew_roster = Enumerable.From($scope.ds_crew).Where('$.JobGroupCode.startsWith("00102")').ToArray();
                     }
-            console.log($scope.ds_crew);
+            $scope.ds_crew_roster=Enumerable.From($scope.ds_crew_roster).OrderBy('$.GroupOrder').ThenBy('$.ScheduleName').ToArray();
             //$scope.updateFlightsDsInit();
             $.each($scope.ds_crew, function (_i, crw) {
 
@@ -411,7 +421,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             {
                 widget: 'dxSelectBox', location: 'before', options: {
                     dataSource: ['All', 'COCKPIT', 'CABIN'],
-                    readOnly: !($scope.IsCockpit && $scope.IsCabin),
+                    //readOnly: !($scope.IsCockpit && $scope.IsCabin),
                     onValueChanged: function (e) {
                         $scope.rptcd_caco = e.value;
                     },
@@ -445,6 +455,16 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
                         var dto = { Ids: ids, Date: new Date($scope.rptcd_dateFrom), UserName: $rootScope.userName };
                         /////////////////////////////
                         $scope.loadingVisible = true;
+						
+						//dutiesSendRocketChat
+						flightService.dutiesSendRocketChat(dto).then(function (responsex) {
+                            $scope.loadingVisible = false;
+                             
+
+
+                        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+						 
+						$scope.loadingVisible = true;
                         flightService.dutiesSendSMS(dto).then(function (response) {
                             $scope.loadingVisible = false;
                             $.each(response, function (_i, _d) {
@@ -453,21 +473,19 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
                                 rec.ResStr = "Queue";
 
                             });
-                            //2020-11-22
+                            
                             $.each(selected, function (_i, _d) {
                                 if (_d.DateConfirmed) { _d.IsConfirmed = null; _d.DateConfirmed = null; }
                                 else { _d.IsConfirmed = 1; _d.DateConfirmed = new Date(); }
                             });
 
-                            //$scope.dg_cduties_instance.refresh();
-                            ///////////////////////////
-                            // $scope.start();
+                           
 
 
 
                         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-
+                         
 
                     }
                 }, toolbar: 'bottom'
@@ -480,13 +498,20 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
 
 
                         var selected = $rootScope.getSelectedRows($scope.dg_cduties_instance);
-                        var ids = Enumerable.From(selected).Select('$.Id').ToArray();
 
+						var ids =[]
+						if($rootScope.userName.toLowerCase() == 'cs.pakniat'){
+                         ids = Enumerable.From(selected).Where("$.IsCabin == 1").Select('$.Id').ToArray();
+						 
+						}else{
+                         ids = Enumerable.From(selected).Select('$.Id').ToArray();
+						}
 
-                        if (ids.length == 0) {
+ if (ids.length == 0) {
                             General.ShowNotify('No Rows Selected', 'error');
                             return;
                         }
+                       
 
                         General.Confirm('Are you sure?', function (res) {
                             if (res) {
@@ -544,11 +569,18 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
                 widget: 'dxButton', location: 'before', options: {
                     type: 'default', text: 'Hide', onClick: function (arg) {
 
-                        var selected = $rootScope.getSelectedRows($scope.dg_cduties_instance);
-                        var ids = Enumerable.From(selected).Select('$.Id').ToArray();
+                      
+						var selected = $rootScope.getSelectedRows($scope.dg_cduties_instance);
 
+						var ids =[]
+						if($rootScope.userName.toLowerCase() == 'cs.pakniat'){
+                         ids = Enumerable.From(selected).Where("$.IsCabin == 1").Select('$.Id').ToArray();
+						 
+						}else{
+                         ids = Enumerable.From(selected).Select('$.Id').ToArray();
+						}
 
-                        if (ids.length == 0) {
+ if (ids.length == 0) {
                             General.ShowNotify('No Rows Selected', 'error');
                             return;
                         }
@@ -633,6 +665,10 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             'toolbarItems[0].options.value': 'rptcd_dateFrom',
             'toolbarItems[1].options.value': 'rptcd_dateTo',
             'toolbarItems[2].options.value': 'rptcd_caco',
+			 //'toolbarItems[4].visible': 'IsCockpit',
+			  //'toolbarItems[5].visible': 'IsCockpit',
+			   //'toolbarItems[6].visible': 'IsCockpit',
+			  //'toolbarItems[7].visible': 'IsCockpit',
         }
     };
 
@@ -641,7 +677,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
     $scope.popup_eduties_visible = false;
     $scope.popup_eduties_title = 'Exceeded FDPs Report';
     //06-13
-    $scope.rptcd_caco = ($scope.IsCabin && $scope.IsCockpit) ? 'All' : ($scope.IsCabin ? 'CABIN' : 'COCKPIT');
+    $scope.rptcd_caco = 'All' //($scope.IsCabin && $scope.IsCockpit) ? 'All' : ($scope.IsCabin ? 'CABIN' : 'COCKPIT');
 
     $scope.popup_eduties = {
         elementAttr: {
@@ -1082,6 +1118,7 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
 
         }
     };
+
 
 
     ////FIXTIME 2021-12-26
@@ -2857,7 +2894,9 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             },
             fixed: true, fixedPosition: 'left',//  sortIndex: 0, sortOrder: "desc"
         },
-
+ { dataField: 'REgister', caption: 'O/A', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 100,fixed: true, fixedPosition: 'left' },
+		{ dataField: 'AircraftType', caption: 'A/C Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120,fixed: true, fixedPosition: 'left' },
+		
         { dataField: 'ScheduleName', caption: 'Sch. Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left', },
         // { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 200 },
 
@@ -3095,9 +3134,6 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             // $scope.bind_calcrew();
 
             // $scope.cal_change();
-            //2024-06-23
-            if ($scope.dg_calcrew_instance)
-                $scope.dg_calcrew_instance.repaint();
 
         },
         onHiding: function () {
@@ -3208,12 +3244,13 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         $scope.popup_sms_visible = true;
     };
 
-    $scope.dg_calcrew_columns = [
+  $scope.dg_calcrew_columns = [
         // { dataField: 'Selected', caption: '', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width:45},
-        { dataField: 'ac_type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width:90/*sortIndex: 1, sortOrder: 'asc'*/ },
-        { dataField: 'ScheduleName', caption: 'Schedule Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, sortIndex: 1, sortOrder: 'asc' },
-        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
-        { dataField: 'GroupOrder', caption: 'O', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, visible: false, sortIndex: 0, sortOrder: 'asc' },
+		{ dataField: 'Position', caption: 'O/A', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width:70/*sortIndex: 1, sortOrder: 'asc'*/ },
+        { dataField: 'ac_type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width:70/*sortIndex: 1, sortOrder: 'asc'*/ },
+        { dataField: 'ScheduleName', caption: 'Schedule Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false,width:170/*, sortIndex: 1, sortOrder: 'asc'*/ },
+        { dataField: 'JobGroup2', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 70 },
+        { dataField: 'GroupOrder', caption: 'O', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, visible: false/*, sortIndex: 0, sortOrder: 'asc'*/ },
         {
             dataField: "Id", caption: '',
             width: 45,
@@ -3287,12 +3324,15 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
             var selectedRowElements = e.component.element().find('tr.dx-selection');
             scrollable.scrollToElement(selectedRowElements);
         },
-        onRowPrepared: function (e) {
-            //if (e.data && e.data.AvailabilityId != 1)
-            //    e.rowElement.css('background', '#ffcccc');
+         
+		 onRowPrepared: function (e) {
+            if (e.data &&  e.data.PositionId   ) {
+               // e.rowElement.css('background', '#e6e6e6');
+                
+            }
 
         },
-        //2024-06-23
+		 //2024-06-23
         onCellPrepared: function (e) {
 
             if (e.rowType === "data" && e.column.dataField == "ac_type") {
@@ -3312,6 +3352,12 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
                     e.cellElement.css("backgroundColor", "#ffcccc");
                 }
             }
+			//#fafa98
+			 if (e.rowType === "data" && e.column.dataField == "ScheduleName") {
+				  if (e.data.BaseAirportId == 140870) {
+                    e.cellElement.css("backgroundColor", "#fafa98");
+                }
+			 }
 
         },
 
@@ -4000,18 +4046,25 @@ app.controller('schedulingvrhController', ['$scope', '$location', '$routeParams'
         return false;
     };
 
-    //2024-06-23
     $scope.xgetDutyClass = function (duty) {
-        switch (duty.DutyType) {
+		
+		 var str = '';
+        if (duty.DutyType == 1165 && duty.IsOver)
+            str += "-oh";
+        if (duty.DutyType == 1165 && duty.InitRoute.includes('(o)'))
+            str = "-obs";
+
+        return 'obj-duty duty-' + duty.DutyType+str;
+		
+		
+		
+		
+       /* switch (duty.DutyType) {
             case 1165:
-                 
-                if (duty.InitRoute.includes('(o)'))
-                    return 'duty-1165 duty-1165-obs duty-base';
-                else
                 return 'duty-1165 duty-base';
             default:
                 return 'duty-' + duty.DutyType+' duty-base';
-        }
+        }*/
     };
     //hoohoo
 
@@ -4983,6 +5036,13 @@ onValueChanged: function (arg) {
 
         return false;
     };
+	
+	$scope.getFlightCaption=function(f){
+		var dh=f.PaxOver===0?'':'*';
+	   if (f.FlightStatusID==4)
+		   return (f.notes? f.FlightNumber+"("+f.notes+")":f.FlightNumber)+dh;
+		return f.FlightNumber+dh;
+	};
     $scope.timeType = 0;
     $scope.getFlightStyle = function (f, index, res) {
 
@@ -5910,6 +5970,15 @@ onValueChanged: function (arg) {
     $scope.isExtendFDPVisible = function (y) {
         if (y.key == $scope.selectedFlightsKey.Id)
             return false;
+		//2024-07-20
+		if (! $scope.IsCockpit){
+			
+			var cockpit=['TRE','TRI','P1','P2','LTC'].indexOf(y.group)!=-1;
+			if (cockpit)
+				return false;
+			else return true;
+			
+		}
         return true;
     };
 
@@ -6289,9 +6358,9 @@ onValueChanged: function (arg) {
             'P22', 'P23', 'P24', 'P25',
             'ISCCM1', 'ISCCM2', 'ISCCM3', 'ISCCM4', 'ISCCM5',
             'SCCM1', 'SCCM2', 'SCCM3', 'SCCM4', 'SCCM5',
-            'CCM1', 'CCM2', 'CCM3', 'CCM4', 'CCM5',
+            'CCM1', 'CCM2', 'CCM3', 'CCM4', 'CCM5','CCM6','CCM7','CCM8','CCM9','CCM10',
             'IP1', 'IP2', 'IP3', 'IP4', 'IP5',
-            'OBS1', 'OBS2', 'OBS3', 'OBS4', 'OBS5',
+            'OBS1', 'OBS2', 'OBS3', 'OBS4', 'OBS5', 'OBS6',
             'CHECK1', 'CHECK2', 'CHECK3', 'CHECK4', 'CHECK5',
             'SAFETY1', 'SAFETY2', 'SAFETY3', 'SAFETY4', 'SAFETY5',
         ];
@@ -6344,6 +6413,7 @@ onValueChanged: function (arg) {
         OBS3: false,
         OBS4: false,
         OBS5: false,
+        OBS6: false,
         CHECK1: false,
         CHECK2: false,
         CHECK3: false,
@@ -6364,6 +6434,11 @@ onValueChanged: function (arg) {
         P25: false,
         CCM4: false,
         CCM5: false,
+		CCM6: false,
+		CCM7: false,
+		CCM8: false,
+		CCM9: false,
+		CCM10: false,
 
     };
     $scope.posVisibleClick = function (pos) {
@@ -6375,12 +6450,17 @@ onValueChanged: function (arg) {
     };
 
     $scope.posVisibleClick2 = function (pos) {
-
-        if ($scope.indexPos[pos] == 5)
+          console.log('index',$scope.indexPos[pos]);
+          console.log($scope.posVisible[pos + $scope.indexPos[pos].toString()]);
+		  console.log($scope.indexPos[pos]);
+        if (pos !='CCM' && $scope.indexPos[pos] == 6)
+            return;
+		if (pos =='CCM' && $scope.indexPos[pos] == 10)
             return;
 
 
         $scope.indexPos[pos]++;
+		console.log($scope.indexPos[pos]);
         if ($scope.posVisible[pos + $scope.indexPos[pos].toString()])
             $scope.posVisibleClick2(pos);
         $scope.posVisible[pos + $scope.indexPos[pos].toString()] = true;
@@ -6411,6 +6491,22 @@ onValueChanged: function (arg) {
             SAFETY: 0,
 
         };
+		var is_airbus=false;
+		if ($scope.ati_selectedTypes && $scope.ati_selectedTypes.length==1 && $scope.ati_selectedTypes[0]==26){
+			$scope.indexPos = {
+            SCCM: 1,
+            P1: 1,
+            P2: 1,
+            IP: 0,
+            OBS: 0,
+            CHECK: 0,
+            CCM: 5,
+            ISCCM: 0,
+            SAFETY: 0,
+
+        };
+		is_airbus=true;
+		}
         $scope.posVisible.IP1 = false;
         $scope.posVisible.IP2 = false;
         $scope.posVisible.IP3 = false;
@@ -6425,13 +6521,19 @@ onValueChanged: function (arg) {
         $scope.posVisible.SCCM3 = false;
         $scope.posVisible.SCCM4 = false;
         $scope.posVisible.SCCM5 = false;
-        $scope.posVisible.CCM4 = false;
-        $scope.posVisible.CCM5 = false;
+        $scope.posVisible.CCM4 = is_airbus;
+        $scope.posVisible.CCM5 = is_airbus;
+		$scope.posVisible.CCM6 = false;
+		$scope.posVisible.CCM7 = false;
+		$scope.posVisible.CCM8 = false;
+		$scope.posVisible.CCM9 = false;
+		$scope.posVisible.CCM10 = false;
         $scope.posVisible.OBS1 = false;
         $scope.posVisible.OBS2 = false;
         $scope.posVisible.OBS3 = false;
         $scope.posVisible.OBS4 = false;
         $scope.posVisible.OBS5 = false;
+        $scope.posVisible.OBS6 = false;
         $scope.posVisible.CHECK1 = false;
         $scope.posVisible.CHECK2 = false;
         $scope.posVisible.CHECK3 = false;
@@ -6461,9 +6563,23 @@ onValueChanged: function (arg) {
         $scope.clearPos(keep);
         var _id = $scope.selectedFlightsKey.Id;
         console.log(_id);
-        console.log($scope.ati_fdps);
-        var _fdps = Enumerable.From($scope.ati_fdps).Where("$.key=='" + _id + "'").ToArray();
-        console.log(_fdps);
+        console.log('ati_fdps',$scope.ati_fdps);
+		
+        //var _fdps = Enumerable.From($scope.ati_fdps).Where("$.key=='" + _id + "'").ToArray();
+		var _fdps=[];
+		var main_ids=_id.split('_');
+		console.log('11-24 mainids',main_ids);
+		$.each($scope.ati_fdps,function(_i,_d){
+			var _ids=_d.key.split('_');
+			console.log('11-24 ids',_ids);
+			var intersect=Enumerable.From(main_ids).Where(function(x){return _ids.indexOf(x)!=-1;}).ToArray();
+			console.log('11-24 intersect',intersect);
+			if (intersect.length==main_ids.length && _ids.length==main_ids.length)
+				_fdps.push(_d);
+			
+			
+		});
+        console.log('11-24 _fdps',_fdps);
         $.each(_fdps, function (_i, _d) {
             $scope.currentAssigned.CrewIds.push(_d.crewId);
             $scope.currentAssigned[_d.rank + _d.index.toString() + 'Id'] = _d.crewId;
@@ -6799,12 +6915,18 @@ onValueChanged: function (arg) {
         });
 
         $.each($scope.ati_flights, function (_i, _d) {
-
+           // console.log('2024-09-25 has crew   ',_d.OTypeId+'   '+_d.FlightNumber);
             var _cbn = /*_d.ISCCM +*/ _d.SCCM + _d.CCM;
-            _d.hasCabinExtra = _d.SCCM > 1 || _d.CCM > 3;
+			var cabin_limit=4;
+			if (_d.OTypeId==26)
+				cabin_limit=6;
+			var cabin_extra=3;
+			if (_d.OTypeId==26)
+				cabin_extra=5;
+            _d.hasCabinExtra = _d.SCCM > 1 || _d.CCM > cabin_extra;
             _d.hasCockpitExtra = _d.P1 > 1 || _d.P2 > 1 || _d.IP > 1;
 
-            if (((_d.P1 >= 1 && _d.P2 >= 1) || (_d.IP >= 1 && _d.P2 >= 1) || (_d.IP >= 1 && _d.P1 >= 1)) && /*_d.SCCM>=1 && _d.CCM>=3*/ _cbn >= 4)
+            if (((_d.P1 >= 1 && _d.P2 >= 1) || (_d.IP >= 1 && _d.P2 >= 1) || (_d.IP >= 1 && _d.P1 >= 1)) && /*_d.SCCM>=1 && _d.CCM>=3*/ _cbn >= cabin_limit)
                 _d.hasCrewAll = true;
             _d.crew = Enumerable.From(_d.crew).OrderBy('$.order').ToArray();
             //if (flight.FlightStatusID==4)
@@ -6882,6 +7004,11 @@ onValueChanged: function (arg) {
             case 'CCM3':
             case 'CCM4':
             case 'CCM5':
+			case 'CCM6':
+			case 'CCM7':
+			case 'CCM8':
+			case 'CCM9':
+			case 'CCM10':
                 return 1158;
             case 'OBS':
             case 'OBS1':
@@ -6889,6 +7016,7 @@ onValueChanged: function (arg) {
             case 'OBS3':
             case 'OBS4':
             case 'OBS5':
+            case 'OBS6':
                 return 1153;
             case 'CHECK':
             case 'CHECK1':
@@ -7022,8 +7150,18 @@ onValueChanged: function (arg) {
                 return;
             }
 
+           if ($scope.ati_selectedFlights.length === 1) 
+               if ($scope.ati_selectedFlights[0].dh === 1) 
+                   $scope.isDH = true;
+   
+
+console.log('DH test');
+console.log('Length:', $scope.ati_selectedFlights);
+console.log('DH value:', $scope.ati_selectedFlights[0]?.dh);
+console.log('isDH:', $scope.isDH);
+var _deps=Enumerable.From($scope.ati_selectedFlights).Where(function(x){ return x.ToAirport==135749 || x.ToAirport==152340;}).Select('$.ToAirport').ToArray();
             //////2022-01-14
-            if ($scope.selectedPos.rank != 'OBS') {
+            if ($scope.selectedPos.rank != 'OBS' && !$scope.isDH) {
                 //4-27
 
                 //if ($scope.FDPStat.WOCLError == 1) {
@@ -7044,7 +7182,7 @@ onValueChanged: function (arg) {
                         buttons: [{ text: "Ok", onClick: function () { } }]
                     });
                     _myDialog.show();
-                    //return;
+                    return;
                 }
 
 
@@ -7059,12 +7197,31 @@ onValueChanged: function (arg) {
                             buttons: [{ text: "Ok", onClick: function () { } }]
                         });
                         _myDialog.show();
-                      //  return;
+                        return;
+                    }
+                }
+				
+				
+				 
+
+				if (crew.JobGroupCode.startsWith('00101')) {
+
+                    if (!crew.RemainLicence || crew.RemainLicence < 0) {
+                        var _mestr = 'Licence ' + (crew.LicenceExpired ? moment(crew.LicenceExpired).format('YYYY-MM-DD') : 'UNKNOWN');
+                        var _myDialog = DevExpress.ui.dialog.custom({
+                            rtlEnabled: true,
+                            title: "Confirm",
+                            message: _mestr,
+                            buttons: [{ text: "Ok", onClick: function () { } }]
+                        });
+                        _myDialog.show();
+                         return;
                     }
                 }
 
 
                 var expired = [];
+				var expired_extra=[];
                 if (crew.JobGroupCode.startsWith('00101'))
                     if (!crew.RemainSEPT || crew.RemainSEPT < 0) {
 
@@ -7106,18 +7263,41 @@ onValueChanged: function (arg) {
 
                 if (crew.JobGroupCode.startsWith('00101')) {
                     if (!crew.RemainLPC || crew.RemainLPC < 0)
-                        expired.push('LPC ' + (crew.LPCExpired ? moment(crew.LPCExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+                    {    
+				       expired.push('LPC ' + (crew.LPCExpired ? moment(crew.LPCExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+					   expired_extra.push('LPC ' + (crew.LPCExpired ? moment(crew.LPCExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+				      }
 
                     if (!crew.RemainOPC || crew.RemainOPC < 0)
-                        expired.push('OPC ' + (crew.OPCExpired ? moment(crew.OPCExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+					{   expired.push('OPC ' + (crew.OPCExpired ? moment(crew.OPCExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+				         expired_extra.push('OPC ' + (crew.OPCExpired ? moment(crew.OPCExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+				    }
 
                     if (!crew.RemainLPR || crew.RemainLPR < 0)
-                        expired.push('LPR ' + (crew.LPRExpired ? moment(crew.LPRExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+                    {    expired.push('LPR ' + (crew.LPRExpired ? moment(crew.LPRExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+				         expired_extra.push('LPR ' + (crew.LPRExpired ? moment(crew.LPRExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+				    }
                     if (!crew.RemainLicence || crew.RemainLicence < 0)
-                        expired.push('Licence ' + (crew.LicenceExpired ? moment(crew.LicenceExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+                    {    expired.push('Licence ' + (crew.LicenceExpired ? moment(crew.LicenceExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+				expired_extra.push('Licence ' + (crew.LicenceExpired ? moment(crew.LicenceExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+				
+				   }
 
                     if (!crew.RemainLine || crew.RemainLine < 0)
-                        expired.push('LINE ' + (crew.LineExpired ? moment(crew.LineExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+					{
+						//alert(  $scope.selectedPos.rank.toLowerCase()!='check');
+						//alert(crew.Code);
+						if (crew.Code=='1' /*&& $scope.selectedPos.rank.toLowerCase()=='check'*/ ){
+							// expired.push('LINE ' + (crew.LineExpired ? moment(crew.LineExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+						}
+						else
+						{
+							if ($scope.selectedPos.rank.toLowerCase()=='check'){
+							}
+							else
+						    expired.push('LINE ' + (crew.LineExpired ? moment(crew.LineExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+						}
+					}
 
                     if (!crew.RemainColdWx || crew.RemainColdWx < 0)
                         expired.push('COLD-WX ' + (crew.RemainColdWx ? moment(crew.RemainColdWx).format('YYYY-MM-DD') : 'UNKNOWN'));
@@ -7125,11 +7305,11 @@ onValueChanged: function (arg) {
                     //ColdWXExpired
                 }
                 else {
-                    if (!crew.RemainRecurrent || crew.RemainRecurrent < 0)
-                        expired.push('OPC ' + (crew.RecurrentExpired ? moment(crew.RecurrentExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
+                  //  if (!crew.RemainRecurrent || crew.RemainRecurrent < 0)
+                  //      expired.push('OPC ' + (crew.RecurrentExpired ? moment(crew.RecurrentExpired).format('YYYY-MM-DD') : 'UNKNOWN'));
                 }
 
-                if (crew.RemainFirstAid < 0)
+                if (crew.RemainFirstAid < 0 && _deps.length>0)
                     expired.push('PASSPORT ' + moment(crew.FirstAidExpired).format('YYYY-MM-DD'));
 
 
@@ -7142,7 +7322,17 @@ onValueChanged: function (arg) {
                         buttons: [{ text: "OK", onClick: function () { } }]
                     });
                     myDialog.show();
-                     //return;
+                    return;
+                }
+				 if (expired_extra.length > 0) {
+                    var myDialog = DevExpress.ui.dialog.custom({
+                        rtlEnabled: true,
+                        title: "Expired Documents",
+                        message: expired_extra,
+                        buttons: [{ text: "OK", onClick: function () { } }]
+                    });
+                    myDialog.show();
+                    return;
                 }
 
 
@@ -7518,8 +7708,9 @@ onValueChanged: function (arg) {
             //console.log('______selected',selected);
             $.each(selected, function (_i, _d) {
                 //  alert($(_d).data('flightid')+'    '+ $(_d).data('dh'));
-                // console.log();
+               
                 var $d = $(_d);
+				 console.log('PUSH       ',$d);
                 $scope.ati_selectedFlights.push({
                     Id: $d.data('flightid'), dh: !$d.data('dh') ? 0 : $d.data('dh')
                     , sta: new Date($d.data('sta'))
@@ -7535,6 +7726,7 @@ onValueChanged: function (arg) {
 
             });
             $scope.ati_selectedTypes = Enumerable.From($scope.ati_selectedTypes).Distinct().ToArray();
+			//console.log('2024-09-25    ',$scope.ati_selectedTypes);
 	//2024-04-10 
 			$scope.ati_selectedFlights=Enumerable.From($scope.ati_selectedFlights).OrderBy(function(x){ return x.offblock;}).ToArray();
 			console.log($scope.ati_selectedFlights);
@@ -7679,7 +7871,7 @@ onValueChanged: function (arg) {
     $scope.FLAvg = null;
     $scope.dg_used_crew_ds = [];
     $scope.fillFilteredCrew = function () {
-		
+		//11-17
         //console.log('filtered',Enumerable.From( $scope.ds_crew).Where('$.JobGroup="P1"').ToArray());
 		console.log('__selected type',$scope.ati_selectedTypes[0]);
         $scope.dg_used_crew_ds = [];
@@ -7710,24 +7902,24 @@ onValueChanged: function (arg) {
         switch (id) {
             case 'IP':
                 _ds = Enumerable.From($scope.ds_crew).Where(function (x) {
-                    return (x.JobGroup == 'TRE' || x.JobGroup == 'TRI' || x.JobGroup == 'LTC')  /*&& x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1*/ ;
+                    return (x.JobGroup == 'TRE' || x.JobGroup == 'TRI' || x.JobGroup == 'LTC')   && (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh)  ;
                 }).ToArray();
 
                 break;
             case 'P1':
                 _ds = Enumerable.From($scope.ds_crew).Where(function (x) {
-                    return ((x.JobGroup == 'TRE' || x.JobGroup == 'TRI' || x.JobGroup == 'LTC') || ((x.JobGroup == 'P1'))) /*&& (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh)*/;
+                    return ((x.JobGroup == 'TRE' || x.JobGroup == 'TRI' || x.JobGroup == 'LTC') || ((x.JobGroup == 'P1')))  && (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh) ;
                 }).ToArray();
                 break;
             case 'P2':
                 _ds = Enumerable.From($scope.ds_crew).Where(function (x) {
-                    return ((x.JobGroup == 'P2' || x.JobGroup == 'P1')) /*&& (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh)*/;
+                    return ((x.JobGroup == 'P2' || x.JobGroup == 'P1'))  && (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh) ;
                 }).ToArray();
                 break;
             case 'Safety':
             case 'SAFETY':
                 _ds = Enumerable.From($scope.ds_crew).Where(function (x) {
-                    return ((x.JobGroup == 'TRE' || x.JobGroup == 'TRI' || x.JobGroup == 'LTC') || (x.JobGroup == 'P1' || x.JobGroup == 'P2')) /*&& (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh)*/;
+                    return ((x.JobGroup == 'TRE' || x.JobGroup == 'TRI' || x.JobGroup == 'LTC') || (x.JobGroup == 'P1' || x.JobGroup == 'P2'))  && (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh) ;
                 }).ToArray();
                 break;
             case 'ISCCM':
@@ -7737,12 +7929,12 @@ onValueChanged: function (arg) {
                 break;
             case 'SCCM':
                 _ds = Enumerable.From($scope.ds_crew).Where(function (x) {
-                    return x.JobGroup == 'SCCM' || x.JobGroup == 'ISCCM';
+                    return (x.JobGroup == 'SCCM' || x.JobGroup == 'ISCCM') && (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh);
                 }).ToArray();
                 break;
             case 'CCM':
                 _ds = Enumerable.From($scope.ds_crew).Where(function (x) {
-                    return x.JobGroup == 'CCM' || x.JobGroup == 'SCCM';
+                    return (x.JobGroup == 'CCM' || x.JobGroup == 'SCCM') && (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh) ;
                 }).ToArray();
                 break;
             case 'CCM1':
@@ -7765,7 +7957,7 @@ onValueChanged: function (arg) {
 
                 _ds = Enumerable.From($scope.ds_crew).Where(function (x) {
                     return ($scope.IsCabin && (x.JobGroup == 'CCM' || x.JobGroup == 'SCCM' || x.JobGroup == 'ISCCM')) 
-					|| ($scope.IsCockpit && (x.JobGroup == 'P2' || x.JobGroup == 'P1' || x.JobGroup == 'TRE' || x.JobGroup == 'TRI' || x.JobGroup == 'LTC') /*&& (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh)*/);
+					|| ($scope.IsCockpit && (x.JobGroup == 'P2' || x.JobGroup == 'P1' || x.JobGroup == 'TRE' || x.JobGroup == 'TRI' || x.JobGroup == 'LTC')  /*&& (x.ValidTypes && x.ValidTypes.indexOf($scope.ati_selectedTypes[0])!=-1 || alldh)*/ );
                 }).ToArray();
                 break;
             case 'CHECK':
@@ -8159,7 +8351,7 @@ onValueChanged: function (arg) {
                     //    $('.gantt-main-container').height($(window).height() - 205);
                     //}
                 });
-            }, 2000);
+            }, 1000);
 
 
 
@@ -10078,407 +10270,7 @@ onValueChanged: function (arg) {
         showCurrentTimeIndicator: false,
         showAllDayPanel: false,
     };
-    //const resourcesData = [
-    //    {
-    //        text: 'Samantha Bright',
-    //        id: 1,
-    //        color: '#cb6bb2',
-    //    }, {
-    //        text: 'John Heart',
-    //        id: 2,
-    //        color: '#56ca85',
-    //    }, {
-    //        text: 'Todd Hoffman',
-    //        id: 3,
-    //        color: '#1e90ff',
-    //    }, {
-    //        text: 'Sandra Johnson',
-    //        id: 4,
-    //        color: '#ff9747',
-    //    },
-    //];
-
-    //const priorityData = [
-    //    {
-    //        text: 'Low Priority',
-    //        id: 1,
-    //        color: '#1e90ff',
-    //    }, {
-    //        text: 'High Priority',
-    //        id: 2,
-    //        color: '#ff9747',
-    //    },
-    //];
-
-    //const data = [{
-    //    text: 'Google AdWords Strategy',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-01T16:00:00.000Z'),
-    //    endDate: new Date('2021-02-01T17:30:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'New Brochures',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-01T18:30:00.000Z'),
-    //    endDate: new Date('2021-02-01T21:15:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Brochure Design Review',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-01T20:15:00.000Z'),
-    //    endDate: new Date('2021-02-01T23:15:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Website Re-Design Plan',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-01T23:45:00.000Z'),
-    //    endDate: new Date('2021-02-02T18:15:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Rollout of New Website and Marketing Brochures',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-02T15:15:00.000Z'),
-    //    endDate: new Date('2021-02-02T17:45:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Update Sales Strategy Documents',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-02T19:00:00.000Z'),
-    //    endDate: new Date('2021-02-02T20:45:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Non-Compete Agreements',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-03T16:15:00.000Z'),
-    //    endDate: new Date('2021-02-03T17:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Approve Hiring of John Jeffers',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-03T17:00:00.000Z'),
-    //    endDate: new Date('2021-02-03T18:15:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Update NDA Agreement',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-03T18:45:00.000Z'),
-    //    endDate: new Date('2021-02-03T20:45:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Update Employee Files with New NDA',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-03T21:00:00.000Z'),
-    //    endDate: new Date('2021-02-03T23:45:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Submit Questions Regarding New NDA',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-05T01:00:00.000Z'),
-    //    endDate: new Date('2021-02-04T16:30:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Submit Signed NDA',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-04T19:45:00.000Z'),
-    //    endDate: new Date('2021-02-04T21:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Review Revenue Projections',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-05T00:15:00.000Z'),
-    //    endDate: new Date('2021-02-04T15:00:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Comment on Revenue Projections',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-05T16:15:00.000Z'),
-    //    endDate: new Date('2021-02-05T18:15:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Provide New Health Insurance Docs',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-05T19:45:00.000Z'),
-    //    endDate: new Date('2021-02-05T21:15:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Review Changes to Health Insurance Coverage',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-05T21:15:00.000Z'),
-    //    endDate: new Date('2021-02-05T22:30:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Review Training Course for any Omissions',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-08T21:00:00.000Z'),
-    //    endDate: new Date('2021-02-09T19:00:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Recall Rebate Form',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-08T19:45:00.000Z'),
-    //    endDate: new Date('2021-02-08T20:15:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Create Report on Customer Feedback',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-09T22:15:00.000Z'),
-    //    endDate: new Date('2021-02-10T00:30:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Review Customer Feedback Report',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-09T23:15:00.000Z'),
-    //    endDate: new Date('2021-02-10T01:30:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Customer Feedback Report Analysis',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-10T16:30:00.000Z'),
-    //    endDate: new Date('2021-02-10T17:30:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Prepare Shipping Cost Analysis Report',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-10T19:30:00.000Z'),
-    //    endDate: new Date('2021-02-10T20:30:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Provide Feedback on Shippers',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-10T21:15:00.000Z'),
-    //    endDate: new Date('2021-02-10T23:00:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Select Preferred Shipper',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-11T00:30:00.000Z'),
-    //    endDate: new Date('2021-02-11T03:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Complete Shipper Selection Form',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-11T15:30:00.000Z'),
-    //    endDate: new Date('2021-02-11T17:00:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Upgrade Server Hardware',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-11T19:00:00.000Z'),
-    //    endDate: new Date('2021-02-11T21:15:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Upgrade Personal Computers',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-11T21:45:00.000Z'),
-    //    endDate: new Date('2021-02-11T23:30:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Upgrade Apps to Windows RT or stay with WinForms',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-12T17:30:00.000Z'),
-    //    endDate: new Date('2021-02-12T20:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Estimate Time Required to Touch-Enable Apps',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-12T21:45:00.000Z'),
-    //    endDate: new Date('2021-02-12T23:30:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Report on Tranistion to Touch-Based Apps',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-13T01:30:00.000Z'),
-    //    endDate: new Date('2021-02-13T02:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Submit New Website Design',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-15T15:00:00.000Z'),
-    //    endDate: new Date('2021-02-15T17:00:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Create Icons for Website',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-15T18:30:00.000Z'),
-    //    endDate: new Date('2021-02-15T20:15:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Create New Product Pages',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-16T16:45:00.000Z'),
-    //    endDate: new Date('2021-02-16T18:45:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Approve Website Launch',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-16T19:00:00.000Z'),
-    //    endDate: new Date('2021-02-16T22:15:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Update Customer Shipping Profiles',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-17T16:30:00.000Z'),
-    //    endDate: new Date('2021-02-17T18:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Create New Shipping Return Labels',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-17T19:45:00.000Z'),
-    //    endDate: new Date('2021-02-17T21:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Get Design for Shipping Return Labels',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-17T22:00:00.000Z'),
-    //    endDate: new Date('2021-02-17T23:30:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'PSD needed for Shipping Return Labels',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-18T15:30:00.000Z'),
-    //    endDate: new Date('2021-02-18T16:15:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Contact ISP and Discuss Payment Options',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-18T18:30:00.000Z'),
-    //    endDate: new Date('2021-02-18T23:00:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Prepare Year-End Support Summary Report',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-19T00:00:00.000Z'),
-    //    endDate: new Date('2021-02-19T03:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Review New Training Material',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-19T15:00:00.000Z'),
-    //    endDate: new Date('2021-02-19T16:15:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Distribute Training Material to Support Staff',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-19T19:45:00.000Z'),
-    //    endDate: new Date('2021-02-19T21:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Training Material Distribution Schedule',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-19T21:15:00.000Z'),
-    //    endDate: new Date('2021-02-19T23:15:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Approval on Converting to New HDMI Specification',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-22T16:30:00.000Z'),
-    //    endDate: new Date('2021-02-22T17:15:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Create New Spike for Automation Server',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-22T17:00:00.000Z'),
-    //    endDate: new Date('2021-02-22T19:30:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Code Review - New Automation Server',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-22T20:00:00.000Z'),
-    //    endDate: new Date('2021-02-22T22:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Confirm Availability for Sales Meeting',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-23T17:15:00.000Z'),
-    //    endDate: new Date('2021-02-23T22:15:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Reschedule Sales Team Meeting',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-23T23:15:00.000Z'),
-    //    endDate: new Date('2021-02-24T01:00:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Send 2 Remotes for Giveaways',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-24T16:30:00.000Z'),
-    //    endDate: new Date('2021-02-24T18:45:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Discuss Product Giveaways with Management',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-24T19:15:00.000Z'),
-    //    endDate: new Date('2021-02-24T23:45:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Replace Desktops on the 3rd Floor',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-25T16:30:00.000Z'),
-    //    endDate: new Date('2021-02-25T17:45:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Update Database with New Leads',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-25T19:00:00.000Z'),
-    //    endDate: new Date('2021-02-25T21:15:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Mail New Leads for Follow Up',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-25T21:45:00.000Z'),
-    //    endDate: new Date('2021-02-25T22:30:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Send Territory Sales Breakdown',
-    //    ownerId: [2],
-    //    startDate: new Date('2021-02-26T01:00:00.000Z'),
-    //    endDate: new Date('2021-02-26T03:00:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Territory Sales Breakdown Report',
-    //    ownerId: [1],
-    //    startDate: new Date('2021-02-26T15:45:00.000Z'),
-    //    endDate: new Date('2021-02-26T16:45:00.000Z'),
-    //    priority: 1,
-    //}, {
-    //    text: 'Report on the State of Engineering Dept',
-    //    ownerId: [3],
-    //    startDate: new Date('2021-02-26T21:45:00.000Z'),
-    //    endDate: new Date('2021-02-26T22:30:00.000Z'),
-    //    priority: 2,
-    //}, {
-    //    text: 'Staff Productivity Report',
-    //    ownerId: [4],
-    //    startDate: new Date('2021-02-26T23:15:00.000Z'),
-    //    endDate: new Date('2021-02-27T02:30:00.000Z'),
-    //    priority: 2,
-    //}];
-    //$scope.schedulerOptions = {
-    //   // timeZone: 'America/Los_Angeles',
-    //    dataSource: data,
-    //    views: ['timelineDay', 'timelineWeek', 'timelineWorkWeek', 'timelineMonth'],
-    //    currentView: 'timelineMonth',
-    //    currentDate: new Date(2021, 1, 2),
-    //    firstDayOfWeek: 0,
-    //    startDayHour: 8,
-    //    endDayHour: 20,
-    //    cellDuration: 60,
-    //    groups: ['CrewId'],
-    //    resources: [{
-    //        fieldExpr: 'ownerId',
-    //        allowMultiple: true,
-    //        dataSource: resourcesData,
-    //        label: 'Owner',
-    //        useColorAsDefault: true,
-    //    }, {
-    //        fieldExpr: 'priority',
-    //        allowMultiple: false,
-    //        dataSource: priorityData,
-    //        label: 'Priority',
-    //    }],
-    //    height: 580,
-    //};
-
+   
 
 
 
@@ -10603,7 +10395,7 @@ onValueChanged: function (arg) {
                     type: 'default', text: 'Default', icon: 'print', onClick: function (arg) {
 
                         var _dtd=(moment($scope._dailydate).format('YYYY-MM-DD'));
-						  $window.open($rootScope.reportServer + '?type=15&date='+_dtd+'&rev='+$scope.report_rev, '_blank');
+						  $window.open($rootScope.report_scheduling + '?type=15&date='+_dtd+'&rev='+$scope.report_rev, '_blank');
 
                     }
                 }, toolbar: 'bottom'
@@ -10613,7 +10405,7 @@ onValueChanged: function (arg) {
                     type: 'default', text: 'Security', icon: 'print', onClick: function (arg) {
 
                           var _dtd=(moment($scope._dailydate).format('YYYY-MM-DD'));
-  $window.open($rootScope.reportServer + '?type=16&date='+_dtd+'&rev='+$scope.report_rev, '_blank');
+  $window.open($rootScope.report_scheduling + '?type=16&date='+_dtd+'&rev='+$scope.report_rev, '_blank');
                     }
                 }, toolbar: 'bottom'
             },

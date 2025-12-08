@@ -504,6 +504,12 @@
         padding: 3px !important;
         color: white;
     }
+	.duty-1359 {
+	  background: #dddddd;
+        text-align: center;
+        padding: 3px !important;
+        color: black;
+	};
 </style>
 
 
@@ -1469,13 +1475,7 @@
                         <div ng-show="duty.DutyType==1165 && xids.indexOf(duty.Id)==-1">
                             <table style="width:100%;">
                                 <tr>
-                                    <!--<td style="width:32px;">
-
-                        <a class="cellposition" href="" data-ng-click="xcellPositionClicked(duty.Id)" style="background:white;width:28px;height:28px;border-radius:50%;color:gray;font-weight:bold;font-size:10px;text-align:center;display: inherit;vertical-align:middle;">
-                            {{xgetPosition(duty.Position)}}
-                        </a>
-
-                    </td>-->
+                        
                                     <td style=" width:30px;text-align:center;background:white;">
                                         
                                     </td>
@@ -1484,8 +1484,7 @@
                                         <div style="font-size:12px;font-weight:bold">{{duty.DutyTypeTitle}}</div>
                                         <div style="font-size:11px;font-weight:normal">{{duty.FltNo}}</div>
                                         <div style="font-size:11px;font-weight:normal">{{duty.Route}}</div>
-                                        <!--<div style="font-size:10px; "><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>-->
-                                    </td>
+                                     </td>
 
 
                                 </tr>
@@ -1505,10 +1504,10 @@
                                     </td>
                                     <td style="text-align:left;padding-left:5px;">
                                         <div style="font-size:12px;font-weight:bold">{{duty.DutyTypeTitle}}</div>
-                                        <div style="font-size:10px; " ng-show="!duty.Remark2"><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
+                                       <!-- <div style="font-size:10px; " ng-show="!duty.Remark2"><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
                                         <div style="font-size:12px; " ng-show="duty.CanceledNo">{{duty.CanceledNo}}</div>
 
-                                        <div style="font-size:12px; " ng-show="duty.Remark">{{duty.Remark}}</div>
+                                        <div style="font-size:12px; " ng-show="duty.Remark">{{duty.Remark}}</div>-->
                                     </td>
 
 

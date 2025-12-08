@@ -37,7 +37,6 @@ app.controller('inventory_totalController', ['$scope', '$location', 'mntService'
         icon: 'search',
         width: '100%',
         onClick: function (e) {
-           
             mntService.get_part_number($scope.entity).then(function (res) {
                 $.each(res, function (_i, _d) {
                     _d.selected_qty = null;

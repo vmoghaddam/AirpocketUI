@@ -40,19 +40,20 @@ app.controller('appsController', ['$scope', '$location', 'authService', 'ngAuthS
                
                 break;
             case 3:
-                // alert('x');
+			//alert('x');
                 ok = $rootScope.HasAccessToFlightPocket();
-                ok = true;
+				break;
             case 5:
                
                 ok = false;
+				break;
             case 6:
-                ok = $rootScope.HasAccessToLGS();
+               // ok = $rootScope.HasAccessToLGS();
+                //alert(ok);
+               // if (ok)
+               //     $rootScope.fill_vira_information();
                 
-                if (ok)
-                    $rootScope.fill_vira_information();
-                
-                 
+                 ok=false;
                  
                 break;
             default:
@@ -61,6 +62,7 @@ app.controller('appsController', ['$scope', '$location', 'authService', 'ngAuthS
         if (ok) {
 
             authService.setModule(Number(moduleId));
+			//alert('a');
             $rootScope.navigatehome();
         }
         

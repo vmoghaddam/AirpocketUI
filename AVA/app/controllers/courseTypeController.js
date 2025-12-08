@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('courseTypeController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService', function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService) {
     $scope.prms = $routeParams.prms;
 $scope.IsEditable=$rootScope.HasTrainingAdmin();

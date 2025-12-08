@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('personmiscAddController', ['$scope', '$location', 'personService', 'authService', '$routeParams', '$rootScope', function ($scope, $location, personService, authService, $routeParams, $rootScope) {
     $scope.isNew = true;
     $scope.TypeId = null;
