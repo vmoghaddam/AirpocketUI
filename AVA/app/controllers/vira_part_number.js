@@ -1,10 +1,9 @@
 ﻿'use strict';
-app.controller('vira_part_numberController', ['$scope', '$location', '$routeParams', '$rootScope', 'authService', 'notificationService', '$route', 'mntService', 'vira_general_service',
-    function ($scope, $location, $routeParams, $rootScope, authService, notificationService, $route, mntService, vira_general_service) {
+app.controller('vira_part_numberController', ['$scope', '$location', '$routeParams', '$rootScope', 'authService', 'notificationService', '$route', 'mntService',
+    function ($scope, $location, $routeParams, $rootScope, authService, notificationService, $route, mntService) {
 
         $scope.prms = $routeParams.prms;
-
-        $scope.dto_search = {
+        $scope.entity = {
             id: null,
             ataChapter: null,
             description: null,
@@ -17,9 +16,13 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             blockList: null
         };
 
-        $scope.entity = {
+        // mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
 
-        }
+
+
+
+
+        // }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
         ///////////////////////////////
 
@@ -28,9 +31,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             width: '50%',
             type: 'default',
             onClick: function () {
-                mntService.getPNSelection($scope.dto_search).then(function (res) {
-                    $scope.dg_pn_ds = res.data;
-                });
+
             }
         }
 
@@ -44,100 +45,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             }
         }
 
-       $scope.btn_edit = {
-            icon: 'edit',
-            text:'Edit',
-            width: 120,
-            type: 'default',
-            onClick: function () {
-                $rootScope.$broadcast('InitNewPNPopup', $scope.entity);
-            }
-        }
-
-       $scope.btn_delete = {
-            icon: 'remove',
-            text:'Delete',
-            width: 120,
-            type: 'danger',
-            onClick: function () {
-                $scope.loadingVisible = true;
-                $scope.delete(function (res) {
-                    if (res.errorCode) {
-                        if (res.errorCode == 10029) {
-                            mntService.authenticate({ "username": "test", "password": "1234" }).then(function (response) {
-                                $scope.delete();
-
-                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-                        }
-                        else
-                            General.ShowNotify(res.errorMessage, 'error');
-                    }
-                    else {
-                        General.ShowNotify('Deleting Was Done Successfully', 'success');
-                        $scope.loadingVisible = false;
-                    }
-                });
-            }
-        }
-
-        $scope.delete = function (callback) {
-            $scope.loadingVisible = true;
-            vira_general_service.delete_part_number($scope.entity.id).then(function (res) {
-                $scope.loadingVisible = false;
-                if (callback)
-                    callback(res);
-                else {
-                    if (res.errorCode) {
-                        General.ShowNotify(res.errorMessage, 'error');
-                    }
-                    else {
-                        $scope.loadingVisible = false;
-                        General.ShowNotify('Deleting Was Done Successfully', 'success');
-
-                    }
-                }
-            });
-        };
-
-
         /////////////////////////////////////
-        $scope.txt_desc = {
-            bindingOptions: {
-                value: 'dto_search.description',
-            }
-        }
-
-        $scope.txt_pn = {
-            bindingOptions: {
-                value: 'dto_search.partNumber',
-            }
-        }
-
-        $scope.txt_ipc = {
-            bindingOptions: {
-                value: 'dto_search.ipcReference',
-            }
-        }
-
-        $scope.txt_code = {
-            bindingOptions: {
-                value: '',
-            }
-        }
-
-        $scope.txt_issuedBy = {
-            bindingOptions: {
-                 value: '',
-            }
-        }
-
-        $scope.ch_block = {
-            bindingOptions: {
-                value: 'dto_search.blockList',
-            }
-        }
-
-
 
         $scope.sb_ata = {
             showClearButton: false,
@@ -145,7 +53,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             displayExpr: "title",
             valueExpr: 'title',
             bindingOptions: {
-                value: 'dto_search.ataChapter',
+                value: 'entity.ataChapter',
                 dataSource: 'ds_ata'
             }
         }
@@ -165,7 +73,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             valueExpr: 'id',
             dataSource: $scope.ds_cat,
             bindingOptions: {
-                value: 'dto_search.categoryId',
+                value: '',
             }
         }
 
@@ -202,12 +110,17 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             valueExpr: 'id',
             dataSource: $scope.ds_status,
             bindingOptions: {
-                value: 'dto_search.statusId',
+                value: '',
             }
         }
 
 
-      
+        $scope.ch_block = {
+            bindingOptions: {
+                value: '',
+            }
+        }
+
 
         /////////////////////////
         $scope.dg_pn_columns = [
@@ -225,7 +138,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             { dataField: '', caption: 'Effectivity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
             { dataField: 'ataChapter', caption: 'ATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
             { dataField: '', caption: 'Code', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
-            { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 250, fixed: true, fixedPosition: 'left' },
+            { dataField: 'description', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
             { dataField: 'partNumber', caption: 'Part Number', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
             { dataField: '', caption: 'Shelf Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
             { dataField: 'uom', caption: 'Unit', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
@@ -245,7 +158,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
 
         $scope.dg_pn_selected = null;
         $scope.dg_pn_instance = null;
-        $scope.dg_pn_height = $(window).height() - 240,
+        $scope.dg_pn_height = $(window).height() - 230,
             $scope.dg_pn = {
 
 
@@ -301,10 +214,11 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
                 onSelectionChanged: function (e) {
                     var data = e.selectedRowsData[0];
 
-                    $scope.entity = data;
-                    console.log('Entity: ',$scope.entity);
-                    
-                  
+                    console.log(data);
+
+                    $scope.dg_pn_id.Id = e.selectedRowsData[0].Id;
+
+                    console.log($scope.dg_pn_id.id);
                     if (!data) {
                         $scope.dg_pn_selected = null;
                     }
@@ -337,7 +251,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
 
         $scope.dg_int_selected = null;
         $scope.dg_int_instance = null;
-        $scope.dg_int_height = $(window).height() - 240,
+        $scope.dg_int_height = $(window).height() - 230,
             $scope.dg_int = {
 
 
@@ -468,13 +382,13 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
             });
             mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
                 $scope.user = response;
-                $scope.dto_search.stock_LocationId = $scope.user[0].gI_LocationId;
-                $scope.dto_search.sender_LocationId = $scope.user[0].gI_LocationId;
-                $scope.dto_search.sender_UserId = $rootScope.vira_user_id;
-                //$scope.dto_search.receiver_UserId = $rootScope.vira_user_id;
+                $scope.entity.stock_LocationId = $scope.user[0].gI_LocationId;
+                $scope.entity.sender_LocationId = $scope.user[0].gI_LocationId;
+                $scope.entity.sender_UserId = $rootScope.vira_user_id;
+                //$scope.entity.receiver_UserId = $rootScope.vira_user_id;
             });
 
-            mntService.getPNSelection($scope.dto_search).then(function (res) {
+            mntService.getPNSelection($scope.entity).then(function (res) {
                 $scope.dg_pn_ds = res.data;
             });
 
@@ -507,7 +421,7 @@ app.controller('vira_part_numberController', ['$scope', '$location', '$routePara
         $scope.$on('$viewContentLoaded', function () {
             mntService.get_user_locations({ userId: $rootScope.vira_user_id }).then(function (response) {
                 $scope.ds_locations = response;
-                $scope.dto_search.locationId = response[0].gI_LocationId;
+                $scope.entity.locationId = response[0].gI_LocationId;
                 $scope.bind();
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
             setTimeout(function () {

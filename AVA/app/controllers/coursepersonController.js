@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('coursepersonController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService', 'ztrnService', 'atoService', '$window', '$compile', '$interval'
     , function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService, ztrnService, atoService, $window, $compile, $interval) {
         $scope.prms = $routeParams.prms;
@@ -489,7 +489,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             text: 'Follow Up',
             type: 'default',
             icon: 'group',
-            width: 200,
+            width: 170,
             onClick: function (e) {
 
                 if ($scope.active_header == '_list_header') {
@@ -706,7 +706,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             text: 'Close',
             type: 'success',
             //icon: 'search',
-            width: 180,
+            width: 140,
 
             bindingOptions: {},
             onClick: function (e) {
@@ -731,7 +731,29 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             }
 
         };
+		$scope.btn_download = {
+            text: 'Certificates',
+            type: 'success',
+            //icon: 'search',
+            width: 150,
+
+            bindingOptions: {},
+            onClick: function (e) {
+                $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
+                if (!$scope.dg_selected) {
+                    General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                    return;
+                }
+
+                var data = $scope.dg_selected;
+                $window.open('https://ava.reporttrn.airpocket.app/filehandler.ashx?type=courses&cid='+data.Id, '_blank');
+
+            }
+
+        };
+		//btn_download
         $scope.close_course = function (crs) {
+			// $window.open($rootScope.clientsFilesUrl + e.data.AttForm, '_blank');
             $scope.loadingVisible = true;
             ztrnService.saveCoursePeopleStatusAll({ CourseId: crs.Id }).then(function (response) {
                 //$scope.selectedEmployees
@@ -743,10 +765,10 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
         };
         $scope.btn_search = {
-            text: 'Search',
+            text: 'SEARCH',
             type: 'success',
-            icon: 'search',
-            width: 120,
+           // icon: 'search',
+            width: 100,
 
             bindingOptions: {},
             onClick: function (e) {
@@ -754,6 +776,41 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 // $scope.$broadcast('getFilterQuery', null);
                 $scope.doRefresh = true;
                 $scope.bind();
+            }
+
+        };
+		
+		$scope.filter_type_value=null;
+		$scope.sb_filter_type = {
+
+            showClearButton: true,
+            searchEnabled: true,
+			 placeholder: 'Course Type',
+           // searchExpr: ["Name"],
+            valueExpr: "course_type_id",
+            displayExpr: "course_Type",
+            width:300,
+            bindingOptions: {
+                value: 'filter_type_value',
+                dataSource: 'filter_types'
+
+            }
+
+        };
+		$scope.filter_people_value=null;
+		$scope.sb_filter_people = {
+
+            showClearButton: true,
+            searchEnabled: true,
+			 placeholder: 'Employee',
+           // searchExpr: ["Name"],
+            valueExpr: "person_id",
+            displayExpr: "name",
+            width:250,
+            bindingOptions: {
+                value: 'filter_people_value',
+                dataSource: 'filter_people'
+
             }
 
         };
@@ -887,46 +944,49 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             //    },
             //    fixed: true, fixedPosition: 'left',
             //},
-            {
-                dataField: "Date_Sign_Ins1", caption: '',
-                width: 55,
-                name: 'AttForm',
-                allowFiltering: false,
-                allowSorting: false,
-                cellTemplate: function (container, options) {
-                    var fn = options.value ? 'attform' : 'certification-document';
-                    if (options.value)
-                        $("<div>")
-                            .append("<img class='cell-img' src='content/images/" + fn + ".png' />")
-                            .appendTo(container);
-                    else
-                        $("<div>").appendTo(container);
-                },
-                fixed: true, fixedPosition: 'left',
+            //{
+            //    dataField: "Date_Sign_Ins1", caption: '',
+            //    width: 55,
+            //    name: 'AttForm',
+            //    allowFiltering: false,
+            //    allowSorting: false,
+            //    cellTemplate: function (container, options) {
+            //        var fn = options.value ? 'attform' : 'certification-document';
+            //        if (options.value)
+            //            $("<div>")
+            //                .append("<img class='cell-img' src='content/images/" + fn + ".png' />")
+            //                .appendTo(container);
+            //        else
+            //            $("<div>").appendTo(container);
+            //    },
+            //    fixed: true, fixedPosition: 'left',
 
-            },
-            {
-                dataField: "Date_Sign_Director", caption: '',
-                width: 55,
-                name: 'AttForm',
-                allowFiltering: false,
-                allowSorting: false,
-                cellTemplate: function (container, options) {
-                    var fn = options.value ? 'signed' : 'certification-document';
-                    if (options.value)
-                        $("<div>")
-                            .append("<img class='cell-img' src='content/images/" + fn + ".png' />")
-                            .appendTo(container);
-                    else
-                        $("<div>").appendTo(container);
-                },
-                fixed: true, fixedPosition: 'left',
+            //},
+            //{
+            //    dataField: "Date_Sign_Director", caption: '',
+            //    width: 55,
+            //    name: 'AttForm',
+            //    allowFiltering: false,
+            //    allowSorting: false,
+            //    cellTemplate: function (container, options) {
+            //        var fn = options.value ? 'signed' : 'certification-document';
+            //        if (options.value)
+            //            $("<div>")
+            //                .append("<img class='cell-img' src='content/images/" + fn + ".png' />")
+            //                .appendTo(container);
+            //        else
+            //            $("<div>").appendTo(container);
+            //    },
+            //    fixed: true, fixedPosition: 'left',
 
-            },
+            //},
             //{ dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left', },
             { dataField: 'No', caption: 'Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90, fixed: true, fixedPosition: 'left' },
+           // { dataField: 'ParentId', caption: 'ParentId', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, fixed: true, fixedPosition: 'left' },
             { dataField: 'Attendants', caption: 'P/S', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left' },
             { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300, fixed: true, fixedPosition: 'left' },
+            { dataField: 'ProfileGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left' },
+            { dataField: 'RecurrentType', caption: 'Period', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'left' },
              
             { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 350 },
             {
@@ -956,6 +1016,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
             { dataField: 'TrainingDirector', caption: 'Training Director', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
             { dataField: 'JobGroups', caption: 'Groups', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250 },
+			  { dataField: 'Remark', caption: 'Remark', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 750 },
 
         ];
         $scope.dg_selected = null;
@@ -1823,9 +1884,6 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             }
 
         };
-
-       
-
         $scope.sb_syl_session = {
 
             showClearButton: true,
@@ -2303,7 +2361,16 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                                 General.ShowNotify("You Do Not Have Enough Access Privileges.", 'error');
                                 return;
                             }
-
+							//scope.followup_object
+							//console.log($scope.selectedCourse );
+                            //2025-11-14
+							//$window.open('https://ava.reporttrn.airpocket.app/filehandler.ashx?type=courses&cid='+data.Id, '_blank');
+							if ($scope.followup_object.subjects && $scope.followup_object.subjects.length>0)
+							{
+								var _sids=Enumerable.From($scope.followup_object.subjects).Select('$.Id').ToArray().join('_');
+								$window.open('https://ava.reporttrn.airpocket.app/filehandler.ashx?type=att&cid='+_sids+'&pid='+$scope.selectedCourse.Id, '_blank');
+							}
+							else
                             $window.open($rootScope.zreportServerTRNForms + '?type=100&cid=' + $scope.selectedCourse.Id, '_blank');
                             // $scope.popup_notify_visible = true;
                         }
@@ -2344,11 +2411,11 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                             var data = $scope.dg_selected;
                             if (!data.Date_Sign_Ins1) {
                                 General.ShowNotify('The selected course should be signed by the instructor(s).', 'error');
-                                return;
+                                //return;
                             }
                             if (!data.Date_Sign_Director) {
                                 General.ShowNotify('The selected course should be signed by the director.', 'error');
-                                return;
+                                //return;
                             }
 
 
@@ -2359,18 +2426,24 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                             }
                             var pids = Enumerable.From(selected).Select('Number($.PersonId)').ToArray();
 
+//2025-11-16
+         
+                            //$scope.loadingVisible = true;
+                            //ztrnService.saveCoursePeopleStatusAll({ CourseId: $scope.dg_selected.Id, PersonIds:pids }).then(function (response) {
+                                
+                            //    $scope.doRefresh = true;
 
-                            $scope.loadingVisible = true;
-                            ztrnService.saveCoursePeopleStatusAll({ CourseId: $scope.dg_selected.Id, PersonIds:pids }).then(function (response) {
-                                //$scope.selectedEmployees
-                                $scope.doRefresh = true;
+                            //    $scope.loadingVisible = false;
+                            //    $scope.bind();
+                            //}, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-                                $scope.loadingVisible = false;
-                                $scope.bind();
-                            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-
-
+                           $scope.group_update=true;
+						   $scope.group_update_pids=pids;
+						   $scope.related_interval = null; //Enumerable.From($scope.selected_intervals).Where(function (x) { return $scope.dg_people_selected.JobGroupCode.startsWith(x.code); }).FirstOrDefault();
+					       if (!$scope.related_interval)
+                              $scope.related_interval = { value: $scope.selectedCourse.Interval };
+                           //console.log('related_interval', $scope.related_interval);
+                           $scope.popup_result_visible = true;
 
                             
                         }
@@ -3141,7 +3214,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
             trnService.getCoursePeopleSessions($scope.selectedCourse.Id).then(function (response) {
                 $scope.loadingVisible = false;
-
+                $scope.followup_object=response.Data;
                 $scope.follow_course = response.Data.course;
                 $scope.follow_exam = response.Data.exams && response.Data.exams.length > 0 ? response.Data.exams[0] : {};
                 console.log('follow exam', $scope.follow_exam);
@@ -3181,13 +3254,14 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
 
 
-                //$scope.dg_people_instance.addColumn({
-                //    cellTemplate: function (container, options) {
-                //        $("<div style='text-align:center'/>")
-                //            .html(options.rowIndex + 1)
-                //            .appendTo(container);
-                //    }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
-                //});
+				 $scope.dg_people_instance.addColumn( {
+            name: '_row',
+            cellTemplate: function (container, options) {
+                $("<div style='text-align:center'/>")
+                    .html(options.rowIndex + 1)
+                    .appendTo(container);
+            }, caption: '#', width: 60, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader', fixed: screen.width > 1024 ? true : false, fixedPosition: 'left'
+        },);
                 $scope.dg_people_instance.addColumn({
                     dataField: "IsSessionsSynced", caption: '',
                     width: 55,
@@ -3204,6 +3278,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                     },
                     fixed: true, fixedPosition: 'left',
                 });
+				
+               
                 $scope.dg_people_instance.addColumn({ dataField: 'JobGroup', caption: 'GRP', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left', sortIndex: 0, sortOrder: "desc" });
                 $scope.dg_people_instance.addColumn({ dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 250, fixed: true, fixedPosition: 'left', sortIndex: 1, sortOrder: "asc" });
                 //  $scope.dg_people_instance.addColumn({ dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 200, fixed: true, fixedPosition: 'left', });
@@ -3412,7 +3488,9 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                                 General.ShowNotify(Config.Text_FillRequired, 'error');
                                 return;
                             }
-                            var dto = {
+						if (!$scope.group_update)
+						{
+   						  var dto = {
                                 Id: $scope.dg_people_selected.Id,
                                 PersonId: $scope.dg_people_selected.PersonId,
                                 CourseId: $scope.selectedCourse.Id,
@@ -3442,6 +3520,22 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                                 $scope.loadingVisible = false;
                                 $scope.popup_result_visible = false;
                             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+						 }
+						 else				
+						 {
+							 $scope.loadingVisible = true;
+							 var gdto={CourseId: $scope.dg_selected.Id, PersonIds:$scope.group_update_pids, StatusId: $scope.resultId
+							 ,Issue: $scope.resultIssue ? moment($scope.resultIssue).format('YYYY-MM-DD') : ''
+							 ,Expire: $scope.resultExpire ? moment($scope.resultExpire).format('YYYY-MM-DD') : ''
+							 ,Remark: $scope.resultRemark};
+							  ztrnService.saveCoursePeopleStatusAll(gdto).then(function (response) {
+                                
+                                 $scope.loadingVisible = false;
+                                  $scope.popup_result_visible = false;
+								  $scope.popup_people_visible=false;
+                                  
+                             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+						 }
 
                         }
                     }, toolbar: 'bottom'
@@ -3822,6 +3916,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             if (!$scope.related_interval)
                 $scope.related_interval = { value: $scope.selectedCourse.Interval };
             //console.log('related_interval', $scope.related_interval);
+			$scope.group_update=false;
             $scope.popup_result_visible = true;
         };
 
@@ -4136,9 +4231,31 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
             return filters;
         };
-        $scope.bind = function () {
+		
+		
+		//2025-11-15
+		$scope.bind_filters = function () {
+			ztrnService.get_filter_types().then(function (response) {
+                $scope.filter_types=response ;
+				ztrnService.get_filter_people().then(function (response2) {
+                    $scope.filter_people=response2 ;
 
-            ; if (!$scope.dg_ds && $scope.doRefresh) {
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+			
+		};
+        $scope.bind = function () {
+			//filter_type_value
+			
+			ztrnService.get_courses_ds($scope.filter_type_value?$scope.filter_type_value:-1,
+			   $scope.filter_people_value?$scope.filter_people_value: -1
+			).then(function (response2) {
+                    $scope.dg_ds=response2 ;
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+            return;
+            if (!$scope.dg_ds && $scope.doRefresh) {
                 $scope.dg_ds = {
                     store: {
                         type: "odata",
@@ -4540,6 +4657,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             $scope.filters = prms;
 
             $scope.doRefresh = true;
+			//$scope.bind_filters();
             $scope.bind();
         });
         $scope.$on('onTemplateSearch', function (event, prms) {
@@ -4598,6 +4716,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                 });
                 //$scope.$broadcast('getFilterQuery', null);
                 $scope.doRefresh = true;
+				$scope.bind_filters();
                 $scope.bind();
             }, 500);
 

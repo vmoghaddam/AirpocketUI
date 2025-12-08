@@ -34,8 +34,8 @@ app.controller('formaController', ['$scope', '$location', '$routeParams', '$root
 
     };
     /////////////////////////////////////////
-    $scope.yf = 2024;
-    $scope.yt = 2024;
+    $scope.yf = 2025;
+    $scope.yt = 2025;
     $scope.sb_yf = {
         placeholder: 'From Year',
         showClearButton: false,
@@ -72,7 +72,7 @@ app.controller('formaController', ['$scope', '$location', '$routeParams', '$root
         // var yf = 2020;
         // var yt = 2020;
         $scope.loadingVisible = true;
-        flightService.getFormAReport($scope.yf, $scope.yt).then(function (response) {
+        flightService.getFormAReport($scope.yf).then(function (response) {
 
 
 

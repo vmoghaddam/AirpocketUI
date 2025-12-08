@@ -1,9 +1,5 @@
 'use strict';
 app.controller('fixTimeReportDailyController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route) {
-	
-	
-	
-	
     $scope.prms = $routeParams.prms;
 
     $scope.IsEditable = $rootScope.userName.toLowerCase().startsWith('demo') || $rootScope.userName.toLowerCase().startsWith('ops.soltani') || $rootScope.userName.toLowerCase().startsWith('ops.esmaeili')
@@ -211,6 +207,104 @@ app.controller('fixTimeReportDailyController', ['$scope', '$location', '$routePa
 
     };
     /////////////////////////////////////////
+	
+	$scope.btn_persiandate = {
+    //text: 'Search',
+    type: 'default',
+    icon: 'event',
+    width: 35,
+    //validationGroup: 'dlasearch',
+    bindingOptions: {},
+    onClick: function (e) {
+
+        $scope.popup_date_visible = true;
+    }
+
+};
+$scope.popup_date_visible = false;
+$scope.popup_date_title = 'Date Picker';
+var pd1 = null;
+var pd2 = null;
+$scope.popup_date = {
+    title: 'Shamsi Date Picker',
+    shading: true,
+    //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
+    height: 200,
+    width: 300,
+    fullScreen: false,
+    showTitle: true,
+    dragEnabled: true,
+
+
+    visible: false,
+
+    closeOnOutsideClick: false,
+    onTitleRendered: function (e) {
+        // $(e.titleElement).addClass('vahid');
+        // $(e.titleElement).css('background-color', '#f2552c');
+    },
+    onShowing: function (e) {
+
+
+
+
+    },
+    onShown: function (e) {
+
+        pd1 = $(".date1").pDatepicker({
+            format: 'l',
+            autoClose: true,
+            calendar: {
+                persian: {
+                    locale: 'en'
+                }
+            },
+            onSelect: function (unix) {
+
+                //console.log(new Date(unix));
+                $scope.$apply(function () {
+
+                    $scope.dt_from = new Date(unix);
+                });
+
+            },
+
+        });
+        pd1.setDate(new Date($scope.dt_from.getTime()));
+        pd2 = $(".date2").pDatepicker({
+            format: 'l',
+            autoClose: true,
+            calendar: {
+                persian: {
+                    locale: 'en'
+                }
+            },
+            onSelect: function (unix) {
+                $scope.$apply(function () {
+                    $scope.dt_to = new Date(unix);
+                });
+            },
+
+        });
+        pd2.setDate(new Date($scope.dt_to.getTime()));
+
+    },
+    onHiding: function () {
+        pd1.destroy();
+        pd2.destroy();
+        $scope.popup_date_visible = false;
+
+    },
+    showCloseButton: true,
+    bindingOptions: {
+        visible: 'popup_date_visible',
+
+
+
+    }
+};
+	
+	
     $scope.yf = 1400;
     $scope.month = null;
     $scope.sb_yf = {
@@ -275,7 +369,7 @@ app.controller('fixTimeReportDailyController', ['$scope', '$location', '$routePa
 
         }
     };
-    $scope.rank = 'P1';
+    $scope.rank = 'All';
     $scope.sb_rank = {
         placeholder: 'Rank',
         showClearButton: false,
@@ -293,74 +387,12 @@ app.controller('fixTimeReportDailyController', ['$scope', '$location', '$routePa
         }
     };
 	
-
-$scope.set_date=function(){
-    var d1=new persianDate([$scope.pyear,$scope.pmonth.id,1]).toCalendar('gregorian');
-	var d2=new persianDate([$scope.pyear,$scope.pmonth.id,$scope.pmonth.end]).toCalendar('gregorian');
-	$scope.dt_from=d1.toDate();
-	$scope.dt_to=d2.toDate();
-	//console.log('xxxxxxx',xxx.toDate());
-};
-
-	$scope.pyear=1402;
-$scope.sb_pyear={
-
-placeholder: 'Year',
-        showClearButton: false,
-        searchEnabled: false,
-        dataSource: [1401,1402,1403],
-
-        onSelectionChanged: function (arg) {
-$scope.set_date();
-        },
-
-        bindingOptions: {
-            value: 'pyear',
-
-
-        }
-};
-	
-$scope.ds_pmonth=[
-    {title:'فروردین',start:1,end:31, id:1},
-{title:'اردیبهشت',start:1,end:31, id:2},
-{title:'خرداد',start:1,end:31, id:3},
-{title:'تیر',start:1,end:31, id:4},
-{title:'مرداد',start:1,end:31, id:5},
-{title:'شهریور',start:1,end:31, id:6},
-{title:'مهر',start:1,end:30, id:7},
-{title:'آبان',start:1,end:30, id:8},
-{title:'آذر',start:1,end:30, id:9},
-{title:'دی',start:1,end:30, id:10},
-{title:'بهمن',start:1,end:30, id:11},
-{title:'اسفند',start:1,end:29, id:12},	
-];
-	
-		$scope.pmonth=$scope.ds_pmonth[2];
-$scope.sb_pmonth={
-
-placeholder: 'Month',
-        showClearButton: false,
-        searchEnabled: false,
-        dataSource: $scope.ds_pmonth,
-       displayExpr: "title",
-        onSelectionChanged: function (arg) {
-$scope.set_date();
-        },
-
-        bindingOptions: {
-            value: 'pmonth',
-
-
-        }
-};
-	$scope.set_date();
 	$scope.actype = 'All';
     $scope.sb_actype = {
         placeholder: 'A/C Type',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: ['All', 'AIRBUS','FOKKER','MD'],
+        dataSource: ['All','737', 'AIRBUS', 'MD'],
 
         onSelectionChanged: function (arg) {
 
@@ -380,12 +412,13 @@ $scope.set_date();
 
        // { dataField: 'JobGroupRoot', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
         { dataField: 'JobGroup', caption: 'Rank', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left'},
-        { dataField: 'LastName', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 200,fixed: true, fixedPosition: 'left' },
+ { dataField: 'Register', caption: 'REG.', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 200,fixed: true, fixedPosition: 'left' },
+               
+	   { dataField: 'LastName', caption: 'Last Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 200,fixed: true, fixedPosition: 'left' },
         { dataField: 'FirstName', caption: 'First Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 150,fixed: true, fixedPosition: 'left' },
-        { dataField: 'FixTime2', caption: 'Fixed Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
-		 { dataField: 'IndexF', caption: 'Index', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90,fixed: true, fixedPosition: 'right' },
+        { dataField: 'FixTime2', caption: 'Fixed Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 ,fixed: true},
         { dataField: 'FixTimeTotal2', caption: 'Total', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100,fixed: true, fixedPosition: 'right' },
-        //{ dataField: 'Mission2', caption: 'Mission', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110 },
+        { dataField: 'Mission2', caption: 'Mission', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110 },
        // {
        //     caption: 'Redirect', columns: [
        //         { dataField: 'RedirectFixTime2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
@@ -398,53 +431,84 @@ $scope.set_date();
        //         { dataField: 'Pos', caption: 'Count', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
        //     ]
        // },
-        
+       
+//	   { dataField: 'FX3000032', caption: 'گارانتی', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+      //  { dataField: 'FX3000022', caption: 'رمپ', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+       // { dataField: 'FX3000042', caption: 'مسئولیت', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+      //  { dataField: 'FX3000052', caption: 'تاخیرات', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+       // { dataField: 'FX3000062', caption: 'متفرقه', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
 
 
 
 
-       // {
-     //       caption: 'Positioning', columns: [
-    //            { dataField: 'PositioningFixTime2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+       //{
+       //     caption: 'Positioning', columns: [
+       //         { dataField: 'PositioningFixTime2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
        //         { dataField: 'Positioning', caption: 'Count', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
        //     ]
-      //  },
+       // },
        // { dataField: 'Standby', caption: 'STBY', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
 		{
             caption: 'Standby', columns: [
-             //   { dataField: 'StandbyFixTime2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
-                { dataField: 'StandbyAM', caption: 'AM', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
-				{ dataField: 'StandbyPM', caption: 'PM', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
+                { dataField: 'StandbyFixTime2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+                { dataField: 'Standby', caption: 'Count', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
             ]
         },
-		{ dataField: 'Reserve', caption: 'RESERVE', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
-		{ dataField: 'Refuse', caption: 'REFUSED', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
-		//{
-        //    caption: 'Canceled', columns: [
-        //        { dataField: 'CanceledFixTime2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
-        //        { dataField: 'Canceled', caption: 'Count', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
-       //     ]
-       // },
+		{
+            caption: 'Canceled', columns: [
+                { dataField: 'CanceledFixTime2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+                { dataField: 'Canceled', caption: 'Count', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
+            ]
+        },
 		
         { dataField: 'Legs', caption: 'Legs', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 90, fixed: false, fixedPosition: 'left', },
-
-       // { dataField: 'FlightTime2', caption: 'F/L', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'LayOver', caption: 'L/O', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+        { dataField: 'FlightTime2', caption: 'F/L', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
         { dataField: 'BlockTime2', caption: 'B/L', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
         //Redirect
         //RedirectFixTime
-       // { dataField: 'Leg1', caption: '1 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
-       // { dataField: 'Leg2', caption: '2 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
-       // { dataField: 'Leg3', caption: '3 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
-       // { dataField: 'Leg4', caption: '4 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
-       // { dataField: 'Leg5', caption: '5 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
-      //  { dataField: 'Leg6', caption: '6 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+        { dataField: 'Leg1', caption: '1 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+        { dataField: 'Leg2', caption: '2 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+        { dataField: 'Leg3', caption: '3 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+        { dataField: 'Leg4', caption: '4 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+        { dataField: 'Leg5', caption: '5 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+        { dataField: 'Leg6', caption: '6 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+		{ dataField: 'Safety', caption: 'Safety', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+		{
+            caption: 'Instructor', columns: [
+                { dataField: 'InstructorBlock2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+                { dataField: 'Instructor', caption: 'Count', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
+            ]
+        },
+		{
+            caption: 'Safety', columns: [
+                { dataField: 'SafetyBlock2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+                { dataField: 'Safety', caption: 'Count', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
+            ]
+        },
+		{
+            caption: 'OBS', columns: [
+                { dataField: 'OBSBlock2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+                { dataField: 'OBS', caption: 'Count', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
+            ]
+        },
 		
-		{ dataField: 'Leg2X', caption: '2 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
-		 { dataField: 'Leg4X', caption: '4 Leg', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },	
-			{ dataField: 'XAirportTO', caption: 'INT.', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+		{
+            caption: 'CHECK', columns: [
+                { dataField: 'CheckBlock2', caption: 'Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+                { dataField: 'Check', caption: 'Count', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, },
+            ]
+        },
+		{ dataField: 'DH', caption: 'D/H', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+		{ dataField: 'Off', caption: 'Off (d)', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 100, fixed: false, fixedPosition: 'left', },
+		{ dataField: 'ReqOff', caption: 'Req. Off (d)', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 100, fixed: false, fixedPosition: 'left', },
+		{ dataField: 'Sick', caption: 'Sick', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 100, fixed: false, fixedPosition: 'left', },
+		{ dataField: 'Ticket', caption: 'Ticket', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 100, fixed: false, fixedPosition: 'left', },
+		{ dataField: 'Refuse', caption: 'Refuse', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 100, fixed: false, fixedPosition: 'left', },
 		{ dataField: 'EarlyDeparture', caption: 'Early Dep', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
 		{ dataField: 'LateArrival', caption: 'Late Arr', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
 		{ dataField: 'HolidayDeparture', caption: 'Holiday Dep.', allowResizing: true, alignment: 'center', dataType: 'numeric', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', },
+		
 
 
     ];
@@ -1257,6 +1321,37 @@ $scope.set_date();
 
         }
     };
+	
+	$scope.reg_ds=[
+  {Id:30,Register:'RBA'},
+{Id:224,Register:'RBB'},
+{Id:225,Register:'RBC'},
+{Id:231,Register:'RBD'},
+{Id:230,Register:'SAP'},
+ 
+];
+	  $scope.tag_reg_instance = null;
+  $scope.tag_reg = {
+      dataSource: $scope.reg_ds,
+      searchEnabled: true,
+      hideSelectedItems: true,
+      displayExpr: "Register",
+      valueExpr: 'Id',
+	  placeholder: 'ALL REGISTERS',
+      onContentReady: function (e) {
+          if (!$scope.tag_days_instance)
+              $scope.tag_days_instance = e.component;
+      },
+      onSelectionChanged: function (arg) {
+          // $scope.fillSchedule2();
+
+      },
+      bindingOptions: {
+          disabled: 'customDisabled',
+          value: "regs"
+      },
+
+  };
     $scope.num_fx_hh = {
         min: 0,
         bindingOptions: {
@@ -2084,7 +2179,7 @@ $scope.set_date();
         type: "date",
         placeholder: 'From',
         width: '100%',
-
+		displayFormat: "yyyy/MM/dd",
         bindingOptions: {
             value: 'dt_from',
 
@@ -2094,7 +2189,7 @@ $scope.set_date();
         type: "date",
         placeholder: 'To',
         width: '100%',
-
+		displayFormat: "yyyy/MM/dd",
         bindingOptions: {
             value: 'dt_to',
 
@@ -2111,7 +2206,9 @@ $scope.set_date();
 
 
         $scope.loadingVisible = true;
-        flightService.getCrewFixTimePeriodReportDaily(_df,_dt, $scope.rank,$scope.actype).then(function (response) {
+		var regs2 = $scope.regs ? $scope.regs.toString() : ' ';
+		var regs = regs2.replaceAll(',', '_');
+        flightService.getCrewFixTimePeriodReportDaily(_df,_dt, $scope.rank,$scope.actype, regs).then(function (response) {
 
 
 
@@ -2125,6 +2222,11 @@ $scope.set_date();
                 _d.Mission2 = $scope.formatMinutes(_d.Misson);
                 _d.FixTimeTotal2 = $scope.formatMinutes(_d.FixTimeTotal);
                 _d.ScheduledTime2 = $scope.formatMinutes(_d.ScheduledTime);
+				
+				 _d.SafetyBlock2 = $scope.formatMinutes(_d.SafetyBlock);
+				  _d.OBSBlock2 = $scope.formatMinutes(_d.OBSBlock);
+				   _d.CheckBlock2 = $scope.formatMinutes(_d.CheckBlock);
+				     _d.InstructorBlock2 = $scope.formatMinutes(_d.InstructorBlock);
 
                 if (!_d.RedirectFixTime)
                     _d.RedirectFixTime = 0;
@@ -2250,7 +2352,7 @@ $scope.set_date();
         authService.redirectToLogin();
     }
     else {
-        $rootScope.page_title = '>  Daily Fix Time Report';
+        $rootScope.page_title = '>  Daily Summary';
 
 
         $('.fixtimereportdaily').fadeIn(400, function () {

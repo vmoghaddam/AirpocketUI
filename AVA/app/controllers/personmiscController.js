@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('personmiscController', ['$scope', '$location', '$routeParams', '$rootScope', 'personService', 'authService', '$route', function ($scope, $location, $routeParams, $rootScope, personService, authService, $route) {
     $scope.prms = $routeParams.prms;
     $scope.TypeId = $route.current.TypeId;

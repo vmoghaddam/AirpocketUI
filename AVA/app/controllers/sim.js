@@ -1991,6 +1991,7 @@ $scope.num_rev = {
             console.log(data);
 			data=Enumerable.From(data).Where(function(x){return $scope.xids.indexOf(x.Id)==-1;}).ToArray();
             $scope.cal_crew_ds = data;
+			console.log('--------------ds-----------', $scope.cal_crew_ds)
         });
 
 
@@ -2010,6 +2011,25 @@ $scope.num_rev = {
                         FDPs: response,
                     };
                     //$scope.crewFDPs.push(row);
+					 var allowed=[
+					 100003
+,5000
+,100004
+,100005
+,100006
+					 ];
+					var dts1=Enumerable.From(response).Where(function(x){return allowed.indexOf(x.DutyType)!=-1;}).ToArray();
+					var dts2=Enumerable.From(response).Where(function(x){return allowed.indexOf(x.DutyType)==-1;}).ToArray();
+					var dts_all=[];
+					$.each(dts1,function(_i,_d){
+						
+						dts_all.push(_d);
+					});
+					$.each(dts2,function(_i,_d){
+					//	_d.DutyType=1359;
+						//_d.DutyTypeTitle='Occupied';
+						dts_all.push(_d);
+					});
                     callback(response);
 
 
@@ -2444,11 +2464,11 @@ $scope.num_rev = {
 if ($rootScope.userName.toLowerCase().startsWith('razbani'))
 	return false;
         var f = Enumerable.From($scope.cal_crew_ds).Where(function (x) {
-            return (new Date(event.DutyStart) >= new Date(x.StartUTC) && new Date(event.DutyStart) <= new Date(x.RestUntil))
+            return ((new Date(event.DutyStart) >= new Date(x.StartUTC) && new Date(event.DutyStart) <= new Date(x.EndUTC))
                 ||
-                (new Date(event.RestTo) >= new Date(x.StartUTC) && new Date(event.RestTo) <= new Date(x.RestUntil))
+                (new Date(event.RestTo) >= new Date(x.StartUTC) && new Date(event.RestTo) <= new Date(x.EndUTC))
                 ||
-                (new Date(x.StartUTC) >= new Date(event.DutyStart) && new Date(x.StartUTC) <= new Date(event.RestUntil))
+                (new Date(x.StartUTC) >= new Date(event.DutyStart) && new Date(x.StartUTC) <= new Date(event.EndUTC)) ) && [5001].indexOf(x.DutyType)==-1
 
         }).FirstOrDefault();
         console.log('IsEventOverLapped-------------------------------------');
@@ -2595,7 +2615,7 @@ if ($rootScope.userName.toLowerCase().startsWith('razbani'))
                             //  alert(crewid);
                             var _event = $scope.createEvent($scope.dg_calcrew_selected, 10000, 'RERRP', eventFrom, eventEnd, $scope.RemarkEvent);
                             var check = $scope.IsEventOverLapped(_event);
-                            if (check   ) {
+                            if (check && 1==2  ) {
                                 General.ShowNotify('Overlapped Duties Found', 'error');
                                 return;
                             }
@@ -2642,7 +2662,7 @@ if ($rootScope.userName.toLowerCase().startsWith('razbani'))
 
                             var _event = $scope.createEvent($scope.dg_calcrew_selected, $scope.event_status, null, eventFrom, eventEnd, $scope.RemarkEvent);
                             var check = $scope.IsEventOverLapped(_event);
-                            if (check  ) {
+                            if (check && 1==2 ) {
                                 General.ShowNotify('Overlapped Duties Found', 'error');
                                 return;
                             }
@@ -2662,7 +2682,7 @@ if ($rootScope.userName.toLowerCase().startsWith('razbani'))
 
                             var _event = $scope.createEvent($scope.dg_calcrew_selected, $scope.event_status, null, eventFrom, eventEnd, $scope.RemarkEvent);
                             var check = false; //$scope.IsEventOverLapped(_event);
-                            if (check  ) {
+                            if (check && 1==2 ) {
                                 General.ShowNotify('Overlapped Duties Found', 'error');
                                 return;
                             }

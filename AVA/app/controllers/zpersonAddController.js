@@ -1,5 +1,5 @@
 'use strict';
-app.controller('zpersonAddController', ['$scope', '$location', 'personService', 'zpersonService', 'authService', '$routeParams', '$rootScope','trnService','$window', function ($scope, $location, personService, zpersonService,authService, $routeParams, $rootScope,trnService,$window) {
+app.controller('zpersonAddController', ['$scope', '$location', 'personService', 'zpersonService', 'authService', '$routeParams', '$rootScope','trnService','$window','$http', function ($scope, $location, personService, zpersonService,authService, $routeParams, $rootScope,trnService,$window, $http) {
 	$scope.isNew = true;
   /*  $scope.IsEditable = $rootScope.roles.indexOf('Admin') != -1 || $rootScope.userName.toLowerCase() == 'i.zamani' || $rootScope.userName.toLowerCase() == 'dehghan'  || $rootScope.userName.toLowerCase() == 'khorshidi'
 	|| $rootScope.userName.toLowerCase() == '1abbaspour1'
@@ -184,6 +184,12 @@ app.controller('zpersonAddController', ['$scope', '$location', 'personService', 
             TypeMDExpireDate: null,
 			TypeAirbusIssueDate: null,
             TypeAirbusExpireDate: null,
+			 LineC1IssueDate: null,
+            LineC1ExpireDate: null,
+			LineC3IssueDate: null,
+            LineC3ExpireDate: null,
+			LineC2IssueDate: null,
+            LineC2ExpireDate: null,
 			
 			LRCIssueDate: null,
 LRCExpireDate: null,
@@ -334,6 +340,8 @@ IssueDate47: null,
 IssueDate48: null,
 IssueDate49: null,
 IssueDate50: null,
+IssueDate56: null,
+IssueDate66: null,
 
 ExpireDate36: null,
 ExpireDate37: null,
@@ -350,6 +358,9 @@ ExpireDate47: null,
 ExpireDate48: null,
 ExpireDate49: null,
 ExpireDate50: null,
+ExpireDate56: null,
+ExpireDate57: null,
+ExpireDate66: null,
 IssueDateTRG02:null,
 ExpireDateTRG02:null,
 
@@ -607,10 +618,10 @@ RIGHT_SEAT_QUALIFICATION_ExpireDate:null,
         $scope.entityDocument.DateIssue = null;
         $scope.entityDocument.DateExpire = null;
         $scope.entityDocument.Documents = [];
-        $scope.uploader_document_instance.reset();
+		$scope.files = [];
+        //$scope.uploader_document_instance.reset();
     };
     $scope.clearEntity = function () {
-        //war2
         $scope.entity.Id = null;
         $scope.entity.PersonId = -1;
         $scope.entity.DateJoinCompany = null;
@@ -780,6 +791,13 @@ RIGHT_SEAT_QUALIFICATION_ExpireDate:null,
         $scope.entity.Person.TypeAirbusIssueDate = null;
         $scope.entity.Person.TypeAirbusExpireDate = null;
 		
+		  $scope.entity.Person.LineC1IssueDate = null;
+             $scope.entity.Person.LineC1ExpireDate = null;
+			 $scope.entity.Person.LineC3IssueDate = null;
+             $scope.entity.Person.LineC3ExpireDate = null;
+			 $scope.entity.Person.LineC2IssueDate = null;
+             $scope.entity.Person.LineC2ExpireDate = null;
+		
 
 $scope.entity.Person.LRCIssueDate = null;
 $scope.entity.Person.LRCExpireDate = null;
@@ -927,6 +945,8 @@ $scope.entity.Person.IssueDate47 = null;
 $scope.entity.Person.IssueDate48 = null;
 $scope.entity.Person.IssueDate49 = null;
 $scope.entity.Person.IssueDate50 = null;
+$scope.entity.Person.IssueDate56 = null;
+$scope.entity.Person.IssueDate66 = null;
 $scope.entity.Person.IssueDateTRG02=null;
 
 
@@ -954,6 +974,7 @@ $scope.entity.Person.ExpireDate47 = null;
 $scope.entity.Person.ExpireDate48 = null;
 $scope.entity.Person.ExpireDate49 = null;
 $scope.entity.Person.ExpireDate50 = null;
+$scope.entity.Person.ExpireDate66 = null;
 $scope.entity.Person.ExpireDateTRG02= null;
 
 $scope.entity.Person. RouteCheckIssueDate= null;
@@ -1006,11 +1027,9 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= null;
     $scope.entity.Locations[0].Phone = null;
     $scope.entity.Locations[0].OrgRole = null;
     $scope.entity.Locations[0].Title = null;
-        $scope.entity.Locations[0].FullCode = null;
-
+    $scope.entity.Locations[0].FullCode = null;
     $scope.img_url = 'content/images/imguser.png';
-        //war
-        $scope.entity.GroupId = null;
+         
     };
     //xxxx
     $scope.clearEntityRating = function () {
@@ -1234,6 +1253,13 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= null;
         $scope.entity.Person.TypeAirbusIssueDate = data.TypeAirbusIssueDate;
         $scope.entity.Person.TypeAirbusExpireDate = data.TypeAirbusExpireDate;
 		
+		 $scope.entity.Person.LineC1IssueDate = data.LineC1IssueDate;
+             $scope.entity.Person.LineC1ExpireDate = data.LineC1ExpireDate;
+			 $scope.entity.Person.LineC3IssueDate = data.LineC3IssueDate;
+             $scope.entity.Person.LineC3ExpireDate = data.LineC3ExpireDate;
+			 $scope.entity.Person.LineC2IssueDate = data.LineC2IssueDate;
+             $scope.entity.Person.LineC2ExpireDate = data.LineC2ExpireDate;
+		
 
 $scope.entity.Person.LRCIssueDate = data.LRCIssueDate ;
 $scope.entity.Person.LRCExpireDate = data.LRCExpireDate ;
@@ -1377,6 +1403,8 @@ $scope.entity.Person.IssueDate47 = data.IssueDate47 ;
 $scope.entity.Person.IssueDate48 = data.IssueDate48 ;
 $scope.entity.Person.IssueDate49 = data.IssueDate49 ;
 $scope.entity.Person.IssueDate50 = data.IssueDate50 ;
+$scope.entity.Person.IssueDate56 = data.IssueDate56 ;
+$scope.entity.Person.IssueDate66 = data.IssueDate66 ;
 $scope.entity.Person.IssueDateTRG02= data.IssueDateTRG02 ;
 
 $scope.entity.Person.ExpireDate28 = data.ExpireDate28 ;
@@ -1403,6 +1431,7 @@ $scope.entity.Person.ExpireDate47 = data.ExpireDate47 ;
 $scope.entity.Person.ExpireDate48 = data.ExpireDate48 ;
 $scope.entity.Person.ExpireDate49 = data.ExpireDate49 ;
 $scope.entity.Person.ExpireDate50 = data.ExpireDate50 ;
+$scope.entity.Person.ExpireDate66 = data.ExpireDate66 ;
 $scope.entity.Person.ExpireDateTRG02= data.ExpireDateTRG02 ;
 
 
@@ -1505,10 +1534,6 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
         if (data.Locations && data.Locations.length > 0) {
             $scope.bindLocation(data.Locations[0]);
         }
-
-
-        $scope.entity.Certificates = data.Certificates;
-        console.log('certifs', $scope.entity.Certificates);
          $scope.bindPersoncourses();
 		 
 		 
@@ -1867,8 +1892,23 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
                 ];
                 break;
             case 'part8':
-                $scope.btn_visible_file = false;
-                $scope.btn_visible_crt = true;
+                $scope.btn_visible_file = true;
+                $scope.btn_visible_crt = false;
+                $scope.dg_courses_instance.refresh();
+                break;
+				case 'part7':
+                $scope.btn_visible_file = true;
+                $scope.btn_visible_crt = false;
+                $scope.dg_courses_instance.refresh();
+                break;
+				case 'part5':
+                $scope.btn_visible_file = true;
+                $scope.btn_visible_crt = false;
+                $scope.dg_courses_instance.refresh();
+                break;
+				case 'part6':
+                $scope.btn_visible_file = true;
+                $scope.btn_visible_crt = false;
                 $scope.dg_courses_instance.refresh();
                 break;
             default:
@@ -1969,13 +2009,18 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
         };
     }
     $scope.is_dg_file_visible = function () {
-        var visible = ['part1', 'part2', 'part3', 'part4', 'part5', 'part6', 'part7','part9'];
+        var visible = ['part1', 'part2', 'part3', 'part4', 'part5', 'part6','part9'];
         return visible.indexOf($scope.doc_selected) != -1;
     }
     $scope.is_dg_courses_visible = function () {
         var visible = ['part8'];
         return visible.indexOf($scope.doc_selected) != -1;
     }
+	$scope.is_part_7 = function () {
+        var visible = ['part7'];
+        return visible.indexOf($scope.doc_selected) != -1;
+    }
+  
     /////////////////////////
     $scope.IsMainDisabled = false;
     $scope.IsNIDDisabled = false;
@@ -2572,7 +2617,8 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
         type: 'date',
         displayFormat: $rootScope.DateBoxFormat,
         onValueChanged: function (e) {
-           
+           // if (!($scope.isNew || !$scope.entity.Person.SEPTPExpireDate))
+            //    return;
             if (!e.value) {
                 $scope.entity.Person.SEPTPExpireDate = null;
                 return;
@@ -2731,13 +2777,13 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
             //if (!($scope.isNew || !$scope.entity.Person.TypeMDIssueDate))
             //    return;
             if (!e.value) {
-                $scope.entity.Person.TypeMDExpireDate = null;
+                $scope.entity.Person.LineC3ExpireDate = null;
                 return;
             }
           //  $scope.entity.Person.TypeMDExpireDate = (new Date(e.value)).addYears(1);
         },
         bindingOptions: {
-            value: 'entity.Person.TypeMDIssueDate',
+            value: 'entity.Person.LineC3IssueDate',
             readOnly: 'IsMainDisabled',
             disabled: 'IsCerDisabled',
         }
@@ -2749,7 +2795,7 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
         displayFormat: $rootScope.DateBoxFormat,
 
         bindingOptions: {
-            value: 'entity.Person.TypeMDExpireDate',
+            value: 'entity.Person.LineC3ExpireDate',
             readOnly: 'IsMainDisabled',
             disabled: 'IsCerDisabled',
         }
@@ -2765,13 +2811,13 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
             //if (!($scope.isNew || !$scope.entity.Person.TypeAirbusIssueDate))
             //    return;
             if (!e.value) {
-                $scope.entity.Person.TypeAirbusExpireDate = null;
+                $scope.entity.Person.LineC2ExpireDate = null;
                 return;
             }
            // $scope.entity.Person.TypeAirbusExpireDate = (new Date(e.value)).addYears(2);
         },
         bindingOptions: {
-            value: 'entity.Person.TypeAirbusIssueDate',
+            value: 'entity.Person.LineC2IssueDate',
             readOnly: 'IsMainDisabled',
             disabled: 'IsCerDisabled',
         }
@@ -2783,7 +2829,7 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
         displayFormat: $rootScope.DateBoxFormat,
 
         bindingOptions: {
-            value: 'entity.Person.TypeAirbusExpireDate',
+            value: 'entity.Person.LineC2ExpireDate',
             readOnly: 'IsMainDisabled',
             disabled: 'IsCerDisabled',
         }
@@ -2828,13 +2874,13 @@ $scope.date_Type737IssueDate = {
             //if (!($scope.isNew || !$scope.entity.Person.Type737IssueDate))
             //    return;
             if (!e.value) {
-                $scope.entity.Person.Type737ExpireDate = null;
+                $scope.entity.Person.LineC1ExpireDate = null;
                 return;
             }
          //   $scope.entity.Person.Type737ExpireDate = (new Date(e.value)).addYears(1);
         },
         bindingOptions: {
-            value: 'entity.Person.Type737IssueDate',
+            value: 'entity.Person.LineC1IssueDate',
             readOnly: 'IsMainDisabled',
             disabled: 'IsCerDisabled',
         }
@@ -2846,7 +2892,7 @@ $scope.date_Type737IssueDate = {
         displayFormat: $rootScope.DateBoxFormat,
 
         bindingOptions: {
-            value: 'entity.Person.Type737ExpireDate',
+            value: 'entity.Person.LineC1ExpireDate  ',
             readOnly: 'IsMainDisabled',
             disabled: 'IsCerDisabled',
         }
@@ -3644,100 +3690,20 @@ $scope.date_Type737IssueDate = {
 				$scope.group_root=null;
 				$scope.parent_code=null;
 				$scope.group_fulltitle=null;
-                $scope.group_manager = null;
-                $scope.group_fullcode = null;
+				$scope.group_manager=null;
+				console.log('----GRP Title----', e.selectedItem);
 				 return;
 			}
-			console.log('onSelection',e);
+			console.log('----GRP Title----', e.selectedItem);
+			
 			$scope.group_title=e.selectedItem.Title;
 			$scope.group_root=e.selectedItem.RootCode;
 			$scope.parent_code=e.selectedItem.ParentCode;
 			$scope.group_fulltitle=e.selectedItem.TitleFormated;
 			$scope.group_manager=$scope.group_fulltitle.toLowerCase().includes('manager');
 			$scope.post_visible=$scope.post_titles.indexOf($scope.post_title)!=-1 || $scope.post_manager || $scope.group_manager;
-            console.log('ROOT ROOT', $scope.group_title);
-
-            //war
-            $scope.group_fullcode = e.selectedItem.FullCode;
-            //$scope.profile_course_types 
-            
-            var pcts= Enumerable.From($scope.ds_course_types).Where(function (x) {
-                return $scope.group_fullcode.startsWith(x.group_code);
-            }).ToArray();
-            $scope._change = false;
-            $.each(pcts, function (_i, _d) {
-                var _cer = Enumerable.From($scope.entity.Certificates).Where(function (x) { return x.course_type_id == _d.course_type_id }).FirstOrDefault();
-                console.log('cer jg changed',_cer);
-                _d.date_issue_obj = {
-                    //value: _cer ? _cer.date_issue:null,
-                    onContentReady: function (e) {
-                        if (!_d.issue_component)
-                            _d.issue_component = e.component;
-
-                    },
-                    width: '100%',
-                    type: 'date',
-                    displayFormat: $rootScope.DateBoxFormat,
-                    onValueChanged: function (e) {
-                       // if (!$scope._change)
-                       //     return;
-                        if (!_d.interval)
-                            return;
-                        if (!e.value) {
-                            _d.expire_value = null;
-                            return;
-                        }
-                        //	if ($scope.isNew || !$scope.entity.Person.SEPTPExpireDate)
-                        _d.issue_value = new Date(e.value);
-                        _d.expire_value = (new Date(e.value)).addMonths(_d.interval);
-                        _d.expire_component.option('value', _d.expire_value);
-                        
-                    },
-                    //bindingOptions: {
-                    //    value: _d.issue_field,
-                    //    //readOnly: 'IsMainDisabled',
-                    //}
-                };
-
-                _d.date_expire_obj = {
-                   // value: _cer ? _cer.date_expire : null,
-                    onContentReady: function (e) {
-                        if (!_d.expire_component)
-                            _d.expire_component = e.component;
-
-                    },
-                    width: '100%',
-                    type: 'date',
-                    displayFormat: $rootScope.DateBoxFormat,
-                    onValueChanged: function (e) {
-                        _d.expire_value = new Date(e.value);
-                    }
-                    //bindingOptions: {
-                    //  //  value: _d.expire_value,
-                    //    //readOnly: 'IsMainDisabled',
-                    //}
-                };
-
-
-            });
-            $scope.profile_course_types = pcts;
-            setTimeout(function () {
-                $.each(pcts, function (_i, _d) {
-                    var _cer = Enumerable.From($scope.entity.Certificates).Where(function (x) { return x.course_type_id == _d.course_type_id }).FirstOrDefault();
-                    _d.issue_component.option('value', _cer ? _cer.date_issue : null);
-                    _d.expire_component.option('value', _cer ? _cer.date_expire : null);
-                   
-                });
-                
-            }, 1000);
-            ////////////////////////////
-             
-
-           
-
-
-
-            /////////////////////////
+			
+			
 		},
         //displayExpr: "TitleFormated",
 		displayExpr: "TitleFormated",
@@ -3894,10 +3860,43 @@ $scope.date_Type737IssueDate = {
         }
 
     };
+	
+	
+	
+	$scope.doc_type_ds = [
+  { Id: 1, Title: "GENERAL DOCUMENTS" },
+  { Id: 2, Title: "LICENSES" },
+  { Id: 3, Title: "MEDICAL RECORDS" },
+  { Id: 4, Title: "LINE CHECK RECORDS" },
+  { Id: 5, Title: "OFFICIAL RECORDS" },
+  { Id: 6, Title: "SIMULATOR TRAINING" },
+  { Id: 7, Title: "LOGBOOK RECORDS" },
+  { Id: 8, Title: "CERTIFICATES" }
+]
     $scope.sb_DocumentTypeId = {
         showClearButton: true,
         searchEnabled: true,
-        //dataSource: $rootScope.getDatasourceOption(44),
+        dataSource: $scope.doc_type_ds,
+        displayExpr: "Title",
+        valueExpr: 'Id',
+        
+        onSelectionChanged: function (e) {
+            $scope.entityDocument.DocumentType = e.selectedItem ? e.selectedItem.Title : null;
+        },
+        bindingOptions: {
+            value: 'entityDocument.DocumentTypeId',
+        }
+    };
+	
+	
+	$scope.ac_type_ds = [
+	{Id: '737', Title: '737'},
+	{Id: 'MD', Title: 'MD'},
+	{Id: '310', Title: '310'}]
+     $scope.sb_ac_type = {
+        showClearButton: true,
+        searchEnabled: true,
+        dataSource:$scope.ac_type_ds,
         displayExpr: "Title",
         valueExpr: 'Id',
         
@@ -3909,8 +3908,7 @@ $scope.date_Type737IssueDate = {
 
         },
         bindingOptions: {
-            dataSource: 'ds_doc_type',
-            value: 'entityDocument.DocumentTypeId',
+            value: 'entityDocument.ac_type',
         }
     };
     $scope.date_issue_doc = {
@@ -4410,27 +4408,27 @@ $scope.date_Type737IssueDate = {
                     }
                 }, toolbar: 'bottom'
             },
-            ////certificates
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Add Certificate', width: 190, icon: 'plus', validationGroup: 'certificateadd', bindingOptions: { visible: 'btn_visible_crt', disabled: 'IsMainDisabled' }, onClick: function (e) {
-                       // alert('x');
-                        $scope.popup_cer_visible = true;
-                    }
-                }, toolbar: 'bottom'
-            },
-            {
-                widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'certificateadd', bindingOptions: { visible: 'btn_visible_crt', disabled: 'IsMainDisabled' }, onClick: function (e) {
-                        dg_selected = $rootScope.getSelectedRow($scope.dg_aircrafttype_instance);
-                        if (!dg_selected) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $scope.entity.Person.AircraftTypes = Enumerable.From($scope.entity.Person.AircraftTypes).Where('$.Id!=' + dg_selected.Id).ToArray();
-                    }
-                }, toolbar: 'bottom'
-            },
+            // ////certificates
+            // {
+                // widget: 'dxButton', location: 'before', options: {
+                    // type: 'default', text: 'Add Certificate', width: 190, icon: 'plus', validationGroup: 'certificateadd', bindingOptions: { visible: 'btn_visible_crt', disabled: 'IsMainDisabled' }, onClick: function (e) {
+                       // // alert('x');
+                        // $scope.popup_cer_visible = true;
+                    // }
+                // }, toolbar: 'bottom'
+            // },
+            // {
+                // widget: 'dxButton', location: 'before', options: {
+                    // type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'certificateadd', bindingOptions: { visible: 'btn_visible_crt', disabled: 'IsMainDisabled' }, onClick: function (e) {
+                        // dg_selected = $rootScope.getSelectedRow($scope.dg_aircrafttype_instance);
+                        // if (!dg_selected) {
+                            // General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                            // return;
+                        // }
+                        // $scope.entity.Person.AircraftTypes = Enumerable.From($scope.entity.Person.AircraftTypes).Where('$.Id!=' + dg_selected.Id).ToArray();
+                    // }
+                // }, toolbar: 'bottom'
+            // },
 
             { widget: 'dxButton', location: 'after', options: { type: 'success', text: 'Save', icon: 'check', validationGroup: 'personadd', bindingOptions: {} }, toolbar: 'bottom' },
             { widget: 'dxButton', location: 'after', options: { type: 'danger', text: 'Close', icon: 'remove', }, toolbar: 'bottom' }
@@ -4441,7 +4439,7 @@ $scope.date_Type737IssueDate = {
         closeOnOutsideClick: false,
         onShowing: function (e) {
             $scope.popup_instance.repaint();
-            $scope.profile_course_types = [];
+           
 
             //$scope.pop_width_related = $scope.pop_width - 200;
             //if ($scope.pop_width_related <= 800)
@@ -4514,22 +4512,22 @@ $scope.date_Type737IssueDate = {
             'toolbarItems[16].visible': 'btn_visible_aircrafttype',
             'toolbarItems[17].visible': 'btn_visible_aircrafttype',
 
-            'toolbarItems[18].visible': 'btn_visible_crt',
-            'toolbarItems[19].visible': 'btn_visible_crt',
+            // 'toolbarItems[18].visible': 'btn_visible_crt',
+            // 'toolbarItems[19].visible': 'btn_visible_crt',
 
-            'toolbarItems[20].visible': 'IsEditable',
+            'toolbarItems[18].visible': 'IsEditable',
         }
     };
 
     //close button
-    $scope.popup_add.toolbarItems[21].options.onClick = function (e) {
+    $scope.popup_add.toolbarItems[19].options.onClick = function (e) {
         
         
         $scope.popup_add_visible = false;
     };
 
     //save button
-    $scope.popup_add.toolbarItems[20].options.onClick = function (e) {
+    $scope.popup_add.toolbarItems[18].options.onClick = function (e) {
        
 		
         var result = e.validationGroup.validate();
@@ -4630,8 +4628,16 @@ $scope.date_Type737IssueDate = {
             $scope.entity.Person.TypeAirbusIssueDate = (new Date($scope.entity.Person.TypeAirbusIssueDate)).addMinutes(offset);
         if ($scope.entity.Person.TypeAirbusExpireDate)
             $scope.entity.Person.TypeAirbusExpireDate = (new Date($scope.entity.Person.TypeAirbusExpireDate)).addMinutes(offset);
-		
-
+		 if ($scope.entity.Person.LineC3IssueDate)
+            $scope.entity.Person.LineC3IssueDate = (new Date($scope.entity.Person.LineC3IssueDate)).addMinutes(offset);
+        if ($scope.entity.Person.LineC3ExpireDate)
+            $scope.entity.Person.LineC3ExpireDate = (new Date($scope.entity.Person.LineC3ExpireDate)).addMinutes(offset);
+		 if ($scope.entity.Person.LineC2IssueDate)
+            $scope.entity.Person.LineC2IssueDate = (new Date($scope.entity.Person.LineC2IssueDate)).addMinutes(offset);
+        if ($scope.entity.Person.LineC2ExpireDate)
+            $scope.entity.Person.LineC2ExpireDate = (new Date($scope.entity.Person.LineC2ExpireDate)).addMinutes(offset);
+  if ($scope.entity.Person.LineC1IssueDate)
+            $scope.entity.Person.LineC1IssueDate = (new Date($scope.entity.Person.LineC1IssueDate)).addMinutes(offset);
  
 		  if ($scope.entity.Person.LRCIssueDate)
             $scope.entity.Person.LRCIssueDate = (new Date($scope.entity.Person.LRCIssueDate)).addMinutes(offset);
@@ -4966,6 +4972,8 @@ if ($scope.entity.Person.IssueDate23)
             $scope.entity.Person.ExpireDate49 = (new Date($scope.entity.Person.ExpireDate49)).addMinutes(offset);
 		if ($scope.entity.Person.ExpireDate50)
             $scope.entity.Person.ExpireDate50 = (new Date($scope.entity.Person.ExpireDate50)).addMinutes(offset);
+		if ($scope.entity.Person.ExpireDate66)
+            $scope.entity.Person.ExpireDate66 = (new Date($scope.entity.Person.ExpireDate66)).addMinutes(offset);
 		if ($scope.entity.Person.ExpireDateTRG02)
             $scope.entity.Person.ExpireDateTRG02 = (new Date($scope.entity.Person.ExpireDateTRG02)).addMinutes(offset);
 		
@@ -5017,6 +5025,10 @@ if ($scope.entity.Person.IssueDate23)
             $scope.entity.Person.IssueDate49 = (new Date($scope.entity.Person.IssueDate49)).addMinutes(offset);
 		if ($scope.entity.Person.IssueDate50)
             $scope.entity.Person.IssueDate50 = (new Date($scope.entity.Person.IssueDate50)).addMinutes(offset);
+		if ($scope.entity.Person.IssueDate56)
+            $scope.entity.Person.IssueDate56 = (new Date($scope.entity.Person.IssueDate56)).addMinutes(offset);
+		if ($scope.entity.Person.IssueDate66)
+            $scope.entity.Person.IssueDate66 = (new Date($scope.entity.Person.IssueDate66)).addMinutes(offset);
 		
 			if ($scope.entity.Person.IssueDateTRG02)
             $scope.entity.Person.IssueDateTRG02 = (new Date($scope.entity.Person.IssueDateTRG02)).addMinutes(offset);
@@ -5111,19 +5123,9 @@ if ($scope.entity.Person.IssueDate23)
        // if ($scope.entity.Person.DateTypeIssue)
        //     $scope.entity.Person.DateTypeIssue = new Date((new Date($scope.entity.DateTypeIssue)).addMinutes(offset));
        // if ($scope.entity.Person.DateTypeExpire)
-        //     $scope.entity.Person.DateTypeExpire = new Date((new Date($scope.entity.DateTypeExpire)).addMinutes(offset));
-        console.log('_____Save', $scope.profile_course_types);
-        $scope.entity.Certificates = [];
-        $.each($scope.profile_course_types, function (_i, _d) {
-            $scope.entity.Certificates.push({
-                course_type_id:  _d.course_type_id,
-                date_issue_str: !_d.issue_value?null: moment(_d.issue_value).format('YYYY-MM-DD'),
-                date_expire_str: !_d.expire_value ? null : moment(_d.expire_value).format('YYYY-MM-DD'),
+       //     $scope.entity.Person.DateTypeExpire = new Date((new Date($scope.entity.DateTypeExpire)).addMinutes(offset));
 
-            });
-        });
-        
-       //war
+       
 		 $scope.loadingVisible = true;
        
         zpersonService.save($scope.entity).then(function (response) {
@@ -5618,6 +5620,79 @@ if ($scope.entity.Person.IssueDate23)
         }
     };
 	
+	// $scope.files = [];
+
+// $scope.onFilesSelected = function (files) {
+    // $scope.files = files;
+    // $scope.$apply();
+// };
+ 
+ // $scope.removeFile = function (index) {
+    // $scope.files.splice(index, 1);
+// };
+
+
+
+$scope.files = [];
+
+$scope.onFilesSelected = function (fileList, event) {
+    const newFiles = Array.from(fileList);
+    $scope.files.push(...newFiles);
+
+    // Reset input field so same file selection works again
+    event.target.value = "";
+
+    $scope.$apply();
+};
+
+$scope.removeFile = function (index) {
+    $scope.files.splice(index, 1);
+};
+
+
+function formatDate(date) {
+    if (!date) return "";
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+}
+
+
+ $scope.uploadProfileDoc = function () {
+
+    var fd = new FormData();
+
+    fd.append("nid", $scope.entity.Person.NID);
+    fd.append("ac_type", $scope.entityDocument.ac_type);
+    fd.append("Remark", $scope.entityDocument.Remark);
+    fd.append("DocumentTypeId", $scope.entityDocument.DocumentTypeId);
+
+    fd.append("DateIssue", formatDate($scope.entityDocument.DateIssue));
+    fd.append("DateExpire",formatDate($scope.entityDocument.DateExpire));
+
+    for (var i = 0; i < $scope.files.length; i++) {
+        fd.append("file" + i, $scope.files[i]);
+    }
+    $scope.loadingVisible = true;
+    $http.post("https://ava.apitrn.aerotango.app/api/upload/profile/doc", fd, {
+        transformRequest: angular.identity,
+        headers: { "Content-Type": undefined }
+    })
+    .then(function (response) {
+		$scope.loadingVisible = false;
+		 $scope.popup_file_visible = false;
+		General.ShowNotify(Config.Text_SavedOk, 'success');
+        console.log("Upload OK:", response.data);
+    })
+    .catch(function (error) {
+		$scope.loadingVisible = false;
+		$scope.popup_file_visible = false;
+		General.ShowNotify(err.message, 'error');
+        console.error("Upload ERROR:", error);
+    });
+};
+
 	
 	
 	$scope.pop_width_file = 750;
@@ -5635,37 +5710,7 @@ if ($scope.entity.Person.IssueDate23)
             {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'success', text: 'Save', icon: 'check', validationGroup: 'fileadd', bindingOptions: {}, onClick: function (e) {
-                        var result = e.validationGroup.validate();
-
-                        if (!result.isValid) {
-                            General.ShowNotify(Config.Text_FillRequired, 'error');
-                            return;
-                        }
-
-                        //var exist = Enumerable.From($scope.entity.Person.Educations).Where('$.EducationDegreeId==' + $scope.entityEducation.EducationDegreeId + ' && ' + '$.StudyFieldId==' + $scope.entityEducation.StudyFieldId + ' && $.Id!=' + $scope.entityEducation.Id).FirstOrDefault();
-                        //if (exist) {
-                        //    General.ShowNotify(Config.Text_SameItemExist, 'error');
-                        //    return;
-                        //}
-                        if (!$scope.entityDocument.Id) {
-                            var id = ($scope.entity.Person.Documents.length + 1) * -1;
-
-                            $scope.entityDocument.Id = id;
-                            $scope.entity.Person.Documents.push(JSON.clone($scope.entityDocument));
-                            $scope.clearEntityDocumnet();
-                        }
-                        else {
-
-                            //dg_selected = JSON.clone($scope.entityAircrafttype);
-                            JSON.copy($scope.entityDocument, dg_selected);
-                            $scope.clearEntityDocumnet();
-                            $scope.popup_file_visible = false;
-                        }
-
-                        var ids = Enumerable.From($scope.ds_doc_type).Select('$.Id').ToArray();
-                        $scope.ds_dg_file = Enumerable.From($scope.entity.Person.Documents).Where(function (x) { return ids.indexOf(x.DocumentTypeId) != -1; }).ToArray();
-
-
+                       $scope.uploadProfileDoc();
                     }
                 }, toolbar: 'bottom'
             },
@@ -5694,7 +5739,7 @@ if ($scope.entity.Person.IssueDate23)
         },
         onShown: function (e) {
 
-            $scope.dg_upload_instance.repaint();
+            // $scope.dg_upload_instance.repaint();
         },
         onHiding: function () {
             $scope.clearEntityDocumnet();
@@ -7000,6 +7045,71 @@ if ($scope.entity.Person.IssueDate23)
     };
 	
 	
+	 $scope.date_RVSMIssueDate = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+        onValueChanged: function (e) {
+           
+            if (!e.value) {
+                $scope.entity.Person.LRCExpireDate = null;
+                return;
+            }
+			 var y=5;
+			if ($scope.group_root=='100')
+				y=2;
+            //$scope.entity.Person.LRCExpireDate = (new Date(e.value)).addYears(y);
+        },
+        bindingOptions: {
+            value: 'entity.Person.RVSMIssueDate',
+            readOnly: 'IsMainDisabled',
+        }
+    };
+    
+    $scope.date_RVSMExpireDate = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+
+        bindingOptions: {
+            value: 'entity.Person.RVSMExpireDate',
+            readOnly: 'IsMainDisabled',
+        }
+    };
+	
+	 $scope.date_ManualIssue = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+        onValueChanged: function (e) {
+           
+            if (!e.value) {
+                $scope.entity.Person.LRCExpireDate = null;
+                return;
+            }
+			 var y=5;
+			if ($scope.group_root=='100')
+				y=2;
+            //$scope.entity.Person.LRCExpireDate = (new Date(e.value)).addYears(y);
+        },
+        bindingOptions: {
+            value: 'entity.Person.DISPATCH_MANUAL_FAM_IssueDate',
+            readOnly: 'IsMainDisabled',
+        }
+    };
+    
+    $scope.date_ManualExpire = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+
+        bindingOptions: {
+            value: 'entity.Person.DISPATCH_MANUAL_FAM_ExpireDate',
+            readOnly: 'IsMainDisabled',
+        }
+    };
+	
+	
 	$scope.date_PERIssueDate = {
         width: '100%',
         type: 'date',
@@ -7563,6 +7673,41 @@ if ($scope.entity.Person.IssueDate23)
 
         bindingOptions: {
             value: 'entity.Person.ExpireDate10',
+            readOnly: 'IsMainDisabled',
+        }
+    };	
+	
+
+ $scope.date_C2A2Issue = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+
+        bindingOptions: {
+            value: 'entity.Person.IssueDate56',
+            readOnly: 'IsMainDisabled',
+        }
+    };	
+	
+$scope.date_FamTypesIssue = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+
+        bindingOptions: {
+            value: 'entity.Person.IssueDate66',
+            readOnly: 'IsMainDisabled',
+        }
+    };	
+	
+
+$scope.date_FamTypesExpire = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
+
+        bindingOptions: {
+            value: 'entity.Person.ExpireDate66',
             readOnly: 'IsMainDisabled',
         }
     };	
@@ -9406,15 +9551,10 @@ $scope.date_TRG16IssueDate = {
         $scope.dg_height = $scope.pop_height - 153;
         $scope.scroll_height = $scope.pop_height - 140;
 		
-        personService.getGroups(Config.CustomerId).then(function (response) {
-            trnService.get_profiles_course_types().then(function (responsex) {
-                $scope.ds_course_types = responsex.Data;
-                console.log('$scope.ds_course_types',$scope.ds_course_types);
-                $scope.ds_allgroups = response.data;
-                console.log('all groupos', $scope.ds_allgroups);
-                $scope.popup_add_visible = true;
-            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-			
+		personService.getGroups(Config.CustomerId).then(function (response) {
+			$scope.ds_allgroups=response.data;
+			console.log('all groupos',$scope.ds_allgroups);
+            $scope.popup_add_visible = true;
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
        
         
@@ -9456,7 +9596,40 @@ $scope.date_TRG16IssueDate = {
        // { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
        // { dataField: 'TrainingDirector', caption: 'Director', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
         { dataField: 'Organization', caption: 'Center', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+       {
+    caption: "Download",
+    width: 100,
+    alignment: "center",
+    allowFiltering: false,
+    allowSorting: false,
+    cellTemplate: function (container, options) {
+ if (options.data.CoursePeopleStatus !== "PASSED") {
+            return; 
+        }
+        
+        var url = "https://ava.reporttrn.airpocket.app/frmreportview.aspx?type=18&id=" + options.data.Id;
+
        
+        $("<i>")
+            .addClass("fa fa-download")
+            .css({
+                cursor: "pointer",
+                fontSize: "18px",
+                color: "#444",
+                padding: "6px"
+            })
+            .hover(
+                function () { $(this).css("color", "#0078ff"); },
+                function () { $(this).css("color", "#444"); }
+            )
+            .on("click", function (e) {
+                e.stopPropagation(); 
+                window.open(url, "_blank");
+            })
+            .appendTo(container);
+    }
+}
+
 
 
 
@@ -9466,7 +9639,7 @@ $scope.date_TRG16IssueDate = {
     $scope.dg_courses_ds = null;
     //$scope.pop_height = $(window).height() - 30;
    // $scope.dg_height = $scope.pop_height - 153;
-    $scope.dg_courses_height = $(window).height() - 153 - 30;
+    $scope.dg_courses_height = $(window).height() - 535 - 30;
     $scope.dg_courses = {
         sorting: {
             mode: "single"
@@ -9527,18 +9700,179 @@ $scope.date_TRG16IssueDate = {
         }
     };
 
+
+$scope.dg_courses_ext_columns = [
+        {
+            dataField: "CoursePeopleStatusId", caption: '',
+            width: 55,
+            allowFiltering: false,
+            allowSorting: false,
+            cellTemplate: function (container, options) {
+                //var fn = options.value == 1 ? 'registered-24' : 'red';
+                var fn = 'pending-24';
+                if (options.value == 1)
+                    fn = 'registered-24';
+                else if (options.value == 0)
+                    fn = 'red';
+
+
+                $("<div>")
+                    .append("<img src='content/images/" + fn + ".png' />")
+                    .appendTo(container);
+            },
+            fixed: true, fixedPosition: 'left',//  sortIndex: 0, sortOrder: "desc"
+        },
+        { dataField: 'No', caption: 'Class Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+        //{ dataField: 'Status', caption: 'Status', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 140 },
+        { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 300, fixed: true, fixedPosition: 'left' },
+       // { dataField: 'CourseType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'DateStart', caption: 'Start', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150, sortIndex: 0, sortOrder: "desc" },
+        { dataField: 'DateEnd', caption: 'End', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
+        { dataField: 'CoursePeopleStatus', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+        { dataField: 'DateIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
+        { dataField: 'DateExpire', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
+       // { dataField: 'CertificateNo', caption: 'Cer. NO', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
+       // { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+       // { dataField: 'TrainingDirector', caption: 'Director', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'Organization', caption: 'Center', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
+       
+
+
+
+    ];
+    $scope.dg_courses_ext_selected = null;
+    $scope.dg_courses_ext_instance = null;
+    $scope.dg_courses_ext_ds = null;
+    //$scope.pop_height = $(window).height() - 30;
+   // $scope.dg_height = $scope.pop_height - 153;
+    $scope.dg_courses_ext_height = $(window).height() - 535 - 30;
+    $scope.dg_courses_ext = {
+        sorting: {
+            mode: "single"
+        },
+        headerFilter: {
+            visible: false
+        },
+        filterRow: {
+            visible: true,
+            showOperationChooser: true,
+        },
+        showRowLines: true,
+        showColumnLines: true,
+
+
+        noDataText: '',
+
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'standard' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'single' },
+
+        columnAutoWidth: false,
+        // height: $(window).height()-130,
+
+        columns: $scope.dg_courses_ext_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_courses_ext_instance)
+                $scope.dg_courses_ext_instance = e.component;
+
+            //$scope.dg_cduties_height = $(window).height() - 131;
+        },
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData[0];
+
+            if (!data) {
+                $scope.dg_courses_selected = null;
+
+            }
+            else {
+                $scope.dg_courses_selected = data;
+
+            }
+        },
+
+        onRowPrepared: function (e) {
+            if (e.data && !e.data.IsNotificationEnabled) {
+                e.rowElement.css('background', '#f2f2f2');
+
+            }
+
+        },
+        bindingOptions: {
+            dataSource: 'dg_courses_ext_ds',
+            height: 'dg_courses_ext_height',
+        }
+    };
+
+
+
+$scope.openImage = function (url) {
+    window.open(url, '_blank');
+};
+
+$scope.isImage = function (file) {
+    if (!file) return false;
+    const ext = file.split('.').pop().toLowerCase();
+    return ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'].includes(ext);
+};
+
+$scope.isPDF = function (file) {
+    if (!file) return false;
+    const ext = file.split('.').pop().toLowerCase();
+    return ext === 'pdf';
+};
+
+
    $scope.bind_person_folder = function (callback) {
         
             trnService.getPersonFolder($scope.entity.Person.NID).then(function (response) {
                 $scope.loadingVisible = false;
                 $scope.person_folders = response ;
-				
-				console.log('YYYYYYY',$scope.person_folders);
-				console.log('YYYYYYY',response);
-                 
+				 
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
        
+       
+			
+			
+			
+			
+			
+			
+			 trnService.getProfileDoc($scope.entity.Person.NID).then(function (response) {
+                $scope.loadingVisible = false;
+                $scope.person_files = response.Data ;
+				$scope.root_path_crew = "https://ava.airpocket.app/upload/training/doc/" +  $scope.entity.Person.NID + '/';
+				  $scope.files_cer = response.Data["CERTIFICATES"];
+                  $scope.files_general = response.Data["GENERAL DOCUMENTS"];
+                  $scope.files_lic = response.Data["LICENSES"];
+                  $scope.files_line = response.Data["LINE CHECK RECORDS"];
+                  $scope.files_log = response.Data["LOGBOOK RECORDS"];
+                  $scope.files_med = response.Data["MEDICAL RECORDS"];
+                  $scope.files_official = response.Data["OFFICIAL RECORDS"];
+                  $scope.files_sim = response.Data["SIMULATOR TRAINING"];
+				    $scope.files_737 = response.Data["737"];
+    $scope.files_MD = response.Data["MD"];
+    $scope.files_310 = response.Data["310"];
+				
+				
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });	
+			
+				 // trnService.getPersonFiles($scope.entity.Person.NID).then(function (response) {
+                // $scope.loadingVisible = false;
+                // $scope.person_files = response.Data ;
+				// $scope.root_path = "https://ava.airpocket.app/upload/training/linecheck/" + $scope.entity.Person.NID + "/";
+				
+				
+				
+
+            // }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+			
+			
+		
          
     };
 
@@ -9548,6 +9882,14 @@ $scope.date_TRG16IssueDate = {
             trnService.getPersonCourses($scope.entity.Person.PersonId).then(function (response) {
                 $scope.loadingVisible = false;
                 $scope.personCourses = response.Data;
+                callback();
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+			
+			
+			 trnService.getCourseExternal($scope.entity.Person.PersonId).then(function (response) {
+                $scope.loadingVisible = false;
+                $scope.personCoursesExt = response.Data;
                 callback();
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
@@ -9575,6 +9917,7 @@ $scope.date_TRG16IssueDate = {
             //}
 
             $scope.dg_courses_ds = ds;
+            $scope.dg_courses_ext_ds = $scope.personCoursesExt;
 
         });
 

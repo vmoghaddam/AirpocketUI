@@ -1,13 +1,13 @@
 ﻿'use strict';
-app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route','$window', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route,$window) {
+app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams', '$rootScope', 'flightService', 'aircraftService', 'authService', 'notificationService', '$route', '$window', function ($scope, $location, $routeParams, $rootScope, flightService, aircraftService, authService, notificationService, $route, $window) {
     $scope.prms = $routeParams.prms;
-	$scope.search=function(){
-	 $scope.dg_flight_total_ds = null;
-            $scope.dg_flight_ds = null;
-            var caption = 'From ' + moment($scope.dt_from).format('YYYY-MM-DD') + ' to ' + moment($scope.dt_to).format('YYYY-MM-DD');
-            $scope.dg_flight_total_instance.columnOption('date', 'caption', caption);
-            $scope.getCrewFlightsTotal($scope.dt_from, $scope.dt_to);
-	};
+    $scope.search = function () {
+        $scope.dg_flight_total_ds = null;
+        $scope.dg_flight_ds = null;
+        var caption = 'From ' + moment($scope.dt_from).format('YYYY-MM-DD') + ' to ' + moment($scope.dt_to).format('YYYY-MM-DD');
+        $scope.dg_flight_total_instance.columnOption('date', 'caption', caption);
+        $scope.getCrewFlightsTotal($scope.dt_from, $scope.dt_to, $scope.ac_type, $scope.crank);
+    };
     $scope.btn_search = {
         text: 'Search',
         type: 'success',
@@ -22,21 +22,33 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
                 General.ShowNotify(Config.Text_FillRequired, 'error');
                 return;
             }
-           $scope.search();
+            $scope.search();
         }
 
     };
-	 
-	 $scope.btn_export = {
+
+    $scope.btn_export = {
         text: 'Export',
         type: 'success',
-        
+
         width: 120,
-        
+
         bindingOptions: {},
         onClick: function (e) {
-           $window.open(apixls +'api/xls/crew/flights/-1?df='+moment(new Date($scope.dt_from)).format('YYYY-MM-DD')+'&dt='
-						+moment(new Date($scope.dt_to)).format('YYYY-MM-DD'), '_blank');
+            $window.open(apixls + 'api/xls/crew/flights/-1?df=' + moment(new Date($scope.dt_from)).format('YYYY-MM-DD') + '&dt='
+                + moment(new Date($scope.dt_to)).format('YYYY-MM-DD'), '_blank');
+        }
+
+    };
+	$scope.btn_summary = {
+        text: 'Summary',
+        type: 'success',
+        //icon: 'search',
+        width: 120,
+        validationGroup: 'ctrsearch',
+        bindingOptions: {},
+        onClick: function (e) {
+             $window.open('https://ava.airpocket.app/#!/crew/report/fixtime/daily', '_blank');
         }
 
     };
@@ -70,10 +82,10 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
     $scope.formatMinutes = function (mm) {
         return pad(Math.floor(mm / 60)).toString() + ':' + pad(mm % 60).toString();
     };
-    $scope.getCrewFlightsTotal = function (df, dt) {
+    $scope.getCrewFlightsTotal = function (df, dt, _type, _rank) {
 
         $scope.loadingVisible = true;
-        flightService.getCrewFlightsTotal(df, dt).then(function (response) {
+        flightService.getCrewFlightsTotal(df, dt, _type, _rank).then(function (response) {
             $scope.loadingVisible = false;
             $.each(response, function (_i, _d) {
 
@@ -102,12 +114,12 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
             $scope.loadingVisible = false;
             $.each(response, function (_i, _d) {
                 _d.Route = _d.FromAirportIATA + '-' + _d.ToAirportIATA;
-				_d.BlockTime2 = $scope.formatMinutes(_d.BlockTime);
-				_d.FlightTime2 = $scope.formatMinutes(_d.FlightTime);
-				_d.FixTime2 = $scope.formatMinutes(_d.FixTime);
-				_d.JLBlockTime2 = $scope.formatMinutes(_d.JL_BlockTime);
-				_d.JLFlightTime2 = $scope.formatMinutes(_d.JL_FlightTime);
-               // _d.STA = (new Date(_d.STA)).addMinutes(offset);
+                _d.BlockTime2 = $scope.formatMinutes(_d.BlockTime);
+                _d.FlightTime2 = $scope.formatMinutes(_d.FlightTime);
+                _d.FixTime2 = $scope.formatMinutes(_d.FixTime);
+                _d.JLBlockTime2 = $scope.formatMinutes(_d.JL_BlockTime);
+                _d.JLFlightTime2 = $scope.formatMinutes(_d.JL_FlightTime);
+                // _d.STA = (new Date(_d.STA)).addMinutes(offset);
 
                 //_d.STD = (new Date(_d.STD)).addMinutes(offset);
                 //if (_d.ChocksIn)
@@ -161,31 +173,76 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
         }
     };
     //////////////////////////////////
+    $scope.ac_type = 'ALL';
+    $scope.sb_type = {
+        placeholder: 'A/C Type',
+        showClearButton: false,
+        searchEnabled: false,
+        dataSource: ['ALL', '737', 'MD', 'AIRBUS'],
+
+        onSelectionChanged: function (arg) {
+
+        },
+
+        bindingOptions: {
+            value: 'ac_type',
+
+
+        }
+    };
+    $scope.crank = 'ALL';
+    if ($rootScope.roles.includes("Cabin Crew Manager"))
+        $scope.ranks = ['ALL', 'CABIN', 'ISCCM', 'SCCM', 'CCM']
+    else
+        $scope.ranks = ['ALL', 'COCKPIT', 'CABIN', 'IP', 'P1', 'P2', 'ISCCM', 'SCCM', 'CCM']
+
+    $scope.sb_rank = {
+        placeholder: 'Rank',
+        showClearButton: false,
+        searchEnabled: false,
+        dataSource: $scope.ranks,
+
+        onSelectionChanged: function (arg) {
+
+        },
+
+        bindingOptions: {
+            value: 'crank',
+
+
+        }
+    };
     $scope.dg_flight_total_columns = [
-          { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', width: 90, allowEditing: false, fixed: true, fixedPosition: 'left' },
+        { dataField: 'OA', caption: 'O/A', allowResizing: true, alignment: 'center', dataType: 'number', width: 70, allowEditing: false, fixed: true, fixedPosition: 'left' },
 
-                { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: true, fixedPosition: 'left', minWidth: 200 },
+        { dataField: 'JobGroup', caption: 'Group', allowResizing: true, alignment: 'center', dataType: 'string', width: 90, allowEditing: false, fixed: true, fixedPosition: 'left' },
 
-                { dataField: 'Legs', caption: 'Legs', allowResizing: true, dataType: 'number', allowEditing: false, width: 80, alignment: 'center', },
-                { dataField: 'DH', caption: 'DH', allowResizing: true, dataType: 'number', allowEditing: false, width: 80, alignment: 'center', },
-                //  { dataField: 'LayOver', caption: 'LO', allowResizing: true, dataType: 'number', allowEditing: false, width: 90, alignment: 'center', },
-                //{ dataField: 'FlightTime2', caption: 'Sch. Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
-				 { dataField: 'FixTime2', caption: 'Fix Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
-				{caption:'STATION',columns:[
-				
-				 { dataField: 'FlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100,  },
-                { dataField: 'BlockTime2', caption: 'Block', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100,   },
-				
-				]},
-				{caption:'Journey Log',columns:[
-				
-				 { dataField: 'JLFlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100,   },
-                { dataField: 'JLBlockTime2', caption: 'Block', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100,   },
-				]},
-				
-               
-               
-                // { dataField: 'FixTime2', caption: 'Fix Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
+        { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, fixed: true, fixedPosition: 'left', minWidth: 200 },
+        { dataField: 'Type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', width: 120, allowEditing: false, fixed: false, fixedPosition: 'left' },
+        { dataField: 'Legs', caption: 'Legs', allowResizing: true, dataType: 'number', allowEditing: false, width: 80, alignment: 'center', },
+        { dataField: 'DH', caption: 'DH', allowResizing: true, dataType: 'number', allowEditing: false, width: 80, alignment: 'center', },
+        //  { dataField: 'LayOver', caption: 'LO', allowResizing: true, dataType: 'number', allowEditing: false, width: 90, alignment: 'center', },
+        //{ dataField: 'FlightTime2', caption: 'Sch. Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
+        { dataField: 'FixTime2', caption: 'Fix Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
+       /* {
+            caption: 'STATION', columns: [
+
+                { dataField: 'FlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, },
+                { dataField: 'BlockTime2', caption: 'Block', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, },
+
+            ]
+        },*/
+        {
+            caption: 'Journey Log', columns: [
+
+                { dataField: 'JLFlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, },
+                { dataField: 'JLBlockTime2', caption: 'Block', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, },
+            ]
+        },
+
+
+
+        // { dataField: 'FixTime2', caption: 'Fix Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
 
 
 
@@ -235,8 +292,8 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
             }
             else {
                 $scope.dg_flight_total_selected = data;
-               /// var caption = data.Name + ' (From ' + moment($scope.dt_from).format('YYYY-MM-DD') + ' to ' + moment($scope.dt_to).format('YYYY-MM-DD') + ' )';
-               // $scope.dg_flight_instance.columnOption('crew', 'caption', caption);
+                /// var caption = data.Name + ' (From ' + moment($scope.dt_from).format('YYYY-MM-DD') + ' to ' + moment($scope.dt_to).format('YYYY-MM-DD') + ' )';
+                // $scope.dg_flight_instance.columnOption('crew', 'caption', caption);
                 $scope.getCrewFlights($scope.dg_flight_total_selected.CrewId, $scope.dt_from, $scope.dt_to);
             }
 
@@ -251,13 +308,13 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
 
                 summaryType: "custom"
             },
-                {
-                    name: "BlockTimeTotal",
-                    showInColumn: "BlockTime2",
-                    displayFormat: "{0}",
+            {
+                name: "BlockTimeTotal",
+                showInColumn: "BlockTime2",
+                displayFormat: "{0}",
 
-                    summaryType: "custom"
-                },
+                summaryType: "custom"
+            },
 
             {
                 name: "JLBlockTimeTotal",
@@ -390,6 +447,13 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
             e.component.columnOption("row", "visible", true);
             e.component.endUpdate();
         },
+        onRowPrepared: function (e) {
+            if (e.data && e.data.OA) {
+                e.rowElement.css('background', '#ff99ff');
+
+            }
+
+        },
         bindingOptions: {
             dataSource: 'dg_flight_total_ds'
         }
@@ -397,47 +461,52 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
     //////////////////////////////////
     $scope.dg_flight_columns = [
         {
-                    cellTemplate: function (container, options) {
-                        $("<div style='text-align:center'/>")
-                            .html(options.rowIndex + 1)
-                            .appendTo(container);
-                    }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
-                },
-                { dataField: 'IsPositioning', caption: 'DH', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 60 },
-                { dataField: 'Date', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd',fixed: true, fixedPosition: 'left' },
-                { dataField: 'Position', caption: 'Pos', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left' },
-                { dataField: 'FlightNumber', caption: 'No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left' },
+            cellTemplate: function (container, options) {
+                $("<div style='text-align:center'/>")
+                    .html(options.rowIndex + 1)
+                    .appendTo(container);
+            }, name: 'row', caption: '#', width: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+        },
+        { dataField: 'IsPositioning', caption: 'DH', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 60 },
+        { dataField: 'Date', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 120, format: 'yy-MMM-dd', fixed: true, fixedPosition: 'left' },
+        { dataField: 'Position', caption: 'Pos', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left' },
+        { dataField: 'Register', caption: 'Reg.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left' },
+        { dataField: 'FlightNumber', caption: 'No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: true, fixedPosition: 'left' },
 
-                { dataField: 'Route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
-				
-              
-                { dataField: 'JL_OffBlockLocal', caption: 'Off', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm', sortIndex: 0, sortOrder: 'asc' },
-
-                { dataField: 'JL_TakeOffLocal', caption: 'T/O', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm', sortIndex: 0, sortOrder: 'asc' },
+        { dataField: 'Route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130 },
 
 
-                { dataField: 'JL_LandingLocal', caption: 'LND', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm' },
+       // { dataField: 'JL_OffBlockLocal', caption: 'Off', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm', sortIndex: 0, sortOrder: 'asc' },
 
-                { dataField: 'JL_OnBlockLocal', caption: 'On', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm' },
+       // { dataField: 'JL_TakeOffLocal', caption: 'T/O', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm', sortIndex: 0, sortOrder: 'asc' },
 
 
-                
-                
-				{caption:'STATION',columns:[
-				
-				  { dataField: 'FlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'right' },
+        //{ dataField: 'JL_LandingLocal', caption: 'LND', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm' },
+
+        //{ dataField: 'JL_OnBlockLocal', caption: 'On', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm' },
+
+
+
+
+       /* {
+            caption: 'STATION', columns: [
+
+                { dataField: 'FlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'right' },
 
                 { dataField: 'BlockTime2', caption: 'Block', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'right' },
-				
-				]},
-				{caption:'Journey Log',columns:[
-				  { dataField: 'JLFlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'right' },
+
+            ]
+        },*/
+        {
+            caption: 'Journey Log', columns: [
+                { dataField: 'JLFlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'right' },
 
                 { dataField: 'JLBlockTime2', caption: 'Block', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'right' },
-				
-				]},
-				{ dataField: 'FixTime2', caption: 'Fix Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110, fixed: true, fixedPosition: 'right' },
-             
+
+            ]
+        },
+        { dataField: 'FixTime2', caption: 'Fix Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110, fixed: true, fixedPosition: 'right' },
+
 
 
 

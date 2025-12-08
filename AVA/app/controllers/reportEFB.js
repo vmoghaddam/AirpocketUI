@@ -343,7 +343,7 @@ $scope.jlObj = null;
                     co.Position = 'F/P';
                 if (co.Position && (co.Position == 'FA' || co.Position == 'CCM'))
                     co.Position = 'F/A';
-                if (co.JobGroup == "ISCCM")
+                if (co.JobGroup == "ISCCM" && co.Position !='OBS')
                     co.Position = "IF/P";
                 $scope.jl.crewscabin.push(co);
             });
@@ -386,8 +386,8 @@ $scope.jlObj = null;
                     ca.Position = 'SCCM';
                 if (ca.Position && ca.Position == 'FA')
                     ca.Position = 'CCM';
-                if (ca.JobGroup == "ISCCM")
-                    ca.Position = "ISCCM";
+                if (ca.JobGroup == "ISCCM"  && ca.Position !='OBS')
+                    ca.Position = "IF/P";
 
                 if (ca.IsPositioning)
                     ca.Position = 'DH';
@@ -527,14 +527,15 @@ $scope.jlObj = null;
                 if (co.IsPositioning)
                     co.Position = 'DH';
                 //////////////////////////////////
-
+                
 
                 if (ca.Position && ca.Position == 'Purser')
                     ca.Position = 'SCCM';
                 if (ca.Position && ca.Position == 'FA')
                     ca.Position = 'CCM';
-                if (ca.JobGroup == "ISCCM")
+                if (ca.JobGroup == "ISCCM" && ca.Position!='OBS')
                     ca.Position = "ISCCM";
+				
 
                 if (ca.IsPositioning)
                     ca.Position = 'DH';

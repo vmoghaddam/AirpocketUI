@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('trnScheduleCourseController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService', '$window', '$compile', function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService, $window, $compile) {
     $scope.prms = $routeParams.prms;
 

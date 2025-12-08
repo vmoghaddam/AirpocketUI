@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('personAddController', ['$scope', '$location', 'personService', 'authService', '$routeParams', '$rootScope','trnService','$window', function ($scope, $location, personService, authService, $routeParams, $rootScope,trnService,$window) {
     
     $scope.isNew = true;

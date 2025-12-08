@@ -8,7 +8,7 @@ app.controller('asrAddController', ['$scope', '$location', 'flightBagService', '
     var detector = new MobileDetect(window.navigator.userAgent);
 
 
-    $scope.isOPSManager = true; 
+    $scope.isOPSManager = true;
     $scope.isOPSStaff = false;
     $scope.isSave = $scope.isOPSManager || $scope.isOPSStaff;
 
@@ -123,7 +123,7 @@ app.controller('asrAddController', ['$scope', '$location', 'flightBagService', '
               {
                 widget: 'dxButton', location: 'after', options: {
                     type: 'default', text: 'Print', icon: 'remove', onClick: function (e) {
-                        $window.open('https://report.apvaresh.com/frmreportview.aspx' + '?type=17&fid=' +$scope.entity.FlightId, '_blank');
+                        $window.open('https://ava.report.airpocket.app/frmreportview.aspx' + '?type=17&fid=' +$scope.entity.FlightId, '_blank');
                     }
                 }, toolbar: 'bottom'
             },

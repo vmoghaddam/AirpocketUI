@@ -30,20 +30,20 @@ app.config(function ($routeProvider) {
      
     $routeProvider.when("/apps", {
         controller: "appsController",
-        templateUrl: "/app/views/apps.html?v=" + "111"
+        templateUrl: "/app/views/apps.html?v=" + "667"
     });
     $routeProvider.when("/home", {
         controller: "homeController",
-        templateUrl: "/app/views/home.html?v="+'666'
+        templateUrl: "/app/views/home.html?v="+'555'
     });
     $routeProvider.when("/home/:year/:month/:day", {
         controller: "homeController",
-        templateUrl: "/app/views/home.html?v=" + '666'
+        templateUrl: "/app/views/home.html?v=" + '555'
     });
 
     $routeProvider.when("/login", {
         controller: "loginController",
-        templateUrl: "/app/views/login.html"
+        templateUrl: "/app/views/login.html?v=112313"
     });
 
     
@@ -104,16 +104,16 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/person", {
         controller: "zpersonController",
-        templateUrl: "/app/views/zperson.html?v=54"
+        templateUrl: "/app/views/zperson.html?v=88782"
     });
      $routeProvider.when("/person/crew", {
         controller: "zpersonController",
-        templateUrl: "/app/views/zperson.html?v=56",
+        templateUrl: "/app/views/zperson.html?v=7777",
         isCrew:true,
     }); 
     $routeProvider.when("/person/course", {
         controller: "personcourseController",
-        templateUrl: "/app/views/personcourse.html"
+        templateUrl: "/app/views/personcourse.html?v=1"
     });
      
     $routeProvider.when("/person/book", {
@@ -132,7 +132,7 @@ app.config(function ($routeProvider) {
     });
     $routeProvider.when("/course/person", {
         controller: "coursepersonController",
-        templateUrl: "/app/views/courseperson.html?v=1999"
+        templateUrl: "/app/views/courseperson.html?v=555"
     });
     $routeProvider.when("/course/type", {
         controller: "courseTypeController",
@@ -206,7 +206,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/document", {
         controller: "libraryController",
-        templateUrl: "/app/views/document.html",
+        templateUrl: "/app/views/document.html?v=3",
         isDocument: true,
     });
 
@@ -443,7 +443,7 @@ app.config(function ($routeProvider) {
     });
     $routeProvider.when("/users", {
         controller: "usersController",
-        templateUrl: "/app/views/users.html"
+        templateUrl: "/app/views/users.html?v=108"
     });
 
     $routeProvider.when("/gnt", {
@@ -500,7 +500,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/forma", {
         controller: "formaController",
-        templateUrl: "/app/views/forma.html"
+        templateUrl: "/app/views/forma.html?v=1"
     });
     $routeProvider.when("/roster/admin", {
         controller: "fdpsController",
@@ -510,7 +510,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/board", {
         controller: "boardController",
-        templateUrl: "/app/views/board.html?v=924",
+        templateUrl: "/app/views/board.html?v=926",
         isAdmin: true,
     });
     $routeProvider.when("/board/fly", {
@@ -544,7 +544,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/formmovaled", {
         controller: "formmovaledController",
-        templateUrl: "/app/views/formmovaled.html"
+        templateUrl: "/app/views/formmovaled.html?v=1"
     });
     $routeProvider.when("/fuel", {
         controller: "fuelController",
@@ -608,7 +608,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/flights/efbs", {
         controller: "reportEFBController",
-        templateUrl: "/app/views/reportEFB.html?v=1009"
+        templateUrl: "/app/views/reportEFB.html?v=1010"
     });
 
 
@@ -622,7 +622,7 @@ app.config(function ($routeProvider) {
     });
     $routeProvider.when("/scheduling/admin", {
         controller: "schedulingvrhController",
-        templateUrl: "/app/views/schedulingvrh.html?v=17081",
+        templateUrl: "/app/views/schedulingvrh.html?v=17083",
         isAdmin: true,
     });
     $routeProvider.when("/scheduling", {
@@ -697,10 +697,6 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/trn/dashboard", {
         controller: "trnDashboardController",
         templateUrl: "/app/views/trndashboard.html"
-    });
-    $routeProvider.when("/trn/question/add", {
-        controller: "trn_question_addController",
-        templateUrl: "/app/views/trn_question_add.html"
     });
 	
 	 $routeProvider.when("/duty/timeline/z", {
@@ -818,42 +814,7 @@ app.config(function ($routeProvider) {
   $routeProvider.when("/forms/vacation/responsible", {
      controller: "forms_vacation_responsibleController",
      templateUrl: "/app/views/form_vacation_responsible.html?v=1130"
-  });
-
-
-    $routeProvider.when("/exam/client/:id/:cid", {
-        controller: "exam_client_controller",
-        templateUrl: "/app/views/exam_client.html?v=" + '5673'
-    });
-
-    $routeProvider.when("/fdm/main", {
-        controller: "fdm_main_controller",
-        templateUrl: "/app/views/fdm_main.html?v=" + '5673'
-    });
-
-
-    $routeProvider.when("/fdm/main/z", {
-        controller: "zfdm_main_controller",
-        templateUrl: "/app/views/zfdm_main.html?v=" + '5673'
-    });
-
-    $routeProvider.when("/fdm/crew/z/:crew_id/:dt1/:dt2/:ac_type", {
-        controller: "zfdm_crew_controller",
-        templateUrl: "/app/views/zfdm_crew.html?v=" + '5673'
-    });
-
-    $routeProvider.when("/exams", {
-        controller: "trnexamController",
-        templateUrl: "/app/views/trn_exam.html?v=1999"
-    });
-
-
-    $routeProvider.when("/fdm/sand", {
-        controller: "fdm_sand_controller",
-        templateUrl: "/app/views/fdm_sand.html?v=" + '5673'
-    });
-
-
+ });
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });   
@@ -872,58 +833,64 @@ app.config(function ($routeProvider) {
 //} 
 //var serviceBase = 'http://fleet.caspianairlines.com/api/';
 
-var serviceBaseAPI ='https://ava.api.airpocket.app/';  //*
-var serviceBaseTRN = 'https://ava.apitrn.airpocket.app/';
+var serviceBaseAPI ='https://aerotango.app/api/';  //*
+var serviceBaseTRN = 'https://ava.apitrn.aerotango.app/';
  
  
 var webBase = 'https://ava.airpocket.app/';  //*
-var serviceBase ='https://ava.apinet.airpocket.app/'; //*
-var serviceBaseAeroTango='https://ava.apinet.aerotango.app/';
+var serviceBase ='https://aerotango.app/apinetauth/';//'https://ava.apinet.airpocket.app/';//'https://ava.apinetauth.aerotango.app/'; 
+var serviceBaseAeroTango='https://aerotango.app/apinet/';//'https://ava.apinet.airpocket.app/';//'https://ava.apinet.aerotango.app/';
 var liburl = serviceBase;
 var serviceBase2 =  'https://localhost:5001/'; 
  
 var signFiles = 'https://_fbpocket.ir/upload/signs/';
-var apimain='https://ava.api.airpocket.app/';
-var comAPI='https://ava.api.airpocket.app/'; 
-var msgUrl="https://ava.apinet.airpocket.app/"; 
-var apiLog='https://ava.apilog.airpocket.app/'; //*
+var apimain='https://aerotango.app/api/';
+var comAPI='https://aerotango.app/api/'; 
+var msgUrl="https://aerotango.app/apinet/"; 
+var apiLog='https://aerotango.app/apilog/';//'https://ava.apilog.airpocket.app/';//'https://ava.apilog.aerotango.app/'; //*
 var schUrl='https://_sch.apvaresh.com/'; 
-var apigd='https://ava.api.airpocket.app/';//'http://ava.api.airpocket.app/'; 
+var apigd='https://aerotango.app/api/';//'http://ava.api.airpocket.app/'; 
 var netProfile='https://_netprofile.apvaresh.com/'; 
-var apireportflight='https://ava.apireportflight.airpocket.app/'; //* 
+var apireportflight='https://ava.reportflight.skybag.tech/';//'https://ava.apireportflight.airpocket.app/'; //* 
 var zreportflight=apireportflight ;
 var apixls='https://ava.apixls.airpocket.app/'; //*
-var apiScheduling='https://ava.apischeduling.aerotango.app/';
- var zapiScheduling="https://ava.apischeduling.aerotango.app/"; 
+var apiScheduling='https://aerotango.app/apischeduling/';//'https://ava.apischeduling.airpocket.app/';//'https://ava.apischeduling.aerotango.app/';
+ var zapiScheduling='https://aerotango.app/apischeduling/';//'https://ava.apischeduling.airpocket.app/';//"https://ava.apischeduling.aerotango.app/";
 
 var apiExternal = 'https://_xpi.airpocket.app/';
 var airlineCode = 'vrh';
 
 var serviceSKYBAG = 'https://_api.sbvaresh.ir/';
-var weatherUrl='https://wxava.skybag.app/';
+var weatherUrl='https://wxava.skybag.tech/';
 var staticFilesSKYBAG = 'https://fbpocket.ir/Upload/';
 
 var apimsg='https://_apimsg.apvaresh.com/';
-var apiplanning='https://ava.apiplanning.airpocket.app/'; //*
-var apilogdefault='https://ava.apilogdefault.airpocket.app/'; //*
-var apiapsb='https://ava.apiapsb.airpocket.app/';
-var apiprofile='https://ava.apiprofile.airpocket.app/';
-var apiauth ='https://aerotango.app/apinetauth/'; //*
-var atcfiles='https://files.airpocket.app/air1/atc/';
+var apiplanning='https://aerotango.app/apiplanning/'; //*
+var apilogdefault='https://aerotango.app/apilogdefault/'; //*
+
+var apiapsb='https://ava.apiapsb.aerotango.app/';//'https://ava.apiapsb.airpocket.app/';
+
+var apiprofile='https://ava.apiprofile.aerotango.app/';
+var apiauth='https://aerotango.app/apinetauth/';//'https://ava.apinet.airpocket.app//';//'https://ava.apinetauth.aerotango.app/'; //*
+var atcfiles='https://files.aerotango.app/ava/atc/';
 
 var apiCAO='https://ava.apicaox.airpocket.app/';
 
-var zapinet='https://ava.apinet.airpocket.app/';
-var zfuel='https://ava.apifuel.airpocket.app/';
-var zapitrn = 'https://ava.apitrn.airpocket.app/';
+var zapinet='https://aerotango.app/apinet/';
+var zfuel='https://ava.apifuel.aerotango.app/';
+var zapitrn='https://ava.apitrn.aerotango.app/';
 var vira_api = "https://lmmcore.online/";
-var zapinet2 = 'https://ava.zapinet.airpocket.app/';
-var api_fdm = 'http://localhost:22556/';
+var zapinet2='https://aerotango.app/zapinet/';//'https://ava.zapinet.airpocket.app/';//'https://ava.zapinet.aerotango.app/';;
+var apireportflight2=apireportflight;
 
-var temp_url='https://ava.temp.apinet.airpocket.app/';
+var pgs_logdefault='https://pgs.apilogdefault.aerok.tech/';
+var pgs_apinet='https://pgs.apinet.aerok.tech/';
+var pgs_apiplanning='https://pgs.apiplanning.aerok.tech/';
+
+var temp_url='https://ava.temp.apinet.aerotango.app/';
     //'http://localhost:58908/';
     //'http://localhost:40654/';
-   var serviceRequest = 'https://ava.apiform.airpocket.app/';
+   var serviceRequest = 'https://ava.apiform.aerotango.app/';
     //'http://localhost:10707/';
 //'http://ngauthenticationapi.azurewebsites.net/';
 app.constant('ngAuthSettings', {
@@ -1035,7 +1002,7 @@ app.directive(
                 function () {
 
                     console.info("Digest running.");
-                    
+
                     // Now that we're in a digest, check to see
                     // if there are any ngRepeat items being
                     // rendered. Since we want to know when the
@@ -1113,8 +1080,9 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
         serviceBase = 'http://fleet.flypersia.aero/api.airpocket/';
     }
     ////////////////////////////////
-    $rootScope.reportServer = "https://ava.report.airpocket.app/frmreportview.aspx";
-	$rootScope.formsReportServer = "https://ava.formsreport.airpocket.app/frmreportview.aspx";
+    $rootScope.reportServer = "https://ava.reporttrn.airpocket.app/frmreportview.aspx";
+	 $rootScope.report_scheduling = "https://aerotango.app/report/frmreportview.aspx";
+	$rootScope.formsReportServer = "https://ava.reporttrn.airpocket.app//frmreportview.aspx";
     $rootScope.reportServerTRN = "https://ava.reporttrn.airpocket.app/frmreportview.aspx";
 	$rootScope.zreportServerTRN = "https://ava.reporttrn.airpocket.app/frmreportview.aspx";
 	$rootScope.zreportServerTRNForms="https://ava.reporttrn.airpocket.app/frmreportview.aspx";
@@ -1136,7 +1104,7 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
     $rootScope.serviceUrl = serviceBase;
     $rootScope.fileHandlerUrl = webBase + 'filehandler.ashx';
 	// $rootScope.fileHandlerUrl ='https://trn.apvaresh.com/'+'filehandler.ashx';
-    $rootScope.clientsFilesUrl = 'https://files.airpocket.app/varesh/certificates/';//webBase + 'upload/clientsfiles/';
+    $rootScope.clientsFilesUrl = 'https://ava.airpocket.app/upload/clientsfiles/';//webBase + 'upload/clientsfiles/';
     $rootScope.app_title = 'AirPocket';
     $rootScope.page_title = '';
     $rootScope.app_remark = 'Lorem ipsum dolor sit amet';
@@ -1176,6 +1144,13 @@ app.run(['authService', 'activityService', 'mntService', 'vira_general_service',
 	$rootScope.HasDispatch = function () {
         
         var role = Enumerable.From($rootScope.roles).Where('$=="Dispatch"').FirstOrDefault();
+        if (role)
+            return true;
+        return false;
+    };
+	$rootScope.HasTransport = function () {
+        
+        var role = Enumerable.From($rootScope.roles).Where('$=="Transport"').FirstOrDefault();
         if (role)
             return true;
         return false;
@@ -1268,6 +1243,16 @@ $rootScope.HasHR = function () {
 		 
         return false;
     };
+	
+	$rootScope.ShowOnlyFM = function () {
+		
+        var role = Enumerable.From($rootScope.roles).Where('$=="Show Flight Crew (F/M)"').FirstOrDefault();
+        if (role)
+            return true;
+		 
+		 
+        return false;
+    };
     //ati12
     $rootScope.logOut = function () {
 
@@ -1352,7 +1337,7 @@ $rootScope.HasHR = function () {
 
         }
 		if (key == 'requests') {
-             return $rootScope.userName.toUpperCase()=='KERMANSHAHI' ||   $rootScope.userName.toUpperCase()=='N.TALEBI' || $rootScope.userName.toLowerCase() == 'demo';
+             return $rootScope.userName.toUpperCase()=='M.KERMANSHAHI' ||   $rootScope.userName.toUpperCase()=='N.TALEBI' || $rootScope.userName.toLowerCase() == 'demo';
 
         }
 	   
@@ -1375,6 +1360,20 @@ $rootScope.HasHR = function () {
            
 
         }
+         if (key == 'flight_crew_time') {
+              var _xst= $rootScope.roles.indexOf('Cabin Crew Manager')!=-1 || $rootScope.roles.indexOf('Crew Scheduler')!=-1 || $rootScope.roles.indexOf('Crew Scheduling')!=-1;
+			  if (_xst)
+				  return true;
+			  return false;
+         } 
+		
+        if (key == 'user_manager') {
+              var _xst= $rootScope.roles.indexOf('User Manager')!=-1;
+			  if (_xst)
+				  return true;
+			  return false;
+         } 
+		
         var exist = Enumerable.From($rootScope.claims).Where('$.page=="' + key + '"').FirstOrDefault();
         
         if (!exist) {

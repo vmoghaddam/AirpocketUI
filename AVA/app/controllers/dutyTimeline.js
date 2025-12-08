@@ -1,5 +1,5 @@
 ﻿'use strict';
-
+ 
 
 app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams', '$rootScope', '$timeout', 'flightService', 'weatherService', 'aircraftService', 'authService', 'notificationService', '$route', '$window', 'schedulingService', function ($scope, $location, $routeParams, $rootScope, $timeout, flightService, weatherService, aircraftService, authService, notificationService, $route, $window, schedulingService) {
     $scope.OnlyRoster = false;
@@ -1224,7 +1224,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
     $scope.setTopDuty = function (flts) {
 
-        var _flights = Enumerable.From(flts).OrderBy(function (x) { return moment(new Date(x.InitStart)).format('YYYYMMDD'); }).ToArray();
+        var _flights = Enumerable.From(flts).OrderBy(function (x) { return moment(new Date(x.InitStart)).format('YYYYMMDD') ; }).ToArray();
         var j = 5;
         var last = null;
 
@@ -1232,7 +1232,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             for (var i = 0; i < _flights.length; i++) {
                 var cf = _flights[i];
                 //cf.top = null;
-                if (i == 0) { cf.top = j; last = cf; }
+                if (i == 0 ) { cf.top = j; last = cf; }
                 else {
                     if (!$scope.IsConflictDuty(cf, last)) { cf.top = j; last = cf; }
                 }
@@ -1308,7 +1308,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         //     //console.log('scroll', e);
         // })
         $('.col-duty').on('scroll', function () {
-
+            
             $('.col-res').scrollTop($(this).scrollTop());
             $('.row-date').scrollLeft($(this).scrollLeft());
 
@@ -1328,7 +1328,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         }
     };
     $scope.getRightColumnStyle = function () {
-        var _height = $(window).height() - col_height_gap + 12;
+        var _height = $(window).height() - col_height_gap  + 12;
         return {
             height: _height + 'px'
         }
@@ -1347,13 +1347,13 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         var _width = duration * minute_width;
 
         var _left = _start.diff(moment(start0), 'minutes') * minute_width;
-
+        
 
         return {
             width: _width + 'px',
             left: _left + 'px',
-
-
+            
+            
         };
     };
     $scope.getDutyStyle = function (duty) {
@@ -1365,8 +1365,8 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         var start = duty.InitStart;
         var end = duty.InitRestTo;
         if (duty.DutyType == 100020) {
-            //   var offset = 1 * (new Date()).getTimezoneOffset();
-
+         //   var offset = 1 * (new Date()).getTimezoneOffset();
+           
             start = new Date(General.getDayFirstHour(duty.InitStart));
             end = new Date(General.getDayLastHour(duty.InitStart));
 
@@ -1379,7 +1379,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
         var _left = _start.diff(moment($scope.datefrom), 'minutes') * minute_width;
         var dheight = duty_height;
-        if ([5000, 5001, 100003, 100001, 100025, 300014].indexOf(duty.DutyType) != -1)
+        if ([5000, 5001, 100003, 100001, 100025,300014].indexOf(duty.DutyType) != -1)
             dheight = duty_height_trn;
         if ([1165].indexOf(duty.DutyType) != -1) {
             dheight = duty_height_fdp;
@@ -1410,12 +1410,12 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         var _width = $scope.ganttData && $scope.ganttData.dates ? $scope.ganttData.dates.length * date_cell_width : 1000;
         return {
             width: _width + 'px',
-            height: (res.maxTop + duty_height + 5) + 'px'
+            height: (res.maxTop + duty_height + 5 ) + 'px'
         };
     };
     $scope.getResCaptionStyle = function (res) {
         return {
-            lineHeight: (res.maxTop + duty_height - 30) + 'px'
+            lineHeight: (res.maxTop + duty_height-30) + 'px'
         };
     }
     $scope.getCellId = function (res, dt) {
@@ -1564,8 +1564,8 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             default:
                 break;
         }
-
-        schedulingService.getCrewFlightTime(_code, df, dt).then(function (response) {
+        
+        schedulingService.getCrewFlightTime(_code,df, dt).then(function (response) {
 
             console.log('FLIGHT TIME', response);
             //$.each(response, function (_i, _c) {
@@ -1583,9 +1583,9 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
 
             //});
-            if (callback) {
-                callback(response);
-            }
+             if (callback) {
+                 callback(response);
+             }
 
 
         }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
@@ -1876,7 +1876,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     }
     $scope.showProfileContextMenu = function (id) {
         //console.log($scope.selected_crew);
-        var c = Enumerable.From($scope.crews).Where('$.CrewId==' + $scope.selected_crew_id).FirstOrDefault()
+        var c=Enumerable.From($scope.crews).Where('$.CrewId==' + $scope.selected_crew_id).FirstOrDefault()
         $scope.showProfile(c.item, $scope.contextMenuCellData.startDate);
     }
     $scope.showProfile = function (c, dt) {
@@ -3051,30 +3051,6 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         return result;
     };
 
-    //2024-06-21
-    $scope.get_ac_type = function (message, rank) {
-        var type_part = null;
-        var result = [];
-        if (message) {
-            type_part = message.split('*')[0];
-        }
-        if (!type_part) {
-            if (['ISCCM', 'SCCM', 'CCM', 'CCI', 'CCE', 'SCC', 'CC'].indexOf(rank) != -1)
-                return 'all';
-            else
-                return 'none';
-        }
-        if (type_part.includes('73'))
-            result.push('737');
-        if (type_part.includes('MD'))
-            result.push('MD');
-        if (type_part.includes('310') || type_part.includes('320') || type_part.includes('330') || type_part.includes('340'))
-            result.push('AIRBUS');
-
-
-
-    };
-
 
     $scope.timeline_data = null;
     $scope.bindDutyTimeLine = function (callback) {
@@ -3177,13 +3153,10 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
                     $scope.totalHeight += _d.maxTop;
 
-                    //2024-06-21
-                    _d.ac_type = $scope.get_ac_type(_d.item.ValidationMessage, _d.JobGroup);
 
                 });
 
                 $scope.crews = crews;
-                console.log('crew ac type',$scope.crews);
                 $scope.ganttData.resources = crews;
                 $scope.ganttData.dates = [];
                 var tempDate = new Date(dfrom);
@@ -3191,7 +3164,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                 while (new Date(tempDate) <= new Date($scope.dt_to)) {
                     $scope.ganttData.dates.push({
                         date: new Date(tempDate),
-                        caption: moment(tempDate).format("MMM-DD"),
+                        caption:   moment(tempDate).format("MMM-DD"),
                         day: moment(tempDate).format("ddd"),
                         pdate: new persianDate(tempDate).format("MM-DD"),
                     });
@@ -3370,7 +3343,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         var str = '';
         if (duty.DutyType == 1165 && duty.OutOfHomeBase)
             str += "-oh";
-        return 'obj-duty duty-' + duty.DutyType + str;
+        return 'obj-duty duty-' + duty.DutyType+str;
     }
 
     $scope.bindFlights = function (callback) {
@@ -3750,7 +3723,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         placeholder: 'Rank',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: ['COCKPIT', 'CABIN', 'IP,P1', 'P2', 'TRE', 'TRI', 'P1', 'ISCCM,SCCM', 'CCM', 'ISCCM', 'SCCM'],
+        dataSource: ['COCKPIT','CABIN','IP,P1', 'P2', 'TRE', 'TRI', 'P1', 'ISCCM,SCCM', 'CCM', 'ISCCM', 'SCCM'],
 
         onSelectionChanged: function (arg) {
 
@@ -4475,7 +4448,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     $scope.assign100025 = function (e) {
         $scope.event_status = 100025;
         $scope.FromDateEvent = (new Date($scope.contextMenuCellData.startDate)).setHours(0, 0, 0, 0);
-        $scope.ToDateEvent = (new Date($scope.FromDateEvent)).addMinutes(24 * 60);
+        $scope.ToDateEvent = (new Date($scope.FromDateEvent)).addMinutes(24 * 60 );
         $scope.popup_event_title = 'Mission';
         $scope.popup_event_visible = true;
     };
@@ -4500,10 +4473,10 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
     $scope.selected_crew_id = null;
     $scope.sb_crews = {
-
+        
         showClearButton: false,
         searchEnabled: true,
-
+        
         valueExpr: 'CrewId',
         displayExpr: "ScheduleName",
         onSelectionChanged: function (arg) {
@@ -4521,7 +4494,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     };
     $scope.selected_crew = null;
     $scope.prepare_fdp_inserting = function () {
-
+       
         $scope.selected_crew = Enumerable.From($scope.crews).Where('$.CrewId==' + $scope.selected_crew_id).FirstOrDefault();
         switch ($scope.selected_crew.JobGroup) {
             case 'P1':
@@ -4568,7 +4541,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     $scope.new_event = function (key, id) {
         $scope.$apply(function () {
             var prts = id.split('_');
-            $scope.selected_crew_id = Number(prts[0]);
+            $scope.selected_crew_id =Number( prts[0]);
             var dt_parts = prts[1].split('-');
             $scope.contextMenuCellData = {};
             $scope.contextMenuCellData.startDate = new Date(dt_parts[0], Number(dt_parts[1] - 1), dt_parts[2]);
@@ -4576,11 +4549,11 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
             var isvalid = $scope.getCrewCerStatus(Enumerable.From($scope.crews).Where('$.CrewId==' + $scope.selected_crew_id).FirstOrDefault(), $scope.contextMenuCellData.startDate);
             console.log('isvalid', isvalid);
-
+            
 
             switch (key) {
                 case 'PROFILE':
-
+                     
                     $scope.showProfileContextMenu($scope.selected_crew_id);
                     break;
                 case 'FDP':
@@ -4625,7 +4598,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                         function (x) {
                             return moment(new Date($scope.contextMenuCellData.startDate)).format('YYYYMMDD') == moment(new Date(x.InitStart)).format('YYYYMMDD');
                         }
-                    ).OrderByDescending(function (x) { return moment(new Date(x.InitStart)).format('YYYYMMDD'); }).FirstOrDefault();
+                    ).OrderByDescending(function (x) { return moment(new Date(x.InitStart)).format('YYYYMMDD');}).FirstOrDefault();
                     var _rs = null;
                     if (duty)
                         _rs = duty.InitEnd;
@@ -4670,7 +4643,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                         });
                     }
                     else
-                        $scope.assign300008();
+                    $scope.assign300008();
                     break;
                 case 'GROUND':
                     $scope.assign100000();
@@ -4693,7 +4666,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                         });
                     }
                     else
-                        $scope.addStby(1168);
+                    $scope.addStby(1168);
                     break;
                 case 'STBY-PM':
                     //1167
@@ -4713,7 +4686,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                         });
                     }
                     else
-                        $scope.addStby(1167);
+                    $scope.addStby(1167);
                     break;
                 case 'STBY-C':
                     //300013
@@ -4740,7 +4713,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                         });
                     }
                     else
-                        $scope.addStby(1170);
+                    $scope.addStby(1170);
                     break;
                 case 'OFFICE':
                     $scope.assign5001();
@@ -4757,7 +4730,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                             rtlEnabled: true,
                             title: "ERROR",
                             message: 'Violation of Certificates/License/FTL',
-                            buttons: [{ text: "OK", onClick: function (e) { return { buttonText: "OK" }; } }]
+                            buttons: [{ text: "OK", onClick: function (e) {   return { buttonText: "OK" }; } }]
                         });
                         myDialog.show().done(function (dialogResult) {
                             //console.log(dialogResult.buttonText);
@@ -4765,10 +4738,10 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                             $scope.$apply(function () {
                                 $scope.assign100003();
                             });
-                        });
+                        }); 
                     }
                     else
-                        $scope.assign100003();
+                    $scope.assign100003();
                     break;
                 case 'MISSION':
                     $scope.assign100025();
@@ -4806,7 +4779,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             }
         });
     }
-    $scope.removeFDP = function (x, row) {
+    $scope.removeFDP = function (x,row) {
         console.log(x);
         var dto = { Id: x.FDPId };
 
@@ -4831,7 +4804,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
             }
 
-
+          
             if (x.CrewId == $scope.selected_crew_id) {
                 $scope.getDutiesByCrew();
             }
@@ -4875,7 +4848,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         //$scope.contextMenuCellData.startDate
 
     };
-    $scope.getRoute = function (str, no) {
+    $scope.getRoute = function (str,no) {
         if (!str)
             return "";
         if (!no || !no.includes("dh"))
@@ -4893,7 +4866,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     }
 
     $scope.addStby = function (_type) {
-
+       
         $scope.selected_crew = Enumerable.From($scope.crews).Where('$.CrewId==' + $scope.selected_crew_id).FirstOrDefault();
 
 
@@ -4908,7 +4881,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         schedulingService.saveSTBY(dto).then(function (response) {
             $scope.loadingVisible = false;
 
-            if (response.Code == 406 || (response.data && response.data.Code == 406)) {
+            if (response.Code == 406 || (response.data && response.data.Code==406)) {
                 if (response.message) {
                     var myDialog = DevExpress.ui.dialog.custom({
                         rtlEnabled: true,
@@ -5188,8 +5161,8 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         //moment(new Date(dt)).format("YYYY-MM-DD");
         if (!$scope.selected_crew_id)
             return;
-        var _df = new Date($scope.contextMenuCellData.startDate).addDays(-2);
-        var _dt = new Date($scope.contextMenuCellData.startDate).addDays(3);
+       var _df = new Date($scope.contextMenuCellData.startDate).addDays(-2);
+       var _dt = new Date($scope.contextMenuCellData.startDate).addDays(3);
         var df = General.getDayFirstHour(new Date(_df));
         var dt = General.getDayFirstHour(new Date(_dt));
         $scope.crew_duties_history = [];
@@ -5203,20 +5176,20 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                     });
                     $scope.crew_duties_history = Enumerable.From(response[0].Items).OrderBy(function (x) { return Number(moment(new Date(x.DateLocal)).format("YYYYMMDD")); }).ToArray();
                 }
-
-
+               
+                
                 console.log('history1', response);
                 console.log('history', $scope.crew_duties_history);
-            });
+        });
     };
     $scope.duty_info = {};
     $scope.show_info = function (dty) {
-        $scope.duty_info = { duty: dty };
+        $scope.duty_info = {duty:dty};
         if (dty.DutyType == 1165) {
             schedulingService.getFdpsByFlight(dty.InitKey).then(function (response) {
                 $scope.duty_info.fdps = response;
                 console.log($scope.duty_info.fdps);
-
+                 
             });
         }
         $scope.popup_info_visible = true;
@@ -5227,7 +5200,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     $scope.popup_info_title = 'Profile';
 
     $scope.popup_info = {
-
+        
         shading: true,
         //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
         height: 600,
@@ -5261,11 +5234,11 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
         },
         onShown: function (e) {
-
+            
 
         },
         onHiding: function () {
-
+            
             $scope.popup_info_visible = false;
 
         },
@@ -5312,7 +5285,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
         $scope.continuity = $scope.checkContinuity2(flts);
         $scope.overlapping = $scope.checkConflict2(flts);
-        // alert($scope.continuity + '   ' + $scope.overlapping);
+       // alert($scope.continuity + '   ' + $scope.overlapping);
         $scope.FDPStat = {};
         $scope.useSplit = false;
         if (!$scope.continuity && !$scope.overlapping)
@@ -5428,7 +5401,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             }
 
 
-
+           
 
             $scope.FDPStat = response;
             $scope.FDPDuty = response.Duty;
@@ -5683,7 +5656,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
         columnAutoWidth: false,
         //2020-10-27 1 s
-        height: $(window).height() - 200 - 290,
+        height:  $(window).height() - 200-290,
 
         columns: $scope.dg_crew_abs_columns,
         onContentReady: function (e) {
@@ -5792,7 +5765,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             CDate: date,
             CrewIds: crewIds,
         };
-
+       
         schedulingService.getFTLByCrewIds(dto).then(function (response) {
             var sumFLT28 = 0;
             var sumFL = 0;
@@ -5852,7 +5825,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     $scope.getCertificationStyle = function (_d) {
         var res = $scope.getCrewCerStatus($scope.selected_crew, $scope.contextMenuCellData.startDate);
         var style = { background: 'cornflowerblue' };
-        var invalid = res.expired.length > 0;
+        var invalid =   res.expired.length > 0;
         if (invalid)
             return { background: '#cc0000' };
 
@@ -5869,7 +5842,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     //};
     $scope.calculateOrder = function (c) {
         if (!c.FTL) {
-
+            
             return;
         }
         if (!c.FTL.Flight28Remain && c.FTL.Flight28Remain !== 0)
@@ -5920,7 +5893,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         dto.split = $scope.useSplit;
         dto.maxFDP = $scope.FDPStat.MaxFDPExtended;
         dto.flights = [];
-
+       
         //yook
         schedulingService.getFDPIndex(dto.key2, dto.rank).then(function (responsex) {
             //alert(response);
@@ -5931,7 +5904,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             schedulingService.saveFDP(dto).then(function (response) {
                 $scope.loadingVisible = false;
 
-
+             
                 if (response.Code == 406 || (response.data && response.data.Code == 406)) {
                     if (response.data.message) {
                         var myDialog = DevExpress.ui.dialog.custom({
@@ -5946,7 +5919,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                 } else
                     if (response.data && response.data.Code == 501) {
                         var _data = response.data.data;
-
+ 
                         General.Confirm("The selected crew is on STANDBY. Do you want to activate him/her?", function (res) {
                             if (res) {
 
@@ -5965,17 +5938,17 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                             });
                             myDialog.show();
                         }
-                        else if ([413, 412, 428, 314, 307, 328, 308].indexOf(response.Code) != -1 || (response.data && [413, 412, 428, 314, 307, 328, 308].indexOf(response.data.Code) != -1)) {
-                            var myDialog = DevExpress.ui.dialog.custom({
-                                rtlEnabled: true,
-                                title: "Error",
-                                message: response.data.message,
-                                buttons: [{ text: "OK", onClick: function () { } }]
-                            });
-                            myDialog.show();
-                        }
+                else if ([413, 412, 428, 314, 307, 328,308].indexOf(response.Code)!=-1 || (response.data && [413, 412, 428, 314, 307, 328,308].indexOf(response.data.Code)!=-1  )) {
+                    var myDialog = DevExpress.ui.dialog.custom({
+                        rtlEnabled: true,
+                        title: "Error",
+                        message: response.data.message,
+                        buttons: [{ text: "OK", onClick: function () { } }]
+                    });
+                    myDialog.show();
+                }
                         else {
-
+                           
                             var gres = response.data;
 
                             var resource = Enumerable.From($scope.ganttData.resources).Where('$.CrewId==' + $scope.selected_crew.CrewId).FirstOrDefault();
@@ -6002,28 +5975,28 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                             $scope.getFDPsByFlights();
 
 
-
-                            $scope.getDutiesByCrew();
-
-
-                            var _dfx = moment($scope.dt_from).format('YYYY-MM-DD');
-                            var _dtx = moment($scope.dt_to).format('YYYY-MM-DD');
-                            schedulingService.getCrewFlightTimeByCrew($scope.selected_crew_id, _dfx, _dtx).then(function (_cres) {
-                                console.log('cres cres ', _cres);
-                                var _res = Enumerable.From($scope.crews).Where('$.CrewId==' + $scope.selected_crew_id).FirstOrDefault();
-                                if (_res) {
-                                    _res.FX = 0;
-                                    _res.BL = 0;
-                                    _res.FL = 0;
-                                    if (_cres) {
-                                        _res.FX = _cres.FixTime;
-                                        _res.BL = _cres.JLBlockTime;
-                                        _res.FL = _cres.JLFlightTime;
-                                    }
+                             
+                                $scope.getDutiesByCrew();
 
 
-                                }
-                            });
+                    var _dfx = moment($scope.dt_from).format('YYYY-MM-DD');
+                    var _dtx = moment($scope.dt_to).format('YYYY-MM-DD');
+                    schedulingService.getCrewFlightTimeByCrew($scope.selected_crew_id, _dfx, _dtx).then(function (_cres) {
+                        console.log('cres cres ',_cres);
+                        var _res = Enumerable.From($scope.crews).Where('$.CrewId==' + $scope.selected_crew_id).FirstOrDefault();
+                        if (_res) {
+                            _res.FX = 0;
+                            _res.BL = 0;
+                            _res.FL =0;
+                            if (_cres) {
+                                _res.FX = _cres.FixTime;
+                                _res.BL = _cres.JLBlockTime;
+                                _res.FL = _cres.JLFlightTime;
+                            }
+
+                           
+                        }
+                    });
 
                             General.ShowNotify(Config.Text_SavedOk, 'success');
                             // $scope.popup_flt_visible = false;
@@ -6053,7 +6026,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     $scope.popup_flt_title = 'Flights';
     $scope.popup_flt = {
         shading: true,
-        width: $(window).width() - 100,
+        width: $(window).width()-100,
         height: $(window).height() - 40,
         fullScreen: false,
         showTitle: true,
@@ -6093,11 +6066,11 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         closeOnOutsideClick: false,
         onShowing: function (e) {
 
-
+            
 
         },
         onShown: function (e) {
-
+            
             $scope.prepare_gantt_flt();
             $scope._datefrom_flt = $scope.contextMenuCellData.startDate;
             $scope.datefrom_flt = General.getDayFirstHour(new Date($scope._datefrom_flt));
@@ -6105,7 +6078,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             $scope.getFlights(new Date(dt));
             $scope.getFtlAbs($scope.selected_crew.CrewId, dt, function (ftl) {
                 $scope.selected_crew.FTL = ftl[0];
-
+                
             });
             $scope.getFDPsByFlights();
             $scope.dg_flt_instance.repaint();
@@ -6117,7 +6090,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             $scope.popup_flt_visible = false;
 
         },
-        // position: { my: 'right', at: 'right', of: window, offset: '-15 0' },
+       // position: { my: 'right', at: 'right', of: window, offset: '-15 0' },
         bindingOptions: {
             visible: 'popup_flt_visible',
 
@@ -6212,12 +6185,12 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
         var fltIds = Enumerable.From(flts).Select('$.ID').ToArray();
         var fltIdsStr = fltIds.join('*');
 
-
+       
 
         $scope.loadingVisible = true;
         schedulingService.checkStbyActivation(($scope.FDPStat.Extended > 0 ? 1 : 0), stbyid, flts[0].ID, $scope.FDPStat.Duty, $scope.FDPStat.MaxFDPExtended).then(function (response) {
             $scope.loadingVisible = false;
-
+            
             if (response.maxFDPError) {
 
                 var myDialog = DevExpress.ui.dialog.custom({
@@ -6249,15 +6222,15 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                 rank: $scope.getDefaultPositionId(rank),
                 rank2: Enumerable.From(flts).Select(function (_d) { return _d.Position == 'DH' ? $scope.getDefaultPos($scope.selected_crew.JobGroup) : $scope.getPos(_d.Position) }).ToArray().join('_'),
                 index: index,
-                isgantt: 1,
+                isgantt:1,
             };
-
-
+           
+            
             $scope.loadingVisible = true;
 
             schedulingService.activateStby(dto).then(function (response) {
                 $scope.loadingVisible = false;
-
+                 
                 var gres = response;//.data;
 
                 var resource = Enumerable.From($scope.ganttData.resources).Where('$.CrewId==' + $scope.selected_crew.CrewId).FirstOrDefault();
@@ -6299,7 +6272,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
     $scope._datefrom_flt = new Date();  // new Date(2023, 2, 6);
     $scope.datefrom_flt = General.getDayFirstHour(new Date($scope._datefrom_flt));
 
-
+     
     $scope.getRegisterOrder = function (reg) {
         if (reg == 'CNL')
             return "ZZZZZZZZZ";
@@ -6326,7 +6299,7 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                 response.dates.push({
                     date: new Date(tempDate),
                     caption: moment(tempDate).format("MMM-DD"),
-                    hours: ['00', '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23'],
+                    hours:['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23'],
                 });
                 tempDate = tempDate.addDays(1);
                 i++;
@@ -6334,11 +6307,11 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             response.dates.push({
                 date: new Date(tempDate),
                 caption: moment(tempDate).format("MMM-DD"),
-                hours: ['00', '01', '02', '03', '04', '05', '06'],
+                hours: ['00', '01', '02', '03', '04', '05', '06' ],
             });
-
+           
             $.each(response, function (_i, _d) {
-
+               
 
 
                 if (_d.Flights && _d.Flights.length > 0) {
@@ -6350,17 +6323,17 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                 else
                     _d.maxTop = 0;
 
-                //    $.each(_c.Items, function (_j, _d) {
+            //    $.each(_c.Items, function (_j, _d) {
 
-                //        var offset1 = -1 * (new Date(_d.InitStart)).getTimezoneOffset();
-                //        _d.InitStart = (new Date(_d.InitStart)).addMinutes(offset1);
+            //        var offset1 = -1 * (new Date(_d.InitStart)).getTimezoneOffset();
+            //        _d.InitStart = (new Date(_d.InitStart)).addMinutes(offset1);
 
-                //        var offset2 = -1 * (new Date(_d.InitEnd)).getTimezoneOffset();
-                //        _d.InitEnd = (new Date(_d.InitEnd)).addMinutes(offset2);
+            //        var offset2 = -1 * (new Date(_d.InitEnd)).getTimezoneOffset();
+            //        _d.InitEnd = (new Date(_d.InitEnd)).addMinutes(offset2);
 
-                //        var offset3 = -1 * (new Date(_d.InitRestTo)).getTimezoneOffset();
-                //        _d.InitRestTo = (new Date(_d.InitRestTo)).addMinutes(offset3);
-                //    });
+            //        var offset3 = -1 * (new Date(_d.InitRestTo)).getTimezoneOffset();
+            //        _d.InitRestTo = (new Date(_d.InitRestTo)).addMinutes(offset3);
+            //    });
 
 
             });
@@ -6374,8 +6347,8 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
 
 
     }
-
-
+    
+      
     /////////////////////////////////////////////////
     //menux
     $scope.$on('$viewContentLoaded', function () {
@@ -6385,8 +6358,8 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                 selector: '.context-menu-one',
                 callback: function (itemKey, opt, e) {
                     // Alert the key of the item and the trigger element's id.
-
-                    // alert("Clicked on " + itemKey + " on element " + opt.$trigger[0].id);
+                    
+                   // alert("Clicked on " + itemKey + " on element " + opt.$trigger[0].id);
                     $scope.new_event(itemKey, opt.$trigger[0].id);
                     // Do not close the menu after clicking an item
                     //return true;
@@ -6397,37 +6370,37 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                         name: "<span style='font-weight: bold; color:green'>PROFILE</span>",
                         isHtmlName: true, icon: "help"
                     },
-                    "sep1000": "---------",
+                   "sep1000": "---------",
                     "FDP": {
                         name: "<span style='font-weight: bold'>FDP</span>",
                         isHtmlName: true, icon: "add"
                     },
-                    //  "sep1000": "---------",
+                  //  "sep1000": "---------",
                     "STBY-AM": {
                         name: "<span style='font-weight: bold'>STBY-AM</span>",
                         isHtmlName: true, icon: "add"
                     },
-                    //  "sep1001": "---------",
+                  //  "sep1001": "---------",
                     "STBY-PM": {
                         name: "<span style='font-weight: bold'>STBY-PM</span>",
                         isHtmlName: true, icon: "add"
                     },
-                    //  "sep1002": "---------",
+                  //  "sep1002": "---------",
                     "STBY-C": {
                         name: "<span style='font-weight: bold'>STBY-C</span>",
                         isHtmlName: true, icon: "add"
                     },
-                    // "sep1003": "---------",
+                   // "sep1003": "---------",
                     "RESERVE": {
                         name: "<span style='font-weight: bold'>RESERVE</span>",
                         isHtmlName: true, icon: "add"
                     },
-                    //  "sep1004": "---------",
+                  //  "sep1004": "---------",
                     "RERRP": {
                         name: "<span style='font-weight: bold'>RERRP</span>",
                         isHtmlName: true, icon: "add"
                     },
-                    // "sep1": "---------",
+                   // "sep1": "---------",
 
                     "OFF": {
                         name: "<span style='font-weight: bold'>OFF</span>",
@@ -6446,17 +6419,17 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                         name: "<span style='font-weight: bold'>SIMULATOR</span>",
                         isHtmlName: true, icon: "add"
                     },
-                    // "sep2": "---------",
+                   // "sep2": "---------",
                     "REQUESTED OFF": {
                         name: "<span style='font-weight: bold'>REQUESTED OFF</span>",
                         isHtmlName: true, icon: "add"
                     },
-                    // "sep3": "---------",
+                   // "sep3": "---------",
                     "VACATION": {
                         name: "<span style='font-weight: bold'>VACATION</span>",
                         isHtmlName: true, icon: "add"
                     },
-                    // "sep4": "---------",
+                   // "sep4": "---------",
                     "SICK": {
                         name: "<span style='font-weight: bold'>SICK</span>",
                         isHtmlName: true, icon: "add"
@@ -6466,25 +6439,25 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                     //    name: "<span style='font-weight: bold'>GROUND</span>",
                     //    isHtmlName: true, icon: "add"
                     //},
-
+                   
                     //"EXP. LICENCE": {
                     //    name: "<span style='font-weight: bold'>EXP. LICENCE</span>",
                     //    isHtmlName: true, icon: "add"
                     //},
-
+                   
                     //"EXP. MEDICAL": {
                     //    name: "<span style='font-weight: bold'>EXP. MEDICAL</span>",
                     //    isHtmlName: true, icon: "add"
                     //},
-
+                  
                     //"EXP. PASSPORT": {
                     //    name: "<span style='font-weight: bold'>EXP. PASSPORT</span>",
                     //    isHtmlName: true, icon: "add"
                     //},
-
-
-
-
+                   
+                    
+                    
+                   
                     "MEETING": {
                         name: "<span style='font-weight: bold'>MEETING</span>",
                         isHtmlName: true, icon: "add"
@@ -6497,13 +6470,13 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
                         name: "<span style='font-weight: bold'>BRIEFING</span>",
                         isHtmlName: true, icon: "add"
                     },
-
+                    
                     "DUTY": {
                         name: "<span style='font-weight: bold'>DUTY</span>",
                         isHtmlName: true, icon: "add"
                     },
 
-
+                     
                 }
             });
 
@@ -6512,28 +6485,28 @@ app.controller('dutyTimelineController', ['$scope', '$location', '$routeParams',
             });
 
 
+            
+                $.contextMenu({
+                    selector: '.obj-duty',
+                    callback: function (itemKey, opt, e) {
+                        // Alert the key of the item and the trigger element's id.
 
-            $.contextMenu({
-                selector: '.obj-duty',
-                callback: function (itemKey, opt, e) {
-                    // Alert the key of the item and the trigger element's id.
-
-                    // alert("Clicked on " + itemKey + " on element " + opt.$trigger[0].id);
-                    $scope.delete_event(itemKey, opt.$trigger[0].id);
-                    // Do not close the menu after clicking an item
-                    //return true;
-                },
-                items:
-                {
-                    "DELETE": {
-                        name: "<span style='font-weight: bold'>DELETE</span>",
-                        isHtmlName: true, icon: "delete"
+                        // alert("Clicked on " + itemKey + " on element " + opt.$trigger[0].id);
+                        $scope.delete_event(itemKey, opt.$trigger[0].id);
+                        // Do not close the menu after clicking an item
+                        //return true;
                     },
+                    items:
+                    {
+                        "DELETE": {
+                            name: "<span style='font-weight: bold'>DELETE</span>",
+                            isHtmlName: true, icon: "delete"
+                        },
+                       
 
 
-
-                }
-            });
+                    }
+                });
 
 
 

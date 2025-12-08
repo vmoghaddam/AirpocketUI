@@ -199,7 +199,7 @@ app.factory('ztrnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', funct
 
     var _saveCoursePeopleStatusAll = function (entity) {
         var deferred = $q.defer();
-        $http.post(zapitrn + 'api/course/people/status/all/save', entity).then(function (response) {
+        $http.post(zapitrn + 'api/course/people/status/all/save/new', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -1148,10 +1148,9 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.get_templates = _get_templates;
-
-
-
-    //war
+	
+	
+	 //war
     var _getCourseTypeSubjects = function (cid) {
 
         var deferred = $q.defer();
@@ -1206,10 +1205,11 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.update_score = _update_score;
-
-
-
-    var _get_exams = function (cid) {
+	
+	
+	
+	
+	var _get_exams = function (cid) {
 
         var deferred = $q.defer();
         $http.get(zapitrn + 'api/exams'  ).then(function (response) {
@@ -1321,12 +1321,14 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.save_press_all = _save_press_all;
+	
+	
+	
+	
+	var _get_filter_types = function () {
 
-
-
-    var _delete_exam = function (entity) {
         var deferred = $q.defer();
-        $http.post(zapitrn + 'api/trn/exam/delete', entity).then(function (response) {
+        $http.get(zapitrn + 'api/filter/types/' ).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -1335,7 +1337,38 @@ var _saveSyllabus = function (entity) {
 
         return deferred.promise;
     };
-    serviceFactory.delete_exam = _delete_exam;
+    serviceFactory.get_filter_types = _get_filter_types;
+	
+	
+	var _get_filter_people = function () {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/filter/people/' ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_filter_people = _get_filter_people;
+	
+	
+	
+	var _get_courses_ds = function (type,pid) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/courses/'+type+'/'+pid ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_courses_ds = _get_courses_ds;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;

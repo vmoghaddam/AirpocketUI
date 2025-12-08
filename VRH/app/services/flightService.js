@@ -4173,7 +4173,22 @@ var _getFlightsWeekList = function () {
     };
     serviceFactory.save_fixtiem = _save_fixtiem;
 	
+    var _get_duties_report = function (dutytype, df, dt) {
+        var deferred = $q.defer();
+        var _df = moment(df).format('YYYY-MM-DD');
+        var _dt = moment(dt).format('YYYY-MM-DD');
+        var deferred = $q.defer();
+      
+            $http.get('http://localhost:22568/' + 'api/get/duties/' + dutytype + '?df=' + _df + '&dt=' + _dt).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
 
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_duties_report = _get_duties_report;
 
     /////////////////////////
     serviceFactory.getOFP = _getOFP;

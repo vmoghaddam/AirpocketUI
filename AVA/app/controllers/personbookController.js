@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('personbookController', ['$scope', '$location', '$routeParams', '$rootScope', 'libraryService', 'notificationService', 'authService', function ($scope, $location, $routeParams, $rootScope, libraryService, notificationService, authService) {
     $scope.prms = $routeParams.prms;
     //////////////////////////////////

@@ -145,6 +145,7 @@
     <Content Include="app\controllers\delayReport.js" />
     <Content Include="app\controllers\documentAddController.js" />
     <Content Include="app\controllers\drAdd.js" />
+    <Content Include="app\controllers\duties_report.js" />
     <Content Include="app\controllers\dutyTimeline.js" />
     <Content Include="app\controllers\efbAsrController.js" />
     <Content Include="app\controllers\employeeSelectController.js" />
@@ -391,6 +392,7 @@
     <Content Include="app\views\Document.html" />
     <Content Include="app\views\documentAdd.html" />
     <Content Include="app\views\drAdd.html" />
+    <Content Include="app\views\duties_report.html" />
     <Content Include="app\views\dutyTimeline.html" />
     <Content Include="app\views\efbAsr.html" />
     <Content Include="app\views\employeeSelect.html" />

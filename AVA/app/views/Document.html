@@ -1,20 +1,16 @@
 ﻿<div class="box library" style="height:100%;display:none;overflow-y:hidden">
-
-
     <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
     <div class="rowx content" style="clear:both">
-        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+	<div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
             <div class="filter-container box">
                 <div class="header">Filter</div>
                 <div class="content">
                     <div ng-include="'app/views/filter.html'" ng-init="type = 'library';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
                 </div>
-
-            </div>
-
-        </div>
-
-        <div class=" col-lg-9 col-md-6 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+			</div>
+		</div>
+        <div class=" col-lg-9 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
             <div class="filter-container box  ">
                 <div class="header">Items</div>
 
@@ -24,16 +20,9 @@
             </div>
 
         </div>
-
-
-
-
-
-    </div>
-
-
-    <div class="rowx footer">
-        <div class=" col-lg-11 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+ </div>
+<div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
             <div dx-button="btn_search"></div>
 
             <div dx-button="btn_new" ng-show="IsEditableDoc"></div>
@@ -42,20 +31,12 @@
             <div dx-button="btn_expose" ng-show="IsEditableDoc"></div>
             <div dx-button="btn_employees"></div>
             <div dx-button="btn_delete" ng-show="IsEditableDoc"></div>
-            <!--<div dx-button="btn_new"></div>
-    <div dx-button="btn_employees"></div>
-    <div dx-button="btn_edit"></div>
 
-    <div dx-button="btn_delete"></div>-->
         </div>
-        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
-            <div dx-button="btn_filter"></div>
-        </div>
+
         <div style="clear:both"></div>
     </div>
-
-
-    <div id="popup_employees" dx-popup="popup_employees">
+  <div id="popup_employees" dx-popup="popup_employees">
 
         <div class="box">
             <div class="rowx content" style="clear:both">
@@ -112,16 +93,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
-                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,-2)">
-                                    <div class="caption">
-                                        Not Downloaded
-                                    </div>
-                                    <div class="value">
-                                        {{dg_book_selected.NotDownloaded}}
-                                    </div>
-                                </div>
-                            </div>
+                             
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
                                 <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,1)">
                                     <div class="caption">
@@ -132,16 +104,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
-                                <div class="card-number cn w3-2017-marina" ng-click="filterStatus($event,2)">
-                                    <div class="caption">
-                                        Downloaded
-                                    </div>
-                                    <div class="value">
-                                        {{dg_book_selected.Downloaded}}
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-6" style="padding:5px;text-align:center">
                                 <div class="card-number cn w3-win-phone-green">
@@ -149,7 +112,7 @@
                                         Total
                                     </div>
                                     <div class="value">
-                                        {{dg_book_selected.Total}}
+                                        {{dg_book_selected.NotVisited+dg_book_selected.Visited}}
                                     </div>
                                 </div>
                             </div>
@@ -209,7 +172,7 @@
     </div>
 
 
-    <div ng-include="'app/views/documentAdd.html'"></div>
+    <div ng-include="'app/views/documentAdd.html?v=108'"></div>
 
     <div dx-load-panel="loadPanel"></div>
 </div>

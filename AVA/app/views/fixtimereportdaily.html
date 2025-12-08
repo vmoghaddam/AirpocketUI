@@ -298,24 +298,17 @@
 
                     <!--<td style="width:120px;text-align:right;padding-right:5px" class="dx-border"><div class="center" style="background:white;" dx-select-box="sb_yf" dx-validator="{validationGroup:'fixtimerep',  validationRules: [{ type: 'required'}]}"></div></td>
     <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" style="background:white;font-family:tahoma" dx-select-box="sb_month" dx-validator="{validationGroup:'fixtimerep',  validationRules: [{ type: 'required'}]}"></div></td>-->
-					
-					
-					     <td style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div class="center" style="background:white;font-family:tahoma" dx-select-box="sb_pyear" dx-validator="{validationGroup:'fixtimerep',  validationRules: [{ type: 'required'}]}"></div></td>
-					
-					    <td style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div class="center" style="background:white;font-family:tahoma" dx-select-box="sb_pmonth" dx-validator="{validationGroup:'fixtimerep',  validationRules: [{ type: 'required'}]}"></div></td>
-					
-					
-					
-					
                     <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
                     <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+					<!-- <td style="width:35px;text-align:right;padding-right:5px" class="dx-border" ><div dx-button="btn_persiandate"></div></div>-->
                     <td style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div class="center" style="background:white;font-family:tahoma" dx-select-box="sb_rank" dx-validator="{validationGroup:'fixtimerep',  validationRules: [{ type: 'required'}]}"></div></td>
-					 
-                    <td style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div dx-button="btn_search"></div></td>
+					<td style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div class="center" style="background:white;font-family:tahoma" dx-select-box="sb_actype" dx-validator="{validationGroup:'fixtimerep',  validationRules: [{ type: 'required'}]}"></div></td>
+					<td style="width:360px;text-align:right;padding-right:5px" class="dx-border"><div  class="left" dx-tag-box="tag_reg" dx-validator="{validationGroup:'fblink',  validationRules: [{ type: 'required'}]}"></div></td>               
+				   <td style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div dx-button="btn_search"></div></td>
 
                     <td></td>
                     <td ng-show="IsEditable" style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div dx-button="btn_details"></div></td>
-                    <!--<td ng-show="IsEditable" style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div dx-button="btn_fixtime"></div></td>-->
+                    <td ng-show="IsEditable" style="width:140px;text-align:right;padding-right:5px" class="dx-border"><div dx-button="btn_fixtime"></div></td>
 
                 </tr>
             </table>
@@ -360,6 +353,27 @@
 
 
     </div>
+
+<div id="popup_date" dx-popup="popup_date">
+    <div class="margin-bottom-5 padding-7 dx-border" style="padding:25px 0 10px 0">
+        <div>
+            <label style="width:45px;text-align:right;margin-right:5px;">From</label>
+
+            <input type="text" class="date1 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+        </div>
+        <div style="margin-top:15px;">
+            <label style="width:45px;text-align:right; margin-right:5px;">To</label>
+
+            <input type="text" class="date2 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+        </div>
+
+
+
+    </div>
+
+
+</div>
+
 
     <div id="popup_details" dx-popup="popup_details">
         <div style="padding:0px 0 0 0">
