@@ -273,7 +273,7 @@ namespace Report
 
                         var rptvr = new rptVR();
                         dataSource = new JsonDataSource();
-                        var rptvrurl = apiapsbUrl + "/api/vr/view//" + vrFlightId;
+                        var rptvrurl = "https://fly.apiapsb.myaero.tech/" + "/api/vr/view//" + vrFlightId;
                         dataSource.JsonSource = new UriJsonSource(new Uri(rptvrurl));
                         dataSource.Fill();
                         rptvr.DataSource = dataSource;

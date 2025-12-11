@@ -196,6 +196,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     };
 
 
+    $scope.entity.RecurrentType = 'Recurrent';
     $scope.bind = function (data, sessions, syllabi, exams) {
         //2023-07-29
         if ($scope.tempData.ReadOnly == 100)
@@ -260,7 +261,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         //$scope.entity.SMSInsDate = data.SMSInsDate;
 
         $scope.entity = JSON.parse(JSON.stringify(data));
-        $scope.entity.RecurrentType = 'Recurrent';
+
         $scope.course_type_id = data.CourseTypeId;
         $scope.entity.Sessions = sessions;
         $scope.entity.Syllabi = syllabi;
@@ -1625,7 +1626,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         dto.CurrencyId = $scope.entity.CurrencyId;
         dto.Sessions = Enumerable.From($scope.entity.Sessions).Select('$.Key').ToArray();
         dto.Syllabi = Enumerable.From($scope.entity.Syllabi).ToArray();
-       
+
         $.each(dto.Syllabi, function (_j, _s) {
             _s.Sessions = Enumerable.From(_s.Sessions).Select('$.Key').ToArray();
         })
@@ -2345,6 +2346,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     };
     $scope.txt_Title = {
         hoverStateEnabled: false,
+        readOnly: true,
         bindingOptions: {
             value: 'entity.Title',
         }
@@ -2627,7 +2629,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         }
     };
 
-   
+
     $scope.sb_DurationUnitId = {
         showClearButton: true,
         searchEnabled: true,
@@ -2680,10 +2682,8 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         $scope.course_types = response.data.Data;
     });
     $scope.fill_duration_int = function () {
-      
+
         var course_type = Enumerable.From($scope.course_types).Where('$.Id==' + $scope.course_type_id).FirstOrDefault();
-        console.log('=====Coures=====', $scope.course_types);
-        console.log('=====Coures=====', course_type);
         switch ($scope.entity.RecurrentType) {
             case 'Recurrent':
                 $scope.entity.Duration = course_type.Duration;
@@ -2698,14 +2698,36 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                 $scope.entity.Interval = null;
                 break;
             default:
-            
+                break;
         }
     }
 
-    
+    $scope.fill_title = function () {
 
-  
-    
+
+        switch ($scope.entity.RecurrentType) {
+            case 'Recurrent':
+                $scope.entity.Title = 'RECURRENT ' + $scope.course_type_title;
+
+                break;
+            case 'Initial':
+                $scope.entity.Title = 'INITIAL ' + $scope.course_type_title;
+
+                break;
+            case 'One Time':
+                $scope.entity.Title = $scope.course_type_title;
+
+                break;
+            default:
+                break;
+
+        }
+    }
+
+
+
+
+
     $scope.sb_period = {
         showClearButton: false,
         searchEnabled: false,
@@ -2713,6 +2735,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         onValueChanged: function (e) {
             if ($scope.fill_duration_int) {
                 $scope.fill_duration_int();
+                $scope.fill_title();
             }
         },
         bindingOptions: {
@@ -2738,9 +2761,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             //if (e.selectedItem && e.selectedItem.CalenderTypeId)
             //    $scope.entity.CalanderTypeId = e.selectedItem.CalenderTypeId;
             $scope.course_type_id = e.selectedItem.Id;
+            $scope.course_type_title = e.selectedItem.Title;
             $scope.fill_duration_int();
-
-
+            
             //if ($scope.isNew) {
             //    if (e.selectedItem && e.selectedItem.Interval)
             //        $scope.entity.Interval = e.selectedItem.Interval;
@@ -2756,8 +2779,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                 $scope.certype = e.selectedItem.CertificateType;
 
                 $scope.ctgroups = e.selectedItem.JobGroups;
-                if ($scope.isNew)
-                    $scope.entity.Title = e.selectedItem.Title;
+                $scope.fill_title();
+                // if ($scope.isNew)
+                // $scope.entity.Title = e.selectedItem.Title;
 
                 //war
                 ztrnService.getCourseTypeSubjects(e.selectedItem.Id).then(function (response2) {

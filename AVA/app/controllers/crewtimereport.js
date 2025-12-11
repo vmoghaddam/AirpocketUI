@@ -224,14 +224,14 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
         //  { dataField: 'LayOver', caption: 'LO', allowResizing: true, dataType: 'number', allowEditing: false, width: 90, alignment: 'center', },
         //{ dataField: 'FlightTime2', caption: 'Sch. Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
         { dataField: 'FixTime2', caption: 'Fix Time', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: true, fixedPosition: 'right' },
-       /* {
+       {
             caption: 'STATION', columns: [
 
                 { dataField: 'FlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, },
                 { dataField: 'BlockTime2', caption: 'Block', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, },
 
             ]
-        },*/
+        },
         {
             caption: 'Journey Log', columns: [
 
@@ -488,7 +488,7 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
 
 
 
-       /* {
+        {
             caption: 'STATION', columns: [
 
                 { dataField: 'FlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'right' },
@@ -496,7 +496,7 @@ app.controller('crewTimeReportController', ['$scope', '$location', '$routeParams
                 { dataField: 'BlockTime2', caption: 'Block', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'right' },
 
             ]
-        },*/
+        },
         {
             caption: 'Journey Log', columns: [
                 { dataField: 'JLFlightTime2', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'right' },

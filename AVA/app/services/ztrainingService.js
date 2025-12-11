@@ -1356,10 +1356,11 @@ var _saveSyllabus = function (entity) {
 	
 	
 	
-	var _get_courses_ds = function (type,pid) {
+	var _get_courses_ds = function (type,pid,period, group) {
 
         var deferred = $q.defer();
-        $http.get(zapitrn + 'api/courses/'+type+'/'+pid ).then(function (response) {
+        $http.get(zapitrn + 'api/courses/' + type + '/' + pid + '/' + period + '/' + group ).then(function (response) {
+        //$http.get(zapitrn + 'api/courses/' + type + '/' + pid).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 

@@ -3005,6 +3005,15 @@ namespace EPAGriffinAPI.DAL
             {
                 flight.RampDate = dto.RampDate;
                 flight.RampReasonId = dto.RampReasonId;
+                if (flight.OSTA == null)
+                {
+                    var vflight = await this.context.ViewFlightInformations.FirstOrDefaultAsync(q => q.ID == flight.ID);
+                    flight.OSTA = flight.STA;
+                    flight.OToAirportId = vflight.ToAirport;
+                    flight.OToAirportIATA = vflight.ToAirportIATA;
+                }
+
+                flight.ToAirportId = dto.ToAirportId;
             }
 
             if (flight.ChocksIn != null && flight.FlightStatusID == 15)
