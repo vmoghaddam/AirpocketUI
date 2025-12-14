@@ -385,7 +385,9 @@ app.controller('reportEFBController', ['$scope', '$location', '$routeParams', '$
             if (response.legs[0].JLSignedBy)
                 $scope.jl.sign = signFiles + response.legs[0].JLSignedBy + ".jpg";
             console.log($scope.jlObj);
-           
+           if (response.legs[0].FromAirportIATA.startsWith('OI'))
+			   $scope.jl_etd='1:00';
+		   else $scope.jl_etd='1:30';
 
             $scope.jl.sectors = [];
             for (var i = 0; i < 6; i++) {

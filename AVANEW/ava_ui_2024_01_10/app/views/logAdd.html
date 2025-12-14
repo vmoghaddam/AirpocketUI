@@ -1,0 +1,291 @@
+﻿<div ng-controller="logAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+            <div style="padding:10px 5px 5px 5px;" ng-show="isContentVisible">
+                <table style="width:100%;border:2px solid #eee;text-align:center">
+                    <tr style="border-bottom:2px solid #eee">
+                        <td style="padding:7px;border-right:1px dotted #eee">{{entity.FromAirportIATA}}</td>
+                        <td style="padding:7px;border-right:1px dotted #eee">{{entity.FlightNumber}}</td>
+                        <td style="padding:7px;">{{entity.ToAirportIATA}}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding:7px;border-right:1px dotted #eee">{{getSTD(entity)}}</td>
+                        <td style="padding:7px;border-right:1px dotted #eee">{{formatDateLong(entity.STDDay)}}</td>
+                        <td style="padding:7px;">{{getSTA(entity)}}</td>
+                    </tr>
+
+                </table>
+            </div>
+
+            <!--<div id="scrollview" class="thin-scroll0" style="overflow-y:auto;margin-top:5px;" ng-style="scrollStyle">-->
+            <div id="scroll_logadd" dx-scroll-view="scroll_logadd" style="margin-top:5px">
+                <div style="padding:5px;" ng-show="isContentVisible">
+                    <table style="margin-top:0px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px;padding-bottom:12px">PF I/C/F</td>
+                            <td style="border-right:0px dotted #eee;padding:5px;padding-right:15px;padding-top:12px;padding-bottom:12px"> <div class="center" dx-select-box="sb_pf"></div></td>
+                            <!--<td style="width:100px;"></td>-->
+
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="4" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                TIME
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:0px solid #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px">BlockOff</td>
+                            <td style="border-right:0px dotted #eee;padding:5px;padding-top:12px;"> <div class="center" dx-date-box="time_blockoff"></div></td>
+                            <td style="width:50px;border-right:0px dotted #eee;font-weight:bold;font-size:20px;padding-top:12px;" ng-click="clickD('blockOffD')">{{blockOffD}}</td>
+                            <td style="width:50px;padding-top:12px" ng-click="fillTime('blockOff','STD')"><span style="display:inline-block;color:white; "><i class="fas fa-arrow-alt-circle-down" style="font-size:26px;"></i></span></td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee">T/O</td>
+                            <td style="border-right:0px dotted #eee;padding:5px"> <div class="center" dx-date-box="time_takeoff"></div></td>
+                            <td style="border-right:0px dotted #eee;font-weight:bold;font-size:20px" ng-click="clickD('takeOffD')">{{takeOffD}}</td>
+                            <td ng-click="fillTime('takeOff','STD')"><span style="display:inline-block;color:white; "><i class="fas fa-arrow-alt-circle-down" style="font-size:26px;"></i></span></td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee">LND</td>
+                            <td style="border-right:0px dotted #eee;padding:5px"> <div class="center" dx-date-box="time_landing"></div></td>
+                            <td style="border-right:0px dotted #eee;font-weight:bold;font-size:20px" ng-click="clickD('landingD')">{{landingD}}</td>
+                            <td ng-click="fillTime('landing','STA')"><span style="display:inline-block;color:white; "><i class="fas fa-arrow-alt-circle-down" style="font-size:26px;"></i></span></td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;">BlockOn</td>
+                            <td style="border-right:0px dotted #eee;padding:5px;padding-bottom:12px"> <div class="center" dx-date-box="time_blockon"></div></td>
+                            <td style="border-right:0px dotted #eee;font-weight:bold;font-size:20px" ng-click="clickD('blockOnD')">{{blockOnD}}</td>
+                            <td ng-click="fillTime('blockOn','STA')"><span style="display:inline-block;color:white; "><i class="fas fa-arrow-alt-circle-down" style="font-size:26px;"></i></span></td>
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                FUEL
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px">Remaining</td>
+                            <td style="padding:5px;padding-right:15px;padding-top:12px"> <div class="center" dx-number-box="fuel_remaining"></div></td>
+                            <!--<td style="width:50px;"></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee">Uplift</td>
+                            <td style="padding:5px;padding-right:15px"> <div class="center" dx-number-box="fuel_uplift"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee">Density</td>
+                            <td style="padding:5px;padding-right:15px"> <div class="center" dx-number-box="fuel_density"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee">Total</td>
+                            <td style="padding:5px;padding-right:15px"> <div class="center" dx-number-box="fuel_total"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;">Used</td>
+                            <td style="padding:5px;padding-bottom:12px;padding-right:15px"> <div class="center" dx-number-box="fuel_used"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                    </table>
+
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                PASSENGER
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px">Adult</td>
+                            <td style=" padding:5px;padding-right:15px;padding-top:12px"> <div class="center" dx-number-box="pass_adult"></div></td>
+
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee">Child</td>
+                            <td style=" padding:5px;padding-right:15px"> <div class="center" dx-number-box="pass_child"></div></td>
+
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;">Infant</td>
+                            <td style=" padding:5px;padding-bottom:12px;padding-right:15px"> <div class="center" dx-number-box="pass_infant"></div></td>
+
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee">Total</td>
+                            <td style=" padding:5px;padding-right:15px"> <div class="center" dx-number-box="pass_total"></div></td>
+
+
+                        </tr>
+
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                CARGO/BAGGS
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px">Cargo</td>
+                            <td style=" padding:5px;padding-right:15px;padding-top:12px"> <div class="center" dx-number-box="cargo"></div></td>
+
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee">Baggs</td>
+                            <td style=" padding:5px;padding-right:15px"> <div class="center" dx-number-box="baggs"></div></td>
+
+
+                        </tr>
+
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee">Total</td>
+                            <td style="border-right:0px dotted #eee;padding:5px;padding-right:15px"> <div class="center" dx-number-box="freight"></div></td>
+
+
+                        </tr>
+
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="3" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                RVSM CHECK
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="background-color:gray;padding:5px;text-align:center;color:white;border-bottom:1px dotted #eee; ">
+                                GND
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px dotted #eee;text-align:center">
+
+                            <td style="width:33.33%;padding:5px;border-right:1px dotted #eee;font-weight:bold">CPT</td>
+                            <td style="width:33.33%;padding:5px;border-right:1px dotted #eee;font-weight:bold">STBY</td>
+                            <td style="width:33.33%;padding:5px;font-weight:bold">FO</td>
+                        </tr>
+
+                        <tr style="border-bottom:1px dotted #eee;text-align:center">
+
+                            <td style="padding:5px;border-right:1px dotted #eee"><div class="center" dx-number-box="gnd_cpt"></div></td>
+                            <td style="padding:5px;border-right:1px dotted #eee"><div class="center" dx-number-box="gnd_stby"></div></td>
+                            <td style="padding:5px"><div class="center" dx-number-box="gnd_fo"></div></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" style="background-color:gray;padding:5px;text-align:center;color:white;border-bottom:1px dotted #eee; ">
+                                FLT
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px dotted #eee;text-align:center">
+
+                            <td style="width:33.33%;padding:5px;border-right:1px dotted #eee;font-weight:bold">CPT</td>
+                            <td style="width:33.33%;padding:5px;border-right:1px dotted #eee;font-weight:bold">STBY</td>
+                            <td style="width:33.33%;padding:5px;font-weight:bold">FO</td>
+                        </tr>
+                        <tr style="border-bottom:1px dotted #eee;text-align:center">
+
+                            <td style="padding:5px;border-right:1px dotted #eee"><div class="center" dx-number-box="flt_cpt"></div></td>
+                            <td style="padding:5px;border-right:1px dotted #eee"><div class="center" dx-number-box="flt_stby"></div></td>
+                            <td style="padding:5px"><div class="center" dx-number-box="flt_fo"></div></td>
+                        </tr>
+
+                    </table>
+
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px">SERIAL NO</td>
+                            <td style=" padding:5px;padding-right:15px;padding-top:12px"> <div class="center" dx-number-box="serialNo"></div></td>
+
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;">LTR</td>
+                            <td style=" padding:5px;padding-bottom:12px;padding-right:15px"> <div class="center" dx-number-box="ltr"></div></td>
+
+
+                        </tr>
+
+
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px;padding-bottom:12px;">Repositioning</td>
+                            <td style=" padding:5px;padding-right:15px;padding-top:12px;padding-bottom:12px;text-align:right">  <div dx-check-box="chb_rep1"></div></td>
+                            <td style=" padding:5px;padding-right:15px;padding-top:12px;padding-bottom:12px;width:100px">  <div dx-check-box="chb_rep2"></div></td>
+
+                        </tr>
+
+
+
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                NOTE
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:left">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px;padding:0">
+                                <div dx-text-area="note"></div>
+                            </td>
+
+
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                COMMANDER'S SIGNATURE
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:left">
+                            <td style="width:94px;padding-left:7px;border-right:0px dotted #eee;padding-top:12px;padding:10px;text-align:center;">
+                                <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">The document signed and approved by</div>
+                                <div ng-show="url_sign" style="text-align:center;font-size:18px;padding:5px;">{{PIC}}</div>
+                                <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">{{signDate}}</div>
+                                <img style="height:auto;display: block; width: 70%;margin:0 auto 0 auto" ng-show="url_sign" ng-src="{{url_sign}}" />
+                            </td>
+
+
+                        </tr>
+                    </table>
+
+
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <div id="popup_check" dx-popup="popup_check" class="no-padding">
+        <div style="padding:20px;line-height:30px">
+            The flight updated by <span style="display:inline-block;font-weight:bold">{{checkResult.JLUser}}</span>
+            on <span style="display:inline-block;font-weight:bold">{{checkResult.JLDate2}}</span>
+        </div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

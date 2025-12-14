@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace ApiMSG.Areas.HelpPage.ModelDescriptions
+namespace EPAGriffinAPI.Areas.HelpPage.ModelDescriptions
 {
     public class ComplexTypeModelDescription : ModelDescription
     {

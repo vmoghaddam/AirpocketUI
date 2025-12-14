@@ -1,0 +1,103 @@
+﻿<div ng-controller="documentAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+
+
+
+
+
+        <div dx-tabs="tabs_options">
+
+        </div>
+        <div class="tab main dx-border">
+            <div id="scrollview" dx-scroll-view="scroll_main">
+                <div style="padding-top:20px;padding-left:10px;padding-right:10px">
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Category</label>
+                        <div dx-select-box="sb_Category" dx-validator="{validationGroup:'documentadd',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-7 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Sender/Publisher</label>
+                        <div dx-text-box="txt_Sender" dx-validator="{validationGroup:'documentadd',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+                        <label>No</label>
+                        <div dx-text-box="txt_No" class="center" dx-validator="{validationGroup:'documentadd',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-7 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Title</label>
+                        <div dx-text-box="txt_Title" dx-validator="{validationGroup:'documentadd',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Edition/Revision</label>
+                        <div dx-text-box="txt_Edition"></div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" style="padding-top:36px;">
+                        <label>&nbsp;</label>
+                        <div dx-check-box="chb_Exposed"></div>
+                    </div>
+
+
+
+                    <!--<div class="col-lg-7 col-md-3 col-sm-6    margin-bottom-5 padding-7">
+        <label>Remark</label>
+        <div dx-text-box="txt_Remark"></div>
+    </div>-->
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Date</label>
+                        <div dx-date-box="date_DatePublication" class="center" dx-validator="{validationGroup:'documentadd',  validationRules: [{ type: 'required'}]}"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6    margin-bottom-5 padding-7">
+                        <label>Valid Until</label>
+                        <div dx-date-box="date_DateValidUntil" class="center"></div>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-6    margin-bottom-5 padding-7">
+                        <label>Deadline</label>
+                        <div dx-date-box="date_DeadLine" class="center"></div>
+                    </div>
+
+
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Abstract</label>
+                        <div dx-text-area="txt_Abstract"></div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="tab files" style="display:none;padding-top:0;">
+
+            <div class="col-lg-3 col-md-12 col-sm-12 col-12  margin-bottom-5" style="padding:5px">
+                <div id="uploader_document" dx-file-uploader="uploader_document" class="invisibleuploader"></div>
+            </div>
+
+            <div style="clear:both"></div>
+            <div dx-data-grid="dg_file" id="dg_file"></div>
+        </div>
+        <div class="tab actypes" style="display:none;padding-top:0;">
+
+            <div dx-data-grid="dg_aircrafttype" id="dg_aircrafttype"></div>
+
+        </div>
+        <div class="tab groups" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_group" id="dg_group"></div>
+        </div>
+        <div class="tab educations" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_education" id="dg_education"></div>
+        </div>
+        <div class="tab employees" style="display:none;padding-top:0;">
+            <div dx-data-grid="dg_employee" id="dg_employee"></div>
+        </div>
+
+    </div>
+
+
+
+    <div ng-include="'app/views/aircraftSelect.html'"></div>
+    <div ng-include="'app/views/studyFieldSelect.html'"></div>
+    <div ng-include="'app/views/employeeSelect.html'"></div>
+    <div ng-include="'app/views/jobgroupSelect.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

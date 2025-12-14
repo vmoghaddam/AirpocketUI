@@ -73,6 +73,7 @@
              <div dx-button="btn_sms" style="vertical-align: middle; margin: 2px;" ng-show='!isManager'></div>
              <div dx-button="btn_training" style="vertical-align: middle; margin: 2px;" ng-show='!isManager && is_crew'></div>
              <div dx-button="btn_courses" style="vertical-align: middle; margin: 2px;"></div>
+			  <div dx-button="btn_download" style="vertical-align: middle; margin: 2px;"></div>
             <div ng-if="IsAccountEdit" dx-button="btn_user" style="vertical-align: middle; margin: 2px;"></div>
 			<div ng-if="IsAccountEdit" dx-button="btn_password" style="vertical-align: middle; margin: 2px;"></div>
 			 <div dx-button="btn_opc" style="vertical-align: middle; margin: 2px;" ng-show='!isManager && is_cockpit'></div>
@@ -212,7 +213,8 @@
 
 
         </div>
-        <div dx-data-grid="dg_courses" dx-item-alias="error" id="dg_courses" style="margin-top:10px;"></div>
+        <div dx-data-grid="dg_courses" dx-item-alias="error" id="dg_courses" style="margin-top:10px;">
+        </div>
 
 
     </div>
@@ -324,7 +326,7 @@
 
     </div>
 
-    <div ng-include="'app/views/zpersonAdd.html?v=43254'"></div>
+    <div ng-include="'app/views/zpersonAdd.html?v=336'"></div>
     <div ng-include="'app/views/personView.html'"></div>
     <div ng-include="'app/views/imageviewer.html'"></div>
     <div dx-load-panel="loadPanel"></div>

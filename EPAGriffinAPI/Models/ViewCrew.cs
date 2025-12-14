@@ -167,5 +167,6 @@ namespace EPAGriffinAPI.Models
         public Nullable<System.DateTime> TypeMDExpired { get; set; }
         public string LicenceTitle { get; set; }
         public string LicenceNo { get; set; }
+        public string ValidTypesStr { get; set; }
     }
 }

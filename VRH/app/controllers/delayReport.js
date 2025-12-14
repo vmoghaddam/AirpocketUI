@@ -483,7 +483,9 @@ app.controller('delayReportController', ['$scope', '$location', '$routeParams', 
               //   { dataField: 'Delay2', caption: 'Delay', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
 
            ]
-       },
+        },
+
+
        //{
        //    caption: 'UTC',
        //    columns: [
@@ -493,17 +495,6 @@ app.controller('delayReportController', ['$scope', '$location', '$routeParams', 
        //          { dataField: 'Landing', caption: 'LND', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm' },
        //    ]
        //},
-
-        
-
-        
-
-
-
-
-
-
-
 
 
 

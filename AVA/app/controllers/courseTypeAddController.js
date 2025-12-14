@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('courseTypeAddController', ['$scope', '$location', 'courseService', 'authService', '$routeParams', '$rootScope', 'trnService', function ($scope, $location, courseService, authService, $routeParams, $rootScope, trnService) {
     $scope.isNew = true;
 
@@ -53,6 +53,10 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
         $scope.entity.Duration = data.Duration;
         $scope.entity.JobGroups = data.JobGroups;
         $scope.entity.CourseTypes2 = data.CourseTypes;
+        $scope.entity.IntervalInitial = data.IntervalInitial;
+        $scope.entity.DurationInitial = data.DurationInitial;
+        $scope.entity.ProfileGroup = data.ProfileGroup;
+        $scope.entity.DurationRecurrent = data.DurationRecurrent;
     };
 
 
@@ -96,12 +100,45 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
             value: 'entity.Interval',
         }
     };
-    $scope.txt_duration = {
+    //$scope.txt_duration = {
+    //    min: 1,
+    //    bindingOptions: {
+    //        value: 'entity.Duration',
+    //    }
+    //};
+
+    $scope.no_duration_recurrent = {
         min: 1,
         bindingOptions: {
             value: 'entity.Duration',
         }
     };
+
+    $scope.no_duration_initial = {
+        min: 1,
+        bindingOptions: {
+            value: 'entity.DurationInitial',
+        }
+    };
+
+    var _ranks = ['Cockpit', 'Cabin', 'F/D', 'GRND', 'COMM', 'CAMO', 'MAINTENANCE', 'TRAINING', 'LEGAL', 'QA', 'FINANCIAL', 'HR', 'IT', 'SECURITY', 'MANAGEMENT',
+        'FLIGT_OPS_STAFF',
+        'ENG_AND_MAINT_STAFF',
+        'MNG_STAFF',
+        'SECURITY_STAFF',
+
+        'All'];
+
+    $scope.sb_group = {
+        showClearButton: true,
+        searchEnabled: true,
+        dataSource: _ranks,
+        bindingOptions: {
+            value: 'entity.ProfileGroup',
+
+        }
+    };
+
     //$scope.sb_CalanderTypeId = {
     //    showClearButton: true,
     //    searchEnabled: true,
@@ -273,7 +310,7 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
 
     };
     /////////////////////////////
-    $scope.pop_width = 1500;
+    $scope.pop_width = 500;
     $scope.pop_height = 550;
     $scope.popup_add_visible = false;
     $scope.popup_add_title = 'New';

@@ -1,0 +1,1014 @@
+﻿<link rel="stylesheet" href="https://unpkg.com/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css" />
+ 
+<script src="https://unpkg.com/persian-date@1.1.0/dist/persian-date.min.js"></script>
+<script src="https://unpkg.com/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+<style>
+
+    .summarybox {
+        /*min-width: 140px !important;*/
+        padding-right: 3px;
+        margin-top: 3px;
+    }
+
+        .summarybox .caption {
+            font-size: 14px !important;
+            margin-bottom: 0 !important;
+        }
+
+        .summarybox .td-icon {
+            width: 35% !important;
+            padding: 0 5px 0 5px !important;
+        }
+
+    .home-box {
+        padding: 15px !important;
+        border-radius: 0
+    }
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .dx-border .dx-texteditor-input {
+        padding: 5px !important;
+    }
+
+    .accordion {
+        margin: 0px;
+    }
+
+        .accordion dt, .accordion dd {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+            .accordion dt:last-of-type, .accordion dd:last-of-type {
+                border-bottom: 1px solid #ccc;
+            }
+
+            .accordion dt a, .accordion dd a {
+                display: block;
+                color: gray;
+                font-weight: bold;
+            }
+
+        .accordion dd {
+            border-top: 0;
+            font-size: 12px;
+        }
+
+            .accordion dd:last-of-type {
+                border-top: 1px solid white;
+                position: relative;
+                top: -1px;
+            }
+
+    .dx-datagrid .dx-row > td {
+        font-size: 12px;
+    }
+
+    .dx-datagrid .dx-row > td {
+        padding-top: 6px;
+        padding-bottom: 6px;
+    }
+
+    .dx-datagrid .dx-row.dx-header-row > td {
+        padding: 7px 10px 7px 10px !important
+    }
+
+    .dx-tabs {
+        /*text-align: left;*/
+        background: #ddd;
+    }
+
+    .dx-tab {
+        background: #ccc !important;
+        /*max-width: 200px;*/
+        min-width: 150px;
+        color: black !important;
+        text-align: center;
+    }
+
+        .dx-tab.dx-tab-selected {
+            color: black;
+            background: #bbb !important;
+        }
+
+    .dx-editor-cell .dx-texteditor .dx-texteditor-input {
+        height: 35px;
+        line-height: 35px;
+    }
+
+    .dx-datagrid .dx-editor-with-menu, .dx-datagrid-container .dx-editor-with-menu {
+        height: 35px;
+    }
+
+    .dx-datagrid .dx-menu .dx-menu-item .dx-menu-item-content, .dx-datagrid-container .dx-menu .dx-menu-item .dx-menu-item-content {
+        padding: 5px 4px;
+    }
+
+    .dx-datagrid-filter-row .dx-editor-cell .dx-editor-with-menu .dx-texteditor-input, .dx-datagrid-filter-row .dx-editor-cell .dx-editor-with-menu .dx-placeholder:before {
+        padding-left: 5px;
+    }
+
+    .dx-popup-content {
+        padding: 0 !important;
+    }
+
+
+    #dg_dla .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_dla .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_dla .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_dla .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_dla .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_dla .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_dla .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_dla .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+</style>
+
+<div class="box statdelay" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header hx"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'person';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;" ng-show="isMainVisible">
+
+
+            <div dx-tabs="tabs_options" class="gray">
+
+            </div>
+
+            <div id="summery" class="tabc">
+
+                <div dx-scroll-view="scroll_main">
+
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:10px;">
+                        <div class="padding-0">
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 padding-0 center summarybox">
+
+                                <div class="home-box " style=" background:white !important;padding:8px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fa fa-plane" style="font-size:30px"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center;color:gray" class="caption">Total Flights</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold;color:gray">{{dataYear.flightsCount}}</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:8px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-hourglass-half" style="font-size:30px;color:#cc0000 !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">Delay</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{formatMinutes(dataYear.delaysSum)}}</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2 col-xs-6   col-xsm-4 col-sm-4 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:10px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-chart-pie" style="font-size:30px;color:#808080 !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">DLA/Leg</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{ dataYear.avgDelayLeg }}  </span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:10px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-stopwatch" style="font-size:30px;color:#ff00ff !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">BL. Time</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{formatMinutes(dataYear.block)}}</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:10px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-stopwatch" style="font-size:30px;color:lawngreen !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">FL. Time</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{formatMinutes(dataYear.flight)}}</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:10px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-chart-pie" style="font-size:30px;color:#cc0000 !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">DLA Ratio</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{ dataYear.delayRatio }}%</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div style="clear:both"></div>
+                        </div>
+
+
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:10px;">
+                        <div class="col-lg-6 col-md-7" style="padding-right:0;padding-left:0;margin-top:10px;">
+                            <div dx-chart="line_year"></div>
+                        </div>
+                        <div class="col-lg-6 col-md-5" style="padding-right:0;padding-left:0;margin-top:10px">
+                            <div dx-chart="line_yeardl"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div dx-data-grid="dg_year" dx-item-alias="row">
+                            <div data-options="dxTemplate:{ name:'detailTemplate' }">
+                                <a ng-click="showDetail(row)" href="" class='w3-button w3-block w3-blue' style='width:30px;height:30px; margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class='fas fa-exclamation'></i></a>
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="col-lg-6" style="margin-top:10px;">
+                            <div dx-chart="line_yearweek"></div>
+                        </div>
+                        <div class="col-lg-6" style="margin-top:10px">
+                            <div dx-chart="line_yearweekdl"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div dx-data-grid="dg_yearweek" dx-item-alias="row">
+                            <div data-options="dxTemplate:{ name:'detailTemplate' }">
+                                <a ng-click="showDetail(row)" href="" class='w3-button w3-block w3-blue' style='width:30px;height:30px; margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class='fas fa-exclamation'></i></a>
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div id="category" class="tabc">
+                <div dx-scroll-view="scroll_main">
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:10px;">
+                        <div class="padding-0">
+                            <div class="col-lg-2  col-xsm-6 col-sm-4 col-md-3  padding-0 center summarybox" ng-repeat="x in dataYear.categoriesSum" style="padding:3px;">
+
+                                <div class="home-box " style=" background:#eee !important;padding-left:0px !important;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:20% !important;padding:0  0px 0 0 !important;text-align:center;border-right:1px solid gray" class="td-icon">
+
+                                                    <div dx-check-box="x.chb"> </div>
+                                                </td>
+                                                <td>
+
+                                                    <div style="margin-bottom:5px;text-align:center;color:gray" class="caption">{{x.category}}</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold;color:gray;display:inline-block">{{formatMinutes(x.sum)}}</span>
+                                                        <span style="font-size:16px;font-weight:bold;color:gray;display:inline-block;margin-left:3px">({{x.count}})</span>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                                <td style="width:20% !important;padding:0  0px 0 5px !important;text-align:center;border-left:1px solid gray;font-size:14px" class="td-icon">
+
+                                                    {{x.trend.toFixed(1)}}
+                                                    <i class="fas fa-sort-down" style="font-size:22px;color:green !important;top:-2px " ng-show="x.trend<=0"></i>
+                                                    <i class="fas fa-sort-up" style="font-size:22px;color:red !important;top:7px; " ng-show="x.trend>0"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:5px;">
+                        <!--<div style="background:#ddd;border-bottom:1px solid #ccc;padding:10px;text-align:center;font-size:14px;font-weight:bold;">
+
+                            <div ng-repeat="x in chbCats2" dx-check-box="x" style="display:inline-block;margin-left:20px;"> </div>
+                        </div>-->
+                        <div class="col-lg-6">
+                            <div dx-chart="line_yearcat"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div dx-chart="bar_yearcat"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div dx-data-grid="dg_yearcat"></div>
+                        <div style="clear:both"></div>
+
+                        <div>
+                            <div dx-chart="line_yearweekcat"></div>
+                        </div>
+                        <div>
+                            <div dx-chart="bar_yearweekcat"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div dx-data-grid="dg_yearweekcat"></div>
+                        <div style="clear:both"></div>
+                        <div class="col-lg-6" style="margin-top:10px;">
+
+                            <div dx-chart="bar_yearcatmonth"></div>
+                        </div>
+                        <div class="col-lg-6 dx-border" style="margin-top:10px;">
+                            <div dx-select-box="sb_cat" style="margin-top:5px;margin-bottom:10px;"></div>
+                            <div dx-chart="line_yearcatmonth"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="col-lg-6 dx-border" style="margin-top:10px;">
+                            <div dx-select-box="sb_month" style="margin-top:5px;margin-bottom:10px;"></div>
+                            <div dx-chart="line_yearcatweek"></div>
+                        </div>
+                        <div class="col-lg-6 dx-border" style="margin-top:10px;">
+                            <div dx-pie-chart="pie_catweek"></div>
+                        </div>
+
+                        <div style="clear:both"></div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="airport" class="tabc">
+                <div dx-scroll-view="scroll_main">
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:10px;">
+                        <div class="padding-0">
+                            <div class="col-lg-2  col-xsm-6 col-sm-4 col-md-3   padding-0 center summarybox" style=" padding:3px" ng-repeat="x in dataYear.airportsSum">
+
+                                <div class="home-box " style=" background:#eee !important;padding-left:0px !important;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:20% !important;padding:0  0px 0 0 !important;text-align:center;border-right:1px solid gray" class="td-icon">
+
+                                                    <div dx-check-box="x.chb"> </div>
+                                                </td>
+                                                <td>
+
+                                                    <div style="margin-bottom:5px;text-align:center;color:gray" class="caption">{{x.airport}}</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold;color:gray;display:inline-block">{{formatMinutes(x.sum)}}</span>
+                                                        <span style="font-size:16px;font-weight:bold;color:gray;display:inline-block;margin-left:3px">({{x.count}})</span>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                                <td style="width:20% !important;padding:0  0px 0 0 !important;text-align:center;border-left:1px solid gray" class="td-icon">
+
+                                                    {{x.trend.toFixed(1)}}
+                                                    <i class="fas fa-sort-down" style="font-size:22px;color:green !important;top:-2px " ng-show="x.trend<=0"></i>
+                                                    <i class="fas fa-sort-up" style="font-size:22px;color:red !important;top:7px; " ng-show="x.trend>0"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:0px; text-align:center">
+                        <div class="col-lg-3 col-sm-6 col-xsm-6" ng-repeat="x in dataYear.airportsSum" style="padding:0;" ng-show="selectedApts[x.airport]">
+                            <div class="pies1" dx-pie-chart="x.pie"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:5px;margin-top:10px">
+                        <!--<div style="background:#ddd;border-bottom:1px solid #ccc;padding:10px;text-align:center;font-size:14px;font-weight:bold;">
+
+                            <div ng-repeat="x in chbApts" dx-check-box="x" style="display:inline-block;margin-left:20px;"> </div>
+                        </div>-->
+
+                        <div class="col-lg-6">
+                            <div dx-chart="line_yearapt"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div dx-chart="bar_yearapt"></div>
+                        </div>
+
+                        <div style="clear:both"></div>
+                        <div dx-data-grid="dg_yearapt"></div>
+                        <div style="clear:both"></div>
+                        <div>
+                            <div dx-chart="line_yearweekapt"></div>
+                        </div>
+                        <div>
+                            <div dx-chart="bar_yearweekapt"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div dx-data-grid="dg_yearweekapt"></div>
+                        <div style="clear:both"></div>
+                        <!--apt categories-->
+                        <div style="background:#ddd;border-bottom:1px solid #ccc;padding:10px;text-align:left;font-size:14px;font-weight:bold;">
+
+                            <div ng-repeat="x in chbCats" dx-check-box="x" style="display:inline-block;margin-left:10px;"> </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div dx-chart="line_yearaptcat" style="margin:0 auto 0 auto"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div dx-chart="bar_yearaptcat"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div dx-data-grid="dg_yearaptcat"></div>
+                        <div style="clear:both"></div>
+                        <div>
+                            <div dx-chart="line_yearaptcatweek"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div dx-data-grid="dg_yearweekaptcat"></div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="detail" class="tabc">
+                <div dx-data-grid="dg_dla" id="dg_dla" class="content" style="overflow-y:hidden"></div>
+                <div class="rowx footer dx-border">
+
+                    <table style=" margin:0;padding:0;width:100%">
+                        <tr>
+
+                            <td style="width:125px; text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from1"></div></td>
+
+                            <td style="width:125px; text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to1"></div></td>
+                            <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_date"></div></td>
+                            <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+
+                            <td></td>
+                            <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_info"></div></td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+    <div id="popup_date" dx-popup="popup_date">
+        <div class="margin-bottom-5 padding-7 dx-border" style="padding:25px 0 10px 0">
+            <div>
+                <label style="width:45px;text-align:right;margin-right:5px;">From</label>
+
+                <input type="text" class="date1 locale-en" />
+            </div>
+            <div style="margin-top:15px;">
+                <label style="width:45px;text-align:right; margin-right:5px;">To</label>
+
+                <input type="text" class="date2 locale-en" />
+            </div>
+
+            
+
+        </div>
+     
+
+    </div>
+
+
+    <div id="popup_detail" dx-popup="popup_detail">
+        <div ng-show="IsDetailVisible">
+            <div dx-tabs="tabs_detail_options" class="gray">
+
+            </div>
+            <div id="dsummery" class="tabcd">
+                <div id="scrollview" dx-scroll-view="scroll_det1">
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:10px;">
+                        <div class="padding-0">
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4  col-md-3 padding-0 center summarybox">
+
+                                <div class="home-box " style=" background:white !important;padding:8px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fa fa-plane" style="font-size:30px"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center;color:gray" class="caption">Total Flights</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold;color:gray">{{data.flightsCountDate}}</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 col-md-3 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:8px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-hourglass-half" style="font-size:30px;color:#cc0000 !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">Delay</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{formatMinutes(data.delaysSumDate)}}</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 col-md-3  padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:10px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-chart-pie" style="font-size:30px;color:#808080 !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">DLA/Leg</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{ data.delayLeg }}  </span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 col-md-3 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:10px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-chart-pie" style="font-size:30px;color:#cc0000 !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">O.A. DLA/Leg</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{ data.avgDelayLeg }}  </span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 col-md-3 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:10px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-stopwatch" style="font-size:30px;color:#ff00ff !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">BL. Time</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{formatMinutes(data.block)}}</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 col-md-3 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:10px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-stopwatch" style="font-size:30px;color:lawngreen !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">FL. Time</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{formatMinutes(data.flight)}}</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-2  col-xs-6 col-xsm-4 col-sm-4 col-md-3 padding-0 center summarybox">
+
+                                <div class="home-box " style="padding:10px;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:40%;padding:0 10px 0 0;text-align:right" class="td-icon">
+
+                                                    <i class="fas fa-chart-pie" style="font-size:30px;color:#cc0000 !important"></i>
+                                                </td>
+                                                <td>
+                                                    <div style="margin-bottom:5px;text-align:center" class="caption">DLA Ratio</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold">{{ data.delayRatio }}%</span>
+
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div style="clear:both"></div>
+                        </div>
+
+
+                        <div style="clear:both"></div>
+                    </div>
+
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:10px;">
+                        <div class="col-lg-6">
+                            <div dx-chart="line_daily"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div dx-chart="line_dailydl"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="dcategory" class="tabcd">
+                <div id="scrollview" dx-scroll-view="scroll_det2">
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:10px;">
+                        <div class="padding-0">
+                            <div class="col-lg-2  col-xsm-6 col-sm-4 col-md-3  padding-0 center summarybox" ng-repeat="x in data.category" style="padding:3px;">
+
+                                <div class="home-box " style=" background:#eee !important;padding-left:0px !important;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:20% !important;padding:0  0px 0 0 !important;text-align:center;border-right:1px solid gray" class="td-icon">
+
+                                                    <div dx-check-box="x.chb"> </div>
+                                                </td>
+                                                <td>
+
+                                                    <div style="margin-bottom:5px;text-align:center;color:gray" class="caption">{{x.Category}}</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold;color:gray;display:inline-block">{{formatMinutes(x.Delay)}}</span>
+                                                        <span style="font-size:16px;font-weight:bold;color:gray;display:inline-block;margin-left:3px">({{x.Count}})</span>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                                <td style="width:20% !important;padding:0  0px 0 5px !important;text-align:center;border-left:1px solid gray;font-size:14px" class="td-icon">
+
+                                                    {{x.Slope.toFixed(1)}}
+                                                    <i class="fas fa-sort-down" style="font-size:22px;color:green !important;top:-2px " ng-show="x.Slope<=0"></i>
+                                                    <i class="fas fa-sort-up" style="font-size:22px;color:red !important;top:7px; " ng-show="x.Slope>0"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:5px;">
+                        <div class="col-lg-6">
+                            <div dx-chart="line_daycat"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div dx-chart="bar_daycat"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-3" style="padding:5px;">
+                        <div dx-data-grid="dg_cat"></div>
+                    </div>
+
+                    <div class="col-lg-9 hidden-xs" style="padding:5px;">
+
+                        <div dx-data-grid="dg_cat_det"></div>
+
+                    </div>
+
+
+
+                    <div style="clear:both"></div>
+
+                    <div class="col-lg-4" style="padding:5px;padding-left:10px;padding-top:10px;">
+                        <div dx-pie-chart="pie_cat"></div>
+                    </div>
+                    <div class="col-lg-8" style="padding:5px;padding-left:10px;padding-top:10px;">
+                        <div dx-chart="bar_cat"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+            </div>
+            <div id="dairport" class="tabcd">
+                <div id="scrollview" dx-scroll-view="scroll_det3">
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:10px;">
+                        <div class="padding-0">
+                            <div class="col-lg-2  col-xsm-6 col-sm-4 col-md-3  padding-0 center summarybox" style="float:none;display:inline-block;padding:3px" ng-repeat="x in data.airport">
+
+                                <div class="home-box " style=" background:#eee !important;padding-left:0px !important;">
+                                    <table style="width:100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width:20% !important;padding:0  0px 0 0 !important;text-align:center;border-right:1px solid gray" class="td-icon">
+
+                                                    <div dx-check-box="x.chb"> </div>
+                                                </td>
+                                                <td>
+
+                                                    <div style="margin-bottom:5px;text-align:center;color:gray" class="caption">{{x.Airport}}</div>
+                                                    <div class="libcount" style="text-align:center">
+                                                        <span style="font-size:16px;font-weight:bold;color:gray;display:inline-block">{{formatMinutes(x.Delay)}}</span>
+                                                        <span style="font-size:16px;font-weight:bold;color:gray;display:inline-block;margin-left:3px">({{x.Count}})</span>
+                                                        <div style="clear:both"></div>
+                                                    </div>
+                                                </td>
+                                                <td style="width:20% !important;padding:0  0px 0 0 !important;text-align:center;border-left:1px solid gray" class="td-icon">
+
+                                                    {{x.Slope.toFixed(1)}}
+                                                    <i class="fas fa-sort-down" style="font-size:22px;color:green !important;top:-2px " ng-show="x.Slope<=0"></i>
+                                                    <i class="fas fa-sort-up" style="font-size:22px;color:red !important;top:7px; " ng-show="x.Slope>0"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-5" style="padding:5px;padding-left:10px;padding-top:10px;">
+                        <div dx-chart="bar_airc"></div>
+                    </div>
+                    <div class="col-lg-4" style="padding:5px;padding-left:10px;padding-top:10px;">
+                        <div dx-chart="bar_cata"></div>
+                    </div>
+                    <div class="col-lg-3" style="padding:5px;">
+                        <div dx-pie-chart="pie_air"></div>
+                    </div>
+                    <div style="clear:both"></div>
+
+
+                    <div class="col-lg-6">
+                        <div dx-chart="line_dayapt"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div dx-chart="bar_dayapt"></div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                    <div class="col-lg-3 col-md-4 col-sm-4" style="padding:5px;">
+                        <div dx-data-grid="dg_air"></div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-8 col-sm-8" style="padding:5px;">
+                        <div dx-data-grid="dg_airc"></div>
+
+
+                    </div>
+
+
+
+                    <div style="clear:both"></div>
+
+                    <div style="margin-bottom:0px;border-bottom:1px solid #ccc;padding:10px;text-align:center" class="dool">
+                        <div class="col-lg-3" ng-repeat="x in data.airport" style="float:none;display:inline-block" ng-show="selectedAptsDaily[x.Airport]">
+                            <div class="pies2" dx-pie-chart="x.pie"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="background:#ddd;border-bottom:1px solid #ccc;padding:10px;text-align:center;font-size:14px;font-weight:bold;">
+
+                        <div ng-repeat="x in chbDayApts" dx-check-box="x" style="display:inline-block;margin-left:20px;"> </div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="background:#ddd;border-bottom:1px solid #ccc;padding:10px;text-align:center;font-size:14px;font-weight:bold;">
+
+                        <div ng-repeat="x in chbDayCats" dx-check-box="x" style="display:inline-block;margin-left:20px;"> </div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="col-lg-6">
+                        <div dx-chart="line_dayaptcat" style="margin:0 auto 0 auto"></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div dx-chart="bar_dayaptcat"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="hidden-xs" style="padding:5px;padding-left:10px;padding-top:10px;">
+                        <div dx-data-grid="dg_air_det"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--<div id="scrollview" dx-scroll-view="scroll_det">
+            <div ng-show="IsDetailVisible">
+
+
+                <dl class="accordion">
+
+                    <dt><a href="">By Category</a></dt>
+                    <dd class="category">
+
+                    </dd>
+
+                    <dt><a href="">By Airport</a></dt>
+                    <dd class="airport">
+
+                    </dd>
+
+
+                </dl>
+            </div>
+        </div>-->
+
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+
+
+</div>
+
+

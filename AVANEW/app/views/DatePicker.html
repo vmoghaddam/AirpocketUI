@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
+    
+
+    <!-- DevExtreme themes -->
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/19.2.7/css/dx.common.css">
+    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/19.2.7/css/dx.light.css">
+
+    <!-- DevExtreme library -->
+    <script src="https://cdn3.devexpress.com/jslib/19.2.7/js/dx.web.js" integrity="sha384-Ze//61QemRJKIQrAB2+yUT02+mjVlIrjl2GdbPdSEhL1ecbX1Svjv94FA4MAPiiS sha512-maQScFRqUF2TeDpg1bnbhlm0GBavLiTMUnHCMg7J6orKsmNwME6QTqwm0sCeCPdbPvTJNba9zF7Cn+znvMYHbg==" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div>
+        <label>From</label>
+        <div id="dateFrom"></div>
+        <label>To</label>
+        <div id="dateTo"></div>
+    </div>
+
+    <script>
+        $(function () {
+            DevExpress.localization.locale('fa-IR');
+            DevExpress.config({ rtlEnabled: true });
+            var now = new Date();
+            $("#dateFrom").dxDateBox({
+                type: "date",
+                value: now
+            });
+            $("#dateTo").dxDateBox({
+                type: "date",
+                value: now
+            });
+             
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,701 @@
+﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-fileuploader-files-container {
+        display: none;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-popup-content {
+        padding: 0 !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_regroute .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_regroute .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_reg .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_reg .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    #dg_route .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_route .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .tile_selected {
+        background: #ffb3cc !important;
+    }
+
+    .dx-texteditor-input {
+        text-align: center
+    }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box finmonthreport" style="height:100%;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px; ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+                    <div dx-tabs="tabs_options"></div>
+                    <div id="rba" class="tabc">
+
+                    </div>
+
+                    <div id="rbb" class="tabc">
+
+                    </div>
+
+                    <div id="rbc" class="tabc">
+
+                    </div>
+
+                    <div style="padding: 7px">
+                        <div style="border: 1px solid #ccc; width:100%">
+                            <table>
+                                <tr>
+                                    <td style="padding:2px 0 0 5px !important; text-align: center;width: 10%">TFH</td>
+                                    <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_tfh"></div></td>
+
+                                    <td style="padding: 2px 0 0 5px !important; text-align: center; width: 10%">TFC</td>
+                                    <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_tfc"></div></td>
+
+                                    <td style="padding: 2px 0 0 5px !important; text-align: center; width: 15%">Date UpDate</td>
+                                    <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_update"></div></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div dx-tabs="statusTabs_options" style="border: 1px solid #ccc; margin-top:5px"></div>
+                        <div id="llp" class="tabst">
+                            <div style="border: 1px solid #ccc; width: 100%; margin-top: 5px">
+                                <table>
+                                    <tr>
+                                        <td style="padding: 2px 0 0 5px !important; text-align: left; width: 235px">Landing Gear (Day)</td>
+                                        <td style="padding: 5px"><div style="border: 1px solid #ccc;height:35px; width:200px" dx-number-box="num_ldg"></div></td>
+
+                                        <td style="padding:2px 0 0 5px !important; text-align: center;width:200px">Date Update</td>
+                                        <td style="padding: 5px"><div style="border: 1px solid #ccc;height:35px; width:200px" dx-date-box="dt_ldg"></div></td>
+
+
+
+
+                                        <!--<td style="padding:2px 0 0 5px !important; text-align: center;width:10%">Landing Gear (Day)</td>
+                                        <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width:20%" dx-number-box="num_ldg"></div></td>
+
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center;width:10%">Date Update</td>
+                                        <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-date-box="dt_ldg"></div></td>-->
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 2px 0 0 5px !important; text-align: left; width: 235px">Landing Gear (LDG)</td>
+                                        <td style="padding: 5px"><div style="border: 1px solid #ccc;height:35px; width:200px" dx-number-box="num_landingldg"></div></td>
+
+
+                                        <!--<td style="padding:2px 0 0 5px !important; text-align: center;width:10%">Landing Gear (Day)</td>
+                                        <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width:20%" dx-number-box="num_ldg"></div></td>
+
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center;width:10%">Date Update</td>
+                                        <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-date-box="dt_ldg"></div></td>-->
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div style="width: 100%; border: 1px solid #ccc; margin-top: 5px">
+                                <table>
+                                    <tr>
+                                        <td style="padding: 2px 0 0 5px !important; text-align: left; width: 235px">APU (hour)</td>
+                                        <td style="padding: 5px"><div style="border: 1px solid #ccc;height:35px; width:200px" dx-number-box="num_apu"></div></td>
+
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center; width: 200px">Date Update</td>
+                                        <td style="padding: 5px"><div style="border: 1px solid #ccc;height:35px; width:200px" dx-date-box="dt_apu"></div></td>
+
+
+
+
+                                        <!--<td class="col-lg-1 col-md-1" style="padding:2px 0 0 5px !important; text-align: center">APU (hour)</td>
+                                        <td class="col-lg-3 col-md-3" style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_apu"></div></td>
+
+                                        <td class="col-lg-1 col-md-1" style="padding: 2px 0 0 5px !important; text-align: center">Date Update</td>
+                                        <td class="col-lg-3 col-md-3" style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_apu"></div></td>-->
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--<div class="flex-container">
+                                <div style="width:250px">First Other HT Component</div>
+                                <div style="border: 1px solid #ccc; width: 200px" dx-text-box="txt_firstht"></div>
+                                <div>Days</div>
+                            </div>
+
+                            <div class="flex-container">
+                                <div style="width: 250px; text-align: left">Date Update</div>
+                                <div style="border: 1px solid #ccc; width: 200px" dx-text-box="txt_firstht"></div>
+                            </div>
+
+
+                            <div class="flex-container">
+                                <div style="width:250px">Second Other HT Component</div>
+                                <div style="border: 1px solid #ccc; width: 200px" dx-text-box="txt_secondHT"></div>
+                                <div>Days</div>
+                            </div>
+
+                            <div class="flex-container">
+                                <div style="width: 250px; text-align: left">Date Update</div>
+                                <div style="border: 1px solid #ccc; width: 200px" dx-text-box="txt_firstht"></div>
+                            </div>
+
+                            <div class="flex-container">
+                                <div style="width:250px">Third Other HT Component</div>
+                                <div style="border: 1px solid #ccc; width: 200px" dx-text-box="txt_thirdHT"></div>
+                                <div>Days</div>
+                            </div>
+
+                            <div class="flex-container">
+                                <div style="width:250px; text-align:left">Date Update</div>
+                                <div style="border: 1px solid #ccc; width: 200px" dx-text-box="txt_firstht"></div>
+                            </div>-->
+
+                            <div style="width: 100%; border: 1px solid #ccc; margin-top: 5px">
+                                <table>
+                                    <tr>
+                                        <td style="padding:2px 0 0 5px !important; text-align: left;width:235px">First Other HT Component (Days)</td>
+                                        <td style="padding: 5px"><div style="border: 1px solid #ccc;height:35px; width:200px" dx-text-box="txt_firstHT"></div></td>
+
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center; width: 200px ">Date Update</td>
+                                        <td style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px; width: 200px" dx-date-box="dt_firstHT"></div></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="padding: 2px 0 0 5px !important; text-align: left; width: 235px">Second Other HT Component (Days)</td>
+                                        <td style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_secondHT"></div></td>
+
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center; width: 200px ">Date Update</td>
+                                        <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width: 200px" dx-date-box="dt_secondHT"></div></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="padding: 2px 0 0 5px !important; text-align: left; width: 235px">Third Other HT Component (Days)</td>
+                                        <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_thirdHT"></div></td>
+
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center; width: 200px ">Date Update</td>
+                                        <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width: 200px" dx-date-box="dt_thirdHT"></div></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+                            <table style="width: 100%; border: 1px solid #ccc; margin-top: 5px">
+                                <tr>
+                                    <td class="col-lg-1 col-md-1" style="padding:2px 0 0 5px !important; text-align: center">Number Of Defects</td>
+                                    <td class="col-lg-3 col-md-3" style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_defects"></div></td>
+
+                                    <td class="col-lg-1 col-md-1" style="padding: 2px 0 0 5px !important; text-align: center">First Due(Day)</td>
+                                    <td class="col-lg-3 col-md-3" style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_firstDue"></div></td>
+
+                                    <td class="col-lg-1 col-md-1" style="padding: 2px 0 0 5px !important; text-align: center">Date Update</td>
+                                    <td class="col-lg-3 col-md-3" style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_defectsUpdate"></div></td>
+                                </tr>
+                            </table>
+
+                            <div style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                                <table>
+                                    <tr>
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center; width: 100px">Engine 1</td>
+                                        <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box=""></div></td>
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center">Cycle</td>
+                                        <td dx-button="btn_eng1" style="margin: 5px 0 0 5px;"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center; width: 100px ">Engine 2</td>
+                                        <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box=""></div></td>
+                                        <td style="padding: 2px 0 0 5px !important; text-align: center">Cycle</td>
+                                        <td dx-button="btn_eng2" style="margin: 5px 0 0 5px;"></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+
+                        <div id="coming" class="tabst" style="padding: 7px">
+                            <div dx-data-grid="dg_coming" id="dg_coming" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+                            <div dx-button="btn_coming_add"></div>
+                            <div dx-button="btn_coming_remove"></div>
+                        </div>
+
+                        <div id="ad" class="tabst" style="padding: 7px">
+                            <div dx-data-grid="dg_ad" id="dg_ad" class="content" style="overflow-y:hidden" dx-item-alias="row"></div>
+                            <div dx-button="btn_ad_add"></div>
+                            <div dx-button="btn_ad_remove"></div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div id="popup_eng" dx-popup="popup_eng">
+                <div style="border: 1px solid #ccc; width:100%;padding-top:3px">
+                    <table>
+                        <tr>
+                            <td style="padding: 5px 0 0 5px !important; text-align: center; width: 5%">Model</td>
+                            <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_engModel"></div></td>
+
+                            <td style="padding: 5px 0 0 5px !important; text-align: center; width: 5%">Serial No</td>
+                            <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_engSerial"></div></td>
+
+                            <td style="padding: 5px 0 0 5px !important; text-align: center; width: 5%">Cat</td>
+                            <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-text-box="txt_cat"></div></td>
+
+                            <td style="padding:2px 0 0 5px !important; text-align: center;width: 5%">TFH</td>
+                            <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_engTfh"></div></td>
+
+                            <td style="padding: 2px 0 0 5px !important; text-align: center; width: 5%">TFC</td>
+                            <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_engTfc"></div></td>
+
+                            <td style="padding: 2px 0 0 5px !important; text-align: center; width: 5%">Date UpDate</td>
+                            <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_engUpdate"></div></td>
+                        </tr>
+                        <tr>
+                            <td style="padding:2px 0 0 5px !important; text-align: center;width: 5%">Remainig Cycle</td>
+                            <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_rCycle"></div></td>
+
+                            <td style="padding: 2px 0 0 5px !important; text-align: center; width: 5%">Remainig Hour</td>
+                            <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_rHour"></div></td>
+                            <td style="padding: 2px 0 0 5px !important; text-align: center; width: 5%">Remainig Minute</td>
+                            <td style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-number-box="num_rMin"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <div dx-data-grid="dg_eng_part" id="dg_eng_part" class="content" style="overflow-y: hidden; margin-top: 10px" dx-item-alias="row"></div>
+                <div dx-button="btn_eng_part_add" style="margin: 5px 2px 0 2px !important"></div>
+                <div dx-button="btn_eng_part_remove" style="margin: 5px 0 0 0 !important"></div>
+
+                <div dx-data-grid="dg_eng_ad" id="dg_eng_ad" class="content" style="overflow-y:hidden; margin-top:10px" dx-item-alias="row"></div>
+                <div dx-button="btn_eng_ad_add" style="margin: 5px 2px 0 2px !important"></div>
+                <div dx-button="btn_eng_ad_remove" style="margin: 5px 0 0 0 !important"></div>
+            </div>
+
+
+            <div id="popup_tasks" dx-popup="popup_tasks">
+                <div style="border: 1px solid #ccc; width: 100%">
+                    <table>
+                        <tr>
+                            <td class="col-lg-10 col-md-10" style="padding:2px 0 0 7px !important">Check</td>
+                            <td class="col-lg-4 col-md-4" style="padding:5px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_taskChk"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td style="padding:10px 0 0 7px !important">Tasks</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 7px"><div style="border: 1px solid #ccc; width: 100%; height: 200px" dx-text-area="txt_tasks"></div></td>
+                    </tr>
+                </table>
+
+                <div style=" border: 1px solid #ccc; margin-top:5px; width: 100%">
+                    <table>
+                        <tr>
+                            <td class="col-lg-10 col-md-10" style="padding: 2px 0 0 7px !important">Estimated Working Hour</td>
+                            <td class="col-lg-4 col-md-4" style="padding: 7px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_tasksEstimated"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td style="padding: 2px 0 0 7px !important">Remaining Minutes</td>
+                        <td style="padding: 7px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_tasksRemaining"></div></td>
+
+                        <td style="padding: 2px 0 0 7px !important">Date Update</td>
+                        <td style="padding: 7px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_taskUpdate"></div></td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div id="popup_ad" dx-popup="popup_ad">
+                <div style="border: 1px solid #ccc; width: 100%">
+                    <table>
+                        <tr>
+                            <td class="col-lg-10 col-md-10" style="padding:2px 0 0 5px !important">AD/SB Ref</td>
+                            <td class="col-lg-4 col-md-4" style="padding:5px"><div style="border: 1px solid #ccc; height: 35px; width:100%" dx-text-box="txt_adsb"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td style="padding:10px 0 0 5px !important">Subject</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px"><div style="border: 1px solid #ccc; width: 100%; height: 35px" dx-text-box="txt_subject"></div></td>
+                    </tr>
+                </table>
+
+                <div style=" border: 1px solid #ccc; margin-top:5px; width: 100%">
+                    <table>
+                        <tr>
+                            <td class="col-lg-10 col-md-10" style="padding: 2px 0 0 5px !important">Estimated Working Hour</td>
+                            <td class="col-lg-4 col-md-4 " style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_adEstimated"></div></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td class="col-lg-6 col-md-6" style="padding: 10px 0 0 5px !important">Due Date</td>
+                        <td class="col-lg-6 col-md-6" style="padding: 10px 0 0 5px !important">Date Update</td>
+
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6" style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_adDue"></div></td>
+                        <td class="col-lg-6 col-md-6" style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_adUpdate"></div></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="popup_adsb" dx-popup="popup_adsb">
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td style="padding:10px 0 0 5px !important">AD/SB</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px"><div style="border: 1px solid #ccc; width: 100%; height: 35px" dx-text-box="txt_adPart"></div></td>
+                    </tr>
+                </table>
+
+
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td style="padding:10px 0 0 5px !important">Subject</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px"><div style="border: 1px solid #ccc; width: 100%; height: 35px" dx-text-box="txt_adSubject"></div></td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td style="padding:10px 0 0 5px !important">Remark</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px"><div style="border: 1px solid #ccc; width: 100%; height: 100px" dx-text-area="txt_adRemark"></div></td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td class="col-lg-6 col-md-6" style="padding: 10px 0 0 5px !important">Due Date</td>
+                        <td class="col-lg-6 col-md-6" style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_adDue"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6" style="padding: 10px 0 0 5px !important">Remaining Cycle</td>
+                        <td class="col-lg-6 col-md-6" style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-text-box="txt_adCycle"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6" style="padding: 10px 0 0 5px !important">Date Update</td>
+                        <td class="col-lg-6 col-md-6" style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_engAdUpdate"></div></td>
+                    </tr>
+                </table>
+
+            </div>
+
+
+            <div id="popup_cat" dx-popup="popup_cat">
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td style="padding:10px 0 0 5px !important">Title</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 5px"><div style="border: 1px solid #ccc; width: 100%; height: 35px" dx-text-box="txt_title"></div></td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td style="padding: 5px !important; background-color: whitesmoke; text-align: left; color: black" colspan="6">Life Time Limit</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 2px 0 0 7px !important; width: 50px">Cat A</td>
+                        <td style="padding: 7px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_cata"></div></td>
+
+                        <td style="padding: 2px 0 0 7px !important; width: 50px">Cat B</td>
+                        <td style="padding: 7px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_catb"></div></td>
+
+                        <td style="padding: 2px 0 0 7px !important; width: 50px">Cat C</td>
+                        <td style="padding: 7px"><div style="border: 1px solid #ccc; height: 35px" dx-text-box="txt_catc"></div></td>
+                    </tr>
+                </table>
+
+                <table style="width: 100%; border: 1px solid #ccc; margin-top:5px">
+                    <tr>
+                        <td class="col-lg-6 col-md-6" style="padding: 10px 0 0 5px !important">Remaining Cycle</td>
+                        <td class="col-lg-6 col-md-6" style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-text-box="txt_catCycle"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6" style="padding: 10px 0 0 5px !important">Date Update</td>
+                        <td class="col-lg-6 col-md-6" style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_catUpdate"></div></td>
+                    </tr>
+                    <tr>
+                        <td class="col-lg-6 col-md-6" style="padding: 10px 0 0 5px !important">Due Date</td>
+                        <td class="col-lg-6 col-md-6" style="padding: 5px"><div style="border: 1px solid #ccc; height: 35px; width: 100%" dx-date-box="dt_catDue"></div></td>
+                    </tr>
+                </table>
+
+            </div>
+
+
+
+
+        </div>
+
+
+
+    </div>
+
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-8 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_save"></div></td>
+                    <td></td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

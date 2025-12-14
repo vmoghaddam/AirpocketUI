@@ -160,24 +160,7 @@
                         <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div style="text-align:left" dx-text-area="report"></div></td>
                     </tr>
                 </table>
-                <div style="clear:both"></div>
-                <table ng-show="url_sign3" style="width:100%;margin-top:10px;border:1px solid #eee;">
-                    <tr>
-                        <td style="padding:10px;border-bottom:1px solid #eeee;text-align:center" colspan="3">
-                            <div ng-show="url_sign3" style="text-align:center;font-size:14px;padding:0px;">The document signed and approved by</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:25%;"></td>
-                        <td style="width:50%; text-align:center;padding:10px">
-
-                            <div ng-show="url_sign3" style="text-align:center;font-size:16px;padding:5px;">{{PIC3}}</div>
-                            <div ng-show="url_sign3" style="text-align:center;font-size:16px;padding:5px;">{{signDate3}}</div>
-                            <img style="height:auto;display: block; width: 50%;margin:0 auto 0 auto" ng-show="url_sign3" ng-src="{{url_sign3}}" />
-                        </td>
-                        <td style="width:25%;"></td>
-                    </tr>
-                </table>
+                
                 <div style="clear:both"></div>
                 <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black">
                     <tr>
@@ -224,6 +207,24 @@
                         <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div style="text-align:left" dx-select-box="sb_status_staff"></div></td>
                     </tr>
 
+                </table>
+				<div style="clear:both"></div>
+                <table ng-show="signDate3" style="width:100%;margin-top:10px;border:1px solid #eee;">
+                    <tr>
+                        <td style="padding:10px;border-bottom:1px solid #eeee;text-align:center" colspan="3">
+                            <div ng-show="signDate3" style="text-align:center;font-size:14px;padding:0px;">The document signed and approved by</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:25%;"></td>
+                        <td style="width:50%; text-align:center;padding:10px">
+
+                           <div ng-show="signDate3" style="text-align:center;font-size:16px;padding:5px;">{{PIC3}}</div>
+							 <div ng-show="signDate3" style="text-align:center;font-size:16px;padding:5px;">{{SgnCPTLicNo3}}</div>
+                            <div ng-show="signDate3" style="text-align:center;font-size:16px;padding:5px;">{{signDate3}}</div>
+                        </td>
+                        <td style="width:25%;"></td>
+                    </tr>
                 </table>
             </div>
             <!--<div style="clear:both"></div>-->

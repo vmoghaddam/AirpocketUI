@@ -1,4 +1,4 @@
-namespace ApiMSG.Areas.HelpPage.ModelDescriptions
+namespace EPAGriffinAPI.Areas.HelpPage.ModelDescriptions
 {
     public class CollectionModelDescription : ModelDescription
     {

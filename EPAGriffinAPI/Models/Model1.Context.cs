@@ -443,6 +443,7 @@ namespace EPAGriffinAPI.Models
         public virtual DbSet<BookCourse> BookCourses { get; set; }
         public virtual DbSet<ViewMSN> ViewMSNs { get; set; }
         public virtual DbSet<AppFuel> AppFuels { get; set; }
+        public virtual DbSet<MVTAPI> MVTAPIs { get; set; }
     
         public virtual int GetOverDuty(string aDate, Nullable<int> aDuty, Nullable<int> aFlight, Nullable<int> aPID)
         {

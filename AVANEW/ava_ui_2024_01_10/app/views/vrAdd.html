@@ -1,0 +1,235 @@
+<div ng-controller="vrAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+
+            <!--<div style="margin-top:5px">
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:lightgray" class="dx-border">
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left;width:80px">FLIGHT No</td>
+                        <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-text-box="txt_FlightNo"></div></td>
+                        <td style="border-right:0px dotted #eee;text-align:left;width:60px">Date</td>
+                        <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-date-box="Date"></div></td>
+                        <td style="border-right:0px dotted #eee;padding-top:12px;text-align:left;width:45px">Route</td>
+                        <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-text-box="Route"></div></td>
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center;padding-bottom:7px">
+                        <td style="padding-left: 7px; border-right: 0px dotted #eee; padding-top: 12px; text-align: left">A/C Type</td>
+                        <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-text-box="ACType"></div></td>
+                        <td style="border-right:0px dotted #eee;text-align:left">A/C Reg</td>
+                        <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-text-box="ACReg"></div></td>
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    </tr>
+                </table>
+            </div>-->
+
+            <div id="scroll_vradd" dx-scroll-view="scroll_vradd" style="margin-top:5px">
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                    <tr>
+                        <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            FLIGHT IRREGULARITY
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">FLIGHT CANCELLATION</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_irr_100111"></div></td>
+                        <!--<td style="width:50px;"></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">FLIGHT RETURN</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_irr_100112"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">DIVERSION</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_irr_100113"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">ABN./ EMER.EVENT</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_irr_100114"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">DEPARTURE DELAY > 30 MINUTE</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-number-box="txt_depdelay"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                </table>
+
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                    <tr>
+                        <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            REASON (S)
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">TECHNICAL</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100119"></div></td>
+                        <!--<td style="width:50px;"></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">ATC</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100120"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">SECURITY</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100121"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">FLT.OPS</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100122"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">A/C LATE ARRIVAL</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100123"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">PAX HANDELING</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100124"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">CATERING</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100125"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">WEATHER</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100126"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">RAMP HANDELING</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100127"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">OTHERS</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100128"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+                </table>
+
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                    <!--<tr>
+            <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                FLIGHT IRREGULARITY
+            </td>
+        </tr>-->
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">REDUCTION OF REST PERIOD</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-number-box="restReduction"></div></td>
+
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">EXTENTION OF FLYING DUTY PERIOD</td>
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-number-box="dutyExtention"></div></td>
+                        <!-- <td></td>-->
+
+                    </tr>
+
+                </table>
+
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black">
+                    <tr>
+                        <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            REPORT
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div style="text-align:left" dx-text-area="report"></div></td>
+                    </tr>
+                </table>
+                <div style="clear:both"></div>
+                <table ng-show="url_sign3" style="width:100%;margin-top:10px;border:1px solid #eee;">
+                    <tr>
+                        <td style="padding:10px;border-bottom:1px solid #eeee;text-align:center" colspan="3">
+                            <div ng-show="url_sign3" style="text-align:center;font-size:14px;padding:0px;">The document signed and approved by</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:25%;"></td>
+                        <td style="width:50%; text-align:center;padding:10px">
+
+                            <div ng-show="url_sign3" style="text-align:center;font-size:16px;padding:5px;">{{PIC3}}</div>
+                            <div ng-show="url_sign3" style="text-align:center;font-size:16px;padding:5px;">{{signDate3}}</div>
+                            <img style="height:auto;display: block; width: 50%;margin:0 auto 0 auto" ng-show="url_sign3" ng-src="{{url_sign3}}" />
+                        </td>
+                        <td style="width:25%;"></td>
+                    </tr>
+                </table>
+                <div style="clear:both"></div>
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black">
+                    <tr>
+                        <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            Flight Operations Manager Remark <span style="display:inline-block;margin-left:10px" data-ng-bind="getOPSRemark()"></span>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div style="text-align:left" dx-text-area="OPSRemark"></div></td>
+                    </tr>
+
+                </table>
+
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black">
+                    <tr>
+                        <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            Status
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div style="text-align:left" dx-select-box="sb_status_manager"></div></td>
+                    </tr>
+
+                </table>
+
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black">
+                    <tr>
+                        <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            Flight Operations Staff Remark <span style="display:inline-block;margin-left:10px" data-ng-bind="getOPSStaffRemark()"></span>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div style="text-align:left" dx-text-area="OPSStaffRemark"></div></td>
+                    </tr>
+
+                </table>
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black">
+                    <tr>
+                        <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            Status
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:0px dotted #eee;text-align:center">
+                        <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div style="text-align:left" dx-select-box="sb_status_staff"></div></td>
+                    </tr>
+
+                </table>
+            </div>
+            <!--<div style="clear:both"></div>-->
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

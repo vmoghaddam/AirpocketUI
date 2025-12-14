@@ -128,22 +128,29 @@
                 </tr>
             </table>
 
-            <div style="clear:both"></div>
-            <table ng-show="url_sign" style="width:100%;margin-top:10px;border:1px solid #eee;">
+           <div style="clear:both"></div>
+            <table style="width:100%;margin-top:10px;border:1px solid #eee;">
                 <tr>
-                    <td style="padding:10px;border-bottom:1px solid #eeee;text-align:center" colspan="3">
-                        <div ng-show="url_sign" style="text-align:center;font-size:14px;padding:0px;">The document signed and approved by</div>
+                    <td style="padding:10px;border-bottom:1px solid #eeee;text-align:center" colspan="2">
+                        <div style="text-align:center;font-size:14px;padding:0px;">The document signed and approved by</div>
                     </td>
                 </tr>
                 <tr>
-                    <td style="width:25%;"></td>
-                    <td style="width:50%; text-align:center;padding:10px">
 
-                        <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">{{PIC}}</div>
-                        <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">{{signDate}}</div>
-                        <img style="height:auto;display: block; width: 50%;margin:0 auto 0 auto" ng-show="url_sign" ng-src="{{url_sign}}" />
+                    <td style="width:100%; text-align:center;padding:10px;border:1px solid lightgray">
+                        <div style='background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold'>PIC</div>
+                        <div style="text-align:center;font-size:16px;padding:5px;">{{PIC}}</div>
+                         <div  style="text-align:center;font-size:16px;padding:5px;">{{SgnCPTLicNo}}</div>
+                        <div style="text-align:center;font-size:16px;padding:5px;">{{signDate}}</div>
                     </td>
-                    <td style="width:25%;"></td>
+					 </tr>
+                <tr>							
+                    <td style="width:100%; text-align:center;padding:10px;border:1px solid lightgray">
+                        <div style='background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold'>Dispatcher</div>
+                        <div style="text-align:center;font-size:16px;padding:5px;">{{DSP}}</div>
+                        <div style="text-align:center;font-size:16px;padding:5px;">{{DSP_Lic}}</div>
+                        <div style="text-align:center;font-size:16px;padding:5px;">{{signDate_dsp}}</div>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -151,6 +158,18 @@
     </div>
     <!--</div>-->
 
-
+<div id="popup_dr_sign" dx-popup="popup_dr_sign" class="no-padding">
+ <div class='dx-border' style='padding:20px;'>
+   <!--<div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+         <label>Name</label>
+          <div dx-text-box="txt_name"  ></div>
+   </div>-->
+ <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+         <label>License Number</label>
+          <div dx-text-box="txt_licno" dx-validator="{validationGroup:'drsign',  validationRules: [{ type: 'required'}]}"></div>
+   </div>
+  </div>
+</div>
     <div dx-load-panel="loadPanel"></div>
 </div>
+					

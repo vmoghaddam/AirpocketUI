@@ -1,0 +1,39 @@
+﻿<div class="box location" style="height:100%;display:none">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <!--<div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'location';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>-->
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:0;display:none" id="treecontainer">
+            <!--<div dx-data-grid="dg" id="grid"></div>-->
+            <div dx-tree-list="tree" id="tree"></div>
+            
+
+        </div>
+    </div>
+    <div class="rowx footer">
+        <div>
+            
+            <div dx-button="btn_new"></div>
+            <div dx-button="btn_edit"></div>
+
+            <div dx-button="btn_delete"></div>
+        </div>
+    </div>
+
+
+    <div ng-include="'app/views/locationAdd.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+

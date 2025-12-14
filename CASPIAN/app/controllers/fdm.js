@@ -176,7 +176,7 @@ app.controller('fdmController', ['$http', '$scope', '$location', '$routeParams',
         placeholder: 'From Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [2021, 2022, 2023],
+        dataSource: [2021, 2022, 2023, 2024],
 
         onSelectionChanged: function (arg) {
 
@@ -192,7 +192,7 @@ app.controller('fdmController', ['$http', '$scope', '$location', '$routeParams',
         placeholder: 'To Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [2021, 2022, 2023],
+        dataSource: [2021, 2022, 2023, 2024],
 
         onSelectionChanged: function (arg) {
 

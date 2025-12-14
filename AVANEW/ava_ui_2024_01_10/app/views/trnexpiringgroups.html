@@ -1,0 +1,544 @@
+﻿<style>
+    .row_odd .cal_day {
+        background: #ffe6cc;
+    }
+
+    .row_even .cal_day {
+        background: #ccf2ff;
+    }
+</style>
+<div class="box trnexpiringgrps" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+
+        <div class=" col-lg-3 col-md-3 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px; width:30% ">
+            <div class="filter-container box  thin-scroll2" style="border:none;border-right:1px solid #ccc;padding:10px; overflow-y:auto" ng-style="getMainStyle()">
+
+
+                <div style="text-align:left;border-bottom:1px dashed #ccc;padding-bottom:5px" ng-show="!selected_l1">
+                    <div class=" thin-scroll2" style="overflow-y:auto;overflow-x:hidden;">
+                        <div ng-repeat="g in ds_groups" style="  text-align:center;border :1px solid #bbb;display:inline-block;width:19%;margin:5px; " ng-click="group_l1_click(g)">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="font-weight:normal;text-align:center;padding:5px;" ng-style="get_l1_style(g)">
+                                        {{g.GroupTitle}}
+                                    </td>
+                                    <td style="width:20%">
+                                        <div style="padding-top:3px;padding-bottom:3px;border-right:1px solid #ddd;font-weight:bold;background:#ffd480">{{g.IsExpiring}}</div>
+                                        <div style="padding-top:3px;padding-bottom:3px;font-weight:bold;background:#ff6666">{{g.IsExpired}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div style="text-align:center">
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expiring_l1" dx-chart="bar_chart_expiring_l1"></div>
+                        </div>
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expired_l1" dx-chart="bar_chart_expired_l1"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Employees
+                        </div>
+                        <table style="width:100%">
+                            <tr ng-repeat="x in ds_dates.Monthes" style="border-bottom:2px solid #bbb;" ng-class="get_month_class($index)">
+                                <td style="width:100px;text-align:left;padding:5px;border-right:2px solid #bbb;font-size:15px;font-weight:bold">
+                                    {{x}}
+                                </td>
+                                <td style="text-align:left;padding:3px 3px 3px 5px">
+                                    <div style="display:inline-block;min-width:200px;padding:3px;float:left;" ng-repeat="d in get_dates(ds_dates.Items,x)"
+                                         ng-click="day_click(d.Date,get_day_items(ds_dates.Items,d.Date))">
+                                        <div style="border:1px solid #ccc;padding:3px; " class="cal_day">
+                                            <div style="padding:3px;font-weight:bold">{{momentDay(d.Date)}}</div>
+                                            <div style="height:90px;overflow-y:auto;padding-left:3px;" class="thin-scroll2">
+                                                <div ng-repeat="i in get_day_items(ds_dates.Items,d.Date)" style="font-size:13px;padding:1px 0 1px 0">
+                                                    {{i.CertificateType}}<span style="display:inline-block;margin-left:3px;">({{i.Count}})</span>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="clear:both"></div>
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Employees
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:10px">
+
+                            <div dx-data-grid="dg_emp_l1" id="dg_emp_l1" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:0px">
+
+                            <div dx-data-grid="dg_emp_l1_items" id="dg_emp_l1_items" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+
+                <div style="text-align: left; border-bottom: 1px dashed #ccc; margin-top: 5px;" ng-show="selected_l1 && !selected_l2">
+                    <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold; ">
+                        <table>
+                            <tr>
+                                <td style="width:50px;padding:7px;" ng-click="back_root()"><span><i class='far fa-arrow-alt-circle-left' style='font-size:24px;color:white'></i></span></td>
+                                <td style="padding:7px">{{selected_l1.GroupTitle}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class=" thin-scroll2" style="overflow-y:auto;overflow-x:hidden;margin-top:10px">
+                        <div ng-repeat="g in selected_l1.Children" style="  text-align:center;border :1px solid #bbb;display:inline-block;width:19%;margin:5px; " ng-click="group_l2_click(g)">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="font-weight:normal;text-align:center;padding:7px;" ng-style="get_l2_style(g)">
+                                        {{g.GroupTitle}}
+                                    </td>
+                                    <td style="width:20%">
+                                        <div style="padding-top:5px;padding-bottom:5px;border-right:1px solid #ddd;font-weight:bold;background:#ffd480">{{g.IsExpiring}}</div>
+                                        <div style="padding-top:5px;padding-bottom:5px;font-weight:bold;background:#ff6666">{{g.IsExpired}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </div>
+                    <div style="text-align:center">
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expiring_l2" dx-chart="bar_chart_expiring_l2"></div>
+                        </div>
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expired_l2" dx-chart="bar_chart_expired_l2"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Calendar
+                        </div>
+                        <table style="width:100%">
+                            <tr ng-repeat="x in selected_l1.Dates.Monthes" style="border-bottom:2px solid #bbb;" ng-class="get_month_class($index)">
+                                <td style="width:100px;text-align:left;padding:5px;border-right:2px solid #bbb;font-size:15px;font-weight:bold">
+                                    {{x}}
+                                </td>
+                                <td style="text-align:left;padding:3px 3px 3px 5px">
+                                    <div style="display:inline-block;min-width:200px;padding:3px;float:left;" ng-repeat="d in get_dates(selected_l1.Dates.Items,x)"
+                                         ng-click="day_click(d.Date,get_day_items(selected_l1.Dates.Items,d.Date))">
+                                        <div style="border:1px solid #ccc;padding:3px; " class="cal_day">
+                                            <div style="padding:3px;font-weight:bold">{{momentDay(d.Date)}}</div>
+                                            <div style="height:90px;overflow-y:auto;padding-left:3px;" class="thin-scroll2">
+                                                <div ng-repeat="i in get_day_items(selected_l1.Dates.Items,d.Date)" style="font-size:13px;padding:1px 0 1px 0">
+                                                    {{i.CertificateType}}<span style="display:inline-block;margin-left:3px;">({{i.Count}})</span>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="clear:both"></div>
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Employees
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:10px">
+
+                            <div dx-data-grid="dg_emp_l2" id="dg_emp_l2" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:0px">
+
+                            <div dx-data-grid="dg_emp_l2_items" id="dg_emp_l2_items" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div style="text-align: left; border-bottom: 1px dashed #ccc; margin-top: 5px;" ng-show="selected_l2 && !selected_l3">
+                    <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold; ">
+                        <table>
+                            <tr>
+                                <td style="width:50px;padding:7px;" ng-click="back_l1()"><span><i class='far fa-arrow-alt-circle-left' style='font-size:24px;color:white'></i></span></td>
+                                <td style="padding:7px">{{selected_l1.GroupTitle}}<span style="display:inline-block;margin:0 3px 0 3px">></span>{{selected_l2.GroupTitle}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class=" thin-scroll2" style="overflow-y:auto;overflow-x:hidden;margin-top:10px">
+                        <div ng-repeat="g in selected_l2.Children" style="text-align:center;border:1px solid #bbb;display:inline-block;width:32%;margin:5px; " ng-click="group_l3_click(g)">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="font-weight:normal;text-align:center;padding:7px;" ng-style="get_l3_style(g)">
+                                        {{g.GroupTitle}}
+                                    </td>
+                                    <td style="width:20%">
+                                        <div style="padding-top:5px;padding-bottom:5px;border-right:1px solid #ddd;font-weight:bold;background:#ffd480">{{g.IsExpiring}}</div>
+                                        <div style="padding-top:5px;padding-bottom:5px;font-weight:bold;background:#ff6666">{{g.IsExpired}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center">
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expiring_l3" dx-chart="bar_chart_expiring_l3"></div>
+                        </div>
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expired_l3" dx-chart="bar_chart_expired_l3"></div>
+                        </div>
+                        <div style="clear:both"></div>
+
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Calendar
+                        </div>
+                        <table style="width:100%">
+                            <tr ng-repeat="x in selected_l2.Dates.Monthes" style="border-bottom:2px solid #bbb;" ng-class="get_month_class($index)">
+                                <td style="width:100px;text-align:left;padding:5px;border-right:2px solid #bbb;font-size:15px;font-weight:bold">
+                                    {{x}}
+                                </td>
+                                <td style="text-align:left;padding:3px 3px 3px 5px">
+                                    <div style="display:inline-block;min-width:200px;padding:3px;float:left;" ng-repeat="d in get_dates(selected_l2.Dates.Items,x)"
+                                         ng-click="day_click(d.Date,get_day_items(selected_l2.Dates.Items,d.Date))">
+                                        <div style="border:1px solid #ccc;padding:3px; " class="cal_day">
+                                            <div style="padding:3px;font-weight:bold">{{momentDay(d.Date)}}</div>
+                                            <div style="height:90px;overflow-y:auto;padding-left:3px;" class="thin-scroll2">
+                                                <div ng-repeat="i in get_day_items(selected_l2.Dates.Items,d.Date)" style="font-size:13px;padding:1px 0 1px 0">
+                                                    {{i.CertificateType}}<span style="display:inline-block;margin-left:3px;">({{i.Count}})</span>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="clear:both"></div>
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Employees
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:10px">
+
+                            <div dx-data-grid="dg_emp_l3" id="dg_emp_l3" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:0px">
+
+                            <div dx-data-grid="dg_emp_l3_items" id="dg_emp_l3_items" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div style="text-align: left; border-bottom: 1px dashed #ccc; margin-top: 5px;" ng-show="selected_l3 && !selected_l4">
+                    <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold; ">
+                        <table>
+                            <tr>
+                                <td style="width:50px;padding:7px;" ng-click="back_l2()"><span><i class='far fa-arrow-alt-circle-left' style='font-size:24px;color:white'></i></span></td>
+                                <td style="padding:7px">
+                                    {{selected_l1.GroupTitle}}<span style="display:inline-block;margin:0 3px 0 3px">></span>
+                                    {{selected_l2.GroupTitle}}<span style="display:inline-block;margin:0 3px 0 3px">></span>
+                                    {{selected_l3.GroupTitle}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class=" thin-scroll2" style="overflow-y:auto;overflow-x:hidden;margin-top:10px">
+                        <div ng-repeat="g in selected_l3.Children" style="text-align:center;border:1px solid #bbb;display:inline-block;width:32%;margin:5px; " ng-click="group_l4_click(g)">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="font-weight:normal;text-align:center;padding:7px;" ng-style="get_l4_style(g)">
+                                        {{g.GroupTitle}}
+                                    </td>
+                                    <td style="width:20%">
+                                        <div style="padding-top:5px;padding-bottom:5px;border-right:1px solid #ddd;font-weight:bold;background:#ffd480">{{g.IsExpiring}}</div>
+                                        <div style="padding-top:5px;padding-bottom:5px;font-weight:bold;background:#ff6666">{{g.IsExpired}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center">
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expiring_l4" dx-chart="bar_chart_expiring_l4"></div>
+                        </div>
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expired_l4" dx-chart="bar_chart_expired_l4"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Calendar
+                        </div>
+                        <table style="width:100%">
+                            <tr ng-repeat="x in selected_l3.Dates.Monthes" style="border-bottom:2px solid #bbb;" ng-class="get_month_class($index)">
+                                <td style="width:100px;text-align:left;padding:5px;border-right:2px solid #bbb;font-size:15px;font-weight:bold">
+                                    {{x}}
+                                </td>
+                                <td style="text-align:left;padding:3px 3px 3px 5px">
+                                    <div style="display:inline-block;min-width:200px;padding:3px;float:left;" ng-repeat="d in get_dates(selected_l3.Dates.Items,x)"
+                                         ng-click="day_click(d.Date,get_day_items(selected_l3.Dates.Items,d.Date))">
+                                        <div style="border:1px solid #ccc;padding:3px; " class="cal_day">
+                                            <div style="padding:3px;font-weight:bold">{{momentDay(d.Date)}}</div>
+                                            <div style="height:90px;overflow-y:auto;padding-left:3px;" class="thin-scroll2">
+                                                <div ng-repeat="i in get_day_items(selected_l3.Dates.Items,d.Date)" style="font-size:13px;padding:1px 0 1px 0">
+                                                    {{i.CertificateType}}<span style="display:inline-block;margin-left:3px;">({{i.Count}})</span>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="clear:both"></div>
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Employees
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:10px">
+
+                            <div dx-data-grid="dg_emp_l4" id="dg_emp_l4" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:0px">
+
+                            <div dx-data-grid="dg_emp_l4_items" id="dg_emp_l4_items" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div style="text-align: left; border-bottom: 1px dashed #ccc; margin-top: 5px;" ng-show="selected_l4 && !selected_l5">
+                    <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold; ">
+                        <table>
+                            <tr>
+                                <td style="width:50px;padding:7px;" ng-click="back_l3()"><span><i class='far fa-arrow-alt-circle-left' style='font-size:24px;color:white'></i></span></td>
+                                <td style="padding:7px">
+                                    {{selected_l1.GroupTitle}}<span style="display:inline-block;margin:0 3px 0 3px">></span>
+                                    {{selected_l2.GroupTitle}}<span style="display:inline-block;margin:0 3px 0 3px">></span>
+                                    {{selected_l3.GroupTitle}}<span style="display:inline-block;margin:0 3px 0 3px">></span>
+                                    {{selected_l4.GroupTitle}}
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class=" thin-scroll2" style="overflow-y:auto;overflow-x:hidden;margin-top:10px">
+                        <div ng-repeat="g in selected_l4.Children" style="text-align:center;border:1px solid #bbb;display:inline-block;width:32%;margin:5px; " ng-click="group_l5_click(g)">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="font-weight:normal;text-align:center;padding:7px;" ng-style="get_l5_style(g)">
+                                        {{g.GroupTitle}}
+                                    </td>
+                                    <td style="width:20%">
+                                        <div style="padding-top:5px;padding-bottom:5px;border-right:1px solid #ddd;font-weight:bold;background:#ffd480">{{g.IsExpiring}}</div>
+                                        <div style="padding-top:5px;padding-bottom:5px;font-weight:bold;background:#ff6666">{{g.IsExpired}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div style="text-align:center">
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expiring_l5" dx-chart="bar_chart_expiring_l4"></div>
+                        </div>
+                        <div class="col-lg-6">
+
+                            <div id="bar_chart_expired_l5" dx-chart="bar_chart_expired_l4"></div>
+                        </div>
+                        <div style="clear:both"></div>
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Calendar
+                        </div>
+                        <table style="width:100%">
+                            <tr ng-repeat="x in selected_l4.Dates.Monthes" style="border-bottom:2px solid #bbb;" ng-class="get_month_class($index)">
+                                <td style="width:100px;text-align:left;padding:5px;border-right:2px solid #bbb;font-size:15px;font-weight:bold">
+                                    {{x}}
+                                </td>
+                                <td style="text-align:left;padding:3px 3px 3px 5px">
+                                    <div style="display:inline-block;min-width:200px;padding:3px;float:left;" ng-repeat="d in get_dates(selected_l4.Dates.Items,x)"
+                                         ng-click="day_click(d.Date,get_day_items(selected_l4.Dates.Items,d.Date))">
+                                        <div style="border:1px solid #ccc;padding:3px; " class="cal_day">
+                                            <div style="padding:3px;font-weight:bold">{{momentDay(d.Date)}}</div>
+                                            <div style="height:90px;overflow-y:auto;padding-left:3px;" class="thin-scroll2">
+                                                <div ng-repeat="i in get_day_items(selected_l4.Dates.Items,d.Date)" style="font-size:13px;padding:1px 0 1px 0">
+                                                    {{i.CertificateType}}<span style="display:inline-block;margin-left:3px;">({{i.Count}})</span>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
+                                    <div style="clear:both"></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="clear:both"></div>
+                        <div style="background:#8c8c8c;border:1px solid gray; color:white;font-weight:bold;padding:7px;margin-top:10px;margin-bottom:2px; ">
+                            Employees
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:10px">
+
+                            <div dx-data-grid="dg_emp_l5" id="dg_emp_l5" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+                        <div class="col-lg-6" style="padding:0; padding-right:0px">
+
+                            <div dx-data-grid="dg_emp_l5_items" id="dg_emp_l5_items" class="content" style="overflow-y:hidden"></div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+               
+
+
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_employees"></div>
+            <!--<div dx-button="btn_delete"></div>-->
+
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_day" dx-popup="popup_day">
+        <div>
+            <div style="padding:5px;background:#ccc;border:1px solid gray;font-weight:bold;text-align:center">
+                {{momentDate(popup_day_date)}}
+            </div>
+            <div class="thin-scroll2 item-cont" style="overflow-y:auto;" ng-style="get_day_container_style()">
+                <table style="width:100%;border-top:1px solid gray;border-right:1px solid gray;border-left:1px solid gray">
+                    <tr style="border-bottom:1px solid gray" ng-repeat="row in popup_day_ds">
+                        <td style="width:15%;text-align:left;font-weight:bold;font-size:14px;padding:10px;border-right:1px solid gray">
+                            {{row.CertificateType}}
+                        </td>
+                        <td style="padding:5px;">
+                            <div style="border:1px solid #ccc;margin-bottom:5px" ng-repeat="g in row.Items">
+                                <div style="padding:5px;border-bottom:1px solid #ccc;background:#eee">{{g.main_group}}</div>
+                                <table style="width:100%;">
+                                    <thead>
+                                        <tr style="border-bottom:1px solid #ccc">
+                                            <th style="width:20%;text-align:center;padding:5px;border-right:1px solid #ccc">
+                                                Group
+                                            </th>
+                                            <th style="text-align:left;padding:5px;border-right:1px solid #ccc">
+                                                Last Name
+                                            </th>
+                                            <th style="width: 20%; text-align: left; padding: 5px; border-right: 1px solid #ccc">
+                                                First Name
+                                            </th>
+                                            <th style="width:15%;text-align:center;padding:5px;border-right:1px solid #ccc">
+                                                NID
+                                            </th>
+                                            <th style="width:15%;text-align:center;padding:5px">
+                                                Mobile
+                                            </th>
+                                        </tr>
+
+
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="emp in g.employees" style="border-bottom:1px solid #ccc">
+                                            <td style="text-align:center;padding:5px;border-right:1px solid #ccc">{{emp.JobGroup}}</td>
+                                            <td style="text-align:left;padding:5px;border-right:1px solid #ccc">{{emp.LastName}}</td>
+                                            <td style="text-align:left;padding:5px;border-right:1px solid #ccc">{{emp.FirstName}}</td>
+                                            <td style="text-align:center;padding:5px;border-right:1px solid #ccc">{{emp.NID}}</td>
+                                            <td style="text-align:center;padding:5px">{{emp.Mobile}}</td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+
+</div>

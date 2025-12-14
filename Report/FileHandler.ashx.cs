@@ -16,9 +16,9 @@ namespace Report
     /// </summary>
     public class FileHandler : IHttpHandler
     {
-       // string api_certificates = "https://ava.apitrn.aerotango.app/";
+        // string api_certificates = "https://ava.apitrn.aerotango.app/";
         string api_certificates = WebConfigurationManager.AppSettings["api_url_trn"];
-        string certificate_output_folder= WebConfigurationManager.AppSettings["certificate_output_folder"];
+        string certificate_output_folder = WebConfigurationManager.AppSettings["certificate_output_folder"];
         public void ProcessRequest(HttpContext context)
         {
             //string param = context.Request.QueryString["t"];
@@ -124,7 +124,7 @@ namespace Report
 
 
                         string sourceDir = new_path;
-                        string zipPath = zip_path + @"\" + "course_" + course_id +"_"+course_title+ ".zip";
+                        string zipPath = zip_path + @"\" + "course_" + course_id + "_" + course_title + ".zip";
 
                         // اگر فایل مقصد وجود دارد، حذفش کن تا خطا نگیری (اختیاری)
                         if (File.Exists(zipPath)) File.Delete(zipPath);
@@ -141,7 +141,7 @@ namespace Report
                         context.Response.BufferOutput = false;
                         context.Response.ContentType = "application/zip";
 
-                        var encoded = Uri.EscapeDataString("course_" + course_id+"_"+ course_title + ".zip");
+                        var encoded = Uri.EscapeDataString("course_" + course_id + "_" + course_title + ".zip");
                         context.Response.AddHeader("Content-Disposition",
                             $"attachment; filename=\"{encoded}\"; filename*=UTF-8''{encoded}");
                         context.Response.AddHeader("Content-Length", fi.Length.ToString());
@@ -261,6 +261,108 @@ namespace Report
 
                 //////////////////////
                 ///////////////////////
+
+            }
+
+            if (param == "att")
+            {
+                var pbase_folder = certificate_output_folder;
+                string cid = context.Request.QueryString["cid"];
+                string pid = context.Request.QueryString["pid"];
+                var cids = cid.Split('_');
+                var format = "pdf";
+                string contentType = string.Format("application/{0}", format);
+
+                var _a1 = DateTime.Now.ToString("yyyy-MMM-dd-HHmm");
+
+                string pnew_path = pbase_folder + "people_atts_"+pid+"_" + _a1;
+                string pzip_path = pbase_folder + "people_atts_" + pid + "_" + _a1 + "_zip";
+
+                if (Directory.Exists(pnew_path))
+                    Directory.Delete(pnew_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                Directory.CreateDirectory(pnew_path);
+
+
+
+                if (Directory.Exists(pzip_path))
+                    Directory.Delete(pzip_path, recursive: true); // حتی اگر داخلش فایل/فولدر باشد
+
+                Directory.CreateDirectory(pzip_path);
+
+
+                foreach (var _cid in cids)
+                {
+                    try
+                    {
+                        var reportAtt2 = new rptCourseProfileAVA1(_cid);
+
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            switch (format)
+                            {
+                                case "pdf":
+                                    contentType = "application/pdf";
+                                    reportAtt2.ExportToPdf(ms);
+                                    break;
+                                    // ...
+                            }
+                            ms.Position = 0;
+
+                            // ذخیره در فایل
+                            string filePath = pnew_path + @"\" + _cid + ".pdf"; // مسیر دلخواه
+                            using (FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                            {
+                                ms.CopyTo(file);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+
+
+
+                }
+
+                string psourceDir = pnew_path;
+                string pzipPath = pzip_path + @"\" + "people_atts_" + _a1 + ".zip";
+
+                // اگر فایل مقصد وجود دارد، حذفش کن تا خطا نگیری (اختیاری)
+                if (File.Exists(pzipPath)) File.Delete(pzipPath);
+
+                // includeBaseDirectory=false یعنی محتوای فولدر، نه خود فولدر، در ریشه‌ی زیپ قرار می‌گیرند
+                ZipFile.CreateFromDirectory(psourceDir, pzipPath, CompressionLevel.Optimal, includeBaseDirectory: false);
+
+
+
+                var physical = pzipPath;
+                var fi = new FileInfo(physical);
+
+
+                context.Response.Clear();
+                context.Response.BufferOutput = false;
+                context.Response.ContentType = "application/zip";
+
+                var encoded = Uri.EscapeDataString("people_atts_" + _a1 + ".zip");
+                context.Response.AddHeader("Content-Disposition",
+                    $"attachment; filename=\"{encoded}\"; filename*=UTF-8''{encoded}");
+                context.Response.AddHeader("Content-Length", fi.Length.ToString());
+                context.Response.TrySkipIisCustomErrors = true;
+
+                // ارسال فایل با IIS
+                context.Response.TransmitFile(fi.FullName);
+
+                // قطع چرخه
+                context.ApplicationInstance.CompleteRequest();
+
+                //////////////////////
+
+
+
+
 
             }
 
