@@ -623,9 +623,12 @@ app.controller('delayReportFlightController', ['$scope', '$location', '$routePar
 
         { dataField: 'STDDay', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 110, format: 'yy-MMM-dd', sortIndex: 0, sortOrder: 'asc', fixed: true, fixedPosition: 'left' },
         { dataField: 'STDDayPersian', caption: 'Date(P)', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 110,   fixed: true, fixedPosition: 'left' },
-      
-        { dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', fixed: true, fixedPosition: 'left' },
-         {
+      { dataField: 'FlightNumber', caption: 'Flight No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80, fixed: false, fixedPosition: 'left', fixed: true, fixedPosition: 'left' },
+        { dataField: 'PaxAdult', caption: 'IP', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'left', fixed: true, fixedPosition: 'left' },
+        { dataField: 'PaxChild', caption: 'P1', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'left', fixed: true, fixedPosition: 'left' },
+        { dataField: 'PaxInfant', caption: 'P2', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, fixed: false, fixedPosition: 'left', fixed: true, fixedPosition: 'left' },
+
+        {
            caption: 'Aircraft', columns: [
                  { dataField: 'AircraftType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90,  },
         { dataField: 'Register', caption: 'Reg', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90,   },
@@ -669,6 +672,7 @@ app.controller('delayReportFlightController', ['$scope', '$location', '$routePar
                   { dataField: 'TakeOffLocal', caption: 'T/O', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm',   },
                 //{ dataField: 'LandingLocal', caption: 'LND', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 90, format: 'HH:mm' },
               //   { dataField: 'Delay2', caption: 'Delay', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+              
 
            ]
        },
@@ -684,6 +688,8 @@ app.controller('delayReportFlightController', ['$scope', '$location', '$routePar
             fixed: true,
             fixedPosition: 'right',
         },
+
+       
        //{
        //    caption: 'UTC',
        //    columns: [
