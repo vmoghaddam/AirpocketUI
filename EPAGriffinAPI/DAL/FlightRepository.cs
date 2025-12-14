@@ -2935,6 +2935,8 @@ namespace EPAGriffinAPI.DAL
             flight.PaxAdult = dto.PaxAdult;
             flight.PaxInfant = dto.PaxInfant;
             flight.PaxChild = dto.PaxChild;
+            flight.PaxMale = dto.PaxMale;
+            flight.PaxFemale = dto.PaxFemale;
             flight.NightTime = dto.NightTime;
             flight.CargoWeight = dto.CargoWeight;
             flight.CargoUnitID = dto.CargoUnitID;
