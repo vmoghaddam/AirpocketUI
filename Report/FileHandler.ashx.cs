@@ -208,11 +208,16 @@ namespace Report
                     string contentType = string.Format("application/{0}", format);
                     using (MemoryStream ms = new MemoryStream())
                     {
+                        
                         switch (format)
                         {
                             case "pdf":
                                 contentType = "application/pdf";
+                                //rptfpc_e.ExportToImage()
                                 rptfpc_e.ExportToPdf(ms);
+                                break;
+                            case "img":
+                               // rptfpc_e.ExportToImage(ms,new DevExpress.XtraPrinting.ImageExportOptions() {  Format=new DevExpress.Drawing.DXImag})
                                 break;
                                 // ...
                         }
