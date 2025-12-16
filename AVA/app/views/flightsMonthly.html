@@ -260,21 +260,33 @@
         <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
             <div class="filter-container box  ">
                 <div>
-                    <div class="col-lg-6 padding-0">
+                   <!-- <div class="col-lg-3 padding-0">
                         <div dx-data-grid="dg_737" id="dg_737" class="content" style="overflow-y:hidden" dx-item-alias="row" >
                             <div data-options="dxTemplate:{ name:'goDetailTemplate' }">
                                 <a ng-click="goDetail(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Details</a>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6 padding-0">
+                    </div>-->
+                    <div class="col-lg-12 padding-0">
                         <div class="c737 thin-scroll2" style="overflow-y:auto;padding:10px 40px 10px 40px;" ng-style="getChartBoxStyle()">
-                            <div dx-chart="bar_ftl_737"></div>
+                           
+						    <div dx-chart="bar_leg" style="margin-top:20px"></div>
+							<div dx-chart="bar_ft" style="margin-top:20px"></div>
+							
+							<div dx-chart="bar_dl" style="margin-top:20px"></div>
+							<div dx-chart="bar_dlleg" style="margin-top:20px"></div>
+						   
                             <div dx-chart="bar_btleg" style="margin-top:20px"></div>
                             <div dx-chart="bar_pax" style="margin-top:20px"></div>
-                            <div dx-chart="bar_ft" style="margin-top:20px"></div>
-                            <div dx-pie-chart="pie_cat" style="margin-top:20px"></div>
+							 <div dx-chart="bar_ftl_737"></div>
+							 <div dx-chart="bar_lf" style="margin-top:20px"></div>
+                            
+                            <!--<div dx-pie-chart="pie_cat" style="margin-top:20px"></div>
                             <div dx-pie-chart="pie_det" style="margin-top:20px"></div>
+							-->
+							 <div dx-tree-map="map_pax" style="margin-top:20px"></div>
+							  <div dx-chart="bar_route" style="margin-top:20px"></div>
+							   <div dx-chart="bar_route_flights" style="margin-top:20px"></div>
                         </div>
 
                     </div>

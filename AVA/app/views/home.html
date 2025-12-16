@@ -598,11 +598,41 @@
         <div class=" col-lg-1 col-md-2 hidden-md  hidden-xs hidden-sm hidden-xsm" style="padding:10px 0 10px 10px;padding:0; height:100%">
             <div class="home-box" style="height:100%;border-radius:0;padding:5px">
                 <!--<div class="caption" style="text-align:center">History</div>-->
+				 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('user_manager',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/users'  , 'user_manager')">
+                            <img src="content/images/user.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Users</div>
+                        </a>
+                    </div>
                 <div class="thin-scroll" style="margin-top:10px;height:93%;overflow-y:auto">
                     <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_board',3)">
                         <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/board'  , 'flight_board')">
                             <img src="content/images/date.png">
                             <div class="title-small ng-binding" style="color:gray;font-size:1em">Flight Board</div>
+                        </a>
+                    </div>
+					 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('requests_scheduling',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/forms/vacation'  , 'requests_scheduling')">
+                            <img src="content/images/requests.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Requests</div>
+                        </a>
+                    </div>
+					 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('requests',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/forms/vacation/responsible'  , 'requests')">
+                            <img src="content/images/requests.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Requests</div>
+                        </a>
+                    </div>
+					<div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('delays_report',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/delays/flight'  , 'delays_report_flight')">
+                            <img src="content/images/fd.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Delays</div>
+                        </a>
+                    </div>
+					 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_fuel',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/fuel/report'  , 'flight_fuel')">
+                            <img src="content/images/fuel.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Fuel</div>
                         </a>
                     </div>
                     <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('profile_person',1)">
@@ -653,6 +683,12 @@
                             <div class="title-small ng-binding" style="color:gray;font-size:1em">EFB Report</div>
                         </a>
                     </div>
+					 <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('cabin_report',3)">
+                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/cabin/report'  , 'cabin_report')">
+                            <img src="content/images/cabinreport.png">
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Cabin Report</div>
+                        </a>
+                    </div>
                     <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_crew_time',3)">
                         <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/crew/time/report'  , 'flight_crew_time')">
                             <img src="content/images/crew_time.png">
@@ -677,12 +713,7 @@
                             <div class="title-small ng-binding" style="color:gray;font-size:1em">Delays Monitoring</div>
                         </a>
                     </div>
-                    <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_fuel',3)">
-                        <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/fuel/report'  , 'flight_fuel')">
-                            <img src="content/images/fuel.png">
-                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Fuel</div>
-                        </a>
-                    </div>
+                   
                     <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('register_flights_report',3)">
                         <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/flights/monthly'  , 'summary_flights_report')">
                             <img src="content/images/rgflt.png">
@@ -754,7 +785,7 @@
                     <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('delays_report',3)">
                         <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate(  '/delays'  , 'delays_report')">
                             <img src="content/images/delay.png">
-                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Delays</div>
+                            <div class="title-small ng-binding" style="color:gray;font-size:1em">Delays Details</div>
                         </a>
                     </div>
                     <div class="box-app" style="padding-top:0" ng-show="HasMenuAccess('flight_roster',3)">
@@ -1571,8 +1602,7 @@
                     </div>
                     <div class="col-lg-1 col-lg-1-l padding-0" style="padding-right:10px">
                         <div class="box-app" style="padding-top:0;width:100%;">
-                            <!--<a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/vira/inventory/total' , 'vira_inventory_total')">-->
-                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/vira/cardex' , 'vira_cardex')">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/vira/inventory/total' , 'vira_inventory_total')">
                                 <img src="content/images/vira_cardex.png">
                                 <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Cardex </div>
                             </a>
@@ -1653,7 +1683,7 @@
                 <div class="menu_row" style="padding:10px">
                     <div class="col-lg-1  padding-0" style="padding-right:10px">
                         <div class="box-app" style="padding-top:0;width:100%;">
-                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/vira/part/type' , 'vira_part_type')">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="">
                                 <img src="content/images/vira_menu_parttype.png">
                                 <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Part Description </div>
                             </a>
@@ -1661,7 +1691,7 @@
                     </div>
                     <div class="col-lg-1   padding-0" style="padding-right:10px">
                         <div class="box-app" style="padding-top:0;width:100%;">
-                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/vira/partnumber' , 'vira_part_number')">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="">
                                 <img src="content/images/vira_menu_partnumber.png">
                                 <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Part Number </div>
                             </a>
@@ -1669,7 +1699,7 @@
                     </div>
                     <div class="col-lg-1   padding-0" style="padding-right:10px">
                         <div class="box-app" style="padding-top:0;width:100%;">
-                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="navigate('/vira/company' , 'vira_company')">
+                            <a class="logo" style="text-decoration:none;" href="" data-ng-click="">
                                 <img src="content/images/vira_menu_company.png">
                                 <div class="title-small ng-binding" style="color:gray;font-size:1em;font-weight:bold">Companies </div>
                             </a>

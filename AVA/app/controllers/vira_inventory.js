@@ -1,7 +1,6 @@
 ﻿'use strict';
 app.controller('vira_inventoryController', ['$scope', '$location', '$routeParams', '$rootScope', 'authService', 'notificationService', '$route', 'mntService',
     function ($scope, $location, $routeParams, $rootScope, authService, notificationService, $route, mntService) {
-       // alert('xxx');
         $scope.fn_test = function () {
             alert('vv');
         };

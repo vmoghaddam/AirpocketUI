@@ -334,7 +334,8 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
     //sookceo
     var _getFlightsGantt = function (cid, from, to, tzoffset, airport, filter) {
-        var url = serviceBase + 'odata/flights/gantt/customer/' + cid + '/' + from + '/' + to + '/' + tzoffset;
+       // var url = 'https://ava.zapinet.airpocket.app/' + 'odata/flights/gantt/customer/' + cid + '/' + from + '/' + to + '/' + tzoffset;
+		 var url = zapinet + 'odata/flights/gantt/customer/' + cid + '/' + from + '/' + to + '/' + tzoffset;
         if (airport)
             url += '/' + airport;
         // if (utc)
@@ -1906,6 +1907,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     };
 
     var _saveDeleteFDP = function (entity) {
+		//entity.username=$rootScope.userName;
         var deferred = $q.defer();
         //$http.post($rootScope.serviceUrl + 'odata/fdp/delete', entity).then(function (response) {
 	    $http.post(apiScheduling + 'api/roster/fdp/delete', entity).then(function (response) {
@@ -1970,6 +1972,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
     //2023
     var _deleteFDP = function (entity) {
+		//entity.username=$rootScope.userName;
         var deferred = $q.defer();
         $http.post(apiScheduling + 'api/roster/fdp/delete', entity).then(function (response) {
             console.log('delete fdp   ',response);
@@ -2370,7 +2373,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _getCrewDuties = function (df, dt, ca, co) {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/crew/duties/' + ca + '/' + co + '?df=' + df + '&dt=' + dt).then(function (response) {
+        $http.get(serviceBaseAeroTango + 'odata/crew/duties/' + ca + '/' + co + '?df=' + df + '&dt=' + dt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -2396,7 +2399,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _getOffItems = function (df, dt) {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/roster/offitems/' + '?df=' + df + '&dt=' + dt).then(function (response) {
+        $http.get(serviceBaseAeroTango + 'odata/roster/offitems/' + '?df=' + df + '&dt=' + dt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -2849,7 +2852,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _getFormAReport = function (yf, yt) {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/forma/' + yf + '/' + yt).then(function (response) {
+        $http.get('https://apicao.airpocket.app/' + 'api/cao/report/forma/' + yf + '/' + yt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -2863,7 +2866,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _getFormAYearlyReport = function (yf, yt) {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/forma/yearly/' + yf + '/' + yt).then(function (response) {
+        $http.get('https://apicao.airpocket.app/' + 'api/cao/report/forma/yearly/' + yf + '/' + yt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3159,7 +3162,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
 
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/mail/mvt/' + flightId + '/' + username + '/vahid/Chico1359').then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/mail/mvt/' + flightId + '/' + username + '/vahid/Chico1359').then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3173,7 +3176,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
 
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/idea/session/update/errors').then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/idea/session/update/errors').then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3186,7 +3189,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
 
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/crew/light').then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/crew/light').then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3199,7 +3202,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
 
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/training/duties/' + crewid + '/1').then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/training/duties/' + crewid + '/1').then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3214,7 +3217,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
 
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/nira/conflicts/' + df + '/' + dt).then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/nira/conflicts/' + df + '/' + dt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3228,7 +3231,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
 
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/ofp/flight/' + id).then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/ofp/flight/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3277,7 +3280,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     //12-05
     var _getFDPsCrewCount = function (d1, d2) {
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/fdps/crew/count?dt1=' + d1 + '&dt2=' + d2).then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/fdps/crew/count?dt1=' + d1 + '&dt2=' + d2).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3319,7 +3322,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
     var _getFTLExceedAll = function (id) {
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/ftl/crew/date/range/exceed/' + '?df&dt&crew=' + id).then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/ftl/crew/date/range/exceed/' + '?df&dt&crew=' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3332,7 +3335,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
     var _getDutyTimeLineMonthly = function (year, month, rank, type) {
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/duty/timeline/' + year + '/' + month + '/' + rank + '/' + type).then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/duty/timeline/' + year + '/' + month + '/' + rank + '/' + type).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3346,7 +3349,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
     var _getDutyTimeLine = function (df, dt, rank, type) {
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/duty/timeline/' + rank + '/' + type + '?df=' + df + '&dt=' + dt).then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/duty/timeline/' + rank + '/' + type + '?df=' + df + '&dt=' + dt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3359,7 +3362,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
     var _getDutyTimeLineByCrew = function (df, dt, id) {
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + 'api/duty/timeline/crew/' + id + '?df=' + df + '&dt=' + dt).then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + 'api/duty/timeline/crew/' + id + '?df=' + df + '&dt=' + dt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3460,7 +3463,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _getFTL = function (cid, df) {
 
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + "api/ftl/crew/date/?df=" + df + "&crew=" + cid).then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + "api/ftl/crew/date/?df=" + df + "&crew=" + cid).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
             alert(JSON.stringify(err));
@@ -3474,7 +3477,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
     var _getFlightTimeYear = function (cid, y) {
 
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + "api/flighttime/crew/year/" + cid + "/" + y).then(function (response) {
+        $http.get(serviceBaseAPIAeroTango + "api/flighttime/crew/year/" + cid + "/" + y).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
             alert(JSON.stringify(err));
@@ -3519,7 +3522,7 @@ app.factory('schedulingService', ['$http', '$q', 'ngAuthSettings', '$rootScope',
 
     var _saveFixTime = function (entity) {
         var deferred = $q.defer();
-        $http.post(serviceBaseAPI + 'api/fixtime/save/', entity).then(function (response) {
+        $http.post(serviceBaseAPIAeroTango + 'api/fixtime/save/', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 

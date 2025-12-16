@@ -2935,6 +2935,8 @@ namespace EPAGriffinAPI.DAL
             flight.PaxAdult = dto.PaxAdult;
             flight.PaxInfant = dto.PaxInfant;
             flight.PaxChild = dto.PaxChild;
+            flight.PaxMale = dto.PaxMale;
+            flight.PaxFemale = dto.PaxFemale;
             flight.NightTime = dto.NightTime;
             flight.CargoWeight = dto.CargoWeight;
             flight.CargoUnitID = dto.CargoUnitID;
@@ -3005,6 +3007,15 @@ namespace EPAGriffinAPI.DAL
             {
                 flight.RampDate = dto.RampDate;
                 flight.RampReasonId = dto.RampReasonId;
+                if (flight.OSTA == null)
+                {
+                    var vflight = await this.context.ViewFlightInformations.FirstOrDefaultAsync(q => q.ID == flight.ID);
+                    flight.OSTA = flight.STA;
+                    flight.OToAirportId = vflight.ToAirport;
+                    flight.OToAirportIATA = vflight.ToAirportIATA;
+                }
+
+                flight.ToAirportId = dto.ToAirportId;
             }
 
             if (flight.ChocksIn != null && flight.FlightStatusID == 15)

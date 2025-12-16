@@ -9,7 +9,7 @@
             margin: 0;
             padding-right: 20px;
             background-color: transparent;
-            padding: 10px;
+            padding-left: 10px;
         }
 
         #grid .dx-datagrid-header-panel .dx-toolbar-items-container {
@@ -51,9 +51,21 @@
     <div class="rowx content" style="clear:both">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div style="width: 100%; border: 1px solid #ccc;padding:10px 0 10px 0" class="dx-border">
+                <div class="col-lg-3 padding-0" style="padding-left:10px;">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                                Description:
+                            </td>
+                            <td>
+                                <div dx-text-box="txt_desc" class="center" style="width: 100%"></div>
+                            </td>
 
+                        </tr>
+                    </table>
+                </div>
 
-                <div class="col-lg-2 padding-0" style="padding: 10px 10px 0 10px">
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
                             <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
@@ -67,7 +79,7 @@
                     </table>
                 </div>
 
-                <div class="col-lg-2 padding-0" style="padding: 10px 10px 0 10px">
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
                             <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
@@ -82,7 +94,7 @@
                 </div>
 
 
-                <div class="col-lg-2 padding-0" style="padding: 10px 10px 0 10px">
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
                             <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
@@ -96,7 +108,7 @@
                     </table>
                 </div>
 
-                <div class="col-lg-2 padding-0" style="padding: 10px 10px 0 10px">
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
                             <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
@@ -109,20 +121,13 @@
                         </tr>
                     </table>
                 </div>
-
-                <div class="col-lg-2 padding-0" style="padding:0px;margin-top:10px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:100px;font-size:12px;padding-right:5px;text-align:right">
-                                Block PN(s):
-                            </td>
-                            <td dx-check-box="ch_block" class="center"></td>
-                        </tr>
-                    </table>
-                </div>
                 <div style="clear: both"></div>
+            </div>
 
-                <div class="col-lg-2 padding-0" style="padding: 10px 10px 0 10px">
+            <div style="clear:both"></div>
+
+            <div style="width: 100%; border: 1px solid #ccc;padding:10px 0 10px 0; margin-top:5px" class="dx-border">
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
                             <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
@@ -136,7 +141,7 @@
                     </table>
                 </div>
 
-                <div class="col-lg-2 padding-0" style="padding: 10px 10px 0 10px">
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
                             <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
@@ -150,7 +155,7 @@
                     </table>
                 </div>
 
-                <div class="col-lg-2 padding-0" style="padding: 10px 10px 0 10px">
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
                             <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
@@ -164,7 +169,7 @@
                     </table>
                 </div>
 
-                <div class="col-lg-2 padding-0" style="padding: 10px 10px 0 10px">
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table style="width:100%">
                         <tr>
                             <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
@@ -178,26 +183,22 @@
                     </table>
                 </div>
 
-
-
-                <div class="col-lg-3 padding-0" style="padding: 10px 10px 0 10px">
+                <div class="col-lg-2 padding-0" style="padding-left:0px;margin-top:10px">
                     <table style="width:100%">
                         <tr>
-                            <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
-                                Description:
+                            <td style="width:100px;font-size:12px;padding-right:5px;text-align:right">
+                                Block PN(s):
                             </td>
-                            <td>
-                                <div dx-text-box="txt_desc" class="center" style="width: 100%"></div>
-                            </td>
-
+                            <td dx-check-box="ch_block" class="center"></td>
                         </tr>
                     </table>
                 </div>
 
-                <div class="col-lg-1 padding-0" style="padding: 10px 10px 0 10px">
+
+                <div class="col-lg-2 padding-0" style="padding-left:10px;">
                     <table>
                         <tr>
-                            <td style="padding:3px;">
+                            <td style="padding-left:3px;">
                                 <div dx-button="btn_search"></div>
                             </td>
                         </tr>
@@ -229,8 +230,6 @@
             <tr>
 
                 <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_new"></div></td>
-                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_edit"></div></td>
-                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_delete"></div></td>
 
                 <td></td>
 

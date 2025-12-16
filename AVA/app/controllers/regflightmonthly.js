@@ -118,15 +118,15 @@ app.controller('regFlightsMonthlyController', ['$scope', '$location', '$routePar
 
     };
     /////////////////////////////////////////
-    $scope.yf = 1402;
+    $scope.yf = 1403;
     if ($scope.pyear)
         $scope.yf =Number( $scope.pyear);
-    $scope.yt = 2023;
+    $scope.yt = 2024;
     $scope.sb_yf = {
         placeholder: 'Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [1402,1401,1400,1399, 1398],
+        dataSource: [1403,1402 ],
 
         onSelectionChanged: function (arg) {
             $scope.bind();
@@ -142,7 +142,7 @@ app.controller('regFlightsMonthlyController', ['$scope', '$location', '$routePar
         placeholder: 'To Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [2018, 2019, 2020, 2021],
+        dataSource: [2023,2024],
 
         onSelectionChanged: function (arg) {
 

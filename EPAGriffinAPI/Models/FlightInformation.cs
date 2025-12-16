@@ -28,6 +28,7 @@ namespace EPAGriffinAPI.Models
             this.FlightStatusWeathers = new HashSet<FlightStatusWeather>();
             this.MVTs = new HashSet<MVT>();
             this.OffItems = new HashSet<OffItem>();
+            this.MVTAPIs = new HashSet<MVTAPI>();
         }
     
         public int ID { get; set; }
@@ -329,6 +330,14 @@ namespace EPAGriffinAPI.Models
         public string AttForms { get; set; }
         public Nullable<int> PaxMale { get; set; }
         public Nullable<int> PaxFemale { get; set; }
+        public Nullable<int> PF1Id { get; set; }
+        public Nullable<int> PM1Id { get; set; }
+        public Nullable<int> PF2Id { get; set; }
+        public Nullable<int> PM2Id { get; set; }
+        public Nullable<int> PF1Time { get; set; }
+        public Nullable<int> PM1Time { get; set; }
+        public Nullable<int> PF2Time { get; set; }
+        public Nullable<int> PM2Time { get; set; }
     
         public virtual Ac_MSN Ac_MSN { get; set; }
         public virtual AircraftType AircraftType { get; set; }
@@ -362,5 +371,7 @@ namespace EPAGriffinAPI.Models
         public virtual ICollection<MVT> MVTs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OffItem> OffItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MVTAPI> MVTAPIs { get; set; }
     }
 }

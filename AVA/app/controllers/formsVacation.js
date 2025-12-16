@@ -963,7 +963,7 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
                 DateEnd: new Date($scope.entity.DateTo),
                 CityId: -1,
                 CrewId: $scope.entity.EmployeeId,
-                DutyType: 1169,
+                DutyType:$scope.entity.ReasonStr == "Vacation" ?1169:100008,
                 Remark: $scope.entity.Remark,
                 EXTRERRP: 0,
             }
@@ -1005,6 +1005,7 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
         if ($(window).width() - 100 < 1200)
             duties_width = $(window).width();
         $scope.save = function (dto) {
+			console.log('dto', dto);
             $scope.loadingVisible = true;
             flightService.updateFormVacation(dto).then(function (response) {
                 $scope.loadingVisible = false;
@@ -1063,8 +1064,8 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
                             var dto = {
                                 Id: $scope.entity.Id,
                                 UserId: $scope.entity.UserId,
-                                DateFrom: new Date($scope.entity.DateFrom),
-                                DateTo: new Date($scope.entity.DateTo),
+                                DateFrom: $scope.entity.DateFrom,
+                                DateTo: $scope.entity.DateTo,
                                 ReasonStr: $scope.entity.ReasonStr,
                                 Reason: $scope.entity.Reason,
                                 Remark: $scope.entity.Remark,
@@ -1073,6 +1074,8 @@ app.controller('formsVacationController', ['$scope', '$location', '$routeParams'
                                 OperatorId: $scope.entity.OperatorId,
                             };
 
+console.log(dto);
+console.log($scope.entity)
 
 
 

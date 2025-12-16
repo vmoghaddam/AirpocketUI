@@ -174,5 +174,8 @@ namespace EPAGriffinAPI.Models
         public Nullable<int> RemainTypeFoker50 { get; set; }
         public Nullable<int> RemainTypeFoker100 { get; set; }
         public Nullable<int> RemainTRG07A { get; set; }
+        public Nullable<int> RemainDisManual { get; set; }
+        public Nullable<int> Remain56 { get; set; }
+        public Nullable<int> Remain66 { get; set; }
     }
 }

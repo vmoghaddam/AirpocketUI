@@ -111,10 +111,6 @@ app.controller('vira_direct_deliveryController', ['$scope', '$location', 'mntSer
             $rootScope.$broadcast('InitInventoryPopup', { location_id: $scope.entity.warehouse });
         }
     };
-
-
-
-   
     //////////////////
 
     $scope.save = function (callback) {

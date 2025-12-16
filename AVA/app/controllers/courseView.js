@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('courseViewController', ['$scope', '$location', 'courseService', 'authService', '$routeParams', '$rootScope', 'trnService', function ($scope, $location, courseService, authService, $routeParams, $rootScope, trnService) {
 
     $scope.IsEditable = true;

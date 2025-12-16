@@ -50,7 +50,7 @@ app.factory('notificationService', ['$http', '$q', 'ngAuthSettings', '$rootScope
         entity.SenderId = $rootScope.userId;
 
         var deferred = $q.defer();
-        $http.post(msgUrl + 'odata/notifications/save2', entity).then(function (response) {
+        $http.post('https://yapinet.airpocket.app/' + 'odata/notifications/save2', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 

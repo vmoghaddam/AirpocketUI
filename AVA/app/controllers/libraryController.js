@@ -1,4 +1,4 @@
-﻿'use strict';
+﻿﻿'use strict';
 app.controller('libraryController', ['$scope', '$location', '$routeParams', '$rootScope', 'libraryService', 'authService', 'notificationService', '$route', '$q', '$http', function ($scope, $location, $routeParams, $rootScope, libraryService, authService, notificationService, $route, $q, $http) {
     $scope.prms = $routeParams.prms;
     $scope.IsEditable = $rootScope.IsLibraryEditable();
@@ -499,7 +499,9 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                 }
                 //zool
                 libraryService.getBookFiles(data.Id).then(function (response) {
-                    $scope.bookFiles = response;
+					 console.log ('bookFiles',$scope.bookFiles);
+					if (response)
+                    $scope.bookFiles =Enumerable.From( response).OrderBy('$.SysUrl').ToArray();
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
                 ///////////////////////////////////
@@ -532,16 +534,19 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
             },
             fixed: true, fixedPosition: 'left',
         },
+        { dataField: 'Category', caption: 'Category', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'Title', caption: 'Subject', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 400, fixed: true, fixedPosition: 'left', sortIndex: 1, sortOrder: "asc" },
 
         { dataField: 'No', caption: 'No', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left' },
-        { dataField: 'Category', caption: 'Category', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'Title', caption: 'Title', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 400, fixed: true, fixedPosition: 'left', sortIndex: 1, sortOrder: "asc" },
-
-        { dataField: 'Sender', caption: 'Sender', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 300 },
-        { dataField: 'Edition', caption: 'Edition', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
-        { dataField: 'DateEffective', caption: 'Effective', allowResizing: true, dataType: 'string', allowEditing: false, width: 200, alignment: 'center' },
-        { dataField: 'DateRelease', caption: 'Publication Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 200 },
-        { dataField: 'DateExposure', caption: 'Exposure Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 200 },
+       
+        { dataField: 'Sender', caption: 'Issued By', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 250 },
+        // { dataField: 'Edition', caption: 'Edition', allowResizing: true, dataType: 'string', allowEditing: false, width: 200 },
+        { dataField: 'DateRelease', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130, sortIndex: 0, sortOrder:'desc' },
+        { dataField: 'DateEffective', caption: 'Effective', allowResizing: true, dataType: 'string', allowEditing: false, width: 130, alignment: 'center' },
+        
+        { dataField: 'DateExposure', caption: 'Exposure Date', allowResizing: true, alignment: 'center', dataType: 'date', allowEditing: false, width: 130 },
+		   { dataField: 'Visited', caption: 'Visited', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, fixed: true, fixedPosition: 'right' },
+		//  { dataField: 'Visited', caption: 'Visited', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, fixed: true, fixedPosition: 'left' },
         {
             dataField: "Id", caption: '',
             width: 130,
@@ -865,17 +870,16 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                         }
 
                         $scope.Notify.Message =
-                            'Dear ' + '[#Name]' + ',' + '\r\n'
-                            + "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-                            + '\r\n'
-                            + '\r\n'
-                            + '<strong>' + $scope.dg_selected.Title + '</strong>'
-                            + '\r\n'
-                            + '\r\n'
-                            + 'Your(s) sincerely' + '\r\n'
-                            + $rootScope.userTitle
-                            + '\r\n'
-                            + moment().format('MMMM Do YYYY, h:mm:ss a');
+                                 'Dear Flight Crew'
+                        + '\r\n'
+                        + 'Relevant documentation titled \"' + $scope.dg_selected.Title + '\", pertaining to your area of responsibility, has been uploaded to the Electronic Library. Kindly refer to the Electronic Library system within the next 24 hours to ensure your tasks are carried out in accordance with the company’s updated guidelines.'
+
+                        + '\r\n'
+                            + 'https://ava.pulsepocket.app/'
+							+ '\r\n'
+                            + 'https://ava.skybag.tech/'
+                        + '\r\n'
+                            + 'AVA AIRLINES';
 
                         $scope.popup_notify_visible = true;
                     }
@@ -1546,6 +1550,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
     };
     $scope.txt_MessageNotify = {
         hoverStateEnabled: false,
+		  rtlEnabled:false,
         height: 300,
         bindingOptions: {
             value: 'Notify.Message',
@@ -1579,7 +1584,7 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
                     key: "Id",
                     version: 4,
                     onLoaded: function (e) {
-                        // $scope.loadingVisible = false;
+                        //$scope.loadingVisible = false;
                         //filter
                         $rootScope.$broadcast('OnDataLoaded', null);
                     },
@@ -1587,13 +1592,13 @@ app.controller('libraryController', ['$scope', '$location', '$routeParams', '$ro
 
                         $scope.dsUrl = General.getDsUrl(e);
 
-                        // $scope.$apply(function () {
-                        //    $scope.loadingVisible = true;
-                        // });
+                        //$scope.$apply(function () {
+                           //$scope.loadingVisible = true;
+                        ///});
                         $rootScope.$broadcast('OnDataLoading', null);
                     },
                 },
-                // filter: [['OfficeCode', 'startswith', $scope.ParentLocation.FullCode]],
+                //filter: [['OfficeCode', 'startswith', $scope.ParentLocation.FullCode]],
                 sort: [{ getter: "DateCreate", desc: true }],
 
             };

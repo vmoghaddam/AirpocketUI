@@ -1056,12 +1056,12 @@ app.controller('usersController', ['$scope', '$location', '$routeParams', '$root
         onRowPrepared: function (e) {
             if (e.rowType === "data" && e.data.PersonId) {
 
-                e.rowElement.css("backgroundColor", "#b3ffcc");
+                e.rowElement.css("backgroundColor", "#b3ffd9");
             }
             if (e.rowType === "data" && e.data.LockoutEnabled) {
 
-                e.rowElement.css("backgroundColor", "#666666");
-                e.rowElement.css("color", "white");
+                e.rowElement.css("backgroundColor", "#e6e6e6");
+                e.rowElement.css("color", "#000000");
             }
             //42 %  10
 

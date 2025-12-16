@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authService', '$routeParams', '$rootScope', '$window', '$sce', 'vira_general_service', function ($scope, $location, mntService, authService, $routeParams, $rootScope, $window, $sce, vira_general_service) {
 
-
+    
     $scope.entity =
     {
         paperItemId: 0,
@@ -13,9 +13,6 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
         remark: null
     }
 
-    $scope.t = {
-
-    }
     $scope.clear_entity = function () {
         $scope.entity.paperItemId = 0;
         $scope.entity.cmP_PartNumberId = 0;
@@ -105,34 +102,10 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
                 widget: 'dxButton', location: 'before', options: {
                     type: 'success', text: 'Save', onClick: function (e) {
 
+                        $scope.popup_nis_visible = false;
 
-                        if (!$scope.new_part_number) {
-
-                        }
-                        else {
-                        }
-                        var dto = {
-                            "paperItemId": $scope.entity.paperItemId,
-                            "cmP_PartNumberId": $scope.entity.cmP_PartNumberId,
-                            "priorityId": $scope.entity.priorityId,
-                            "sender_LocationId": $scope.entity.sender_LocationId,
-                            "sender_UserId": $scope.entity.sender_UserId,
-                            "quantity": $scope.entity.rem_quantity,
-                            "remark": $scope.entity.remark
-                        };
-                        $scope.nis_add_result = null;
-                        vira_general_service.add_nis(dto).then(function (res) {
-                            console.log('sdfsdfsdfsfsdf  ', res);
-                            $scope.nis_add_result = res;
-                            $scope.t.vira_no = res.paperNo;
-                            vira_general_service.document_save_nis($scope.t).then(function (response) {
-                                console.log("rrrrrrrrrrrrrrrr",response);
-                            });
-                            $rootScope.$broadcast('OnNISAdd', $scope.nis_add_result);
-                            // $scope.clear_entity();
-
-
-                            $scope.popup_nis_visible = false;
+                        vira_general_service.add_nis($scope.entity).then(function () {
+                            $scope.clear_entity();
                         });
                     }
                 }, toolbar: 'bottom'
@@ -279,15 +252,14 @@ app.controller('nisAddController', ['$scope', '$location', 'mntService', 'authSe
     $scope.$on('InitNISPopup', function (event, prms) {
 
         $scope.tempData = prms;
-        $scope.entity = prms;
-        //$scope.entity.cmP_PartNumberId = $scope.tempData.cmP_PartNumberId;
-        //$scope.entity.pn_title = $scope.tempData.pn_title;
-        //$scope.entity.quantity = $scope.tempData.quantity;
-        //$scope.entity.rem_quantity = $scope.tempData.rem_quantity;
-        //$scope.entity.paperItemId = $scope.tempData.paperItemId;
-        //$scope.entity.priorityId = $scope.tempData.priorityId;
-        //$scope.entity.sender_LocationId = $scope.tempData.sender_LocationId;
-        //$scope.entity.sender_UserId = $scope.tempData.sender_UserId;
+        $scope.entity.cmP_PartNumberId = $scope.tempData.cmP_PartNumberId;
+        $scope.entity.pn_title = $scope.tempData.pn_title;
+        $scope.entity.quantity = $scope.tempData.quantity;
+        $scope.entity.rem_quantity = $scope.tempData.rem_quantity;
+        $scope.entity.paperItemId = $scope.tempData.paperItemId;
+        $scope.entity.priorityId = $scope.tempData.priorityId;
+        $scope.entity.sender_LocationId = $scope.tempData.sender_LocationId;
+        $scope.entity.sender_UserId = $scope.tempData.sender_UserId;
 
 
         $scope.popup_nis_visible = true;

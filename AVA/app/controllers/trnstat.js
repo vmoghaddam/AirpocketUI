@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('trnStatController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'trnService', '$window','ztrnService', function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService, $window,ztrnService) {
     $scope.prms = $routeParams.prms;
      $scope.isManager=$rootScope.HasDepartmentManager();

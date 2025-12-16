@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('courseController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', function ($scope, $location, $routeParams, $rootScope, courseService, authService) {
     $scope.prms = $routeParams.prms;
     //////////////////////////////////

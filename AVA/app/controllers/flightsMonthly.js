@@ -33,13 +33,13 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
 
     };
     /////////////////////////////////////////
-    $scope.yf = 1402;
-    $scope.yt = 2023;
+    $scope.yf = 1403;
+    $scope.yt = 2024;
     $scope.sb_yf = {
         placeholder: 'Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [1402,1401,1400,1399, 1398],
+        dataSource: [1403,1402],
 
         onSelectionChanged: function (arg) {
             $scope.bind();
@@ -55,7 +55,7 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
         placeholder: 'To Year',
         showClearButton: false,
         searchEnabled: false,
-        dataSource: [2018, 2019, 2020, 2021,2022,2023],
+        dataSource: [ 2023,2024],
 
         onSelectionChanged: function (arg) {
 
@@ -91,6 +91,7 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
         $scope.dg_737_ds = null;
         $scope.dg_md_ds = null;
         $scope.dg_reg_ds = null;
+		$scope.ds_pax_total=null;
 
         $scope.dg_regroute_ds = null;
         $scope.doRefresh = true;
@@ -108,11 +109,19 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
             });
             ;
 
-            $scope.dg_737_ds = Enumerable.From(response.total).OrderBy('$.Month').ToArray();
+            $scope.dg_737_ds = Enumerable.From(response.total).OrderBy('$.Year').ThenBy('$.Month').ToArray();
 
            
             $scope.pie_cat_ds = $scope.dg_737_ds;
             $scope.pie_det_ds = $scope.dg_737_ds;
+			
+			//$scope.ds_pax_total={name:'name',items:response.pax_route_total};
+			$.each(response.pax_route_total,function(_i,_d){
+				
+				_d.title=_d.Route+' ('+_d.TotalPax+')';
+				_d.avg=_d.TotalPax*1.0/_d.Flights;
+			});
+			$scope.ds_pax_total= response.pax_route_total ;
             
             //$scope.pie_cat_ds = Enumerable.From(response.total).GroupBy("$.Fleet", null,
             //            function (key, g) {
@@ -601,7 +610,7 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
         },
         palette: "Dark Moon",
         title: {
-            text: "Pax / Legs",
+            text: "Average of Passengers per Leg",
             font: {
                 size: 20,
             }
@@ -610,25 +619,26 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
         commonSeriesSettings: {
             type: "bar",
             valueField: "PaxLeg",
-            argumentField: "MonthName",
+            //argumentField: "MonthName",
+			argumentField: "YearMonth",
             ignoreEmptyPoints: true,
             label: {
-                //backgroundColor: 'gray',
-                position: 'outside',
+                 //backgroundColor: 'gray',
+                position: 'inside',
                 color: 'black',
                 font: {
                     color: 'black',
-                    size: 11,
+                    size: 13,
                 },
                 //customizeText: function () {
                 //    return $scope.formatMinutes(this.value);
                 //},
-                visible: false,
+                visible: true,
             },
-            barWidth: 30,
+            barWidth: 40,
         },
         seriesTemplate: {
-            nameField: "MonthName"
+            nameField: "YearMonth"
         },
         tooltip: {
             enabled: true,
@@ -640,6 +650,14 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
                 //};
             }
         },
+		argumentAxis:{
+			label:{
+				font:{
+					color:'#000000',
+					size:13
+				}
+			}
+		},
         valueAxis: [{
             label: {
                 //customizeText: function () {
@@ -647,6 +665,10 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
                 //}
             },
         }],
+		size:{
+			
+			height:500
+		},
         bindingOptions: {
             "dataSource": "dg_737_ds",
         }
@@ -786,9 +808,9 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
             if (!$scope.bar_pax_instance)
                 $scope.bar_pax_instance = e.component;
         },
-        palette: "GreenMist",
+        //palette: "GreenMist",
         title: {
-            text: "Pax",
+            text: "Passenger",
             font: {
                 size: 20,
             }
@@ -797,23 +819,36 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
         commonSeriesSettings: {
             type: "bar",
 
-            argumentField: "MonthName",
+            argumentField: "YearMonth",
             ignoreEmptyPoints: true,
             label: {
-                //backgroundColor: 'gray',
-                position: 'outside',
+                 //backgroundColor: 'gray',
+                position: 'inside',
                 color: 'black',
                 font: {
                     color: 'black',
-                    size: 11,
+                    size: 13,
                 },
                 //customizeText: function () {
                 //    return $scope.formatMinutes(this.value);
                 //},
-                visible: false,
+                visible: true,
             },
+             barWidth: 60,
             // barWidth: 30,
         },
+		argumentAxis:{
+			label:{
+				font:{
+					color:'#000000',
+					size:13
+				}
+			}
+		},
+		size:{
+			
+			height:500
+		},
         //seriesTemplate: {
         //    nameField: "Register"
         //},
@@ -844,9 +879,587 @@ app.controller('flightsMonthlyController', ['$scope', '$location', '$routeParams
         }
     };
 
-    //////////////////////////////
-    $scope.bar_ft_instance = null;
+
+$scope.bar_lf_instance = null;
+    $scope.bar_lf = {
+        "export": {
+            enabled: true
+        },
+        onInitialized: function (e) {
+            if (!$scope.bar_lf_instance)
+                $scope.bar_lf_instance = e.component;
+        },
+        palette: "Material",
+        title: {
+            text: "Load Factor",
+            font: {
+                size: 20,
+            }
+            // subtitle: "as of January 2017"
+        },
+        commonSeriesSettings: {
+            type: "bar",
+
+            argumentField: "YearMonth",
+            ignoreEmptyPoints: true,
+            label: {
+                 //backgroundColor: 'gray',
+                position: 'inside',
+                color: 'black',
+                font: {
+                    color: 'black',
+                    size: 13,
+                },
+                //customizeText: function () {
+                //    return $scope.formatMinutes(this.value);
+                //},
+                visible: true,
+            },
+             barWidth: 40,
+            // barWidth: 30,
+        },
+		argumentAxis:{
+			label:{
+				font:{
+					color:'#000000',
+					size:13
+				}
+			}
+		},
+		size:{
+			
+			height:500
+		},
+        //seriesTemplate: {
+        //    nameField: "Register"
+        //},
+        series: [
+            { valueField: "LoadFactor", name: "Load Factor" },
+            //{ valueField: "BlockTime", name: "Block Time", color: '#0099cc' },
+        ],
+
+        tooltip: {
+            enabled: true,
+            // location: "edge",
+            customizeTooltip: function (arg) {
+                // alert(arg.seriesName + " " + $scope.formatMinutes(arg.value));
+                //return {
+                //    text: arg.seriesName + " " + $scope.formatMinutes(arg.value)
+                //};
+            }
+        },
+        valueAxis: [{
+            label: {
+                //customizeText: function () {
+                //    return $scope.formatMinutes(this.value);
+                //}
+            },
+        }],
+        bindingOptions: {
+            "dataSource": "dg_737_ds",
+        }
+    };
+	
+	
+	
+	
+	
+	$scope.bar_leg_instance = null;
+    $scope.bar_leg = {
+        "export": {
+            enabled: true
+        },
+        onInitialized: function (e) {
+            if (!$scope.bar_leg_instance)
+                $scope.bar_leg_instance = e.component;
+        },
+        palette: "Material",
+        title: {
+            text: "Flights",
+            font: {
+                size: 20,
+            }
+            // subtitle: "as of January 2017"
+        },
+        commonSeriesSettings: {
+            type: "bar",
+
+            argumentField: "YearMonth",
+            ignoreEmptyPoints: true,
+            label: {
+                 //backgroundColor: 'gray',
+                position: 'outside',
+                color: 'black',
+                font: {
+                    color: 'black',
+                    size: 13,
+                },
+                //customizeText: function () {
+                //    return $scope.formatMinutes(this.value);
+                //},
+                visible: true,
+            },
+             barWidth: 40,
+            // barWidth: 30,
+        },
+		argumentAxis:{
+			label:{
+				font:{
+					color:'#000000',
+					size:13
+				}
+			}
+		},
+		size:{
+			
+			height:500
+		},
+        //seriesTemplate: {
+        //    nameField: "Register"
+        //},
+        series: [
+            { valueField: "Legs", name: "Legs" ,type:"line"},
+			
+			{ valueField: "ResInt1", name: "RBA"  },
+			//{ valueField: "ResInt2", name: "RBB"  },
+			{ valueField: "ResInt3", name: "RBC"  },
+			{ valueField: "ResInt4", name: "SAP"  },
+            //{ valueField: "BlockTime", name: "Block Time", color: '#0099cc' },
+        ],
+
+        tooltip: {
+            enabled: true,
+            // location: "edge",
+            customizeTooltip: function (arg) {
+                // alert(arg.seriesName + " " + $scope.formatMinutes(arg.value));
+                //return {
+                //    text: arg.seriesName + " " + $scope.formatMinutes(arg.value)
+                //};
+            }
+        },
+        valueAxis: [{
+            label: {
+                //customizeText: function () {
+                //    return $scope.formatMinutes(this.value);
+                //}
+            },
+        }],
+        bindingOptions: {
+            "dataSource": "dg_737_ds",
+        }
+    };
+	
+	
+	 $scope.bar_ft_instance = null;
     $scope.bar_ft = {
+        "export": {
+            enabled: true
+        },
+        onInitialized: function (e) {
+            if (!$scope.bar_ft_instance)
+                $scope.bar_ft_instance = e.component;
+        },
+        palette: "Green Mist",
+        title: {
+            text: "Flight Time",
+            font: {
+                size: 20,
+            }
+            // subtitle: "as of January 2017"
+        },
+        commonSeriesSettings: {
+            type: "bar",
+
+            argumentField: "YearMonth",
+            ignoreEmptyPoints: true,
+            label: {
+                 //backgroundColor: 'gray',
+                position: 'outside',
+                color: 'black',
+                font: {
+                    color: 'black',
+                    size: 12,
+                },
+                customizeText: function () {
+                    return $scope.formatMinutes(this.value);
+                },
+                visible: true,
+            },
+             barWidth: 40,
+            // barWidth: 30,
+        },
+        //seriesTemplate: {
+        //    nameField: "Register"
+        //},
+        series: [
+           // { valueField: "FlightTime", name: "Flight Time", color: '#00cc99' },
+             { valueField: "BlockTime", name: "Block Time", type:'line' },
+			 
+			 
+			 	{ valueField: "ResInt2", name: "RBA"  },
+			//{ valueField: "ResInt2", name: "RBB"  },
+			{ valueField: "ResInt5", name: "RBC"  },
+			{ valueField: "ResInt6", name: "SAP"  },
+        ],
+
+        tooltip: {
+            enabled: true,
+            // location: "edge",
+            customizeTooltip: function (arg) {
+                // alert(arg.seriesName + " " + $scope.formatMinutes(arg.value));
+                return {
+                    text: arg.seriesName + " " + $scope.formatMinutes(arg.value)
+                };
+            }
+        },
+        valueAxis: [{
+            label: {
+                customizeText: function () {
+                    return $scope.formatMinutes(this.value);
+                }
+            },
+        }],
+		size:{
+			height:500
+		},
+        bindingOptions: {
+            "dataSource": "dg_737_ds",
+        }
+    };
+	
+	
+	
+	 $scope.bar_dl = {
+        "export": {
+            enabled: true
+        },
+        onInitialized: function (e) {
+            
+        },
+        palette: "Violet",
+        title: {
+            text: "Total Delay",
+            font: {
+                size: 20,
+            }
+            // subtitle: "as of January 2017"
+        },
+        commonSeriesSettings: {
+            type: "bar",
+
+            argumentField: "YearMonth",
+            ignoreEmptyPoints: true,
+            label: {
+                 //backgroundColor: 'gray',
+                position: 'outside',
+                color: 'black',
+                font: {
+                    color: 'black',
+                    size: 12,
+                },
+                customizeText: function () {
+                    return $scope.formatMinutes(this.value);
+                },
+                visible: true,
+            },
+             barWidth: 40,
+            // barWidth: 30,
+        },
+        //seriesTemplate: {
+        //    nameField: "Register"
+        //},
+        series: [
+           // { valueField: "FlightTime", name: "Flight Time", color: '#00cc99' },
+             { valueField: "Res2", name: "Delay", type:'line' },
+			 
+			 
+			 
+        ],
+
+        tooltip: {
+            enabled: true,
+            // location: "edge",
+            customizeTooltip: function (arg) {
+                // alert(arg.seriesName + " " + $scope.formatMinutes(arg.value));
+                return {
+                    text: arg.seriesName + " " + $scope.formatMinutes(arg.value)
+                };
+            }
+        },
+        valueAxis: [{
+            label: {
+                customizeText: function () {
+                    return $scope.formatMinutes(this.value);
+                }
+            },
+        }],
+		size:{
+			height:500
+		},
+        bindingOptions: {
+            "dataSource": "dg_737_ds",
+        }
+    };
+	
+	
+	$scope.bar_dlleg = {
+        "export": {
+            enabled: true
+        },
+        onInitialized: function (e) {
+            
+        },
+        palette: "Ocean",
+        title: {
+            text: "Delay per Flight",
+            font: {
+                size: 20,
+            }
+            // subtitle: "as of January 2017"
+        },
+        commonSeriesSettings: {
+            type: "bar",
+
+            argumentField: "YearMonth",
+            ignoreEmptyPoints: true,
+            label: {
+                 //backgroundColor: 'gray',
+                position: 'outside',
+                color: 'black',
+                font: {
+                    color: 'black',
+                    size: 12,
+                },
+                customizeText: function () {
+                    return $scope.formatMinutes(this.value);
+                },
+                visible: true,
+            },
+             barWidth: 40,
+            // barWidth: 30,
+        },
+        //seriesTemplate: {
+        //    nameField: "Register"
+        //},
+        series: [
+           // { valueField: "FlightTime", name: "Flight Time", color: '#00cc99' },
+             { valueField: "Res1", name: "Delay/Flight", type:'line' },
+			 
+			 
+			 	//{ valueField: "ResInt2", name: "RBA"  },
+			//{ valueField: "ResInt2", name: "RBB"  },
+			//{ valueField: "ResInt5", name: "RBC"  },
+			//{ valueField: "ResInt6", name: "SAP"  },
+        ],
+
+        tooltip: {
+            enabled: true,
+            // location: "edge",
+            customizeTooltip: function (arg) {
+                // alert(arg.seriesName + " " + $scope.formatMinutes(arg.value));
+                return {
+                    text: arg.seriesName + " " + $scope.formatMinutes(arg.value)
+                };
+            }
+        },
+        valueAxis: [{
+            label: {
+                customizeText: function () {
+                    return $scope.formatMinutes(this.value);
+                }
+            },
+        }],
+		size:{
+			height:500
+		},
+        bindingOptions: {
+            "dataSource": "dg_737_ds",
+        }
+    };
+	
+	
+	$scope.map_pax={
+		 "export": {
+            enabled: true
+        },
+		title:{
+			text:'Routes - Passengers'
+		},
+		tile:{
+			label:{
+				font:{
+					size:10
+				},
+				wordWrap:'breakWord',
+			}
+		},
+		valueField:'TotalPax',
+		labelField:'title',
+		size:{
+			height:600
+		},
+		bindingOptions: {
+            "dataSource": "ds_pax_total",
+        }
+		
+	};
+	
+	
+	$scope.bar_route = {
+        "export": {
+            enabled: true
+        },
+        onInitialized: function (e) {
+            
+        },
+        palette: "Ocean",
+        title: {
+            text: "Routes - Passengers",
+            font: {
+                size: 20,
+            }
+            // subtitle: "as of January 2017"
+        },
+		argumentAxis: {
+            label: {
+                displayMode: 'rotate',
+                rotationAngle: -45,
+                overlappingBehavior: 'rotate',
+            },
+            overlappingBehavior: 'rotate',
+        },
+        commonSeriesSettings: {
+            type: "bar",
+
+            argumentField: "Route",
+            ignoreEmptyPoints: true,
+            label: {
+                 //backgroundColor: 'gray',
+                position: 'outside',
+                color: 'black',
+                font: {
+                    color: 'black',
+                    size: 10,
+                },
+                
+                visible: true,
+            },
+            // barWidth: 40,
+            // barWidth: 30,
+        },
+        //seriesTemplate: {
+        //    nameField: "Register"
+        //},
+        series: [
+           // { valueField: "FlightTime", name: "Flight Time", color: '#00cc99' },
+             { valueField: "TotalPax", name: "Passengers",   },
+			 //  { valueField: "Flights", name: "Flights",   },
+			 
+			 
+			 	//{ valueField: "ResInt2", name: "RBA"  },
+			//{ valueField: "ResInt2", name: "RBB"  },
+			//{ valueField: "ResInt5", name: "RBC"  },
+			//{ valueField: "ResInt6", name: "SAP"  },
+        ],
+
+        tooltip: {
+            enabled: true,
+            // location: "edge",
+            customizeTooltip: function (arg) {
+                // alert(arg.seriesName + " " + $scope.formatMinutes(arg.value));
+                return {
+                    text: arg.seriesName + " " + $scope.formatMinutes(arg.value)
+                };
+            }
+        },
+         
+		size:{
+			height:500
+		},
+        bindingOptions: {
+            "dataSource": "ds_pax_total",
+        }
+    };
+	
+	$scope.bar_route_flights = {
+        "export": {
+            enabled: true
+        },
+        onInitialized: function (e) {
+            
+        },
+        //palette: "Ocean",
+        title: {
+            text: "Routes - Flights",
+            font: {
+                size: 20,
+            }
+            // subtitle: "as of January 2017"
+        },
+		argumentAxis: {
+            label: {
+                displayMode: 'rotate',
+                rotationAngle: -45,
+                overlappingBehavior: 'rotate',
+            },
+            overlappingBehavior: 'rotate',
+        },
+        commonSeriesSettings: {
+            type: "bar",
+
+            argumentField: "Route",
+            ignoreEmptyPoints: true,
+            label: {
+                 //backgroundColor: 'gray',
+                position: 'outside',
+                color: 'black',
+                font: {
+                    color: 'black',
+                    size: 10,
+                },
+                
+                visible: true,
+            },
+            // barWidth: 40,
+            // barWidth: 30,
+        },
+        //seriesTemplate: {
+        //    nameField: "Register"
+        //},
+        series: [
+           // { valueField: "FlightTime", name: "Flight Time", color: '#00cc99' },
+            
+			   { valueField: "Flights", name: "Flights",   },
+			 //   { valueField: "avg", name: "Avg. of Pax",    },
+			 
+			 
+			 	//{ valueField: "ResInt2", name: "RBA"  },
+			//{ valueField: "ResInt2", name: "RBB"  },
+			//{ valueField: "ResInt5", name: "RBC"  },
+			//{ valueField: "ResInt6", name: "SAP"  },
+        ],
+
+        tooltip: {
+            enabled: true,
+            // location: "edge",
+            customizeTooltip: function (arg) {
+                // alert(arg.seriesName + " " + $scope.formatMinutes(arg.value));
+                return {
+                    text: arg.seriesName + " " + $scope.formatMinutes(arg.value)
+                };
+            }
+        },
+        
+		size:{
+			height:500
+		},
+        bindingOptions: {
+            "dataSource": "ds_pax_total",
+        }
+    };
+    //////////////////////////////
+    $scope._bar_ft_instance = null;
+    $scope._bar_ft = {
         "export": {
             enabled: true
         },

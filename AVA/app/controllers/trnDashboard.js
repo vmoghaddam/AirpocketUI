@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('trnDashboardController', ['$scope', '$location', '$routeParams', '$rootScope', 'courseService', 'authService', 'ztrnService', '$window', '$compile', function ($scope, $location, $routeParams, $rootScope, courseService, authService, trnService, $window, $compile) {
     $scope.prms = $routeParams.prms;
     $scope.loadingVisible = false;

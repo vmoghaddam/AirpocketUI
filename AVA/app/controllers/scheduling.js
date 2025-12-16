@@ -2685,7 +2685,9 @@ app.controller('schedulingController', ['$scope', '$location', '$routeParams', '
             },
             fixed: true, fixedPosition: 'left',//  sortIndex: 0, sortOrder: "desc"
         },
-
+ { dataField: 'REgister', caption: 'O/A', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 100,fixed: true, fixedPosition: 'left' },
+		{ dataField: 'AircraftType', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120,fixed: true, fixedPosition: 'left' },
+		
         { dataField: 'ScheduleName', caption: 'Sch. Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150, fixed: true, fixedPosition: 'left', },
         // { dataField: 'Name', caption: 'Name', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 200 },
 

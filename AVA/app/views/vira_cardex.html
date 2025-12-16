@@ -261,124 +261,53 @@
     <div ng-include="'app/views/menu.html'"></div>
     <div class="rowx content" style="clear:both">
 
-        <div style="width: 100%">
-            <div style="border: 1px solid #ccc;padding:5px 0 5px 0;margin:0 5px 0 5px" class="dx-border">
+        <div class="col-lg-12" style="border: 1px solid #ccc;padding:10px">
+            <div class="dx-border">
 
-                <div class="col-lg-2 padding-0" style="padding:5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
-                                Stcok:
-                            </td>
-                            <td>
-                                <div dx-select-box="sb_stock" class="center" style="width: 100%"></div>
 
-                            </td>
-                        </tr>
-                    </table>
+                <div class="col-lg-2 padding-0">
+                    <span>Date</span>
+                    <div dx-date-box="dt_date" class="center" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
+
+                    <span>No</span>
+                    <div dx-text-box="txt_no" class="center" style="width: 100%"></div>
+
+                </div>
+                <div class="col-lg-2 padding-0" style="padding-left:10px">
+                    <span>A/C Type</span>
+
+                    <div dx-select-box="sb_acType" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px " dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
+                    <span>Register</span>
+                    <div dx-select-box="sb_register" class="left" dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
+
                 </div>
 
-                <div class="col-lg-2 padding-0" style="padding:5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
-                                P/N:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_pn" class="center" style="width: 100%"></div>
+                <div class="col-lg-2 padding-0" style="padding-left:10px">
+                    <span>Warehouse</span>
 
-                            </td>
-                            <td style="padding-left: 15px">
-                                <div dx-button="btn_pn"></div>
-                            </td>
-                        </tr>
-                    </table>
+                    <div dx-select-box="sb_warehouse" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
+                    <span>Issued By</span>
+                    <div dx-text-box="txt_issuedBy" class="left" style="width: 100%"></div>
+
                 </div>
-                <div class="col-lg-2 padding-0" style="padding:5px">
-                    <table style="width:100%">
+                <div class="col-lg-2 padding-0" style="padding-left:10px">
+                    <span>Receiver</span>
+                    <table style="width:100%;margin-top:5px;margin-bottom:5px">
                         <tr>
-                            <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
-                                SN / BN:
-                            </td>
                             <td>
-                                <div dx-text-box="txt_snbn" class="center" style="width: 100%"></div>
-
+                                <div dx-text-box="txt_receiver" class="left" style="width: 100%" dx-validator="{validationGroup:'deladd',  validationRules: [{ type: 'required'}]}"></div>
                             </td>
+                            <td style="width:10%"><div dx-button="btn_receiver"></div></td>
                         </tr>
+
                     </table>
-                </div>
 
-
-
-                <div class="col-lg-2 padding-0" style="padding:5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
-                                Description:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_desc" class="center" style="width: 100%"></div>
-
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="col-lg-2 padding-0" style="padding:5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
-                                Date From:
-                            </td>
-                            <td>
-                                <div dx-date-box="dt_date_from" class="center" style="width: 100%"></div>
-
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="col-lg-2 padding-0" style="padding:5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
-                                Date To:
-                            </td>
-                            <td>
-                                <div dx-date-box="dt_date_to" class="center" style="width: 100%"></div>
-
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-
-
-                <div class="col-lg-2 padding-0" style="padding:5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width: 80px; font-size: 12px; padding:0 5px 0 5px; text-align: right">
-                                Year:
-                            </td>
-                            <td>
-                                <div dx-text-box="txt_year" class="center" style="width: 100%"></div>
-
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+                    <span>Location</span>
+                    <div dx-text-box="txt_receiver_location" class="left" style="width: 100%"></div>
 
 
 
 
-
-                <div class="col-lg-2 padding-0" style="padding:5px">
-                    <table style="width:100%">
-                        <tr>
-                            <td style="width:150px">
-                                <div dx-button="btn_search"></div>
-                            </td>
-                        </tr>
-                    </table>
                 </div>
 
 
@@ -387,10 +316,10 @@
 
 
 
+        </div>
 
-            <div class="padding-0" style="margin: 5px">
-                <div dx-data-grid="dg_cardex" id="dg_cardex" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
-            </div>
+        <div class="col-lg-12">
+            <div dx-data-grid="dg_del" id="dg_del" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
         </div>
         <div dx-load-panel="loadPanel"></div>
     </div>
@@ -398,15 +327,15 @@
         <div class=" col-lg-8 col-md-11 col-sm-11 col-xs-11" style="padding:0">
             <table style="width:100%;margin:0;padding:0;">
                 <tr>
-
-                    <!--   <td style="text-align: left" dx-button="btn_submit"></td>-->
+                 
+                 <!--   <td style="text-align: left" dx-button="btn_submit"></td>-->
                     <td></td>
                 </tr>
             </table>
 
 
         </div>
-        <div ng-include="'app/views/vira_beginning_add.html'"></div>
+
         <div style="clear:both"></div>
     </div>
 </div>

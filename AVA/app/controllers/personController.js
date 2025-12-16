@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.controller('personController', ['$scope', '$location', '$routeParams', '$rootScope', 'personService', 'authService', 'notificationService', '$route', 'trnService','flightService','$window','$timeout', function ($scope, $location, $routeParams, $rootScope, personService, authService, notificationService, $route, trnService,flightService,$window,$timeout) {
     $scope.prms = $routeParams.prms;
     $scope.IsEditable = $rootScope.IsProfileEditable(); //$rootScope.roles.indexOf('Admin') != -1;
