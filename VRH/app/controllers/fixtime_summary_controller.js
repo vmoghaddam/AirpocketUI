@@ -32,12 +32,12 @@ app.controller('fixtime_summary_controller', [
             }
         };
 
-        $scope.rank = 'All';
+        $scope.rank = 'Cockpit';
         $scope.sb_rank = {
             placeholder: 'Rank',
             showClearButton: false,
             searchEnabled: false,
-            dataSource: ['All', 'Cockpit', 'Cabin', 'IP', 'P1', 'P2', 'SCCM', 'CCM', 'ISCCM'],
+            dataSource: [  'Cockpit', 'Cabin', 'IP', 'P1', 'P2', 'SCCM', 'CCM', 'ISCCM'],
 
             bindingOptions: {
                 value: 'rank',
@@ -46,12 +46,12 @@ app.controller('fixtime_summary_controller', [
             }
         };
 
-        $scope.acType = 'All';
+        $scope.acType = 'B737';
         $scope.sb_acType = {
             placeholder: 'AC Type',
             showClearButton: false,
             searchEnabled: false,
-            dataSource: ['All', 'B737', 'MD'],
+            dataSource: [  'B737', 'MD'],
             
 
             bindingOptions: {
@@ -108,16 +108,16 @@ app.controller('fixtime_summary_controller', [
 
         function buildFlightColumns(sampleRow) {
             var baseCols = [
+                //{
+                //    name: 'row', caption: '#', width: 60, allowResizing: false, alignment: 'center',
+                //    cellTemplate: function (container, options) {
+                //        $('<div style="text-align:center"/>').text(options.rowIndex + 1).appendTo(container);
+                //    }
+                //},
+               // { dataField: 'rank', caption: 'Rank', width: 60, alignment: 'center', fixed: true, fixedPosition: 'left' },
+                { dataField: 'last_name', caption: 'Last Name', minWidth: 170, alignment: 'left', fixed: true, fixedPosition: 'left' },
                 {
-                    name: 'row', caption: '#', width: 60, allowResizing: false, alignment: 'center',
-                    cellTemplate: function (container, options) {
-                        $('<div style="text-align:center"/>').text(options.rowIndex + 1).appendTo(container);
-                    }
-                },
-                { dataField: 'rank', caption: 'Rank', width: 70, alignment: 'center' },
-                { dataField: 'last_name', caption: 'Last Name', minWidth: 200, alignment: 'left' },
-                {
-                    dataField: 'total', caption: 'Total', width: 90, alignment: 'center',
+                    dataField: 'total', caption: 'Total', width: 90, alignment: 'center', fixed: true, fixedPosition: 'left',
                     calculateSortValue: function (r) { return parseHHmmToMinutes(r.total); }
                 },
                 {
@@ -153,7 +153,7 @@ app.controller('fixtime_summary_controller', [
                             dataField: k,
                             caption: k,
                             alignment: 'center',
-                            width: 120,
+                            width: 70,
                             headerCellTemplate: function (container) { headerMultiline(container, k); },
                             calculateSortValue: function (row) {
                                 var v = row[k];
@@ -233,7 +233,8 @@ app.controller('fixtime_summary_controller', [
             },
 
             bindingOptions: { dataSource: 'dg_fixtime_ds' },
-            columnChooser: { enabled: false }
+            columnChooser: { enabled: false },
+            width:'100%'
         };
 
         $scope.$watchCollection('dg_fixtime_ds', function (ds) {

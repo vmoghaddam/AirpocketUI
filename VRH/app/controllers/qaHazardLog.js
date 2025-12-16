@@ -120,6 +120,20 @@ app.controller('qahazardlog', ['$scope', '$location', '$routeParams', '$rootScop
                 $rootScope.$broadcast('InitAddHazard', data);
 		}
     };
+
+    $scope.btn_occ = {
+        text: 'Occurrance',
+        type: 'success',
+        width: 160,
+        bindingOptions: {},
+        onClick: function (e) {
+            //$scope.popup_hazard_visible = true;
+            var data = { Id: null, };
+
+
+            $rootScope.$broadcast('InitAddOccurrence', data);
+        }
+    };
 	
 	
 	$scope.btn_showForm = {

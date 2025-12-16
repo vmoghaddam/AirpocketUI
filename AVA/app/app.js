@@ -873,7 +873,7 @@ app.config(function ($routeProvider) {
 //var serviceBase = 'http://fleet.caspianairlines.com/api/';
 
 var serviceBaseAPI ='https://ava.api.airpocket.app/';  //*
-var serviceBaseTRN = 'https://ava.apitrn.airpocket.app/';
+var serviceBaseTRN = 'http://localhost:4005/'; //'https://ava.apitrn.airpocket.app/';
  
  
 var webBase = 'https://ava.airpocket.app/';  //*
@@ -907,7 +907,7 @@ var apimsg='https://_apimsg.apvaresh.com/';
 var apiplanning='https://ava.apiplanning.airpocket.app/'; //*
 var apilogdefault='https://ava.apilogdefault.airpocket.app/'; //*
 var apiapsb='https://ava.apiapsb.airpocket.app/';
-var apiprofile='https://ava.apiprofile.airpocket.app/';
+var apiprofile ='https://ava.apiprofile.aerotango.app/';
 var apiauth ='https://aerotango.app/apinetauth/'; //*
 var atcfiles='https://files.airpocket.app/air1/atc/';
 
@@ -915,7 +915,7 @@ var apiCAO='https://ava.apicaox.airpocket.app/';
 
 var zapinet='https://ava.apinet.airpocket.app/';
 var zfuel='https://ava.apifuel.airpocket.app/';
-var zapitrn = 'https://ava.apitrn.airpocket.app/';
+var zapitrn = 'http://localhost:4005/'; //'https://ava.apitrn.airpocket.app/';
 var vira_api = "https://lmmcore.online/";
 var zapinet2 = 'https://ava.zapinet.airpocket.app/';
 var api_fdm = 'http://localhost:22556/';

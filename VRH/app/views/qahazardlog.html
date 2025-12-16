@@ -63,11 +63,12 @@
             <tr>
 
                 <!-- <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
-                 <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
-                 <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_persiandate"></div></td>-->
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_persiandate"></div></td>-->
                 <td style="width:120px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
                 <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_showForm"></div></td>
                 <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_hazardLog"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_occ"></div></td>
                 <td></td>
                 <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_person"></div></td>
                 <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_flight"></div></td>
@@ -339,12 +340,14 @@
         </div>
 
     </div>
-        <div ng-include="'app/views/personView.html'"></div>
-        <div ng-include="'app/views/qaEmployee.html?vx.2'"></div>
-        <div ng-include="'app/views/qaForm.html?vx.2'"></div>
-        <div ng-include="'app/views/qaOperationPopup.html?vx.2'"></div>
-		
-		 <div ng-include="'app/views/qahazardadd.html?v=1004'"></div>
+    <div ng-include="'app/views/personView.html'"></div>
+    <div ng-include="'app/views/qaEmployee.html?vx.2'"></div>
+    <div ng-include="'app/views/qaForm.html?vx.2'"></div>
+    <div ng-include="'app/views/qaOperationPopup.html?vx.2'"></div>
+
+    <div ng-include="'app/views/qahazardadd.html?v=1004'"></div>
+    <div ng-include="'app/views/qa_occ_add_html.html?v=1004'"></div>
+    
 
 </div>
 

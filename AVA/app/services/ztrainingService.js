@@ -1336,6 +1336,22 @@ var _saveSyllabus = function (entity) {
         return deferred.promise;
     };
     serviceFactory.delete_exam = _delete_exam;
+
+
+    //////// 2025-11-23
+    var _get_profile_config = function (id) {
+
+        var deferred = $q.defer();
+        $http.get(zapitrn + 'api/profile/config/'  ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.get_profile_config = _get_profile_config;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;
