@@ -30,7 +30,11 @@
 .inline-block {
     display: inline-block !important;
 }
-
+.theme-teal {
+    background: #009688;
+    /*background: linear-gradient(to bottom right, #009688 20%, #53e3a6 95%);*/
+    border-bottom: 2px solid #009688;
+}
 .theme-gray {
     background: #97a1a6;
     /*background: linear-gradient(to bottom right, #009688 20%, #53e3a6 95%);*/
@@ -41,6 +45,11 @@
     background: #03A9F4;
     /*background: linear-gradient(to bottom right, #009688 20%, #53e3a6 95%);*/
     border-bottom: 2px solid #03A9F4;
+}
+.theme-cherry {
+    background: #46202f;
+    /*background: linear-gradient(to bottom right, #009688 20%, #53e3a6 95%);*/
+    border-bottom: 2px solid #150102;
 }
 
 .theme-purple {
@@ -57,7 +66,7 @@
 
 .app-headerx {
     padding: 10px 20px 10px 10px;
-    /*background-color: #009688;*/
+   /* background-color: #009688 !important; */
     color: white;
     font-size: 15px;
     /*font-weight: bold;*/
@@ -573,7 +582,7 @@ body {
 
 @media (min-width: 768px) {
     .box-app .logo .title {
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 }
 
@@ -1484,6 +1493,7 @@ h1 {
 }
 .e-gantt-template-taskbar.scheduled, .scheduled {
     background-color: #ffd480 !important;
+    background-color:#d4b5a5 !important;
     color: #000;
     font-weight: normal !important;
 }
@@ -1496,7 +1506,9 @@ h1 {
 
 .e-gantt-template-taskbar.departed, .departed {
     background-color: #00ff00 !important;
+    background-color: #5cb35b !important;
     color: #000;
+    color:whitesmoke;
 }
 .e-gantt-template-taskbar.takeoff, .takeoff {
     background-color: #00ff00 !important;
@@ -1509,6 +1521,7 @@ h1 {
 }
 .e-gantt-template-taskbar.offblocked, .offblocked {
     background-color: #80ffff !important;
+    background-color: #8df2cd !important;
     color: #000;
 }
 
@@ -1518,6 +1531,7 @@ h1 {
 }
 .e-gantt-template-taskbar.onblocked, .onblocked {
     background-color: #66b3ff !important;
+    background-color: #79c4f0 !important;
     color: #000;
 }
 
@@ -1555,8 +1569,9 @@ h1 {
 .e-gantt-template-taskbar.arrived, .arrived {
     background-color: #99ccff !important;
     background-color: #009900 !important;
+    background-color: #347c3f !important;
     color: #000;
-    color:#fff;
+    color: #fff;
 }
 
 .e-gantt-template-taskbar.cancel, .cancel {
@@ -1583,8 +1598,9 @@ h1 {
     color: #000;
 }
 
-.e-gantt-template-taskbar.redirect, .redirect,.redirected {
+.e-gantt-template-taskbar.redirect, .redirect, .redirected {
     background-color: #e6e600 !important;
+    background-color: #fcde64 !important;
     color: #000;
 }
 
@@ -1600,32 +1616,38 @@ h1 {
 
 .e-gantt-template-taskbar.returntoramp, .returntoramp {
     background-color: #862d59 !important;
+    background-color: #d17242 !important;
     color: #fff;
 }
 
 .e-gantt-template-taskbar.boarding, .boarding {
     background-color: #ff66ff !important;
+    background-color: #f451a1 !important;
     color: #fff;
 }
 
 
 .e-gantt-template-taskbar.gateclosed, .gateclosed {
     background-color: #cc33ff !important;
+    background-color: #a94b6e !important;
     color: #fff;
 }
 .e-gantt-template-taskbar.ready, .ready {
     background-color: #9900cc !important;
+    background-color: #b532e0 !important;
     color: #fff;
 }
- 
+
 
 .e-gantt-template-taskbar.start, .start {
     background-color: #80ffff !important;
+    background-color: #8df1f2 !important;
     color: #000;
 }
 
 .e-gantt-template-taskbar.taxi, .taxi {
     background-color: #00b3b3 !important;
+    background-color: #8df2aa !important;
     color: #fff;
 }
 
@@ -1658,6 +1680,243 @@ h1 {
     background: #ccc;
 }
 
+.duty-100020, .duty-100021, .duty-100022, .duty-100023 {
+    background: #ff471a;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+.duty-text-1165 {
+    color: white;
+}
+
+.duty-text-5001 {
+    color: white;
+}
+
+.duty-text-5000 {
+    color: white;
+}
+
+.duty-text-1168 {
+    color: black;
+}
+
+.duty-text-1167 {
+    color: black;
+}
+
+.duty-text-10000, .duty-text-10001 {
+    color: white;
+}
+
+.duty-text-100000, .duty-text-100004, .duty-text-100005, .duty-text-100006 {
+    color: black;
+}
+
+.duty-text-100002 {
+    color: black;
+}
+
+.duty-text-100003 {
+    color: black;
+}
+
+.duty-text-100001 {
+    color: white;
+}
+
+.duty-text-1169 {
+    color: black;
+}
+
+.duty-text-1170 {
+    color: black;
+}
+
+.duty-text-100007 {
+    color: black;
+}
+
+.duty-text-100008 {
+    color: black;
+}
+
+.duty-text-100009 {
+    color: white;
+}
+
+.duty-1165 {
+    background: #80e5ff;
+    text-align: center;
+    padding: 0px !important;
+    color: black;
+}
+
+.duty-1165-oh {
+    background: #bfff80;
+    text-align: center;
+    padding: 0px !important;
+    color: black;
+}
+
+.duty-5001 {
+    background: #e699ff;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-300014 {
+    background: #db70b8;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-5000 {
+    background: #ff1a8c;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-1168 {
+    background: #ffff00;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-1167 {
+    background: #ffb31a;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-300013 {
+    background: #ffe066;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-10000, .duty-10001 {
+    background: #e699ff;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-100000, .duty-100004, .duty-100005, .duty-100006 {
+    background: #ff0000;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-100002 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100003 {
+    background: #47d1d1;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100001 {
+    background: #e699ff;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-1169 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-1166 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-1170 {
+    background: #ffff99;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100007 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100008 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100009 {
+    background: #ff471a;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-300008 {
+    background: gray;
+    text-align: center;
+    padding: 3px !important;
+    color: white;
+}
+
+.duty-300009 {
+    background: #99ffdd;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+
+.duty-100025 {
+    background: #03A9F4;
+    text-align: center;
+    padding: 3px !important;
+    color: black;
+}
+.duty-300050 {
+    background: #b8b894;
+    text-align: center;
+    color: black;
+}
+
+.duty-300051 {
+    background: #e6e6e6;
+    text-align: center;
+    color: black;
+}
+.duty-1165-obs {
+    background: #ffd9b3;
+    text-align: center;
+    padding: 0px !important;
+    color: black;
+}
+/*   OLD 
 .duty-1165 {
     background: #9966ff;
     text-align: center;
@@ -1706,6 +1965,7 @@ h1 {
     padding: 3px !important;
     color: black;
 }
+
 
 .duty-100002 {
     background: #b3b3b3;
@@ -1757,7 +2017,7 @@ h1 {
     padding: 3px !important;
     color: white;
 }
-
+*/
 /***************************/
 /******Weather*/
 .wicon {
@@ -1907,3 +2167,13 @@ h1 {
         padding: 0;
         margin: 0px;
     }
+
+
+.vira .dx-datagrid .dx-row > td{
+    padding-top:8px;
+    padding-bottom:8px;
+    line-height:18px;
+}
+.vira .dx-datagrid .dx-row.dx-header-row > td {
+    padding: 8px 10px 8px 10px !important;
+}

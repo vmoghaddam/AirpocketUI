@@ -1,0 +1,105 @@
+﻿<style>
+    #grid .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #grid .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #grid .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #grid .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .datepicker-plot-area {
+        box-sizing: border-box;
+        overflow: hidden;
+        min-height: 70px;
+        display: block;
+        width: 300px !important;
+        min-width: 200px;
+        padding: 10px !important;
+        position: absolute;
+        font: 12px tahoma;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
+
+        .datepicker-plot-area .datepicker-day-view .table-days td span {
+            display: block;
+            width: 100%;
+            height: 30px !important;
+            line-height: 30px !important;
+            padding: 0;
+            margin: 0px;
+        }
+
+    .td-field {
+        padding: 7px;
+        text-align: left
+    }
+
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+</style>
+<div class="box vira_inventory" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div style="width: 100%">
+            <!--<div style="width: 100%; border: 1px solid #ccc">
+                <div class="td-title" style="width: 100%">Filter Panel</div>
+                <table style="margin-top:10px;color:black" class="dx-border">
+                    <tr>
+                        <td class="td-field" style="font-weight:bold">Part Type:</td>
+                        <td class="td-field"><div dx-text-box="txt_part_type" class="center" style="width: 100%"></div></td>
+
+                        <td class="td-field" style="font-weight:bold">code:</td>
+                        <td class="td-field"><div dx-text-box="txt_code" class="center"></div></td>
+
+
+                        <td style="padding: 5px"><div dx-button="btn_search"></div></td>
+                    </tr>
+
+
+                </table>
+            </div>-->
+            <div dx-data-grid="dg_company" id="dg_company" class="content" style="overflow-y:hidden;margin-top: 5px;width: 100%" dx-item-alias="row"></div>
+        </div>
+
+    </div>
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_new"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_edit"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_delete"></div></td>
+
+                <td></td>
+
+            </tr>
+        </table>
+    </div>
+
+    <div ng-include="'app/views/vira_company_add.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+

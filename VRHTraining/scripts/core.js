@@ -372,7 +372,15 @@ function GetTimeStr(minutes) {
     return ans;
 };
 General = {};
-
+Date.prototype.addMinutes = function (h) {
+    this.setTime(this.getTime() + (h * 60 * 1000));
+    return this;
+};
+General.add_minutes =function (dt, m){
+    var result = new Date(dt);
+    result.setTime(result.getTime() + (m * 60 * 1000));
+    return new Date( result);
+}
 General.getDayFirstHour = function (d) {
      return new Date(new Date(d.setHours(0)).setMinutes(0)).setSeconds(0);
 	/*var dif = 0;

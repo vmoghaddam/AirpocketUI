@@ -1,6 +1,6 @@
 'use strict';
 app.controller('mapController', ['$scope', '$location',   'flightService', '$routeParams', '$rootScope', 'trnService', '$window','mapService', '$sce',function ($scope, $location,   flightService, $routeParams, $rootScope, trnService, $window,mapService,$sce) {
-
+    $scope.airline_id='AXV';
 	
 	
 	$scope.popup_add_visible = false;
@@ -65,14 +65,16 @@ app.controller('mapController', ['$scope', '$location',   'flightService', '$rou
 	$scope.bind_flight=function(){
 	   mapService.getFlight( $scope.mapt_data.APFlightId ).then(function (response) {
 		   $scope.flight=response.flight;
-		   if ($scope.flight.FlightNumber.indexOf('VRH')==-1)
+		   if ($scope.airline_id=='VRH' && $scope.flight.FlightNumber.indexOf('VRH')==-1)
 			   $scope.flight.FlightNumber='VRH'+$scope.flight.FlightNumber;
+          if ($scope.airline_id=='AXV' && $scope.flight.FlightNumber.indexOf('AXV')==-1)
+			   $scope.flight.FlightNumber='AXV'+$scope.flight.FlightNumber;
 		   
 		   $scope.crew=response.crew;
 		   console.log('map flight',$scope.crew);
 		   
 		   var is_flight_onlie=[2,14,20,21,23,24,25].indexOf($scope.flight.FlightStatusID)!=-1;
-		   $scope.map_url=$sce.trustAsResourceUrl('https://map.airpocket.app/fr.html?source=map&icao=vrh&no='
+		   $scope.map_url=$sce.trustAsResourceUrl('https://map.airpocket.app/fr.html?source=map&icao='+$scope.airline_id+'&no='
 												  +$scope.flight.FlightNumber+'&date='
 												  +moment(new Date($scope.flight.STDDayLocal)).format("YYYY-MM-DD")+'&mode='+(is_flight_onlie?'online':'offline'));
 												  

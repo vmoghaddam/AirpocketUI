@@ -1,5 +1,4 @@
 ﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,14 +15,13 @@
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44339</IISExpressSSLPort>
+    <IISExpressSSLPort>44385</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -44,20 +42,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -67,30 +52,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -98,11 +59,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="airpocket\content\images\airline.png" />
+    <Content Include="airpocket\content\images\logo.png" />
     <Content Include="app\app.js" />
     <Content Include="app\controllers\aircraftSelectController.js" />
     <Content Include="app\controllers\aircraftTypeController.js" />
@@ -112,11 +72,12 @@
     <Content Include="app\controllers\asrAdd.js" />
     <Content Include="app\controllers\asrreport.js" />
     <Content Include="app\controllers\associateController.js" />
-    <Content Include="app\controllers\authCardsController.js" />
+    <Content Include="app\controllers\awbController.js" />
     <Content Include="app\controllers\board.js" />
     <Content Include="app\controllers\boardfly.js" />
-    <Content Include="app\controllers\boardtemp.js" />
     <Content Include="app\controllers\boardtest.js" />
+    <Content Include="app\controllers\cabinReports.js" />
+    <Content Include="app\controllers\cabin_reports.js" />
     <Content Include="app\controllers\ceoFlightBoardController.js" />
     <Content Include="app\controllers\certificateAddController.js" />
     <Content Include="app\controllers\changeFlightRegisterController.js" />
@@ -143,27 +104,27 @@
     <Content Include="app\controllers\delaybiKPI.js" />
     <Content Include="app\controllers\delayCodesController.js" />
     <Content Include="app\controllers\delayReport.js" />
+    <Content Include="app\controllers\directDeliveryController.js" />
+    <Content Include="app\controllers\disaggregationController.js" />
     <Content Include="app\controllers\documentAddController.js" />
     <Content Include="app\controllers\drAdd.js" />
-    <Content Include="app\controllers\duties_report.js" />
     <Content Include="app\controllers\dutyTimeline.js" />
-    <Content Include="app\controllers\efbAsrController.js" />
     <Content Include="app\controllers\employeeSelectController.js" />
     <Content Include="app\controllers\employeeSelectCourse.js" />
+    <Content Include="app\controllers\exam_client.js" />
     <Content Include="app\controllers\expiringCourseType.js" />
     <Content Include="app\controllers\expiringGroup.js" />
+    <Content Include="app\controllers\fdm_main.js" />
+    <Content Include="app\controllers\fdm_sand.js" />
     <Content Include="app\controllers\fdps.js" />
     <Content Include="app\controllers\fdpsfly.js" />
     <Content Include="app\controllers\filterController.js" />
     <Content Include="app\controllers\finMonthlyReport.js" />
     <Content Include="app\controllers\finMonthReport.js" />
     <Content Include="app\controllers\finReport.js" />
-    <Content Include="app\controllers\fix-time-add.js" />
     <Content Include="app\controllers\fixtime.js" />
     <Content Include="app\controllers\fixtimereport.js" />
     <Content Include="app\controllers\fixtimereportdaily.js" />
-    <Content Include="app\controllers\fixtime_summary_controller.js" />
-    <Content Include="app\controllers\fix_time_controller.js" />
     <Content Include="app\controllers\flightBoardAllController.js" />
     <Content Include="app\controllers\flightBoardController - Copy.js" />
     <Content Include="app\controllers\flightBoardController.js" />
@@ -189,14 +150,18 @@
     <Content Include="app\controllers\formayearly.js" />
     <Content Include="app\controllers\formmovaled.js" />
     <Content Include="app\controllers\formmovaledyearly.js" />
+    <Content Include="app\controllers\formsVacation.js" />
+    <Content Include="app\controllers\form_vacation_responsible.js" />
     <Content Include="app\controllers\fuelbi.js" />
     <Content Include="app\controllers\fuelbiKPI.js" />
     <Content Include="app\controllers\fuelbiRoute.js" />
     <Content Include="app\controllers\fuelReport.js" />
     <Content Include="app\controllers\gnt.js" />
+    <Content Include="app\controllers\gpt_test.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\imageviewer.js" />
     <Content Include="app\controllers\indexController.js" />
+    <Content Include="app\controllers\inventoryController.js" />
     <Content Include="app\controllers\ipaccessController.js" />
     <Content Include="app\controllers\irregularFlightController.js" />
     <Content Include="app\controllers\jobgroupAddController.js" />
@@ -225,14 +190,15 @@
     <Content Include="app\controllers\locationAddController.js" />
     <Content Include="app\controllers\locationController.js" />
     <Content Include="app\controllers\logAdd.js" />
+    <Content Include="app\controllers\logeticRequest.js" />
     <Content Include="app\controllers\loginController.js" />
-    <Content Include="app\controllers\map.js" />
     <Content Include="app\controllers\mlistAddController.js" />
     <Content Include="app\controllers\mlistController.js" />
     <Content Include="app\controllers\mntStatus.js" />
     <Content Include="app\controllers\New Text Document.txt" />
-    <Content Include="app\controllers\newFile.js" />
+    <Content Include="app\controllers\newPartNumber.js" />
     <Content Include="app\controllers\nira.js" />
+    <Content Include="app\controllers\nisFollowUp.js" />
     <Content Include="app\controllers\notificationController.js" />
     <Content Include="app\controllers\ofpAdd.js" />
     <Content Include="app\controllers\optionAddController.js" />
@@ -240,10 +206,17 @@
     <Content Include="app\controllers\ordersController.js" />
     <Content Include="app\controllers\organizationAddController.js" />
     <Content Include="app\controllers\organizationController.js" />
+    <Content Include="app\controllers\partNumberSelection.js" />
     <Content Include="app\controllers\personAddController.js" />
+    <Content Include="app\controllers\personController.js" />
+    <Content Include="app\controllers\stby_controller.js" />
+    <Content Include="app\controllers\trn_exam.js" />
+    <Content Include="app\controllers\zfdm_crew.js" />
+    <Content Include="app\controllers\zfdm_main.js" />
+    <Content Include="app\controllers\_personAddController.js" />
     <Content Include="app\controllers\personbookController.js" />
     <Content Include="app\controllers\personcertificateController.js" />
-    <Content Include="app\controllers\personController.js" />
+    <Content Include="app\controllers\_personController.js" />
     <Content Include="app\controllers\personcourseController.js" />
     <Content Include="app\controllers\personmiscAddController.js" />
     <Content Include="app\controllers\personmiscController.js" />
@@ -251,25 +224,9 @@
     <Content Include="app\controllers\planController.js" />
     <Content Include="app\controllers\planningBoard.js" />
     <Content Include="app\controllers\planRegistersController.js" />
-    <Content Include="app\controllers\qaCabin.js" />
-    <Content Include="app\controllers\qaCatering.js" />
-    <Content Include="app\controllers\qaCyberSecurity.js" />
-    <Content Include="app\controllers\qaDashboard.js" />
-    <Content Include="app\controllers\qaDispatch.js" />
-    <Content Include="app\controllers\qaEmployee.js" />
-    <Content Include="app\controllers\qaForm.js" />
-    <Content Include="app\controllers\qaGround.js" />
-    <Content Include="app\controllers\qahazardadd.js" />
-    <Content Include="app\controllers\qaHazardLog.js" />
-    <Content Include="app\controllers\qaMaintenance.js" />
-    <Content Include="app\controllers\qaOperationPopup.js" />
-    <Content Include="app\controllers\qaRefer.js" />
-    <Content Include="app\controllers\qaReports.js" />
-    <Content Include="app\controllers\qaReportStatus.js" />
-    <Content Include="app\controllers\qaSecurity.js" />
-    <Content Include="app\controllers\qaVoluntary.js" />
-    <Content Include="app\controllers\qaVoyageController.js" />
+    <Content Include="app\controllers\quizController.js" />
     <Content Include="app\controllers\rawcmd.js" />
+    <Content Include="app\controllers\receiptController.js" />
     <Content Include="app\controllers\refreshController.js" />
     <Content Include="app\controllers\regAvailabilityController.js" />
     <Content Include="app\controllers\regflightmonthly.js" />
@@ -278,9 +235,40 @@
     <Content Include="app\controllers\reportFlightDaily.js" />
     <Content Include="app\controllers\reportFlightDailyStation.js" />
     <Content Include="app\controllers\reportFlights.js" />
-    <Content Include="app\controllers\reportlog.js" />
-    <Content Include="app\controllers\reportlogduty.js" />
-    <Content Include="app\controllers\reportlogprofile.js" />
+    <Content Include="app\controllers\student_attendance.js" />
+    <Content Include="app\controllers\trn_efb_assessment.js" />
+    <Content Include="app\controllers\trn_fstd_crm.js" />
+    <Content Include="app\controllers\trn_fstd_monitoring.js" />
+    <Content Include="app\controllers\trn_grt.js" />
+    <Content Include="app\controllers\trn_instructor.js" />
+    <Content Include="app\controllers\trn_lifus.js" />
+    <Content Include="app\controllers\trn_line_check.js" />
+    <Content Include="app\controllers\trn_line_crm.js" />
+    <Content Include="app\controllers\trn_questions.js" />
+    <Content Include="app\controllers\trn_zftt.js" />
+    <Content Include="app\controllers\vira_mrf_closing.js" />
+    <Content Include="app\controllers\vira_mrf_list.js" />
+    <Content Include="app\controllers\vira_beginning_add.js" />
+    <Content Include="app\controllers\vira_beginning_inventory.js" />
+    <Content Include="app\controllers\vira_cardex.js" />
+    <Content Include="app\controllers\vira_company.js" />
+    <Content Include="app\controllers\vira_company_add.js" />
+    <Content Include="app\controllers\vira_delivery_order_wr.js" />
+    <Content Include="app\controllers\vira_direct_delivery.js" />
+    <Content Include="app\controllers\vira_inventory_total.js" />
+    <Content Include="app\controllers\vira_new_mrf.js" />
+    <Content Include="app\controllers\vira_nis.js" />
+    <Content Include="app\controllers\vira_nis_list.js" />
+    <Content Include="app\controllers\vira_part_number.js" />
+    <Content Include="app\controllers\vira_part_number_add.js" />
+    <Content Include="app\controllers\vira_part_number_selection.js" />
+    <Content Include="app\controllers\vira_po.js" />
+    <Content Include="app\controllers\vira_po_list.js" />
+    <Content Include="app\controllers\vira_qrf_list.js" />
+    <Content Include="app\controllers\vira_receipt.js" />
+    <Content Include="app\controllers\vira_request_cartable.js" />
+    <Content Include="app\controllers\requestForm.js" />
+    <Content Include="app\controllers\requestNewAdd.js" />
     <Content Include="app\controllers\roster2.js" />
     <Content Include="app\controllers\rosterController.js" />
     <Content Include="app\controllers\rosterDailyController - Copy.js" />
@@ -288,13 +276,12 @@
     <Content Include="app\controllers\rosterReport.js" />
     <Content Include="app\controllers\routeAddController.js" />
     <Content Include="app\controllers\routeController.js" />
-    <Content Include="app\controllers\rptCityPairDaily.js" />
     <Content Include="app\controllers\rptflightspopup.js" />
-    <Content Include="app\controllers\cabinReports.js" />
     <Content Include="app\controllers\scheduling.js" />
     <Content Include="app\controllers\schedulinggrid.js" />
     <Content Include="app\controllers\schedulingvrh.js" />
     <Content Include="app\controllers\signupController.js" />
+    <Content Include="app\controllers\sim.js" />
     <Content Include="app\controllers\statDelayController.js" />
     <Content Include="app\controllers\studyFieldSelectController.js" />
     <Content Include="app\controllers\tblDelay.js" />
@@ -307,49 +294,75 @@
     <Content Include="app\controllers\testController.js" />
     <Content Include="app\controllers\tokensManagerController.js" />
     <Content Include="app\controllers\training.js" />
+    <Content Include="app\controllers\tripinfo.js" />
+    <Content Include="app\controllers\trnDashboard.js" />
+    <Content Include="app\controllers\trnexpiringgroups.js" />
+    <Content Include="app\controllers\trnexpiringtypes.js" />
+    <Content Include="app\controllers\trnschedule.js" />
+    <Content Include="app\controllers\trnScheduleCourse.js" />
+    <Content Include="app\controllers\trnScheduleCourseType.js" />
     <Content Include="app\controllers\trnstat.js" />
     <Content Include="app\controllers\usersController.js" />
     <Content Include="app\controllers\verify.js" />
+    <Content Include="app\controllers\vira_inventory.js" />
+    <Content Include="app\controllers\vira_new_part_type.js" />
+    <Content Include="app\controllers\vira_nis_add.js" />
+    <Content Include="app\controllers\vira_part_type.js" />
+    <Content Include="app\controllers\vira_personnel_selection.js" />
+    <Content Include="app\controllers\vira_request_cartable_line.js" />
+    <Content Include="app\controllers\vira_request_edit.js" />
+    <Content Include="app\controllers\vira_request_list.js" />
+    <Content Include="app\controllers\vira_return_store.js" />
+    <Content Include="app\controllers\vira_rfq_new.js" />
+    <Content Include="app\controllers\vira_rfq_result.js" />
+    <Content Include="app\controllers\vira_shipment.js" />
+    <Content Include="app\controllers\vira_shipment_add.js" />
     <Content Include="app\controllers\vrAdd.js" />
     <Content Include="app\controllers\zdutyTimeline.js" />
+    <Content Include="app\controllers\zpersonAddController.js" />
+    <Content Include="app\controllers\zpersonController.js" />
+    <Content Include="app\controllers\zscheduling.js" />
     <Content Include="app\rosterController.js" />
     <Content Include="app\services\activityService.js" />
     <Content Include="app\services\aircraftService.js" />
     <Content Include="app\services\airportService.js" />
+    <Content Include="app\services\atoService.js" />
+    <Content Include="app\services\atoServices.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\biService.js" />
-    <Content Include="app\services\cmsService.js" />
     <Content Include="app\services\courseService.js" />
     <Content Include="app\services\fbService.js" />
+    <Content Include="app\services\fdmService.js" />
     <Content Include="app\services\flightBagService.js" />
     <Content Include="app\services\flightService.js" />
     <Content Include="app\services\fuelService.js" />
     <Content Include="app\services\generalService.js" />
-    <Content Include="app\services\mntService.js" />
+    <Content Include="app\services\grhService.js" />
     <Content Include="app\services\jobgroupService.js" />
     <Content Include="app\services\libraryService.js" />
     <Content Include="app\services\locationService.js" />
     <Content Include="app\services\logService.js" />
     <Content Include="app\services\mapService.js" />
+    <Content Include="app\services\mntService.js" />
     <Content Include="app\services\msgService.js" />
     <Content Include="app\services\neerjaService.js" />
-    <Content Include="app\services\newFile.js" />
     <Content Include="app\services\notificationService.js" />
     <Content Include="app\services\ordersService.js" />
     <Content Include="app\services\organizationService.js" />
     <Content Include="app\services\personService.js" />
-    <Content Include="app\services\qahService.js" />
-    <Content Include="app\services\qalogService.js" />
-    <Content Include="app\services\qaService.js" />
     <Content Include="app\services\schedulingService.js" />
     <Content Include="app\services\statService.js" />
     <Content Include="app\services\testService.js" />
     <Content Include="app\services\tokensManagerService.js" />
     <Content Include="app\services\trainingService.js" />
+    <Content Include="app\services\vira_general_service.js" />
     <Content Include="app\services\weatherService.js" />
+    <Content Include="app\services\zpersonService.js" />
     <Content Include="app\services\zschedulingService.js" />
-    <Content Include="app\services\zschedulingService2.js" />
+    <Content Include="app\services\ztrainingService.js" />
+    <Content Include="app\controllers\aggregateController.js" />
+    <Content Include="app\views\aggregate.html" />
     <Content Include="app\views\aircraftSelect.html" />
     <Content Include="app\views\aircrafttype.html" />
     <Content Include="app\views\airport.html" />
@@ -358,11 +371,12 @@
     <Content Include="app\views\asrAdd.html" />
     <Content Include="app\views\asrreport.html" />
     <Content Include="app\views\associate.html" />
-    <Content Include="app\views\authCards.html" />
+    <Content Include="app\views\awb.html" />
     <Content Include="app\views\board.html" />
-    <Content Include="app\views\boardtemp.html" />
     <Content Include="app\views\boardtest.html" />
     <Content Include="app\views\boarfly.html" />
+    <Content Include="app\views\cabinReports.html" />
+    <Content Include="app\views\cabin_reports.html" />
     <Content Include="app\views\ceoFlightBoard.html" />
     <Content Include="app\views\certificateAdd.html" />
     <Content Include="app\views\changeflightregister.html" />
@@ -390,16 +404,19 @@
     <Content Include="app\views\delaybiKPI.html" />
     <Content Include="app\views\delayCodes.html" />
     <Content Include="app\views\delayReport.html" />
+    <Content Include="app\views\directDelivery.html" />
+    <Content Include="app\views\disaggregation.html" />
     <Content Include="app\views\Document.html" />
     <Content Include="app\views\documentAdd.html" />
     <Content Include="app\views\drAdd.html" />
-    <Content Include="app\views\duties_report.html" />
     <Content Include="app\views\dutyTimeline.html" />
-    <Content Include="app\views\efbAsr.html" />
     <Content Include="app\views\employeeSelect.html" />
     <Content Include="app\views\employeeSelectCourse.html" />
+    <Content Include="app\views\exam_client.html" />
     <Content Include="app\views\expiringCourseType.html" />
     <Content Include="app\views\expiringGroup.html" />
+    <Content Include="app\views\fdm_main.html" />
+    <Content Include="app\views\fdm_sand.html" />
     <Content Include="app\views\fdps.html" />
     <Content Include="app\views\fdpsfly.html" />
     <Content Include="app\views\filter.html" />
@@ -407,12 +424,9 @@
     <Content Include="app\views\finMonthReport.html" />
     <Content Include="app\views\finReport.html" />
     <Content Include="app\views\firstLogin.html" />
-    <Content Include="app\views\fix-time-add.html" />
     <Content Include="app\views\fixtime.html" />
     <Content Include="app\views\fixtimereport.html" />
     <Content Include="app\views\fixtimereportdaily.html" />
-    <Content Include="app\views\fixtime_summary.html" />
-    <Content Include="app\views\fix_time.html" />
     <Content Include="app\views\flight.html" />
     <Content Include="app\views\flightboard.html" />
     <Content Include="app\views\flightboardall.html" />
@@ -437,15 +451,19 @@
     <Content Include="app\views\formayearly.html" />
     <Content Include="app\views\formmovaled.html" />
     <Content Include="app\views\formmovaledyearly.html" />
+    <Content Include="app\views\formsVacation.html" />
+    <Content Include="app\views\form_vacation_responsible.html" />
     <Content Include="app\views\fuelbi.html" />
     <Content Include="app\views\fuelbiKPI.html" />
     <Content Include="app\views\fuelbiRoute.html" />
     <Content Include="app\views\fuelReport.html" />
     <Content Include="app\views\gnt.html" />
+    <Content Include="app\views\gpt_test.html" />
     <Content Include="app\views\header.html" />
     <Content Include="app\views\heasernarrow.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\imageviewer.html" />
+    <Content Include="app\views\inventory.html" />
     <Content Include="app\views\ipaccess.html" />
     <Content Include="app\views\irregularFlight.html" />
     <Content Include="app\views\jobgroup.html" />
@@ -474,12 +492,14 @@
     <Content Include="app\views\location.html" />
     <Content Include="app\views\locationAdd.html" />
     <Content Include="app\views\logAdd.html" />
+    <Content Include="app\views\logesticRequest.html" />
     <Content Include="app\views\login.html" />
-    <Content Include="app\views\map.html" />
     <Content Include="app\views\menu.html" />
     <Content Include="app\views\mlist.html" />
     <Content Include="app\views\mlistAdd.html" />
     <Content Include="app\views\mntStatus.html" />
+    <Content Include="app\views\newPartNumber.html" />
+    <Content Include="app\views\nisFollowUp.html" />
     <Content Include="app\views\nira.html" />
     <Content Include="app\views\notification.html" />
     <Content Include="app\views\ofpAdd.html" />
@@ -488,37 +508,27 @@
     <Content Include="app\views\orders.html" />
     <Content Include="app\views\Organization.html" />
     <Content Include="app\views\OrganizationAdd.html" />
+    <Content Include="app\views\partNumberSelection.html" />
     <Content Include="app\views\person.html" />
     <Content Include="app\views\personAdd.html" />
+    <Content Include="app\views\stby.html" />
+    <Content Include="app\views\trn_exam.html" />
+    <Content Include="app\views\zfdm_crew.html" />
+    <Content Include="app\views\zfdm_main.html" />
+    <Content Include="app\views\_person.html" />
+    <Content Include="app\views\_personAdd.html" />
     <Content Include="app\views\personbook.html" />
     <Content Include="app\views\personcertificate.html" />
     <Content Include="app\views\personcourse.html" />
     <Content Include="app\views\personmisc.html" />
     <Content Include="app\views\personmiscAdd.html" />
     <Content Include="app\views\personView.html" />
-    <Content Include="app\views\pif.html" />
     <Content Include="app\views\plan.html" />
     <Content Include="app\views\planningBoard.html" />
     <Content Include="app\views\planRegisters.html" />
-    <Content Include="app\views\qaCabin.html" />
-    <Content Include="app\views\qaCatering.html" />
-    <Content Include="app\views\qaCyberSecurity.html" />
-    <Content Include="app\views\qaDashboard.html" />
-    <Content Include="app\views\qaDispatch.html" />
-    <Content Include="app\views\qaEmployee.html" />
-    <Content Include="app\views\qaForm.html" />
-    <Content Include="app\views\qaGround.html" />
-    <Content Include="app\views\qahazardadd.html" />
-    <Content Include="app\views\qahazardlog.html" />
-    <Content Include="app\views\qaMaintenance.html" />
-    <Content Include="app\views\qaOperationPopup.html" />
-    <Content Include="app\views\qaRefer.html" />
-    <Content Include="app\views\qaReport.html" />
-    <Content Include="app\views\qaReportStatus.html" />
-    <Content Include="app\views\qaSecurity.html" />
-    <Content Include="app\views\qaVoluntary.html" />
-    <Content Include="app\views\qaVoyage.html" />
+    <Content Include="app\views\quiz.html" />
     <Content Include="app\views\rawcmd.html" />
+    <Content Include="app\views\receipt.html" />
     <Content Include="app\views\refresh.html" />
     <Content Include="app\views\regavailability.html" />
     <Content Include="app\views\regflightmonthly.html" />
@@ -527,21 +537,52 @@
     <Content Include="app\views\reportFlightDaily.html" />
     <Content Include="app\views\reportFlightDailyStation.html" />
     <Content Include="app\views\reportFlights.html" />
-    <Content Include="app\views\reportlog.html" />
-    <Content Include="app\views\reportlogduty.html" />
-    <Content Include="app\views\reportlogprofile.html" />
+    <Content Include="app\views\student_attendance.html" />
+    <Content Include="app\views\test_gpt.html" />
+    <Content Include="app\views\trn_efb_assessment.html" />
+    <Content Include="app\views\trn_fstd_crm.html" />
+    <Content Include="app\views\trn_fstd_monitoring.html" />
+    <Content Include="app\views\trn_grt.html" />
+    <Content Include="app\views\trn_instructor.html" />
+    <Content Include="app\views\trn_lifus.html" />
+    <Content Include="app\views\trn_line_check.html" />
+    <Content Include="app\views\trn_line_crm.html" />
+    <Content Include="app\views\trn_questions.html" />
+    <Content Include="app\views\trn_zftt.html" />
+    <Content Include="app\views\vira_beginning_add.html" />
+    <Content Include="app\views\vira_beginning_inventory.html" />
+    <Content Include="app\views\vira_cardex.html" />
+    <Content Include="app\views\vira_company.html" />
+    <Content Include="app\views\vira_company_add.html" />
+    <Content Include="app\views\vira_delivery_order_wr.html" />
+    <Content Include="app\views\vira_direct_delivery.html" />
+    <Content Include="app\views\vira_inventory_total.html" />
+    <Content Include="app\views\vira_mrf_closing.html" />
+    <Content Include="app\views\vira_mrf_list.html" />
+    <Content Include="app\views\vira_new_mrf.html" />
+    <Content Include="app\views\vira_nis.html" />
+    <Content Include="app\views\vira_nis_list.html" />
+    <Content Include="app\views\vira_part_number.html" />
+    <Content Include="app\views\vira_part_number_add.html" />
+    <Content Include="app\views\vira_part_number_selection.html" />
+    <Content Include="app\views\vira_po.html" />
+    <Content Include="app\views\vira_po_list.html" />
+    <Content Include="app\views\vira_qrf_list.html" />
+    <Content Include="app\views\vira_receipt.html" />
+    <Content Include="app\views\vira_request_cartable.html" />
+    <Content Include="app\views\requestForm.html" />
+    <Content Include="app\views\requestNewAdd.html" />
     <Content Include="app\views\roster.html" />
     <Content Include="app\views\rosterdaily.html" />
     <Content Include="app\views\rosterReport.html" />
     <Content Include="app\views\route.html" />
     <Content Include="app\views\routeAdd.html" />
-    <Content Include="app\views\rptCityPairDaily.html" />
     <Content Include="app\views\rptflightspopup.html" />
-    <Content Include="app\views\cabinReports.html" />
     <Content Include="app\views\scheduling.html" />
     <Content Include="app\views\schedulinggrid.html" />
     <Content Include="app\views\schedulingvrh.html" />
     <Content Include="app\views\signup.html" />
+    <Content Include="app\views\sim.html" />
     <Content Include="app\views\statDelay.html" />
     <Content Include="app\views\studyFieldSelect.html" />
     <Content Include="app\views\tblDelay.html" />
@@ -555,15 +596,40 @@
     <Content Include="app\views\test.html" />
     <Content Include="app\views\tokens.html" />
     <Content Include="app\views\training.html" />
+    <Content Include="app\views\tripinfo.html" />
+    <Content Include="app\views\trnDashboard.html" />
+    <Content Include="app\views\trnexpiringgroups.html" />
+    <Content Include="app\views\trnexpiringtypes.html" />
+    <Content Include="app\views\trnschedule.html" />
+    <Content Include="app\views\trnScheduleCourse.html" />
+    <Content Include="app\views\trnScheduleCourseType.html" />
     <Content Include="app\views\trnstat.html" />
     <Content Include="app\views\users.html" />
     <Content Include="app\views\verify.html" />
+    <Content Include="app\views\vira_inventory.html" />
+    <Content Include="app\views\vira_new_part_type.html" />
+    <Content Include="app\views\vira_nis_add.html" />
+    <Content Include="app\views\vira_part_type.html" />
+    <Content Include="app\views\vira_personnel_selection.html" />
+    <Content Include="app\views\vira_request_cartable_line.html" />
+    <Content Include="app\views\vira_request_edit.html" />
+    <Content Include="app\views\vira_request_list.html" />
+    <Content Include="app\views\vira_return_store.html" />
+    <Content Include="app\views\vira_rfq_new.html" />
+    <Content Include="app\views\vira_rfq_result.html" />
+    <Content Include="app\views\vira_shipment.html" />
+    <Content Include="app\views\vira_shipment_add.html" />
     <Content Include="app\views\vrAdd.html" />
     <Content Include="app\views\zdutyTimeline.html" />
+    <Content Include="app\views\zperson.html" />
+    <Content Include="app\views\zpersonAdd.html" />
+    <Content Include="app\views\zscheduling.html" />
     <Content Include="app\_part1.js" />
     <Content Include="app\_part2.js" />
     <Content Include="app\_part3.js" />
     <Content Include="app\_service1.js" />
+    <Content Include="bin\VRHTraining.dll" />
+    <Content Include="bin\VRHTraining.pdb" />
     <Content Include="content\css\bootstrap-4.min.css" />
     <Content Include="content\css\bootstrap.css" />
     <Content Include="content\css\bootstrap.min.css" />
@@ -617,8 +683,6 @@
     <Content Include="content\fonts\fontawesome-webfont.svg" />
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="content\fonts\ionicons.svg" />
-    <Content Include="content\images\acicon.png" />
-    <Content Include="content\images\acicon2.png" />
     <Content Include="content\images\actype.png" />
     <Content Include="content\images\actype2.png" />
     <Content Include="content\images\airline.png" />
@@ -653,7 +717,6 @@
     <Content Include="content\images\clear-night.svg" />
     <Content Include="content\images\cloud-download.png" />
     <Content Include="content\images\cloudy.svg" />
-    <Content Include="content\images\cm-report.png" />
     <Content Include="content\images\course.png" />
     <Content Include="content\images\course2.png" />
     <Content Include="content\images\crew_time.png" />
@@ -671,8 +734,6 @@
     <Content Include="content\images\eye-white.png" />
     <Content Include="content\images\eye.png" />
     <Content Include="content\images\failed-24.png" />
-    <Content Include="content\images\fdmc.png" />
-    <Content Include="content\images\fdmdashboardmain.png" />
     <Content Include="content\images\fields.png" />
     <Content Include="content\images\fields2.png" />
     <Content Include="content\images\fixedtimeedit.png" />
@@ -706,7 +767,6 @@
     <Content Include="content\images\letter-f.png" />
     <Content Include="content\images\letter-l.png" />
     <Content Include="content\images\library.png" />
-    <Content Include="content\images\log.png" />
     <Content Include="content\images\logo-white.png" />
     <Content Include="content\images\logo.png" />
     <Content Include="content\images\logoap.png" />
@@ -747,7 +807,6 @@
     <Content Include="content\images\profile.png" />
     <Content Include="content\images\publisher.png" />
     <Content Include="content\images\publisher2.png" />
-    <Content Include="content\images\qa.png" />
     <Content Include="content\images\quill.png" />
     <Content Include="content\images\quill2.png" />
     <Content Include="content\images\rain.svg" />
@@ -773,8 +832,10 @@
     <Content Include="content\images\teamwork.png" />
     <Content Include="content\images\teamwork2.png" />
     <Content Include="content\images\timeline.png" />
+    <Content Include="content\images\trndashboard.png" />
     <Content Include="content\images\trnprofile.png" />
     <Content Include="content\images\trnprofilegrps.png" />
+    <Content Include="content\images\trnschedules.png" />
     <Content Include="content\images\trnstat.png" />
     <Content Include="content\images\types.png" />
     <Content Include="content\images\types2.png" />
@@ -787,15 +848,52 @@
     <Content Include="content\images\wind.svg" />
     <Content Include="content\images\windarrow.svg" />
     <Content Include="content\images\_book.png" />
-    <Content Include="content\Site.css" />
     <Content Include="content\webfonts\fa-brands-400.svg" />
     <Content Include="content\webfonts\fa-regular-400.svg" />
     <Content Include="content\webfonts\fa-solid-900.svg" />
+    <Content Include="contextmenu\jquery.contextMenu.min.css" />
+    <Content Include="contextmenu\jquery.contextMenu.min.js" />
+    <Content Include="contextmenu\jquery.ui.position.js" />
+    <Content Include="download.aspx" />
+    <Content Include="fm\images\application.png" />
+    <Content Include="fm\images\arrow-down.png" />
+    <Content Include="fm\images\arrow-right-small.png" />
+    <Content Include="fm\images\arrow-right.png" />
+    <Content Include="fm\images\code.png" />
+    <Content Include="fm\images\css.png" />
+    <Content Include="fm\images\db.png" />
+    <Content Include="fm\images\directory-lock.png" />
+    <Content Include="fm\images\directory.png" />
+    <Content Include="fm\images\doc.png" />
+    <Content Include="fm\images\drive.png" />
+    <Content Include="fm\images\expander-collapsed.gif" />
+    <Content Include="fm\images\expander-expanded.gif" />
+    <Content Include="fm\images\file-lock.png" />
+    <Content Include="fm\images\file.png" />
+    <Content Include="fm\images\film.png" />
+    <Content Include="fm\images\flash.png" />
+    <Content Include="fm\images\folder_open.png" />
+    <Content Include="fm\images\html.png" />
+    <Content Include="fm\images\java.png" />
+    <Content Include="fm\images\linux.png" />
+    <Content Include="fm\images\music.png" />
+    <Content Include="fm\images\pdf.png" />
+    <Content Include="fm\images\php.png" />
+    <Content Include="fm\images\picture.png" />
+    <Content Include="fm\images\ppt.png" />
+    <Content Include="fm\images\psd.png" />
+    <Content Include="fm\images\ruby.png" />
+    <Content Include="fm\images\script.png" />
+    <Content Include="fm\images\spinner.gif" />
+    <Content Include="fm\images\txt.png" />
+    <Content Include="fm\images\xls.png" />
+    <Content Include="fm\images\zip.png" />
+    <Content Include="fm\jQueryFileExplorer.css" />
+    <Content Include="fm\jQueryFileExplorer.js" />
     <Content Include="gant.html" />
     <Content Include="gantt2.css" />
     <Content Include="gantt2.html" />
     <Content Include="gantt2.js" />
-    <Content Include="Global.asax" />
     <Content Include="index.html" />
     <Content Include="logo.png" />
     <Content Include="pdfjs\api\draft\display_api.js.html" />
@@ -1022,6 +1120,7 @@
     <Content Include="scripts\momenttz.js" />
     <Content Include="scripts\persian-date.min.js" />
     <Content Include="scripts\persian-datepicker.min.js" />
+    <Content Include="scripts\plotly-3.0.1.js" />
     <Content Include="scripts\properties.js" />
     <Content Include="scripts\selection.min.js" />
     <Content Include="scripts\styles.css" />
@@ -1063,16 +1162,27 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".user.ini" />
+    <Content Include="app\app.zip" />
+    <Content Include="app\controllers\11-16.zip" />
+    <Content Include="app\controllers\courseadd-01-10.zip" />
+    <Content Include="app\controllers\courseperson-01-10.zip" />
+    <Content Include="app\controllers\scheduling.zip" />
+    <Content Include="app\controllers\_forms.zip" />
+    <Content Include="app\services\services.zip" />
+    <Content Include="app\services\_trn.zip" />
+    <Content Include="app\views\board-10-29.zip" />
+    <Content Include="app\views\courseadd-01-10.zip" />
+    <Content Include="app\views\courseperson-01-10.zip" />
+    <Content Include="app\views\perdonadd-01-10.zip" />
+    <Content Include="app\views\scheduling.zip" />
+    <Content Include="app\views\services.zip" />
+    <Content Include="app\views\views.zip" />
+    <Content Include="app\views\_forms.zip" />
     <Content Include="content\css\fonts\KFOlCnqEu92Fr1MmEU9fABc4EsA.woff2" />
     <Content Include="content\css\fonts\KFOlCnqEu92Fr1MmEU9fBBc4.woff2" />
     <Content Include="content\css\fonts\KFOlCnqEu92Fr1MmEU9fBxc4EsA.woff2" />
@@ -1227,9 +1337,10 @@
     <Content Include="content\webfonts\fa-solid-900.ttf" />
     <Content Include="content\webfonts\fa-solid-900.woff" />
     <Content Include="content\webfonts\fa-solid-900.woff2" />
+    <Content Include="downloadhandler.ashx" />
+    <Content Include="filehandler.ashx" />
+    <Content Include="obj\Debug\VRHTraining.csproj.AssemblyReference.cache" />
     <Content Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
-    <Content Include="obj\Debug\VRH.csproj.AssemblyReference.cache" />
-    <None Include="packages.config" />
     <Content Include="pdfjs\api\draft\fonts\OpenSans-Bold-webfont.eot" />
     <Content Include="pdfjs\api\draft\fonts\OpenSans-Bold-webfont.woff" />
     <Content Include="pdfjs\api\draft\fonts\OpenSans-BoldItalic-webfont.eot" />
@@ -1517,10 +1628,8 @@
     <Content Include="pdfjs\web\locale\zh-CN\viewer.properties" />
     <Content Include="pdfjs\web\locale\zh-TW\viewer.properties" />
     <Content Include="pdfjs\web\viewer.js.map" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\web.config" />
+    <Content Include="pdfjs\_pdf.zip" />
+    <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1529,12 +1638,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\views\Shared\" />
     <Folder Include="app\views\templates\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Data\" />
+    <Folder Include="archived\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Views\fix_time_add\" />
+    <Folder Include="upload\certificates\" />
+    <Folder Include="upload\clientsfiles\" />
+    <Folder Include="upload\images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -1549,9 +1659,11 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52558</DevelopmentServerPort>
+          <DevelopmentServerPort>55700</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44339/</IISUrl>
+          <IISUrl>https://localhost:44386/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44386/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -1561,11 +1673,12 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.4.1.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
