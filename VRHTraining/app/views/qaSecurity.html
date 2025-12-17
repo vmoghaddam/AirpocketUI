@@ -1,0 +1,207 @@
+<style>
+    .td-field {
+        padding: 7px;
+        text-align: right
+    }
+
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: right;
+        color: black;
+        font-weight: bold
+    }
+</style>
+<div ng-controller="qaSecurityController">
+    <div style="padding:0px 10px 0 10px;">
+        <div style="margin-top: 0px; float: left; overflow: hidden; width: 60%;padding:10px 15px 0 0px" ng-show="isMaximise">
+            <div style='background:#898e8c;color:white;font-weight:bold;padding:7px;text-align:center'>SECURITY HAZARD REPORT</div>
+            <div style="border:1px solid #ccc;padding:10px;">
+                <div class='thin-scroll' style='overflow-y:auto;' ng-style="{height: scroll_qaSecurity_height + 'px'}">
+                    <div class="visible-sm visible-md visible-lg">
+                       <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="6" style=" padding:7px;text-align:left;color:black;font-weight:bold">
+                                Id:<span style='display:inline-block;margin-left:5px;'>{{entity.FormNo}}</span>
+                            </td>
+                        </tr>
+                    </table>
+						<table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="2">
+                                    :گزارش دهنده
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_email" class="center"></div></td>
+                                <td class="td-field" style="font-weight:bold"> :(Email) آدرس ایمیل </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_telNumber" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :(Tel No.) شماره تلفن </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"> <div dx-text-box="txt_name" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :(Full Name) نام و نام‌خانوادگی </td>
+                            </tr>
+                        </table>
+                        <table style="margin-top: 10px; border: 1px solid #eee; width: 100%; color: black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="4">
+                                    :اطلاعات اولیه
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-date-box="txt_reportDate" class="center"></div></td>
+                                <td class="td-field" style=" font-weight: bold"> :تاریخ گزارش </td>
+                                <td class="td-field"><div dx-date-box="txt_hazardDate" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :تاریخ و ساعت بروز رویداد/مخاطره </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_area" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :محل و بخش بروز رویداد/مخاطره </td>
+                                <td class="td-field"><div dx-text-box="txt_register" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :علامت ثبت هواپیما </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_route" class="center"></div></td>
+                                <td class="td-field" style=" font-weight: bold"> :مسیر پرواز </td>
+                                <td class="td-field"><div dx-text-box="txt_flightNumber" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :شماره پرواز </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 7px;text-align:right; font-weight: bold" colspan="2"> :شرح مخاطره / رویداد </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:7px;text-align:right;" colspan="2"><div dx-text-area="txt_description" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <div style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <div class="td-title">
+                                :عامل بروز مخاطره/رویداد
+                            </div>
+
+                            <div class="col-xs-3 col-sm-3 col-md-3" style="padding: 1%;text-align:right" ng-repeat="x in shrReason">
+                                <p style="margin-right:5px;display:inline-block">{{x.Title}}</p><input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="optReason[$index]" ng-change="chkReason($index)" ng-disabled="true" />
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="td-field" dx-text-area="txt_eventOther"></div>
+                        </div>
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" colspan="6">
+                                  :مشخصات / نوع و شماره تجهیزات / ابزار
+                                </td>
+                            </tr>
+
+
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_camera" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :دوربین </td>
+                                <td class="td-field"><div dx-text-box="txt_carryingBox" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :جعبه حمل اشیاء ممنوعه </td>
+                                <td class="td-field"><div dx-text-box="txt_handRocket" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :راکت‌دستی بازرسی کترینگ </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-box="txt_comail" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> Co mail: </td>
+                                <td class="td-field"><div dx-text-box="txt_other" class="center"></div></td>
+                                <td class="td-field" style="font-weight: bold"> :سایر </td>
+                            </tr>
+                        </table>
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title">
+                                    :گزارش شرایط و جزئیات تجهیزات مرتبط با مخاطره/رویداد
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-area="txt_equipmentDescription" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title">
+                                    آیا رویداد منجر به جرح/مصدومیت یا آسیب‌دیدگی پرسنل گردیدهاست؟ (توضیح داده شود)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-select-box="sb_injuryOccuring" class="center"></div></td>
+                            </tr>
+                            <tr ng-show="entity.InjuryOccuring == true">
+                                <td class="td-field"><div dx-text-area="txt_injuryDescription" class="center"></div></td>
+                            </tr>
+                        </table>
+
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title">
+                                    آیا رویداد منجر به وقفه کاری شده است؟ (چه مدت؟ بر حسب دقیقه)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding:7px;text-align:right;"><div dx-select-box="sb_workBreak" class="center"></div></td>
+                            </tr>
+                            <tr style="padding: 0px !important;text-align:center;width:100%" ng-show="entity.WorkBreak == true">
+                                <td class="td-field col-sm-12 col-xs-12 col-md-12"><div dx-number-box="txt_workBreakPeriod" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title">
+                                    :اقدامات پیشگیرانه/پیشنهادی یا اصلاحی لازم
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"><div dx-text-area="txt_preventiveActions" class="center"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="td-title" style="text-align: left !important; background-color: #66ffcc !important ">
+                                    Result
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-field"> <div dx-text-area="txt_result"></div></td>
+                            </tr>
+
+                        </table>
+                        <div style="clear:both"></div>
+                        <div class="td-title" style="text-align: left; margin-top: 10px">
+                            ATTACHED DOCUMENTS
+                        </div>
+                        <div dx-data-grid="dg_attachments" id="dg_attachments" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                            <div data-options="dxTemplate:{ name:'download' }">
+                                <a ng-click="download(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="float: right;width:40%" ng-style="getStyle()">
+            <div ng-include="'app/views/qaRefer.html?vx=2'" onload="testLoaded()"></div>
+            <table style="width:100%">
+                <tr>
+                    <td></td>
+                    <td style="width:200px;padding-right:10px">
+                        <div style="margin-top: 10px;padding: 7px; text-align: center; width: 100%;background-color:#ccc" ng-show="isMaximise" ng-click="maximise()">Maximize</div>
+                        <div style="margin-top: 10px;padding: 7px; text-align: center; width: 100%;background-color:#ccc" ng-show="!isMaximise" ng-click="maximise()">Minimize</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+<div style="clear:both"></div>

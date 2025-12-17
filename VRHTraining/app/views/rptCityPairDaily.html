@@ -1,0 +1,61 @@
+﻿<style>
+    #dg_fix_time {
+        margin-bottom: 80px;
+        padding: 0;
+        background-color: gray;
+        color: white;
+        padding: 0;
+    }
+
+    .footer.fixed-bottom {
+        z-index: 1000;
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="box" style="height:100%;overflow-y:hidden">
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+
+    <div dx-data-grid="dg_rptCPD" id="dg_rptCPD" dx-instance="dgInstance"></div>
+
+
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_persiandate"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+
+                <td></td>
+                <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_person"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_flight"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_flight_total"></div></td>-->
+            </tr>
+        </table>
+    </div>
+    <div id="popup_date" dx-popup="popup_date">
+        <div class="margin-bottom-5 padding-7 dx-border" style="padding:25px 0 10px 0">
+            <div>
+                <label style="width:45px;text-align:right;margin-right:5px;">From</label>
+
+                <input type="text" class="date1 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+            <div style="margin-top:15px;">
+                <label style="width:45px;text-align:right; margin-right:5px;">To</label>
+
+                <input type="text" class="date2 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

@@ -1,0 +1,18 @@
+﻿<div ng-controller="qaOperationPopup">
+    <div id="popup_operation" dx-popup="popup_operation" class="no-padding" style='padding:0 !important;'>
+     <div ng-include="'app/views/qaCabin.html?vx=3'" ng-if="Type == 0 && popup_operation_visible == true" onload="cabinLoaded()" style='padding:0'></div>
+        <div ng-include="'app/views/qaCatering.html?vx=3'" ng-if="Type == 4 && popup_operation_visible == true" onload="cateringLoaded()"></div>
+        <div ng-include="'app/views/qaMaintenance.html?vx=3'" ng-if="Type == 3 && popup_operation_visible == true" onload="maintenanceLoaded()"></div>
+        <div ng-include="'app/views/qaGround.html?vx=3'" ng-if="Type == 1 && popup_operation_visible == true" onload="groundLoaded()"></div>
+        <div ng-include="'app/views/qaVoluntary.html?vx=3'" ng-if="Type == 2 && popup_operation_visible == true" onload="voluntaryLoaded()"></div>
+        <div ng-include="'app/views/qaSecurity.html?vx=3'" ng-if="Type == 5 && popup_operation_visible == true" onload="securityLoaded()"></div>
+        <div ng-include="'app/views/qaDispatch.html?vx=3'" ng-if="Type == 6 && popup_operation_visible == true" onload="dispatchLoaded()"></div>
+        <div ng-include="'app/views/qaCyberSecurity.html?vx=3'" ng-if="Type == 7 && popup_operation_visible == true" onload="cyberLoaded()"></div>
+        <div ng-include="'app/views/efbAsr.html?vx=3'" ng-if="Type == 8 && popup_operation_visible == true" onload="asrLoaded()"></div>
+
+        <div ng-include="'app/views/qaVoyage.html?vx=3'" ng-if="Type == 9 && popup_operation_visible == true" onload="vrLoaded()"></div>
+    </div>
+
+  
+
+</div>

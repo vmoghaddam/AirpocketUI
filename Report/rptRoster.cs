@@ -7,6 +7,7 @@ using DevExpress.DataAccess.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Web.Configuration;
 
 namespace Report
 {
@@ -15,6 +16,7 @@ namespace Report
         public rptRoster(string _date, string _rev)
         {
             InitializeComponent();
+            xrPictureBoxLogo.ImageUrl = WebConfigurationManager.AppSettings["logo"] + ".png";
             if (!string.IsNullOrEmpty(_rev) && Convert.ToInt32(_rev) > 0)
                 lblRev.Text = "REVISION " + _rev;
 

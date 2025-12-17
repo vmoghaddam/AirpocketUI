@@ -1,0 +1,18 @@
+﻿<div ng-controller="employeeSelectCourseController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div dx-data-grid="dg" id="dg"></div>
+        <div style="margin-top:5px;font-weight:bold;padding:5px;">Selected Peaple:({{dg_selected.length}})</div>
+        <div style="border:1px solid #eee;height:160px;overflow-y:auto">
+            <div ng-repeat="x in dg_selected" class="col-lg-2" style="font-size:12px;text-align:center;padding:5px;" >
+                <div style="font-size: 12px; text-align: center; background: #ecc6d9; height: 30px; margin-top:3px;padding:2px;">
+                    {{x.Name}}
+                </div>
+               
+            </div>
+
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

@@ -1,0 +1,83 @@
+﻿<style>
+    .z5000{
+
+    }
+    .h70{
+        height:70px;
+    }
+    .left80{
+        margin-left:160px;
+    }
+    .sig {
+        display: inline-block;
+        position: relative;
+    }
+    .sig_img {
+        position:absolute;
+        top:25px;
+        left:0;
+        width:auto;
+        height:110px;
+    }
+    pre{
+        font-size:15px;
+    }
+    pre .prop{
+        color:red;
+        font-weight:bold;
+        display:inline-block;
+        min-width:90px;
+        text-align:center;
+        border-color:orange;
+        border-width:1px;
+        border-style:solid;
+    }
+    pre .prop.selected {
+        border-color:red;
+    }
+    .noborder{
+        border:0px solid white !important;
+    }
+    .alignleft{
+        text-align:left !important;
+    }
+</style>
+<div ng-controller="ofpAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <!--<div style="padding:5px;">-->
+
+        <div id="scroll_dradd" dx-scroll-view="scroll_dradd" style="margin-top:5px">
+            <div class="ofp-container" id="ofp-doc" ng-bind-html="OFPHtml">
+
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div style="clear:both"></div>
+
+
+
+        <div id="popup_value" dx-popup="popup_value" class="no-padding">
+            <div class="dx-border" style="padding:10px">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7" ng-show="propType=='string'">
+                    <label></label>
+                    <div dx-text-box="txt_prop" class="dx-border center" style="margin-top:0px;"></div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7" ng-show="propType=='number'">
+                    <label></label>
+                    <div dx-number-box="num_prop" class="dx-border center" style="margin-top:0px;"></div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+    <!--</div>-->
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+    
+</div>
+
+

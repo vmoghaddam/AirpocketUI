@@ -1,0 +1,354 @@
+﻿
+<style>
+    #grid .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #grid .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #grid .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #grid .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .datepicker-plot-area {
+        box-sizing: border-box;
+        overflow: hidden;
+        min-height: 70px;
+        display: block;
+        width: 300px !important;
+        min-width: 200px;
+        padding: 10px !important;
+        position: absolute;
+        font: 12px tahoma;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
+
+        .datepicker-plot-area .datepicker-day-view .table-days td span {
+            display: block;
+            width: 100%;
+            height: 30px !important;
+            line-height: 30px !important;
+            padding: 0;
+            margin: 0px;
+        }
+</style>
+<div class="box qahazardlog" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+
+        <div class=" col-lg-12 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;">
+            <div dx-data-grid="dg" id="grid">
+
+            </div>
+
+        </div>
+    </div>
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+
+                <!-- <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>
+                <td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_persiandate"></div></td>-->
+                <td style="width:120px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_showForm"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_hazardLog"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_occ"></div></td>
+                <td></td>
+                <!--<td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_person"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_flight"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_flight_total"></div></td>-->
+            </tr>
+        </table>
+    </div>
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <div id="popup_flight" dx-popup="popup_flight">
+        <div style="margin:0px 0px 5px 0px;border-radius:0;" class="groupbox dx-border">
+            <div class="caption">Information</div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>First Name</label>
+                <div dx-text-box="txt_FirstName"></div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Last Name</label>
+                <div dx-text-box="txt_LastName"></div>
+            </div>F
+            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Personnel Id</label>
+                <div dx-text-box="txt_PID" class="center ltr f16"></div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Group</label>
+                <div dx-text-box="txt_group" class="center ltr f16"></div>
+            </div>
+            <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                <label>Mobile</label>
+                <div dx-text-box="txt_Mobile" class="center ltr f16"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>
+
+
+    </div>
+
+    <div id="popup_flight_total" dx-popup="popup_flight_total">
+
+        <div dx-data-grid="dg_flight_total" id="dg_flight_total" class="content" style="overflow-y:hidden"></div>
+
+
+    </div>
+
+
+    <div id="popup_date" dx-popup="popup_date">
+        <div class="margin-bottom-5 padding-7 dx-border" style="padding:25px 0 10px 0">
+            <div>
+                <label style="width:45px;text-align:right;margin-right:5px;">From</label>
+
+                <input type="text" class="date1 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+            <div style="margin-top:15px;">
+                <label style="width:45px;text-align:right; margin-right:5px;">To</label>
+
+                <input type="text" class="date2 locale-en" style="border: 1px solid gray !important;padding:10px;text-align:center" />
+            </div>
+
+
+
+        </div>
+
+
+    </div>
+
+
+    <div id="popup_hazard" dx-popup="popup_hazard">
+
+        <div id="scroll_hazard" style='border:1px solid #ccc;padding:5px;overflow-y:auto' class='thin-scroll2' ng-style='get_hazard_style()'>
+            <div style='padding:0px'>
+                <table class='tbl_hazard' style='width:90%;' id='tbl_reg'>
+                    <tr class='hzrow'>
+                        <td colspan='4'>Hazard Identification</td>
+                    </tr>
+                    <!-- <tr>
+                       <td>Date</td>
+                       <td  class='dx-border'><div class="center" dx-date-box="date_identification"   ></div></td>
+                        <td style='text-align:right'>Scope</td>
+                       <td><div dx-text-box="txt_scope"  class="dx-border"></div></td>
+                     </tr>-->
+                    <!-- <tr>
+                      <td>Source</td>
+                      <td colspan=3><div dx-text-box="txt_source"  class="dx-border"></div></td>
+                    </tr>-->
+                    <tr>
+                        <td>Scope</td>
+                        <td colspan=3><div dx-text-box="txt_scope" class="dx-border"></div></td>
+                    </tr>
+                    <tr>
+                        <td colspan=4>Hazard Description</td>
+
+                    </tr>
+                    <tr>
+                        <td colspan=4> <div dx-text-area="txt_hazard" class="dx-border"></div></td>
+
+                    </tr>
+                    <!-- <tr>
+                       <td colspan=4>Hazard Consequences</td>
+
+                     </tr>-->
+                    <tr>
+                        <td colspan=4>
+                            <div dx-data-grid="dg_consequences" id="dg_consequences" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                                <div data-options="dxTemplate:{ name:'temp_con' }">
+                                    <a ng-click="delete_con(row.data)" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Del</a>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan=3><div dx-text-box="txt_con" class="dx-border"></div></td>
+                        <td><div dx-button="btn_add_con"></div><div style='margin-left:5px' dx-button="btn_remove_con"></div></td>
+                    </tr>
+                    <!--  <tr>
+                       <td colspan=4>Root Causes</td>
+
+                     </tr>-->
+                    <tr>
+                        <td colspan=4>
+                            <div dx-data-grid="dg_root_cause" id="dg_root_cause" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                                <div data-options="dxTemplate:{ name:'temp_root' }">
+                                    <a ng-click="delete_root(row.data)" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Del</a>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan=3><div dx-text-box="txt_root" class="dx-border"></div></td>
+                        <td><div dx-button="btn_add_root"></div><div style='margin-left:5px' dx-button="btn_remove_root"></div></td>
+                    </tr>
+                    <tr>
+                        <td colspan=4><div class="dx-border" dx-check-box="check_relevant"></div></td>
+
+
+                    </tr>
+                    <tr class='hzrow'>
+                        <td colspan=4>Risk Assessment</td>
+                    </tr>
+                    <tr>
+                        <td>Probability</td>
+                        <td> <div class="dx-border" dx-select-box="sb_prob"></div></td>
+                        <td style='text-align:right'>Severity</td>
+                        <td> <div class="dx-border" dx-select-box="sb_severity"></div></</td>
+                    </tr>
+                    <tr>
+                        <td>Risk Index Matrix</td>
+                        <td><div dx-text-box="txt_index" class="dx-border"></div></td>
+                        <td />
+                        <td />
+                    </tr>
+
+                    <tr>
+                        <td>Risk Acceptability</td>
+                        <td colspan=3><div class="dx-border" dx-select-box="sb_risk_type"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                        <td colspan=3><div class="dx-border" dx-select-box="sb_description"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Responsible Manager</td>
+                        <td><div class="dx-border" dx-select-box="sb_responsible_manager"></div></td>
+                        <td>Date/Signature</td>
+                        <td class='dx-border'><div class="center" dx-date-box="date_responsible_manager"></div> </td>
+                    </tr>
+                    <tr>
+                        <td>QA Approval</td>
+                        <td><div dx-text-box="txt_qa_approval" class="dx-border"></div></td>
+                        <td>Date/Signature</td>
+                        <td class='dx-border'><div class="center" dx-date-box="date_qa_approval"></div> </td>
+                    </tr>
+
+                    <tr class='hzrow'>
+                        <td colspan=4>Risk Elimination or Mitigation or Control Measures</td>
+                    </tr>
+                    <!--<tr>
+                      <td colspan=4>Action Taken</td>
+
+                    </tr>-->
+                    <tr>
+                        <td colspan=4>
+                            <div dx-data-grid="dg_action_taken" id="dg_action_taken" class="content" dx-item-alias="row">
+                                <div data-options="dxTemplate:{ name:'temp_action' }">
+                                    <a ng-click="delete_action(row.data)" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Del</a>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan=3><div dx-text-box="txt_action" class="dx-border"></div></td>
+                        <td><div dx-button="btn_add_action"></div><div style='margin-left:5px' dx-button="btn_remove_action"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Responsible Staff</td>
+                        <td colspan=3><div dx-text-box="txt_action_staff" class="dx-border"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Time Limit</td>
+                        <td colspan=3><div dx-text-box="txt_action_time_limit" class="dx-border"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Date/Signature</td>
+                        <td class='dx-border'><div class="center" dx-date-box="date_action_staff"></div></td>
+                        <td>QA Approval</td>
+                        <td class='dx-border'><div class="center" dx-date-box="date_action_qa_approval"></div></td>
+                    </tr>
+
+                    <tr class='hzrow'>
+                        <td colspan=4>Risk Assessment Review</td>
+                    </tr>
+                    <tr>
+                        <td>Probability</td>
+                        <td><div class="dx-border" dx-select-box="sb_prob2"></div></td>
+                        <td style='text-align:right'>Severity</td>
+                        <td><div class="dx-border" dx-select-box="sb_severity2"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Risk Index Matrix</td>
+                        <td><div dx-text-box="txt_index2" class="dx-border"></div></td>
+                        <td style='text-align:right'>Date</td>
+                        <td class="dx-border"><div class="center" dx-date-box="date_review"></div> </td>
+
+                    </tr>
+                    <tr>
+                        <td>Risk Acceptability</td>
+                        <td colspan=3><div class="dx-border" dx-select-box="sb_accept"></div></td>
+                    </tr>
+
+                    <tr class='hzrow'>
+                        <td colspan=4>Monitoring and Control</td>
+                    </tr>
+                    <tr>
+                        <td colspan=4>
+                            <div dx-data-grid="dg_monitoring" id="dg_monitoring" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                                <div data-options="dxTemplate:{ name:'temp_monitor' }">
+                                    <a ng-click="delete_monitor(row.data)" href="" class='w3-button w3-block w3-red' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Del</a>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td colspan=3><div dx-text-box="txt_monitor" class="dx-border"></div></td>
+                        <td><div dx-button="btn_add_monitor"></div><div style='margin-left:5px' dx-button="btn_remove_monitor"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td class='dx-border'><div class="center" dx-date-box="date_last_updated"></div></td>
+                        <td> </td>
+                        <td class='dx-border'></td>
+                    </tr>
+
+
+
+                </table>
+                <div style='margin-top:5px;' dx-button="btn_save_register"></div>
+
+            </div>
+        </div>
+
+    </div>
+    <div ng-include="'app/views/personView.html'"></div>
+    <div ng-include="'app/views/qaEmployee.html?vx.2'"></div>
+    <div ng-include="'app/views/qaForm.html?vx.2'"></div>
+    <div ng-include="'app/views/qaOperationPopup.html?vx.2'"></div>
+
+    <div ng-include="'app/views/qahazardadd.html?v=1004'"></div>
+    <div ng-include="'app/views/qa_occ_add_html.html?v=1004'"></div>
+    
+
+</div>
+
+

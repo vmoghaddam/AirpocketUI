@@ -144,7 +144,6 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode113 = new DevExpress.DataAccess.Json.JsonSchemaNode("ToneDistanceAvailableInt", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode114 = new DevExpress.DataAccess.Json.JsonSchemaNode("WeightLoadFactorDom", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode115 = new DevExpress.DataAccess.Json.JsonSchemaNode("WeightLoadFactorInt", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<double>));
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RptFormA));
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
@@ -437,10 +436,6 @@
             this.xrLabel8 = new DevExpress.XtraReports.UI.XRLabel();
             this.jsonDataSource1 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
             this.PageHeader = new DevExpress.XtraReports.UI.PageHeaderBand();
-            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.pic_karun = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.pic_kish = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.pic_varesh = new DevExpress.XtraReports.UI.XRPictureBox();
             this.lblMonth = new DevExpress.XtraReports.UI.XRLabel();
             this.lblYear = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel7 = new DevExpress.XtraReports.UI.XRLabel();
@@ -450,10 +445,9 @@
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel2 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
-            this.pic_taban = new DevExpress.XtraReports.UI.XRPictureBox();
             this.jsonDataSource2 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
             this.jsonDataSource3 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
-            this.xrPictureBox2 = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.xrPictureBoxLogo = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -2756,7 +2750,7 @@
             this.xrTableCell16.Multiline = true;
             this.xrTableCell16.Name = "xrTableCell16";
             this.xrTableCell16.Text = "Classified by flight stage";
-            this.xrTableCell16.Weight = 1.3909276243771525D;
+            this.xrTableCell16.Weight = 1.3909276243771524D;
             // 
             // TopMargin
             // 
@@ -2787,7 +2781,6 @@
             // 
             // jsonDataSource1
             // 
-            this.jsonDataSource1.ConnectionName = "JsonConnection_caspian";
             this.jsonDataSource1.Name = "jsonDataSource1";
             jsonSchemaNode1.Nodes.Add(jsonSchemaNode2);
             jsonSchemaNode1.Nodes.Add(jsonSchemaNode3);
@@ -2823,11 +2816,7 @@
             // PageHeader
             // 
             this.PageHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrPictureBox2,
-            this.xrPictureBox1,
-            this.pic_karun,
-            this.pic_kish,
-            this.pic_varesh,
+            this.xrPictureBoxLogo,
             this.lblMonth,
             this.lblYear,
             this.xrLabel7,
@@ -2836,46 +2825,9 @@
             this.xrLabel4,
             this.xrLabel3,
             this.xrLabel2,
-            this.xrLabel1,
-            this.pic_taban});
+            this.xrLabel1});
             this.PageHeader.HeightF = 121.8335F;
             this.PageHeader.Name = "PageHeader";
-            // 
-            // xrPictureBox1
-            // 
-            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
-            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(223.3333F, 32.83351F);
-            this.xrPictureBox1.Name = "xrPictureBox1";
-            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(100F, 79F);
-            this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.xrPictureBox1.Visible = false;
-            // 
-            // pic_karun
-            // 
-            this.pic_karun.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("pic_karun.ImageSource"));
-            this.pic_karun.LocationFloat = new DevExpress.Utils.PointFloat(91.66664F, 13.33333F);
-            this.pic_karun.Name = "pic_karun";
-            this.pic_karun.SizeF = new System.Drawing.SizeF(156.4643F, 56.00001F);
-            this.pic_karun.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.pic_karun.Visible = false;
-            // 
-            // pic_kish
-            // 
-            this.pic_kish.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("pic_kish.ImageSource"));
-            this.pic_kish.LocationFloat = new DevExpress.Utils.PointFloat(277.5F, 37.50018F);
-            this.pic_kish.Name = "pic_kish";
-            this.pic_kish.SizeF = new System.Drawing.SizeF(100F, 79F);
-            this.pic_kish.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.pic_kish.Visible = false;
-            // 
-            // pic_varesh
-            // 
-            this.pic_varesh.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("pic_varesh.ImageSource"));
-            this.pic_varesh.LocationFloat = new DevExpress.Utils.PointFloat(360.8334F, 32.83351F);
-            this.pic_varesh.Name = "pic_varesh";
-            this.pic_varesh.SizeF = new System.Drawing.SizeF(100F, 79F);
-            this.pic_varesh.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.pic_varesh.Visible = false;
             // 
             // lblMonth
             // 
@@ -2994,18 +2946,8 @@
             this.xrLabel1.Text = "INTERNATIONAL CIVIL AVIATION ORGANIZATION";
             this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
-            // pic_taban
-            // 
-            this.pic_taban.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("pic_taban.ImageSource"));
-            this.pic_taban.LocationFloat = new DevExpress.Utils.PointFloat(48.57161F, 13.33335F);
-            this.pic_taban.Name = "pic_taban";
-            this.pic_taban.SizeF = new System.Drawing.SizeF(100F, 79F);
-            this.pic_taban.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
-            this.pic_taban.Visible = false;
-            // 
             // jsonDataSource2
             // 
-            this.jsonDataSource2.ConnectionName = "JsonConnection_forma";
             this.jsonDataSource2.Name = "jsonDataSource2";
             jsonSchemaNode31.Nodes.Add(jsonSchemaNode32);
             jsonSchemaNode31.Nodes.Add(jsonSchemaNode33);
@@ -3064,7 +3006,6 @@
             // 
             // jsonDataSource3
             // 
-            this.jsonDataSource3.ConnectionName = "JC_CAO";
             this.jsonDataSource3.Name = "jsonDataSource3";
             jsonSchemaNode85.Nodes.Add(jsonSchemaNode86);
             jsonSchemaNode85.Nodes.Add(jsonSchemaNode87);
@@ -3098,13 +3039,12 @@
             jsonSchemaNode85.Nodes.Add(jsonSchemaNode115);
             this.jsonDataSource3.Schema = jsonSchemaNode85;
             // 
-            // xrPictureBox2
+            // xrPictureBoxLogo
             // 
-            this.xrPictureBox2.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox2.ImageSource"));
-            this.xrPictureBox2.LocationFloat = new DevExpress.Utils.PointFloat(10F, 13.33333F);
-            this.xrPictureBox2.Name = "xrPictureBox2";
-            this.xrPictureBox2.SizeF = new System.Drawing.SizeF(156.4643F, 74.667F);
-            this.xrPictureBox2.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
+            this.xrPictureBoxLogo.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrPictureBoxLogo.Name = "xrPictureBoxLogo";
+            this.xrPictureBoxLogo.SizeF = new System.Drawing.SizeF(158.3333F, 111.8335F);
+            this.xrPictureBoxLogo.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
             // 
             // RptFormA
             // 
@@ -3118,11 +3058,11 @@
             this.jsonDataSource2,
             this.jsonDataSource3});
             this.DataSource = this.jsonDataSource3;
-            this.Margins = new DevExpress.Drawing.DXMargins(62, 62, 35, 33);
+            this.Margins = new DevExpress.Drawing.DXMargins(62F, 62F, 35F, 33F);
             this.PageHeight = 1169;
             this.PageWidth = 827;
             this.PaperKind = DevExpress.Drawing.Printing.DXPaperKind.A4;
-            this.Version = "19.2";
+            this.Version = "24.2";
             this.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.RptFormA_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
@@ -3434,12 +3374,7 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell246;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell247;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell248;
-        private DevExpress.XtraReports.UI.XRPictureBox pic_taban;
-        private DevExpress.XtraReports.UI.XRPictureBox pic_varesh;
         private DevExpress.DataAccess.Json.JsonDataSource jsonDataSource3;
-        private DevExpress.XtraReports.UI.XRPictureBox pic_kish;
-        private DevExpress.XtraReports.UI.XRPictureBox pic_karun;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox2;
+        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBoxLogo;
     }
 }

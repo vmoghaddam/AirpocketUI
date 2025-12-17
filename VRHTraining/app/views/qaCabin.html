@@ -1,0 +1,221 @@
+<style>
+
+    .ctd {
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+
+    .ctd-empty {
+        border: 0px solid #ccc;
+        text-align: center;
+    }
+
+    .ctr {
+        /*height:30px;*/
+    }
+
+    .ctd-center {
+        background-color: lightseagreen;
+    }
+
+    .ctd-selected {
+        background-color: red;
+    }
+
+    .tdStyle {
+        padding: 7px;
+        text-align: left
+    }
+
+    .titleStyle {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+</style>
+<div ng-controller="qaCabinController">
+    <div style="padding:0px 10px 0 10px;">
+        <div style="margin-top: 0px; float: left; overflow: hidden; width: 60%;padding:10px 15px 0 0px" ng-show="isMaximise">
+            <div style='background:#898e8c;color:white;font-weight:bold;padding:7px;text-align:center'>CABIN SAFETY REPORT</div>
+            <div style="border:1px solid #ccc;padding:10px;">
+                <!--<div id="scroll_qaCabin" dx-scroll-view="scroll_qaCabin" class='thin-scroll'>-->
+                <div class='thin-scroll' style='overflow-y:auto;' ng-style="{height: scroll_qaCabin_height + 'px'}">
+
+                    <div class="visible-sm visible-md visible-lg">
+ <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="6" style=" padding:7px;text-align:left;color:black;font-weight:bold">
+                                Id:<span style='display:inline-block;margin-left:5px;'>{{entity.FormNo}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Name (If you want): </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_Name" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> BOX: </td>
+                                <td class="tdStyle"><div dx-text-box="txt_BOX" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Ref: </td>
+                                <td class="tdStyle"><div dx-text-box="num_refNumber" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Reporter: </td>
+                                <td class="tdStyle"> <div dx-select-box="sb_reporter" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Report field by: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_repFieldBy" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Location of event: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_eventLoc" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Date of Occurrence: </td>
+                                <td class="tdStyle"><div dx-date-box="txt_OccurrenceDate" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Approximate local time of event: </td>
+                                <td class="tdStyle"><div dx-date-box="txt_OccurrenceTime" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Flight number: </td>
+                                <td class="tdStyle"> <div dx-number-box="num_fltNum" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Flight segment(from-to): </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_fltSeg" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> A/C type & registration: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_acType" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Number of passenger: </td>
+                                <td class="tdStyle"> <div dx-number-box="num_PAXNum" class="center"></div></td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Weather condition: </td>
+                                <td class="tdStyle" colspan="3"> <div dx-text-area="txt_wxCondition" class="center"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <div style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <div class="titleStyle">
+                                Flight Phase:
+                            </div>
+
+                            <div class="col-xs-3 col-sm-3 col-md-3" ng-repeat="x in flightPhase">
+
+                                <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="fpoptions[x.Id]" ng-change="chkFlightPhase($index)" ng-disabled="true" /> {{x.Title}}
+
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+
+                        <div style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <div class="titleStyle">
+                                Event Title(check all that apply):
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6" ng-repeat="x in eventTitle">
+
+                                <input type="checkbox" style="text-align:right" ng-checked="x.checked" ng-model="etoptions[x.Id]" ng-change="chkEventTitle($index)" ng-disabled="true" /> {{x.Title}}
+
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class="tdStyle" style="height: 80px" dx-text-area="txt_eventOther"></div>
+
+
+                        </div>
+
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle">
+                                    Describe occurernece/ situation with all relevant information (Please be brief & to the point)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"> <div dx-text-area="txt_desOccurrence"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="titleStyle">
+                                    Recommendation(s)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"> <div dx-text-area="txt_Rec"></div></td>
+                            </tr>
+
+                        </table>
+
+
+
+                        <div style="clear:both"></div>
+
+
+
+
+                        <table style="margin-top:10px;border:1px solid #ccc;width:100%;color:black" class="dx-border">
+                            <tr>
+                                <td class="tdStyle" style="font-weight: bold"> Recived: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_recived" class="center"></div></td>
+                                <td class="tdStyle" style="font-weight: bold"> Follow-Up: </td>
+                                <td class="tdStyle"> <div dx-text-box="txt_followup" class="center"></div></td>
+                            </tr>
+                        </table>
+
+                        <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black;  " class="dx-border">
+                            <tr>
+                                <td class="titleStyle" style="background-color: #66ffcc !important">
+                                    Result
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tdStyle"> <div dx-text-area="txt_result"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <div class="titleStyle">
+                            ATTACHED DOCUMENTS
+                        </div>
+                        <div dx-data-grid="dg_attachments" id="dg_attachments" class="content" style="overflow-y:hidden" dx-item-alias="row">
+                            <div data-options="dxTemplate:{ name:'download' }">
+                                <a ng-click="download(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Download</a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div style="float: right; width: 40%" ng-style="getStyle()">
+            <div ng-include="'app/views/qaRefer.html?vx=4'" onload="testLoaded()"></div>
+            <table style="width:100%">
+                <tr>
+                    <td></td>
+                    <td style="width:200px;padding-right:10px">
+                        <div style="margin-top: 10px;padding: 7px; text-align: center; width: 100%;background-color:#ccc" ng-show="isMaximise" ng-click="maximise()">Maximize</div>
+                        <div style="margin-top: 10px;padding: 7px; text-align: center; width: 100%;background-color:#ccc" ng-show="!isMaximise" ng-click="maximise()">Minimize</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style='clear:both'></div>
+
+    </div>
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+</div>
+<div style='clear:both'></div>

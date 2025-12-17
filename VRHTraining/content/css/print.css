@@ -1,0 +1,49 @@
+﻿.dark-header{
+    background:#bbb !important;
+    padding:5px !important;
+
+}
+.tbl-pad10{
+    padding:10px;
+}
+
+.tblcenter {
+}
+
+    .tblcenter th {
+        text-align: center;
+        font-size: 13px;
+        padding: 3px;
+        border: 1px solid #bbb;
+    }
+
+    .tblcenter td {
+        text-align: center;
+        font-size: 13px;
+        padding: 3px;
+        border: 1px solid #bbb;
+    }
+
+    .tblcenter th:last-child {
+        border-right: none;
+    }
+
+    .tblcenter td:nth-child(2) {
+        text-align: left !important;
+    }
+
+    .tblcenter th:nth-child(2) {
+        text-align: left !important;
+    }
+
+    .tblcenter th span {
+        font-size: 13px;
+    }
+
+    .tblcenter tr {
+        border-bottom: 1px solid #bbb;
+    }
+
+        .tblcenter tr:last-child {
+            border: none;
+        }

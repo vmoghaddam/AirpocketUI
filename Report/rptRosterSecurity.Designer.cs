@@ -174,7 +174,6 @@
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode143 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasOBSC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode144 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasCHECKC", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
             DevExpress.DataAccess.Json.JsonSchemaNode jsonSchemaNode145 = new DevExpress.DataAccess.Json.JsonSchemaNode("hasFM", true, DevExpress.DataAccess.Json.JsonNodeType.Property, typeof(System.Nullable<bool>));
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(rptRosterSecurity));
             DevExpress.XtraReports.UI.XRWatermark xrWatermark1 = new DevExpress.XtraReports.UI.XRWatermark();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
@@ -227,7 +226,7 @@
             this.xrTableCell46 = new DevExpress.XtraReports.UI.XRTableCell();
             this.jsonDataSource3 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
             this.jsonDataSource2 = new DevExpress.DataAccess.Json.JsonDataSource(this.components);
-            this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.xrPictureBoxLogo = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.tableH)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -522,7 +521,7 @@
             // ReportHeader
             // 
             this.ReportHeader.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrPictureBox1});
+            this.xrPictureBoxLogo});
             this.ReportHeader.HeightF = 110F;
             this.ReportHeader.Name = "ReportHeader";
             // 
@@ -838,12 +837,12 @@
             jsonSchemaNode97.Nodes.Add(jsonSchemaNode145);
             this.jsonDataSource2.Schema = jsonSchemaNode97;
             // 
-            // xrPictureBox1
+            // xrPictureBoxLogo
             // 
-            this.xrPictureBox1.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBox1.ImageSource"));
-            this.xrPictureBox1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 27.60417F);
-            this.xrPictureBox1.Name = "xrPictureBox1";
-            this.xrPictureBox1.SizeF = new System.Drawing.SizeF(138.0208F, 54.6875F);
+            this.xrPictureBoxLogo.LocationFloat = new DevExpress.Utils.PointFloat(11.37501F, 14.02082F);
+            this.xrPictureBoxLogo.Name = "xrPictureBoxLogo";
+            this.xrPictureBoxLogo.SizeF = new System.Drawing.SizeF(152.6042F, 84.89583F);
+            this.xrPictureBoxLogo.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
             // 
             // rptRosterSecurity
             // 
@@ -927,6 +926,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell46;
         private DevExpress.DataAccess.Json.JsonDataSource jsonDataSource2;
         private DevExpress.DataAccess.Json.JsonDataSource jsonDataSource3;
-        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox1;
+        private DevExpress.XtraReports.UI.XRPictureBox xrPictureBoxLogo;
     }
 }

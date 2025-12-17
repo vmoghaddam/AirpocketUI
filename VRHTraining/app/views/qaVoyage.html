@@ -1,0 +1,194 @@
+﻿<div ng-controller="qaVoyageController">
+    <div style="padding:0px 10px 0 10px;">
+        <div style="margin-top: 0px; float: left; overflow: hidden; width: 60%;padding:10px 15px 0 0px" ng-show="isMaximise">
+            <div style='background:#898e8c;color:white;font-weight:bold;padding:7px;text-align:center'>Voyage Report</div>
+            <div style="border:1px solid #ccc;padding:10px;">
+                <!--<div id="scroll_qaCabin" dx-scroll-view="scroll_qaCabin" class='thin-scroll'>-->
+                <div class='thin-scroll' style='overflow-y:auto;' ng-style="{height: scroll_vradd_height + 'px'}">
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                FLIGHT IRREGULARITY
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">FLIGHT CANCELLATION</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_irr_100111"></div></td>
+                            <!--<td style="width:50px;"></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">FLIGHT RETURN</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_irr_100112"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">DIVERSION</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_irr_100113"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">ABN./ EMER.EVENT</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_irr_100114"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">DEPARTURE DELAY > 30 MINUTE</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-number-box="txt_depdelay"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <tr>
+                            <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                REASON (S)
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">TECHNICAL</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100119"></div></td>
+                            <!--<td style="width:50px;"></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">ATC</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100120"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">SECURITY</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100121"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">FLT.OPS</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100122"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">A/C LATE ARRIVAL</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100123"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">PAX HANDELING</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100124"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">CATERING</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100125"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">WEATHER</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100126"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">RAMP HANDELING</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100127"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-bottom:12px;text-align:left">OTHERS</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_re_100128"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                        <!--<tr>
+            <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                FLIGHT IRREGULARITY
+            </td>
+        </tr>-->
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">REDUCTION OF REST PERIOD</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-number-box="restReduction"></div></td>
+
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="padding-left:7px;border-right:0px dotted #eee;text-align:left">EXTENTION OF FLYING DUTY PERIOD</td>
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-number-box="dutyExtention"></div></td>
+                            <!-- <td></td>-->
+
+                        </tr>
+
+                    </table>
+
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black">
+                        <tr>
+                            <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                                REPORT
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:0px dotted #eee;text-align:center">
+                            <td style="width: 94px; padding: 5px; padding-right: 15px; padding-top: 12px"> <div style="text-align:left" dx-text-area="report"></div></td>
+                        </tr>
+                    </table>
+                    <div style="clear:both"></div>
+                    <table ng-show="url_sign" style="width:100%;margin-top:10px;border:1px solid #eee;">
+                        <tr>
+                            <td style="padding:10px;border-bottom:1px solid #eeee;text-align:center" colspan="3">
+                                <div ng-show="url_sign" style="text-align:center;font-size:14px;padding:0px;">The document signed and approved by</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:25%;"></td>
+                            <td style="width:50%; text-align:center;padding:10px">
+
+                                <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">{{PIC}}</div>
+                                <div ng-show="url_sign" style="text-align:center;font-size:16px;padding:5px;">{{signDate}}</div>
+                                <img style="height:auto;display: block; width: 50%;margin:0 auto 0 auto" ng-show="url_sign" ng-src="{{url_sign}}" />
+                            </td>
+                            <td style="width:25%;"></td>
+                        </tr>
+                    </table>
+                    <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black;  " class="dx-border">
+                        <tr>
+                            <td class="titleStyle" style="background-color: #66ffcc !important">
+                                Result
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tdStyle"> <div dx-text-area="txt_result"></div></td>
+                        </tr>
+
+                    </table>
+                </div>
+                <!--<div style="clear:both"></div>-->
+            </div>
+        </div>
+        <div style="float: right; width: 40%" ng-style="getStyle()">
+            <div ng-include="'app/views/qaRefer.html?vx=3'" onload="testLoaded()"></div>
+            <table style="width:100%">
+                <tr>
+                    <td></td>
+                    <td style="width:200px;padding-right:10px">
+                        <div style="margin-top: 10px;padding: 7px; text-align: center; width: 100%;background-color:#ccc" ng-show="isMaximise" ng-click="maximise()">Maximize</div>
+                        <div style="margin-top: 10px;padding: 7px; text-align: center; width: 100%;background-color:#ccc" ng-show="!isMaximise" ng-click="maximise()">Minimize</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style='clear:both'></div>
+
+        <div dx-load-panel="loadPanel"></div>
+    </div>
+</div>
