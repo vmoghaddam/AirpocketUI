@@ -325,7 +325,7 @@ app.controller('occAddController', ['$scope', '$location', '$routeParams', '$roo
 
 
             { dataField: 'DateOccurrence', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, encodeHtml: false, width: 150, format: 'YYYY-MM-DD', sortIndex: 0, sortOrder: "asc" },
-            { dataField: 'CreatorName', caption: 'Reporter', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 1500, fixed: false, fixedPosition: 'right' },
+            { dataField: 'CreatorName', caption: 'Reporter', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: false, fixedPosition: 'right' },
             { dataField: 'Route', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130, fixed: false, fixedPosition: 'right' },
             { dataField: 'Describtion', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'right' },
             {
@@ -360,7 +360,7 @@ app.controller('occAddController', ['$scope', '$location', '$routeParams', '$roo
 
             filterRow: { visible: false, showOperationChooser: true, },
             columnAutoWidth: false,
-            columns: $scope.dg_att_columns,
+            columns: $scope.dg_source_columns,
             onContentReady: function (e) {
                 if (!$scope.dg_source_instance)
                     $scope.dg_source_instance = e.component;
