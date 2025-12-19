@@ -1,0 +1,38 @@
+﻿<style>
+    .status_null_class{
+        background:#ccc;
+    }
+    .status_s_class {
+        background: rgba(0, 150, 136, 1);
+    }
+    .status_us_class {
+        background: #F44336;
+    }
+</style>
+<div ng-controller="OnboardAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div id="scroll_obadd" dx-scroll-view="scroll_obadd" style="margin-top:5px">
+
+            <div ng-repeat="cat in ds_category">
+                <div style="background:#eee;border:1px solid #eee; text-align:left;padding:7px;font-weight:bold;color:black">
+                    {{cat.category}}
+                </div>
+                <table style="width:100%">
+                    <tr ng-repeat="item in cat.items" >
+                        <td style="text-align:center;padding:7px;border:1px solid #eee;width:5%">{{item.order_index}}</td>
+                        <td style="text-align: left; padding: 7px; border: 1px solid #eee;width:85%">{{item.item}}</td>
+                        <td style="text-align: center; padding: 7px; border: 1px solid #eee;width:10%;" ng-click="click_status(item)">
+                            <div style="color:black;font-size:16px;padding:10px" ng-class="get_status_class(item.status)">
+                                {{item.status ? item.status : 'S/US'}}
+                            </div>  
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+</div>

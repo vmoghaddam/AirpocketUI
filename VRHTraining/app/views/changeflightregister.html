@@ -1,0 +1,129 @@
+﻿<div class="box changeregister" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'flightplanview';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class=" col-lg-3 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div dx-data-grid="dg_register" id="dg_register" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+        </div>
+        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden"></div>
+
+
+            </div>
+
+        </div>
+        <!--<div class=" col-lg-2 col-md-3 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="header">Details</div>
+
+                <div class="content ">
+
+
+                </div>
+
+
+            </div>
+        </div>-->
+
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <table style="width:100%">
+                <tr>
+                    <td style="padding-right:5px;text-align:right;width:50px">From</td>
+                    <td style="width:140px" class="dx-border">
+                        <div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'changeregister',  validationRules: [{ type: 'required'}]}"></div>
+                    </td>
+                    <td style="padding-right:5px;text-align:right;width:40px">To</td>
+                    <td style="width:140px" class="dx-border">
+                        <div class="center" dx-date-box="date_to" dx-validator="{validationGroup:'changeregister',  validationRules: [{ type: 'required'}]}"></div>
+                    </td>
+                    <td style="width:135px;text-align:center"><div dx-button="btn_search"></div></td>
+                    <td style="width:205px;text-align:center"><div dx-button="btn_register"></div></td>
+                    <td></td>
+                    <!--<td style="width:50px;text-align:center"><div dx-button="btn_selectall"></div></td>
+                    <td style="width:50px;text-align:center"><div dx-button="btn_deselectall"></div></td>-->
+                </tr>
+            </table>
+
+
+
+
+
+
+
+
+
+
+        </div>
+        <!--<div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>-->
+        <div class=" col-lg-3 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+    <div id="popup_register" dx-popup="popup_register">
+        <div style="padding:0px 0 0 0">
+            <div style="border:0px solid #ddd;padding:5px;" class="dx-border">
+                <div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Aircraft Type</label>
+                    <div dx-text-box="txt_actype"></div>
+                </div>
+                <div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Current Register</label>
+                    <div dx-text-box="txt_register"></div>
+                </div>
+                <div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>New Register</label>
+                    <div dx-select-box="sb_msn" dx-validator="{validationGroup:'changeregisterset',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-12 col-md-3 col-sm-12 col-12  margin-bottom-5 padding-7">
+                    <label>Reason</label>
+                    <div dx-select-box="sb_reason" dx-validator="{validationGroup:'changeregisterset',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+            </div>
+            
+
+        </div>
+
+    </div>
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+
+</div>

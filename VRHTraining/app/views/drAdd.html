@@ -1,0 +1,189 @@
+<div ng-controller="drAddController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <!--<div style="padding:5px;">-->
+
+        <div id="scroll_dradd" dx-scroll-view="scroll_dradd" style="margin-top:5px">
+            <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                <tr>
+                    <td style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                        ITEM
+                    </td>
+                    <td style="background-color:lightgray;padding:7px;text-align:center;color:black;font-weight:bold">
+                        DSP
+                    </td>
+                    <td style="background-color:lightgray;padding:7px;text-align:center;color:black;font-weight:bold">
+                        CPT
+                    </td>
+                    <td colspan="2" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                        REMARKS
+                    </td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Actual weather (DEP, DES, ALT, ENROUTE)</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_ActualWXDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_ActualWXCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div   dx-text-box="txt_ActualWXCPTRemark"></div></td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">WX Forcast (DEP,DES,ALT,RTE)</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_WXForcastDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_WXForcastCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div   dx-text-box="txt_WXForcastCPTRemark"></div></td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Wind & Significant Weather Chart</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_SigxWXDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_SigxWXCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div   dx-text-box="txt_SigxWXCPTRemark"></div></td>
+                </tr>
+         
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Notams(DEP,DES,ALT & FIR)</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_NotamDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_NotamCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_NotamCPTRemark"></div></td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Computed Flight Plan</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_ComputedFligthPlanDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_ComputedFligthPlanCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_ComputedFligthPlanCPTRemark"></div></td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">ATS Flight Plan</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_ATCFlightPlanDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_ATCFlightPlanCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_ATCFlightPlanCPTRemark"></div></td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Permissions</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_PermissionsDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_PermissionsCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_PermissionsCPTRemark"></div></td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Jeppesen Airway Manual</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_JeppesenAirwayManualDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_JeppesenAirwayManualCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_JeppesenAirwayManualCPTRemark"></div></td>
+                </tr>
+                <tr rowspan="2" style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Minimum Fuel Required</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_MinFuelRequiredDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_MinFuelRequiredCPT"></div></td>
+                    <td style="text-align:right">
+                        <div>
+                            <div style="display: inline-block">CFP Fuel</div>
+                            <div class="center" style="padding: 5px; padding-right: 15px; padding-top: 12px; display:inline-block" dx-number-box="txt_MinFuelRequiredCFP"></div>
+                        </div>
+                        <div>
+                            <div style="display: inline-block">PILOT Requestes Fuel</div>
+                            <div class="center" style="padding: 5px; padding-right: 15px;  padding-top: 12px; display:inline-block" dx-number-box="txt_MinFuelRequiredPilotReq"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Crew List & General Declaration</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_GeneralDeclarationDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_GeneralDeclarationCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_GeneralDeclarationCPTRemark"></div></td>
+                </tr>
+               
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Load & Trime Sheet</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_LoadSheetDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_LoadSheetCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_LoadSheetCPTRemark"></div></td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Flight Safety Report</td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_FlightSafetyReportDSP"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_FlightSafetyReportCPT"></div></td>
+                    <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_FlightSafetyReportCPTRemark"></div></td>
+                </tr>
+                <tr style="border-bottom:0px dotted #eee;text-align:center">
+                    <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Pilot Request</td>
+                </tr>
+				 <tr style="border-bottom:0px dotted #eee;text-align:center">
+                     <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="4">
+                        <div dx-text-box="txt_FlightReportCPTRemark" style="height: 85px;"></div>
+                    </td>
+                </tr>
+                <!-- <tr style="border-bottom:0px dotted #eee;text-align:center"> -->
+                    <!-- <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Operation Engineering</td> -->
+                    <!-- <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_OperationEngineeringDSP"></div></td> -->
+                    <!-- <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_OperationEngineeringCPT"></div></td> -->
+                    <!-- <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_OperationEngineeringCPTRemark"></div></td> -->
+                <!-- </tr> -->
+                
+                <!-- <tr style="border-bottom:0px dotted #eee;text-align:center"> -->
+                    <!-- <td style="padding-left:7px;border-right:0px dotted #eee;padding-top:12px;text-align:left">Declaration of goods by Aircraft Crew</td> -->
+                    <!-- <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_GoodDeclarationDSP"></div></td> -->
+                    <!-- <td style="padding: 5px; padding-right: 15px; padding-top: 12px"> <div class="center" dx-check-box="chb_GoodDeclarationCPT"></div></td> -->
+                    <!-- <td style="padding: 5px; padding-right: 15px; padding-top: 12px" colspan="2"> <div  dx-text-box="txt_GoodDeclarationCPTRemark"></div></td> -->
+                <!-- </tr> -->
+        
+            </table>
+
+            <div style="clear:both"></div>
+            <table   style="width:100%;margin-top:10px;border:1px solid #eee;">
+                <tr>
+                    <td style="padding:10px;border-bottom:1px solid #ccc;text-align:center" colspan="3" >
+                        <div  style="text-align:center;font-size:14px;padding:0px;">The document signed and approved by</div>
+                    </td>
+                </tr>
+				<tr>
+                    <td style="padding:10px;border-bottom:1px solid #ccc;text-align:center;background:#eee" colspan="3" >
+                        <div  style="text-align:center;font-size:14px;padding:0px;">Dispatcher</div>
+                    </td>
+                </tr>
+                <tr style='border-bottom:1px solid #ccc'>
+                    <td style="width:25%;"></td>
+                    <td style="width:50%; text-align:center;padding:10px">
+                        
+                        <div ng-show="url_sign4" style="text-align:center;font-size:16px;padding:5px;">{{entity.SGNDSPName}}</div>
+						   <div ng-show="url_sign4" style="text-align:center;font-size:16px;padding:5px;">{{entity.SgnDSPLicNo}}</div>
+                        <div ng-show="url_sign4" style="text-align:center;font-size:16px;padding:5px;">{{signDate4}}</div>
+                        <!--<img style="height:auto;display: block; width: 50%;margin:0 auto 0 auto" ng-show="url_sign4" ng-src="{{url_sign4}}" />-->
+                    </td>
+                    <td style="width:25%;"></td>
+                </tr>
+				<tr>
+                    <td style="padding:10px;border-bottom:1px solid #ccc;text-align:center;background:#eee" colspan="3" >
+                        <div  style="text-align:center;font-size:14px;padding:0px;">PIC</div>
+                    </td>
+                </tr>
+				 <tr>
+                    <td style="width:25%;"></td>
+                    <td style="width:50%; text-align:center;padding:10px">
+                        
+                        <div  style="text-align:center;font-size:16px;padding:5px;">{{entity.PIC}}</div>
+						   
+                        <div   style="text-align:center;font-size:16px;padding:5px;">{{signDatePIC}}</div>
+                        <!--<img style="height:auto;display: block; width: 50%;margin:0 auto 0 auto" ng-show="url_sign4" ng-src="{{url_sign4}}" />-->
+                    </td>
+                    <td style="width:25%;"></td>
+                </tr>
+            </table>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+	
+	
+	
+    <!--</div>-->
+   <div id="popup_dr_sign" dx-popup="popup_dr_sign" class="no-padding">
+	   <div class='dx-border' style='padding:20px;'>
+      <!--<div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>Name</label>
+             <div dx-text-box="txt_name"  ></div>
+      </div>-->
+	   <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
+            <label>License Number</label>
+             <div dx-text-box="txt_licno" dx-validator="{validationGroup:'drsign',  validationRules: [{ type: 'required'}]}"></div>
+      </div>
+		   </div>
+   </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

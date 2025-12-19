@@ -1,0 +1,62 @@
+﻿<style>
+    .dx-border .dx-texteditor-input {
+        padding: 7px 4px 7px 4px !important;
+    }
+
+    .margin-bottom-5 {
+        margin-bottom: 1px !important;
+    }
+
+    .padding-7 {
+        padding: 5px 5px 2px 5px !important;
+    }
+
+    .dx-state-disabled.dx-widget, .dx-state-disabled .dx-widget {
+        opacity: 0.7 !important;
+    }
+</style>
+<div ng-controller="rptflightspopupController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        
+        <div style="padding:5px;">
+            <div class="dx-border thin-scroll0" style="padding:10px;border-bottom:1px solid #eee">
+                <div dx-scroll-view="scroll_btns">
+                    <table style="width:1300px">
+                        <tr>
+
+                            <td style="width:130px;padding:0 7px 0 0px"> <div dx-date-box="date_from" class="center"></div></td>
+                            <td style="width:130px;padding:0 7px 0 0px"> <div dx-date-box="date_to" class="center"></div></td>
+                            <td style="width:130px;padding:0 7px 0 0px"> <div dx-select-box="sb_from"></div></td>
+                            <td style="width:130px;padding:0 7px 0 0px"> <div dx-select-box="sb_to"></div></td>
+                            <td style="width:100px;padding:0 7px 0 0px"> <div dx-select-box="sb_reg"></div></td>
+
+                            <!--<td style="width:100px;padding:0 7px 0 0px"> <div dx-select-box="sb_pf"></div></td>
+
+                            <td style="width:150px;padding:0 7px 0 0px"> <div dx-select-box="sb_ip"></div></td>
+                            <td style="width:150px;padding:0 7px 0 0px"> <div dx-select-box="sb_cpt"></div></td>
+                            <td style="width:150px;padding:0 7px 0 0px"> <div dx-select-box="sb_fo"></div></td>-->
+
+
+
+                        </tr>
+                    </table>
+                </div>
+                <div dx-data-grid="dg_flight" id="dg_flight" class="content" style="overflow-y:hidden;margin-top:10px" ></div>
+            </div>
+
+
+        </div>
+
+        
+
+       
+
+
+
+    </div>
+   
+     
+   
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

@@ -12,24 +12,15 @@ namespace Report
         public RptFormA()
         {
             InitializeComponent();
+            xrPictureBoxLogo.ImageUrl = WebConfigurationManager.AppSettings["logo"] + ".png";
         }
 
         private void RptFormA_BeforePrint(object sender, CancelEventArgs e)
         {
             string airline = WebConfigurationManager.AppSettings["customer"];
             lbl_airline.Text = airline;
-
-            switch (airline)
-            {
-                case "VARESH AIRLINES":
-                    pic_varesh.Visible = true;
-                    break;
-                case "KISHAIR":
-                    pic_kish.Visible = true;
-                    break;
-                default:
-                    break;
-            }
+            xrPictureBoxLogo.ImageUrl = WebConfigurationManager.AppSettings["logo"] + ".png";
+           
 
         }
     }
