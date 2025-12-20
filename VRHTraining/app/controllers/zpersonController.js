@@ -363,15 +363,15 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         { dataField: 'RemainPassport', caption: 'Passport', name: 'passport', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
 
         { dataField: 'RemainLicence', caption: 'Licence', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-        { dataField: 'RemainRIGHT_SEAT_QUALIFICATION', caption: 'RIGHTSEAT', name: 'RIGHTSEAT', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
+      /*  { dataField: 'RemainRIGHT_SEAT_QUALIFICATION', caption: 'RIGHTSEAT', name: 'RIGHTSEAT', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },*/
         { dataField: 'RemainPROFICIENCY_ASSESSMENT', caption: 'PROF', name: 'PROF', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, visible: false },
         { dataField: 'RemainRouteCheck', caption: 'ROUTE', name: 'ROUTE', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 120, visible: false },
-        { dataField: 'RemainProficiency', caption: 'LPC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-        { dataField: 'RemainProficiencyOPC', caption: 'OPC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-        { dataField: 'RemainLPR', caption: 'LPR', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        //{ dataField: 'RemainProficiency', caption: 'LPC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        //{ dataField: 'RemainProficiencyOPC', caption: 'OPC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        //{ dataField: 'RemainLPR', caption: 'LPR', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
 
         { dataField: 'RemainAvSec', caption: 'TRG07B', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-        // { dataField: 'RemainTRG02', caption: 'TRG02', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },	
+        { dataField: 'RemainTRG02', caption: 'TRG02', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },	
         { dataField: 'RemainTRG01', caption: 'TRG01', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },
         { dataField: 'RemainTRG07A', caption: 'TRG07A', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },
         { dataField: 'RemainTRG16', caption: 'TRG16', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible: false },
@@ -387,7 +387,7 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         { dataField: 'RemainLOAD_CONTROL', caption: 'LOAD', name: 'LOAD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
 
         //7-12
-        { dataField: 'RemainSEPTP', caption: 'SEPT-P', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        //{ dataField: 'RemainSEPTP', caption: 'SEPT-P', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
         { dataField: 'RemainSEPT', caption: 'ESET', name: 'ESET', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
 
 
@@ -395,12 +395,12 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         { dataField: 'RemainCRM', caption: 'CRM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
         { dataField: 'RemainCCRM', caption: 'CCRM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
         //moradi
-        // { dataField: 'RemainFirstAid', caption: 'FirstAid', name: 'FirstAid', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible:false },
-        { dataField: 'RemainLine', caption: 'Line', name: 'Line', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
-        { dataField: 'Reserved1', caption: 'LIFUS', name: 'LIFUS', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 60 },
-        { dataField: 'RemainLineC1', caption: '737', name: '737', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false, },
+         { dataField: 'RemainFirstAid', caption: 'FirstAid', name: 'FirstAid', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90, visible:false },
+        //{ dataField: 'RemainLine', caption: 'Line', name: 'Line', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
+        //{ dataField: 'Reserved1', caption: 'LIFUS', name: 'LIFUS', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 60 },
+      /*  { dataField: 'RemainLineC1', caption: '737', name: '737', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false, },*/
         { dataField: 'RemainLineC3', caption: 'MD', name: 'MD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
-        { dataField: 'RemainLineC2', caption: 'AIRBUS', name: 'AIRBUS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        //{ dataField: 'RemainLineC2', caption: 'AIRBUS', name: 'AIRBUS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
 
         { dataField: 'RemainRecurrent', caption: 'Recurrent', name: 'Recurrent', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
         { dataField: 'RemainCAO', caption: 'GRT', name: 'GRT', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
@@ -408,8 +408,8 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
 
         { dataField: 'RemainHotWeather', caption: 'HOTWX', name: 'HOTWX', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
         { dataField: 'RemainColdWeather', caption: 'COLDWX', name: 'COLDWX', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-        { dataField: 'RemainCMC', caption: 'CMC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
-        //nasiri
+        //{ dataField: 'RemainCMC', caption: 'CMC', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 90 },
+        ////nasiri
 
 
 
@@ -870,12 +870,16 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
 
             $scope.dg_instance.columnOption('Line', 'visible', e.value == 'Cockpit' /*|| e.value == 'Cabin'*/);
 
-            $scope.dg_instance.columnOption('737', 'visible', e.value == 'Cabin' /*|| e.value == 'Cabin'*/);
+            //$scope.dg_instance.columnOption('737', 'visible', e.value == 'Cabin' /*|| e.value == 'Cabin'*/);
+
+            $scope.dg_instance.columnOption('B737', 'visible', e.value == 'Cabin' /*|| e.value == 'Cabin'*/);//asalAdd
+
+
             $scope.dg_instance.columnOption('MD', 'visible', false /*e.value == 'Cabin'*/ /*|| e.value == 'Cabin'*/);
-            $scope.dg_instance.columnOption('AIRBUS', 'visible', e.value == 'Cabin' /*|| e.value == 'Cabin'*/);
+            //$scope.dg_instance.columnOption('AIRBUS', 'visible', e.value == 'Cabin' /*|| e.value == 'Cabin'*/);
 
             $scope.dg_instance.columnOption('AvSec', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
-            $scope.dg_instance.columnOption('TRG07B', 'visible', e.value == 'Cockpit' || e.value == 'Cabin' || e.value == 'MAINTENANCE');
+            $scope.dg_instance.columnOption('TRG07B', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
 
             //$scope.dg_instance.columnOption('CyberSec', 'visible',   e.value == 'COMM');
             $scope.dg_instance.columnOption('RemainSMS', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
@@ -883,38 +887,41 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             $scope.dg_instance.columnOption('RemainSMSL2L3', 'visible', e.value == 'MANAGEMENT');
 
             $scope.dg_instance.columnOption('SEPT-P', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
-            $scope.dg_instance.columnOption('SEPT-T', 'visible', e.value == 'Cockpit');
-            $scope.dg_instance.columnOption('ESET', 'visible', e.value == 'Cockpit');
+            $scope.dg_instance.columnOption('SEPT-T', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
+            $scope.dg_instance.columnOption('ESET', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
             $scope.dg_instance.columnOption('DG', 'visible', e.value == 'Cockpit' || e.value == 'Cabin' || e.value == 'GRND' || e.value == 'COMM_' || e.value == 'F/D');
-            $scope.dg_instance.columnOption('CRM', 'visible', e.value == 'Cockpit' || e.value == 'F/D');
+            $scope.dg_instance.columnOption('CRM', 'visible', e.value == 'Cockpit' || e.value == 'F/D' || e.value == 'Cabin');
             $scope.dg_instance.columnOption('CCRM', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
-            $scope.dg_instance.columnOption('FirstAid', 'visible', e.value == 'Cabin');
+            $scope.dg_instance.columnOption('FirstAid', 'visible', e.value == 'Cabin' || e.value == 'Cabin');
             $scope.dg_instance.columnOption('FMT', 'visible', e.value == 'Cabin' || e.value == 'Cockpit');
 
             $scope.dg_instance.columnOption('FlightCheck', 'visible', false);
             $scope.dg_instance.columnOption('TYPEM', 'visible', e.value == 'MAINTENANCE');
-            $scope.dg_instance.columnOption('Recurrent', 'visible', e.value == 'Cabin');
+           /* $scope.dg_instance.columnOption('Recurrent', 'visible', e.value == 'Cabin');*/
             $scope.dg_instance.columnOption('CMC', 'visible', e.value == 'Cockpit' || e.value == 'Cabin');
 
-            $scope.dg_instance.columnOption('HF', 'visible', e.value == 'SECURITY' || e.value == 'CAMO' || e.value == 'MAINTENANCE' || e.value == 'GRND');
+           
 
             $scope.dg_instance.columnOption('ASD', 'visible', e.value == 'GRND' || e.value == 'COMM_'   || e.value == 'MAINTENANCE');
             $scope.dg_instance.columnOption('FAM', 'visible', e.value == 'CAMO');
 
-            $scope.dg_instance.columnOption('DEICING', 'visible', e.value == 'GRND' || e.value == 'COMM_' || e.value == 'MAINTENANCE');
-            $scope.dg_instance.columnOption('GOM', 'visible', e.value == 'GRND');
+            $scope.dg_instance.columnOption('DEICING', 'visible', e.value == 'GRND' || e.value == 'COMM_' );
+            $scope.dg_instance.columnOption('GOM', 'visible', e.value == 'GRND' || e.value == 'TRAINING' || e.value == 'QA');
             $scope.dg_instance.columnOption('ULD', 'visible', e.value == 'GRND');
             $scope.dg_instance.columnOption('GSE', 'visible', e.value == 'GRND');
             $scope.dg_instance.columnOption('BAGGAGE', 'visible', e.value == 'GRND');
-            $scope.dg_instance.columnOption('PASSENGER', 'visible', e.value == 'GRND');
+            $scope.dg_instance.columnOption('PASSENGER', 'visible', e.value == 'GRND'||e.value == 'IT' || e.value == 'LEGAL');
             //$scope.dg_instance.columnOption('ASDIKA', 'visible',   e.value == 'COMM'  || e.value == 'GRND'  || e.value=='MAINTENANCE');
             
             //$scope.dg_instance.columnOption('ASF', 'visible', e.value == 'GRND' || e.value == 'COMM');
             //$scope.dg_instance.columnOption('CC', 'visible', e.value == 'GRND' || e.value == 'COMM');
             $scope.dg_instance.columnOption('LOAD', 'visible', e.value == 'GRND' || e.value == 'COMM_');
 
-            $scope.dg_instance.columnOption('ERP', 'visible', e.value == 'GRND' || e.value == 'COMM_' || e.value == 'SECURITY' || e.value == 'QA' || e.value == 'MANAGEMENT');
+            $scope.dg_instance.columnOption('ERP', 'visible', e.value == 'GRND' || e.value == 'COMM_' || e.value == 'SECURITY' || e.value == 'QA' || e.value == 'MANAGEMENT' || e.value == 'QA');
             $scope.dg_instance.columnOption('TRG01', 'visible', e.value == 'MANAGEMENT' || e.value == 'All' || e.value == 'GRND' || e.value == 'COMM' || e.value == 'SECURITY' || e.value == 'QA' || e.value == 'CAMO' || e.value == 'MAINTENANCE' || e.value == 'LEGAL' || e.value == 'IT' || e.value == 'FINANCIAL' || e.value == 'CEO' || e.value == 'HR' || e.value == 'TRAINING');
+            $scope.dg_instance.columnOption('TRG02', 'visible', e.value == 'IT' || e.value == 'LEGAL' || e.value == 'TRAINING' || e.value == 'QA' || e.value == 'CAMO')
+            $scope.dg_instance.columnOption('HF', 'visible', e.value == 'LEGAL' || e.value == 'TRAINING' || e.value == 'QA' || e.value == 'MAINTENANCE' || e.value == 'CAMO' || e.value == 'SECURITY' || e.value == 'GRND')
+           
             $scope.dg_instance.columnOption('TRG07A', 'visible', e.value == 'MANAGEMENT')
             $scope.dg_instance.columnOption('TRG16', 'visible', e.value == 'SECURITY');
             $scope.dg_instance.columnOption('MB', 'visible', e.value == 'F/D');
@@ -924,7 +931,7 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             //$scope.dg_instance.columnOption('ANNEX', 'visible', e.value == 'F/D');
             //$scope.dg_instance.columnOption('DRM', 'visible', e.value == 'F/D');
             $scope.dg_instance.columnOption('FMTD', 'visible', /*e.value == 'F/D'*/false);
-            $scope.dg_instance.columnOption('MEL', 'visible', e.value == 'F/D');
+            $scope.dg_instance.columnOption('MEL', 'visible', e.value == 'F/D' || e.value == 'QA' || e.value == 'MAINTENANCE' || e.value == 'CAMO');
             // $scope.dg_instance.columnOption('MET', 'visible', e.value == 'F/D');
             $scope.dg_instance.columnOption('PER', 'visible', e.value == 'F/D');
             $scope.dg_instance.columnOption('RC', 'visible', e.value == 'F/D');
@@ -949,28 +956,28 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
 
 
 
-            //$scope.dg_instance.columnOption('SMSL2', 'visible',  e.value == 'QA');
+            $scope.dg_instance.columnOption('SMSL2', 'visible', e.value == 'LEGAL');
 
-            //$scope.dg_instance.columnOption('OM', 'visible',  e.value == 'QA');
-            //$scope.dg_instance.columnOption('AIROPS', 'visible',  e.value == 'QA'  || e.value=='TRAINING');	
-            //$scope.dg_instance.columnOption('CAME', 'visible',  e.value == 'QA'  ||  e.value == 'CAMO');
-            //$scope.dg_instance.columnOption('ANALYSIS', 'visible',  e.value == 'QA');
-            $scope.dg_instance.columnOption('AUDIT', 'visible', e.value == 'QA_');
-            $scope.dg_instance.columnOption('EWIS', 'visible', e.value == 'MAINTENANCE' || e.value == 'CAMO');
-            $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE' || e.value == 'CAMO');
-            //$scope.dg_instance.columnOption('PART145', 'visible', e.value == 'MAINTENANCE'     ||  e.value == 'CAMO'  || e.value=='TRAINING'  );
-            $scope.dg_instance.columnOption('PARTM', 'visible', e.value == 'CAMO');
-            $scope.dg_instance.columnOption('MOE', 'visible', e.value == 'MAINTENANCE');
-            //$scope.dg_instance.columnOption('ATL', 'visible', e.value == 'MAINTENANCE'  ||  e.value == 'CAMO');
-            //$scope.dg_instance.columnOption('RAMP', 'visible', e.value == 'MAINTENANCE');
+            $scope.dg_instance.columnOption('OM', 'visible',  e.value == 'QA');
+            $scope.dg_instance.columnOption('AIROPS', 'visible',  e.value == 'QA'  || e.value=='TRAINING');	
+            $scope.dg_instance.columnOption('CAME', 'visible',  e.value == 'QA'  ||  e.value == 'CAMO');
+            $scope.dg_instance.columnOption('ANALYSIS', 'visible',  e.value == 'QA');
+            $scope.dg_instance.columnOption('AUDIT', 'visible', e.value == 'QA');
+            $scope.dg_instance.columnOption('EWIS', 'visible', e.value == 'MAINTENANCE' || e.value == 'CAMO' || e.value == 'QA');
+            $scope.dg_instance.columnOption('FTS', 'visible', e.value == 'MAINTENANCE' || e.value == 'CAMO' || e.value == 'QA');
+            $scope.dg_instance.columnOption('PART145', 'visible', e.value == 'MAINTENANCE' || e.value == 'CAMO' || e.value == 'TRAINING' || e.value == 'QA' );
+            $scope.dg_instance.columnOption('PARTM', 'visible', e.value == 'CAMO' || e.value == 'TRAINING' || e.value == 'QA' || e.value == 'MAINTENANCE');
+            $scope.dg_instance.columnOption('MOE', 'visible', e.value == 'MAINTENANCE' || e.value == 'TRAINING' || e.value == 'QA' );
+            $scope.dg_instance.columnOption('ATL', 'visible', e.value == 'MAINTENANCE' || e.value == 'CAMO' || e.value == 'QA'|| e.value == 'MAINTENANCE');
+            $scope.dg_instance.columnOption('RAMP', 'visible', e.value == 'MAINTENANCE');
             $scope.dg_instance.columnOption('ENGINE', 'visible', e.value == 'CAMO');
-            $scope.dg_instance.columnOption('C2A2', 'visible', e.value == 'CAMO');
+           /* $scope.dg_instance.columnOption('C2A2', 'visible', e.value == 'CAMO');*/
             //$scope.dg_instance.columnOption('B737', 'visible', e.value == 'MAINTENANCE'  );
             //$scope.dg_instance.columnOption('LEGISLATION', 'visible', e.value == 'MAINTENANCE');
 
-            //$scope.dg_instance.columnOption('MPA', 'visible', e.value == 'CAMO');
-            //$scope.dg_instance.columnOption('ADSB', 'visible', e.value == 'CAMO');
-            //$scope.dg_instance.columnOption('FCL', 'visible', e.value == 'TRAINING');
+            $scope.dg_instance.columnOption('MPA', 'visible', e.value == 'CAMO' || e.value == 'QA');
+            $scope.dg_instance.columnOption('ADSB', 'visible', e.value == 'CAMO' || e.value == 'QA');
+            $scope.dg_instance.columnOption('FCL', 'visible', e.value == 'TRAINING');
             ////////
 
             $scope.dg_instance.endUpdate();
@@ -1894,7 +1901,7 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: 'TrainingDirector', caption: 'Training Director', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 150 },
 
-        { dataField: 'Recurrent', caption: 'Recurrent', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 100 },
+       /* { dataField: 'Recurrent', caption: 'Recurrent', allowResizing: true, alignment: 'center', dataType: 'boolean', allowEditing: false, width: 100 },*/
         { dataField: 'Duration', caption: 'Duration (hrs)', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
 
 
