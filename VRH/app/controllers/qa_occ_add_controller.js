@@ -1,5 +1,5 @@
 'use strict';
-app.controller('occAddController', ['$scope', '$location', '$routeParams', '$rootScope', 'qahService',
+app.controller('occAddController', ['$scope', '$location', '$routeParams', '$rootScope', 'cmsService',
     function ($scope, $location, $routeParams, $rootScope, qahService) {
         $scope.isNew = true;
 
@@ -131,19 +131,24 @@ app.controller('occAddController', ['$scope', '$location', '$routeParams', '$roo
             }
         };
 
+        // Description Text Area
+        $scope.txt_description = {
+            placeholder: 'Description',
+            height: 150,
+            bindingOptions: {
+                value: 'entity.description'
+            }
+        };
+
         $scope.btn_source_add = {
             text: '',
             type: 'default',
             icon: 'plus',
             width: '20',
-
             bindingOptions: {},
             onClick: function (e) {
-
                 $scope.popup_sources_visible = true;
-
             }
-
         };
 
         // Scroll Style
@@ -233,8 +238,134 @@ app.controller('occAddController', ['$scope', '$location', '$routeParams', '$roo
             $scope.entity = angular.copy(data);
         };
 
+        // ============================================
+        // SOURCES POPUP & FILTER
+        // ============================================
 
         $scope.popup_sources_visible = false;
+
+        // Source Filter Object
+        $scope.sourceFilter = {
+            type_id: -1,
+            date_from: null,
+            date_to: null,
+            flight_no: null,
+            route: null,
+            register: null
+        };
+
+        // Source Types Data
+        $scope.ds_source_types = [
+            { id: -1, title: 'All Types' },
+            { id: 1, title: 'Incident Report' },
+            { id: 2, title: 'Safety Report' },
+            { id: 3, title: 'Maintenance Report' },
+            { id: 4, title: 'Flight Report' },
+            { id: 5, title: 'Ground Report' }
+        ];
+
+        // Filter Controls
+        $scope.sb_filter_type = {
+            showClearButton: false,
+            searchEnabled: false,
+            placeholder: 'Type',
+            displayExpr: "title",
+            valueExpr: 'id',
+            bindingOptions: {
+                value: 'sourceFilter.type_id',
+                dataSource: 'ds_source_types'
+            }
+        };
+
+        $scope.dt_filter_from = {
+            type: "date",
+            placeholder: 'From Date',
+            width: '100%',
+            displayFormat: "yyyy-MM-dd",
+            bindingOptions: {
+                value: 'sourceFilter.date_from'
+            }
+        };
+
+        $scope.dt_filter_to = {
+            type: "date",
+            placeholder: 'To Date',
+            width: '100%',
+            displayFormat: "yyyy-MM-dd",
+            bindingOptions: {
+                value: 'sourceFilter.date_to'
+            }
+        };
+
+        $scope.txt_filter_flight_no = {
+            placeholder: 'Flight No',
+            bindingOptions: {
+                value: 'sourceFilter.flight_no'
+            }
+        };
+
+        $scope.txt_filter_route = {
+            placeholder: 'Route',
+            bindingOptions: {
+                value: 'sourceFilter.route'
+            }
+        };
+
+        $scope.txt_filter_register = {
+            placeholder: 'Register',
+            bindingOptions: {
+                value: 'sourceFilter.register'
+            }
+        };
+
+        // Search Button
+        $scope.btn_search_sources = {
+            text: 'Search',
+            type: 'default',
+            icon: 'search',
+            onClick: function (e) {
+                $scope.searchSources();
+            }
+        };
+
+        // Search Function
+        $scope.searchSources = function () {
+            $scope.loadingVisible = true;
+
+            // Build filter parameters
+            var params = {
+                type_id: $scope.sourceFilter.type_id,
+                date_from: $scope.sourceFilter.date_from,
+                date_to: $scope.sourceFilter.date_to,
+                flight_no: $scope.sourceFilter.flight_no,
+                route: $scope.sourceFilter.route,
+                register: $scope.sourceFilter.register
+            };
+
+            var _from = moment($scope.sourceFilter.date_from).format('YYYY-MM-DD');
+            var _to = moment($scope.sourceFilter.date_to).format('YYYY-MM-DD');
+            qahService.get_reports(_from, _to, $scope.sourceFilter.type_id, ($scope.sourceFilter.register ? $scope.sourceFilter.register : '-'), -1).then(function (response) {
+                $scope.loadingVisible = false;
+                console.log(response);
+                $scope.ds_source = response;
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+        };
+
+        // Clear Filter Function
+        $scope.clearSourceFilter = function () {
+            $scope.sourceFilter = {
+                type_id: -1,
+                date_from: null,
+                date_to: null,
+                flight_no: null,
+                route: null,
+                register: null
+            };
+            $scope.ds_source = [];
+        };
+
+        $scope.selected_sources = [];
+
         $scope.popup_sources = {
             height: $(window).height() - 100,
             width: $(window).width() - 200,
@@ -242,94 +373,70 @@ app.controller('occAddController', ['$scope', '$location', '$routeParams', '$roo
             showTitle: true,
             title: 'Sources',
             toolbarItems: [
-
-
-                //{
-                //    widget: 'dxButton', location: 'after', options: {
-                //        type: 'success', text: 'Save', icon: 'check', validationGroup: 'statusChange', onClick: function (e) {
-                //            var result = e.validationGroup.validate();
-
-                //            if (!result.isValid) {
-                //                General.ShowNotify(Config.Text_FillRequired, 'error');
-                //                return;
-                //            }
-                //            $scope.loadingVisible = true;
-                //            courseService.changeStatus($scope.courseStatus).then(function (response) {
-                //                //$scope.selectedEmployees
-                //                $.each($scope.selectedEmployees, function (_i, _d) {
-                //                    _d.StatusId = $scope.courseStatus.StatusId != 72 ? $scope.courseStatus.StatusId : null;
-                //                    _d.Status = $scope.courseStatus.Status != 72 ? $scope.courseStatus.Status : null;
-                //                    _d.CerNumber = null;
-                //                    _d.DateIssue = null;
-                //                });
-                //                $scope.courseEmployee.Failed = response.Failed;
-                //                $scope.courseEmployee.Pending = response.Pending;
-                //                $scope.courseEmployee.Total = response.Total;
-                //                $scope.courseEmployee.Registered = response.Registered;
-                //                $scope.courseEmployee.Canceled = response.Canceled;
-                //                $scope.courseEmployee.Passed = response.Passed;
-                //                $scope.courseEmployee.Attended = response.Attended;
-
-                //                General.ShowNotify(Config.Text_SavedOk, 'success');
-
-                //                $scope.loadingVisible = false;
-                //                $scope.dg_employees_instance.clearSelection();
-                //                $scope.popup_status_visible = false;
-                //            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
-
-                //        }
-                //    }, toolbar: 'bottom'
-                //},
                 {
-                    widget: 'dxButton', location: 'after', options: {
-                        type: 'danger', text: 'Close', icon: 'remove', onClick: function (e) {
+                    widget: 'dxButton',
+                    location: 'after',
+                    options: {
+                        type: 'success',
+                        text: 'Select',
+                        icon: 'remove',
+                        onClick: function (e) {
+                            if ($scope.dg_source_selected) {
+                                $scope.selected_sources.push($scope.dg_source_selected);
+                            }
+
+                        }
+                    },
+                    toolbar: 'bottom'
+                },
+                {
+                    widget: 'dxButton',
+                    location: 'after',
+                    options: {
+                        type: 'danger',
+                        text: 'Close',
+                        icon: 'remove',
+                        onClick: function (e) {
                             $scope.popup_sources_visible = false;
                         }
-                    }, toolbar: 'bottom'
+                    },
+                    toolbar: 'bottom'
                 }
             ],
-
             visible: false,
             dragEnabled: false,
             closeOnOutsideClick: false,
             onShowing: function (e) {
-
-
             },
             onShown: function (e) {
-
-
             },
             onHidden: function () {
-               // $scope.dg_employees_instance.refresh();
             },
             onHiding: function () {
-                
-
                 $scope.popup_sources_visible = false;
-                // $rootScope.$broadcast('onPersonHide', null);
             },
             bindingOptions: {
                 visible: 'popup_sources_visible',
-
-
             }
         };
 
-
+        // Show Report Function
+        $scope.show_report = function (data) {
+            console.log('Show report for:', data);
+            // TODO: Implement report viewing logic
+            General.ShowNotify('Report view will be implemented', 'info');
+        };
 
         $scope.ds_source = null;
         $scope.dg_source_columns = [
-            { dataField: 'TypeTitle', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false,width:200, fixed: false, fixedPosition: 'right' },
-
-
-
-            { dataField: 'DateOccurrence', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, encodeHtml: false, width: 150, format: 'YYYY-MM-DD', sortIndex: 0, sortOrder: "asc" },
-            { dataField: 'CreatorName', caption: 'Reporter', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 1500, fixed: false, fixedPosition: 'right' },
+            { dataField: 'TypeTitle', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200, fixed: false, fixedPosition: 'right' },
+            { dataField: 'DateOccurrence', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, encodeHtml: false, width: 150, format: 'yyyy-MM-dd', sortIndex: 0, sortOrder: "asc" },
+            { dataField: 'CreatorName', caption: 'Reporter', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, fixed: false, fixedPosition: 'right' },
             { dataField: 'Route', caption: 'Flight', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 130, fixed: false, fixedPosition: 'right' },
             { dataField: 'Describtion', caption: 'Description', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, fixed: false, fixedPosition: 'right' },
             {
-                dataField: "Id", caption: '',
+                dataField: "Id",
+                caption: '',
                 width: 100,
                 allowFiltering: false,
                 allowSorting: false,
@@ -337,18 +444,15 @@ app.controller('occAddController', ['$scope', '$location', '$routeParams', '$roo
                 name: 'showreport',
                 fixed: true,
                 fixedPosition: 'right',
-                //visible:false,
-
             }
-            
         ];
+
         $scope.dg_source_selected = null;
         $scope.dg_source_instance = null;
         $scope.dg_source = {
             showRowLines: true,
             showColumnLines: true,
             sorting: { mode: 'multiple' },
-
             noDataText: '',
             showColumnHeaders: true,
             allowColumnReordering: true,
@@ -357,39 +461,26 @@ app.controller('occAddController', ['$scope', '$location', '$routeParams', '$roo
             paging: { pageSize: 100 },
             showBorders: true,
             selection: { mode: 'single' },
-
             filterRow: { visible: false, showOperationChooser: true, },
             columnAutoWidth: false,
-            columns: $scope.dg_att_columns,
+            columns: $scope.dg_source_columns,
             onContentReady: function (e) {
                 if (!$scope.dg_source_instance)
                     $scope.dg_source_instance = e.component;
-
             },
             onSelectionChanged: function (e) {
                 var data = e.selectedRowsData[0];
-
                 if (!data) {
                     $scope.dg_source_selected = null;
                 }
                 else
                     $scope.dg_source_selected = data;
-
-
             },
             height: 450,
             bindingOptions: {
-
                 dataSource: 'ds_source',
-                // height: 'dg_height',
             },
-            // dataSource:ds
-
         };
-
-
-
-
 
         // Listen for Init Event
         $scope.tempData = null;
