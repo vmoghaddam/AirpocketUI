@@ -9522,7 +9522,10 @@ $scope.date_TRG16IssueDate = {
     $scope.tempData = null;
 	$scope.ds_allgroups=[];
     $scope.$on('InitZAddPerson', function (event, prms) {
-		
+
+        //var jobGroup = (prms.JobGroupRoot || '').trim().toLowerCase();
+        //$scope.showCMC = (jobGroup == 'cockpit');
+
         $scope.tempData = null;
         $scope.doNID = true;
         if (!prms.Id) {
@@ -9539,15 +9542,16 @@ $scope.date_TRG16IssueDate = {
             $scope.tempData = prms;
             $scope.isNew = false;
             //console.log(prms.NID);
+            console.log(prms.JobGroupRoot);
 
         }
-
+      
         var size = $rootScope.getWindowSize();
 
         $scope.pop_width = size.width;
         if ($scope.pop_width > 1400)
             $scope.pop_width = 1400;
-        $scope.pop_height = $(window).height() - 30;
+        $scope.pop_height = $(window).height() - 30; 
         $scope.dg_height = $scope.pop_height - 153;
         $scope.scroll_height = $scope.pop_height - 140;
 		

@@ -113,6 +113,7 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             }
             var data = $scope.dg_selected;
             $rootScope.$broadcast('InitZAddPerson', data);
+          
         }
 
     };
