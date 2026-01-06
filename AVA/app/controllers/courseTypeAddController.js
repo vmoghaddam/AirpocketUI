@@ -100,12 +100,12 @@ app.controller('courseTypeAddController', ['$scope', '$location', 'courseService
             value: 'entity.Interval',
         }
     };
-    //$scope.txt_duration = {
-    //    min: 1,
-    //    bindingOptions: {
-    //        value: 'entity.Duration',
-    //    }
-    //};
+    // $scope.txt_duration = {
+        // min: 1,
+        // bindingOptions: {
+            // value: 'entity.Duration',
+        // }
+    // };
 
     $scope.no_duration_recurrent = {
         min: 1,

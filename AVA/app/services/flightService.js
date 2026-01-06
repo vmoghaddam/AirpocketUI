@@ -4066,7 +4066,7 @@ switch (flt.Register) {
 	
 	 var _saveFlightDoc = function (entity) {
         var deferred = $q.defer();
-        $http.post(apiapsb + 'api/flight/doc/save', entity).then(function (response) {
+        $http.post('https://ava.zapiapsb.aerotango.app/' + 'api/flight/doc/save', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 

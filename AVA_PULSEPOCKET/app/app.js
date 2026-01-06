@@ -247,18 +247,18 @@ var clientBase = 'https://172.16.103.37/webpocket/';
 }
 }
    
-var serviceBase ='https://ava.apinet.airpocket.app/'; //'https://net.apvaresh.com/';
-var webBase ='https://ava.airpocket.app/'; //'https://apvaresh.com/';
-var clientBase ='https://ava.pulsepocket.app/'; //'https://cp.apvaresh.com/';
- var serviceBase2 ='https://ava.apinet.airpocket.app/';// 'https://net.apvaresh.com/';
- var serviceBaseTRN ='https://ava.api.airpocket.app/';
+var serviceBase ='https://apinet.chabahar.app/'; //'https://net.apvaresh.com/';
+var webBase ='https://chabahar.app/'; //'https://apvaresh.com/';
+var clientBase ='https://pulsepocket.app/'; //'https://cp.apvaresh.com/';
+ var serviceBase2 ='https://apinet.chabahar.app/';// 'https://net.apvaresh.com/';
+ var serviceBaseTRN ='https://api.chabahar.app/';
 
-var zlib='https://https://ava.apilib.airpocket.app/';   //*****
-var apiQA = 'https://https://ava.apiqa.airpocket.app/';  //*****
+var zlib='https://https://apilib.chabahar.app/';   //*****
+var apiQA = 'https://https://apiqa.chabahar.app/';  //*****
 
-var zscheduling='https://ava.apischedulingtemp.airpocket.app/';
-var extapi='https://ava.api.airpocket.app/';
-var zauth = 'https://ava.apinet.airpocket.app/';
+var zscheduling='https://apischedulingtemp.chabahar.app/';
+var extapi='https://api.chabahar.app/';
+var zauth = 'https://apinet.chabahar.app/';
 
 var serviceForms = 'http://localhost:9066/';
 
@@ -266,18 +266,18 @@ var serviceForms = 'http://localhost:9066/';
 
 ////////////////////////////////////////////
 //FLYPERSIA
-var serviceBase = 'https://ava.apinet.airpocket.app/token/'; //'https://net.apvaresh.com/';
+var serviceBase = 'https://apinet.chabahar.app/token/'; //'https://net.apvaresh.com/';
 var webBase = 'https://fleet.flypersiaairlines.ir/'; //'https://apvaresh.com/';
-var clientBase = 'https://ava.pulsepocket.app/'; //'https://cp.apvaresh.com/';
-var serviceBase2 = 'https://ava.apinet.airpocket.app/token/';// 'https://net.apvaresh.com/';
-var serviceBaseTRN = 'https://ava.api.airpocket.app/';
+var clientBase = 'https://pulsepocket.app/'; //'https://cp.apvaresh.com/';
+var serviceBase2 = 'https://apinet.chabahar.app/token/';// 'https://net.apvaresh.com/';
+var serviceBaseTRN = 'https://api.chabahar.app/';
 
-var zlib = 'https://https://ava.apilib.airpocket.app/';   //*****
-var apiQA = 'https://https://ava.apiqa.airpocket.app/';  //*****
+var zlib = 'https://https://apilib.chabahar.app/';   //*****
+var apiQA = 'https://https://apiqa.chabahar.app/';  //*****
 
-var zscheduling = 'https://fleet.flypersiaairlines.ir/zscheduling';
-var extapi = 'https://fleet.flypersiaairlines.ir/zapinet/';
-var zauth = 'https://fleet.flypersiaairlines.ir/zapinet/';
+var zscheduling = 'https://scheduling.chabahar.app/';
+var extapi = 'https://apinet.chabahar.app/';
+var zauth = 'https://apinet.chabahar.app/';
 
 var serviceForms = 'http://localhost:9066/';
   

@@ -68,6 +68,10 @@
     display: none;
 }
 
+.selected-tile > div {
+  border: 2px solid #9a4464 !important;
+}
+
 		
 </style>
 
@@ -223,9 +227,13 @@
                                         <label>Home Base</label>
                                         <div dx-select-box="sb_Base"></div>
                                     </div>
-									<div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+									<div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" ng-show="['tre','tri','p1','p2','ip'].indexOf(group_title.toLowerCase())!=-1">
                             <div>&nbsp;</div>
                             <div dx-check-box="chk_lifus" class="center" style="margin-top:10px;"></div>
+                        </div>
+						<div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" ng-show="['isccm','sccm','ccm','cci','cc','cce','iscc'].indexOf(group_title.toLowerCase())!=-1">
+                            <div>&nbsp;</div>
+                            <div dx-check-box="chk_observer" class="center" style="margin-top:10px;"></div>
                         </div>
                                     <div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                                         <div>&nbsp;</div>
@@ -696,9 +704,13 @@
                             <div>&nbsp;</div>
                             <div dx-check-box="chk_inactive" class="center" style="margin-top:10px;"></div>
                         </div>
-									<div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+									<div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" ng-show="['tre','tri','p1','p2','ip'].indexOf(group_title.toLowerCase())!=-1" >
                             <div>&nbsp;</div>
-                            <div dx-check-box="chk_lifus" class="center" style="margin-top:10px;"></div>
+                            <div dx-check-box="chk_lifus" class="center" style="margin-top:10px"></div>
+                        </div>
+						<div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7"  ng-show="['isccm','sccm','ccm','cci','cc','cce','iscc'].indexOf(group_title.toLowerCase())!=-1">
+                            <div>&nbsp;</div>
+                            <div dx-check-box="chk_observer" class="center" style="margin-top:10px;"></div>
                         </div>
                         <div class="col-lg-1 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <div>&nbsp;</div>
@@ -6589,7 +6601,7 @@
                 </div>
                 <div class="doc-box" ng-class="get_doc_class('part2')" ng-click="click_doc('part2')" ng-style="get_doc_style('part2')">
                     <div class="title1">PART 2</div>
-                    <div class="title2">LICENSES</div>
+                    <div class="title2">ATTESTATION</div>
 
                 </div>
                 <div class="doc-box" ng-class="get_doc_class('part3')" ng-click="click_doc('part3')" ng-style="get_doc_style('part3')">
@@ -6651,7 +6663,9 @@
                        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part1'">
     <div ng-repeat="file in files_general"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		 ng-click="openImage(root_path_crew + 'GENERAL DOCUMENTS/' + file)">
+		 ng-dblclick="openImage(root_path_crew + 'GENERAL DOCUMENTS/' + file)"
+		 ng-click="toggleSelectDocs(file, 'GENERAL DOCUMENTS/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'GENERAL DOCUMENTS/')}">
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
         <!-- <img ng-src="{{root_path_crew}}GENERAL DOCUMENTS/{{file}}" alt="{{file}}" style="width: 100px; height: auto; border-radius: 4px;"> -->
 		<!-- Image preview -->
@@ -6672,7 +6686,9 @@
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part2'">
     <div ng-repeat="file in files_lic"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		 ng-click="openImage(root_path_crew + 'LICENSES/' + file)">
+		 ng-dblclick="openImage(root_path_crew + 'LICENSES/' + file)"
+		 ng-click="toggleSelectDocs(file, 'LICENSES/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'LICENSES/')}">
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
       <div ng-if="isPDF(file)"
      style="height: 100px; display:flex; align-items:center; justify-content:center">
@@ -6690,7 +6706,9 @@
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part3'">
     <div ng-repeat="file in files_med"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		 ng-click="openImage(root_path_crew + 'MEDICAL RECORDS/' + file)">
+		 ng-dblclick="openImage(root_path_crew + 'MEDICAL RECORDS/' + file)"
+		 ng-click="toggleSelectDocs(file, 'MEDICAL RECORDS/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'MEDICAL RECORDS/')}">
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
         <div ng-if="isPDF(file)"
      style="height: 100px; display:flex; align-items:center; justify-content:center">
@@ -6708,7 +6726,9 @@
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part4'">
     <div ng-repeat="file in files_log"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		 ng-click="openImage(root_path_crew + 'LOGBOOK RECORDS/' + file)">
+		 ng-dblclick="openImage(root_path_crew + 'LOGBOOK RECORDS/' + file)"
+		 ng-click="toggleSelectDocs(file, 'LOGBOOK RECORDS/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'LOGBOOK RECORDS/')}">
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
        <div ng-if="isPDF(file)"
      style="height: 100px; display:flex; align-items:center; justify-content:center">
@@ -6726,7 +6746,9 @@
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part5'">
     <div ng-repeat="file in files_sim"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		 ng-click="openImage(root_path_crew + 'SIMULATOR TRAINING/' + file)">
+		 ng-dblclick="openImage(root_path_crew + 'SIMULATOR TRAINING/' + file)"
+		 ng-click="toggleSelectDocs(file, 'SIMULATOR TRAINING/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'SIMULATOR TRAINING/')}">
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
         <div ng-if="isPDF(file)"
      style="height: 100px; display:flex; align-items:center; justify-content:center">
@@ -6742,9 +6764,11 @@
   </div>
   
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part6'">
-     <div ng-repeat="file in files_line"
+     <div ng-repeat="file in files_ground"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		ng-click="openImage(root_path + 'LINE CHECK RECORDS/' + file)">
+		ng-dblclick="openImage(root_path_crew + 'GROUND TRAINING/' + file)"
+		 ng-click="toggleSelectDocs(file, 'GROUND TRAINING/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'GROUND TRAINING/')}">
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
        <div ng-if="isPDF(file)"
      style="height: 100px; display:flex; align-items:center; justify-content:center">
@@ -6759,7 +6783,7 @@
      </div> 
    </div> 
   
-  <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part7'">
+  <!--<div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part7'">
     <div ng-repeat="file in files_line"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
 		 ng-click="openImage(root_path_crew + 'LINE CHECK RECORDS/' + file)">
@@ -6775,7 +6799,7 @@
         <div style="font-size: 12px; margin-top: 4px; word-wrap: break-word;">{{file}}</div>
       </div>
     </div>
-  </div>
+  </div>-->
   
   <!-- <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part8'"> -->
     <!-- <div ng-repeat="file in files_cer" -->
@@ -6791,7 +6815,9 @@
    <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;" ng-show="doc_selected == 'part9'">
     <div ng-repeat="file in files_official"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		 ng-click="openImage(root_path_crew + 'OFFICIAL RECORDS/' + file)">
+		 ng-dblclick="openImage(root_path_crew + 'OFFICIAL RECORDS/' + file)"
+		 ng-click="toggleSelectDocs(file, 'OFFICIAL RECORDS/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'OFFICIAL RECORDS/')}">
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
         <div ng-if="isPDF(file)"
      style="height: 100px; display:flex; align-items:center; justify-content:center">
@@ -6808,11 +6834,10 @@
                     </div>
                     <div ng-show="is_dg_courses_visible()">
                         <div dx-data-grid="dg_courses" dx-item-alias="error" id="dg_courses" style="margin-top:0px;"></div>
-                        <div dx-data-grid="dg_courses_ext" dx-item-alias="error" id="dg_courses_ext" style="margin-top:0px;"></div>
                     </div>
 					
 					
-					 <div ng-show="is_part_7() && ['isccm','sccm','ccm','cci','cc','cce','iscc'].indexOf(group_title.toLowerCase())!=-1"  style=" height: 82vh;
+					 <div ng-show="is_part_7() && ['isccm','sccm','ccm','cci','cc','cce','iscc', 'tri', 'tre', 'p1', 'p2'].indexOf(group_title.toLowerCase())!=-1"  style=" height: 82vh;
     display: flex;
     flex-direction: column;">
 	 <div style="flex: 1; overflow-y: auto; padding-right: 5px;">
@@ -6824,7 +6849,10 @@
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;">
     <div ng-repeat="file in files_737"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		 ng-click="openImage(root_path_crew + 'LINE CHECK RECORDS/737/' + file)">
+		 ng-dblclick="openImage(root_path_crew + 'LINE CHECK RECORDS/737/' + file)"
+		 ng-click="toggleSelectDocs(file, 'LINE CHECK RECORDS/737/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'LINE CHECK RECORDS/737/')}">
+		 	
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
           <div ng-if="isPDF(file)"
      style="height: 100px; display:flex; align-items:center; justify-content:center">
@@ -6848,7 +6876,9 @@
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;">
     <div ng-repeat="file in files_MD"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		 ng-click="openImage(root_path_crew + 'LINE CHECK RECORDS/MD/' + file)">
+		 ng-dblclick="openImage(root_path_crew + 'LINE CHECK RECORDS/MD/' + file)"
+		 ng-click="toggleSelectDocs(file, 'LINE CHECK RECORDS/MD/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'LINE CHECK RECORDS/MD/')}">
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
   <div ng-if="isPDF(file)"
      style="height: 100px; display:flex; align-items:center; justify-content:center">
@@ -6872,7 +6902,9 @@
   <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-start; margin-top: 10px;">
     <div ng-repeat="file in files_310"
          style="flex: 0 0 calc(16.66% - 10px); box-sizing: border-box; text-align: center;"
-		 ng-click="openImage(root_path_crew + 'LINE CHECK RECORDS/310/' + file)">
+		  ng-dblclick="openImage(root_path_crew + 'LINE CHECK RECORDS/310/' + file)"
+		 ng-click="toggleSelectDocs(file, 'LINE CHECK RECORDS/310/')"
+		 ng-class="{'selected-tile': isSelectedDocs(file, 'LINE CHECK RECORDS/310/')}">
       <div style="border: 1px solid #ddd; border-radius: 5px; padding: 5px;">
   <div ng-if="isPDF(file)"
      style="height: 100px; display:flex; align-items:center; justify-content:center">
@@ -6943,20 +6975,23 @@
 
     <div id="popup_file" dx-popup="popup_file" class="dx-border">
        
-<div class="col-lg-12 col-md-12 col-sm-12 margin-bottom-5 padding-7">
+<div class="col-lg-6 col-md-6 col-sm-12 margin-bottom-5 padding-7">
             <label>Document Type</label>
             <div dx-select-box="sb_DocumentTypeId" ></div>
         </div>
-	 
-		<div class="col-lg-6 col-md-6 col-sm-12 margin-bottom-5 padding-7" ng-show="entityDocument.DocumentTypeId == 4">
-            <label>Aircraft Type</label>
-            <div dx-select-box="sb_ac_type"></div>
-        </div>
-          <div class="col-lg-6 col-md-6 col-sm-12 margin-bottom-5 padding-7" ng-show="entityDocument.DocumentTypeId == 8">
+	  <div class="col-lg-6 col-md-6 col-sm-12 margin-bottom-5 padding-7" ng-show="entityDocument.DocumentTypeId == 8">
             <label>Title</label>
             <div dx-text-box="txt_DocumentTitle"></div>
         </div>
 		
+		<div class="col-lg-6 col-md-6 col-sm-12 margin-bottom-5 padding-7" ng-show="entityDocument.DocumentTypeId == 4">
+            <label>Aircraft Type</label>
+            <div dx-select-box="sb_ac_type"></div>
+        </div>
+         <div class="col-lg-6 col-md-6 col-sm-12 margin-bottom-5 padding-7" ng-show="entityDocument.DocumentTypeId != 1">
+            <label>Year</label>
+            <div dx-select-box="sb_year"></div>
+        </div>
         <div class="col-lg-6 col-md-6 col-sm-12 margin-bottom-5 padding-7" ng-show="entityDocument.DocumentTypeId == 8">
             <label>Issue Date</label>
             <div dx-date-box="date_issue_doc"></div>

@@ -420,9 +420,11 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         // { dataField: 'RemainTypeAirbus', caption: 'FRMS', name: 'FRMS', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
 
         { dataField: 'RemainHF', caption: 'HF', name: 'HF', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
-        { dataField: 'date86', caption: 'FAM MD', name: 'FAM MD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
-        { dataField: 'date87', caption: 'FAM 310', name: 'FAM 310', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
-        { dataField: 'RemainASD', caption: 'ASD', name: 'ASD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        //{ dataField: 'Remain66', caption: 'FAM', name: 'FAM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+         { dataField: 'Remain86', caption: 'FAM MD', name: 'FAM MD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+ { dataField: 'Remain87', caption: 'FAM 310', name: 'FAM 310', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+       
+		{ dataField: 'RemainASD', caption: 'ASD', name: 'ASD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
         //{ dataField: 'Remain1', caption: 'ASD IKA',name:'ASDIKA', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100,visible:false },
         { dataField: 'RemainGOM', caption: 'GOM', name: 'GOM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
         { dataField: 'Remain55', caption: 'ULD', name: 'ULD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
@@ -464,9 +466,11 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         { dataField: 'Remain17', caption: 'MOE', name: 'MOE', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
         { dataField: 'Remain8', caption: 'ATL', name: 'ATL', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
         { dataField: 'Remain9', caption: 'RAMP', name: 'RAMP', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
-        { dataField: 'date88', caption: 'ENGINE MD', name: 'ENGINE MD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
-        { dataField: ' date56', caption: 'ENGINE 310', name: 'ENGINE 310', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
-        { dataField: 'Remain56', caption: 'C2A2', name: 'C2A2', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+        //{ dataField: 'Remain10', caption: 'ENGINE', name: 'ENGINE', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+         { dataField: 'Remain88', caption: 'ENGINE MD', name: 'ENGINE MD', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+ { dataField: 'Remain56', caption: 'ENGINE 310', name: 'ENGINE 310', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
+       
+		{ dataField: 'Remain56', caption: 'C2A2', name: 'C2A2', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
         { dataField: 'Remain11', caption: 'B737', name: 'B737', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
         { dataField: 'Remain13', caption: 'LEGISLATION', name: 'LEGISLATION', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100, visible: false },
 
@@ -901,6 +905,7 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             $scope.dg_instance.columnOption('HF', 'visible', e.value == 'SECURITY' || e.value == 'CAMO' || e.value == 'MAINTENANCE' || e.value == 'GRND');
 
             $scope.dg_instance.columnOption('ASD', 'visible', e.value == 'GRND' || e.value == 'COMM_'   || e.value == 'MAINTENANCE');
+            $scope.dg_instance.columnOption('FAM', 'visible', e.value == 'CAMO');
             $scope.dg_instance.columnOption('FAM MD', 'visible', e.value == 'CAMO');
             $scope.dg_instance.columnOption('FAM 310', 'visible', e.value == 'CAMO');
 
@@ -945,6 +950,13 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             $scope.dg_instance.columnOption('SMSL3', 'visible', e.value == 'QA');
 
 
+
+
+
+
+
+
+
             //$scope.dg_instance.columnOption('SMSL2', 'visible',  e.value == 'QA');
 
             //$scope.dg_instance.columnOption('OM', 'visible',  e.value == 'QA');
@@ -959,8 +971,9 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
             $scope.dg_instance.columnOption('MOE', 'visible', e.value == 'MAINTENANCE');
             //$scope.dg_instance.columnOption('ATL', 'visible', e.value == 'MAINTENANCE'  ||  e.value == 'CAMO');
             //$scope.dg_instance.columnOption('RAMP', 'visible', e.value == 'MAINTENANCE');
-            $scope.dg_instance.columnOption('ENGINE MD', 'visible', e.value == 'CAMO');
-            $scope.dg_instance.columnOption('ENGINE 310', 'visible', e.value == 'CAMO');
+            // $scope.dg_instance.columnOption('ENGINE', 'visible', e.value == 'CAMO');
+            // $scope.dg_instance.columnOption('ENGINE MD', 'visible', e.value == 'CAMO');
+            // $scope.dg_instance.columnOption('ENGINE 310', 'visible', e.value == 'CAMO');
             $scope.dg_instance.columnOption('C2A2', 'visible', e.value == 'CAMO');
             //$scope.dg_instance.columnOption('B737', 'visible', e.value == 'MAINTENANCE'  );
             //$scope.dg_instance.columnOption('LEGISLATION', 'visible', e.value == 'MAINTENANCE');
@@ -1774,7 +1787,7 @@ app.controller('zpersonController', ['$scope', '$location', '$routeParams', '$ro
         { dataField: 'DateEnd', caption: 'End', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
         { dataField: 'CoursePeopleStatus', caption: 'Result', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
         { dataField: 'DateIssue', caption: 'Issue', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
-        { dataField: 'ExpireDate86', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
+        { dataField: 'DateExpire', caption: 'Expire', allowResizing: true, alignment: 'center', dataType: 'date', format: 'yyyy-MM-dd', allowEditing: false, width: 150 },
         { dataField: 'CertificateNo', caption: 'Cer. NO', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150 },
         { dataField: 'Instructor', caption: 'Instructor', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },
         { dataField: 'TrainingDirector', caption: 'Director', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 200 },

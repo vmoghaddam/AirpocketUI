@@ -339,11 +339,23 @@
     <Compile Include="rptFPCAVA.Designer.cs">
       <DependentUpon>rptFPCAVA.cs</DependentUpon>
     </Compile>
+    <Compile Include="rptFPCCHB.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptFPCCHB.Designer.cs">
+      <DependentUpon>rptFPCCHB.cs</DependentUpon>
+    </Compile>
     <Compile Include="rptFPCFlyPersia.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="rptFPCFlyPersia.Designer.cs">
       <DependentUpon>rptFPCFlyPersia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="rptFPCMehr.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptFPCMehr.Designer.cs">
+      <DependentUpon>rptFPCMehr.cs</DependentUpon>
     </Compile>
     <Compile Include="rptFPCPasco.cs">
       <SubType>Component</SubType>
@@ -610,8 +622,14 @@
     <EmbeddedResource Include="rptFPCAVA.resx">
       <DependentUpon>rptFPCAVA.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="rptFPCCHB.resx">
+      <DependentUpon>rptFPCCHB.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="rptFPCFlyPersia.resx">
       <DependentUpon>rptFPCFlyPersia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptFPCMehr.resx">
+      <DependentUpon>rptFPCMehr.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="rptFPCPasco.resx">
       <DependentUpon>rptFPCPasco.cs</DependentUpon>

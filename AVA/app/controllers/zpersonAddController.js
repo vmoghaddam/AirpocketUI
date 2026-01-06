@@ -1691,6 +1691,12 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
 
             });
 
+              $scope.btn_visible_file = newValue == 1;
+           // $scope.btn_visible_experience = newValue == 3;
+           // $scope.btn_visible_rating = newValue ==4;
+            $scope.btn_visible_aircrafttype = newValue == 2;
+
+
              $scope.dg_education_instance.repaint();
              $scope.dg_file_instance.repaint();
              $scope.dg_exp_instance.repaint();
@@ -1714,11 +1720,8 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
             
           //  $scope.btn_visible_education = newValue == 1;
             
+            
            
-             $scope.btn_visible_file = newValue == 1;
-           // $scope.btn_visible_experience = newValue == 3;
-           // $scope.btn_visible_rating = newValue ==4;
-            $scope.btn_visible_aircrafttype = newValue == 2;
         
           //  $scope.btn_visible_course = newValue == 7;
 
@@ -1755,6 +1758,7 @@ $scope.entity.Person.RIGHT_SEAT_QUALIFICATION_ExpireDate= data.RIGHT_SEAT_QUALIF
     $scope.click_doc = function (id) {
         $scope.doc_selected = id;
         $scope.ds_doc_type = [];
+        $scope.selectedDocs = [];
         $scope.btn_visible_file = false;
         // alert($scope.doc_selected);
         switch (id) {
@@ -3198,7 +3202,14 @@ $scope.date_Type737IssueDate = {
         text: 'LIFUS',
         bindingOptions: {
             value: 'entity.Person.IsAuditee',
-            readOnly: 'IsMainDisabled',
+			readOnly: 'IsMainDisabled',
+        }
+    };
+    $scope.chk_observer = {
+        text: 'OBSERVER',
+        bindingOptions: {
+            value: 'entity.Person.IsAuditee',
+			readOnly: 'IsMainDisabled',
         }
     };
     $scope.date_DateInactiveBegin = {
@@ -3871,7 +3882,9 @@ $scope.date_Type737IssueDate = {
   { Id: 5, Title: "OFFICIAL RECORDS" },
   { Id: 6, Title: "SIMULATOR TRAINING" },
   { Id: 7, Title: "LOGBOOK RECORDS" },
-  { Id: 8, Title: "CERTIFICATES" }
+  { Id: 8, Title: "CERTIFICATES" },
+  { Id: 9, Title: "ATTESTATION" },
+  { Id: 10, Title: "GROUND TRAINING" }
 ]
     $scope.sb_DocumentTypeId = {
         showClearButton: true,
@@ -3909,6 +3922,29 @@ $scope.date_Type737IssueDate = {
         },
         bindingOptions: {
             value: 'entityDocument.ac_type',
+        }
+    };
+   $scope.ac_year_ds = [
+	{Id: '2026', Title: '2026'},
+	{Id: '2025', Title: '2025'},
+	{Id: '2024', Title: '2024'},
+	{Id: '2023', Title: '2023'}]
+     $scope.sb_year = {
+        showClearButton: true,
+        searchEnabled: true,
+        dataSource:$scope.ac_year_ds,
+        displayExpr: "Title",
+        valueExpr: 'Id',
+        
+        onSelectionChanged: function (e) {
+
+            $scope.entityDocument.DocumentType = e.selectedItem ? e.selectedItem.Title : null;
+            
+
+
+        },
+        bindingOptions: {
+            value: 'entityDocument.year',
         }
     };
     $scope.date_issue_doc = {
@@ -4284,19 +4320,14 @@ $scope.date_Type737IssueDate = {
             },
             {
                 widget: 'dxButton', location: 'before', options: {
-                    type: 'default', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'fileadd', bindingOptions: { visible: 'btn_visible_file', disabled: 'IsMainDisabled' }
+                    type: 'danger', text: 'Delete', width: 120, icon: 'clear', validationGroup: 'fileadd', bindingOptions: { visible: 'btn_visible_file', disabled: 'IsMainDisabled' }
                     , onClick: function (e) {
-                        //kook
-                        dg_selected = $rootScope.getSelectedRow($scope.dg_file_instance);
-                        if (!dg_selected) {
-                            General.ShowNotify(Config.Text_NoRowSelected, 'error');
-                            return;
-                        }
-                        $scope.entity.Person.Documents = Enumerable.From($scope.entity.Person.Documents).Where('$.Id!=' + dg_selected.Id).ToArray();
-
-                       // $scope.entityDocument.Id = id;
-                        //$scope.entity.Person.Documents.push(JSON.clone($scope.entityDocument));
-
+                      
+						$scope.loadingVisible = true;
+trnService.deletePersonDocs($scope.selectedDocs).then(function(resposne){
+	$scope.loadingVisible = false;
+	$scope.bind_person_folder();
+})
 
                     }
                 }, toolbar: 'bottom'
@@ -4481,6 +4512,7 @@ $scope.date_Type737IssueDate = {
             $scope.clearEntity();
 
             $scope.popup_add_visible = false;
+			$scope.selectedDocs = []
             $rootScope.$broadcast('onPersonHide', null);
         },
         onContentReady: function (e) {
@@ -4500,7 +4532,7 @@ $scope.date_Type737IssueDate = {
             'toolbarItems[4].visible':'btn_visible_certificate',
             'toolbarItems[5].visible': 'btn_visible_certificate',
             'toolbarItems[6].visible': 'btn_visible_file',
-            'toolbarItems[7].visible': 'btn_visible_file',
+            'toolbarItems[7].visible': false,
             'toolbarItems[8].visible': 'btn_visible_file',
             'toolbarItems[9].visible': 'btn_visible_experience',
             'toolbarItems[10].visible': 'btn_visible_experience',
@@ -5665,6 +5697,7 @@ function formatDate(date) {
 
     fd.append("nid", $scope.entity.Person.NID);
     fd.append("ac_type", $scope.entityDocument.ac_type);
+    fd.append("year", $scope.entityDocument.year);
     fd.append("Remark", $scope.entityDocument.Remark);
     fd.append("DocumentTypeId", $scope.entityDocument.DocumentTypeId);
 
@@ -5682,6 +5715,7 @@ function formatDate(date) {
     .then(function (response) {
 		$scope.loadingVisible = false;
 		 $scope.popup_file_visible = false;
+		 $scope.bind_person_folder();
 		General.ShowNotify(Config.Text_SavedOk, 'success');
         console.log("Upload OK:", response.data);
     })
@@ -9607,8 +9641,11 @@ $scope.date_TRG16IssueDate = {
             return; 
         }
         
-        var url = "https://ava.reporttrn.airpocket.app/frmreportview.aspx?type=18&id=" + options.data.Id;
-
+		if(options.data.Organization.toLowerCase() == "ava" ){
+           var url = "https://ava.reporttrn.airpocket.app/frmreportview.aspx?type=18&id=" + options.data.Id;
+		} else {
+		var url = "https://ava.airpocket.app/upload/training/Certificates/" + options.data.ImageUrl
+		}
        
         $("<i>")
             .addClass("fa fa-download")
@@ -9639,7 +9676,7 @@ $scope.date_TRG16IssueDate = {
     $scope.dg_courses_ds = null;
     //$scope.pop_height = $(window).height() - 30;
    // $scope.dg_height = $scope.pop_height - 153;
-    $scope.dg_courses_height = $(window).height() - 535 - 30;
+    $scope.dg_courses_height = $(window).height() - 150 - 30;
     $scope.dg_courses = {
         sorting: {
             mode: "single"
@@ -9825,6 +9862,27 @@ $scope.isPDF = function (file) {
 };
 
 
+$scope.selectedDocs = [];
+
+$scope.isSelectedDocs = function(file, folder_name) {
+  return $scope.selectedDocs.some(function (x) {
+    return x.file_name === file &&  x.folder_name === $scope.entity.Person.NID + '/' + folder_name;
+  });
+};
+
+$scope.toggleSelectDocs = function(file, folder_name) {
+
+  var idx = $scope.selectedDocs.findIndex(function (x) {
+    return x.file_name === file && x.folder_name === $scope.entity.Person.NID + '/' + folder_name;
+  });
+
+  if (idx === -1) {
+    $scope.selectedDocs.push({ file_name: file, folder_name: $scope.entity.Person.NID + '/' + folder_name });
+  } else {
+    $scope.selectedDocs.splice(idx, 1);
+  }
+};
+
    $scope.bind_person_folder = function (callback) {
         
             trnService.getPersonFolder($scope.entity.Person.NID).then(function (response) {
@@ -9849,6 +9907,7 @@ $scope.isPDF = function (file) {
                   $scope.files_general = response.Data["GENERAL DOCUMENTS"];
                   $scope.files_lic = response.Data["LICENSES"];
                   $scope.files_line = response.Data["LINE CHECK RECORDS"];
+                  $scope.files_ground = response.Data["GROUND TRAINING"];
                   $scope.files_log = response.Data["LOGBOOK RECORDS"];
                   $scope.files_med = response.Data["MEDICAL RECORDS"];
                   $scope.files_official = response.Data["OFFICIAL RECORDS"];

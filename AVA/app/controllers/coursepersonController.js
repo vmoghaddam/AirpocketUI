@@ -1739,8 +1739,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                     $scope.IsUploadVisible = $scope.IsEditable && data.CoursePeopleStatusId == 1;
                     var tid = data.CertificateTypeId ? data.CertificateTypeId : -1;
                     // console.log('selected', data);
-                    $scope.upload_url = serviceBaseTRN + 'api/upload/certificate/' + data.Id + '/' + data.PersonId + '/' + tid + '/' + $scope.selectedCourse.Id;
-                }
+                    //$scope.upload_url = serviceBaseTRN + 'api/upload/certificate/' + data.Id + '/' + data.PersonId + '/' + tid + '/' + $scope.selectedCourse.Id;
+					  }
 
 
             },
@@ -1765,7 +1765,7 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 }
                 if (clmn.name == "ImgUrl" && e.data.ImgUrl)
-                    $window.open($rootScope.clientsFilesUrl + e.data.ImgUrl, '_blank');
+                    $window.open('https://ava.airpocket.app/upload/training/Certificates/' + e.data.ImgUrl, '_blank');
             },
             onCellPrepared: function (e) {
                 if (e.column.name != "updateresult")
@@ -2348,46 +2348,106 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
                         }
                     }, toolbar: 'bottom'
                 },
-                {
-                    widget: 'dxFileUploader', location: 'after', options: {
-                        multiple: false,
-                        width: 200,
-                        selectButtonText: 'Upload Certificate',
-                        // selectButtonText: 'انتخاب تصویر',
-                        labelText: '',
-                        accept: "*",
-                        uploadMethod: 'POST',
-                        uploadMode: "instantly",
-                        rtlEnabled: true,
-                        showFileList: false,
-                        //uploadUrl: serviceBaseTRN + 'api/upload/certificate',
-                        onValueChanged: function (arg) {
+                // {
+                    // widget: 'dxFileUploader', location: 'after', options: {
+                        // multiple: false,
+                        // width: 200,
+                        // selectButtonText: 'Upload Certificate',
+                        // // selectButtonText: 'انتخاب تصویر',
+                        // labelText: '',
+                        // accept: "*",
+                        // uploadMethod: 'POST',
+                        // uploadMode: "instantly",
+                        // rtlEnabled: true,
+                        // showFileList: false,
+                        // //uploadUrl: serviceBaseTRN + 'api/upload/certificate',
+                        // onValueChanged: function (arg) {
 
-                        },
-                        onUploadStarted: function (e) { $scope.loadingVisible = true; },
-                        onUploaded: function (e) {
-                            $scope.uploadedFileImage = e.request.responseText;
-                            //console.log('upload message', e.request);
-                            if (e.request.responseText) {
-                                var row = $rootScope.getSelectedRow($scope.dg_people_instance);
-                                row.ImgUrl = e.request.responseText.replace(/"/g, '');
-                                $scope.loadingVisible = false;
-                                // $scope.IsUploadVisible = false;
-                                try {
-                                    $scope.dg_people_instance.clearSelection();
-                                    $scope.dg_people_instance.refresh();
+                        // },
+                        // onUploadStarted: function (e) { $scope.loadingVisible = true; },
+                        // onUploaded: function (e) {
+                            // $scope.uploadedFileImage = e.request.responseText;
+                            // //console.log('upload message', e.request);
+                            // if (e.request.responseText) {
+                                // var row = $rootScope.getSelectedRow($scope.dg_people_instance);
+                                // row.ImgUrl = e.request.responseText.replace(/"/g, '');
+                                // $scope.loadingVisible = false;
+                                // // $scope.IsUploadVisible = false;
+                                // try {
+                                    // $scope.dg_people_instance.clearSelection();
+                                    // $scope.dg_people_instance.refresh();
 
-                                }
-                                catch (e) {
-                                    alert(e);
-                                    console.log(e);
-                                }
+                                // }
+                                // catch (e) {
+                                    // alert(e);
+                                    // console.log(e);
+                                // }
 
-                            }
+                            // }
 
-                        },
-                    }, toolbar: 'bottom'
-                },
+                        // },
+                    // }, toolbar: 'bottom'
+                // },
+				{
+  widget: 'dxFileUploader',
+  location: 'after',
+  options: {
+    multiple: true,            
+    width: 200,
+    selectButtonText: 'Upload Certificate',
+    labelText: '',
+    accept: "*",
+    uploadMethod: 'POST',
+    uploadMode: "instantly",
+    rtlEnabled: true,
+    showFileList: false,
+      //2025-12-16
+     //uploadUrl: serviceBaseTRN + "api/upload/certificates/"+$scope.follow_course.No, 
+	
+    onUploadStarted: function (e) { $scope.loadingVisible = true; },
+
+    onUploaded: function (e) {
+      $scope.loadingVisible = false;
+
+      var raw = e.request.responseText;  
+      var fileNameOrUrl = null;
+
+      try {
+        var obj = JSON.parse(raw);
+        if (obj && obj.files && obj.files.length > 0) {
+          fileNameOrUrl = obj.files[0];   
+        }
+      } catch (err) {
+        fileNameOrUrl = (raw || "").replace(/"/g, "");
+      }
+
+      if (!fileNameOrUrl) return;
+
+      var row = $rootScope.getSelectedRow($scope.dg_people_instance);
+      row.ImgUrl = serviceBaseTRN + "upload/fixed/" + fileNameOrUrl;
+
+
+      try {
+        $scope.dg_people_instance.clearSelection();
+        $scope.dg_people_instance.refresh();
+      } catch (ex) {
+        console.log(ex);
+      }
+
+      $scope.$applyAsync();
+    },
+
+    onUploadError: function (e) {
+      $scope.loadingVisible = false;
+      console.log("Upload failed:", e);
+      $scope.$applyAsync();
+    },
+
+  
+  },
+  toolbar: 'bottom'
+},
+
                 {
                     widget: 'dxButton', location: 'after', options: {
                         type: 'default', text: 'PARTICIPANTS FORM', onClick: function (e) {
@@ -2502,7 +2562,8 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
 
                 $scope.selectedTabFolderIndex = 0;
                 $scope.preparePeopleGrid();
-
+                $scope.upload_url=serviceBaseTRN + "api/upload/certificates/"+$scope.selectedCourse.Id;
+				$scope.isOtherOrganization = $scope.selectedCourse.Organization == "AVA" ? true : false;
             },
             onHidden: function () {
                 //$scope.dg_employees_instance.refresh();
@@ -2520,8 +2581,9 @@ app.controller('coursepersonController', ['$scope', '$location', '$routeParams',
             },
             bindingOptions: {
                 visible: 'popup_people_visible',
-                'toolbarItems[7].visible': 'IsUploadVisible',
-                'toolbarItems[7].options.uploadUrl': 'upload_url',
+                'toolbarItems[7].visible': 'isOtherOrganization',
+                'toolbarItems[8].visible': true,
+                'toolbarItems[8].options.uploadUrl': 'upload_url',
 
             }
         };

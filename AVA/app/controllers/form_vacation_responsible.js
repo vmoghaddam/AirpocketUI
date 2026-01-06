@@ -724,7 +724,14 @@ app.controller('forms_vacation_responsibleController', ['$scope', '$location', '
 
     //};
     $scope.bind_all_responsible = function (callback) {
-        flightService.getReqResponsibleAll($rootScope.employeeId).then(function (response) {
+		if($rootScope.userName.toLowerCase() == 'cs.yazdani'){
+		$scope.eid = 4758
+		}
+		else{
+		$scope.eid = $rootScope.employeeId
+		}
+			
+        flightService.getReqResponsibleAll($scope.eid).then(function (response) {
 
             $scope.ds_all = response;
             $scope.dg_ds = Enumerable.From($scope.ds_all).Where('$.ResponsibleActionId != 1 && $.ResponsibleActionId != -1').ToArray();

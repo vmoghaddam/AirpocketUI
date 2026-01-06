@@ -2498,7 +2498,7 @@ app.controller('boardController', ['$scope', '$location', '$routeParams', '$root
             $scope.popup_fltdoc_title = 'OTHER';
             $scope.popup_fltdoc_visible = true;
         }
-        if (key == 'per') {
+		if (key == 'per') {
             $scope.popup_fltdoc_title = 'PERMISSION';
             $scope.popup_fltdoc_visible = true;
         }

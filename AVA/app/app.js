@@ -104,11 +104,11 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/person", {
         controller: "zpersonController",
-        templateUrl: "/app/views/zperson.html?v=88782"
+        templateUrl: "/app/views/zperson.html?v=88785"
     });
      $routeProvider.when("/person/crew", {
         controller: "zpersonController",
-        templateUrl: "/app/views/zperson.html?v=7777",
+        templateUrl: "/app/views/zperson.html?v=77796",
         isCrew:true,
     }); 
     $routeProvider.when("/person/course", {
@@ -132,11 +132,11 @@ app.config(function ($routeProvider) {
     });
     $routeProvider.when("/course/person", {
         controller: "coursepersonController",
-        templateUrl: "/app/views/courseperson.html?v=555"
+        templateUrl: "/app/views/courseperson.html?v=560"
     });
     $routeProvider.when("/course/type", {
         controller: "courseTypeController",
-        templateUrl: "/app/views/coursetype.html"
+        templateUrl: "/app/views/coursetype.html?v=556"
     });
     $routeProvider.when("/flight/board", {
         controller: "flightBoardController",
@@ -510,7 +510,7 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/board", {
         controller: "boardController",
-        templateUrl: "/app/views/board.html?v=926",
+        templateUrl: "/app/views/board.html?v=927",
         isAdmin: true,
     });
     $routeProvider.when("/board/fly", {
@@ -1337,7 +1337,7 @@ $rootScope.HasHR = function () {
 
         }
 		if (key == 'requests') {
-             return $rootScope.userName.toUpperCase()=='M.KERMANSHAHI' ||   $rootScope.userName.toUpperCase()=='N.TALEBI' || $rootScope.userName.toLowerCase() == 'demo';
+             return $rootScope.userName.toUpperCase()=='CS.YAZDANI'|| $rootScope.userName.toUpperCase()=='M.KERMANSHAHI' ||   $rootScope.userName.toUpperCase()=='N.TALEBI' || $rootScope.userName.toLowerCase() == 'demo';
 
         }
 	   

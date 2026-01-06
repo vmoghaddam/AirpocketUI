@@ -1953,7 +1953,7 @@ namespace EPAGriffinAPI.DAL
                                   join f in this.context.FDPs on fi.FDPId equals f.Id
                                   where nullable_ids.Contains(fi.FlightId) && f.IsTemplate == false
                                   select fi.FlightId).ToListAsync();
-            if (fdpitems != null && fdpitems.Count > 0)
+            if (fdpitems != null && fdpitems.Count > 0 && ConfigurationManager.AppSettings["ignore_crew"] == "0")
             {
                 return new CustomActionResult(HttpStatusCode.BadRequest, "flight crew error");
             }

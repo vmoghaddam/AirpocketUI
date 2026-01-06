@@ -812,7 +812,7 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 	var _get_course_types = function () {
 
     var deferred = $q.defer();
-        $http.get(serviceBaseTRN + 'api/course/types').then(function (response) {
+    $http.get(serviceBaseTRN + 'api/course/types').then(function (response) {
         deferred.resolve(response.data);
     }, function (err, status) {
 
@@ -919,9 +919,20 @@ serviceFactory.get_course_types = _get_course_types;
  };
 	
 	
-	
+	 var _deletePersonDocs = function (entity) {
+        var deferred = $q.defer();
+        $http.post(zapitrn + 'api/trn/delete/profile/doc', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
 	
 	serviceFactory.getCourseExternal = _getCourseExternal;
+	serviceFactory.deletePersonDocs = _deletePersonDocs;
 	serviceFactory.getPersonFiles = _getPersonFiles;
 	serviceFactory.getCrewFiles = _getCrewFiles;
 	serviceFactory.getCabinFiles = _getCabinFiles;

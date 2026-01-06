@@ -196,7 +196,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     };
 
 
-    $scope.entity.RecurrentType = 'Recurrent';
+    $scope.entity.RecurrentType = '  ';
     $scope.bind = function (data, sessions, syllabi, exams) {
         //2023-07-29
         if ($scope.tempData.ReadOnly == 100)
@@ -261,7 +261,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         //$scope.entity.SMSInsDate = data.SMSInsDate;
 
         $scope.entity = JSON.parse(JSON.stringify(data));
-
+      
         $scope.course_type_id = data.CourseTypeId;
         $scope.entity.Sessions = sessions;
         $scope.entity.Syllabi = syllabi;
@@ -599,7 +599,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         },
         shading: true,
         //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
-        height: 300,
+        height: 420,
         width: 350,
         fullScreen: false,
         showTitle: true,
@@ -839,6 +839,47 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         },
         bindingOptions: {
             value: 'sessionEnd',
+
+        }
+    };
+
+    $scope.course_type_session = {
+       
+        dataSource: $rootScope.getDatasourceCourseTypeNew(),
+        showClearButton: true,
+        searchEnabled: true,
+        searchExpr: ["Title"],
+        valueExpr: "Id",
+        displayExpr: "Title",
+       
+        bindingOptions: {
+            value: '',
+
+        }
+    };
+
+
+    $scope.instructor_session = {
+      
+        showClearButton: true,
+        searchEnabled: true,
+        searchExpr: ["Name"],
+        valueExpr: "Id",
+        displayExpr: "Name",
+        onSelectionChanged: function (e) {
+
+            $scope.entity.Instructor = null;
+
+            if (e.selectedItem) {
+                $scope.entity.Instructor = e.selectedItem.Name;
+
+
+            }
+
+        },
+        bindingOptions: {
+            value: '',
+            dataSource: 'ds_teachers'
 
         }
     };
@@ -1626,7 +1667,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         dto.CurrencyId = $scope.entity.CurrencyId;
         dto.Sessions = Enumerable.From($scope.entity.Sessions).Select('$.Key').ToArray();
         dto.Syllabi = Enumerable.From($scope.entity.Syllabi).ToArray();
-
+       
         $.each(dto.Syllabi, function (_j, _s) {
             _s.Sessions = Enumerable.From(_s.Sessions).Select('$.Key').ToArray();
         })
@@ -2346,7 +2387,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
     };
     $scope.txt_Title = {
         hoverStateEnabled: false,
-        readOnly: true,
+        //readOnly: true,
         bindingOptions: {
             value: 'entity.Title',
         }
@@ -2583,6 +2624,99 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
 
         }
     };
+
+
+    $scope.btn_persiandate_session = {
+        //text: 'Search',
+        type: 'default',
+        icon: 'event',
+        width: 35,
+        //validationGroup: 'dlasearch',
+        bindingOptions: {},
+        onClick: function (e) {
+
+            $scope.popup_date_session_visible = true;
+        }
+
+    };
+    $scope.popup_date_session_visible = false;
+    $scope.popup_date_session_title = 'Date Picker';
+    var pd_session = null;
+    $scope.popup_date_session = {
+        title: 'Shamsi Date Picker',
+        shading: true,
+        //position: { my: 'left', at: 'left', of: window, offset: '5 0' },
+        height: 200,
+        width: 300,
+        fullScreen: false,
+        showTitle: true,
+        dragEnabled: true,
+
+
+        visible: false,
+
+        closeOnOutsideClick: false,
+        onTitleRendered: function (e) {
+            // $(e.titleElement).addClass('vahid');
+            // $(e.titleElement).css('background-color', '#f2552c');
+        },
+        onShowing: function (e) {
+
+
+
+
+        },
+        onShown: function (e) {
+
+            pd_session = $(".date1").pDatepicker({
+                format: 'l',
+                autoClose: true,
+                calendar: {
+                    persian: {
+                        locale: 'en'
+                    }
+                },
+                onSelect: function (unix) {
+
+                    console.log(new Date(unix));
+                    $scope.$apply(function () {
+
+                        $scope.entity.DateStart = new Date(unix);
+                        $scope.entity.DateStart.setDate($scope.entity.DateStart.getDate() + 1)
+                    });
+
+                },
+
+            });
+            if ($scope.entity.DateStart) {
+
+                var td = new Date($scope.entity.DateStart.getTime());
+                td.setDate(td.getDate() - 1)
+                pd_session.setDate(new Date(td.getTime()));
+
+            }
+
+
+           
+
+
+        },
+        onHiding: function () {
+            pd_session.destroy();
+          
+            $scope.popup_date_session_visible = false;
+
+        },
+        showCloseButton: true,
+        bindingOptions: {
+            visible: 'popup_date_session_visible',
+
+
+
+        }
+    };
+
+
     $scope.date_DateStartPractical = {
         width: '100%',
         type: 'date',
@@ -2629,7 +2763,7 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         }
     };
 
-
+   
     $scope.sb_DurationUnitId = {
         showClearButton: true,
         searchEnabled: true,
@@ -2682,9 +2816,10 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
         $scope.course_types = response.data.Data;
     });
     $scope.fill_duration_int = function () {
-
+      
         var course_type = Enumerable.From($scope.course_types).Where('$.Id==' + $scope.course_type_id).FirstOrDefault();
-        switch ($scope.entity.RecurrentType) {
+        if($scope.isNew){
+		switch ($scope.entity.RecurrentType) {
             case 'Recurrent':
                 $scope.entity.Duration = course_type.Duration;
                 $scope.entity.Interval = course_type.Interval;
@@ -2700,38 +2835,40 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             default:
                 break;
         }
+		}
     }
 
     $scope.fill_title = function () {
 
-
+ if($scope.isNew){
         switch ($scope.entity.RecurrentType) {
             case 'Recurrent':
                 $scope.entity.Title = 'RECURRENT ' + $scope.course_type_title;
-
+              
                 break;
             case 'Initial':
                 $scope.entity.Title = 'INITIAL ' + $scope.course_type_title;
-
+                
                 break;
             case 'One Time':
                 $scope.entity.Title = $scope.course_type_title;
-
+               
                 break;
             default:
                 break;
 
         }
+ }
     }
 
+    
 
-
-
-
+  
+    
     $scope.sb_period = {
         showClearButton: false,
         searchEnabled: false,
-        dataSource: ['Recurrent', 'Initial', 'One Time'],
+        dataSource: ['  ','Recurrent', 'Initial', 'One Time'],
         onValueChanged: function (e) {
             if ($scope.fill_duration_int) {
                 $scope.fill_duration_int();
@@ -2763,7 +2900,8 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
             $scope.course_type_id = e.selectedItem.Id;
             $scope.course_type_title = e.selectedItem.Title;
             $scope.fill_duration_int();
-            
+            $scope.fill_title();
+
             //if ($scope.isNew) {
             //    if (e.selectedItem && e.selectedItem.Interval)
             //        $scope.entity.Interval = e.selectedItem.Interval;
@@ -2779,9 +2917,9 @@ app.controller('courseAddController', ['$scope', '$location', 'courseService', '
                 $scope.certype = e.selectedItem.CertificateType;
 
                 $scope.ctgroups = e.selectedItem.JobGroups;
-                $scope.fill_title();
+				 $scope.fill_title();
                 // if ($scope.isNew)
-                // $scope.entity.Title = e.selectedItem.Title;
+                    // $scope.entity.Title = e.selectedItem.Title;
 
                 //war
                 ztrnService.getCourseTypeSubjects(e.selectedItem.Id).then(function (response2) {
