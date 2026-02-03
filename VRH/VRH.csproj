@@ -162,6 +162,7 @@
     <Content Include="app\controllers\fixtime.js" />
     <Content Include="app\controllers\fixtimereport.js" />
     <Content Include="app\controllers\fixtimereportdaily.js" />
+    <Content Include="app\controllers\fixtime_krn_controller.js" />
     <Content Include="app\controllers\fixtime_summary_controller.js" />
     <Content Include="app\controllers\fix_time_controller.js" />
     <Content Include="app\controllers\flightBoardAllController.js" />
@@ -198,6 +199,15 @@
     <Content Include="app\controllers\imageviewer.js" />
     <Content Include="app\controllers\indexController.js" />
     <Content Include="app\controllers\ipaccessController.js" />
+    <Content Include="app\controllers\iqs_audit_detail_controller.js" />
+    <Content Include="app\controllers\iqs_audit_list_controller.js" />
+    <Content Include="app\controllers\iqs_controller.js" />
+    <Content Include="app\controllers\iqs_hazard_detail_controller.js" />
+    <Content Include="app\controllers\iqs_hazard_list_controller.js" />
+    <Content Include="app\controllers\iqs_moc_detail_controller.js" />
+    <Content Include="app\controllers\iqs_moc_list_controller.js" />
+    <Content Include="app\controllers\iqs_occurrence_detail_controller.js" />
+    <Content Include="app\controllers\iqs_occurrence_list_controller.js" />
     <Content Include="app\controllers\irregularFlightController.js" />
     <Content Include="app\controllers\jobgroupAddController.js" />
     <Content Include="app\controllers\jobgroupController.js" />
@@ -411,6 +421,7 @@
     <Content Include="app\views\fixtime.html" />
     <Content Include="app\views\fixtimereport.html" />
     <Content Include="app\views\fixtimereportdaily.html" />
+    <Content Include="app\views\fixtime_krn.html" />
     <Content Include="app\views\fixtime_summary.html" />
     <Content Include="app\views\fix_time.html" />
     <Content Include="app\views\flight.html" />
@@ -447,6 +458,15 @@
     <Content Include="app\views\home.html" />
     <Content Include="app\views\imageviewer.html" />
     <Content Include="app\views\ipaccess.html" />
+    <Content Include="app\views\iqs.html" />
+    <Content Include="app\views\iqs_audit_detail.html" />
+    <Content Include="app\views\iqs_audit_list.html" />
+    <Content Include="app\views\iqs_hazard_detail.html" />
+    <Content Include="app\views\iqs_hazard_list.html" />
+    <Content Include="app\views\iqs_moc_detail.html" />
+    <Content Include="app\views\iqs_moc_list.html" />
+    <Content Include="app\views\iqs_occurrence_detail.html" />
+    <Content Include="app\views\iqs_occurrence_list.html" />
     <Content Include="app\views\irregularFlight.html" />
     <Content Include="app\views\jobgroup.html" />
     <Content Include="app\views\jobgroupAdd.html" />

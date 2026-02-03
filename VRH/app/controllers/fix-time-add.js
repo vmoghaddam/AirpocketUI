@@ -46,16 +46,26 @@ app.controller('fix-time-addController', ['$scope', '$compile', '$location', '$r
 
     //////////////////////////
 
-    $scope.txt_route = {
-        hoverStateEnabled: false,
+    $scope.txt_from = {
         bindingOptions: {
-            value: 'entity.Route',
+            value: 'entity.from',
         }
     };
-    $scope.num_duration = {
+    $scope.txt_to = {
+        bindingOptions: {
+            value: 'entity.to',
+        }
+    };
+    $scope.num_hr = {
         min: 0,
         bindingOptions: {
-            value: 'entity.Duration',
+            value: 'entity.hours',
+        }
+    };
+    $scope.num_min = {
+        min: 0,
+        bindingOptions: {
+            value: 'entity.minutes',
         }
     };
     $scope.txt_remark = {
@@ -87,14 +97,16 @@ app.controller('fix-time-addController', ['$scope', '$compile', '$location', '$r
                 widget: 'dxButton', location: 'before', options: {
                     type: 'default', text: 'Save', icon: 'check',
                     onClick: function () {
+                        $scope.loadingVisible = true;
                         flightService.save_fixtime($scope.entity).then(function (response2) {
+                            $scope.loadingVisible = false;
                             if (response2.IsSuccess) {
                                 General.ShowNotify(Config.Text_SavedOk, 'success');
 
                               
                                 var existing = null;
                                 $.each($scope.ds_fix_time, function (_i, _d) {
-                                    if (_d.Route == $scope.entity.Route) {
+                                    if (_d.Route == $scope.entity.from.toUpperCase() + '-' + $scope.entity.to.toUpperCase()) {
                                         existing = _d
                                     }
                                 });
@@ -103,11 +115,8 @@ app.controller('fix-time-addController', ['$scope', '$compile', '$location', '$r
                               
                                 if (existing) {
                                     $.each($scope.ds_fix_time, function (_i, _d) {
-                                        if (_d.Route == $scope.entity.Route) {
-                                            alert(_d.Route)
-                                            alert(_d.Duration)
-                                            alert(_d.remark)
-                                            _d.Duration = $scope.entity.Duration;
+                                        if (_d.Route == $scope.entity.from.toUpperCase() + '-' + $scope.entity.to.toUpperCase()) {
+                                            _d.Duration = $scope.entity.hours * 60 + $scope.entity.minutes;
                                             _d.remark = $scope.entity.remark;
                                             $scope.dgInstance.refresh();
                                         }
@@ -155,6 +164,12 @@ app.controller('fix-time-addController', ['$scope', '$compile', '$location', '$r
 
     $scope.popup_edit_visible = false;
 
+    function minutesToHoursMinutes(totalMinutes) {
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        return { hours, minutes };
+    }
+
     $scope.btn_edit = {
         text: 'Edit',
         type: 'default',
@@ -167,7 +182,11 @@ app.controller('fix-time-addController', ['$scope', '$compile', '$location', '$r
             }
 
             $scope.entity = angular.copy($scope.selectedRow);
-
+            var routes = $scope.entity.Route.split("-");
+            $scope.entity.from = routes[0];
+            $scope.entity.to = routes[1];
+            $scope.entity.hours = minutesToHoursMinutes($scope.entity.Duration).hours;
+            $scope.entity.minutes = minutesToHoursMinutes($scope.entity.Duration).minutes;
             $scope.popup_add_visible = true;
         }
     };

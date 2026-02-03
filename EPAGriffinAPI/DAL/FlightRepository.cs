@@ -4403,13 +4403,13 @@ namespace EPAGriffinAPI.DAL
 
             var isvalid = true;
             var typeChangeDtoList = new List<TypeChangeDto>();
-
+            int check_crew = Convert.ToInt32(ConfigurationManager.AppSettings["check_crew"]);
             foreach (var x in flights)
             {
 
 
                 var y = legs.FirstOrDefault(q => q.ID == x.ID);
-                if ((y.AircraftType[0] != newResisgerObj.AircraftType2[0]) && fdpitems.Count > 0)
+                if ((y.AircraftType[0] != newResisgerObj.AircraftType2[0]) && fdpitems.Count > 0 && check_crew == 1)
                 {
                     result = "Unable to apply register change due to aircraft type change involving current crew assignment.";
                     return new CustomActionResult(HttpStatusCode.NotFound, result);
@@ -4430,7 +4430,7 @@ namespace EPAGriffinAPI.DAL
                     });
                 }
 
-              
+
 
                 var changeLog = new FlightChangeHistory()
                 {
@@ -4504,7 +4504,7 @@ namespace EPAGriffinAPI.DAL
                 //piano
                 result = new List<object>() { fdpstr, fdpitemstr, crewStr, fltStr, typeChangeDtoList, fltIds };
 
-            } 
+            }
             else
                 result = new List<object>() { fltIds };
             //if (!isvalid)
@@ -5436,11 +5436,11 @@ namespace EPAGriffinAPI.DAL
                 context.FDPs.RemoveRange(fdps);
                 this.context.FlightInformations.Remove(entityToDelete);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 int i = 0;
             }
-          
+
         }
 
         public object UpdateLogUser(List<int> ids, string username)
@@ -9210,7 +9210,7 @@ namespace EPAGriffinAPI.DAL
         }
 
 
-     
+
         internal async Task<dynamic> SMSDuties(List<int> Ids, DateTime date, string username = "")
         {
             try
@@ -13296,323 +13296,339 @@ namespace EPAGriffinAPI.DAL
         {
             //var _fdpItemIds = strItems.Split('*').Select(q => Convert.ToInt32(q)).Distinct().ToList();
             //var _fdpIds = strfdps.Split('*').Select(q => Convert.ToInt32(q)).Distinct().ToList();
-
-            var flightIds = strItems.Split('*').Select(q => (Nullable<int>)Convert.ToInt32(q)).Distinct().ToList();
-            var _fdpItemIds = await this.context.ViewFDPItem2.Where(q => q.CrewId == crewId && flightIds.Contains(q.FlightId)).OrderBy(q => q.STD).Select(q => q.Id).ToListAsync();
-            var allRemovedItems = await this.context.FDPItems.Where(q => _fdpItemIds.Contains(q.Id)).ToListAsync();
-            var _fdpIds = allRemovedItems.Select(q => q.FDPId).ToList();
-            var fdps = await this.context.FDPs.Where(q => _fdpIds.Contains(q.Id)).ToListAsync();
-            var fdpItems = await this.context.FDPItems.Where(q => _fdpIds.Contains(q.FDPId)).ToListAsync();
-
-
-            var allFlightIds = fdpItems.Select(q => q.FlightId).ToList();
-            var allFlights = await this.context.ViewLegTimes.Where(q => allFlightIds.Contains(q.ID)).OrderBy(q => q.STD).ToListAsync();
-            var crews = await this.context.ViewEmployeeLights.Where(q => q.Id == crewId).ToListAsync();
-            var allRemovedFlights = allFlights.Where(q => flightIds.Contains(q.ID)).OrderBy(q => q.STD).ToList();
-            FDP offFDP = null;
-            string offSMS = string.Empty;
-            List<string> sms = new List<string>();
-            List<string> nos = new List<string>();
-            List<CrewPickupSM> csms = new List<CrewPickupSM>();
-            if (reason != -1)
+            try
             {
+                var flightIds = strItems.Split('*').Select(q => (Nullable<int>)Convert.ToInt32(q)).Distinct().ToList();
+                var _fdpItemIds = await this.context.ViewFDPItem2.Where(q => q.CrewId == crewId && flightIds.Contains(q.FlightId)).OrderBy(q => q.STD).Select(q => q.Id).ToListAsync();
+                var allRemovedItems = await this.context.FDPItems.Where(q => _fdpItemIds.Contains(q.Id)).ToListAsync();
+                var _fdpIds = allRemovedItems.Select(q => q.FDPId).ToList();
+                var fdps = await this.context.FDPs.Where(q => _fdpIds.Contains(q.Id)).ToListAsync();
+                var updatefdps = await this.context.FDPs.Where(q => _fdpIds.Contains((int)q.FDPId)).ToListAsync();
+                var fdpItems = await this.context.FDPItems.Where(q => _fdpIds.Contains(q.FDPId)).ToListAsync();
 
 
-                offFDP = new FDP()
+                var allFlightIds = fdpItems.Select(q => q.FlightId).ToList();
+                var allFlights = await this.context.ViewLegTimes.Where(q => allFlightIds.Contains(q.ID)).OrderBy(q => q.STD).ToListAsync();
+                var crews = await this.context.ViewEmployeeLights.Where(q => q.Id == crewId).ToListAsync();
+                var allRemovedFlights = allFlights.Where(q => flightIds.Contains(q.ID)).OrderBy(q => q.STD).ToList();
+                FDP offFDP = null;
+                string offSMS = string.Empty;
+                List<string> sms = new List<string>();
+                List<string> nos = new List<string>();
+                List<CrewPickupSM> csms = new List<CrewPickupSM>();
+                if (reason != -1)
                 {
-                    CrewId = crewId,
-                    DateStart = allRemovedFlights.First().STD,
-                    DateEnd = allRemovedFlights.Last().STA,
-                    InitStart = allRemovedFlights.First().STD,
-                    InitEnd = allRemovedFlights.Last().STA,
-
-                    InitRestTo = allRemovedFlights.Last().STA,
-                    InitKey = allRemovedFlights.First().ID.ToString(),
-                    DutyType = 0,
-                    GUID = Guid.NewGuid(),
-                    IsTemplate = false,
-                    Remark = remark,
-                    UPD = 1,
-                    UserName = username
 
 
-                };
-                offFDP.CanceledNo = string.Join(",", allRemovedFlights.Select(q => q.FlightNumber));
-                offFDP.CanceledRoute = string.Join(",", allRemovedFlights.Select(q => q.FromAirportIATA)) + "," + allRemovedFlights.Last().ToAirportIATA;
-                switch (reason)
-                {
-                    case 1:
-                        offFDP.DutyType = 100009;
-                        offFDP.Remark2 = "Refused by Crew";
-                        break;
-                    case 5:
-                        offFDP.DutyType = 100020;
-                        offFDP.Remark2 = "Cenceled due to Rescheduling";
-                        break;
-                    case 2:
-                        offFDP.DutyType = 100021;
-                        offFDP.Remark2 = "Cenceled due to Flight(s) Cancellation";
-                        break;
-                    case 3:
-                        offFDP.DutyType = 100022;
-                        offFDP.Remark2 = "Cenceled due to Change of A/C Type";
-                        break;
-                    case 4:
-                        offFDP.DutyType = 100023;
-                        offFDP.Remark2 = "Cenceled due to Flight/Duty Limitations";
-                        break;
-                    case 6:
-                        offFDP.DutyType = 100024;
-                        offFDP.Remark2 = "Cenceled due to Not using Split Duty";
-                        break;
-
-
-                    case 7:
-                        offFDP.DutyType = 200000;
-                        offFDP.Remark2 = "Refused-Not Home";
-                        break;
-                    case 8:
-                        offFDP.DutyType = 200001;
-                        offFDP.Remark2 = "Refused-Family Problem";
-                        break;
-                    case 9:
-                        offFDP.DutyType = 200002;
-                        offFDP.Remark2 = "Canceled - Training";
-                        break;
-                    case 10:
-                        offFDP.DutyType = 200003;
-                        offFDP.Remark2 = "Ground - Operation";
-                        break;
-                    case 11:
-                        offFDP.DutyType = 200004;
-                        offFDP.Remark2 = "Ground - Expired License";
-                        break;
-                    case 12:
-                        offFDP.DutyType = 200005;
-                        offFDP.Remark2 = "Ground - Medical";
-                        break;
-                    default:
-                        break;
-                }
-                foreach (var x in allRemovedFlights)
-                {
-                    var _ofdpitem = fdpItems.FirstOrDefault(q => q.FlightId == x.ID);
-                    string _oremark = string.Empty;
-                    if (_ofdpitem != null)
+                    offFDP = new FDP()
                     {
-                        var _ofdp = fdps.Where(q => q.Id == _ofdpitem.FDPId).FirstOrDefault();
-                        if (_ofdp != null)
-                            _oremark = _ofdp.InitRank;
+                        CrewId = crewId,
+                        DateStart = allRemovedFlights.First().STD,
+                        DateEnd = allRemovedFlights.Last().STA,
+                        InitStart = allRemovedFlights.First().STD,
+                        InitEnd = allRemovedFlights.Last().STA,
+
+                        InitRestTo = allRemovedFlights.Last().STA,
+                        InitKey = allRemovedFlights.First().ID.ToString(),
+                        DutyType = 0,
+                        GUID = Guid.NewGuid(),
+                        IsTemplate = false,
+                        Remark = remark,
+                        UPD = 1,
+                        UserName = username
+
+
+                    };
+                    offFDP.CanceledNo = string.Join(",", allRemovedFlights.Select(q => q.FlightNumber));
+                    offFDP.CanceledRoute = string.Join(",", allRemovedFlights.Select(q => q.FromAirportIATA)) + "," + allRemovedFlights.Last().ToAirportIATA;
+                    switch (reason)
+                    {
+                        case 1:
+                            offFDP.DutyType = 100009;
+                            offFDP.Remark2 = "Refused by Crew";
+                            break;
+                        case 5:
+                            offFDP.DutyType = 100020;
+                            offFDP.Remark2 = "Cenceled due to Rescheduling";
+                            break;
+                        case 2:
+                            offFDP.DutyType = 100021;
+                            offFDP.Remark2 = "Cenceled due to Flight(s) Cancellation";
+                            break;
+                        case 3:
+                            offFDP.DutyType = 100022;
+                            offFDP.Remark2 = "Cenceled due to Change of A/C Type";
+                            break;
+                        case 4:
+                            offFDP.DutyType = 100023;
+                            offFDP.Remark2 = "Cenceled due to Flight/Duty Limitations";
+                            break;
+                        case 6:
+                            offFDP.DutyType = 100024;
+                            offFDP.Remark2 = "Cenceled due to Not using Split Duty";
+                            break;
+
+
+                        case 7:
+                            offFDP.DutyType = 200000;
+                            offFDP.Remark2 = "Refused-Not Home";
+                            break;
+                        case 8:
+                            offFDP.DutyType = 200001;
+                            offFDP.Remark2 = "Refused-Family Problem";
+                            break;
+                        case 9:
+                            offFDP.DutyType = 200002;
+                            offFDP.Remark2 = "Canceled - Training";
+                            break;
+                        case 10:
+                            offFDP.DutyType = 200003;
+                            offFDP.Remark2 = "Ground - Operation";
+                            break;
+                        case 11:
+                            offFDP.DutyType = 200004;
+                            offFDP.Remark2 = "Ground - Expired License";
+                            break;
+                        case 12:
+                            offFDP.DutyType = 200005;
+                            offFDP.Remark2 = "Ground - Medical";
+                            break;
+                        default:
+                            break;
                     }
-                    offFDP.OffItems.Add(new OffItem() { FDP = offFDP, FlightId = x.ID, Remark = _oremark });
+                    foreach (var x in allRemovedFlights)
+                    {
+                        var _ofdpitem = fdpItems.FirstOrDefault(q => q.FlightId == x.ID);
+                        string _oremark = string.Empty;
+                        if (_ofdpitem != null)
+                        {
+                            var _ofdp = fdps.Where(q => q.Id == _ofdpitem.FDPId).FirstOrDefault();
+                            if (_ofdp != null)
+                                _oremark = _ofdp.InitRank;
+                        }
+                        offFDP.OffItems.Add(new OffItem() { FDP = offFDP, FlightId = x.ID, Remark = _oremark });
+                    }
+
+                    this.context.FDPs.Add(offFDP);
+
+
+
+                    var strs = new List<string>();
+                    strs.Add(ConfigurationManager.AppSettings["airline"] + " Airlines");
+                    strs.Add("Dear " + crews.FirstOrDefault(q => q.Id == crewId).Name + ", ");
+                    strs.Add("Canceling Notification");
+                    var day = ((DateTime)allRemovedFlights.First().STDLocal).Date;
+                    var dayStr = day.ToString("ddd") + " " + day.Year + "-" + day.Month + "-" + day.Day;
+                    strs.Add(dayStr);
+                    strs.Add(offFDP.CanceledNo);
+                    strs.Add(offFDP.CanceledRoute);
+                    strs.Add(offFDP.Remark2);
+                    strs.Add(remark);
+                    strs.Add("Date sent: " + DateTime.Now.ToLocalTime().ToString("yyyy/MM/dd HH:mm"));
+                    strs.Add("Crew Scheduling Department");
+                    offSMS = String.Join("\n", strs);
+                    sms.Add(offSMS);
+                    nos.Add(crews.FirstOrDefault(q => q.Id == crewId).Mobile);
+
+                    var csm = new CrewPickupSM()
+                    {
+                        CrewId = (int)crewId,
+                        DateSent = DateTime.Now,
+                        DateStatus = DateTime.Now,
+                        FlightId = -1,
+                        Message = offSMS,
+                        Pickup = null,
+                        RefId = "",
+                        Status = "",
+                        Type = offFDP.DutyType,
+                        FDP = offFDP,
+                        DutyType = offFDP.Remark2,
+                        DutyDate = ((DateTime)offFDP.InitStart).ToLocalTime().Date,
+                        Flts = offFDP.CanceledNo,
+                        Routes = offFDP.CanceledRoute
+                    };
+                    csms.Add(csm);
+                    if (notify == 1)
+                        this.context.CrewPickupSMS.Add(csm);
                 }
 
-                this.context.FDPs.Add(offFDP);
+                /////////////////////////
+                //var fdps = await this.context.FDPs.Where(q => _fdpIds.Contains(q.Id)).ToListAsync();
+                //var fdpIds = fdps.Select(q => q.Id).ToList();
+                //var crewIds = fdps.Select(q => q.CrewId).ToList();
+                //var fdpItems = await this.context.FDPItems.Where(q => fdpIds.Contains(q.FDPId)).ToListAsync();
+                //var allFlightIds = fdpItems.Select(q => q.FlightId).ToList();
+                //var allFlights = await this.context.ViewLegTimes.Where(q => allFlightIds.Contains(q.ID)).ToListAsync();
+                //var crews = await this.context.ViewEmployeeLights.Where(q => crewIds.Contains(q.Id)).ToListAsync();
+                //var allRemovedItems = fdpItems.Where(q => _fdpItemIds.Contains(q.Id)).ToList();
+                //////////////////////////
+                //////////////////////////
+                ///////////////////
 
-
-
-                var strs = new List<string>();
-                strs.Add(ConfigurationManager.AppSettings["airline"] + " Airlines");
-                strs.Add("Dear " + crews.FirstOrDefault(q => q.Id == crewId).Name + ", ");
-                strs.Add("Canceling Notification");
-                var day = ((DateTime)allRemovedFlights.First().STDLocal).Date;
-                var dayStr = day.ToString("ddd") + " " + day.Year + "-" + day.Month + "-" + day.Day;
-                strs.Add(dayStr);
-                strs.Add(offFDP.CanceledNo);
-                strs.Add(offFDP.CanceledRoute);
-                strs.Add(offFDP.Remark2);
-                strs.Add(remark);
-                strs.Add("Date sent: " + DateTime.Now.ToLocalTime().ToString("yyyy/MM/dd HH:mm"));
-                strs.Add("Crew Scheduling Department");
-                offSMS = String.Join("\n", strs);
-                sms.Add(offSMS);
-                nos.Add(crews.FirstOrDefault(q => q.Id == crewId).Mobile);
-
-                var csm = new CrewPickupSM()
+                foreach (var x in allRemovedItems)
                 {
-                    CrewId = (int)crewId,
-                    DateSent = DateTime.Now,
-                    DateStatus = DateTime.Now,
-                    FlightId = -1,
-                    Message = offSMS,
-                    Pickup = null,
-                    RefId = "",
-                    Status = "",
-                    Type = offFDP.DutyType,
-                    FDP = offFDP,
-                    DutyType = offFDP.Remark2,
-                    DutyDate = ((DateTime)offFDP.InitStart).ToLocalTime().Date,
-                    Flts = offFDP.CanceledNo,
-                    Routes = offFDP.CanceledRoute
-                };
-                csms.Add(csm);
+                    var xfdp = fdps.FirstOrDefault(q => q.Id == x.FDPId);
+                    var xcrew = crews.FirstOrDefault(q => q.Id == xfdp.CrewId);
+                    var xleg = allFlights.FirstOrDefault(q => q.ID == x.FlightId);
+
+
+                }
+
+                var updatedIds = new List<int>();
+                var updated = new List<FDP>();
+                var removed = new List<int>();
+
+
+                //  List<FDP> deleted = new List<FDP>();
+
+                if (updatefdps.Count > 0)
+                {
+                    foreach (var ufdp in updatefdps)
+                    {
+                        ufdp.FDPId = null;
+                    }
+                }
+
+                foreach (var fdp in fdps)
+                {
+                    fdp.Split = 0;
+                    var allitems = fdpItems.Where(q => q.FDPId == fdp.Id).ToList();
+                    var removedItems = allitems.Where(q => _fdpItemIds.Contains(q.Id)).ToList();
+                    var remainItems = allitems.Where(q => !_fdpItemIds.Contains(q.Id)).ToList();
+                    var remainFlightIds = remainItems.Select(q => q.FlightId).ToList();
+                    if (allitems.Count == removedItems.Count)
+                    {
+                        removed.Add(fdp.Id);
+                        this.context.FDPItems.RemoveRange(removedItems);
+
+                        this.context.FDPs.Remove(fdp);
+                    }
+                    else
+                    {
+                        //Update FDP
+
+                        this.context.FDPItems.RemoveRange(removedItems);
+                        var items = (from x in remainItems
+                                     join y in allFlights on x.FlightId equals y.ID
+                                     orderby y.STD
+                                     select new { fi = x, flt = y }).ToList();
+                        fdp.FirstFlightId = items.First().flt.ID;
+                        fdp.LastFlightId = items.Last().flt.ID;
+                        fdp.InitStart = ((DateTime)items.First().flt.STD).AddMinutes(-60);
+                        fdp.InitEnd = ((DateTime)items.Last().flt.STA).AddMinutes(30);
+
+                        fdp.DateStart = ((DateTime)items.First().flt.STD).AddMinutes(-60);
+                        fdp.DateEnd = ((DateTime)items.Last().flt.STA).AddMinutes(30);
+
+                        var rst = 12;
+                        if (fdp.InitHomeBase != null && fdp.InitHomeBase != items.Last().flt.ToAirport)
+                            rst = 10;
+                        fdp.InitRestTo = ((DateTime)items.Last().flt.STA).AddMinutes(30).AddHours(rst);
+                        fdp.InitFlts = string.Join(",", items.Select(q => q.flt).Select(q => q.FlightNumber).ToList());
+                        fdp.InitRoute = string.Join(",", items.Select(q => q.flt).Select(q => q.FromAirportIATA).ToList());
+                        fdp.InitRoute += "," + items.Last().flt.ToAirportIATA;
+                        fdp.InitFromIATA = items.First().flt.FromAirport.ToString();
+                        fdp.InitToIATA = items.Last().flt.ToAirport.ToString();
+                        fdp.InitNo = string.Join("-", items.Select(q => q.flt).Select(q => q.FlightNumber).ToList());
+                        fdp.InitKey = string.Join("-", items.Select(q => q.flt).Select(q => q.ID).ToList());
+                        fdp.InitFlights = string.Join("*", items.Select(q => q.flt.ID + "_" + (q.fi.IsPositioning == true ? "1" : "0") + "_" + ((DateTime)q.flt.STDLocal).ToString("yyyyMMddHHmm")
+                          + "_" + ((DateTime)q.flt.STALocal).ToString("yyyyMMddHHmm")
+                          + "_" + q.flt.FlightNumber + "_" + q.flt.FromAirportIATA + "_" + q.flt.ToAirportIATA).ToList()
+                        );
+
+                        var keyParts = new List<string>();
+                        keyParts.Add(items[0].flt.ID + "*" + (items[0].fi.IsPositioning == true ? "1" : "0"));
+                        var breakGreaterThan10Hours = string.Empty;
+                        for (int i = 1; i < items.Count; i++)
+                        {
+
+                            keyParts.Add(items[i].flt.ID + "*" + (items[i].fi.IsPositioning == true ? "1" : "0"));
+                            var dt = (DateTime)items[i].flt.STD - (DateTime)items[i - 1].flt.STA;
+                            var minuts = dt.TotalMinutes;
+                            // – (0:30 + 0:15 + 0:45)
+                            var brk = minuts - 30 - 60; //30:travel time, post flight duty:15, pre flight duty:30
+                            if (brk >= 600)
+                            {
+                                //var tfi = tflights.FirstOrDefault(q => q.ID == flights[i].ID);
+                                // var tfi1 = tflights.FirstOrDefault(q => q.ID == flights[i - 1].ID);
+                                breakGreaterThan10Hours = "The break is greater than 10 hours.";
+                            }
+                            else
+                            if (brk >= 180)
+                            {
+                                var xfdpitem = allitems.FirstOrDefault(q => q.Id == items[i].fi.Id);
+                                xfdpitem.SplitDuty = true;
+                                var pair = allitems.FirstOrDefault(q => q.Id == items[i - 1].fi.Id);
+                                pair.SplitDuty = true;
+                                xfdpitem.SplitDutyPairId = pair.FlightId;
+                                fdp.Split += 0.5 * (brk);
+
+                            }
+
+                        }
+                        fdp.UPD = fdp.UPD == null ? 1 : ((int)fdp.UPD) + 1;
+                        fdp.Key = string.Join("_", keyParts);
+                        fdp.UserName = username;
+                        //var flights = allFlights.Where(q => remainFlightIds.Contains(q.ID)).OrderBy(q=>q.STD).ToList();
+                        updatedIds.Add(fdp.Id);
+                        updated.Add(fdp);
+
+                    }
+                }
+
+
+
+
+
+                var saveResult = await context.SaveAsync();
+                if (saveResult.Code != HttpStatusCode.OK)
+                    return saveResult;
+
+                var fdpsIds = fdps.Select(q => q.Id).ToList();
+                var maxfdps = await context.HelperMaxFDPs.Where(q => fdpsIds.Contains(q.Id)).ToListAsync();
+                var fdpExtras = await context.FDPExtras.Where(q => fdpsIds.Contains(q.FDPId)).ToListAsync();
+                context.FDPExtras.RemoveRange(fdpExtras);
+                foreach (var x in maxfdps)
+                {
+                    context.FDPExtras.Add(new FDPExtra()
+                    {
+                        FDPId = x.Id,
+                        MaxFDP = Convert.ToDecimal(x.MaxFDPExtended),
+                    });
+                }
+                saveResult = await context.SaveAsync();
+                if (saveResult.Code != HttpStatusCode.OK)
+                    return saveResult;
                 if (notify == 1)
-                    this.context.CrewPickupSMS.Add(csm);
-            }
-
-            /////////////////////////
-            //var fdps = await this.context.FDPs.Where(q => _fdpIds.Contains(q.Id)).ToListAsync();
-            //var fdpIds = fdps.Select(q => q.Id).ToList();
-            //var crewIds = fdps.Select(q => q.CrewId).ToList();
-            //var fdpItems = await this.context.FDPItems.Where(q => fdpIds.Contains(q.FDPId)).ToListAsync();
-            //var allFlightIds = fdpItems.Select(q => q.FlightId).ToList();
-            //var allFlights = await this.context.ViewLegTimes.Where(q => allFlightIds.Contains(q.ID)).ToListAsync();
-            //var crews = await this.context.ViewEmployeeLights.Where(q => crewIds.Contains(q.Id)).ToListAsync();
-            //var allRemovedItems = fdpItems.Where(q => _fdpItemIds.Contains(q.Id)).ToList();
-            //////////////////////////
-            //////////////////////////
-            ///////////////////
-
-            foreach (var x in allRemovedItems)
-            {
-                var xfdp = fdps.FirstOrDefault(q => q.Id == x.FDPId);
-                var xcrew = crews.FirstOrDefault(q => q.Id == xfdp.CrewId);
-                var xleg = allFlights.FirstOrDefault(q => q.ID == x.FlightId);
-
-
-            }
-
-            var updatedIds = new List<int>();
-            var updated = new List<FDP>();
-            var removed = new List<int>();
-
-
-            //  List<FDP> deleted = new List<FDP>();
-            foreach (var fdp in fdps)
-            {
-                fdp.Split = 0;
-                var allitems = fdpItems.Where(q => q.FDPId == fdp.Id).ToList();
-                var removedItems = allitems.Where(q => _fdpItemIds.Contains(q.Id)).ToList();
-                var remainItems = allitems.Where(q => !_fdpItemIds.Contains(q.Id)).ToList();
-                var remainFlightIds = remainItems.Select(q => q.FlightId).ToList();
-                if (allitems.Count == removedItems.Count)
                 {
-                    removed.Add(fdp.Id);
-                    this.context.FDPItems.RemoveRange(removedItems);
-
-                    this.context.FDPs.Remove(fdp);
-                }
-                else
-                {
-                    //Update FDP
-
-                    this.context.FDPItems.RemoveRange(removedItems);
-                    var items = (from x in remainItems
-                                 join y in allFlights on x.FlightId equals y.ID
-                                 orderby y.STD
-                                 select new { fi = x, flt = y }).ToList();
-                    fdp.FirstFlightId = items.First().flt.ID;
-                    fdp.LastFlightId = items.Last().flt.ID;
-                    fdp.InitStart = ((DateTime)items.First().flt.STD).AddMinutes(-60);
-                    fdp.InitEnd = ((DateTime)items.Last().flt.STA).AddMinutes(30);
-
-                    fdp.DateStart = ((DateTime)items.First().flt.STD).AddMinutes(-60);
-                    fdp.DateEnd = ((DateTime)items.Last().flt.STA).AddMinutes(30);
-
-                    var rst = 12;
-                    if (fdp.InitHomeBase != null && fdp.InitHomeBase != items.Last().flt.ToAirport)
-                        rst = 10;
-                    fdp.InitRestTo = ((DateTime)items.Last().flt.STA).AddMinutes(30).AddHours(rst);
-                    fdp.InitFlts = string.Join(",", items.Select(q => q.flt).Select(q => q.FlightNumber).ToList());
-                    fdp.InitRoute = string.Join(",", items.Select(q => q.flt).Select(q => q.FromAirportIATA).ToList());
-                    fdp.InitRoute += "," + items.Last().flt.ToAirportIATA;
-                    fdp.InitFromIATA = items.First().flt.FromAirport.ToString();
-                    fdp.InitToIATA = items.Last().flt.ToAirport.ToString();
-                    fdp.InitNo = string.Join("-", items.Select(q => q.flt).Select(q => q.FlightNumber).ToList());
-                    fdp.InitKey = string.Join("-", items.Select(q => q.flt).Select(q => q.ID).ToList());
-                    fdp.InitFlights = string.Join("*", items.Select(q => q.flt.ID + "_" + (q.fi.IsPositioning == true ? "1" : "0") + "_" + ((DateTime)q.flt.STDLocal).ToString("yyyyMMddHHmm")
-                      + "_" + ((DateTime)q.flt.STALocal).ToString("yyyyMMddHHmm")
-                      + "_" + q.flt.FlightNumber + "_" + q.flt.FromAirportIATA + "_" + q.flt.ToAirportIATA).ToList()
-                    );
-
-                    var keyParts = new List<string>();
-                    keyParts.Add(items[0].flt.ID + "*" + (items[0].fi.IsPositioning == true ? "1" : "0"));
-                    var breakGreaterThan10Hours = string.Empty;
-                    for (int i = 1; i < items.Count; i++)
+                    Magfa m = new Magfa();
+                    int c = 0;
+                    foreach (var x in sms)
                     {
+                        var txt = sms[c];
+                        var no = nos[c];
 
-                        keyParts.Add(items[i].flt.ID + "*" + (items[i].fi.IsPositioning == true ? "1" : "0"));
-                        var dt = (DateTime)items[i].flt.STD - (DateTime)items[i - 1].flt.STA;
-                        var minuts = dt.TotalMinutes;
-                        // – (0:30 + 0:15 + 0:45)
-                        var brk = minuts - 30 - 60; //30:travel time, post flight duty:15, pre flight duty:30
-                        if (brk >= 600)
-                        {
-                            //var tfi = tflights.FirstOrDefault(q => q.ID == flights[i].ID);
-                            // var tfi1 = tflights.FirstOrDefault(q => q.ID == flights[i - 1].ID);
-                            breakGreaterThan10Hours = "The break is greater than 10 hours.";
-                        }
-                        else
-                        if (brk >= 180)
-                        {
-                            var xfdpitem = allitems.FirstOrDefault(q => q.Id == items[i].fi.Id);
-                            xfdpitem.SplitDuty = true;
-                            var pair = allitems.FirstOrDefault(q => q.Id == items[i - 1].fi.Id);
-                            pair.SplitDuty = true;
-                            xfdpitem.SplitDutyPairId = pair.FlightId;
-                            fdp.Split += 0.5 * (brk);
-
-                        }
+                        var smsResult = m.enqueue(1, no, txt)[0];
+                        c++;
 
                     }
-                    fdp.UPD = fdp.UPD == null ? 1 : ((int)fdp.UPD) + 1;
-                    fdp.Key = string.Join("_", keyParts);
-                    fdp.UserName = username;
-                    //var flights = allFlights.Where(q => remainFlightIds.Contains(q.ID)).OrderBy(q=>q.STD).ToList();
-                    updatedIds.Add(fdp.Id);
-                    updated.Add(fdp);
-
                 }
-            }
 
+                //updated = await this.context.ViewFDPKeys.Where(q => updatedIds.Contains(q.Id)).ToListAsync();
 
-
-
-
-            var saveResult = await context.SaveAsync();
-            if (saveResult.Code != HttpStatusCode.OK)
-                return saveResult;
-
-            var fdpsIds = fdps.Select(q => q.Id).ToList();
-            var maxfdps = await context.HelperMaxFDPs.Where(q => fdpsIds.Contains(q.Id)).ToListAsync();
-            var fdpExtras = await context.FDPExtras.Where(q => fdpsIds.Contains(q.FDPId)).ToListAsync();
-            context.FDPExtras.RemoveRange(fdpExtras);
-            foreach (var x in maxfdps)
-            {
-                context.FDPExtras.Add(new FDPExtra()
+                var result = new
                 {
-                    FDPId = x.Id,
-                    MaxFDP = Convert.ToDecimal(x.MaxFDPExtended),
-                });
+                    removed,
+                    updatedId = updated.Select(q => q.Id).ToList(),
+                    updated = getRosterFDPDtos(updated)
+                };
+
+                return new CustomActionResult(HttpStatusCode.OK, result);
             }
-            saveResult = await context.SaveAsync();
-            if (saveResult.Code != HttpStatusCode.OK)
-                return saveResult;
-            if (notify == 1)
+            catch (Exception ex)
             {
-                Magfa m = new Magfa();
-                int c = 0;
-                foreach (var x in sms)
-                {
-                    var txt = sms[c];
-                    var no = nos[c];
-
-                    var smsResult = m.enqueue(1, no, txt)[0];
-                    c++;
-
-                }
+                return new CustomActionResult(HttpStatusCode.OK, ex);
             }
-
-            //updated = await this.context.ViewFDPKeys.Where(q => updatedIds.Contains(q.Id)).ToListAsync();
-
-            var result = new
-            {
-                removed,
-                updatedId = updated.Select(q => q.Id).ToList(),
-                updated = getRosterFDPDtos(updated)
-            };
-
-            return new CustomActionResult(HttpStatusCode.OK, result);
         }
 
         public string GetDutyTypeTitle(int t)

@@ -1,0 +1,116 @@
+﻿<div class="app-shell">
+    <div class="topbar">
+        <div class="brand">
+            <div class="brand-logo"></div>
+            <div>
+                <div class="brand-text-main">IQS - Safety Management Studio</div>
+                <div class="brand-text-sub">Version Beta 0.5</div>
+            </div>
+        </div>
+        <div class="topbar-right">
+            <div class="pill">
+                <span class="pill-dot"></span>
+                <span>Demo data – not connected to live SMS</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div class="sidebar">
+            <div class="nav-section-title">Safety core</div>
+            <div class="nav-item" ng-class="{active: shell.isRoute('/hazards')}" ng-click="shell.go('/hazards')">
+                <span class="nav-icon">⚠️</span>
+                <span class="nav-label-main">Hazards</span>
+                <span class="nav-badge">Register</span>
+            </div>
+            <div class="nav-item" ng-class="{active: shell.isRoute('/occurrences')}" ng-click="shell.go('/occurrences')">
+                <span class="nav-icon">📋</span>
+                <span class="nav-label-main">Occurrences</span>
+                <span class="nav-badge">Reports</span>
+            </div>
+
+            <div class="nav-section-title">Change & assurance</div>
+            <div class="nav-item" ng-class="{active: shell.isRoute('/mocs')}" ng-click="shell.go('/mocs')">
+                <span class="nav-icon">♻️</span>
+                <span class="nav-label-main">MOCs</span>
+                <span class="nav-badge">Change</span>
+            </div>
+            <div class="nav-item" ng-class="{active: shell.isRoute('/audits')}" ng-click="shell.go('/audits')">
+                <span class="nav-icon">📝</span>
+                <span class="nav-label-main">Audits</span>
+                <span class="nav-badge">Assurance</span>
+            </div>
+
+            <div class="nav-footer">
+                <div><strong>Demo focus:</strong> hazard log, risk matrix, MOC & audit linkages and hazard-level actions/monitoring.</div>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div>
+                <div class="page-header">
+                    <div class="page-title-block">
+                        <div class="page-title">
+                            Audits
+                            <span class="page-title-pill">Safety / Quality assurance</span>
+                        </div>
+                        <div class="page-subtitle">
+                            Internal audit view to show how findings and hazards are tied together, and how audit results
+                            feed into the hazard register.
+                        </div>
+                    </div>
+                    <div class="page-actions">
+                        <button class="btn btn-ghost" ng-click="refresh()">
+                            <span class="icon">↻</span>
+                            Refresh
+                        </button>
+                        <button class="btn btn-primary" ng-click="new()">
+                            <span class="icon">＋</span>
+                            New Audit
+                        </button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Internal audits (demo)</div>
+                            <div class="card-subtitle">
+                                For this concept, only a very small subset of audit information is shown.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Title</th>
+                                    <th>Dept</th>
+                                    <th>Period</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="a in items" ng-click="open(a)">
+                                    <td>{{ a.auditNo }}</td>
+                                    <td>{{ a.title }}</td>
+                                    <td>{{ a.dept }}</td>
+                                    <td>{{ a.startDate }} → {{ a.endDate }}</td>
+                                    <td>{{ a.status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span><strong>Note:</strong> All content is fictitious and for concept/demo only.</span>
+        <span class="link-muted" ng-click="shell.go('/hazards')">Back to hazard register</span>
+    </div>
+</div>
+
+

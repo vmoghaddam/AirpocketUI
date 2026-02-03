@@ -18,6 +18,13 @@ app.config(function ($routeProvider) {
         controller: "fix-time-addController",
         templateUrl: "/app/views/fix-time-add.html"
     });
+
+    $routeProvider.when("/fixtime/krn", {
+        controller: "fixtime_krn_controller",
+        templateUrl: "/app/views/fixtime_krn.html"
+    });
+
+
     $routeProvider.when("/rptCityPairDaily", {
         controller: "rptCityPairDailyController",
         templateUrl: "/app/views/rptCityPairDaily.html"
@@ -743,6 +750,50 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/duties_report.html"
     });
 
+    $routeProvider.when("/iqs", {
+        controller: "iqs_controller",
+        templateUrl: "/app/views/iqs.html"
+    });
+
+    $routeProvider.when("/iqs/hazard/list", {
+        controller: "iqs_hazard_list_controller",
+        templateUrl: "/app/views/iqs_hazard_list.html"
+    });
+
+     $routeProvider.when("/iqs/hazard/detail/:id", {
+         controller: "iqs_hazard_detail_controller",
+         templateUrl: "/app/views/iqs_hazard_detail.html"
+     });
+
+    $routeProvider.when("/iqs/audit/list", {
+        controller: "iqs_audit_list_controller",
+        templateUrl: "/app/views/iqs_audit_list.html"
+    });
+
+    $routeProvider.when("/iqs/audit/detail/:id", {
+        controller: "iqs_audit_detail_controller",
+        templateUrl: "/app/views/iqs_audit_detail.html"
+    });
+
+    $routeProvider.when("/iqs/occurrence/list", {
+        controller: "iqs_occurrence_list_controller",
+        templateUrl: "/app/views/iqs_occurrence_list.html"
+    });
+
+    $routeProvider.when("/iqs/occurrence/detail/:id", {
+        controller: "iqs_occurrence_detail_controller",
+        templateUrl: "/app/views/iqs_occurrence_detail.html"
+    });
+
+    $routeProvider.when("/iqs/moc/list", {
+        controller: "iqs_moc_list_controller",
+        templateUrl: "/app/views/iqs_moc_list.html"
+    });
+
+    $routeProvider.when("/iqs/moc/detail/:id", {
+        controller: "iqs_moc_detail_controller",
+        templateUrl: "/app/views/iqs_moc_detail.html"
+    });
 
    	
 
@@ -751,76 +802,136 @@ app.config(function ($routeProvider) {
 
 });   
 
-////var serviceBase = 'http://grfn.api.epatrin.ir/';
-////var webBase = 'http://grfn.epatrin.ir/';
-//if (window.location.href.indexOf('fleet.flypersia.aero') != -1) {
-//    var webBase = 'http://fleet.flypersia.aero/airpocket/';
-//    var serviceBase = 'http://fleet.flypersia.aero/api.airpocket/';
-//}
-//else {
-//    //var serviceBase = 'http://apig.epapocket.ir/';
-//    var serviceBase = 'http://localhost:58908/';
-//   // var serviceBase = 'http://fleet.caspianairlines.com/api/';
-//    var webBase = 'http://localhost:30000/';
-//} 
-//var serviceBase = 'http://fleet.caspianairlines.com/api/';
+//////var serviceBase = 'http://grfn.api.epatrin.ir/';
+//////var webBase = 'http://grfn.epatrin.ir/';
+////if (window.location.href.indexOf('fleet.flypersia.aero') != -1) {
+////    var webBase = 'http://fleet.flypersia.aero/airpocket/';
+////    var serviceBase = 'http://fleet.flypersia.aero/api.airpocket/';
+////}
+////else {
+////    //var serviceBase = 'http://apig.epapocket.ir/';
+////    var serviceBase = 'http://localhost:58908/';
+////   // var serviceBase = 'http://fleet.caspianairlines.com/api/';
+////    var webBase = 'http://localhost:30000/';
+////}
+////var serviceBase = 'http://fleet.caspianairlines.com/api/';
 
-var serviceBaseAPI ='https://api0.apvaresh.com/'; 
-var serviceBaseTRN = 'https://trn.apvaresh.com/';
- 
+//var serviceBaseAPI ='https://api0.apvaresh.com/';
+//var serviceBaseTRN = 'https://trn.apvaresh.com/';
+
+//var webBase = 'https://apvaresh.ir/';
+//var serviceBase ='https://apinet.apvaresh.com/';
+//var liburl = serviceBase;
+//var serviceBase2 =  'https://localhost:5001/';
+
+//var signFiles = 'https://fbpocket.ir/upload/signs/';
+
+//var comAPI='https://api.apvaresh.com/';
+//var msgUrl="https://msg.apvaresh.com/";
+//var apiLog='https://yapilog.apvaresh.com/';
+//var zlog='https://zlog.apvaresh.com/';
+//var schUrl='https://sch.apvaresh.com/';
+//var apigd='https://apigd.apvaresh.com/';
+//var netProfile='https://netprofile.apvaresh.com/';
+//var apireportflight='https://apireportflight.apvaresh.com/';
+//var apixls='https://apixls.apvaresh.com/';
+//var apiScheduling='https://varschedulingapi.airpocket.click/';
+
+//var apiExternal = 'https://xpi.airpocket.online/';
+//var airlineCode = 'vrh';
+
+//var serviceSKYBAG = 'https://sbapi.apvaresh.com/';
+//var weatherUrl='https://coreweather.varesh.click/';
+//var staticFilesSKYBAG = 'https://fbpocket.ir/Upload/';
+
+//var apimsg='https://apimsg.apvaresh.com/';
+//var apiplanning='https://apiplanning.apvaresh.com/';
+//var apilogdefault='https://var.apilogdefault.airpocket.online/';
+//var apiapsb='https://apiapsb.apvaresh.com/';
+//var apiprofile='https://apiprofile.apvaresh.com/';
+//var apiauth='https://xauth.apvaresh.com/';
+//var atcfiles='https://files.airpocket.online/varesh/atc/';
+//var apiCAO='https://apicao.apvaresh.com/';
+//var apiQA = 'https://apiqatemp.apvaresh.com/';
+//var zapiqa = 'https://apiqa.apvaresh.com/';
+//var apiQAAuthCard = 'https://apiqaauth.apvaresh.ir/';
+
+//var zscheduling='https://zscheduling.apvaresh.com/';
+//var zreportflight='https://apireportflight.apvaresh.com/';
+//var zapinet='https://zapinet.apvaresh.com/';
+//var zapiqalog = 'https://apiqalog.apvaresh.com/';
+//var zfuel='https://apifuel.apvaresh.com/';
+//    //'http://localhost:58908/';
+//    //'http://localhost:40654/';
+
+//    //'http://localhost:10707/';
+////'http://ngauthenticationapi.azurewebsites.net/';
+
+var serviceBaseAPI = 'https://pya.apiapsb.myaero.tech/';
+var serviceBaseTRN = 'https://pya.apicaox.myaero.tech/';
+var routeManuals = 'https://sb.varesh.click/upload/RouteManuals/';
 var webBase = 'https://apvaresh.ir/';
-var serviceBase ='https://apinet.apvaresh.com/'; 
+var serviceBase = 'https://vrh.apinet.atbravo.link/';//'https://yapinet.apvaresh.com/'; 
 var liburl = serviceBase;
-var serviceBase2 =  'https://localhost:5001/'; 
- 
+var serviceBase2 = 'https://localhost:5001/';
+
 var signFiles = 'https://fbpocket.ir/upload/signs/';
 
-var comAPI='https://api.apvaresh.com/'; 
-var msgUrl="https://msg.apvaresh.com/"; 
-var apiLog='https://yapilog.apvaresh.com/';
-var zlog='https://zlog.apvaresh.com/'; 
-var schUrl='https://sch.apvaresh.com/'; 
-var apigd='https://apigd.apvaresh.com/'; 
-var netProfile='https://netprofile.apvaresh.com/'; 
-var apireportflight='https://apireportflight.apvaresh.com/'; 
-var apixls='https://apixls.apvaresh.com/'; 
-var apiScheduling='https://varschedulingapi.airpocket.click/';
+//var comAPI='https://api.apvaresh.com/';
+var comAPI = 'https://pya.apifuel.myaero.tech/';
+var msgUrl = "https://msg.apvaresh.com/";
+//var apiLog='https://yapilog.apvaresh.com/';
+var apiLog = 'https://pya.apilog.myaero.tech/';
+var zlog = 'https://zlog.apvaresh.com/';
+var schUrl = 'https://sch.apvaresh.com/';
+var apigd = 'https://apigd.apvaresh.com/';
+var netProfile = 'https://netprofile.apvaresh.com/';
+//var apireportflight='https://apireportflight.apvaresh.com/'; 
+var apireportflight = 'https://pya.apireportflight.myaero.tech/';
+//var apixls='https://apixls.apvaresh.com/'; 
+var apixls = 'https://pya.apixls.myaero.tech/';
+var apiScheduling = 'https://varschedulingapi.airpocket.click/';
 
 var apiExternal = 'https://xpi.airpocket.online/';
 var airlineCode = 'vrh';
 
 var serviceSKYBAG = 'https://sbapi.apvaresh.com/';
-var weatherUrl='https://coreweather.varesh.click/';
+var weatherUrl = 'https://coreweather.varesh.click/';
 var staticFilesSKYBAG = 'https://fbpocket.ir/Upload/';
 
-var apimsg='https://apimsg.apvaresh.com/';
-var apiplanning='https://apiplanning.apvaresh.com/';
-var apilogdefault='https://var.apilogdefault.airpocket.online/'; 
-var apiapsb='https://apiapsb.apvaresh.com/';
-var apiprofile='https://apiprofile.apvaresh.com/';
-var apiauth='https://xauth.apvaresh.com/';
-var atcfiles='https://files.airpocket.online/varesh/atc/';
-var apiCAO='https://apicao.apvaresh.com/';
+var apimsg = 'https://apimsg.apvaresh.com/';
+var apiplanning = 'https://pya.apiplanning.myaero.tech/';
+var apilogdefault = 'https://var.apilogdefault.airpocket.online/';
+var apiapsb = 'http://pya.apitrn.myaero.tech/';
+//var apiprofile='https://apiprofile.apvaresh.com/';
+var apiprofile = 'https://pya.apiprofile.myaero.tech/';
+var apiauth = 'https://pya.apiauth.myaero.tech/';
+var atcfiles = 'https://files.airpocket.online/varesh/atc/';
+var apicao = 'https://apicao.apvaresh.com/';
+var apiCAO = 'https://apicao.apvaresh.com/';
 var apiQA = 'https://apiqatemp.apvaresh.com/';
 var zapiqa = 'https://apiqa.apvaresh.com/';
 var apiQAAuthCard = 'https://apiqaauth.apvaresh.ir/';
 
-var zscheduling='https://zscheduling.apvaresh.com/';
-var zreportflight='https://apireportflight.apvaresh.com/'; 
-var zapinet='https://zapinet.apvaresh.com/';
+var zscheduling = 'https://pya.apischeduling.myaero.tech'//'https://zscheduling.apvaresh.com/';
+var zreportflight = 'https://apireportflight.apvaresh.com/';
+var zapinet = 'https://apinet.apvaresh.ir/';
 var zapiqalog = 'https://apiqalog.apvaresh.com/';
-var zfuel='https://apifuel.apvaresh.com/';
-    //'http://localhost:58908/';
-    //'http://localhost:40654/';
-   
-    //'http://localhost:10707/';
-//'http://ngauthenticationapi.azurewebsites.net/';
+var zfuel = 'https://apifuel.apvaresh.com/';
+//var zapireportflight='https://zapireportflight.apvaresh.com/';
+var zapireportflight = 'https://pya.apireportflight.myaero.tech/';
+var serviceRequest = 'https://apiform.apvaresh.com/';
+var ychbapi = 'https://yfapi.apvaresh.ir/';
 app.constant('ngAuthSettings', {
     apiServiceBaseUri: serviceBase,
     clientId: 'ngAuthApp'
 });
  
 //app.config(function ($httpProvider) {
+
+
+
+
 app.config(['$httpProvider', function ($httpProvider) {
    
     $httpProvider.interceptors.push('authInterceptorService');
@@ -2259,4 +2370,348 @@ app.run(['authService', 'activityService', '$rootScope', '$location', '$template
 }(this));
  
  
- 
+app.factory('DataService', [function () {
+    var hazards = [
+        {
+            id: 1,
+            code: 'H-00023',
+            title: 'Bird strike on approach to OIII',
+            summary: 'Risk of bird strike during approach and landing at OIII due to wildlife activity in the vicinity of the airport.',
+            ownerDept: 'Flight Safety',
+            status: 'In progress',
+            initialRisk: 'High',
+            residualRisk: 'Medium',
+            keyDriver: 'Bird activity and runway proximity to wildlife habitats.'
+        },
+        {
+            id: 2,
+            code: 'H-00041',
+            title: 'Ramp collision risk during pushback',
+            summary: 'Risk of collision between aircraft and ground equipment or vehicles during pushback at OIMM.',
+            ownerDept: 'Ground Operations',
+            status: 'Open',
+            initialRisk: 'High',
+            residualRisk: 'Medium',
+            keyDriver: 'Complex ramp layout and variable experience of ramp staff.'
+        }
+    ];
+
+    var hazardSources = [
+        {
+            id: 1,
+            hazardId: 1,
+            methodCode: 'OCC',
+            methodTitle: 'Occurrence report',
+            refCode: 'ASR-2025-00123',
+            refTitle: 'Bird strike on final OIII RWY29',
+            refModule: 'Occurrences',
+            dateIdentified: '2025-02-10',
+            isPrimary: true,
+            note: ''
+        },
+        {
+            id: 2,
+            hazardId: 1,
+            methodCode: 'AUD',
+            methodTitle: 'Internal audit',
+            refCode: 'AUD-2025-03',
+            refTitle: 'Internal safety audit – Flight Ops',
+            refModule: 'Audit',
+            dateIdentified: '2025-03-14',
+            isPrimary: false,
+            note: ''
+        },
+        {
+            id: 3,
+            hazardId: 2,
+            methodCode: 'AUD',
+            methodTitle: 'Internal audit',
+            refCode: 'AUD-2025-05',
+            refTitle: 'Internal audit – Ground operations OIMM',
+            refModule: 'Audit',
+            dateIdentified: '2025-05-18',
+            isPrimary: true,
+            note: ''
+        }
+    ];
+
+    var hazardIdentificationMethods = [
+        { code: 'OCC', title: 'Occurrence report' },
+        { code: 'AUD', title: 'Internal / external audit' },
+        { code: 'MOC', title: 'MOC risk assessment' },
+        { code: 'MEET', title: 'Safety meeting / review' },
+        { code: 'STUDY', title: 'Study / analysis' }
+    ];
+
+    var riskAssessments = [
+        {
+            id: 1,
+            hazardId: 1,
+            assessmentNo: 'RA-2025-001',
+            date: '2025-02-10',
+            initial: 'High',
+            residual: 'Medium',
+            initialIndex: '4B',
+            residualIndex: '2C',
+            acceptability: 'Acceptable with controls'
+        },
+        {
+            id: 2,
+            hazardId: 2,
+            assessmentNo: 'RA-2025-002',
+            date: '2025-05-20',
+            initial: 'Medium',
+            residual: 'Low',
+            initialIndex: '3C',
+            residualIndex: '2D',
+            acceptability: 'Acceptable'
+        }
+    ];
+
+    var hazardActions = [
+        {
+            id: 1,
+            hazardId: 1,
+            actionNo: 'HA-2025-001',
+            action: 'Implement wildlife hazard management plan at OIII in coordination with airport operator.',
+            type: 'Preventive',
+            owner: 'Flight Safety',
+            targetDate: '2025-06-30',
+            status: 'In progress'
+        },
+        {
+            id: 2,
+            hazardId: 1,
+            actionNo: 'HA-2025-002',
+            action: 'Issue flight crew briefing on bird strike risk and final approach procedures.',
+            type: 'Preventive',
+            owner: 'Flight Operations',
+            targetDate: '2025-05-31',
+            status: 'Implemented'
+        },
+        {
+            id: 3,
+            hazardId: 2,
+            actionNo: 'HA-2025-003',
+            action: 'Update ramp marshalling and pushback procedure and provide refresher training.',
+            type: 'Corrective',
+            owner: 'Ground Operations',
+            targetDate: '2025-07-15',
+            status: 'In progress'
+        }
+    ];
+
+    var hazardMonitoring = [
+        {
+            id: 1,
+            hazardId: 1,
+            indicator: 'Bird strike rate per 1,000 flights on OIII arrivals',
+            method: 'Trend of occurrence reports + internal safety audit + meetings with airport wildlife control.',
+            frequency: 'Monthly',
+            lastReview: '2025-06-01',
+            nextReview: '2025-09-01',
+            conclusion: 'Risk reduced from High to Medium; controls appear effective but remain under close monitoring.'
+        },
+        {
+            id: 2,
+            hazardId: 2,
+            indicator: 'Ramp incidents related to pushback and marshalling per 10,000 movements',
+            method: 'Ramp inspections, ground safety reports, internal audits.',
+            frequency: 'Quarterly',
+            lastReview: '2025-05-31',
+            nextReview: '2025-08-31',
+            conclusion: 'Initial actions implemented; further monitoring required to confirm sustained improvement.'
+        }
+    ];
+
+    var occurrences = [
+        {
+            id: 1,
+            date: '2025-02-10',
+            ref: 'ASR-2025-00123',
+            type: 'Bird strike on approach',
+            hazardId: 1,
+            hazardSummary: 'Bird strike on approach to OIII',
+            severity: 'Minor damage',
+            status: 'Closed'
+        },
+        {
+            id: 2,
+            date: '2025-02-18',
+            ref: 'ASR-2025-00145',
+            type: 'Bird strike – engine ingestion',
+            hazardId: 1,
+            hazardSummary: 'Bird strike on approach to OIII',
+            severity: 'Significant',
+            status: 'Closed'
+        },
+        {
+            id: 3,
+            date: '2025-05-10',
+            ref: 'GSR-2025-00031',
+            type: 'Ramp incident – pushback clearance',
+            hazardId: 2,
+            hazardSummary: 'Ramp collision risk during pushback',
+            severity: 'Near miss',
+            status: 'Open'
+        }
+    ];
+
+    var mocs = [
+        {
+            id: 1,
+            mocNo: 'MOC-2025-001',
+            title: 'Wildlife hazard management programme at OIII',
+            status: 'In progress',
+            requestedBy: 'Flight Safety',
+            reason: 'Risk of bird strike on approach to OIII; need for structured wildlife hazard management.',
+            hazardIds: [1]
+        }
+    ];
+
+    var audits = [
+        {
+            id: 1,
+            auditNo: 'AUD-2025-03',
+            auditType: 'INTERNAL',
+            title: 'Internal safety audit – Flight Operations Q1/2025',
+            scope: 'Flight operations, bird control measures, approach procedures at OIII',
+            objective: 'Verify effectiveness of bird strike risk controls and compliance with company flight operations manual and CAO.IRI Air OPS.',
+            standards: 'Company OM-A Chapter 8; CAO.IRI Air OPS CAT; SMS Manual Section 5 (Safety assurance).',
+            dept: 'Flight Safety',
+            location: 'OIII – Tehran Mehrabad',
+            leadAuditor: 'Safety Manager Flight Ops',
+            team: 'Senior safety officer, FO line training captain',
+            startDate: '2025-03-10',
+            endDate: '2025-03-14',
+            status: 'Closed'
+        },
+        {
+            id: 2,
+            auditNo: 'AUD-2025-05',
+            auditType: 'INTERNAL',
+            title: 'Internal audit – Ground operations OIMM',
+            scope: 'Ramp safety, pushback procedures, marshalling',
+            objective: 'Assess ground handling conformity with ground operations manual and ramp safety procedures.',
+            standards: 'Ground Operations Manual; CAO.IRI Air OPS; Part-145 interfaces.',
+            dept: 'Quality Assurance',
+            location: 'OIMM – Mashhad',
+            leadAuditor: 'Quality Manager',
+            team: 'QA auditor, Ground ops representative',
+            startDate: '2025-05-15',
+            endDate: '2025-05-18',
+            status: 'Open'
+        }
+    ];
+
+    var auditFindings = [
+        {
+            id: 1,
+            auditId: 1,
+            findingNo: 'F-01',
+            title: 'Inadequate bird control programme at OIII',
+            severity: 'Major',
+            status: 'Open',
+            dueDate: '2025-06-30',
+            hazardIds: [1],
+            actionPlan: 'Implement enhanced bird control programme, formal wildlife hazard management plan and regular coordination with airport operator.',
+            actionOwner: 'Flight Safety Manager / Airport coordination focal point',
+            actionTargetDate: '2025-06-30',
+            followUpStatus: 'In progress',
+            followUpDate: '2025-07-30',
+            effectivenessNote: 'Effectiveness to be verified via follow-up audit and trend in bird-strike occurrences.'
+        },
+        {
+            id: 2,
+            auditId: 2,
+            findingNo: 'F-02',
+            title: 'Ramp marshalling and pushback not fully in line with procedures',
+            severity: 'Minor',
+            status: 'Open',
+            dueDate: '2025-07-15',
+            hazardIds: [2],
+            actionPlan: 'Update ramp safety procedures, refresh marshalling and pushback training and introduce on-the-job supervision checks.',
+            actionOwner: 'Ground Operations Manager',
+            actionTargetDate: '2025-07-15',
+            followUpStatus: 'Planned',
+            followUpDate: '2025-09-01',
+            effectivenessNote: 'Monitoring via ramp inspections and safety reports; effectiveness not yet evaluated.'
+        }
+    ];
+
+    return {
+        getHazards: function () {
+            return hazards;
+        },
+        getHazardById: function (id) {
+            return hazards.find(function (h) { return h.id === id; });
+        },
+        saveHazard: function (hazard) {
+            if (!hazard.id) {
+                hazard.id = hazards.length + 1;
+                hazards.push(hazard);
+            } else {
+                var idx = hazards.findIndex(function (h) { return h.id === hazard.id; });
+                if (idx >= 0) hazards[idx] = hazard;
+            }
+            return hazard;
+        },
+        getHazardSources: function (hazardId) {
+            return hazardSources.filter(function (s) { return s.hazardId === hazardId; });
+        },
+        saveHazardSources: function (hazardId, sources) {
+            for (var i = hazardSources.length - 1; i >= 0; i--) {
+                if (hazardSources[i].hazardId === hazardId) {
+                    hazardSources.splice(i, 1);
+                }
+            }
+            sources.forEach(function (s, idx) {
+                s.id = idx + 1;
+                s.hazardId = hazardId;
+                hazardSources.push(s);
+            });
+        },
+        getHazardIdentificationMethods: function () {
+            return hazardIdentificationMethods;
+        },
+        getRiskAssessmentsByHazardId: function (hazardId) {
+            return riskAssessments.filter(function (r) { return r.hazardId === hazardId; });
+        },
+        getHazardActionsByHazardId: function (hazardId) {
+            return hazardActions.filter(function (a) { return a.hazardId === hazardId; });
+        },
+        getHazardMonitoringByHazardId: function (hazardId) {
+            return hazardMonitoring.filter(function (m) { return m.hazardId === hazardId; });
+        },
+        getOccurrences: function () {
+            return occurrences;
+        },
+        getOccurrenceById: function (id) {
+            return occurrences.find(function (o) { return o.id === id; });
+        },
+        getOccurrencesByHazardId: function (hazardId) {
+            return occurrences.filter(function (o) { return o.hazardId === hazardId; });
+        },
+        getOccurrenceCountByHazardId: function (hazardId) {
+            return occurrences.filter(function (o) { return o.hazardId === hazardId; }).length;
+        },
+        getMocs: function () {
+            return mocs;
+        },
+        getMocById: function (id) {
+            return mocs.find(function (m) { return m.id === id; });
+        },
+        getHazardsByIds: function (ids) {
+            return hazards.filter(function (h) { return ids.indexOf(h.id) !== -1; });
+        },
+        getAudits: function () {
+            return audits;
+        },
+        getAuditById: function (id) {
+            return audits.find(function (a) { return a.id === id; });
+        },
+        getAuditFindingsByAuditId: function (auditId) {
+            return auditFindings.filter(function (f) { return f.auditId === auditId; });
+        }
+    };
+}]);
