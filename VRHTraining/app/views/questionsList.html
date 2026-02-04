@@ -1,0 +1,157 @@
+﻿<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #333;
+        color: white;
+        margin: 0;
+        padding: 0;
+    }
+
+    .form-container {
+        width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 15px;
+        background-color: #444;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .form-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 0.9em;
+        color: white;
+        border: 1px solid lightgray
+    }
+
+        .form-table th {
+            background-color: #444;
+            color: #ddd;
+            font-weight: normal;
+            text-align: left;
+            border: 1px solid lightgray
+        }
+
+        /* Styles for td elements within the table with class 'form-table' */
+        .form-table td {
+            border-bottom: 1px solid #666;
+            padding: 10px;
+            border: 1px solid lightgray
+        }
+
+    .table-header {
+        background-color: #555;
+        padding: 10px;
+        font-weight: bold;
+        color: white;
+        text-align: left;
+        border-radius: 4px;
+    }
+
+    /*  th, td {
+        border-bottom: 1px solid #666;
+        padding: 10px;
+    }
+
+    th {
+        background-color: #444;
+        color: #ddd;
+        font-weight: normal;
+        text-align: left;
+    }*/
+
+    .crew-table th, .crew-table td {
+        text-align: left;
+        color: #ddd;
+    }
+
+    .crew-input {
+        display: flex;
+        gap: 10px;
+        margin: 5px 0;
+    }
+
+    .add-crew-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .add-crew-btn:hover {
+            background-color: #45a049;
+        }
+
+    @media screen and (max-width: 768px) {
+        .form-container {
+            width: 100%;
+            padding: 10px;
+        }
+
+        th, td {
+            padding: 6px;
+            font-size: 0.85em;
+        }
+
+        .crew-input {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<div ng-controller="questionsListController">
+    <div id="popup_add" dx-popup="popup_add">
+        <div id="scroll_vradd" dx-scroll-view="scroll_vradd">
+            <div style="border:1px solid #ccc">
+                <div style="background: #564147;color:white; padding: 7px; text-align: center">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="text-align:left;padding:0 0 0 10px;font-size:18px;">
+                                Questions
+                            </td>
+                            <td style="text-align:right;padding:0 10px 0 0">
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div ng-style="{ 'height': (windowHeight - height_dy) + 'px' }">
+                    <div class="qustions-container   thin-scroll" ng-style="{ 'height': (windowHeight - height_dy-5) + 'px' }" style="overflow-y:auto">
+
+                        <div ng-repeat="(questionIndex, question) in questions" ng-class="get_answer_class(question.dir)">
+                            <div style="font-size:14px;color:gray;border-bottom:1px solid #ccc;padding:5px;">{{question.category}}</div>
+                            <p>
+                                <table style="width:100%">
+                                    <tr>
+                                        <td style="text-align:left">{{questionIndex + 1}}. {{ question.english_title }}</td>
+                                        <td style="text-align:right;padding-right:5px;color:gray;font-size:13px;">({{question.id}})</td>
+                                    </tr>
+                                </table>
+                            </p>
+                            <label class="qlabel" ng-repeat="(optionIndex, option) in question.answers">
+                                <input type="radio" ng-model="option.id" ng-change="save_answer(option.exam_quesion_id,option.answer_id )"
+                                       ng-checked="option.is_selected"
+                                       name="question_{{questionIndex}}" ng-disabled="status_id!=1" />
+
+                                <span class="checkmark"></span>
+                                {{option.english_title}}
+
+                            </label>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

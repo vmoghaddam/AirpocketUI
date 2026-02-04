@@ -5,6 +5,7 @@ using System.ComponentModel;
 using DevExpress.XtraReports.UI;
 using DevExpress.DataAccess.Json;
 using Newtonsoft.Json.Linq;
+using System.Web.Configuration;
 
 namespace Report
 {
@@ -13,6 +14,7 @@ namespace Report
         public rptRosterSecurity()
         {
             InitializeComponent();
+            xrPictureBoxLogo.ImageUrl = WebConfigurationManager.AppSettings["logo"] + ".png";
         }
 
         private void Detail1_BeforePrint(object sender, CancelEventArgs e)

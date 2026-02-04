@@ -68,11 +68,11 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
 
 
         /////////////////////////////////
-        //Chart.defaults.global.pointHitDetectionRadius = 1;
-        //Chart.defaults.global.tooltips.enabled = false;
-        //Chart.defaults.global.tooltips.mode = 'index';
-        //Chart.defaults.global.tooltips.position = 'nearest';
-        //Chart.defaults.global.pointHitDetectionRadius = 1;
+        Chart.defaults.global.pointHitDetectionRadius = 1;
+        Chart.defaults.global.tooltips.enabled = false;
+        Chart.defaults.global.tooltips.mode = 'index';
+        Chart.defaults.global.tooltips.position = 'nearest';
+        Chart.defaults.global.pointHitDetectionRadius = 1;
         var customTooltips = function (tooltip) {
 
             // Tooltip Element
@@ -145,7 +145,7 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
             tooltipEl.style.fontStyle = tooltip._bodyFontStyle;
             tooltipEl.style.padding = tooltip.yPadding + 'px ' + tooltip.xPadding + 'px';
         };
-       // Chart.defaults.global.tooltips.custom = CustomTooltips;
+        Chart.defaults.global.tooltips.custom = CustomTooltips;
 
         ////////////////////////////
         var random = function random() {
@@ -1872,7 +1872,10 @@ app.controller('homeController', ['$scope', '$routeParams', 'authService', 'acti
             else if ($rootScope.moduleId == 3) {
                 $scope.flight.Init();
                 $scope.flight.Bind();
-                $scope.get_mnt_dashboard();
+               // $scope.get_mnt_dashboard();
+			   
+			   
+			   
                 //Flight Pocket
                 //$scope.timer_flight_opertation = setInterval(function () {
                 //    console.log('timer_flight_opertation');

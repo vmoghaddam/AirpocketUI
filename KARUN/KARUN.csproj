@@ -104,6 +104,7 @@
     <Content Include="app\controllers\delaybiKPI.js" />
     <Content Include="app\controllers\delayCodesController.js" />
     <Content Include="app\controllers\delayReport.js" />
+    <Content Include="app\controllers\delayReportFlight.js" />
     <Content Include="app\controllers\directDeliveryController.js" />
     <Content Include="app\controllers\disaggregationController.js" />
     <Content Include="app\controllers\documentAddController.js" />

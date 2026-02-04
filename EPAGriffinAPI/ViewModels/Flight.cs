@@ -2579,6 +2579,8 @@ namespace EPAGriffinAPI.ViewModels
         public int? NightTime { get; set; }
         public int? PaxInfant { get; set; }
         public int? PaxChild { get; set; }
+        public int? PaxMale { get; set; }
+        public int? PaxFemale { get; set; }
         public int? CargoWeight { get; set; }
         public int? CargoUnitID { get; set; }
         public int? BaggageCount { get; set; }

@@ -117,7 +117,7 @@ namespace Report
             };
             cellDir.Text = course.TrainingDirector;
             //course.CurrencyId
-            xrPictureBox3.ImageUrl = "https://ava.airpocket.app/upload/ins/" + course.CurrencyId + ".png";
+            //xrPictureBox3.ImageUrl = "https://ava.airpocket.app/upload/ins/" + course.CurrencyId + ".png";
             record.CoursePeople = query;
             record.CourseSessions = sessions;
             record.CourseSessionPresence = atts;

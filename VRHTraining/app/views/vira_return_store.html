@@ -1,0 +1,59 @@
+﻿<div ng-controller="vira_return_storeController">
+    <div id="popup_store" dx-popup="popup_store" class="no-padding" style='padding:0 !important;'>
+        <div style="border: 1px solid #ccc " class="dx-border">
+            <div class="col-lg-12 padding-0" style="padding-left:0px;margin-top:0px;margin-bottom:7px">
+                <div class="td-title" style="width: 100%; border-bottom: 1px solid #ccc;border-top: 1px solid #ccc">Filter Panel</div>
+            </div>
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            Date:
+                        </td>
+                        <td>
+                            <div dx-date-box="dt_date" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width:60px;font-size:12px;padding-right:5px;text-align:right">
+                            Stock:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_stock" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-lg-3 padding-0" style="margin-bottom: 5px">
+                <table style="width:100%">
+                    <tr>
+                        <td style="width: 100px; font-size: 12px; padding-right: 5px; text-align: center">
+                            Tag:
+                        </td>
+                        <td>
+                            <div dx-select-box="sb_tag" class="center" style="width: 100%"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div style="clear: both"></div>
+
+        </div>
+        <div style="margin: 5px 0 5px 0; text-align: right">
+            <div dx-button="btn_remove" style="margin-right: 5px"></div>
+            <div dx-button="btn_component" ng-show="!isDO" style="margin-right: 5px"></div>
+            <div dx-button="btn_do"  ng-show="isDO" style="margin-right: 5px"></div>
+        </div>
+        <div style="padding: 5px 0 0 0">
+            <div dx-data-grid="dg_store" id="dg_store" class="content" style="overflow-y: hidden" dx-item-alias="row"></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿<div ng-controller="awbController">
+    <div id="popup_awb" dx-popup="popup_awb" class="no-padding" style='padding:0 !important;'>
+        <div style="width: 100%">
+            <div style="width: 100%; border: 1px solid #ccc">
+                <div class="td-title" style="width: 100%">Filter Panel</div>
+                <table style="margin-top:10px;color:black" class="dx-border">
+                    <tr>
+                        <td class="td-field" style="font-weight:bold">AWB No. :</td>
+                        <td class="td-field"><div dx-text-box="txt_awbNo" class="center" style="width: 100%"></div></td>
+
+                        <td class="td-field" style="font-weight:bold">Company:</td>
+                        <td class="td-field"><div dx-text-box="txt_company" class="center"></div></td>
+
+                        <td style="padding: 5px"><div dx-button="btn_refresh"></div></td>
+                    </tr>
+
+                   
+                </table>
+            </div>
+
+
+
+            <div dx-data-grid="dg_awb" id="dg_awb" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
+        </div>
+    </div>
+</div>

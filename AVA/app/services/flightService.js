@@ -206,12 +206,29 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
         return deferred.promise;
     };
-    var _getFlightDelays = function (fid) {
+    var _getFlightDelays = function (fid,flt) {
 
+var _url = "";
+switch (flt.Register) {
+  case '83-SAP':
+   _url = pgs_apinet;
+    break;
+  case '33-LEE':
+     _url =fly_apinet;
+    break;
+	case '33-LEF':
+     _url =fly_apinet;
+    break;
+	case '82-LED':
+     _url =fly_apinet;
+    break;
 
+  default:
+   _url = serviceBase;
+}
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/delays/' + fid).then(function (response) {
+        $http.get(_url + 'odata/delays/' + fid).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -233,7 +250,8 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     };
     var _getUpdatedFlightsNew = function (entity) {
         var deferred = $q.defer();
-        $http.post($rootScope.serviceUrl + 'odata/flights/updated/new/', entity).then(function (response) {
+        //$http.post($rootScope.serviceUrl + 'odata/flights/updated/new/', entity).then(function (response) {
+		$http.post(apiLog+ 'api/flights/updated/new/', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -648,11 +666,39 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
         return deferred.promise;
     };*/
+	var _getDelayedFlightsReport = function (df, dt, regs,types,flts,route,range) {
+
+
+        var deferred = $q.defer();
+        $http.get(apireportflight + 'api/flight/delayed?df='+df+'&dt='+dt+'&route='+route+'&regs='+regs+'&cats=&types='+types+'&flts='+flts+'&range='+range).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+	serviceFactory.getDelayedFlightsReport = _getDelayedFlightsReport;
 	var _getCrewFlights = function (id,df,dt) {
         var _df = moment(df).format('YYYY-MM-DD');
         var _dt = moment(dt).format('YYYY-MM-DD');
         var deferred = $q.defer();
         $http.get(apireportflight + 'api/crew/flights/detail/' + id+'?df='+_df+'&dt='+_dt).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+	
+	var _getCrewFlightsFly = function (id,df,dt) {
+        var _df = moment(df).format('YYYY-MM-DD');
+        var _dt = moment(dt).format('YYYY-MM-DD');
+        var deferred = $q.defer();
+        $http.get(fly_apireportflight + 'api/crew/flights/detail/' + id+'?df='+_df+'&dt='+_dt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -674,11 +720,24 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
         return deferred.promise;
     };*/
-	var _getCrewFlightsTotal = function (df, dt) {
+	var _getCrewFlightsTotalFly = function (df, dt,_type,_rank) {
         var _df = moment(df).format('YYYY-MM-DD');
         var _dt = moment(dt).format('YYYY-MM-DD');
         var deferred = $q.defer();
-        $http.get(apireportflight + 'api/crew/flights/-1?df=' + _df + '&dt=' + _dt).then(function (response) {
+        $http.get(fly_apireportflight + 'api/crew/flights/'+_rank+'/'+_type+'?df=' + _df + '&dt=' + _dt).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+	var _getCrewFlightsTotal = function (df, dt,_type,_rank) {
+        var _df = moment(df).format('YYYY-MM-DD');
+        var _dt = moment(dt).format('YYYY-MM-DD');
+        var deferred = $q.defer();
+        $http.get(apireportflight + 'api/crew/flights/'+_rank+'/'+_type+'?df=' + _df + '&dt=' + _dt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -951,7 +1010,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     //magu2-16
     var _saveFlightRegisterChangeGroup = function (entity) {
         var deferred = $q.defer();
-        $http.post($rootScope.serviceUrl + 'odata/flight/register/change/group', entity).then(function (response) {
+        $http.post(temp_url + 'odata/flight/register/change/group', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -1264,9 +1323,24 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
         return deferred.promise;
     };
-    var _saveFlightLog = function (entity) {
+    var _saveFlightLog = function (entity,flt) {
         var deferred = $q.defer();
-        $http.post($rootScope.serviceUrl + 'odata/flight/log/save', entity).then(function (response) {
+		var _url = "";
+switch (flt.Register) {
+  case '33-LEE':
+     _url =fly_apinet;
+    break;
+	case '33-LEF':
+     _url =fly_apinet;
+    break;
+	case '82-LED':
+     _url =fly_apinet;
+    break;
+
+  default:
+   _url = $rootScope.serviceUrl;
+}
+        $http.post(_url + 'odata/flight/log/save', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -1660,19 +1734,29 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
         }, function (err, status) {
 
             deferred.reject(Exceptions.getMessage(err));
+			
         });
 
         return deferred.promise;
     };
 
     
-    var _getFlightCrews = function (id,arc) {
+    var _getFlightCrews = function (id,arc,reg) {
+		//console.log(reg);
         //var url = serviceBase + 'odata/flight/crews/' + id;
 		var url=apilogdefault+'api/flight/crews/'+id;
 		if ($rootScope.InvisibleCrew())
 			var url=apilogdefault+'api/flight/crews/admin/'+id;
          if (arc == 1)
              url = serviceBase + 'odata/flight/crews/archive/' + id;
+		 if (reg=='83-SAP')
+			 url=pgs_logdefault+'api/flight/crews/'+id;
+		 if (reg=='33-LEF')
+			 url=fly_logdefault+'api/flight/crews/'+id;
+		 if (reg=='33-LEE')
+			 url=fly_logdefault+'api/flight/crews/'+id;
+		 if (reg=='82-LED')
+			 url=fly_logdefault+'api/flight/crews/'+id;
         var deferred = $q.defer();
         $http.get(url).then(function (response) {
             deferred.resolve(response.data);
@@ -1747,10 +1831,39 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
         return deferred.promise;
     };
 
-    var _getFlightsLine = function (id) {
+    var _getFlightsLine = function (id, register) {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/line/flights/' + id).then(function (response) {
+		var _url = 'odata/line/flights/'
+		switch (register) {
+ 
+  case 239:
+     _url =fly_apinet + _url + id;
+    break;
+	case 237:
+     _url =fly_apinet + _url + id;
+    break;
+	case 238:
+     _url =fly_apinet + _url+ id;
+    break;
+
+  default:
+   _url = serviceBase + _url + id;
+}
+        $http.get(_url).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+  var _getFlightsLineFly = function (id) {
+
+        var deferred = $q.defer();
+        $http.get(fly_apinet + 'odata/line/flights/' + id).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -1761,6 +1874,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     };
 
 
+  
     var _getReporting = function (id) {
 
         var deferred = $q.defer();
@@ -2756,7 +2870,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
      var _getRegFlightsMonthlyReport = function (y,m,f) {
 
          var deferred = $q.defer();
-         $http.get(serviceBase + 'odata/reg/flights/monthly/report/' + y + '/' + m+'/'+f).then(function (response) {
+         $http.get(zapinet2 + 'odata/reg/flights/monthly/report/' + y + '/' + m+'/'+f).then(function (response) {
              deferred.resolve(response.data);
          }, function (err, status) {
 
@@ -2768,7 +2882,9 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
      var _getFlightsMonthlyReport = function (y) {
 
          var deferred = $q.defer();
-         $http.get(serviceBase + 'odata/flights/monthly/report/' + y ).then(function (response) {
+        // $http.get(zapinet2 + 'odata/flights/monthly/report/' + y ).then(function (response) {
+			//apireportflight
+			$http.get(apireportflight + 'api/stat/flight/' + y ).then(function (response) {
              deferred.resolve(response.data);
          }, function (err, status) {
 
@@ -2832,7 +2948,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
      var _getFormAReport = function (yf, yt) {
 
          var deferred = $q.defer();
-         $http.get(serviceBase + 'odata/forma/' + yf + '/' + yt).then(function (response) {
+         $http.get('https://apicao.airpocket.app/' + 'api/cao/report/forma/year/' + yf ).then(function (response) {
              deferred.resolve(response.data);
          }, function (err, status) {
 
@@ -2846,7 +2962,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     var _getFormAYearlyReport = function (yf, yt) {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/forma/yearly/' + yf + '/' + yt).then(function (response) {
+        $http.get('https://apicao.airpocket.app/' + 'api/cao/report/forma/yearly/' + yf + '/' + yt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3585,7 +3701,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     };
     serviceFactory.getCrewFixTimePeriodReportDaily = _getCrewFixTimePeriodReportDaily;
     */
-  var _getCrewFixTimePeriodReportDaily = function (df,dt, r,t) {
+  /*var _getCrewFixTimePeriodReportDaily = function (df,dt, r,t) {
 
         var deferred = $q.defer();
         $http.get(apireportflight + 'api/crew/flight/summary?df=' + df + '&dt=' + dt + '&grps='+r+'&actype='+t).then(function (response) {
@@ -3598,6 +3714,23 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
         return deferred.promise;
     };
     serviceFactory.getCrewFixTimePeriodReportDaily = _getCrewFixTimePeriodReportDaily;
+	*/
+	
+	
+	var _getCrewFixTimePeriodReportDaily = function (df,dt, r,t, regs) {
+
+        var deferred = $q.defer();
+        $http.get(apireportflight2 + 'api/crew/flight/summary/regs/?df=' + df + '&dt=' + dt + '&grps='+r+'&actype='+t+ '&regs=' + regs).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.getCrewFixTimePeriodReportDaily = _getCrewFixTimePeriodReportDaily;
+
 
     var _getCrewFixTimePeriodReportCrewDaily = function (df,dt, c) {
 
@@ -3933,7 +4066,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 	
 	 var _saveFlightDoc = function (entity) {
         var deferred = $q.defer();
-        $http.post(apiapsb + 'api/flight/doc/save', entity).then(function (response) {
+        $http.post('https://ava.zapiapsb.aerotango.app/' + 'api/flight/doc/save', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -3974,8 +4107,10 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     };
     serviceFactory.sendCaoMVT = _sendCaoMVT;
 	////////////////////////
-		var _saveFlightGroupUTC = function (entity) {
+   var _saveFlightGroupUTC = function (entity) {
         var url = 'odata/flight/group/save/utc';
+
+
         if (entity.ID != -1)
             url = 'odata/flight/group/update/utc';
 
@@ -3984,7 +4119,26 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
             _url = 'api/plan/group/update/utc';
         var deferred = $q.defer();
 
-        $http.post(/*$rootScope.serviceUrl*/ apiplanning + _url, entity).then(function (response) {
+switch (entity.RegisterID) {
+  case 230:
+   _url = pgs_apiplanning + _url;
+    break;
+  case 240:
+     _url =fly_apiplanning + _url;
+    break;
+	case 237:
+     _url =fly_apiplanning + _url;
+    break;
+	case 238:
+     _url =fly_apiplanning + _url;
+    break;
+
+  default:
+   _url = apiplanning + _url;
+}
+
+
+        $http.post(_url, entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -4022,9 +4176,24 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
         return deferred.promise;
     };
     serviceFactory.getFlightPax = _getFlightPax;
+	
+	
+	var _getImportFlightsNew = function (fileName, fromDate, toDate) {
 
 
-    ///////////////REQUESTS ///////////////////////
+        var deferred = $q.defer();
+        $http.get('https://ava.xls.airpocket.app/' + 'api/plan/xls/uploadflights?fileName=' +fileName
+				 +'&fromDate=' + fromDate + '&toDate=' + toDate).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+	
+ ///////////////REQUESTS ///////////////////////
 
     var _getApprovedRequests = function () {
 
@@ -4160,7 +4329,22 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
         return deferred.promise;
     };
     serviceFactory.getRequesterDuties = _getRequesterDuties;
+	
+	
+	 var _dutiesSendRocketChat = function (entity) {
+         var deferred = $q.defer();
+         $http.post('https://crm.api.airpocket.app/' + 'api/msg/rocketchat/notify/duties', entity).then(function (response) {
+             deferred.resolve(response.data);
+         }, function (err, status) {
 
+             deferred.reject(Exceptions.getMessage(err));
+         });
+
+         return deferred.promise;
+     };
+     serviceFactory.dutiesSendRocketChat = _dutiesSendRocketChat;
+    /////////////////////////
+    serviceFactory.getImportFlightsNew = _getImportFlightsNew;
     /////////////////////////
     serviceFactory.getOFP = _getOFP;
     serviceFactory.saveOFP = _saveOFP;
@@ -4251,6 +4435,8 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
     serviceFactory.getFlightCrew2 = _getFlightCrew2;
     serviceFactory.getCrewFlights = _getCrewFlights;
     serviceFactory.getCrewFlightsTotal = _getCrewFlightsTotal;
+	serviceFactory.getCrewFlightsFly = _getCrewFlightsFly;
+    serviceFactory.getCrewFlightsTotalFly = _getCrewFlightsTotalFly;
     serviceFactory.getCrewSummary = _getCrewSummary;
     serviceFactory.getCrew  = _getCrew ;
     serviceFactory.getFlightPlanPermits = _getFlightPlanPermits;
@@ -4376,6 +4562,7 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
      serviceFactory.getJLDataLegs = _getJLDataLegs;
      serviceFactory.getCLDataLegs = _getCLDataLegs;
      serviceFactory.getFlightsLine = _getFlightsLine;
+     serviceFactory.getFlightsLineFly = _getFlightsLineFly;
     serviceFactory.getReporting = _getReporting;
     serviceFactory.saveAog = _saveAog;
     serviceFactory.getAogs = _getAogs;

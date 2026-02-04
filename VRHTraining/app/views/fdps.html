@@ -1,0 +1,2571 @@
+﻿<style>
+
+    .task-route {
+        background: rgba(250,250,250,1);
+    }
+    /*[class$="gridrowIndexlevel0"], [class*='gridrowIndexlevel0 '] {
+        display: none !important;
+    }*/
+    .summarybox {
+        /*min-width: 140px !important;*/
+        padding-right: 3px;
+    }
+
+        .summarybox .caption {
+            font-size: 11px !important;
+            margin-bottom: 0 !important;
+        }
+
+        .summarybox .td-icon {
+            width: 30% !important;
+            padding: 0 5px 0 5px !important;
+        }
+
+    .home-box {
+        padding: 4px !important;
+        min-height: 60px !important;
+    }
+
+    .dx-datagrid .dx-row.dx-header-row > td {
+        padding: 8px !important;
+    }
+
+    .dx-datagrid .dx-row > td {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    .dx-datagrid .dx-row.dx-header-row > td .dx-datagrid-text-content {
+        font-size: 12px !important;
+    }
+
+    .dx-border .dx-texteditor-input {
+        padding: 5px !important;
+    }
+
+    .dx-toast-custom {
+        background: #ffd480;
+        color: black;
+    }
+
+    .e-headercelldiv span {
+        display: none;
+    }
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .dx-checkbox-text {
+        font-size: 12px !important;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .tabprofile {
+        display: none;
+    }
+
+    .dx-popup-title.dx-toolbar {
+        /*background:red !important;*/
+    }
+
+    .red {
+        background: red !important;
+    }
+
+
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: #f44336;
+        opacity: 1 !important;
+    }
+
+
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .e-gantt-parenttaskbar-innerdiv.e-chartexpand.e-parentTask {
+        display: none;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-childtaskbar {
+        border: 2px solid #ff3399;
+    }
+    /*************/
+    #ganttviewerheaderContainerejGanttChartresourceGanttba {
+    }
+
+    .e-ganttviewerheaderContainer {
+        height: 53px !important;
+    }
+
+    .e-treegrid .e-headercell {
+        height: 53px !important;
+    }
+
+    .e-ganttchart .e-schedule-day-headercell {
+        height: 30px !important;
+    }
+
+    .tabsdate.dx-tabs {
+        /*text-align: left;*/
+        background: #e6e6e6;
+    }
+
+    .tabsdate .dx-tab {
+        background: #e6e6e6;
+        max-width: 200px;
+        min-width: 150px;
+        display: inline-block;
+        text-align: center;
+    }
+
+        .tabsdate .dx-tab.dx-tab-selected {
+            color: black;
+            background: #ffdab3 !important;
+        }
+
+    .tabsdetoptions.dx-tabs {
+        /*text-align: left;*/
+        background: #e6e6e6;
+    }
+
+    .tabsdetoptions .dx-tab {
+        background: lightgray;
+        /*display: inline-block;*/
+        text-align: center;
+    }
+
+        .tabsdetoptions .dx-tab.dx-tab-selected {
+            background-color: gray;
+            color: white;
+        }
+
+
+
+    .tabsdate2.dx-tabs {
+        /*text-align: left;*/
+        background: #e6e6e6;
+    }
+
+    .tabsdate2 .dx-tab {
+        background: #e6e6e6;
+        max-width: 200px;
+        min-width: 150px;
+        display: inline-block;
+        text-align: center;
+    }
+
+        .tabsdate2 .dx-tab.dx-tab-selected {
+            color: black;
+            background: #ffdab3 !important;
+        }
+
+    .e-ganttviewerbodyContianer.e-scroller.e-js.e-widget {
+        background: rgb(250, 250, 250);
+    }
+
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        background: #fce9e9;
+        background: #ffe6cc;
+    }
+
+    .e-treegrid .e-alt-row {
+        background: #fce9e9;
+        background: #ffe6cc;
+    }
+
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        border-bottom: none;
+    }
+
+    .e-ganttchart .e-ganttviewerheaderContainer {
+        background: #fce9e9;
+        background: #ffe6cc;
+    }
+
+    .e-container-spreadsheet {
+        height: 100%;
+        width: 100%;
+    }
+
+    .e-rg-rangdiv {
+        opacity: 0 !important
+    }
+
+    .e-gantt-template-progressbar {
+        top: 12px !important;
+        height: 15px !important;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-template-progressbar {
+        top: 13px !important;
+        height: 15px !important;
+    }
+
+    .e-gantt-template-taskbar.linked-flight, .linked-flight {
+        display: none;
+    }
+
+    .datepicker-plot-area {
+        box-sizing: border-box;
+        overflow: hidden;
+        min-height: 70px;
+        display: block;
+        width: 300px !important;
+        min-width: 200px;
+        padding: 10px !important;
+        position: absolute;
+        font: 12px tahoma;
+        border: 1px solid #ccc;
+        background-color: #fff;
+    }
+
+        .datepicker-plot-area .datepicker-day-view .table-days td span {
+            display: block;
+            width: 100%;
+            height: 30px !important;
+            line-height: 30px !important;
+            padding: 0;
+            margin: 0px;
+        }
+
+    #resourceGanttba .e-cell {
+        font-size: 14px;
+    }
+
+    @media screen and (max-width: 640px) {
+        #resourceGanttba .e-cell {
+            font-size: 11px;
+        }
+
+        #resourceGanttba .treegridrows .e-dragintend {
+        }
+    }
+
+    .large-tile {
+        display: none;
+        height: 65px;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        width: 100%;
+    }
+
+    .small-tile {
+        /*display: none;*/
+        display: inline-flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 60px;
+    }
+
+        /*@media screen and (min-height: 640px) {
+        .small-tile{display:inline-flex;width:100%;}
+
+    }
+    @media screen and (min-height: 768px) {
+        .small-tile {
+            display: none;
+        }
+        .large-tile {
+            display: inline-flex;
+        }
+    }*/
+        .small-tile .summarybox {
+            min-width: 115px;
+            display: inline-block
+        }
+
+    .large-tile .summarybox {
+        min-width: 115px;
+        display: inline-block
+    }
+
+    .small-tile .home-box {
+        min-height: 50px !important
+    }
+
+    .small-tile .libcount span {
+        font-size: 15px !important
+    }
+
+    .log-mobile .dx-icon {
+        font-size: 16px;
+    }
+
+    /***********************/
+    .gantt-main-container {
+        /*display: flex;*/
+        /*height: calc(100% - 300px);*/
+        height: 50px;
+    }
+
+    .col-fleet {
+        width: 50px;
+        display: inline-block;
+        float: left;
+        height: 100%;
+    }
+
+    .col-flights {
+        display: inline-block;
+        width: calc(100% - 50px);
+        float: left;
+        height: 100%;
+        /*flex-grow: 1;*/
+    }
+
+    .header-date {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .header-time {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .regs {
+        /* background-color: #fce9e9;
+        background-color: #ffe6cc;*/
+    }
+
+    .flights {
+        background-color: #f5f5f5;
+    }
+
+    .cell-hour {
+        border-right: 1px solid #bbb;
+        position: relative;
+        text-align: center;
+        line-height: 25px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .cell-day {
+        border-right: 1px solid #bbb;
+        position: relative;
+        text-align: center;
+        line-height: 23px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .second-time {
+        font-size: 9px;
+        position: absolute;
+        top: -7px;
+        left: 2px;
+        font-weight: normal;
+    }
+
+    .mid-line {
+        position: absolute;
+        border-left: 1px solid gray;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+    .now-line {
+        position: absolute;
+        border-left: 2px solid orange;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+    .hour-line {
+        position: absolute;
+        border-left: 1px dotted #ccc;
+        height: 100px;
+        display: inline-block;
+        width: 1px;
+    }
+
+
+
+    #dg3 .dx-row > td {
+        padding-top: 4px !important;
+        padding-bottom: 3px !important;
+        font-size: 12px;
+    }
+
+    .dx-tab-content, .dx-tab-text {
+        font-size: 12px;
+        line-height: 10px;
+    }
+
+    .crewpos {
+        display: table-cell;
+        min-width: 200px;
+        padding-right: 5px;
+    }
+
+        .crewpos .header {
+            background: #eee;
+            border: 1px solid #ccc;
+            padding: 3px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .crewpos.selected .header {
+            background: #80ff80 !important;
+            border: 1px solid #ccc;
+            padding: 3px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .crewpos .content {
+            font-size: 12px;
+            text-align: center;
+            border: 1px solid #ccc;
+            height: 40px;
+            background: white;
+            padding: 5px;
+        }
+
+        .crewpos.selected .content {
+            font-size: 12px;
+            text-align: center;
+            border: 1px solid #ccc;
+            height: 40px;
+            background: #e6ffe6 !important;
+            padding: 5px;
+        }
+
+
+
+    .dx-tooltip-wrapper .dx-overlay-content {
+        background-color: white !important;
+    }
+
+        .dx-tooltip-wrapper .dx-overlay-content .dx-popup-content {
+            padding: 0px !important
+        }
+
+    .dx-toast-custom {
+        background: #ffd480;
+        color: black;
+    }
+
+    #dg_flightrr .dx-toolbar .dx-toolbar-items-container {
+        height: 40px !important;
+    }
+
+    @media print {
+        .rrheader {
+            background: #ccc;
+        }
+    }
+
+    .init-flt {
+        background: #f9d286;
+        background: #ffcc99;
+        color: black;
+    }
+
+    .cnl {
+        background-color: #999999 !important;
+        color: black !important;
+    }
+
+    .has-crew {
+        background: #66ccff;
+        background: #4ddbff;
+        color: black;
+    }
+
+    .has-crew-all {
+        background: #00e6b8;
+        color: black;
+    }
+
+    .has-crew-extra {
+        color: red !important;
+    }
+
+    .dh {
+        background: #bfbfbf !important;
+    }
+
+
+    .duty-100020, .duty-100021, .duty-100022, .duty-100023 {
+        background: #ff471a;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+    .duty-300008 {
+        background: #0099cc;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+    .duty-300009 {
+        background: #00cc00;
+        text-align: center;
+        padding: 3px !important;
+        color: white;
+    }
+    .mainselection div.selected {
+        background: #ccffcc !important;
+    }
+
+    .isover {
+        background: #ffaa80 !important;
+    }
+
+    .aboveavg {
+        background: #ffd480 !important;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: initial !important;
+    }
+
+    .ftl-tbl {
+    }
+
+        .ftl-tbl tr td {
+            text-align: center;
+            border: 1px solid #aaa;
+            padding: 5px;
+            font-size: 15px
+        }
+</style>
+
+
+
+<!--<div class="mainselection">
+    <div class="box-wrap1 boxes1 yellow" style="border:1px solid red;padding:20px;">
+        <div data-id="1">A</div>
+        <div data-id="2">B</div>
+        <div data-id="3">C</div>
+        <div data-id="4">D</div>
+        <div data-id="5">E</div>
+        <div data-id="6">F</div>
+    </div>
+
+</div>-->
+
+
+
+<div class="box fdps" style="height:100%;display:none;overflow-y:hidden">
+    <!--<div ng-include="'app/views/header.html'" class="rowx header" ng-show="footerfilter"></div>
+    <div ng-include="'app/views/menu.html'" ng-show="footerfilter"></div>-->
+    <div dx-tabs="tabs_date_options">
+
+    </div>
+
+    <div class="rowx1 content1" style="clear:both" ng-show="ShowFunctions">
+        <div class="col-lg-10 padding-0" style="width:80%;">
+            <div class="gantt-main-container  " style="width:100%; background:#dcdcdc;border :1px solid #ccc;border-top:1px solid #ccc">
+
+
+                <div class="col-fleet" style=" display: flex;  flex-direction: column; ">
+                    <div style="border-bottom:1px solid #ccc;border-right:1px solid #ccc" class="row-top-mirror">
+
+                    </div>
+                    <div class="regs thin-scroll" style=" overflow-y:hidden; flex:0.95;border-right:1px solid #ccc;  ">
+                        <div class="reg-box">
+                            <!--<div style="text-align:left;padding:0px 0 0 10px;font-size:12px;  border-bottom:0px solid #ccc; height:20px">
+
+                            </div>-->
+                            <div class="reg-row" ng-repeat="res in ganttData.resources" style="text-align:left;padding:0px 0 0 10px;font-size:12px;  border-bottom:1px solid #ccc" ng-style="getResStyle(res)">
+                                <div style="font-size:11px;font-weight:bold" ng-style="getResCaptionStyle(res)">{{res.resourceName.split('-')[1]}}</div>
+                            </div>
+                            <idv style="clear:both"></idv>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-flights  " style=" overflow-x:auto ;display: flex;  flex-direction: column;">
+                    <div style=" " class="row-top timeline">
+                        <div class="header-date"></div>
+                        <div class="header-time">
+
+                        </div>
+                    </div>
+                    <div class="flights thin-scroll" style="overflow-y:auto; flex:0.999 ;position:relative;overflow-x:hidden ">
+                        <div class="flights-box mainselection " style="background-color:#f2f2f2;     ">
+                            <!--<div style="text-align:left;padding:0px 0 0 10px;font-size:12px; border-bottom:0px solid #ccc;position:relative; height:20px;">
+
+                            </div>-->
+                            <div class="box-wrap1 yellow" ng-repeat="res in ganttData.resources" style="text-align:left;padding:0px 0 0 10px;font-size:12px; border-bottom:1px solid #ccc;position:relative;min-height:50px;" ng-style="getResStyle(res)">
+                                <div class="flightarea" style="display:inline-block; text-align:center;position:absolute;" ng-repeat="f in res.flights" data-from="{{f.FromAirport}}" data-to="{{f.ToAirport}}" data-std="{{f.STD}}" data-sta="{{f.STA}}" data-no="{{f.FlightNumber}}" data-flightId="{{f.ID}}" data-type="{{f.OTypeId}}" ng-init="finished()" ng-style="getFlightStyle(f,$index,res)">
+                                    <div style="font-weight:bold;font-size:10px;">
+                                        {{f.FromAirportIATA}}-{{f.ToAirportIATA}}
+
+                                    </div>
+                                    <p name="xer" data-type="flightitem" style="font-weight:bold;font-size:12px;border:1px solid #ccc;position:relative;height:18px;margin:0" ng-class="getFlightClass(f)" ng-click="clickFlight(f,$event );">
+                                        <span style="display:inline-block;font-size:12px;font-weight:bold !important;z-index:1000;height:99.9%;top:0;left:0;width:100%;position:absolute">{{f.FlightNumber}}</span>
+                                        <span style="display:inline-block;position:absolute;left:3px;top:-2px;color:white;" ng-show="f.hasCockpit" ng-class="getCockpitSignClass(f)"><i class='fas fa-angle-double-up' style="font-size:11px;"></i></span>
+                                        <span style="display:inline-block;position:absolute;left:13px;top:-2px;color:white;" ng-show="f.IP>0"><i class='fas fa-star' style="font-size:11px;"></i></span>
+                                        <span style="display:inline-block;position:absolute;right:13px;top:-2px;color:white;" ng-show="f.ISCCM>0"><i class='fas fa-star' style="font-size:11px;"></i></span>
+                                        <span style="display:inline-block;position:absolute;right:3px;top:-2px;color:white;" ng-show="f.hasCabin" ng-class="getCabinSignClass(f)"><i class='fas fa-angle-up' style="font-size:11px;"></i></span>
+                                        <!--<span style="display:inline-block;position:absolute;top:0;left:0; height:99.9%;background:#ff5c33;text-align:left;font-size:10px;color:white;" ng-style="getDelayStyle(f)">{{getDelayText(f)}}</span>-->
+                                        <span style="display:inline-block;position:absolute;left:10px;top:-2px;color:red;" ng-show="f.hasOffItem"><i class='fas fa-exclamation-circle' style="font-size:9px;"></i></span>
+                                    </p>
+                                    <div style="font-weight:bold;font-size:11px;">{{getDep(f)}} {{getArr(f)}}</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+            <div style="clear:both"></div>
+        </div>
+        <div class="col-lg-2 padding-0 thin-scroll2" ng-style="getRangeStyle()" style="width:20%">
+            <div dx-tabs="tabsdetoptions">
+
+            </div>
+            <!-- <div style="background:lightgray; text-align:center;font-weight:bold;padding:3px;font-size:12px;border:1px solid gray;">FDPs</div>-->
+            <div id="FDPs" style="padding:6px;border:1px solid #ccc;overflow-y:auto" class="this-scroll2 tabdet" ng-style="getRangeStyleHeader()">
+
+                <div ng-repeat="x in rangeFdps">
+                    <div style="padding:3px;border:1px solid #ccc;background:#eee;font-size:12px;font-weight:bold;text-align:center">{{formatNOs(x.no)}}</div>
+                    <div style="border:1px solid #ccc;">
+                        <div ng-repeat="y in x.fdps" style="border:1px solid #4da6ff; width:99%;margin:3px;display:inline-block ">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="font-size:11px; font-weight:bold;padding:2px 2px 2px 5px;border-right:1px solid #4da6ff;width:50px">{{y.rank}}</td>
+                                    <td style="text-align:center;width:25px;padding:2px;"><a href="" ng-show="isExtendFDPVisible(y)" ng-click="extendFDP(y)"><i class="fa fa-plus-circle" style="color:green;font-size:19px; "></i></a></td>
+                                    <td style="font-size:11px;font-weight:bold;padding:2px;text-align:center;border-right:0px solid #4da6ff">{{y.scheduleName}}</td>
+                                    <td style="text-align:center;width:25px;padding:2px;"><a href="" ng-click="offFlights3(y)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                    <td style="text-align:center;width:25px;padding:2px;"><a href="" ng-click="removeFDP(y)"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Crew" style="padding:6px;border:1px solid #ccc;overflow-y:auto" class="this-scroll2 tabdet" ng-style="getRangeStyleHeader()">
+
+
+
+                <div ng-repeat="x in rangeCrews" style="border:1px solid #4da6ff; width:99%;margin:3px;display:inline-block ">
+                    <table style="width:100%">
+                        <tr>
+
+                            <td style="font-size:11px; font-weight:bold;padding:2px 2px 2px 5px;border-right:1px solid #4da6ff;width:50px">{{x.rank}}</td>
+                            <td style="font-size:11px;font-weight:bold;padding:2px;text-align:center;border-right:0px solid #4da6ff">{{x.name}}</td>
+                            <td style="text-align:center;width:25px;padding:2px;"><a href="" ng-click="offFlights2(x)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                            <td style="text-align:center;width:25px;padding:2px;"><a href="" ng-click="offFlights(null,x,-1,'',0,0)"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                        </tr>
+                    </table>
+                </div>
+
+
+            </div>
+
+            <div id="ASSIGNED" style="padding:6px;border:1px solid #ccc;overflow-y:auto" class="this-scroll2 tabdet" ng-style="getRangeStyleHeader()">
+
+                <div ng-repeat="x in dayAssigned" style="margin-bottom:5px;">
+
+                    <div style="padding:2px;border:1px solid #ccc;background:#e6e6e6;font-size:11px;font-weight:bold;text-align:center;border-bottom:none;">
+                        <div style="font-size:12px;font-weight:normal"><span style="font-size:12px;font-weight:bold">{{x.no}}</span></div>
+                        <!--<div style="font-size:12px;font-weight:normal">{{x.route}}</div>-->
+                         
+                    </div>
+                    
+                    <div style="border:0px solid #ccc;">
+
+                        <table style="width:100%">
+                            <tr ng-repeat="y in x.items">
+                                <td style="border: 1px solid #ccc; font-size: 11px; font-weight: bold; padding: 2px 2px 2px 5px;   width: 50px">{{y.rank}}</td>
+
+                                <td style="border: 1px solid #ccc; font-size: 12px; font-weight: normal; padding: 2px 2px 2px 5px;   ">{{y.scheduleName}}</td>
+
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div style="clear:both"></div>
+
+
+
+
+    </div>
+    <div style="border-top:0px solid gray;margin:2px 0 2px 0" ng-show="ShowFunctions">
+        <div class="col-lg-2 padding-0" style="width:14%;">
+            <div style="padding:4px;text-align:center;font-weight:bold; background-color:lightgray;border:1px solid gray;font-size:12px;">FDP Stats.</div>
+            <div dx-data-grid="dg3" id="dg3"></div>
+            <div ng-show="IsExtensionVisible" style="border:1px solid #ccc;margin-top:6px;padding:15px;">
+                <div dx-check-box="check_extension"></div>
+            </div>
+            <div ng-show="IsSplitVisible" style="border:1px solid #ccc;margin-top:6px;padding:15px;">
+                <div dx-check-box="check_split"></div>
+            </div>
+        </div>
+        <div class="col-lg-10 padding-0" style="padding:0 0 0 5px; width:86%;">
+            <div class="thin-scroll2" style="overflow-x:auto;padding:0 0px 0 0px">
+
+                <div class="crewpos" ng-click="posClick('IP',1,$event)" ng-show="posVisible.IP1">
+                    <div class="header" style="background:#80e5ff">IP(1)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP1" href="" ng-click="removePos(currentAssigned.IP1Id,'IP1')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP1" href="" ng-click="offFlights4(currentAssigned.IP1Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.IP1}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.IP1Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP1" href="" ng-click="notifyPos(currentAssigned.IP1Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('IP',2,$event)" ng-show="posVisible.IP2">
+                    <div class="header" style="background:#80e5ff">IP(2)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP2" href="" ng-click="removePos(currentAssigned.IP2Id,'IP2')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP2" href="" ng-click="offFlights4(currentAssigned.IP2Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.IP2}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.IP2Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP2" href="" ng-click="notifyPos(currentAssigned.IP2Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('IP',3,$event)" ng-show="posVisible.IP3">
+                    <div class="header" style="background:#80e5ff">IP(3)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP3" href="" ng-click="removePos(currentAssigned.IP3Id,'IP3')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP3" href="" ng-click="offFlights4(currentAssigned.IP3Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.IP3}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.IP3Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP3" href="" ng-click="notifyPos(currentAssigned.IP3Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('IP',4,$event)" ng-show="posVisible.IP4">
+                    <div class="header" style="background:#80e5ff">IP(4)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP4" href="" ng-click="removePos(currentAssigned.IP4Id,'IP4')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP4" href="" ng-click="offFlights4(currentAssigned.IP4Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.IP4}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.IP4Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP4" href="" ng-click="notifyPos(currentAssigned.IP4Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('IP',5,$event)" ng-show="posVisible.IP5">
+                    <div class="header" style="background:#80e5ff">IP(5)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP5" href="" ng-click="removePos(currentAssigned.IP5Id,'IP5')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP5" href="" ng-click="offFlights4(currentAssigned.IP5Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.IP5}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.IP5Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.IP5" href="" ng-click="notifyPos(currentAssigned.IP5Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('P1',1,$event)">
+                    <div class="header" style="background:#80e5ff">P1(1)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P11" href="" ng-click="removePos(currentAssigned.P11Id,'P11')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P11" href="" ng-click="offFlights4(currentAssigned.P11Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P11}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P11Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P11" href="" ng-click="notifyPos(currentAssigned.P11Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('P1',2,$event)" ng-show="posVisible.P12">
+                    <div class="header" style="background:#80e5ff">P1(2)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P12" href="" ng-click="removePos(currentAssigned.P12Id,'P12')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P12" href="" ng-click="offFlights4(currentAssigned.P12Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P12}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P12Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P12" href="" ng-click="notifyPos(currentAssigned.P12Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('P1',3,$event)" ng-show="posVisible.P13">
+                    <div class="header" style="background:#80e5ff">P1(3)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P13" href="" ng-click="removePos(currentAssigned.P13Id,'P13')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P13" href="" ng-click="offFlights4(currentAssigned.P13Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P13}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P13Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P13" href="" ng-click="notifyPos(currentAssigned.P13Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="crewpos" ng-click="posClick('P1',4,$event)" ng-show="posVisible.P14">
+                    <div class="header" style="background:#80e5ff">P1(4)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P14" href="" ng-click="removePos(currentAssigned.P14Id,'P14')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P14" href="" ng-click="offFlights4(currentAssigned.P14Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P14}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P14Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P14" href="" ng-click="notifyPos(currentAssigned.P14Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('P1',5,$event)" ng-show="posVisible.P15">
+                    <div class="header" style="background:#80e5ff">P1(5)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P15" href="" ng-click="removePos(currentAssigned.P15Id,'P15')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P15" href="" ng-click="offFlights4(currentAssigned.P15Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P15}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P15Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P15" href="" ng-click="notifyPos(currentAssigned.P15Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('P2',1,$event)">
+                    <div class="header" style="background:#80e5ff">P2(1)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P21" href="" ng-click="removePos(currentAssigned.P21Id,'P21')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P21" href="" ng-click="offFlights4(currentAssigned.P21Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P21}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P21Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P21" href="" ng-click="notifyPos(currentAssigned.P21Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('P2',2,$event)" ng-show="posVisible.P22">
+                    <div class="header" style="background:#80e5ff">P2(2)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P22" href="" ng-click="removePos(currentAssigned.P22Id,'P22')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P22" href="" ng-click="offFlights4(currentAssigned.P22Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P22}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P22Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P22" href="" ng-click="notifyPos(currentAssigned.P22Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('P2',3,$event)" ng-show="posVisible.P23">
+                    <div class="header" style="background:#80e5ff">P2(3)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P23" href="" ng-click="removePos(currentAssigned.P23Id,'P23')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P23" href="" ng-click="offFlights4(currentAssigned.P23Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P23}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P23Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P23" href="" ng-click="notifyPos(currentAssigned.P23Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="crewpos" ng-click="posClick('P2',4,$event)" ng-show="posVisible.P24">
+                    <div class="header" style="background:#80e5ff">P2(4)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P24" href="" ng-click="removePos(currentAssigned.P24Id,'P24')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P24" href="" ng-click="offFlights4(currentAssigned.P24Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P24}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P24Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P24" href="" ng-click="notifyPos(currentAssigned.P24Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('P2',5,$event)" ng-show="posVisible.P25">
+                    <div class="header" style="background:#80e5ff">P2(5)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P25" href="" ng-click="removePos(currentAssigned.P25Id,'P25')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P25" href="" ng-click="offFlights4(currentAssigned.P25Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.P25}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.P25Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.P25" href="" ng-click="notifyPos(currentAssigned.P25Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('SAFETY',1,$event)" ng-show="posVisible.SAFETY1">
+                    <div class="header" style="background:#80e5ff">SAFETY(1)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY1" href="" ng-click="removePos(currentAssigned.SAFETY1Id,'SAFETY1')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY1" href="" ng-click="offFlights4(currentAssigned.SAFETY1Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SAFETY1}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SAFETY1Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY1" href="" ng-click="notifyPos(currentAssigned.SAFETY1Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="crewpos" ng-click="posClick('SAFETY',2,$event)" ng-show="posVisible.SAFETY2">
+                    <div class="header" style="background:#80e5ff">SAFETY(2)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY2" href="" ng-click="removePos(currentAssigned.SAFETY2Id,'SAFETY2')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY2" href="" ng-click="offFlights4(currentAssigned.SAFETY2Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SAFETY2}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SAFETY2Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY2" href="" ng-click="notifyPos(currentAssigned.SAFETY2Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="crewpos" ng-click="posClick('SAFETY',3,$event)" ng-show="posVisible.SAFETY3">
+                    <div class="header" style="background:#80e5ff">SAFETY(3)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY3" href="" ng-click="removePos(currentAssigned.SAFETY3Id,'SAFETY3')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY3" href="" ng-click="offFlights4(currentAssigned.SAFETY3Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SAFETY3}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SAFETY3Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY3" href="" ng-click="notifyPos(currentAssigned.SAFETY3Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="crewpos" ng-click="posClick('SAFETY',4,$event)" ng-show="posVisible.SAFETY4">
+                    <div class="header" style="background:#80e5ff">SAFETY(4)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY4" href="" ng-click="removePos(currentAssigned.SAFETY4Id,'SAFETY4')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY4" href="" ng-click="offFlights4(currentAssigned.SAFETY4Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SAFETY4}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SAFETY4Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY4" href="" ng-click="notifyPos(currentAssigned.SAFETY4Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="crewpos" ng-click="posClick('SAFETY',5,$event)" ng-show="posVisible.SAFETY5">
+                    <div class="header" style="background:#80e5ff">SAFETY(5)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY5" href="" ng-click="removePos(currentAssigned.SAFETY5Id,'SAFETY5')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY5" href="" ng-click="offFlights4(currentAssigned.SAFETY5Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SAFETY5}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SAFETY5Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SAFETY5" href="" ng-click="notifyPos(currentAssigned.SAFETY5Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="crewpos" ng-click="posClick('ISCCM',1,$event)" ng-show="posVisible.ISCCM1">
+                    <div class="header" style="background:#ccccff">ISCCM(1)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM1" href="" ng-click="removePos(currentAssigned.ISCCM1Id,'ISCCM1')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM1" href="" ng-click="offFlights4(currentAssigned.ISCCM1Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.ISCCM1}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.ISCCM1Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM1" href="" ng-click="notifyPos(currentAssigned.ISCCM1Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('ISCCM',2,$event)" ng-show="posVisible.ISCCM2">
+                    <div class="header" style="background:#ccccff">ISCCM(2)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM2" href="" ng-click="removePos(currentAssigned.ISCCM2Id,'ISCCM2')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM2" href="" ng-click="offFlights4(currentAssigned.ISCCM2Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.ISCCM2}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.ISCCM2Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM2" href="" ng-click="notifyPos(currentAssigned.ISCCM2Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('ISCCM',3,$event)" ng-show="posVisible.ISCCM3">
+                    <div class="header" style="background:#ccccff">ISCCM(3)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM3" href="" ng-click="removePos(currentAssigned.ISCCM3Id,'ISCCM3')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM3" href="" ng-click="offFlights4(currentAssigned.ISCCM3Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.ISCCM3}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.ISCCM3Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM3" href="" ng-click="notifyPos(currentAssigned.ISCCM3Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('ISCCM',4,$event)" ng-show="posVisible.ISCCM4">
+                    <div class="header" style="background:#ccccff">ISCCM(4)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM4" href="" ng-click="removePos(currentAssigned.ISCCM4Id,'ISCCM4')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM4" href="" ng-click="offFlights4(currentAssigned.ISCCM4Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.ISCCM4}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.ISCCM4Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM4" href="" ng-click="notifyPos(currentAssigned.ISCCM4Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('ISCCM',5,$event)" ng-show="posVisible.ISCCM5">
+                    <div class="header" style="background:#ccccff">ISCCM(5)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM5" href="" ng-click="removePos(currentAssigned.ISCCM5Id,'ISCCM5')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM5" href="" ng-click="offFlights4(currentAssigned.ISCCM5Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.ISCCM5}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.ISCCM5Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.ISCCM5" href="" ng-click="notifyPos(currentAssigned.ISCCM5Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('SCCM',1,$event)">
+                    <div class="header" style="background:#ccccff">SCCM(1)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM1" href="" ng-click="removePos(currentAssigned.SCCM1Id,'SCCM1')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM1" href="" ng-click="offFlights4(currentAssigned.SCCM1Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SCCM1}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SCCM1Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM1" href="" ng-click="notifyPos(currentAssigned.SCCM1Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="crewpos" ng-click="posClick('SCCM',2,$event)" ng-show="posVisible.SCCM2">
+                    <div class="header" style="background:#ccccff">SCCM(2)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM2" href="" ng-click="removePos(currentAssigned.SCCM2Id,'SCCM2')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM2" href="" ng-click="offFlights4(currentAssigned.SCCM2Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SCCM2}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SCCM2Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM2" href="" ng-click="notifyPos(currentAssigned.SCCM2Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('SCCM',3,$event)" ng-show="posVisible.SCCM3">
+                    <div class="header" style="background:#ccccff">SCCM(3)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM3" href="" ng-click="removePos(currentAssigned.SCCM3Id,'SCCM3')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM3" href="" ng-click="offFlights4(currentAssigned.SCCM3Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SCCM3}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SCCM3Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM3" href="" ng-click="notifyPos(currentAssigned.SCCM3Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('SCCM',4,$event)" ng-show="posVisible.SCCM4">
+                    <div class="header" style="background:#ccccff">SCCM(4)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM4" href="" ng-click="removePos(currentAssigned.SCCM4Id,'SCCM4')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM4" href="" ng-click="offFlights4(currentAssigned.SCCM4Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SCCM4}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SCCM4Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM4" href="" ng-click="notifyPos(currentAssigned.SCCM4Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('SCCM',5,$event)" ng-show="posVisible.SCCM5">
+                    <div class="header" style="background:#ccccff">SCCM(5)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM5" href="" ng-click="removePos(currentAssigned.SCCM5Id,'SCCM5')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM5" href="" ng-click="offFlights4(currentAssigned.SCCM5Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.SCCM5}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.SCCM5Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.SCCM5" href="" ng-click="notifyPos(currentAssigned.SCCM5Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="crewpos" ng-click="posClick('CCM',1,$event)">
+                    <div class="header" style="background:#ccccff">CCM(1)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM1" href="" ng-click="removePos(currentAssigned.CCM1Id,'CCM1')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM1" href="" ng-click="offFlights4(currentAssigned.CCM1Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CCM1}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CCM1Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM1" href="" ng-click="notifyPos(currentAssigned.CCM1Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('CCM',2,$event)">
+                    <div class="header" style="background:#ccccff">CCM(2)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM2" href="" ng-click="removePos(currentAssigned.CCM2Id,'CCM2')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM2" href="" ng-click="offFlights4(currentAssigned.CCM2Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CCM2}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CCM2Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM2" href="" ng-click="notifyPos(currentAssigned.CCM2Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('CCM',3,$event)">
+                    <div class="header" style="background:#ccccff">CCM(3)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM3" href="" ng-click="removePos(currentAssigned.CCM3Id,'CCM3')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM3" href="" ng-click="offFlights4(currentAssigned.CCM3Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CCM3}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CCM3Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM3" href="" ng-click="notifyPos(currentAssigned.CCM3Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('CCM',4,$event)" ng-show="posVisible.CCM4">
+                    <div class="header" style="background:#ccccff">CCM(4)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM4" href="" ng-click="removePos(currentAssigned.CCM4Id,'CCM4')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM4" href="" ng-click="offFlights4(currentAssigned.CCM4Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CCM4}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CCM4Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM4" href="" ng-click="notifyPos(currentAssigned.CCM4Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('CCM',5,$event)" ng-show="posVisible.CCM5">
+                    <div class="header" style="background:#ccccff">CCM(5)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM5" href="" ng-click="removePos(currentAssigned.CCM5Id,'CCM5')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM5" href="" ng-click="offFlights4(currentAssigned.CCM5Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CCM5}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CCM5Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CCM5" href="" ng-click="notifyPos(currentAssigned.CCM5Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="crewpos" ng-click="posClick('CHECK',1,$event)" ng-show="posVisible.CHECK1">
+                    <div class="header" style="background:#ffbf80">CHECK(1)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK1" href="" ng-click="removePos(currentAssigned.CHECK1Id,'CHECK1')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK1" href="" ng-click="offFlights4(currentAssigned.CHECK1Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CHECK1}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CHECK1Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK1" href="" ng-click="notifyPos(currentAssigned.CHECK1Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('CHECK',2,$event)" ng-show="posVisible.CHECK2">
+                    <div class="header" style="background:#ffbf80">CHECK(2)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK2" href="" ng-click="removePos(currentAssigned.CHECK2Id,'CHECK2')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK2" href="" ng-click="offFlights4(currentAssigned.CHECK2Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CHECK2}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CHECK2Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK2" href="" ng-click="notifyPos(currentAssigned.CHECK2Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('CHECK',3,$event)" ng-show="posVisible.CHECK3">
+                    <div class="header" style="background:#ffbf80">CHECK(3)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK3" href="" ng-click="removePos(currentAssigned.CHECK3Id,'CHECK3')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK3" href="" ng-click="offFlights4(currentAssigned.CHECK3Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CHECK3}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CHECK3Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK3" href="" ng-click="notifyPos(currentAssigned.CHECK3Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('CHECK',4,$event)" ng-show="posVisible.CHECK4">
+                    <div class="header" style="background:#ffbf80">CHECK(4)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK4" href="" ng-click="removePos(currentAssigned.CHECK4Id,'CHECK4')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK4" href="" ng-click="offFlights4(currentAssigned.CHECK4Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CHECK4}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CHECK4Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK4" href="" ng-click="notifyPos(currentAssigned.CHECK4Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('CHECK',5,$event)" ng-show="posVisible.CHECK5">
+                    <div class="header" style="background:#ffbf80">CHECK(5)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK5" href="" ng-click="removePos(currentAssigned.CHECK5Id,'CHECK5')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK5" href="" ng-click="offFlights4(currentAssigned.CHECK5Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.CHECK5}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.CHECK5Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.CHECK5" href="" ng-click="notifyPos(currentAssigned.CHECK5Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+
+                <div class="crewpos" ng-click="posClick('OBS',1,$event)" ng-show="posVisible.OBS1">
+                    <div class="header" style="background:#ffbf80;">OBS(1)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS1" href="" ng-click="removePos(currentAssigned.OBS1Id,'OBS1')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS1" href="" ng-click="offFlights4(currentAssigned.OBS1Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.OBS1}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.OBS1Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS1" href="" ng-click="notifyPos(currentAssigned.OBS1Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('OBS',2,$event)" ng-show="posVisible.OBS2">
+                    <div class="header" style="background:#ffbf80;">OBS(2)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS2" href="" ng-click="removePos(currentAssigned.OBS2Id,'OBS2')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS2" href="" ng-click="offFlights4(currentAssigned.OBS2Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.OBS2}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.OBS2Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS2" href="" ng-click="notifyPos(currentAssigned.OBS2Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('OBS',3,$event)" ng-show="posVisible.OBS3">
+                    <div class="header" style="background:#ffbf80;">OBS(3)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS3" href="" ng-click="removePos(currentAssigned.OBS3Id,'OBS3')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS3" href="" ng-click="offFlights4(currentAssigned.OBS3Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.OBS3}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.OBS3Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS3" href="" ng-click="notifyPos(currentAssigned.OBS3Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('OBS',4,$event)" ng-show="posVisible.OBS4">
+                    <div class="header" style="background:#ffbf80;">OBS(4)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS4" href="" ng-click="removePos(currentAssigned.OBS4Id,'OBS4')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS4" href="" ng-click="offFlights4(currentAssigned.OBS4Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.OBS4}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.OBS4Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS4" href="" ng-click="notifyPos(currentAssigned.OBS4Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="crewpos" ng-click="posClick('OBS',5,$event)" ng-show="posVisible.OBS5">
+                    <div class="header" style="background:#ffbf80;">OBS(5)</div>
+                    <div class="content">
+                        <table style="width:100%;">
+                            <tr>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS5" href="" ng-click="removePos(currentAssigned.OBS5Id,'OBS5')"><i class="fas fa-minus-circle" style="color:red;font-size:19px; "></i></a></td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS5" href="" ng-click="offFlights4(currentAssigned.OBS5Id)"><i class="fa fa-question-circle" style="color:#990000;font-size:19px; "></i></a></td>
+                                <td style="font-size:12px;text-align:center;font-weight:bold">{{currentAssigned.OBS5}}</td>
+                                <td style="width:30px;font-size:12px;text-align:center">{{currentAssigned.OBS5Group}}</td>
+                                <td style="text-align:center;width:25px;padding:5px;"><a ng-show="currentAssigned.OBS5" href="" ng-click="notifyPos(currentAssigned.OBS5Id)"><i class="fas fa-bell" style="color:#0099ff;font-size:19px; "></i></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div style="background:#eee;border:1px solid #ccc;padding:5px;font-size:12px;text-align:left;margin-top:5px;font-weight:bold">
+                <table style="width:100%">
+                    <tr>
+                        <!--<td>Crew List</td>-->
+                        <td style="width:300px" class="dx-border">
+                            <div dx-text-box="text_search" style="background:white"></div>
+                        </td>
+                        <td></td>
+                        <td style="width:380px">
+                            <div>
+                                <table>
+                                    <tr>
+                                        <!--<td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('IP1')" ng-click="posVisibleClick('IP1')">IP</div>
+                                        </td>-->
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('POS')" ng-click="posVisibleClick2('IP')">IP</div>
+                                        </td>
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('POS')" ng-click="posVisibleClick2('P1')">P1</div>
+                                        </td>
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('POS')" ng-click="posVisibleClick2('P2')">P2</div>
+                                        </td>
+                                        <!--<td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('ISCCM1')" ng-click="posVisibleClick('ISCCM1')">ISCCM</div>
+                                        </td>-->
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('POS')" ng-click="posVisibleClick2('SAFETY')">SAFETY</div>
+                                        </td>
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('POS')" ng-click="posVisibleClick2('ISCCM')">ISCCM</div>
+                                        </td>
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('POS')" ng-click="posVisibleClick2('SCCM')">SCCM</div>
+                                        </td>
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('POS')" ng-click="posVisibleClick2('CCM')">CCM</div>
+                                        </td>
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('POS')" ng-click="posVisibleClick2('CHECK')">CHECK</div>
+                                        </td>
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('POS')" ng-click="posVisibleClick2('OBS')">OBS</div>
+                                        </td>
+                                        <!--</td>
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('SCCM2')" ng-click="posVisibleClick('SCCM2')">SCCM2</div>
+                                        </td>
+                                        <td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('SCCM3')" ng-click="posVisibleClick('SCCM3')">SCCM3</div>
+                                        </td>-->
+                                        <!--<td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('OBS1')" ng-click="posVisibleClick('OBS1')">OBS</div>
+                                        </td>-->
+                                        <!--<td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('CHECK1')" ng-click="posVisibleClick('CHECK1')">CHECK</div>
+                                        </td>-->
+                                        <!--<td style="padding:0 5px 0 5px">
+                                            <div style="border:1px solid gray; background:white;text-align:center;font-size:13px;min-width:50px;padding:5px" ng-style="getSelectedPosStyle('SAFETY1')" ng-click="posVisibleClick('SAFETY1')">SAFETY</div>
+                                        </td>-->
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="thin-scroll2" style="overflow-x:auto;padding:0 0px 0 0px;height:235px;border:1px solid #ccc;border-top:0;padding:5px;">
+                <div style="display:inline-block; width:15.8%;border:1px solid #ccc;margin:5px;background:white" ng-repeat="x in dg_crew_ds">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="background:#f7f7f7;padding:2px;   border-right:1px solid #ccc;text-align:center;font-weight:bold;font-size:11px">{{x.JobGroup}}</td>
+                            <td colspan="3" style="background: #f7f7f7; font-size: 11px; text-align: center; border-right:0px solid #ccc; font-weight: bold; cursor: pointer" ng-click="crewClick(x,$event)">{{x.ScheduleName}}<span ng-show="x.dayFDP" style="display:inline-block;margin-left:2px;font-size:10px;font-weight:normal">({{x.dayFDP.no2}})</span></td>
+                            <td ng-click="showProfile(x)" style="background: #f7f7f7;text-align:center;padding-right:3px;" ng-style="getCertificationStyle(x)"><i style="color:#f7f7f7;" class="fas fa-graduation-cap"></i></td>
+                            <td ng-click="showProfile(x)" style="background: #66c2ff;text-align:center;padding-right:3px;"><i style="color:white;" class="fas fa-info"></i></td>
+                        </tr>
+                        <tr style="border-top:1px solid #ccc;">
+                            <td style="width: 17%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee" ng-class="getFLT28Class(x.FTL.Flight28)">F28</td>
+                            <td style="width: 12%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee" ng-class="getFLClass(x.FTL.Ratio)"> F/L</td>
+                            <td style="width:17%;font-size:11px;text-align:center;border-right:1px solid #ccc;background:#eee">D7</td>
+                            <td style="width: 17%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee">D14</td>
+                            <td style="width: 20%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee">D28</td>
+
+                            <td style="width: 17%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee"> F12M</td>
+
+
+                        </tr>
+                        <tr style="border-top:1px solid #ccc;">
+                            <td style=" font-size: 11px; text-align: center; border-right: 1px solid #ccc; font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.Flight28Remain,1)"> {{x.FTL._Flight28Remain}}</td>
+                            <td style="  font-size: 11px; text-align: center; border-right: 1px solid #ccc; font-weight:bold;background:#b3ffe6"> {{x.FTL.Ratio}}</td>
+                            <td style=" font-size:11px;text-align:center;border-right:1px solid #ccc;font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.Duty7Remain,0)">{{x.FTL._Duty7Remain}}</td>
+                            <td style="  font-size: 11px; text-align: center; border-right: 1px solid #ccc;font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.Duty14Remain,0)">{{x.FTL._Duty14Remain}}</td>
+                            <td style="  font-size: 11px; text-align: center; border-right: 1px solid #ccc;font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.Duty28Remain,0)">{{x.FTL._Duty28Remain}}</td>
+
+                            <td style="  font-size: 11px; text-align: center; border-right: 1px solid #ccc; font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.FlightYearRemain,1)"> {{x.FTL._FlightYearRemain}}</td>
+
+                        </tr>
+                    </table>
+                </div>
+
+                <div style="clear:both"></div>
+                <div style="border-top:1px solid #ccc; margin-top:10px; margin-bottom:10px"></div>
+                <div style="display:inline-block; width:15.8%;border:1px solid #ccc;margin:5px;background:white" ng-repeat="x in dg_used_crew_ds">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="background:#98e6e6; padding:2px; width:20%; border-right:1px solid #ccc;text-align:center;font-weight:bold;font-size:12px">{{x.JobGroup}}</td>
+                            <td colspan="4" style="background:#e6e6e6; font-size:11px;text-align:center;border-right:0px solid #ccc;font-weight:bold;cursor:pointer">{{x.ScheduleName}}<div ng-show="x.dayFDP" style="text-align:center;font-size:11px;font-weight:normal">({{x.dayFDP.no2}})</div></td>
+
+                        </tr>
+                        <tr style="border-top:1px solid #ccc;">
+                            <td style="width: 20%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee">F28</td>
+                            <td style="width:20%;font-size:11px;text-align:center;border-right:1px solid #ccc;background:#eee">D7</td>
+                            <td style="width: 20%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee">D14</td>
+                            <td style="width: 20%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee">D28</td>
+
+                            <td style="width: 20%; font-size: 11px; text-align: center; border-right: 1px solid #ccc;background:#eee"> F12M</td>
+                        </tr>
+                        <tr style="border-top:1px solid #ccc;">
+                            <td style="  font-size: 11px; text-align: center; border-right: 1px solid #ccc;font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.Duty28Remain,0)">{{x.FTL._Duty28Remain}}</td>
+                            <td style=" font-size:11px;text-align:center;border-right:1px solid #ccc;font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.Duty7Remain,0)">{{x.FTL._Duty7Remain}}</td>
+                            <td style="  font-size: 11px; text-align: center; border-right: 1px solid #ccc;font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.Duty14Remain,0)">{{x.FTL._Duty14Remain}}</td>
+
+                            <td style=" font-size: 11px; text-align: center; border-right: 1px solid #ccc; font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.Flight28Remain,1)"> {{x.FTL._Flight28Remain}}</td>
+                            <td style="  font-size: 11px; text-align: center; border-right: 0px solid #ccc; font-weight:bold;background:#f9f9f9" ng-class="getCFTLStyle(x.FTL.FlightYearRemain,1)"> {{x.FTL._FlightYearRemain}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <!--<div id="btn" style="border:1px solid gray;padding:10px;margin-top:20px" ng-click="test()">Click</div>-->
+
+    <div class="rowx footer" ng-show="footerfilter && ShowFunctions">
+        <div class="col-lg-12    " style="padding:0;text-align:right">
+            <table>
+                <tr>
+
+
+                    <td style="width:130px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:70px;text-align:right;padding-right:5px" class="dx-border">
+                        <!--<div class="center " dx-number-box="num_days" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div>-->
+                        <div class="center " dx-select-box="sb_days" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div>
+                    </td>
+                    <!--<td style="width:40px; text-align:left;padding-right:5px"><div dx-button="btn_persiandate"></div></td>-->
+
+                    <td style="width:40px;text-align:left;padding-right:5px"><div dx-button="btn_search_mobile"></div></td>
+
+
+
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_stby"></div></td>
+
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_cal"></div></td>
+                    <td style="width:180px;text-align:left;padding-right:5px"><div dx-button="btn_cduties"></div></td>
+                    <!-- <td style="width:180px;text-align:left;padding-right:5px"><div dx-button="btn_history"></div></td>-->
+                    <td style="width:180px;text-align:left;padding-right:5px"><div dx-button="btn_report"></div></td>
+
+                    <td style="width:180px;text-align:left;padding-right:5px"><div dx-button="btn_fx"></div></td>
+
+
+
+                </tr>
+            </table>
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_cal" dx-popup="popup_cal">
+        <div style="padding:0px 0 0 0">
+            <div class=" col-lg-3 col-md-1 col-sm-1 col-xs-1 " style="padding:0 5px 0 0; width:33%;  ">
+                <div dx-data-grid="dg_calcrew" id="dg_calcrew" class="content" style="overflow-y:hidden" dx-item-alias="crew">
+                    <div data-options="dxTemplate:{ name:'smsTemplate' }">
+                        <a ng-click="smsCrew(crew)" href="" class='w3-button w3-block w3-deep-orange' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fas fa-bell" aria-hidden="true"></i></a>
+                    </div>
+
+                    <div data-options="dxTemplate:{ name:'profileTemplate' }">
+                        <a ng-click="showProfile(crew.data)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fas fa-info" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class=" col-lg-9 col-md-1 col-sm-1 col-xs-1" style="padding:0 0px 0 0;  width:67%; ">
+                <div style="border:1px solid #ddd; background:#eee;padding:3px;text-align:center">
+
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:40px">
+                                <a href="" ng-click="preCrew()"><i class="fas fa-caret-left" style="font-size:22px;" ng-show="dg_calcrew_selected"></i></a>
+                            </td>
+                            <td>
+                                <span>{{dg_calcrew_selected?dg_calcrew_selected.Name+'('+dg_calcrew_selected.JobGroup+')':'-'}}</span>
+                            </td>
+                            <td style="width:40px">
+                                <a href="" ng-click="nextCrew()"><i class="fas fa-caret-right" style="font-size:22px;" ng-show="dg_calcrew_selected"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div dx-scheduler="cal_crew" dx-item-alias="duty">
+                    <div data-options="dxTemplate:{name:'appointmentTemplate'}" ng-class="xgetDutyClass(duty)">
+                        <div ng-show="duty.DutyType==1165">
+                            <table style="width:100%;">
+                                <tr>
+                                    <!--<td style="width:32px;">
+
+                                        <a class="cellposition" href="" data-ng-click="xcellPositionClicked(duty.Id)" style="background:white;width:28px;height:28px;border-radius:50%;color:gray;font-weight:bold;font-size:10px;text-align:center;display: inherit;vertical-align:middle;">
+                                            {{xgetPosition(duty.Position)}}
+                                        </a>
+
+                                    </td>-->
+                                    <td style=" width:30px;text-align:center;background:white;">
+                                        <a href="" style="display:block" ng-click="removeDutyCal(duty)"><i class="fas fa-minus-circle" style="color:red;font-size:20px; "></i></a>
+                                        <a href="" style="display:block" ng-click="notifyDutyCal(duty)"><i class="fas fa-bell" style="color:#2196F3;font-size:20px; "></i></a>
+                                    </td>
+                                    <td style="text-align:left;padding-left:5px">
+
+                                        <div style="font-size:12px;font-weight:bold">{{duty.DutyTypeTitle}}</div>
+                                        <div style="font-size:11px;font-weight:normal">{{duty.FltNo}}</div>
+                                        <div style="font-size:11px;font-weight:normal">{{duty.Route}}</div>
+                                        <div style="font-size:10px; "><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
+                                    </td>
+
+
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                        <div ng-show="duty.DutyType!=1165">
+                            <table style="width:100%; height:50px">
+                                <tr>
+                                    <td style="width:30px;text-align:center;background:white;">
+                                        <a href="" style="display:block" ng-click="removeDutyCal(duty)"><i class="fas fa-minus-circle" style="color:red;font-size:20px; "></i></a>
+                                        <a href="" style="display:block" ng-click="notifyDutyCal(duty)"><i class="fas fa-bell" style="color:#2196F3;font-size:20px; "></i></a>
+                                    </td>
+                                    <td style="text-align:left;padding-left:5px;">
+                                        <div style="font-size:12px;font-weight:bold">{{duty.DutyTypeTitle}}</div>
+                                        <div style="font-size:10px; " ng-show="!duty.Remark2"><span style="font-size:11px; ">{{formatTime(duty.Start)}}</span><span style="font-size:11px;display:inline-block;margin-left:10px">{{formatTime(duty.End)}}</span></div>
+                                        <div style="font-size:12px; " ng-show="duty.CanceledNo">{{duty.CanceledNo}}</div>
+                                        <div style="font-size:12px; " ng-show="duty.DutyType==300007">{{duty.Remark2}}</div>
+                                        <div style="font-size:12px; " ng-show="duty.Remark">{{duty.Remark}}</div>
+                                    </td>
+
+
+
+                                </tr>
+                                <!--<tr ng-show="duty.Remark">
+                                    <td colspan="2" style="font-size:12px;text-align:left">{{duty.Remark}}</td>
+                                </tr>-->
+
+
+                            </table>
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div data-options="dxTemplate: {name: 'tooltip-template'}" dx-item-alias="duty" style="background:white;border:1px solid #03A9F4;min-width:300px;">
+                        <div style="background:#03A9F4;padding:5px;">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <div style="font-size:12px;font-weight:bold">{{duty.FDPTitle}}</div>
+                                        <div style="font-size:12px; ">{{duty.FDPRemark}}</div>
+                                    </td>
+                                    <td style="width:40px">
+                                        <a href="" ng-click="xremoveAssignedFDP(duty)"><i class="fas fa-minus-circle" style="color:red;font-size:24px; "></i></a>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                        <div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="duty.DutyType==1165">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:30px">
+                                        <a href="" ng-click="prePosition2(duty)"><i class="fas fa-caret-left" style="font-size:22px;"></i></a>
+                                    </td>
+                                    <td style="font-weight:bold;">{{ duty.Position }}</td>
+                                    <td style="width:30px">
+                                        <a href="" ng-click="nextPosition2(duty)"><i class="fas fa-caret-right" style="font-size:22px;"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                        <div style="background:white;padding:7px;color:gray; ">
+                            Some information ...
+                        </div>
+
+                    </div>
+
+                    <div data-options="dxTemplate:{name:'dataCellTemplate'}" ng-class="xgetDataCellTemplateClass(duty)">
+                        <div>
+
+                            <span style="font-weight:bold">{{formatCellDateDay(duty.startDate)}}</span>
+                            <span style="display:inline-block;padding-left:2px;font-size:13px">({{formatCellDatePersian(duty.startDate)}})</span>
+
+                        </div>
+                    </div>
+
+                    <div data-options="dxTemplate:{name:'dateCellTemplate'}">
+                        <div>
+                            {{duty.text}}
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div id="context-menu" dx-context-menu="cellContextMenuOptions"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+    <div id="popup_event" dx-popup="popup_event">
+        <div style="padding:0px 0 0 0">
+            <div class="dx-border">
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>From</label>
+                    <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>&nbsp;</label>
+                    <div class="center" dx-date-box="date_from_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>To</label>
+                    <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>&nbsp;</label>
+                    <div class="center" dx-date-box="date_to_event_hh" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div ng-show="event_status==100025">
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>BlockTime (hh)</label>
+                        <div class="center" dx-number-box="num_bl_hh"></div>
+                    </div>
+                    <div class="col-lg-6 margin-bottom-5 padding-7">
+                        <label>(mm)</label>
+                        <div class="center" dx-number-box="num_bl_mm"></div>
+                    </div>
+                </div>
+              
+                <div style="clear:both"></div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>Remark</label>
+                    <div dx-text-area="remark_event"></div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="popup_cduties" dx-popup="popup_cduties">
+        <!--<div style="padding:0px 0 0 0">-->
+        <div dx-data-grid="dg_cduties" dx-item-alias="error" id="dg_cduties">
+
+            <!--<div data-options="dxTemplate:{ name:'ecalCrewTemplate' }">
+                <a href="" class='w3-button w3-block w3-2017-marina' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'><i class="fa fa-calendar" aria-hidden="true"></i></a>
+            </div>-->
+        </div>
+
+        <!--  </div>-->
+    </div>
+    <div id="popup_his" dx-popup="popup_his">
+        <div style="padding:0px 0 0 0">
+            <div dx-data-grid="dg_his" dx-item-alias="error" id="dg_his">
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="popup_off" dx-popup="popup_off">
+        <div style="padding:0px 0 0 0" class="dx-border">
+            <div class=" margin-bottom-5 padding-7">
+                <label>Reason</label>
+                <div dx-select-box="sb_offreason" dx-validator="{validationGroup:'offflight',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class=" margin-bottom-5 padding-7">
+                <label>Remark</label>
+                <div dx-text-area="txt_offremark"></div>
+            </div>
+            <div dx-check-box="check_offnotify"></div>
+
+        </div>
+    </div>
+
+    <div id="popup_report" dx-popup="popup_report">
+        <div style="padding:0px 0 0 0">
+            <div dx-data-grid="dg_flight" id="dg_flightrr" class="content" style="overflow-y:hidden"></div>
+            <div style="background:#ccc;border:1px solid #bbb;text-align:center;padding:5px;font-weight:bold">STANDBY/RESERVE</div>
+            <div>
+                <table style="width:100%;border:1px solid #ccc">
+                    <tr style="border-bottom:1px solid #ccc">
+                        <td style="width:150px;padding:5px;border-right:1px solid #ccc;background:#eee">STANDBY AM</td>
+                        <td style="padding:5px;">
+                            <div ng-repeat="a in ds_am" style="display:inline-block;font-size:12px;padding:3px;border:1px solid #000;margin:2px">{{a.JobGroup}}-{{a.ScheduleName}}</div>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #ccc">
+                        <td style="width:150px;padding:3px;border-right:1px solid #ccc;background:#eee">STANDBY PM</td>
+                        <td style="padding:5px;">
+                            <div ng-repeat="p in ds_pm" style="display:inline-block;font-size:12px;padding:3px;border:1px solid #000;margin:2px">{{p.JobGroup}}-{{p.ScheduleName}}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:150px;padding:3px;border-right:1px solid #ccc;background:#eee">RESERVE</td>
+                        <td style="padding:5px;"></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div id="popup_reportfp" dx-popup="popup_reportfp">
+        <div style="padding:0px 0 0 0">
+            <div dx-data-grid="dg_fp" id="dg_fp" class="content" style="overflow-y:hidden"></div>
+            <!--<div style="background:#ccc;border:1px solid #bbb;text-align:center;padding:5px;font-weight:bold">STANDBY/RESERVE</div>
+            <div>
+                <table style="width:100%;border:1px solid #ccc">
+                    <tr style="border-bottom:1px solid #ccc">
+                        <td style="width:150px;padding:5px;border-right:1px solid #ccc;background:#eee">STANDBY AM</td>
+                        <td style="padding:5px;">
+                            <div ng-repeat="a in ds_am" style="display:inline-block;font-size:12px;padding:3px;border:1px solid #000;margin:2px">{{a.JobGroup}}-{{a.ScheduleName}}</div>
+                        </td>
+                    </tr>
+                    <tr style="border-bottom:1px solid #ccc">
+                        <td style="width:150px;padding:3px;border-right:1px solid #ccc;background:#eee">STANDBY PM</td>
+                        <td style="padding:5px;">
+                            <div ng-repeat="p in ds_pm" style="display:inline-block;font-size:12px;padding:3px;border:1px solid #000;margin:2px">{{p.JobGroup}}-{{p.ScheduleName}}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:150px;padding:3px;border-right:1px solid #ccc;background:#eee">RESERVE</td>
+                        <td style="padding:5px;"></td>
+                    </tr>
+                </table>
+            </div>-->
+
+        </div>
+
+
+    </div>
+
+
+    <div id="popup_print" dx-popup="popup_print">
+        <div style="padding:10px 0 0 0">
+            <div id="scrollview" dx-scroll-view="scroll_jl">
+                <div id="rtbl" class="tbl page-a4  ">
+
+                    <table class="subpage" style="border:1px solid #ccc;width:100%">
+                        <thead>
+                            <tr style="border-bottom:1px solid #000;background:#bbb;height:34px;" class="dark-header">
+                                <th colspan="13" style="text-align:center;padding:5px;">{{Operator}} AIRLINE CREW SCHEDULING DEPARTMENT</th>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;background:#bbb;height:34px;" class="dark-header">
+                                <!--<th colspan="13" style="text-align:center;padding:5px;">CREW DAILY ROSTER <span style="font-weight:bold;display:inline-block">{{formatDay(dt_from)}}</span> {{formatDate(dt_from)}} (<span style="font-weight:bold;display:inline-block">{{formatDatePersian(dt_from)}}</span>)</th>-->
+
+                                <th colspan="13" style="text-align:center;padding:5px;">CREW DAILY ROSTER  {{formatDay(rptdaily_dateFrom)}}  {{formatDate(rptdaily_dateFrom)}} ( {{formatDatePersian(rptdaily_dateFrom)}} )</th>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;background:#bbb; height:28px;">
+                                <th style="padding:5px;border-right:1px solid black;">FltNo</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Reg</th>
+                                <th style="padding:5px;border-right:1px solid black;">Route</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Dep</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Arr</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">IP</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">P1</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">P2</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">SAFETY</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">SCCM</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">CCM</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">OBS</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">CHECK</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in dg_flight_ds" style="border-bottom:1px solid black; height:29px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important">{{x.FltNo}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.Register}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important">{{x.Route}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{formatTime(x.STDLocal)}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{formatTime(x.STALocal)}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.IP}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.P1}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.P2}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.SAFETY}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.SCCM}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CCM1}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.OBS}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CCM3}}</td>
+                                <!--<td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CCM2}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CCM3}}</td>-->
+                                /t
+                            </tr>
+                            r>
+                            <tr style="border-bottom:1px solid black;height:30px;background:#bbb;" class="dark-header">
+
+                                <td colspan="13" style="text-align:center;padding:5px;">STANDBY/RESERVE</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">STANDBY AM</td>
+                                <td colspan="12" style="text-align:left;padding:5px;">
+                                    <div ng-repeat="a in ds_am" style="display:inline-block;font-size:11px;padding:3px;border:1px solid #000;margin:1px">{{a.JobGroup}}-{{a.ScheduleName}}</div>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">STANDBY PM</td>
+                                <td colspan="12" style="text-align:left;padding:5px;">
+                                    <div ng-repeat="p in ds_pm" style="display:inline-block;font-size:11px;padding:3px;border:1px solid #000;margin:1px">{{p.JobGroup}}-{{p.ScheduleName}}</div>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">RESERVE</td>
+                                <td colspan="12" style="text-align:left;padding:5px;"></td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:30px;background:#bbb;" class="dark-header">
+                                <td colspan="13" style="text-align:center;padding:5px;">OTHER</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">F/D</td>
+                                <td colspan="12" style="text-align:left;padding:5px;"></td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">F/M</td>
+                                <td colspan="12" style="text-align:left;padding:5px;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align:right;padding-right:10px;font-size:11px;padding-top:2px">Generated by AIRPOCKET</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="popup_printfp" dx-popup="popup_printfp">
+        <div style="padding:10px 0 0 0">
+            <div id="scrollview" dx-scroll-view="scroll_jl">
+                <div id="rtblfp" class="tbl page-a4  ">
+
+                    <table class="subpage" style="border:1px solid #ccc;width:100%">
+                        <thead>
+                            <tr style="border-bottom:1px solid #000;background:#bbb;height:34px;" class="dark-header">
+                                <th colspan="13" style="text-align:center;padding:5px;">{{Operator}} AIRLINE CREW SCHEDULING DEPARTMENT</th>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;background:#bbb;height:34px;" class="dark-header">
+                                <!--<th colspan="13" style="text-align:center;padding:5px;">CREW DAILY ROSTER <span style="font-weight:bold;display:inline-block">{{formatDay(dt_from)}}</span> {{formatDate(dt_from)}} (<span style="font-weight:bold;display:inline-block">{{formatDatePersian(dt_from)}}</span>)</th>-->
+
+                                <th colspan="13" style="text-align:center;padding:5px;">CREW DAILY ROSTER  {{formatDay(rptdaily_dateFrom)}}  {{formatDate(rptdaily_dateFrom)}} ( {{formatDatePersian(rptdaily_dateFrom)}} )</th>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;background:#bbb; height:28px;">
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Flight</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Register</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Route</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Dep UTC</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Arr UTC</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Dep</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Arr</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">IP</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">CPT</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">FO</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">SAFETY</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">CHECK</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">OBS</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">ISCCM</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">SCCM</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">CCM</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">CHECK</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">OBS</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in dg_fp_ds" style="border-bottom:1px solid black; height:29px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.FlightNumber}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.Register}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.Route}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{(x.STD)}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{(x.STA)}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{(x.STDLOC)}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{(x.STALOC)}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.IP}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CPT}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.FO}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.SAFETY}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CHECK}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.OBS}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.ISCCM}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.SCCM}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CCM}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CHECKC}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.OBSC}}</td>
+
+
+                            </tr>
+                            <!--<tr style="border-bottom:1px solid black;height:30px;background:#bbb;" class="dark-header">
+
+                                <td colspan="13" style="text-align:center;padding:5px;">STANDBY/RESERVE</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">STANDBY AM</td>
+                                <td colspan="12" style="text-align:left;padding:5px;">
+                                    <div ng-repeat="a in ds_am" style="display:inline-block;font-size:11px;padding:3px;border:1px solid #000;margin:1px">{{a.JobGroup}}-{{a.ScheduleName}}</div>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">STANDBY PM</td>
+                                <td colspan="12" style="text-align:left;padding:5px;">
+                                    <div ng-repeat="p in ds_pm" style="display:inline-block;font-size:11px;padding:3px;border:1px solid #000;margin:1px">{{p.JobGroup}}-{{p.ScheduleName}}</div>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">RESERVE</td>
+                                <td colspan="12" style="text-align:left;padding:5px;"></td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:30px;background:#bbb;" class="dark-header">
+                                <td colspan="13" style="text-align:center;padding:5px;">OTHER</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">F/D</td>
+                                <td colspan="12" style="text-align:left;padding:5px;"></td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">F/M</td>
+                                <td colspan="12" style="text-align:left;padding:5px;"></td>
+                            </tr>-->
+                        </tbody>
+                    </table>
+                    <div style="text-align:right;padding-right:10px;font-size:11px;padding-top:2px">Generated by AIRPOCKET</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="popup_crews" dx-popup="popup_crews">
+        <div style="padding:0px 0 0 0;overflow-y:auto;height:350px;">
+            <div ng-repeat="y in shiftFlight.crew" style="border:1px solid #4da6ff;min-width:46%;margin:3px;display:inline-block;background:#eee ">
+
+                <table style="width:100%">
+                    <tr>
+                        <td style="font-size:11px; font-weight:bold;padding:2px 2px 2px 5px;border-right:1px solid #4da6ff;width:50px">{{y.rank}}</td>
+                        <td style="font-size:11px;font-weight:bold;padding:5px;text-align:center;border-right:0px solid #4da6ff">{{y.name}}</td>
+
+                    </tr>
+                </table>
+
+            </div>
+            <div ng-show="shiftFlight.hasOffItem" style="padding:3px;color:white;background:#bbb;">
+                Refused/Off/Canceled/...
+            </div>
+            <div ng-repeat="y in shiftFlight.offItems" style="border:1px solid #4da6ff;min-width:46%;margin:3px;display:inline-block;background:#eee ">
+
+                <table style="width:100%">
+                    <tr>
+                        <td style="font-size:11px; font-weight:bold;padding:2px 2px 2px 5px;border-right:1px solid #4da6ff;width:50px">{{y.Remark}}</td>
+                        <td style="font-size:11px;font-weight:bold;padding:5px;text-align:center;border-right:0px solid #4da6ff">{{y.Name}}</td>
+
+                    </tr>
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div id="popup_sms" dx-popup="popup_sms">
+        <div style="padding:0px 0 0 0">
+            <div class="col-lg-6" style="padding:0px 0 0 0">
+                <div dx-data-grid="dg_smscrew" id="dg_smscrew"></div>
+            </div>
+            <div class="col-lg-6 dx-border" style="padding:0px 0px 0 10px">
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>Message</label>
+                    <div dx-text-area="txt_sms_message" class="dx-border" style="margin-top:0px;" dx-validator="{validationGroup:'smsmessage',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="padding-7">
+                    <div style="background:#ddd;padding:5px;border:1px solid #ccc">Receivers</div>
+                    <div class="thin-scroll2" style="overflow-y:auto;border:1px solid #ccc;padding:10px;height:150px">
+                        <div ng-repeat="x in dg_smscrew_selected" style="padding:5px;text-align:center;background:#eee;display:inline-block;font-size:12px;margin:5px;">{{x.ScheduleName}}</div>
+
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div id="popup_fx" dx-popup="popup_fx">
+        <div style="padding:0px 0 0 0">
+            <div class="col-lg-6" style="padding:0px 0 0 0">
+                <div dx-data-grid="dg_smscrew" id="dg_smscrew"></div>
+            </div>
+            <div class="col-lg-6 dx-border" style="padding:0px 0px 0 10px">
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <div class="center" style="background:white;" dx-select-box="sb_fx_year" dx-validator="{validationGroup:'fxsave',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <div class="center" style="background:white;" dx-select-box="sb_fx_period" dx-validator="{validationGroup:'fxsave',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <div class="center" style="background:white;" dx-select-box="sb_fx_type" dx-validator="{validationGroup:'fxsave',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div ng-show="fxType!=300007" class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>Hour(s)</label>
+                    <div class="center" dx-number-box="num_fx_hh"></div>
+                </div>
+                <div ng-show="fxType!=300007" class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>Minute(s)</label>
+                    <div class="center" dx-number-box="num_fx_mm"></div>
+                </div>
+                <div ng-show="fxType==300007" class="col-lg-6 margin-bottom-5 padding-7">
+                    <label>Count</label>
+                    <div class="center" dx-number-box="num_fx_cnt"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div class="padding-7">
+                    <div style="background:#ddd;padding:5px;border:1px solid #ccc">Selected People</div>
+                    <div class="thin-scroll2" style="overflow-y:auto;border:1px solid #ccc;padding:10px;height:150px">
+                        <div ng-repeat="x in dg_smscrew_selected" style="padding:5px;text-align:center;background:#eee;display:inline-block;font-size:12px;margin:5px;">{{x.ScheduleName}}</div>
+
+                    </div>
+                </div>
+                <div style="clear:both"></div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="popup_stby" dx-popup="popup_stby">
+        <div style="padding:0px 0 0 0">
+            <div dx-tabs="tabs_date_options2">
+
+            </div>
+            <div class=" col-lg-6 col-md-1 col-sm-1 col-xs-1 " style="padding:0 5px 0 0;    ">
+
+
+                <div dx-data-grid="dg_crew_stby" dx-item-alias="crew">
+                    <div data-options="dxTemplate:{ name:'addStbyAMTemplate' }">
+                        <a ng-click="addStby(crew,1168)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center'>AM</a>
+
+                    </div>
+                    <div data-options="dxTemplate:{ name:'addStbyPMTemplate' }">
+                        <a ng-click="addStby(crew,1167)" href="" class='w3-button w3-block w3-2017-flame' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center'>PM</a>
+                    </div>
+                    <div data-options="dxTemplate:{ name:'addResTemplate' }">
+                        <a ng-click="addStby(crew,1170)" href="" class='w3-button w3-block w3-yellow' style=' margin:0 auto 0px auto;text-decoration:none;padding:6px 0px !important; text-align:center'>RES</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=" col-lg-6 col-md-1 col-sm-1 col-xs-1" style="padding:0 0px 0 3px;   ">
+
+                <div style="border:1px solid #bbb;height:190px">
+                    <div style="border-bottom:1px solid #ccc;padding:5px;text-align:center" class="w3-blue">StandBy AM</div>
+                    <div style="overflow-y:auto;height:160px;">
+                        <div ng-repeat="x in AmDs" class="qcol-lg-3" style="padding:3px !important;float:left;">
+                            <div style="border:1px solid #ccc;padding:10px;background:#eee">
+                                <table style="width:100%;  ">
+                                    <tr>
+                                        <td>
+                                            <!--<div style="font-size:11px;">{{x.JobGroup}}</div>-->
+                                            <div style="font-size:12px;font-weight:bold;margin-top:0px;">{{x.ScheduleName}}({{}})</div>
+
+                                        </td>
+                                        <td style="width:50px">
+                                            <a href="" ng-click="removeStby(x,1168)"><i class="fas fa-minus-circle" style="color:red;font-size:19px;float:right;"></i></a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+                <div style="border:1px solid #bbb;height:195px;margin-top:5px">
+                    <div style="border-bottom:1px solid #ccc;padding:5px;text-align:center" class="w3-2017-flame">StandBy PM</div>
+                    <div style="overflow-y:auto;height:165px;">
+                        <div ng-repeat="x in PmDs" class="qcol-lg-3" style="padding:3px !important;float:left;">
+                            <div style="border:1px solid #ccc;padding:10px;background:#eee">
+                                <table style="width:100%;  ">
+                                    <tr>
+                                        <td>
+                                            <!--<div style="font-size:11px;">{{x.JobGroup}}</div>-->
+                                            <div style="font-size:12px;font-weight:bold;margin-top:0px;">{{x.ScheduleName}}({{x.JobGroup}})</div>
+
+                                        </td>
+                                        <td style="width:50px">
+                                            <a href="" ng-click="removeStby(x,1167)"><i class="fas fa-minus-circle" style="color:red;font-size:19px;float:right;"></i></a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+
+                <div style="border:1px solid #bbb;height:165px;margin-top:5px">
+                    <div style="border-bottom:1px solid #ccc;padding:5px;text-align:center" class="w3-yellow">Reserved</div>
+                    <div style="overflow-y:auto;height:135px;">
+                        <div ng-repeat="x in ReservedDs" class="qcol-lg-3" style="padding:3px !important;float:left;">
+                            <div style="border:1px solid #ccc;padding:10px;background:#eee">
+                                <table style="width:100%;  ">
+                                    <tr>
+                                        <td>
+                                            <!--<div style="font-size:11px;">{{x.JobGroup}}</div>-->
+                                            <div style="font-size:12px;font-weight:bold;margin-top:0px;">{{x.ScheduleName}}({{x.JobGroup}})</div>
+
+                                        </td>
+                                        <td style="width:50px">
+                                            <a href="" ng-click="removeStby(x,1170)"><i class="fas fa-minus-circle" style="color:red;font-size:19px;float:right;"></i></a>
+                                        </td>
+                                    </tr>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+
+
+    <div id="popup_dates" dx-popup="popup_dates">
+        <div style="padding:0px 0 0 0">
+            <div class="dx-border">
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>From</label>
+                    <div class="center" dx-date-box="date_from_visible" dx-validator="{validationGroup:'datevisible',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+                <div style="clear:both"></div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>To</label>
+                    <div class="center" dx-date-box="date_to_visible" dx-validator="{validationGroup:'datevisible',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+                <div style="clear:both"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="popup_datessms" dx-popup="popup_datessms">
+        <div style="padding:0px 0 0 0">
+            <div class="dx-border">
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>From</label>
+                    <div class="center" dx-date-box="datesms_from_visible" dx-validator="{validationGroup:'datesms',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+                <div style="clear:both"></div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>To</label>
+                    <div class="center" dx-date-box="datesms_to_visible" dx-validator="{validationGroup:'datesms',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+
+                <div style="clear:both"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="popup_time" dx-popup="popup_time">
+        <div dx-scheduler="options"></div>
+    </div>
+
+    <div id="popup_profile" dx-popup="popup_profile">
+        <div dx-tabs="tabs_profile">
+
+        </div>
+        <div id="scroll_profile" dx-scroll-view="scroll_profile">
+            <div class="tabprofile profilemain">
+                <div class="dx-border">
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>First Name</label>
+                        <div dx-text-box="txt_FirstName"></div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Last Name</label>
+                        <div dx-text-box="txt_LastName"></div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Group</label>
+                        <div dx-text-box="txt_Group"></div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Schedule Name</label>
+                        <div dx-text-box="txt_ScheduleName"></div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                        <label>Mobile</label>
+                        <div dx-text-box="txt_Mobile" class="center ltr f16"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+                <div dx-data-grid="dg_cer" id="dg_cer"></div>
+            </div>
+
+            <div class="tabprofile profileftl" style="padding:5px 10px 5px 5px;">
+                <table style="width:100%; ">
+                    <tr>
+                        <td style="width:50px;" ng-click="dtFtlGo(-1)"><i class="far fa-arrow-alt-circle-left" style="color:green;font-size:29px;"></i></td>
+                        <td>
+                            <div dx-date-box="date_ftl" class="center dx-border"></div>
+                        </td>
+                        <td style="width:50px;text-align:right" ng-click="dtFtlGo(1)"><i class="far fa-arrow-alt-circle-right" style="color:green;font-size:29px;"></i></td>
+                    </tr>
+                </table>
+                <div style="margin-top:10px;padding:0 5px 0 5px">
+                    <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                        <div dx-bar-gauge="duty7Gauge"></div>
+                        <div style="text-align:center;font-size:15px;font-weight:bold">{{getDutyText(7)}}</div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                        <div dx-bar-gauge="duty14Gauge"></div>
+                        <div style="text-align:center;font-size:15px;font-weight:bold">{{getDutyText(14)}}</div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                        <div dx-bar-gauge="duty28Gauge"></div>
+                        <div style="text-align:center;font-size:15px;font-weight:bold">{{getDutyText(28)}}</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="margin-top:10px;padding:10px 20px 10px 20px;">
+                        <table class="ftl-tbl" style="margin-top:10px;border:1px solid #ccc;width:100%;">
+                            <tr>
+                                <td></td>
+                                <td style="background:#ccc">7 Days</td>
+                                <td style="background:#ccc">14 Days</td>
+                                <td style="background:#ccc">28 Days</td>
+                            </tr>
+                            <tr>
+                                <td style="background:#ccc">USED</td>
+                                <td ng-style="getDutyCellStyle(7)">{{getDutyText2(7)}}</td>
+                                <td ng-style="getDutyCellStyle(14)">{{getDutyText2(14)}}</td>
+                                <td ng-style="getDutyCellStyle(28)">{{getDutyText2(28)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="background:#ccc">REMAINING</td>
+                                <td>{{getDutyRemainingText(7)}}</td>
+                                <td>{{getDutyRemainingText(14)}}</td>
+                                <td>{{getDutyRemainingText(28)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="padding:15px;font-size:15px;font-weight:bold;text-align:center;border-bottom:1px solid #ccc">DUTY</div>
+
+
+                </div>
+                <div style="margin-top:10px;padding:0 5px 0 5px">
+                    <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                        <div dx-bar-gauge="flight28Gauge"></div>
+                        <div style="text-align:center;font-size:15px;font-weight:bold">{{getFlightText(28)}}</div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                        <div dx-bar-gauge="flightYearGauge"></div>
+                        <div style="text-align:center;font-size:15px;font-weight:bold">{{getFlightText(12)}}</div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 padding-0">
+                        <div dx-bar-gauge="flightCYearGauge"></div>
+                        <div style="text-align:center;font-size:15px;font-weight:bold">{{getFlightText(1)}}</div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="margin-top:10px;padding:10px 20px 10px 20px;">
+                        <table class="ftl-tbl" style="margin-top:10px;border:1px solid #ccc;width:100%;">
+                            <tr>
+                                <td></td>
+                                <td style="background:#ccc">28 Days</td>
+                                <td style="background:#ccc">12 Months</td>
+                                <td style="background:#ccc">Year</td>
+                            </tr>
+                            <tr>
+                                <td style="background:#ccc">USED</td>
+                                <td ng-style="getFlightCellStyle(28)">{{getFlightText2(28)}}</td>
+                                <td ng-style="getFlightCellStyle(12)">{{getFlightText2(12)}}</td>
+                                <td ng-style="getFlightCellStyle(1)">{{getFlightText2(1)}}</td>
+                            </tr>
+                            <tr>
+                                <td style="background:#ccc">REMAINING</td>
+                                <td>{{getFlightRemainingText(28)}}</td>
+                                <td>{{getFlightRemainingText(12)}}</td>
+                                <td>{{getFlightRemainingText(1)}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="padding:15px;font-size:15px;font-weight:bold;text-align:center;border-bottom:1px solid #ccc">FLIGHT</div>
+
+
+                </div>
+                <div ng-show="ds_exceed.length>0">
+                    <div style="padding:15px;font-size:15px;font-weight:bold;text-align:left;border-bottom:1px solid #ccc">Exceeded</div>
+                    <div style="margin-top:10px;padding:10px 20px 10px 20px;">
+                        <table class="ftl-tbl" style="margin-top:10px;border:1px solid #ccc;width:100%;">
+                            <thead>
+                                <tr>
+                                    <td style="background:#ccc">Date</td>
+                                    <td style="background:#ccc">DTY 7</td>
+                                    <td style="background:#ccc">DTY 14</td>
+                                    <td style="background:#ccc">DTY 28</td>
+                                    <td style="background:#ccc">FLT 28</td>
+                                    <td style="background:#ccc">FLT 12 M</td>
+                                    <td style="background:#ccc">FLT Year</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="rec in ds_exceed">
+                                    <td style="background:#ccc">{{formatDate(rec.CDate)}}</td>
+                                    <td ng-style="getDutyCellStyle3(rec,7)">{{getDutyText3(rec,'Duty7')}}</td>
+                                    <td ng-style="getDutyCellStyle3(rec,14)">{{getDutyText3(rec,'Duty14')}}</td>
+                                    <td ng-style="getDutyCellStyle3(rec,28)">{{getDutyText3(rec,'Duty28')}}</td>
+                                    <td ng-style="getFlightCellStyle3(rec,28)">{{getDutyText3(rec,'Flight28')}}</td>
+                                    <td ng-style="getFlightCellStyle3(rec,12)">{{getDutyText3(rec,'FlightYear')}}</td>
+                                    <td ng-style="getFlightCellStyle3(rec,1)">{{getDutyText3(rec,'FlightCYear')}}</td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+
+
+            </div>
+
+            <div class="tabprofile profileflights" style="padding:5px 10px 5px 5px;">
+                <table style="width:100%; ">
+                    <tr>
+                        <td>
+                            <div dx-select-box="sb_year" class="center dx-border"></div>
+                        </td>
+
+                    </tr>
+                </table>
+                <div style="margin-top:10px;padding:15px 25px 15px 25px;">
+                    <div dx-chart="chart_bl"></div>
+
+                </div>
+                <div style="margin-top:20px;padding:15px 25px 15px 25px;">
+                    <div dx-chart="chart_cnt"></div>
+
+                </div>
+                <div style="margin-top:20px;padding:15px 25px 15px 25px;">
+                    <div dx-chart="chart_fltratio"></div>
+
+                </div>
+                <div style="margin-top:10px;padding:10px 20px 10px 20px;">
+                    <table class="ftl-tbl" style="margin-top:10px;border:1px solid #ccc;width:100%;">
+
+                        <tr>
+                            <td style="background:#ccc">Year</td>
+                            <td style="background:#ccc">Month</td>
+                            <td style="background:#ccc">Flight Time</td>
+                            <td style="background:#ccc">Block Time</td>
+                            <td style="background:#ccc">Flights</td>
+                            <td style="background:#ccc">Flight/Leg</td>
+                            <td></td>
+                        </tr>
+                        <tr ng-repeat="x in data_bl">
+                            <td style="background:#ccc">{{x.Year}}</td>
+                            <td style="background:#ccc">{{x.MonthName}}</td>
+                            <td>{{formatMinutes(x.FlightTime)}}</td>
+                            <td>{{formatMinutes(x.BlockTime)}}</td>
+                            <td>{{ (x.Flights)}}</td>
+                            <td>{{formatMinutes(x.FLTRatio)}}</td>
+                            <td><div ng-click="goFlights(x.Year,x.Month)" style="background:#009973;padding:3px;color:white">Details</div></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <div class="tabprofile profileduties" style="padding:5px 10px 5px 5px;">
+                <table style="width:100%; ">
+                    <tr>
+
+                        <td style="width:250px">
+                            <div dx-date-box="date_dty_from" class="center dx-border"></div>
+                        </td>
+                        <td style="padding-left:5px;width:250px;">
+                            <div dx-date-box="date_dty_to" class="center dx-border"></div>
+                        </td>
+                        <td style="width:60px;padding-left:10px"><div dx-button="btn_search_duties"></div></td>
+                        <td></td>
+
+                    </tr>
+                </table>
+                <div dx-data-grid="dg_pdty" id="dg_pdty" class="content" style="overflow-y:hidden;margin-top:10px"></div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <div ng-include="'app/views/rptflightspopup.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+
+</div>

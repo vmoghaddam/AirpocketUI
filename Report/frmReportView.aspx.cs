@@ -253,6 +253,28 @@ namespace Report
                             rptfpc.DataSource = dataSource;
                             ASPxWebDocumentViewer1.OpenReport(rptfpc);
                         }
+                        if (customer == "chabahar")
+                        {
+                            var rptfpc = new rptFPCCHB(); //new rptFPCAir1(); //new rptFPC();
+                            dataSource = new JsonDataSource();
+                            var rptfpcurl = apiUrlExtTemp + "/api/certificate/" + cerId;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                            dataSource.JsonSource = new UriJsonSource(new Uri(rptfpcurl));
+                            dataSource.Fill();
+
+                            rptfpc.DataSource = dataSource;
+                            ASPxWebDocumentViewer1.OpenReport(rptfpc);
+                        }
+                        if (customer == "mehr")
+                        {
+                            var rptfpc = new rptFPCMehr(); //new rptFPCAir1(); //new rptFPC();
+                            dataSource = new JsonDataSource();
+                            var rptfpcurl = apiUrlExtTemp + "/api/certificate/" + cerId;//apiUrlExtTemp + " / api/asr/flight/view/" + asrFlightId;
+                            dataSource.JsonSource = new UriJsonSource(new Uri(rptfpcurl));
+                            dataSource.Fill();
+
+                            rptfpc.DataSource = dataSource;
+                            ASPxWebDocumentViewer1.OpenReport(rptfpc);
+                        }
                         else
                         {
                             var rptfpc = new rptFPCVaresh(); //new rptFPCAir1(); //new rptFPC();
@@ -273,7 +295,7 @@ namespace Report
 
                         var rptvr = new rptVR();
                         dataSource = new JsonDataSource();
-                        var rptvrurl = apiapsbUrl + "/api/vr/view//" + vrFlightId;
+                        var rptvrurl = "https://fly.apiapsb.myaero.tech/" + "/api/vr/view//" + vrFlightId;
                         dataSource.JsonSource = new UriJsonSource(new Uri(rptvrurl));
                         dataSource.Fill();
                         rptvr.DataSource = dataSource;

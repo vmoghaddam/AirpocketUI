@@ -1,0 +1,263 @@
+<style>
+    .ctd {
+        border: 1px solid #eee;
+        text-align: center;
+    }
+
+    .ctd-empty {
+        border: 0px solid #eee;
+        text-align: center;
+    }
+
+    .ctr {
+        /*height:30px;*/
+    }
+
+    .ctd-center {
+        background-color: lightseagreen;
+    }
+
+    .ctd-selected {
+        background-color: red;
+    }
+</style>
+<div ng-controller="ftpController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div style="padding:5px;">
+
+            <div id="scroll_ftpadd" dx-scroll-view="scroll_ftpadd" style="margin-top:5px">
+                
+
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+                    <tr>
+                        <td colspan="6" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            Flight Information
+                        </td>
+                    </tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					    <td style="padding: 7px;text-align:left; font-weight: bold;border-right:1px solid #ccc;width:33.33%" class="center"> A/C Register </td>
+						 
+						<td style="padding: 7px;text-align:left; font-weight: bold;border-right:1px solid #ccc;width:33.33%" class="center"> A/C Type </td>
+						 
+						 <td style="padding: 7px;text-align:left; font-weight: bold;width:33.33%" class="center"> Date </td>
+						 
+						
+					</tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					    <td style="padding: 7px;text-align:left; font-weight: bold;border-right:1px solid #ccc" class="center"> {{view.Register}} </td>
+						 
+						<td style="padding: 7px;text-align:left; font-weight: bold;border-right:1px solid #ccc" class="center">{{view.AircraftType}} </td>
+						 
+						 <td style="padding: 7px;text-align:left; font-weight: bold" class="center"> {{fdate}} </td>
+						 
+						
+					</tr>
+                    
+					<tr>
+					     <td style="padding: 7px;text-align:left; font-weight: bold; border-right:1px solid #ccc"> Route </td>
+						 <td style="padding:7px;text-align:left;" colspan=5>{{route}}</td>
+					</tr>
+                </table>
+
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                    <tr style='border-bottom:1px solid black;'>
+					 
+					   <td colspan="6" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                             Please see overleaf before completing the form
+                        </td>
+                       
+                    </tr>
+					<tr>
+					   <td colspan="6" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            PART A: CREW MEMBER AFFECTED
+                        </td>
+					</tr>
+                    <tr style='border-bottom:1px lightgray solid'>
+                        <td style="padding: 7px;text-align:left;width: 60%; font-weight: bold"> Name  </td>
+                        <td style="padding: 7px; text-align: center; width: 40%; font-weight: bold"> Position  </td>
+                    </tr>
+                    <tr ng-repeat='c in crews' style='border-bottom:1px lightgray solid'>
+					    <td style="padding: 7px;text-align:left;  font-weight: normal"> {{c.Name}}  </td>
+                        <td style="padding: 7px; text-align: center;   font-weight: normal"> {{c.Position}}  </td>
+                    </tr>
+                </table>
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                    <tr>
+                        <td colspan="6" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            PART B: REDUCTION OF PRE-FLT REST
+                        </td>
+                    </tr>
+                    <tr style='border-bottom:1px solid lightgray'>
+					
+
+
+
+
+
+                        <td style="padding: 7px;text-align:left;width: 50%; font-weight: bold;border-right:1px solid #ccc"> Day/Time </td>
+                        <td style="padding: 7px; text-align: center; width: 25%; font-weight: bold;border-right:1px solid #ccc" colspan=4> UTC </td>
+                        <td style="padding: 7px; text-align: center; width: 25%; font-weight: bold"> Local </td>
+                    </tr>
+                    <tr style='border-bottom:1px solid #ccc'>
+					   <td style="padding: 7px;text-align:left;  font-weight: normal;border-right:1px solid #ccc"> LAST DUTY STARTED </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal;border-right:1px solid #ccc" colspan=4> <div class="center" dx-date-box="time_last_duty_started"></div>  </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal"> <div class="center" dx-date-box="time_last_duty_started_lcl"></div>  </td>
+                    </tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style="padding: 7px;text-align:left; font-weight: normal;border-right:1px solid #ccc">LAST DUTY ENDED </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal;border-right:1px solid #ccc" colspan=4>  
+                                 <div class="center" dx-date-box="time_last_duty_ended"></div>
+					   </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal"> <div class="center" dx-date-box="time_last_duty_ended_lcl"></div>  </td>
+                    </tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style="padding: 7px;text-align:left;  font-weight: normal;border-right:1px solid #ccc"> REST EARNED </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal;border-right:1px solid #ccc" colspan=4> <div class="center" dx-date-box="time_rest_earned"></div>  </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal"><div class="center" dx-date-box="time_rest_earned_lcl"></div>   </td>
+                    </tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style="padding: 7px;text-align:left;  font-weight: normal;border-right:1px solid #ccc"> CALCULATED EARLIEST NEXT AVAILABLE </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal;border-right:1px solid #ccc" colspan=4> <div class="center" dx-date-box="time_next_duty_planned"></div>  </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal"><div class="center" dx-date-box="time_next_duty_planned_lcl"></div>   </td>
+                    </tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style="padding: 7px;text-align:left;  font-weight: normal;border-right:1px solid #ccc"> ACTUAL START OF NEXT DUTY </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal ;border-right:1px solid #ccc" colspan=4><div class="center" dx-date-box="time_next_duty_actual"></div>   </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal"> <div class="center" dx-date-box="time_next_duty_actual_lcl"></div>  </td>
+                    </tr>
+					<tr>
+					   <td style="padding: 7px;text-align:left;  font-weight: normal;border-right:1px solid #ccc"> REST PERIOD REDUCED BY </td>
+					   
+					   <td style="padding: 7px;text-align:center;  font-weight: normal"> <div dx-number-box="num_pre_flight_reduced_rest_hh" class="center"></div>  </td>
+					   <td style="padding: 7px;text-align:left;  font-weight: normal ;border-right:1px solid #ccc;width:5%"> hrs </td>
+					   <td style="padding: 7px;text-align:center;  font-weight: normal"> <div dx-number-box="num_pre_flight_reduced_rest_mm" class="center"></div>  </td>
+					   <td style="padding: 7px;text-align:right;  font-weight: normal ;border-right:1px solid #ccc;width:5%;"> min </td>
+					   
+					   <td style="padding: 7px;text-align:left;  font-weight: normal">   </td>
+						  
+					    
+                    </tr>
+                </table>
+                <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                    <tr>
+                        <td colspan="6" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                            PART C: EXTENTION OF DUTY PERIOD
+                        </td>
+                    </tr>
+                </table>
+                <table style="margin-top:9px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                    <tr>
+                        <td colspan="8" style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                           FLIGHTS DETAILS
+                        </td>
+                    </tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td colspan="4" style="padding:5px;text-align:center;font-weight:bold;border-right:1px solid #ccc">PLANNED</td>
+					   <td colspan="4" style="padding:5px;text-align:center;font-weight:bold">ACTUAL</td>
+					</tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style='width:12.5%'></td>
+					   <td style="padding:5px;text-align:center;font-weight:bold;font-size:12px;border-right:1px solid #ccc;width:12.5%">PLACE</td>
+					   <td style="padding:5px;text-align:center;font-weight:bold;font-size:12px;border-right:1px solid #ccc;width:12.5%">UTC</td>
+					   <td style="padding:5px;text-align:center;font-weight:bold;font-size:12px;border-right:1px solid #ccc;width:12.5%">LOCAL</td>
+					   
+					   <td style='width:12.5%'></td>
+					   <td style="padding:5px;text-align:center;font-weight:bold;font-size:12px;border-right:1px solid #ccc;width:12.5%">PLACE</td>
+					   <td style="padding:5px;text-align:center;font-weight:bold;font-size:12px;border-right:1px solid #ccc;width:12.5%">UTC</td>
+					   <td style="padding:5px;text-align:center;font-weight:bold;font-size:12px;width:12.5%">LOCAL</td>
+					</tr>
+					
+					
+					<tr ng-repeat='x in flights_details' style='border-bottom:1px solid #ccc'>
+					   <td style='padding:5px;border-right:1px solid #ccc;'>{{x.title}}</td>
+					   <td style="padding:5px;text-align:center; font-weight:bold;border-right:1px solid #ccc ">{{x.place}}</td>
+					   <td style="padding:5px;text-align:center; font-weight:bold;border-right:1px solid #ccc ">{{to_time(x.utc)}}</td>
+					   <td style="padding:5px;text-align:center; font-weight:bold;border-right:1px solid #ccc ">{{to_time(x.lcl)}}</td>
+					   
+					   <td style='padding:5px;border-right:1px solid #ccc'>{{x.title}}</td>
+					   <td style="padding:5px;text-align:center; font-weight:bold;border-right:1px solid #ccc ">{{x.place}}</td>
+					   <td style="padding:5px;text-align:center; font-weight:bold;border-right:1px solid #ccc ">{{to_time(x.utc_actual)}}</td>
+					   <td style="padding:5px;text-align:center; font-weight:bold; ">{{to_time(x.lcl_actual)}}</td>
+					</tr>
+					
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style='padding:5px;border-right:1px solid #ccc;font-size:13px' colspan=2>Planned FLT. duty time</td>
+					   <td style='padding:5px;border-right:1px solid #ccc' colspan=2>{{to_hhmm(view.planned_flt_duty_time)}}</td>
+					   
+					   <td style='padding:5px;border-right:1px solid #ccc;font-size:13px' colspan=2>Actual FLT. duty time</td>
+					   <td style='padding:5px;border-right:1px solid #ccc' colspan=2>{{to_hhmm(view.actual_flt_duty_time)}}</td>
+				 
+					   
+					</tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style='padding:5px;border-right:1px solid #ccc;font-size:13px' colspan=6>Flying duty time standard rules</td>
+					   <td style='padding:5px;border-right:1px solid #ccc' colspan=2>{{to_hhmm(view.max_fdp)}}</td>
+					   
+					</tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style='padding:5px;border-right:1px solid #ccc' colspan=6>Extended FDP or</td>
+					   <td style='padding:5px;border-right:1px solid #ccc'><div dx-number-box="num_extended_fdp_value_hh" class="center"></div></td>
+					   <td style='padding:5px;border-right:0px solid #ccc'><div dx-number-box="num_extended_fdp_value_mm" class="center"></div></td>
+					</tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style='padding:5px;border-right:1px solid #ccc;font-size:13px' colspan=6>Extended FDP by split duty or</td>
+					   <td style='padding:5px;border-right:1px solid #ccc'><div dx-number-box="num_extended_fdp_split_value_hh" class="center"></div></td>
+					   <td style='padding:5px;border-right:0px solid #ccc'><div dx-number-box="num_extended_fdp_split_value_mm" class="center"></div></td>
+					</tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style='padding:5px;border-right:1px solid #ccc;font-size:13px' colspan=6>Extended FDP by in-flight Rest</td>
+					   <td style='padding:5px;border-right:1px solid #ccc'><div dx-number-box="num_extended_fdp_inflight_rest_value_hh" class="center"></div></td>
+					   <td style='padding:5px;border-right:0px solid #ccc'><div dx-number-box="num_extended_fdp_inflight_rest_value_mm" class="center"></div></td>
+					</tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style='padding:5px;border-right:1px solid #ccc;font-size:13px' colspan=6>Maximum legal FDP including Discretion</td>
+					   <td style='padding:5px;border-right:1px solid #ccc'><div dx-number-box="num_max_legal_fdp_value_hh" class="center"></div></td>
+					   <td style='padding:5px;border-right:0px solid #ccc'><div dx-number-box="num_max_legal_fdp_value_mm" class="center"></div></td>
+					</tr>
+					<tr style='border-bottom:1px solid #ccc'>
+					   <td style='padding:5px;border-right:1px solid #ccc;font-size:13px' colspan=6>Discretion (actual flight duty time minus flying duty time standard rules</td>
+					   <td style='padding:5px;border-right:1px solid #ccc'><div dx-number-box="num_discretion_value_hh" class="center"></div></td>
+					   <td style='padding:5px;border-right:0px solid #ccc'><div dx-number-box="num_discretion_value_mm" class="center"></div></td>
+					</tr>
+					 
+                </table>
+				
+				 <table style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                    <tr>
+                        <td  style="background-color:lightgray;padding:7px;text-align:left;color:black;font-weight:bold">
+                           PART D: CAPTAIN’S REPORT CIRCUMESTANCES (USE CAPITAL LETTER)
+                        </td>
+                    </tr>
+					<tr>
+					   <td>
+					      <div dx-text-area="txt_comment"></div>
+					   </td>
+					</tr>
+				</table>
+				 <table ng-show='view.pic_sign_date' style="margin-top:10px;border:1px solid #eee;width:100%;color:black" class="dx-border">
+
+                    <tr>
+                        <td  style="background-color:lightgray;padding:7px;text-align:center;color:black;font-weight:bold">
+                           The document approved and signed by
+                        </td>
+                    </tr>
+					<tr>
+					   <td style='padding:10px;text-align:center'>
+					      {{view.PIC}}
+					   </td>
+					</tr>
+				</table>
+
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+<div style="clear:both"></div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

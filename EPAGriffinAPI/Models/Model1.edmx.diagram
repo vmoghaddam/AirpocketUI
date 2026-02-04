@@ -589,6 +589,8 @@
         <EntityTypeShape EntityType="EPAGRIFFINModel.ViewMSN" Width="1.5" PointX="0.75" PointY="46.75" />
         <AssociationConnector Association="EPAGRIFFINModel.fk_course_parent" />
         <EntityTypeShape EntityType="EPAGRIFFINModel.AppFuel" Width="1.5" PointX="86.375" PointY="81.75" />
+        <EntityTypeShape EntityType="EPAGRIFFINModel.MVTAPI" Width="1.5" PointX="93.125" PointY="61" />
+        <AssociationConnector Association="EPAGRIFFINModel.fk_mvtapi_flight" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

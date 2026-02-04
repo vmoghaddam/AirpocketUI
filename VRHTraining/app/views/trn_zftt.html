@@ -1,0 +1,293 @@
+﻿<style>
+    .form-header {
+        text-align: center;
+        margin-bottom: 20px;
+        border: 1px solid #dee2e6;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+        .form-header h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .form-header .form-info {
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+
+    .form-section {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 20px;
+        background-color: white;
+    }
+
+    .flat-input, .flat-select-box .dx-dropdowneditor-input {
+        border: 1px solid #dee2e6 !important;
+        background-color: #ffffff !important;
+        padding: 0.375rem 0.75rem;
+        border-radius: 0;
+        box-shadow: none !important;
+        transition: border-color 0.15s ease-in-out !important;
+    }
+
+        .flat-input:focus, .flat-select-box .dx-dropdowneditor-input:focus {
+            border-color: #80bdff !important;
+            outline: none;
+            box-shadow: none !important;
+        }
+
+    .text-box, .date-box {
+        background-color: white;
+        border: 1px solid lightgray;
+        padding: 7px 5px;
+        width: 100%;
+        background-color:white;
+    }
+
+    .assessment-options label {
+        margin-right: 10px;
+    }
+
+    .form-section h4 {
+        margin-top: 20px;
+    }
+
+    .title {
+        border: 1px solid lightgray;
+        background-color: whitesmoke;
+        margin-bottom: 0px;
+        border-bottom: 0px;
+        padding: 10px
+    }
+
+    .description {
+        vertical-align: middle !important;
+    }
+
+    .table {
+        background-color: white;
+    }
+
+    .select_box {
+        background-color: white;
+        border: 1px solid lightgray;
+        padding: 7px 5px;
+    }
+</style>
+
+<div class="container">
+
+    <h4 class="title">Basic Information</h4>
+    <div class="form-section">
+        <form>
+            <div class="form-group row">
+                <label for="date" class="col-sm-3 col-form-label">Date</label>
+                <div class="col-sm-3">
+                    <div dx-date-box class="date-box" style="width:100%" ng-model="formData.date"></div>
+                </div>
+                <label for="crewMembersName" class="col-sm-3 col-form-label">Crew Members Name & Grade</label>
+                <div class="col-sm-3">
+                    <div class="text-box" dx-text-box ng-model="formData.crewMembersName"></div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="typeOfCheck" class="col-sm-3 col-form-label">Type of Check</label>
+                <div class="col-sm-9">
+                    <div class="text-box" dx-text-box ng-model="formData.typeOfCheck"></div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <h4 class="title">Category Observable Actions – Crew Members</h4>
+    <div class="form-section">
+        <h4 class="title">
+            Initiate at Date, Day
+            Time, ENG Running,
+            Check List Completed
+        </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-10">Description</th>
+                    <th class="col-sm-2"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.check_list">
+                    <td>{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="select_box" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+  
+        <h4 class="title">
+            Init at Take-off, Day
+            Time, 15KT Cross
+            Wind at MLW
+        </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-10">Description</th>
+                    <th class="col-sm-2"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.wind_mlw">
+                    <td>{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="select_box" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+    
+        <h4 class="title">
+            Init at Take-off, Day
+            Time, 10KT Tail Wind,
+            TOW Below MLW
+        </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-10">Description</th>
+                    <th class="col-sm-2"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.tow_mlw">
+                    <td>{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="select_box" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+  
+        <h4 class="title">
+            Init at Take-off, Day
+            Time, Cross Wind 15
+            KT, Gusting 25 KT at
+            MLW
+        </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-10">Description</th>
+                    <th class="col-sm-2"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.cross_wind">
+                    <td>{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="select_box" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+   
+        <h4 class="title">
+            Init at Take-off, Day
+            Time, Tail Wind 10KT
+            at MLW
+        </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-10">Description</th>
+                    <th class="col-sm-2"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.tail_wind">
+                    <td>{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="select_box" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 class="title">
+            Init at Take-off, Day
+            Time, Cross Wind 15
+            KT, at MTOW, RWY
+            WET
+        </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-10">Description</th>
+                    <th class="col-sm-2"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.mtow_cross">
+                    <td>{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="select_box" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+   
+        <h4 class="title">
+            Init at Take-off, Night
+            Time, Tailwind 10
+            KT, at MTOW, RWY
+            WET
+        </h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-sm-10">Description</th>
+                    <th class="col-sm-2"></th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in formData.mtow_tail">
+                    <td>{{item.description}}</td>
+                    <td><div dx-select-box="sb_rate" class="select_box" ng-model="item.assessment"></div></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="form-section">
+        <div class="form-group row">
+            <label for="finalAssessment" class="col-sm-12 col-form-label">Final Assessment & Grade</label>
+            <div class="col-sm-12">
+                <div class="text-box" dx-text-box ng-model="formData.finalAssessment"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="comments" class="col-sm-12 col-form-label">Special Comments on Overall ZFTT Refresher Performance</label>
+            <div class="col-sm-12">
+                <div dx-text-area ng-model="formData.comments" class="text-box" dx-multiline="true"></div>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="title">Signatures</h4>
+    <div class="form-section">
+        <div class="form-group row">
+            <label for="crewMemberSignature" class="col-sm-3 col-form-label">Crew Members Signature</label>
+            <div class="col-sm-9">
+                <div dx-text-box ng-model="formData.crewMemberSignature" class="text-box"></div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="instructorSignature" class="col-sm-3 col-form-label">Instructor's Name & Signature</label>
+            <div class="col-sm-9">
+                <div dx-text-box ng-model="formData.instructorSignature" class="text-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <div dx-button="btn_save"></div>
+</div>

@@ -152,6 +152,86 @@ app.controller('hazardAddController', ['$scope', '$location',   '$routeParams', 
          }
      };
 
+      
+     $scope.sb_hazard_status = {
+         showClearButton: true,
+         searchEnabled: true,
+         
+         onValueChanged: function () {
+
+         },
+         valueExpr: "id",
+         displayExpr: "title",
+         bindingOptions: {
+             value: 'entity.hazard_status_id',
+             
+             dataSource: 'ds_hazard_status'
+
+         }
+     };
+
+     $scope.sb_risk_owner = {
+         showClearButton: true,
+         searchEnabled: true,
+
+         onValueChanged: function () {
+
+         },
+         valueExpr: "id",
+         displayExpr: "title",
+         bindingOptions: {
+             value: 'entity.risk_owner_id',
+
+             dataSource: 'ds_risk_owner'
+
+         }
+     };
+     $scope.sb_responsible_department = {
+         showClearButton: true,
+         searchEnabled: true,
+
+         onValueChanged: function () {
+
+         },
+         valueExpr: "id",
+         displayExpr: "title",
+         bindingOptions: {
+             value: 'entity.responsible_department_id',
+
+             dataSource: 'ds_responsible_department'
+
+         }
+     };
+
+     $scope.btn_source_add = {
+         text: '',
+         type: 'default',
+         icon: 'plus',
+         width: '20',
+         
+         bindingOptions: {},
+         onClick: function (e) {
+
+
+
+         }
+
+     };
+     $scope.btn_source_remove = {
+         text: '',
+         type: 'danger',
+         icon: 'remove',
+         width: '20',
+         
+         bindingOptions: {},
+         onClick: function (e) {
+
+
+
+         }
+
+     };
+
      ///////////////////////////////////////////
 
 
@@ -427,11 +507,23 @@ app.controller('hazardAddController', ['$scope', '$location',   '$routeParams', 
 	  ]
     }	
   ];
+     $scope.txt_hazard_title = {
+         hoverStateEnabled: false,
+         bindingOptions: {
+             value: 'entity.title',
+              
+         }
+     };
   
-  
-  $scope.txt_hazard_remark={
-	  height:50,
-  }
+     $scope.txt_hazard_remark = {
+         height: 80,
+         bindingOptions: {
+             value: 'entity.description',
+
+         }
+     };
+
+    
   $scope.txt_hazard_tags={
 	  height:50,
   }
@@ -956,7 +1048,7 @@ app.controller('hazardAddController', ['$scope', '$location',   '$routeParams', 
         width: '100%',
         displayFormat: "yyyy-MM-dd",
         bindingOptions: {
-            value: 'entity.date_occurred',
+            value: 'entity.identified_date',
 
         }
     };

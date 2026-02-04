@@ -1,0 +1,287 @@
+<style>
+    .three-cols {
+        display: flex;
+        height: 565px;
+    }
+
+
+        .three-cols > [class*="col-"] {
+            flex: 1 1 0;
+            border: 1px solid #ccc;
+        }
+
+
+            .three-cols > [class*="col-"] + [class*="col-"] {
+                margin-left: 5px;
+            }
+
+    /* Filter Box Styles */
+    .filter-box {
+        background: #f5f5f5;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 15px;
+        margin-bottom: 15px;
+    }
+
+    .filter-row {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+    }
+
+    .filter-item {
+        flex: 1;
+    }
+
+        .filter-item label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+    .filter-btn {
+        min-width: 100px;
+    }
+</style>
+<div ng-controller="occAddController">
+    <div id="popup_add_occ" dx-popup="popup_add" class="no-padding">
+
+        <!-- Tabs -->
+        <div dx-tabs="tabs_options"></div>
+
+        <!-- Main Tab -->
+        <div class="tab main">
+            <div style='padding:10px;'>
+                <div class="row three-cols">
+                    <!-- Three Column Layout -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12 dx-border" style="padding:7px;">
+                        <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+
+                            <!-- Row 1: Date and Status -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6 margin-bottom-5 padding-7">
+                                <label>Occurrence Date</label>
+                                <div dx-date-box="dt_occurrence_date" dx-validator="{validationGroup:'occadd', validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-6 margin-bottom-5 padding-7">
+                                <label>Status</label>
+                                <div dx-select-box="sb_status"></div>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                            <!-- Category - Full Width -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 margin-bottom-5 padding-7">
+                                <label>Category</label>
+                                <div dx-select-box="sb_category" dx-validator="{validationGroup:'occadd', validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+
+                            <!-- Type - Full Width -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 margin-bottom-5 padding-7">
+                                <label>Type</label>
+                                <div dx-select-box="sb_type" dx-validator="{validationGroup:'occadd', validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+
+                            <!-- Description - Full Width -->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-12 margin-bottom-5 padding-7">
+                                <label>Description</label>
+                                <div dx-text-area="txt_description" dx-validator="{validationGroup:'occadd', validationRules: [{ type: 'required'}]}"></div>
+                            </div>
+
+                            <div style="clear:both"></div>
+
+                        </div>
+                    </div>
+
+                    <!-- Second Column (Empty for now) -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding:0">
+                        <div style="background:#ccc; padding:5px;">
+                            <table style="width:100%">
+                                <tr>
+                                    <td>Sources</td>
+                                    <td style="width:40px"> <div dx-button="btn_source_add"></div></td>
+
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                        <div id="source_container" class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                          
+                        </div>
+                    </div>
+
+                    <!-- Third Column (Empty for now) -->
+                    <div class="col-lg-4 col-md-4 col-sm-12 col-12" style="padding:7px;">
+                        <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                            <div>
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="clear:both"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Sources Tab -->
+        <div class="tab sources" style='display:none;'>
+            <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                <div style="border:1px solid #ccc;padding:10px">
+                    <h4>Sources</h4>
+                    <p>Fields will be added here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Root Causes Tab -->
+        <div class="tab root_causes" style='display:none;'>
+            <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                <div style="border:1px solid #ccc;padding:10px">
+                    <h4>Root Causes</h4>
+                    <p>Fields will be added here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consequences Tab -->
+        <div class="tab consequences" style='display:none;'>
+            <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                <div style="border:1px solid #ccc;padding:10px">
+                    <h4>Consequences</h4>
+                    <p>Fields will be added here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attachments Tab -->
+        <div class="tab attachments" style='display:none;'>
+            <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                <div style="border:1px solid #ccc;padding:10px">
+                    <h4>Attachments</h4>
+                    <p>Fields will be added here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Relevants Tab -->
+        <div class="tab relevants" style='display:none;'>
+            <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                <div style="border:1px solid #ccc;padding:10px">
+                    <h4>Relevant Data</h4>
+                    <p>Fields will be added here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Risk Assessment Tab -->
+        <div class="tab assessment" style='display:none;'>
+            <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                <div style="border:1px solid #ccc;padding:10px">
+                    <h4>Risk Assessment</h4>
+                    <p>Fields will be added here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions Tab -->
+        <div class="tab actions" style='display:none;'>
+            <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                <div style="border:1px solid #ccc;padding:10px">
+                    <h4>Actions</h4>
+                    <p>Fields will be added here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assessment Review Tab -->
+        <div class="tab assessment_review" style='display:none;'>
+            <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                <div style="border:1px solid #ccc;padding:10px">
+                    <h4>Assessment Review</h4>
+                    <p>Fields will be added here...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monitoring Tab -->
+        <div class="tab monitoring" style='display:none;'>
+            <div class="dx-border thin-scroll" style='overflow-y:auto;padding:10px;' ng-style='get_scroll_style()'>
+                <div style="border:1px solid #ccc;padding:10px">
+                    <h4>Monitoring</h4>
+                    <p>Fields will be added here...</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Loading Panel -->
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <!-- Sources Popup with Filter -->
+    <div id="popup_sources" dx-popup="popup_sources" class="dx-border">
+
+        <!-- Filter Box -->
+        <div class="filter-box">
+            <div class="filter-row">
+                <div class="filter-item">
+                    <label>Type</label>
+                    <div dx-select-box="sb_filter_type"></div>
+                </div>
+
+                <div class="filter-item">
+                    <label>From Date</label>
+                    <div dx-date-box="dt_filter_from"></div>
+                </div>
+
+                <div class="filter-item">
+                    <label>To Date</label>
+                    <div dx-date-box="dt_filter_to"></div>
+                </div>
+
+                <div class="filter-item">
+                    <label>Flight No</label>
+                    <div dx-text-box="txt_filter_flight_no"></div>
+                </div>
+
+                <div class="filter-item">
+                    <label>Route</label>
+                    <div dx-text-box="txt_filter_route"></div>
+                </div>
+
+                <div class="filter-item">
+                    <label>Register</label>
+                    <div dx-text-box="txt_filter_register"></div>
+                </div>
+
+                <div class="filter-item filter-btn">
+                    <div dx-button="btn_search_sources"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Grid -->
+        <div dx-data-grid="dg_source" id="dg_source" dx-item-alias="row">
+
+            <div data-options="dxTemplate:{ name:'showReportTemplate' }">
+                <a ng-click="show_report(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>View</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</div>

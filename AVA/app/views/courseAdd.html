@@ -82,13 +82,14 @@
                             <div dx-select-box="sb_CourseTypeId" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Period</label>
+                            <div dx-select-box="sb_period"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Class Id</label>
                             <div dx-text-box="txt_No"></div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
-                            <label>Status</label>
-                            <div dx-select-box="sb_StatusId" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
-                        </div>
+
                         <div style="clear:both"></div>
                         <!--<div class="col-lg-6 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
         <label>Groups</label>
@@ -96,12 +97,16 @@
     </div>-->
                         <div class="col-lg-5 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Exam Type</label>
-                            <div dx-select-box="sb_exam_type"  ></div>
+                            <div dx-select-box="sb_exam_type"></div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
-                            <label>Certificate Type</label>
-                            <div dx-text-box="txt_certype" class="center"></div>
+                            <label>Status</label>
+                            <div dx-select-box="sb_StatusId" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
                         </div>
+                        <!--<div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+        <label>Certificate Type</label>
+        <div dx-text-box="txt_certype" class="center"></div>
+    </div>-->
                         <div class="col-lg-4 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Type of Class Holding</label>
                             <div dx-select-box="sb_holding" dx-validator="{validationGroup:'courseadd',  validationRules: [{ type: 'required'}]}"></div>
@@ -136,6 +141,10 @@
                         <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Location</label>
                             <div dx-text-box="txt_Location"></div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
+                            <label>Group</label>
+                            <div dx-select-box="sb_group"></div>
                         </div>
                         <div style="clear:both"></div>
                         <!--<div class="col-lg-6    col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
@@ -191,14 +200,14 @@
                             <div dx-select-box="sb_CalanderTypeId"></div>
                         </div>
 
-                        <div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" style="margin-top:30px">
+                        <!--<div class="col-lg-3 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" style="margin-top:30px">
                             <label>&nbsp;</label>
                             <div dx-check-box="chb_Recurrent"></div>
                         </div>
                         <div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7">
                             <label>Cost</label>
                             <div dx-number-box="txt_Cost" class="center"></div>
-                        </div>
+                        </div>-->
                         <!--<div class="col-lg-2 col-md-6 col-sm-12 col-12  margin-bottom-5 padding-7" style="margin-top:30px">
         <label>&nbsp;</label>
         <div dx-check-box="chb_IsInside"></div>
@@ -460,6 +469,7 @@
                         </table>
                     </div>
                     <div dx-data-grid="dg_syllabi" id="dg_syllabi"></div>
+					
                 </div>
             </div>
         </div>
@@ -523,7 +533,14 @@
                 <label>End</label>
                 <div class="center" dx-date-box="end_session" dx-validator="{validationGroup:'crsession',  validationRules: [{ type: 'required'}]}"></div>
             </div>
-
+            <div class="col-lg-12  margin-bottom-5 padding-5">
+                <label>Course Type</label>
+                <div class="center" dx-select-box="course_type_session" dx-validator="{validationGroup:'crsession',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
+            <div class="col-lg-12  margin-bottom-5 padding-5">
+                <label>Instructor</label>
+                <div class="center" dx-select-box="instructor_session" dx-validator="{validationGroup:'crsession',  validationRules: [{ type: 'required'}]}"></div>
+            </div>
 
             <div style="clear:both"></div>
 

@@ -1,0 +1,176 @@
+ 
+ 
+
+.mainselection {
+    /*width: 100%;
+    max-width: 50em;
+    margin: 1.5em auto;*/
+}
+
+.mainselection .sec .head {
+    display: block;
+    margin-bottom: 0.4em;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+/* details */
+
+.mainselection section.demo .info {
+    text-align: center;
+    margin: 1em 0 2em 0;
+    line-height: 2em;
+    color: #42445a;
+}
+
+.mainselection section.demo .box-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 2px solid rgba(66, 68, 90, 0.075);
+    border-radius: 0.15em;
+    padding: 1em 0;
+}
+
+.mainselection section.demo .box-wrap.green,
+.mainselection section.demo .box-wrap.blue {
+    margin-bottom: 3em;
+}
+
+.mainselection section.demo .box-wrap.red {
+    display: grid;
+    grid-template-columns: repeat(28, 1fr);
+    grid-gap: 0.4em;
+    align-items: flex-start;
+    justify-content: flex-start;
+    max-height: 25em;
+    overflow: auto;
+    padding: 0.5em;
+    margin-bottom: 3em;
+}
+
+.mainselection section.demo .box-wrap.red > div {
+    margin: 0;
+}
+
+.mainselection .box-wrap::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+
+.mainselection .boxes div {
+    /*height: 3em;
+    width: 3em;*/
+	display:inline-block;
+	width:250px;
+	padding:20px;
+    margin: 0.2em;
+    background: rgba(66, 68, 90, 0.075);
+    border: 2px solid transparent;
+    border-radius: 0.15em;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.mainselection .boxes.green div.selected {
+    background: #7febc2;
+    border: 2px solid rgba(0, 0, 0, 0.075);
+}
+
+.mainselection .boxes.blue div.selected {
+    background: #7fa0eb;
+    border: 2px solid rgba(0, 0, 0, 0.075);
+}
+
+.mainselection .boxes.red div.selected {
+    background: #eb8181;
+    border: 2px solid rgba(0, 0, 0, 0.075);
+}
+
+.mainselection .boxes.yellow div.selected {
+    background: yellow;
+    border: 2px solid rgba(0, 0, 0, 0.075);
+}
+
+    .mainselection div.selected {
+        background: #ffd480;
+        
+        border: 2px solid rgba(0, 0, 0, 0.075);
+    }
+    .mainselection.selected2 div.selected {
+        background: #99ebff;
+        border: 2px solid rgba(0, 0, 0, 0.075);
+    }
+
+.selection {
+    background: rgba(46, 115, 252, 0.11);
+    border-radius: 0.1em;
+    border: 2px solid rgba(98, 155, 255, 0.81);
+}
+
+.mainselection section.demo .info p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.keyboard-key {
+    display: inline-block;
+    font-family: 'Noto Sans', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #4285f4;
+    font-size: 0.85em;
+    line-height: 1em;
+    letter-spacing: -0.05em;
+    padding: 0.2em 0.4em 0.2em 0.4em;
+    margin: 0 0.5em;
+    border: 1px solid #4285f4;
+    border-bottom: 2px solid #4285f4;
+    border-radius: 2px;
+}
+
+.gist {
+    margin-top: 2em;
+}
+
+.js-file-line-container,
+.gist-file,
+.gist-data,
+.gist-meta {
+    background: transparent !important;
+    border: none !important;
+}
+
+
+@media only screen and (max-width: 1000px) {
+
+    #fork-me {
+        height: 6em;
+        width: 6em;
+    }
+
+    header {
+        padding: 1em 0 0 0;
+    }
+
+    header h1 {
+        font-size: 0.8em;
+    }
+
+    /*.mainselection section.demo .info {
+        font-size: 0.8em;
+    }
+
+    .mainselection .boxes {
+        margin: 0 0.5em;
+    }
+
+    .mainselection .boxes div {
+        height: 1.75em;
+        width: 1.75em;
+    }*/
+}

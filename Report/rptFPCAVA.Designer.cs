@@ -37,7 +37,6 @@
             this.img_ins2 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrPictureBox3 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrPictureBox2 = new DevExpress.XtraReports.UI.XRPictureBox();
-            this.img_ins1 = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrBarCode1 = new DevExpress.XtraReports.UI.XRBarCode();
             this.lblHead = new DevExpress.XtraReports.UI.XRLabel();
             this.lblInstructor = new DevExpress.XtraReports.UI.XRLabel();
@@ -64,6 +63,7 @@
             this.lblExpire = new DevExpress.XtraReports.UI.XRLabel();
             this.lblExpiryCaption = new DevExpress.XtraReports.UI.XRLabel();
             this.xrPictureBox1 = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.img_ins1 = new DevExpress.XtraReports.UI.XRPictureBox();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -134,13 +134,6 @@
             this.xrPictureBox2.Name = "xrPictureBox2";
             this.xrPictureBox2.SizeF = new System.Drawing.SizeF(218.9265F, 116.1617F);
             this.xrPictureBox2.Sizing = DevExpress.XtraPrinting.ImageSizeMode.Squeeze;
-            // 
-            // img_ins1
-            // 
-            this.img_ins1.LocationFloat = new DevExpress.Utils.PointFloat(155.055F, 671.6667F);
-            this.img_ins1.Name = "img_ins1";
-            this.img_ins1.SizeF = new System.Drawing.SizeF(218.9265F, 116.1617F);
-            this.img_ins1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.Squeeze;
             // 
             // xrBarCode1
             // 
@@ -476,6 +469,13 @@
             this.xrPictureBox1.SizeF = new System.Drawing.SizeF(1169F, 817.778F);
             this.xrPictureBox1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.StretchImage;
             // 
+            // img_ins1
+            // 
+            this.img_ins1.LocationFloat = new DevExpress.Utils.PointFloat(155.055F, 671.6667F);
+            this.img_ins1.Name = "img_ins1";
+            this.img_ins1.SizeF = new System.Drawing.SizeF(218.9265F, 116.1617F);
+            this.img_ins1.Sizing = DevExpress.XtraPrinting.ImageSizeMode.Squeeze;
+            // 
             // rptFPCAVA
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -529,9 +529,9 @@
         private DevExpress.XtraReports.UI.XRLabel lblInstructor;
         private DevExpress.XtraReports.UI.XRLabel lblHead;
         private DevExpress.XtraReports.UI.XRBarCode xrBarCode1;
-        private DevExpress.XtraReports.UI.XRPictureBox img_ins1;
         private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox2;
         private DevExpress.XtraReports.UI.XRPictureBox xrPictureBox3;
         private DevExpress.XtraReports.UI.XRPictureBox img_ins2;
+        private DevExpress.XtraReports.UI.XRPictureBox img_ins1;
     }
 }

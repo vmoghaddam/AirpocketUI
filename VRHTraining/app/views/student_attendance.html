@@ -1,0 +1,290 @@
+﻿
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f0f0;
+        padding: 20px;
+    }
+
+    .section {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        color: #007bff;
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    .attendance-card {
+        flex: 1 1 calc(50% - 20px);
+        padding: 20px;
+        background: linear-gradient(135deg, #f6f9fc, #fff);
+        border-radius: 12px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .attendance-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .attendance-card h3 {
+            font-size: 22px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .attendance-card p {
+            font-size: 15px;
+            color: #555;
+            margin: 8px 0;
+        }
+
+    .attendance-icons {
+        margin-top: 15px;
+    }
+
+        .attendance-icons p {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .attendance-icons button {
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+    .present-btn {
+        background-color: #28a745;
+    }
+
+        .present-btn:hover {
+            background-color: #218838;
+        }
+
+    .absent-btn {
+        background-color: #dc3545;
+    }
+
+        .absent-btn:hover {
+            background-color: #c82333;
+        }
+
+    .score-input, .final-result-input, .remark-input {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        background-color: #f6f9fc;
+        transition: background-color 0.3s ease;
+    }
+
+        .score-input:focus, .final-result-input:focus, .remark-input:focus {
+            background-color: #fff;
+            outline: none;
+            border-color: #007bff;
+        }
+
+    @media (max-width: 768px) {
+        .attendance-card {
+            flex: 1 1 100%;
+        }
+    }
+</style>
+
+<div class="box vira_inventory" style="height:100%;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+        <!--<div class="card col-lg-12" style="padding: 0px 5px 0 5px">
+            <div class="header">
+                <div>General Information</div>
+            </div>
+            <div class="visible-lg">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Course Title</td>
+                            <td>COURSE TEST - SEPT</td>
+
+                            <td>Course Type</td>
+                            <td>SEPT</td>
+                        </tr>
+                        <tr>
+                            <td>Class ID</td>
+                            <td>CLS-3563</td>
+
+                            <td>Start Date</td>
+                            <td>2024-09-29</td>
+                        </tr>
+                        <tr>
+                            <td>End Date</td>
+                            <td>2024-10-01</td>
+
+                            <td>Instructor</td>
+                            <td>KHANJANI ALIREZA</td>
+                        </tr>
+                        <tr>
+                            <td>Duration</td>
+                            <td>12 (hrs)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="visible-md visible-sm visible-xs">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>Course Title</td>
+                            <td>COURSE TEST - SEPT</td>
+                        </tr>
+                        <tr>
+                            <td>Course Type</td>
+                            <td>SEPT</td>
+                        </tr>
+                        <tr>
+                            <td>Class ID</td>
+                            <td>CLS-3563</td>
+                        </tr>
+                        <tr>
+                            <td>Start Date</td>
+                            <td>2024-09-29</td>
+                        </tr>
+                        <tr>
+                            <td>End Date</td>
+                            <td>2024-10-01</td>
+                        </tr>
+                        <tr>
+                            <td>Instructor</td>
+                            <td>KHANJANI ALIREZA</td>
+                        </tr>
+                        <tr>
+                            <td>Duration</td>
+                            <td>12 (hrs)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="header">
+                <div>Presence and Result</div>
+            </div>
+            <div id="dg_req" dx-data-grid="dg_req"></div>
+        </div>-->
+
+        <div id="scroll" dx-scroll-view="scroll" class="thin-scroll" style="margin-top:5px">
+        <div class="container">
+            
+                <!-- General Information Section -->
+                <div class="info-section">
+                    <h2>Course Information</h2>
+                    <div class="info-cards">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4><i class="glyphicon glyphicon-book"></i> Course Title</h4>
+                                <p>COURSE TEST - SEPT</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4><i class="glyphicon glyphicon-briefcase"></i> Department</h4>
+                                <p>AVA TRAINING CENTER</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4><i class="glyphicon glyphicon-time"></i> Start Date</h4>
+                                <p>2024-09-29</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4><i class="glyphicon glyphicon-calendar"></i> End Date</h4>
+                                <p>2024-10-01</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4><i class="glyphicon glyphicon-user"></i> Instructor</h4>
+                                <p>KHANJANI ALIREZA</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h4><i class="glyphicon glyphicon-hourglass"></i> Duration</h4>
+                                <p>12 Hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Presence and Result Section -->
+                <h2>Presence and Result</h2>
+                <div class="presence-grid">
+                    <!-- ng-repeat to loop through participants -->
+                    <div class="participant" ng-repeat="participant in participants">
+                        <div class="participant-header">
+                            <h4>{{participant.fullName}}</h4>
+                            <p>National Code: {{participant.nationalCode}}</p>
+                            <p>Department: {{participant.department}}</p>
+                        </div>
+                        <div class="attendance">
+                            <!-- ng-repeat for each session to display checkboxes -->
+                            <label ng-repeat="session in participant.sessions">
+                                <input type="checkbox" ng-model="session.attended"> {{session.date}}, {{session.time}}
+                            </label>
+                        </div>
+                        <div class="result">
+                            <p><strong>Result:</strong> {{participant.result}}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Approval Section -->
+                <div class="approval-section text-center">
+                    <h2>Approval</h2>
+                    <p><strong>Instructor:</strong> KHANJANI ALIREZA</p>
+                    <p><strong>Head of Training:</strong> Capt. Peyman Mesgarihoushyar</p>
+                </div>
+
+                <div dx-load-panel="loadPanel"></div>
+            </div>
+        </div>
+    </div>
+    <div class="rowx footer">
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11" style="padding:0">
+
+
+        </div>
+        <div dx-load-panel="loadPanel"></div>
+        <div style="clear:both"></div>
+    </div>
+
+
+</div>

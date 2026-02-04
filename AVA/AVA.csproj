@@ -1167,7 +1167,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".user.ini" />
-    <Content Include="app\app.zip" />
     <Content Include="app\controllers\11-16.zip" />
     <Content Include="app\controllers\courseadd-01-10.zip" />
     <Content Include="app\controllers\courseperson-01-10.zip" />
@@ -1661,9 +1660,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55700</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44386/</IISUrl>
+          <IISUrl>https://localhost:44387/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>https://localhost:44386/</IISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44387/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

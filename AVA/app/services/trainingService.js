@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', function ($http, $q, ngAuthSettings, $rootScope) {
 
 
@@ -22,19 +22,6 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
         var deferred = $q.defer();
         $http.get(serviceBaseTRN + 'api/course/type/groups/'+cid).then(function (response) {
-            deferred.resolve(response.data);
-        }, function (err, status) {
-
-            deferred.reject(Exceptions.getMessage(err));
-        });
-
-        return deferred.promise;
-    };
-
-    var _getCourseTypeSubject = function (cid) {
-
-        var deferred = $q.defer();
-        $http.get(serviceBaseTRN + 'api/course/type/subject/' + cid).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -239,18 +226,6 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
         var deferred = $q.defer();
         $http.get(serviceBaseTRN + 'api/course/bytype/' + tid+'/'+sid).then(function (response) {
-            deferred.resolve(response.data);
-        }, function (err, status) {
-
-            deferred.reject(Exceptions.getMessage(err));
-        });
-
-        return deferred.promise;
-    };
-    var _getCoursesByTypeOutside = function (tid, sid) {
-
-        var deferred = $q.defer();
-        $http.get(serviceBaseTRN + 'api/course/bytype/outside/' + tid + '/' + sid).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -805,24 +780,7 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
         return deferred.promise;
     };
     serviceFactory.generateQuestions = _generateQuestions;
-
-
-
-    var _getExamQuestions = function (id) {
-        var deferred = $q.defer();
-        $http.get(/*serviceBaseTRN*/zapitrn + 'api/exam/questions/' + id).then(function (response) {
-            deferred.resolve(response.data);
-        }, function (err, status) {
-
-            deferred.reject(Exceptions.getMessage(err));
-        });
-
-        return deferred.promise;
-    };
-    serviceFactory.getExamQuestions = _getExamQuestions;
-
-
-    var _getCoursesByTypeOutside = function (tid, sid) {
+	 var _getCoursesByTypeOutside = function (tid, sid) {
 
         var deferred = $q.defer();
         $http.get(serviceBaseTRN + 'api/course/bytype/outside/' + tid + '/' + sid).then(function (response) {
@@ -834,10 +792,10 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
         return deferred.promise;
     };
-    serviceFactory.getCoursesByTypeOutside = _getCoursesByTypeOutside;
-
-
-    var _getPersonFolder = function (nid) {
+	serviceFactory.getCoursesByTypeOutside = _getCoursesByTypeOutside;
+	
+	
+	 var _getPersonFolder = function (nid) {
 
         var deferred = $q.defer();
         $http.get(serviceBaseTRN + 'api/files/get/' + nid).then(function (response) {
@@ -849,14 +807,121 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
         return deferred.promise;
     };
-    serviceFactory.getPersonFolder = _getPersonFolder;
+	
+	
+	var _get_course_types = function () {
 
+    var deferred = $q.defer();
+    $http.get(serviceBaseTRN + 'api/course/types').then(function (response) {
+        deferred.resolve(response.data);
+    }, function (err, status) {
 
+        deferred.reject(Exceptions.getMessage(err));
+    });
 
-    var _get_profiles_course_types = function () {
+    return deferred.promise;
+};
+serviceFactory.get_course_types = _get_course_types;
+	
+	 var _getCourseTypeSubject = function (cid) {
 
+     var deferred = $q.defer();
+     $http.get(serviceBaseTRN + 'api/course/type/subject/' + cid).then(function (response) {
+         deferred.resolve(response.data);
+     }, function (err, status) {
+
+         deferred.reject(Exceptions.getMessage(err));
+     });
+
+     return deferred.promise;
+ };
+	
+	
+	serviceFactory.get_course_types = _get_course_types;
+	
+	 var _getPersonFiles = function (nid) {
+
+     var deferred = $q.defer();
+     $http.get(serviceBaseTRN + 'api/trn/get/person/files/' + nid).then(function (response) {
+         deferred.resolve(response.data);
+     }, function (err, status) {
+
+         deferred.reject(Exceptions.getMessage(err));
+     });
+
+     return deferred.promise;
+ };
+	
+	 var _getCrewFiles = function (nid) {
+
+     var deferred = $q.defer();
+     $http.get(serviceBaseTRN + 'api/trn/get/crew/files/' + nid).then(function (response) {
+         deferred.resolve(response.data);
+     }, function (err, status) {
+
+         deferred.reject(Exceptions.getMessage(err));
+     });
+
+     return deferred.promise;
+ };
+	
+	var _getProfileDoc = function (nid) {
+
+     var deferred = $q.defer();
+     $http.get(serviceBaseTRN + 'api/trn/get/profile/doc/' + nid).then(function (response) {
+         deferred.resolve(response.data);
+     }, function (err, status) {
+
+         deferred.reject(Exceptions.getMessage(err));
+     });
+
+     return deferred.promise;
+ };
+	
+	
+	 var _getCabinFiles = function (nid) {
+
+     var deferred = $q.defer();
+     $http.get(serviceBaseTRN + 'api/trn/get/cabin/files/' + nid).then(function (response) {
+         deferred.resolve(response.data);
+     }, function (err, status) {
+
+         deferred.reject(Exceptions.getMessage(err));
+     });
+
+     return deferred.promise;
+ };
+	
+	 var _getDspFiles = function (nid) {
+
+     var deferred = $q.defer();
+     $http.get(serviceBaseTRN + 'api/trn/get/dispatch/files/' + nid).then(function (response) {
+         deferred.resolve(response.data);
+     }, function (err, status) {
+
+         deferred.reject(Exceptions.getMessage(err));
+     });
+
+     return deferred.promise;
+ };
+	
+	 var _getCourseExternal = function (pid) {
+
+     var deferred = $q.defer();
+     $http.get(serviceBaseTRN + 'api/trn/get/course/ext/' + pid).then(function (response) {
+         deferred.resolve(response.data);
+     }, function (err, status) {
+
+         deferred.reject(Exceptions.getMessage(err));
+     });
+
+     return deferred.promise;
+ };
+	
+	
+	 var _deletePersonDocs = function (entity) {
         var deferred = $q.defer();
-        $http.get(serviceBaseTRN + 'api/profile/course/types/' ).then(function (response) {
+        $http.post(zapitrn + 'api/trn/delete/profile/doc', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -865,20 +930,16 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
 
         return deferred.promise;
     };
-    serviceFactory.get_profiles_course_types = _get_profiles_course_types;
-    var _get_course_types = function () {
-
-        var deferred = $q.defer();
-        $http.get('https://ava.apitrn.airpocket.app/api/course/types').then(function (response) {
-            deferred.resolve(response.data);
-        }, function (err, status) {
-
-            deferred.reject(Exceptions.getMessage(err));
-        });
-
-        return deferred.promise;
-    };
-    serviceFactory.get_course_types = _get_course_types;
+	
+	serviceFactory.getCourseExternal = _getCourseExternal;
+	serviceFactory.deletePersonDocs = _deletePersonDocs;
+	serviceFactory.getPersonFiles = _getPersonFiles;
+	serviceFactory.getCrewFiles = _getCrewFiles;
+	serviceFactory.getCabinFiles = _getCabinFiles;
+	serviceFactory.getDspFiles = _getDspFiles;
+	serviceFactory.getProfileDoc = _getProfileDoc;
+	serviceFactory.getPersonFolder = _getPersonFolder;
+	serviceFactory.getCourseTypeSubject = _getCourseTypeSubject;
     /////////////////////////
     serviceFactory.getExpiring = _getExpiring;
     serviceFactory.getExpiringMain = _getExpiringMain;
@@ -895,7 +956,6 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     serviceFactory.getCourseTypes = _getCourseTypes;
     serviceFactory.getCoursesByType = _getCoursesByType;
     serviceFactory.getCourseTypeGroups = _getCourseTypeGroups;
-    serviceFactory.getCourseTypeSubject = _getCourseTypeSubject;
     serviceFactory.getCertificateTypes = _getCertificateTypes;
     serviceFactory.saveCourseType = _saveCourseType;
     serviceFactory.deleteCourseType = _deleteCourseType;
@@ -911,8 +971,7 @@ app.factory('trnService', ['$http', '$q', 'ngAuthSettings', '$rootScope', functi
     serviceFactory.getCourseSessions = _getCourseSessions;
     serviceFactory.getCoursePeople = _getCoursePeople;
     serviceFactory.getCoursePeopleSessions = _getCoursePeopleSessions;
-    serviceFactory.getNotApplicables = _getNotApplicables;
-    serviceFactory.getCoursesByTypeOutside = _getCoursesByTypeOutside;
+	serviceFactory.getNotApplicables=_getNotApplicables;
     return serviceFactory;
 
 }]);

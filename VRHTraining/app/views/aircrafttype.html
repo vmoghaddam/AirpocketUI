@@ -1,0 +1,51 @@
+﻿<div class="box aircraftType" style="height:100%;display:none">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-6 col-md-6 col-sm-3 col-xs-3 col2">
+            <div class="filter-container box">
+                <div class="header">Manufacturer</div>
+                 
+                    <div dx-data-grid="dg_man" id="grid_man" class="content" style="overflow-y:hidden"></div>
+                
+
+            </div>
+
+        </div>
+        <div class=" col-lg-6 col-md-6 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:5px;">
+            <div class="filter-container box">
+                <div class="header">Types</div>
+               
+                    <div dx-data-grid="dg" id="grid" class="content" style="overflow-y:hidden"></div>
+                
+
+            </div>
+           
+
+        </div>
+    </div>
+    <div class="rowx footer">
+        <div class=" col-lg-6 col-md-6 col-sm-3 col-xs-3 col2">
+            <div dx-button="btn_new_man"></div>
+            <div dx-button="btn_edit_man"></div>
+
+            <div dx-button="btn_delete_man"></div>
+        </div>
+        <div class=" col-lg-6 col-md-6 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:5px;">
+           
+            <div dx-button="btn_new"></div>
+            <div dx-button="btn_edit"></div>
+
+            <div dx-button="btn_delete"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+
+   <!-- <div ng-include="'app/views/airportAdd.html'"></div>-->
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+
