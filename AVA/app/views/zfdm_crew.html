@@ -292,6 +292,14 @@
                     <div class="chartBox" style="width:100%">
 
                         <div id="chart_pareto_captain" dx-chart="CaptainParetoChart"></div>
+                        <div id="chart_description" style="font-size:13px;color:#444;margin:10px 12px 18px 12px;line-height:1.5;">
+                            <strong>How to read this chart</strong><br />
+                            • <strong>Bars (Count)</strong>: Show the individual number of occurrences for each event type. Taller bars represent more frequent events.<br />
+                            • <strong>Line (Cumulative %)</strong>: Shows the running total percentage of all events as you move from left to right. It identifies how many event types make up the majority of problems.<br />
+                            • <strong>The "Vital Few"</strong>: Events on the left side of the chart are your most frequent types. Focusing improvement efforts on these few areas will address the largest portion of total events, following the <strong>Pareto Principle (80/20 Rule)</strong>.<br />
+                            • <strong>Recommended action</strong>: Prioritize investigation and corrective actions for the event types at the beginning of the chart (the tallest bars). Addressing the top 3-5 categories will likely resolve a significant majority (60-80%) of all reported events.<br />
+                            • <strong>Parameters reference</strong>: Events are sorted by frequency in descending order. Cumulative percentage calculated as running total of individual percentages.
+                        </div>
                     </div>
                 </div>
 
@@ -329,6 +337,15 @@
                 <div class="col-lg-12" style="padding:2px">
                     <div class="chartBox" style="width:100%">
                         <div id="chart_ewma_captain" dx-chart="CaptainEWMAEventsChart"></div>
+                        <div id="chart_description" style="font-size:13px;color:#444;margin:10px 12px 18px 12px;line-height:1.5;">
+                            <strong>How to read this chart</strong><br />
+                            • <span style="color:#2f6fbf">Blue line (EWMA, α = 0.30)</span>: smoothed trend of daily FDM event rate per 100 flights. Smooths out daily fluctuations while highlighting emerging trends. An upward trend indicates increasing risk; downward or flat trend indicates stable or improving performance.<br />
+                            • <span style="color:#d9534f">Red triangles (Alarms)</span>: days when <strong>CUSUM-positive</strong> exceeds threshold (kFactor = 0.50 × σ, hFactor = 10 × σ) <em>and</em> EWMA is rising. These points signal a statistically significant sustained increase in event rates and should be investigated first.<br />
+                            • <strong>Event severity weights</strong>: High = 4, Medium = 2, Low = 1. Daily total score reflects overall impact.<br />
+                            • <strong>Recommended action</strong>: review operations and maintenance logs around alarm dates. If multiple consecutive alarms appear, escalate to safety review for proactive risk mitigation.<br />
+                            • <strong>Parameters reference</strong>: α (EWMA smoothing factor) = 0.30, kFactor (CUSUM sensitivity) = 0.50, hFactor (CUSUM alarm threshold) = 10.0, window for EWMA trend comparison = 3 days.
+                        </div>
+
                     </div>
                 </div>
 

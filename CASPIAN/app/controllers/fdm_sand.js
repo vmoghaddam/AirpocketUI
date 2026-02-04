@@ -275,7 +275,6 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
         $scope.dg_events_md_instance = null;
         $scope.dg_events_md_ds = null;
         $scope.dg_events_md_height = 500; //$(window).height() - 130;
-
         $scope.dg_events_md =
         {
             onContentReady: function (e) {
@@ -351,8 +350,6 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             },
         };
 
-
-
         $scope.dg_events_737_columns = [
             //{
             //    cellTemplate: function (container, options) {
@@ -399,7 +396,6 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
         $scope.dg_events_737_instance = null;
         $scope.dg_events_737_ds = null;
         $scope.dg_events_737_height = 500; //$(window).height() - 130;
-
         $scope.dg_events_737 =
         {
             onContentReady: function (e) {
@@ -528,13 +524,13 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
         //const COLOR_CNEG = "#22C55E";   // سبز  (CUSUM-)
         //const COLOR_ALARM = "#EF4444";   // قرمز
         //const THRESHOLD = 100; // آستانه دلخواه CUSUM+
-
         $scope.allEWMAEventsChart = {
 
             bindingOptions: { dataSource: 'allEWMAEvents' },
 
             palette: "Material",
-            title: "EWMA & CUSUM (Alarm on Increase Only)",
+            title: "Early Warning Trend of Flight Events(Smoothed Daily Rate)",//"EWMA & CUSUM (Alarm on Increase Only)",
+
             commonSeriesSettings: {
                 argumentField: "Date",
                 type: "spline",
@@ -545,8 +541,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 { name: "Daily Event Rate / 100 flights", valueField: "Daily", axis: "rateAxis", width: 1, color: COLOR_DAILY },
                 { name: "EWMA", valueField: "EWMA", axis: "rateAxis", width: 1, color: COLOR_EWMA },
 
-                { name: "CUSUM+", valueField: "CusumPos", axis: "cusumAxis", width: 1, color: COLOR_CPOS },
-                { name: "CUSUM-", valueField: "CusumNeg", axis: "cusumAxis", width: 1, color: COLOR_CNEG },
+                //{ name: "CUSUM+", valueField: "CusumPos", axis: "cusumAxis", width: 1, color: COLOR_CPOS },
+                //{ name: "CUSUM-", valueField: "CusumNeg", axis: "cusumAxis", width: 1, color: COLOR_CNEG },
 
                 // مارکرهای آلارم روی EWMA
                 {
@@ -576,13 +572,13 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     grid: { visible: true },
                     constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
                 },
-                {
-                    name: "cusumAxis",
-                    title: { text: "CUSUM" },
-                    position: "right",
-                    grid: { visible: false },
-                    constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
-                }
+                //{
+                //    name: "cusumAxis",
+                //    title: { text: "CUSUM" },
+                //    position: "right",
+                //    grid: { visible: false },
+                //    constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
+                //}
             ],
             crosshair: { enabled: true, label: { visible: true } },
             legend: { visible: true, verticalAlignment: "bottom", horizontalAlignment: "center" },
@@ -601,8 +597,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                             `Date: ${d}\n` +
                             `Daily: ${get("Daily Event Rate / 100 flights")}\n` +
                             `EWMA: ${get("EWMA")}\n` +
-                            `CUSUM+: ${get("CUSUM+")}\n` +
-                            `CUSUM-: ${get("CUSUM-")}` +
+                            // `CUSUM+: ${get("CUSUM+")}\n` +
+                            // `CUSUM-: ${get("CUSUM-")}` +
                             `Alarm: ${get("Alarm")}`
                     };
                 }
@@ -940,10 +936,144 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 width: '100%'
             }
         };
+        //-------------------All FO Comparison---------------------------
+        $scope.fo_all_737_ds = [];
+        $scope.fo_all_B737_chart =
+        {
+            title: 'B737 FOs Event Comparison ',
+            tooltip: { enabled: true, shared: true },
+            legend: { verticalAlignment: 'bottom', horizontalAlignment: 'center' },
+
+            commonSeriesSettings: {
+                argumentField: 'crew_name',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                type: 'stackedBar',        // ← مهم: پیش‌فرض رو stackedBar بذار
+                // barPadding: 0.2
+                barGroupPadding: 0.01
+            },
+            valueAxis: [
+                { name: 'countAxis', position: 'left', title: { text: 'Event Count' } },
+                { name: 'rateAxis', position: 'right', title: { text: 'Event Count / 100 Flights' }, grid: { visible: false } }
+            ],
+            argumentAxis: {
+                type: 'discrete',
+                position: 'bottom',
+                label: { overlappingBehavior: 'stagger', font: { size: 12 }, overlappingBehavior: 'rotate', rotationAngle: 90 }
+            },
+
+            series: [
+                {
+                    name: 'Flights', valueField: 'flight_count', axis: 'countAxis',
+                    type: 'stackedBar', stack: 'flights', color: Color_flight, opacity: 0.75
+                },
+
+                {
+                    name: 'Low', valueField: 'low_count', axis: 'countAxis',
+                    stack: 'sev', color: lowColor, opacity: 0.95
+                },
+                {
+                    name: 'Medium', valueField: 'medium_count', axis: 'countAxis',
+                    stack: 'sev', color: '#F59E0B', opacity: 0.95
+                },
+                {
+                    name: 'High', valueField: 'high_count', axis: 'countAxis',
+                    stack: 'sev', color: '#EF4444', opacity: 0.95
+                },
+
+                // خط نرخ (محور راست)
+                {
+                    name: 'Events/100 Flights', valueField: 'total_count_per_100', axis: 'rateAxis',
+                    type: 'spline', width: 2, color: color_event_per100, point: { visible: false, size: 1 }
+                },
+                {
+                    name: 'Pilots Average (Events/100)', valueField: 'avg_total_count_per100', axis: 'rateAxis',
+                    type: 'spline', width: 2, color: color_avg_event_per100, point: { visible: false, size: 1 }
+                }
+            ],
+
+            bindingOptions:
+            {
+                dataSource: 'fo_all_737_ds',
+                //'size.height': 'chart_size_full_height'
+            },
+            margin: { left: 80, right: 80, top: 20, bottom: 20 },
+            size: {
+                height: 700,
+                width: '100%'
+            }
+        };
+
+        $scope.fo_all_MD_ds = [];
+        $scope.fo_all_MD_chart =
+        {
+            title: 'MD FOs Event Comparison ',
+            tooltip: { enabled: true, shared: true },
+            legend: { verticalAlignment: 'bottom', horizontalAlignment: 'center' },
+
+            commonSeriesSettings: {
+                argumentField: 'crew_name',
+                hoverMode: 'allArgumentPoints',
+                selectionMode: 'allArgumentPoints',
+                type: 'stackedBar',        // ← مهم: پیش‌فرض رو stackedBar بذار
+                // barPadding: 0.2
+                barGroupPadding: 0.01
+            },
+            valueAxis: [
+                { name: 'countAxis', position: 'left', title: { text: 'Event Count' } },
+                { name: 'rateAxis', position: 'right', title: { text: 'Event Count / 100 Flights' }, grid: { visible: false } }
+            ],
+            argumentAxis: {
+                type: 'discrete',
+                position: 'bottom',
+                label: { overlappingBehavior: 'stagger', font: { size: 12 }, overlappingBehavior: 'rotate', rotationAngle: 90 }
+            },
+
+            series: [
+                {
+                    name: 'Flights', valueField: 'flight_count', axis: 'countAxis',
+                    type: 'stackedBar', stack: 'flights', color: Color_flight, opacity: 0.75
+                },
+
+                {
+                    name: 'Low', valueField: 'low_count', axis: 'countAxis',
+                    stack: 'sev', color: lowColor, opacity: 0.95
+                },
+                {
+                    name: 'Medium', valueField: 'medium_count', axis: 'countAxis',
+                    stack: 'sev', color: '#F59E0B', opacity: 0.95
+                },
+                {
+                    name: 'High', valueField: 'high_count', axis: 'countAxis',
+                    stack: 'sev', color: '#EF4444', opacity: 0.95
+                },
+
+                // خط نرخ (محور راست)
+                {
+                    name: 'Events/100 Flights', valueField: 'total_count_per_100', axis: 'rateAxis',
+                    type: 'spline', width: 2, color: color_event_per100, point: { visible: false, size: 1 }
+                },
+                {
+                    name: 'Pilots Average (Events/100)', valueField: 'avg_total_count_per100', axis: 'rateAxis',
+                    type: 'spline', width: 2, color: color_avg_event_per100, point: { visible: false, size: 1 }
+                }
+            ],
+
+            bindingOptions:
+            {
+                dataSource: 'fo_all_MD_ds',
+                //'size.height': 'chart_size_full_height'
+            },
+            margin: { left: 80, right: 80, top: 20, bottom: 20 },
+            size: {
+                height: 700,
+                width: '100%'
+            }
+        };
 
         //----------------------------------------
         //
-        $scope.get_events = function (type, register_id, cpt_id, route, phase, severity) {
+        $scope.get_events = function (type, register_id, cpt_id, route, phase, severity,position) {
             $scope.loadingVisible = true;
             fdmService.get_fmd_event_info_new(
                 $scope.formatDateYYYYMMDD($scope.dt_from),
@@ -953,7 +1083,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 cpt_id,
                 route,
                 phase,
-                severity
+                severity,
+                position
             ).then(function (response) {
                 $scope.loadingVisible = false;
                 //console.warn("Yesss", response.Data);
@@ -984,6 +1115,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 'B737',
                 0,
                 0,
+                "-",
                 "-",
                 "-",
                 "-"
@@ -1018,6 +1150,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 0,
                 "-",
                 "-",
+                "-",
                 "-"
             ).then(function (response) {
                 $scope.loadingVisible = false;
@@ -1042,7 +1175,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
         }
 
         $scope.show_severity = function (type, severity) {
-            $scope.get_events(type, 0, 0, "-", "-", severity);
+            $scope.get_events(type, 0, 0, "-", "-", severity,"-");
         }
 
         $scope.pie_737_total_event = {
@@ -1080,7 +1213,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
                 console.log(point);
                 var data = point.data;  //level:Medium
-                $scope.get_events("B737", 0, 0, "-", "-", data.level);
+                $scope.get_events("B737", 0, 0, "-", "-", data.level,"-");
 
                 // toggleVisibility(point);
             },
@@ -1194,7 +1327,7 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
                 console.log(point);
                 var data = point.data;  //level:Medium
-                $scope.get_events("MD", 0, 0, "-", "-", data.level);
+                $scope.get_events("MD", 0, 0, "-", "-", data.level,"-");
             },
             onLegendClick(e) {
                 const arg = e.target;
@@ -1327,12 +1460,14 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 var register_id = e.target.data.register_id;
                 console.log("Clicked register_id:", register_id);
 
-                fdmService.get_fmd_event_info(
+                fdmService.get_fmd_event_info_new(
                     $scope.formatDateYYYYMMDD($scope.dt_from),
                     $scope.formatDateYYYYMMDD($scope.dt_to),
                     "B737",
                     register_id,
                     "0",
+                    "-",
+                    "-",
                     "-",
                     "-"
                 ).then(function (response) {
@@ -1409,12 +1544,14 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 var register_id = e.target.data.register_id;
                 console.log("Clicked register_id:", register_id);
 
-                fdmService.get_fmd_event_info(
+                fdmService.get_fmd_event_info_new(
                     $scope.formatDateYYYYMMDD($scope.dt_from),
                     $scope.formatDateYYYYMMDD($scope.dt_to),
                     "MD",
                     register_id,
                     "0",
+                    "-",
+                    "-",
                     "-",
                     "-"
                 ).then(function (response) {
@@ -1508,12 +1645,14 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 var cpt_id = e.target.data.crew_id;
                 console.log("Clicked cpt_id:", cpt_id);
 
-                fdmService.get_fmd_event_info(
+                fdmService.get_fmd_event_info_new(
                     $scope.formatDateYYYYMMDD($scope.dt_from),
                     $scope.formatDateYYYYMMDD($scope.dt_to),
                     "B737",
                     "0",
                     cpt_id,
+                    "-",
+                    "-",
                     "-",
                     "-"
                 ).then(function (response) {
@@ -1605,12 +1744,14 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 var cpt_id = e.target.data.crew_id;
                 console.log("Clicked cpt_id:", cpt_id);
 
-                fdmService.get_fmd_event_info(
+                fdmService.get_fmd_event_info_new(
                     $scope.formatDateYYYYMMDD($scope.dt_from),
                     $scope.formatDateYYYYMMDD($scope.dt_to),
                     "MD",
                     "0",
                     cpt_id,
+                    "-",
+                    "-",
                     "-",
                     "-"
                 ).then(function (response) {
@@ -1703,13 +1844,15 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 var route = e.target.data.route;
                 console.log("Clicked route:", route);
 
-                fdmService.get_fmd_event_info(
+                fdmService.get_fmd_event_info_new(
                     $scope.formatDateYYYYMMDD($scope.dt_from),
                     $scope.formatDateYYYYMMDD($scope.dt_to),
                     "B737",
                     "0",
                     "0",
                     route,
+                    "-",
+                    "-",
                     "-"
                 ).then(function (response) {
                     if (response.Data) {
@@ -1801,13 +1944,15 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 var route = e.target.data.route;
                 console.log("Clicked route:", route);
 
-                fdmService.get_fmd_event_info(
+                fdmService.get_fmd_event_info_new(
                     $scope.formatDateYYYYMMDD($scope.dt_from),
                     $scope.formatDateYYYYMMDD($scope.dt_to),
                     "MD",
                     "0",
                     "0",
                     route,
+                    "-",
+                    "-",
                     "-"
                 ).then(function (response) {
                     if (response.Data) {
@@ -2741,9 +2886,6 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             //-------EWMA---------------------
 
             fdmService.get_fmd_ewma_all($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (res) {
-                //if (res.IsSuccess) {
-                //$scope.ds_ewma_all = res.Data.items;
-                // بعد از دریافت پاسخ سرویس:
                 $scope.allEWMAEvents = (res && res.Data && res.Data.items) ? res.Data.items.map(function (r) {
                     const alarm = (r.Alarm !== undefined) ? r.Alarm : true;
 
@@ -2751,15 +2893,15 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                         Date: new Date(r.Date),
                         Daily: r.EventRatePer100,
                         EWMA: r.Ewma,
-                        CusumPos: r.CusumPos,
-                        CusumNeg: r.CusumNeg,
+                        //CusumPos: r.CusumPos,
+                        //CusumNeg: r.CusumNeg,
                         Alarm: r.Alarm,
                         AlarmEWMA: alarm ? r.Ewma : null // فقط وقتی آلارم دارد مقدار EWMA؛ وگرنه null
 
                     };
                 }) : [];
 
-                //console.log('EWMAevents ', $scope.ds_ewma_all);
+                console.log('EWMAevents ', $scope.allEWMAEvents);
 
                 //}
             });
@@ -2841,37 +2983,59 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-            //-----------Pilots-------------------------
-            fdmService.get_fmd_crew($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response2) {
-                //get_fmd_crew_phase
-                $scope.result_crew = response2.Data.result_type_crew;
+            //-----------Pilots--FO-----------------------
+            fdmService.get_fmd_crew($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response2)
+            {
+                
+                //$scope.result_crew = response2.Data.result_type_crew;
+                $scope.result_crew = response2.Data.result_type_crew || [];
+                $scope.result_cpt_crew = Enumerable.From($scope.result_crew).Where("c => c.crew_position == 'CPT'").ToArray();
+                $scope.result_fo_crew = Enumerable.From($scope.result_crew).Where("c => c.crew_position == 'FO'").ToArray();
+               
                 fdmService.get_fmd_crew_phase($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response_phase) {
                     console.log(response_phase.Data.result_type_crew_phase);
 
-                    $.each($scope.result_crew, function (_i, _d) {
+                    $.each($scope.result_cpt_crew, function (_i, _d) {
                         var phase = Enumerable.From(response_phase.Data.result_type_crew_phase).Where(function (x) { return x.crew_id == _d.crew_id; }).OrderByDescending('$.total_score').ToArray();
                         _d.ds_phase = phase;
                         _d.ds_phase_scores = Enumerable.From(phase).Select('$.total_score').ToArray();
                         _d.ds_phase_labels = Enumerable.From(phase).Select('$.phase').ToArray();
                     });
 
-                    $scope.bar_cpt_737_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').Take(10).ToArray();
-                    $scope.bar_cpt_md_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').Take(10).ToArray();
+                    $.each($scope.result_fo_crew, function (_i, _d) {
+                        var phase = Enumerable.From(response_phase.Data.result_type_crew_phase).Where(function (x) { return x.crew_id == _d.crew_id; }).OrderByDescending('$.total_score').ToArray();
+                        _d.ds_phase = phase;
+                        _d.ds_phase_scores = Enumerable.From(phase).Select('$.total_score').ToArray();
+                        _d.ds_phase_labels = Enumerable.From(phase).Select('$.phase').ToArray();
+                    });
 
 
-                    $scope.ds_cpt_737 = Enumerable.From($scope.result_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').ToArray();
-                    //$scope.renderPhaseCharts($scope.ds_cpt_737,'b737-'); // ← همین‌جا
+                    $scope.bar_cpt_737_ds = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').Take(10).ToArray();
+                    $scope.bar_cpt_md_ds = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').Take(10).ToArray();
+
+                    $scope.bar_fo_737_ds = Enumerable.From($scope.result_fo_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').Take(10).ToArray();
+                    $scope.bar_fo_md_ds = Enumerable.From($scope.result_fo_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').Take(10).ToArray();
+
+
+                    $scope.ds_cpt_737 = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').ToArray();
                     $scope.$evalAsync(() => $scope.renderPhaseCharts($scope.ds_cpt_737, 'b737-'));
 
-                    $scope.ds_cpt_MD = Enumerable.From($scope.result_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').ToArray();
+                    $scope.ds_cpt_MD = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').ToArray();
                     $scope.$evalAsync(() => $scope.renderPhaseCharts($scope.ds_cpt_MD, 'md-'));
 
-                    console.log('$scope.result_cre', $scope.bar_cpt_737_ds);
-                    /////////////////////
+                    $scope.ds_fo_737 = Enumerable.From($scope.result_fo_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').ToArray();
+                    $scope.$evalAsync(() => $scope.renderPhaseCharts($scope.ds_fo_737, 'b737-'));
+
+                    $scope.ds_fo_MD = Enumerable.From($scope.result_fo_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').ToArray();
+                    $scope.$evalAsync(() => $scope.renderPhaseCharts($scope.ds_fo_MD, 'md-'));
+
+
+                    console.log('$scope.fo_all_MD_ds', $scope.fo_all_MD_ds);
+                  
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-                $scope.cpt_all_737_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_count_per_100').ToArray();
+                $scope.cpt_all_737_ds = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_count_per_100').ToArray();
                 var avg = $scope.cpt_all_737_ds.length
                     ? $scope.cpt_all_737_ds.reduce(function (s, it) { return s + (+it.total_count_per_100 || 0); }, 0) / $scope.cpt_all_737_ds.length
                     : 0;
@@ -2879,7 +3043,72 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 // مقدار ثابت برای تمام نقاط سری میانگین
                 $scope.cpt_all_737_ds.forEach(function (it) { it.avg_total_count_per100 = avg; });
 
-                $scope.cpt_all_MD_ds = Enumerable.From($scope.result_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_count_per_100').ToArray();
+                $scope.cpt_all_MD_ds = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_count_per_100').ToArray();
+                var avg = $scope.cpt_all_MD_ds.length
+                    ? $scope.cpt_all_MD_ds.reduce(function (s, it) { return s + (+it.total_count_per_100 || 0); }, 0) / $scope.cpt_all_MD_ds.length
+                    : 0;
+                avg = +avg.toFixed(2);
+                // مقدار ثابت برای تمام نقاط سری میانگین
+                $scope.cpt_all_MD_ds.forEach(function (it) { it.avg_total_count_per100 = avg; });
+
+
+                $scope.fo_all_737_ds = Enumerable.From($scope.result_fo_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_count_per_100').ToArray();
+                var avg = $scope.fo_all_737_ds.length
+                    ? $scope.fo_all_737_ds.reduce(function (s, it) { return s + (+it.total_count_per_100 || 0); }, 0) / $scope.fo_all_737_ds.length
+                    : 0;
+                avg = +avg.toFixed(2);
+                // مقدار ثابت برای تمام نقاط سری میانگین
+                $scope.fo_all_737_ds.forEach(function (it) { it.avg_total_count_per100 = avg; });
+
+                $scope.fo_all_MD_ds = Enumerable.From($scope.result_fo_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_count_per_100').ToArray();
+                var avg = $scope.fo_all_MD_ds.length
+                    ? $scope.fo_all_MD_ds.reduce(function (s, it) { return s + (+it.total_count_per_100 || 0); }, 0) / $scope.fo_all_MD_ds.length
+                    : 0;
+                avg = +avg.toFixed(2);
+                // مقدار ثابت برای تمام نقاط سری میانگین
+                $scope.fo_all_MD_ds.forEach(function (it) { it.avg_total_count_per100 = avg; });
+
+
+            }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+            //-------------FO-----------------------------
+            /*fdmService.get_fmd_crew($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).Where('$.crew_position=="CPT"').then(function (response2) {
+                //get_fmd_crew_phase
+                $scope.result_cpt_crew = response2.Data.result_type_crew;
+                fdmService.get_fmd_crew_phase($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response_phase) {
+                    console.log(response_phase.Data.result_type_crew_phase);
+
+                    $.each($scope.result_cpt_crew, function (_i, _d) {
+                        var phase = Enumerable.From(response_phase.Data.result_type_crew_phase).Where(function (x) { return x.crew_id == _d.crew_id; }).OrderByDescending('$.total_score').ToArray();
+                        _d.ds_phase = phase;
+                        _d.ds_phase_scores = Enumerable.From(phase).Select('$.total_score').ToArray();
+                        _d.ds_phase_labels = Enumerable.From(phase).Select('$.phase').ToArray();
+                    });
+
+                    $scope.bar_cpt_737_ds = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').Take(10).ToArray();
+                    $scope.bar_cpt_md_ds = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').Take(10).ToArray();
+
+
+                    $scope.ds_cpt_737 = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').ToArray();
+                    //$scope.renderPhaseCharts($scope.ds_cpt_737,'b737-'); // ← همین‌جا
+                    $scope.$evalAsync(() => $scope.renderPhaseCharts($scope.ds_cpt_737, 'b737-'));
+
+                    $scope.ds_cpt_MD = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_score').ToArray();
+                    $scope.$evalAsync(() => $scope.renderPhaseCharts($scope.ds_cpt_MD, 'md-'));
+
+                    console.log('$scope.result_cre', $scope.bar_cpt_737_ds);
+
+
+                }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+                $scope.cpt_all_737_ds = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_count_per_100').ToArray();
+                var avg = $scope.cpt_all_737_ds.length
+                    ? $scope.cpt_all_737_ds.reduce(function (s, it) { return s + (+it.total_count_per_100 || 0); }, 0) / $scope.cpt_all_737_ds.length
+                    : 0;
+                avg = +avg.toFixed(2);
+                // مقدار ثابت برای تمام نقاط سری میانگین
+                $scope.cpt_all_737_ds.forEach(function (it) { it.avg_total_count_per100 = avg; });
+
+                $scope.cpt_all_MD_ds = Enumerable.From($scope.result_cpt_crew).Where('$.ac_type=="MD"').OrderByDescending('$.total_count_per_100').ToArray();
                 var avg = $scope.cpt_all_MD_ds.length
                     ? $scope.cpt_all_MD_ds.reduce(function (s, it) { return s + (+it.total_count_per_100 || 0); }, 0) / $scope.cpt_all_MD_ds.length
                     : 0;
@@ -2890,6 +3119,10 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
+            $scope.ds_fo_737 = Enumerable.From($scope.result_fo_crew).Where('$.ac_type=="B737"').OrderByDescending('$.total_score').ToArray();
+            //$scope.renderPhaseCharts($scope.ds_cpt_737,'b737-'); // ← همین‌جا
+            $scope.$evalAsync(() => $scope.renderPhaseCharts($scope.ds_fo_737, 'b737-'));
+            */
             // ---------- All CPT comparison------------------------
             //fdmService.get_fmd_all_cpts($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (res)
             //{
@@ -2910,12 +3143,12 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
 
 
         };
-        $scope.go_crew = function (x) {
+        $scope.go_crew = function (x,position) {
             console.log('go_crew', x);
             var dt1 = moment($scope.dt_from).format('YYYY_MM_DD');
             var dt2 = moment($scope.dt_to).format('YYYY_MM_DD');
             // $location.path("/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2);
-            $window.open("#!/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2 + "/" + x.ac_type, '_blank')
+            $window.open("#!/fdm/crew/z/" + x.crew_id + "/" + dt1 + "/" + dt2 + "/" + x.ac_type + "/" + position, '_blank')
         };
 
         $scope.show_events = function (x) {

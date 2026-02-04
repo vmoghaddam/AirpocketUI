@@ -323,19 +323,22 @@
         <div style="width:100%">
             <!-- TAB NAVIGATION -->
             <ul class="nav nav-tabs">
-                <li style="width:20%;text-align:center" ng-class="{active: activeTab === 'overview'}">
+                <li style="width:17%;text-align:center" ng-class="{active: activeTab === 'overview'}">
                     <a style="color: white" ng-style="{'background-color': activeTab === 'overview' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'overview'; instanceReferesh()">OverView</a>
 
-                <li style="width:20%;text-align:center" ng-class="{active: activeTab === 'fleet'}">
+                <li style="width:17%;text-align:center" ng-class="{active: activeTab === 'fleet'}">
                     <a style="color: white" ng-style="{'background-color': activeTab === 'fleet' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'fleet'; instanceReferesh()">Fleet</a>
                 </li>
-                <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'pilots'}">
+                <li style="width: 16%; text-align: center" ng-class="{active: activeTab === 'pilots'}">
                     <a style="color: white" ng-style="{'background-color': activeTab === 'pilots' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'pilots'; instanceReferesh()">Pilots</a>
                 </li>
-                <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'events'}">
+                <li style="width: 16%; text-align: center" ng-class="{active: activeTab === 'FirstOfficers'}">
+                    <a style="color: white" ng-style="{'background-color': activeTab === 'FirstOfficers' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'FirstOfficers'; instanceReferesh()">FirstOfficers</a>
+                </li>
+                <li style="width: 17%; text-align: center" ng-class="{active: activeTab === 'events'}">
                     <a style="color: white" ng-style="{'background-color': activeTab === 'events' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'events'; instanceReferesh()">Events</a>
                 </li>
-                <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'routes'}">
+                <li style="width: 17%; text-align: center" ng-class="{active: activeTab === 'routes'}">
                     <a style="color: white" ng-style="{'background-color': activeTab === 'routes' ? 'cadetblue' : 'gray'}" href="" ng-click="activeTab = 'routes'; instanceReferesh()">Routes</a>
                 </li>
             </ul>
@@ -345,11 +348,35 @@
                     <!-- TAB OverView -->
                     <div ng-show="activeTab === 'overview'">
                         <div class="row " style="padding:5px;">
-                            <div class="type-card" style="overflow-x:hidden">
-                                <!-- <div class="type-header" style="padding:7px;background:#eee;text-align:center">AllEvents</div>-->
-                                <div id="chart_ewma_all" dx-chart="allEWMAEventsChart"></div>
-                                <div id="chart_pareto_all" dx-chart="AllParetoChart"></div>
+                             <div class="type-card">
+                                <div class="type-header" style="padding:7px;background:#eee;text-align:center">AllEvents</div>
+                                <div id="chart_ewma_all" dx-chart="allEWMAEventsChart">
+                                </div>
+                                <div id="chart_description" style="font-size:13px;color:#444;margin:10px 12px 18px 12px;line-height:1.5;">
+                                    <strong>How to read this chart</strong><br />
+                                    • <span style="color:#2f6fbf">Blue line (EWMA, α = 0.30)</span>: smoothed trend of daily FDM event rate per 100 flights. Smooths out daily fluctuations while highlighting emerging trends. An upward trend indicates increasing risk; downward or flat trend indicates stable or improving performance.<br />
+                                    • <span style="color:#d9534f">Red triangles (Alarms)</span>: days when <strong>CUSUM-positive</strong> exceeds threshold (kFactor = 0.50 × σ, hFactor = 10 × σ) <em>and</em> EWMA is rising. These points signal a statistically significant sustained increase in event rates and should be investigated first.<br />
+                                    • <strong>Event severity weights</strong>: High = 4, Medium = 2, Low = 1. Daily total score reflects overall impact.<br />
+                                    • <strong>Recommended action</strong>: review operations and maintenance logs around alarm dates. If multiple consecutive alarms appear, escalate to safety review for proactive risk mitigation.<br />
+                                    • <strong>Parameters reference</strong>: α (EWMA smoothing factor) = 0.30, kFactor (CUSUM sensitivity) = 0.50, hFactor (CUSUM alarm threshold) = 10.0, window for EWMA trend comparison = 3 days.
+                                </div>
+
+            ======================================
+                                <div class="type-card" style="overflow-x:hidden">
+                                   
+                                    <div id="chart_pareto_all" dx-chart="AllParetoChart"></div>
+                                    <div id="chart_description" style="font-size:13px;color:#444;margin:10px 12px 18px 12px;line-height:1.5;">
+                                        <strong>How to read this chart</strong><br />
+                                        • <strong>Bars (Count)</strong>: Show the individual number of occurrences for each event type. Taller bars represent more frequent events.<br />
+                                        • <strong>Line (Cumulative %)</strong>: Shows the running total percentage of all events as you move from left to right. It identifies how many event types make up the majority of problems.<br />
+                                        • <strong>The "Vital Few"</strong>: Events on the left side of the chart are your most frequent types. Focusing improvement efforts on these few areas will address the largest portion of total events, following the <strong>Pareto Principle (80/20 Rule)</strong>.<br />
+                                        • <strong>Recommended action</strong>: Prioritize investigation and corrective actions for the event types at the beginning of the chart (the tallest bars). Addressing the top 3-5 categories will likely resolve a significant majority (60-80%) of all reported events.<br />
+                                        • <strong>Parameters reference</strong>: Events are sorted by frequency in descending order. Cumulative percentage calculated as running total of individual percentages.
+                                    </div>
+
+                                </div>
                             </div>
+
                         </div>
                     </div>
                     <!-- TAB Fleet  -->
@@ -477,14 +504,14 @@
                             </div>
                             <div style="clear:both"></div>
                             <!--<div class="col-lg-3 col-md-3" style="padding :0;"></div>
-                            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
-                                <div class="type-card" style="margin-top:10px">
-                                    <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
-                                        <div id="bar_type_comparison" dx-chart="bar_type_comparison"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-3" style="padding :0;"></div>-->
+            <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
+                <div class="type-card" style="margin-top:10px">
+                    <div class=" chartBox" style='padding: 10px 10px 10px 10px'>
+                        <div id="bar_type_comparison" dx-chart="bar_type_comparison"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3" style="padding :0;"></div>-->
 
 
                             <div class="col-lg-6" style="padding:0px;padding-top:0px;padding-right:5px">
@@ -536,7 +563,7 @@
 
                         </div>
 
-                       
+
                     </div>
                     <!-- TAB pilots -->
                     <div ng-show="activeTab === 'pilots'">
@@ -554,7 +581,7 @@
                             <div class="tab-content ">
                                 <div ng-show="activeTab2 === 'B737'">
                                     <div style="padding:5px;overflow-y:auto;" ng-style="get_type_content_style()">
-                                        <div ng-repeat="c in ds_cpt_737 track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px" ng-click="go_crew(c)">
+                                        <div ng-repeat="c in ds_cpt_737 track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px" ng-click="go_crew(c,'CPT')">
                                             <div style="border:1px solid #ccc">
                                                 <div style="padding:7px;font-weight:bold;background:#ddd">{{c.crew_name}}</div>
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
@@ -611,19 +638,19 @@
                                         </div>
                                     </div>
                                     <!-- Top Pairs — B737 -->
-                                     <div style="clear:both"></div>
+                                    <div style="clear:both"></div>
                                     <div class="type-card" style="margin-top:10px;overflow-x:hidden">
                                         <div class="type-header" style="padding:7px;background:#eee;text-align:center">
                                             Top Pairs — B737 (events per 100 flights)
                                         </div>
-                                       
+
                                         <div style="height: 420px; padding: 10px;overflow-x:hidden">
                                             <!--<div ng-if="!pairs.list737.length" class="text-muted" style="padding:8px">داده‌ای برای B737 در این بازه نیست.</div>-->
                                             <canvas ng-if="pairs.list737.length" id="topPairsChartB737" style="width:100%;height:100%"></canvas>
                                         </div>
                                     </div>
 
-                                    
+
                                     <!-- Matrix — B737 (CPT rows × FO columns) -->
                                     <div class="type-card" style="margin-top:10px;overflow-x:hidden">
                                         <div class="type-header" style="padding:7px;background:#eee;text-align:center">
@@ -631,7 +658,7 @@
                                         </div>
 
                                         <div class="matrix-wrap" style="padding:10px">
-                                           
+
 
                                             <table ng-if="pairs.matrix737.rows.length" class="matrix" style="width:100%;">
                                                 <thead>
@@ -663,7 +690,7 @@
 
                                 <div ng-show="activeTab2 === 'MD'">
                                     <div style="padding:5px;overflow-y:auto; " ng-style="get_type_content_style()">
-                                        <div ng-repeat="c in ds_cpt_MD track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px">
+                                        <div ng-repeat="c in ds_cpt_MD track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px" ng-click="go_crew(c,'CPT')">
                                             <div style="border:1px solid #ccc">
                                                 <div style="padding:7px;font-weight:bold;background:#ddd">{{c.crew_name}}</div>
                                                 <div class="col-lg-2 col-md-3" style="padding :0;">
@@ -737,7 +764,7 @@
                                         </div>
 
                                         <div class="matrix-wrap" style="padding:10px">
-                                            
+
 
 
                                             <table ng-if="pairs.matrixMD.rows.length" class="matrix" style="width:100%;">
@@ -771,6 +798,149 @@
                         </div>
 
                     </div>
+                    <!-- TAB FOs -->
+                    <div ng-show="activeTab === 'FirstOfficers'">
+                        <div class="row " style="padding:5px;">
+                            <ul class="nav nav-tabs">
+                                <li style="width:50%;text-align:center" ng-class="{active: activeTab2 === 'B737'}">
+                                    <a style="color: white;padding:7px" ng-style="{'background-color': activeTab2 === 'B737' ? '#00ccff' : '#bfbfbf'}" href="" ng-click="activeTab2 = 'B737'">B737</a>
+                                </li>
+                                <li style="width: 50%; text-align: center" ng-class="{active: activeTab2 === 'MD'}">
+                                    <a style="color: white;padding:7px" ng-style="{'background-color': activeTab2 === 'MD' ? '#00ccff' : '#bfbfbf'}" href="" ng-click="activeTab2 = 'MD'">MD</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content ">
+                                <div ng-show="activeTab2 === 'B737'">
+                                    <div style="padding:5px;overflow-y:auto;" ng-style="get_type_content_style()">
+                                        <div ng-repeat="c in ds_fo_737 track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px" ng-click="go_crew(c,'FO')">
+                                            <div style="border:1px solid #ccc">
+                                                <div style="padding:7px;font-weight:bold;background:#ddd">{{c.crew_name}}</div>
+                                                <div class="col-lg-2 col-md-3" style="padding :0;">
+                                                    <div class="  generalInfo chartBox">
+                                                        <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">S/F</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight :bold;padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.score_per_flight}}</p>
+                                                    </div>
+                                                    <div class="  generalInfo chartBox" ng-click="showEvents()">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Scores</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.total_score}}</p>
+                                                    </div>
+                                                    <div class="   generalInfo chartBox">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Flights</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 5px; margin: 0; padding-bottom: 10px; padding-top: 0px ">{{c.flight_count}}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-lg-8 col-md-6" style="padding:7px;">
+                                                    <!----canvas id="chart-{{$index}}" width="100" height="60"></canvas-->
+                                                    <canvas id="b737-chart-{{c.crew_id || $index}}" class="w-100" height="140"></canvas>
+
+                                                </div>
+
+                                                <div class="col-lg-2 col-md-3" style="padding :0;">
+                                                    <div class="  generalInfo chartBox" style="background: #ffb3b3; ">
+                                                        <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">H.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.high_score}}</p>
+                                                    </div>
+                                                    <div class="  generalInfo chartBox" style="background: #ffe6cc; " ng-click="showEvents()">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">M.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px ">{{ c.medium_score}}</p>
+                                                    </div>
+                                                    <div class="   generalInfo chartBox" style="background: #ccfff2; ">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">L.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.low_score}}</p>
+                                                    </div>
+                                                </div>
+
+
+                                                <div style="clear:both"></div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div style="clear:both"></div>
+                                    <!-- all FOs comparison -->
+
+                                    <div class="col-lg-12" style="padding: 2px; overflow-x: hidden">
+                                        <div class="chartBox" style="width:100%">
+                                            <div id="chart_fo_all" dx-chart="fo_all_B737_chart"></div>
+                                        </div>
+                                    </div>
+                                  
+                                    <!-- Matrix — B737 (CPT rows × FO columns) -->
+                                    
+
+
+                                </div>
+
+                                <div ng-show="activeTab2 === 'MD'">
+                                    <div style="padding:5px;overflow-y:auto; " ng-style="get_type_content_style()">
+                                        <div ng-repeat="c in ds_fo_MD track by (c.crew_id || $index)" class="col-lg-3" style="padding:5px" ng-click="go_crew(c,'FO')">
+                                            <div style="border:1px solid #ccc">
+                                                <div style="padding:7px;font-weight:bold;background:#ddd">{{c.crew_name}}</div>
+                                                <div class="col-lg-2 col-md-3" style="padding :0;">
+                                                    <div class="  generalInfo chartBox">
+                                                        <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">S/F</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight :bold;padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.score_per_flight}}</p>
+                                                    </div>
+                                                    <div class="  generalInfo chartBox" ng-click="showEvents()">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Scores</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.total_score}}</p>
+                                                    </div>
+                                                    <div class="   generalInfo chartBox">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">Flights</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 5px; margin: 0; padding-bottom: 10px; padding-top: 0px ">{{c.flight_count}}</p>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-lg-8 col-md-6" style="padding:7px;">
+                                                    <canvas id="md-chart-{{c.crew_id || $index}}" width="100" height="60"></canvas>
+                                                </div>
+
+                                                <div class="col-lg-2 col-md-3" style="padding :0;">
+                                                    <div class="  generalInfo chartBox" style="background: #ffb3b3; ">
+                                                        <p style="font-size: 12px; padding : 5px;margin:0;padding-bottom:0">H.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.high_score}}</p>
+                                                    </div>
+                                                    <div class="  generalInfo chartBox" style="background: #ffe6cc; " ng-click="showEvents()">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">M.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 05px ">{{ c.medium_score}}</p>
+                                                    </div>
+                                                    <div class="   generalInfo chartBox" style="background: #ccfff2; ">
+                                                        <p style="font-size: 12px; padding: 5px; margin: 0; padding-bottom: 0 ">L.S</p>
+                                                        <p style="text-align: center; font-size: 14px; font-weight: bold; padding: 10px; margin: 0; padding-bottom: 10px; padding-top: 0px">{{ c.low_score}}</p>
+                                                    </div>
+                                                </div>
+
+
+                                                <div style="clear:both"></div>
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- all fos comparison -->
+
+                                    <div class="col-lg-12" style="padding:2px">
+                                        <div class="chartBox" style="width:100%">
+                                            <div id="chart_fo_MD_all" dx-chart="fo_all_MD_chart"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
                     <!--TAB EVENTS-->
                     <div ng-show="activeTab === 'events'">
                         <div class="row " style="padding:5px;">

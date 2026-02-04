@@ -10,7 +10,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
 
         $scope.dt_from = new Date(2024, 10, 1);
         $scope.dt_to = new Date(2025, 5, 1);
-
+        $scope.position = $routeParams.position;
 
         $scope.get_date_prm = function (str) {
 
@@ -215,9 +215,6 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                 'size.width': 'chart_size_4cols_width'
             },
         };
-
-
-
         $scope.pie_event = {
 
             type: 'doughnut',
@@ -277,9 +274,6 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                 dataSource: 'pie_event_ds'
             },
         };
-
-
-
         $scope.pie_score_phase = {
 
             type: 'doughnut',
@@ -339,9 +333,6 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                 dataSource: 'pie_score_phase_ds'
             },
         };
-
-
-
         $scope.pie_event_phase = {
 
             type: 'doughnut',
@@ -401,9 +392,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                 dataSource: 'pie_event_phase_ds'
             },
         };
-
-
-
+ //-----------------------------------------------------------------
         $scope.bar_phase = {
             palette: 'Office',
             tooltip: {
@@ -419,7 +408,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                     precision: 0
                 },
             },
-            // title: 'Top Events',
+            title: 'Event Count by Phase',
             commonSeriesSettings: {
                 argumentField: 'phase',
                 type: 'bar',
@@ -484,7 +473,6 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
         };
 
 
-
         $scope.bar_register = {
             palette: 'Office',
             tooltip: {
@@ -500,7 +488,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                     precision: 0
                 },
             },
-            // title: 'Top Events',
+            title: 'Event Count by Register',
             commonSeriesSettings: {
                 argumentField: 'register',
                 type: 'bar',
@@ -581,7 +569,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
             bindingOptions: { dataSource: 'CaptainEWMAEvents' },
 
             palette: "Material",
-            title: "EWMA & CUSUM (Alarm on Increase Only)",
+            title: "Early Warning Trend of Flight Events(Smoothed Daily Rate)",//"EWMA & CUSUM (Alarm on Increase Only)",
             commonSeriesSettings: {
                 argumentField: "Date",
                 type: "spline",
@@ -592,8 +580,8 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                 { name: "Daily Event Rate / 100 flights", valueField: "Daily", axis: "rateAxis", width: 1, color: COLOR_DAILY },
                 { name: "EWMA", valueField: "EWMA", axis: "rateAxis", width: 1, color: COLOR_EWMA },
 
-                { name: "CUSUM+", valueField: "CusumPos", axis: "cusumAxis", width: 1, color: COLOR_CPOS },
-                { name: "CUSUM-", valueField: "CusumNeg", axis: "cusumAxis", width: 1, color: COLOR_CNEG },
+                // { name: "CUSUM+", valueField: "CusumPos", axis: "cusumAxis", width: 1, color: COLOR_CPOS },
+                //{ name: "CUSUM-", valueField: "CusumNeg", axis: "cusumAxis", width: 1, color: COLOR_CNEG },
 
                 // مارکرهای آلارم روی EWMA
                 {
@@ -623,13 +611,14 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                     grid: { visible: true },
                     constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
                 },
-                {
-                    name: "cusumAxis",
-                    title: { text: "CUSUM" },
-                    position: "right",
-                    grid: { visible: false },
-                    constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
-                }
+                //    {
+                //        name: "cusumAxis",
+                //        title: { text: "CUSUM" },
+                //        position: "right",
+                //        grid: { visible: false },
+                //        constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
+                //    }
+                //
             ],
             crosshair: { enabled: true, label: { visible: true } },
             legend: { visible: true, verticalAlignment: "bottom", horizontalAlignment: "center" },
@@ -648,8 +637,8 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                             `Date: ${d}\n` +
                             `Daily: ${get("Daily Event Rate / 100 flights")}\n` +
                             `EWMA: ${get("EWMA")}\n` +
-                            `CUSUM+: ${get("CUSUM+")}\n` +
-                            `CUSUM-: ${get("CUSUM-")}` +
+                            // `CUSUM+: ${get("CUSUM+")}\n` +
+                            //`CUSUM-: ${get("CUSUM-")}` +
                             `Alarm: ${get("Alarm")}`
                     };
                 }
@@ -831,7 +820,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                     precision: 0
                 },
             },
-            // title: 'Top Events',
+            title: 'Event Count by Route',
             commonSeriesSettings: {
                 argumentField: 'route_iata',
                 type: 'bar',
@@ -847,7 +836,6 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                     }
                 }
             },
-            title: 'Routes',
 
             // title: 'Score per Flight Comparison',
             legend: {
@@ -1136,7 +1124,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
 
             },
         };
-        $scope.get_events = function (type, register_id, cpt_id, route, phase, severity) {
+        $scope.get_events = function (type, register_id, cpt_id, route, phase, severity,position) {
             $scope.loadingVisible = true;
             fdmService.get_fmd_event_info_new(
                 $scope.formatDateYYYYMMDD($scope.dt_from),
@@ -1146,7 +1134,8 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                 cpt_id,
                 route,
                 phase,
-                severity
+                severity,
+                position
             ).then(function (response) {
                 $scope.loadingVisible = false;
                 //console.warn("Yesss", response.Data);
@@ -1170,11 +1159,19 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
         ///////////////////////////////////////
         $scope.bind = function ()
         {
-            fdmService.get_fmd_crew_id($scope.crew_id, $scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response) {
-                $scope.result_type_crew = response.Data.result_type_crew[0];
+            fdmService.get_fmd_crew_id($scope.crew_id, $scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to), $scope.position).then(function (response) {
+                /*
+                //$scope.result_type_crew = response.Data.result_type_crew[0];
+               //$scope.result_type_crew=Enumerable.From(response.Data.result_type_crew[0]).Where(function (x) { return x.crew_position == $scope.position; }).ToArray();
+                $scope.result_type_crew = (response.Data.result_type_crew || []).filter(function (x)
+                {
+                    return x.crew_position === $scope.position;
+                });
+                console.log('$scope.position', $scope.position);
+                console.log('$scope.result_type_crew ', $scope.result_type_crew);
+
                 $scope.crew_name = response.Data.result_type_crew[0].crew_name;
                // $scope.bar_event_ds = response.Data.result_events;
-                $scope.bar_route_ds = Enumerable.From(response.Data.result_type_crew_route).Where(function (x) { return x.count > 0; }).OrderByDescending('$.count').ToArray();
                 $scope.pie_score_ds = [
                     { title: 'High', value: $scope.result_type_crew.high_score },
                     { title: 'Medium', value: $scope.result_type_crew.medium_score },
@@ -1185,11 +1182,49 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                     { title: 'Medium', value: $scope.result_type_crew.medium_count },
                     { title: 'Low', value: $scope.result_type_crew.low_count },
                 ];
-                $scope.result_register_crew = response.Data.result_register_crew;
-                $scope.result_register_crew_route = response.Data.result_register_crew_route;
-                $scope.result_type_crew_route = response.Data.result_type_crew_route;
+                */
+               // $scope.result_type_crew = (response.Data.result_type_crew || []).filter(function (x) {  return x.crew_position == $scope.position;  });
+                $scope.result_type_crew = response.Data.result_type_crew;
+                console.log('$scope.result_type_crew', $scope.result_type_crew);
 
-                fdmService.get_fmd_crew_phase_id($scope.crew_id, $scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response_phase) {
+                // یک آیتم انتخاب کن (اگر وجود داشته باشد)
+                $scope.crewItem = $scope.result_type_crew.length > 0 ? $scope.result_type_crew[0] : null;
+
+                if ($scope.crewItem) {
+                    // اگر می‌خواهی اسم را هم روی همین فیلتر بگیری، از crewItem استفاده کن
+                    $scope.crew_name = $scope.crewItem.crew_name;
+
+                    $scope.pie_score_ds = [
+                        { title: 'High', value: $scope.crewItem.high_score || 0 },
+                        { title: 'Medium', value: $scope.crewItem.medium_score || 0 },
+                        { title: 'Low', value: $scope.crewItem.low_score || 0 }
+                    ];
+
+                    $scope.pie_event_ds = [
+                        { title: 'High', value: $scope.crewItem.high_count || 0 },
+                        { title: 'Medium', value: $scope.crewItem.medium_count || 0 },
+                        { title: 'Low', value: $scope.crewItem.low_count || 0 }
+                    ];
+                } else {
+                    // اگر هیچ رکوردی نباشد
+                    $scope.crew_name = '';
+                    $scope.pie_score_ds = [];
+                    $scope.pie_event_ds = [];
+                }
+                $scope.bar_route_ds = Enumerable.From(response.Data.result_type_crew_route).Where(function (x) { return x.count > 0 ; }).OrderByDescending('$.count').ToArray();
+
+                //$scope.result_register_crew = response.Data.result_register_crew;
+                //$scope.result_register_crew_route = response.Data.result_register_crew_route;
+                //$scope.result_type_crew_route = response.Data.result_type_crew_route;
+                var all_register_crew = response.Data.result_register_crew || [];
+                var all_register_crew_route = response.Data.result_register_crew_route || [];
+                var all_type_crew_route = response.Data.result_type_crew_route || [];
+
+                $scope.result_register_crew = all_register_crew.filter(function (x) { return x.crew_position == $scope.position;});
+                $scope.result_register_crew_route = all_register_crew_route.filter(function (x) { return x.crew_position == $scope.position; });
+                $scope.result_type_crew_route = all_type_crew_route.filter(function (x) { return x.crew_position === $scope.position;});
+
+                fdmService.get_fmd_crew_phase_id($scope.crew_id, $scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to), $scope.position).then(function (response_phase) {
                     $scope.result_type_crew_phase = response_phase.Data.result_type_crew_phase;
                     $scope.pie_score_phase_ds = [];
                     $scope.pie_event_phase_ds = [];
@@ -1203,20 +1238,15 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
-                fdmService.get_fmd_crew_phase_route_id($scope.crew_id, $scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (response_phase_route) {
+                fdmService.get_fmd_crew_phase_route_id($scope.crew_id, $scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to), $scop.position).then(function (response_phase_route) {
 
                 }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
             }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
 
             //-------EWMA---------------------
-            fdmService.get_fmd_ewma_captain($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to), $scope.crew_id).then(function (res)
-            {
-                //if (res.IsSuccess) {
-                //$scope.ds_ewma_all = res.Data.items;
-                // بعد از دریافت پاسخ سرویس:
-                $scope.CaptainEWMAEvents = (res && res.Data && res.Data.items) ? res.Data.items.map(function (r)
-                {
+            fdmService.get_fmd_ewma_captain($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to), $scope.crew_id, $scope.position).then(function (res) {
+                $scope.CaptainEWMAEvents = (res && res.Data && res.Data.items) ? res.Data.items.map(function (r) {
                     const alarm = (r.Alarm !== undefined) ? r.Alarm : true;
 
                     return {
@@ -1235,7 +1265,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                 //}
             });
             //-----------------pareto-----------------
-            fdmService.get_fmd_cpt_pareto($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to), 20, $scope.crew_id).then(function (res)
+            fdmService.get_fmd_cpt_pareto($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to), 20, $scope.crew_id, $scope.position).then(function (res)
             {
                 if (res.IsSuccess)
                 {
@@ -1279,14 +1309,14 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
             }); 
 
             // --- Monthly CPT ------------------------
-            fdmService.get_fmd_monthlyCPT($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to)).then(function (res)
+            fdmService.get_fmd_monthlyCPT($scope.formatDateYYYYMMDD($scope.dt_from), $scope.formatDateYYYYMMDD($scope.dt_to),$scope.crew_id).then(function (res)
             {
                 var items = (res && res.Data && res.Data.items) ? res.Data.items : [];
-                var cptId = Number($scope.crew_id);
+               // var cptId = Number($scope.crew_id);
                 console.log('ca_type', $scope.ac_type);
                 // فقط رکوردهای کاپیتان منتخب و همین ac_type
                 var q = Enumerable.From(items)
-                    .Where(function (x) { return Number(x.crew_id) === cptId && x.ac_type === $scope.ac_type; });
+                    .Where(function (x) { return Number(x.ac_type === $scope.ac_type); });
 
                 var byMonth = q.OrderBy("$.year").ThenBy("$.month")
                     .Select(function (x) {
@@ -1316,7 +1346,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                     $scope.cpt_month_mix_ds = [];
                 });
             //})();
-            $scope.get_events("-", 0, $scope.crew_id, "-", "-", "-");
+            $scope.get_events("-", 0, $scope.crew_id, "-", "-", "-", $scope.position);
 
         }
         ///////////////////////////////////////

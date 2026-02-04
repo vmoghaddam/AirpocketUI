@@ -534,7 +534,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
             bindingOptions: { dataSource: 'allEWMAEvents' },
 
             palette: "Material",
-            title: "EWMA & CUSUM (Alarm on Increase Only)",
+            title: "Early Warning Trend of Flight Events(Smoothed Daily Rate)",//"EWMA & CUSUM (Alarm on Increase Only)",
+            
             commonSeriesSettings: {
                 argumentField: "Date",
                 type: "spline",
@@ -545,8 +546,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                 { name: "Daily Event Rate / 100 flights", valueField: "Daily", axis: "rateAxis", width: 1, color: COLOR_DAILY },
                 { name: "EWMA", valueField: "EWMA", axis: "rateAxis", width: 1, color: COLOR_EWMA },
 
-                { name: "CUSUM+", valueField: "CusumPos", axis: "cusumAxis", width: 1, color: COLOR_CPOS },
-                { name: "CUSUM-", valueField: "CusumNeg", axis: "cusumAxis", width: 1, color: COLOR_CNEG },
+                //{ name: "CUSUM+", valueField: "CusumPos", axis: "cusumAxis", width: 1, color: COLOR_CPOS },
+                //{ name: "CUSUM-", valueField: "CusumNeg", axis: "cusumAxis", width: 1, color: COLOR_CNEG },
 
                 // مارکرهای آلارم روی EWMA
                 {
@@ -576,13 +577,13 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                     grid: { visible: true },
                     constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
                 },
-                {
-                    name: "cusumAxis",
-                    title: { text: "CUSUM" },
-                    position: "right",
-                    grid: { visible: false },
-                    constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
-                }
+                //{
+                //    name: "cusumAxis",
+                //    title: { text: "CUSUM" },
+                //    position: "right",
+                //    grid: { visible: false },
+                //    constantLines: [{ value: 0, width: 1, dashStyle: "dash", color: "#9CA3AF" }]
+                //}
             ],
             crosshair: { enabled: true, label: { visible: true } },
             legend: { visible: true, verticalAlignment: "bottom", horizontalAlignment: "center" },
@@ -601,8 +602,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                             `Date: ${d}\n` +
                             `Daily: ${get("Daily Event Rate / 100 flights")}\n` +
                             `EWMA: ${get("EWMA")}\n` +
-                            `CUSUM+: ${get("CUSUM+")}\n` +
-                            `CUSUM-: ${get("CUSUM-")}` +
+                           // `CUSUM+: ${get("CUSUM+")}\n` +
+                           // `CUSUM-: ${get("CUSUM-")}` +
                             `Alarm: ${get("Alarm")}`
                     };
                 }
@@ -2752,8 +2753,8 @@ app.controller('fdm_sand_controller', ['$scope', '$location', '$routeParams', '$
                         Date: new Date(r.Date),
                         Daily: r.EventRatePer100,
                         EWMA: r.Ewma,
-                        CusumPos: r.CusumPos,
-                        CusumNeg: r.CusumNeg,
+                        //CusumPos: r.CusumPos,
+                        //CusumNeg: r.CusumNeg,
                         Alarm: r.Alarm,
                         AlarmEWMA: alarm ? r.Ewma : null // فقط وقتی آلارم دارد مقدار EWMA؛ وگرنه null
 
