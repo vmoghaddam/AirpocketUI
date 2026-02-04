@@ -1014,8 +1014,159 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                 width: '100%'
             }
         };
+        ////////////////////////////////////////////
+        $scope.dg_events_columns = [
+            //{
+            //    cellTemplate: function (container, options) {
+            //        $("<div style='text-align:center'/>")
+            //            .html(options.rowIndex + 1)
+            //            .appendTo(container);
+            //    }, name: 'row', caption: '#', barWidth: 50, fixed: true, fixedPosition: 'left', allowResizing: false, cssClass: 'rowHeader'
+            //}, 
+            { dataField: 'std', caption: 'Date', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 100, format: 'yy-MM-dd', sortIndex: 0, sortOrder: 'asc', fixed: false, fixedPosition: 'left' },
+            { dataField: 'ac_type2', caption: 'Fleet', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+            { dataField: 'register', caption: 'Reg.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 80 },
+            { dataField: 'flight_number', caption: 'Flight No.', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'route', caption: 'Route', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+            { dataField: 'event_name', caption: 'Event', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, minWidth: 190 },
+            { dataField: 'severity', caption: 'Severity', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
+            // { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100 },
 
 
+
+
+            { dataField: 'phase', caption: 'Phase', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+            // { dataField: 'state_name', caption: 'State Name', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 120 },
+
+            //{ dataField: 'arr_iata', caption: 'To', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 90 },
+
+            { dataField: 'ip1_name', caption: 'IP', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+            { dataField: 'cp1_name', caption: 'P1', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+            { dataField: 'cp2_name', caption: 'P2', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false, width: 170 },
+
+
+            //  { dataField: 'type', caption: 'Type', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 350 },
+
+            // { dataField: 'Duration', caption: 'Duration', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
+            // { dataField: 'Value', caption: 'Value', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 115,  },
+            //{ dataField: 'BlockOff', caption: 'BlockOff', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'BlockOn', caption: 'BlockOn', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'TakeOff', caption: 'TakeOff', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'Landing', caption: 'Landing', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+            //{ dataField: 'STD', caption: 'STD', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm', },
+            //{ dataField: 'STA', caption: 'STA', allowResizing: true, alignment: 'center', dataType: 'datetime', allowEditing: false, width: 115, format: 'HH:mm' },
+
+        ];
+        $scope.dg_events_selected = null;
+        $scope.dg_events_instance = null;
+        $scope.dg_events_ds = null;
+        $scope.dg_events_height = 500;
+
+        $scope.dg_events =
+        {
+            onContentReady: function (e) {
+                if (!$scope.dg_events_instance)
+                    $scope.dg_events_instance = e.component;
+
+            },
+            columns: $scope.dg_events_columns,
+
+            bindingOptions: {
+                "dataSource": "dg_events_ds",
+                "height": "dg_events_height",
+
+            },
+            wordWrapEnabled: true,
+            rowAlternationEnabled: false,
+            headerFilter: {
+                visible: false
+            },
+            filterRow: {
+                visible: true,
+                showOperationChooser: true,
+            },
+            showRowLines: true,
+            showColumnLines: true,
+            sorting: { mode: 'none' },
+
+            noDataText: '',
+
+            allowColumnReordering: true,
+            allowColumnResizing: true,
+            scrolling: { mode: 'infinite' },
+            paging: { pageSize: 100 },
+            showBorders: true,
+            selection: { mode: 'single' },
+            columnAutoWidth: false,
+
+            onSelectionChanged: function (e) {
+                //var data = e.selectedRowsData[0];
+
+                //if (!data) {
+                //    $scope.dg_master_selected = null;
+                //}
+                //else
+                //    $scope.dg_master_selected = data;
+
+
+            },
+
+            "export": {
+                enabled: false,
+                fileName: "File",
+                allowExportSelectedData: false
+            },
+
+
+            onRowPrepared: function (e) {
+                if (e.data && e.data.Severity && e.data.Severity == 'High') e.rowElement.css('background', '#ff8566');
+                if (e.data && e.data.Severity && e.data.Severity == 'Medium') e.rowElement.css('background', '#ffd480');
+                //  e.rowElement.css('background', '#ffccff');
+
+            },
+
+            onCellPrepared: function (e) {
+                //lightgray
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'Medium')
+                    e.cellElement.css("backgroundColor", "#ffe699");
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'High')
+                    e.cellElement.css("backgroundColor", "#d98c8c");
+                if (e.rowType === "data" && e.column.dataField == "severity" && e.data.severity == 'Low')
+                    e.cellElement.css("backgroundColor", "#b3e6cc");
+
+            },
+        };
+        $scope.get_events = function (type, register_id, cpt_id, route, phase, severity) {
+            $scope.loadingVisible = true;
+            fdmService.get_fmd_event_info_new(
+                $scope.formatDateYYYYMMDD($scope.dt_from),
+                $scope.formatDateYYYYMMDD($scope.dt_to),
+                type,
+                register_id,
+                cpt_id,
+                route,
+                phase,
+                severity
+            ).then(function (response) {
+                $scope.loadingVisible = false;
+                //console.warn("Yesss", response.Data);
+
+                // $scope.dg_events_ds = response.data.data?.Items;
+                // $scope.dg_events_ds = response.data.data?.Items || [];
+                if (response.Data) {
+                    //console.warn("Yesss", response.Data);
+
+                    $scope.dg_events_ds = response.Data.Items;
+                    
+                } else {
+                    console.warn("No Items in response", response.Data);
+                    $scope.dg_events_ds = [];
+                   
+                }
+
+
+            });
+        }
         ///////////////////////////////////////
         $scope.bind = function ()
         {
@@ -1165,7 +1316,7 @@ app.controller('zfdm_crew_controller', ['$scope', '$location', '$routeParams', '
                     $scope.cpt_month_mix_ds = [];
                 });
             //})();
-
+            $scope.get_events("-", 0, $scope.crew_id, "-", "-", "-");
 
         }
         ///////////////////////////////////////

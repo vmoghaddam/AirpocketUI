@@ -23,116 +23,17 @@
 
         </div>
 		<div class="tab main ">
-		   <div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
-		       <div class="col-lg-2 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
-                        <label>Issue Type</label>
-                        <div dx-select-box="sb_hazard_issue_type"  ></div>
-              </div>
-			  <div class="col-lg-2 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
-                        <label>Occurred On</label>
-                        <div dx-date-box="dt_hazard_occurred" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
-              </div>
-			 
-			  <div class="col-lg-2   col-12  margin-bottom-5 padding-7">
-				       <label>Register</label>
-                        <div dx-select-box="sb_hazard_flight" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
-				  </div>
-				   <div class="col-lg-2   col-12  margin-bottom-5 padding-7">
-				   
-				        <label>Airport</label>
-                        <div dx-select-box="sb_hazard_flight" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
-				  </div>
-				  <div class="col-lg-4   col-12  margin-bottom-5 padding-7">
-				   
-				        <label>Flight</label>
-                        <div dx-select-box="sb_hazard_flight" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
-				  </div>
-			   <div style='clear:both'></div>
-		      <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
-                        <label>Description</label>
-                        <div dx-text-area="txt_hazard_description" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
-              </div>
-			 
-			  <div class="col-lg-12 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
-                        <label>Scope(s)</label>
-                        <div dx-select-box="sb_hazard_scope" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
-              </div>
-			   
-			   <!--<div class="col-lg-3 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
-                        <label>Priority</label>
-                        <div dx-select-box="sb_hazard_priority"  ></div>
-              </div>-->
-			 
-			  <div class="col-lg-5   col-12  margin-bottom-5 padding-7">
-			      <!--<div class="col-12  margin-bottom-5 padding-7">
-                        <label>Category</label>
-                        <div dx-select-box="sb_hazard_category"  ></div>
-                  </div>-->
-				   <div class="col-12  margin-bottom-5 padding-7">
-                        <label>Category</label>
-						<div style='padding:5px;border:1px solid #ccc'>
-						   <div dx-tree-view="tree_hazard_subcategory" dx-item-alias="item">
-						    <div data-options="dxTemplate: {name: 'item'}">
-                                  <div> {{ item.title  }} </div>
-                            </div>
-						  </div>
-						</div>
-                          
-                  </div>
-			  </div>
-			  <div class="col-lg-4   col-12  margin-bottom-5 padding-7">
-			     
-				  <div style='clear:both'></div>
-				  <label style='margin-top:7px'>Location Coordinates</label>
-				  <div style='border:1px solid #ccc;height:285px;'></div>
-			      
-			  </div>
-			   <div class="col-lg-3   col-12  margin-bottom-5 padding-7">
-			     <!-- <label style='margin-top:7px'>Parts Involved</label>
-				   <div dx-data-grid="dg_parts" id="dg_parts" class="content" style="overflow-y:hidden"></div>
-				   <div dx-button="btn_part_add" style='margin-top:10px;'></div>-->
-				    <label style='margin-top:7px'>People Involved</label>
-				    <div dx-data-grid="dg_people" id="dg_people" class="content" style="overflow-y:hidden"></div>
-					<div dx-button="btn_people_add" style='margin-top:10px;'></div>
-					<!--<label style='margin-top:7px'>Components Involved</label>
-				   <div dx-data-grid="dg_parts" id="dg_parts" class="content" style="overflow-y:hidden"></div>
-				   <div dx-button="btn_part_add" style='margin-top:10px;'></div>-->
-			  </div>
-			  
-  		    <div style='clear:both'></div>
-			  <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
-                        <label>Remark</label>
-                         <div dx-text-area="txt_hazard_remark" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
-              </div>
-			 <div class="col-lg-12 col-md-12 col-sm-12 col-12  margin-bottom-5 padding-7">
-                        <label>Tags</label>
-                         <div dx-text-area="txt_hazard_tags" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
-              </div>
-			 <!-- <div class="col-lg-6 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
-                        <label>Category</label>
-                        <div dx-drop-down-box="sb_category">
-                           <div data-options="dxTemplate: { name: 'content' }">
-                               <div dx-tree-view="sb_category.treeView"></div>
-                           </div>
-                        </div>
-						
-              </div>
-			  <div class="col-lg-6 col-md-3 col-sm-6  col-12  margin-bottom-5 padding-7">
-                        <label>Sub Category</label>
-                        <div dx-drop-down-box="sb_category">
-                           <div data-options="dxTemplate: { name: 'content' }">
-                               <div dx-tree-view="sb_category.treeView"></div>
-                           </div>
-                        </div>
-						
-              </div>-->
-			  
-			  
-			  
-			  
-			   <div style='clear:both'></div>
-			  
-		   </div>
+			<div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>
+				<div class="col-lg-6 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					<label>Category</label>
+					<div dx-select-box="sb_hazard_category" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12  col-12  margin-bottom-5 padding-7">
+					<label>Category</label>
+					<div dx-select-box="sb_hazard_type" dx-validator="{validationGroup:'hazardadd',  validationRules: [{ type: 'required'}]}"></div>
+				</div>
+
+			</div>
 		</div>
 		<div class="tab sources " style='display:none;'>
 		      <div class="dx-border thin-scroll" style='overflow-y:auto' ng-style='get_scroll_style()'>

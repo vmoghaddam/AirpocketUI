@@ -1,0 +1,579 @@
+﻿<link href="sfstyles/ejthemes/default-theme/ej.web.all.min.css" rel="stylesheet" />
+<link href="sfstyles/default.css" rel="stylesheet" />
+<link href="sfstyles/default-responsive.css" rel="stylesheet" />
+<link href="sfstyles/ejthemes/responsive-css/ej.responsive.css" rel="stylesheet" />
+
+<style>
+    /*.dx-popup-content {padding:1px !important;}*/
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: initial !important;
+    }
+
+    .dx-tooltip-wrapper .dx-overlay-content {
+        background-color: white !important;
+    }
+
+        .dx-tooltip-wrapper .dx-overlay-content .dx-popup-content {
+            padding: 0px !important
+        }
+    /*.dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {height:91px;}*/
+    .dx-datagrid .dx-row.dx-header-row > td {
+        padding: 8px !important;
+    }
+
+    .dx-datagrid .dx-row > td {
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+
+    .dx-datagrid .dx-row.dx-header-row > td .dx-datagrid-text-content {
+        font-size: 12px !important;
+    }
+
+    .dx-border .dx-texteditor-input {
+        padding: 5px !important;
+    }
+
+    .dx-toast-custom {
+        background: #ffd480;
+        color: black;
+    }
+
+    .e-headercelldiv span {
+        display: none;
+    }
+
+    .summarybox i {
+        position: relative;
+        top: 2px;
+    }
+
+    .summarybox span {
+        display: inline-block;
+        margin-left: 2px;
+    }
+
+    .dx-checkbox-text {
+        font-size: 12px !important;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .dx-popup-title.dx-toolbar {
+        /*background:red !important;*/
+    }
+
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: #f44336 !important;
+        opacity: 1 !important;
+    }
+
+
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .e-gantt-parenttaskbar-innerdiv.e-chartexpand.e-parentTask {
+        display: none;
+    }
+
+    .e-gantt-taskbarSelection .e-gantt-childtaskbar {
+        border: 2px solid yellow
+    }
+    /*************/
+    #ganttviewerheaderContainerejGanttChartresourceGanttba {
+    }
+
+    .e-ganttviewerheaderContainer {
+        height: 53px !important;
+    }
+
+    .e-treegrid .e-headercell {
+        height: 53px !important;
+    }
+
+    .e-ganttchart .e-schedule-day-headercell {
+        height: 30px !important;
+    }
+
+    .tabsdate.dx-tabs {
+        /*text-align: left;*/
+        background: #e6e6e6;
+    }
+
+    .tabsdate .dx-tab {
+        background: #e6e6e6;
+        max-width: 200px;
+        min-width: 150px;
+        display: inline-block;
+        text-align: center;
+    }
+
+        .tabsdate .dx-tab.dx-tab-selected {
+            color: black;
+            background: #80ffd4 !important;
+        }
+
+    .e-ganttviewerbodyContianer.e-scroller.e-js.e-widget {
+        background: rgb(250, 250, 250);
+    }
+
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        background: #ccffe6;
+    }
+
+    .e-treegrid .e-alt-row {
+        background: #ccffe6;
+    }
+
+    .e-gridcontent.e-scroller.e-js.e-widget.e-borderbox {
+        border-bottom: none;
+    }
+
+    .e-ganttchart .e-ganttviewerheaderContainer {
+        background: #ccffe6;
+    }
+
+    .e-container-spreadsheet {
+        height: 100%;
+        width: 100%;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar-progress, .e-ganttchart .e-gantt-childtaskbar{
+        border-color:gray !important;
+    }*/
+
+    .e-childContainer {
+        margin-top: 0px !important;
+    }
+
+    .TemplateBoxNew {
+    }
+
+    .e-inner-treecolumn-container .e-cell {
+        font-size: 10px !important;
+        text-align: left;
+        white-space: normal !important;
+        word-break: break-word !important;
+    }
+
+    .e-dragintend {
+        width: 10px !important
+    }
+
+    .menu {
+        width: 150px;
+        box-shadow: 3px 3px 5px #888888;
+        border-style: solid;
+        border-width: 1px;
+        border-color: grey;
+        border-radius: 2px;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        position: fixed;
+        display: none;
+    }
+
+    .menu-item {
+        height: 20px;
+    }
+
+        .menu-item:hover {
+            background-color: #6CB5FF;
+            cursor: pointer;
+        }
+
+    .e-rangecontainer {
+        display: none;
+    }
+</style>
+
+<script>
+
+            var menuDisplayed = false;
+            var menuBox = null;
+
+            window.addEventListener("contextmenu", function() {
+                var left = arguments[0].clientX;
+                var top = arguments[0].clientY;
+
+                menuBox = window.document.querySelector(".menu");
+                menuBox.style.left = left + "px";
+                menuBox.style.top = top + "px";
+                menuBox.style.display = "block";
+
+                arguments[0].preventDefault();
+
+                menuDisplayed = true;
+            }, false);
+
+            window.addEventListener("click", function() {
+                if(menuDisplayed == true){
+                    menuBox.style.display = "none";
+                }
+            }, true);
+</script>
+<div class="box crewassignreg" style="height:100%;display:none;overflow-y:hidden">
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class="  col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  " style="border:none;">
+                <div id="gantt_container_ba" style="position:relative;top:0;width:100%">
+                    <div id="resourceGanttba" style="height:450px;width:100%;" />
+                </div>
+
+
+                <div dx-tabs="tabs_date_options">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="rowx footer">
+        <div class="col-lg-12   col-md-11 col-sm-11 col-xs-11" style="padding:0;text-align:right">
+            <table style="width:100%">
+                <tr>
+
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'assigncrewdate',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:50px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-number-box="num_days" dx-validator="{validationGroup:'assigncrewdate',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+
+
+
+
+                    <td> </td>
+
+
+
+                    <td style="width:120px;padding-left:5px"><div dx-button="btn_box"></div></td>
+                    <td style="width:47px;padding-left:5px"><div dx-button="btn_unbox"></div> </td>
+                    <td style="width:120px;padding-left:5px"><div dx-button="btn_crew"></div> </td>
+                    <td style="width:120px;padding-left:5px"><div dx-button="btn_cal"></div> </td>
+                    <td style="width:120px;padding-left:5px"><div dx-button="btn_details"></div> </td>
+                    <td style="width:120px;padding-left:5px"><div dx-button="btn_pos"></div> </td>
+                    <td style="width:120px;padding-left:5px"><div dx-button="btn_fc"></div> </td>
+
+                    <!--<td style="width:150px;padding-left:5px"><div dx-button="btn_log"></div> </td>
+                    <td style="width:120px;padding-left:5px"><div dx-button="btn_delete"></div></td>-->
+
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+
+    <div ng-include="'app/views/templates.html'"></div>
+
+
+    <div id="popup_crew" dx-popup="popup_crew">
+        <div style="padding:0px 0 0 0">
+            <div class=" col-lg-6 col-md-1 col-sm-1 col-xs-1" style="padding:0 5px 0 0;width:45%; ">
+                <div dx-data-grid="dg_box" id="dg_box" class="content" style="overflow-y:hidden"></div>
+            </div>
+            <div class=" col-lg-6 col-md-1 col-sm-1 col-xs-1" style="padding:0;width:55%; ">
+                <div class="dx-border" style="padding:0px;padding-bottom:5px; ">
+                    <div dx-select-box="sb_cabin" style="background:white"></div>
+                </div>
+                <div dx-data-grid="dg_crew" id="dg_crew" class="content" style="overflow-y:hidden" dx-item-alias="crew">
+                    <div data-options="dxTemplate:{ name:'addCrewTemplate' }">
+                        <a ng-click="addCrew(crew)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'>+</a>
+                    </div>
+                </div>
+                <div style="border:1px solid #ddd;padding:0px;margin-top:5px;height:200px">
+                    <div style="background:#898e8c;color:white;text-align:center;padding:5px;">Assigned</div>
+                    <div class="thin-scroll2" style="padding:0px;overflow-y:auto;height:170px">
+                        <div ng-repeat="x in assignedCrewDs" style="display: inline-block;width:33%;padding:3px 3px 0 3px">
+                            <div style="border:1px solid #80ccff; ">
+                                <div style="background:#80ccff;color:black;padding:3px 5px 3px 5px;text-align:center;font-size:11px;min-height:23.6px">
+                                    <a ng-show="IsCrewTileEditable(x)" href="" ng-click="prePosition(x.Id,x.fdpId,x.CrewId)"><i class="fas fa-caret-left" style="font-size:19px;float:left"></i></a>
+                                    <a href="" ng-show="!IsCrewTileEditable(x)"></a>
+                                    {{x.Position}} ({{x.JobGroup}})
+                                    <a ng-show="IsCrewTileEditable(x)" href="" ng-click="nextPosition(x.Id,x.fdpId,x.CrewId)"><i class="fas fa-caret-right" style="font-size:19px;float:right"></i></a>
+                                    <a href="" ng-show="!IsCrewTileEditable(x)"></a>
+                                </div>
+                                <div style="background:#eee;text-align:center;padding:4px;font-size:12px;font-weight:bold;min-height:25.6px;">
+                                    {{x.ScheduleName}}
+                                    <a href="" ng-show="IsCrewTileEditable(x)" ng-click="removeAssignedCrew(x.Id,x.fdpId,x.CrewId)"><i class="fas fa-minus-circle" style="color:red;font-size:19px;float:right;"></i></a>
+                                    <a href="" ng-show="!IsCrewTileEditable(x)"></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+    <div id="popup_cal" dx-popup="popup_cal">
+        <div style="padding:0px 0 0 0">
+            <div class=" col-lg-3 col-md-1 col-sm-1 col-xs-1 dgcalcrew" style="padding:0 5px 0 0; width:33%;  ">
+                <div dx-data-grid="dg_calcrew" id="dg_calcrew" class="content" style="overflow-y:hidden"></div>
+
+            </div>
+            <div class=" col-lg-3 col-md-1 col-sm-1 col-xs-1 dgcalfdp" style="padding:0 5px 0 0;  display:none; width:33%;">
+                <div dx-data-grid="dg_calfdp" id="dg_calfdp" class="content" style="overflow-y:hidden" dx-item-alias="fdp">
+                    <div data-options="dxTemplate:{ name:'addFDPTemplate' }">
+                        <a ng-click="addFDP(fdp)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'>+</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class=" col-lg-9 col-md-1 col-sm-1 col-xs-1" style="padding:0 0px 0 0;  width:67%; ">
+                <div style="border:1px solid #ddd; background:#eee;padding:3px;text-align:center">
+
+                    <table style="width:100%;">
+                        <tr>
+                            <td style="width:40px">
+                                <a href="" ng-click="preCrew()"><i class="fas fa-caret-left" style="font-size:22px;" ng-show="dg_calcrew_selected"></i></a>
+                            </td>
+                            <td>
+                                <span>{{dg_calcrew_selected?dg_calcrew_selected.Name+'('+dg_calcrew_selected.JobGroup+')':'-'}}</span>
+                            </td>
+                            <td style="width:40px">
+                                <a href="" ng-click="nextCrew()"><i class="fas fa-caret-right" style="font-size:22px;" ng-show="dg_calcrew_selected"></i></a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div dx-scheduler="cal_crew" dx-item-alias="duty">
+                    <div data-options="dxTemplate:{name:'appointmentTemplate'}" ng-class="getDutyClass(duty)">
+                        <div ng-show="duty.DutyType==1165">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="width:32px;">
+
+                                        <a class="cellposition" href="" data-ng-click="cellPositionClicked(duty.Id)" style="background:white;width:28px;height:28px;border-radius:50%;color:gray;font-weight:bold;font-size:10px;text-align:center;display: inherit;vertical-align:middle;">
+                                            {{getPosition(duty.Position)}}
+                                        </a>
+
+                                    </td>
+                                    <td style="text-align:left;">
+                                        <div style="font-size:9px;font-weight:bold">{{duty.FDPTitle}}</div>
+                                        <div style="font-size:10px; ">{{duty.FDPRemark}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                        <!--<div ng-show="duty.DutyType==10000">
+                            <table style="width:100%;">
+                                <tr>
+
+                                    <td style="text-align:left;">
+                                        <div style="font-size:11px;font-weight:bold;padding-bottom:2px;">{{duty.FDPTitle}}<span style="font-size:11px;margin-left:5px">{{duty.FDPRemark}}</span></div>
+
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>-->
+
+                        <div ng-show="duty.DutyType!=1165">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td style="width:32px;">
+
+                                        <a class="cellposition" href="" data-ng-click="cellPositionClicked(duty.Id)" style="background:white;width:28px;height:28px;border-radius:50%;color:gray;font-weight:bold;font-size:10px;text-align:center;display: inherit;vertical-align:middle;">
+                                            {{getCaption(duty)}}
+                                        </a>
+
+                                    </td>
+                                    <td style="text-align:left;">
+                                        <div style="font-size:10px;font-weight:bold">{{duty.FDPTitle}}</div>
+                                        <div style="font-size:10px; ">{{duty.FDPRemark}}</div>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div data-options="dxTemplate: {name: 'tooltip-template'}" dx-item-alias="duty" style="background:white;border:1px solid #03A9F4;min-width:300px;">
+                        <div style="background:#03A9F4;padding:5px;">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="text-align:left;">
+                                        <div style="font-size:12px;font-weight:bold">{{duty.FDPTitle}}</div>
+                                        <div style="font-size:12px; ">{{duty.FDPRemark}}</div>
+                                    </td>
+                                    <td style="width:40px">
+                                        <a href="" ng-click="removeAssignedFDP(duty)"><i class="fas fa-minus-circle" style="color:red;font-size:24px; "></i></a>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+                        <div style="background:white;padding:7px;color:gray;;border-bottom:1px solid #03A9F4" ng-show="duty.DutyType==1165">
+                            <table style="width:100%">
+                                <tr>
+                                    <td style="width:30px">
+                                        <a href="" ng-click="prePosition2(duty)"><i class="fas fa-caret-left" style="font-size:22px;"></i></a>
+                                    </td>
+                                    <td style="font-weight:bold;">{{ duty.Position }}</td>
+                                    <td style="width:30px">
+                                        <a href="" ng-click="nextPosition2(duty)"><i class="fas fa-caret-right" style="font-size:22px;"></i></a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                        <div style="background:white;padding:7px;color:gray; ">
+                            Some information ...
+                        </div>
+
+                    </div>
+
+                    <div data-options="dxTemplate:{name:'dataCellTemplate'}" ng-class="getDataCellTemplateClass(duty)">
+                        <div>
+                            {{duty.text}}
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div id="context-menu" dx-context-menu="cellContextMenuOptions"></div>
+            </div>
+            <div style="clear:both"></div>
+        </div>
+    </div>
+
+
+    <div id="popup_event" dx-popup="popup_event">
+        <div style="padding:0px 0 0 0">
+            <div class="dx-border">
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>From</label>
+                    <div class="center" dx-date-box="date_from_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div class="col-lg-12 margin-bottom-5 padding-7">
+                    <label>To</label>
+                    <div class="center" dx-date-box="date_to_event" dx-validator="{validationGroup:'eventadd2',  validationRules: [{ type: 'required'}]}"></div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="popup_fdp_details" dx-popup="popup_fdp_details">
+        <div style="padding:0px 0 0 0">
+            <div dx-data-grid="dg_details" id="dg_details" class="content" style="overflow-y:hidden;margin-top:5px;" dx-item-alias="fdp">
+                <div data-options="dxTemplate:{ name:'detailTemplate' }">
+
+
+                    <div ng-repeat="x in fdp.data.Items" style="display: inline-block;padding:3px 3px 0 3px;width:140px">
+                        <div style="padding:5px 10px 5px 10px;text-align:center " ng-class="getTileFlightClass(x)" ng-click="tileFlightClicked(x)">
+                            <div style="font-size:12px;color:white;">{{x.FromAirportIATA}}-{{x.FlightNumber}}-{{x.ToAirportIATA}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup_pos" dx-popup="popup_pos">
+        <div style="padding:0px 0 0 0">
+            <div class="col-lg-6" style="margin:0 !important; padding:0px !important">
+                <div dx-data-grid="dg_pos_flights" id="dg_pos_flights" class="content" style="overflow-y:hidden; " dx-item-alias="pflight">
+
+                </div>
+                <div dx-data-grid="dg_main_flights" id="dg_main_flights" class="content" style="overflow-y:hidden;margin-top:5px;" dx-item-alias="mflight">
+
+                </div>
+            </div>
+            <div class="col-lg-6" style="margin:0 !important; padding:0px 0px 0px 5px !important">
+                <div dx-data-grid="dg_pos_crew" id="dg_pos_crew" class="content" style="overflow-y:hidden" dx-item-alias="pcrew">
+                    <div data-options="dxTemplate:{ name:'addPosCrewTemplate' }">
+                        <a ng-click="addPosCrew(pcrew)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 0px !important;border-radius:50%;text-align:center'>+</a>
+                    </div>
+                </div>
+                <div style="border:1px solid #ddd;padding:0px;margin-top:5px;height:200px">
+                    <div style="background:#898e8c;color:white;text-align:center;padding:5px;">Assigned</div>
+                    <div class="thin-scroll2" style="padding:0px;overflow-y:auto;height:170px">
+                        <div ng-repeat="x in assignedPosCrewDs" style="display: inline-block;width:25%;padding:3px 3px 0 3px">
+                            <div style="border:1px solid #80ccff; ">
+                                <div style="background:#80ccff;color:black;padding:3px 5px 3px 5px;text-align:center;font-size:11px;min-height:23.6px">
+                                    <a ng-show="IsCrewTileEditable(x)" href="" ng-click="prePosPosition(x.Id,x.fdpId,x.CrewId)"><i class="fas fa-caret-left" style="font-size:19px;float:left"></i></a>
+                                    <a href="" ng-show="!IsCrewTileEditable(x)"></a>
+                                    {{x.Position}} ({{x.JobGroup}})
+                                    <a ng-show="IsCrewTileEditable(x)" href="" ng-click="nextPosPosition(x.Id,x.fdpId,x.CrewId)"><i class="fas fa-caret-right" style="font-size:19px;float:right"></i></a>
+                                    <a href="" ng-show="!IsCrewTileEditable(x)"></a>
+                                </div>
+                                <div style="background:#eee;text-align:center;padding:4px;font-size:12px;font-weight:bold;min-height:25.6px;">
+                                    {{x.ScheduleName}}
+                                    <a href="" ng-show="IsCrewTileEditable(x)" ng-click="removeAssignedPosCrew(x.Id,x.fdpId,x.CrewId)"><i class="fas fa-minus-circle" style="color:red;font-size:19px;float:right;"></i></a>
+                                    <a href="" ng-show="!IsCrewTileEditable(x)"></a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="popup_fc" dx-popup="popup_fc">
+        <div style="padding:0px 0 0 0">
+            <div class="col-lg-6" style="margin:0 !important; padding:0px !important">
+                <div dx-data-grid="dg_fc" id="dg_fc" class="content" style="overflow-y:hidden; " dx-item-alias="pflight">
+
+                </div>
+
+            </div>
+            <div class="col-lg-6" style="margin:0 !important; padding:0px 0px 0px 5px !important">
+                <div dx-data-grid="dg_fcrew" id="dg_fcrew" class="content" style="overflow-y:hidden" dx-item-alias="crew">
+
+                </div>
+                <div dx-data-grid="dg_ffdp" id="dg_ffdp" class="content" style="overflow-y:hidden;margin-top:5px" dx-item-alias="crew">
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

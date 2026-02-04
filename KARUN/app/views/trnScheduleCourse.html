@@ -1,0 +1,634 @@
+﻿<style>
+    .stSelected {
+        background: green !important;
+        color: white !important;
+    }
+
+    .dx-fileuploader-input-wrapper {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+        .dx-fileuploader-input-wrapper .dx-button-content {
+            background: green;
+            color: white;
+        }
+
+    .dx-fileuploader-container {
+    }
+
+    .cell-img {
+        height: 40px;
+    }
+
+
+
+
+
+    .row_odd .cal_day {
+        background: #ffe6cc;
+    }
+
+    .row_even .cal_day {
+        background: #ccf2ff;
+    }
+
+
+    ._cal .days-row {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days-row td {
+            text-align: center;
+            border: 1px solid gray;
+            padding: 5px;
+            width: 14.28571%;
+            background: #ddd;
+        }
+
+    ._cal .days {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days td {
+            border: 1px solid #ccc;
+            width: 14.28571%;
+            padding: 3px;
+            vertical-align: baseline;
+        }
+
+            ._cal .days td .day-wrapper {
+                padding: 2px;
+                /*min-height: 65px;*/
+            }
+
+
+            ._cal .days td .day-caption {
+                color: black;
+                text-align: right;
+                padding: 1px;
+            }
+
+            ._cal .days td .today .day-caption {
+                color: green;
+                font-weight: bold;
+            }
+
+            ._cal .days td .day-caption._inactive {
+                color: #ccc !important;
+            }
+
+            ._cal .days td .today .day-caption._inactive {
+                color: green !important;
+                font-weight: bold;
+            }
+
+            ._cal .days td:has(> .today) {
+                background: #ccffe6;
+            }
+
+    ._cal .event {
+        padding: 3px;
+        margin: 2px 0 0 0;
+        text-align: center;
+    }
+
+        ._cal .event.d1165 {
+            background-color: #00cc99;
+        }
+
+        ._cal .event.d10000 {
+            background-color: #66ff66;
+        }
+
+        ._cal .event span {
+            display: inline-block;
+            margin-left: 5px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        ._cal .event i {
+            font-size: 15px;
+        }
+
+    .thin-scroll0::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .thin-scroll0::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    ._xheader.selected {
+        background: #b3ffd9;
+        border-bottom: 2px solid #00cc66 !important;
+    }
+
+    ._header_child {
+        /*display: none;*/
+    }
+
+
+    ._event {
+        margin: 3px;
+    }
+
+    ._session {
+        padding: 5px;
+        background: #adebeb;
+        color: black;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    ._expired {
+        padding: 5px;
+        background: #b32400;
+        color: white;
+        font-size: 11px;
+        text-align: center;
+    }
+    ._status_1 {
+        background: #99ebff;
+    }
+    ._status_2 {
+        background: #ffccff;
+    }
+    ._status_3 {
+        background: #1affa3;
+    }
+    ._status_4 {
+        background: #ffcc66;
+    }
+
+    ._session ._title {
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+    ._expired ._title {
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color:white;
+    }
+
+    ._session.selected {
+        background: #99ff33;
+    }
+
+    ._scheduleyear .cell-container td {
+        border: 1px solid gray;
+        width: 25%;
+        vertical-align: baseline;
+    }
+
+    ._scheduleyear .cell-container .month .header {
+        color: #bbb;
+        font-weight: bold;
+        font-size: 12px;
+        /*padding: 5px 10px;*/
+        margin-bottom: 5px;
+    }
+
+    ._scheduleyear .cell-container .month {
+        padding: 10px;
+        font-size: 12px;
+    }
+    .collapsed{
+        display:none;
+    }
+</style>
+
+<div class="box trnschedulecoursetype" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-12  col1 col-grid" style="padding-right:2px;padding-left:2px;">
+
+
+            <div class="_scheduleyear  _header_child" style="border:none;border-right:1px solid #ccc;padding:3px; overflow-y:hidden; " ng-style="getMainStyle()">
+                <div style="padding:0px;" class="_scheduleyear_wrapper">
+                    <div>
+                        <table style="width:100%;background:#ddd">
+                            <tr>
+                                <td style="padding:5px" ng-click="schedule_year_ins.nextYear(-1)"><i class="fas fa-chevron-circle-left main-color" style="font-size:22px;"></i></td>
+                                <td style="text-align:center;font-size:16px;padding:5px">{{schedule_year_ins.caption}}</td>
+                                <td style="padding:5px;text-align:right;" ng-click="schedule_year_ins.nextYear(1)"><i class="fas fa-chevron-circle-right main-color" style="font-size:22px;"></i></td>
+                            </tr>
+
+                        </table>
+                        <div id="scrollview" class="thin-scroll0" style="overflow-y:auto;margin-top:0px;" ng-style="getScrollStyle()">
+                            <table class="cell-container" style="width:100%;border:1px solid gray">
+                                <tr>
+                                    <td class="jan month" ng-style="getScheduleYearTableRowStyle()">
+                                        <div class="header" ng-click="goMonth(1)">JAN<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(1)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="feb month">
+                                        <div class="header" ng-click="goMonth(2)">FEB<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(2)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="mar month">
+                                        <div class="header" ng-click="goMonth(3)">MAR<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(3)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="apr month">
+                                        <div class="header" ng-click="goMonth(4)">APR<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(4)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="may month" ng-style="getScheduleYearTableRowStyle()">
+                                        <div class="header" ng-click="goMonth(5)">MAY<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(5)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="jun month">
+                                        <div class="header" ng-click="goMonth(6)">JUN<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(6)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="jul month">
+                                        <div class="header" ng-click="goMonth(7)">JUL<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(7)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="aug month">
+                                        <div class="header" ng-click="goMonth(8)">AUG<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(8)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="sep month" ng-style="getScheduleYearTableRowStyle()">
+                                        <div class="header" ng-click="goMonth(9)">SEP<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(9)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="oct month">
+                                        <div class="header" ng-click="goMonth(10)">OCT<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(10)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="nov month">
+                                        <div class="header" ng-click="goMonth(11)">NOV<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(11)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="dec month">
+                                        <div class="header" ng-click="goMonth(12)">DEC<span style="float:right;display:inline-block;color:#33ccff"><i class='fas fa-calendar-alt' style='font-size:18px'></i></span></div>
+                                        <div ng-repeat="x in schedule_year_ins.getCoursesByMonth(12)" style="border:1px solid #ddd;padding:3px;font-size:12px;background:#f2f2f2;margin-bottom:5px;">
+                                            <div style="padding:3px;border-bottom:0px solid #ddd;font-size:12px;font-weight:bold" ng-click="expand($event)"> {{x.Type}}  ({{x.Items.length}})<span style="float:right;display:inline-block;color:#ff0066; "><i class='fas fa-arrows-alt-v' style='font-size:16px'></i></span></div>
+                                            <div class="collapsed">
+                                                <div ng-repeat="y in x.Items" style="padding:2px 10px 2px 10px;border-bottom:0px dotted #ff9966;" ng-click="showCourse(y ,$event)">
+                                                    <table style="width:100%;border:none" ng-style="getCourseStatusStyle(y)">
+                                                        <tr style="border-bottom:0px solid #ddd">
+                                                            <td style="border: none;padding:3px 0 3px 3px;font-weight:bold"><span style="font-size:12px;">CLS-{{y.Id}}</span></td>
+                                                            <td style="width:20%;border:none; text-align:center"><span style="font-size:12px;">{{momentDate(y.DateStart)}}</span></td>
+                                                            <td style="width:5%;border:none;text-align:center"> <span style=" display:inline-block;color:#999999"><i class='fas fa-info-circle' style='font-size:14px'></i></span></td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <!--  <div class="dx-border" dx-select-box="sb_coursetypes" style="margin-top:6px; "></div>-->
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+    <div class="rowx footer">
+        <div style="padding:0;">
+
+
+            <table>
+                <tr>
+                    <td style="padding-right:3px;"> <div dx-button="btn_search"></div></td>
+
+                </tr>
+            </table>
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+    <div id="popup_month" dx-popup="popup_month">
+        <div id="sch_01">
+            <div>
+                <table style="width:100%;background:#ddd">
+                    <tr>
+                        <!-- <td style="padding:5px" ng-click="nextMonth(-1)"><i class="fas fa-chevron-circle-left main-color" style="font-size:22px;"></i></td>-->
+                        <td style="text-align:center;font-size:16px;padding:5px">{{schedule_month_01_ins.caption}}</td>
+                        <!--  <td style="padding:5px;text-align:right;" ng-click="nextMonth(1)"><i class="fas fa-chevron-circle-right main-color" style="font-size:22px;"></i></td>-->
+                    </tr>
+
+                </table>
+            </div>
+            <div class="_cal">
+
+                <table style="width:100%" class="days-row">
+                    <tr>
+                        <td style="font-size:12px;">SUN</td>
+                        <td style="font-size:12px;">MON</td>
+                        <td style="font-size:12px;">TUE</td>
+                        <td style="font-size:12px;">WED</td>
+                        <td style="font-size:12px;">THU</td>
+                        <td style="font-size:12px;">FRI</td>
+                        <td style="font-size:12px;">SAT</td>
+                    </tr>
+                </table>
+                <div id="scrollview" class="thin-scroll0" style="overflow-y:auto;margin-top:0px; " ng-style="schedule_month_01_ins.getScrollStyle()">
+
+                    <table style="width:100%" class="days" id="_days">
+                        <tr id="w1">
+                            <td id="d0">
+                                <div class="day-wrapper"></div>
+                            </td>
+                            <td id="d1">
+                            </td>
+                            <td id="d2">
+                            </td>
+                            <td id="d3">
+                            </td>
+                            <td id="d4">
+                            </td>
+                            <td id="d5">
+                            </td>
+                            <td id="d6">
+                            </td>
+                        </tr>
+
+                        <tr id="w2">
+                            <td id="d7">
+                            </td>
+                            <td id="d8">
+                            </td>
+                            <td id="d9">
+                            </td>
+                            <td id="d10">
+                            </td>
+                            <td id="d11">
+                            </td>
+                            <td id="d12">
+                            </td>
+                            <td id="d13">
+                            </td>
+                        </tr>
+
+                        <tr id="w3">
+                            <td id="d14">
+                            </td>
+                            <td id="d15">
+                            </td>
+                            <td id="d16">
+                            </td>
+                            <td id="d17">
+                            </td>
+                            <td id="d18">
+                            </td>
+                            <td id="d19">
+                            </td>
+                            <td id="d20">
+                            </td>
+                        </tr>
+                        <tr id="w4">
+                            <td id="d21">
+                            </td>
+                            <td id="d22">
+                            </td>
+                            <td id="d23">
+                            </td>
+                            <td id="d24">
+                            </td>
+                            <td id="d25">
+                            </td>
+                            <td id="d26">
+                            </td>
+                            <td id="d27">
+                            </td>
+                        </tr>
+                        <tr id="w5">
+                            <td id="d28">
+                            </td>
+                            <td id="d29">
+                            </td>
+                            <td id="d30">
+                            </td>
+                            <td id="d31">
+                            </td>
+                            <td id="d32">
+                            </td>
+                            <td id="d33">
+                            </td>
+                            <td id="d34">
+                            </td>
+                        </tr>
+                        <tr id="w6">
+                            <td id="d35">
+                            </td>
+                            <td id="d36">
+                            </td>
+                            <td id="d37">
+                            </td>
+                            <td id="d38">
+                            </td>
+                            <td id="d39">
+                            </td>
+                            <td id="d40">
+                            </td>
+                            <td id="d41">
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="popup_people" dx-popup="popup_people">
+        <div class="   padding-7" style="padding:0;margin-top:3px;">
+
+            <div class="tabfolder participants">
+                <div dx-data-grid="dg_people" id="dg_people" dx-item-alias="row">
+
+                    <div data-options="dxTemplate:{ name:'updateResultTemplate' }">
+                        <!--<a ng-click="updateResult(row)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Update Result</a>-->
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+
+    <div ng-include="'app/views/courseAdd.html?v=1256887'" ng-init="type = 'active';"></div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

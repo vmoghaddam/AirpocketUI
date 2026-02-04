@@ -1,0 +1,167 @@
+<style>
+ .tab-map{
+   display:none;
+ }
+ .tab-map-selected{
+   background:yellow !important;
+ }
+</style>
+<div ng-controller="mapController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding">
+        <div class='col-lg-8 col-md-8 col-sm-8 col-xs-12' style='padding:0;padding-top:7px;padding-left:5px' >
+		     <div style='border:1px solid #ccc' ng-style='get_map_container_style()'>
+			    <div style='background:gray;color:black;text-align:center;font-weight:bold'>
+							<table style='width:100%;background:#ddd'><tr>
+								<td style='padding:7px;width:50%;text-align:left'>{{flight.FlightNumber}}</td>
+								<td style='width:25%;font-size:12px;text-align:right'><img src="content/images/acicon2.png" style="margin-right:5px;width:20px;height:20px;vertical-align:middle" />Estimated</td>
+								<td style='width:25%;font-size:12px;border-right:1px solid #ccc'><img src="content/images/acicon.png" style="margin-right:5px;width:20px;height:20px;vertical-align:middle" />Actual</td>
+								 
+						    </tr></table>
+		       </div>
+			   <iframe  ng-attr-id="imap-{{mapt_data.Id}}" ng-src="{{map_url}}" style="border:none;height:100%;width:100%;" ng-style='get_map_style()'></iframe>
+			 </div>
+		    
+		</div>
+		
+		 <div class='col-lg-4 col-md-4 col-sm-4 col-xs-12' style='padding:0;padding-top:7px;padding-left:5px;padding-right:5px' >
+		    <div class='thin-scroll' style='overflow-y:auto' ng-style='get_info_container_style()'>
+			  <div class='tab-map tab-info'>
+			   <div style='background:#ddd;padding:7px;font-weight:bold'  >
+			      Information
+			   </div>
+			   <div style='border:1px solid #ccc;padding:7px;'>
+			      <table style='width:100%;'>
+				   <tr style='border-bottom:1px solid #ddd';>
+					    <td style='padding:5px;width:25%;'>Date</td>
+						<td   style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd;width:25%;'>{{format_date(flight.STDDayLocal)}}</td>
+						 <td style='padding:5px;width:25%;'>Route</td>
+						 <td style='padding:5px;text-align:right;font-weight:bold;width:25%;'>{{flight.FromAirportIATA2}}-{{flight.ToAirportIATA2}}</td>
+					 </tr>
+				     <tr style='border-bottom:1px solid #ddd';>
+					    <td style='padding:5px;'>No</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{flight.FlightNumber}}</td>
+						<td style='padding:5px;'>Register</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{flight.Register}}</td>
+					 </tr>
+					 
+					 <tr style='border-bottom:1px solid #ddd';>
+					    <td style='padding:5px;'>STD</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{format_time(flight.STDLocal)}}</td>
+						<td style='padding:5px;'>STA</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{format_time(flight.STALocal)}}</td>
+					 </tr>
+					 
+					 <tr style='border-bottom:1px solid #ddd';>
+					    <td style='padding:5px;'>OffBlock</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{format_time(flight.BlockOffLocalX)}}</td>
+						 <td style='padding:5px;'>TakeOff</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{format_time(flight.TakeOffLocalX)}}</td>
+					 </tr>
+					 
+					 <tr style='border-bottom:1px solid #ccc';>
+					    <td style='padding:5px 5px 5px 5px;'>Landing</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{format_time(flight.LandingLocalX)}}</td>
+						 <td style='padding:5px;'>OnBlock</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{format_time(flight.BlockOnLocalX)}}</td>
+					 </tr>
+					 <tr style='border-bottom:1px solid #ddd';>
+					   <td colspan=4 style='padding:5px;background:#eee'>Passenger</td>
+					 </tr>
+					  <tr style='border-bottom:1px solid #ddd';>
+					    <td style='padding:5px 5px 5px 5px;'>Adult</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{ flight.PaxAdult }}</td>
+						 <td style='padding:5px;'>Child</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{ flight.PaxChild}}</td>
+					 </tr>
+					  <tr style='border-bottom:1px solid #ccc';>
+					    <td style='padding:5px 5px 5px 5px;'>Infant</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{ flight.PaxInfant}}</td>
+						 <td style='padding:5px;'>Total</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{ flight.PaxRevenued}}</td>
+					 </tr>
+					  <tr style='border-bottom:1px solid #ddd';>
+					   <td colspan=4 style='padding:5px;background:#eee'>Cargo/Bags</td>
+					 </tr>
+					 <tr style='border-bottom:0px solid #ddd';>
+					    <td style='padding:5px 5px 5px 5px;'>Bags</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{ flight.BaggageWeight}}</td>
+						 <td style='padding:5px;'>Cargo</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{ flight.CargoWeight}}</td>
+					 </tr>
+					 <tr style='border-bottom:1px solid #ddd';>
+					   <td colspan=4 style='padding:5px;background:#eee'>Fuel</td>
+					 </tr>
+					  <tr style='border-bottom:1px solid #ddd';>
+					    <td style='padding:5px 5px 5px 5px;'>Serial No</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{ flight.SerialNo }}</td>
+						 <td style='padding:5px;'>LTR</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{ flight.LTR}}</td>
+					 </tr>
+					  <tr style='border-bottom:1px solid #ddd';>
+					    <td style='padding:5px 5px 5px 5px;'>Remaining</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{ flight.FuelRemaining }}</td>
+						 <td style='padding:5px;'>Uplift</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{ flight.FuelUplift}}</td>
+					 </tr>
+					  <tr style='border-bottom:1px solid #ddd';>
+					    <td style='padding:5px 5px 5px 5px;'>Density</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{ flight.FuelDensity }}</td>
+						 <td style='padding:5px;'>Total</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{ flight.FuelTotal}}</td>
+					 </tr>
+					   <tr style='border-bottom:0px solid #ddd';>
+					    <td style='padding:5px 5px 5px 5px;'>Used</td>
+						<td style='padding:5px;text-align:right;font-weight:bold;border-right:1px solid #ddd'>{{ flight.FuelUsed }}</td>
+						 <td style='padding:5px;'>Remained</td>
+						<td style='padding:5px;text-align:right;font-weight:bold'>{{ flight.FuelTotal}}-{{ flight.FuelUsed }}</td>
+					 </tr>
+					 
+				  </table>
+			   </div>
+			    <div style='background:#ddd;padding:7px;font-weight:bold;margin-top:5px'>
+			      Crew
+			   </div>
+			   <div style='border:1px solid #ccc;padding:7px;'>
+			      <table style='width:100%;'>
+				     <tr ng-repeat='x in crew' style='border-bottom:1px solid #ddd'>
+					    <td style='padding:5px 5px 5px 5px;width:30%'>{{x.Position}}</td>
+						<td style='padding:5px 5px 5px 5px;text-align:right'>{{x.Name}}</td>
+					 </tr>
+				  </table>
+			   </div>
+			  </div> 
+			   
+			   
+			   
+			 		  
+			   
+			</div>
+			 <table style='margin-top:5px;width:100%;'>
+			    <tr >
+				   <td style='padding:0px 3px 0px 0'>
+				       <div style='background:gray;color:white;font-weight:bold;text-align:center;padding:7px;' ng-class='get_tile_class("tab-info")' ng-click='tile_click("tab-info")'>Info</div>
+				   </td>
+				   <td style='padding:0px 3px 0px 0'>
+				       <div style='background:gray;color:white;font-weight:bold;text-align:center;padding:7px;' ng-class='get_tile_class("tab-metar")' ng-click='tile_click("tab-metar")'>Metar</div>
+				   </td>
+				   <td style='padding:0px 3px 0px 0'>
+				       <div style='background:gray;color:white;font-weight:bold;text-align:center;padding:7px;' ng-class='get_tile_class("tab-taf")' ng-click='tile_click("tab-taf")'>Taf</div>
+				   </td>
+				   <td style='padding:0px 3px 0px 0'>
+				       <div style='background:gray;color:white;font-weight:bold;text-align:center;padding:7px;' ng-class='get_tile_class("tab-notam")' ng-click='tile_click("tab-notam")'>Notam</div>
+				   </td>
+				    <td style='padding:0px 3px 0px 0'>
+				       <div style='background:gray;color:white;font-weight:bold;text-align:center;padding:7px;' ng-class='get_tile_class("tab-charts")' ng-click='tile_click("tab-charts")'>Charts</div>
+				   </td>
+				    <td style='padding:0px 0px 0px 0'>
+				       <div style='background:gray;color:white;font-weight:bold;text-align:center;padding:7px;' ng-class='get_tile_class("tab-docs")' ng-click='tile_click("tab-docs")'>Documents</div>
+				   </td>
+				</tr>
+              </table>	
+		 </div>
+		
+		 
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

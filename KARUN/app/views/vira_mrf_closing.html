@@ -1,0 +1,123 @@
+﻿
+<style>
+
+    /* Header Styling */
+    .header {
+        flex: 0 0 50px; /* Fixed height of 60px */
+    }
+
+    /* Footer Styling */
+    .footer {
+        flex: 0 0 40px; /* Fixed height of 60px */
+    }
+
+    /* Content Styling */
+    .content {
+        flex: 1; /* Grow to fill the remaining space */
+        overflow-y: auto; /* Allow scrolling if content overflows */
+        background-color: white;
+        box-sizing: border-box;
+    }
+
+    .text-box {
+        padding-left: 5px
+    }
+</style>
+
+<div ng-controller="vira_closing_mrfController">
+    <div id="popup_add" dx-popup="popup_add" class="no-padding" style="padding:0 !important">
+        <div class="container-fluid p-3">
+            <!-- MRF Information Section -->
+            <div class="dx-border p-3 mb-3" style="border: 1px solid #ccc;">
+                <div class="row">
+                    <!-- No -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_paperNo" class="form-label mb-0 me-2" style="width: 60px; text-align: right;">No:</label>
+                            <div dx-text-box="txt_paperNo" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+
+                    <!-- Date -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="dt_paperDate" class="form-label mb-0 me-2" style="width: 60px; text-align: right;">Date:</label>
+                            <div dx-date-box="dt_paperDate" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+
+                    <!-- Priority -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="sb_priority" class="form-label mb-0 me-2" style="width: 60px; text-align: right;">Priority:</label>
+                            <div dx-select-box="sb_priority" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+
+                    <!-- Deadline -->
+                    <div class="col-lg-2 col-md-6 ">
+                        <div class="d-flex align-items-center">
+                            <label for="dt_deadline" class="form-label mb-0 me-2" style="width: 60px; text-align: right;">Deadline:</label>
+                            <div dx-date-box="dt_deadline" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+
+                    <!-- Remark -->
+                    <div class="col-lg-4 col-md-12 ">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_remark" class="form-label mb-0 me-2" style="width: 60px; text-align: right;">Remark:</label>
+                            <div dx-text-box="txt_remark" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Items Data Grid -->
+            <div >
+                <div dx-data-grid="dg_mrf" id="dg_mrf" class="content" style="overflow-y:hidden;">
+                </div>
+            </div>
+
+            <!-- Sender, Receiver, Approver Section -->
+            <div class="dx-border p-3 mt-4" style="border: 1px solid #ccc;">
+                <div class="row">
+                    <!-- Sender -->
+                    <div class="col-lg-4 col-md-12 mb-2">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_sender" class="form-label mb-0 me-2" style="width: 100px; text-align: right;">Sender:</label>
+                            <div dx-text-box="txt_sender" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+
+                    <!-- Receiver -->
+                    <div class="col-lg-4 col-md-12 mb-2">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_receiver" class="form-label mb-0 me-2" style="width: 100px; text-align: right;">Receiver:</label>
+                            <div dx-text-box="txt_receiver" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+
+                    <!-- Approver -->
+                    <div class="col-lg-4 col-md-12 mb-2">
+                        <div class="d-flex align-items-center">
+                            <label for="txt_approver" class="form-label mb-0 me-2" style="width: 100px; text-align: right;">Approver:</label>
+                            <div dx-text-box="txt_approver" class="flex-grow-1 text-box"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="clear:both"></div>
+
+        <!-- Result Popup -->
+        <div id="popup_result" dx-popup="popup_result" class="no-padding" style="padding:20px !important;">
+            <div style="text-align:center">
+                <div style="font-size:17px;padding:25px;">The document saved successfully.</div>
+                <div dx-text-box="txt_paperNo" class="center" style="width:100%;margin-top:0px"></div>
+            </div>
+        </div>
+
+        <div dx-load-panel="loadPanel"></div>
+    </div>
+</div>

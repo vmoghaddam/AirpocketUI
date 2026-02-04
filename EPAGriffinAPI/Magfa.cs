@@ -533,12 +533,16 @@ namespace EPAGriffinAPI
                     }
                 }
                 //ava
-                else if (1 ==2){
+                else if (1 ==6){
                     //MelliRef.SendSoapClient soapClient = new MelliRef.SendSoapClient();
                     // var _melli_res=soapClient.SendSimpleSMS2("9354957316", "Rhbsms99@", "09124449584", "90009105", "test sms", false);
                     RestClient client = new RestClient("9354957316", "Rhbsms99@");
-                   var rest_result= client.Send(recipientNumber, "90009105", text, false).Value;
+                    var rest_result = client.Send(recipientNumber, "90009105", text, false).Value;
                     return new long[] { Convert.ToInt64(rest_result) };
+                    //raymon
+                    //RestClient client = new RestClient("9354957316", "Rhbsms99@");
+                    //var rest_result= client.Send(recipientNumber, "90009105", text, false).Value;
+                    // return new long[] { Convert.ToInt64(rest_result) };
                 }
                 else return new long[] { -2 };
 

@@ -33,6 +33,30 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
         return deferred.promise;
     };
 
+
+    var _get_rptCPD = function (df, dt) {
+        var deferred = $q.defer();
+        $http.get('http://localhost:3486/' + 'api/report/citypair/daily/' + df + '/' +dt)
+            .then(function (response) {
+                deferred.resolve(response.data);
+            })
+            .catch(function (err) {
+
+                var safeError = err;
+                if (err && err.data && typeof err.data !== 'string') {
+                    safeError = {
+                        data: JSON.stringify(err.data),
+                        status: err.status,
+                        statusText: err.statusText
+                    };
+                }
+                deferred.reject(Exceptions.getMessage(safeError));
+            });
+
+        return deferred.promise;
+    };
+
+    serviceFactory.get_rptCPD = _get_rptCPD;
     
     var _get_fixtime = function () {
         var deferred = $q.defer();
@@ -102,6 +126,21 @@ app.factory('flightService', ['$http', '$q', 'ngAuthSettings', '$rootScope', fun
 
         var deferred = $q.defer();
         $http.get( + 'odata/airport/iata/' + iata  ).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+
+    var _getFixTimeByRoute = function (pyear, period, rank, acType) {
+
+
+
+        var deferred = $q.defer();
+        $http.get('http://localhost:3486/' + 'api/fixtime/route/' + pyear + '/' + period + '/' + rank + '/' + acType).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -4417,6 +4456,7 @@ var _getFlightsWeekList = function () {
 
 
     serviceFactory.getFormAYearlyReport = _getFormAYearlyReport;
+    serviceFactory.getFixTimeByRoute = _getFixTimeByRoute;
 
     return serviceFactory;
 

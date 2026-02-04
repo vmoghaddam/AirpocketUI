@@ -1082,7 +1082,7 @@ app.factory('flightBagService', ['$http', '$q', 'ngAuthSettings', '$rootScope', 
 var _saveDR = function (entity) {
 
         var deferred = $q.defer();
-        $http.post(apiapsb + 'efb/dr/save', entity).then(function (response) {
+        $http.post('https://fleet.caspianairlines.com/yapiapsb/api/' + 'efb/dr/save', entity).then(function (response) {
 
             deferred.resolve(response.data);
 
@@ -1223,9 +1223,10 @@ var _saveDR = function (entity) {
         var deferred = $q.defer();
 
         //$http.get(apiLog + 'api/efb/dr/' + flightId /*+ '?from=' + _df + '&to=' + _dt*/).then(function (response) {
-			$http.get(apiskybag + 'dr/flight/' + flightId /*+ '?from=' + _df + '&to=' + _dt*/).then(function (response) {
+			//$http.get(apiskybag + 'dr/flight/' + flightId /*+ '?from=' + _df + '&to=' + _dt*/).then(function (response) {
+			$http.get('https://fleet.caspianairlines.com/yapiapsb/' + 'api/dr/flight/' + flightId /*+ '?from=' + _df + '&to=' + _dt*/).then(function (response) {
 
-            deferred.resolve(response.data);
+            deferred.resolve(response.data);	
 
 
         });
@@ -1461,7 +1462,7 @@ var _saveDR = function (entity) {
 
         return deferred.promise;
     };
-    ////////////////////////////////////////
+    ////////////////////////////////////////		
     var _epReplaceVR = function (item) {
         var deferred = $q.defer();
         //db.Clear("VR", function () {
@@ -2361,7 +2362,7 @@ var _saveDR = function (entity) {
     var _getJL = function (fid) {
 
         var deferred = $q.defer();
-        $http.get(serviceBaseAPI + "api/jl/"+fid).then(function (response) {
+        $http.get('https://fleet.caspianairlines.com/yapiapsb/' + "api/jl/"+fid).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -2461,7 +2462,8 @@ var _saveDR = function (entity) {
     var _getNOTAM = function (flt) {
 
         var deferred = $q.defer();
-        $http.get(serviceSKYBAG + "api/airport/notam/archive/flight/" + flt).then(function (response) {
+        //$http.get(serviceSKYBAG + "api/airport/notam/archive/flight/" + flt).then(function (response) {
+        $http.get('https://fleet.caspianairlines.com/zweather/' + "api/weather/notam/flight/" + flt).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -2471,6 +2473,20 @@ var _saveDR = function (entity) {
         return deferred.promise;
     };
     serviceFactory.getNOTAM = _getNOTAM;
+	
+	 var _signDr = function (entity) {
+        var deferred = $q.defer();
+
+        $http.post('https://fleet.caspianairlines.com/yapiapsb/api/' + 'dsp/dr/sign/new', entity).then(function (response) {
+            deferred.resolve(response.data);
+        }, function (err, status) {
+
+            deferred.reject(Exceptions.getMessage(err));
+        });
+
+        return deferred.promise;
+    };
+    serviceFactory.signDr = _signDr;
     ////////////////////////////
     serviceFactory.getJL = _getJL;
     serviceFactory.getAppLegs = _getAppLegs;

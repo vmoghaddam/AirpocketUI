@@ -109,6 +109,7 @@
     <Content Include="app\controllers\fdmOpsController.js" />
     <Content Include="app\controllers\fdmQAController.js" />
     <Content Include="app\controllers\fdmRegMonthly.js" />
+    <Content Include="app\controllers\fdm_sand.js" />
     <Content Include="app\controllers\fdps.js" />
     <Content Include="app\controllers\filterController.js" />
     <Content Include="app\controllers\finMonthlyReport.js" />
@@ -117,6 +118,7 @@
     <Content Include="app\controllers\fixtime.js" />
     <Content Include="app\controllers\fixtimereport.js" />
     <Content Include="app\controllers\fixtimereportdaily.js" />
+    <Content Include="app\controllers\fixtime_summary_controller.js" />
     <Content Include="app\controllers\flightBoardAllController.js" />
     <Content Include="app\controllers\flightBoardController-5-19-2020\flightBoardController.js" />
     <Content Include="app\controllers\flightBoardController.js" />
@@ -231,7 +233,12 @@
     <Content Include="app\controllers\usersController.js" />
     <Content Include="app\controllers\verify.js" />
     <Content Include="app\controllers\vrAdd.js" />
+    <Content Include="app\controllers\zdutyTimeline.js" />
+    <Content Include="app\controllers\zfdm_crew.js" />
+    <Content Include="app\controllers\zfdm_main.js" />
     <Content Include="app\controllers\zreportEFB.js" />
+    <Content Include="app\controllers\zscheduling.js" />
+    <Content Include="app\controllers\zusersController.js" />
     <Content Include="app\controllers\_flightBoardController.js" />
     <Content Include="app\services\activityService.js" />
     <Content Include="app\services\aircraftService.js" />
@@ -319,6 +326,7 @@
     <Content Include="app\views\fixtime.js" />
     <Content Include="app\views\fixtimereport.html" />
     <Content Include="app\views\fixtimereportdaily.html" />
+    <Content Include="app\views\fixtime_summary.html" />
     <Content Include="app\views\flight.html" />
     <Content Include="app\views\flightboard.html" />
     <Content Include="app\views\flightboardall.html" />

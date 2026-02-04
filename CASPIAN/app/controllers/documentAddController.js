@@ -1,9 +1,60 @@
-﻿'use strict';
+﻿﻿'use strict';
 app.controller('documentAddController', ['$scope', '$location', 'libraryService', 'authService', '$routeParams', '$rootScope', function ($scope, $location, libraryService, authService, $routeParams, $rootScope) {
     $scope.isNew = true;
     $scope.IsExposedDisabled = true;
     $scope._IsEditable = $scope.IsEditable || $scope.IsEditableDoc;
+    ///////////////////////////////
+    $scope.grp_ds = [
+        { title: 'COCKPIT', selected: false, code: '00101', code2: '', code3: '' },
+        { title: 'CABIN', selected: false, code: '00102', code2: '', code3: '' },
+        { title: 'FLIGHT DISPATCH', selected: false, code: '00103', code2: '', code3: '' },
+        { title: 'GROUND HANDLING', selected: false, code: '00210', code2: '', code3: '' },
+        { title: 'COMMERCIAL', selected: false, code: '00220', code2: '', code3: '' },
+        { title: 'CAMO', selected: false, code: '300', code2: '700', code3: '' },
+        { title: 'MAINTENANCE', selected: false, code: '100', code2: '004', code3: '' },
+        { title: 'TRAINING', selected: false, code: '400', code2: '', code3: '' },
+        { title: 'LEGAL', selected: false, code: '500', code2: '', code3: '' },
+        { title: 'QA', selected: false, code: '200', code2: '', code3: '' },
+        { title: 'SECURITY', selected: false, code: '610', code2: '', code3: '' },
+        { title: 'SUPPORT', selected: false, code: '620', code2: '', code3: '' },
+        { title: 'ADMINISTRATIVE', selected: false, code: '630', code2: '', code3: '' },
+        { title: 'MANAGEMENT', selected: false, code: '640', code2: '', code3: '' },
+        { title: 'PUBLIC RELATIONS', selected: false, code: '650', code2: '', code3: '' },
+        { title: 'OPERATION', selected: false, code: '660', code2: '', code3: '' },
+        { title: 'CRM', selected: false, code: '670', code2: '', code3: '' },
+        { title: 'LOGISTIC', selected: false, code: '680', code2: '', code3: '' },
+        { title: 'IT', selected: false, code: '690', code2: '', code3: '' },
+        { title: 'CATERING', selected: false, code: '600', code2: '', code3: '' },
+        // {title:'ALL',selected:false,code:'-1',code2:'',code3:''},
+    ];
+	
+	 $scope.ac_ds = [
+        { title: 'B733', selected: false, Id: 25, ManufacturerId: 2, Remark: '' },
+        { title: 'B734', selected: false, Id: 22, ManufacturerId: 2, Remark: '' },
+        { title: 'B735', selected: false, Id: 24, ManufacturerId: 2, Remark: '' },
+        { title: 'MD82', selected: false, Id: 23, ManufacturerId: 4, Remark: '' },
+        { title: 'MD83', selected: false, Id: 21, ManufacturerId: 4, Remark: '' },
+    ];
+	
+	 $scope.ac_ds_show = [
+				{ title: 'B737', selected: false, Id: 25, ManufacturerId: 2, Remark: '' },
+        { title: 'MD', selected: false, Id: 23, ManufacturerId: 4, Remark: '' },
+       
+    ];
+	
+    $scope.grp_selected = function (x) {
 
+    };
+
+    $scope.ac_selected = function (x) {
+       $.each($scope.ac_ds, function(_i, _d){
+		   if(_d.ManufacturerId == x.ManufacturerId)
+			   _d.selected = x.selected
+		   
+	   })
+    };
+
+    //$scope.is_grps_readonly = true;
     $scope.entity = {
         Id: -1,
         Title: null,
@@ -14,7 +65,7 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
         ISSNElectronic: null,
         DOI: null,
         Pages: null,
-        CategoryId: 93,
+        CategoryId: 10007,
         ImageUrl: null,
         Abstract: null,
         DateCreate: null,
@@ -38,7 +89,7 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
         Conference: null,
         ConferenceLocationId: null,
         DateConference: null,
-        Sender: null,
+        Sender: 'Flight Operations Department',
         No: null,
         PublishedIn: null,
         INSPECAccessionNumber: null,
@@ -49,58 +100,87 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
     };
 
     $scope.clearEntity = function () {
-        $scope.entity.Id = -1;
-        $scope.entity.Title = null;
-        $scope.entity.ISBN = null;
-        $scope.entity.DateRelease = null;
-        $scope.entity.DatePublished = null;
-        $scope.entity.PublisherId = null;
-        $scope.entity.ISSNPrint = null;
-        $scope.entity.ISSNElectronic = null;
-        $scope.entity.DOI = null;
-        $scope.entity.Pages = null;
-        $scope.entity.CategoryId = 93;
-        $scope.entity.ImageUrl = null;
-        $scope.entity.Abstract = null;
-        $scope.entity.DateCreate = null;
-        $scope.entity.IsExposed = false;
+        try {
+            $scope.entity.Id = -1;
+            $scope.entity.DateDeadline = null;
+            $scope.entity.DateEffective = null;
+            $scope.entity.DateValidUntil = null;
+            $scope.entity.Title = null;
+            $scope.entity.ISBN = null;
+            $scope.entity.DateRelease = null;
+            $scope.entity.DatePublished = null;
+            $scope.entity.PublisherId = null;
+            $scope.entity.ISSNPrint = null;
+            $scope.entity.ISSNElectronic = null;
+            $scope.entity.DOI = null;
+            $scope.entity.Pages = null;
+            //$scope.entity.CategoryId = 93;
+            $scope.entity.ImageUrl = null;
+            $scope.entity.Abstract = null;
+            $scope.entity.DateCreate = null;
+            $scope.entity.IsExposed = false;
 
-        $scope.entity.BookKeywords = [];
-        $scope.entity.BookAuthors = [];
-        $scope.entity.BookRelatedAircraftTypes = [];
-        $scope.entity.BookRelatedGroups = [];
-        $scope.entity.BookRelatedStudyFields = [];
-        $scope.entity.BookRelatedEmployees = [];
-        $scope.entity.BookFiles = [];
+            $scope.entity.BookKeywords = [];
+            $scope.entity.BookAuthors = [];
+            $scope.entity.BookRelatedAircraftTypes = [];
+            $scope.entity.BookRelatedGroups = [];
+            $scope.entity.BookRelatedStudyFields = [];
+            $scope.entity.BookRelatedEmployees = [];
+            $scope.entity.BookFiles = [];
 
-        $scope.uploaderValueDocument = [];
-        $scope.uploadedFileDocument = null;
-        $scope.uploader_document_instance.reset();
-        $scope.entity.CustomerId = Config.CustomerId;
+            $scope.uploaderValueDocument = [];
+            $scope.uploadedFileDocument = null;
+            $scope.uploader_document_instance.reset();
+            $scope.entity.CustomerId = Config.CustomerId;
 
-        $scope.img_url = 'content/images/image.png';
-        $scope.entity.DateDeadline = null;
-        $scope.entity.Duration = null;
-        $scope.entity.LanguageId = null;
-        $scope.entity.ExternalUrl = null;
-        $scope.entity.NumberOfLessens = null;
-         $scope.entity.TypeId = 86;
-        $scope.entity.JournalId = null;
-        $scope.entity.Conference = null;
-        $scope.entity.ConferenceLocationId = null;
-        $scope.entity.DateConference = null;
-        $scope.entity.Sender = null;
-        $scope.entity.No = null;
-        $scope.entity.PublishedIn = null;
-        $scope.entity.INSPECAccessionNumber = null;
-        $scope.entity.Edition = null;
-        $scope.entity.DateEffective = null;
-        $scope.DeadLine = null;
-        $scope.DateValidUntil = null;
+            $scope.img_url = 'content/images/image.png';
+
+            $scope.entity.Duration = null;
+            $scope.entity.LanguageId = null;
+            $scope.entity.ExternalUrl = null;
+            $scope.entity.NumberOfLessens = null;
+            $scope.entity.TypeId = 86;
+            $scope.entity.JournalId = null;
+            $scope.entity.Conference = null;
+            $scope.entity.ConferenceLocationId = null;
+            $scope.entity.DateConference = null;
+           // $scope.entity.Sender = null;
+            $scope.entity.No = null;
+            $scope.entity.PublishedIn = null;
+            $scope.entity.INSPECAccessionNumber = null;
+            $scope.entity.Edition = null;
+
+            $scope.DeadLine = null;
+        }
+        catch (e) { console.log('ERROR',e); }
+       
     };
 
     $scope.bind = function (data) {
         $scope.entity.Id = data.Id;
+        $.each($scope.grp_ds, function (_i, _d) {
+            _d.selected = false;
+            var exist = Enumerable.From(data.BookGrps).Where(function (x) { return x == _d.code || x == _d.code2 || x == _d.code3; }).FirstOrDefault();
+            if (exist)
+                _d.selected = true;
+
+        });
+		$.each($scope.ac_ds, function (_i, _d) {
+			 _d.selected = false;
+            var exist = Enumerable.From(data.BookRelatedAircraftTypes).Where(function (x) { return x.Id  == _d.Id}).FirstOrDefault();
+            if (exist)
+                _d.selected = true;
+
+        });
+		
+		$.each($scope.ac_ds_show, function (_i, _d) {
+		   _d.selected = false;
+            var exist = Enumerable.From(data.BookRelatedAircraftTypes).Where(function (x) { return x.Id  == _d.Id}).FirstOrDefault();
+            if (exist)
+                _d.selected = true;
+
+        });
+		
         $scope.entity.Title = data.Title;
         $scope.entity.ISBN = data.ISBN;
         $scope.entity.DateRelease = data.DateRelease;
@@ -148,19 +228,23 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
         $scope.entity.DateEffective = data.DateEffective;
         $scope.entity.DeadLine = data.DeadLine;
         $scope.entity.DateValidUntil = data.DateValidUntil;
+
        
+
+        console.log('grp_ds', $scope.grp_ds);
+
     };
     ///////////////////////////
     var tabs = [
         { text: "Main", id: 'main', visible_btn: false },
         { text: "Files", id: 'files', visible_btn: false, visible: true },
 
-        { text: "Aircraft Types", id: 'actypes', visible_btn: true, visible: true },
-        { text: "Groups", id: 'groups', visible_btn: false, visible_btn2: true, visible: true },
+        //{ text: "Aircraft Types", id: 'actypes', visible_btn: true, visible: true },
+      //  { text: "Groups", id: 'groups', visible_btn: false, visible_btn2: true, visible: true },
 
-        { text: "Educations", id: 'educations', visible_btn: false, visible: true },
+       // { text: "Educations", id: 'educations', visible_btn: false, visible: true },
 
-        { text: "Employees", id: 'employees', visible_btn: false, visible: true },
+      //  { text: "Employees", id: 'employees', visible_btn: false, visible: true },
 
 
     ];
@@ -206,13 +290,13 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
                 clearInterval(myVar);
             }, 10);
 
-            $scope.btn_visible_aircrafttype = newValue == 2;
+            $scope.btn_visible_aircrafttype = false;//newValue == 2;
 
             $scope.btn_visible_file = newValue == 1;
-            $scope.btn_visible_education = newValue == 4;
+            $scope.btn_visible_education = false;//newValue == 4;
             //$scope.btn_visible_course = newValue == 4;
-            $scope.btn_visible_group = newValue == 3;
-            $scope.btn_visible_employee = newValue == 5;
+            $scope.btn_visible_group = newValue == 2;
+            $scope.btn_visible_employee = newValue == 3;
 
 
 
@@ -273,15 +357,26 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
             value: 'entity.Remark',
         }
     };
-   
-    
+
+
     $scope.txt_Sender = {
         hoverStateEnabled: false,
         bindingOptions: {
             value: 'entity.Sender',
         }
     };
-    
+    $scope.sb_sender = {
+
+        showClearButton: true,
+        searchEnabled: true,
+        dataSource: ['Safety & QA Department','Flight Operations Department','Financial & Administrative Department'],
+        
+        bindingOptions: {
+            value: 'entity.Sender',
+
+        }
+    };
+
     $scope.txt_DateEffective = {
         hoverStateEnabled: false,
         bindingOptions: {
@@ -304,18 +399,49 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
 
         showClearButton: true,
         searchEnabled: true,
-        dataSource: $rootScope.getDatasourceOption(94),
+        dataSource: [{ Id: 10007, Title: 'ACN' }/*, { Id: 10008, Title: 'CIF' }*/, { Id: 95, Title: 'DIF' }, { Id: 300063, Title: 'Safety Notice'},  { Id: 300072, Title: 'Administrative Regulations'}], //$rootScope.getDatasourceOption(94),
         displayExpr: "Title",
         valueExpr: 'Id',
+        onSelectionChanged: function (e) {
+            
+            $scope.entity.Sender = 'Flight Operations Department';
+            
+            if (e.selectedItem.Id == 10007) {
+                //pif
+                $.each($scope.grp_ds, function (_i, _d) { _d.selected = false; });
+                var exist = Enumerable.From($scope.grp_ds).Where(function (x) { return x.code == '00101' || x.code == '00102'; }).ToArray();
+                //if (exist)
+                //    exist.selected = true;
+			    $.each(exist,function(_i,_d){_d.selected = true;});
+            }
+            else if (e.selectedItem.Id == 10008) {
+                //cif
+                $.each($scope.grp_ds, function (_i, _d) { _d.selected = false; });
+                var exist = Enumerable.From($scope.grp_ds).Where(function (x) { return x.code == '00102'; }).FirstOrDefault();
+                if (exist)
+                    exist.selected = true;
+            }
+            else if (e.selectedItem.Id == 95) {
+                $.each($scope.grp_ds, function (_i, _d) { _d.selected = false; });
+                var exist = Enumerable.From($scope.grp_ds).Where(function (x) { return x.code == '00103'; }).FirstOrDefault();
+                if (exist)
+                    exist.selected = true;
+            }
+            else {
+                $scope.entity.Sender = 'Safety & QA Department';
+            }
+
+
+        },
         bindingOptions: {
             value: 'entity.CategoryId',
 
         }
     };
     /////////////////////////////
-     
 
-    
+
+
     $scope.date_DatePublication = {
         width: '100%',
         type: 'date',
@@ -347,8 +473,18 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
 
         }
     };
+    $scope.date_DateEffective = {
+        width: '100%',
+        type: 'date',
+        displayFormat: $rootScope.DateBoxFormat,
 
-    
+        bindingOptions: {
+            value: 'entity.DateEffective',
+
+        }
+    };
+
+
     $scope.txt_Abstract = {
         hoverStateEnabled: false,
         height: 150,
@@ -365,16 +501,16 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
         }
     };
     //txt_ISSNElectronic
-    
 
-    
+
+
     $scope.txt_Remark = {
         hoverStateEnabled: false,
         bindingOptions: {
             value: 'entity.PublishedIn',
         }
     };
-    
+
 
     $scope.chb_Exposed = {
 
@@ -385,8 +521,10 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
         }
     };
 
+
    
-    ///////////////////////////////
+
+    /////////////////////////////
     $scope.scroll_height = 200;
     $scope.dg_height = 200;
     $scope.dg_height2 = 200;
@@ -395,8 +533,8 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
         scrollByThumb: true,
         bindingOptions: { height: 'scroll_height', }
     };
-    $scope.pop_width = 900;
-    $scope.pop_height = 500;
+    $scope.pop_width = 1200;
+    $scope.pop_height = 600;
     $scope.popup_add_visible = false;
     $scope.popup_add_title = 'New';
     $scope.popup_add = {
@@ -495,19 +633,10 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
         dragEnabled: false,
         closeOnOutsideClick: false,
         onShowing: function (e) {
-            var size = $rootScope.getWindowSize();
-            $scope.pop_height = 600;//$(window).height() - 70;
-            if (size.width <= 600) {
-                $scope.pop_width = size.width;
-                $scope.pop_height = size.height;
-            }
+            
 
 
-            //$scope.pop_width = size.width;
-            //if ($scope.pop_width > 1000)
-            //    $scope.pop_width = 1000;
-
-            // $scope.pop_height = $(window).height() - 30; //630; //size.height;
+           
             $scope.dg_height = $scope.pop_height - 133;
             $scope.dg_height2 = $scope.dg_height - 73;
             $scope.scroll_height = $scope.pop_height - 140;
@@ -519,6 +648,7 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
                 $scope.keywords = response.slice();
                 if ($scope.tempData != null) {
                     libraryService.getBook($scope.tempData.Id).then(function (result) {
+                        console.log('get ........',result);
                         $scope.loadingVisible = false;
                         $scope.bind(result);
 
@@ -539,7 +669,10 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
         onHiding: function () {
 
             $scope.clearEntity();
-
+            $.each($scope.grp_ds, function (_i, _d) { _d.selected = false; });
+			$.each($scope.ac_ds, function (_i, _d) { _d.selected = false; });
+			$.each($scope.ac_ds_show, function (_i, _d) { _d.selected = false; });
+            $scope.popup_add_visible = false;
             $scope.popup_add_visible = false;
             $rootScope.$broadcast('onLibraryHide', null);
         },
@@ -589,10 +722,12 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
             $scope.entity.Id = -1;
 
         $scope.entity.DateRelease = new Date($scope.entity.DateRelease).ToUTC();
-
+        $scope.entity.BookGroups = Enumerable.From($scope.grp_ds).Where('$.selected').ToArray();
+        $scope.entity.BookRelatedGroups = Enumerable.From($scope.grp_ds).Where('$.selected').ToArray();
+        $scope.entity.BookRelatedAircraftTypes = Enumerable.From($scope.ac_ds).Where('$.selected').ToArray();
 
         $scope.loadingVisible = true;
-        libraryService.save($scope.entity).then(function (response) {
+        libraryService.ysave($scope.entity).then(function (response) {
 
             $scope.clearEntity();
 
@@ -913,7 +1048,7 @@ app.controller('documentAddController', ['$scope', '$location', 'libraryService'
     /////////////////////////////
     $scope.tempData = null;
     $scope.$on('InitAddDocument', function (event, prms) {
-       
+
 
         $scope.tempData = null;
 

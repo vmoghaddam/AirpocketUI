@@ -63,19 +63,19 @@ namespace Report
                         switch (k)
                         {
                             case 1:
-                                emp.S01 = "*";//"✓";
+                                emp.S01 = "✓";
                                 break;
                             case 2:
-                                emp.S02 = "*";// "✓";
+                                emp.S02 =  "✓";
                                 break;
                             case 3:
-                                emp.S03 = "*";// "✓";
+                                emp.S03 =   "✓";
                                 break;
                             case 4:
-                                emp.S04 = "*";// "✓";
+                                emp.S04 =  "✓";
                                 break;
                             case 5:
-                                emp.S05 = "*";// "✓";
+                                emp.S05 =  "✓";
                                 break;
                             default:
                                 break;
@@ -116,7 +116,8 @@ namespace Report
 
             };
             cellDir.Text = course.TrainingDirector;
-
+            //course.CurrencyId
+            xrPictureBox3.ImageUrl = "https://ava.airpocket.app/upload/ins/" + course.CurrencyId + ".png";
             record.CoursePeople = query;
             record.CourseSessions = sessions;
             record.CourseSessionPresence = atts;

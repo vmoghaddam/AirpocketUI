@@ -1,0 +1,481 @@
+﻿
+
+<style>
+    .red {
+        background: red !important;
+    }
+
+    .yellow {
+        background: yellow !important;
+    }
+
+    .green {
+        background: green !important;
+    }
+    /*.e-ganttchart .e-gantt-childtaskbar{
+            background-color:transparent;
+        }
+        .e-ganttchart .e-gantt-childtaskbar, .e-ganttchart .e-gantt-parenttaskbar-innerdiv{
+            border-style:none;
+        }*/
+    .e-gantt-template-progressbar {
+        background: red !important;
+        opacity: 1 !important;
+    }
+
+    .e-gantt-template-taskbar.schedule {
+        background-color: #f0f0f0;
+        color: #000;
+    }
+
+    .e-gantt-template-taskbar.takeoff {
+        background-color: #00bfff;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.landing {
+        background-color: #3cb371;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.cancel {
+        background-color: #a65959;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.delay {
+        background-color: #ff0000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.inactive {
+        background-color: #ffff00;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.diverted {
+        background-color: #ee82ee;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.ground {
+        background-color: #ff8000;
+        color: #fff;
+    }
+
+    .e-gantt-template-taskbar.nodata {
+        background-color: #787878;
+        color: #fff;
+    }
+
+    .lbl_from, .lbl_to {
+        font-size: 10px;
+    }
+
+    .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal {
+        height: 40px !important;
+        background: white !important;
+        margin: -3px 1px 0 1px;
+    }
+
+        .dx-item.dx-scheduler-appointment.dx-scheduler-appointment-horizontal.dx-state-focused {
+            height: 40px !important;
+            background: white !important;
+            margin: -3px 1px 0 1px;
+            border: none !important;
+        }
+
+    .dx-scheduler-work-space.dx-scheduler-work-space-month .dx-scheduler-date-table-cell {
+        height: 67px !important;
+    }
+
+    .dx-scheduler-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    .dx-scheduler-timeline .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-work-space-month .dx-scheduler-appointment.dx-state-focused:before,
+    .dx-scheduler-all-day-appointment.dx-state-focused:before {
+        background-color: white !important;
+    }
+
+    #dg_flight_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_flight_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_flight_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_regroute .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_regroute .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_regroute .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_total .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_total .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_total .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_reg .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_reg .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_reg .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    #dg_route .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_route .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_route .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .tblcenter {
+    }
+
+        .tblcenter th {
+            text-align: center;
+            font-size: 13px;
+            padding: 3px;
+            border: 1px solid #bbb;
+        }
+
+        .tblcenter td {
+            text-align: center;
+            font-size: 13px;
+            padding: 3px;
+            border: 1px solid #bbb;
+        }
+
+        .tblcenter th:last-child {
+            border-right: none;
+        }
+
+        .tblcenter td:nth-child(2) {
+        }
+
+        .tblcenter th:nth-child(2) {
+        }
+
+        .tblcenter th span {
+            font-size: 13px;
+        }
+
+        .tblcenter tr {
+            border-bottom: 1px solid #bbb;
+        }
+
+            .tblcenter tr:last-child {
+                border: none;
+            }
+</style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<div class="box formmovaledyearly" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+
+
+
+        <div class=" col-lg-12 col-md-12 col-sm-12 col-xs-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div class="filter-container box  ">
+
+                    <div id="total" class="tabc">
+                        <div dx-data-grid="dg_total" id="dg_total" class="content" style="overflow-y:hidden"></div>
+                    </div>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <div style="padding:0;">
+            <table style="width:100%;margin:0;padding:0;">
+                <tr>
+
+                    <!--<td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to"></div></td>-->
+                    <!--<td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_Status"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_IP"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_CPT"></div></td>-->
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yf" dx-validator="{validationGroup:'finmrpt',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-select-box="sb_yt" dx-validator="{validationGroup:'finmrpt',  validationRules: [{ type: 'required'}]}"></div></td>
+
+                    <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+
+                    <td></td>
+                    <td style="width:160px;text-align:left;padding-right:5px"><div dx-button="btn_print"></div></td>
+
+                </tr>
+            </table>
+
+
+        </div>
+
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div id="popup_print" dx-popup="popup_print">
+        <div style="padding:10px 0 0 0">
+            <div id="scrollview" dx-scroll-view="scroll_jl">
+                <div id="rtblfa" class="tbl page-a4 tbl-pad10 " style="padding:10px !important; border:none !important;direction:rtl">
+
+                    <div style="width:100%;padding:10px;text-align:center">
+                        <!--<img src="../../airpocket/content/images/airline.png" style="margin-left:5px;position:relative; width:120px;float:left" />-->
+
+                        <div style=" padding:25px 10px 5px 10px;font-weight:bold;font-size:16px; ">
+                            گزارش اطلاعات و آمار پروازهای مولد هواپیمایی کاسپین
+                        </div>
+                        <div style="margin-top:5px; ">
+                            <span>سال:</span><span style="font-weight:bold;display:inline-block;margin-left:2px;">{{reportData.Year}}</span>
+                            <span style="display:inline-block;margin-left:5px;">ماه:</span><span style="font-weight:bold;display:inline-block;margin-left:2px;">{{reportData.MonthName}}</span>
+                        </div>
+                        <div style="clear:both"></div>
+                    </div>
+                    <div style="clear:both"></div>
+                    <div style="padding:10px;margin-top:5px;">
+                        <table class="subpage tblcenter" style="border:1px solid #bbb;width:80%;text-align:center;direction:rtl !important;margin:20px auto 10px auto !important">
+                            <thead>
+                                <tr>
+
+                                    <th style="text-align:right;line-height:30px;">
+                                        <span style="font-weight:bold;text-align:right !important">شرح</span>
+                                    </th>
+                                    <th style="text-align:center !important">
+                                        <span style="font-weight:bold">DOM</span>
+                                    </th>
+                                    <th style="text-align:center !important">
+                                        <span style="font-weight:bold">جمع</span>
+                                    </th>
+                                </tr>
+
+
+
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td style="text-align:right">تعداد پرواز</td>
+
+                                    <td style="text-align:center !important">{{reportData.Legs}}</td>
+                                    <td>{{reportData.Legs}}</td>
+
+                                </tr>
+                                <tr>
+
+                                    <td style="text-align:right">ساعت پرواز</td>
+
+                                    <td style="text-align:center !important">{{reportData.FlightHour}}</td>
+                                    <td>{{reportData.FlightHour}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">مسافر حمل شده</td>
+                                    <td style="text-align:center !important">{{reportData.PaxTotal}}</td>
+                                    <td>{{reportData.PaxTotal}}</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right">صندلی عرضه شده</td>
+                                    <td style="text-align:center !important">{{reportData.TotalSeat}}</td>
+                                    <td>{{reportData.TotalSeat}}</td>
+
+                                </tr>
+                                <tr>
+
+                                    <td style="text-align:right">مسافت طی شده هزار کیلومتر</td>
+                                    <td style="text-align:center !important">{{reportData.Distance}}</td>
+                                    <td>{{reportData.Distance}}</td>
+
+                                </tr>
+
+
+
+                                <tr>
+
+                                    <td style="text-align:right">مسافر کیلومتر حمل شده هزار</td>
+                                    <td style="text-align:center !important">{{reportData.PaxTotalDistRound}}</td>
+                                    <td>{{reportData.PaxTotalDistRound}}</td>
+
+                                </tr>
+                                <tr>
+
+                                    <td style="text-align:right">صندلی کیلومتر حمل شده هزار</td>
+                                    <td style="text-align:center !important">{{reportData.TotalSeatDistRound}}</td>
+                                    <td>{{reportData.TotalSeatDistRound}}</td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <td style="text-align:right">ضریب ظرفیت مسافر</td>
+                                    <td style="text-align:center !important">{{reportData.PaxLoad}}</td>
+                                    <td>{{reportData.PaxLoad}}</td>
+
+                                </tr>
+                                <tr>
+
+                                    <td style="text-align:right">بار حمل شده تن</td>
+                                    <td style="text-align:center !important">{{reportData.FreightTone}}</td>
+                                    <td>{{reportData.FreightTone}}</td>
+
+                                </tr>
+                                <tr>
+
+                                    <td style="text-align:right">پست حمل شده تن</td>
+                                    <td style="text-align:center !important">0</td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+
+                                    <td style="text-align:right">تن کیلومتر حمل شده هزار</td>
+                                    <td style="text-align:center !important">{{reportData.TotalToneDistance}}</td>
+                                    <td>{{reportData.TotalToneDistance}}</td>
+                                </tr>
+                                <tr>
+
+                                    <td style="text-align:right">تن کیلومتر عرضه شده هزار</td>
+                                    <td style="text-align:center !important">{{reportData.TotalToneDistanceAvailable}}</td>
+                                    <td>{{reportData.TotalToneDistanceAvailable}}</td>
+                                </tr>
+
+                                <tr>
+
+                                    <td style="text-align:right">ضریب ظرفیت وزنی</td>
+                                    <td style="text-align:center !important">{{reportData.WeightLoadFactor}}</td>
+                                    <td>{{reportData.WeightLoadFactor}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+
+</div>

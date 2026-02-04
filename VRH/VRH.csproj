@@ -161,6 +161,7 @@
     <Content Include="app\controllers\fixtime.js" />
     <Content Include="app\controllers\fixtimereport.js" />
     <Content Include="app\controllers\fixtimereportdaily.js" />
+    <Content Include="app\controllers\fixtime_summary_controller.js" />
     <Content Include="app\controllers\fix_time_controller.js" />
     <Content Include="app\controllers\flightBoardAllController.js" />
     <Content Include="app\controllers\flightBoardController - Copy.js" />
@@ -286,6 +287,7 @@
     <Content Include="app\controllers\rosterReport.js" />
     <Content Include="app\controllers\routeAddController.js" />
     <Content Include="app\controllers\routeController.js" />
+    <Content Include="app\controllers\rptCityPairDaily.js" />
     <Content Include="app\controllers\rptflightspopup.js" />
     <Content Include="app\controllers\cabinReports.js" />
     <Content Include="app\controllers\scheduling.js" />
@@ -406,6 +408,7 @@
     <Content Include="app\views\fixtime.html" />
     <Content Include="app\views\fixtimereport.html" />
     <Content Include="app\views\fixtimereportdaily.html" />
+    <Content Include="app\views\fixtime_summary.html" />
     <Content Include="app\views\fix_time.html" />
     <Content Include="app\views\flight.html" />
     <Content Include="app\views\flightboard.html" />
@@ -529,6 +532,7 @@
     <Content Include="app\views\rosterReport.html" />
     <Content Include="app\views\route.html" />
     <Content Include="app\views\routeAdd.html" />
+    <Content Include="app\views\rptCityPairDaily.html" />
     <Content Include="app\views\rptflightspopup.html" />
     <Content Include="app\views\cabinReports.html" />
     <Content Include="app\views\scheduling.html" />

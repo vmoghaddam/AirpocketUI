@@ -1,0 +1,129 @@
+﻿<style>
+    .dx-toolbar-items-container .dx-texteditor-input {
+        border: 1px solid #ccc;
+        padding-right: 5px !important;
+        padding-left: 5px !important;
+        padding: 10px !important;
+    }
+
+    .dx-toolbar-items-container .dx-placeholder {
+        padding-right: 5px !important;
+        padding-left: 5px !important;
+    }
+
+
+    #dg .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: #00b386;
+        color: white;
+    }
+
+        #dg .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    #dg_courses .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: #1f7a7a;
+        color: white;
+    }
+
+        #dg_courses .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_courses .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_courses .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+</style>
+<div class="box rawcmd" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+
+        <div class=" col-lg-3 col-md-9 col-sm-9 col-xs-9 col1 dx-border" style="padding-right:2px;padding-left:2px;">
+            <!--<div style="padding:5px;background:#ccc">Instructors</div>-->
+            <table style="width:100%;">
+                <tr>
+                    <td style="padding-left:5px;">  <div dx-text-box="txt_user"></div></td>
+                    <td><div dx-text-box="txt_password"></div></td>
+                </tr>
+
+            </table>
+            <div style="padding:5px; background-color:skyblue">CMD</div>
+            <div dx-text-area="txt_cmd"></div>
+            <div style="padding:5px; background-color:orange">MSG</div>
+            <div dx-text-area="txt_msg"></div>
+
+        </div>
+        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:5px;">
+            <!-- <div style="padding:5px;background:#ccc">Courses</div>-->
+
+            <div dx-data-grid="dg" id="dg">
+
+            </div>
+        </div>
+    </div>
+    <div class="rowx footer">
+
+        <div class=" col-lg-12 col-md-11 col-sm-11 col-xs-11 dx-border" style="padding:0;">
+            <table>
+                <tr>
+
+                    <td style="padding-left:5px;"><div dx-button="btn_run"></div></td>
+                    <td style="padding-left:5px;"><div dx-button="btn_exe"></div></td>
+
+                    <!--<td style="padding-left:5px;"><div dx-button="btn_new"></div></td>
+    <td style="padding-left:5px;">  <div dx-button="btn_edit"></div></td>
+
+
+
+    <td style="padding-left:5px;"> <div dx-button="btn_delete"></div></td>-->
+
+
+                </tr>
+            </table>
+
+
+
+
+
+
+
+
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+
+
+    <div dx-load-panel="loadPanel"></div>
+
+</div>
+
+

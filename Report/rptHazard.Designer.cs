@@ -482,7 +482,7 @@
             this.xrLabel10.StylePriority.UseBorders = false;
             this.xrLabel10.StylePriority.UseFont = false;
             this.xrLabel10.StylePriority.UseTextAlignment = false;
-            this.xrLabel10.Text = "GROUND INCIDENT/ACCIDENT/DAMAGE REPORT";
+            this.xrLabel10.Text = "VOLUNTARY HAZARD REPORT";
             this.xrLabel10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // xrLabel26

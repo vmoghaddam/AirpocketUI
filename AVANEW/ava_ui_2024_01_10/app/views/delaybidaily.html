@@ -1,0 +1,466 @@
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .fuContent {
+        overflow-y: scroll; /* has to be scroll, not auto */
+        -webkit-overflow-scrolling: touch;
+        height: calc(100vh - 150px);
+    }
+
+    .fuContentCat {
+        overflow-y: scroll; /* has to be scroll, not auto */
+        -webkit-overflow-scrolling: touch;
+        height: calc(100vh - 196px);
+    }
+
+    @media (max-width: 600px) {
+        .fuHeader {
+            display: none;
+        }
+
+        .fuContent {
+            height: calc(100vh - 170px);
+        }
+
+        .fuContentCat {
+            height: calc(100vh - 196px);
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .fuContent {
+            height: calc(100vh -150px);
+        }
+
+        .fuContentCat {
+            height: calc(100vh -240px);
+        }
+    }
+
+
+
+
+
+    .thin-scroll3::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .thin-scroll3::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    .thin-scroll6::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+    }
+
+    .thin-scroll6::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        outline: 0px solid #eee;
+    }
+
+    .tile-total {
+        border: 1px solid #ccc;
+        margin: 5px 5px 5px 0;
+        text-align: center;
+        border-radius: 2px;
+        padding: 3px;
+        background: white;
+    }
+
+        .tile-total .caption {
+            font-size: 14px;
+            padding: 4px 1px 3px 1px;
+            color: #666666 !important;
+            font-weight: normal
+        }
+
+        .tile-total .value {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 1px 1px 2px 1px;
+        }
+
+    .tbl-inf td {
+        padding: 5px;
+        min-width: 100px;
+    }
+
+        .tbl-inf td:nth-child(even) {
+            text-align: left
+        }
+
+        .tbl-inf td:nth-child(odd) {
+            text-align: right;
+        }
+
+    .tile-container {
+        display: inline-flex;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+
+        .tile-container .tile-total {
+            display: inline-block;
+            width: 16.6%;
+            min-width: 220px;
+        }
+
+    .tile-total td {
+        background: white;
+    }
+
+    .thin-scroll4::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .thin-scroll4::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        outline: 1px solid slategrey;
+    }
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .iblock {
+        /*clear:both !important;
+        display:inline-block !important;
+        float:none !important;*/
+    }
+
+    .tdchart {
+        height: 90px;
+    }
+
+        .tdchart canvas {
+            height: 90px !important;
+        }
+
+    .dx-area-row-cell {
+        background: blanchedalmond !important;
+    }
+
+        .dx-area-row-cell.dx-bottom-border {
+            background: blanchedalmond !important;
+        }
+
+    .dx-area-column-cell {
+        background: blanchedalmond;
+    }
+
+    .dx-area-row-cell.dx-bottom-border td {
+        color: black !important;
+        font-weight: bold;
+        /*text-align: center !important;*/
+    }
+
+        .dx-area-row-cell.dx-bottom-border td span:not(.dx-expand) {
+            font-family: Tahoma !important;
+            /*text-align:center !important;*/
+        }
+
+    .dx-pivotgrid-container * {
+        border-color: gray !important;
+    }
+
+    .dx-pivotgrid-area td {
+        text-align: center !important;
+    }
+
+    #dg_pivot .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_pivot .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_pivot .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_pivot .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+    .off-type {
+        background: #eee;
+        color: black;
+    }
+
+    .on-type {
+        background: #a6a6a6 !important;
+        color: white;
+    }
+
+    .cart-height-1 {
+        height: 230px;
+    }
+
+        .cart-height-1:hover {
+            background: currentcolor;
+        }
+
+    #dg_items .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_items .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_items .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_items .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+    .tbl-summary {
+        width: 100%;
+         
+        
+        border: 1px solid #ccc
+    }
+    .tbl-summary tr{
+        border-bottom:1px solid #ccc;
+    }
+        .tbl-summary tr td:nth-child(odd), .tbl-summary tr th:nth-child(odd) {
+            border-right: 1px solid #ccc;
+            border-left: 1px solid #ccc;
+        }
+    .tbl-summary td {
+        text-align:center;
+        padding:7px;
+        font-size:16px;
+    }
+        .tbl-summary th {
+            text-align: center;
+            padding: 7px;
+            font-size: 14px;
+            background:#eee;
+        }
+</style>
+<div class="box delaybidaily" style="height:100%;display:none;overflow-y:hidden">
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content1" style="clear:both">
+        <div dx-tabs="tabs_options"></div>
+        <table style="width:100%;margin-top:5px; " class="dx-border">
+            <tr>
+
+                <td class="dx-border" style=" padding:0 0px 10px 5px"><div dx-tag-box="sb_yearmonth"></div></td>
+
+                <td class="dx-border" style="width:50px;padding:0 15px 10px 5px"><div dx-button="btn_reload"></div></td>
+            </tr>
+        </table>
+
+        <div ng-show="activeTab=='overall'" class="kpi-container">
+
+            <div class="col-lg-7 padding-0">
+                <div class="fuContent thin-scroll6" style="padding:8px 20px 8px 8px;  ">
+                    <div dx-chart="chart_main" style="margin-top:0px"></div>
+                    <div dx-chart="chart_dc" style="margin-top:20px"></div>
+                    <div dx-chart="chart_otfc" style="margin-top:20px"></div>
+                    <div dx-chart="chart_dfc" style="margin-top:20px"></div>
+                </div>
+            </div>
+            <div class="col-lg-5 padding-0">
+                <div class="fuContent thin-scroll6" style="padding:8px 8px 8px 15px;  ">
+                    <table class="tbl-summary">
+                        <thead>
+                            <tr>
+                                <th style="width:20%">Year</th>
+                                <th style="width:20%">Month</th>
+                                <th style="width:20%">Delay</th>
+                                <th style="width:20%">Cycles</th>
+                                <th style="width:20%">BlockTime</th>
+
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="row in ds_main_summary">
+                            <td>{{row.Year}}</td>
+                            <td>{{row.MonthName}}</td>
+                            <td>{{row.Delay2}}</td>
+                            <td>{{row.Cycles}}</td>
+                            <td>{{row.BlockTime2}}</td>
+
+                        </tr>
+                    </table>
+                    <div dx-chart="chart_cycle" style="margin-top:10px;border:1px solid #ccc"></div>
+                    <div dx-chart="chart_bl" style="margin-top:10px;border:1px solid #ccc"></div>
+
+                </div>
+
+            </div>
+            <div style="clear:both"></div>
+
+        </div>
+
+        <div ng-show="activeTab=='category'" class="kpi-container">
+            <table style="width:98%;margin:5px 15px 5px 15px" class="tbl-types">
+                <tr>
+                    <td style="text-align:center;" ng-repeat="t in ds_catNames">
+                        <div style="text-align:center;border:1px solid #ccc;padding:5px;font-weight:bold;font-size:11px;" ng-class="getCatSelectedClass(t.ICategory)" ng-click="selectCat(t.ICategory)">
+                            {{t.ICategory}}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="col-lg-7 padding-0">
+                <div class="fuContentCat thin-scroll6" style="padding:8px 20px 8px 8px;  ">
+                    <div dx-chart="chart_catdl" style="margin-top:0px"></div>
+                    <div dx-chart="chart_catdc" style="margin-top:20px"></div>
+                    <!--<div dx-chart="chart_otfc" style="margin-top:20px"></div>
+                    <div dx-chart="chart_dfc" style="margin-top:20px"></div>-->
+                </div>
+            </div>
+            <div class="col-lg-5 padding-0">
+                <div class="fuContentCat thin-scroll6" style="padding:8px 8px 8px 15px;  ">
+                    <table class="tbl-summary">
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Year</th>
+                                <th style="width:25%">Month</th>
+                                <th style="width:25%">Category</th>
+                                <th style="width:25%">Delay</th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="row in ds_cats_summary">
+                            <td>{{row.Year}}</td>
+                            <td>{{row.MonthName}}</td>
+                            <td>{{row.ICategory}}</td>
+                            <td>{{row.Delay2}}</td>
+
+
+
+                        </tr>
+                    </table>
+                    <div dx-chart="chart_catratio" style="margin-top:0px;border:1px solid #ccc"></div>
+                    <div dx-chart="chart_catdelay" style="margin-top:10px;border:1px solid #ccc"></div>
+                    <div dx-chart="chart_catcycle" style="margin-top:10px;border:1px solid #ccc"></div>
+
+                </div>
+
+            </div>
+            <div style="clear:both"></div>
+
+        </div>
+
+
+        <div ng-show="activeTab=='airport'" class="kpi-container">
+            <table style="width:98%;margin:5px 15px 5px 15px" class="tbl-types">
+                <tr>
+                    <td style="text-align:center;" ng-repeat="t in ds_aptNames">
+                        <div style="text-align:center;border:1px solid #ccc;padding:5px;font-weight:bold;font-size:11px;" ng-class="getAptSelectedClass(t)" ng-click="selectApt(t)">
+                            {{t}}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="col-lg-7 padding-0">
+                <div class="fuContentCat thin-scroll6" style="padding:8px 20px 8px 8px;  ">
+                    <div dx-chart="chart_aptdl" style="margin-top:0px"></div>
+                    <div dx-chart="chart_aptdc" style="margin-top:20px"></div>
+                    <!--<div dx-chart="chart_aptotfc" style="margin-top:20px"></div>-->
+                    <div dx-chart="chart_aptdfc" style="margin-top:20px"></div>
+
+                </div>
+            </div>
+            <div class="col-lg-5 padding-0">
+                <div class="fuContentCat thin-scroll6" style="padding:8px 8px 8px 15px;  ">
+                    <table class="tbl-summary">
+                        <thead>
+                            <tr>
+                                <th style="width:25%">Year</th>
+                                <th style="width:25%">Month</th>
+                                <th style="width:25%">Airport</th>
+                                <th style="width:25%">Delay</th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tr ng-repeat="row in ds_apts_summary">
+                            <td>{{row.Year}}</td>
+                            <td>{{row.MonthName}}</td>
+                            <td>{{row.Airport}}</td>
+                            <td>{{row.Delay2}}</td>
+
+
+
+                        </tr>
+                    </table>
+                    <div dx-chart="chart_aptleg" style="margin-top:10px;border:1px solid #ccc"></div>
+                    <div dx-chart="chart_aptratio" style="margin-top:10px;border:1px solid #ccc"></div>
+
+                    <div dx-chart="chart_aptcycle" style="margin-top:10px;border:1px solid #ccc"></div>
+                    <div dx-chart="chart_aptdelay" style="margin-top:10px;border:1px solid #ccc"></div>
+
+                </div>
+
+            </div>
+            <div style="clear:both"></div>
+
+        </div>
+
+
+        <div ng-show="activeTab=='stats'" class="kpi-container">
+
+            <div class="col-lg-2 padding-0">
+                <div  style="padding:0px 20px 8px 8px;  ">
+                    <div class="filter-container box  ">
+                        <div class="filter-container box  dx-border" style="background:#fff; ">
+                            <div style="background:gray;color:white;padding:8px;">Filter</div>
+                            <div dx-scroll-view="scroll_1">
+                                <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Categories</div>
+                                <div style="padding:5px;"> <div dx-tag-box="tag_cats"></div></div>
+                                <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Airports</div>
+                                <div style="padding:5px;"> <div dx-tag-box="tag_apts"></div></div>
+                                <div style="padding:5px;border-bottom:1px solid #ccc;padding-top:10px;background:#eee">Range</div>
+                                <div style="padding:5px;"> <div dx-select-box="sb_range"></div></div>
+                            </div>
+                            <div style="padding:5px;">
+                                <div   dx-button="btn_apply"></div>
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-10 padding-0" style="padding-right:10px;">
+                <div dx-data-grid="dg_items" id="dg_items" class="content" style="overflow-y:hidden"></div>
+
+            </div>
+            <div style="clear:both"></div>
+
+        </div>
+
+
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+
+
+    <div ng-include="'app/views/tblDelayItems.html'"></div>
+
+
+</div>

@@ -25,6 +25,7 @@ namespace Report
 
         private void rptFPCAVA_BeforePrint(object sender, CancelEventArgs e)
         {
+            //1437
             var ds = this.DataSource as JsonDataSource;
             // ds.Fill();
             // var xx = new CustomJsonSource();
@@ -32,6 +33,8 @@ namespace Report
             dynamic data = JObject.Parse(str);
             string sex = Convert.ToString(data.Sex);
             string name = (Convert.ToString(data.FirstName) + " " + Convert.ToString(data.LastName));
+            string course_type_id = Convert.ToString(data.CourseTypeId);
+            string course_type  = Convert.ToString(data.CourseType );
             name = (sex.ToLower() == "male" ? "Mr. " : "Ms. ") + name.ToUpper();
             lblName.Text = name;
             lblCer.Text = Convert.ToString(data.Title).ToUpper();
@@ -42,7 +45,9 @@ namespace Report
 
 
             lblHead.Text = Convert.ToString(data.TrainingDirector).ToUpper();
-            lblInstructor.Text = Convert.ToString(data.Instructor).ToUpper();
+            lblInstructor.Text =course_type_id=="1437"?"NASER TALEBI": Convert.ToString(data.Instructor).ToUpper();
+            if (course_type_id == "1437")
+                xrLabel11.Text = "Cabin Crew Manager";
             DateTime issue = Convert.ToDateTime(data.DateIssue);
             expire = data.DateExpire != null ? (Nullable<DateTime>)Convert.ToDateTime(data.DateExpire) : null;
             lblExpiryCaption.Visible = expire != null;
@@ -73,13 +78,21 @@ namespace Report
 
             string groupcode = Convert.ToString(data.JobGroupCode);
 
-            img_ins1.ImageUrl = "https://ava.airpocket.app/upload/ins/" + data.CustomerId+".png";
-            if (data.Customer != "-1")
+            if (course_type_id != "1437")
             {
-                img_ins2.ImageUrl = "https://ava.airpocket.app/upload/ins/" + data.Customer + ".png";
+                img_ins1.ImageUrl = "https://ava.airpocket.app/upload/ins/" + data.CustomerId + ".png";
+                if (data.Customer != "-1")
+                {
+                    img_ins2.ImageUrl = "https://ava.airpocket.app/upload/ins/" + data.Customer + ".png";
+                }
+                else
+                    img_ins1.LocationF = new Point(255, 660);
             }
             else
-                img_ins1.LocationF =  new Point(255, 660);
+            {
+                img_ins1.ImageUrl = "https://ava.airpocket.app/upload/ins/" + "4912" + ".png";
+            }
+           
 
            // lblOpsTrn.Visible = groupcode.StartsWith("0000110") || groupcode.StartsWith("00101") || groupcode.StartsWith("00102") || groupcode.StartsWith("000010602");
            // lblOpsTrnCaption.Visible = lblOpsTrn.Visible;

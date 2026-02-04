@@ -1,0 +1,150 @@
+﻿
+<style>
+    .dx-placeholder {
+        margin-left: 5px !important
+    }
+
+    .td-field {
+        padding: 7px;
+        text-align: left
+    }
+
+    .td-title {
+        background-color: whitesmoke;
+        padding: 7px;
+        text-align: left;
+        color: black;
+        font-weight: bold
+    }
+</style>
+<div ng-controller="directDeliveryController">
+    <div id="popup_pn" dx-popup="popup_pn" class="no-padding" style='padding:0 !important;'>
+        <div style="width: 100%">
+            <div style="width: 100%; border: 1px solid #ccc;padding:10px">
+                <!--<div class="td-title " style="width: 100%">Paper</div>-->
+                <!--<table style="margin-top:10px;color:black" class="dx-border">
+                <tr>
+                    <td class="td-field" style="font-weight:bold">date:</td>
+                    <td class="td-field"><div dx-date-box="dt_date" class="center" style="width: 100%"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Receiver location:</td>
+                    <td class="td-field"><div dx-select-box="sb_shop" class="center"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">A/C Type:</td>
+                    <td class="td-field"><div dx-select-box="sb_acType" class="center"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Register:</td>
+                    <td class="td-field"><div dx-select-box="sb_register" class="center"></div></td>
+
+                </tr>
+
+                <tr>
+                    <td class="td-field" style="font-weight:bold">NO. :</td>
+                    <td class="td-field"><div dx-text-box="txt_no" class="center" style="width: 100%"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Warehouse:</td>
+                    <td class="td-field"><div dx-select-box="sb_warehouse" class="center"></div></td>
+
+                    <td class="td-field" style="font-weight:bold">Issued By:</td>
+                    <td class="td-field" colspan="3"><div dx-text-box="txt_issuedBy" class="center" style="width:100%"></div></td>
+                </tr>
+            </table>-->
+                <div class="dx-border">
+
+
+                    <div class="col-lg-2 padding-0">
+                        <span>Date</span>
+                        <div dx-date-box="dt_date" class="center" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
+
+                        <span>No</span>
+                        <div dx-text-box="txt_no" class="center" style="width: 100%"></div>
+
+                    </div>
+                    <div class="col-lg-2 padding-0" style="padding-left:10px">
+                        <span>A/C Type</span>
+
+                        <div dx-select-box="sb_acType" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
+                        <span>Register</span>
+                        <div dx-select-box="sb_register" class="left"></div>
+
+                    </div>
+
+                    <div class="col-lg-2 padding-0" style="padding-left:10px">
+                        <span>Warehouse</span>
+
+                        <div dx-select-box="sb_warehouse" class="left" style="width: 100%;margin-top:5px;margin-bottom:5px"></div>
+                        <span>Issued By</span>
+                        <div dx-text-box="txt_issuedBy" class="left" style="width: 100%"></div>
+
+                    </div>
+                    <div class="col-lg-2 padding-0" style="padding-left:10px">
+                        <span>Receiver</span>
+                        <table style="width:100%;margin-top:5px;margin-bottom:5px">
+                            <tr>
+                                <td>
+                                    <div dx-text-box="txt_receiver" class="left" style="width: 100%"></div>
+                                </td>
+                                <td style="width:10%"><div dx-button="btn_receiver"></div></td>
+                            </tr>
+
+                        </table>
+
+                        <span>Location</span>
+                        <div dx-text-box="txt_receiver_location" class="left" style="width: 100%"></div>
+
+
+
+
+                    </div>
+
+
+                    <div style="clear:both"></div>
+                </div>
+
+
+
+            </div>
+
+            <!--<div style="width: 100%; border: 1px solid #ccc">
+        <div class="td-title" style="width: 100%">Items</div>
+        <table style="margin-top:10px;color:black" class="dx-border">
+            <tr>-->
+            <!--<td class="td-field" style="font-weight:bold">Plaque:</td>
+        <td class="td-field"><div dx-text-box="txt_plaque" class="center" style="width: 100%"></div></td>-->
+            <!--<td class="td-field" style="font-weight:bold">SN / BN:</td>
+        <td class="td-field"><div dx-text-box="txt_snbn" class="center"></div></td>-->
+            <!--<td class="td-field" style="font-weight:bold">RFID Enable:</td>
+        <td class="td-field"><div dx-check-box="ch_rfid" class="center"></div></td>-->
+            <!--<td style="padding: 5px"><div dx-button="btn_add"></div></td>
+                    <td style="padding: 5px"><div dx-button="btn_remove"></div></td>
+                    <td style="padding: 5px"><div dx-button="btn_inventory"></div></td>
+
+                </tr>
+            </table>
+        </div>-->
+
+            <div dx-data-grid="dg_del" id="dg_del" class="content" style="overflow-y:hidden;margin-top: 5px" dx-item-alias="row"></div>
+            <div class="col-lg-12 dx-border" style="margin-top:5px">
+
+                <span>Remark</span>
+                <div dx-text-box="txt_remark" style="width: 100%;margin-top:5px"></div>
+
+            </div>
+        </div>
+
+        <div dx-load-panel="loadPanel"></div>
+
+        <div id="popup_result" dx-popup="popup_result" class="no-padding" style='padding:20px !important;'>
+            <div style="text-align:center">
+                <div style="font-size:17px;padding:25px;">The document saved successfully.</div>
+                <div dx-text-box="txt_paperNo" class="center" style="width:100%;margin-top:0px"></div>
+
+            </div>
+        </div>
+
+        <div ng-include="'app/views/inventory.html?vx.2'"></div>
+        <!--<div ng-include="'app/views/vira_personnel_selection.html?vx.2'"></div>-->
+
+    </div>
+</div>
+

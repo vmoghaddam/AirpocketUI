@@ -50,10 +50,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     };
     var _login = function (loginData) {
 		 
-        if (loginData.password == "Magu1359")
-            loginData.password = "XXXX";
-        if (loginData.password == "CSPN1359@aA")
-            loginData.password = "Magu1359";
+        
         var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password + "&scope=" + (loginData.scope);
        
         //var data = {
@@ -86,7 +83,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         //    _logOut();
         //    deferred.reject(err);
         //    });
-       $http.post(serviceBase /*'https://fleet.caspianairlines.com/apinetv12/'*/ + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
+       $http.post('https://fleet.caspianairlines.com/auth/' /*'https://fleet.caspianairlines.com/apinetv12/'*/ + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
 			// $http.post( 'https://fleet.caspianairlines.com/apinetv12/'  + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).then(function (response) {
             console.log('token');
             console.log(response);
@@ -406,10 +403,13 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _changePassword = function (entity) {
         var deferred = $q.defer();
-        $http.post($rootScope.serviceUrl + 'api/Account/ChangePassword', entity).then(function (response) {
+        $http.post('https://fleet.caspianairlines.com/auth/'  + 'api/Account/ChangePassword', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
-
+ console.error("HTTP ERROR:", err); 
+    if (err && err.data) {
+        console.log("Error data:", err.data);
+    }
             deferred.reject(Exceptions.getMessage(err));
         });
 
@@ -441,18 +441,18 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     };
     var _setPassword = function (entity) {
         var deferred = $q.defer();
-        $http.post($rootScope.serviceUrl + 'odata/users/password', entity).then(function (response) {
+        $http.post('https://fleet.caspianairlines.com/auth/' + 'odata/users/password', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
             deferred.reject(Exceptions.getMessage(err));
         });
 
-        return deferred.promise;
+        return deferred.promise;	
     };
     var _updateUser = function (entity) {
         var deferred = $q.defer();
-        $http.post($rootScope.serviceUrl + 'odata/users/update', entity).then(function (response) {
+        $http.post('https://fleet.caspianairlines.com/auth/' + 'odata/users/update', entity).then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 
@@ -501,7 +501,8 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _getUsers = function () {
 
         var deferred = $q.defer();
-        $http.get(serviceBase + 'odata/users').then(function (response) {
+        //$http.get(serviceBase + 'odata/users').then(function (response) {
+        $http.get('https://fleet.caspianairlines.com/auth/' + 'odata/users').then(function (response) {
             deferred.resolve(response.data);
         }, function (err, status) {
 

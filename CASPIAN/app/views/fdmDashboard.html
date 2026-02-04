@@ -1,5 +1,3 @@
-
-
 <style>
     .red {
         background: red !important;
@@ -179,6 +177,33 @@
     #dg_events .dx-icon.dx-icon-export-excel-button {
         color: white;
     }
+
+    .dx-scrollable-native.dx-scrollable-vertical, .dx-scrollable-native.dx-scrollable-vertical .dx-scrollable-container {
+        overflow-x: auto;
+    }
+
+    .thin-scroll3::-webkit-scrollbar {
+        width: 2em;
+        height: 2em;
+    }
+
+    .thin-scroll3::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+    .phase-box {
+        border: 1px solid #ccc;
+        background: white;
+        padding: 3px;
+    }
+    .phase-box-title{
+
+    }
+    .phase-box-score{
+
+    }
+    .phase-box-score-total {
+    }
 </style>
 
 
@@ -196,128 +221,312 @@
 
 
             <div class='visible-lg'>
+                <!-- TAB NAVIGATION -->
+                <ul class="nav nav-tabs">
+                    <li style="width:20%;text-align:center" ng-class="{active: activeTab === 'summary'}">
+                        <a style="color: white" ng-style="{'background-color': activeTab === 'summary' ? 'lightgray' : 'gray'}" href="" ng-click="activeTab = 'summary'; instanceReferesh()">Summary</a>
+                    </li>
+                    <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'pilots'}">
+                        <a style="color: white" ng-style="{'background-color': activeTab === 'pilots' ? 'lightgray' : 'gray'}" href="" ng-click="activeTab = 'pilots'; instanceReferesh()">Pilots</a>
+                    </li>
+                    <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'events'}">
+                        <a style="color: white" ng-style="{'background-color': activeTab === 'events' ? 'lightgray' : 'gray'}" href="" ng-click="activeTab = 'events'; instanceReferesh()">Events</a>
+                    </li>
+                    <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'phase'}">
+                        <a style="color: white" ng-style="{'background-color': activeTab === 'phase' ? 'lightgray' : 'gray'}" href="" ng-click="activeTab = 'phase'; instanceReferesh()">Phase</a>
+                    </li>
+                    <li style="width: 20%; text-align: center" ng-class="{active: activeTab === 'others'}">
+                        <a style="color: white" ng-style="{'background-color': activeTab === 'others' ? 'lightgray' : 'gray'}" href="" ng-click="activeTab = 'others'; instanceReferesh()">Others</a>
+                    </li>
+                </ul>
 
-                <div class="col-lg-4 col-md-3" style="padding-right:0;">
-                    <div>
-                        <div class="col-lg-6 col-md-6 generalInfo chartBox">
-                            <p style="font-size: 16px; padding-top: 5px">Flights</p>
-                            <p style="text-align: center; font-size: 60px;padding-top: 30px">{{ds_cptEventsGeneral.TotalFlightCount}}</p>
-                        </div>
-                        <div class="col-lg-6 col-md-6 generalInfo chartBox" ng-click="showEvents()">
-                            <p style="font-size: 16px; padding-top: 5px">Events</p>
-                            <p style="text-align: center; font-size: 60px;padding-top: 30px">{{ds_cptEventsGeneral.TotalEventsCount}}</p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="col-lg-6 col-md-6  generalInfo chartBox">
-                            <p style="font-size: 16px; padding-top: 5px">Scores</p>
-                            <p style="text-align: center; font-size: 60px;padding-top: 30px">{{ds_cptEventsGeneral.TotalScores}}</p>
-                        </div>
-                        <div class="col-lg-6 col-md-6 generalInfo" style="padding:0 !important">
-                            <div class="chartBox" style="height: 102.5px">
-                                <p style="font-size: 16px; padding-top: 5px; padding-left: 14px">Events per flight</p>
-                                <p style="text-align: center; font-size: 30px">{{ds_cptEventsGeneral.EventPerFlight.toFixed(0)}}</p>
+
+                <!-- TAB CONTENT -->
+                <div class="tab-content ">
+                    <!-- SUMMARY SECTION -->
+                    <div ng-show="activeTab === 'summary'">
+                        <div class="row ">
+                            <div class="col-lg-4 col-md-3" style="padding-right:0;">
+                                <div>
+                                    <div class="col-lg-6 col-md-6 generalInfo chartBox">
+                                        <p style="font-size: 16px; padding-top: 5px">Flights</p>
+                                        <p style="text-align: center; font-size: 60px;padding-top: 30px">{{ds_cptEventsGeneral.TotalFlightCount}}</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 generalInfo chartBox" ng-click="showEvents()">
+                                        <p style="font-size: 16px; padding-top: 5px">Events</p>
+                                        <p style="text-align: center; font-size: 60px;padding-top: 30px">{{ds_cptEventsGeneral.TotalEventsCount}}</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-6 col-md-6  generalInfo chartBox">
+                                        <p style="font-size: 16px; padding-top: 5px">Scores</p>
+                                        <p style="text-align: center; font-size: 60px;padding-top: 30px">{{ds_cptEventsGeneral.TotalScores}}</p>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 generalInfo" style="padding:0 !important">
+                                        <div class="chartBox" style="height: 102.5px">
+                                            <p style="font-size: 16px; padding-top: 5px; padding-left: 14px">Events per flight</p>
+                                            <p style="text-align: center; font-size: 30px">{{ds_cptEventsGeneral.EventPerFlight.toFixed(0)}}</p>
+                                        </div>
+                                        <div class="chartBox" style="height: 102.5px">
+                                            <p style="font-size: 16px; padding-top: 5px; padding-left: 14px">Score per flight</p>
+                                            <p style="text-align: center; font-size: 30px">{{ds_cptEventsGeneral.ScorePerFlight.toFixed(0)}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="chartBox" style="height: 102.5px">
-                                <p style="font-size: 16px; padding-top: 5px; padding-left: 14px">Score per flight</p>
-                                <p style="text-align: center; font-size: 30px">{{ds_cptEventsGeneral.ScorePerFlight.toFixed(0)}}</p>
+
+                            <div class="col-lg-6 col-md-6" style="padding:0; padding-right:5px;">
+                                <div class=" chartBox" style='padding-bottom:9px'>
+                                    <div id="totalEventsPie" dx-pie-chart="totalEventsPie"></div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-2 col-md-3" style="padding-right:11px;padding-left:0;">
+                                <div class="col-lg-6 generalInfo chartBox" style="width:100%;height:136px;background:#ffb3b3">
+                                    <p style="font-size: 16px; padding-top: 5px">High Score</p>
+                                    <p style="text-align: center; font-size: 45px;padding-top:0px">{{ds_cptEventsGeneral.TotalHighScore}}</p>
+                                </div>
+                                <div class="col-lg-6 generalInfo chartBox" style="width:100%;height:136px;background:#ffd9b3">
+                                    <p style="font-size: 16px; padding-top: 5px">Medium Score</p>
+                                    <p style="text-align: center; font-size: 45px;padding-top:0px">{{ds_cptEventsGeneral.TotalMediumScore}}</p>
+                                </div>
+                                <div class="col-lg-6 generalInfo chartBox" style="width:100%;height:137px;background:#b3ffec">
+                                    <p style="font-size: 16px; padding-top: 5px">Low Score</p>
+                                    <p style="text-align: center; font-size: 45px;padding-top:0px">{{ds_cptEventsGeneral.TotalLowScore}}</p>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="eventPerFlightChart2" dx-chart="eventPerFlightChart2"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="compareCpt" dx-chart="compareCpt"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
+                    <!-- PILOTS SECTION -->
+                    <div ng-show="activeTab === 'pilots'">
+                        <div class="row">
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="bestCptScoresChart" dx-chart="bestCptScoresChart"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="bestFoScoresChart" dx-chart="bestFoScoresChart"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="cptScoresChart" dx-chart="cptScoresChart"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="compareCpt" dx-chart="compareCpt"></div>
+                                </div>
+                            </div>
+
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="foScoresChart " dx-chart="foScoresChart "></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="compareFo" dx-chart="compareFo"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div dx-data-grid="dg_cpt" id="dg_cpt" class="content" style="overflow-y:hidden"></div>
+                            </div>
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div dx-data-grid="dg_fo" id="dg_fo" class="content" style="overflow-y:hidden"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- EVENTS SECTION -->
+                    <div ng-show="activeTab === 'events'">
+                        <div class="row">
+                            <!--<div class='col-lg-12' style='padding:10px 5px 10px 5px'>
+        <div class=" chartBox" style='padding: 10px 0 10px 0'>
+            <div id="compareReg" dx-chart="compareReg"></div>
+        </div>
+    </div>-->
+
+                            <div class='col-lg-12' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="eventsTreeMap" dx-tree-map="eventsTreeMap"></div>
+                                </div>
+                            </div>
+
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="top_event" dx-chart="top_event"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div dx-data-grid="dg_event" id="dg_event" class="content" style="overflow-y:hidden"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-8' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="eventsMonthlyChart" dx-chart="eventsMonthlyChart"></div>
+                                </div>
+                            </div>
+                            <div class='col-lg-4' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div dx-data-grid="dg_event2" id="dg_event2" class="content" style="overflow-y:hidden"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-8' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="scoresMonthlyChart" dx-chart="scoresMonthlyChart"></div>
+                                </div>
+                            </div>
+                            <div class='col-lg-4' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div dx-data-grid="dg_scores" id="dg_scores" class="content" style="overflow-y:hidden"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PHASE SECTION -->
+                    <div ng-show="activeTab === 'phase'">
+                        <div class="row">
+                            <!--<div>
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td ng-repeat="p in x_ds_phase.grp_phase" style="padding:5px;">
+                                            <div style="text-align:center" class="phase-box">
+                                                <div class="phase-box-title">{{p.Phase}}</div>
+                                                <table style="width:100%;">
+                                                    <tr>
+                                                        <td class="phase-box-score-total">
+                                                            <div>Score</div>
+                                                            <div>{{p.Score}}</div>
+                                                        </td>
+                                                        <td class="phase-box-score-total">
+                                                            <div>Count</div>
+                                                            <div>{{p.EventCount}}</div>
+                                                        </td>
+                                                         
+                                                    </tr>
+
+                                                </table>
+                                                <table style="width:100%;">
+                                                    <tr>
+                                                        <td class="phase-box-score">
+                                                            <div>H</div>
+                                                            <div>{{p.HighScore}}</div>
+                                                        </td>
+                                                        <td class="phase-box-score">
+                                                            <div>H</div>
+                                                            <div>{{p.MediumScore}}</div>
+                                                        </td>
+                                                        <td class="phase-box-score">
+                                                            <div>H</div>
+                                                            <div>{{p.LowScore}}</div>
+                                                        </td>
+                                                    </tr>
+
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </table>
+                            </div>-->
+                            <div style="clear:both"></div>
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="phaseChart" dx-chart="phaseChart"></div>
+                                </div>
+                            </div>
+                            <div class='col-lg-6' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <!-- <div id="phaseChartPolar" dx-polar-chart="phaseChartPolar"></div>-->
+                                    <div id="phaseEventChart" dx-chart="phaseEventChart"></div>
+
+                                </div>
+                            </div>
+                            <div style="clear:both"></div>
+                            <div class='col-lg-12' style='padding:10px 5px 10px 5px'>
+
+                                <div dx-data-grid="dg_phase" id="dg_phase" class="content" style="overflow-y:hidden"></div>
+
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                    </div>
+
+                    <!-- OTHERS SECTION -->
+                    <div ng-show="activeTab === 'others'">
+                        <div class="row">
+
+
+                            <div class='col-lg-12' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="registerEventsChart" dx-chart="registerEventsChart"></div>
+                                </div>
+                            </div>
+
+
+                            <div class='col-lg-12' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="registerScoresChart" dx-chart="registerScoresChart"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-12' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="cptRouteChart" dx-chart="cptRouteChart"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-12' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div id="eventPerFlightRoute" dx-chart="eventPerFlightRoute"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-12' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div dx-data-grid="dg_all_event" id="dg_all_event" class="content" style="overflow-y:hidden"></div>
+                                </div>
+                            </div>
+
+                            <div class='col-lg-12' style='padding:10px 5px 10px 5px'>
+                                <div class=" chartBox" style='padding: 10px 0 10px 0'>
+                                    <div dx-data-grid="dg_all_pilot" id="dg_all_pilot" class="content" style="overflow-y:hidden"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-lg-6 col-md-6" style="padding:0; padding-right:5px;">
-                    <div class=" chartBox" style='padding-bottom:9px'>
-                        <div id="totalEventsPie" dx-pie-chart="totalEventsPie"></div>
-                    </div>
-
-                </div>
-                <div class="col-lg-2 col-md-3" style="padding-right:11px;padding-left:0;">
-                    <div class="col-lg-6 generalInfo chartBox" style="width:100%;height:136px;background:#ffb3b3">
-                        <p style="font-size: 16px; padding-top: 5px">High Score</p>
-                        <p style="text-align: center; font-size: 45px;padding-top:0px">{{ds_cptEventsGeneral.TotalHighScore}}</p>
-                    </div>
-                    <div class="col-lg-6 generalInfo chartBox" style="width:100%;height:136px;background:#ffd9b3">
-                        <p style="font-size: 16px; padding-top: 5px">Medium Score</p>
-                        <p style="text-align: center; font-size: 45px;padding-top:0px">{{ds_cptEventsGeneral.TotalMediumScore}}</p>
-                    </div>
-                    <div class="col-lg-6 generalInfo chartBox" style="width:100%;height:137px;background:#b3ffec">
-                        <p style="font-size: 16px; padding-top: 5px">Low Score</p>
-                        <p style="text-align: center; font-size: 45px;padding-top:0px">{{ds_cptEventsGeneral.TotalLowScore}}</p>
-                    </div>
-                </div>
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="cptScoresChart" dx-chart="cptScoresChart"></div>
-                    </div>
-                </div>
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="eventPerFlightChart" dx-chart="eventPerFlightChart"></div>
-                    </div>
-                </div>
-
-
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="compareCpt" dx-chart="compareCpt"></div>
-                    </div>
-                </div>
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="compareReg" dx-chart="compareReg"></div>
-                    </div>
-                </div>
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="eventsTreeMap" dx-tree-map="eventsTreeMap"></div>
-                    </div>
-                </div>
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="eventsMonthlyChart" dx-chart="eventsMonthlyChart"></div>
-                    </div>
-                </div>
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="scoresMonthlyChart" dx-chart="scoresMonthlyChart"></div>
-                    </div>
-                </div>
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="registerEventsChart" dx-chart="registerEventsChart"></div>
-                    </div>
-                </div>
-
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="registerScoresChart" dx-chart="registerScoresChart"></div>
-                    </div>
-                </div>
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="cptRouteChart" dx-chart="cptRouteChart"></div>
-                    </div>
-                </div>
-
-                <div class='col-lg-12' style='padding:10px 11px 10px 14px'>
-                    <div class=" chartBox" style='padding: 10px 0 10px 0'>
-                        <div id="eventPerFlightRoute" dx-chart="eventPerFlightRoute"></div>
-                    </div>
-                </div>
-
-
-                <div style="clear:both"></div>
             </div>
             <div style="clear:both"></div>
 

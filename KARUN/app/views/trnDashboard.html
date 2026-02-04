@@ -1,0 +1,360 @@
+﻿<style>
+    .stSelected {
+        background: green !important;
+        color: white !important;
+    }
+
+    .dx-fileuploader-input-wrapper {
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+        .dx-fileuploader-input-wrapper .dx-button-content {
+            background: green;
+            color: white;
+        }
+
+    .dx-fileuploader-container {
+    }
+
+    .cell-img {
+        height: 40px;
+    }
+
+
+
+
+
+    .row_odd .cal_day {
+        background: #ffe6cc;
+    }
+
+    .row_even .cal_day {
+        background: #ccf2ff;
+    }
+
+
+    ._cal .days-row {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days-row td {
+            text-align: center;
+            border: 1px solid gray;
+            padding: 5px;
+            width: 14.28571%;
+            background: #ddd;
+        }
+
+    ._cal .days {
+        border: 1px solid #eee;
+    }
+
+        ._cal .days td {
+            border: 1px solid #ccc;
+            width: 14.28571%;
+            padding: 3px;
+            vertical-align: baseline;
+        }
+
+            ._cal .days td .day-wrapper {
+                padding: 2px;
+                /*min-height: 65px;*/
+            }
+
+
+            ._cal .days td .day-caption {
+                color: black;
+                text-align: right;
+                padding: 1px;
+            }
+
+            ._cal .days td .today .day-caption {
+                color: green;
+                font-weight: bold;
+            }
+
+            ._cal .days td .day-caption._inactive {
+                color: #ccc !important;
+            }
+
+            ._cal .days td .today .day-caption._inactive {
+                color: green !important;
+                font-weight: bold;
+            }
+
+            ._cal .days td:has(> .today) {
+                background: #ccffe6;
+            }
+
+    ._cal .event {
+        padding: 3px;
+        margin: 2px 0 0 0;
+        text-align: center;
+    }
+
+        ._cal .event.d1165 {
+            background-color: #00cc99;
+        }
+
+        ._cal .event.d10000 {
+            background-color: #66ff66;
+        }
+
+        ._cal .event span {
+            display: inline-block;
+            margin-left: 5px;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        ._cal .event i {
+            font-size: 15px;
+        }
+
+    .thin-scroll0::-webkit-scrollbar {
+        width: 0px;
+        height: 0px;
+    }
+
+    .thin-scroll0::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    ._xheader.selected {
+        background: #b3ffd9;
+        border-bottom: 2px solid #00cc66 !important;
+    }
+
+    ._header_child {
+        display: none;
+    }
+
+
+    ._event {
+        margin: 3px;
+    }
+
+    ._session {
+        padding: 5px;
+        background: #adebeb;
+        color: black;
+        font-size: 12px;
+        text-align: center;
+    }
+
+    ._expired {
+        padding: 5px;
+        background: #b32400;
+        color: white;
+        font-size: 11px;
+        text-align: center;
+    }
+
+    ._status_1 {
+        background: #99ebff;
+    }
+
+    ._status_2 {
+        background: #ffccff;
+    }
+
+    ._status_3 {
+        background: #1affa3;
+    }
+
+    ._status_4 {
+        background: #ffcc66;
+    }
+
+    ._session ._title {
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+
+    ._expired ._title {
+        font-size: 11px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+
+    ._session.selected {
+        background: #99ff33;
+    }
+
+    ._schedule .cell-container td {
+        border: 1px solid gray;
+        width: 25%;
+        vertical-align: baseline;
+    }
+
+    ._schedule .cell-container .month .header {
+        color: #bbb;
+        font-weight: bold;
+        font-size: 12px;
+        /*padding: 5px 10px;*/
+        margin-bottom: 5px;
+    }
+
+    ._schedule .cell-container .month {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .collapsed {
+        display: none;
+    }
+    .grp-tile{
+        /*float:left;*/
+    }
+        .grp-tile.selected {
+            background: #66ffb3 !important;
+        }
+</style>
+<div class="box trndashboard" style="height:100%;display:none;overflow-y:hidden">
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-12  col1 col-grid" style="padding-right:2px;padding-left:2px;">
+            <div>
+                <table style="width:100%;">
+                    <tr>
+                        <td style="padding:6px;width:25%;font-weight:normal;text-align:center;border-bottom:1px solid #ccc" class="_summary_header _xheader selected" ng-click="_header_click('_summary_header','_summary')">SUMMARY</td>
+                        <td style="padding:6px;width:25%;font-weight:normal;text-align:center;border-bottom:1px solid #ccc" class="_type_header _xheader " ng-click="_header_click('_type_header','_type')">TYPES</td>
+                        <td style="padding: 6px; width: 25%; font-weight: normal; text-align: center; border-bottom: 1px solid #ccc" class="_group_header _xheader" ng-click="_header_click('_group_header','_group')">GROUPS</td>
+                        <td style="padding: 6px; width:25%; font-weight: normal; text-align: center; border-bottom: 1px solid #ccc" class="_employees_header _xheader" ng-click="_header_click('_employees_header','_employees')">EMPLOYEES</td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="_summary _schedule  _header_child thin-scroll2" style="border:none;border-right:1px solid #ccc;padding:3px; overflow-y:auto; " ng-style="getMainStyle()">
+                <div style="padding:7px;background:#ccc;text-align:center;margin-bottom:10px;font-weight:bold;">Status</div>
+                <div class="col-lg-4 col-md-6 padding-0" style="border-right:1px solid #ccc">
+                    <div dx-pie-chart="pie_status" style="margin-top:10px"></div>
+                </div>
+                <div class="col-lg-4 col-md-6 padding-0" style="padding-left:10px;padding-right:10px;border-right:1px solid #ccc">
+                    <div id="bar_status" dx-chart="bar_status" style="margin-top:10px"></div>
+                </div>
+                <div class="col-lg-4 col-md-6 padding-0" style="border-right:1px solid #ccc">
+                    <div dx-pie-chart="pie_passed" style="margin-top:10px"></div>
+                </div>
+                <div style="clear:both"></div>
+                <div style="padding:7px;background:#ccc;text-align:center;margin-bottom:10px;margin-top:10px;font-weight:bold">Types</div>
+                <div class="col-lg-12 col-md-12 padding-0" style="padding:10px">
+                    <div id="bar_type" dx-chart="bar_type" style="margin-top:10px"></div>
+                </div>
+                <div class="col-lg-12 col-md-12 padding-0" style="padding:10px">
+                    <div id="bar_type2" dx-chart="bar_type2" style="margin-top:10px"></div>
+                </div>
+                <div style="clear:both"></div>
+
+                <div style="padding:7px;background:#ccc;text-align:center;margin-bottom:10px;margin-top:10px;font-weight:bold">Groups</div>
+                <div class="col-lg-12 col-md-12 padding-0" style="padding:10px">
+                    <div id="bar_group" dx-chart="bar_group" style="margin-top:10px"></div>
+                </div>
+                <div class="col-lg-12 col-md-12 padding-0" style="padding:10px">
+                    <div id="bar_group2" dx-chart="bar_group2" style="margin-top:10px"></div>
+                </div>
+                <div style="clear:both"></div>
+
+
+
+
+            </div>
+            <div class="_type _schedule  _header_child thin-scroll2" style="border:none;border-right:1px solid #ccc;padding:3px; overflow-y:auto; " ng-style="getMainStyle()">
+                <div class="col-lg-6 col-md-12 padding-0">
+                    <div dx-data-grid="dg_type" id="dg_type"></div>
+                </div>
+                <div class="col-lg-6 col-md-12 padding-0" style="padding-left:10px">
+                    <div dx-data-grid="dg_typed" id="dg_typed"></div>
+                </div>
+                <div style="clear:both"></div>
+            </div>
+            <div class="_group _schedule  _header_child thin-scroll2" style="border:none;border-right:1px solid #ccc;padding:3px; overflow-y:auto; " ng-style="getMainStyle()">
+
+                <!--<div class="col-lg-2 thin-scroll2" style="overflow-y:auto;border-right:1px solid #ccc" ng-style="getMainStyle2()">
+
+    </div>-->
+
+                <div style="overflow-x:auto;padding:5px;border-bottom:1px solid #ccc;margin-bottom:5px;" class="thin-scroll2">
+                    <div ng-style="getTileWrapperStyle()">
+                        <div style="padding:5px; display:inline-block;width:300px " ng-repeat="s in ds_group.summary">
+                            <div style="background:#eee;border:1px solid #ccc;text-align:center" class="grp-tile" ng-click="tile_group_click(s.Group)" id="{{s.Group}}">
+                                <div style="padding:5px;border-bottom:1px solid #ddd;font-size:11px;font-weight:bold">{{s.GroupTitle}}</div>
+                                <table style="width:100%">
+                                    <tr>
+                                        <td style="padding:3px;font-size:11px;border-right:1px solid #ddd;width:50%">Count</td>
+                                        <td style="padding:3px;font-size:11px">Duration</td>
+                                    </tr>
+                                    <tr>
+                                        <td style=" border-right: 1px solid #ddd;font-size:11px">{{s.Count}}</td>
+                                        <td style="font-size: 11px">{{s.Duration}}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div dx-data-grid="dg_group" id="dg_group"></div>
+                    
+                </div>
+                <div class="col-lg-6">
+                    <div dx-data-grid="dg_groupd" id="dg_groupd"></div>
+                </div>
+                <div style="clear:both"></div>
+
+
+            </div>
+            <div class="_employees _schedule  _header_child thin-scroll2" style="border:none;border-right:1px solid #ccc;padding:3px; overflow-y:auto; " ng-style="getMainStyle()">
+                <div class="col-lg-3" style="padding:0">
+                    <div dx-data-grid="dg_employees" id="dg_employees"></div>
+                    <div dx-select-box="sb_rank" class="dx-border"></div>
+                </div>
+                <div class="col-lg-5">
+                    <div dx-data-grid="dg_cp" id="dg_cp"></div>
+
+                </div>
+                <div class="col-lg-4">
+                    <div dx-data-grid="dg_cpd" id="dg_cpd"></div>
+                </div>
+
+                <div style="clear:both"></div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <div class="rowx footer">
+        <div style="padding:0;">
+
+
+            <table>
+                <tr>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_to" dx-validator="{validationGroup:'flightboarddate',  validationRules: [{ type: 'required'}]}"></div></td>
+                    <td style="width:150px;padding-right:3px;"> <div dx-button="btn_refresh"></div></td>
+                    <td ng-show="isdrillvisble" style="width: 120px; padding-right: 3px;"> <div dx-button="btn_up"></div></td>
+                    <td ng-show="isdrillvisble" style="width: 120px; padding-right: 3px;"> <div dx-button="btn_down"></div></td>
+
+
+                </tr>
+            </table>
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div dx-load-panel="loadPanel"></div>
+</div>

@@ -1,0 +1,171 @@
+﻿<style>
+    #dg_flightrr .dx-toolbar .dx-toolbar-items-container {
+        height: 40px !important;
+    }
+
+    @media print {
+        .rrheader {
+            background: #ccc;
+        }
+    }
+</style>
+<div class="box dailyrosterreport" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+    <div ng-include="'app/views/menu.html'"></div>
+    <div class="rowx content" style="clear:both">
+
+
+        <div class="col-lg-12 col1" style="padding-right:2px;padding-left:2px;  ">
+            <div class="filter-container box  ">
+                <div dx-data-grid="dg_flight" id="dg_flightrr" class="content" style="overflow-y:hidden"></div>
+                <div style="background:#ccc;border:1px solid #bbb;text-align:center;padding:5px;font-weight:bold">STANDBY/RESERVE</div>
+                <div>
+                    <table style="width:100%;border:1px solid #ccc">
+                        <tr style="border-bottom:1px solid #ccc">
+                            <td style="width:150px;padding:5px;border-right:1px solid #ccc;background:#eee">STANDBY AM</td>
+                            <td style="padding:5px;">
+                                <div ng-repeat="a in ds_am" style="display:inline-block;font-size:12px;padding:3px;border:1px solid #000;margin:2px">{{a.JobGroup}}-{{a.ScheduleName}}</div>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px solid #ccc">
+                            <td style="width:150px;padding:3px;border-right:1px solid #ccc;background:#eee">STANDBY PM</td>
+                            <td style="padding:5px;">
+                                <div ng-repeat="p in ds_pm" style="display:inline-block;font-size:12px;padding:3px;border:1px solid #000;margin:2px">{{p.JobGroup}}-{{p.ScheduleName}}</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:150px;padding:3px;border-right:1px solid #ccc;background:#eee">RESERVE</td>
+                            <td style="padding:5px;"></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+    <div class="rowx footer">
+        <table style="width:100%;margin:0;padding:0;">
+            <tr>
+
+                <td style="width:150px;text-align:right;padding-right:5px" class="dx-border"><div class="center" dx-date-box="date_from" dx-validator="{validationGroup:'rosterreportbind',  validationRules: [{ type: 'required'}]}"></div></td>
+
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_search"></div></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_print"></div></td>
+                <td></td>
+                <td style="width:130px;text-align:left;padding-right:5px"><div dx-button="btn_notify"></div></td>
+
+            </tr>
+        </table>
+    </div>
+
+    <div id="popup_print" dx-popup="popup_print">
+        <div style="padding:10px 0 0 0">
+            <div id="scrollview" dx-scroll-view="scroll_jl">
+                <div id="rtbl" class="tbl page-a4  ">
+
+                    <table class="subpage" style="border:1px solid #ccc;width:100%">
+                        <thead>
+                            <tr style="border-bottom:1px solid #000;background:#bbb;height:34px;" class="dark-header">
+                                <th colspan="13" style="text-align:center;padding:5px;">{{Operator}} AIRLINE CREW SCHEDULING DEPARTMENT</th>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;background:#bbb;height:34px;" class="dark-header">
+                                <!--<th colspan="13" style="text-align:center;padding:5px;">CREW DAILY ROSTER <span style="font-weight:bold;display:inline-block">{{formatDay(dt_from)}}</span> {{formatDate(dt_from)}} (<span style="font-weight:bold;display:inline-block">{{formatDatePersian(dt_from)}}</span>)</th>-->
+                              
+                                <th colspan="13" style="text-align:center;padding:5px;">CREW DAILY ROSTER  {{formatDay(dt_from)}}  {{formatDate(dt_from)}} ( {{formatDatePersian(dt_from)}} )</th>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;background:#bbb; height:28px;">
+                                <th style="padding:5px;border-right:1px solid black;">FltNo</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Reg</th>
+                                <th style="padding:5px;border-right:1px solid black;">Route</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Dep</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">Arr</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">IP</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">P1</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">P2</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">SAFETY</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">SCCM</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">CCM</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">OBS</th>
+                                <th style="padding:5px;border-right:1px solid black;text-align:center">CHECK</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in dg_ds" style="border-bottom:1px solid black; height:29px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important">{{x.FltNo}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.Register}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important">{{x.Route}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{formatTime(x.STDLocal)}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{formatTime(x.STALocal)}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.IP}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.P1}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.P2}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.SAFETY}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.SCCM}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CCM1}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.OBS}}</td>
+                                <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CCM3}}</td>
+                                <!--<td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CCM2}}</td>
+    <td style="padding:5px;border-right:1px solid black;font-size:12px !important;text-align:center">{{x.CCM3}}</td>-->
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:30px;background:#bbb;" class="dark-header">
+                                <td colspan="13" style="text-align:center;padding:5px;">STANDBY/RESERVE</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">STANDBY AM</td>
+                                <td colspan="12" style="text-align:left;padding:5px;">
+                                    <div ng-repeat="a in ds_am" style="display:inline-block;font-size:11px;padding:3px;border:1px solid #000;margin:1px">{{a.JobGroup}}-{{a.ScheduleName}}</div>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">STANDBY PM</td>
+                                <td colspan="12" style="text-align:left;padding:5px;">
+                                    <div ng-repeat="p in ds_pm" style="display:inline-block;font-size:11px;padding:3px;border:1px solid #000;margin:1px">{{p.JobGroup}}-{{p.ScheduleName}}</div>
+                                </td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px;">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">RESERVE</td>
+                                <td colspan="12" style="text-align:left;padding:5px;"></td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:30px;background:#bbb;" class="dark-header">
+                                <td colspan="13" style="text-align:center;padding:5px;">OTHER</td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">F/D</td>
+                                <td colspan="12" style="text-align:left;padding:5px;"></td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;height:34px">
+                                <td style="padding:5px;border-right:1px solid black;font-size:13px !important;" class="dark-header">F/M</td>
+                                <td colspan="12" style="text-align:left;padding:5px;"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="text-align:right;padding-right:10px;font-size:11px;padding-top:2px">Generated by AIRPOCKET</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="popup_notify" dx-popup="popup_notify">
+        <div style="padding:10px 0 0 0">
+            <div dx-data-grid="dg_notify" class="content" style="overflow-y:hidden"></div>
+             <div style="padding:7px;text-align:center" ng-show="countDownVisible">Sent SMS(s) status will be refreshed in <span style="display:inline-block;font-weight:bold;font-size:14px">{{counter}}</span> seconds.</div> 
+            
+        </div>
+    </div>
+    <div dx-load-panel="loadPanel"></div>
+
+
+
+
+</div>

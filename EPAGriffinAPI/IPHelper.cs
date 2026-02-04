@@ -69,8 +69,8 @@ namespace EPAGriffinAPI
             //return true;
             var cacheKey = "ipaccess";
             username = username.ToLower();
-            if (username != "trans.varesh")
-                return true;
+            //if (username != "trans.varesh")
+            //    return true;
                 //var access = GetFromCache<List<Models.ViewIPAccess>>(cacheKey, () => {
                 //    // load movie from DB
                 //    UnitOfWork unitOfWork = new UnitOfWork();

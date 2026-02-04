@@ -1,0 +1,41 @@
+﻿<div class="box journal" style="height:100%;display:none;overflow-y:hidden">
+
+
+    <div ng-include="'app/views/header.html'" class="rowx header"></div>
+
+    <div class="rowx content" style="clear:both">
+        <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-3 col2 filter" style="display:none">
+            <div class="filter-container box">
+                <div class="header">Filter</div>
+                <div class="content">
+                    <div ng-include="'app/views/filter.html'" ng-init="type = 'organization';" style="flex: 1 1 auto;display: flex;  width:100%;"></div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class=" col-lg-9 col-md-9 col-sm-9 col-xs-9 col1" style="padding-right:2px;padding-left:5px;">
+            <div dx-data-grid="dg" id="grid"></div>
+
+        </div>
+    </div>
+    <div class="rowx footer">
+        <div class=" col-lg-11 col-md-11 col-sm-11 col-xs-11" style="padding:0;">
+            <div dx-button="btn_search"></div>
+            <div dx-button="btn_new"></div>
+            <div dx-button="btn_edit"></div>
+
+            <div dx-button="btn_delete"></div>
+        </div>
+        <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1" style="padding:0;text-align:right">
+            <!-- <div dx-button="btn_filter"></div>-->
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+
+    <div ng-include="'app/views/journalAdd.html'"></div>
+    <div dx-load-panel="loadPanel"></div>
+</div>
+
+

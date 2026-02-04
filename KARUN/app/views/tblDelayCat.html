@@ -1,0 +1,253 @@
+﻿<style>
+    /*.fuContent {
+        overflow-y: scroll;  
+        -webkit-overflow-scrolling: touch;
+        height: calc(100vh - 130px);
+    }
+
+    @media (max-width: 600px) {
+        .fuHeader {
+            display: none;
+        }
+
+        .fuContent2 {
+            height: calc(100vh - 230px);
+        }
+    }
+
+    @media (min-width: 1200px) {
+        .fuContent2 {
+            height: calc(100vh - 200px);
+        }
+    }*/
+
+    .thin-scroll3::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .thin-scroll3::-webkit-scrollbar-thumb {
+        background-color: #ddd;
+        outline: 1px solid slategrey;
+    }
+
+    .tile-inf {
+        border: 1px solid #ccc;
+        margin: 5px 5px 5px 0;
+        text-align: center;
+        border-radius: 2px;
+        padding: 3px;
+        background: white;
+    }
+
+        .tile-inf .caption {
+            font-size: 14px;
+            padding: 4px 1px 3px 1px;
+            color: #666666 !important;
+            font-weight: normal
+        }
+
+        .tile-inf .value {
+            font-size: 14px;
+            font-weight: bold;
+            padding: 1px 1px 2px 1px;
+        }
+
+        .tile-inf td {
+            background: white;
+        }
+
+    .thin-scroll4::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .thin-scroll4::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        outline: 1px solid slategrey;
+    }
+
+    .thin-scroll5::-webkit-scrollbar {
+        width: 3px;
+        height: 6px;
+    }
+
+    .thin-scroll5::-webkit-scrollbar-thumb {
+        background-color: #eee;
+        outline: 1px solid slategrey;
+    }
+
+    .padding-5 .dx-popup-content {
+        padding: 0px !important;
+    }
+
+    .dx-overlay-wrapper {
+        padding: 0 !important
+    }
+
+    .dx-popup-content {
+        padding: 0 !important;
+    }
+
+
+    #dg_master .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_master .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_master .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_master .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+    #dg_detail .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_detail .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_detail .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_detail .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+
+
+
+
+    .pos {
+        color: green;
+    }
+
+    .neg {
+        color: red;
+    }
+
+    .nut {
+        color: gray;
+    }
+
+    .fsymbol {
+        font-size: 20px;
+        margin-left: 5px;
+    }
+
+    .fsymbol-small {
+        font-size: 14px;
+        margin-left: 2px;
+    }
+
+    .dx-tab {
+        background-color: lightgray !important;
+    }
+
+    .tbl-types td {
+        padding: 5px;
+    }
+
+        .tbl-types td:first-child {
+            padding-left: 0;
+        }
+
+        .tbl-types td:last-child {
+            padding-right: 0;
+        }
+
+    .off-type {
+        background: #eee;
+        color: black;
+    }
+
+    .on-type {
+        background: #a6a6a6;
+        color: white;
+    }
+
+    #dg_monthly2 .dx-datagrid-header-panel {
+        padding: 0;
+        background-color: gray;
+        color: white;
+    }
+
+        #dg_monthly2 .dx-datagrid-header-panel .dx-toolbar {
+            margin: 0;
+            padding-right: 20px;
+            background-color: transparent;
+            padding-left: 10px;
+        }
+
+        #dg_monthly2 .dx-datagrid-header-panel .dx-toolbar-items-container {
+            height: 35px;
+        }
+
+    #dg_monthly2 .dx-icon.dx-icon-export-excel-button {
+        color: white;
+    }
+    /*  #dg_master .dx-datagrid .dx-row > td {
+     padding: 7px !important;
+    }
+    #dg_detail .dx-datagrid .dx-row > td {
+        padding: 7px !important;
+    }*/
+</style>
+
+
+<div ng-controller="tblDelayCatController" class="bifuelroute">
+    <div id="popup" dx-popup="popup">
+        <div class="wrapper " style="padding:5px;background-color:whitesmoke">
+            <div class="padding-0" style="padding:0px; border:1px solid #ccc;background:white;margin-top:0px">
+                <div style="padding-right:5px;padding-top:5px;padding-left:5px;padding-bottom:5px" class="padding-0" >
+                    <div class="thin-scroll5" style="overflow-x:scroll;  padding-right:5px;padding-left:5px;border:1px solid #ccc">
+                        <table style=" margin:0" class="tbl-types"  >
+                            <tr>
+                                <td style="text-align:center;min-width:80px" ng-repeat="t in grouped">
+                                    <div style="text-align:center;border:1px solid #ccc;padding:5px;font-weight:bold;font-size:11px;" ng-class="getTypeSelectedClass(t.ICategory)" ng-click="selectType(t.ICategory)">
+                                        {{t.ICategory}}
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        
+                    </div>
+                    <div dx-data-grid="dg_master" id="dg_master" class="content" style="overflow-y:hidden;margin-top:10px" dx-item-alias="xrow">
+                        <div data-options="dxTemplate:{ name:'titleTemplate' }">
+                            <div>
+                                <span style='color:white;'>Categories</span>
+                            </div>
+                        </div>
+                        <div data-options="dxTemplate:{ name:'goFlightsTemplate' }">
+                            <a ng-click="showFlights(xrow)" href="" class='w3-button w3-block w3-blue' style=' margin:0 auto 0px auto;text-decoration:none;padding:5px 5px !important; text-align:center'>Flights</a>
+                        </div>
+                    </div>
+                </div>
+                 
+                <div style="clear:both"></div>
+
+            </div>
+        </div>
+    </div>
+
+    <div dx-load-panel="loadPanel"></div>
+    <!--<div ng-include="'app/views/tblDelayedFlight.html'"></div>-->
+</div>

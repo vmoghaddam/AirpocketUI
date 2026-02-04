@@ -1,0 +1,376 @@
+﻿'use strict';
+app.controller('routeController', ['$scope', '$location', '$routeParams', '$rootScope', 'airportService','flightService', 'authService', '$route', function ($scope, $location, $routeParams, $rootScope, airportService,flightService, authService, $route) {
+    $scope.prms = $routeParams.prms;
+    $scope.IsDispatch = $route.current.isDispatch;
+    $scope.IsBase = !$scope.IsDispatch;
+    //////////////////////////////////
+    $scope.dsUrl = null;
+    $scope.filterVisible = false;
+    $scope.btn_delete = {
+        text: 'Delete',
+        type: 'danger',
+        icon: 'clear',
+        width: 120,
+        bindingOptions: {
+            visible: 'IsBase'
+        },
+        onClick: function (e) {
+            $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
+            if (!$scope.dg_selected) {
+                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                return;
+            }
+
+            General.Confirm(Config.Text_DeleteConfirm, function (res) {
+                if (res) {
+
+                    var dto = { Id: $scope.dg_selected.Id, };
+                    $scope.loadingVisible = true;
+                    flightService.deleteRoute(dto).then(function (response) {
+                        $scope.loadingVisible = false;
+                        General.ShowNotify(Config.Text_SavedOk, 'success');
+                        $scope.doRefresh = true;
+                        $scope.bindRoutes();
+
+
+
+                    }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+
+                }
+            });
+        }
+    };
+    $scope.btn_new = {
+        text: 'New',
+        type: 'default',
+        icon: 'plus',
+        width: 120,
+        onClick: function (e) {
+
+            var data = { Id: null };
+
+            $rootScope.$broadcast('InitAddRoute', data);
+        },
+        
+
+    };
+    $scope.btn_edit = {
+        text: 'Edit',
+        type: 'default',
+        icon: 'edit',
+        width: 120,
+
+        onClick: function (e) {
+            $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
+            if (!$scope.dg_selected) {
+                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                return;
+            }
+            var data = $scope.dg_selected;
+            $rootScope.$broadcast('InitAddAirport', data);
+        },
+        bindingOptions: {
+            visible: 'IsBase'
+        },
+
+    };
+
+    $scope.btn_flights = {
+        text: 'Flights',
+        type: 'default',
+        icon: 'rowfield',
+        width: 120,
+
+        onClick: function (e) {
+            $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
+            if (!$scope.dg_selected) {
+                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                return;
+            }
+            var data = $scope.dg_selected;
+            $rootScope.navigateairport(data.IATA);
+        },
+        bindingOptions: {
+            visible: 'IsDispatch'
+        },
+
+    };
+    $scope.btn_view = {
+        text: 'View',
+        type: 'default',
+        icon: 'doc',
+        width: 120,
+        onClick: function (e) {
+            $scope.dg_selected = $rootScope.getSelectedRow($scope.dg_instance);
+            if (!$scope.dg_selected) {
+                General.ShowNotify(Config.Text_NoRowSelected, 'error');
+                return;
+            }
+            var data = $scope.dg_selected;
+            $scope.InitAddAirport(data);
+        }
+
+    };
+    $scope.btn_search = {
+        text: 'Search',
+        type: 'success',
+        icon: 'search',
+        width: 120,
+
+        bindingOptions: {},
+        onClick: function (e) {
+            $scope.doRefresh = true;
+            $scope.bindRoutes();
+        }
+
+    };
+    $scope.btn_print = {
+        text: 'Print',
+        type: 'default',
+        icon: 'print',
+        width: 120,
+
+    };
+    $scope.btn_filter = {
+        text: '',
+        type: 'default',
+        icon: 'filter',
+        width: 40,
+        onClick: function (e) {
+            if ($scope.filterVisible) {
+                $scope.filterVisible = false;
+                $('.filter').fadeOut();
+            }
+            else {
+                $scope.filterVisible = true;
+                $('.filter').fadeIn();
+            }
+        }
+
+    };
+
+    $scope.bindRoutes = function () {
+        if (!$scope.doRefresh)
+            return;
+        $scope.dg_ds = null;
+        $scope.loadingVisible = true;
+        flightService.getRoutes(Config.AirlineId).then(function (response) {
+            $scope.loadingVisible = false;
+            $scope.dg_ds = response;
+
+        }, function (err) { $scope.loadingVisible = false; General.ShowNotify(err.message, 'error'); });
+    };
+    //////////////////////////////////
+    $scope.loadingVisible = false;
+    $scope.loadPanel = {
+        message: 'Please wait...',
+
+        showIndicator: true,
+        showPane: true,
+        shading: true,
+        closeOnOutsideClick: false,
+        shadingColor: "rgba(0,0,0,0.4)",
+        // position: { of: "body" },
+        onShown: function () {
+
+        },
+        onHidden: function () {
+
+        },
+        bindingOptions: {
+            visible: 'loadingVisible'
+        }
+    };
+    ///////////////////////////////////
+
+    ///////////////////////////////////
+    $scope.filters = [];
+
+    $scope.dg_columns = [
+          { dataField: 'Id', caption: 'Id', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+            { dataField: 'AirlineId', caption: 'Airline', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+        {
+            caption: 'Source', columns: [
+                 { dataField: 'FromAirportIATA', caption: 'IATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, sortIndex: 0, sortOrder: 'asc' },
+                 // { dataField: 'FromCity', caption: 'City', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+                   { dataField: 'FromCountry', caption: 'Country', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+            ]
+        },
+        {
+            caption: 'Destination', columns: [
+                 { dataField: 'ToAirportIATA', caption: 'IATA', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 100, sortIndex: 1, sortOrder: 'asc' },
+                 //{ dataField: 'ToCity', caption: 'City', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+                   { dataField: 'ToCountry', caption: 'Country', allowResizing: true, alignment: 'center', dataType: 'string', allowEditing: false, width: 150, },
+            ]
+        },
+        {
+            caption:'Duration',columns:[
+                 { dataField: 'FlightH', caption: 'HH', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
+                  { dataField: 'FlightM', caption: 'MM', allowResizing: true, alignment: 'center', dataType: 'number', allowEditing: false, width: 100 },
+            ]
+        },
+        {
+            caption: 'Airports', columns: [
+                  { dataField: 'FromAirportName', caption: 'Source', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false,  },
+                 { dataField: 'ToAirportName', caption: 'Destination', allowResizing: true, alignment: 'left', dataType: 'string', allowEditing: false,   },
+                 
+            ]
+        },
+        
+    ];
+
+    $scope.dg_selected = null;
+    $scope.dg_instance = null;
+    $scope.dg_ds = null;
+    $scope.dg = {
+        headerFilter: {
+            visible: false
+        },
+        filterRow: {
+            visible: true,
+            showOperationChooser: true,
+        },
+        showRowLines: true,
+        showColumnLines: true,
+        sorting: { mode: 'none' },
+
+        noDataText: '',
+
+        allowColumnReordering: true,
+        allowColumnResizing: true,
+        scrolling: { mode: 'infinite' },
+        paging: { pageSize: 100 },
+        showBorders: true,
+        selection: { mode: 'single' },
+
+        columnAutoWidth: false,
+        height: $(window).height() - 135,
+
+        columns: $scope.dg_columns,
+        onContentReady: function (e) {
+            if (!$scope.dg_instance)
+                $scope.dg_instance = e.component;
+
+        },
+        onSelectionChanged: function (e) {
+            var data = e.selectedRowsData[0];
+
+            if (!data) {
+                $scope.dg_selected = null;
+            }
+            else
+                $scope.dg_selected = data;
+
+
+        },
+        onCellPrepared: function (cellInfo) {
+            if (cellInfo.rowType == "data" && cellInfo.column.dataField === 'FromAirportIATA') {
+                 
+                cellInfo.cellElement.css('background', 'palegreen');
+            }
+            if (cellInfo.rowType == "data" && cellInfo.column.dataField === 'ToAirportIATA') {
+
+                cellInfo.cellElement.css('background', 'lightpink');
+            }
+            if (cellInfo.rowType == "data" && cellInfo.column.dataField === 'FlightH') {
+
+                cellInfo.cellElement.css('background', 'papayawhip');
+            }
+            if (cellInfo.rowType == "data" && cellInfo.column.dataField === 'FlightM') {
+
+                cellInfo.cellElement.css('background', 'papayawhip');
+            }
+            //papayawhip
+        },
+        bindingOptions: {
+            dataSource: 'dg_ds'
+        }
+    };
+
+
+    $scope.doRefresh = false;
+
+    $scope.getFilters = function () {
+        var filters = $scope.filters;
+        if (filters.length == 0)
+            filters = [['Id', '>', 0]];
+        else {
+            //filters.push('and');
+            //filters.push(['OfficeCode', 'startswith', $scope.ParentLocation.FullCode]);
+
+        }
+
+
+        return filters;
+    };
+    $scope.bind = function () {
+        if (!$scope.dg_ds) {
+            $scope.dg_ds = {
+                store: {
+                    type: "odata",
+                    url: $rootScope.serviceUrl + 'odata/airports/all',
+                    key: "Id",
+                    version: 4,
+                    onLoaded: function (e) {
+                        // $scope.loadingVisible = false;
+                        //filter
+                        $rootScope.$broadcast('OnDataLoaded', null);
+                    },
+                    beforeSend: function (e) {
+
+                        $scope.dsUrl = General.getDsUrl(e);
+
+                        // $scope.$apply(function () {
+                        //    $scope.loadingVisible = true;
+                        // });
+                        $rootScope.$broadcast('OnDataLoading', null);
+                    },
+                },
+                // filter: [['OfficeCode', 'startswith', $scope.ParentLocation.FullCode]],
+                // sort: ['DatePay', 'Amount'],
+
+            };
+        }
+
+        if ($scope.doRefresh) {
+            $scope.filters = $scope.getFilters();
+            $scope.dg_ds.filter = $scope.filters;
+            $scope.dg_instance.refresh();
+            $scope.doRefresh = false;
+        }
+
+    };
+    ///////////////////////
+    if (!authService.isAuthorized()) {
+
+        authService.redirectToLogin();
+    }
+    else {
+        $rootScope.page_title = '> Block Times';
+        $('.route').fadeIn();
+    }
+    //////////////////////////////////////////
+    $scope.$on('getFilterResponse', function (event, prms) {
+
+        $scope.filters = prms;
+
+        $scope.doRefresh = true;
+        $scope.bindRoutes();
+    });
+    $scope.$on('onTemplateSearch', function (event, prms) {
+
+        $scope.$broadcast('getFilterQuery', null);
+    });
+    $scope.$on('onRouteSaved', function (event, prms) {
+
+        $scope.doRefresh = true;
+    });
+    $scope.$on('onRouteHide', function (event, prms) {
+        alert($scope.doRefresh);
+        $scope.bindRoutes();
+
+    });
+    //////////////////////////////////////////
+    $rootScope.$broadcast('AirportLoaded', null);
+    ///end
+}]);
