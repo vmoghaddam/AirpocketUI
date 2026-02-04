@@ -680,7 +680,7 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/logininfo.html"
     });
 	
-	$routeProvider.when("/fdm/crew/z/:crew_id/:dt1/:dt2/:ac_type", {
+	$routeProvider.when("/fdm/crew/z/:crew_id/:dt1/:dt2/:ac_type/:position", {
         controller: "zfdm_crew_controller",
         templateUrl: "/app/views/zfdm_crew.html?v=" + '5673'
     });
@@ -767,7 +767,7 @@ var apireportflight='https://fleet.caspianairlines.com/zapinet/'
 var zfuel='https://fleet.caspianairlines.com/zfuel/';
 var serviceRequest = 'https://fleet.caspianairlines.com/apiform/';
 
-var zfdm='https://fleet.caspianairlines.com/zfdm/';
+var zfdm ='http://localhost:22558/';
 var api_fdm=zfdm;
 
 if (window.location.href.indexOf('fleet.caspianairlines') != -1) { 

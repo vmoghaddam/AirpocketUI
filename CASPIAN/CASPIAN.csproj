@@ -316,6 +316,7 @@
     <Content Include="app\views\fdmOps.html" />
     <Content Include="app\views\fdmQA.html" />
     <Content Include="app\views\fdmRegMonthly.html" />
+    <Content Include="app\views\fdm_sand.html" />
     <Content Include="app\views\fdps.html" />
     <Content Include="app\views\filter.html" />
     <Content Include="app\views\finMonthlyReport.html" />
@@ -438,7 +439,12 @@
     <Content Include="app\views\users.html" />
     <Content Include="app\views\verify.html" />
     <Content Include="app\views\vrAdd.html" />
+    <Content Include="app\views\zdutyTimeline.html" />
+    <Content Include="app\views\zfdm_crew.html" />
+    <Content Include="app\views\zfdm_main.html" />
     <Content Include="app\views\zreportEFB.html" />
+    <Content Include="app\views\zscheduling.html" />
+    <Content Include="app\views\zusers.html" />
     <Content Include="content\css\bootstrap-4.min.css" />
     <Content Include="content\css\bootstrap.css" />
     <Content Include="content\css\bootstrap.min.css" />
@@ -2192,6 +2198,7 @@
     <Content Include="content\webfonts\fa-solid-900.woff2" />
     <Content Include="downloadhandler.ashx" />
     <Content Include="filehandler.ashx" />
+    <Content Include="app\views\zfdm_main.rar" />
     <None Include="packages.config" />
     <Content Include="pdfjs\api\draft\fonts\OpenSans-Bold-webfont.eot" />
     <Content Include="pdfjs\api\draft\fonts\OpenSans-Bold-webfont.woff" />
