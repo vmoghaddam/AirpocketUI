@@ -2,11 +2,11 @@
     $scope.items = DataService.getAudits();
 
     $scope.open = function (audit) {
-        $location.path('/iqs/audit/detail/' + audit.id);
+        $location.path('/iqs/audit/plan/detail/' + 4);//+ audit.id);
     };
 
     $scope.new = function (audit) {
-        $location.path('/iqs/audit/detail/' + -1);
+        $location.path('/iqs/audit/plan/detail/' + -1);
     };
 
 }]);

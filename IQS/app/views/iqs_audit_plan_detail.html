@@ -11,6 +11,7 @@
         <div class="topbar-right">
             <div class="pill">
                 <span class="pill-dot"></span>
+
                 <span>Demo data – not connected to live SMS</span>
             </div>
         </div>
@@ -49,15 +50,15 @@
 
         <div class="content-area">
 
-            <div id="scroll_content" class="scroll-flex" dx-scroll-view="scroll_content" >
+            <div id="scroll_content" class="scroll-flex" dx-scroll-view="scroll_content">
                 <div class="page-header">
                     <div class="page-title-block">
                         <div class="page-title">
-                            Audit – {{ item.auditNo }}
+                            Audit Plan – {{ item.auditNo }}
                             <span class="page-title-pill">Internal audit</span>
                         </div>
                         <div class="page-subtitle">
-                            Conceptual view showing scope, standards_refrences, findings, corrective actions and linked hazards.
+                            Conceptual view showing scope, objectives, findings, corrective actions and linked hazards.
                         </div>
                     </div>
                     <div class="page-actions">
@@ -77,80 +78,144 @@
                         <div class="form-group full">
                             <label><span class="field-name">Title</span></label>
                             <div class="input" dx-text-box="txt_title" dx-validator="{validationGroup:'auditsave',  validationRules: [{ type: 'required' }]}"></div>
+                            <!--<input type="text"  ng-model="item.title" />-->
 
                         </div>
                         <div class="form-group">
                             <label><span class="field-name">Code</span></label>
                             <div class="input" dx-text-box="txt_code"></div>
-
+                            <!--<input type="text" ng-model="item.dept" />-->
                         </div>
                         <div class="form-group">
                             <label><span class="field-name">Type</span></label>
                             <div class="input" dx-select-box="sb_types"></div>
-
+                            <!--<input type="text" ng-model="item.auditType" />-->
                         </div>
 
                         <div class="form-group">
-                            <label><span class="field-name">Audit Date</span></label>
-                            <div class="input" dx-date-box="dt_audit_date"></div>
-
+                            <label><span class="field-name">IssueDate</span></label>
+                            <div class="input" dx-date-box="dt_issue_date"></div>
+                            <!--<input type="text" ng-model="item.startDate" />-->
                         </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Scope</span></label>
-                            <div class="input" dx-text-box="txt_scope"></div>
 
+                        <div class="form-group full">
+                            <label><span class="field-name">Objective</span></label>
+                            <div class="input" dx-text-area="txt_objective"></div>
+                            <!--<textarea>{{ item.objective }}</textarea>s-->
                         </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Area</span></label>
-                            <div class="input" dx-text-box="txt_area"></div>
 
+                        <div class="form-group full">
+                            <label><span class="field-name">Description</span></label>
+                            <div class="input" dx-text-area="txt_Description"></div>
+                            <!--<textarea>{{ item.standards }}</textarea>-->
                         </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Location</span></label>
-                            <div dx-select-box="sb_locations"></div>
 
-                        </div>
                         <div class="form-group">
-                            <label><span class="field-name">Auditee</span></label>
-                            <div dx-select-box="sb_auditees"></div>
-
-                        </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Auditor</span></label>
+                            <label><span class="field-name">Lead auditor</span></label>
                             <div dx-select-box="sb_auditors"></div>
-
-                        </div>
-
-                        <div class="form-group full">
-                            <label><span class="field-name">Standards/ Refrences</span></label>
-                            <div class="input" dx-text-area="txt_standards_refrences"></div>
-
-                        </div>
-
-                        <div class="form-group full">
-                            <label><span class="field-name">Remark</span></label>
-                            <div class="input" dx-text-area="txt_remark"></div>
+                            <!--<input type="text" ng-model="item.leadAuditor" />-->
                         </div>
                     </div>
-
 
                     <div class="section-divider"></div>
-                    <div class="section-head">
-                        <div class="page-subtitle">Findings</div>
-                        <div dx-button="btn_finding_add" class="btn btn-primary"></div>
+
+                    <div class="page-subtitle" style="margin-bottom:6px;">Opening meeting</div>
+                    <div class="meeting-grid">
+                        <div class="form-group">
+                            <label><span class="field-name">Start</span></label>
+                            <div class="input" dx-date-box="dt_opening_start"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><span class="field-name">End</span></label>
+                            <div class="input" dx-date-box="dt_opening_end"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><span class="field-name">Venue</span></label>
+                            <div class="input" dx-text-box="txt_opening_venue"></div>
+                        </div>
                     </div>
 
+                    <!--<div class="section-head" style="margin: 12px 0px 6px 0px;">
+                        <div class="page-subtitle">Audit programme</div>
+                        <div dx-button="btn_audit_add" class="btn btn-primary" style="margin-right: 6px ;"  >
+                            <span class="icon" >＋</span>
+                            Add Audit
+                        </div>
+                    </div>-->
+                    <div class="section-head">
+                        <div class="page-subtitle">Audit programme</div>
+                        <div dx-button="btn_audit_add" class="btn btn-primary"></div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Title</th>
+                                <th>Type</th>
+                                <th>Audit date</th>
+                                <th>Auditee</th>
+                                <th>Auditor</th>
+                                <th>Location</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="a in audits">
+                                <td>{{ a.code }}</td>
+                                <td>{{ a.title }}</td>
+                                <td>{{ a.type_id }}</td>
+                                <td>{{ a.audit_date | date:'yyyy-MM-dd' }}</td>
+                                <td>{{ a.auditee_name }}</td>
+                                <td>{{ a.auditor_name }}</td>
+                                <td>{{ a.location_title }}</td>
+                                <td>
+                                    <span class="link-like" ng-click="openAudit(a)">Open</span>
+                                </td>
+                            </tr>
+                            <tr ng-if="!audits || !audits.length">
+                                <td colspan="7" style="font-size:0.85rem; color:var(--text-muted);">
+                                    No planned audits.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+
+
+
+                    <div class="page-subtitle" style="margin:12px 0px 6px 0px;">Closing meeting</div>
+
+                    <div class="meeting-grid">
+                        <div class="form-group">
+                            <label><span class="field-name">Start</span></label>
+                            <div class="input" dx-date-box="dt_closing_start"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><span class="field-name">End</span></label>
+                            <div class="input" dx-date-box="dt_closing_end"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><span class="field-name">Venue</span></label>
+                            <div class="input" dx-text-box="txt_closing_venue"></div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
                     <div class="card" style="background:none; border:none; padding:0;">
-                        <!--<div class="page-subtitle" style="margin-bottom:6px;">Findings</div>
-                        <div dx-button="btn_finging_add" class="btn btn-primary"></div>-->
+                        <div class="page-subtitle" style="margin-bottom:6px;">Findings</div>
                         <table>
                             <thead>
                                 <tr>
                                     <th>Code</th>
                                     <th>Title</th>
                                     <th>Level</th>
+                                    <th>Auditor</th>
                                     <th>Closure Deadline</th>
-                                    <th>Closure Date</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -158,8 +223,8 @@
                                     <td>{{ f.code }}</td>
                                     <td>{{ f.title }}</td>
                                     <td>{{ f.level }}</td>
+                                    <td>{{ f.auditor_name }}</td>
                                     <td>{{ f.closure_deadline | date:'yyyy-MM-dd' }}</td>
-                                    <td>{{ f.closure_auditor_date | date:'yyyy-MM-dd' }}</td>
                                 </tr>
                                 <tr ng-if="!findings || !findings.length">
                                     <td colspan="5" style="font-size:0.85rem; color:var(--text-muted);">
@@ -174,9 +239,9 @@
                     <div class="card" style="background:none; border:none; padding:0; margin-top:10px;">
                         <div class="page-subtitle" style="margin-bottom:6px;">Corrective actions &amp; monitoring</div>
                         <!--<p class="hint" style="margin:0 0 6px;">
-            For each finding, this section summarises the agreed corrective action, the responsible owner,
-            target date and how the effectiveness will be monitored.
-        </p>-->
+                            For each finding, this section summarises the agreed corrective action, the responsible owner,
+                            target date and how the effectiveness will be monitored.
+                        </p>-->
                         <table>
                             <thead>
                                 <tr>

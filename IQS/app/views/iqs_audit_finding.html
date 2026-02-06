@@ -49,11 +49,11 @@
 
         <div class="content-area">
 
-            <div id="scroll_content" class="scroll-flex" dx-scroll-view="scroll_content" >
+            <div id="scroll_content" class="scroll-flex" dx-scroll-view="scroll_content">
                 <div class="page-header">
                     <div class="page-title-block">
                         <div class="page-title">
-                            Audit – {{ item.auditNo }}
+                            Audit Finding– {{ item.auditNo }}
                             <span class="page-title-pill">Internal audit</span>
                         </div>
                         <div class="page-subtitle">
@@ -85,14 +85,24 @@
 
                         </div>
                         <div class="form-group">
-                            <label><span class="field-name">Type</span></label>
-                            <div class="input" dx-select-box="sb_types"></div>
+                            <label><span class="field-name">Level</span></label>
+                            <div class="input" dx-text-box="txt_level"></div>
+
+                        </div>
+                        <div class="form-group">
+                            <label><span class="field-name">Sent Report Date</span></label>
+                            <div class="input" dx-date-box="dt_sent_report_date"></div>
 
                         </div>
 
                         <div class="form-group">
-                            <label><span class="field-name">Audit Date</span></label>
-                            <div class="input" dx-date-box="dt_audit_date"></div>
+                            <label><span class="field-name">Closure Deadline</span></label>
+                            <div class="input" dx-date-box="dt_closure_deadline"></div>
+
+                        </div>
+                        <div class="form-group">
+                            <label><span class="field-name">Auditor Closure Date</span></label>
+                            <div class="input" dx-date-box="dt_closure_auditor_date"></div>
 
                         </div>
                         <div class="form-group">
@@ -174,9 +184,9 @@
                     <div class="card" style="background:none; border:none; padding:0; margin-top:10px;">
                         <div class="page-subtitle" style="margin-bottom:6px;">Corrective actions &amp; monitoring</div>
                         <!--<p class="hint" style="margin:0 0 6px;">
-            For each finding, this section summarises the agreed corrective action, the responsible owner,
-            target date and how the effectiveness will be monitored.
-        </p>-->
+                            For each finding, this section summarises the agreed corrective action, the responsible owner,
+                            target date and how the effectiveness will be monitored.
+                        </p>-->
                         <table>
                             <thead>
                                 <tr>

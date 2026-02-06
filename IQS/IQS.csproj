@@ -62,10 +62,12 @@
     <Reference Include="System.EnterpriseServices" />
     <Content Include="app\app.js" />
     <Content Include="app\controllers\iqs_audit_detail_controller.js" />
+    <Content Include="app\controllers\iqs_audit_finding_controller.js" />
     <Content Include="app\controllers\iqs_audit_list_controller.js" />
     <Content Include="app\app.js" />
     <Content Include="app\controllers\iqs_audit_detail_controller.js" />
     <Content Include="app\controllers\iqs_audit_list_controller.js" />
+    <Content Include="app\controllers\iqs_audit_plan_detail_controller.js" />
     <Content Include="app\controllers\iqs_controller.js" />
     <Content Include="app\controllers\iqs_hazard_detail_controller.js" />
     <Content Include="app\controllers\iqs_hazard_list_controller.js" />
@@ -78,6 +80,8 @@
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\cmsService.js" />
+    <Content Include="app\views\iqs_audit_finding.html" />
+    <Content Include="app\views\iqs_audit_plan_detail.html" />
     <Content Include="app\views\iqs.html" />
     <Content Include="app\views\iqs_audit_detail.html" />
     <Content Include="app\views\iqs_audit_list.html" />

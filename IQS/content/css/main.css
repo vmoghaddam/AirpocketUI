@@ -854,3 +854,34 @@ select {
     /*border-bottom: 1px solid rgba(31, 41, 55, 0.9);*/
     padding: 5px 0px 5px 0px
 }
+/* Fix double scroll: let ONLY dx-scroll-view scroll */
+.content-area {
+    overflow: hidden !important;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#scroll_content {
+    flex: 1;
+    min-height: 0;
+}
+.meeting-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 4fr; /* Venue بزرگتر */
+    gap: 6px 8px;
+    align-items: end;
+}
+
+@media (max-width: 920px) {
+    .meeting-grid {
+        grid-template-columns: 1fr; /* موبایل ستونی */
+    }
+}
+.section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 12px 0 6px 0;
+}
+

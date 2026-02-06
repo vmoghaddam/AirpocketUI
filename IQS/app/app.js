@@ -28,10 +28,18 @@ app.config(function ($routeProvider) {
         controller: "iqs_audit_list_controller",
         templateUrl: "/app/views/iqs_audit_list.html"
     });
+    $routeProvider.when("/iqs/audit/plan/detail/:plan_id", {
+        controller: "iqs_audit_plan_detail_controller",
+        templateUrl: "/app/views/iqs_audit_plan_detail.html"
+    });
 
-    $routeProvider.when("/iqs/audit/detail/:id", {
+    $routeProvider.when("/iqs/audit/detail/:id/:plan_id", {
         controller: "iqs_audit_detail_controller",
         templateUrl: "/app/views/iqs_audit_detail.html"
+    });
+    $routeProvider.when("/iqs/audit/finding/detail/:id/:audit_id/:plan_id", {
+        controller: "iqs_audit_finding_controller",
+        templateUrl: "/app/views/iqs_audit_finding.html"
     });
 
     $routeProvider.when("/iqs/occurrence/list", {
@@ -54,14 +62,10 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/iqs_moc_detail.html"
     });
 
-
     $routeProvider.when("/login", {
         controller: "loginController",
         templateUrl: "/app/views/login.html"
     });
-
-
-
 
     $routeProvider.otherwise({ redirectTo: "/iqs" });
 
