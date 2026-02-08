@@ -1,52 +1,52 @@
-﻿
-<div>
-    <div class="app-shell">
-        <div class="topbar">
-            <div class="brand">
-                <div class="brand-logo"></div>
-                <div>
-                    <div class="brand-text-main">IQS - Safety Management Studio</div>
-                    <div class="brand-text-sub">Version Beta 0.5</div>
-                </div>
+﻿<div class="app-shell">
+    <div class="topbar">
+        <div class="brand">
+            <div class="brand-logo"></div>
+            <div>
+                <div class="brand-text-main">IQS - Safety Management Studio</div>
+                <div class="brand-text-sub">Version Beta 0.5</div>
             </div>
-            <div class="topbar-right">
-                <div class="pill">
-                    <span class="pill-dot"></span>
-                    <span>Demo data – not connected to live SMS</span>
-                </div>
+        </div>
+        <div class="topbar-right">
+            <div class="pill">
+                <span class="pill-dot"></span>
+                <span>Demo data – not connected to live SMS</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-layout">
+        <div class="sidebar">
+            <div class="nav-section-title">Safety core</div>
+            <div class="nav-item" ng-class="{active: shell.isRoute('/hazards')}" ng-click="shell.go('/hazards')">
+                <span class="nav-icon">⚠️</span>
+                <span class="nav-label-main">Hazards</span>
+                <span class="nav-badge">Register</span>
+            </div>
+            <div class="nav-item" ng-class="{active: shell.isRoute('/occurrences')}" ng-click="shell.go('/occurrences')">
+                <span class="nav-icon">📋</span>
+                <span class="nav-label-main">Occurrences</span>
+                <span class="nav-badge">Reports</span>
+            </div>
+
+            <div class="nav-section-title">Change & assurance</div>
+            <div class="nav-item" ng-class="{active: shell.isRoute('/mocs')}" ng-click="shell.go('/mocs')">
+                <span class="nav-icon">♻️</span>
+                <span class="nav-label-main">MOCs</span>
+                <span class="nav-badge">Change</span>
+            </div>
+            <div class="nav-item" ng-class="{active: shell.isRoute('/audit')}" ng-click="shell.go('/audit')">
+                <span class="nav-icon">📝</span>
+                <span class="nav-label-main">Audits</span>
+                <span class="nav-badge">Assurance</span>
+            </div>
+
+            <div class="nav-footer">
+                <div><strong>Demo focus:</strong> hazard log, risk matrix, MOC & audit linkages and hazard-level actions/monitoring.</div>
             </div>
         </div>
 
-        <div class="main-layout">
-            <div class="sidebar">
-                <div class="nav-section-title">Safety core</div>
-                <div class="nav-item" ng-click="go('/iqs/hazard/list')">
-                    <span class="nav-icon">⚠️</span>
-                    <span class="nav-label-main">Hazards</span>
-                    <span class="nav-badge">Register</span>
-                </div>
-                <div class="nav-item" ng-click="go('/iqs/occurrence/list')">
-                    <span class="nav-icon">📋</span>
-                    <span class="nav-label-main">Occurrences</span>
-                    <span class="nav-badge">Reports</span>
-                </div>
-
-                <div class="nav-section-title">Change & assurance</div>
-                <div class="nav-item" ng-click="go('/iqs/moc/list')">
-                    <span class="nav-icon">♻️</span>
-                    <span class="nav-label-main">MOCs</span>
-                    <span class="nav-badge">Change</span>
-                </div>
-                <div class="nav-item" ng-click="go('/iqs/audit/list')">
-                    <span class="nav-icon">📝</span>
-                    <span class="nav-label-main">Audits</span>
-                    <span class="nav-badge">Assurance</span>
-                </div>
-
-                <div class="nav-footer">
-                    <div><strong>Demo focus:</strong> hazard log, risk matrix, MOC & audit linkages and hazard-level actions/monitoring.</div>
-                </div>
-            </div>
+        <div class="content-area">
             <div>
                 <div class="page-header">
                     <div class="page-title-block">
@@ -102,48 +102,48 @@
                                     <td>
                                         <div>{{ h.title }}</div>
                                         <div style="font-size:0.72rem; color:var(--text-soft); margin-top:2px;">
-                                            {{ h.summary }}
+                                            {{ h.description }}
                                         </div>
                                     </td>
                                     <td>
                                         <span class="tag">
                                             <span class="tag-pill tag-pill-blue"></span>
-                                            <span>{{ h.ownerDept }}</span>
+                                            <span>{{ h.risk_owner }}</span>
                                         </span>
                                     </td>
                                     <td>
                                         <div style="display:flex; flex-direction:column; gap:2px;">
-                                            <span class="tag badge-risk-high" ng-if="h.initialRisk === 'High'">
+                                            <span class="tag badge-risk-high" ng-if="h.initial_risk_level_id === 3">
                                                 Initial: High
                                             </span>
-                                            <span class="tag badge-risk-medium" ng-if="h.initialRisk === 'Medium'">
+                                            <span class="tag badge-risk-medium" ng-if="h.initial_risk_level_id === 2">
                                                 Initial: Medium
                                             </span>
-                                            <span class="tag badge-risk-low" ng-if="h.initialRisk === 'Low'">
+                                            <span class="tag badge-risk-low" ng-if="h.initial_risk_level_id === 1">
                                                 Initial: Low
                                             </span>
 
-                                            <span class="tag badge-risk-high" ng-if="h.residualRisk === 'High'">
+                                            <span class="tag badge-risk-high" ng-if="h.residual_risk_level_id === 3">
                                                 Residual: High
                                             </span>
-                                            <span class="tag badge-risk-medium" ng-if="h.residualRisk === 'Medium'">
+                                            <span class="tag badge-risk-medium" ng-if="h.residual_risk_level_id === 2">
                                                 Residual: Medium
                                             </span>
-                                            <span class="tag badge-risk-low" ng-if="h.residualRisk === 'Low'">
+                                            <span class="tag badge-risk-low" ng-if="h.residual_risk_level_id === 1">
                                                 Residual: Low
                                             </span>
                                         </div>
                                     </td>
                                     <td>
-                                        <span class="tag badge-status-open" ng-if="h.status === 'Open'">
+                                        <span class="tag badge-status-open" ng-if="h.hazard_status_id === 1">
                                             <span class="tag-pill tag-pill-red"></span>
-                                            Open
+                                            Identified
                                         </span>
-                                        <span class="tag badge-status-in-progress" ng-if="h.status === 'In progress'">
+                                        <span class="tag badge-status-in-progress" ng-if="h.hazard_status_id === 2">
                                             <span class="tag-pill tag-pill-amber"></span>
-                                            In progress
+                                            Assessed
                                         </span>
-                                        <span class="tag badge-status-closed" ng-if="h.status === 'Closed'">
+                                        <span class="tag badge-status-closed" ng-if="h.hazard_status_id === 4">
                                             <span class="tag-pill tag-pill-green"></span>
                                             Closed
                                         </span>
@@ -155,11 +155,12 @@
                 </div>
             </div>
         </div>
-        </div>
-
-        <div class="footer">
-            <span><strong>Note:</strong> All content is fictitious and for concept/demo only.</span>
-            <span class="link-muted">Back to hazard register</span>
-        </div>
     </div>
-    
+
+    <div class="footer">
+        <span><strong>Note:</strong> All content is fictitious and for concept/demo only.</span>
+        <span class="link-muted" ng-click="shell.go('/hazards')">Back to hazard register</span>
+    </div>
+</div>
+
+
