@@ -161,7 +161,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="a in audits">
+                            <tr ng-click="openAudit(a)" ng-repeat="a in audits">
                                 <td>{{ a.code }}</td>
                                 <td>{{ a.title }}</td>
                                 <td>{{ a.type_id }}</td>
@@ -169,9 +169,9 @@
                                 <td>{{ a.auditee_name }}</td>
                                 <td>{{ a.auditor_name }}</td>
                                 <td>{{ a.location_title }}</td>
-                                <td>
+                                <!--<td>
                                     <span class="link-like" ng-click="openAudit(a)">Open</span>
-                                </td>
+                                </td>-->
                             </tr>
                             <tr ng-if="!audits || !audits.length">
                                 <td colspan="7" style="font-size:0.85rem; color:var(--text-muted);">

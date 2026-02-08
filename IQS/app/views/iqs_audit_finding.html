@@ -1,5 +1,4 @@
-﻿
-<div class="app-shell">
+﻿<div class="app-shell">
     <div class="topbar">
         <div class="brand">
             <div class="brand-logo"></div>
@@ -48,18 +47,19 @@
         </div>
 
         <div class="content-area">
-
             <div id="scroll_content" class="scroll-flex" dx-scroll-view="scroll_content">
+
                 <div class="page-header">
                     <div class="page-title-block">
                         <div class="page-title">
-                            Audit Finding– {{ item.auditNo }}
+                            Audit Finding – {{ item.auditNo }}
                             <span class="page-title-pill">Internal audit</span>
                         </div>
                         <div class="page-subtitle">
-                            Conceptual view showing scope, standards_refrences, findings, corrective actions and linked hazards.
+                            Finding details, CAP, auditor acceptance, follow-ups, verification, and closure (VRH-CMS-01 flow).
                         </div>
                     </div>
+
                     <div class="page-actions">
                         <div dx-button="btn_back" class="btn btn-ghost">
                             <span class="icon">←</span>
@@ -72,159 +72,273 @@
                     </div>
                 </div>
 
+                <!-- FINDING DETAILS -->
                 <div class="card">
+                    <div class="page-subtitle" style="margin-bottom:8px;">Finding details</div>
+
                     <div class="form-grid">
                         <div class="form-group full">
-                            <label><span class="field-name">Title</span></label>
+                            <label><span class="field-name">Finding title</span></label>
                             <div class="input" dx-text-box="txt_title" dx-validator="{validationGroup:'auditsave',  validationRules: [{ type: 'required' }]}"></div>
-
                         </div>
+
                         <div class="form-group">
-                            <label><span class="field-name">Code</span></label>
+                            <label><span class="field-name">Finding code</span></label>
                             <div class="input" dx-text-box="txt_code"></div>
-
                         </div>
+
                         <div class="form-group">
-                            <label><span class="field-name">Level</span></label>
+                            <label><span class="field-name">Finding level</span></label>
                             <div class="input" dx-text-box="txt_level"></div>
-
-                        </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Sent Report Date</span></label>
-                            <div class="input" dx-date-box="dt_sent_report_date"></div>
-
                         </div>
 
                         <div class="form-group">
-                            <label><span class="field-name">Closure Deadline</span></label>
-                            <div class="input" dx-date-box="dt_closure_deadline"></div>
-
-                        </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Auditor Closure Date</span></label>
-                            <div class="input" dx-date-box="dt_closure_auditor_date"></div>
-
-                        </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Scope</span></label>
-                            <div class="input" dx-text-box="txt_scope"></div>
-
-                        </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Area</span></label>
-                            <div class="input" dx-text-box="txt_area"></div>
-
-                        </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Location</span></label>
-                            <div dx-select-box="sb_locations"></div>
-
-                        </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Auditee</span></label>
-                            <div dx-select-box="sb_auditees"></div>
-
-                        </div>
-                        <div class="form-group">
-                            <label><span class="field-name">Auditor</span></label>
+                            <label><span class="field-name">Lead auditor</span></label>
                             <div dx-select-box="sb_auditors"></div>
+                        </div>
 
+                        <div class="form-group">
+                            <label><span class="field-name">Report sent date</span></label>
+                            <div class="input" dx-date-box="dt_sent_report_date"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><span class="field-name">Closure due date</span></label>
+                            <div class="input" dx-date-box="dt_closure_deadline"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label><span class="field-name">Auditor sign-off date</span></label>
+                            <div class="input" dx-date-box="dt_closure_auditor_date"></div>
                         </div>
 
                         <div class="form-group full">
-                            <label><span class="field-name">Standards/ Refrences</span></label>
-                            <div class="input" dx-text-area="txt_standards_refrences"></div>
-
+                            <label><span class="field-name">Reference / standard no.</span></label>
+                            <div class="input" dx-text-box="txt_standard_title"></div>
                         </div>
 
                         <div class="form-group full">
-                            <label><span class="field-name">Remark</span></label>
-                            <div class="input" dx-text-area="txt_remark"></div>
+                            <label><span class="field-name">Description of standard</span></label>
+                            <div class="input" dx-text-area="txt_standard_description"></div>
                         </div>
+
+                        <div class="form-group full">
+                            <label><span class="field-name">Non-compliance description</span></label>
+                            <div class="input" dx-text-area="txt_none_compliance_description"></div>
+                        </div>
+
+                        <div></div>
                     </div>
 
-
                     <div class="section-divider"></div>
+
+                    <!-- CORRECTIVE ACTIONS & CAP FLOW -->
                     <div class="section-head">
-                        <div class="page-subtitle">Findings</div>
-                        <div dx-button="btn_finding_add" class="btn btn-primary"></div>
+                        <div class="page-subtitle">Corrective actions &amp; CAP workflow</div>
+                        <!-- اگر دکمه add داری -->
+                        <!--<div dx-button="btn_action_add" class="btn btn-primary"></div>-->
                     </div>
 
-                    <div class="card" style="background:none; border:none; padding:0;">
-                        <!--<div class="page-subtitle" style="margin-bottom:6px;">Findings</div>
-                        <div dx-button="btn_finging_add" class="btn btn-primary"></div>-->
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Title</th>
-                                    <th>Level</th>
-                                    <th>Closure Deadline</th>
-                                    <th>Closure Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="f in findings">
-                                    <td>{{ f.code }}</td>
-                                    <td>{{ f.title }}</td>
-                                    <td>{{ f.level }}</td>
-                                    <td>{{ f.closure_deadline | date:'yyyy-MM-dd' }}</td>
-                                    <td>{{ f.closure_auditor_date | date:'yyyy-MM-dd' }}</td>
-                                </tr>
-                                <tr ng-if="!findings || !findings.length">
-                                    <td colspan="5" style="font-size:0.85rem; color:var(--text-muted);">
-                                        No findings.
-                                    </td>
-                                </tr>
-                            </tbody>
+                    <div ng-repeat="a in actions" class="card action-card">
+                        <div class="page-subtitle" style="margin-bottom:6px;">
+                            Corrective action #{{$index + 1}}
+                            <span class="tag" style="margin-left:8px;">CAP</span>
+                        </div>
 
-                        </table>
-                    </div>
+                        <div class="form-grid">
+                            <!-- CAP (filled by Auditee) -->
+                            <div class="form-group full">
+                                <div class="followup-box">
+                                    <div class="page-subtitle" style="margin-bottom:8px;">Corrective action plan (filled by auditee)</div>
 
-                    <div class="card" style="background:none; border:none; padding:0; margin-top:10px;">
-                        <div class="page-subtitle" style="margin-bottom:6px;">Corrective actions &amp; monitoring</div>
-                        <!--<p class="hint" style="margin:0 0 6px;">
-                            For each finding, this section summarises the agreed corrective action, the responsible owner,
-                            target date and how the effectiveness will be monitored.
-                        </p>-->
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Finding no</th>
-                                    <th>Corrective action</th>
-                                    <th>Owner</th>
-                                    <th>Target date</th>
-                                    <th>Follow-up / monitoring</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="a in actions">
-                                    <td>{{ a.finding_id }}</td>
-                                    <td>{{ a.action_title }}</td>
-                                    <td>{{ a.responsible_manager_name }}</td>
-                                    <td>{{ a.request_implementation_date | date:'yyyy-MM-dd' }}</td>
-                                    <td>
-                                        <div><strong>Approved:</strong> {{ a.is_approved }}</div>
-                                        <div ng-if="a.follow_up1_date"><strong>FU1:</strong> {{ a.follow_up1_date | date:'yyyy-MM-dd' }}</div>
-                                        <div ng-if="a.follow_up2_date"><strong>FU2:</strong> {{ a.follow_up2_date | date:'yyyy-MM-dd' }}</div>
-                                    </td>
-                                </tr>
-                                <tr ng-if="!actions || !actions.length">
-                                    <td colspan="5" style="font-size:0.85rem; color:var(--text-muted);">
-                                        No corrective actions.
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    <div class="form-grid" style="margin-top:6px;">
+                                        <div class="form-group">
+                                            <label><span class="field-name">Action title</span></label>
+                                            <input type="text" ng-model="a.action_title" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">Action code</span></label>
+                                            <input type="text" ng-model="a.code" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group full">
+                                            <label><span class="field-name">Root cause analysis (RCA)</span></label>
+                                            <input type="text" ng-model="a.root_cause_analysis_desc" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group full">
+                                            <label><span class="field-name">Corrective action plan</span></label>
+                                            <input type="text" ng-model="a.corrective_action_plan" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">Requested implementation date</span></label>
+                                            <input type="text" ng-model="a.request_implementation_date" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">Responsible manager</span></label>
+                                            <input type="text" ng-model="a.responsible_manager_name" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">Manager sign-off date</span></label>
+                                            <input type="text" ng-model="a.sign_date" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CAP ACCEPTANCE (Auditor) -->
+                            <div class="form-group full">
+                                <div class="followup-box">
+                                    <div class="page-subtitle" style="margin-bottom:8px;">CAP acceptance (auditor)</div>
+
+                                    <div class="followup-grid">
+                                        <div class="form-group">
+                                            <label><span class="field-name">CAP accepted?</span></label>
+                                            <select ng-model="a.cap_accepted" class="form-control">
+                                                <option value="">—</option>
+                                                <option value="true">Yes</option>
+                                                <option value="false">No</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">CAP acceptance date</span></label>
+                                            <input type="text" ng-model="a.cap_acceptance_date" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">Auditor comment</span></label>
+                                            <input type="text" ng-model="a.cap_acceptance_comment" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FOLLOW-UP I -->
+                            <div class="form-group full">
+                                <div class="followup-box">
+                                    <div class="page-subtitle" style="margin-bottom:8px;">Effectiveness review (1)</div>
+
+                                    <div class="followup-grid">
+                                        <div class="form-group">
+                                            <label><span class="field-name">Follow-up date</span></label>
+                                            <input type="text" ng-model="a.follow_up1_date" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">Implementation approved?</span></label>
+                                            <select ng-model="a.follow_up1_implementation_approved" class="form-control">
+                                                <option value="">—</option>
+                                                <option value="true">Yes</option>
+                                                <option value="false">No</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">Extended due date</span></label>
+                                            <input type="text" ng-model="a.follow_up1_extended_deadline_date" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- FOLLOW-UP II -->
+                            <div class="form-group full">
+                                <div class="followup-box">
+                                    <div class="page-subtitle" style="margin-bottom:8px;">Effectiveness review (2)</div>
+
+                                    <div class="followup-grid">
+                                        <div class="form-group">
+                                            <label><span class="field-name">Follow-up date</span></label>
+                                            <input type="text" ng-model="a.follow_up2_date" class="form-control" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">Auditor satisfied?</span></label>
+                                            <select ng-model="a.follow_up2_effective" class="form-control">
+                                                <option value="">—</option>
+                                                <option value="true">Yes</option>
+                                                <option value="false">No</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label><span class="field-name">MRB review date</span></label>
+                                            <input type="text" ng-model="a.follow_up2_mrb_review_date" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
 
                     <div class="section-divider"></div>
 
+                    <!-- VERIFICATION & CLOSURE (Finding-level, as in the form) -->
+                    <div class="page-subtitle" style="margin-bottom:8px;">Verification &amp; closure</div>
+
+                    <div class="form-grid">
+                        <div class="form-group full">
+                            <div class="followup-box">
+                                <div class="page-subtitle" style="margin-bottom:8px;">Verified by Compliance Monitoring &amp; Safety Manager</div>
+
+                                <div class="followup-grid">
+                                    <div class="form-group">
+                                        <label><span class="field-name">Verified by</span></label>
+                                        <input type="text" ng-model="item.verified_by_name" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><span class="field-name">Verification date</span></label>
+                                        <input type="text" ng-model="item.verified_date" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><span class="field-name">Signature / note</span></label>
+                                        <input type="text" ng-model="item.verified_signature_note" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full">
+                            <div class="followup-box">
+                                <div class="page-subtitle" style="margin-bottom:8px;">Closed by auditor</div>
+
+                                <div class="followup-grid">
+                                    <div class="form-group">
+                                        <label><span class="field-name">Closure date</span></label>
+                                        <input type="text" ng-model="item.closure_date" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><span class="field-name">Auditor name</span></label>
+                                        <input type="text" ng-model="item.closed_by_auditor_name" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label><span class="field-name">Signature / note</span></label>
+                                        <input type="text" ng-model="item.closed_by_auditor_signature_note" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section-divider"></div>
+
+                    <!-- LINKED HAZARDS -->
                     <div class="card" style="background:none; border:none; padding:0;">
                         <div class="page-subtitle" style="margin-bottom:6px;">Linked hazards</div>
                         <p class="hint" style="margin:0 0 6px;">
                             Hazards that are either the subject of the audit or are directly affected by its findings.
                         </p>
+
                         <table>
                             <thead>
                                 <tr>
@@ -247,18 +361,10 @@
                             </tbody>
                         </table>
                     </div>
+
                 </div>
+
             </div>
         </div>
-
-        <!--<div class="footer">
-            <span><strong>Note:</strong> All content is fictitious and for concept/demo only.</span>
-            <span class="link-muted" ng-click="shell.go('/hazards')">Back to hazard register</span>
-        </div>-->
     </div>
 </div>
-
-
-
-
-

@@ -885,3 +885,57 @@ select {
     margin: 12px 0 6px 0;
 }
 
+
+
+
+
+
+.main-layout {
+    height: calc(100vh - 60px); /* topbar height */
+    overflow: hidden;
+}
+
+.sidebar {
+    position: sticky;
+    top: 60px; /* below topbar */
+    align-self: flex-start;
+    height: calc(100vh - 60px);
+    overflow: auto; /* sidebar scroll only if menu is longer */
+}
+
+/* 2) Corrective action card: subtle contrast, same theme */
+.action-card {
+    background: radial-gradient(circle at top, rgba(15,23,42,0.92), rgba(2,6,23,0.98));
+    border: 1px solid rgba(55,65,81,0.85);
+    border-radius: var(--radius-lg);
+    padding: 12px 14px;
+    margin-top: 10px;
+}
+
+    .action-card .page-subtitle {
+        padding-bottom: 6px;
+        margin-bottom: 10px;
+        border-bottom: 1px dashed rgba(55,65,81,0.8);
+    }
+
+/* 3) Boxed sections inside action: CAP acceptance, reviews, verification */
+.followup-box {
+    border-radius: 14px;
+    border: 1px solid rgba(31,41,55,0.9);
+    background: rgba(2,6,23,0.75); /* close to --input-bg */
+    padding: 10px 12px;
+}
+
+/* 3-column grid (matches your form-grid spacing) */
+.followup-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px 12px;
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 920px) {
+    .followup-grid {
+        grid-template-columns: 1fr;
+    }
+}
